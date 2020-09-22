@@ -1,0 +1,75 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# usage #
+
+if [[ $# -lt 1 ]]
+then
+	echo "Usage: ${0} <settings file>"
+	exit 1
+fi
+
+refresh () {
+	xfwm4 --replace &
+}
+
+# variables #
+
+settings_file="${1}"
+
+user="$(whoami)"
+
+# write settings
+
+console.info "Writing settings."
+echo
+
+grep -viE '^\s*((#|;).*)?$' "${settings_file}" | while read channel property value
+do
+	# provide data type:
+	# needs to be researched before making a new .xfconf file
+	# “bool”   - boolean value: either “true” or “false”
+	# “int”    - 32-bit signed integer value, in the range from -2·147·483·648 through 2·147·483·647
+	# “uint”   - 32-bit unsigned integer value, in the range from 0 through 4·294·967·295
+	# “int64”  - 64-bit signed integer value, in the range from -9·223·372·036·854·775·808 through 9·223·372·036·854·775·807
+	# “uint64” - 64-bit unsigned integer value, in the range from 0 through 18·446·744·073·709·551·615
+	# “double” - presumably a double-precision floating-point value, even though it will be stored as a fixed-point value instead, with six decimal places following the decimal point
+	# “string” - character string.
+
+	# parse data types
+
+	type=string
+
+	case "${property}" in
+		*last-separator-position)
+			type=integer
+		;;
+		*last-show-hidden|*misc-single-click)
+			type=bool
+		;;
+	esac
+
+	# write settings
+
+	xfconf-query --create \
+		-t "${type}" \
+		-c "${channel}" \
+		-p "${property}" \
+		-s "${value}"
+
+	refresh
+
+	# sudo su - "${user}" -c "DISPLAY=${DISPLAY} DBUS_SESSION_BUS_ADDRESS=${DBUS_SESSION_BUS_ADDRESS} \
+	# xfconf-query --create \
+	# -t "${type}" \
+	# -c "${channel}" \
+	# -p "${property}" \
+	# -s "${value}""
+
+done
+
+refresh

@@ -1,0 +1,183 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# write configuration file
+
+cat <<- FILE > "$PROOT_DIRECTORY"/home/"$user_name"/.config/i3/config
+# i3 configuration #
+
+# startup ----------------------------------------- #
+
+# exec_always --no-startup-id APPLICATION OPTIONS
+
+# lock screen - xss-lock - uses loginctl lock-session to lock your screen
+
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+
+# variables --------------------------------------- #
+
+# modifiers
+
+# Alt
+
+set $mod Mod1
+
+# Win / Super
+
+set $sup Mod4
+
+# workspaces
+
+set $workspace1         "1"
+set $workspace2         "2"
+set $workspace3         "3"
+set $workspace4         "4"
+
+# colors
+
+set $bg-color           #172A47
+set $text-color         #5A9857
+set $urgent-bg-color    #E53935
+set $inactive-bg-color  #435E75
+set $unfocused_border   #72afff
+set $focused_border     #82ff80
+
+# information bar
+
+set $info_bar           "i3status"
+
+# launcher
+
+set $launcher           "i3-dmenu-desktop"
+
+# network manager
+
+set $network_manager    "nm-applet"
+
+# terminal
+
+set $terminal           "xfce4-terminal"
+
+# fonts
+
+font pango:DejaVu Sans Mono 8
+
+
+# network management - nm-applet
+
+# exec --no-startup-id $network_manager
+
+# volume control - pactl
+
+#set $refresh_i3status killall -SIGUSR1 i3status
+#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+#bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# use mouse+$mod to drag floating windows to the desired position
+floating_modifier $mod
+
+bindsym $mod+t exec $terminal
+bindsym $mod+x kill
+bindsym $mod+r exec --no-startup-id $launcher
+
+# change focus
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split horizontal
+
+bindsym $mod+h split h
+
+# split vertical
+
+bindsym $mod+v split v
+
+# toggle fullscreen
+
+bindsym $mod+f fullscreen toggle
+
+# change container layout  - split / stacked / tabbed
+
+bindsym $mod+s layout toggle split
+bindsym $mod+k layout stacking
+bindsym $mod+b layout tabbed
+
+# toggle mode tiling / floating
+bindsym $mod+space floating toggle
+
+# change window focus - tiling / floating
+bindsym $mod+Shift+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+p focus parent
+
+# focus the child container
+bindsym $mod+d focus child
+
+# workspace switching
+
+bindsym $mod+1 workspace number $workspace1
+bindsym $mod+2 workspace number $workspace2
+bindsym $mod+3 workspace number $workspace3
+bindsym $mod+4 workspace number $workspace4
+
+# move focused container to workspace
+
+bindsym $mod+Shift+1 move container to workspace number $workspace1
+bindsym $mod+Shift+2 move container to workspace number $workspace2
+bindsym $mod+Shift+3 move container to workspace number $workspace3
+bindsym $mod+Shift+4 move container to workspace number $workspace4
+bindsym $mod+Shift+5 move container to workspace number $workspace5
+bindsym $mod+Shift+6 move container to workspace number $workspace6
+
+# reload i3 configuration
+
+bindsym $mod+q reload
+
+# restart i3 inplace
+
+bindsym $mod+Shift+q restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit session?' -B 'Yes' 'i3-msg exit'"
+
+# resize window  - bindings are triggered when entering the resize mode (you can also use the mouse)
+
+mode "resize" {
+        # shrink window width
+        bindsym Left resize shrink width 10 px or 10 ppt
+        # shrink window height
+        bindsym Up resize shrink height 10 px or 10 ppt
+        # grow window height
+        bindsym Down resize grow height 10 px or 10 ppt
+        # grow window width
+        bindsym Right resize grow width 10 px or 10 ppt
+        # exit resize mode
+        bindsym $mod+z mode "default"
+}
+
+bindsym $mod+z mode "resize"
+
+# display workspace information bar - i3bar + i3status
+
+bar {
+        status_command $info_bar
+}
+FILE

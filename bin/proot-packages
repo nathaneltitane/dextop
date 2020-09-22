@@ -1,0 +1,228 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# enable quiet package install
+
+export DEBIAN_FRONTEND=noninteractive
+
+# update packages list
+
+console.info "Updating repository and package information."
+echo
+
+apt-get update
+echo
+
+# upgrade installed packages
+
+console.info "Upgrading installed packages."
+echo
+
+echo yes | apt-get upgrade
+echo
+
+# packages #
+
+utilities_list=(
+	curl
+	git
+	nano
+	sudo
+)
+
+display_server_list=(
+	dbus-x11
+	x11-utils
+)
+
+sound_list=(
+	pavucontrol
+	pulseaudio
+)
+
+vnc_list=(
+	tigervnc-common
+	tigervnc-standalone-server
+)
+
+xorg_list=(
+	xorg
+	xserver-xorg-core
+	xorgxrdp
+	xrdp
+)
+
+web_list=(
+	ca-certificates
+	openssl
+	midori
+)
+
+desktop_environment_list=(
+	xfce4
+	xfce4-goodies
+	xfce4-appfinder
+	xfce4-appmenu-plugin
+	xfce4-battery-plugin
+	xfce4-clipman
+	xfce4-clipman-plugin
+	xfce4-cpufreq-plugin
+	xfce4-cpugraph-plugin
+	xfce4-datetime-plugin
+	xfce4-dev-tools
+	xfce4-dict
+	xfce4-diskperf-plugin
+	xfce4-equake-plugin
+	xfce4-eyes-plugin
+	xfce4-fsguard-plugin
+	xfce4-genmon-plugin
+	xfce4-goodies
+	xfce4-indicator-plugin
+	xfce4-mailwatch-plugin
+	xfce4-mount-plugin
+	xfce4-mpc-plugin
+	xfce4-netload-plugin
+	xfce4-notes
+	xfce4-notes-plugin
+	xfce4-notifyd
+	xfce4-panel
+	xfce4-panel-profiles
+	xfce4-places-plugin
+	xfce4-power-manager
+	xfce4-power-manager-data
+	xfce4-power-manager-plugins
+	xfce4-pulseaudio-plugin
+	xfce4-screensaver
+	xfce4-screenshooter
+	xfce4-sensors-plugin
+	xfce4-session
+	xfce4-settings
+	xfce4-smartbookmark-plugin
+	xfce4-sntray-plugin
+	xfce4-sntray-plugin-common
+	xfce4-statusnotifier-plugin
+	xfce4-systemload-plugin
+	xfce4-taskmanager
+	xfce4-terminal
+	xfce4-time-out-plugin
+	xfce4-timer-plugin
+	xfce4-verve-plugin
+	xfce4-volumed
+	xfce4-wavelan-plugin
+	xfce4-weather-plugin
+	xfce4-whiskermenu-plugin
+	xfce4-xkb-plugin
+	elementary-xfce-icon-theme
+	tango-icon-theme
+	blackbird-gtk-theme
+	bluebird-gtk-theme
+	greybird-gtk-theme
+	breeze-cursor-theme
+)
+
+window_manager_list=(
+	i3
+)
+
+theme_list=(
+	arc-theme
+	qt5-style-platform-gtk2
+	qt5-style-plugin-gtk2
+)
+
+# options #
+
+# base
+
+if [[ $install_option = "base" ]]
+then
+	install_list=(
+		${utilities_list[@]}
+		${display_server_list[@]}
+		${vnc_list[@]}
+	)
+fi
+
+# full
+
+if [[ $install_option = "full" ]]
+then
+	install_list=(
+		${utilities_list[@]}
+		${display_server_list[@]}
+		${vnc_list[@]}
+		${web_list[@]}
+		${desktop_environment_list[@]}
+		${window_manager_list[@]}
+		${theme_list[@]}
+	)
+fi
+
+# minimal
+
+if [[ $install_option = "minimal" ]]
+then
+	install_list=(
+		${utilities_list[@]}
+		${display_server_list[@]}
+		${vnc_list[@]}
+		${window_manager_list[@]}
+		${theme_list[@]}
+	)
+fi
+
+# output #
+
+# output - vnc
+
+if [[ $display_output = "vnc" ]]
+then
+	install_list+=(
+		${vnc_list}
+	)
+fi
+
+# output - xorg
+
+if [[ $display_output = "xorg" ]]
+then
+	install_list+=(
+		${xorg_list}
+	)
+fi
+
+# install #
+
+console.info "Installing required packages."
+echo
+
+for package in ${install_list[@]}
+do
+	if [[ $(command -v ${package}) = "" ]]
+	then
+		console.warning "Required package '${package}' not present."
+		echo
+		console.fwd "Installing..."
+		echo
+
+		# use 'apt-get install --no-install-recommends' to keep bloat to a minimum
+
+		echo yes | apt-get install --no-install-recommends ${package}
+		echo
+	else
+		console.success "Required package '${package}' already installed."
+		echo
+		console.fwd "Continuing..."
+		echo
+
+		:
+	fi
+done
+
+# cleanup
+
+apt-get clean

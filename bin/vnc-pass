@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+console.input  "Enter VNC password:"
+
+# prevent empty input values
+
+while true
+do
+	if [ -z "$input" ]
+	then
+		console.warning "Input cannot be empty:"
+		console.warning "Values are required for a successful setup."
+		echo
+
+		read -r input
+	else
+		eval "$password"="$input"
+
+		break
+	fi
+done
+
+# hash password input using 'vncpasswd' utility and store in
+
+echo "$password" | /usr/bin/vncpasswd -f > "$HOME"/.vnc/passwd
+
+console.success "VNC password changed."
+echo

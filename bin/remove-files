@@ -1,0 +1,98 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# set extended pattern matching / globbing
+
+shopt -s extglob
+
+# variables #
+
+if [ "$USER" = "root" ]
+then
+	home="/root"
+else
+	home="/home/${SUDO_USER:-$USER}"
+fi
+
+local_applications_directory="$home/.local/share/applications"
+system_applications_directory="/usr/share/applications"
+
+local_icons_directory="$home/.icons"
+system_icons_directory="/usr/share/icons"
+
+local_backgrounds_directory=""
+system_backgrounds_directory="/usr/share/backgrounds"
+
+local_themes_directory="$home/.themes"
+system_themes_directory="/usr/share/themes"
+
+# remove files and folders
+
+console.info "Removing unwanted files and folders..."
+
+# home #
+
+cd "$home" || :
+
+removal_list=(
+
+)
+
+for item in ${removal_list[@]}
+do
+	rm -rf "$item"
+done
+
+# applications directory #
+
+cd "$system_applications_directory" || :
+
+removal_list=(
+
+)
+
+for item in ${removal_list[@]}
+do
+	rm -rf "$item"
+done
+
+# backgrounds directory #
+
+cd "$system_backgrounds_directory" || :
+
+removal_list=(
+
+)
+
+for item in ${removal_list[@]}
+do
+	rm -rf "$item"
+done
+
+# themes directory #
+
+cd "$system_themes_directory" || :
+
+removal_list=(
+
+)
+
+for item in ${removal_list[@]}
+do
+	rm -rf "$item"
+done
+
+# remove extra theme files
+
+rm -rf "!(Arc*|Default|*bird)"
+
+# unset extended pattern matching
+
+shopt -u extglob
+
+console.success "Done."
+echo

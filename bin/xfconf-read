@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# usage #
+
+if [[ $# -lt 1 ]]
+then
+	echo "Usage: ${0} <settings file>"
+	exit 1
+fi
+
+# variables #
+
+settings_file="${1}"
+
+# read settings
+
+console.info "Reading settings file."
+echo
+
+xfconf-query -l | sed -r -e '/Channels:/d' | while read channel
+do
+	xfconf-query -lv -c "${channel}" | sed -r -e "s/^/${channel} /"
+
+done > "${settings_file}"

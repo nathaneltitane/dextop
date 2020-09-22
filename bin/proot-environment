@@ -1,0 +1,110 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# download and setup configuration files into proot directories
+
+configurations_list=(
+	i3-configuration
+	xfce4-configuration
+)
+
+for configuration in ${configurations_list[@]}
+do
+	configuration_url=cfg-dex.ntttn.me/"$configuration"
+
+	# get configurations from repository
+
+	curl -sL ${configuration_url} > "$PROOT_DIRECTORY"/tmp/"$configuration"
+
+	console.download "Downloading configuration [ $configuration ]."
+	echo
+
+done
+
+console.info "Copied necessary configuration files."
+echo
+
+# download and setup image files into proot directories
+
+images_list=(
+	bird.png
+	bird.svg
+)
+
+for image in ${images_list[@]}
+do
+	image_url=img-dex.ntttn.me/"$image"
+
+	# get images from repository
+
+	curl -sL ${image_url} > "$PROOT_DIRECTORY"/usr/share/backgrounds/"$image"
+
+	console.download "Downloading image [ $image ]."
+	echo
+
+done
+
+console.info "Copied necessary image files."
+echo
+
+# download and setup library files into proot directories
+
+libraries_list=(
+	libandroid-shmem-aarch64.so
+)
+
+for library in ${libraries_list[@]}
+do
+	library_url=lib-dex.ntttn.me/"$library"
+
+	# get libraries from repository
+
+	curl -sL ${library_url} > "$PROOT_DIRECTORY"/lib/"$library"
+
+	console.download "Downloading library [ $library ]."
+	echo
+
+done
+
+console.info "Copied necessary library files."
+echo
+
+# setup proot environment
+
+echo ${hostname} > "$PROOT_DIRECTORY"/etc/hostname
+
+cat <<- "FILE" >> "$PROOT_DIRECTORY"/etc/environment
+LD_PRELOAD=/lib/aarch64-linux-gnu/libgcc_s.so.1:/lib/libandroid-shmem-aarch64.so
+FILE
+
+# hosts #
+
+console.info "Setting host address."
+echo
+
+echo ${hostname} > "$PROOT_DIRECTORY"/etc/hostname
+
+cat <<- 'FILE' > "$PROOT_DIRECTORY"/etc/hosts
+127.0.0.1 localhost.localdomain
+127.0.0.1 localhost
+FILE
+
+echo "127.0.0.1 ${hostname}" >> "$PROOT_DIRECTORY"/etc/hosts
+
+# nameserver #
+
+console.info "Setting namserver address."
+echo
+
+cat <<- 'FILE' > "$PROOT_DIRECTORY"/etc/resolv.conf
+nameserver 8.8.8.8
+FILE
+
+cat <<- 'FILE' >> "$PROOT_DIRECTORY"/root/.profile
+
+bash /tmp/setup
+FILE

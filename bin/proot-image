@@ -1,0 +1,83 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+proot-deploy() {
+	# shorthand:
+	
+	# proot -l tar -xzf "$1" -X "$2" || :
+	
+	# exclude archive directories: dev | proc | sys | system
+	# 'proot-launch' will bind and mount those device directories to proot
+	
+	proot								\
+		--link2symlink					\
+			tar 						\
+				--extract				\
+				--file="$1"				\
+				--exclude='dev'			\
+				--exclude='proc'		\
+				--exclude='sys'			\
+				--exclude='system'	||	:
+}
+
+setup () {
+	distribution_name="ubuntu"
+	distribution_version="20.04"
+	proot_launcher="proot-launch"
+
+	iso_root_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${distribution_version}/release"
+	iso_archive="ubuntu-base-${distribution_version}-base-${iso_architecture}.tar.gz"
+	iso_url="$iso_root_url/$iso_archive"
+
+	console.info "Initializing proot setup (${distribution_name^} $distribution_version)."
+	echo
+
+	console.fwd "Initializing..."
+	echo
+
+	console.info "Downloading image."
+	echo
+
+	curl -sL "${iso_url}" > ${iso_archive} &
+
+	console.spinner "Downloading..."
+	echo
+
+	console.info "Creating proot directory."
+	echo
+
+	mkdir -p "$PROOT_DIRECTORY"
+
+	console.info "Creating bind directory."
+	echo
+
+	mkdir -p "$BIND_DIRECTORY"
+
+	console.info "Decompressing and linking image contents."
+	echo
+
+	cd "$PROOT_DIRECTORY" || exit 1
+
+	proot-deploy "${SETUP_DIRECTORY}/${iso_archive}" || exit 1 &
+
+	console.spinner "Unpacking..."
+	echo
+
+	wait
+	
+	# remove archive after unpacking to avoid clutter
+
+	rm -rf "${SETUP_DIRECTORY}/${iso_archive}"
+}
+
+# remove previous deployments
+
+rm -rf "$PROOT_DIRECTORY"
+
+# run setup
+
+setup

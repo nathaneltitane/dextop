@@ -1,0 +1,76 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# verify termux storage directory existence
+
+if [[ ! -d "$HOME"/storage ]]
+then
+	# enable storage permissions - [ requires user touch input ]
+
+	console.warning "Termux requires user permission to access storage on this device:"
+	echo
+	console.info "This feature enables both internal and external storage access (when available)."
+	console.info "You may select 'Allow' or 'Deny' when prompted to enable or disable this feature."
+	echo
+	console.info "TIP: While in Dex mode or if a physical keyboard is connected,"
+	console.info "pressing Tab and Enter keys when prompted by the permissions dialog"
+	console.info "will select and apply 'Allow'."
+	echo
+
+	termux-setup-storage
+
+	# wait 5 seconds to permit storage permissions approval
+
+	console.countdown 5
+
+else
+	console.success "Storage directory detected in:"
+	console.success "$HOME"
+	echo
+	console.fwd "Continuing..."
+	echo
+fi
+
+# get sdcard UUID if present
+
+if [ -e "$HOME"/storage/external* ]
+then
+	# find sdcard UUID
+	# use formatting expression to match XXXX-XXXX
+
+	sd_uuid=$(echo $(ls /storage | sed -r '/[A0-Z9][-][A0-Z9]/!d'))
+fi
+
+# remove storage link defaults
+
+rm -rf "$HOME"/storage
+
+# create new storage mount location
+
+mkdir -p "$SETUP_DIRECTORY"/storage
+
+# create new symbolic links for bind mounts
+
+ln -s -f /storage/emulated/0 "$SETUP_DIRECTORY"/storage/internal || :
+
+if [ ! -z "$sd_uuid" ]
+then
+	console.success "External storage found:"
+	console.info "UUID:......: ${sd_uuid}"
+	echo
+	console.fwd "Linking..."
+	echo
+
+	ln -s -f /storage/"${sd_uuid}" "$SETUP_DIRECTORY"/storage/external || :
+
+else
+	console.error "External storage not found or not present:"
+	console.info "Could not find extrernal storage media mounted under /storage."
+	echo
+	console.fwd "Continuing..."
+	echo
+fi

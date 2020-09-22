@@ -1,0 +1,95 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# creates self-terminating script file:
+# executed on first login to complete proot environment setup
+
+console.info "Generating initial login environemnt setup scripts."
+echo
+
+# write dependencies
+
+cat << FILE > "$PROOT_DIRECTORY"/tmp/setup
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+FILE
+
+cat "$BINARIES_DIRECTORY"/globals >> "$PROOT_DIRECTORY"/tmp/setup
+
+# write setup
+
+cat << 'FILE' >> "$PROOT_DIRECTORY"/tmp/setup
+
+# setup #
+
+console.info "Setting up proot environment."
+echo
+
+console.fwd "Completing setup..."
+echo
+
+# packages
+
+"$BINARIES_DIRECTORY"/proot-packages
+
+# remove unwanted files
+
+"$BINARIES_DIRECTORY"/remove-files
+
+# create user account
+
+"$BINARIES_DIRECTORY"/create-user "${first_name}" "${last_name}"
+
+# checkpoint #
+
+# write value to confirm uinterrupted setup completion
+
+echo "yes" > /tmp/setup-complete
+
+console.success "Done."
+echo
+
+console.success "Environment deployment and configuration complete."
+echo
+
+console.info "Desktop mode: for a full desktop environment session - run 'proot-launch <username>' - uses XFCE4 DE"
+echo
+
+console.info "Application mode: for an application-only session - run 'proot-launch <username> <application>' - uses i3 WM"
+console.info "This mode is intended to optimize performance and run resource intensive applications effectively."
+echo
+
+console.fwd "Exiting."
+echo
+
+# cleanup #
+
+# purge all setup traces:
+# use BASH_SROUCE for all bash-specific invocations to the script path:
+# $0 is POSIX compliant and may not always return the correct value.
+
+if [[ $(cat /tmp/setup-complete) == "[yY][eE][sS]" ]]
+then
+	# remove last line ['bash /tmp/setup'] from /root/.profile
+
+	sed -i '$ d' /root/.profile
+
+	# remove script
+
+	# rm ${BASH_SOURCE[0]}
+
+	# cleanup /tmp
+
+	# rm -rf /tmp/*
+fi
+
+exit
+FILE

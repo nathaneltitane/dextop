@@ -1,0 +1,286 @@
+#!/bin/bash
+
+# usage #
+
+if [[ $# -gt 2 ]]
+then
+	echo "Usage: ${0} print <color number (0-255)>"
+	exit 1
+fi
+
+# name		value		HEX		RGB
+
+# black		0		#000000		000,000,000
+# red		1		#ff0000		255,000,000
+# green		2		#00ff00		000,255,000
+# yellow	3		#ffff00		255,255,000
+# blue		4		#000000		000,000,255
+# magenta	5		#ff00ff		255,000,255
+# cyan		6		#00ffff		000,255,255
+# white		7		#ffffff		255,255,255
+
+# variables #
+
+color_option=$1
+color_number=$2
+
+print_color(){
+	for color_number
+	do
+		printf '\e[48;5;%dm%03d' $color_number $color_number
+	done
+
+	printf '\e[0m \n'
+}
+
+if [[ "$color_option" = "print" ]]
+then
+	# set IFS
+
+	IFS=$' \t\n'
+
+	# print basic colors 000 >>> 015
+
+	print_color {0..15}
+
+	# print color range 016 >>> 231
+
+	for ((i=0;i<6;i++))
+	do
+		print_color $(seq $((i*36+16)) $((i*36+51)))
+	done
+
+	# print monochromatic colors 232 >>> 255
+
+	print_color {232..255}
+fi
+
+# colors #
+
+if [ -z $(command -v tput) ]
+then
+	if [[ -t 1 ]]
+	then
+		black=$(echo -e \\e\[30m)
+		red=$(echo -e \\e\[31m)
+		green=$(echo -e \\e\[32m)
+		yellow=$(echo -e \\e\[33m)
+		blue=$(echo -e \\e\[34m)
+		magenta=$(echo -e \\e\[35m)
+		cyan=$(echo -e \\e\[36m)
+		white=$(echo -e \\e\[97m)
+		reset=$(echo -e \\e\[39m)
+	fi
+else
+	if [[ -t 1 ]]
+	then
+		black=$(tput setaf 0)
+		red=$(tput setaf 1)
+		green=$(tput setaf 2)
+		yellow=$(tput setaf 3)
+		blue=$(tput setaf 4)
+		magenta=$(tput setaf 5)
+		cyan=$(tput setaf 6)
+		white=$(tput setaf 7)
+		reset=$(tput sgr0)
+	fi
+fi
+
+# symbols #
+
+# markers
+
+marker_batsu='[ ✕ ]'
+marker_download='[ ↓ ]'
+marker_fwd='[ > ]'
+marker_info='[ i ]'
+marker_input='[ + ]'
+marker_maru='[ ○ ]'
+marker_bako='[ □ ]'
+marker_no='[ ✕ ]'
+marker_question='[ ? ]'
+marker_rev='[ < ]'
+marker_sankaku='[ △ ]'
+marker_stp='[ - ]'
+marker_upload='[ ↑ ]'
+marker_warning='[ ! ]'
+marker_yes='[ ✓ ]'
+marker_yes_no='[ Y/N ]'
+
+# highlights #
+
+# red
+
+console.red () {
+	echo "${red}"$@"${reset}"
+}
+
+# green
+
+console.green () {
+	echo "${green}"$@"${reset}"
+}
+
+# yellow
+
+console.yellow () {
+	echo "${yellow}"$@"${reset}"
+}
+
+# blue
+
+console.blue () {
+	echo "${blue}"$@"${reset}"
+}
+
+# magenta
+
+console.magenta () {
+	echo "${magenta}"$@"${reset}"
+}
+
+# cyan
+
+console.cyan () {
+	echo "${cyan}"$@"${reset}"
+}
+
+# prompts #
+
+# marker_batsu
+
+console.batsu () {
+	echo "${red}${marker_batsu}" $@"${reset}"
+}
+
+# marker_download
+
+console.batsu () {
+	echo "${magenta}${marker_download}" $@"${reset}"
+}
+
+# marker_fwd
+
+console.fwd () {
+	echo "${white}${marker_fwd}" $@"${reset}"
+}
+
+# marker_info
+
+console.info () {
+	echo "${cyan}${marker_info}" $@"${reset}"
+}
+
+# marker_input
+
+console.input () {
+	echo -n "${magenta}${marker_input}" $@"${reset}"
+}
+
+# marker_maru
+
+console.maru () {
+	echo "${green}${marker_maru}" $@"${reset}"
+}
+
+# marker_no
+
+console.error () {
+	echo "${red}${marker_no}" $@"${reset}"
+}
+
+# marker_question
+
+console.question () {
+	echo "${magenta}${marker_question}" $@"${reset}"
+}
+
+# marker_rev
+
+console.rev () {
+	echo "${white}${marker_rev}" $@"${reset}"
+}
+
+# marker_sankaku
+
+console.sankaku () {
+	echo "${blue}${marker_sankaku}" $@"${reset}"
+}
+
+# marker_stp
+
+console.stp () {
+	echo "${white}${marker_stp}" $@"${reset}"
+}
+
+# marker_upload
+
+console.batsu () {
+	echo "${magenta}${marker_upload}" $@"${reset}"
+}
+
+# marker_warning
+
+console.warning () {
+	echo "${yellow}${marker_warning}" $@"${reset}"
+}
+
+# marker_yes
+
+console.success () {
+	echo "${green}${marker_yes}" $@"${reset}"
+}
+
+# marker_yes_no
+
+console.choice () {
+	echo "${magenta}${marker_yes_no}" $@"${reset}"
+}
+
+# triggers #
+
+# countdown
+
+console.countdown () {
+	seconds=$1
+	shift
+
+	while [ $seconds -gt 0 ]
+	do
+		echo -e "\r${marker_warning} WAITING [ ${yellow}$((seconds--))${reset} ] SECONDS...\c"
+
+		sleep 1
+	done
+
+	# additional echo required because of carriage return clear
+
+	echo
+	echo
+}
+
+# spinner
+
+console.spinner () {
+	# catch PID of last command
+
+	PID=$!
+
+	# spinner string content
+
+	spinner="/—\|"
+	before="[ "
+	after="]"
+	message="$1"
+
+	i=1
+
+	echo
+
+	while [ -d /proc/$PID ]
+	do
+		echo -ne "\r${before} \b${spinner:i++%${#spinner}:1} ${after} ${message}\c "
+		sleep 0.125
+	done
+
+	echo
+}

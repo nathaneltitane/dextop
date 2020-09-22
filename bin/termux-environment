@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# setup termux environment
+
+# silence login prompt
+
+console.info "Silencing login messages."
+echo
+
+echo > "$HOME"/.hushlogin
+
+console.info "Creating required configuration files."
+echo
+
+# .bash_aliases
+
+cat <<- 'FILE' > "$HOME"/.bash_aliases
+
+FILE
+
+# .bash_profile
+
+cat <<- 'FILE' > "$HOME"/.bash_profile
+
+FILE
+
+# .bashrc
+
+cat <<- 'FILE' > "$HOME"/.bashrc
+
+FILE
+
+# .profile
+
+cat <<- 'FILE' >> "$HOME"/.profile
+
+pulseaudio --start
+FILE

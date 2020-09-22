@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+console.info "Transferring unregistered group IDs."
+echo
+
+IFS=' '
+
+read uid gid groups <<< $(id)
+
+# parse existing groups setup
+
+uid=${uid/uid=}
+gid=${gid/gid=}
+groups=${groups/groups=}
+
+IFS=','
+
+read -r -a groups_list <<< "$groups"
+
+for line in "${groups_list[@]}"
+do
+	line=${line/(/ }
+	line=${line/)}
+
+	IFS=' '
+
+	# transfer unregistered IDs
+
+	read group_number group_name <<< ${line}
+	echo "${group_name}:x:${group_number}:" >> "$PROOT_DIRECTORY"/etc/group
+done
+
+# reset IFS
+
+IFS=''

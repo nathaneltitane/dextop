@@ -1,0 +1,326 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# write configuration file
+
+cat <<- FILE > "$PROOT_DIRECTORY"/home/"$user_name"/.config/xfce4/xfce4-settings
+displays /ActiveProfile                                                 Default
+keyboard-layout /Default/XkbDisable                                     true
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace0/color-style     0
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace0/image-style     5
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace0/last-image      /usr/share/backgrounds/bird.svg
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace0/rgba1           [0,0,0,1]
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace0/rgba2           [0,0,0,1]
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace1/color-style     0
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace1/image-style     5
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace1/last-image      /usr/share/backgrounds/bird.svg
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace1/rgba1           [0,0,0,1]
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace1/rgba2           [0,0,0,1]
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace2/color-style     0
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace2/image-style     5
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace2/last-image      /usr/share/backgrounds/bird.svg
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace2/rgba1           [0,0,0,1]
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace2/rgba2           [0,0,0,1]
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace3/color-style     0
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace3/image-style     5
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace3/last-image      /usr/share/backgrounds/bird.svg
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace3/rgba1           [0,0,0,1]
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace3/rgba2           [0,0,0,1]
+xfce4-keyboard-shortcuts /commands/custom/<Alt>F1                       xfce4-popup-applicationsmenu
+xfce4-keyboard-shortcuts /commands/custom/<Alt>F2/startup-notify        true
+xfce4-keyboard-shortcuts /commands/custom/<Alt>F3/startup-notify        true
+xfce4-keyboard-shortcuts /commands/custom/<Alt>l                        xflock4
+xfce4-keyboard-shortcuts /commands/custom/<Alt>r                        xfce4-appfinder
+xfce4-keyboard-shortcuts /commands/custom/<Alt>r/startup-notify         true
+xfce4-keyboard-shortcuts /commands/custom/<Alt>s                        xfce4-screenshooter
+xfce4-keyboard-shortcuts /commands/custom/<Alt>t                        exo-open --launch TerminalEmulator
+xfce4-keyboard-shortcuts /commands/custom/<Alt>x                        xkill
+xfce4-keyboard-shortcuts /commands/custom/<Primary><Shift>numbersign    xfdesktop --menu
+xfce4-keyboard-shortcuts /commands/custom/<Shift><Alt>r                 xfce4-appfinder --collapsed
+xfce4-keyboard-shortcuts /commands/custom/<Shift><Alt>r/startup-notify  true
+xfce4-keyboard-shortcuts /commands/custom/XF86Mail                      exo-open --launch MailReader
+xfce4-keyboard-shortcuts /commands/custom/XF86WWW                       exo-open --launch WebBrowser
+xfce4-keyboard-shortcuts /commands/custom/override                      true
+xfce4-keyboard-shortcuts /commands/default/<Alt>F1                      xfce4-popup-applicationsmenu
+xfce4-keyboard-shortcuts /commands/default/<Alt>F2                      xfce4-appfinder --collapsed
+xfce4-keyboard-shortcuts /commands/default/<Alt>F2/startup-notify       true
+xfce4-keyboard-shortcuts /commands/default/<Alt>F3                      xfce4-appfinder
+xfce4-keyboard-shortcuts /commands/default/<Alt>F3/startup-notify       true
+xfce4-keyboard-shortcuts /commands/default/<Primary><Alt>Delete         xflock4
+xfce4-keyboard-shortcuts /commands/default/<Primary><Alt>l              xflock4
+xfce4-keyboard-shortcuts /commands/default/<Primary><Alt>t              exo-open --launch TerminalEmulator
+xfce4-keyboard-shortcuts /commands/default/<Primary>Escape              xfdesktop --menu
+xfce4-keyboard-shortcuts /commands/default/<Super>p                     xfce4-display-settings --minimal
+xfce4-keyboard-shortcuts /commands/default/Print                        xfce4-screenshooter
+xfce4-keyboard-shortcuts /commands/default/XF86Display                  xfce4-display-settings --minimal
+xfce4-keyboard-shortcuts /commands/default/XF86Mail                     exo-open --launch MailReader
+xfce4-keyboard-shortcuts /commands/default/XF86WWW                      exo-open --launch WebBrowser
+xfce4-keyboard-shortcuts /providers                                     <<UNSUPPORTED>>
+xfce4-keyboard-shortcuts /xfwm4/custom/<Alt>Delete                      del_workspace_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Alt>F10                         maximize_window_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Alt>F11                         fullscreen_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Alt>F12                         above_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Alt>F4                          close_window_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Alt>F6                          stick_window_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Alt>F7                          move_window_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Alt>F8                          resize_window_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Alt>F9                          hide_window_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Alt>Insert                      add_workspace_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Alt>space                       popup_menu_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary><Alt>Down               down_workspace_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary><Alt>End                move_window_next_workspace_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary><Alt>Home               move_window_prev_workspace_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary><Alt>KP_1               move_window_workspace_1_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary><Alt>KP_2               move_window_workspace_2_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary><Alt>KP_3               move_window_workspace_3_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary><Alt>KP_4               move_window_workspace_4_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary><Alt>KP_5               move_window_workspace_5_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary><Alt>KP_6               move_window_workspace_6_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary><Alt>KP_7               move_window_workspace_7_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary><Alt>KP_8               move_window_workspace_8_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary><Alt>KP_9               move_window_workspace_9_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary><Alt>Left               left_workspace_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary><Alt>Right              right_workspace_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary><Alt>Up                 up_workspace_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary><Alt>d                  show_desktop_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary><Shift><Alt>Left        move_window_left_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary><Shift><Alt>Right       move_window_right_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary><Shift><Alt>Up          move_window_up_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary><Shift>ISO_Left_Tab     cycle_reverse_windows_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary>F1                      workspace_1_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary>F10                     workspace_10_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary>F11                     workspace_11_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary>F12                     workspace_12_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary>F2                      workspace_2_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary>F3                      workspace_3_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary>F4                      workspace_4_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary>F5                      workspace_5_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary>F6                      workspace_6_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary>F7                      workspace_7_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary>F8                      workspace_8_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary>F9                      workspace_9_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Primary>Tab                     cycle_windows_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Shift><Alt>Page_Down            lower_window_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Shift><Alt>Page_Up              raise_window_key
+xfce4-keyboard-shortcuts /xfwm4/custom/<Shift>ISO_Left_Tab              switch_window_key
+xfce4-keyboard-shortcuts /xfwm4/custom/Down                             down_key
+xfce4-keyboard-shortcuts /xfwm4/custom/Escape                           cancel_key
+xfce4-keyboard-shortcuts /xfwm4/custom/Left                             left_key
+xfce4-keyboard-shortcuts /xfwm4/custom/Right                            right_key
+xfce4-keyboard-shortcuts /xfwm4/custom/Up                               up_key
+xfce4-keyboard-shortcuts /xfwm4/custom/override                         true
+xfce4-keyboard-shortcuts /xfwm4/default/<Alt><Shift>Tab                 cycle_reverse_windows_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Alt>Delete                     del_workspace_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Alt>F10                        maximize_window_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Alt>F11                        fullscreen_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Alt>F12                        above_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Alt>F4                         close_window_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Alt>F6                         stick_window_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Alt>F7                         move_window_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Alt>F8                         resize_window_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Alt>F9                         hide_window_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Alt>Insert                     add_workspace_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Alt>Tab                        cycle_windows_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Alt>space                      popup_menu_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary><Alt>Down              down_workspace_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary><Alt>End               move_window_next_workspace_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary><Alt>Home              move_window_prev_workspace_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary><Alt>KP_1              move_window_workspace_1_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary><Alt>KP_2              move_window_workspace_2_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary><Alt>KP_3              move_window_workspace_3_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary><Alt>KP_4              move_window_workspace_4_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary><Alt>KP_5              move_window_workspace_5_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary><Alt>KP_6              move_window_workspace_6_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary><Alt>KP_7              move_window_workspace_7_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary><Alt>KP_8              move_window_workspace_8_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary><Alt>KP_9              move_window_workspace_9_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary><Alt>Left              left_workspace_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary><Alt>Right             right_workspace_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary><Alt>Up                up_workspace_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary><Alt>d                 show_desktop_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary><Shift><Alt>Left       move_window_left_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary><Shift><Alt>Right      move_window_right_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary><Shift><Alt>Up         move_window_up_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary>F1                     workspace_1_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary>F10                    workspace_10_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary>F11                    workspace_11_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary>F12                    workspace_12_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary>F2                     workspace_2_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary>F3                     workspace_3_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary>F4                     workspace_4_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary>F5                     workspace_5_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary>F6                     workspace_6_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary>F7                     workspace_7_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary>F8                     workspace_8_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Primary>F9                     workspace_9_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Shift><Alt>Page_Down           lower_window_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Shift><Alt>Page_Up             raise_window_key
+xfce4-keyboard-shortcuts /xfwm4/default/<Super>Tab                      switch_window_key
+xfce4-keyboard-shortcuts /xfwm4/default/Down                            down_key
+xfce4-keyboard-shortcuts /xfwm4/default/Escape                          cancel_key
+xfce4-keyboard-shortcuts /xfwm4/default/Left                            left_key
+xfce4-keyboard-shortcuts /xfwm4/default/Right                           right_key
+xfce4-keyboard-shortcuts /xfwm4/default/Up                              up_key
+xfce4-panel /configver                                                  2
+xfce4-panel /panels                                                     [1, 2]
+xfce4-panel /panels/panel-1/icon-size                                   16
+xfce4-panel /panels/panel-1/length                                      100
+xfce4-panel /panels/panel-1/plugin-ids                                  <<UNSUPPORTED>>
+xfce4-panel /panels/panel-1/position                                    p=6;x=0;y=0
+xfce4-panel /panels/panel-1/position-locked                             true
+xfce4-panel /panels/panel-1/size                                        26
+xfce4-panel /plugins/plugin-1                                           applicationsmenu
+xfce4-panel /plugins/plugin-1/show-button-title                         false
+xfce4-panel /plugins/plugin-1/show-generic-names                        true
+xfce4-panel /plugins/plugin-10                                          notification-plugin
+xfce4-panel /plugins/plugin-11                                          separator
+xfce4-panel /plugins/plugin-11/style                                    0
+xfce4-panel /plugins/plugin-12                                          clock
+xfce4-panel /plugins/plugin-13                                          separator
+xfce4-panel /plugins/plugin-13/style                                    0
+xfce4-panel /plugins/plugin-14                                          actions
+xfce4-panel /plugins/plugin-14/appearance                               1
+xfce4-panel /plugins/plugin-14/invert-orientation                       false
+xfce4-panel /plugins/plugin-2                                           tasklist
+xfce4-panel /plugins/plugin-2/flat-buttons                              true
+xfce4-panel /plugins/plugin-2/grouping                                  1
+xfce4-panel /plugins/plugin-2/include-all-workspaces                    true
+xfce4-panel /plugins/plugin-2/show-labels                               false
+xfce4-panel /plugins/plugin-2/show-wireframes                           false
+xfce4-panel /plugins/plugin-3                                           separator
+xfce4-panel /plugins/plugin-3/expand                                    true
+xfce4-panel /plugins/plugin-3/style                                     0
+xfce4-panel /plugins/plugin-4                                           pager
+xfce4-panel /plugins/plugin-4/rows                                      1
+xfce4-panel /plugins/plugin-5                                           separator
+xfce4-panel /plugins/plugin-5/style                                     0
+xfce4-panel /plugins/plugin-6                                           systray
+xfce4-panel /plugins/plugin-6/names-hidden                              <<UNSUPPORTED>>
+xfce4-panel /plugins/plugin-6/names-ordered                             <<UNSUPPORTED>>
+xfce4-panel /plugins/plugin-6/show-frame                                false
+xfce4-panel /plugins/plugin-6/square-icons                              true
+xfce4-panel /plugins/plugin-7                                           statusnotifier
+xfce4-panel /plugins/plugin-7/menu-is-primary                           false
+xfce4-panel /plugins/plugin-7/square-icons                              true
+xfce4-panel /plugins/plugin-7/symbolic-icons                            true
+xfce4-panel /plugins/plugin-8                                           pulseaudio
+xfce4-panel /plugins/plugin-8/enable-keyboard-shortcuts                 true
+xfce4-panel /plugins/plugin-8/show-notifications                        true
+xfce4-panel /plugins/plugin-9                                           power-manager-plugin
+xfce4-power-manager /xfce4-power-manager/dpms-enabled                   false
+xfce4-power-manager /xfce4-power-manager/general-notification           true
+xfce4-power-manager /xfce4-power-manager/power-button-action            0
+xfce4-power-manager /xfce4-power-manager/show-panel-label               0
+xfce4-power-manager /xfce4-power-manager/show-tray-icon                 false
+xfwm4 /general/activate_action                                          bring
+xfwm4 /general/borderless_maximize                                      true
+xfwm4 /general/box_move                                                 false
+xfwm4 /general/box_resize                                               false
+xfwm4 /general/button_layout                                            O|TSHMC
+xfwm4 /general/button_offset                                            0
+xfwm4 /general/button_spacing                                           0
+xfwm4 /general/click_to_focus                                           true
+xfwm4 /general/cycle_apps_only                                          false
+xfwm4 /general/cycle_draw_frame                                         true
+xfwm4 /general/cycle_hidden                                             true
+xfwm4 /general/cycle_minimum                                            true
+xfwm4 /general/cycle_preview                                            false
+xfwm4 /general/cycle_raise                                              false
+xfwm4 /general/cycle_tabwin_mode                                        0
+xfwm4 /general/cycle_workspaces                                         false
+xfwm4 /general/double_click_action                                      maximize
+xfwm4 /general/double_click_distance                                    5
+xfwm4 /general/double_click_time                                        250
+xfwm4 /general/easy_click                                               Alt
+xfwm4 /general/focus_delay                                              250
+xfwm4 /general/focus_hint                                               true
+xfwm4 /general/focus_new                                                true
+xfwm4 /general/frame_border_top                                         0
+xfwm4 /general/frame_opacity                                            100
+xfwm4 /general/full_width_title                                         true
+xfwm4 /general/horiz_scroll_opacity                                     false
+xfwm4 /general/inactive_opacity                                         100
+xfwm4 /general/maximized_offset                                         0
+xfwm4 /general/mousewheel_rollup                                        true
+xfwm4 /general/move_opacity                                             100
+xfwm4 /general/placement_mode                                           center
+xfwm4 /general/placement_ratio                                          20
+xfwm4 /general/popup_opacity                                            100
+xfwm4 /general/prevent_focus_stealing                                   false
+xfwm4 /general/raise_delay                                              250
+xfwm4 /general/raise_on_click                                           true
+xfwm4 /general/raise_on_focus                                           false
+xfwm4 /general/raise_with_any_button                                    true
+xfwm4 /general/repeat_urgent_blink                                      false
+xfwm4 /general/resize_opacity                                           100
+xfwm4 /general/scroll_workspaces                                        true
+xfwm4 /general/shadow_delta_height                                      0
+xfwm4 /general/shadow_delta_width                                       0
+xfwm4 /general/shadow_delta_x                                           0
+xfwm4 /general/shadow_delta_y                                           -3
+xfwm4 /general/shadow_opacity                                           50
+xfwm4 /general/show_app_icon                                            false
+xfwm4 /general/show_dock_shadow                                         false
+xfwm4 /general/show_frame_shadow                                        false
+xfwm4 /general/show_popup_shadow                                        false
+xfwm4 /general/snap_resist                                              false
+xfwm4 /general/snap_to_border                                           true
+xfwm4 /general/snap_to_windows                                          true
+xfwm4 /general/snap_width                                               10
+xfwm4 /general/theme                                                    Arc-Dark
+xfwm4 /general/tile_on_move                                             true
+xfwm4 /general/title_alignment                                          center
+xfwm4 /general/title_font                                               Sans Bold 9
+xfwm4 /general/title_horizontal_offset                                  0
+xfwm4 /general/title_shadow_active                                      false
+xfwm4 /general/title_shadow_inactive                                    false
+xfwm4 /general/title_vertical_offset_active                             0
+xfwm4 /general/title_vertical_offset_inactive                           0
+xfwm4 /general/titleless_maximize                                       false
+xfwm4 /general/toggle_workspaces                                        false
+xfwm4 /general/unredirect_overlays                                      false
+xfwm4 /general/urgent_blink                                             false
+xfwm4 /general/use_compositing                                          false
+xfwm4 /general/vblank_mode                                              auto
+xfwm4 /general/workspace_count                                          4
+xfwm4 /general/workspace_names                                          ["Workspace 1", "Workspace 2", "Workspace 3", "Workspace 4"]
+xfwm4 /general/wrap_cycle                                               true
+xfwm4 /general/wrap_layout                                              false
+xfwm4 /general/wrap_resistance                                          10
+xfwm4 /general/wrap_windows                                             true
+xfwm4 /general/wrap_workspaces                                          false
+xfwm4 /general/zoom_desktop                                             true
+xsettings /Gdk/WindowScalingFactor                                      1
+xsettings /Gtk/ButtonImages                                             true
+xsettings /Gtk/CanChangeAccels                                          false
+xsettings /Gtk/ColorPalette                                             black:white:gray50:red:purple:blue:light blue:green:yellow:orange:lavender:brown:goldenrod4:dodger blue:pink:light green:gray10:gray30:gray75:gray90
+xsettings /Gtk/CursorThemeName
+xsettings /Gtk/CursorThemeSize                                          0
+xsettings /Gtk/DecorationLayout                                         menu:minimize,maximize,close
+xsettings /Gtk/FontName                                                 Sans 9
+xsettings /Gtk/IconSizes
+xsettings /Gtk/KeyThemeName
+xsettings /Gtk/MenuBarAccel                                             F10
+xsettings /Gtk/MenuImages                                               true
+xsettings /Gtk/MonospaceFontName                                        Monospace 9
+xsettings /Gtk/ToolbarIconSize                                          3
+xsettings /Gtk/ToolbarStyle                                             icons
+xsettings /Net/CursorBlink                                              true
+xsettings /Net/CursorBlinkTime                                          1200
+xsettings /Net/DndDragThreshold                                         8
+xsettings /Net/DoubleClickDistance                                      5
+xsettings /Net/DoubleClickTime                                          400
+xsettings /Net/EnableEventSounds                                        false
+xsettings /Net/EnableInputFeedbackSounds                                false
+xsettings /Net/IconThemeName                                            elementary-xfce-dark
+xsettings /Net/SoundThemeName                                           default
+xsettings /Net/ThemeName                                                Arc-Dark
+xsettings /Xft/Antialias                                                -1
+xsettings /Xft/HintStyle                                                hintnone
+xsettings /Xft/Hinting                                                  -1
+xsettings /Xft/RGBA                                                     none
+FILE

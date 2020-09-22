@@ -1,0 +1,64 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# update packages list
+
+console.info "Updating repository and package information."
+echo
+
+apt update
+echo
+
+# upgrade installed packages
+
+console.info "Upgrading installed packages."
+echo
+
+echo yes | apt upgrade
+echo
+
+# packages #
+
+install_list=(
+	termux-*
+	*-repo
+	libandroid-*
+	nano
+	proot
+	pulseaudio
+)
+
+# install #
+
+console.info "Installing required packages."
+echo
+
+for package in ${install_list[@]}
+do
+	if [[ $(command -v ${package}) = "" ]]
+	then
+		console.warning "Required package '${package}' not present."
+		echo
+		console.stp "Installing..."
+		echo
+
+		echo yes | apt install ${package}
+		echo
+
+	else
+		console.success "Required package '${package}' already installed."
+		echo
+		console.fwd "Continuing..."
+		echo
+
+		:
+	fi
+done
+
+# cleanup
+
+apt clean

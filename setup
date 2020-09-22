@@ -1,0 +1,235 @@
+#!/bin/bash
+
+# Author: Nathanel Titane - nathanel.titane@gmail.com
+
+# linux-dextop # Linux on Android # Termux Dextop // Ubuntu Dextop #
+
+# script #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="09-20-2020"
+
+# variables #
+
+install_option=$1
+display_output=$2
+
+# set defaults
+
+if [ -z $install_option ]
+then
+	install_option="full"
+fi
+
+if [ -z $display_output ]
+then
+	display_output="vnc"
+fi
+
+# usage #
+
+while (($#))
+do
+	case "$1" in
+		-b|--base)
+			install_option="base"
+			;;
+		-f|--full)
+			install_option="full"
+			;;
+		-m|--minimal)
+			install_option="minimal"
+			;;
+		-v|--vnc)
+			display_output="vnc"
+			;;
+		-x|--xorg)
+			display_output="xorg"
+			;;
+		-h|--help)
+			echo -e ""
+			echo -e "USAGE:"
+			echo -e ""
+			echo -e "-b, --base \t Base setup: download and unpack root filesystem and utilities."
+			echo -e "-f, --full \t Full setup: download and install full desktop environment and utilities."
+			echo -e "-m, --minimal \t Minimal setup: download and install minimal set of utilities:."
+			echo -e " \t\t Note:"
+			echo -e " \t\t this option is ideal for running specific applications and their dependencies only."
+			echo -e ""
+			echo -e "-h, --help \t Show help and usage."
+			echo -e "-v, --version \t Show ${script} version."
+			echo -e ""
+			exit
+			;;
+		-v|--version)
+			echo -e ""
+			echo -e "$script $version"
+			echo -e ""
+			exit
+			;;
+		*)
+			echo -e ""
+			echo -e "$script: Unknown option $1"
+			echo -e "Type './$script --help' for help and usage information."
+			echo -e ""
+			exit
+			;;
+		esac
+	shift
+done
+
+# initial prompt clear #
+
+clear
+
+# set shell setup globals 
+
+SETUP_DIRECTORY="${PREFIX%/*}"
+BINARIES_DIRECTORY="${PREFIX}"/bin
+
+# set work directory
+
+cd "${SETUP_DIRECTORY}" || exit 1
+
+# dependencies #
+
+dependencies_list=(
+	console
+	globals
+)
+
+for dependency in ${dependencies_list[@]}
+do
+	dependency_url=bin-dex.ntttn.me/"$binary"
+
+	# get binaries from repository
+
+	curl -sL ${dependency_url} > 
+
+	# set execution mode for binary
+
+	chmod +x "$BINARIES_DIRECTORY/$dependency"
+	
+	# source dependency
+	
+	source "$BINARIES_DIRECTORY/$dependency"
+done
+
+# get binaries
+
+console.fwd "Fetching necessary binary files."
+echo
+
+# binaries #
+
+binaries_list=(
+	check-architecture
+	create-user
+	proot-environment
+	proot-image
+	proot-launch
+	proot-packages
+	proot-setup
+	remove-files
+	termux-environment
+	termux-groups
+	termux-packages
+	termux-storage
+	user-information
+	vnc-pass
+	vnc-start
+	vnc-stop
+	xfconf-read
+	xfconf-write
+)
+
+for binary in ${binaries_list[@]}
+do
+	binary_url=bin-dex.ntttn.me/"$binary"
+
+	# get binaries from repository
+	
+	# no background process:
+	# not using console.progress: prevent 'Text file busy'error
+
+	curl -sL ${binary_url} > "$BINARIES_DIRECTORY/$binary"
+
+	# emulate console.fwd until dependencies are loaded
+	
+	console.download "Downloading binary [ $binary ]."
+	echo
+
+	# set execution mode for binary
+
+	chmod +x "$BINARIES_DIRECTORY/$binary"
+done
+
+# carry options over to globals to complete setup
+
+cat << FILE >> "$BINARIES_DIRECTORY"/globals
+
+# options #
+
+export install_option="${install_option}"
+export display_output="${display_output}"
+FILE
+
+# setup #
+
+# proceed with setup
+
+console.fwd "Setting up environments [ [ termux <<< ] | [ >>> proot ] ]..."
+echo
+
+# verify architecture match
+
+"$BINARIES_DIRECTORY"/check-architecture
+
+# get user information
+
+"$BINARIES_DIRECTORY"/user-information
+
+# setup transient storage - [ device >>> [ termux >>> [ proot ] ] ]
+
+"$BINARIES_DIRECTORY"/termux-storage
+
+# setup termux package requirements
+
+"$BINARIES_DIRECTORY"/termux-packages
+
+# download and unpack/setup image
+
+"$BINARIES_DIRECTORY"/proot-image
+
+# transfer unregsitered termux group IDs into proot
+
+"$BINARIES_DIRECTORY"/termux-groups
+
+# setup termux environment requirements
+
+"$BINARIES_DIRECTORY"/termux-environment
+
+# setup proot environment requirements
+
+"$BINARIES_DIRECTORY"/proot-environment
+
+# setup proot system requirements
+
+"$BINARIES_DIRECTORY"/proot-setup
+
+# cleanup #
+
+# purge all setup traces:
+# use BASH_SROUCE for all bash-specific invocations to the script path:
+# $0 is POSIX compliant and may not always return the correct value.
+
+# rm "$INITIAL_DIRECTORY"/${BASH_SOURCE[0]}
+# rm "$BINARIES_DIRECTORY"/globals
+
+# automatic proot setup transition:
+# run 'proot-launch' as 'root' default and carry over setup in proot environment
+
+$BINARIES_DIRECTORY/bash -c 'proot-launch'

@@ -1,0 +1,161 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# use /etc/os-release to read distribution $NAME
+
+source /etc/os-release
+
+vnc() {
+	vncserver \
+		-SecurityTypes none \
+		-localhost yes \
+		-depth 32 \
+		-cleanstale \
+		-name $NAME \
+		-geometry ${GEOMETRY} ${DISPLAY}
+
+	echo
+	console.fwd "Starting display server..."
+	echo
+
+	console.info "Name.........: ${name}"
+	console.info "Resolution...: ${GEOMETRY}"
+	console.info "Port.........: 590${DISPLAY:1}"
+	echo
+
+	# make selection available for automatic start
+
+	if [[ $(id -u) = 0 || $(id -u -n) = "root" ]]
+	then
+		:
+	else
+		echo "$selection" > /home/$(id -u -n)/.vnc/selection
+	fi
+
+	# start android vnc intent after establishing connection
+
+	am start -d vnc://127.0.0.1:590${DISPLAY:1} > /dev/null
+}
+
+# list supported display resolutions
+
+resolutions=(
+	VGA       640     480
+	WVGA      768     480
+	SVGA      800     600
+	FWVGA     854     480
+	qHD       960     540
+	DVGA      960     640
+	WSVGA     1024    576
+	WSVGA     1024    600
+	XGA       1024    768
+	XGA+      1152    864
+	HD        1280    720
+	WXGA      1366    768
+	WXGA+     1440    900
+	HD+       1600    900
+	SXGA      1280    1024
+	SXGA+     1400    1050
+	UXGA      1600    1200
+	WSXGA+    1680    1050
+	FHD       1920    1080
+	WUXGA     1920    1200
+	DCI2K     2048    1080
+	QWXGA     2048    1152
+	QXGA      2048    1536
+	UWFHD     2560    1080
+	QHD       2560    1440
+	WQXGA     2560    1600
+	QSXGA     2560    2048
+	QHD+      3200    1800
+	WQSXGA    3200    2048
+	QUXGA     3200    2400
+	UWQHD     3440    1440
+	UW4K      3840    1600
+	4KUHD     3840    2160
+	WQUXGA    3840    2400
+	DCI4K     4096    2160
+	UW5K      5120    2160
+	5K        5120    2880
+	8KUHD     7680    4320
+)
+
+console.input "Enter the selection to start the display server with: "
+
+# prepend list with default / custom entries
+
+echo -e -n "
+\t[ -- ] Default   (Dynamic + 5901)
+
+\t[  1 ] Custom    (resolution + port)
+"
+
+# continue list using array selection of suppported values
+
+pad_length=10
+
+for (( i=0 ; i<${#resolutions[@]} ; i+=3 ))
+do
+	name="${resolutions[$i]}"
+	width="${resolutions[$i+1]}"
+	height="${resolutions[$i+2]}"
+	resolution="${width}x${height}"
+
+	if (( $i/3 >= 0 && $i/3 <= 7 ))
+	then
+		printf '\t[  %s ] %s' $((($i/3) +2)) $name
+	else
+		printf '\t[ %s ] %s' $((($i/3) +2)) $name
+	fi
+
+	printf '%*s' $((pad_length - ${#name}))
+	printf '%s\n' $resolution
+done
+
+echo
+
+console.input "Selection: "
+read selection
+echo
+
+# manage custom input values
+
+case $selection in
+	1)
+		console.info "Setting custom resolution and port:"
+		echo
+
+		console.input "Set resolution as WIDTHxHEIGHT (e.g. 1920x1080): "
+		read custom_resolution
+		echo
+
+		console.input "Set custom port as NUMBER (e.g. 1): "
+		read custom_port
+		echo
+
+		GEOMETRY="$custom_resolution" port=":$custom_port" vnc 2&1> /dev/null
+
+		break
+	;;
+	*)
+		resolution=""
+		int_check='^[0-9]+$'
+
+		if [[ $selection =~ $int_check ]]
+		then
+			i=$(($selection-1))
+			i=$(($i*3))
+
+			name="${resolutions[$i-3]}"
+			width="${resolutions[$i-2]}"
+			height="${resolutions[$i-1]}"
+			resolution="${width}x${height}"
+		fi
+
+		GEOMETRY="$resolution" vnc 2&1> /dev/null
+	;;
+esac

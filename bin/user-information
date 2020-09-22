@@ -1,0 +1,102 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# get user information for setup
+
+console.warning "The following information is required to set up your environment:"
+echo
+console.warning "The information will be used to set up the user account."
+console.warning "The fields cannot be empty."
+echo
+
+input_list=(
+	first_name
+	last_name
+	user_email
+	user_password
+)
+
+for value in "${input_list[@]}"
+do
+	# enter requested values
+
+	console.input "Enter $(echo ${value^} | sed 's/_/ /')...: "
+
+	# obfuscate password using prompt variable
+	# if entered value corresponds to password input
+
+	if [[ "$value" = user_password ]]
+	then
+		unset password
+
+		while IFS= read -p "$prompt" -r -s -n 1 character
+		do
+				# enter / accept password
+
+				if [[ $character == $'\0' ]]
+				then
+					# break on 'NUL'
+
+					break
+				fi
+
+				# handle backspace / delete character input
+
+				if [[ $character == $'\177' ]]
+				then
+					# remove input on 'BACKSPACE'/'DEL'
+
+					prompt=$'\b \b'
+					password="${password%?}"
+						else
+					# set character mask
+
+					prompt='[]'
+					password+="$character"
+				fi
+		done
+	else
+		read -r input
+	fi
+	
+	echo
+
+	# prevent empty input values
+
+	while true
+	do
+		if [ -z "$input" ]
+		then
+			console.warning "Input cannot be empty:"
+			console.warning "Values are required for a successful setup."
+			echo
+
+			read -r input
+		else
+			eval "$value"="$input"
+
+			break
+		fi
+	done
+done
+
+echo
+
+# carry input over to globals to complete setup
+
+cat << FILE >> "$BINARIES_DIRECTORY"/globals
+
+# user information #
+
+export first_name=${first_name}
+export last_name=${last_name}
+export full_name="$first_name $last_name"
+export user_name=${first_name,,}
+export user_email=${user_email}
+export user_password=${user_password}
+
+FILE

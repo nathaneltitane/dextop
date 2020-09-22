@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# cleanup routine #
+
+clean () {
+	if [ -e /tmp/.X* ]
+	then
+		rm -rf /tmp/.X*
+	fi
+}
+
+# check for process tokens and cleanup
+
+if pgrep -f vnc > /dev/null
+then
+	console.fwd "Stopping display server..."
+	echo
+
+	vncserver \
+		-kill \
+		-clean \
+				${DISPLAY} 2&1> /dev/null
+
+	clean
+fi
