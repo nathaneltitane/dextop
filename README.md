@@ -38,7 +38,7 @@ where available install options are:
 and available display output options are:
 
 ```
--v | --vnc:     download and setup vnc protocol display output. [ Default - vnc display when no option is selected ]
+-c | --vnc:     download and setup vnc protocol display output. [ Default - vnc display when no option is selected ]
 -x | --xorg:    download and setup xorg/xrdp protocol display output.
 ```
 
