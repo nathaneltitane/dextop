@@ -106,7 +106,7 @@ dependencies_list=(
 
 for dependency in ${dependencies_list[@]}
 do
-	dependency_url=bin-dex.ntttn.me/"$binary"
+	dependency_url=dep-dex.ntttn.me/"$binary"
 
 	# get dependencies from repository
 
