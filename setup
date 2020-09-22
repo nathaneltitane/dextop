@@ -43,7 +43,7 @@ do
 		-m|--minimal)
 			install_option="minimal"
 			;;
-		-v|--vnc)
+		-c|--vnc)
 			display_output="vnc"
 			;;
 		-x|--xorg)
@@ -58,6 +58,9 @@ do
 			echo -e "-m, --minimal \t Minimal setup: download and install minimal set of utilities:."
 			echo -e " \t\t Note:"
 			echo -e " \t\t this option is ideal for running specific applications and their dependencies only."
+			echo -e ""
+			echo -e "-c , --vnc: \t Download and setup vnc protocol display output. [ Default - vnc display when no option is selected ]"
+			echo -e "-x , --xorg: \t Download and setup xorg/xrdp protocol display output.
 			echo -e ""
 			echo -e "-h, --help \t Show help and usage."
 			echo -e "-v, --version \t Show ${script} version."
