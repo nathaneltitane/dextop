@@ -60,7 +60,7 @@ do
 			echo -e " \t\t this option is ideal for running specific applications and their dependencies only."
 			echo -e ""
 			echo -e "-c , --vnc: \t Download and setup vnc protocol display output. [ Default - vnc display when no option is selected ]"
-			echo -e "-x , --xorg: \t Download and setup xorg/xrdp protocol display output.
+			echo -e "-x , --xorg: \t Download and setup xorg/xrdp protocol display output."
 			echo -e ""
 			echo -e "-h, --help \t Show help and usage."
 			echo -e "-v, --version \t Show ${script} version."
