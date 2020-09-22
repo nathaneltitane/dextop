@@ -35,11 +35,11 @@ where available install options are:
 -f | --full:    download and install full desktop environment and utilities. [ Default - full setup when no option is selected ] 
 -m | --minimal: download and install minimal set of utilities.
 ```
-and available display output configurations are
+and available display output options are:
 
 ```
--v | --vnc:     download and unpack root filesystem and utilities.
--x | --xorg:    download and install full desktop environment and utilities. [ Default - full setup when no option is selected ] 
+-v | --vnc:     download and setup vnc protocol display output. [ Default - vnc display when no option is selected ]
+-x | --xorg:    download and setup xorg/xrdp protocol display output.
 ```
 
 The minimal setup option is ideal for running specific applications and their dependencies only (see Application mode).
