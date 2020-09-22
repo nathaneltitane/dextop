@@ -97,7 +97,7 @@ BINARIES_DIRECTORY="${PREFIX}"/bin
 
 cd "${SETUP_DIRECTORY}" || exit 1
 
-# dependencies #
+# get dependencies
 
 dependencies_list=(
 	console
@@ -108,11 +108,11 @@ for dependency in ${dependencies_list[@]}
 do
 	dependency_url=bin-dex.ntttn.me/"$binary"
 
-	# get binaries from repository
+	# get dependencies from repository
 
 	curl -sL ${dependency_url} > "$BINARIES_DIRECTORY/$dependency"
 
-	# set execution mode for binary
+	# set execution mode for dependency
 
 	chmod +x "$BINARIES_DIRECTORY/$dependency"
 	
