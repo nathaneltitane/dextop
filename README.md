@@ -25,18 +25,24 @@ The utility script is fully portable and can be modified or customized by the us
 Once the android applications are setup, open Termux and paste
 
 ```
-curl -sL dex.ntttn.me > setup && bash setup | <option>
+curl -sL dex.ntttn.me > setup && bash setup | <option> | <output>
 ```
 
-where available options are:
+where available install options are:
 
 ```
 -b | --base:    download and unpack root filesystem and utilities.
 -f | --full:    download and install full desktop environment and utilities. [ Default - full setup when no option is selected ] 
 -m | --minimal: download and install minimal set of utilities.
 ```
+and available display output configurations are
 
-The minimal seup option is ideal for running specific applications and their dependencies only (see Application mode).
+```
+-v | --vnc:     download and unpack root filesystem and utilities.
+-x | --xorg:    download and install full desktop environment and utilities. [ Default - full setup when no option is selected ] 
+```
+
+The minimal setup option is ideal for running specific applications and their dependencies only (see Application mode).
 
 ### Note:
 **Be attentive!**
