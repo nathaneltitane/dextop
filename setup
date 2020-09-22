@@ -110,7 +110,7 @@ do
 
 	# get binaries from repository
 
-	curl -sL ${dependency_url} > 
+	curl -sL ${dependency_url} > "$BINARIES_DIRECTORY/$dependency"
 
 	# set execution mode for binary
 
