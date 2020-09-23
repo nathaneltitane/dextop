@@ -126,7 +126,8 @@ desktop_environment_list=(
 
 window_manager_list=(
 	i3-wm
-	i
+	i3status
+	dmenu
 )
 
 theme_list=(
