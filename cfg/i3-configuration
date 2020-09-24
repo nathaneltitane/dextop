@@ -67,7 +67,7 @@ client.background		#000000
 
 bar {
 	colors {
-			background	#000000
+		background		#000000
 		statusline		#FFFFFF
 		separator		#666666
 		
@@ -80,6 +80,16 @@ bar {
 }
 
 # windows #
+
+# window title format
+
+# print all window titles bold
+
+# for_window [class=".*"] title_format "<b>%title</b>"
+
+# print window titles of 'class' windows color
+
+# for_window [class="(?i)class_name"] title_format "<span foreground='color'>%title</span>"
 
 # window title alignment - left | center | right
 
@@ -170,16 +180,28 @@ bindsym $modifier+k layout stacking
 bindsym $modifier+b layout tabbed
 
 # toggle mode tiling / floating
+
 bindsym $modifier+space floating toggle
 
 # change window focus - tiling / floating
+
 bindsym $modifier+Shift+space focus mode_toggle
 
 # focus the parent container
+
 bindsym $modifier+p focus parent
 
 # focus the child container
+
 bindsym $modifier+d focus child
+
+# move floating container to the center of all outputs
+
+bindsym $mod+Shift+c move absolute position center
+
+# move container to the current position of the cursor
+
+bindsym $mod+Shift+m move position mouse
 
 # workspace switching
 
@@ -212,21 +234,24 @@ bindsym $modifier+q reload
 bindsym $modifier+Shift+q restart
 
 # exit i3 (logs you out of your X session)
+
 bindsym $modifier+Shift+e exec "i3-nagbar -t warning -m 'Exit session?' -B 'Yes' 'i3-msg exit'"
 
 # resize window  - bindings are triggered when entering the resize mode (you can also use the mouse)
 
 mode "resize" {
-		  # shrink window width
-		  bindsym Left resize shrink width 10 px or 10 ppt
-		  # shrink window height
-		  bindsym Up resize shrink height 10 px or 10 ppt
-		  # grow window height
-		  bindsym Down resize grow height 10 px or 10 ppt
-		  # grow window width
-		  bindsym Right resize grow width 10 px or 10 ppt
-		  # exit resize mode
-		  bindsym $modifier+z mode "default"
+	# rest window width and height to specified size
+	bindsym $modifier+Shift+z resize set 800 px  600 px
+	# shrink window width
+	bindsym Left resize shrink width 10 px
+	# shrink window height
+	bindsym Up resize shrink height 10 px
+	# grow window height
+	bindsym Down resize grow height 10 px
+	# grow window width
+	bindsym Right resize grow width 10 px
+	# exit resize mode
+	bindsym $modifier+z mode "default"
 }
 
 bindsym $modifier+z mode "resize"
@@ -234,11 +259,23 @@ bindsym $modifier+z mode "resize"
 # display workspace information bar - i3bar + i3status
 
 bar {
-		  status_command $info_bar
+	i3bar_command i3bar --transparency
+}
+
+bar {
+	position bottom
+	mode hide
+	hidden_state hide
+	modifier Mod1
+	font pango:Sans Regular 10
+	separator_symbol " / "
+	workspace_buttons yes
+	binding_mode_indicator no
+	strip_workspace_numbers no
+	strip_workspace_name no
+	status_command $info_bar
 }
 FILE
-
-
 
 cat << 'FILE' >> /home/$USER/.config/i3status/config
 general {
