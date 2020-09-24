@@ -18,9 +18,11 @@ cat <<- FILE > "$PROOT_DIRECTORY"/home/"$user_name"/.config/i3/config
 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
-# variables #
+# network management - nm-applet
 
-# modifiers
+# exec --no-startup-id $network_manager
+
+# modifiers #
 
 # 'xmodmap' output:
 
@@ -36,7 +38,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 set $modifier Mod1
 set $windows Mod4
 
-# workspaces
+# workspaces #
 
 set $workspace1			"1"
 set $workspace2			"2"
@@ -48,62 +50,6 @@ set $workspace4			"6"
 set $workspace4			"7"
 set $workspace4			"8"
 
-# colors
-
-# A - Border
-# B - Background
-# C - Text
-# D - Indicator
-# E - Child Border
-
-# class					[  A  ]	[  B  ]	[  c  ]	[  d  ]	[  E  ]
-
-client.focused			#000000	#000000 #FFFFFF	#FFFFFF	#000000
-client.focused_inactive #000000	#000000 #666666	#666666	#000000
-client.unfocused		#000000	#666666 #000000	#000000	#000000
-client.urgent			#000000	#000000 #FF0000	#FF0000	#000000
-client.placeholder		#000000	#000000 #815FA3	#815FA3	#000000
-client.background		#000000
-
-bar {
-	colors {
-		background		#000000
-		statusline		#FFFFFF
-		separator		#666666
-		
-		focused_workspace		#000000	#000000	#FFFFFF
-		active_workspace		#000000	#000000	#FFFFFF
-		inactive_workspace		#000000	#000000	#666666
-		urgent_workspace		#000000	#000000	#FF0000
-		binding_mode			#000000	#000000	#815FA3
-	}
-}
-
-# windows #
-
-# window title format
-
-# print all window titles bold
-
-# for_window [class=".*"] title_format "<b>%title</b>"
-
-# print window titles of 'class' windows color
-
-# for_window [class="(?i)class_name"] title_format "<span foreground='color'>%title</span>"
-
-# window title alignment - left | center | right
-
-title_align center
-
-# floating window size
-
-floating_minimum_size 805 x 600
-floating_maximum_size -1 x -1
-
-# disable window titlebars
-
-# for_window [class="^.*"] border pixel 2
-
 # information bar
 
 set $info_bar "i3status"
@@ -114,7 +60,7 @@ set $launcher "i3-dmenu-desktop"
 
 # menu
 
-set $menu "dmenu_run -nf '#FFFFFF' -nb '#000000' -sb '#000000' -sf '#815FA3' -fn 'monospace-10' -p 'dmenu prompt &gt;'
+set $menu "dmenu_run -nf '#FFFFFF' -nb '#000000' -sb '#000000' -sf '#815FA3' -fn 'monospace-10' -p 'dmenu prompt &gt;"
 
 # network manager
 
@@ -124,13 +70,82 @@ set $network_manager "nm-applet"
 
 set $terminal "xfce4-terminal"
 
+# colors #
+
+# A - border
+# B - background
+# C - text
+# D - indicator
+# E - child border
+
+# color class			[  A  ]	[  B  ]	[  c  ]	[  d  ]	[  E  ]
+
+client.focused			#000000	#000000 #FFFFFF	#FFFFFF	#000000
+client.focused_inactive		#000000	#000000 #666666	#666666	#000000
+client.unfocused		#000000	#666666 #000000	#000000	#000000
+client.urgent			#000000	#000000 #FF0000	#FF0000	#000000
+client.placeholder		#000000	#000000 #815FA3	#815FA3	#000000
+client.background		#000000
+
+bar {
+	colors {
+		background	#000000
+		statusline	#FFFFFF
+		separator	#666666
+		
+		focused_workspace	#000000	#000000	#FFFFFF
+		active_workspace	#000000	#000000	#FFFFFF
+		inactive_workspace	#000000	#000000	#666666
+		urgent_workspace	#000000	#000000	#FF0000
+		binding_mode		#000000	#000000	#815FA3
+	}
+}
+
+# windows #
+
+# disable window titlebars
+
+# for_window [class="^.*"] border pixel 2
+
+# window title format
+
+# for_window [class=".*"] title_format "<b>%title</b>"
+
+# window title color
+
+# for_window [class="(?i)class_name"] title_format "<span foreground='color'>%title</span>"
+
+# window title alignment - left | center | right
+
+title_align center
+
+# window size - floating
+
+floating_minimum_size 800 x 600
+floating_maximum_size -1 x -1
+
+# window modifier - floating
+
+floating_modifier $modifier
+
 # fonts
 
 font pango:Sans Regular 10
 
-# network management - nm-applet
+# bindings #
 
-# exec --no-startup-id $network_manager
+
+# open launcher
+
+bindsym $modifier+r exec --no-startup-id $launcher
+
+# open terminal
+
+bindsym $modifier+t exec $terminal
+
+# kill application instance
+
+bindsym $modifier+x kill
 
 # volume control - pactl
 
@@ -139,13 +154,6 @@ font pango:Sans Regular 10
 #bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
 #bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 #bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-
-# use mouse+$modifier to drag floating windows to the desired position
-floating_modifier $modifier
-
-bindsym $modifier+t exec $terminal
-bindsym $modifier+x kill
-bindsym $modifier+r exec --no-startup-id $launcher
 
 # change focus
 
@@ -169,6 +177,10 @@ bindsym $modifier+h split h
 
 bindsym $modifier+v split v
 
+# toggle floating
+
+bindsym $modifier+space floating toggle
+
 # toggle fullscreen
 
 bindsym $modifier+f fullscreen toggle
@@ -179,19 +191,15 @@ bindsym $modifier+s layout toggle split
 bindsym $modifier+k layout stacking
 bindsym $modifier+b layout tabbed
 
-# toggle mode tiling / floating
-
-bindsym $modifier+space floating toggle
-
 # change window focus - tiling / floating
 
 bindsym $modifier+Shift+space focus mode_toggle
 
-# focus the parent container
+# focus parent container
 
 bindsym $modifier+p focus parent
 
-# focus the child container
+# focus child container
 
 bindsym $modifier+d focus child
 
@@ -203,7 +211,7 @@ bindsym $mod+Shift+c move absolute position center
 
 bindsym $mod+Shift+m move position mouse
 
-# workspace switching
+# switch workspace
 
 bindsym $modifier+1 workspace number $workspace1
 bindsym $modifier+2 workspace number $workspace2
@@ -229,19 +237,24 @@ bindsym $modifier+Shift+8 move container to workspace number $workspace8
 
 bindsym $modifier+q reload
 
-# restart i3 inplace
+# restart i3
 
 bindsym $modifier+Shift+q restart
 
 # exit i3 (logs you out of your X session)
 
-bindsym $modifier+Shift+e exec "i3-nagbar -t warning -m 'Exit session?' -B 'Yes' 'i3-msg exit'"
+bindsym $modifier+Shift+x exec "i3-nagbar -t warning -m 'Exit session?' -B 'Yes' 'i3-msg exit'"
 
 # resize window  - bindings are triggered when entering the resize mode (you can also use the mouse)
 
+# enter resize mode
+
+bindsym $modifier+z mode "resize"
+
 mode "resize" {
-	# rest window width and height to specified size
+	# reset window width and height to specified size
 	bindsym $modifier+Shift+z resize set 800 px  600 px
+	
 	# shrink window width
 	bindsym Left resize shrink width 10 px
 	# shrink window height
@@ -250,11 +263,10 @@ mode "resize" {
 	bindsym Down resize grow height 10 px
 	# grow window width
 	bindsym Right resize grow width 10 px
+	
 	# exit resize mode
 	bindsym $modifier+z mode "default"
 }
-
-bindsym $modifier+z mode "resize"
 
 # display workspace information bar - i3bar + i3status
 
@@ -263,29 +275,30 @@ bar {
 }
 
 bar {
-	position bottom
-	mode hide
-	hidden_state hide
-	modifier Mod1
-	font pango:Sans Regular 10
-	separator_symbol " / "
-	workspace_buttons yes
-	binding_mode_indicator no
-	strip_workspace_numbers no
-	strip_workspace_name no
 	status_command $info_bar
+	
+	binding_mode_indicator no
+	font pango:Sans Regular 10
+	hidden_state hide
+	mode hide
+	modifier Mod1
+	position bottom
+	separator_symbol " / "
+	strip_workspace_name no
+	strip_workspace_numbers no
+	workspace_buttons yes
 }
 FILE
 
 cat << 'FILE' >> /home/$USER/.config/i3status/config
 general {
-	output_format = "i3bar"
-	colors = false
-	markup = pango
-	interval = 5
-	color_good = '#2f343f'
-	color_degraded = '#ebcb8b'
 	color_bad = '#ba5e57'
+	color_degraded = '#ebcb8b'
+	color_good = '#2f343f'
+	colors = false
+	interval = 5
+	markup = pango
+	output_format = "i3bar"
 }
 
 #order += "load"
@@ -307,6 +320,18 @@ order += "tztime local"
 
 load {
 	format = "<span background='#f59335'> %5min Load </span>"
+}
+
+battery 0{
+	last_full_capacity = true
+	format = "<span background='#a3be8c'>  %status %percentage </span>"
+	path = "/sys/class/power_supply/battery/uevent"
+	format_down = "No Battery"
+	status_chr = "Charging"
+	status_bat = "Battery"
+	status_unk = "N/A"
+	status_full = "Full"
+	low_threshold = 15
 }
 
 cpu_temperature 0 {
@@ -373,18 +398,6 @@ volume master {
 	device = "default"
 	mixer = "Master"
 	mixer_idx = 0
-}
-
-battery 0{
-	last_full_capacity = true
-	format = "<span background='#a3be8c'>  %status %percentage </span>"
-	format_down = "No Battery"
-	status_chr = "Charging"
-	status_bat = "Battery"
-	status_unk = "Unknown"
-	status_full = "Charged"
-	path = "/sys/class/power_supply/BAT/uevent"
-	low_threshold = 10
 }
 
 tztime local {
