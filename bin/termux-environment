@@ -17,6 +17,43 @@ echo > "$HOME"/.hushlogin
 console.info "Creating required configuration files."
 echo
 
+# termux properties
+
+cat <<- FILE > "$HOME"/.termux/termux.properties
+
+# use black for drawer and dialogs - Android 9.0+ default
+
+use-black-ui = true
+
+# enforce character based input - workaround for word-based input keyboards
+
+enforce-char-based-input = true
+
+# handle the bell character - vibrate | beep | ignore
+
+bell-character=beep
+
+# handle the escape key - escape | back
+
+back-key=back
+
+# open a new terminal with ctrl + t (volume down + t)
+
+shortcut.create-session = ctrl + t
+
+# move to next terminal session
+
+shortcut.next-session = ctrl + 2
+
+# move to previous terminal session
+
+shortcut.previous-session = ctrl + 1
+
+# rename current terminal session
+
+shortcut.rename-session = ctrl + n
+FILE
+
 # .bash_aliases
 
 cat <<- 'FILE' > "$HOME"/.bash_aliases
