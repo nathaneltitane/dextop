@@ -10,7 +10,7 @@ source /data/data/com.termux/files/usr/bin/globals
 cat <<- FILE > "$PROOT_DIRECTORY"/home/"$user_name"/.config/i3/config
 # i3 configuration #
 
-# startup ----------------------------------------- #
+# startup #
 
 # exec_always --no-startup-id APPLICATION OPTIONS
 
@@ -19,54 +19,90 @@ cat <<- FILE > "$PROOT_DIRECTORY"/home/"$user_name"/.config/i3/config
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 
-# variables --------------------------------------- #
+# variables #
 
 # modifiers
 
-# Alt
+# 'xmodmap' output:
 
-set $mod Mod1
+# shift		Shift_L (0x32) | Shift_R (0x3e)
+# lock		Caps_Lock (0x42)
+# control	Control_L (0x25) | Control_R (0x69)
+# mod1		Alt_L (0x40) | Alt_R (0x6c) | Meta_L (0xcd)
+# mod2		Num_Lock (0x4d)
+# mod3
+# mod4		Super_L (0x85) | Super_R (0x86) | Super_L (0xce) | Hyper_L (0xcf)
+# mod5		ISO_Level3_Shift (0x5c) | Mode_switch (0xcb)
 
-# Win / Super
-
-set $sup Mod4
+set $modifier Mod1
+set $windows Mod4
 
 # workspaces
 
-set $workspace1         "1"
-set $workspace2         "2"
-set $workspace3         "3"
-set $workspace4         "4"
+set $workspace1			"1"
+set $workspace2			"2"
+set $workspace3			"3"
+set $workspace4			"4"
+set $workspace4			"4"
+set $workspace4			"5"
+set $workspace4			"6"
+set $workspace4			"7"
+set $workspace4			"8"
 
 # colors
 
-set $bg-color           #172A47
-set $text-color         #5A9857
-set $urgent-bg-color    #E53935
-set $inactive-bg-color  #435E75
-set $unfocused_border   #72afff
-set $focused_border     #82ff80
+# A - Border
+# B - Background
+# C - Text
+# D - Indicator
+# E - Child Border
+
+# class					[  A  ]	[  B  ]	[  c  ]	[  d  ]	[  E  ]
+
+client.focused			#000000	#000000 #FFFFFF	#FFFFFF	#000000
+client.focused_inactive #000000	#000000 #FFFFFF	#666666	#000000
+client.unfocused		#000000	#000000 #000000	#000000	#000000
+client.urgent			#000000	#000000 #FF0000	#FF0000	#000000
+client.placeholder		#000000	#000000 #815FA3	#815FA3	#000000
+client.background		#000000
+
+bar {
+	colors {
+			background	#000000
+		statusline		#FFFFFF
+		separator		#666666
+		
+		focused_workspace		#000000	#000000	#FFFFFF
+		active_workspace		#000000	#000000	#FFFFFF
+		inactive_workspace		#000000	#000000	#666666
+		urgent_workspace		#000000	#000000	#FF0000
+		binding_mode			#000000	#000000	#815FA3
+	}
+}
 
 # information bar
 
-set $info_bar           "i3status"
+set $info_bar "i3status"
 
 # launcher
 
-set $launcher           "i3-dmenu-desktop"
+set $launcher "i3-dmenu-desktop"
+
+# menu
+
+set $menu "dmenu_run -nf '#FFFFFF' -nb '#000000' -sb '#000000' -sf '#815FA3' -fn 'monospace-10' -p 'dmenu prompt &gt;'
 
 # network manager
 
-set $network_manager    "nm-applet"
+set $network_manager "nm-applet"
 
 # terminal
 
-set $terminal           "xfce4-terminal"
+set $terminal "xfce4-terminal"
 
 # fonts
 
-font pango:DejaVu Sans Mono 8
-
+font pango:DejaVu Sans Mono 9
 
 # network management - nm-applet
 
@@ -80,104 +116,228 @@ font pango:DejaVu Sans Mono 8
 #bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 #bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-# use mouse+$mod to drag floating windows to the desired position
-floating_modifier $mod
+# use mouse+$modifier to drag floating windows to the desired position
+floating_modifier $modifier
 
-bindsym $mod+t exec $terminal
-bindsym $mod+x kill
-bindsym $mod+r exec --no-startup-id $launcher
+bindsym $modifier+t exec $terminal
+bindsym $modifier+x kill
+bindsym $modifier+r exec --no-startup-id $launcher
 
 # change focus
 
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $modifier+Left focus left
+bindsym $modifier+Down focus down
+bindsym $modifier+Up focus up
+bindsym $modifier+Right focus right
 
 # move focused window
 
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $modifier+Shift+Left move left
+bindsym $modifier+Shift+Down move down
+bindsym $modifier+Shift+Up move up
+bindsym $modifier+Shift+Right move right
 
-# split horizontal
+# horizontal split - vertical layout
 
-bindsym $mod+h split h
+bindsym $modifier+h split h
 
-# split vertical
+# vertical split - horizontal layout
 
-bindsym $mod+v split v
+bindsym $modifier+v split v
 
 # toggle fullscreen
 
-bindsym $mod+f fullscreen toggle
+bindsym $modifier+f fullscreen toggle
 
 # change container layout  - split / stacked / tabbed
 
-bindsym $mod+s layout toggle split
-bindsym $mod+k layout stacking
-bindsym $mod+b layout tabbed
+bindsym $modifier+s layout toggle split
+bindsym $modifier+k layout stacking
+bindsym $modifier+b layout tabbed
 
 # toggle mode tiling / floating
-bindsym $mod+space floating toggle
+bindsym $modifier+space floating toggle
 
 # change window focus - tiling / floating
-bindsym $mod+Shift+space focus mode_toggle
+bindsym $modifier+Shift+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+p focus parent
+bindsym $modifier+p focus parent
 
 # focus the child container
-bindsym $mod+d focus child
+bindsym $modifier+d focus child
 
 # workspace switching
 
-bindsym $mod+1 workspace number $workspace1
-bindsym $mod+2 workspace number $workspace2
-bindsym $mod+3 workspace number $workspace3
-bindsym $mod+4 workspace number $workspace4
+bindsym $modifier+1 workspace number $workspace1
+bindsym $modifier+2 workspace number $workspace2
+bindsym $modifier+3 workspace number $workspace3
+bindsym $modifier+4 workspace number $workspace4
+bindsym $modifier+5 workspace number $workspace5
+bindsym $modifier+6 workspace number $workspace6
+bindsym $modifier+7 workspace number $workspace7
+bindsym $modifier+8 workspace number $workspace8
 
 # move focused container to workspace
 
-bindsym $mod+Shift+1 move container to workspace number $workspace1
-bindsym $mod+Shift+2 move container to workspace number $workspace2
-bindsym $mod+Shift+3 move container to workspace number $workspace3
-bindsym $mod+Shift+4 move container to workspace number $workspace4
-bindsym $mod+Shift+5 move container to workspace number $workspace5
-bindsym $mod+Shift+6 move container to workspace number $workspace6
+bindsym $modifier+Shift+1 move container to workspace number $workspace1
+bindsym $modifier+Shift+2 move container to workspace number $workspace2
+bindsym $modifier+Shift+3 move container to workspace number $workspace3
+bindsym $modifier+Shift+4 move container to workspace number $workspace4
+bindsym $modifier+Shift+5 move container to workspace number $workspace5
+bindsym $modifier+Shift+6 move container to workspace number $workspace6
+bindsym $modifier+Shift+7 move container to workspace number $workspace7
+bindsym $modifier+Shift+8 move container to workspace number $workspace8
 
 # reload i3 configuration
 
-bindsym $mod+q reload
+bindsym $modifier+q reload
 
 # restart i3 inplace
 
-bindsym $mod+Shift+q restart
+bindsym $modifier+Shift+q restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit session?' -B 'Yes' 'i3-msg exit'"
+bindsym $modifier+Shift+e exec "i3-nagbar -t warning -m 'Exit session?' -B 'Yes' 'i3-msg exit'"
 
 # resize window  - bindings are triggered when entering the resize mode (you can also use the mouse)
 
 mode "resize" {
-        # shrink window width
-        bindsym Left resize shrink width 10 px or 10 ppt
-        # shrink window height
-        bindsym Up resize shrink height 10 px or 10 ppt
-        # grow window height
-        bindsym Down resize grow height 10 px or 10 ppt
-        # grow window width
-        bindsym Right resize grow width 10 px or 10 ppt
-        # exit resize mode
-        bindsym $mod+z mode "default"
+		  # shrink window width
+		  bindsym Left resize shrink width 10 px or 10 ppt
+		  # shrink window height
+		  bindsym Up resize shrink height 10 px or 10 ppt
+		  # grow window height
+		  bindsym Down resize grow height 10 px or 10 ppt
+		  # grow window width
+		  bindsym Right resize grow width 10 px or 10 ppt
+		  # exit resize mode
+		  bindsym $modifier+z mode "default"
 }
 
-bindsym $mod+z mode "resize"
+bindsym $modifier+z mode "resize"
 
 # display workspace information bar - i3bar + i3status
 
 bar {
-        status_command $info_bar
+		  status_command $info_bar
+}
+FILE
+
+
+
+cat << 'FILE' >> /home/$USER/.config/i3status/config
+general {
+	output_format = "i3bar"
+	colors = false
+	markup = pango
+	interval = 5
+	color_good = '#2f343f'
+	color_degraded = '#ebcb8b'
+	color_bad = '#ba5e57'
+}
+
+#order += "load"
+order += "cpu_temperature 0"
+order += "cpu_temperature 1"
+order += "cpu_temperature 2"
+order += "cpu_temperature 3"
+order += "cpu_temperature 4"
+order += "cpu_temperature 5"
+order += "cpu_temperature 6"
+order += "cpu_temperature 7"
+order += "disk /"
+order += "disk /home"
+order += "ethernet eth0"
+order += "wireless wlan0"
+order += "volume master"
+order += "battery 0"
+order += "tztime local"
+
+load {
+	format = "<span background='#f59335'> %5min Load </span>"
+}
+
+cpu_temperature 0 {
+	format = "<span background='#bf616a'> %degrees °C </span>"
+	path = "/sys/class/thermal/thermal_zone0/temp"
+}
+
+cpu_temperature 1 {
+	format = "<span background='#bf616a'> %degrees °C </span>"
+	path = "/sys/class/thermal/thermal_zone1/temp"
+}
+
+cpu_temperature 2 {
+	format = "<span background='#bf616a'> %degrees °C </span>"
+	path = "/sys/class/thermal/thermal_zone2/temp"
+}
+
+cpu_temperature 3 {
+	format = "<span background='#bf616a'> %degrees °C </span>"
+	path = "/sys/class/thermal/thermal_zone3/temp"
+}
+
+cpu_temperature 4 {
+	format = "<span background='#bf616a'> %degrees °C </span>"
+	path = "/sys/class/thermal/thermal_zone4/temp"
+}
+
+cpu_temperature 5 {
+	format = "<span background='#bf616a'> %degrees °C </span>"
+	path = "/sys/class/thermal/thermal_zone5/temp"
+}
+
+cpu_temperature 6 {
+	format = "<span background='#bf616a'> %degrees °C </span>"
+	path = "/sys/class/thermal/thermal_zone6/temp"
+}
+
+cpu_temperature 7 {
+	format = "<span background='#bf616a'> %degrees °C </span>"
+	path = "/sys/class/thermal/thermal_zone7/temp"
+}
+
+disk "/" {
+	format = "<span background='#fec7cd'> %free Free </span>"
+}
+
+disk "/home" {
+	format = "<span background='#a1d569'> %free Free </span>"
+}
+
+ethernet eth0 {
+	format_up = "<span background='#88c0d0'> %ip </span>"
+	format_down = "<span background='#88c0d0'> Down </span>"
+}
+
+wireless wlan0 {
+	format_up = "<span background='#b48ead'> %essid </span>"
+	format_down = "<span background='#b48ead'> Down</span>"
+}
+
+volume master {
+	format = "<span background='#ebcb8b'> %volume </span>"
+	format_muted = "<span background='#ebcb8b'> Muted </span>"
+	device = "default"
+	mixer = "Master"
+	mixer_idx = 0
+}
+
+battery 0{
+	last_full_capacity = true
+	format = "<span background='#a3be8c'>  %status %percentage </span>"
+	format_down = "No Battery"
+	status_chr = "Charging"
+	status_bat = "Battery"
+	status_unk = "Unknown"
+	status_full = "Charged"
+	path = "/sys/class/power_supply/BAT/uevent"
+	low_threshold = 10
+}
+
+tztime local {
+	format = "<span background='#81a1c1'> %time </span>"
+	format_time = "%a %-d %b %H:%M"
 }
 FILE
