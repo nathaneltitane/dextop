@@ -271,7 +271,7 @@ bar {
 	binding_mode_indicator yes
 	hidden_state show
 	mode dock
-	modifier Mod1
+	modifier \$mod
 	position bottom
 	separator_symbol " + "
 	strip_workspace_name no
