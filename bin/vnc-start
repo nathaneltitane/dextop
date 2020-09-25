@@ -135,7 +135,7 @@ vnc () {
 
 if [ -s "$HOME"/.vnc/selection ]
 then
-	selection="$(cat "$HOME"/.vnc/selection)"
+	selection="$(echo $(cat "$HOME"/.vnc/selection)"
 else
 	echo
 	console.input "Enter the selection to start the display server with: "

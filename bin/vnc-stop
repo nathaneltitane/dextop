@@ -9,11 +9,13 @@ vnc_server () {
 	vncserver > /dev/null 2>&1
 }
 
-clean () {
-	if [ -e "/tmp/.X*" ]
-	then
-		rm -rf "/tmp/.X*"
-	fi
+vnc_clean () {
+	vnc_server \
+		-kill \
+		-clean \
+			:*
+	
+	rm -rf /tmp/.X*
 }
 
 # check for process tokens and cleanup
@@ -24,10 +26,5 @@ then
 	console.fwd "Stopping display server..."
 	echo
 
-	vnc_server \
-		-kill \
-		-clean \
-				${DISPLAY}
-
-	clean
+	vnc_clean
 fi
