@@ -257,8 +257,8 @@ mode "resize" {
 bar {
 	status_command \$info_bar
 	
-	binding_mode_indicator no
 	font pango:Sans Regular 10
+	binding_mode_indicator yes
 	hidden_state show
 	mode dock
 	modifier Mod1
