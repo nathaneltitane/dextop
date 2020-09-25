@@ -308,7 +308,7 @@ load {
 
 battery all {
 	last_full_capacity = true
-	format = " %status %percentage"
+	format = " %status %remaining (%emptytime %consumption) %percentage"
 	path = "/sys/class/power_supply/battery/uevent"
 	format_down = "No Battery"
 	status_chr = "Charging"
