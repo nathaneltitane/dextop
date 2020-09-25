@@ -126,6 +126,7 @@ desktop_environment_list=(
 
 window_manager_list=(
 	i3-wm
+	i3blocks
 	i3status
 	dmenu
 	xss-lock

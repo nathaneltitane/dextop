@@ -306,14 +306,14 @@ load {
 battery 0 {
 	format = "[ %status | %percentage ]"
 	path = "/sys/class/power_supply/battery/uevent"
-	last_full_capacity = false
+	last_full_capacity = true
+	threshold_type = percentage
+	low_threshold = 15
 	format_down = "[ X ]"
 	status_chr = ">>>"
 	status_bat = " [ B ]"
 	status_unk = "[ ? ]"
 	status_full = "[ F ]"
-	low_threshold = 15
-	threshold_type = percentage
 }
 
 cpu_temperature 0 {
