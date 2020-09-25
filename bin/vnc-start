@@ -9,6 +9,10 @@ source /data/data/com.termux/files/usr/bin/globals
 
 source /etc/os-release
 
+# variables # 
+
+PORT="590${DISPLAY:1}"
+
 vnc_server () {
 	vncserver > /dev/null
 }
@@ -21,6 +25,8 @@ vnc () {
 		-cleanstale \
 		-format $NAME \
 		-geometry ${GEOMETRY} ${DISPLAY}
+		
+		# 'vncserver' uses $DISPLAY instead of $PORT
 
 	echo
 	console.fwd "Starting display server..."
@@ -28,7 +34,7 @@ vnc () {
 
 	console.info "Format.......: ${format}"
 	console.info "Resolution...: ${GEOMETRY}"
-	console.info "Port.........: 590${DISPLAY:1}"
+	console.info "Port.........: ${PORT}"
 	echo
 
 	# make selection available for automatic start
@@ -42,7 +48,7 @@ vnc () {
 
 	# start android vnc intent after establishing connection
 
-	am start -d vnc://127.0.0.1:590${DISPLAY:1} > /dev/null
+	am start -d vnc://127.0.0.1:${PORT} > /dev/null
 }
 
 # list supported display resolutions
