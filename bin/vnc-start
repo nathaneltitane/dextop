@@ -9,20 +9,24 @@ source /data/data/com.termux/files/usr/bin/globals
 
 source /etc/os-release
 
-vnc() {
-	vncserver \
+vnc_server () {
+	vncserver > /dev/null
+}
+
+vnc () {
+	vnc_server \
 		-SecurityTypes none \
 		-localhost yes \
 		-depth 32 \
 		-cleanstale \
-		-name $NAME \
+		-format $NAME \
 		-geometry ${GEOMETRY} ${DISPLAY}
 
 	echo
 	console.fwd "Starting display server..."
 	echo
 
-	console.info "Name.........: ${name}"
+	console.info "Format.......: ${format}"
 	console.info "Resolution...: ${GEOMETRY}"
 	console.info "Port.........: 590${DISPLAY:1}"
 	echo
@@ -100,19 +104,19 @@ pad_length=10
 
 for (( i=0 ; i<${#resolutions[@]} ; i+=3 ))
 do
-	name="${resolutions[$i]}"
+	format="${resolutions[$i]}"
 	width="${resolutions[$i+1]}"
 	height="${resolutions[$i+2]}"
 	resolution="${width}x${height}"
 
 	if (( $i/3 >= 0 && $i/3 <= 7 ))
 	then
-		printf '\t[  %s ] %s' $((($i/3) +2)) $name
+		printf '\t[  %s ] %s' $((($i/3) +2)) $format
 	else
-		printf '\t[ %s ] %s' $((($i/3) +2)) $name
+		printf '\t[ %s ] %s' $((($i/3) +2)) $format
 	fi
 
-	printf '%*s' $((pad_length - ${#name}))
+	printf '%*s' $((pad_length - ${#format}))
 	printf '%s\n' $resolution
 done
 
@@ -150,7 +154,7 @@ case $selection in
 			i=$(($selection-1))
 			i=$(($i*3))
 
-			name="${resolutions[$i-3]}"
+			format="${resolutions[$i-3]}"
 			width="${resolutions[$i-2]}"
 			height="${resolutions[$i-1]}"
 			resolution="${width}x${height}"
