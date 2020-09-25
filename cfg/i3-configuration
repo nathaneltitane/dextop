@@ -258,10 +258,6 @@ mode "resize" {
 # display workspace information bar - i3bar + i3status
 
 bar {
-	i3bar_command i3bar --transparency
-}
-
-bar {
 	status_command \$info_bar
 	
 	binding_mode_indicator no
