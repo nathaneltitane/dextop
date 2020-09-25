@@ -270,7 +270,7 @@ bar {
 }
 FILE
 
-cat << 'FILE' >> /home/$USER/.config/i3status/config
+cat << 'FILE' >> "$PROOT_DIRECTORY"/home/"$user_name"/.config/i3status/config
 general {
 	output_format = "i3bar"
 	
