@@ -62,8 +62,9 @@ print_selection () {
 	
 	# print default and custom  selection lines first
 	
-	printf '\t[ -- ] Default   (Dynamic + 5901)\n'
-	printf '\t[  1 ] Custom    (resolution + port)\n'
+	printf '\t[  D ] Default\n'
+	printf '\t[  C ] Custom\n'
+	printf '\n'
 	
 	# continue list using array selection of suppported display resolutions
 	
@@ -78,11 +79,11 @@ print_selection () {
 		height="${resolutions[$i+2]}"
 		resolution="${width}x${height}"
 	
-		if (( $i/3 >= 0 && $i/3 <= 7 ))
+		if (( $i/3 >= 0 && $i/3 <= 8 ))
 		then
-			printf '\t[  %s ] %s' $((($i/3) +2)) $type
+			printf '\t[  %s ] %s' $((($i/3) +1)) $type
 		else
-			printf '\t[ %s ] %s' $((($i/3) +2)) $type
+			printf '\t[ %s ] %s' $((($i/3) +1)) $type
 		fi
 	
 		printf '%*s' $((pad_length - ${#type}))
@@ -150,7 +151,7 @@ fi
 # manage custom input values
 
 case $selection in
-	1)
+	c|C)
 		console.info "Setting custom resolution and port:"
 		echo
 

@@ -75,11 +75,6 @@ echo
 
 mkdir -p /run/usr/${uid} -m 700
 
-console.info "Setting up desktop session runtime directory."
-echo
-
-mkdir -p /run/usr/i3 -m 700
-
 # home #
 
 # populate user home directory with standard folders
