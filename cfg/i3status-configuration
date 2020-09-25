@@ -1,0 +1,109 @@
+general {
+	output_format = "i3bar"
+	
+	color_bad = '#ff0000'
+	color_degraded = '#ebcb8b'
+	color_good = '#2f343f'
+	color_separator = '#ffffff'
+	colors = false
+	interval = 5
+	markup = pango
+
+}
+
+order += "tztime local"
+order += "cpu_temperature 0"
+order += "cpu_temperature 1"
+order += "cpu_temperature 2"
+order += "cpu_temperature 3"
+order += "cpu_temperature 4"
+order += "cpu_temperature 5"
+order += "cpu_temperature 6"
+order += "cpu_temperature 7"
+order += "disk /"
+order += "memory"
+order += "ethernet eth0"
+order += "wireless wlan0"
+order += "battery 0"
+
+load {
+	format = "%5min Load"
+}
+
+battery 0 {
+	format = "[ %status | %percentage ]"
+	path = "/sys/class/power_supply/battery/uevent"
+	last_full_capacity = true
+	threshold_type = percentage
+	low_threshold = 15
+	format_down = "[ X ]"
+	status_chr = ">>>"
+	status_bat = " [ B ]"
+	status_unk = "[ ? ]"
+	status_full = "[ F ]"
+}
+
+cpu_temperature 0 {
+	format = "[ 0 | %degrees °C ]"
+	path = "/sys/class/thermal/thermal_zone0/temp"
+}
+
+cpu_temperature 1 {
+	format = "[ 1 | %degrees °C ]"
+	path = "/sys/class/thermal/thermal_zone1/temp"
+}
+
+cpu_temperature 2 {
+	format = "[ 2 | %degrees °C ]"
+	path = "/sys/class/thermal/thermal_zone2/temp"
+}
+
+cpu_temperature 3 {
+	format = "[ 3 | %degrees °C ]"
+	path = "/sys/class/thermal/thermal_zone3/temp"
+}
+
+cpu_temperature 4 {
+	format = "[ 4 | %degrees °C ]"
+	path = "/sys/class/thermal/thermal_zone4/temp"
+}
+
+cpu_temperature 5 {
+	format = "[ 5 | %degrees °C ]"
+	path = "/sys/class/thermal/thermal_zone5/temp"
+}
+
+cpu_temperature 6 {
+	format = "[ 6 | %degrees °C ]"
+	path = "/sys/class/thermal/thermal_zone6/temp"
+}
+
+cpu_temperature 7 {
+	format = "[ 7 | %degrees °C ]"
+	path = "/sys/class/thermal/thermal_zone7/temp"
+}
+
+disk "/" {
+	format = "\[ SSD %free \| %avail \| %total \]"
+}
+
+memory {
+	format = "[ RAM %used | %available ]"
+	format_degraded = "MEMORY < %available"
+	threshold_degraded = "1G"
+}
+
+ethernet eth0 {
+	format_up = "E: (%quality at %essid, %bitrate / %frequency) %ip"
+	format_down = "[ E: Down] "
+}
+
+wireless wlan0 {
+	format_up = "W: (%quality at %essid, %bitrate / %frequency) %ip"
+	format_down = "[ W: Down ]"
+}
+
+tztime local {
+	format = "%time"
+	format_time = "[ %Y-%m-%d | %H:%M:%S ]"
+}

@@ -7,29 +7,38 @@ source /data/data/com.termux/files/usr/bin/globals
 
 # write configuration file
 
-cat <<- FILE > "$PROOT_DIRECTORY"/home/"$user_name"/.config/i3/config
+cat <<- FILE > "$PROOT_DIRECTORY"/etc/i3/config
 # i3 configuration #
 
 # startup #
 
+exec --no-startup-id xsetroot -solid black
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec --no-startup-id xsetroot -solid orange
+
 
 # modifiers #
 
-# 'xmodmap' output:
+# name			call				code
 
-# shift		Shift_L (0x32) | Shift_R (0x3e)
-# lock		Caps_Lock (0x42)
-# control	Control_L (0x25) | Control_R (0x69)
-# mod1		Alt_L (0x40) | Alt_R (0x6c) | Meta_L (0xcd)
-# mod2		Num_Lock (0x4d)
-# mod3
-# mod4		Super_L (0x85) | Super_R (0x86) | Super_L (0xce) | Hyper_L (0xcf)
-# mod5		ISO_Level3_Shift (0x5c) | Mode_switch (0xcb)
+# shift right	Shift_R				0x3e
+# shift left	Shift_L				0x32
+# lock			Caps_Lock			0x42
+# control left	Control_R			0x69
+control right	Control_L			0x25
+# mod1			Alt_L				0x40
+				Alt_R				0x6c
+				Meta_L				0xcd
+# mod2			Num_Lock			0x4d
+# mod3			
+# mod4			Super_L				0x85
+				Super_R				0x86
+				Super_L				0xce
+				Hyper_L				0xcf
+# mod5			ISO_Level3_Shift	0x5c
+				Mode_switch			0xcb
 
-set \$modifier Mod1
-set \$windows Mod4
+set \$modifier	Mod1
+set \$windows	Mod4
 
 # workspaces #
 
@@ -43,27 +52,25 @@ set \$workspace4			"6"
 set \$workspace4			"7"
 set \$workspace4			"8"
 
-# information bar
+# information
 
-set \$info_bar "i3status"
+set \$status "i3status"
+
+set \$blocks "i3blocks"
 
 # launcher
 
 set \$launcher "i3-dmenu-desktop"
-
-# menu
-
-set \$menu "dmenu_run -nf '#FFFFFF' -nb '#000000' -sb '#000000' -sf '#815FA3' -fn 'monospace-10' -p 'dmenu prompt &gt;"
-
-# network manager
-
-set \$network_manager "nm-applet"
 
 # terminal
 
 set \$terminal "xfce4-terminal"
 
 # colors #
+
+# FIX ME: 
+
+use #313437 as main theme color #
 
 # A - border
 # B - background
@@ -252,11 +259,14 @@ mode "resize" {
 	bindsym \$modifier+z mode "default"
 }
 
-# display workspace information bar - i3bar + i3status
+# i3blocks bindings #
+
+# lock status - num/caps
+
+bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
+bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 
 bar {
-	status_command \$info_bar
-	
 	font pango:Sans Regular 10
 	binding_mode_indicator yes
 	hidden_state show
@@ -267,117 +277,5 @@ bar {
 	strip_workspace_name no
 	strip_workspace_numbers no
 	workspace_buttons yes
-}
-FILE
-
-cat <<- 'FILE' > "$PROOT_DIRECTORY"/home/"$user_name"/.config/i3status/config
-general {
-	output_format = "i3bar"
-	
-	color_bad = '#ff0000'
-	color_degraded = '#ebcb8b'
-	color_good = '#2f343f'
-	color_separator = '#ffffff'
-	colors = false
-	interval = 5
-	markup = pango
-
-}
-
-order += "tztime local"
-order += "cpu_temperature 0"
-order += "cpu_temperature 1"
-order += "cpu_temperature 2"
-order += "cpu_temperature 3"
-order += "cpu_temperature 4"
-order += "cpu_temperature 5"
-order += "cpu_temperature 6"
-order += "cpu_temperature 7"
-order += "disk /"
-order += "memory"
-order += "ethernet eth0"
-order += "wireless wlan0"
-order += "battery 0"
-
-load {
-	format = "%5min Load"
-}
-
-battery 0 {
-	format = "[ %status | %percentage ]"
-	path = "/sys/class/power_supply/battery/uevent"
-	last_full_capacity = true
-	threshold_type = percentage
-	low_threshold = 15
-	format_down = "[ X ]"
-	status_chr = ">>>"
-	status_bat = " [ B ]"
-	status_unk = "[ ? ]"
-	status_full = "[ F ]"
-}
-
-cpu_temperature 0 {
-	format = "[ 0 | %degrees °C ]"
-	path = "/sys/class/thermal/thermal_zone0/temp"
-}
-
-cpu_temperature 1 {
-	format = "[ 1 | %degrees °C ]"
-	path = "/sys/class/thermal/thermal_zone1/temp"
-}
-
-cpu_temperature 2 {
-	format = "[ 2 | %degrees °C ]"
-	path = "/sys/class/thermal/thermal_zone2/temp"
-}
-
-cpu_temperature 3 {
-	format = "[ 3 | %degrees °C ]"
-	path = "/sys/class/thermal/thermal_zone3/temp"
-}
-
-cpu_temperature 4 {
-	format = "[ 4 | %degrees °C ]"
-	path = "/sys/class/thermal/thermal_zone4/temp"
-}
-
-cpu_temperature 5 {
-	format = "[ 5 | %degrees °C ]"
-	path = "/sys/class/thermal/thermal_zone5/temp"
-}
-
-cpu_temperature 6 {
-	format = "[ 6 | %degrees °C ]"
-	path = "/sys/class/thermal/thermal_zone6/temp"
-}
-
-cpu_temperature 7 {
-	format = "[ 7 | %degrees °C ]"
-	path = "/sys/class/thermal/thermal_zone7/temp"
-}
-
-disk "/" {
-	format = "\[ SSD %free \| %avail \| %total \]"
-}
-
-memory {
-	format = "[ RAM %used | %available ]"
-	threshold_degraded = "1G"
-	format_degraded = "MEMORY < %available"
-}
-
-ethernet eth0 {
-	format_up = "E: (%quality at %essid, %bitrate / %frequency) %ip"
-	format_down = "E: Down"
-}
-
-wireless wlan0 {
-	format_up = "W: (%quality at %essid, %bitrate / %frequency) %ip"
-	format_down = "W: Down"
-}
-
-tztime local {
-	format = "%time"
-	format_time = "[ %Y-%m-%d | %H:%M:%S ]"
 }
 FILE
