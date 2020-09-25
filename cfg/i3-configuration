@@ -12,11 +12,8 @@ cat <<- FILE > "$PROOT_DIRECTORY"/home/"$user_name"/.config/i3/config
 
 # startup #
 
-# exec_always --no-startup-id APPLICATION OPTIONS
-
-# lock screen - xss-lock - uses loginctl lock-session to lock your screen
-
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xsetroot -solid orange
 
 # modifiers #
 
