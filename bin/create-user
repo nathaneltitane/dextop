@@ -75,6 +75,11 @@ echo
 
 mkdir -p /run/usr/${uid} -m 700
 
+console.info "Setting up desktop session runtime directory."
+echo
+
+mkdir -p /run/usr/i3 -m 700
+
 # home #
 
 # populate user home directory with standard folders
@@ -192,13 +197,15 @@ cat <<- 'FILE' > /home/${user_name}/.bash_logout
 
 # automatic vnc session stop on shell exit
 
-vnc-stop
+vnc-stop 2&1> /dev/null
 FILE
 
 # append automatic vnc session start from selection value
 
 cat <<- 'FILE' > /home/${user_name}/.profile
+
 # automatic vnc session start from last selection value
+
 if [ -f "/home/$(id -u -n)/.vnc/selection" ]
 then
 	echo "$(cat /home/$(id -u -n)/.vnc/selection)" | vnc-start
