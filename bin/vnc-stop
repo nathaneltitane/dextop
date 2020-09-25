@@ -5,12 +5,14 @@
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
-# cleanup routine #
+vnc_server () {
+	vncserver > /dev/null 2>&1
+}
 
 clean () {
-	if [ -e /tmp/.X* ]
+	if [ -e "/tmp/.X*" ]
 	then
-		rm -rf /tmp/.X*
+		rm -rf "/tmp/.X*"
 	fi
 }
 
@@ -21,10 +23,10 @@ then
 	console.fwd "Stopping display server..."
 	echo
 
-	vncserver \
+	vnc_server \
 		-kill \
 		-clean \
-				${DISPLAY} 2&1> /dev/null
+				${DISPLAY}
 
 	clean
 fi
