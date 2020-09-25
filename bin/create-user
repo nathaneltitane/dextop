@@ -192,7 +192,7 @@ cat <<- 'FILE' > /home/${user_name}/.bash_logout
 
 # automatic vnc session stop on shell exit
 
-vnc-stop > /dev/null 2&1
+vnc-stop
 FILE
 
 cat <<- 'FILE' > /home/${user_name}/.profile
