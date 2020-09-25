@@ -304,7 +304,7 @@ load {
 }
 
 battery 0 {
-	format = "[ %status | %remaining]"
+	format = "[ %status | %percentage ]"
 	path = "/sys/class/power_supply/battery/uevent"
 	last_full_capacity = false
 	format_down = "[ X ]"
