@@ -17,7 +17,7 @@ do
 	if [ -z "$input" ]
 	then
 		console.warning "Input cannot be empty:"
-		console.warning "Values are required for a successful setup."
+		console.warning "Password is required for a successful setup."
 		echo
 
 		read -r input
