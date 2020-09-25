@@ -303,14 +303,14 @@ load {
 }
 
 battery 0 {
-	last_full_capacity = true
-	format = " %status %remaining (%emptytime %consumption) %percentage"
+	format = "[ %remaining | %status | %emptytime| %consumption ] %percentage"
 	path = "/sys/class/power_supply/battery/uevent"
-	format_down = "No Battery"
-	status_chr = "Charging"
-	status_bat = "Battery"
+	last_full_capacity = false
+	format_down = "X"
+	status_chr = ">>>"
+	status_bat = "BAT"
 	status_unk = "N/A"
-	status_full = "Full"
+	status_full = "100"
 	low_threshold = 15
 }
 
