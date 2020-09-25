@@ -312,6 +312,7 @@ battery 0 {
 	status_unk = "N/A"
 	status_full = "100"
 	low_threshold = 15
+	threshold_type = percentage
 }
 
 cpu_temperature 0 {
