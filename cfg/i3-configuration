@@ -232,9 +232,9 @@ bindsym \$modifier+q reload
 
 bindsym \$modifier+Shift+q restart
 
-# exit i3 (logs you out of your X session)
+# exit i3
 
-bindsym \$modifier+Shift+x exec "i3-nagbar -t warning -m 'Exit session?' -B 'Yes' 'i3-msg exit'"
+bindsym \$modifier+Shift+x exec 'i3-msg exit'
 
 # resize window  - bindings are triggered when entering the resize mode (you can also use the mouse)
 
