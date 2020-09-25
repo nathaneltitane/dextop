@@ -7,7 +7,7 @@ source /data/data/com.termux/files/usr/bin/globals
 
 # write configuration file
 
-cat <<- FILE > "$PROOT_DIRECTORY"/etc/i3/config
+cat <<- 'FILE' > "$PROOT_DIRECTORY"/etc/i3/config
 # i3 configuration #
 
 # startup #
@@ -24,7 +24,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # shift left	Shift_L				0x32
 # lock			Caps_Lock			0x42
 # control left	Control_R			0x69
-control right	Control_L			0x25
+# control right	Control_L			0x25
 # mod1			Alt_L				0x40
 				Alt_R				0x6c
 				Meta_L				0xcd
