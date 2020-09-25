@@ -275,16 +275,18 @@ FILE
 
 cat << 'FILE' >> /home/$USER/.config/i3status/config
 general {
+	output_format = "i3bar"
+	
 	color_bad = '#ff0000'
 	color_degraded = '#ebcb8b'
 	color_good = '#2f343f'
+	color_separator = '#ffffff'
 	colors = false
 	interval = 5
 	markup = pango
-	output_format = "i3bar"
+
 }
 
-#order += "load"
 order += "cpu_temperature 0"
 order += "cpu_temperature 1"
 order += "cpu_temperature 2"
@@ -294,7 +296,6 @@ order += "cpu_temperature 5"
 order += "cpu_temperature 6"
 order += "cpu_temperature 7"
 order += "disk /"
-order += "disk /home"
 order += "ethernet eth0"
 order += "wireless wlan0"
 order += "volume master"
@@ -302,12 +303,12 @@ order += "battery 0"
 order += "tztime local"
 
 load {
-	format = "<span> %5min Load </span>"
+	format = "%5min Load"
 }
 
-battery 0{
+battery all {
 	last_full_capacity = true
-	format = "<span>  %status %percentage </span>"
+	format = " %status %percentage"
 	path = "/sys/class/power_supply/battery/uevent"
 	format_down = "No Battery"
 	status_chr = "Charging"
@@ -315,76 +316,73 @@ battery 0{
 	status_unk = "N/A"
 	status_full = "Full"
 	low_threshold = 15
+	threshold_type: time
 }
 
 cpu_temperature 0 {
-	format = "<span> %degrees °C </span>"
+	format = "%degrees °C"
 	path = "/sys/class/thermal/thermal_zone0/temp"
 }
 
 cpu_temperature 1 {
-	format = "<span> %degrees °C </span>"
+	format = "%degrees °C"
 	path = "/sys/class/thermal/thermal_zone1/temp"
 }
 
 cpu_temperature 2 {
-	format = "<span> %degrees °C </span>"
+	format = "%degrees °C"
 	path = "/sys/class/thermal/thermal_zone2/temp"
 }
 
 cpu_temperature 3 {
-	format = "<span> %degrees °C </span>"
+	format = "%degrees °C"
 	path = "/sys/class/thermal/thermal_zone3/temp"
 }
 
 cpu_temperature 4 {
-	format = "<span> %degrees °C </span>"
+	format = "%degrees °C"
 	path = "/sys/class/thermal/thermal_zone4/temp"
 }
 
 cpu_temperature 5 {
-	format = "<span> %degrees °C </span>"
+	format = "%degrees °C"
 	path = "/sys/class/thermal/thermal_zone5/temp"
 }
 
 cpu_temperature 6 {
-	format = "<span> %degrees °C </span>"
+	format = "%degrees °C"
 	path = "/sys/class/thermal/thermal_zone6/temp"
 }
 
 cpu_temperature 7 {
-	format = "<span> %degrees °C </span>"
+	format = "%degrees °C"
 	path = "/sys/class/thermal/thermal_zone7/temp"
 }
 
 disk "/" {
-	format = "<span> %free Free </span>"
-}
-
-disk "/home" {
-	format = "<span> %free Free </span>"
+	format = "[ %free | $avail | %total ]"
 }
 
 ethernet eth0 {
-	format_up = "<span> %ip </span>"
-	format_down = "<span> Down </span>"
+	format_up = "E: (%quality at %essid, %bitrate / %frequency) %ip"
+	format_down = "Down"
 }
 
 wireless wlan0 {
-	format_up = "<span> %essid </span>"
-	format_down = "<span> Down</span>"
+	format_up = "W: (%quality at %essid, %bitrate / %frequency) %ip"
+	format_down = "Down"
 }
 
 volume master {
-	format = "<span> %volume </span>"
-	format_muted = "<span background='#ebcb8b'> Muted </span>"
+	format = "%volume"
+	format_muted = "<span background='#ebcb8b'> Muted"
 	device = "default"
 	mixer = "Master"
 	mixer_idx = 0
 }
 
 tztime local {
-	format = "<span> %time </span>"
+	format = "%time"
 	format_time = "%a %-d %b %H:%M"
 }
 FILE
