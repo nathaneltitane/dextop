@@ -18,10 +18,6 @@ cat <<- FILE > "$PROOT_DIRECTORY"/home/"$user_name"/.config/i3/config
 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
-# network management - nm-applet
-
-# exec --no-startup-id \$network_manager
-
 # modifiers #
 
 # 'xmodmap' output:
@@ -78,20 +74,20 @@ set \$terminal "xfce4-terminal"
 # D - indicator
 # E - child border
 
-# color class			[  A  ]	[  B  ]	[  c  ]	[  d  ]	[  E  ]
+# color class				[  A  ]	[  B  ]	[  C  ]	[  D  ]	[  E  ]
 
-client.focused			#000000	#000000 #FFFFFF	#FFFFFF	#000000
-client.focused_inactive	#000000	#000000 #666666	#666666	#000000
-client.unfocused		#000000	#666666 #000000	#000000	#000000
-client.urgent			#000000	#000000 #FF0000	#FF0000	#000000
-client.placeholder		#000000	#000000 #815FA3	#815FA3	#000000
-client.background		#000000
+client.focused				#000000	#000000 #FFFFFF	#FFFFFF	#000000
+client.focused_inactive		#000000	#000000 #666666	#666666	#000000
+client.unfocused			#000000	#666666 #000000	#000000	#000000
+client.urgent				#000000	#000000 #FF0000	#FF0000	#000000
+client.placeholder			#000000	#000000 #815FA3	#815FA3	#000000
+client.background			#000000
 
 bar {
 	colors {
-		background	#000000
-		statusline	#FFFFFF
-		separator	#666666
+		background			#000000
+		statusline			#FFFFFF
+		separator			#666666
 		
 		focused_workspace	#000000	#000000	#FFFFFF
 		active_workspace	#000000	#000000	#FFFFFF
@@ -134,7 +130,6 @@ font pango:Sans Regular 10
 
 # bindings #
 
-
 # open launcher
 
 bindsym \$modifier+r exec --no-startup-id \$launcher
@@ -146,14 +141,6 @@ bindsym \$modifier+t exec \$terminal
 # kill application instance
 
 bindsym \$modifier+x kill
-
-# volume control - pactl
-
-#set \$refresh_i3status killall -SIGUSR1 i3status
-#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && \$refresh_i3status
-#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && \$refresh_i3status
-#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && \$refresh_i3status
-#bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && \$refresh_i3status
 
 # change focus
 
