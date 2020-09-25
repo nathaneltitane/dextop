@@ -270,7 +270,7 @@ bar {
 }
 FILE
 
-cat << 'FILE' >> "$PROOT_DIRECTORY"/home/"$user_name"/.config/i3status/config
+cat <<- 'FILE' > "$PROOT_DIRECTORY"/home/"$user_name"/.config/i3status/config
 general {
 	output_format = "i3bar"
 	
@@ -311,7 +311,6 @@ battery 0 {
 	status_unk = "N/A"
 	status_full = "Full"
 	low_threshold = 15
-
 }
 
 cpu_temperature 0 {
