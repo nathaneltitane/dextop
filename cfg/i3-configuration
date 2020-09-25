@@ -376,6 +376,6 @@ wireless wlan0 {
 
 tztime local {
 	format = "%time"
-	format_time = "%Y-%m-%d %H:%M:%S"
+	format_time = "[ %Y-%m-%d | %H:%M:%S ]"
 }
 FILE
