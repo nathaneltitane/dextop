@@ -9,22 +9,28 @@ source /data/data/com.termux/files/usr/bin/globals
 
 source /etc/os-release
 
-vnc() {
+vnc_server () {
+	vncserver > /dev/null 2>&1
+	echo
+}
+
+vnc () {
 	vncserver \
-		-SecurityTypes none \
+		-SecurityTypes VncAuth \
+		-passwd /home/$(id -u -n)/.vnc/passwd
 		-localhost yes \
 		-depth 32 \
 		-cleanstale \
 		-name $NAME \
-		-geometry ${GEOMETRY} ${DISPLAY}
+		-geometry ${GEOMETRY} ${PORT}
 
 	echo
 	console.fwd "Starting display server..."
 	echo
 
-	console.info "Name.........: ${name}"
+	console.info "Name.........: ${type}"
 	console.info "Resolution...: ${GEOMETRY}"
-	console.info "Port.........: 590${DISPLAY:1}"
+	console.info "Port.........: ${PORT}"
 	echo
 
 	# make selection available for automatic start
@@ -38,7 +44,7 @@ vnc() {
 
 	# start android vnc intent after establishing connection
 
-	am start -d vnc://127.0.0.1:590${DISPLAY:1} > /dev/null
+	am start -d vnc://$LOCALHOST:$PORT > /dev/null 2>&1
 }
 
 # list supported display resolutions
@@ -84,8 +90,6 @@ resolutions=(
 	8KUHD     7680    4320
 )
 
-console.input "Enter the selection to start the display server with: "
-
 # prepend list with default / custom entries
 
 echo -e -n "
@@ -96,28 +100,32 @@ echo -e -n "
 
 # continue list using array selection of suppported values
 
+# set padding for consistent output
+
 pad_length=10
 
 for (( i=0 ; i<${#resolutions[@]} ; i+=3 ))
 do
-	name="${resolutions[$i]}"
+	type="${resolutions[$i]}"
 	width="${resolutions[$i+1]}"
 	height="${resolutions[$i+2]}"
 	resolution="${width}x${height}"
 
 	if (( $i/3 >= 0 && $i/3 <= 7 ))
 	then
-		printf '\t[  %s ] %s' $((($i/3) +2)) $name
+		printf '\t[  %s ] %s' $((($i/3) +2)) $type
 	else
-		printf '\t[ %s ] %s' $((($i/3) +2)) $name
+		printf '\t[ %s ] %s' $((($i/3) +2)) $type
 	fi
 
-	printf '%*s' $((pad_length - ${#name}))
+	printf '%*s' $((pad_length - ${#type}))
 	printf '%s\n' $resolution
 done
 
 echo
 
+console.input "Enter the selection to start the display server with: "
+echo
 console.input "Selection: "
 read selection
 echo
@@ -137,7 +145,7 @@ case $selection in
 		read custom_port
 		echo
 
-		GEOMETRY="$custom_resolution" port=":$custom_port" vnc 2&1> /dev/null
+		GEOMETRY="$custom_resolution" port=":$custom_port" vnc
 
 		break
 	;;
@@ -156,6 +164,6 @@ case $selection in
 			resolution="${width}x${height}"
 		fi
 
-		GEOMETRY="$resolution" vnc 2&1> /dev/null
+		GEOMETRY="$resolution" vnc
 	;;
 esac

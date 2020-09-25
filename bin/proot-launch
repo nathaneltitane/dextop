@@ -179,6 +179,10 @@ command+=" DESKTOP_SESSION=$DESKTOP_SESSION"
 
 command+=" DISPLAY=:1"
 
+# set port
+
+command+=" 590${DISPLAY:1}"
+
 # set home
 
 command+=" HOME=${home}"
