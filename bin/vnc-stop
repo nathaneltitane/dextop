@@ -22,7 +22,6 @@ vnc_clean () {
 
 if pgrep -f vnc > /dev/null
 then
-	echo
 	console.fwd "Stopping display server..."
 	echo
 
