@@ -259,8 +259,8 @@ bar {
 	
 	binding_mode_indicator no
 	font pango:Sans Regular 10
-	hidden_state hide
-	mode hide
+	hidden_state show
+	mode dock
 	modifier Mod1
 	position bottom
 	separator_symbol " ] + [ "
