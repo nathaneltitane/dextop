@@ -358,7 +358,7 @@ cpu_temperature 7 {
 }
 
 disk "/" {
-	format = "[ %free | $avail | %total ]"
+	format = "\[ %free \| %avail \| %total \]"
 }
 
 ethernet eth0 {
