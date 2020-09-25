@@ -7,11 +7,8 @@ source /data/data/com.termux/files/usr/bin/globals
 
 # cleanup routine #
 
-clean () {
-	if [ -e /tmp/.X* ]
-	then
-		rm -rf /tmp/.X*
-	fi
+vnc_server () {
+	vncserver > /dev/null 2>&1
 }
 
 # check for process tokens and cleanup
@@ -21,10 +18,7 @@ then
 	console.fwd "Stopping display server..."
 	echo
 
-	vncserver \
-		-kill \
-		-clean \
-				${DISPLAY} 2&1> /dev/null
-
-	clean
+	vncserver -kill :*
+	
+	rm -rf /tmp/.X*
 fi
