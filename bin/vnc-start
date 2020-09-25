@@ -74,19 +74,19 @@ print_selection () {
 	
 	for (( i=0 ; i<${#resolutions[@]} ; i+=3 ))
 	do
-		type="${resolutions[$i]}"
+		format="${resolutions[$i]}"
 		width="${resolutions[$i+1]}"
 		height="${resolutions[$i+2]}"
 		resolution="${width}x${height}"
 	
 		if (( $i/3 >= 0 && $i/3 <= 8 ))
 		then
-			printf '\t[  %s ] %s' $((($i/3) +1)) $type
+			printf '\t[  %s ] %s' $((($i/3) +1)) $format
 		else
-			printf '\t[ %s ] %s' $((($i/3) +1)) $type
+			printf '\t[ %s ] %s' $((($i/3) +1)) $format
 		fi
 	
-		printf '%*s' $((pad_length - ${#type}))
+		printf '%*s' $((pad_length - ${#format}))
 		printf '%s\n' $resolution
 	done
 
@@ -99,7 +99,7 @@ vnc_server () {
 
 vnc () {
 	vnc_server \
-		-SecurityTypes none \
+		-Securityformats none \
 		-localhost yes \
 		-depth 32 \
 		-cleanstale \
@@ -112,7 +112,7 @@ vnc () {
 	console.fwd "Starting display server..."
 	echo
 
-	console.info "Type.........: ${type}"
+	console.info "Format.......: ${format}"
 	console.info "Resolution...: ${GEOMETRY}"
 	console.info "Port.........: ${PORT}"
 	echo
@@ -135,7 +135,7 @@ vnc () {
 
 if [ -s "$HOME"/.vnc/selection ]
 then
-	selection="$(echo $(cat "$HOME"/.vnc/selection)"
+	read selection <<< "$(cat "$HOME"/.vnc/selection)"
 else
 	echo
 	console.input "Enter the selection to start the display server with: "
@@ -163,7 +163,7 @@ case $selection in
 		read custom_port
 		echo
 
-		GEOMETRY="$custom_resolution" port=":$custom_port" vnc
+		GEOMETRY="$custom_resolution" PORT="590:$custom_port" vnc
 
 		break
 	;;
@@ -176,7 +176,7 @@ case $selection in
 			i=$(($selection-1))
 			i=$(($i*3))
 
-			type="${resolutions[$i-3]}"
+			format="${resolutions[$i-3]}"
 			width="${resolutions[$i-2]}"
 			height="${resolutions[$i-1]}"
 			resolution="${width}x${height}"
