@@ -286,7 +286,7 @@ general {
 	markup = pango
 
 }
-
+order += "tztime local"
 order += "battery 0"
 order += "cpu_temperature 0"
 order += "cpu_temperature 1"
@@ -299,9 +299,6 @@ order += "cpu_temperature 7"
 order += "disk /"
 order += "ethernet eth0"
 order += "wireless wlan0"
-order += "volume master"
-order += "battery 0"
-order += "tztime local"
 
 load {
 	format = "%5min Load"
@@ -317,7 +314,7 @@ battery 0 {
 	status_unk = "N/A"
 	status_full = "Full"
 	low_threshold = 15
-	threshold_type: time
+
 }
 
 cpu_temperature 0 {
