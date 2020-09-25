@@ -287,6 +287,7 @@ general {
 
 }
 
+order += "battery 0"
 order += "cpu_temperature 0"
 order += "cpu_temperature 1"
 order += "cpu_temperature 2"
@@ -306,7 +307,7 @@ load {
 	format = "%5min Load"
 }
 
-battery all {
+battery 0 {
 	last_full_capacity = true
 	format = " %status %remaining (%emptytime %consumption) %percentage"
 	path = "/sys/class/power_supply/battery/uevent"
@@ -371,14 +372,6 @@ ethernet eth0 {
 wireless wlan0 {
 	format_up = "W: (%quality at %essid, %bitrate / %frequency) %ip"
 	format_down = "Down"
-}
-
-volume master {
-	format = "%volume"
-	format_muted = "<span background='#ebcb8b'> Muted"
-	device = "default"
-	mixer = "Master"
-	mixer_idx = 0
 }
 
 tztime local {
