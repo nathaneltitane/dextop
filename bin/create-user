@@ -200,6 +200,16 @@ cat <<- 'FILE' > /home/${user_name}/.bash_logout
 vnc-stop 2&1> /dev/null
 FILE
 
+# automatic vnc session start from last selection value
+
+if [ -f "/home/$(id -u -n)/.vnc/selection" ]
+then
+	vnc-start
+else
+	:
+fi
+FILE
+
 # set ownership on user home
 
 console.info "Setting permissions"
