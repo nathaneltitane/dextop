@@ -201,9 +201,9 @@ cat <<- 'FILE' > /home/${user_name}/.profile
 
 if [ -f "/home/$(id -u -n)/.vnc/selection" ]
 then
-	vnc-start
+	$(cat /home/$(id -u -n)/.vnc/selection) | vnc-start
 else
-	:
+	vnc-start
 fi
 FILE
 
