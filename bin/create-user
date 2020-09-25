@@ -200,6 +200,8 @@ cat <<- 'FILE' > /home/${user_name}/.bash_logout
 vnc-stop > /dev/null 2&1
 FILE
 
+cat <<- 'FILE' > /home/${user_name}/.profile
+
 # automatic vnc session start from last selection value
 
 if [ -f "/home/$(id -u -n)/.vnc/selection" ]

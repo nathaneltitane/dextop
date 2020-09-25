@@ -5,7 +5,10 @@
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
-console.input  "Enter VNC password:"
+echo
+console.input "Enter VNC password:"
+read -r input
+echo
 
 # prevent empty input values
 
@@ -19,7 +22,7 @@ do
 
 		read -r input
 	else
-		eval "$password"="$input"
+		eval password="$input"
 
 		break
 	fi
@@ -29,5 +32,6 @@ done
 
 echo "$password" | /usr/bin/vncpasswd -f > "$HOME"/.vnc/passwd
 
+echo
 console.success "VNC password changed."
 echo

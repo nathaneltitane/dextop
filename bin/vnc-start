@@ -98,8 +98,7 @@ vnc_server () {
 
 vnc () {
 	vnc_server \
-		-SecurityTypes VncAuth \
-		-passwd /home/$(id -u -n)/.vnc/passwd \
+		-SecurityTypes none \
 		-localhost yes \
 		-depth 32 \
 		-cleanstale \
@@ -107,7 +106,8 @@ vnc () {
 		-geometry ${GEOMETRY} ${DISPLAY}
 		
 		# 'vncserver' uses the actual DISPLAY value
-
+	
+	echo
 	console.fwd "Starting display server..."
 	echo
 
@@ -122,7 +122,7 @@ vnc () {
 	then
 		:
 	else
-		echo "$selection" > /home/$(id -u -n)/.vnc/selection
+		echo "$selection" > "$HOME"/.vnc/selection
 	fi
 
 	# start android vnc intent after establishing connection
@@ -132,9 +132,9 @@ vnc () {
 
 # if selection file exists and is not empty
 
-if [ -s /home/$(id -u -n)/.vnc/selection ]
+if [ -s "$HOME"/.vnc/selection ]
 then
-	selection="$(cat /home/$(id -u -n)/.vnc/selection)"
+	selection="$(cat "$HOME"/.vnc/selection)"
 else
 	echo
 	console.input "Enter the selection to start the display server with: "
