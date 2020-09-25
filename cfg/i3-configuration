@@ -285,7 +285,6 @@ general {
 }
 
 order += "tztime local"
-order += "battery 0"
 order += "cpu_temperature 0"
 order += "cpu_temperature 1"
 order += "cpu_temperature 2"
@@ -298,20 +297,21 @@ order += "disk /"
 order += "memory"
 order += "ethernet eth0"
 order += "wireless wlan0"
+order += "battery 0"
 
 load {
 	format = "%5min Load"
 }
 
 battery 0 {
-	format = "[ %remaining | %status | %emptytime | %consumption | %percentage ]"
+	format = "[ %status | %remaining]"
 	path = "/sys/class/power_supply/battery/uevent"
 	last_full_capacity = false
-	format_down = "X"
+	format_down = "[ X ]"
 	status_chr = ">>>"
-	status_bat = "BAT"
-	status_unk = "N/A"
-	status_full = "100"
+	status_bat = " [ B ]"
+	status_unk = "[ ? ]"
+	status_full = "[ F ]"
 	low_threshold = 15
 	threshold_type = percentage
 }
