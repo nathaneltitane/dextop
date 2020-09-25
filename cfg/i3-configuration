@@ -263,7 +263,7 @@ bar {
 	mode dock
 	modifier Mod1
 	position bottom
-	separator_symbol " ] + [ "
+	separator_symbol " + "
 	strip_workspace_name no
 	strip_workspace_numbers no
 	workspace_buttons yes
@@ -283,7 +283,7 @@ general {
 	markup = pango
 
 }
-order += "first"
+
 order += "tztime local"
 order += "battery 0"
 order += "cpu_temperature 0"
@@ -298,22 +298,13 @@ order += "disk /"
 order += "memory"
 order += "ethernet eth0"
 order += "wireless wlan0"
-order += "last"
-
-first {
-	format = "[ "
-}
-
-first {
-	format = " ]"
-}
 
 load {
 	format = "%5min Load"
 }
 
 battery 0 {
-	format = "%remaining | %status | %emptytime | %consumption | %percentage"
+	format = "[ %remaining | %status | %emptytime | %consumption | %percentage ]"
 	path = "/sys/class/power_supply/battery/uevent"
 	last_full_capacity = false
 	format_down = "X"
