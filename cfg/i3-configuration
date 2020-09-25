@@ -294,6 +294,7 @@ order += "cpu_temperature 5"
 order += "cpu_temperature 6"
 order += "cpu_temperature 7"
 order += "disk /"
+order += "memory"
 order += "ethernet eth0"
 order += "wireless wlan0"
 
@@ -357,6 +358,12 @@ disk "/" {
 	format = "\[ %free \| %avail \| %total \]"
 }
 
+memory {
+	format = "[ %used | %available ]"
+	threshold_degraded = "1G"
+	format_degraded = "MEMORY < %available"
+}
+
 ethernet eth0 {
 	format_up = "E: (%quality at %essid, %bitrate / %frequency) %ip"
 	format_down = "Down"
@@ -369,6 +376,6 @@ wireless wlan0 {
 
 tztime local {
 	format = "%time"
-	format_time = "%a %-d %b %H:%M"
+	format_time = "%Y-%m-%d %H:%M:%S"
 }
 FILE
