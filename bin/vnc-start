@@ -132,7 +132,7 @@ print_resolutions() {
 	echo
 }
 
-if [ -f "$HOME"/.vnc/selection ] || [ ! -z "$HOME"/.vnc/selection ]
+if [ -e "$HOME"/.vnc/selection ]
 then
 	read selection <<< "$(cat "$HOME"/.vnc/selection)"
 else
