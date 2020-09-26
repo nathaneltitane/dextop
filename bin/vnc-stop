@@ -8,17 +8,17 @@ source /data/data/com.termux/files/usr/bin/globals
 # cleanup routine #
 
 vnc_server () {
-	vncserver > /dev/null 2>&1
+		vncserver > /dev/null 2>&1
 }
 
 # check for process tokens and cleanup
 
 if pgrep -f vnc > /dev/null
 then
-	console.fwd "Stopping display server..."
-	echo
+		console.fwd "Stopping display server..."
+		echo
 
-	vncserver -kill :*
-	
-	rm -rf /tmp/.X*
+		vnc_server -kill :*
+
+		rm -rf /tmp/.X*
 fi
