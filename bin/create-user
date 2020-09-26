@@ -67,8 +67,10 @@ echo
 
 # create directory and set permissions
 
-mkdir -p /run/user/${uid} -m 755
+mkdir -p /run/user/${uid} -m 700
+mkdir -p /run/user/${user_name} -m 700
 
 # set ownership
 
 chown ${uid}:${gid} -R /run/user${uid}
+chown ${uid}:${gid} -R /run/user${user_name}

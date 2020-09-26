@@ -9,50 +9,53 @@ source /data/data/com.termux/files/usr/bin/globals
 
 if [[ $# -gt 3 ]]
 then
-	echo "Usage: ${0} | <username>  | <application>"
+	echo "Usage: ${0} | <username> | <application>"
 	exit 1
 fi
 
 # variables #
 
-username=$1
-application=$2
-proot_directory=$3
-bind_directory=$4
+USERNAME=$1
+APPLICATION=$2
+PROOT_DIRECTORY=$3
+BIND_DIRECTORY=$4
+
+BROWSER=""
+DISPLAY=":1"
+EDITOR="nano"
+LOCALHOST_ADDRESS="127.0.0.1"
+VISUAL=
 
 # set defaults if no argument is passed
 
-if [ -z "$proot_directory" ]
-then
-	proot_directory=${PREFIX%/*}/img
-fi
+[ -z "$USERNAME" ]			&& USERNAME="root"
+[ -z "$APPLICATION" ]		&& APPLICATION="${TERMINAL}"
+[ -z "$PROOT_DIRECTORY" ]	&& PROOT_DIRECTORY=${PREFIX%/*}/img
+[ -z "$BIND_DIRECTORY" ]	&& BIND_DIRECTORY=${PREFIX%/*}/mnt
+[ -z "$DESKTOP_SESION" ]	&& DESKTOP_SESSION="i3"
 
-if [ -z "$bind_directory" ]
-then
-	bind_directory=${PREFIX%/*}/mnt
-fi
+# assume termux-exec is present - unset LD_PRELOAD
 
-if [ -z "$username" ]
-then
-	username="root"
-fi
+unset LD_PRELOAD
 
-# loop through proot /etc/passwd file
-# make sure 'user' exists and corresponds to 'username' input
-# default to root if 'username' is invalid or does not exist
+# verify user existence: loop through proot /etc/passwd file
+# make sure 'user' exists and corresponds to 'username'
+# then source environment variables from file
+# default to 'root' if 'username' is invalid or does not exist
 
-last_entry="$(tail -n 1 "${proot_directory}"/etc/passwd)"
+last_entry="$(tail -n 1 "${PROOT_DIRECTORY}"/etc/passwd)"
 
 while read -r entry
 do
 	IFS=':'
 
-	read user _ uid gid full_name home shell <<< "$entry"
-	full_name=${full_name%,,,}
+	read USER _ USER_ID GROUP_ID FULL_NAME HOME SHELL <<< "$entry"
+	
+	FULL_NAME=${FULL_NAME%,,,}
 
 	# verify that 'username' matches parsed 'user' entry
 
-	if [[ "$username" == "$user" ]]
+	if [[ "$USERNAME" == "$USER" ]]
 	then
 		# break out of loop if user is found
 
@@ -64,67 +67,30 @@ do
 
 	if [[ "$entry" == "$last_entry" ]]
 	then
-		user="root"
-		uid=0
-		gid=0
-		full_name="root"
-		home="/root"
-		shell="/bin/bash"
+		USER="root"
+		USER_ID=0
+		GROUP_ID=0
+		FULL_NAME="root"
+		HOME="/root"
+		SHELL="/bin/bash"
 	fi
-done < "${proot_directory}"/etc/passwd
+done < "${PROOT_DIRECTORY}"/etc/passwd
+
+# reset IFS
 
 IFS=' '
 
-# assume termux-exec is present - unset LD_PRELOAD
-
-unset LD_PRELOAD
+# proot #
 
 # setup proot command arguments
 
 command="proot"
 command+=" --kill-on-exit"
 command+=" --link2symlink"
-
-# system image location to use
-
-command+=" -r ${proot_directory}"
-
-# bind available mount points inside $bind_directory
-
-if [ -n "$(ls -A ${bind_directory})" ]
-then
-	for i in ${bind_directory}/*
-	do
-		. $i
-	done
-fi
-
-# bind termux home directory
-
+command+=" -r ${PROOT_DIRECTORY}"
 command+=" -b ${PREFIX%/*}/home:/home/termux"
-
-# bind storage locations
-
-storage_directories_list=(
-	"${PREFIX%/*}"/storage/external
-	"${PREFIX%/*}"/storage/internal
-)
-
-for storage_directory in ${storage_directories_list[@]}
-do
-	# verify that storage locations are available before binding
-
-	if [[ -d "$storage_directory" ]]
-	then
-		link=$(basename $storage_directory)
-		link=${link^}
-
-		command+=" -b ${storage_directory}:/media/${link}"
-	fi
-done
-
-# bind android system directories
-
+[ -d "${PREFIX%/*}"/storage/external ] && command+=" -b ${storage_directory}:/media/External" || :
+[ -d "${PREFIX%/*}"/storage/internal ] && command+=" -b ${storage_directory}:/media/Internal" || :
 command+=" -b /apex"
 command+=" -b /data"
 command+=" -b /dev"
@@ -133,109 +99,56 @@ command+=" -b /storage"
 command+=" -b /sys"
 command+=" -b /system"
 command+=" -b /vendor"
-
-# /plat_property_contexts necessary for some certain devices
-
-# command+=" -b /plat_property_contexts"
-
-# switch to user id
-
-command+=" -i ${uid}:${gid}"
-
-# verify that home folder is available before specifying
-
-if [[ -d  "$proot_directory/${home}" ]]
-then
-	command+=" -w ${home}"
-fi
-
-# setup environment
-
-command+=" /usr/bin/env -i"
-command+=" SETUP_DIRECTORY=${PREFIX%/*}"
-command+=" BINARIES_DIRECTORY=${PREFIX}/bin"
-command+=" LIBRARIES_DIRECTORY=${PREFIX}/lib"
-command+=" PROOT_DIRECTORY=${SETUP_DIRECTORY}/img"
-command+=" BIND_DIRECTORY=${SETUP_DIRECTORY}/mnt"
+command+=" -i ${USER_ID}:${GROUP_ID}"
+[ -d  "$PROOT_DIRECTORY/${HOME}" ] && command+=" -w ${HOME}" || exit 1
+command+=" env -i"
 command+=" ANDROID_DATA=$ANDROID_DATA"
 command+=" ANDROID_ROOT=$ANDROID_ROOT"
 command+=" ANDROID_RUNTIME_ROOT=$ANDROID_RUNTIME_ROOT"
 command+=" ANDROID_TZDATA_ROOT=$ANDROID_TZDATA_ROOT"
-
-# verify application argument and load appropriate desktop session manager
-
-if [[ "$application" != "" ]]
-then
-	DESKTOP_SESSION="i3"
-
-	command+=" APPLICATION=${application}"
-else
-	DESKTOP_SESSION="xfce4-session"
-fi
-
-command+=" DESKTOP_SESSION=$DESKTOP_SESSION"
-
-# set display
-
-command+=" DISPLAY=:1"
-
-# set home
-
-command+=" HOME=${home}"
-
-# set user
-
-command+=" USER=${user}"
-
-# set locale
-
-command+=" LANG=C.UTF-8"
-
-# set localhost address
-
-command+=" LOCALHOST=127.0.0.1"
-
-# append termux /bin and /sbin locations to enable proot utilities passthrough
-
-command+=" PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$PREFIX/bin:$PREFIX/sbin"
-
-# append termux $PREFIX for path(s) passthrough
-
 command+=" PREFIX=$PREFIX"
-
+command+=" SETUP_DIRECTORY=${PREFIX%/*}"
+command+=" BINARIES_DIRECTORY=${PREFIX}/bin"
+command+=" LIBRARIES_DIRECTORY=${PREFIX}/lib"
+command+=" PROOT_DIRECTORY=${PROOT_DIRECTORY}"
+command+=" BIND_DIRECTORY=${BIND_DIRECTORY}"
+command+=" BROWSER=${BROWSER}"
+command+=" DISPLAY=${DISPLAY}"
+command+=" EDITOR=${EDITOR}"
+command+=" HOME=${HOME}"
+command+=" USER=${USER}"
+command+=" LANG=C.UTF-8"
+command+=" LOCALHOST=${LOCALHOST_ADDRESS}"
+command+=" PAGER=${PAGER}"
+command+=" PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$PREFIX/bin:$PREFIX/sbin"
 command+=" PULSE_SERVER=$LOCALHOST"
-
-# append Qt environment overrides:
-# QT_QPA_PLATFORMTHEME - theming compatibility
-# QT_X11_NO_MITSHM - shared memeory override for certain OpenGL/ES rendering requirements
-
 command+=" QT_QPA_PLATFORMTHEME=gtk2"
 command+=" QT_X11_NO_MITSHM=1"
-
-# set terminal
-
 command+=" TERM=$TERM"
-
-# set runtime authority arguments
-
-command+=" XDG_RUNTIME_DIR=/run/user/${uid}"
+command+=" XDG_CONFIG_HOME=${HOME}/.config"
+command+=" XDG_CACHE_HOME=${HOME}/.cache"
+command+=" XDG_DATA_HOME=${HOME}/.local/share"
+command+=" XDG_RUNTIME_DIR=/run/user/${USER_ID}"
+command+=" XDG_DATA_DIRS=/usr/local/share:/usr/share"
+command+=" XDG_CONFIG_DIRS=/etc/xdg" 
 command+=" XAUTHORITY=${XDG_RUNTIME_DIR}/.Xauthority"
+command+=" DESKTOP_SESSION=$DESKTOP_SESSION"
+command+=" APPLICATION=${APPLICATION}"
+command+=" ${SHELL} --login"
 
-# set login shell
-
-command+=" ${shell} --login"
-
-# execute proot command
+# execute proot
 
 exec $command
 
-if [[ "$application" != "" ]]
+if [[ ! -z "$application" ]]
 then
-	console.fwd "Starting session [ ${user} - ${application} ]..."
+	console.fwd "Starting application [ ${APPLICATION} ]..."
+	echo
 else
-	console.fwd "Starting session [ ${user} ]..."
+	console.fwd "Starting session [ ${USER} ]..."
+	echo
 fi
 
-# return proot exit status
+# return exit status
 
 exit $?
