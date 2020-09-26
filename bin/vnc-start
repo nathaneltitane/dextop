@@ -134,7 +134,10 @@ print_resolutions() {
 
 if [ -e "$HOME"/.vnc/selection ]
 then
-	read selection <<< "$(cat "$HOME"/.vnc/selection)"
+	console.info "Automatic session start enabled."
+	echo
+	
+	read selection
 else
 	print_resolutions
 

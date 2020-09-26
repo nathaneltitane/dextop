@@ -203,7 +203,9 @@ cat <<- 'FILE' > /home/${user_name}/.profile
 
 if [ -f "$HOME"/.vnc/selection ]
 then
-	vnc-start
+	selection="$(cat "$HOME"/.vnc/selection)" 
+	
+	echo "$selection" | vnc-start
 fi
 FILE
 
