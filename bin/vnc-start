@@ -99,9 +99,9 @@ console.input "Enter the selection to start the display server with: "
 # prepend list with default / custom entries
 
 echo -e -n "
-\t[ -- ] Default   (Dynamic + 5901)
+\t[  D ] Default   (Dynamic + 5901)
 
-\t[  1 ] Custom    (resolution + port)
+\t[  C ] Custom    (resolution + port)
 "
 
 # continue list using array selection of suppported values
@@ -115,11 +115,11 @@ do
 	height="${resolutions[$i+2]}"
 	resolution="${width}x${height}"
 
-	if (( $i/3 >= 0 && $i/3 <= 7 ))
+	if (( $i/3 >= 0 && $i/3 <= 8 ))
 	then
-		printf '\t[  %s ] %s' $((($i/3) +2)) $format
+		printf '\t[  %s ] %s' $((($i/3) +1)) $format
 	else
-		printf '\t[ %s ] %s' $((($i/3) +2)) $format
+		printf '\t[ %s ] %s' $((($i/3) +1)) $format
 	fi
 
 	printf '%*s' $((pad_length - ${#format}))
@@ -135,7 +135,7 @@ echo
 # manage custom input values
 
 case $selection in
-	1)
+	c|C)
 		console.info "Setting custom resolution and port:"
 		echo
 
