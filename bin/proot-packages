@@ -30,6 +30,7 @@ echo
 utilities_list=(
 	curl
 	git
+	hub
 	nano
 	sudo
 )

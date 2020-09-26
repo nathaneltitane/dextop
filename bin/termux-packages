@@ -23,13 +23,33 @@ echo
 
 # packages #
 
-install_list=(
-	termux-*
-	*-repo
-	libandroid-*
+utilities_list=(
+	curl
+	git
+	hub
 	nano
 	proot
+)
+
+libraries_list=(
+	libandroid-*
+)
+
+sound_list=(
 	pulseaudio
+)
+
+termux_list=(
+	termux-*
+	*-repo
+
+)
+
+install_list=(
+	${termux_list[@]}
+	${utilities_list[@]}
+	${libraries_list[@]}
+	${sound_list[@]}
 )
 
 # install #
