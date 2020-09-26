@@ -131,9 +131,14 @@ done
 
 echo
 
-console.input "Selection: "
-read selection
-echo
+if [ -f "$HOME"/.vnc/selection ] || [ ! -z "$HOME"/.vnc/selection ]
+then
+	read selection <<< "$(cat "$HOME"/.vnc/selection)"
+else
+	console.input "Selection: "
+	read selection
+	echo
+fi
 
 # manage custom input values
 
