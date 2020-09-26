@@ -48,6 +48,14 @@ echo
 
 "$BINARIES_DIRECTORY"/create-user "${first_name}" "${last_name}"
 
+# set superuser privileges for user account
+
+"$BINARIES_DIRECTORY"/superuser-setup "${first_name}" "${last_name}"
+
+# setup user account session elements and configured preferences
+
+"$BINARIES_DIRECTORY"/session-setup
+
 # checkpoint #
 
 # write value to confirm uinterrupted setup completion

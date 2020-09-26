@@ -1,0 +1,62 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# usage #
+
+if [[ $# -lt 2 ]]
+then
+	echo "Usage: ${0} <first name> <last name>"
+	exit 1
+fi
+
+# variables #
+
+first_name=${1}
+last_name=${2}
+user_name=${first_name,,}
+sudo_id=$(cat /etc/group | grep sudo | cut -d : -f 3)
+
+# pass sudo id as 27 if 'sudo' group is not setup
+
+if [ -z "$sudo_id" ]
+then
+	sudo_id=27
+fi
+
+# verify that 'sudo' is installed:
+# required for the presence of /etc/sudoers* file and directory
+
+if [[ -z $(command -v sudo) ]]
+then
+	console.warning "'sudo' utility not present or installed on system:"
+	console.warning "Install 'sudo' using the package manager and restart this utility."
+	echo
+	
+	exit 1
+fi
+
+# give user superuser privileges
+
+# /etc/group:
+# group_name:x:group_number:user_name
+
+usermod -a -G ${sudo_id} ${user_name}
+
+# give user superuser privileges password override
+
+echo "${user_name} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/"${user_name}"
+
+# fix superuser privilege errors
+
+echo "Set disable_coredump false" >> /etc/sudo.conf
+
+# fix ownership on user superuser privileges password override
+
+# root:
+# chmod 4755 /usr/bin/sudo
+
+chmod 0440 /etc/sudoers.d/${user_name}

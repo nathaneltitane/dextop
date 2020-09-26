@@ -17,67 +17,20 @@ fi
 
 first_name=${1}
 last_name=${2}
-
 user_name=${first_name,,}
+uid=$(id -u ${user_name})
+gid=$(id -g ${user_name})
 
-# verify that 'sudo' is installed:
-# required for the presence of /etc/sudoers* file and directory
-
-if [[ -z $(command -v sudo) ]]
-then
-	console.warning "'sudo' utility not present or installed on system:"
-	console.warning "Install 'sudo' using the package manager and restart this utility."
-	echo
-	
-	exit 1
-fi
-
-# create user
+# add user
 
 console.info "Creating user account."
 echo
 
 useradd -m -s "$SHELL" ${user_name}
 
-# set sudo privileges for user
-
-sudo_id=$(cat /etc/group | grep sudo | cut -d : -f 3)
-
-# pass sudo id as 27 if 'sudo' group is not setup
-
-if [ -z "$sudo_id" ]
-then
-	sudo_id=27
-fi
-
-# /etc/group
-# group_name:x:group_number:user_name
-
-usermod -a -G ${sudo_id} ${user_name}
-
-# give user 'sudo' privileges password override
-
-echo "${user_name} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/"${user_name}"
-
-# fix superuser privilege errors
-
-echo "Set disable_coredump false" >> /etc/sudo.conf
-
-# get user uid and gid 
-
-uid=$(id -u ${user_name})
-gid=$(id -g ${user_name})
-
-# runtime #
-
-console.info "Setting up user runtime directory."
-echo
-
-mkdir -p /run/user/${uid} -m 755
-
 # home #
 
-# populate user home directory with standard folders
+# populate home directory with standard folders
 
 console.info "Setting up user home directory."
 echo
@@ -95,133 +48,27 @@ home_directories_list=(
 
 for directory in ${home_directories_list[@]}
 do
-	console.fwd "Creating '${directory}' directory."
+	console.fwd "Creating directory [ ${directory} ]."
 	echo
 
-	# create directory structure and set permissions
+	# create directory and set permissions
 
 	mkdir -p "/home/${user_name}/${directory}" -m 755
-done
-
-# silence login prompt
-
-console.info "Silencing login messages."
-echo
-
-echo > /home/${user_name}/.hushlogin
-
-# bookmarks #
-
-console.info "Appending device storage bookmarks."
-echo
-
-# add bookmarks - gtk2
-
-storage_directories_list=(
-	/media/External
-	/media/Internal
-)
-
-for storage_directory in ${storage_directories_list[@]}
-do
-	if [[ -d "$storage_directory" ]]
-	then
-		link=$(basename $storage_directory)
-		link=${link^}
-
-		cat <<- FILE >> /home/${user_name}/.gtk-bookmarks
-		file:///${storage_directory} ${link}
-		FILE
-	fi
-done
-
-# add bookmarks - gtk3
-
-if [[ -f /home/${user_name}/.gtk-bookmarks ]]
-then
-	# create gtk3 bookmarks directory
-
-	mkdir -p /home/${user_name}/.config/gtk-3.0
-
-	# link gtk2 bookmarks
-
-	ln -s -f /home/${user_name}/.gtk-bookmarks /home/${user_name}/.config/gtk-3.0/bookmarks
-fi
-
-# vnc #
-
-console.info "Configuring display server setup."
-echo
-
-# create user home vnc directory
-
-mkdir -p /home/${user_name}/.vnc
-
-# write user vnc password file
-
-cat <<- FILE > /home/${user_name}/.vnc/passwd
-
-FILE
-
-# write user vnc startup file
-
-cat <<- FILE > /home/${user_name}/.vnc/xstartup
-#!/bin/bash
-
-unset DBUS_SESSION_BUS_ADDRESS
-unset SESSION_MANAGER
-
-if [[ "\$APPLICATION" != "" ]]
-then
-	\$DESKTOP_SESSION &
-	LD_PRELOAD=/lib/libandroid-shmem-aarch64.so \$APPLICATION &
-else
-	dbus-launch --exit-with-session \$DESKTOP_SESSION &
-fi
-FILE
-
-# write user X session startup file
-
-cat <<- FILE > /home/${user_name}/.xsession
-$DESKTOP_SESSION &
-FILE
-
-# append automatic vnc session stop on shell exit
-
-cat <<- 'FILE' > /home/${user_name}/.bash_logout
-
-# automatic vnc session stop on shell exit
-
-vnc-stop
-FILE
-
-# append automatic vnc session start from selection value
-
-cat <<- 'FILE' > /home/${user_name}/.profile
-
-# automatic vnc session start from last selection value
-
-if [ -f "$HOME"/.vnc/selection ]
-then
-	selection="$(cat "$HOME"/.vnc/selection)" 
 	
-	echo "$selection" | vnc-start
-fi
-FILE
+	# set ownership
+	
+	chown ${uid}:${gid} -R /home/${user_name}/${directory}
+done
 
-# set ownership on user home
+# runtime #
 
-console.info "Setting permissions"
+console.info "Setting up user runtime directory."
 echo
 
-# root:
-# chown -R root:root /usr
+# create directory and set permissions
 
-chown ${uid}:${gid} -R /home/${user_name}
+mkdir -p /run/user/${uid} -m 755
 
-# set ownership on user 'sudo' privileges password override
+# set ownership
 
-# root:
-# chmod 4755 /usr/bin/sudo
-
-chmod 0440 /etc/sudoers.d/${user_name}
+chown ${uid}:${gid} -R /run/user${uid}

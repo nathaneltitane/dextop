@@ -1,0 +1,116 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# silence login prompt
+
+console.info "Silencing login messages."
+echo
+
+echo > /home/${user_name}/.hushlogin
+
+# bookmarks #
+
+console.info "Appending device storage bookmarks."
+echo
+
+# add bookmarks - gtk2
+
+storage_directories_list=(
+	/media/External
+	/media/Internal
+)
+
+for storage_directory in ${storage_directories_list[@]}
+do
+	if [[ -d "$storage_directory" ]]
+	then
+		link=$(basename $storage_directory)
+		link=${link^}
+
+		cat <<- FILE >> /home/${user_name}/.gtk-bookmarks
+		file:///${storage_directory} ${link}
+		FILE
+	fi
+done
+
+# add bookmarks - gtk3
+
+if [[ -f /home/${user_name}/.gtk-bookmarks ]]
+then
+	# create gtk3 bookmarks directory
+
+	mkdir -p /home/${user_name}/.config/gtk-3.0
+
+	# link gtk2 bookmarks
+
+	ln -s -f /home/${user_name}/.gtk-bookmarks /home/${user_name}/.config/gtk-3.0/bookmarks
+fi
+
+# vnc #
+
+console.info "Configuring display server setup."
+echo
+
+# create user home vnc directory
+
+mkdir -p /home/${user_name}/.vnc
+
+# write user vnc password file
+
+cat <<- FILE > /home/${user_name}/.vnc/passwd
+
+FILE
+
+# write user vnc startup file
+
+cat <<- FILE > /home/${user_name}/.vnc/xstartup
+#!/bin/bash
+
+unset DBUS_SESSION_BUS_ADDRESS
+unset SESSION_MANAGER
+
+if [[ "\$APPLICATION" != "" ]]
+then
+	\$DESKTOP_SESSION &
+	LD_PRELOAD=/lib/libandroid-shmem-aarch64.so \$APPLICATION &
+else
+	dbus-launch --exit-with-session \$DESKTOP_SESSION &
+fi
+FILE
+
+# append automatic vnc session stop on shell exit
+
+cat << 'FILE' > /home/${user_name}/.bash_logout
+
+# automatic vnc session stop on shell exit
+
+vnc-stop
+FILE
+
+# append automatic vnc session start from selection value
+
+cat <<- 'FILE' > /home/${user_name}/.profile
+
+# automatic vnc session start from last selection value
+
+if [ -f "$HOME"/.vnc/selection ]
+then
+	selection="$(cat "$HOME"/.vnc/selection)" 
+	
+	echo "$selection" | vnc-start
+else
+	vnc-start
+fi
+FILE
+
+# xorg #
+
+# write user X session startup file
+
+cat <<- FILE > /home/${user_name}/.xsession
+$DESKTOP_SESSION &
+FILE
