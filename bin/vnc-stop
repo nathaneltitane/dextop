@@ -5,20 +5,20 @@
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
-# cleanup routine #
 
-vnc_server () {
-		vncserver > /dev/null 2>&1
-}
-
-# check for process tokens and cleanup
+# check for PID and kill / cleanup
 
 if pgrep -f vnc > /dev/null
 then
+		echo
 		console.fwd "Stopping display server..."
 		echo
 
-		vnc_server -kill :*
+		# kill active and stale vnc output processes
+
+		vncserver -kill :* > /dev/null 2>&1
+
+		# clean display server runtime files
 
 		rm -rf /tmp/.X*
 fi
