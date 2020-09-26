@@ -25,7 +25,7 @@ user_name=${first_name,,}
 
 if [[ -z $(command -v sudo) ]]
 then
-	console.warning "'sudo' utility not present or installed on system."
+	console.warning "'sudo' utility not present or installed on system:"
 	console.warning "Install 'sudo' using the package manager and restart this utility."
 	echo
 	
@@ -63,7 +63,7 @@ echo "${user_name} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/"${user_name}"
 
 echo "Set disable_coredump false" >> /etc/sudo.conf
 
-# get uid and gid of user
+# get user uid and gid 
 
 uid=$(id -u ${user_name})
 gid=$(id -g ${user_name})
@@ -73,12 +73,7 @@ gid=$(id -g ${user_name})
 console.info "Setting up user runtime directory."
 echo
 
-mkdir -p /run/usr/${uid} -m 700
-
-console.info "Setting up desktop session runtime directory."
-echo
-
-mkdir -p /run/usr/i3 -m 700
+mkdir -p /run/user/${uid} -m 755
 
 # home #
 
