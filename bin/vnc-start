@@ -19,7 +19,7 @@ vnc () {
 				-localhost yes \
 				-depth 32 \
 				-cleanstale \
-				-format $NAME \
+				-name $NAME \
 				-geometry ${GEOMETRY} ${DISPLAY} > /dev/null 2>&1
 
 				# 'vncserver' uses $DISPLAY instead of $PORT
