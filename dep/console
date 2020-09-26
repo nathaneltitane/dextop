@@ -155,7 +155,7 @@ console.batsu () {
 
 # marker_download
 
-console.batsu () {
+console.download () {
 	echo "${magenta}${marker_download}" $@"${reset}"
 }
 
@@ -215,7 +215,7 @@ console.stp () {
 
 # marker_upload
 
-console.batsu () {
+console.upload () {
 	echo "${magenta}${marker_upload}" $@"${reset}"
 }
 
