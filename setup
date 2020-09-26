@@ -21,7 +21,7 @@ display_output=$2
 
 if [ -z $install_option ]
 then
-	install_option="full"
+	install_option="minimal"
 fi
 
 if [ -z $display_output ]

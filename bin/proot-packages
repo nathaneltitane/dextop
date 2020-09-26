@@ -130,6 +130,7 @@ window_manager_list=(
 	i3blocks
 	i3status
 	dmenu
+	feh
 	xss-lock
 )
 

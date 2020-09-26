@@ -118,14 +118,14 @@ print_resolutions() {
 			width="${resolutions[$i+1]}"
 			height="${resolutions[$i+2]}"
 			resolution="${width}x${height}"
-	
+
 			if (( $i/3 >= 0 && $i/3 <= 8 ))
 			then
 					printf '\t[  %s ] %s' $((($i/3) +1)) $format
 			else
 					printf '\t[ %s ] %s' $((($i/3) +1)) $format
 			fi
-	
+
 			printf '%*s' $((pad_length - ${#format}))
 			printf '%s\n' $resolution
 	done
@@ -138,7 +138,7 @@ then
 	read selection <<< "$(cat "$HOME"/.vnc/selection)"
 else
 	print_resolutions
-	
+
 	console.input "Selection: "
 	read selection
 	echo

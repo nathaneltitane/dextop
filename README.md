@@ -32,13 +32,13 @@ where available install options are:
 
 ```
 -b | --base:    download and unpack root filesystem and utilities.
--f | --full:    download and install full desktop environment and utilities. [ Default - full setup when no option is selected ] 
--m | --minimal: download and install minimal set of utilities.
+-f | --full:    download and install full desktop environment and utilities.
+-m | --minimal: download and install minimal set of utilities. [ Default ]
 ```
 and available display output options are:
 
 ```
--c | --vnc:     download and setup vnc protocol display output. [ Default - vnc display when no option is selected ]
+-c | --vnc:     download and setup vnc protocol display output. [ Default ]
 -x | --xorg:    download and setup xorg/xrdp protocol display output.
 ```
 

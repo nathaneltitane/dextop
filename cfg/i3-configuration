@@ -15,7 +15,6 @@ cat <<- 'FILE' > "$PROOT_DIRECTORY"/etc/i3/config
 exec --no-startup-id xsetroot -solid black
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
-
 # modifiers #
 
 # name			call				code
