@@ -197,7 +197,7 @@ cat <<- 'FILE' > /home/${user_name}/.bash_logout
 
 # automatic vnc session stop on shell exit
 
-vnc-stop 2&1> /dev/null
+vnc-stop
 FILE
 
 # append automatic vnc session start from selection value
@@ -206,11 +206,9 @@ cat <<- 'FILE' > /home/${user_name}/.profile
 
 # automatic vnc session start from last selection value
 
-if [ -f "/home/$(id -u -n)/.vnc/selection" ]
+if [ -f "$HOME"/.vnc/selection" ]
 then
-	echo "$(cat /home/$(id -u -n)/.vnc/selection)" | vnc-start
-else
-	:
+	vnc-start
 fi
 FILE
 
