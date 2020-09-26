@@ -140,6 +140,17 @@ theme_list=(
 	qt5-style-plugin-gtk2
 )
 
+framework_list=(
+	libqt5concurrent5
+	libqt5opengl5
+	libqt5opengl5-dev
+	libqt5printsupport5
+	libqt5xml5
+	qt5-default
+	qttools5-dev
+	qttools5-dev-tools
+	)
+
 # options #
 
 # base
