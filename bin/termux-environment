@@ -19,6 +19,8 @@ echo
 
 # termux properties
 
+mkdir "$HOME"/.termux
+
 cat <<- FILE > "$HOME"/.termux/termux.properties
 
 # use black for drawer and dialogs - Android 9.0+ default
