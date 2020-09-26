@@ -35,10 +35,14 @@ vnc () {
 		echo
 
 		# make selection available for automatic start
+		
+		# verify user id - do not write to root
 
 		if [[ $(id -u) = 1000 ]]
 		then
-				if [[ "$selection" = {0..99} ]]
+				# integer check: do not write non numerical values to file
+				
+				if [[ "$selection" =~ ^[0-9]+$ ]]
 				then
 						echo "$selection" > /home/$(id -u -n)/.vnc/selection
 				fi
