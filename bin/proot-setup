@@ -68,8 +68,11 @@ echo
 console.success "Environment deployment and configuration complete."
 echo
 
-console.info "Desktop mode: for a full desktop environment session - run 'proot-launch <username>' - uses XFCE4 DE"
-echo
+if [[ "$install_option" = "full" ]]
+then
+	console.info "Desktop mode: for a full desktop environment session - run 'proot-launch <username>' - uses XFCE4 DE"
+	echo
+fi
 
 console.info "Application mode: for an application-only session - run 'proot-launch <username> <application>' - uses i3 WM"
 console.info "This mode is intended to optimize performance and run resource intensive applications effectively."
@@ -84,7 +87,7 @@ echo
 # use BASH_SROUCE for all bash-specific invocations to the script path:
 # $0 is POSIX compliant and may not always return the correct value.
 
-if [[ $(cat /tmp/setup-complete) == "[yY][eE][sS]" ]]
+if [[ "$(cat /tmp/setup-complete)" = "yes" ]]
 then
 	# remove last line ['bash /tmp/setup'] from /root/.profile
 
@@ -92,11 +95,11 @@ then
 
 	# remove script
 
-	# rm ${BASH_SOURCE[0]}
+	rm ${BASH_SOURCE[0]}
 
 	# cleanup /tmp
 
-	# rm -rf /tmp/*
+	rm -rf /tmp/*
 fi
 
 exit
