@@ -40,6 +40,11 @@ display_server_list=(
 	x11-utils
 )
 
+security_list=(
+	ca-certificates
+	openssl	
+)
+
 sound_list=(
 	pavucontrol
 	pulseaudio
@@ -58,8 +63,6 @@ xorg_list=(
 )
 
 web_list=(
-	ca-certificates
-	openssl
 	midori
 )
 
@@ -160,6 +163,7 @@ then
 	install_list=(
 		${utilities_list[@]}
 		${display_server_list[@]}
+		${security_list[@]}
 		${vnc_list[@]}
 	)
 fi
@@ -171,6 +175,7 @@ then
 	install_list=(
 		${utilities_list[@]}
 		${display_server_list[@]}
+		${security_list[@]}
 		${vnc_list[@]}
 		${web_list[@]}
 		${desktop_environment_list[@]}
@@ -186,6 +191,7 @@ then
 	install_list=(
 		${utilities_list[@]}
 		${display_server_list[@]}
+		${security_list[@]}
 		${vnc_list[@]}
 		${window_manager_list[@]}
 		${theme_list[@]}
