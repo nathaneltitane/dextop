@@ -132,19 +132,13 @@ print_resolutions() {
 	echo
 }
 
-if [ -e "$HOME"/.vnc/selection ]
-then
-	console.info "Automatic session start enabled."
-	echo
-	
-	read selection
-else
-	print_resolutions
+# show selection
 
-	console.input "Selection: "
-	read selection
-	echo
-fi
+print_resolutions
+
+console.input "Selection: "
+read selection
+echo
 
 # manage custom input values
 
