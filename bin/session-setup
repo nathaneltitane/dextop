@@ -95,16 +95,9 @@ FILE
 
 cat <<- 'FILE' > /home/${user_name}/.profile
 
-# automatic vnc session start from last selection value
+# automatic vnc session start
 
-if [ -f "$HOME"/.vnc/selection ]
-then
-	selection="$(cat "$HOME"/.vnc/selection)" 
-	
-	echo "$selection" | vnc-start
-else
-	vnc-start
-fi
+vnc-start
 FILE
 
 # xorg #
