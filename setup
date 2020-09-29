@@ -19,15 +19,8 @@ display_output=$2
 
 # set defaults
 
-if [ -z $install_option ]
-then
-	install_option="minimal"
-fi
-
-if [ -z $display_output ]
-then
-	display_output="vnc"
-fi
+[ -z $install_option ] && install_option="minimal"
+[ -z $display_output ] && display_output="vnc"
 
 # usage #
 
@@ -43,7 +36,7 @@ do
 		-m|--minimal)
 			install_option="minimal"
 			;;
-		-c|--vnc)
+		-n|--vnc)
 			display_output="vnc"
 			;;
 		-x|--xorg)
@@ -75,10 +68,12 @@ do
 			;;
 		*)
 			echo -e ""
+			echo "Usage: ${0} <install option> <display output>"
+			echo -e ""
 			echo -e "$script: Unknown option $1"
 			echo -e "Type './$script --help' for help and usage information."
 			echo -e ""
-			exit
+			exit 1
 			;;
 		esac
 	shift
@@ -195,7 +190,7 @@ echo
 
 "$BINARIES_DIRECTORY"/user-information
 
-# setup transient storage - [ device >>> [ termux >>> [ proot ] ] ]
+# setup transient storage - [ device <<>> [ termux <<>> [ proot ] ] ]
 
 "$BINARIES_DIRECTORY"/termux-storage
 

@@ -28,6 +28,10 @@ cat "$BINARIES_DIRECTORY"/globals >> "$PROOT_DIRECTORY"/tmp/setup
 
 cat << 'FILE' >> "$PROOT_DIRECTORY"/tmp/setup
 
+# initial prompt clear #
+
+clear
+
 # setup #
 
 console.info "Setting up proot environment."
