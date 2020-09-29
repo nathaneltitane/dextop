@@ -5,51 +5,6 @@
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
-# download configuration file
-
-configurations_list=(
-	i3-configuration
-	xfce4-configuration
-)
-
-for configuration in ${configurations_list[@]}
-do
-	configuration_url=cfg-dex.ntttn.me/"$configuration"
-
-	# get configurations from repository
-
-	curl -sL ${configuration_url} > "$PROOT_DIRECTORY"/tmp/"$configuration"
-
-	console.download "Downloading configuration [ $configuration ]."
-	echo
-
-done
-
-console.info "Copied necessary configuration files."
-echo
-
-# download and setup library files into proot directories
-
-libraries_list=(
-	libandroid-shmem-aarch64.so
-)
-
-for library in ${libraries_list[@]}
-do
-	library_url=lib-dex.ntttn.me/"$library"
-
-	# get libraries from repository
-
-	curl -sL ${library_url} > "$PROOT_DIRECTORY"/lib/"$library"
-
-	console.download "Downloading library [ $library ]."
-	echo
-
-done
-
-console.info "Copied necessary library files."
-echo
-
 # environment
 
 cat <<- "FILE" >> "$PROOT_DIRECTORY"/etc/environment
@@ -65,8 +20,6 @@ echo ${hostname} > "$PROOT_DIRECTORY"/etc/hostname
 
 console.info "Setting host address."
 echo
-
-echo ${hostname} > "$PROOT_DIRECTORY"/etc/hostname
 
 cat <<- 'FILE' > "$PROOT_DIRECTORY"/etc/hosts
 127.0.0.1 localhost.localdomain
@@ -84,7 +37,7 @@ cat <<- 'FILE' > "$PROOT_DIRECTORY"/etc/resolv.conf
 nameserver 8.8.8.8
 FILE
 
-# automatic setup transition from termux environment into proot environment
+# automatic setup transition [ termux >>> [ proot ] ]
 
 cat <<- 'FILE' >> "$PROOT_DIRECTORY"/root/.profile
 

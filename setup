@@ -87,7 +87,7 @@ BINARIES_DIRECTORY="${PREFIX}"/bin
 
 cd "${SETUP_DIRECTORY}" || exit 1
 
-# download dependencies
+# dependencies #
 
 dependencies_list=(
 	binaries
@@ -95,36 +95,28 @@ dependencies_list=(
 	globals
 )
 
+# download
+
 for dependency in ${dependencies_list[@]}
 do
 	dependency_url=dep-dex.ntttn.me/"$dependency"
 
-	# get dependencies from repository
-
 	curl -sL ${dependency_url} > "$BINARIES_DIRECTORY/$dependency"
 
-	# set execution mode for dependency
-
 	chmod +x "$BINARIES_DIRECTORY/$dependency"
-	
-	# source dependency
 	
 	source "$BINARIES_DIRECTORY/$dependency"
 done
 
-# download binaries
+# setup #
 
 console.fwd "Fetching necessary binary files."
 echo
 
 "$BINARIES_DIRECTORY"/download-binaries
 
-# proceed with setup
-
 console.fwd "Setting up environments [ [ termux <<< ] | [ >>> proot ] ]..."
 echo
-
-# verify architecture match
 
 "$BINARIES_DIRECTORY"/check-architecture
 

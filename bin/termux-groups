@@ -33,6 +33,8 @@ do
 	line=${line/(/ }
 	line=${line/)}
 
+	# set IFS
+
 	IFS=' '
 
 	# transfer unregistered IDs

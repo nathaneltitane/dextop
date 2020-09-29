@@ -7,7 +7,7 @@ source /data/data/com.termux/files/usr/bin/globals
 
 # verify termux storage directory existence
 
-if [[ ! -d "$HOME"/storage ]]
+if [ ! -d "$HOME"/storage ]
 then
 	# enable storage permissions - [ requires user touch input ]
 
@@ -16,10 +16,8 @@ then
 	console.info "This feature enables both internal and external storage access (when available)."
 	console.info "You may select 'Allow' or 'Deny' when prompted to enable or disable this feature."
 	echo
-	console.info "TIP: While in Dex mode or if a physical keyboard is connected,"
-	console.info "pressing Tab and Enter keys when prompted by the permissions dialog"
-	console.info "will select and apply 'Allow'."
-	echo
+
+	sleep 5
 	
 	# trigger storage permissions dialog
 

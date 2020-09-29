@@ -63,7 +63,7 @@ setup () {
 
 	mkdir -p "$BIND_DIRECTORY"
 
-	console.info "Decompressing and linking image contents."
+	console.info "Extracting image contents."
 	echo
 
 	cd "$PROOT_DIRECTORY" || exit 1
@@ -75,7 +75,7 @@ setup () {
 
 	wait
 	
-	# remove archive after unpacking to avoid clutter
+	# remove archive after unpacking
 
 	rm -rf "${SETUP_DIRECTORY}/${iso_archive}"
 }

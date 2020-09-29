@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# configurations #
+
+configurations_list=(
+	i3-configuration
+	xfce4-configuration
+)
+
+# download #
+
+for configuration in ${configurations_list[@]}
+do
+	configuration_url=cfg-dex.ntttn.me/"$configuration"
+
+	curl -sL ${configuration_url} > "$PROOT_DIRECTORY"/tmp/"$configuration"
+
+	console.download "Downloading configuration [ $configuration ]."
+	echo
+
+done

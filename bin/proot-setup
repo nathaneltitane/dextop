@@ -7,10 +7,7 @@ source /data/data/com.termux/files/usr/bin/globals
 
 # create self-terminating script file
 # execute on first login to complete proot setup
-# terminates when checkpoint is reached
-
-console.info "Generating initial login environemnt setup scripts."
-echo
+# terminate if checkpoint is reached
 
 # write dependencies
 
@@ -54,13 +51,21 @@ echo
 
 "$BINARIES_DIRECTORY"/superuser-setup "${first_name}" "${last_name}"
 
-# setup user account session elements and configured preferences
+# setup vnc configurations
 
-"$BINARIES_DIRECTORY"/session-setup
+"$BINARIES_DIRECTORY"/vnc-setup
+
+# setup xorg configurations
+
+"$BINARIES_DIRECTORY"/xorg-setup
+
+# setup user account configured preferences
+
+"$BINARIES_DIRECTORY"/user-preferences
 
 # checkpoint #
 
-# write value to confirm uinterrupted setup completion
+# write checkpoint to confirm uinterrupted setup
 
 echo "yes" > /tmp/setup-complete
 

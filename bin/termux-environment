@@ -10,7 +10,9 @@ source /data/data/com.termux/files/usr/bin/globals
 console.info "Silencing login messages."
 echo
 
-echo > "$HOME"/.hushlogin
+cat <<- 'FILE' > "$HOME"/.hushlogin
+
+FILE
 
 console.info "Creating required configuration files."
 echo

@@ -49,7 +49,7 @@ done
 
 # test image architecture string
 
-if [[ -z "$img_architecture" ]]
+if [ -z "$img_architecture" ]
 then
 	console.warning "Unknown architecture:"
 	console.warning "Aborting."
@@ -61,8 +61,7 @@ then
 	exit 1
 fi
 
-# export
-# carry architecture over to globals to complete setup
+# export variables
 
 cat << FILE >> "$BINARIES_DIRECTORY"/globals
 

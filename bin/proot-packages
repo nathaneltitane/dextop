@@ -200,7 +200,7 @@ fi
 
 # output #
 
-# output - vnc
+# vnc
 
 if [[ $display_output = "vnc" ]]
 then
@@ -209,7 +209,7 @@ then
 	)
 fi
 
-# output - xorg
+# xorg
 
 if [[ $display_output = "xorg" ]]
 then

@@ -5,10 +5,6 @@
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
-# set extended pattern matching / globbing
-
-shopt -s extglob
-
 # variables #
 
 local_applications_directory="$home/.local/share/applications"
@@ -22,6 +18,10 @@ system_backgrounds_directory="/usr/share/backgrounds"
 
 local_themes_directory="$home/.themes"
 system_themes_directory="/usr/share/themes"
+
+# set extended pattern matching / globbing
+
+shopt -s extglob
 
 # remove files and folders
 
