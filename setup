@@ -86,30 +86,36 @@ BINARIES_DIRECTORY="${PREFIX}"/bin
 curl -sL dep-dex.ntttn.me/console > "$BINARIES_DIRECTORY"/console && source "$BINARIES_DIRECTORY"/console
 curl -sL dep-dex.ntttn.me/globals > "$BINARIES_DIRECTORY"/globals && source "$BINARIES_DIRECTORY"/globals
 
-clear
-
 # execute
 
 curl -sL dep-dex.ntttn.me/binaries > "$BINARIES_DIRECTORY"/binaries && bash "$BINARIES_DIRECTORY"/binaries
 
-# set work directory
-
-cd "${SETUP_DIRECTORY}" || exit 1
-
 clear
 
-console.info "[ Linux on Android - Termux Dextop // Ubuntu Dextop [ ${version} ] ]"
+console.sankaku "[ Linux on Android - Termux Dextop // Ubuntu Dextop [ Version ${version} ] ]"
 echo
 
-console.fwd "Initializing setup."
+console.fwd "Initializing setup..."
 echo
 
 # setup #
 
-console.fwd "Setting up environments [ [ termux <<< ] | [ >>> proot ] ]..."
+# set work directory
+
+console.info "Entering setup directory."
 echo
 
+cd "${SETUP_DIRECTORY}" || exit 1
+
+
+# check system vs. image architecture
+
 "$BINARIES_DIRECTORY"/check-architecture
+
+# setup environments
+
+console.fwd "Setting up environments [ [ termux <<< ] | [ >>> proot ] ]..."
+echo
 
 # get user information
 

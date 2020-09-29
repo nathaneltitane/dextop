@@ -24,7 +24,7 @@ input_list=(
 
 for value in "${input_list[@]}"
 do
-	console.input "Enter $(echo ${value^} | sed 's/_/ /')...: "
+	console.input "$(echo ${value^} | sed 's/_/ /')...: "
 
 	# obfuscate password using prompt variable
 	# when $value=user_password
