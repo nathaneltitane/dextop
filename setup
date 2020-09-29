@@ -81,7 +81,7 @@ BINARIES_DIRECTORY="${PREFIX}"/bin
 
 # dependencies #
 
-curl -sL dep-dex.ntttn.me > dependencies && bash dependencies
+curl -sL dep-dex.ntttn.me/dependencies > dependencies && bash dependencies
 
 # set work directory
 
