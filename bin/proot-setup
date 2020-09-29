@@ -5,8 +5,9 @@
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
-# creates self-terminating script file:
-# executed on first login to complete proot environment setup
+# create self-terminating script file
+# execute on first login to complete proot setup
+# terminates when checkpoint is reached
 
 console.info "Generating initial login environemnt setup scripts."
 echo
@@ -33,9 +34,6 @@ cat << 'FILE' >> "$PROOT_DIRECTORY"/tmp/setup
 clear
 
 # setup #
-
-console.info "Setting up proot environment."
-echo
 
 console.fwd "Completing setup..."
 echo
@@ -72,17 +70,7 @@ echo
 console.success "Environment deployment and configuration complete."
 echo
 
-if [[ "$install_option" = "full" ]]
-then
-	console.info "Desktop mode: for a full desktop environment session - run 'proot-launch <username>' - uses XFCE4 DE"
-	echo
-fi
-
-console.info "Application mode: for an application-only session - run 'proot-launch <username> <application>' - uses i3 WM"
-console.info "This mode is intended to optimize performance and run resource intensive applications effectively."
-echo
-
-console.fwd "Exiting."
+console.fwd "Exiting..."
 echo
 
 # cleanup #

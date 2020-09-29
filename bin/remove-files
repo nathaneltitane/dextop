@@ -11,13 +11,6 @@ shopt -s extglob
 
 # variables #
 
-if [ "$USER" = "root" ]
-then
-	home="/root"
-else
-	home="/home/${SUDO_USER:-$USER}"
-fi
-
 local_applications_directory="$home/.local/share/applications"
 system_applications_directory="/usr/share/applications"
 

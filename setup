@@ -87,9 +87,10 @@ BINARIES_DIRECTORY="${PREFIX}"/bin
 
 cd "${SETUP_DIRECTORY}" || exit 1
 
-# get dependencies
+# download dependencies
 
 dependencies_list=(
+	binaries
 	console
 	globals
 )
@@ -159,6 +160,7 @@ echo
 
 "$BINARIES_DIRECTORY"/proot-setup
 
+# export
 # carry options over to globals to complete setup
 
 cat << FILE >> "$BINARIES_DIRECTORY"/globals
@@ -180,5 +182,8 @@ rm "$INITIAL_DIRECTORY"/${BASH_SOURCE[0]}
 # automatic proot setup transition:
 # run 'proot-launch' as 'root'
 # and carry over setup in proot environment
+
+console.info "Entering proot environment."
+echo
 
 $BINARIES_DIRECTORY/bash -c 'proot-launch'

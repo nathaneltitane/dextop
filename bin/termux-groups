@@ -8,15 +8,21 @@ source /data/data/com.termux/files/usr/bin/globals
 console.info "Transferring unregistered group IDs."
 echo
 
+# set IFS
+
 IFS=' '
 
 read uid gid groups <<< $(id)
 
-# parse existing groups setup
+# variables
 
 uid=${uid/uid=}
 gid=${gid/gid=}
 groups=${groups/groups=}
+
+# parse existing groups
+
+# set IFS
 
 IFS=','
 

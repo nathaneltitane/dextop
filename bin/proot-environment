@@ -5,7 +5,7 @@
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
-# download and setup configuration files into proot directories
+# download configuration file
 
 configurations_list=(
 	i3-configuration
@@ -26,29 +26,6 @@ do
 done
 
 console.info "Copied necessary configuration files."
-echo
-
-# download and setup image files into proot directories
-
-images_list=(
-	bird.png
-	bird.svg
-)
-
-for image in ${images_list[@]}
-do
-	image_url=img-dex.ntttn.me/"$image"
-
-	# get images from repository
-
-	curl -sL ${image_url} > "$PROOT_DIRECTORY"/usr/share/backgrounds/"$image"
-
-	console.download "Downloading image [ $image ]."
-	echo
-
-done
-
-console.info "Copied necessary image files."
 echo
 
 # download and setup library files into proot directories
@@ -73,15 +50,18 @@ done
 console.info "Copied necessary library files."
 echo
 
-# setup proot environment
-
-echo ${hostname} > "$PROOT_DIRECTORY"/etc/hostname
+# environment
 
 cat <<- "FILE" >> "$PROOT_DIRECTORY"/etc/environment
 LD_PRELOAD=/lib/aarch64-linux-gnu/libgcc_s.so.1:/lib/libandroid-shmem-aarch64.so
 FILE
 
 # hosts #
+
+console.info "Setting hostname."
+echo
+
+echo ${hostname} > "$PROOT_DIRECTORY"/etc/hostname
 
 console.info "Setting host address."
 echo
@@ -103,6 +83,8 @@ echo
 cat <<- 'FILE' > "$PROOT_DIRECTORY"/etc/resolv.conf
 nameserver 8.8.8.8
 FILE
+
+# automatic setup transition from termux environment into proot environment
 
 cat <<- 'FILE' >> "$PROOT_DIRECTORY"/root/.profile
 

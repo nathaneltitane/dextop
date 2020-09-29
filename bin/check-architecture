@@ -61,11 +61,7 @@ then
 	exit 1
 fi
 
-console.fwd "Proceeding..."
-echo
-
-# export architecture
-
+# export
 # carry architecture over to globals to complete setup
 
 cat << FILE >> "$BINARIES_DIRECTORY"/globals

@@ -20,6 +20,8 @@ then
 	console.info "pressing Tab and Enter keys when prompted by the permissions dialog"
 	console.info "will select and apply 'Allow'."
 	echo
+	
+	# trigger storage permissions dialog
 
 	termux-setup-storage
 
@@ -28,14 +30,15 @@ then
 	console.countdown 5
 
 else
-	console.success "Storage directory detected in:"
+	console.success "Storage directory detected under"
 	console.success "$HOME"
 	echo
+	
 	console.fwd "Continuing..."
 	echo
 fi
 
-# get sdcard UUID if present
+# get sdcard UUID
 
 if [ -e "$HOME"/storage/external* ]
 then
@@ -62,6 +65,7 @@ then
 	console.success "External storage found:"
 	console.info "UUID:......: ${sd_uuid}"
 	echo
+	
 	console.fwd "Linking..."
 	echo
 
@@ -71,6 +75,7 @@ else
 	console.error "External storage not found or not present:"
 	console.info "Could not find extrernal storage media mounted under /storage."
 	echo
+	
 	console.fwd "Continuing..."
 	echo
 fi

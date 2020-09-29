@@ -10,7 +10,40 @@ source /data/data/com.termux/files/usr/bin/globals
 console.info "Silencing login messages."
 echo
 
-echo > /home/${user_name}/.hushlogin
+echo > "$HOME"/.hushlogin
+
+console.info "Creating required configuration files."
+echo
+
+# .bash_aliases
+
+cat <<- 'FILE' >> "$HOME"/.bash_aliases
+
+FILE
+
+# .bash_profile
+
+cat <<- 'FILE' >> "$HOME"/.bash_profile
+
+FILE
+
+# .bash_logout
+
+cat <<- 'FILE' >> "$HOME"/.bash_logout
+
+FILE
+
+# .bashrc
+
+cat <<- 'FILE' >> "$HOME"/.bashrc
+
+FILE
+
+# .profile
+
+cat <<- 'FILE' >> "$HOME"/.profile
+
+FILE
 
 # bookmarks #
 
@@ -49,61 +82,3 @@ then
 
 	ln -s -f /home/${user_name}/.gtk-bookmarks /home/${user_name}/.config/gtk-3.0/bookmarks
 fi
-
-# vnc #
-
-console.info "Configuring display server setup."
-echo
-
-# create user home vnc directory
-
-mkdir -p /home/${user_name}/.vnc
-
-# write user vnc password file
-
-cat <<- FILE > /home/${user_name}/.vnc/passwd
-
-FILE
-
-# write user vnc startup file
-
-cat <<- FILE > /home/${user_name}/.vnc/xstartup
-#!/bin/bash
-
-unset DBUS_SESSION_BUS_ADDRESS
-unset SESSION_MANAGER
-
-if [[ "\$APPLICATION" != "" ]]
-then
-	\$DESKTOP_SESSION &
-	LD_PRELOAD=/lib/libandroid-shmem-aarch64.so \$APPLICATION &
-else
-	dbus-launch --exit-with-session \$DESKTOP_SESSION &
-fi
-FILE
-
-# append automatic vnc session stop on shell exit
-
-cat << 'FILE' > /home/${user_name}/.bash_logout
-
-# automatic vnc session stop on shell exit
-
-vnc-stop
-FILE
-
-# append automatic vnc session start from selection value
-
-cat <<- 'FILE' > /home/${user_name}/.profile
-
-# automatic vnc session start
-
-vnc-start
-FILE
-
-# xorg #
-
-# write user X session startup file
-
-cat <<- FILE > /home/${user_name}/.xsession
-$DESKTOP_SESSION &
-FILE

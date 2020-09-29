@@ -20,12 +20,10 @@ last_name=${2}
 user_name=${first_name,,}
 sudo_id=$(cat /etc/group | grep sudo | cut -d : -f 3)
 
-# pass sudo id as 27 if 'sudo' group is not setup
+# set defaults
+# pass sudo GID default (27) if 'sudo' group is not setup
 
-if [ -z "$sudo_id" ]
-then
-	sudo_id=27
-fi
+if [ -z "$sudo_id" ] && sudo_id=27
 
 # verify that 'sudo' is installed:
 # required for the presence of /etc/sudoers* file and directory
@@ -38,6 +36,9 @@ then
 	
 	exit 1
 fi
+
+console.info "Setting superuser privileges for user '${user_name}'."
+echo
 
 # give user superuser privileges
 

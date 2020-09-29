@@ -26,7 +26,8 @@ EDITOR="nano"
 LOCALHOST_ADDRESS="127.0.0.1"
 VISUAL=
 
-# set defaults if no argument is passed
+# set defaults
+# push variables if no argument is passed
 
 [ -z "$USERNAME" ]			&& USERNAME="root"
 [ -z "$APPLICATION" ]		&& APPLICATION="${TERMINAL}"

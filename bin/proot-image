@@ -5,8 +5,22 @@
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
-proot-deploy() {
-	# shorthand:
+# variables
+
+distribution_name="ubuntu"
+distribution_version="20.04.1"
+proot_launcher="proot-launch"
+
+iso_root_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${distribution_version}/release"
+iso_archive="ubuntu-base-${distribution_version}-base-${iso_architecture}.tar.gz"
+iso_url="$iso_root_url/$iso_archive"
+
+# set defaults
+
+[ -z $distribution_version ] && distribution_version="20.04.1"
+
+proot-deploy () {
+	# shorthand
 	
 	# proot -l tar -xzf "$1" -X "$2" || :
 	
@@ -25,21 +39,13 @@ proot-deploy() {
 }
 
 setup () {
-	distribution_name="ubuntu"
-	distribution_version="20.04"
-	proot_launcher="proot-launch"
-
-	iso_root_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${distribution_version}/release"
-	iso_archive="ubuntu-base-${distribution_version}-base-${iso_architecture}.tar.gz"
-	iso_url="$iso_root_url/$iso_archive"
-
-	console.info "Initializing proot setup (${distribution_name^} $distribution_version)."
+	console.info "Initializing proot setup ."
 	echo
 
 	console.fwd "Initializing..."
 	echo
 
-	console.info "Downloading image."
+	console.info "Downloading image [ ${distribution_name^} $distribution_version ]."
 	echo
 
 	curl -sL "${iso_url}" > ${iso_archive} &
@@ -76,7 +82,7 @@ setup () {
 
 # remove previous deployments
 
-rm -rf "$PROOT_DIRECTORY"
+[ -d "${PROOT_DIRECTORY}" ] && rm -rf "$PROOT_DIRECTORY" || :
 
 # run setup
 

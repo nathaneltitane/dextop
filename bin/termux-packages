@@ -42,7 +42,6 @@ sound_list=(
 termux_list=(
 	termux-*
 	*-repo
-
 )
 
 install_list=(

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+console.info "Configuring display server setup [ xorg ]."
+echo
+
+# write user X session startup file
+
+cat << FILE > /home/${user_name}/.xsession
+$DESKTOP_SESSION &
+FILE

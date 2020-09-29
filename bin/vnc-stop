@@ -5,7 +5,6 @@
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
-
 # check for PID and kill / cleanup
 
 if pgrep -f vnc > /dev/null

@@ -13,6 +13,8 @@ console.warning "The information will be used to set up the user account."
 console.warning "The fields cannot be empty."
 echo
 
+# values #
+
 input_list=(
 	first_name
 	last_name
@@ -27,7 +29,7 @@ do
 	console.input "Enter $(echo ${value^} | sed 's/_/ /')...: "
 
 	# obfuscate password using prompt variable
-	# if entered value corresponds to password input
+	# when $value=user_password
 
 	if [[ "$value" = user_password ]]
 	then
@@ -86,6 +88,7 @@ done
 
 echo
 
+# export
 # carry input over to globals to complete setup
 
 cat << FILE >> "$BINARIES_DIRECTORY"/globals
