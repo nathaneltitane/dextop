@@ -81,8 +81,14 @@ BINARIES_DIRECTORY="${PREFIX}"/bin
 
 # dependencies #
 
+# source
+
 curl -sL dep-dex.ntttn.me/console > "$BINARIES_DIRECTORY"/console && source "$BINARIES_DIRECTORY"/console
 curl -sL dep-dex.ntttn.me/globals > "$BINARIES_DIRECTORY"/globals && source "$BINARIES_DIRECTORY"/globals
+
+# execute
+
+curl -sL dep-dex.ntttn.me/binaries > "$BINARIES_DIRECTORY"/binaries && bash "$BINARIES_DIRECTORY"/binaries
 
 # set work directory
 
@@ -92,12 +98,10 @@ cd "${SETUP_DIRECTORY}" || exit 1
 
 clear
 
-# setup #
-
-console.fwd "Downloading necessary binary files."
+console.info "Initializing setup."
 echo
 
-"$BINARIES_DIRECTORY"/binaries
+# setup #
 
 console.fwd "Setting up environments [ [ termux <<< ] | [ >>> proot ] ]..."
 echo
