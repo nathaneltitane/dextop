@@ -31,7 +31,7 @@ do
 		-m|--minimal)
 			install_option="minimal"
 			;;
-		-n|--vnc)
+		-c|--vnc)
 			display_output="vnc"
 			;;
 		-x|--xorg)
