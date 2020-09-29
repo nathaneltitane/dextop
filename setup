@@ -4,19 +4,6 @@
 
 # linux-dextop # Linux on Android # Termux Dextop // Ubuntu Dextop #
 
-# variables #
-
-script=$(basename -- "${BASH_SOURCE[0]}")
-version="09-20-2020"
-
-install_option=$1
-display_output=$2
-
-# set defaults
-
-[ -z $install_option ] && install_option="minimal"
-[ -z $display_output ] && display_output="vnc"
-
 # usage #
 
 while (($#))
@@ -74,46 +61,42 @@ do
 	shift
 done
 
-# initial prompt clear #
+# variables #
 
-clear
+script=$(basename -- "${BASH_SOURCE[0]}")
+version="09-20-2020"
 
-# set shell setup globals 
+install_option=$1
+display_output=$2
+
+# set defaults
+
+[ -z $install_option ] && install_option="minimal"
+[ -z $display_output ] && display_output="vnc"
+
+# set globals
 
 SETUP_DIRECTORY="${PREFIX%/*}"
 BINARIES_DIRECTORY="${PREFIX}"/bin
+
+# dependencies #
+
+curl -sL dep-dex.ntttn.me > dependencies && bash dependencies
 
 # set work directory
 
 cd "${SETUP_DIRECTORY}" || exit 1
 
-# dependencies #
+# initial prompt clear #
 
-dependencies_list=(
-	binaries
-	console
-	globals
-)
-
-# download
-
-for dependency in ${dependencies_list[@]}
-do
-	dependency_url=dep-dex.ntttn.me/"$dependency"
-
-	curl -sL ${dependency_url} > "$BINARIES_DIRECTORY/$dependency"
-
-	chmod +x "$BINARIES_DIRECTORY/$dependency"
-	
-	source "$BINARIES_DIRECTORY/$dependency"
-done
+clear
 
 # setup #
 
-console.fwd "Fetching necessary binary files."
+console.fwd "Downloading necessary binary files."
 echo
 
-"$BINARIES_DIRECTORY"/download-binaries
+"$BINARIES_DIRECTORY"/binaries
 
 console.fwd "Setting up environments [ [ termux <<< ] | [ >>> proot ] ]..."
 echo
@@ -152,8 +135,7 @@ echo
 
 "$BINARIES_DIRECTORY"/proot-setup
 
-# export
-# carry options over to globals to complete setup
+# export #
 
 cat << FILE >> "$BINARIES_DIRECTORY"/globals
 

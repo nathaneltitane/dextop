@@ -197,7 +197,7 @@ console.countdown () {
 		sleep 1
 	done
 
-	# additional echo required because of carriage return clear
+	# additional echo required because of carriage return clear '\c'
 
 	echo
 	echo

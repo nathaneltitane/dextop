@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# dependencies # 
+
+dependencies_list=(
+	console
+	globals
+)
+
+# download #
+
+for binary in ${binaries_list[@]}
+do
+	binary_url=bin-dex.ntttn.me/"$dependency"
+
+	curl -sL ${binary_url} > "$BINARIES_DIRECTORY/$dependency"
+
+	console.download "Downloading binary [ $dependency ]."
+	echo
+
+	chmod +x "$BINARIES_DIRECTORY/$dependency"
+	
+	source "$BINARIES_DIRECTORY/$dependency"
+done

@@ -7,7 +7,7 @@ source /data/data/com.termux/files/usr/bin/globals
 
 # write configuration file
 
-cat <<- 'FILE' > "$PROOT_DIRECTORY"/etc/i3/config
+cat <<- 'FILE' > "$PROOT_DIRECTORY"/home/"$user_name"/.config/i3/config
 # i3 configuration #
 
 # startup #

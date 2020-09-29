@@ -17,14 +17,9 @@ for library in ${libraries_list[@]}
 do
 	library_url=lib-dex.ntttn.me/"$library"
 
-	# get libraries from repository
-
 	curl -sL ${library_url} > "$PROOT_DIRECTORY"/lib/"$library"
 
 	console.download "Downloading library [ $library ]."
 	echo
 
 done
-
-console.info "Copied necessary library files."
-echo
