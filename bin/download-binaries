@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# binaries
+
+binaries_list=(
+	check-architecture
+	create-user
+	proot-environment
+	proot-image
+	proot-launch
+	proot-packages
+	proot-setup
+	remove-files
+	session-setup
+	superuser-setup
+	termux-environment
+	termux-groups
+	termux-packages
+	termux-storage
+	user-information
+	vnc-pass
+	vnc-start
+	vnc-stop
+	xfconf-read
+	xfconf-write
+)
+
+# download binaries
+
+for binary in ${binaries_list[@]}
+do
+	binary_url=bin-dex.ntttn.me/"$binary"
+
+	# get binaries from repository
+	
+	# no background process:
+	# not using console.progress: prevent 'Text file busy'error
+
+	curl -sL ${binary_url} > "$BINARIES_DIRECTORY/$binary"
+
+	# emulate console.fwd until dependencies are loaded
+	
+	console.download "Downloading binary [ $binary ]."
+	echo
+
+	# set execution mode for binary
+
+	chmod +x "$BINARIES_DIRECTORY/$binary"
+done

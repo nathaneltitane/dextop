@@ -4,15 +4,10 @@
 
 # linux-dextop # Linux on Android # Termux Dextop // Ubuntu Dextop #
 
-# script #
+# variables #
 
 script=$(basename -- "${BASH_SOURCE[0]}")
-
-# version #
-
 version="09-20-2020"
-
-# variables #
 
 install_option=$1
 display_output=$2
@@ -116,66 +111,12 @@ do
 	source "$BINARIES_DIRECTORY/$dependency"
 done
 
-# get binaries
+# download binaries
 
 console.fwd "Fetching necessary binary files."
 echo
 
-# binaries #
-
-binaries_list=(
-	check-architecture
-	create-user
-	proot-environment
-	proot-image
-	proot-launch
-	proot-packages
-	proot-setup
-	remove-files
-	termux-environment
-	termux-groups
-	termux-packages
-	termux-storage
-	user-information
-	vnc-pass
-	vnc-start
-	vnc-stop
-	xfconf-read
-	xfconf-write
-)
-
-for binary in ${binaries_list[@]}
-do
-	binary_url=bin-dex.ntttn.me/"$binary"
-
-	# get binaries from repository
-	
-	# no background process:
-	# not using console.progress: prevent 'Text file busy'error
-
-	curl -sL ${binary_url} > "$BINARIES_DIRECTORY/$binary"
-
-	# emulate console.fwd until dependencies are loaded
-	
-	console.download "Downloading binary [ $binary ]."
-	echo
-
-	# set execution mode for binary
-
-	chmod +x "$BINARIES_DIRECTORY/$binary"
-done
-
-# carry options over to globals to complete setup
-
-cat << FILE >> "$BINARIES_DIRECTORY"/globals
-
-# options #
-
-export install_option="${install_option}"
-export display_output="${display_output}"
-FILE
-
-# setup #
+"$BINARIES_DIRECTORY"/download-binaries
 
 # proceed with setup
 
@@ -218,16 +159,26 @@ echo
 
 "$BINARIES_DIRECTORY"/proot-setup
 
+# carry options over to globals to complete setup
+
+cat << FILE >> "$BINARIES_DIRECTORY"/globals
+
+# options #
+
+export install_option="${install_option}"
+export display_output="${display_output}"
+FILE
+
 # cleanup #
 
 # purge all setup traces:
 # use BASH_SROUCE for all bash-specific invocations to the script path:
 # $0 is POSIX compliant and may not always return the correct value.
 
-# rm "$INITIAL_DIRECTORY"/${BASH_SOURCE[0]}
-# rm "$BINARIES_DIRECTORY"/globals
+rm "$INITIAL_DIRECTORY"/${BASH_SOURCE[0]}
 
 # automatic proot setup transition:
-# run 'proot-launch' as 'root' default and carry over setup in proot environment
+# run 'proot-launch' as 'root'
+# and carry over setup in proot environment
 
 $BINARIES_DIRECTORY/bash -c 'proot-launch'
