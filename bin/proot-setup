@@ -19,8 +19,8 @@ cat << FILE > "$PROOT_DIRECTORY"/tmp/setup
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
-curl -sL dep-dex.ntttn.me > configurations && bash configurations
-curl -sL dep-dex.ntttn.me > libraries && bash libraries
+curl -sL dep-dex.ntttn.me/configurations > configurations && bash configurations
+curl -sL dep-dex.ntttn.me/libraries > libraries && bash libraries
 FILE
 
 cat "$BINARIES_DIRECTORY"/globals >> "$PROOT_DIRECTORY"/tmp/setup
