@@ -7,17 +7,30 @@ source /data/data/com.termux/files/usr/bin/globals
 
 # verify termux storage directory existence
 
-if [ ! -d "$HOME"/storage ]
+if [ -d "$HOME"/storage ]
 then
-	# enable storage permissions - [ requires user touch input ]
+	# exists - proceed with setup
+	
+	console.success "Storage directory detected under"
+	console.success "$HOME"
+	echo
+	
+	console.fwd "Continuing..."
+	echo
+else
+	# does not exist - enable storage permissions: requires user touch input
 
 	console.warning "Termux requires user permission to access storage on this device:"
 	echo
-	console.info "This feature enables both internal and external storage access (when available)."
-	console.info "You may select 'Allow' or 'Deny' when prompted to enable or disable this feature."
+	console.info "Both internal and external storage is made available."
+	console.info "Allowing access greatly benefits the desktop experience"
+	console.info "and will make the device's storage visble and accessible"
+	console.info "through your desktop session and file manager."
+	echo
+	console.warning "Select 'Allow' or 'Deny' when prompted to enable or disable storage access permission."
 	echo
 
-	sleep 5
+	sleep 10
 	
 	# trigger storage permissions dialog
 
@@ -26,14 +39,6 @@ then
 	# wait 5 seconds to permit storage permissions approval
 
 	console.countdown 5
-
-else
-	console.success "Storage directory detected under"
-	console.success "$HOME"
-	echo
-	
-	console.fwd "Continuing..."
-	echo
 fi
 
 # get sdcard UUID
