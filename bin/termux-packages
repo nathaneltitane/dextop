@@ -63,7 +63,7 @@ do
 		console.warning "Required package '${package}' not present."
 		echo
 
-		echo yes | apt install ${package} &
+		echo yes | apt install ${package} > /dev/null &
 		echo
 		
 		console.progress "Installing..."
