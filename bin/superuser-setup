@@ -26,7 +26,7 @@ sudo_id=$(cat /etc/group | grep sudo | cut -d : -f 3)
 # set defaults
 # pass sudo GID default (27) if 'sudo' group is not setup
 
-if [ -z "$sudo_id" ] && sudo_id=27
+[ -z "$sudo_id" ] && sudo_id=27
 
 # verify that 'sudo' is installed:
 # required for the presence of /etc/sudoers* file and directory
