@@ -218,8 +218,8 @@ console.spinner () {
 	spinner_1="+×"
 	spinner_2="/—\|"
 	spinner_4="◸◹◿◺"
-	spinner_5="◜◝◞◟"
-	spinner_6="◰◳◲◱"
+	spinner_5="◰◳◲◱"
+	spinner_6="◜◝◞◟"
 	spinner_7="◴◷◶◵"
 	spinner_8="◑◒◐◓"
 	
