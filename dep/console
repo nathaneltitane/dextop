@@ -225,7 +225,7 @@ console.spinner () {
 	
 	# parse spinner
 	
-	spinner="${spinner_1}"
+	spinner="${spinner_4}"
 	before="[ "
 	after="]"
 	message="$1"
