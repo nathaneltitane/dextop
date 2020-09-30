@@ -16,7 +16,9 @@ script=$(basename -- "${BASH_SOURCE[0]}")p
 console.info "Updating repository and package information."
 echo
 
-apt update
+apt update >> "${PREFIX}"/var/log/"${script}".log 2>&1 &
+
+console.spinner "Updating..."
 echo
 
 # upgrade installed packages
@@ -24,7 +26,9 @@ echo
 console.info "Upgrading installed packages."
 echo
 
-echo yes | apt upgrade
+echo yes | apt upgrade >> "${PREFIX}"/var/log/"${script}".log 2>&1 &
+
+console.spinner "Upgrading..."
 echo
 
 # packages #
@@ -105,4 +109,7 @@ done
 
 # cleanup
 
-apt clean
+apt clean >> "${PREFIX}"/var/log/"${script}".log 2>&1 &
+
+console.spinner "Cleaning...
+echo"

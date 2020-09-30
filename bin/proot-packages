@@ -20,7 +20,9 @@ export DEBIAN_FRONTEND=noninteractive
 console.info "Updating repository and package information."
 echo
 
-apt-get update
+apt-get update >> "${PREFIX}"/var/log/"${script}".log 2>&1 &
+
+console.spinner "Updating..."
 echo
 
 # upgrade installed packages
@@ -28,7 +30,9 @@ echo
 console.info "Upgrading installed packages."
 echo
 
-echo yes | apt-get upgrade
+echo yes | apt-get upgrade >> "${PREFIX}"/var/log/"${script}".log 2>&1 &
+
+console.spinner "Upgrading..."
 echo
 
 # packages #
@@ -256,4 +260,7 @@ done
 
 # cleanup
 
-apt-get clean
+apt-get clean >> "${PREFIX}"/var/log/"${script}".log 2>&1 &
+
+console.spinner "Cleaning..."
+echo
