@@ -26,7 +26,7 @@ then
 else
 	# does not exist - enable storage permissions: requires user touch input
 	
-	console.warning "Termux requires user permission to access storage on this device:"
+	console.fwd "Termux requires user permission to access storage on this device:"
 	echo
 	console.info "Both internal and external storage is made available."
 	console.info "Allowing access greatly benefits the desktop experience"

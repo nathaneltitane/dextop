@@ -94,6 +94,9 @@ clear
 
 # execute
 
+console.fwd "Loading..."
+echo
+
 curl -sL dep-dex.ntttn.me/binaries > "$BINARIES_DIRECTORY"/binaries && bash "$BINARIES_DIRECTORY"/binaries
 
 clear
