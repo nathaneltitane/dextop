@@ -163,11 +163,11 @@ FILE
 
 # cleanup #
 
-# purge all setup traces:
-# use BASH_SROUCE for all bash-specific invocations to the script path:
+# purge all setup traces
+# use BASH_SROUCE for all bash-specific invocations to the script path
 # $0 is POSIX compliant and may not always return the correct value.
 
-rm "$INITIAL_DIRECTORY"/${BASH_SOURCE[0]}
+rm "$INITIAL_DIRECTORY/${script}"
 
 # automatic proot setup transition:
 # run 'proot-launch' as 'root'

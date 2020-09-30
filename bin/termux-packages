@@ -93,9 +93,6 @@ do
 		
 		console.spinner "Installing [ ${package} ]..."
 		echo
-		
-
-
 	else
 		console.success "Required package '${package}' already installed."
 		echo
@@ -111,5 +108,5 @@ done
 
 apt clean >> "${PREFIX}"/var/log/"${script}".log 2>&1 &
 
-console.spinner "Cleaning...
-echo"
+console.spinner "Cleaning..."
+echo

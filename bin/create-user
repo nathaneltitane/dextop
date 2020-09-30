@@ -21,15 +21,17 @@ first_name=${1}
 last_name=${2}
 user_name=${first_name,,}
 
-uid=$(id -u ${user_name})
-gid=$(id -g ${user_name})
-
 # add user
 
 console.info "Creating user account."
 echo
 
 useradd -m -s "$SHELL" ${user_name}
+
+# get IDs
+
+uid=$(id -u ${user_name})
+gid=$(id -g ${user_name})
 
 # home #
 

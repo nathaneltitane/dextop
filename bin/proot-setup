@@ -25,8 +25,19 @@ cat << FILE > "$PROOT_DIRECTORY"/tmp/setup
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
-curl -sL dep-dex.ntttn.me/configurations > "$BINARIES_DIRECTORY"/configurations && bash "$BINARIES_DIRECTORY"/configurations
-curl -sL dep-dex.ntttn.me/libraries > "$BINARIES_DIRECTORY"/libraries && bash "$BINARIES_DIRECTORY"/libraries
+# source
+
+curl -sL dep-dex.ntttn.me/configurations > "$BINARIES_DIRECTORY"/configurations
+curl -sL dep-dex.ntttn.me/libraries > "$BINARIES_DIRECTORY"/libraries
+
+# execute
+
+chmod +x "$BINARIES_DIRECTORY"/configurations && bash "$BINARIES_DIRECTORY"/configurations
+chmod +x "$BINARIES_DIRECTORY"/libraries && bash "$BINARIES_DIRECTORY"/libraries
+
+# variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
 FILE
 
 cat "$BINARIES_DIRECTORY"/globals >> "$PROOT_DIRECTORY"/tmp/setup
@@ -72,14 +83,6 @@ echo
 
 "$BINARIES_DIRECTORY"/user-preferences
 
-# configurations
-
-"$BINARIES_DIRECTORY"/configurations
-
-# libraries
-
-"$BINARIES_DIRECTORY"/libraries
-
 # checkpoint #
 
 # write checkpoint to confirm uinterrupted setup
@@ -97,8 +100,8 @@ echo
 
 # cleanup #
 
-# purge all setup traces:
-# use BASH_SROUCE for all bash-specific invocations to the script path:
+# purge all setup traces
+# use BASH_SROUCE for all bash-specific invocations to the script path
 # $0 is POSIX compliant and may not always return the correct value.
 
 if [[ "$(cat /tmp/setup-complete)" = "yes" ]]
@@ -109,7 +112,7 @@ then
 
 	# remove script
 
-	rm ${BASH_SOURCE[0]}
+	rm "${script}"
 
 	# cleanup /tmp
 
