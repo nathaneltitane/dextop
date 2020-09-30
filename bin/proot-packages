@@ -239,7 +239,6 @@ do
 		# use 'apt-get install --no-install-recommends' to keep bloat to a minimum
 		
 		echo yes | apt-get install --no-install-recommends ${package} >> "${PREFIX}"/var/log/"${script}".log 2>&1 &
-		echo
 		
 		console.spinner "Installing [ ${package} ]..."
 		echo
@@ -247,6 +246,7 @@ do
 	else
 		console.success "Required package '${package}' already installed."
 		echo
+		
 		console.fwd "Continuing..."
 		echo
 

@@ -46,8 +46,24 @@ sound_list=(
 )
 
 termux_list=(
-	termux-*
-	*-repo
+	termux-am
+	termux-api
+	termux-apt-repo
+	termux-auth
+	termux-create-package
+	termux-elf-cleaner
+	termux-exec
+	termux-keyring
+	termux-licenses
+	termux-services
+	termux-tools
+	game-repo
+	root-repo
+	science-repo
+	termux-apt-repo
+	unstable-repo
+	x11-repo
+	
 )
 
 install_list=(
@@ -70,7 +86,6 @@ do
 		echo
 
 		echo yes | apt install ${package} >> "${PREFIX}"/var/log/"${script}".log 2>&1 &
-		echo
 		
 		console.spinner "Installing [ ${package} ]..."
 		echo
@@ -80,6 +95,7 @@ do
 	else
 		console.success "Required package '${package}' already installed."
 		echo
+		
 		console.fwd "Continuing..."
 		echo
 
