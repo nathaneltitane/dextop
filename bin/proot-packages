@@ -235,13 +235,15 @@ do
 	then
 		console.warning "Required package '${package}' not present."
 		echo
-		console.fwd "Installing..."
-		echo
 
 		# use 'apt-get install --no-install-recommends' to keep bloat to a minimum
-
-		echo yes | apt-get install --no-install-recommends ${package}
+		
+		echo yes | apt-get install --no-install-recommends ${package} >> "${PREFIX}"/var/log/"${script}".log 2>&1 &
 		echo
+		
+		console.spinner "Installing [ ${package} ]..."
+		echo
+		
 	else
 		console.success "Required package '${package}' already installed."
 		echo
