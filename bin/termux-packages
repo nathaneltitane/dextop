@@ -62,10 +62,11 @@ do
 	then
 		console.warning "Required package '${package}' not present."
 		echo
-		console.stp "Installing..."
-		echo
 
-		echo yes | apt install ${package}
+		echo yes | apt install ${package} &
+		echo
+		
+		console.progress "Installing..."
 		echo
 
 	else

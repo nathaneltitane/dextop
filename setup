@@ -86,6 +86,8 @@ BINARIES_DIRECTORY="${PREFIX}"/bin
 curl -sL dep-dex.ntttn.me/console > "$BINARIES_DIRECTORY"/console && source "$BINARIES_DIRECTORY"/console
 curl -sL dep-dex.ntttn.me/globals > "$BINARIES_DIRECTORY"/globals && source "$BINARIES_DIRECTORY"/globals
 
+clear
+
 # execute
 
 curl -sL dep-dex.ntttn.me/binaries > "$BINARIES_DIRECTORY"/binaries && bash "$BINARIES_DIRECTORY"/binaries
