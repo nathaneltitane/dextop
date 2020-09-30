@@ -1,3 +1,21 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# usage #
+
+# variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# write configuration file
+
+cat <<- 'FILE' > "$PROOT_DIRECTORY"/home/"$user_name"/.config/i3status/config
+# i3status configuration #
+
 general {
 	output_format = "i3bar"
 	
@@ -107,3 +125,4 @@ tztime local {
 	format = "%time"
 	format_time = "[ %Y-%m-%d | %H:%M:%S ]"
 }
+FILE

@@ -5,6 +5,12 @@
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
+# usage #
+
+# variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")p
+
 # update packages list
 
 console.info "Updating repository and package information."
@@ -63,7 +69,7 @@ do
 		console.warning "Required package '${package}' not present."
 		echo
 
-		echo yes | apt install ${package} >> "${PREFIX}"/var/log/linux-dextop.log 2>&1 &
+		echo yes | apt install ${package} >> "${PREFIX}"/var/log/"${script}".log 2>&1 &
 		echo
 		
 		console.spinner "Installing [ ${package} ]..."

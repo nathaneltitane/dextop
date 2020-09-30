@@ -5,11 +5,15 @@
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
-# use /etc/os-release to read distribution $NAME
+# /etc/os-release: source distribution codename variables (e.g. $NAME)
 
 source /etc/os-release
 
+# usage #
+
 # variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
 
 PORT="590${DISPLAY:1}"
 

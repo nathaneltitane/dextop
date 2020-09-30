@@ -5,6 +5,12 @@
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
+# usage #
+
+# variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
 # get user information
 
 console.warning "The following information is required to set up your environment:"

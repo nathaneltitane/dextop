@@ -19,8 +19,9 @@ refresh () {
 
 # variables #
 
-settings_file="${1}"
+script=$(basename -- "${BASH_SOURCE[0]}")
 
+settings_file="${1}"
 user="$(whoami)"
 
 # write settings

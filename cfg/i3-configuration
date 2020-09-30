@@ -5,6 +5,12 @@
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
+# usage #
+
+# variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
 # write configuration file
 
 cat <<- 'FILE' > "$PROOT_DIRECTORY"/home/"$user_name"/.config/i3/config

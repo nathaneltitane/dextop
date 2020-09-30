@@ -5,7 +5,11 @@
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
-# variables
+# usage #
+
+# variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
 
 distribution_name="ubuntu"
 distribution_version="20.04.1"
