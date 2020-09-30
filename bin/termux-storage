@@ -58,17 +58,12 @@ mkdir -p "$SETUP_DIRECTORY"/storage
 
 ln -s -f /storage/emulated/0 "$SETUP_DIRECTORY"/storage/internal || :
 	
-# get sdcard UUID
+# match sdcard UUID
+# use regular expression to match label XXXX-XXXX
 
-if [ -e "$HOME"/storage/external* ]
-then
-	# find sdcard UUID
-	# use formatting expression to match XXXX-XXXX
+sd_uuid=$(echo $(ls /storage | sed -r '/[A0-Z9][-][A0-Z9]/!d'))
 
-	sd_uuid=$(echo $(ls /storage | sed -r '/[A0-Z9][-][A0-Z9]/!d'))
-fi
-
-if [ ! -z "$sd_uuid" ]
+if [ ! -z "${sd_uuid}" ]
 then
 	console.success "External storage found:"
 	console.info "UUID:......: ${sd_uuid}"
