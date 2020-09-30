@@ -97,8 +97,10 @@ clear
 console.sankaku "[ Linux on Android - Termux Dextop // Ubuntu Dextop [ Version ${version} ] ]"
 echo
 
-console.fwd "Initializing setup..."
+console.fwd "Initializing setup [ termux ]..."
 echo
+
+sleep 3
 
 # setup #
 
@@ -167,6 +169,8 @@ FILE
 # use BASH_SROUCE for all bash-specific invocations to the script path
 # $0 is POSIX compliant and may not always return the correct value.
 
+# remove script
+
 rm "$INITIAL_DIRECTORY/${script}"
 
 # automatic proot setup transition:
@@ -175,5 +179,7 @@ rm "$INITIAL_DIRECTORY/${script}"
 
 console.info "Entering proot environment."
 echo
+
+sleep 3
 
 $BINARIES_DIRECTORY/bash -c 'proot-launch'

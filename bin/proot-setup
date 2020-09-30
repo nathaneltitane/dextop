@@ -52,8 +52,10 @@ clear
 
 # setup #
 
-console.fwd "Completing setup..."
+console.fwd "Completing setup [ proot ]..."
 echo
+
+sleep 3
 
 # packages
 
@@ -85,18 +87,17 @@ echo
 
 # checkpoint #
 
-# write checkpoint to confirm uinterrupted setup
+# confirm uninterrupted setup for cleanup
 
 echo "yes" > /tmp/setup-complete
-
-console.success "Done."
-echo
 
 console.success "Environment deployment and configuration complete."
 echo
 
 console.fwd "Exiting..."
 echo
+
+sleep 3
 
 # cleanup #
 
@@ -106,11 +107,11 @@ echo
 
 if [[ "$(cat /tmp/setup-complete)" = "yes" ]]
 then
-	# remove last line ['bash /tmp/setup'] from /root/.profile
+	# remove automatic setuap launch
 
 	sed -i '$ d' /root/.profile
 
-	# remove script
+	# remove setup script
 
 	rm "${script}"
 

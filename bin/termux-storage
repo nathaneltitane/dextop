@@ -16,17 +16,16 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 if [ -d "$HOME"/storage ]
 then
 	# exists - proceed with setup
-	
+
 	console.success "Storage directory detected under"
 	console.success "$HOME"
 	echo
-	
+
 	console.fwd "Continuing..."
 	echo
 else
 	# does not exist - enable storage permissions: requires user touch input
 	
-
 	console.warning "Termux requires user permission to access storage on this device:"
 	echo
 	console.info "Both internal and external storage is made available."
@@ -38,9 +37,9 @@ else
 	echo
 
 	sleep 10
-	
+
 	# trigger storage permissions dialog
-	
+
 	# am broadcast	--user 0 \
 	#				--es com.termux.app.reload_style storage \
 	#				-a com.termux.app.reload_style com.termux > /dev/null
