@@ -63,7 +63,7 @@ do
 		console.warning "Required package '${package}' not present."
 		echo
 
-		echo yes | apt install ${package} >> /dev/null 2>&1 &
+		echo yes | apt install ${package} >> "${PREFIX}"/var/log/linux-dextop.log 2>&1 &
 		echo
 		
 		console.progress "Installing [ ${package} ]..."
