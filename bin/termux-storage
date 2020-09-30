@@ -19,6 +19,7 @@ then
 	echo
 else
 	# does not exist - enable storage permissions: requires user touch input
+	
 
 	console.warning "Termux requires user permission to access storage on this device:"
 	echo
@@ -33,22 +34,16 @@ else
 	sleep 10
 	
 	# trigger storage permissions dialog
+	
+	# am broadcast	--user 0 \
+	#				--es com.termux.app.reload_style storage \
+	#				-a com.termux.app.reload_style com.termux > /dev/null
 
 	termux-setup-storage
 
 	# wait 5 seconds to permit storage permissions approval
 
 	console.countdown 5
-fi
-
-# get sdcard UUID
-
-if [ -e "$HOME"/storage/external* ]
-then
-	# find sdcard UUID
-	# use formatting expression to match XXXX-XXXX
-
-	sd_uuid=$(echo $(ls /storage | sed -r '/[A0-Z9][-][A0-Z9]/!d'))
 fi
 
 # remove storage link defaults
@@ -62,6 +57,16 @@ mkdir -p "$SETUP_DIRECTORY"/storage
 # create new symbolic links for bind mounts
 
 ln -s -f /storage/emulated/0 "$SETUP_DIRECTORY"/storage/internal || :
+	
+# get sdcard UUID
+
+if [ -e "$HOME"/storage/external* ]
+then
+	# find sdcard UUID
+	# use formatting expression to match XXXX-XXXX
+
+	sd_uuid=$(echo $(ls /storage | sed -r '/[A0-Z9][-][A0-Z9]/!d'))
+fi
 
 if [ ! -z "$sd_uuid" ]
 then
