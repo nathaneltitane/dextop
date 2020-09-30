@@ -20,6 +20,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 first_name=${1}
 last_name=${2}
 user_name=${first_name,,}
+
 uid=$(id -u ${user_name})
 gid=$(id -g ${user_name})
 
@@ -74,5 +75,5 @@ mkdir -p /run/user/${user_name} -m 700
 
 # set ownership
 
-chown ${uid}:${gid} -R /run/user${uid}
-chown ${uid}:${gid} -R /run/user${user_name}
+chown ${uid}:${gid} -R /run/user/${uid}
+chown ${uid}:${gid} -R /run/user/${user_name}
