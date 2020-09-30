@@ -144,6 +144,7 @@ window_manager_list=(
 	i3status
 	dmenu
 	feh
+	stterm
 	xss-lock
 )
 
