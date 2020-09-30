@@ -77,7 +77,7 @@ set $terminal "xfce4-terminal"
 
 # FIX ME: 
 
-use #313437 as main theme color #
+# use #313437 as main theme color #
 
 # A - border
 # B - background
@@ -278,7 +278,7 @@ bar {
 	binding_mode_indicator yes
 	hidden_state show
 	mode dock
-	modifier $mod
+	modifier $modifier
 	position bottom
 	separator_symbol " + "
 	strip_workspace_name no
