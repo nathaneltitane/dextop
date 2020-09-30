@@ -11,12 +11,30 @@ source /data/data/com.termux/files/usr/bin/globals
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-distribution_name="ubuntu"
-distribution_version="20.04.1"
 proot_launcher="proot-launch"
+distribution_name="ubuntu"
 
-iso_root_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${distribution_version}/release"
-iso_archive="ubuntu-base-${distribution_version}-base-${iso_architecture}.tar.gz"
+# LTS versions only
+
+distribution_codename="focal"
+distribution_version="20.04.1"
+
+# base image
+
+if [[ "$image_type" = "base" ]]
+then
+	iso_root_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${distribution_version}/release"
+	iso_archive="ubuntu-base-${distribution_version}-base-${iso_architecture}.tar.gz"
+fi
+
+# server image
+
+if [[ "$image_type" = "server" ]]
+then
+	iso_root_url="http://cdimage.ubuntu.com/ubuntu/releases/${distribution_codename}/release"
+	iso_archive="ubuntu-${distribution_version}-live-server-${iso_architecture}.iso"
+fi
+
 iso_url="$iso_root_url/$iso_archive"
 
 # set defaults

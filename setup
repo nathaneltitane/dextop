@@ -9,32 +9,34 @@
 while (($#))
 do
 	case "$1" in
-		-b|--base)
-			install_option="base"
-			;;
 		-f|--full)
 			install_option="full"
 			;;
 		-m|--minimal)
 			install_option="minimal"
 			;;
-		-c|--vnc)
+		-n|--vnc)
 			display_output="vnc"
 			;;
 		-x|--xorg)
 			display_output="xorg"
 			;;
+		-b|--base)
+			image_type="base"
+			;;
+		-s|--server)
+			image_type="server"
+			;;
 		-h|--help)
 			echo -e ""
 			echo -e "USAGE:"
 			echo -e ""
-			echo -e "-b, --base \t Base setup: download and unpack root filesystem and utilities."
 			echo -e "-f, --full \t Full setup: download and install full desktop environment and utilities."
 			echo -e "-m, --minimal \t Minimal setup: download and install minimal set of utilities:."
 			echo -e " \t\t Note:"
 			echo -e " \t\t this option is ideal for running specific applications and their dependencies only."
 			echo -e ""
-			echo -e "-c , --vnc: \t Download and setup vnc protocol display output. [ Default - vnc display when no option is selected ]"
+			echo -e "-n , --vnc: \t Download and setup vnc protocol display output. [ Default - vnc display when no option is selected ]"
 			echo -e "-x , --xorg: \t Download and setup xorg/xrdp protocol display output."
 			echo -e ""
 			echo -e "-h, --help \t Show help and usage."
@@ -68,11 +70,13 @@ version="10-01-2020"
 
 install_option=$1
 display_output=$2
+image_type=$3
 
 # set defaults
 
 [ -z $install_option ] && install_option="minimal"
 [ -z $display_output ] && display_output="vnc"
+[ -z $image_type ] && image_type="base"
 
 # set globals
 
@@ -161,6 +165,7 @@ cat << FILE >> "$BINARIES_DIRECTORY"/globals
 
 export install_option="${install_option}"
 export display_output="${display_output}"
+export image_type="${image_type}"
 FILE
 
 # cleanup #
