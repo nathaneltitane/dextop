@@ -33,7 +33,8 @@ fi
 
 # symbols #
 
-
+#	⋀⋁
+#	△▷▽◁
 
 # markers
 
@@ -47,7 +48,7 @@ marker_bako='[ □ ]'
 marker_no='[ ✕ ]'
 marker_question='[ ? ]'
 marker_rev='[ < ]'
-marker_sankaku='[ △ ]'		# △▷▽◁
+marker_sankaku='[ △ ]'
 marker_stp='[ - ]'
 marker_upload='[ ⋀ ]'
 marker_warning='[ ! ]'
@@ -214,22 +215,17 @@ console.spinner () {
 
 	# spinner string content
 
-	spinner_sq_1="◫◨◧■"s
-	pinner_sq_2="◩◪"
-	spinner_di_1="◇□"
-	spinner_di_2="◆■"
 	spinner_1="+×"
 	spinner_2="/—\|"
-	spinner_3="⋮⋰⋯⋱"
 	spinner_4="◸◹◿◺"
 	spinner_5="◜◝◞◟"
 	spinner_6="◰◳◲◱"
 	spinner_7="◴◷◶◵"
-	spinner_8="○◑◒◐◓●"
+	spinner_8="◑◒◐◓"
 	
-	# spinner parsing
+	# parse spinner
 	
-	spinner="${spinner_8}"
+	spinner="${spinner_1}"
 	before="[ "
 	after="]"
 	message="$1"
@@ -246,11 +242,3 @@ console.spinner () {
 
 	echo
 }
-
-# math
-#
-#<>
-#⋀⋁
-#
-#
-#
