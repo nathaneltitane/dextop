@@ -58,27 +58,35 @@ mkdir -p "$SETUP_DIRECTORY"/storage
 
 ln -s -f /storage/emulated/0 "$SETUP_DIRECTORY"/storage/internal || :
 	
-# match sdcard UUID
-# use regular expression to match label XXXX-XXXX
+# use regular expression to match label UUID 'XXXX-XXXX'
 
-sd_uuid=$(echo $(ls /storage | sed -r '/[A0-Z9][-][A0-Z9]/!d'))
+external_storage=$(echo $(ls /storage | sed -r '/[A0-Z9][-][A0-Z9]/!d'))
 
-if [ ! -z "${sd_uuid}" ]
+if [ ! -z "${external_storage}" ]
 then
-	console.success "External storage found:"
-	console.info "UUID:......: ${sd_uuid}"
+	console.success "External storage mounted under /storage."
+	console.info "UUID:......: ${external_storage}"
 	echo
 	
 	console.fwd "Linking..."
 	echo
 
-	ln -s -f /storage/"${sd_uuid}" "$SETUP_DIRECTORY"/storage/external || :
+	ln -s -f /storage/"${external_storage}" "$SETUP_DIRECTORY"/storage/external || :
 
 else
-	console.error "External storage not found or not present:"
-	console.info "Could not find extrernal storage media mounted under /storage."
+	console.error "No extrernal storage media mounted under /storage."
 	echo
 	
 	console.fwd "Continuing..."
 	echo
 fi
+
+# export variables
+
+cat << FILE >> "$BINARIES_DIRECTORY"/globals
+
+# storage #
+
+export external_storage=${external_storage}
+
+FILE
