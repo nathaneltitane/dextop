@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# images #
+
+images_list=(
+	bird.png
+	bird.svg
+)
+
+# download #
+
+for image in ${images_list[@]}
+do
+	image_url=lib-dex.ntttn.me/"$image"
+
+	curl -sL ${image_url} > "$PROOT_DIRECTORY"/usr/share/backgrounds/"$image"
+
+	console.download "Downloading image [ $image ]."
+	echo
+
+done

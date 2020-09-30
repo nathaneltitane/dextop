@@ -179,7 +179,7 @@ FILE
 
 # remove script
 
-rm "$INITIAL_DIRECTORY/${script}"
+rm "$INITIAL_DIRECTORY/${script}" || :
 
 # automatic proot setup transition:
 # run 'proot-launch' as 'root'

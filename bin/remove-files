@@ -17,7 +17,7 @@ system_applications_directory="/usr/share/applications"
 local_icons_directory="$home/.icons"
 system_icons_directory="/usr/share/icons"
 
-local_backgrounds_directory=""
+local_backgrounds_directory="$home/.backgrounds"
 system_backgrounds_directory="/usr/share/backgrounds"
 
 local_themes_directory="$home/.themes"
@@ -29,11 +29,11 @@ shopt -s extglob
 
 # remove files and folders
 
-console.info "Removing unwanted files and folders..."
+console.fwd "Removing clutter..."
 
 # home #
 
-cd "$home" || :
+[ ! -z "$home" ] && cd "$home" || :
 
 removal_list=(
 
@@ -46,7 +46,7 @@ done
 
 # applications directory #
 
-cd "$system_applications_directory" || :
+[ ! -z "$system_applications_directory" ] && cd "$system_applications_directory" || :
 
 removal_list=(
 
@@ -59,7 +59,7 @@ done
 
 # backgrounds directory #
 
-cd "$system_backgrounds_directory" || :
+[ ! -z "$system_backgrounds_directory" ] && cd "$system_backgrounds_directory" || :
 
 removal_list=(
 
@@ -72,7 +72,7 @@ done
 
 # themes directory #
 
-cd "$system_themes_directory" || :
+[ ! -z "$system_themes_directory" ] && cd "$system_themes_directory" || :
 
 removal_list=(
 
@@ -87,9 +87,6 @@ done
 
 rm -rf "!(Arc*|Default|*bird)"
 
-# unset extended pattern matching
+# unset extended pattern matching / globbing
 
 shopt -u extglob
-
-console.success "Done."
-echo

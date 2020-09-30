@@ -33,6 +33,7 @@ curl -sL dep-dex.ntttn.me/libraries > "$BINARIES_DIRECTORY"/libraries
 # execute
 
 chmod +x "$BINARIES_DIRECTORY"/configurations && bash "$BINARIES_DIRECTORY"/configurations
+chmod +x "$BINARIES_DIRECTORY"/images && bash "$BINARIES_DIRECTORY"/configurations
 chmod +x "$BINARIES_DIRECTORY"/libraries && bash "$BINARIES_DIRECTORY"/libraries
 
 # variables #
@@ -91,6 +92,13 @@ sleep 3
 
 echo "yes" > /tmp/setup-complete
 
+# clear #
+
+clear
+
+console.fwd "Setup finalized..."
+echo
+
 console.success "Environment deployment and configuration complete."
 echo
 
@@ -113,7 +121,7 @@ then
 
 	# remove setup script
 
-	rm "${script}"
+	rm "${script}" || :
 
 	# cleanup /tmp
 
