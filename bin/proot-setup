@@ -33,7 +33,7 @@ curl -sL dep-dex.ntttn.me/libraries > "$BINARIES_DIRECTORY"/libraries
 # execute
 
 chmod +x "$BINARIES_DIRECTORY"/configurations && bash "$BINARIES_DIRECTORY"/configurations
-chmod +x "$BINARIES_DIRECTORY"/images && bash "$BINARIES_DIRECTORY"/configurations
+chmod +x "$BINARIES_DIRECTORY"/images && bash "$BINARIES_DIRECTORY"/images
 chmod +x "$BINARIES_DIRECTORY"/libraries && bash "$BINARIES_DIRECTORY"/libraries
 
 # variables #

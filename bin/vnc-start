@@ -105,6 +105,7 @@ print_resolutions() {
 	
 	# prepend list with default / custom entries
 	
+	printf '\n'
 	printf '\t[  D ] Default\n'
 	printf '\t[  C ] Custom\n'
 	printf '\n'
@@ -132,8 +133,6 @@ print_resolutions() {
 			printf '%*s' $((pad_length - ${#format}))
 			printf '%s\n' $resolution
 	done
-	
-	echo
 }
 
 # show selection
