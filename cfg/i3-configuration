@@ -89,24 +89,10 @@ set $terminal "xfce4-terminal"
 
 client.focused				#000000	#000000 #FFFFFF	#FFFFFF	#000000
 client.focused_inactive		#000000	#000000 #666666	#666666	#000000
-client.unfocused			#000000	#666666 #000000	#000000	#000000
+client.unfocused			#666666	#666666 #000000	#000000	#666666
 client.urgent				#000000	#000000 #FF0000	#FF0000	#000000
 client.placeholder			#000000	#000000 #815FA3	#815FA3	#000000
 client.background			#000000
-
-bar {
-	colors {
-		background			#000000
-		statusline			#FFFFFF
-		separator			#666666
-		
-		focused_workspace	#000000	#000000	#FFFFFF
-		active_workspace	#000000	#000000	#FFFFFF
-		inactive_workspace	#000000	#000000	#666666
-		urgent_workspace	#000000	#000000	#FF0000
-		binding_mode		#000000	#000000	#815FA3
-	}
-}
 
 # windows #
 
@@ -167,13 +153,13 @@ bindsym $modifier+Shift+Down move down
 bindsym $modifier+Shift+Up move up
 bindsym $modifier+Shift+Right move right
 
-# horizontal split - vertical layout
+# horizontal split - vertical layout [ top | bottom ]
 
-bindsym $modifier+h split h
+bindsym $modifier+v split h
 
-# vertical split - horizontal layout
+# vertical split - horizontal layout [ side | side ]
 
-bindsym $modifier+v split v
+bindsym $modifier+h split v
 
 # toggle floating
 
@@ -274,6 +260,20 @@ bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 
 bar {
+	colors {
+		background			#000000
+		statusline			#FFFFFF
+		separator			#666666
+		
+		focused_workspace	#000000	#000000	#FFFFFF
+		active_workspace	#000000	#000000	#FFFFFF
+		inactive_workspace	#000000	#000000	#666666
+		urgent_workspace	#000000	#000000	#FF0000
+		binding_mode		#000000	#000000	#815FA3
+	}
+
+	status_command $status
+
 	font pango:Sans Regular 10
 	binding_mode_indicator yes
 	hidden_state show
