@@ -24,11 +24,10 @@ general {
 	color_good = '#2f343f'
 	color_separator = '#ffffff'
 	colors = true
-	interval = 5
+	interval = 1
 	markup = pango
 
 }
-
 
 order += "cpu_temperature 0"
 order += "cpu_temperature 1"
@@ -40,9 +39,8 @@ order += "cpu_temperature 6"
 order += "cpu_temperature 7"
 order += "disk /"
 order += "memory"
-order += "tztime local"
 order += "battery 0"
-
+order += "tztime local"
 
 battery 0 {
 	format = "[ %status • %percentage ]"
@@ -52,7 +50,7 @@ battery 0 {
 	low_threshold = 15
 	format_down = "X"
 	status_chr = "C"
-	status_bat = " B"
+	status_bat = "B"
 	status_unk = "?"
 	status_full = "F"
 }
@@ -109,6 +107,6 @@ memory {
 
 tztime local {
 	format = "%time"
-	format_time = "[ %Y-%m-%d • %H:%M:%S ]"
+	format_time = "[ %Y-%m-%d • %H:%M:%S ] "
 }
 FILE
