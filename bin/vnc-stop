@@ -13,17 +13,16 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # check for PID and kill / cleanup
 
-if pgrep -f vnc > /dev/null
+if [ ! -z "$(pgrep -f vnc)" ]
 then
-		echo
-		console.fwd "Stopping display server..."
-		echo
+	# kill active and stale vnc output processes
 
-		# kill active and stale vnc output processes
+	vncserver -kill :* >> "${PREFIX}"/var/log/"${script}".log 2>&1 &
+	
+	console.spinner "Stopping display server..."
+	echo
 
-		vncserver -kill :* > /dev/null 2>&1
+	# clean display server runtime files
 
-		# clean display server runtime files
-
-		rm -rf /tmp/.X*
+	rm -rf /tmp/.X*
 fi

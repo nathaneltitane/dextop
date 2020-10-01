@@ -24,7 +24,7 @@ vnc () {
 				-depth 32 \
 				-cleanstale \
 				-name $NAME \
-				-geometry ${GEOMETRY} ${DISPLAY} > /dev/null 2>&1
+				-geometry ${GEOMETRY} ${DISPLAY} >> "${PREFIX}"/var/log/"${script}".log 2>&1
 
 				# 'vncserver' uses $DISPLAY instead of $PORT
 
@@ -53,7 +53,7 @@ vnc () {
 
 		# start android vnc intent after establishing connection
 
-		am start -d vnc://${LOCALHOST}:${PORT} > /dev/null 2>&1
+		am start -d vnc://${LOCALHOST}:${PORT} >> "${PREFIX}"/var/log/"${script}".log 2>&1
 }
 
 print_resolutions() {

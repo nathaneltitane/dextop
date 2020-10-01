@@ -37,7 +37,7 @@ done
 
 # hash password input using 'vncpasswd' utility and store in
 
-echo "$password" | /usr/bin/vncpasswd -f > "$HOME"/.vnc/passwd
+echo "$password" | vncpasswd -f > "$HOME"/.vnc/passwd
 
 console.success "VNC password changed."
 echo
