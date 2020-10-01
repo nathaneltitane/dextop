@@ -11,31 +11,84 @@ source /data/data/com.termux/files/usr/bin/globals
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-console.input "Enter VNC password: "
-read -r input
-echo
+# values #
 
+input_list=(
+	vnc_password
+)
 
-# prevent empty input values
-
-while true
+for value in "${input_list[@]}"
 do
-	if [ -z "$input" ]
+	console.input "$(echo ${value^} | sed 's/_/ /')...: "
+
+	# obfuscate password using prompt variable
+	# when $value=user_password
+
+	if [[ "$value" = vnc_password ]]
 	then
-		console.warning "Input cannot be empty:"
-		console.warning "Password is required for a successful setup."
-		echo
+		unset password
 
-		read -r input
-		echo
+		while IFS= read -p "$prompt" -r -s -n 1 character
+		do
+				# enter / accept password
+
+				if [[ $character == $'\0' ]]
+				then
+					# break on 'NUL'
+
+					break
+				fi
+
+				# handle backspace / delete character input
+
+				if [[ $character == $'\177' ]]
+				then
+					# remove input on 'BACKSPACE'/'DEL'
+
+					prompt=$'\b \b'
+					password="${password%?}"
+				else
+					# set character mask
+
+					prompt='+'
+					password+="$character"
+				fi
+		done
 	else
-		eval password="$input"
-
-		break
+		read -r input
 	fi
+
+	# set input for evaluation
+
+	input="${password}"
+	
+	# prevent empty input values
+
+	while true
+	do
+		if [ -z "$input" ]
+		then
+			console.warning "Input cannot be empty:"
+			console.warning "Values are required for a successful setup."
+			echo
+
+			read -r input
+		else
+			eval "$value"="$input"
+
+			break
+		fi
+	done
 done
 
-# hash password input using 'vncpasswd' utility and store in
+# unset IFS
+
+IFS=''
+
+echo
+echo
+
+# hash password  using 'vncpasswd' utility and store it
 
 echo "$password" | vncpasswd -f > "$HOME"/.vnc/passwd
 

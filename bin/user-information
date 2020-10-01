@@ -87,7 +87,6 @@ do
 			break
 		fi
 	done
-	
 done
 
 # unset IFS
