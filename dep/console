@@ -191,6 +191,7 @@ console.choice () {
 
 console.countdown () {
 	seconds=$1
+	
 	shift
 
 	while [ $seconds -gt 0 ]
@@ -198,12 +199,6 @@ console.countdown () {
 		echo -e "\r${marker_warning} WAITING [ ${yellow}$((seconds--))${reset} ] SECONDS...\c"
 
 		sleep 1
-	done
-
-	# additional echo required because of carriage return clear '\c'
-
-	echo
-	echo
 }
 
 # spinner
@@ -232,13 +227,9 @@ console.spinner () {
 
 	i=1
 
-	echo
-
 	while [ -d /proc/$PID ]
 	do
 		echo -ne "\r${before} \b${spinner:i++%${#spinner}:1} ${after} ${message}\c "
 		sleep 0.125
 	done
-
-	echo
 }
