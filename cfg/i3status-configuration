@@ -23,7 +23,7 @@ general {
 	color_degraded = '#ebcb8b'
 	color_good = '#2f343f'
 	color_separator = '#ffffff'
-	colors = false
+	colors = true
 	interval = 5
 	markup = pango
 
@@ -45,7 +45,7 @@ order += "battery 0"
 
 
 battery 0 {
-	format = "[ %status | %percentage ]"
+	format = "[ %status • %percentage ]"
 	path = "/sys/class/power_supply/battery/uevent"
 	last_full_capacity = true
 	threshold_type = percentage
@@ -58,57 +58,57 @@ battery 0 {
 }
 
 cpu_temperature 0 {
-	format = "[ 0 | %degrees °C ]"
+	format = "[ 0 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone0/temp"
 }
 
 cpu_temperature 1 {
-	format = "[ 1 | %degrees °C ]"
+	format = "[ 1 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone1/temp"
 }
 
 cpu_temperature 2 {
-	format = "[ 2 | %degrees °C ]"
+	format = "[ 2 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone2/temp"
 }
 
 cpu_temperature 3 {
-	format = "[ 3 | %degrees °C ]"
+	format = "[ 3 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone3/temp"
 }
 
 cpu_temperature 4 {
-	format = "[ 4 | %degrees °C ]"
+	format = "[ 4 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone4/temp"
 }
 
 cpu_temperature 5 {
-	format = "[ 5 | %degrees °C ]"
+	format = "[ 5 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone5/temp"
 }
 
 cpu_temperature 6 {
-	format = "[ 6 | %degrees °C ]"
+	format = "[ 6 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone6/temp"
 }
 
 cpu_temperature 7 {
-	format = "[ 7 | %degrees °C ]"
+	format = "[ 7 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone7/temp"
 }
 
 disk "/" {
-	format = "\[ SSD %avail \| %total \]"
+	format = "\[ SSD %avail • %total \]"
 }
 
 memory {
-	format = "[ RAM %used / %available ]"
+	format = "[ RAM %used • %available ]"
 	format_degraded = "MEMORY < %available"
 	threshold_degraded = "1G"
 }
 
 tztime local {
 	format = "%time"
-	format_time = "[ %Y-%m-%d + %H:%M:%S ]"
+	format_time = "[ %Y-%m-%d • %H:%M:%S ]"
 }
 FILE
