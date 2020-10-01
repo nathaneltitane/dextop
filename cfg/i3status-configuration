@@ -43,41 +43,57 @@ order += "battery 0"
 cpu_temperature 0 {
 	format = "[ CPU 0 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone0/temp"
+	format_above_threshold = " [ CPU 0 %degress °C + ]"
+	max_threshold = 70
 }
 
 cpu_temperature 1 {
 	format = "[ CPU 1 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone1/temp"
+	format_above_threshold = " [ CPU 1 %degress °C + ]"
+	max_threshold = 70
 }
 
 cpu_temperature 2 {
 	format = "[ CPU 2 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone2/temp"
+	format_above_threshold = " [ CPU 2 %degress °C + ]"
+	max_threshold = 70
 }
 
 cpu_temperature 3 {
 	format = "[ CPU 3 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone3/temp"
+	format_above_threshold = " [ CPU 3 %degress °C + ]"
+	max_threshold = 70
 }
 
 cpu_temperature 4 {
 	format = "[ CPU 4 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone4/temp"
+	format_above_threshold = " [ CPU 4 %degress °C + ]"
+	max_threshold = 70
 }
 
 cpu_temperature 5 {
 	format = "[ CPU 5 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone5/temp"
+	format_above_threshold = " [ CPU 5 %degress °C + ]"
+	max_threshold = 70
 }
 
 cpu_temperature 6 {
 	format = "[ CPU 6 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone6/temp"
+	format_above_threshold = " [ CPU 6 %degress °C + ]"
+	max_threshold = 70
 }
 
 cpu_temperature 7 {
 	format = "[ CPU 7 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone7/temp"
+	format_above_threshold = " [ CPU 7 %degress °C + ]"
+	max_threshold = 70
 }
 
 disk "/" {
