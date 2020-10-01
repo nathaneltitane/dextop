@@ -41,42 +41,42 @@ order += "memory"
 order += "battery 0"
 
 cpu_temperature 0 {
-	format = "[ 0 • %degrees °C ]"
+	format = "[ CPU 0 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone0/temp"
 }
 
 cpu_temperature 1 {
-	format = "[ 1 • %degrees °C ]"
+	format = "[ CPU 1 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone1/temp"
 }
 
 cpu_temperature 2 {
-	format = "[ 2 • %degrees °C ]"
+	format = "[ CPU 2 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone2/temp"
 }
 
 cpu_temperature 3 {
-	format = "[ 3 • %degrees °C ]"
+	format = "[ CPU 3 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone3/temp"
 }
 
 cpu_temperature 4 {
-	format = "[ 4 • %degrees °C ]"
+	format = "[ CPU 4 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone4/temp"
 }
 
 cpu_temperature 5 {
-	format = "[ 5 • %degrees °C ]"
+	format = "[ CPU 5 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone5/temp"
 }
 
 cpu_temperature 6 {
-	format = "[ 6 • %degrees °C ]"
+	format = "[ CPU 6 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone6/temp"
 }
 
 cpu_temperature 7 {
-	format = "[ 7 • %degrees °C ]"
+	format = "[ CPU 7 • %degrees °C ]"
 	path = "/sys/class/thermal/thermal_zone7/temp"
 }
 
