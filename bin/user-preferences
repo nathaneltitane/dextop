@@ -78,15 +78,35 @@ do
 	fi
 done
 
+# create gtk3 bookmarks directory
+
+mkdir -p /home/${user_name}/.config/gtk-3.0
+
 # add bookmarks - gtk3
 
 if [[ -f /home/${user_name}/.gtk-bookmarks ]]
 then
-	# create gtk3 bookmarks directory
-
-	mkdir -p /home/${user_name}/.config/gtk-3.0
-
 	# link gtk2 bookmarks
 
 	ln -s -f /home/${user_name}/.gtk-bookmarks /home/${user_name}/.config/gtk-3.0/bookmarks
 fi
+
+# add settings - gtk3
+
+cat <<- 'FILE' > /home/${user_name}/.config/gtk-3.0/settings.ini
+[Settings]
+gtk-button-images=1
+gtk-cursor-theme-name=Adwaita
+gtk-cursor-theme-size=0
+gtk-enable-event-sounds=0
+gtk-enable-input-feedback-sounds=0
+gtk-font-name=Sans Regular 10
+gtk-icon-theme-name=Adwaita
+gtk-menu-images=1
+gtk-theme-name=Arc-Dark
+gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
+gtk-toolbar-style=GTK_TOOLBAR_BOTH
+gtk-xft-antialias=1
+gtk-xft-hinting=1
+gtk-xft-hintstyle=hintfull
+FILE
