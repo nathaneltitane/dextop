@@ -279,7 +279,7 @@ bar {
 	mode dock
 	modifier $modifier
 	position bottom
-	separator_symbol " ] + [ "
+	separator_symbol " + "
 	strip_workspace_name no
 	strip_workspace_numbers no
 	workspace_buttons yes

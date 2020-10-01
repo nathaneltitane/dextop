@@ -29,7 +29,7 @@ general {
 
 }
 
-order += "tztime local"
+
 order += "cpu_temperature 0"
 order += "cpu_temperature 1"
 order += "cpu_temperature 2"
@@ -40,7 +40,9 @@ order += "cpu_temperature 6"
 order += "cpu_temperature 7"
 order += "disk /"
 order += "memory"
+order += "tztime local"
 order += "battery 0"
+
 
 battery 0 {
 	format = "[ %status | %percentage ]"
@@ -48,11 +50,11 @@ battery 0 {
 	last_full_capacity = true
 	threshold_type = percentage
 	low_threshold = 15
-	format_down = "[ X ]"
-	status_chr = ">>>"
-	status_bat = " [ B ]"
-	status_unk = "[ ? ]"
-	status_full = "[ F ]"
+	format_down = "X"
+	status_chr = "C"
+	status_bat = " B"
+	status_unk = "?"
+	status_full = "F"
 }
 
 cpu_temperature 0 {
@@ -96,17 +98,17 @@ cpu_temperature 7 {
 }
 
 disk "/" {
-	format = "\[ SSD %free \| %avail \| %total \]"
+	format = "\[ SSD %avail \| %total \]"
 }
 
 memory {
-	format = "[ RAM %used | %available ]"
+	format = "[ RAM %used / %available ]"
 	format_degraded = "MEMORY < %available"
 	threshold_degraded = "1G"
 }
 
 tztime local {
 	format = "%time"
-	format_time = "[ %Y-%m-%d | %H:%M:%S ]"
+	format_time = "[ %Y-%m-%d + %H:%M:%S ]"
 }
 FILE
