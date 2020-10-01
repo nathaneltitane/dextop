@@ -69,7 +69,11 @@ do
 	else
 		read -r input
 	fi
+	
+	# set input for evaluation
 
+	input="${value}"
+	
 	# prevent empty input values
 
 	while true
