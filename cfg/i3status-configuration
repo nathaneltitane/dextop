@@ -40,13 +40,7 @@ order += "cpu_temperature 6"
 order += "cpu_temperature 7"
 order += "disk /"
 order += "memory"
-order += "ethernet eth0"
-order += "wireless wlan0"
 order += "battery 0"
-
-load {
-	format = "%5min Load"
-}
 
 battery 0 {
 	format = "[ %status | %percentage ]"
@@ -109,16 +103,6 @@ memory {
 	format = "[ RAM %used | %available ]"
 	format_degraded = "MEMORY < %available"
 	threshold_degraded = "1G"
-}
-
-ethernet eth0 {
-	format_up = "E: (%quality at %essid, %bitrate / %frequency) %ip"
-	format_down = "[ E: Down] "
-}
-
-wireless wlan0 {
-	format_up = "W: (%quality at %essid, %bitrate / %frequency) %ip"
-	format_down = "[ W: Down ]"
 }
 
 tztime local {

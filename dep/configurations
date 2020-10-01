@@ -9,6 +9,7 @@ source /data/data/com.termux/files/usr/bin/globals
 
 configurations_list=(
 	i3-configuration
+	i3status-configuration
 	xfce4-configuration
 )
 
