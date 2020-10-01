@@ -26,7 +26,6 @@ general {
 	colors = true
 	interval = 1
 	markup = pango
-
 }
 
 order += "cpu_temperature 0"
@@ -40,20 +39,6 @@ order += "cpu_temperature 7"
 order += "disk /"
 order += "memory"
 order += "battery 0"
-order += "tztime local"
-
-battery 0 {
-	format = "[ %status • %percentage ]"
-	path = "/sys/class/power_supply/battery/uevent"
-	last_full_capacity = true
-	threshold_type = percentage
-	low_threshold = 15
-	format_down = "X"
-	status_chr = "C"
-	status_bat = "B"
-	status_unk = "?"
-	status_full = "F"
-}
 
 cpu_temperature 0 {
 	format = "[ 0 • %degrees °C ]"
@@ -105,8 +90,16 @@ memory {
 	threshold_degraded = "1G"
 }
 
-tztime local {
-	format = "%time"
-	format_time = "[ %Y-%m-%d • %H:%M:%S ] "
+battery 0 {
+	format = "[ %status • %percentage ] "
+	path = "/sys/class/power_supply/battery/uevent"
+	last_full_capacity = false
+	threshold_type = percentage
+	low_threshold = 15
+	format_down = "X"
+	status_chr = "C"
+	status_bat = "B"
+	status_full = "F"
+	status_unk = "?"
 }
 FILE
