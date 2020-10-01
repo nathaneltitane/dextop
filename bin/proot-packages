@@ -142,6 +142,7 @@ window_manager_list=(
 	i3-wm
 	i3blocks
 	i3status
+	libanyevent-i3-perl
 	dmenu
 	feh
 	stterm
