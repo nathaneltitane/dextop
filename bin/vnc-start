@@ -28,7 +28,6 @@ vnc () {
 
 				# 'vncserver' uses $DISPLAY instead of $PORT
 
-		echo
 		console.fwd "Starting display server..."
 		echo
 
@@ -133,6 +132,8 @@ print_resolutions() {
 			printf '%*s' $((pad_length - ${#format}))
 			printf '%s\n' $resolution
 	done
+	
+	printf '\n'
 }
 
 # show selection

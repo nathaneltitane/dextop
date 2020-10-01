@@ -13,8 +13,9 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # get user information
 
-console.warning "The following information is required to set up your environment:"
+console.fwd "The following information is required to set up your environment."
 echo
+
 console.warning "The information will be used to set up the user account."
 console.warning "The fields cannot be empty."
 echo
@@ -68,8 +69,6 @@ do
 	else
 		read -r input
 	fi
-	
-	echo
 
 	# prevent empty input values
 
@@ -88,8 +87,14 @@ do
 			break
 		fi
 	done
+	
 done
 
+# unset IFS
+
+IFS=''
+
+echo
 echo
 
 # export variables
