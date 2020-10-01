@@ -19,7 +19,6 @@ cat <<- 'FILE' > "$PROOT_DIRECTORY"/home/"$user_name"/.config/i3/config
 # startup #
 
 exec --no-startup-id xsetroot -solid black
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id feh --bg-fill /usr/share/backgrounds/bird.png 
 
 # modifiers #

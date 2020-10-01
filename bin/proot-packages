@@ -145,7 +145,6 @@ window_manager_list=(
 	dmenu
 	feh
 	stterm
-	xss-lock
 )
 
 theme_list=(
