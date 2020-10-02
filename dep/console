@@ -194,11 +194,12 @@ console.countdown () {
 	
 	shift
 
-	while [ $seconds -gt 0 ]
+	while [ ${seconds} -gt 0 ]
 	do
-		echo -e "\r${marker_warning} WAITING [ ${yellow}$((seconds--))${reset} ] SECONDS...\c"
-
+		echo -e "\r${marker_warning} Waiting [ ${yellow}$((seconds--))${reset} ] seconds...\c"
+		
 		sleep 1
+	done
 }
 
 # spinner
@@ -230,6 +231,7 @@ console.spinner () {
 	while [ -d /proc/$PID ]
 	do
 		echo -ne "\r${before} \b${spinner:i++%${#spinner}:1} ${after} ${message}\c "
+		
 		sleep 0.125
 	done
 }
