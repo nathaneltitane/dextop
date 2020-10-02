@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# dependencies #
+
+# usage #
+
+# variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
 # colors #
 
 if [ -z $(command -v tput) ]
@@ -251,4 +259,15 @@ console.get () {
 	destination="$2"
 	
 	curl -sL "${source}" > "${destination}"
+}
+
+console.silence () {
+	command="$1"
+	
+	# use BASH_SROUCE for all bash-specific invocations to the script path
+	# $0 is POSIX compliant but may not always return the correct value
+	
+	script=$(basename -- "${BASH_SOURCE[0]}")
+	
+	"${command}" >> "${PREFIX}"/var/log/"${script}".log 2>&1
 }

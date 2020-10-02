@@ -176,7 +176,7 @@ FILE
 
 # purge all setup traces
 # use BASH_SROUCE for all bash-specific invocations to the script path
-# $0 is POSIX compliant and may not always return the correct value.
+# $0 is POSIX compliant but may not always return the correct value
 
 # remove script
 

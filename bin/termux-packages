@@ -37,6 +37,7 @@ utilities_list=(
 	curl
 	git
 	hub
+	jq
 	nano
 	proot
 )
