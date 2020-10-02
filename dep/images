@@ -16,11 +16,11 @@ images_list=(
 
 for image in ${images_list[@]}
 do
-	image_url=lib-dex.ntttn.me/"$image"
+	image_url=lib-dex.ntttn.me/"${image}"
 
-	curl -sL ${image_url} > "$PROOT_DIRECTORY"/usr/share/backgrounds/"$image"
+	curl -sL ${image_url} > "$PROOT_DIRECTORY"/usr/share/backgrounds/"${image}"
 
-	console.download "Downloading image [ $image ]."
+	console.download "Downloading image [ ${image} ]."
 	echo
 
 done

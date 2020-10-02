@@ -82,7 +82,7 @@ then
 	ln -s -f /storage/"${external_storage}" "$SETUP_DIRECTORY"/storage/external || :
 
 else
-	console.error "No extrernal storage media mounted under /storage."
+	console.error "No extrernal storage media detected."
 	echo
 	
 	console.fwd "Continuing..."

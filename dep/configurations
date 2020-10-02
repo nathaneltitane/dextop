@@ -17,11 +17,11 @@ configurations_list=(
 
 for configuration in ${configurations_list[@]}
 do
-	configuration_url=cfg-dex.ntttn.me/"$configuration"
+	configuration_url=cfg-dex.ntttn.me/"${configuration}"
 
-	curl -sL ${configuration_url} > "$PROOT_DIRECTORY"/tmp/"$configuration"
+	curl -sL ${configuration_url} > "$PROOT_DIRECTORY"/tmp/"${configuration}"
 
-	console.download "Downloading configuration [ $configuration ]."
+	console.download "Downloading configuration [ ${configuration} ]."
 	echo
 
 done

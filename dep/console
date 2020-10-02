@@ -33,16 +33,6 @@ fi
 
 # symbols #
 
-# https://www.w3schools.com/charsets/ref_utf_geometric.asp
-# https://www.w3schools.com/charsets/ref_utf_math.asp
-
-#	⋀ ＞ ⋁ ＜
-#	△ ▷ ▽ ◁
-#	○ □
-#	✓ ⨉
-#	! ?
-#	◥ ◢  ◣ ◤
-
 # markers
 
 marker_batsu='[ ⨉ ]'
@@ -60,7 +50,7 @@ marker_stp='[ - ]'
 marker_upload='[ ⋀ ]'
 marker_warning='[ ! ]'
 marker_yes='[ ✓ ]'
-marker_yes_no='[ ▣ ]'
+marker_yes_no='[ • ]'
 
 # highlights #
 
@@ -234,8 +224,10 @@ console.spinner () {
 	# parse spinner
 	
 	spinner="${spinner_4}"
+	
 	before="[ "
 	after="]"
+
 	message="$1"
 
 	i=1
@@ -255,7 +247,6 @@ console.spinner () {
 # functions #!/usr/bin/env bash
 
 console.get () {
-	
 	source="$1"
 	destination="$2"
 	
