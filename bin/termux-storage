@@ -72,8 +72,7 @@ external_storage=$(echo $(ls /storage | sed -r '/[A0-Z9][-][A0-Z9]/!d'))
 
 if [ ! -z "${external_storage}" ]
 then
-	console.success "External storage mounted under /storage."
-	console.info "UUID:......: ${external_storage}"
+	console.info "SD UUID....: ${external_storage}"
 	echo
 	
 	console.fwd "Linking..."

@@ -164,6 +164,10 @@ echo
 
 cat << FILE >> "$BINARIES_DIRECTORY"/globals
 
+# version #
+
+export version=${version}
+
 # options #
 
 export install_option="${install_option}"
