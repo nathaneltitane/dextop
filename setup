@@ -121,7 +121,7 @@ cd "${SETUP_DIRECTORY}" || exit 1
 
 # check system vs. image architecture
 
-"$BINARIES_DIRECTORY"/check-architecture
+"$BINARIES_DIRECTORY"/proot-architecture
 
 # setup environments
 

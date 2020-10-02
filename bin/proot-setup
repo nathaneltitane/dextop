@@ -70,17 +70,13 @@ sleep 3
 
 "$BINARIES_DIRECTORY"/proot-packages
 
-# remove unwanted files
-
-"$BINARIES_DIRECTORY"/remove-files
-
 # create user account
 
-"$BINARIES_DIRECTORY"/create-user "${first_name}" "${last_name}"
+"$BINARIES_DIRECTORY"/proot-user "${first_name}" "${last_name}"
 
 # set superuser privileges for user account
 
-"$BINARIES_DIRECTORY"/superuser-setup "${first_name}" "${last_name}"
+"$BINARIES_DIRECTORY"/proot-superuser "${first_name}" "${last_name}"
 
 # setup vnc configurations
 
