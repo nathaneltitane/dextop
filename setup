@@ -195,3 +195,5 @@ echo
 sleep 3
 
 $BINARIES_DIRECTORY/bash -c 'proot-launch'
+
+clear
