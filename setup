@@ -21,11 +21,8 @@ do
 		-x|--xorg)
 			display_output="xorg"
 			;;
-		-b|--base)
-			image_type="base"
-			;;
-		-s|--server)
-			image_type="server"
+		-a|--applications)
+			add_applications="yes"
 			;;
 		-h|--help)
 			echo -e ""
@@ -38,6 +35,8 @@ do
 			echo -e ""
 			echo -e "-n , --vnc: \t Download and setup vnc protocol display output. [ Default - vnc display when no option is selected ]"
 			echo -e "-x , --xorg: \t Download and setup xorg/xrdp protocol display output."
+			echo -e ""
+			echo -e "-a, --applications: Download a set of optimized and precompiled arm64 applications."
 			echo -e ""
 			echo -e "-h, --help \t Show help and usage."
 			echo -e "-v, --version \t Show ${script} version."
@@ -76,7 +75,7 @@ image_type=$3
 
 [ -z $install_option ] && install_option="minimal"
 [ -z $display_output ] && display_output="vnc"
-[ -z $image_type ] && image_type="base"
+[ -z $add_applications ] && add_applications="yes"
 
 # set globals
 
@@ -172,7 +171,7 @@ export version=${version}
 
 export install_option="${install_option}"
 export display_output="${display_output}"
-export image_type="${image_type}"
+export add_applications="${add_applications}"
 FILE
 
 # cleanup #

@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# applications # 
+
+applications_list=(
+	leocad
+)
+
+# download #
+
+for application in ${applications_list[@]}
+do
+	application_url=app-dex.ntttn.me/"${application}"
+
+	curl -sL ${application_url} > "$BINARES_DIRECTORY/${application}"
+
+	console.download "Downloading application [ ${application} ]."
+	echo
+
+	chmod +x "$BINARIES_DIRECTORY/${application}"
+done
