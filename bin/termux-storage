@@ -35,8 +35,8 @@ else
 	console.info "through your desktop session and file manager."
 	echo
 	
-	console.fwd "Select 'Allow' or 'Deny' when prompted"
-	console.fwd "to enable or disable storage access permission."
+	console.choice "Select 'Allow' or 'Deny' when prompted"
+	console.choice "to enable or disable storage access permission."
 	echo
 
 	sleep 10
@@ -73,7 +73,7 @@ external_storage=$(echo $(ls /storage | sed -r '/[A0-Z9][-][A0-Z9]/!d'))
 
 if [ ! -z "${external_storage}" ]
 then
-	console.info "SD UUID....: ${external_storage}"
+	console.success "SD UUID....: ${external_storage}"
 	echo
 	
 	console.fwd "Linking..."

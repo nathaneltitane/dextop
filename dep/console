@@ -47,14 +47,14 @@ fi
 
 marker_batsu='[ ⨉ ]'
 marker_download='[ ⋁ ]'
-marker_fwd='[ ＞ ]'
+marker_fwd='[ > ]'
 marker_info='[ i ]'
 marker_input='[ + ]'
 marker_maru='[ ○ ]'
 marker_bako='[ □ ]'
 marker_no='[ ⨉ ]'
 marker_question='[ ? ]'
-marker_rev='[ ＜ ]'
+marker_rev='[ < ]'
 marker_sankaku='[ △ ]'
 marker_stp='[ - ]'
 marker_upload='[ ⋀ ]'
@@ -204,7 +204,7 @@ console.countdown () {
 
 	while [ "${seconds}" -gt 0 ]
 	do
-		echo -e "\r${marker_warning} ${message} [ ${magenta}$((seconds--))${reset} ] seconds...\c"
+		echo -e "\r${marker_warning} ${message} [ ${red}$((seconds--))${reset} ] seconds...\c"
 		
 		sleep 1
 	done
