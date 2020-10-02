@@ -90,9 +90,14 @@ sleep 3
 
 "$BINARIES_DIRECTORY"/xorg-setup
 
-# setup user account configured preferences
+# setup preconfigured preferences
 
-"$BINARIES_DIRECTORY"/user-preferences
+"$BINARIES_DIRECTORY"/proot-preferences
+
+# setup window manager configuration files
+
+"$PROOT_DIRECTORY"/tmp/i3-configuration
+"$PROOT_DIRECTORY"/tmp/i3status-configuration
 
 # checkpoint #
 
@@ -125,19 +130,15 @@ sleep 3
 # use BASH_SROUCE for all bash-specific invocations to the script path
 # $0 is POSIX compliant and may not always return the correct value.
 
-if [[ "$(cat /tmp/setup-complete)" = "yes" ]]
+if [[ "$(cat $PROOT_DIRECTORY/tmp/setup-complete)" = "yes" ]]
 then
-	# remove automatic setuap launch
+	# remove automatic setup launch
 
-	sed -i '$ d' /root/.profile
-
-	# remove setup script
-
-	rm "${script}" || :
+	sed -i '$ d' "$PROOT_DIRECTORY"/root/.profile
 
 	# cleanup /tmp
 
-	rm -rf /tmp/*
+	rm -rf "$PROOT_DIRECTORY"/tmp/*
 fi
 
 exit

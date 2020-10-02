@@ -130,7 +130,7 @@ echo
 
 # get user information
 
-"$BINARIES_DIRECTORY"/user-information
+"$BINARIES_DIRECTORY"/proot-information
 
 # setup transient storage - [ device <<>> [ termux <<>> [ proot ] ] ]
 
