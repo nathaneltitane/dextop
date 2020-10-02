@@ -84,7 +84,7 @@ echo
 
 for package in ${install_list[@]}
 do
-	if [ -z $(command -v ${package}) ]
+	if [ -z "$(command -v ${package})" ]
 	then
 		console.warning "Required package '${package}' not present."
 		echo

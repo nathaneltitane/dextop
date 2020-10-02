@@ -28,11 +28,13 @@ else
 	
 	console.fwd "Termux requires user permission to access storage on this device..."
 	echo
+	
 	console.info "Both internal and external storage are made available:"
 	console.info "Allowing access greatly benefits the desktop experience"
 	console.info "and will make the device's storage visble and accessible"
 	console.info "through your desktop session and file manager."
 	echo
+	
 	console.warning "Select 'Allow' or 'Deny' when prompted to enable or disable storage access permission."
 	echo
 
@@ -49,6 +51,7 @@ else
 	# wait 5 seconds to permit storage permissions approval
 
 	console.countdown 5
+	echo
 fi
 
 # remove storage link defaults

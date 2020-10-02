@@ -200,6 +200,10 @@ console.countdown () {
 		
 		sleep 1
 	done
+	
+	# additional 'echo' required due to carriage return
+
+	echo
 }
 
 # spinner
@@ -234,4 +238,8 @@ console.spinner () {
 		
 		sleep 0.125
 	done
+	
+	# additional 'echo' required due to carriage return
+	
+	echo
 }
