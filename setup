@@ -15,14 +15,14 @@ do
 		-m|--minimal)
 			install_option="minimal"
 			;;
+		-a|--applications)
+			add_applications="yes"
+			;;
 		-n|--vnc)
 			display_output="vnc"
 			;;
 		-x|--xorg)
 			display_output="xorg"
-			;;
-		-a|--applications)
-			add_applications="yes"
 			;;
 		-h|--help)
 			echo -e ""
@@ -30,13 +30,11 @@ do
 			echo -e ""
 			echo -e "-f, --full \t Full setup: download and install full desktop environment and utilities."
 			echo -e "-m, --minimal \t Minimal setup: download and install minimal set of utilities:."
-			echo -e " \t\t Note:"
-			echo -e " \t\t this option is ideal for running specific applications and their dependencies only."
+			echo -e ""
+			echo -e "-a, --applications: Download a set of optimized and precompiled arm64 applications."
 			echo -e ""
 			echo -e "-n , --vnc: \t Download and setup vnc protocol display output. [ Default - vnc display when no option is selected ]"
 			echo -e "-x , --xorg: \t Download and setup xorg/xrdp protocol display output."
-			echo -e ""
-			echo -e "-a, --applications: Download a set of optimized and precompiled arm64 applications."
 			echo -e ""
 			echo -e "-h, --help \t Show help and usage."
 			echo -e "-v, --version \t Show ${script} version."

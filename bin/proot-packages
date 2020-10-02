@@ -161,29 +161,24 @@ framework_list=(
 	libqt5xml5
 	)
 
+# install list #
+
+# core packages lists to load and install
+
+install_list=(
+	${utilities_list[@]}
+	${display_server_list[@]}
+	${security_list[@]}
+	${vnc_list[@]}
+)
+
 # options #
-
-# base
-
-if [[ $install_option = "base" ]]
-then
-	install_list=(
-		${utilities_list[@]}
-		${display_server_list[@]}
-		${security_list[@]}
-		${vnc_list[@]}
-	)
-fi
 
 # full
 
 if [[ $install_option = "full" ]]
 then
-	install_list=(
-		${utilities_list[@]}
-		${display_server_list[@]}
-		${security_list[@]}
-		${vnc_list[@]}
+	install_list+=(
 		${web_list[@]}
 		${desktop_environment_list[@]}
 		${window_manager_list[@]}
@@ -195,13 +190,18 @@ fi
 
 if [[ $install_option = "minimal" ]]
 then
-	install_list=(
-		${utilities_list[@]}
-		${display_server_list[@]}
-		${security_list[@]}
-		${vnc_list[@]}
+	install_list+=(
 		${window_manager_list[@]}
 		${theme_list[@]}
+	)
+fi
+
+# add applications
+
+if [[ $add_applications = "yes" ]]
+then
+	install_list+=(
+		${framework_list}
 	)
 fi
 
