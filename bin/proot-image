@@ -43,7 +43,7 @@ proot-deploy () {
 }
 
 setup () {
-	console.info "Initializing proot setup ."
+	console.info "Initializing proot setup."
 	echo
 
 	console.fwd "Initializing..."

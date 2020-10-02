@@ -33,27 +33,34 @@ fi
 
 # symbols #
 
-#	⋀⋁
-#	△▷▽◁
+# https://www.w3schools.com/charsets/ref_utf_geometric.asp
+# https://www.w3schools.com/charsets/ref_utf_math.asp
+
+#	⋀ ＞ ⋁ ＜
+#	△ ▷ ▽ ◁
+#	○ □
+#	✓ ⨉
+#	! ?
+#	◥ ◢  ◣ ◤
 
 # markers
 
-marker_batsu='[ ✕ ]'
+marker_batsu='[ ⨉ ]'
 marker_download='[ ⋁ ]'
-marker_fwd='[ > ]'
+marker_fwd='[ ＞ ]'
 marker_info='[ i ]'
 marker_input='[ + ]'
 marker_maru='[ ○ ]'
 marker_bako='[ □ ]'
-marker_no='[ ✕ ]'
+marker_no='[ ⨉ ]'
 marker_question='[ ? ]'
-marker_rev='[ < ]'
+marker_rev='[ ＜ ]'
 marker_sankaku='[ △ ]'
 marker_stp='[ - ]'
 marker_upload='[ ⋀ ]'
 marker_warning='[ ! ]'
 marker_yes='[ ✓ ]'
-marker_yes_no='[ Y/N ]'
+marker_yes_no='[ ▣ ]'
 
 # highlights #
 
@@ -190,13 +197,14 @@ console.choice () {
 # countdown
 
 console.countdown () {
-	seconds=$1
+	message="$1"
+	seconds="$2"
 	
 	shift
 
-	while [ ${seconds} -gt 0 ]
+	while [ "${seconds}" -gt 0 ]
 	do
-		echo -e "\r${marker_warning} Waiting [ ${yellow}$((seconds--))${reset} ] seconds...\c"
+		echo -e "\r${marker_warning} ${message} [ ${magenta}$((seconds--))${reset} ] seconds...\c"
 		
 		sleep 1
 	done
@@ -232,7 +240,7 @@ console.spinner () {
 
 	i=1
 
-	while [ -d /proc/$PID ]
+	while [ -d /proc/"${PID}" ]
 	do
 		echo -ne "\r${before} \b${spinner:i++%${#spinner}:1} ${after} ${message}\c "
 		
@@ -242,4 +250,14 @@ console.spinner () {
 	# additional 'echo' required due to carriage return
 	
 	echo
+}
+
+# functions #!/usr/bin/env bash
+
+console.get () {
+	
+	source="$1"
+	destination="$2"
+	
+	curl -sL "${source}" > "${destination}"
 }

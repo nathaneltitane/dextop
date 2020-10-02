@@ -110,7 +110,11 @@ echo
 console.success "Environment deployment and configuration complete."
 echo
 
-console.fwd "Exiting..."
+sleep 3
+
+clear
+
+console.countdown "Exiting in" 5
 echo
 
 sleep 3

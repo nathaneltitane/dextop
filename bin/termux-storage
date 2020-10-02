@@ -51,7 +51,7 @@ else
 
 	# wait 5 seconds to permit storage permissions approval
 
-	console.countdown 5
+	console.countdown "Waiting" 5
 	echo
 fi
 
