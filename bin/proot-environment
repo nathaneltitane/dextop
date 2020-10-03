@@ -32,7 +32,7 @@ do
 	
 	# set ownership
 	
-	chown ${uid}:${gid} -R /home/${user_name}/${directory}
+	chown ${uid}:${gid} -R "$PROOT_DIRECTORY"/usr/share/"${directory}"
 done
 
 # files #
