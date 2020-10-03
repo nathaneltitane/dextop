@@ -70,14 +70,7 @@ do
 			done
 		fi
 
-	# prevent empty input values
-	
-	while [ -z "$input" ]
-	do
-		console.warning "Input cannot be empty:"
-		console.warning "Values are required for a successful setup."
-		echo
-	done
+
 done
 
 # unset IFS
