@@ -14,21 +14,20 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 # binaries # 
 
 binaries_list=(
-	check-architecture
-	create-user
+	proot-architecture
 	proot-environment
 	proot-image
+	proot-information
 	proot-launch
 	proot-packages
+	proot-preferences
 	proot-setup
-	remove-files
-	superuser-setup
+	proot-superuser
+	proot-user
 	termux-environment
 	termux-groups
 	termux-packages
 	termux-storage
-	user-information
-	user-preferences
 	vnc-pass
 	vnc-setup
 	vnc-start
