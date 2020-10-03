@@ -26,58 +26,17 @@ input_list=(
 	first_name
 	last_name
 	user_email
-	user_password
 )
 
 for value in "${input_list[@]}"
 do
 	console.input "$(echo ${value^} | sed 's/_/ /')...: "
-
-	# obfuscate password using prompt variable
-	# when $value=user_password
-
-	if [[ "$value" = user_password ]]
-	then
-		unset password
-
-		while IFS= read -p "$prompt" -r -s -n 1 character
-		do
-				# enter / accept password
-
-				if [[ $character == $'\0' ]]
-				then
-					# break on 'NUL'
-
-					break
-				fi
-
-				# handle backspace / delete character input
-
-				if [[ $character == $'\177' ]]
-				then
-					# remove input on 'BACKSPACE'/'DEL'
-
-					prompt=$'\b \b'
-					password="${password%?}"
-				else
-					# set character mask
-
-					prompt='+'
-					password+="$character"
-				fi
-		done
-
-	fi
 	
-	# set input for evaluation
+	read -r input
 
-		read -r input
-
+	eval "$value"="$input"
+	
 done
-
-# unset IFS
-
-IFS=''
 
 echo
 echo
@@ -93,6 +52,5 @@ export last_name=${last_name}
 export full_name="$first_name $last_name"
 export user_name=${first_name,,}
 export user_email=${user_email}
-export user_password=${user_password}
 
 FILE
