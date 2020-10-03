@@ -20,7 +20,7 @@ console.warning "The information will be used to set up the user account."
 console.warning "The fields cannot be empty."
 echo
 
-# input #
+# values #
 
 input_list=(
 	first_name
@@ -31,44 +31,47 @@ input_list=(
 
 for value in "${input_list[@]}"
 do
-	console.input "$(echo $value^} | sed 's/_/ /')...: "
+	console.input "$(echo ${value^} | sed 's/_/ /')...: "
+
+	# obfuscate password using prompt variable
+	# when $value=user_password
+
+	if [[ "$value" = user_password ]]
+	then
+		unset password
+
+		while IFS= read -p "$prompt" -r -s -n 1 character
+		do
+				# enter / accept password
+
+				if [[ $character == $'\0' ]]
+				then
+					# break on 'NUL'
+
+					break
+				fi
+
+				# handle backspace / delete character input
+
+				if [[ $character == $'\177' ]]
+				then
+					# remove input on 'BACKSPACE'/'DEL'
+
+					prompt=$'\b \b'
+					password="${password%?}"
+				else
+					# set character mask
+
+					prompt='+'
+					password+="$character"
+				fi
+		done
+
+	fi
+	
+	# set input for evaluation
 
 		read -r input
-		
-		# obfuscate password using prompt variable
-		# when $value=user_password
-
-		if [[ "${value}" = "user_password" ]]
-		then
-			unset password
-	
-			while IFS= read -p "$prompt" -r -s -n 1 character
-			do
-					# enter / accept password
-
-					if [[ $character == $'\0' ]]
-					then
-						# break on 'NUL'
-
-						break
-					fi
-
-					# handle backspace / delete character input
-
-					if [[ $character == $'\177' ]]
-					then
-						# remove input on 'BACKSPACE'/'DEL'
-
-						prompt=$'\b \b'
-						password="${password%?}"
-					else
-						# set character mask
-
-						prompt='+'
-						password+="$character"
-					fi
-			done
-		fi
 
 done
 
