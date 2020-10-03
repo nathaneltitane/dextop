@@ -31,14 +31,14 @@ input_list=(
 
 for input in "${input_list[@]}"
 do
-	console.input "$(echo ${value^} | sed 's/_/ /')...: "
+	console.input "$(echo $input^} | sed 's/_/ /')...: "
 	
 		read -r input
 		
 		# obfuscate password using prompt variable
 		# when $value=user_password
 
-		if [[ "$value" = user_password ]]
+		if [[ "$input" = user_password ]]
 		then
 			unset password
 	
