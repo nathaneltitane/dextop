@@ -20,7 +20,7 @@ console.warning "The information will be used to set up the user account."
 console.warning "The fields cannot be empty."
 echo
 
-# values #
+# input #
 
 input_list=(
 	first_name
@@ -29,18 +29,10 @@ input_list=(
 	user_password
 )
 
-for value in "${input_list[@]}"
+for input in "${input_list[@]}"
 do
 	console.input "$(echo ${value^} | sed 's/_/ /')...: "
 	
-	# prevent empty input values
-
-	while [ -z "$input" ]
-	do
-		console.warning "Input cannot be empty:"
-		console.warning "Values are required for a successful setup."
-		echo
-
 		read -r input
 		
 		# obfuscate password using prompt variable
@@ -77,6 +69,14 @@ do
 					fi
 			done
 		fi
+
+	# prevent empty input values
+	
+	while [ -z "$input" ]
+	do
+		console.warning "Input cannot be empty:"
+		console.warning "Values are required for a successful setup."
+		echo
 	done
 done
 
