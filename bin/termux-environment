@@ -55,7 +55,6 @@ FILE
 
 cat <<- 'FILE' >> "$HOME"/.profile
 
-pulseaudio --start
 FILE
 
 # termux properties

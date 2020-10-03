@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# usage #
+
+# variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# write welcome message - replaces motd
+
+console.info "Silencing login messages."
+echo
+
+cat <<- 'FILE' > "$HOME"/.bashrc
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+Welcome to Termux Dextop!
+
+FILE
