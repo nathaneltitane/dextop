@@ -31,7 +31,6 @@ curl -sL dex.ntttn.me > setup && bash setup | <option> | <output>
 where available install options are:
 
 ```
--b | --base:    download and unpack root filesystem and utilities.
 -f | --full:    download and install full desktop environment and utilities.
 -m | --minimal: download and install minimal set of utilities. [ Default ]
 ```
