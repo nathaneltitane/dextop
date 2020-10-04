@@ -52,7 +52,7 @@ setup () {
 	console.info "Downloading image [ ${distribution_name^} $distribution_version ]."
 	echo
 
-	console.get "${iso_url}" ${iso_archive} &
+	console.get "${iso_url}" "${iso_archive}" "${PWD}" &
 
 	console.spin "Downloading..."
 	echo
