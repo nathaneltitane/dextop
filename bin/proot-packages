@@ -159,6 +159,7 @@ theme_list=(
 framework_list=(
 	libqt5concurrent5
 	libqt5opengl5
+	libqt5opengl5-dev
 	libqt5printsupport5
 	libqt5xml5
 	)
