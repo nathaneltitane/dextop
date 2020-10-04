@@ -45,17 +45,18 @@ fi
 
 # markers
 
+marker_maru='[ ○ ]'
+marker_bako='[ □ ]'
+marker_sankaku='[ △ ]'
+
 marker_batsu='[ ⨉ ]'
 marker_download='[ ⋁ ]'
 marker_fwd='[ > ]'
 marker_info='[ i ]'
 marker_input='[ + ]'
-marker_maru='[ ○ ]'
-marker_bako='[ □ ]'
 marker_no='[ ⨉ ]'
 marker_question='[ ? ]'
 marker_rev='[ < ]'
-marker_sankaku='[ △ ]'
 marker_stp='[ - ]'
 marker_upload='[ ⋀ ]'
 marker_warning='[ ! ]'
@@ -233,7 +234,7 @@ console.spin () {
 	do
 		echo -ne "\r${before} \b${spinner:i++%${#spinner}:1} ${after} ${message}\c "
 		
-		sleep 0.15
+		sleep 0.175
 	done
 	
 	# additional 'echo' required due to carriage return
@@ -241,7 +242,9 @@ console.spin () {
 	echo
 }
 
-# functions
+# handlers #
+
+# get
 
 console.get () {
 	source="$1"
@@ -250,6 +253,8 @@ console.get () {
 	
 	curl -sL "${source}/${file}" > "${path}"/"${file}"
 }
+
+# silence
 
 console.silence () {
 	command="$@"
