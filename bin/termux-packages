@@ -26,7 +26,7 @@ echo
 console.info "Upgrading installed packages."
 echo
 
-echo yes | apt upgrade >> "${PREFIX}"/var/log/"${script}".log 2>&1 &
+console.silence "echo yes | apt upgrade" &
 
 console.spinner "Upgrading..."
 echo
@@ -90,7 +90,7 @@ do
 		console.warning "Required package '${package}' not present."
 		echo
 
-		echo yes | apt install ${package} >> "${PREFIX}"/var/log/"${script}".log 2>&1 &
+		console.silence "echo yes | apt install ${package}" &
 		
 		console.spinner "Installing [ ${package} ]..."
 		echo
@@ -107,7 +107,7 @@ done
 
 # cleanup
 
-apt clean >> "${PREFIX}"/var/log/"${script}".log 2>&1 &
+console.silence "apt clean" &
 
 console.spinner "Cleaning..."
 echo

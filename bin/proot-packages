@@ -20,7 +20,7 @@ export DEBIAN_FRONTEND=noninteractive
 console.info "Updating repository and package information."
 echo
 
-apt-get update >> "${PREFIX}"/var/log/"${script}".log 2>&1 &
+console.silence "echo yes | apt-get update" &
 
 console.spinner "Updating..."
 echo
@@ -30,7 +30,7 @@ echo
 console.info "Upgrading installed packages."
 echo
 
-echo yes | apt-get upgrade >> "${PREFIX}"/var/log/"${script}".log 2>&1 &
+console.silence "echo yes | apt-get upgrade" &
 
 console.spinner "Upgrading..."
 echo
@@ -240,7 +240,7 @@ do
 
 		# use 'apt-get install --no-install-recommends' to keep bloat to a minimum
 		
-		echo yes | apt-get install --no-install-recommends ${package} >> "${PREFIX}"/var/log/"${script}".log 2>&1 &
+		console.silence "echo yes | apt-get install --no-install-recommends ${package}" &
 		
 		console.spinner "Installing [ ${package} ]..."
 		echo
@@ -257,7 +257,7 @@ done
 
 # cleanup
 
-apt-get clean >> "${PREFIX}"/var/log/"${script}".log 2>&1 &
+console.silence "apt-get clean" &
 
 console.spinner "Cleaning..."
 echo
