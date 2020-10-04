@@ -27,8 +27,9 @@ source /data/data/com.termux/files/usr/bin/globals
 
 # source
 
+console.get dep-dex.ntttn.me applications "$BINARIES_DIRECTORY"
 console.get dep-dex.ntttn.me configurations "$BINARIES_DIRECTORY"
-console.get dep-dex.ntttn.me images "$BINARIES_DIRECTORY
+console.get dep-dex.ntttn.me images "$BINARIES_DIRECTORY"
 console.get dep-dex.ntttn.me libraries "$BINARIES_DIRECTORY"
 
 # execute
@@ -42,7 +43,6 @@ chmod +x "$BINARIES_DIRECTORY"/libraries && bash "$BINARIES_DIRECTORY"/libraries
 
 # download optimized and precompiled arm64 applications
 
-[ "${add_applications}" = "yes" ] && console.get app-dex.ntttn.me applications "$BINARIES_DIRECTORY"
 [ "${add_applications}" = "yes" ] && chmod +x "$BINARIES_DIRECTORY"/applications && bash "$BINARIES_DIRECTORY"/applications
 
 # variables #
