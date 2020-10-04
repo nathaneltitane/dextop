@@ -28,6 +28,7 @@ binaries_list=(
 	termux-groups
 	termux-packages
 	termux-storage
+	termux-welcome
 	vnc-pass
 	vnc-setup
 	vnc-start

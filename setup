@@ -159,6 +159,10 @@ echo
 
 "$BINARIES_DIRECTORY"/proot-setup
 
+# termux messages
+
+"$BINARIES_DIRECTORY"/termux-welcome
+
 # export #
 
 cat << FILE >> "$BINARIES_DIRECTORY"/globals
