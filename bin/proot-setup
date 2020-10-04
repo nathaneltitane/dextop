@@ -17,7 +17,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # write dependencies
 
-cat << FILE > "$PROOT_DIRECTORY"/tmp/setup
+cat << 'FILE' > "$PROOT_DIRECTORY"/tmp/setup
 #!/bin/bash
 
 # dependencies #
@@ -28,6 +28,7 @@ source /data/data/com.termux/files/usr/bin/globals
 # source
 
 console.get dep-dex.ntttn.me configurations "$BINARIES_DIRECTORY"
+console.get dep-dex.ntttn.me images "$BINARIES_DIRECTORY
 console.get dep-dex.ntttn.me libraries "$BINARIES_DIRECTORY"
 
 # execute
