@@ -8,6 +8,8 @@
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
+stamp=$(date +"%m-%d-%Y-%H-%M-%S")
+
 # colors #
 
 if [ -z $(command -v tput) ]
@@ -262,16 +264,7 @@ console.get () {
 }
 
 console.silence () {
-	command="$1"
+	command="$@"
 	
-	# set path to discern environments
-	
-	path="$2"
-	
-	# use BASH_SROUCE for all bash-specific invocations to the script path
-	# $0 is POSIX compliant but may not always return the correct value
-	
-	script=$(basename -- "${BASH_SOURCE[0]}")
-	
-	"${command}" >> "${path}"/var/log/"${script}".log 2>&1
+	"${SHELL}" -c "${command}" >> "${PREFIX}"/var/log/"${script}"-"${stamp}".log 2>&1$
 }

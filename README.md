@@ -69,4 +69,4 @@ Should you suspect any issues or errors, please provide those files when submitt
 - Run ```'proot-launch <username>``` to start your session.
 - Run ```'proot-launch <username> <application> ``` to start a specific application on session load.
 
-This approach keeps the environment snappy and clean and ensures a streamlined operation in tandem with Dex.
+When in the proot
