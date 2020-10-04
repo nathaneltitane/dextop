@@ -97,8 +97,8 @@ sleep 3
 
 # setup window manager configuration files
 
-"$PROOT_DIRECTORY"/tmp/i3-configuration
-"$PROOT_DIRECTORY"/tmp/i3status-configuration
+bash "$PROOT_DIRECTORY"/tmp/i3-configuration
+bash "$PROOT_DIRECTORY"/tmp/i3status-configuration
 
 # checkpoint #
 

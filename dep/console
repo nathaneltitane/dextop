@@ -123,7 +123,7 @@ console.fwd () {
 # marker_info
 
 console.info () {
-	echo "${cyan}${marker_info}" $@"${reset}"
+	echo "${blue}${marker_info}" $@"${reset}"
 }
 
 # marker_input
@@ -159,7 +159,7 @@ console.rev () {
 # marker_sankaku
 
 console.sankaku () {
-	echo "${blue}${marker_sankaku}" $@"${reset}"
+	echo "${cyan}${marker_sankaku}" $@"${reset}"
 }
 
 # marker_stp
