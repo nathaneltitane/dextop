@@ -113,7 +113,7 @@ clear
 console.fwd "Setup finalized..."
 echo
 
-console.success "Environment deployment and configuration complete."
+console.success "Deployment and configuration complete."
 echo
 
 sleep 3
