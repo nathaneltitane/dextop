@@ -16,7 +16,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")p
 console.info "Updating repository and package information."
 echo
 
-apt update >> "${PREFIX}"/var/log/"${script}".log 2>&1 &
+console.silence "apt update" &
 
 console.spinner "Updating..."
 echo
