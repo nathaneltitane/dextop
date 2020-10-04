@@ -22,12 +22,6 @@ APPLICATION=$2
 PROOT_DIRECTORY=$3
 BIND_DIRECTORY=$4
 
-BROWSER=""
-DISPLAY=":1"
-EDITOR="nano"
-LOCALHOST_ADDRESS="127.0.0.1"
-VISUAL=
-
 # set defaults
 # push variables if no argument is passed
 
@@ -85,9 +79,17 @@ IFS=' '
 
 # proot #
 
+BROWSER=""
+DISPLAY=":1"
+EDITOR="nano"
+LOCALHOST_ADDRESS="127.0.0.1"
+VISUAL=
+XDG_RUNTIME_DIR="/run/user/${USER_ID}"
+
 # setup proot command arguments
 
 command="proot"
+
 command+=" --kill-on-exit"
 command+=" --link2symlink"
 command+=" -r ${PROOT_DIRECTORY}"
@@ -129,7 +131,7 @@ command+=" QT_STYLE_OVERRIDE="
 command+=" QT_QPA_PLATFORMTHEME=gtk2"
 command+=" QT_X11_NO_MITSHM=1"
 command+=" TERM=$TERM"
-command+=" XDG_RUNTIME_DIR=/run/user/${USER_ID}"
+command+=" XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR}"
 command+=" XDG_CONFIG_HOME=${HOME}/.config"
 command+=" XDG_CACHE_HOME=${HOME}/.cache"
 command+=" XDG_DATA_HOME=${HOME}/.local/share"
@@ -155,4 +157,4 @@ fi
 
 # return exit status
 
-exit $?
+exit "$?"
