@@ -60,7 +60,7 @@ cat << 'FILE' >> "$PROOT_DIRECTORY"/tmp/setup
 
 clear
 
-console.sankaku "[ Linux on Android - Termux Dextop // Ubuntu Dextop [ Version ${version} ] ]"
+console.message "[ Linux on Android - Termux Dextop // Ubuntu Dextop [ Version ${version} ] ]"
 echo
 
 sleep 3

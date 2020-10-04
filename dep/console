@@ -54,6 +54,7 @@ marker_download='[ ⋁ ]'
 marker_fwd='[ > ]'
 marker_info='[ i ]'
 marker_input='[ + ]'
+marker_message='[ ¤ ]'
 marker_no='[ ⨉ ]'
 marker_question='[ ? ]'
 marker_rev='[ < ]'
@@ -61,7 +62,7 @@ marker_stp='[ - ]'
 marker_upload='[ ⋀ ]'
 marker_warning='[ ! ]'
 marker_yes='[ ✓ ]'
-marker_yes_no='[ • ]'
+marker_choice='[ • ]'
 
 # highlights #
 
@@ -133,6 +134,12 @@ console.input () {
 	echo -n "${magenta}${marker_input}" $@"${reset}"
 }
 
+# marker_message
+
+console.message () {
+	echo "${cyan}${marker_message}" $@"${reset}"
+}
+
 # marker_maru
 
 console.maru () {
@@ -187,10 +194,10 @@ console.success () {
 	echo "${green}${marker_yes}" $@"${reset}"
 }
 
-# marker_yes_no
+# marker_choice
 
 console.choice () {
-	echo "${magenta}${marker_yes_no}" $@"${reset}"
+	echo "${magenta}${marker_choice}" $@"${reset}"
 }
 
 # triggers #

@@ -100,7 +100,7 @@ console.get dep-dex.ntttn.me binaries "$BINARIES_DIRECTORY" && bash "$BINARIES_D
 
 clear
 
-console.sankaku "[ Linux on Android - Termux Dextop // Ubuntu Dextop [ Version ${version} ] ]"
+console.message "[ Linux on Android - Termux Dextop // Ubuntu Dextop [ Version ${version} ] ]"
 echo
 
 console.fwd "Initializing setup [ termux ]..."
