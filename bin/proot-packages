@@ -44,6 +44,7 @@ utilities_list=(
 	jq
 	nano
 	sudo
+	povray
 )
 
 display_server_list=(

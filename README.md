@@ -66,7 +66,7 @@ The setup dialogs, prompts, comaands and binaries have been made to redirect all
 Should you suspect any issues or errors, please provide those files when submitting a bug report.
 
 ### Usage:
-- Run ```'proot-launch <username>``` to start your session.
-- Run ```'proot-launch <username> <application> ``` to start a specific application on session load.
+- Run ```'proot-launch <username>'``` to start your session.
+- Run ```'proot-launch <username> <application>'``` to start a specific application on session load.
 
 When in the proot
