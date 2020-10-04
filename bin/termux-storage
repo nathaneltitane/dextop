@@ -29,7 +29,9 @@ else
 	console.warning "Termux requires user permission to access storage on this device..."
 	echo
 	
-	console.info "Both internal and external storage are made available:"
+	console.fwd "Both internal and external storage are made available:"
+	echo
+	
 	console.info "Allowing access greatly benefits the desktop experience"
 	console.info "and will make the device's storage visble and accessible"
 	console.info "through your desktop session and file manager."
