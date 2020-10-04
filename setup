@@ -84,8 +84,10 @@ BINARIES_DIRECTORY="${PREFIX}"/bin
 
 # source
 
-console.get dep-dex.ntttn.me console "$BINARIES_DIRECTORY" && source "$BINARIES_DIRECTORY"/console
-console.get dep-dex.ntttn.me globals "$BINARIES_DIRECTORY" && source "$BINARIES_DIRECTORY"/globals
+# explicit console.get for preload
+
+curl -sL dep-dex.ntttn.me/console > "$BINARIES_DIRECTORY"/console && source "$BINARIES_DIRECTORY"/console
+curl -sL dep-dex.ntttn.me/globals > "$BINARIES_DIRECTORY"/globals && source "$BINARIES_DIRECTORY"/globals
 
 clear
 
