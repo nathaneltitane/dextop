@@ -67,9 +67,13 @@ set $blocks "i3blocks"
 
 set $launcher "i3-dmenu-desktop"
 
+# editor
+
+set $editor "i3-sensible-editor"
+
 # terminal
 
-set $terminal "xfce4-terminal"
+set $terminal "i3-sensible-terminal"
 
 # colors #
 
