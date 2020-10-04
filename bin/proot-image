@@ -15,9 +15,9 @@ distribution_name="ubuntu"
 distribution_version="20.04.1"
 proot_launcher="proot-launch"
 
-iso_root_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${distribution_version}/release"
+iso_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${distribution_version}/release"
 iso_archive="ubuntu-base-${distribution_version}-base-${iso_architecture}.tar.gz"
-iso_url="$iso_root_url/$iso_archive"
+iso_full_url="$iso_root_url/$iso_archive"
 
 # set defaults
 
@@ -52,9 +52,9 @@ setup () {
 	console.info "Downloading image [ ${distribution_name^} $distribution_version ]."
 	echo
 
-	curl -sL "${iso_url}" > ${iso_archive} &
+	console.get "${iso_url}" ${iso_archive} &
 
-	console.spinner "Downloading..."
+	console.spin "Downloading..."
 	echo
 
 	console.info "Creating proot directory."
@@ -74,7 +74,7 @@ setup () {
 
 	proot-deploy "${SETUP_DIRECTORY}/${iso_archive}" || exit 1 &
 
-	console.spinner "Unpacking..."
+	console.spin "Unpacking..."
 	echo
 
 	wait

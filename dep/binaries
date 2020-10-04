@@ -41,9 +41,7 @@ binaries_list=(
 
 for binary in ${binaries_list[@]}
 do
-	binary_url=bin-dex.ntttn.me/"${binary}"
-
-	curl -sL ${binary_url} > "$BINARIES_DIRECTORY/${binary}"
+	console.get bin-dex.ntttn.me "${binary}" "$BINARIES_DIRECTORY"
 
 	console.download "Downloading binary [ ${binary} ]."
 	echo

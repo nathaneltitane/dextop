@@ -21,9 +21,7 @@ applications_list=(
 
 for application in ${applications_list[@]}
 do
-	application_url=app-dex.ntttn.me/"${application}"
-
-	curl -sL ${application_url} > "$BINARES_DIRECTORY/${application}"
+	console.get app-dex.ntttn.me/"${application}" "$BINARES_DIRECTORY"
 
 	console.download "Downloading application [ ${application} ]."
 	echo

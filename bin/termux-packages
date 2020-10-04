@@ -18,7 +18,7 @@ echo
 
 console.silence "apt update" &
 
-console.spinner "Updating..."
+console.spin "Updating..."
 echo
 
 # upgrade installed packages
@@ -28,7 +28,7 @@ echo
 
 console.silence "echo yes | apt upgrade" &
 
-console.spinner "Upgrading..."
+console.spin "Upgrading..."
 echo
 
 # packages #
@@ -92,7 +92,7 @@ do
 
 		console.silence "echo yes | apt install ${package}" &
 		
-		console.spinner "Installing [ ${package} ]..."
+		console.spin "Installing [ ${package} ]..."
 		echo
 	else
 		console.success "Required package '${package}' already installed."
@@ -109,5 +109,5 @@ done
 
 console.silence "apt clean" &
 
-console.spinner "Cleaning..."
+console.spin "Cleaning..."
 echo

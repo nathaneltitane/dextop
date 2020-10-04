@@ -216,7 +216,7 @@ console.countdown () {
 
 # spinner
 
-console.spinner () {
+console.spin () {
 	# catch PID of last command
 
 	PID=$!
@@ -254,17 +254,18 @@ console.spinner () {
 	echo
 }
 
-# functions #!/usr/bin/env bash
+# functions
 
 console.get () {
 	source="$1"
-	destination="$2"
+	file="$2"
+	path="$3"
 	
-	curl -sL "${source}" > "${destination}"
+	curl -sL "${source}/${file}" > "${path}"/"${file}"
 }
 
 console.silence () {
 	command="$@"
 	
-	"${SHELL}" -c "${command}" >> "${PREFIX}"/var/log/"${script}"-"${stamp}".log 2>&1$
+	"${SHELL}" -c "${command}" >> "${PREFIX}"/var/log/"${script}"-"${stamp}".log 2>&1
 }

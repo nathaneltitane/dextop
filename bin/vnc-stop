@@ -19,7 +19,7 @@ then
 
 	vncserver -kill :* >> "${PREFIX}"/var/log/"${script}".log 2>&1 &
 	
-	console.spinner "Stopping display server..."
+	console.spin "Stopping display server..."
 	echo
 
 	# clean display server runtime files
