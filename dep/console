@@ -221,20 +221,7 @@ console.spin () {
 
 	PID=$!
 
-	# spinner string content
-
-	spinner_1="+×"
-	spinner_2="/—\|"
-	spinner_4="◸◹◿◺"
-	spinner_5="◰◳◲◱"
-	spinner_6="◜◝◞◟"
-	spinner_7="◴◷◶◵"
-	spinner_8="◑◒◐◓"
-	
-	# parse spinner
-	
-	spinner="${spinner_4}"
-	
+	spinner="+×"
 	before="[ "
 	after="]"
 
@@ -246,7 +233,7 @@ console.spin () {
 	do
 		echo -ne "\r${before} \b${spinner:i++%${#spinner}:1} ${after} ${message}\c "
 		
-		sleep 0.125
+		sleep 0.15
 	done
 	
 	# additional 'echo' required due to carriage return
