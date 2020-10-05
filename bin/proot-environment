@@ -28,7 +28,7 @@ do
 
 	# create directory and set permissions
 
-	[ -z "$PROOT_DIRECTORY"/usr/share/"${directory}" ] && mkdir -p "$PROOT_DIRECTORY"/usr/share/"${directory}" || :
+	[ ! -d "$PROOT_DIRECTORY"/usr/share/"${directory}" ] && mkdir -p "$PROOT_DIRECTORY"/usr/share/"${directory}" || :
 	
 	# set ownership
 	
