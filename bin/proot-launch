@@ -29,7 +29,17 @@ BIND_DIRECTORY=$4
 [ -z "$APPLICATION" ]		&& APPLICATION="${TERMINAL}"
 [ -z "$PROOT_DIRECTORY" ]	&& PROOT_DIRECTORY=${PREFIX%/*}/img
 [ -z "$BIND_DIRECTORY" ]	&& BIND_DIRECTORY=${PREFIX%/*}/mnt
+
+# desktop session
+
 [ -z "$DESKTOP_SESION" ]	&& DESKTOP_SESSION="i3"
+[ -z "$BROWSER" ]			&& BROWSER="i3-sensible-browser"
+[ -z "$EDITOR" ]			&& EDITOR="i3-sensible-editor"
+[ -z "$PAGER" ]				&& PAGER="i3-sensible-pager"
+[ -z "$TERMINAL" ]			&& TERMINAL="i3-sensible-terminal"
+[ -z "$VISUAL" ]			&& VISUAL=""
+
+
 
 # assume termux-exec is present - unset LD_PRELOAD
 
@@ -79,11 +89,8 @@ IFS=' '
 
 # proot #
 
-BROWSER=""
 DISPLAY=":1"
-EDITOR="nano"
 LOCALHOST_ADDRESS="127.0.0.1"
-VISUAL=
 XDG_RUNTIME_DIR="/run/user/${USER_ID}"
 
 # setup proot command arguments
@@ -117,20 +124,22 @@ command+=" BINARIES_DIRECTORY=${PREFIX}/bin"
 command+=" LIBRARIES_DIRECTORY=${PREFIX}/lib"
 command+=" PROOT_DIRECTORY=${PROOT_DIRECTORY}"
 command+=" BIND_DIRECTORY=${BIND_DIRECTORY}"
+command+=" DESKTOP_SESSION=$DESKTOP_SESSION"
 command+=" BROWSER=${BROWSER}"
-command+=" DISPLAY=${DISPLAY}"
 command+=" EDITOR=${EDITOR}"
+command+=" PAGER=${PAGER}"
+command+=" TERM=${TERMINAL}"
+command+=" VISUAL=${VISUAL}"
+command+=" DISPLAY=${DISPLAY}"
 command+=" HOME=${HOME}"
 command+=" USER=${USER}"
 command+=" LANG=C.UTF-8"
 command+=" LOCALHOST=${LOCALHOST_ADDRESS}"
-command+=" PAGER=${PAGER}"
 command+=" PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$PREFIX/bin:$PREFIX/sbin"
 command+=" PULSE_SERVER=${LOCALHOST_ADDRESS}"
 command+=" QT_STYLE_OVERRIDE="
 command+=" QT_QPA_PLATFORMTHEME=gtk2"
 command+=" QT_X11_NO_MITSHM=1"
-command+=" TERM=$TERM"
 command+=" XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR}"
 command+=" XDG_CONFIG_HOME=${HOME}/.config"
 command+=" XDG_CACHE_HOME=${HOME}/.cache"
@@ -138,7 +147,6 @@ command+=" XDG_DATA_HOME=${HOME}/.local/share"
 command+=" XDG_DATA_DIRS=/usr/local/share:/usr/share"
 command+=" XDG_CONFIG_DIRS=/etc/xdg" 
 command+=" XAUTHORITY=${XDG_RUNTIME_DIR}/.Xauthority"
-command+=" DESKTOP_SESSION=$DESKTOP_SESSION"
 command+=" APPLICATION=${APPLICATION}"
 command+=" ${SHELL} --login"
 
@@ -146,7 +154,7 @@ command+=" ${SHELL} --login"
 
 exec $command
 
-if [[ ! -z "$application" ]]
+if [ ! -z "$application" ]
 then
 	console.fwd "Starting application [ ${APPLICATION} ]..."
 	echo
