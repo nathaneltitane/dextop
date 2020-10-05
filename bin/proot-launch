@@ -30,8 +30,8 @@ BIND_DIRECTORY=$4
 [ -z "$BROWSER" ]			&& BROWSER="i3-sensible-browser"
 [ -z "$EDITOR" ]			&& EDITOR="i3-sensible-editor"
 [ -z "$PAGER" ]				&& PAGER="i3-sensible-pager"
-[ -z "$TERMINAL" ]			&& TERMINAL="i3-sensible-terminal"
-[ -z "$VISUAL" ]			&& VISUAL=""
+[ -z "$TERMINAL" ]			&& TERMINAL="$TERM"
+[ -z "$VISUAL" ]			&& VISUAL="$VISUAL"
 
 # push variables if no argument is passed
 
