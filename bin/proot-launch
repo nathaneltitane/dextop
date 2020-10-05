@@ -23,12 +23,6 @@ PROOT_DIRECTORY=$3
 BIND_DIRECTORY=$4
 
 # set defaults
-# push variables if no argument is passed
-
-[ -z "$USERNAME" ]			&& USERNAME="root"
-[ -z "$APPLICATION" ]		&& APPLICATION="${TERMINAL}"
-[ -z "$PROOT_DIRECTORY" ]	&& PROOT_DIRECTORY=${PREFIX%/*}/img
-[ -z "$BIND_DIRECTORY" ]	&& BIND_DIRECTORY=${PREFIX%/*}/mnt
 
 # desktop session
 
@@ -39,7 +33,12 @@ BIND_DIRECTORY=$4
 [ -z "$TERMINAL" ]			&& TERMINAL="i3-sensible-terminal"
 [ -z "$VISUAL" ]			&& VISUAL=""
 
+# push variables if no argument is passed
 
+[ -z "$USERNAME" ]			&& USERNAME="root"
+[ -z "$APPLICATION" ]		&& APPLICATION="${TERMINAL}"
+[ -z "$PROOT_DIRECTORY" ]	&& PROOT_DIRECTORY=${PREFIX%/*}/img
+[ -z "$BIND_DIRECTORY" ]	&& BIND_DIRECTORY=${PREFIX%/*}/mnt
 
 # assume termux-exec is present - unset LD_PRELOAD
 
