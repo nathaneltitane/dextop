@@ -26,5 +26,5 @@ do
 	console.download "Downloading application [ ${application} ]."
 	echo
 
-	chmod +x "$PROOT_DIRECTORY"/usr/bin/${application}"
+	chmod +x "$PROOT_DIRECTORY"/usr/bin/"${application}"
 done
