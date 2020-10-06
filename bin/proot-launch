@@ -26,10 +26,10 @@ BIND_DIRECTORY=$4
 
 # desktop session
 
-[ -z "$DESKTOP_SESION" ]	&& DESKTOP_SESSION="i3"
-[ -z "$BROWSER" ]			&& BROWSER="i3-sensible-browser"
-[ -z "$EDITOR" ]			&& EDITOR="i3-sensible-editor"
-[ -z "$PAGER" ]				&& PAGER="i3-sensible-pager"
+[ -z "$DESKTOP_SESION" ]	&& DESKTOP_SESSION="blackbox"
+[ -z "$BROWSER" ]			&& BROWSER="$BROWSER"
+[ -z "$EDITOR" ]			&& EDITOR="$EDITOR"
+[ -z "$PAGER" ]				&& PAGER="$PAGER"
 [ -z "$TERMINAL" ]			&& TERMINAL="$TERM"
 [ -z "$VISUAL" ]			&& VISUAL="$VISUAL"
 

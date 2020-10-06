@@ -122,11 +122,13 @@ print_resolutions() {
 			height="${resolutions[$i+2]}"
 			resolution="${width}x${height}"
 
+			number=$((($i/3) + 1))
+
 			if (( $i/3 >= 0 && $i/3 <= 8 ))
 			then
-					printf '\t[  %s ] %s' $((($i/3) +1)) $format
+					printf '\t[  %s ] %s' $number $format
 			else
-					printf '\t[ %s ] %s' $((($i/3) +1)) $format
+					printf '\t[ %s ] %s' $number $format
 			fi
 
 			printf '%*s' $((pad_length - ${#format}))
@@ -143,6 +145,10 @@ print_resolutions
 console.input "Selection: "
 read selection
 echo
+
+# FIXME #
+
+# add selection input validation (( 1 < $selection <= $number ))
 
 # manage custom input values
 
