@@ -15,6 +15,8 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 applications_list=(
 	leocad
+	leocad-position
+	leocad-configuration
 )
 
 # download #

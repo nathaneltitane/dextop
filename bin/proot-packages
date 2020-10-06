@@ -79,7 +79,41 @@ web_list=(
 	midori
 )
 
-desktop_environment_list=(
+theme_list=(
+	arc-theme
+	qt5-style-platform-gtk2
+	qt5-style-plugin-gtk2
+)
+
+frameworks_list=(
+	libqt5concurrent5
+	libqt5opengl5
+	libqt5printsupport5
+	libqt5xml5
+	povray
+	)
+
+# desktop environments
+
+blackbox_list=(
+	blackbox
+	bbmail
+	bbpager
+	bbrun
+	bbtime
+)
+
+i3_list=(
+	i3-wm
+	i3blocks
+	i3status
+	libanyevent-i3-perl
+	dmenu
+	feh
+	stterm
+)
+
+xfce4_list=(
 	xfce4
 	xfce4-goodies
 	xfce4-appfinder
@@ -141,38 +175,6 @@ desktop_environment_list=(
 	breeze-cursor-theme
 )
 
-window_manager_list=(
-	blackbox
-	bbmail
-	bbpager
-	bbrun
-	bbtime
-)
-
-i3_list=(
-	i3-wm
-	i3blocks
-	i3status
-	libanyevent-i3-perl
-	dmenu
-	feh
-	stterm
-)
-
-theme_list=(
-	arc-theme
-	qt5-style-platform-gtk2
-	qt5-style-plugin-gtk2
-)
-
-frameworks_list=(
-	libqt5concurrent5
-	libqt5opengl5
-	libqt5printsupport5
-	libqt5xml5
-	povray
-	)
-
 # install list #
 
 # core packages lists to load and install
@@ -190,6 +192,10 @@ install_list=(
 
 if [[ $install_option = "full" ]]
 then
+	desktop_environment_list=(
+		${xfce4_list[@]}
+	)
+	
 	install_list+=(
 		${web_list[@]}
 		${desktop_environment_list[@]}
@@ -203,6 +209,10 @@ fi
 
 if [[ $install_option = "minimal" ]]
 then
+	desktop_environment_list=(
+		${blackbox_list[@]}
+	)
+	
 	install_list+=(
 		${window_manager_list[@]}
 		${frameworks_list[@]}

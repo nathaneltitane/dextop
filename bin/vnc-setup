@@ -56,5 +56,5 @@ cat <<- 'FILE' > /home/${user_name}/.profile
 
 # automatic vnc session start
 
-vnc-start
+[ -f "$HOME"/.vnc/selection ] && echo $(cat "$HOME"/.vnc/selection) | vnc-start || vnc-start
 FILE

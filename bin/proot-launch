@@ -27,6 +27,9 @@ BIND_DIRECTORY=$4
 # desktop session
 
 [ -z "$DESKTOP_SESION" ]	&& DESKTOP_SESSION="blackbox"
+
+# environment defaults
+
 [ -z "$BROWSER" ]			&& BROWSER="$BROWSER"
 [ -z "$EDITOR" ]			&& EDITOR="$EDITOR"
 [ -z "$PAGER" ]				&& PAGER="$PAGER"
