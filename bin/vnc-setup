@@ -26,18 +26,19 @@ FILE
 
 # write user vnc startup file
 
-cat <<- FILE > /home/${user_name}/.vnc/xstartup
+cat <<- 'FILE' > /home/${user_name}/.vnc/xstartup
 #!/bin/bash
 
 unset DBUS_SESSION_BUS_ADDRESS
 unset SESSION_MANAGER
 
-if [[ "\$APPLICATION" != "" ]]
+if [ ! -z "$APPLICATION" ]
 then
-	\$DESKTOP_SESSION &
-	LD_PRELOAD=/lib/libandroid-shmem-aarch64.so \$APPLICATION &
+	$DESKTOP_SESSION &
+	
+	LD_PRELOAD=/lib/libandroid-shmem-aarch64.so $APPLICATION &
 else
-	dbus-launch --exit-with-session \$DESKTOP_SESSION &
+	dbus-launch --exit-with-session $DESKTOP_SESSION &
 fi
 FILE
 
