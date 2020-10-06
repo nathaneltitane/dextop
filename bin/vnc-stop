@@ -17,7 +17,7 @@ if [ ! -z "$(pgrep -f vnc)" ]
 then
 	# kill active and stale vnc output processes
 
-	vncserver -kill :* >> "${PREFIX}"/var/log/"${script}".log 2>&1 &
+	console.silence "vncserver -kill :*" &
 	
 	console.spin "Stopping display server..."
 	echo

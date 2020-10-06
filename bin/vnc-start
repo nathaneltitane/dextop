@@ -18,15 +18,16 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 PORT="590${DISPLAY:1}"
 
 vnc () {
-		vncserver \
-				-SecurityTypes none \
-				-localhost yes \
-				-depth 32 \
-				-cleanstale \
-				-name $NAME \
-				-geometry ${GEOMETRY} ${DISPLAY} >> "${PREFIX}"/var/log/"${script}".log 2>&1
-
-				# 'vncserver' uses $DISPLAY instead of $PORT
+		console.silence "
+						vncserver \
+								-SecurityTypes none \
+								-localhost yes \
+								-depth 32 \
+								-cleanstale \
+								-name $NAME \
+								-geometry ${GEOMETRY} ${DISPLAY}"
+	
+					# 'vncserver' uses $DISPLAY instead of $PORT
 
 		console.fwd "Starting display server..."
 		echo
@@ -40,7 +41,7 @@ vnc () {
 		
 		# verify user id - do not write to root
 
-		if [[ $(id -u) = 1000 ]]
+		if [[ $(id -u) -ne 0 ]]
 		then
 				# integer check: do not write non numerical values to file
 				
@@ -52,7 +53,7 @@ vnc () {
 
 		# start android vnc intent after establishing connection
 
-		am start -d vnc://${LOCALHOST}:${PORT} >> "${PREFIX}"/var/log/"${script}".log 2>&1
+		console.silence "am start -d vnc://${LOCALHOST}:${PORT}"
 }
 
 print_resolutions() {
@@ -138,6 +139,14 @@ print_resolutions() {
 	printf '\n'
 }
 
+# kill active and stale vnc output processes
+
+console.silence "vncserver -kill :*"
+
+# clean display server runtime files
+
+rm -rf /tmp/.X*
+
 # show selection
 
 print_resolutions
@@ -146,11 +155,42 @@ console.input "Selection: "
 read selection
 echo
 
-# FIXME #
+# prevent empty input selection
 
-# add selection input validation (( 1 < $selection <= $number ))
+while true
+do
+	if [ -z "$selection" ]
+	then
+		console.warning "Selection cannot be empty:"
+		echo
+	
+		console.input "Selection: "
+		read selection
+		echo
+	else
+		break
+	fi
+done
 
-# manage custom input values
+# check selection against selection range
+
+while true
+do
+	if [[ "$selection" -lt 1 ]] || [[ "$selection" -gt "$number" ]]
+	then
+		console.error "Invalid selection:"
+		console.warning "Select a format ranging from [ 1 - $number ]."
+		echo
+	
+		console.input "Selection: "
+		read selection
+		echo
+	else
+		break
+	fi
+done
+
+# manage selection
 
 case $selection in
 		c|C)
