@@ -96,10 +96,9 @@ sleep 3
 
 "$BINARIES_DIRECTORY"/proot-preferences
 
-# setup window manager configuration files
+# setup desktop environment configurations
 
-bash "$PROOT_DIRECTORY"/tmp/i3-configuration
-bash "$PROOT_DIRECTORY"/tmp/i3status-configuration
+bash "$PROOT_DIRECTORY"/tmp/blackbox-setup
 
 # checkpoint #
 

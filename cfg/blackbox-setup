@@ -35,3 +35,12 @@ do
 	
 	chown ${uid}:${gid} -R "$PROOT_DIRECTORY"/home/"$user_name"/.blackboxrc
 done
+
+# write configuration files
+
+console.info "Writing configuration files [ blackbox ]."
+echo
+
+bash "$PROOT_DIRECTORY"/tmp/blackbox-configuration
+bash "$PROOT_DIRECTORY"/tmp/blackbox-menu
+bash "$PROOT_DIRECTORY"/tmp/blackbox-theme
