@@ -14,6 +14,9 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 # configurations #
 
 configurations_list=(
+	blackbox-configuration
+	blackbox-menu
+	blackbox-theme
 	i3-configuration
 	i3status-configuration
 	xfce4-configuration

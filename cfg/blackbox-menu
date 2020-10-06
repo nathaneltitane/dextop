@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# usage #
+
+# variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# write menu file
+
+cat <<- 'FILE' > "$PROOT_DIRECTORY"/home/"$user_name"/.blackbox/menu
+[begin] (Menu)
+
+	[submenu] (Applications)
+		[submenu] (Shells)
+			[exec] (Bash)  {x-terminal-emulator -e /bin/bash}
+		[end]
+		
+		[submenu] (System)
+			[submenu] (Administration)
+			[exec] (Pager)  {/usr/bin/bbpager}
+			[exec] (Run)  {/usr/bin/bbrun}
+			[exec] (Mail) {/usr/bin/bbmail}
+			[end]
+			[submenu] (Monitoring)
+			[end]
+		[end]
+		
+		[submenu] (Graphics)
+			[exec] (LeoCAD) {/usr/bin/leocad}
+		[end]
+	[end]
+	
+	[submenu] (Blackbox)
+		[config] (Configuration)
+		
+		[submenu] (Styles)
+		[stylesdir] (home/nathanel/.blackbox/styles)
+		[stylesdir] (/usr/share/blackbox/styles)
+		[end]
+		
+		[workspaces] (Workspaces)
+	[end]
+		
+[sep]
+
+[reconfig] (Reconfigure)
+[restart] (Restart)
+[exit] (Exit)
+		
+[end]
+FILE

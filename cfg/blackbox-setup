@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# usage #
+
+# variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# directories #
+
+# blackbox
+
+console.info "Creating directories [ blackbox ]."
+echo
+
+system_directories_list=(
+	.blackbox/styles
+)
+
+for directory in ${system_directories_list[@]}
+do
+	console.fwd "Creating directory [ ${directory} ]."
+	echo
+
+	# create directory and set permissions
+
+	[ ! -d "$PROOT_DIRECTORY"/home/"$user_name"/"${directory}" ] && mkdir -p "$PROOT_DIRECTORY"/usr/share/"${directory}" || :
+	
+	# set ownership
+	
+	chown ${uid}:${gid} -R "$PROOT_DIRECTORY"/home/"$user_name"/.blackboxrc
+done

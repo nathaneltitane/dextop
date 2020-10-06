@@ -11,7 +11,9 @@ source /data/data/com.termux/files/usr/bin/globals
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-# directories
+# directories #
+
+# system
 
 console.info "Creating directories."
 echo
