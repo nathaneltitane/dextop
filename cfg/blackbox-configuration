@@ -16,14 +16,14 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 cat <<- 'FILE' > "$PROOT_DIRECTORY"/home/"$user_name"/.blackboxrc
 session.menuFile:                                /home/nathanel/.blackbox/menu
 session.styleFile:                               /home/nathanel/.blackbox/styles/Red
-session.screen0.slit.placement:                  BottomRight
+session.screen0.slit.placement:                  BottomLeft
 session.screen0.slit.direction:                  Horizontal
 session.screen0.slit.onTop:                      True
 session.screen0.slit.autoHide:                   False
 session.screen0.toolbar.onTop:                   False
 session.screen0.toolbar.autoHide:                True
-session.screen0.toolbar.placement:               TopCenter
-session.screen0.toolbar.widthPercent:            80
+session.screen0.toolbar.placement:               TopLeft
+session.screen0.toolbar.widthPercent:            100
 session.screen0.enableToolbar:                   True
 session.screen0.workspaces:                      4
 session.screen0.workspaceNames:                  [ 1 ],[ 2 ],[ 3 ],[ 4 ]
@@ -34,7 +34,7 @@ session.shadeWindowWithMouseWheel:               True
 session.edgeSnapThreshold:                       0
 session.focusNewWindows:                         True
 session.rowPlacementDirection:                   LeftToRight
-session.imageDither:                             OrderedDither
+session.imageDither:                             FloydSteinbergDither
 session.changeWorkspaceWithMouseWheel:           True
 session.toolbarActionsWithMouseWheel:            True
 session.autoRaiseDelay:                          200

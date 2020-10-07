@@ -15,11 +15,11 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # blackbox
 
-console.info "Creating directories [ blackbox ]."
+console.info "Creating directories [ leocad ]."
 echo
 
 system_directories_list=(
-	.blackbox/styles
+	.config/"LeoCAD Software"
 )
 
 for directory in ${system_directories_list[@]}
@@ -38,9 +38,7 @@ done
 
 # write configuration files
 
-console.info "Writing configuration files [ blackbox ]."
+console.info "Writing configuration files [ leocad ]."
 echo
 
-bash "$PROOT_DIRECTORY"/tmp/blackbox-configuration
-bash "$PROOT_DIRECTORY"/tmp/blackbox-menu
-bash "$PROOT_DIRECTORY"/tmp/blackbox-theme
+bash "$PROOT_DIRECTORY"/tmp/leocad-configuration

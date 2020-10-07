@@ -100,6 +100,12 @@ sleep 3
 
 bash "$PROOT_DIRECTORY"/tmp/blackbox-setup
 
+# applications
+
+# setup desktop environment configurations
+
+bash "$PROOT_DIRECTORY"/tmp/applications-setup
+
 # checkpoint #
 
 # confirm uninterrupted setup for cleanup
