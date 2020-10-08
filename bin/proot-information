@@ -22,20 +22,37 @@ echo
 
 # values #
 
-input_list=(
+values_list=(
 	first_name
 	last_name
 	user_email
 )
 
-for value in "${input_list[@]}"
+for value in "${values_list[@]}"
 do
 	console.input "$(echo ${value^} | sed 's/_/ /')...: "
+	read input
 	
-	read -r input
+	# prevent empty input value
+	
+	while true
+	do
+		if [ -z "$input" ]
+		then
+			echo
+			console.error "Value cannot be empty:"
+			console.warning "Values are required for a successful setup."
+			echo
+		
+			console.input "$(echo ${value^} | sed 's/_/ /')...: "
+			read input
 
-	eval "$value"="$input"
+		else
+			break
+		fi
+	done
 	
+	eval "$value"="$input"
 done
 
 echo
