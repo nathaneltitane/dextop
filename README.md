@@ -19,13 +19,7 @@ This project provides any user owning a modern android device, the ability to se
 Once the Android applications are installed on your device, open Termux and paste
 
 ```
-if [ "$selection" -ne "$number" ]
-then
-	echo try again
-	read selection
-else
-break
-fi | <option> | <output>
+curl -sL dxtp.app > setup && bash setup | <option> | <output>
 ```
 
 where available install options are:
