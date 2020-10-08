@@ -24,15 +24,17 @@ BIND_DIRECTORY=$4
 
 # set defaults
 
-# desktop session
-
-[ -z "$DESKTOP_SESION" ]	&& DESKTOP_SESSION="blackbox"
+DESKTOP_SESSION="blackbox"
+PAGER="bbpager"
+RUNNER="bbrun"
 
 # environment defaults
 
+[ -z "$DESKTOP_SESION" ]	&& DESKTOP_SESSION="$DESKTOP_SESSION"
 [ -z "$BROWSER" ]			&& BROWSER="$BROWSER"
 [ -z "$EDITOR" ]			&& EDITOR="$EDITOR"
 [ -z "$PAGER" ]				&& PAGER="$PAGER"
+[ -z "$RUNNER" ]			&& RUNNER="$RUNNER"
 [ -z "$TERMINAL" ]			&& TERMINAL="$TERM"
 [ -z "$VISUAL" ]			&& VISUAL="$VISUAL"
 

@@ -19,7 +19,7 @@ console.info "Creating directories [ blackbox ]."
 echo
 
 system_directories_list=(
-	.blackbox/styles
+	.blackbox
 )
 
 for directory in ${system_directories_list[@]}
@@ -29,7 +29,7 @@ do
 
 	# create directory and set permissions
 
-	[ ! -d "$PROOT_DIRECTORY"/home/"$user_name"/"${directory}" ] && mkdir -p "$PROOT_DIRECTORY"/usr/share/"${directory}" || :
+	[ ! -d "$PROOT_DIRECTORY"/home/"$user_name"/"${directory}" ] && "$PROOT_DIRECTORY"/home/"$user_name"/"${directory}" || :
 	
 	# set ownership
 	

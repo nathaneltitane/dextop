@@ -190,7 +190,6 @@ then
 	install_list+=(
 		${web_list[@]}
 		${desktop_environment_list[@]}
-		${window_manager_list[@]}
 		${theme_list[@]}
 		${frameworks_list[@]}
 	)
@@ -205,7 +204,7 @@ then
 	)
 	
 	install_list+=(
-		${window_manager_list[@]}
+		${desktop_environment_list[@]}
 		${frameworks_list[@]}
 	)
 fi

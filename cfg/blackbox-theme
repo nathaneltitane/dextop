@@ -13,7 +13,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # write menu file
 
-cat <<- 'FILE' > "$PROOT_DIRECTORY"/home/"$user_name"/.blackbox/styles/"${theme}"
+cat <<- 'FILE' > "$PROOT_DIRECTORY"/usr/share/blackbox/styles/theme
 rootCommand: bsetroot -solid #232629
 
 *backgroundColor: #313437

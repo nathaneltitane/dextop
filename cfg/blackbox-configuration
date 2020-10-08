@@ -15,7 +15,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 cat <<- 'FILE' > "$PROOT_DIRECTORY"/home/"$user_name"/.blackboxrc
 session.menuFile:                                /home/nathanel/.blackbox/menu
-session.styleFile:                               /home/nathanel/.blackbox/styles/Red
+session.styleFile:                               /home/nathanel/.blackbox/theme
 session.screen0.slit.placement:                  BottomLeft
 session.screen0.slit.direction:                  Horizontal
 session.screen0.slit.onTop:                      True

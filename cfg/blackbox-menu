@@ -27,7 +27,6 @@ cat <<- 'FILE' > "$PROOT_DIRECTORY"/home/"$user_name"/.blackbox/menu
 		[end]
 		[config] (Configuration)
 		[submenu] (Styles)
-		[stylesdir] (home/nathanel/.blackbox/styles)
 		[stylesdir] (/usr/share/blackbox/styles)
 		[end]
 		[workspaces] (Workspaces)

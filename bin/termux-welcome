@@ -26,7 +26,7 @@ console.fwd "Welcome to Termux Dextop!"
 echo
 
 console.info "Run 'proot-launch <username>' to start your session."
-console.info "Run 'proot-launch <username> <application>' to start a specific application on session load."
+console.info "Run 'proot-launch <username> <application>' to start an application with your session."
 echo
 
 FILE
