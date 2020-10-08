@@ -15,8 +15,6 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 cat <<- 'FILE' > "$PROOT_DIRECTORY"/usr/share/blackbox/menu
 [begin] (Menu)
-	[exec] (Bash)  {x-terminal-emulator -e /bin/bash}
-	[exec] (Nano)  {x-terminal-emulator -e /usr/bin/nano}
 	[exec] (LeoCAD) {/usr/bin/leocad}
 	[sep]
 	[submenu] (Blackbox)
