@@ -16,6 +16,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 applications_list=(
 	applications-setup
 	leocad
+	leocad-arm64
 	leocad-position
 	leocad-configuration
 )
