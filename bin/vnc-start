@@ -161,6 +161,7 @@ while true
 do
 	if [ -z "$selection" ]
 	then
+	  echo
 		console.warning "Selection cannot be empty:"
 		echo
 	
