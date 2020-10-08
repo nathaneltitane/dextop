@@ -268,3 +268,37 @@ console.silence () {
 	
 	"${SHELL}" -c "${command}" >> "${PREFIX}"/var/log/"${script}"-"${stamp}".log 2>&1
 }
+
+# empty
+
+console.empty () {
+	value="$1"
+	message="$2"
+	
+	# prompt is declared on values list input request
+	
+  	while true
+  	do
+  		if [ -z "$input" ]
+  		then
+  			echo
+  			console.error "${value} cannot be empty:"
+  			console.warning "${value} ${message}"
+  			echo
+  		
+  			console.input "${prompt}"
+  			read input
+  
+  		else
+  			break
+  		fi
+  	done
+}
+
+
+
+
+
+
+
+

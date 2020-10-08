@@ -13,80 +13,24 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # values #
 
-input_list=(
-	vnc_password
+values_list=(
+  vnc_password
 )
 
-for value in "${input_list[@]}"
+for value in "${values_list[@]}"
 do
-	console.input "$(echo ${value^} | sed 's/_/ /')...: "
-
-	# obfuscate password using prompt variable
-	# when $value=user_password
-
-	if [[ "$value" = vnc_password ]]
-	then
-		unset password
-
-		while IFS= read -p "$prompt" -r -s -n 1 character
-		do
-				# enter / accept password
-
-				if [[ $character == $'\0' ]]
-				then
-					# break on 'NUL'
-
-					break
-				fi
-
-				# handle backspace / delete character input
-
-				if [[ $character == $'\177' ]]
-				then
-					# remove input on 'BACKSPACE'/'DEL'
-
-					prompt=$'\b \b'
-					password="${password%?}"
-				else
-					# set character mask
-
-					prompt='+'
-					password+="$character"
-				fi
-		done
-	else
-		read -r input
-	fi
-
-	# set input for evaluation
-
-	input="${password}"
+	prompt="$(echo ${value^} | sed 's/_/ /')...: "
 	
-	# prevent empty input values
-
-	while true
-	do
-		if [ -z "$input" ]
-		then
-		  echo
-			console.warning "Input cannot be empty:"
-			console.warning "Values are required for a successful setup."
-			echo
-
-			read -r input
-		else
-			eval "$value"="$input"
-
-			break
-		fi
-	done
+	console.input "${prompt}"
+	read input
+	
+	# prevent empty input
+	
+	console.empty Password "is required for a successful setup."
+	
+	eval "$value"="$input"
 done
 
-# unset IFS
-
-IFS=''
-
-echo
 echo
 
 # hash password  using 'vncpasswd' utility and store it

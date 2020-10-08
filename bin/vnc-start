@@ -151,27 +151,15 @@ rm -rf /tmp/.X*
 
 print_resolutions
 
-console.input "Selection: "
+prompt="Selection: "
+
+console.input "${prompt}"
 read selection
 echo
 
-# prevent empty input selection
+# prevent empty input
 
-while true
-do
-	if [ -z "$selection" ]
-	then
-	  echo
-		console.warning "Selection cannot be empty:"
-		echo
-	
-		console.input "Selection: "
-		read selection
-		echo
-	else
-		break
-	fi
-done
+console.empty Selection "required to start display output."
 
 # check selection against selection range
 
