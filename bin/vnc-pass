@@ -22,7 +22,8 @@ do
 	prompt="$(echo ${value^} | sed 's/_/ /')...: "
 	
 	console.input "${prompt}"
-	read input
+	
+	[[ "$value" = *password* ]] && read -s input || read input
 	
 	# prevent empty input
 	
