@@ -13,7 +13,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # write menu file
 
-cat <<- 'FILE' > "$PROOT_DIRECTORY"/home/"$user_name"/.blackbox/menu
+cat <<- 'FILE' > "$PROOT_DIRECTORY"/usr/share/blackbox/menu
 [begin] (Menu)
 	[exec] (Bash)  {x-terminal-emulator -e /bin/bash}
 	[exec] (Nano)  {x-terminal-emulator -e /usr/bin/nano}
@@ -27,6 +27,7 @@ cat <<- 'FILE' > "$PROOT_DIRECTORY"/home/"$user_name"/.blackbox/menu
 		[end]
 		[config] (Configuration)
 		[submenu] (Styles)
+
 		[stylesdir] (/usr/share/blackbox/styles)
 		[end]
 		[workspaces] (Workspaces)
