@@ -179,6 +179,7 @@ while true
 do
 	if [[ "$selection" -lt 1 ]] || [[ "$selection" -gt "$number" ]]
 	then
+	  echo
 		console.error "Invalid selection:"
 		console.warning "Select a format ranging from [ 1 - $number ]."
 		echo

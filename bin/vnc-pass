@@ -68,6 +68,7 @@ do
 	do
 		if [ -z "$input" ]
 		then
+		  echo
 			console.warning "Input cannot be empty:"
 			console.warning "Values are required for a successful setup."
 			echo
