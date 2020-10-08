@@ -15,7 +15,7 @@ libraries_list=(
 
 for library in ${libraries_list[@]}
 do
-	console.get lib-dex.ntttn.me "${library}" "$PROOT_DIRECTORY"/lib
+	console.get lib.dxtp.app "${library}" "$PROOT_DIRECTORY"/lib
 
 	console.download "Downloading library [ ${library} ]."
 	echo

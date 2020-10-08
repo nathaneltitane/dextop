@@ -22,7 +22,7 @@ images_list=(
 
 for image in ${images_list[@]}
 do
-	console.get img-dex.ntttn.me "${image}" "$PROOT_DIRECTORY"/usr/share/backgrounds
+	console.get img.dxtp.app "${image}" "$PROOT_DIRECTORY"/usr/share/backgrounds
 
 	console.download "Downloading image [ ${image} ]."
 	echo

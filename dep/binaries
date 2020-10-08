@@ -42,7 +42,7 @@ binaries_list=(
 
 for binary in ${binaries_list[@]}
 do
-	console.get bin-dex.ntttn.me "${binary}" "$BINARIES_DIRECTORY"
+	console.get bin.dxtp.app "${binary}" "$BINARIES_DIRECTORY"
 
 	console.download "Downloading binary [ ${binary} ]."
 	echo

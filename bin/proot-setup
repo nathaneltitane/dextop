@@ -27,10 +27,10 @@ source /data/data/com.termux/files/usr/bin/globals
 
 # source
 
-console.get dep-dex.ntttn.me applications "$BINARIES_DIRECTORY"
-console.get dep-dex.ntttn.me configurations "$BINARIES_DIRECTORY"
-console.get dep-dex.ntttn.me images "$BINARIES_DIRECTORY"
-console.get dep-dex.ntttn.me libraries "$BINARIES_DIRECTORY"
+console.get dep.dxtp.app applications "$BINARIES_DIRECTORY"
+console.get dep.dxtp.app configurations "$BINARIES_DIRECTORY"
+console.get dep.dxtp.app images "$BINARIES_DIRECTORY"
+console.get dep.dxtp.app libraries "$BINARIES_DIRECTORY"
 
 # execute
 

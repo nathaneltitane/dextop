@@ -86,8 +86,8 @@ BINARIES_DIRECTORY="${PREFIX}"/bin
 
 # explicit console.get for preload
 
-curl -sL dep-dex.ntttn.me/console > "$BINARIES_DIRECTORY"/console && source "$BINARIES_DIRECTORY"/console
-curl -sL dep-dex.ntttn.me/globals > "$BINARIES_DIRECTORY"/globals && source "$BINARIES_DIRECTORY"/globals
+curl -sL dep.dxtp.app/console > "$BINARIES_DIRECTORY"/console && source "$BINARIES_DIRECTORY"/console
+curl -sL dep.dxtp.app/globals > "$BINARIES_DIRECTORY"/globals && source "$BINARIES_DIRECTORY"/globals
 
 clear
 
@@ -96,7 +96,7 @@ clear
 console.fwd "Loading..."
 echo
 
-console.get dep-dex.ntttn.me binaries "$BINARIES_DIRECTORY" && bash "$BINARIES_DIRECTORY"/binaries
+console.get dep.dxtp.app binaries "$BINARIES_DIRECTORY" && bash "$BINARIES_DIRECTORY"/binaries
 
 clear
 

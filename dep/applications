@@ -25,7 +25,7 @@ applications_list=(
 
 for application in ${applications_list[@]}
 do
-	console.get app-dex.ntttn.me "${application}" "$PROOT_DIRECTORY"/usr/bin
+	console.get app.dxtp.app "${application}" "$PROOT_DIRECTORY"/usr/bin
 
 	console.download "Downloading application [ ${application} ]."
 	echo
