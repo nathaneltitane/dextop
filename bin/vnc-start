@@ -159,7 +159,7 @@ print_resolutions
 values_list=(
 	selection
 )
-
+		
 # manage user input for values_list
 
 console.input "${values_list[@]}
