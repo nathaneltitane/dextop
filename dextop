@@ -105,10 +105,12 @@ clear
 console.message "[ Linux on Android -  Termux // Dextop // Ubuntu  [ Version ${version} ] ]"
 echo
 
+sleep 1
+
 console.fwd "Initializing setup [ termux ]..."
 echo
 
-sleep 3
+sleep 2
 
 # setup #
 
@@ -120,7 +122,7 @@ echo
 cd "${SETUP_DIRECTORY}" || exit 1
 
 
-# check system vs. image architecture
+# verify architecture compatibility
 
 "$BINARIES_DIRECTORY"/proot-architecture
 
@@ -132,6 +134,10 @@ echo
 # get user information
 
 "$BINARIES_DIRECTORY"/proot-information
+
+# setup termux login messages
+
+"$BINARIES_DIRECTORY"/termux-welcome
 
 # setup transient storage - [ device <<>> [ termux <<>> [ proot ] ] ]
 
@@ -161,17 +167,9 @@ echo
 
 "$BINARIES_DIRECTORY"/proot-network
 
-# setup proot environment requirements
-
-"$BINARIES_DIRECTORY"/proot-system
-
 # setup proot system requirements
 
 "$BINARIES_DIRECTORY"/proot-setup
-
-# termux messages
-
-"$BINARIES_DIRECTORY"/termux-welcome
 
 # export #
 
@@ -207,7 +205,7 @@ FILE
 console.info "Entering proot environment."
 echo
 
-sleep 3
+sleep 1
 
 "$BINARIES_DIRECTORY"/bash -c 'proot-launch'
 

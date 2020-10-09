@@ -63,14 +63,14 @@ clear
 console.message "[ Linux on Android -  Termux // Dextop // Ubuntu  [ Version ${version} ] ]"
 echo
 
-sleep 3
+sleep 1
 
 # setup #
 
 console.fwd "Completing setup [ proot ]..."
 echo
 
-sleep 3
+sleep 2
 
 # packages
 
