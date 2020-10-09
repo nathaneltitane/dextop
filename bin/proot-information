@@ -28,19 +28,9 @@ values_list=(
 	user_email
 )
 
-for value in "${values_list[@]}"
-do
-	prompt="$(echo ${value^} | sed 's/_/ /'): "
-	
-	console.in "${prompt}"
-	read input
-	
-	# prevent empty input
-	
-	console.empty Information "is required for a successful setup."
-	
-	eval "$value"="$input"
-done
+# manage user input for values_list
+
+console.input "${values_list[@]}"
 
 echo
 
