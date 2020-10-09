@@ -4,6 +4,11 @@
 
 # linux-dextop # Linux on Android # Termux Dextop // Ubuntu Dextop #
 
+# variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+version="10-01-2020"
+
 # usage #
 
 while (($#))
@@ -59,11 +64,6 @@ do
 		esac
 	shift
 done
-
-# variables #
-
-script=$(basename -- "${BASH_SOURCE[0]}")
-version="10-01-2020"
 
 install_option=$1
 display_output=$2
@@ -180,13 +180,9 @@ FILE
 
 # cleanup #
 
-# purge all setup traces
-# use BASH_SROUCE for all bash-specific invocations to the script path
-# $0 is POSIX compliant but may not always return the correct value
-
 # remove script
 
-rm "$INITIAL_DIRECTORY/${script}" || :
+rm "${HOME}"/setup || :
 
 # automatic proot setup transition:
 # run 'proot-launch' as 'root'

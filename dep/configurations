@@ -18,9 +18,6 @@ configurations_list=(
 	blackbox-menu
 	blackbox-setup
 	blackbox-theme
-	i3-configuration
-	i3status-configuration
-	xfce4-configuration
 )
 
 # download #
