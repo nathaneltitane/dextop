@@ -25,20 +25,20 @@ curl -sL get.dxtp.app > setup && bash setup | <option> | <output>
 where available install options are:
 
 ```
--f | --full:         download and install full desktop environment and utilities.
--m | --minimal:      download and install minimal set of utilities.                  [ Default ]
+-f | --full:         download and install full desktop environment and utilities.    ( xfce4    )
+-m | --minimal:      download and install minimal desktop environment and utilities. ( blackbox ) [ Default ]
 ```
 
 and additional optimized and precompiled arm64 applications can be downloaded using:
 
 ```
--a | --applications: download a set of optimized and precompiled arm64 applications. [ Default ]
+-a | --applications: download a set of optimized and precompiled arm64 applications.            [ Default ]
 ```
 
 available display output options are:
 
 ```
--c | --vnc:          download and setup vnc protocol display output.                 [ Default ]
+-c | --vnc:          download and setup vnc protocol display output.                            [ Default ]
 -x | --xorg:         download and setup xorg/xrdp protocol display output.
 ```
 
@@ -63,10 +63,19 @@ The rest of the setup is fully automated and should run its course until the pro
 - 
 ### Note:
 The setup dialogs, prompts, comaands and binaries have been made to redirect all output to Termux's /var/log directory to keep the information stream to a minimum.
+
 Should you suspect any issues or errors, please provide those files when submitting a bug report.
 
 ### Usage:
-- Run ```'proot-launch <username>'``` to start your session.
+
+On Termux load:
+
+- Run ```'proot-launch <username>'```               to start your session.
 - Run ```'proot-launch <username> <application>'``` to start a specific application on session load.
 
-When in the proot
+When in the proot environment:
+
+- Run ```'vnc-start'``` to start your session."
+
+### Note:
+If you've already logged in, your selection has been saved for automatic startup on shell login ("$HOME"$.vnc/selection)

@@ -36,7 +36,7 @@ do
 			echo -e "USAGE:"
 			echo -e ""
 			echo -e "-f, --full \t Full setup: download and install full desktop environment and utilities."
-			echo -e "-m, --minimal \t Minimal setup: download and install minimal set of utilities:."
+			echo -e "-m, --minimal \t Minimal setup: download and install minimal desktop environment and utilities."
 			echo -e ""
 			echo -e "-a, --applications: Download a set of optimized and precompiled arm64 applications."
 			echo -e ""
