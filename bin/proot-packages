@@ -47,6 +47,7 @@ utilities_list=(
 	sudo
 	wmctrl
 	xdotool
+	youtube-dl
 )
 
 display_server_list=(

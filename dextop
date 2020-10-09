@@ -1,13 +1,15 @@
 #!/bin/bash
 
-# Author: Nathanel Titane - nathanel.titane@gmail.com
+# author #
 
-# linux-dextop # Linux on Android # Termux Dextop // Ubuntu Dextop #
+# Nathanel Titane - nathanel.titane@gmail.com
+
+# linux-dextop # Termux // Dextop // Ubuntu #
 
 # variables #
 
 script=$(basename -- "${BASH_SOURCE[0]}")
-version="10-01-2020"
+version="10-10-2020"
 
 # usage #
 
@@ -48,7 +50,7 @@ do
 			;;
 		-v|--version)
 			echo -e ""
-			echo -e "$script $version"
+			echo -e "$script [ Version $version ]"
 			echo -e ""
 			exit
 			;;
@@ -100,7 +102,7 @@ console.get dep.dxtp.app binaries "$BINARIES_DIRECTORY" && bash "$BINARIES_DIREC
 
 clear
 
-console.message "[ Linux on Android - Termux Dextop // Ubuntu Dextop [ Version ${version} ] ]"
+console.message "[ Linux on Android -  Termux // Dextop // Ubuntu  [ Version ${version} ] ]"
 echo
 
 console.fwd "Initializing setup [ termux ]..."
