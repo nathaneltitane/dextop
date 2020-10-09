@@ -169,7 +169,7 @@ do
 	
 	# prevent empty input
 	
-	console.empty Selection "is required for a successful setup."
+	console.empty Information "is required for a successful setup."
 	
 	eval "$value"="$input"
 done

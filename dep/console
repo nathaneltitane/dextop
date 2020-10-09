@@ -297,7 +297,7 @@ console.silence () {
 # empty
 
 console.empty () {
-	value="$1"
+	information="$1"
 	message="$2"
 	
 	# prompt is declared on values list input request
@@ -307,8 +307,8 @@ console.empty () {
 		if [ -z "$input" ]
 		then
 			echo
-			console.error "${value} cannot be empty:"
-			console.warning "${value} ${message}"
+			console.error "${information} cannot be empty:"
+			console.warning "${information} ${message}"
 			echo
 		
 			console.input "${prompt}"
