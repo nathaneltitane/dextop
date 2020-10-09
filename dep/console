@@ -256,7 +256,6 @@ console.spin () {
 console.download () {
 	source="$1"
 	path="$2"
-	command="$3"
 	
 	# downloads_list is declared as an array prior to download request
 	
@@ -267,7 +266,8 @@ console.download () {
 		console.down "Downloading [ ${file} ]."
 		echo
 	
-		"${command} ${path}/${file}"
+		chmod +x "${path}"/"${file}"
+
 	done
 }
 
@@ -282,6 +282,8 @@ console.get () {
 
 	console.down "Downloading [ ${file} ]."
 	echo
+	
+	chmod +x "${path}"/"${file}"
 }
 
 # silence

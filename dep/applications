@@ -23,7 +23,4 @@ downloads_list=(
 
 # download #
 
-console.download \
-		app.dxtp.app \
-		"$PROOT_DIRECTORY"/usr/bin \
-		"chmod +x" 
+console.download app.dxtp.app "$PROOT_DIRECTORY"/usr/bin

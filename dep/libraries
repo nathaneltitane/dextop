@@ -13,7 +13,4 @@ downloads_list=(
 
 # download #
 
-console.download \
-		lib.dxtp.app \
-		"$PROOT_DIRECTORY"/lib \
-		"chmod +x" 
+console.download lib.dxtp.app "$PROOT_DIRECTORY"/lib

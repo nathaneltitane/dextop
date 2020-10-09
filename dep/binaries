@@ -42,7 +42,4 @@ downloads_list=(
 
 # download #
 
-console.download								\
-	bin.dxtp.app								\
-	"$BINARIES_DIRECTORY"						\
-	"chmod +x $BINARIES_DIRECTORY/${binary}"
+console.download bin.dxtp.app "$BINARIES_DIRECTORY"

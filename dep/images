@@ -20,7 +20,4 @@ downloadss_list=(
 
 # download #
 
-console.download \
-		img.dxtp.app \
-		"$PROOT_DIRECTORY"/usr/share/backgrounds \
-		"chmod +x" 
+console.download img.dxtp.app "$PROOT_DIRECTORY"/usr/share/backgrounds
