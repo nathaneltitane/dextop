@@ -25,21 +25,21 @@ curl -sL get.dxtp.app > setup && bash setup | <option> | <output>
 where available install options are:
 
 ```
--f | --full:         download and install full desktop environment and utilities.    ( xfce4    )
--m | --minimal:      download and install minimal desktop environment and utilities. ( blackbox ) [ Default ]
-```
-
-and additional optimized and precompiled arm64 applications can be downloaded using:
-
-```
--a | --applications: download a set of optimized and precompiled arm64 applications.            [ Default ]
+-f | --full: download and install full desktop environment and utilities. ( xfce4 )
+-m | --minimal: download and install minimal desktop environment and utilities. ( blackbox ) [ Default ]
 ```
 
 available display output options are:
 
 ```
--c | --vnc:          download and setup vnc protocol display output.                            [ Default ]
--x | --xorg:         download and setup xorg/xrdp protocol display output.
+-c | --vnc: download and setup vnc protocol display output.[ Default ]
+-x | --xorg: download and setup xorg/xrdp protocol display output.
+```
+
+and additional optimized and precompiled arm64 applications can be downloaded using:
+
+```
+-a | --applications: download a set of optimized and precompiled arm64 applications. [ Default ]
 ```
 
 The options flagged with the [ Default ] tag are automatically passed if no options have been explicitly set by the user.
@@ -60,7 +60,7 @@ The rest of the setup is fully automated and should run its course until the pro
 - Information is then captured to properly configure and setup a user environment in the proot.
 - The base ubuntu image is downloaded, unpacked and setup from within the Termux environment.
 - The setup transitions into the newly unpacked proot environment and proceeds with configuring and installing the rest of your setup.
-- 
+
 ### Note:
 The setup dialogs, prompts, comaands and binaries have been made to redirect all output to Termux's /var/log directory to keep the information stream to a minimum.
 
