@@ -62,7 +62,7 @@ The rest of the setup is fully automated and should run its course until the pro
 - The setup transitions into the newly unpacked proot environment and proceeds with configuring and installing the rest of your setup.
 
 ### Note:
-The setup dialogs, prompts, comaands and binaries have been made to redirect all output to Termux's /var/log directory to keep the information stream to a minimum.
+The setup dialogs, prompts, comaands and binaries have been made to redirect all output to the Termux ```'/var/log'``` directory, keeping output messages to a minimum.
 
 Should you suspect any issues or errors, please provide those files when submitting a bug report.
 
