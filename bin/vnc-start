@@ -163,7 +163,7 @@ values_list=(
 
 # manage user input for values_list
 
-console.input "${values_list[@]}
+console.input "${values_list[@]}"
 
 # check selection against selection range
 
