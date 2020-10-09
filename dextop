@@ -153,6 +153,10 @@ echo
 
 "$BINARIES_DIRECTORY"/termux-environment
 
+# setup proot libraries preload for enhanced performance
+
+"$BINARIES_DIRECTORY"/proot-libraries
+
 # setup proot environment requirements
 
 "$BINARIES_DIRECTORY"/proot-system

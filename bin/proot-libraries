@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# usage #
+
+# variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# environment
+
+console.info "Setting library preload."
+echo
+
+cat <<- "FILE" >> "$PROOT_DIRECTORY"/etc/environment
+LD_PRELOAD=/lib/aarch64-linux-gnu/libgcc_s.so.1:/lib/libandroid-shmem-aarch64.so
+FILE
