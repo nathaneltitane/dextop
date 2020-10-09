@@ -182,7 +182,7 @@ FILE
 
 # remove script
 
-rm "${HOME}"/setup || :
+rm "$HOME"/setup || :
 
 # automatic proot setup transition:
 # run 'proot-launch' as 'root'
@@ -193,6 +193,6 @@ echo
 
 sleep 3
 
-$BINARIES_DIRECTORY/bash -c 'proot-launch'
+"$BINARIES_DIRECTORY"/bash -c 'proot-launch'
 
 clear
