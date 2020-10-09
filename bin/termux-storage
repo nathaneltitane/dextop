@@ -25,23 +25,23 @@ then
 	echo
 else
 	# does not exist - enable storage permissions: requires user touch input
-	
+
 	console.warning "Termux requires user permission to access storage on this device..."
 	echo
-	
+
 	console.fwd "Both internal and external storage are made available:"
 	echo
-	
+
 	console.info "Allowing access greatly benefits the desktop experience"
 	console.info "and will make the device's storage visble and accessible"
 	console.info "through your desktop session and file manager."
 	echo
-	
+
 	console.choice "Select 'Allow' or 'Deny' when prompted"
 	console.choice "to enable or disable storage access permission."
 	echo
-
-	sleep 10
+	
+	console.countdown "Permissions dialog in: " 5
 
 	# trigger storage permissions dialog
 
