@@ -11,76 +11,44 @@ source /data/data/com.termux/files/usr/bin/globals
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-# directories #
+# silence login prompt
 
-# system
-
-console.info "Creating directories."
+console.info "Silencing login messages."
 echo
 
-system_directories_list=(
-	backgrounds
-	fonts
-)
+cat <<- 'FILE' >> "$HOME"/.hushlogin
 
-for directory in ${system_directories_list[@]}
-do
-	console.fwd "Creating directory [ ${directory} ]."
-	echo
-
-	# create directory and set permissions
-
-	[ ! -d "$PROOT_DIRECTORY"/usr/share/"${directory}" ] && mkdir -p "$PROOT_DIRECTORY"/usr/share/"${directory}" || :
-	
-	# set ownership
-	
-	chown ${uid}:${gid} -R "$PROOT_DIRECTORY"/usr/share/"${directory}"
-done
-
-# files #
-
-# environment
-
-console.info "Setting library preload."
-echo
-
-cat <<- "FILE" >> "$PROOT_DIRECTORY"/etc/environment
-LD_PRELOAD=/lib/aarch64-linux-gnu/libgcc_s.so.1:/lib/libandroid-shmem-aarch64.so
 FILE
 
-# hostname
-
-console.info "Setting hostname."
+console.info "Creating required configuration files."
 echo
 
-echo ${hostname} > "$PROOT_DIRECTORY"/etc/hostname
+# .bash_aliases
 
-console.info "Setting host address."
-echo
+cat <<- 'FILE' >> "$HOME"/.bash_aliases
 
-# hosts
-
-cat <<- 'FILE' > "$PROOT_DIRECTORY"/etc/hosts
-127.0.0.1 localhost.localdomain
-127.0.0.1 localhost
 FILE
 
-echo "127.0.0.1 ${hostname}" >> "$PROOT_DIRECTORY"/etc/hosts
+# .bash_profile
 
-# nameserver
+cat <<- 'FILE' >> "$HOME"/.bash_profile
 
-console.info "Setting namserver address."
-echo
-
-cat <<- 'FILE' > "$PROOT_DIRECTORY"/etc/resolv.conf
-nameserver 8.8.8.8
 FILE
 
-# profile
+# .bash_logout
 
-# automatic setup transition [ termux >>> [ proot ] ]
+cat <<- 'FILE' >> "$HOME"/.bash_logout
 
-cat <<- 'FILE' >> "$PROOT_DIRECTORY"/root/.profile
+FILE
 
-bash /tmp/setup
+# .bashrc
+
+cat <<- 'FILE' >> "$HOME"/.bashrc
+
+FILE
+
+# .profile
+
+cat <<- 'FILE' >> "$HOME"/.profile
+
 FILE

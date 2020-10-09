@@ -20,9 +20,9 @@ binaries_list=(
 	proot-information
 	proot-launch
 	proot-packages
-	proot-preferences
 	proot-setup
 	proot-superuser
+	proot-system
 	proot-user
 	termux-environment
 	termux-groups

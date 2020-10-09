@@ -94,7 +94,7 @@ sleep 3
 
 # setup preconfigured preferences
 
-"$BINARIES_DIRECTORY"/proot-preferences
+"$BINARIES_DIRECTORY"/proot-environment
 
 # setup desktop environment configurations
 

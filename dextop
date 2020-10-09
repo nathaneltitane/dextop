@@ -155,7 +155,7 @@ echo
 
 # setup proot environment requirements
 
-"$BINARIES_DIRECTORY"/proot-environment
+"$BINARIES_DIRECTORY"/proot-system
 
 # setup proot system requirements
 
@@ -186,7 +186,13 @@ FILE
 
 rm "$HOME"/setup || :
 
-# automatic proot setup transition:
+# automatic setup transition [ termux >>> [ proot ] ]
+
+cat <<- 'FILE' >> "$PROOT_DIRECTORY"/root/.profile
+
+bash /tmp/setup
+FILE
+
 # run 'proot-launch' as 'root'
 # and carry over setup in proot environment
 
