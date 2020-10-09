@@ -151,15 +151,25 @@ rm -rf /tmp/.X*
 
 print_resolutions
 
-prompt="Selection: "
+# values #
 
-console.input "${prompt}"
-read selection
-echo
+values_list=(
+	selection
+)
 
-# prevent empty input
-
-console.empty Selection "required to start display output."
+for value in "${values_list[@]}"
+do
+	prompt="$(echo ${value^} | sed 's/_/ /')...: "
+	
+	console.input "${prompt}"
+	read input
+	
+	# prevent empty input
+	
+	console.empty Selection "is required to start session."
+	
+	eval "$value"="$selection"
+done
 
 # check selection against selection range
 
