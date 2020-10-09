@@ -159,7 +159,7 @@ values_list=(
 
 for value in "${values_list[@]}"
 do
-	prompt="$(echo ${value^} | sed 's/_/ /')...: "
+	prompt="$(echo ${value^} | sed 's/_/ /'): "
 	
 	console.input "${prompt}"
 	read input
