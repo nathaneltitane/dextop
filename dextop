@@ -180,7 +180,7 @@ FILE
 
 # cleanup #
 
-# remove script
+# remove scripts
 
 rm "$HOME"/setup || :
 

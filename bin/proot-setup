@@ -133,9 +133,7 @@ sleep 3
 
 # cleanup #
 
-# purge all setup traces
-# use BASH_SROUCE for all bash-specific invocations to the script path
-# $0 is POSIX compliant but may not always return the correct value
+# remove scripts
 
 if [[ "$(cat $PROOT_DIRECTORY/tmp/setup-complete)" = "yes" ]]
 then
