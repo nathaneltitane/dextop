@@ -169,7 +169,22 @@ do
 	
 	# prevent empty input
 	
-	console.empty Information "is required for a successful setup."
+	while true
+		do
+			if [ -z "$input" ]
+			then
+				echo
+				console.error "${value} cannot be empty:"
+				console.warning "${value} ${message}"
+				echo
+			
+				console.input "${prompt}"
+				read input
+	
+			else
+				break
+			fi
+		done
 	
 	eval "$value"="$input"
 done
