@@ -13,7 +13,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # binaries # 
 
-binaries_list=(
+downloads_list=(
 	proot-architecture
 	proot-environment
 	proot-image
@@ -42,12 +42,7 @@ binaries_list=(
 
 # download #
 
-for binary in ${binaries_list[@]}
-do
-	console.get bin.dxtp.app "${binary}" "$BINARIES_DIRECTORY"
-
-	console.download "Downloading binary [ ${binary} ]."
-	echo
-
-	chmod +x "$BINARIES_DIRECTORY/${binary}"
-done
+console.download								\
+	bin.dxtp.app								\
+	"$BINARIES_DIRECTORY"						\
+	"chmod +x $BINARIES_DIRECTORY/${binary}"

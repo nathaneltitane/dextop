@@ -112,7 +112,7 @@ console.batsu () {
 
 # marker_download
 
-console.download () {
+console.down () {
 	echo "${magenta}${marker_download}" $@"${reset}"
 }
 
@@ -178,7 +178,7 @@ console.stp () {
 
 # marker_upload
 
-console.upload () {
+console.up () {
 	echo "${magenta}${marker_upload}" $@"${reset}"
 }
 
@@ -251,6 +251,26 @@ console.spin () {
 
 # handlers #
 
+# download
+
+console.download () {
+	source="$1"
+	path="$2"
+	command="$3"
+	
+	# downloads_list is declared as an array prior to download request
+	
+	for file in ${downloads_list[@]}
+	do
+		curl -sL "${source}/${file}" > "${path}"/"${file}"
+	
+		console.down "Downloading [ ${file} ]."
+		echo
+	
+		"${command} ${path}/${file}"
+	done
+}
+
 # get
 
 console.get () {
@@ -259,6 +279,9 @@ console.get () {
 	path="$3"
 	
 	curl -sL "${source}/${file}" > "${path}"/"${file}"
+
+	console.down "Downloading [ ${file} ]."
+	echo
 }
 
 # silence
@@ -277,28 +300,20 @@ console.empty () {
 	
 	# prompt is declared on values list input request
 	
-  	while true
-  	do
-  		if [ -z "$input" ]
-  		then
-  			echo
-  			console.error "${value} cannot be empty:"
-  			console.warning "${value} ${message}"
-  			echo
-  		
-  			console.input "${prompt}"
-  			read input
-  
-  		else
-  			break
-  		fi
-  	done
+	while true
+	do
+		if [ -z "$input" ]
+		then
+			echo
+			console.error "${value} cannot be empty:"
+			console.warning "${value} ${message}"
+			echo
+		
+			console.input "${prompt}"
+			read input
+
+		else
+			break
+		fi
+	done
 }
-
-
-
-
-
-
-
-

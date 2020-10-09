@@ -7,17 +7,13 @@ source /data/data/com.termux/files/usr/bin/globals
 
 # libraries #
 
-libraries_list=(
+downloads_list=(
 	libandroid-shmem-aarch64.so
 )
 
 # download #
 
-for library in ${libraries_list[@]}
-do
-	console.get lib.dxtp.app "${library}" "$PROOT_DIRECTORY"/lib
-
-	console.download "Downloading library [ ${library} ]."
-	echo
-
-done
+console.download \
+		lib.dxtp.app \
+		"$PROOT_DIRECTORY"/lib \
+		"chmod +x" 

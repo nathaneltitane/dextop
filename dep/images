@@ -13,18 +13,14 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # images #
 
-images_list=(
+downloadss_list=(
 	bird.png
 	bird.svg
 )
 
 # download #
 
-for image in ${images_list[@]}
-do
-	console.get img.dxtp.app "${image}" "$PROOT_DIRECTORY"/usr/share/backgrounds
-
-	console.download "Downloading image [ ${image} ]."
-	echo
-
-done
+console.download \
+		img.dxtp.app \
+		"$PROOT_DIRECTORY"/usr/share/backgrounds \
+		"chmod +x" 

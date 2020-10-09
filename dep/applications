@@ -13,7 +13,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # applications # 
 
-applications_list=(
+downloads_list=(
 	applications-setup
 	leocad
 	leocad-arm64
@@ -23,12 +23,7 @@ applications_list=(
 
 # download #
 
-for application in ${applications_list[@]}
-do
-	console.get app.dxtp.app "${application}" "$PROOT_DIRECTORY"/usr/bin
-
-	console.download "Downloading application [ ${application} ]."
-	echo
-
-	chmod +x "$PROOT_DIRECTORY"/usr/bin/"${application}"
-done
+console.download \
+		app.dxtp.app \
+		"$PROOT_DIRECTORY"/usr/bin \
+		"chmod +x" 

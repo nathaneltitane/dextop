@@ -13,7 +13,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # configurations #
 
-configurations_list=(
+downloads_list=(
 	blackbox-configuration
 	blackbox-menu
 	blackbox-setup
@@ -22,11 +22,7 @@ configurations_list=(
 
 # download #
 
-for configuration in ${configurations_list[@]}
-do
-	console.get cfg.dxtp.app "${configuration}" "$PROOT_DIRECTORY"/tmp
-
-	console.download "Downloading configuration [ ${configuration} ]."
-	echo
-
-done
+console.download \
+		cfg.dxtp.app \
+		"$PROOT_DIRECTORY"/tmp \
+		"chmod +x" 

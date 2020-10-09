@@ -41,7 +41,8 @@ else
 	console.choice "to enable or disable storage access permission."
 	echo
 	
-	console.countdown "Permissions dialog in: " 5
+	console.countdown "Permissions dialog in:" 5
+	echo
 
 	# trigger storage permissions dialog
 
