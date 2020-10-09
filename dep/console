@@ -130,7 +130,7 @@ console.info () {
 
 # marker_input
 
-console.input () {
+console.in () {
 	echo -n "${magenta}${marker_input}" $@"${reset}"
 }
 
@@ -294,28 +294,38 @@ console.silence () {
 	"${SHELL}" -c "${command}" >> "${PREFIX}"/var/log/"${script}"-"${stamp}".log 2>&1
 }
 
-# empty
+# input
 
-console.empty () {
-	information="$1"
-	message="$2"
+console.in () {
+array="$1"
+
+for value in "${array}"
+do
+	label=${value^}
+	prompt="$(echo ${label} | sed 's/_/ /'): "
 	
-	# prompt is declared on values list input request
+	console.in "${prompt}"
+	read input
+	
+	# prevent empty input
 	
 	while true
-	do
-		if [ -z "$input" ]
-		then
-			echo
-			console.error "${information} cannot be empty:"
-			console.warning "${information} ${message}"
-			echo
-		
-			console.input "${prompt}"
-			read input
-
-		else
-			break
-		fi
-	done
+		do
+			if [ -z "$input" ]
+			then
+				echo
+				console.error "${label} cannot be empty:"
+				console.warning "${label} ${message}"
+				echo
+			
+				console.in "${prompt}"
+				read input
+	
+			else
+				break
+			fi
+		done
+	
+	eval "$value"="$input"
+done
 }

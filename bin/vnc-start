@@ -57,7 +57,7 @@ vnc () {
 }
 
 print_resolutions() {
-	console.input "Enter the selection to start the display server with: "
+	console.in "Enter the selection to start the display server with: "
 	echo
 	
 	# list supported display resolutions
@@ -160,35 +160,9 @@ values_list=(
 	selection
 )
 
-for value in "${values_list[@]}"
-do
-	label=${value^}
-	prompt="$(echo ${label} | sed 's/_/ /'): "
-	
-	console.input "${prompt}"
-	read input
-	
-	# prevent empty input
-	
-	while true
-		do
-			if [ -z "$input" ]
-			then
-				echo
-				console.error "${label} cannot be empty:"
-				console.warning "${label} ${message}"
-				echo
-			
-				console.input "${prompt}"
-				read input
-	
-			else
-				break
-			fi
-		done
-	
-	eval "$value"="$input"
-done
+# manage user input for values_list
+
+console.input "${values_list[@]}
 
 # check selection against selection range
 
@@ -201,7 +175,7 @@ do
 		console.warning "Select a format ranging from [ 1 - $number ]."
 		echo
 	
-		console.input "Selection: "
+		console.in "Selection: "
 		read selection
 		echo
 	else
@@ -218,11 +192,11 @@ case $selection in
 				console.info "Setting custom resolution and port:"
 				echo
 
-				console.input "Enter WIDTH and HEIGHT (e.g. 1920 1080): "
+				console.in "Enter WIDTH and HEIGHT (e.g. 1920 1080): "
 				read width height
 				echo
 
-				console.input "Enter port NUMBER (e.g. 1): "
+				console.in "Enter port NUMBER (e.g. 1): "
 				read custom_port
 				echo
 

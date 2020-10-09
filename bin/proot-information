@@ -32,7 +32,7 @@ for value in "${values_list[@]}"
 do
 	prompt="$(echo ${value^} | sed 's/_/ /'): "
 	
-	console.input "${prompt}"
+	console.in "${prompt}"
 	read input
 	
 	# prevent empty input
