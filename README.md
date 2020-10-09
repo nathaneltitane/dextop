@@ -1,4 +1,4 @@
-# linux-dextop
+# Linux on Android -  Termux // Dextop // Ubuntu
 
 This project provides any user owning a modern android device, the ability to setup their own Linux-based work environment and use it as their primary workstation.
 
