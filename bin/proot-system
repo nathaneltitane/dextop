@@ -38,31 +38,3 @@ do
 done
 
 # files #
-
-# hostname
-
-console.info "Setting hostname."
-echo
-
-echo ${hostname} > "$PROOT_DIRECTORY"/etc/hostname
-
-console.info "Setting host address."
-echo
-
-# hosts
-
-cat <<- 'FILE' > "$PROOT_DIRECTORY"/etc/hosts
-127.0.0.1 localhost.localdomain
-127.0.0.1 localhost
-FILE
-
-echo "127.0.0.1 ${hostname}" >> "$PROOT_DIRECTORY"/etc/hosts
-
-# nameserver
-
-console.info "Setting namserver address."
-echo
-
-cat <<- 'FILE' > "$PROOT_DIRECTORY"/etc/resolv.conf
-nameserver 8.8.8.8
-FILE

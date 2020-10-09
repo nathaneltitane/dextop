@@ -157,6 +157,10 @@ echo
 
 "$BINARIES_DIRECTORY"/proot-libraries
 
+# setup proot network requirements  - [ device <<>> [ termux <<>> [ proot ] ] ]
+
+"$BINARIES_DIRECTORY"/proot-network
+
 # setup proot environment requirements
 
 "$BINARIES_DIRECTORY"/proot-system

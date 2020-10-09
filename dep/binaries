@@ -20,6 +20,7 @@ binaries_list=(
 	proot-information
 	proot-launch
 	proot-libraries
+	proot-network
 	proot-packages
 	proot-setup
 	proot-superuser
