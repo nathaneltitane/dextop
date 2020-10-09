@@ -141,6 +141,9 @@ print_resolutions() {
 
 # kill active and stale vnc output processes
 
+console.fwd "Looking for stale session tokens..."
+echo
+
 console.silence "vncserver -kill :*"
 
 # clean display server runtime files
@@ -166,9 +169,9 @@ do
 	
 	# prevent empty input
 	
-	console.empty Selection "is required to start session."
+	console.empty Selection "is required for a successful setup."
 	
-	eval "$value"="$selection"
+	eval "$value"="$input"
 done
 
 # check selection against selection range
