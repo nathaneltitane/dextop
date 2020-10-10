@@ -28,9 +28,41 @@ values_list=(
 	user_email
 )
 
+# FIX ME #
+
 # manage user input for values_list
 
-console.input ${values_list[@]}
+# console.input ${values_list[@]}
+
+for value in "${values_list[@]}"
+do
+	label=${value^}
+	prompt="$(echo ${label} | sed 's/_/ /'): "
+	
+	console.in "${prompt}"
+	read input
+	
+	# prevent empty input
+	
+	while true
+		do
+			if [ -z "$input" ]
+			then
+				echo
+				console.error "${label} cannot be empty:"
+				console.warning "${label} ${message}"
+				echo
+			
+				console.in "${prompt}"
+				read input
+	
+			else
+				break
+			fi
+		done
+	
+	eval "$value"="$input"
+done
 
 # export variables
 
