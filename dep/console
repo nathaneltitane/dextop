@@ -245,7 +245,7 @@ console.directory () {
 
 # download
 
-console.dwnload () {
+console.download () {
 	source="$1"
 	path="$2"
 	
