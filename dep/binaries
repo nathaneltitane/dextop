@@ -26,6 +26,7 @@ downloads_list=(
 	proot-superuser
 	proot-system
 	proot-user
+	proot-welcome
 	termux-environment
 	termux-groups
 	termux-packages
