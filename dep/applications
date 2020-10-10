@@ -19,6 +19,7 @@ downloads_list=(
 	leocad-arm64
 	leocad-position
 	leocad-configuration
+	youtube-dl-configuration
 )
 
 # download #

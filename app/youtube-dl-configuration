@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# usage #
+
+# variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# .bashrc
+
+cat <<- 'FILE' >> "$HOME"/.bashrc
+
+sudo curl -sL https://yt-dl.org/downloads/latest/youtube-dl -o /usr/bin/youtube-dl
+sudo chmod a+rx /usr/bin/youtube-dl
+
+FILE

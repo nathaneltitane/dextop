@@ -32,7 +32,7 @@ values_list=(
 
 # manage user input for values_list
 
-#console.input ${values_list[@]}
+# console.input ${values_list[@]}
 
 for value in "${values_list[@]}"
 do
@@ -62,7 +62,7 @@ do
 		done
 	
 	eval "$value"="$input"
-
+done
 
 # export variables
 
