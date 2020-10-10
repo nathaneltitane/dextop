@@ -13,32 +13,12 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # directories #
 
-# blackbox
-
-console.info "Creating directories [ leocad ]."
-echo
-
-system_directories_list=(
-	.config/"LeoCAD Software"
-)
-
-for directory in ${system_directories_list[@]}
-do
-	console.fwd "Creating directory [ ${directory} ]."
-	echo
-
-	# create directory and set permissions
-
-	[ ! -d "$PROOT_DIRECTORY"/home/"$user_name"/"${directory}" ] && mkdir -p "$PROOT_DIRECTORY"/usr/share/"${directory}" || :
-	
-	# set ownership
-	
-	chown ${uid}:${gid} -R "$PROOT_DIRECTORY"/home/"$user_name"/"${directory}"
-done
+console.directory "LeoCAD Software" "$PROOT_DIRECTORY"/home/"${user_name}"/.config
 
 # write configuration files
 
-console.info "Writing configuration files [ leocad ]."
+console.info "Writing configuration files [ applications ]."
 echo
 
 bash "$PROOT_DIRECTORY"/tmp/leocad-configuration
+bash "$PROOT_DIRECTORY"/tmp/youtube-dl-configuration

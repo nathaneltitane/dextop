@@ -251,6 +251,24 @@ console.spin () {
 
 # handlers #
 
+# directory
+
+console.directory () {
+	directory="$1"
+	path="$2"
+	
+	console.fwd "Creating directory [ ${directory} ]."
+	echo
+
+	# create directory and set permissions
+
+	[ ! -d"${path}"/"${directory}" ] && mkdir -p "${path}"/"${directory}" || :
+	
+	# set ownership
+	
+	chown ${uid}:${gid} -R "${path}"/"${directory}"
+}
+
 # download
 
 console.download () {

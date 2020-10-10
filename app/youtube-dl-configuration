@@ -15,7 +15,5 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 cat <<- 'FILE' >> "$HOME"/.bashrc
 
-sudo curl -sL https://yt-dl.org/downloads/latest/youtube-dl -o /usr/bin/youtube-dl
-sudo chmod a+rx /usr/bin/youtube-dl
-
+console.get https://yt-dl.org/downloads/latest/ youtube-dl /usr/bin
 FILE

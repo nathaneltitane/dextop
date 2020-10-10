@@ -53,16 +53,7 @@ home_directories_list=(
 
 for directory in ${home_directories_list[@]}
 do
-	console.fwd "Creating directory [ ${directory} ]."
-	echo
-
-	# create directory and set permissions
-
-	mkdir -p "/home/${user_name}/${directory}" -m 755
-	
-	# set ownership
-	
-	chown ${uid}:${gid} -R /home/${user_name}/${directory}
+	console.directory "$directory" /home/"${user_name}"
 done
 
 # runtime #
