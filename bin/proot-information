@@ -32,10 +32,7 @@ values_list=(
 
 # manage user input for values_list
 
-for value in "${values_list[@]}"
-do
-	console.input value
-done
+console.input "${values_list[@]}"
 
 # export variables
 
