@@ -266,7 +266,10 @@ console.download () {
 # upload
 
 console.upload () {
-	
+
+	console.upl "Uploading [ ${file} ]."
+	echo
+
 }
 
 # get
