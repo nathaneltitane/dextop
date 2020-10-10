@@ -297,35 +297,30 @@ console.silence () {
 # input
 
 console.input () {
-array="$1"
+label=${value^}
+prompt="$(echo ${label} | sed 's/_/ /'): "
 
-for value in "${array}"
-do
-	label=${value^}
-	prompt="$(echo ${label} | sed 's/_/ /'): "
-	
-	console.in "${prompt}"
-	read input
-	
-	# prevent empty input
-	
-	while true
-		do
-			if [ -z "$input" ]
-			then
-				echo
-				console.error "${label} cannot be empty:"
-				console.warning "${label} ${message}"
-				echo
-			
-				console.in "${prompt}"
-				read input
-	
-			else
-				break
-			fi
-		done
-	
-	eval "$value"="$input"
-done
+console.in "${prompt}"
+read input
+
+# prevent empty input
+
+while true
+	do
+		if [ -z "$input" ]
+		then
+			echo
+			console.error "${label} cannot be empty:"
+			console.warning "${label} ${message}"
+			echo
+		
+			console.in "${prompt}"
+			read input
+
+		else
+			break
+		fi
+	done
+
+eval "$value"="$input"
 }
