@@ -236,7 +236,7 @@ console.directory () {
 
 	# create directory and set permissions
 
-	[ ! -d"${path}"/"${directory}" ] && mkdir -p "${path}"/"${directory}" || :
+	[ ! -d "${path}"/"${directory}" ] && mkdir -p "${path}"/"${directory}" || :
 	
 	# set ownership
 	
@@ -298,7 +298,9 @@ console.silence () {
 # input
 
 console.input () {
-	
-# FIX ME #
+
+	# FIX ME #
+
+	true # no-op
 
 }
