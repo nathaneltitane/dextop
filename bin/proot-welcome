@@ -22,11 +22,15 @@ FILE
 
 # write welcome message - replaces motd
 
-cat <<- 'FILE' >> "$PROOT_DIRECTORY"/home/"$user_name"/.bashrc
+cat <<- 'FILE' >> "$PROOT_DIRECTORY"/home/"$user_name"/.profile
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
+
+# initial prompt clear #
+
+clear
 
 console.fwd "Welcome to Ubuntu Dextop!"
 echo

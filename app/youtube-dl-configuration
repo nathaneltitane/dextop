@@ -15,5 +15,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 cat <<- 'FILE' >> "$PROOT_DIRECTORY"/home/"$user_name"/.bashrc
 
+# youtube-dl #
+
 console.get https://yt-dl.org/downloads/latest/ youtube-dl /usr/bin
 FILE

@@ -39,6 +39,7 @@ echo
 
 utilities_list=(
 	curl
+	ffmpeg
 	git
 	hub
 	jq
