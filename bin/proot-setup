@@ -72,6 +72,10 @@ echo
 
 sleep 2
 
+# setup proot login messages
+
+"$BINARIES_DIRECTORY"/proot-welcome
+
 # packages
 
 "$BINARIES_DIRECTORY"/proot-packages

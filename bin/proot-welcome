@@ -26,6 +26,8 @@ console.fwd "Welcome to Ubuntu Dextop!"
 echo
 
 console.inf "Run 'vnc-start' to start your session."
+echo
+
 console.inf "If you've already logged in, your selection has been saved"
 console.inf "for automatic startup on shell login."
 echo
