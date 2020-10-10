@@ -327,5 +327,5 @@ do
 		done
 	
 	eval "$value"="$input"
-done < $array
+done <<< $array
 }
