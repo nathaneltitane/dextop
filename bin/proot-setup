@@ -60,7 +60,7 @@ cat << 'FILE' >> "$PROOT_DIRECTORY"/tmp/setup
 
 clear
 
-console.message "[ Linux on Android -  Termux // Dextop // Ubuntu  [ Version ${version} ] ]"
+console.msg "[ Linux on Android -  Termux // Dextop // Ubuntu  [ Version ${version} ] ]"
 echo
 
 sleep 1
@@ -119,7 +119,7 @@ clear
 console.fwd "Setup finalized..."
 echo
 
-console.success "Deployment and configuration complete."
+console.scs "Deployment and configuration complete."
 echo
 
 sleep 3

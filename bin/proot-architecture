@@ -33,7 +33,7 @@ img_architectures=(
 
 # test processor architecture string
 
-console.info "Checking system architecture."
+console.inf "Checking system architecture."
 echo
 
 print_architecture="$(dpkg --print-architecture)"
@@ -44,7 +44,7 @@ do
 	then
 		img_architecture=${img_architectures[i]}
 
-		console.success "Valid architecture detected [ ${img_architecture} ]."
+		console.scs "Valid architecture detected [ ${img_architecture} ]."
 		echo
 
 		break
@@ -55,8 +55,8 @@ done
 
 if [ -z "$img_architecture" ]
 then
-	console.warning "Unknown architecture:"
-	console.warning "Aborting."
+	console.wrn "Unknown architecture:"
+	console.wrn "Aborting."
 	echo
 
 	console.stp "Exiting."

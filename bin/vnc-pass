@@ -21,7 +21,7 @@ for value in "${values_list[@]}"
 do
 	prompt="$(echo ${value^} | sed 's/_/ /')...: "
 	
-	console.in "${prompt}"
+	console.ipt "${prompt}"
 	
 	[[ "$value" = *password* ]] && read -s input || read input
 	
@@ -38,5 +38,5 @@ echo
 
 echo "$password" | vncpasswd -f > "$HOME"/.vnc/passwd
 
-console.success "VNC password changed."
+console.scs "VNC password changed."
 echo

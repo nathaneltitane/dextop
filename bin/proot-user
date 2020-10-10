@@ -23,7 +23,7 @@ user_name=${first_name,,}
 
 # add user
 
-console.info "Creating user account."
+console.inf "Creating user account."
 echo
 
 useradd -m -s "$SHELL" ${user_name}
@@ -37,7 +37,7 @@ gid=$(id -g ${user_name})
 
 # populate home directory with standard folders
 
-console.info "Setting up user home directory."
+console.inf "Setting up user home directory."
 echo
 
 home_directories_list=(
@@ -58,7 +58,7 @@ done
 
 # runtime #
 
-console.info "Setting up user runtime directory."
+console.inf "Setting up user runtime directory."
 echo
 
 # create directory and set permissions

@@ -13,7 +13,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # write welcome message - replaces motd
 
-console.info "Silencing login messages."
+console.inf "Silencing login messages."
 echo
 
 cat <<- 'FILE' > "$HOME"/.bashrc
@@ -25,8 +25,8 @@ source /data/data/com.termux/files/usr/bin/globals
 console.fwd "Welcome to Termux Dextop!"
 echo
 
-console.info "Run 'proot-launch <username>' to start your session."
-console.info "Run 'proot-launch <username> <application>' to start an application with your session."
+console.inf "Run 'proot-launch <username>' to start your session."
+console.inf "Run 'proot-launch <username> <application>' to start an application with your session."
 echo
 
 FILE

@@ -13,7 +13,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # silence login prompt
 
-console.info "Silencing login messages."
+console.inf "Silencing login messages."
 echo
 
 # directories #
@@ -24,7 +24,7 @@ cat <<- 'FILE' > "$HOME"/.hushlogin
 
 FILE
 
-console.info "Creating files."
+console.inf "Creating files."
 echo
 
 # .bash_aliases

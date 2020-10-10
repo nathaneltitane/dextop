@@ -33,14 +33,14 @@ sudo_id=$(cat /etc/group | grep sudo | cut -d : -f 3)
 
 if [ -z $(command -v sudo) ]
 then
-	console.warning "'sudo' utility not present or installed on system:"
-	console.warning "Install 'sudo' using the package manager and restart this utility."
+	console.wrn "'sudo' utility not present or installed on system:"
+	console.wrn "Install 'sudo' using the package manager and restart this utility."
 	echo
 	
 	exit 1
 fi
 
-console.info "Setting superuser privileges for user '${user_name}'."
+console.inf "Setting superuser privileges for user '${user_name}'."
 echo
 
 # give user superuser privileges

@@ -12,7 +12,7 @@ stamp=$(date +"%m-%d-%Y-%H-%M-%S")
 
 # colors #
 
-if [ -z $(command -v tput) ]
+if [ -z "$(command -v tput)" ]
 then
 	if [[ -t 1 ]]
 	then
@@ -46,158 +46,132 @@ fi
 # markers
 
 marker_maru='[ ○ ]'
+marker_batsu='[ ⨉ ]'
 marker_bako='[ □ ]'
 marker_sankaku='[ △ ]'
 
-marker_batsu='[ ⨉ ]'
-marker_download='[ ⋁ ]'
+marker_top='[ ⋀ ]'
+marker_bot='[ ⋁ ]'
+
 marker_fwd='[ > ]'
-marker_info='[ i ]'
-marker_input='[ + ]'
-marker_message='[ ¤ ]'
-marker_no='[ ⨉ ]'
-marker_question='[ ? ]'
 marker_rev='[ < ]'
-marker_stp='[ - ]'
-marker_upload='[ ⋀ ]'
-marker_warning='[ ! ]'
+marker_stp='[ / ]'
+
+marker_add='[ + ]'
+marker_rem='[ - ]'
+
+marker_ask='[ ? ]'
+marker_inf='[ i ]'
+marker_ipt='[ ± ]'
+marker_msg='[ ¤ ]'
+marker_wrn='[ ! ]'
+marker_usr='[ • ]'
+
 marker_yes='[ ✓ ]'
-marker_choice='[ • ]'
+marker_no='[ ⨉ ]'
 
 # highlights #
 
-# red
-
 console.red () {
-	echo "${red}"$@"${reset}"
+	echo -e "${red}"$@"${reset}"
 }
-
-# green
 
 console.green () {
-	echo "${green}"$@"${reset}"
+	echo -e "${green}"$@"${reset}"
 }
-
-# yellow
 
 console.yellow () {
-	echo "${yellow}"$@"${reset}"
+	echo -e "${yellow}"$@"${reset}"
 }
-
-# blue
 
 console.blue () {
-	echo "${blue}"$@"${reset}"
+	echo -e "${blue}"$@"${reset}"
 }
-
-# magenta
 
 console.magenta () {
-	echo "${magenta}"$@"${reset}"
+	echo -e "${magenta}"$@"${reset}"
 }
 
-# cyan
-
 console.cyan () {
-	echo "${cyan}"$@"${reset}"
+	echo -e "${cyan}"$@"${reset}"
 }
 
 # prompts #
 
-# marker_batsu
+console.maru () {
+	echo -e "${green}${marker_maru}" $@"${reset}"
+}
 
 console.batsu () {
-	echo "${red}${marker_batsu}" $@"${reset}"
+	echo -e "${red}${marker_batsu}" $@"${reset}"
 }
 
-# marker_download
-
-console.down () {
-	echo "${magenta}${marker_download}" $@"${reset}"
+console.bako () {
+	echo -e "${white}${marker_bako}" $@"${reset}"
 }
-
-# marker_fwd
-
-console.fwd () {
-	echo "${white}${marker_fwd}" $@"${reset}"
-}
-
-# marker_info
-
-console.info () {
-	echo "${blue}${marker_info}" $@"${reset}"
-}
-
-# marker_input
-
-console.in () {
-	echo -n "${magenta}${marker_input}" $@"${reset}"
-}
-
-# marker_message
-
-console.message () {
-	echo "${cyan}${marker_message}" $@"${reset}"
-}
-
-# marker_maru
-
-console.maru () {
-	echo "${green}${marker_maru}" $@"${reset}"
-}
-
-# marker_no
-
-console.error () {
-	echo "${red}${marker_no}" $@"${reset}"
-}
-
-# marker_question
-
-console.question () {
-	echo "${magenta}${marker_question}" $@"${reset}"
-}
-
-# marker_rev
-
-console.rev () {
-	echo "${white}${marker_rev}" $@"${reset}"
-}
-
-# marker_sankaku
 
 console.sankaku () {
-	echo "${cyan}${marker_sankaku}" $@"${reset}"
+	echo -e "${cyan}${marker_sankaku}" $@"${reset}"
 }
 
-# marker_stp
+console.ask () {
+	echo -e "${magenta}${marker_ask}" $@"${reset}"
+}
+
+console.inf() {
+	echo -e "${blue}${marker_inf}" $@"${reset}"
+}
+
+console.msg () {
+	echo -e "${cyan}${marker_msg}" $@"${reset}"
+}
+
+console.wrn () {
+	echo -e "${yellow}${marker_wrn}" $@"${reset}"
+}
+
+console.usr () {
+	echo -e "${magenta}${marker_usr}" $@"${reset}"
+}
+
+console.add () {
+	echo -e "${blue}${marker_add}" $@"${reset}"
+}
+
+console.rem () {
+	echo -e "${red}${marker_rem}" $@"${reset}"
+}
+
+console.fwd () {
+	echo -e "${white}${marker_fwd}" $@"${reset}"
+}
+
+console.rev () {
+	echo -e "${white}${marker_rev}" $@"${reset}"
+}
 
 console.stp () {
-	echo "${white}${marker_stp}" $@"${reset}"
+	echo -e "${white}${marker_stp}" $@"${reset}"
 }
 
-# marker_upload
-
-console.up () {
-	echo "${magenta}${marker_upload}" $@"${reset}"
+console.dwn () {
+	echo -e "${magenta}${marker_bot}" $@"${reset}"
 }
 
-# marker_warning
-
-console.warning () {
-	echo "${yellow}${marker_warning}" $@"${reset}"
+console.upl () {
+	echo -e "${magenta}${marker_top}" $@"${reset}"
 }
 
-# marker_yes
-
-console.success () {
-	echo "${green}${marker_yes}" $@"${reset}"
+console.scs () {
+	echo -e "${green}${marker_yes}" $@"${reset}"
 }
 
-# marker_choice
+console.err () {
+	echo -e "${red}${marker_no}" $@"${reset}"
+}
 
-console.choice () {
-	echo "${magenta}${marker_choice}" $@"${reset}"
+console.ipt () {
+	echo -n "${magenta}${marker_add}" $@"${reset}"
 }
 
 # triggers #
@@ -212,7 +186,7 @@ console.countdown () {
 
 	while [ "${seconds}" -gt 0 ]
 	do
-		echo -e "\r${marker_warning} ${message} [ ${red}$((seconds--))${reset} ] seconds...\c"
+		echo -e "\r${marker_wrn} ${message} [ ${red}$((seconds--))${reset} ] seconds...\c"
 		
 		sleep 1
 	done
@@ -257,7 +231,7 @@ console.directory () {
 	directory="$1"
 	path="$2"
 	
-	console.fwd "Creating directory [ ${directory} ]."
+	console.add "Creating directory [ ${directory} ]."
 	echo
 
 	# create directory and set permissions
@@ -271,7 +245,7 @@ console.directory () {
 
 # download
 
-console.download () {
+console.dwnload () {
 	source="$1"
 	path="$2"
 	
@@ -281,12 +255,18 @@ console.download () {
 	do
 		curl -sL "${source}/${file}" > "${path}"/"${file}"
 	
-		console.down "Downloading [ ${file} ]."
+		console.dwn "Downloading [ ${file} ]."
 		echo
 	
 		chmod a+rx "${path}"/"${file}"
 
 	done
+}
+
+# upload
+
+console.upload () {
+	
 }
 
 # get
@@ -298,7 +278,7 @@ console.get () {
 	
 	curl -sL "${source}/${file}" > "${path}"/"${file}"
 
-	console.down "Downloading [ ${file} ]."
+	console.dwn "Downloading [ ${file} ]."
 	echo
 	
 	chmod a+rx "${path}"/"${file}"

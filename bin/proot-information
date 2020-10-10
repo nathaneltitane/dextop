@@ -16,8 +16,8 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 console.fwd "The following information is required to set up your environment."
 echo
 
-console.warning "The information will be used to set up the user account."
-console.warning "The fields cannot be empty."
+console.wrn "The information will be used to set up the user account."
+console.wrn "The fields cannot be empty."
 echo
 
 # values #
@@ -39,7 +39,7 @@ do
 	label=${value^}
 	prompt="$(echo ${label} | sed 's/_/ /'): "
 	
-	console.in "${prompt}"
+	console.ipt "${prompt}"
 	read input
 	
 	# prevent empty input
@@ -49,11 +49,11 @@ do
 			if [ -z "$input" ]
 			then
 				echo
-				console.error "${label} cannot be empty:"
-				console.warning "${label} ${message}"
+				console.err "${label} cannot be empty:"
+				console.wrn "${label} ${message}"
 				echo
 			
-				console.in "${prompt}"
+				console.ipt "${prompt}"
 				read input
 	
 			else

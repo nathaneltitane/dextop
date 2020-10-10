@@ -13,12 +13,12 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # hostname
 
-console.info "Setting hostname."
+console.inf "Setting hostname."
 echo
 
 echo ${hostname} > "$PROOT_DIRECTORY"/etc/hostname
 
-console.info "Setting host address."
+console.inf "Setting host address."
 echo
 
 # hosts
@@ -32,7 +32,7 @@ echo "127.0.0.1 ${hostname}" >> "$PROOT_DIRECTORY"/etc/hosts
 
 # nameserver
 
-console.info "Setting namserver address."
+console.inf "Setting namserver address."
 echo
 
 cat <<- 'FILE' > "$PROOT_DIRECTORY"/etc/resolv.conf

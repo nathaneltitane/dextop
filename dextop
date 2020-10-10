@@ -102,7 +102,7 @@ console.get dep.dxtp.app binaries "$BINARIES_DIRECTORY" && bash "$BINARIES_DIREC
 
 clear
 
-console.message "[ Linux on Android -  Termux // Dextop // Ubuntu  [ Version ${version} ] ]"
+console.msg "[ Linux on Android -  Termux // Dextop // Ubuntu  [ Version ${version} ] ]"
 echo
 
 sleep 1
@@ -116,7 +116,7 @@ sleep 2
 
 # set work directory
 
-console.info "Entering setup directory."
+console.inf "Entering setup directory."
 echo
 
 cd "${SETUP_DIRECTORY}" || exit 1
@@ -202,7 +202,7 @@ FILE
 # run 'proot-launch' as 'root'
 # and carry over setup in proot environment
 
-console.info "Entering proot environment."
+console.inf "Entering proot environment."
 echo
 
 sleep 1

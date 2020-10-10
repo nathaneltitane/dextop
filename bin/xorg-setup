@@ -11,7 +11,7 @@ source /data/data/com.termux/files/usr/bin/globals
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-console.info "Configuring display  [ xorg ]."
+console.inf "Configuring display  [ xorg ]."
 echo
 
 # write user X session startup file

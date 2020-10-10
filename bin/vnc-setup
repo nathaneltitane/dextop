@@ -11,7 +11,7 @@ source /data/data/com.termux/files/usr/bin/globals
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-console.info "Configuring display output [ vnc ]."
+console.inf "Configuring display output [ vnc ]."
 echo
 
 # create user home vnc directory

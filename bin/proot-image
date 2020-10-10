@@ -43,13 +43,13 @@ proot-deploy () {
 }
 
 setup () {
-	console.info "Initializing proot setup."
+	console.inf "Initializing proot setup."
 	echo
 
 	console.fwd "Initializing..."
 	echo
 
-	console.info "Downloading image [ ${distribution_name^} $distribution_version ]."
+	console.inf "Downloading image [ ${distribution_name^} $distribution_version ]."
 	echo
 
 	console.get "${iso_url}" "${iso_archive}" "${PWD}" &
@@ -57,17 +57,17 @@ setup () {
 	console.spin "Downloading..."
 	echo
 
-	console.info "Creating proot directory."
+	console.inf "Creating proot directory."
 	echo
 
 	mkdir -p "$PROOT_DIRECTORY"
 
-	console.info "Creating bind directory."
+	console.inf "Creating bind directory."
 	echo
 
 	mkdir -p "$BIND_DIRECTORY"
 
-	console.info "Extracting image contents."
+	console.inf "Extracting image contents."
 	echo
 
 	cd "$PROOT_DIRECTORY" || exit 1

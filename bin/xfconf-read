@@ -21,7 +21,7 @@ settings_file="${1}"
 
 # read settings
 
-console.info "Reading settings file."
+console.inf "Reading settings file."
 echo
 
 xfconf-query -l | sed -r -e '/Channels:/d' | while read channel

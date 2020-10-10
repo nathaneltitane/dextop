@@ -13,7 +13,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # bookmarks #
 
-console.info "Creating device storage bookmarks."
+console.inf "Creating device storage bookmarks."
 echo
 
 # add bookmarks - gtk2

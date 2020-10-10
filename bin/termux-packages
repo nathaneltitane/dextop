@@ -13,7 +13,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")p
 
 # update packages list
 
-console.info "Updating repository and package information."
+console.inf "Updating repository and package information."
 echo
 
 console.silence "apt update" &
@@ -23,7 +23,7 @@ echo
 
 # upgrade installed packages
 
-console.info "Upgrading installed packages."
+console.inf "Upgrading installed packages."
 echo
 
 console.silence "echo yes | apt upgrade" &
@@ -78,14 +78,14 @@ install_list=(
 
 # install #
 
-console.info "Installing required packages."
+console.inf "Installing required packages."
 echo
 
 for package in ${install_list[@]}
 do
 	if [ -z "$(command -v ${package})" ]
 	then
-		console.warning "Required package '${package}' not present."
+		console.wrn "Required package '${package}' not present."
 		echo
 
 		console.silence "echo yes | apt install ${package}" &
@@ -93,7 +93,7 @@ do
 		console.spin "Installing [ ${package} ]..."
 		echo
 	else
-		console.success "Required package '${package}' already installed."
+		console.scs "Required package '${package}' already installed."
 		echo
 		
 		console.fwd "Continuing..."

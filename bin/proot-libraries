@@ -13,7 +13,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # environment
 
-console.info "Setting library preload."
+console.inf "Setting library preload."
 echo
 
 cat <<- "FILE" >> "$PROOT_DIRECTORY"/etc/environment

@@ -17,8 +17,8 @@ if [ -d "$HOME"/storage ]
 then
 	# exists - proceed with setup
 
-	console.success "Storage directory detected under"
-	console.success "$HOME"
+	console.scs "Storage directory detected under"
+	console.scs "$HOME"
 	echo
 
 	console.fwd "Continuing..."
@@ -26,19 +26,19 @@ then
 else
 	# does not exist - enable storage permissions: requires user touch input
 
-	console.warning "Termux requires user permission to access storage on this device..."
+	console.wrn "Termux requires user permission to access storage on this device..."
 	echo
 
 	console.fwd "Both internal and external storage are made available:"
 	echo
 
-	console.info "Allowing access greatly benefits the desktop experience"
-	console.info "and will make the device's storage visble and accessible"
-	console.info "through your desktop session and file manager."
+	console.inf "Allowing access greatly benefits the desktop experience"
+	console.inf "and will make the device's storage visble and accessible"
+	console.inf "through your desktop session and file manager."
 	echo
 
-	console.choice "Select 'Allow' or 'Deny' when prompted"
-	console.choice "to enable or disable storage access permission."
+	console.usr "Select 'Allow' or 'Deny' when prompted"
+	console.usr "to enable or disable storage access permission."
 	echo
 	
 	console.countdown "Permissions dialog in:" 5
@@ -76,7 +76,7 @@ external_storage=$(echo $(ls /storage | sed -r '/[A0-Z9][-][A0-Z9]/!d'))
 
 if [ ! -z "${external_storage}" ]
 then
-	console.success "External storage detected [ SD UUID: ${external_storage} ]."
+	console.scs "External storage detected [ SD UUID: ${external_storage} ]."
 	echo
 	
 	console.fwd "Linking..."
@@ -85,7 +85,7 @@ then
 	ln -s -f /storage/"${external_storage}" "$SETUP_DIRECTORY"/storage/external || :
 
 else
-	console.error "No extrernal storage media detected."
+	console.err "No extrernal storage media detected."
 	echo
 	
 	console.fwd "Continuing..."
