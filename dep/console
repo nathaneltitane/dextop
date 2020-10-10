@@ -299,8 +299,7 @@ console.silence () {
 console.in () {
 array="$1"
 
-#for value in "${array}"
-echo $@ | while read -r value
+while read -a array -r value
 do
 	label=${value^}
 	prompt="$(echo ${label} | sed 's/_/ /'): "
@@ -328,5 +327,5 @@ do
 		done
 	
 	eval "$value"="$input"
-done
+done < $array
 }
