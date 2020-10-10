@@ -34,7 +34,7 @@ values_list=(
 
 for value in "${values_list[@]}"
 do
-	console.input
+	console.input value
 done
 
 # export variables

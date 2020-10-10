@@ -297,6 +297,8 @@ console.silence () {
 # input
 
 console.input () {
+value="$1"	
+	
 label=${value^}
 prompt="$(echo ${label} | sed 's/_/ /'): "
 
