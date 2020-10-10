@@ -266,7 +266,7 @@ console.download () {
 		console.down "Downloading [ ${file} ]."
 		echo
 	
-		chmod +x "${path}"/"${file}"
+		chmod a+rx "${path}"/"${file}"
 
 	done
 }
@@ -283,7 +283,7 @@ console.get () {
 	console.down "Downloading [ ${file} ]."
 	echo
 	
-	chmod +x "${path}"/"${file}"
+	chmod a+rx "${path}"/"${file}"
 }
 
 # silence
