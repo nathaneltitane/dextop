@@ -61,10 +61,6 @@ bash "$BINARIES_DIRECTORY"/configurations
 bash "$BINARIES_DIRECTORY"/images
 bash "$BINARIES_DIRECTORY"/libraries
 
-# download optimized and precompiled arm64 applications
-
-[ "${add_applications}" = "yes" ] && bash "$BINARIES_DIRECTORY"/applications
-
 clear
 
 # setup #
@@ -89,6 +85,11 @@ sleep 2
 # set superuser privileges for user account
 
 "$BINARIES_DIRECTORY"/proot-superuser "${first_name}" "${last_name}"
+
+# download optimized and precompiled arm64 applications
+
+
+[ "${add_applications}" = "yes" ] && "$BINARIES_DIRECTORY"/applications
 
 # setup vnc configurations
 
