@@ -25,6 +25,26 @@ cat << 'FILE' > "$PROOT_DIRECTORY"/tmp/setup
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
+# variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# initial prompt clear #
+
+clear
+
+console.msg "[ Linux on Android -  Termux // Dextop // Ubuntu  [ Version ${version} ] ]"
+echo
+
+sleep 1
+FILE
+
+cat "$BINARIES_DIRECTORY"/globals >> "$PROOT_DIRECTORY"/tmp/setup
+
+# write setup
+
+cat << 'FILE' >> "$PROOT_DIRECTORY"/tmp/setup
+
 # source
 
 console.get dep.dxtp.app applications "$BINARIES_DIRECTORY"
@@ -45,25 +65,7 @@ bash "$BINARIES_DIRECTORY"/libraries
 
 [ "${add_applications}" = "yes" ] && bash "$BINARIES_DIRECTORY"/applications
 
-# variables #
-
-script=$(basename -- "${BASH_SOURCE[0]}")
-FILE
-
-cat "$BINARIES_DIRECTORY"/globals >> "$PROOT_DIRECTORY"/tmp/setup
-
-# write setup
-
-cat << 'FILE' >> "$PROOT_DIRECTORY"/tmp/setup
-
-# initial prompt clear #
-
 clear
-
-console.msg "[ Linux on Android -  Termux // Dextop // Ubuntu  [ Version ${version} ] ]"
-echo
-
-sleep 1
 
 # setup #
 

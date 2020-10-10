@@ -16,6 +16,6 @@ echo
 
 # write user X session startup file
 
-cat << FILE > /home/${user_name}/.xsession
+cat << FILE > "$PROOT_DIRECTORY"/home/${user_name}/.xsession
 $DESKTOP_SESSION &
 FILE

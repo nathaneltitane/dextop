@@ -53,7 +53,7 @@ home_directories_list=(
 
 for directory in ${home_directories_list[@]}
 do
-	console.directory "$directory" /home/"${user_name}"
+	console.directory "$directory" "$PROOT_DIRECTORY"/home/"$user_name"/
 done
 
 # runtime #

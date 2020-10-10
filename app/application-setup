@@ -20,5 +20,5 @@ console.directory "LeoCAD Software" "$PROOT_DIRECTORY"/home/"${user_name}"/.conf
 console.info "Writing configuration files [ applications ]."
 echo
 
-bash "$PROOT_DIRECTORY"/tmp/leocad-configuration
-bash "$PROOT_DIRECTORY"/tmp/youtube-dl-configuration
+bash "$PROOT_DIRECTORY"/usr/bin/leocad-configuration
+bash "$PROOT_DIRECTORY"/usr/bin/youtube-dl-configuration

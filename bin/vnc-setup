@@ -16,17 +16,17 @@ echo
 
 # create user home vnc directory
 
-mkdir -p /home/${user_name}/.vnc
+mkdir -p "$PROOT_DIRECTORY"/home/${user_name}/.vnc
 
 # write user vnc password file
 
-cat <<- FILE > /home/${user_name}/.vnc/passwd
+cat <<- FILE > "$PROOT_DIRECTORY"/home/${user_name}/.vnc/passwd
 
 FILE
 
 # write user vnc startup file
 
-cat <<- 'FILE' > /home/${user_name}/.vnc/xstartup
+cat <<- 'FILE' > "$PROOT_DIRECTORY"/home/${user_name}/.vnc/xstartup
 #!/bin/bash
 
 unset DBUS_SESSION_BUS_ADDRESS
@@ -44,7 +44,7 @@ FILE
 
 # append automatic vnc session stop on shell exit
 
-cat << 'FILE' > /home/${user_name}/.bash_logout
+cat << 'FILE' > "$PROOT_DIRECTORY"/home/${user_name}/.bash_logout
 
 # automatic vnc session stop on shell logout
 
@@ -53,7 +53,7 @@ FILE
 
 # append automatic vnc session start from selection value
 
-cat <<- 'FILE' > /home/${user_name}/.profile
+cat <<- 'FILE' > "$PROOT_DIRECTORY"/home/${user_name}/.profile
 
 # automatic vnc session start on shell login
 
