@@ -11,10 +11,16 @@ source /data/data/com.termux/files/usr/bin/globals
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-# write welcome message - replaces motd
+# silence login prompt
 
 console.inf "Silencing login messages."
 echo
+
+cat <<- 'FILE' >> "$HOME"/.hushlogin
+
+FILE
+
+# write welcome message - replaces motd
 
 cat <<- 'FILE' > "$HOME"/.bashrc
 # dependencies #

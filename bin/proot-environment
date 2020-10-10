@@ -11,14 +11,9 @@ source /data/data/com.termux/files/usr/bin/globals
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-# silence login prompt
+#directories #
 
-console.inf "Silencing login messages."
-echo
-
-cat <<- 'FILE' >> "$HOME"/.hushlogin
-
-FILE
+# files #
 
 console.inf "Creating required configuration files."
 echo

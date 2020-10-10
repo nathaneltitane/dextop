@@ -11,11 +11,6 @@ source /data/data/com.termux/files/usr/bin/globals
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-# silence login prompt
-
-console.inf "Silencing login messages."
-echo
-
 # directories #
 
 # files #
