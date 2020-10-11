@@ -58,7 +58,7 @@ vnc () {
 		#			-d vnc://${LOCALHOST}:${PORT} \
 		#			-S application/activity"
 		
-		console.silence "am start -d am start -d vnc://${LOCALHOST}:${PORT} -S ${vnc_apk}"
+		console.silence "am start -d vnc://${LOCALHOST}:${PORT} -S ${vnc_apk}"
 }
 
 print_resolutions() {
@@ -161,7 +161,7 @@ print_resolutions
 
 # values #
 
-list=(
+values_list=(
 	selection
 )
 
@@ -169,7 +169,7 @@ list=(
 
 console_rtn=()
 
-console.input ${list[@]}
+console.input ${values_list[@]}
 
 eval ${console_rtn[@]}
 
@@ -179,7 +179,7 @@ while true
 do
 	if [[ "$selection" -lt 1 ]] || [[ "$selection" -gt "$number" ]]
 	then
-	  echo
+		echo
 		console.err "Invalid selection:"
 		console.wrn "Select a format ranging from [ 1 - $number ]."
 		echo
