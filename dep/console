@@ -231,16 +231,23 @@ console.directory () {
 	directory="$1"
 	path="$2"
 	
-	console.add "Creating directory [ ${directory} ]."
-	echo
-
-	# create directory and set permissions
-
-	[ ! -d "${path}"/"${directory}" ] && mkdir -p "${path}"/"${directory}" || :
+	# $3 - array
 	
-	# set ownership
+	data=(${@:3})
 	
-	chown ${uid}:${gid} -R "${path}"/"${directory}"
+	for file in ${data[@]}
+	do
+		console.add "Creating directory [ ${directory} ]."
+		echo
+	
+		# create directory and set permissions
+	
+		[ ! -d "${path}"/"${directory}" ] && mkdir -p "${path}"/"${directory}" || :
+		
+		# set ownership
+		
+		chown ${uid}:${gid} -R "${path}"/"${directory}"
+	done
 }
 
 # download
@@ -302,36 +309,35 @@ console.silence () {
 # input
 
 console.input () {
-values_list=($@)
-
-for value in "${values_list[@]}"
-do
-	label=${value^}
-	prompt="$(echo ${label} | sed 's/_/ /'): "
+	list=($@)
 	
-	console.ipt "${prompt}"
-	read input
-	
-	# prevent empty input
-	
-	while true
-		do
-			if [ -z "$input" ]
-			then
-				echo
-				console.err "${label} cannot be empty:"
-				console.wrn "${label} ${message}"
-				echo
-			
-				console.ipt "${prompt}"
-				read input
-	
-			else
-				break
-			fi
-		done
-	
-	rtn+=("$value=$input")
-done
-
+	for value in "${list[@]}"
+	do
+		label=${value^}
+		prompt="$(echo ${label} | sed 's/_/ /'): "
+		
+		console.ipt "${prompt}"
+		read input
+		
+		# prevent empty input
+		
+		while true
+			do
+				if [ -z "$input" ]
+				then
+					echo
+					console.err "${label} cannot be empty:"
+					console.wrn "${label} ${message}"
+					echo
+				
+					console.ipt "${prompt}"
+					read input
+		
+				else
+					break
+				fi
+			done
+		
+		console_rtn+=("$value=$input")
+	done
 }

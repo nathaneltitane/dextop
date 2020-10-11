@@ -156,45 +156,17 @@ print_resolutions
 
 # values #
 
-values_list=(
+list=(
 	selection
 )
 
-# FIX ME #
-
 # manage user input for values_list
 
-# console.input ${values_list[@]}
+console_rtn=()
 
-for value in "${values_list[@]}"
-do
-	label=${value^}
-	prompt="$(echo ${label} | sed 's/_/ /'): "
-	
-	console.ipt "${prompt}"
-	read input
-	
-	# prevent empty input
-	
-	while true
-		do
-			if [ -z "$input" ]
-			then
-				echo
-				console.err "${label} cannot be empty:"
-				console.wrn "${label} ${message}"
-				echo
-			
-				console.ipt "${prompt}"
-				read input
-	
-			else
-				break
-			fi
-		done
-	
-	eval "$value"="$input"
-done
+console.input ${list[@]}
+
+eval ${console_rtn[@])
 
 # check selection against selection range
 

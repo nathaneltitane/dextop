@@ -43,4 +43,4 @@ downloads_list=(
 
 # download #
 
-console.download bin.dxtp.app "$BINARIES_DIRECTORY"
+console.download bin.dxtp.app "$BINARIES_DIRECTORY" ${downloads_list[@]}

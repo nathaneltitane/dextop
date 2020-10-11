@@ -40,7 +40,7 @@ gid=$(id -g ${user_name})
 console.inf "Setting up user home directory."
 echo
 
-home_directories_list=(
+list=(
 	Desktop
 	Documents
 	Downloads
@@ -51,10 +51,7 @@ home_directories_list=(
 	Videos
 )
 
-for directory in ${home_directories_list[@]}
-do
-	console.directory "$directory" "$PROOT_DIRECTORY"/home/"$user_name"/
-done
+console.directory "$directory" "$PROOT_DIRECTORY"/home/"$user_name"/ ${list[@]}
 
 # runtime #
 

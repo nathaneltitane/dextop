@@ -13,4 +13,4 @@ downloads_list=(
 
 # download #
 
-console.download lib.dxtp.app "$PROOT_DIRECTORY"/lib
+console.download lib.dxtp.app "$PROOT_DIRECTORY"/lib ${downloads_list[@]}

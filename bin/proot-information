@@ -22,7 +22,7 @@ echo
 
 # values #
 
-values_list=(
+list=(
 	first_name
 	last_name
 	user_email
@@ -32,11 +32,11 @@ values_list=(
 
 # manage user input for values_list
 
-rtn=()
+console_rtn=()
 
-console.input ${values_list[@]}
+console.input ${list[@]}
 
-eval ${rtn[@])
+eval ${console_rtn[@])
 
 # export variables
 
