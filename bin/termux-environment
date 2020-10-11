@@ -89,6 +89,13 @@ shortcut.previous-session = ctrl + 1
 # rename current terminal session
 
 shortcut.rename-session = ctrl + n
+
+# configure keyboard shortcut keys
+
+extra-keys = [ \
+	['ESC','|','/','HOME','UP','END','PGUP','DEL'], \
+	['TAB','CTRL','ALT','LEFT','DOWN','RIGHT','PGDN','BKSP'] \
+]
 FILE
 
 # apply termux properties
