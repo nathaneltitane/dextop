@@ -168,7 +168,7 @@ echo
 
 "$BINARIES_DIRECTORY"/proot-network
 
-# setup proot install routine
+# setup proot install routin
 
 "$BINARIES_DIRECTORY"/proot-setup
 
