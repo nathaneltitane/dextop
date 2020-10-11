@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# author #
+
+# Nathanel Titane - nathanel.titane@gmail.com
+
+# Termux // Dextop // Ubuntu #
+
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
