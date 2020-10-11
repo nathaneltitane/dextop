@@ -20,20 +20,14 @@ export DEBIAN_FRONTEND=noninteractive
 console.inf "Updating repository and package information."
 echo
 
-console.silence "echo yes | apt-get update" &
-
-console.spin "Updating..."
-echo
+console.update
 
 # upgrade installed packages
 
 console.inf "Upgrading installed packages."
 echo
 
-console.silence "echo yes | apt-get upgrade" &
-
-console.spin "Upgrading..."
-echo
+console.upgrade
 
 # packages #
 
@@ -244,4 +238,4 @@ fi
 console.inf "Installing required packages."
 echo
 
-console.install "apt-get install --no-install-recommends" ${install_list[@]}
+console.install ${install_list[@]}

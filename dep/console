@@ -352,7 +352,7 @@ console.install () {
 	command_install="apt-get install --no-install-recommends"
 	command_clean="apt-get clean"
 	
-	for package in $list[@]}
+	for package in ${list[@]}
 	do
 		if [ -z $(command -v ${package}) ]
 		then

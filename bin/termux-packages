@@ -18,7 +18,6 @@ echo
 
 console.update
 
-
 # upgrade installed packages
 
 console.inf "Upgrading installed packages."
@@ -76,4 +75,4 @@ install_list=(
 console.inf "Installing required packages."
 echo
 
-console.install "apt install" ${install_list[@]}
+console.install ${install_list[@]}
