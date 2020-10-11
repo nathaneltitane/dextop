@@ -249,9 +249,13 @@ console.download () {
 	source="$1"
 	path="$2"
 	
+	# $3 - array
+	
+	data=(${@:3}) 
+	
 	# downloads_list is declared as an array prior to download request
 	
-	for file in ${downloads_list[@]}
+	for file in ${data[@]}
 	do
 		curl -sL "${source}/${file}" > "${path}"/"${file}"
 	
