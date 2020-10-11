@@ -13,8 +13,14 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # set position using wmctrl
 
-wmctrl -r "New Model.ldr — LeoCAD" -e 0,0000,0000,1960,1080
-wmctrl -r "Timeline — LeoCAD"      -e 0,1960,0000,0300,0720
-wmctrl -r "Colors — LeoCAD"        -e 0,2260,0000,0300,0200
-wmctrl -r "Properties — LeoCAD"    -e 0,2260,0200,0300,0520
-wmctrl -r "Parts — LeoCAD"         -e 0,1960,0720,0600,0360
+#wmctrl -r "New Model.ldr — LeoCAD" -e 0,0000,0000,1960,1080
+#wmctrl -r "Timeline — LeoCAD"      -e 0,1960,0000,0300,0720
+#wmctrl -r "Colors — LeoCAD"        -e 0,2260,0000,0300,0200
+#wmctrl -r "Properties — LeoCAD"    -e 0,2260,0200,0300,0520
+#wmctrl -r "Parts — LeoCAD"         -e 0,1960,0720,0600,0360
+
+wmctrl -r "New Model.ldr — LeoCAD" -e 0,0000,0000,1660,1080
+wmctrl -r "Timeline — LeoCAD"      -e 0,1660,0000,0450,0720
+wmctrl -r "Colors — LeoCAD"        -e 0,2110,0000,0450,0350
+wmctrl -r "Properties — LeoCAD"    -e 0,2110,0350,0450,0370
+wmctrl -r "Parts — LeoCAD"         -e 0,1660,0720,0900,0360
