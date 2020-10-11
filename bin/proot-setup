@@ -29,10 +29,6 @@ source /data/data/com.termux/files/usr/bin/globals
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-# initial prompt clear #
-
-clear
-
 console.msg "[ Linux on Android -  Termux // Dextop // Ubuntu  [ Version ${version} ] ]"
 echo
 
@@ -52,6 +48,10 @@ console.get dep.dxtp.app configurations "$BINARIES_DIRECTORY"
 console.get dep.dxtp.app images "$BINARIES_DIRECTORY"
 console.get dep.dxtp.app libraries "$BINARIES_DIRECTORY"
 
+# initial prompt clear #
+
+clear
+
 # execute
 
 console.fwd "Loading..."
@@ -70,10 +70,6 @@ echo
 
 sleep 2
 
-# setup proot login messages
-
-"$BINARIES_DIRECTORY"/proot-welcome
-
 # packages
 
 "$BINARIES_DIRECTORY"/proot-packages
@@ -86,8 +82,11 @@ sleep 2
 
 "$BINARIES_DIRECTORY"/proot-superuser "${first_name}" "${last_name}"
 
-# download optimized and precompiled arm64 applications
+# setup proot login messages
 
+"$BINARIES_DIRECTORY"/proot-welcome
+
+# download optimized and precompiled arm64 applications
 
 [ "${add_applications}" = "yes" ] && "$BINARIES_DIRECTORY"/applications
 
