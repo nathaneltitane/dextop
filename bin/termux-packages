@@ -16,20 +16,15 @@ script=$(basename -- "${BASH_SOURCE[0]}")p
 console.inf "Updating repository and package information."
 echo
 
-console.silence "apt update" &
+console.update
 
-console.spin "Updating..."
-echo
 
 # upgrade installed packages
 
 console.inf "Upgrading installed packages."
 echo
 
-console.silence "echo yes | apt upgrade" &
-
-console.spin "Upgrading..."
-echo
+console.upgrade
 
 # packages #
 

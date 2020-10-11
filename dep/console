@@ -342,14 +342,15 @@ console.input () {
 	done
 }
 
+# packages #
+
 # install
 
 console.install () {
-	command="$1"
+	list=($@)
 	
-	# $2 - array
-	
-	list=($@:2)
+	command_install="apt-get install --no-install-recommends"
+	command_clean="apt-get clean"
 	
 	for package in $list[@]}
 	do
@@ -360,7 +361,7 @@ console.install () {
 	
 			# use 'apt-get install --no-install-recommends' to keep bloat to a minimum
 			
-			console.silence "echo yes | ${command} ${package}" &
+			console.silence "echo yes | ${command_install} ${package}" &
 			
 			console.spin "Installing [ ${package} ]..."
 			echo
@@ -374,4 +375,33 @@ console.install () {
 			:
 		fi
 	done
+	
+	# cleanup
+	
+	console.silence "${command_clean}" &
+	
+	console.spin "Cleaning..."
+	echo
+}
+
+# update
+
+console.update () {
+	command_update="apt-get update"
+	
+	console.silence "${command_update}" &
+	
+	console.spin "Updating..."
+	echo
+}
+
+# upgrade
+
+console.upgrade () {
+	command_upgrade="apt-get upgrade"
+	
+	console.silence "echo yes | ${command_upgrade}" &
+	
+	console.spin "Upgrading..."
+	echo
 }
