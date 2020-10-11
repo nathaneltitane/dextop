@@ -342,6 +342,8 @@ console.input () {
 	done
 }
 
+# install
+
 console.install () {
 	command="$1"
 	
