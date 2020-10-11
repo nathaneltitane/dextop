@@ -74,27 +74,28 @@ bell-character=beep
 
 back-key=back
 
+# rename current terminal session
+
+shortcut.rename-session = ctrl + n
+
 # open a new terminal with ctrl + t (volume down + t)
 
 shortcut.create-session = ctrl + t
-
-# move to next terminal session
-
-shortcut.next-session = ctrl + 2
 
 # move to previous terminal session
 
 shortcut.previous-session = ctrl + 1
 
-# rename current terminal session
+# move to next terminal session
 
-shortcut.rename-session = ctrl + n
+shortcut.next-session = ctrl + 2
+
 
 # configure keyboard shortcut keys
 
-extra-keys = [														\
-	['ESC','|','/','HOME','UP','END','PGUP','_','DEL'],				\
-	['TAB','CTRL','ALT','LEFT','DOWN','RIGHT','PGDN','-','BKSP']	\
+extra-keys = [																\
+	['ESC', '|',    '/',   'HOME', 'UP',   'END',   'PGUP', '_', 'DEL'	],	\
+	['TAB', 'CTRL', 'ALT', 'LEFT', 'DOWN', 'RIGHT', 'PGDN', '-', 'BKSP'	]	\
 ]
 FILE
 
