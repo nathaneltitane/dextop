@@ -171,7 +171,7 @@ console_rtn=()
 
 console.input ${list[@]}
 
-eval ${console_rtn[@])
+eval ${console_rtn[@]}
 
 # check selection against selection range
 
