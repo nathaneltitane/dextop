@@ -234,9 +234,10 @@ fi
 
 if [[ $add_applications = "yes" ]]
 then
-install_list+=(
-	${applications_list}
-)
+	install_list+=(
+		${applications_list}
+	)
+fi
 
 # install #
 
