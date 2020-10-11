@@ -34,7 +34,14 @@ echo
 # packages #
 
 libraries_list=(
-	libandroid-*
+	libandroid-glob
+	libandroid-glob-static
+	libandroid-shmem
+	libandroid-shmem-static
+	libandroid-spawn
+	libandroid-spawn-static
+	libandroid-support
+	libandroid-support-static
 )
 
 repositories_list=(
