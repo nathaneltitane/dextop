@@ -37,6 +37,12 @@ echo
 
 # packages #
 
+applications_list=(
+	leocad
+	povray
+	youtube-dl
+)
+
 utilities_list=(
 	curl
 	ffmpeg
@@ -48,7 +54,6 @@ utilities_list=(
 	sudo
 	wmctrl
 	xdotool
-	youtube-dl
 )
 
 display_server_list=(
@@ -59,11 +64,6 @@ display_server_list=(
 security_list=(
 	ca-certificates
 	openssl	
-)
-
-sound_list=(
-	pavucontrol
-	pulseaudio
 )
 
 vnc_list=(
@@ -82,7 +82,7 @@ web_list=(
 	midori
 )
 
-theme_list=(
+themes_list=(
 	arc-theme
 	qt5-style-platform-gtk2
 	qt5-style-plugin-gtk2
@@ -93,8 +93,7 @@ frameworks_list=(
 	libqt5opengl5
 	libqt5printsupport5
 	libqt5xml5
-	povray
-	)
+)
 
 # desktop environments
 
@@ -192,7 +191,7 @@ then
 	install_list+=(
 		${web_list[@]}
 		${desktop_environment_list[@]}
-		${theme_list[@]}
+		${themes_list[@]}
 		${frameworks_list[@]}
 	)
 fi
@@ -230,6 +229,14 @@ then
 		${xorg_list}
 	)
 fi
+
+# applications #
+
+if [[ $applications = "yes" ]]
+then
+install_list+=(
+	${applications_list}
+)
 
 # install #
 

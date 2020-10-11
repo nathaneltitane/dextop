@@ -17,3 +17,12 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 	ln -s -f \
 		/media/Internal/MEGA/Lego/leocad/leocad.conf \
 		"$PROOT_DIRECTORY"/home/"$user_name"/.config/"LeoCAD Software"/LeoCAD.conf || :
+			
+# .bashrc
+
+cat <<- 'FILE' >> "$PROOT_DIRECTORY"/home/"$user_name"/.bashrc
+
+# leocad #
+
+console.get app.dxtp.app leocad /usr/bin
+FILE

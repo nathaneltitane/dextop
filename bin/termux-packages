@@ -33,21 +33,17 @@ echo
 
 # packages #
 
-utilities_list=(
-	curl
-	git
-	hub
-	jq
-	nano
-	proot
-)
-
 libraries_list=(
 	libandroid-*
 )
 
-sound_list=(
-	pulseaudio
+repositories_list=(
+	game-repo
+	root-repo
+	science-repo
+	termux-apt-repo
+	unstable-repo
+	x11-repo
 )
 
 termux_list=(
@@ -61,19 +57,16 @@ termux_list=(
 	termux-licenses
 	termux-services
 	termux-tools
-	game-repo
-	root-repo
-	science-repo
-	termux-apt-repo
-	unstable-repo
-	x11-repo
-	
+)
+
+utilities_list=(
+	curl
+	proot
 )
 
 install_list=(
-	${termux_list[@]}
-	${utilities_list[@]}
 	${libraries_list[@]}
+	${utilities_list[@]}
 )
 
 # install #
