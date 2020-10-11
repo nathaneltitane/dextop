@@ -123,43 +123,42 @@ echo
 
 cd "${SETUP_DIRECTORY}" || exit 1
 
-
-# verify architecture compatibility
-
-"$BINARIES_DIRECTORY"/proot-architecture
-
 # setup environments
 
 console.fwd "Setting up environments [ [ termux <<< ] | [ >>> proot ] ]..."
 echo
 
-# get user information
+# setup termux environment requirements
 
-"$BINARIES_DIRECTORY"/proot-information
-
-# setup termux login messages
-
-"$BINARIES_DIRECTORY"/termux-welcome
-
-# setup transient storage - [ device <<>> [ termux <<>> [ proot ] ] ]
-
-"$BINARIES_DIRECTORY"/termux-storage
+"$BINARIES_DIRECTORY"/termux-environment
 
 # setup termux package requirements
 
 "$BINARIES_DIRECTORY"/termux-packages
 
+# setup transient storage - [ device <<>> [ termux <<>> [ proot ] ] ]
+
+"$BINARIES_DIRECTORY"/termux-storage
+
+# setup termux login messages
+
+"$BINARIES_DIRECTORY"/termux-welcome
+
+# verify architecture compatibility
+
+"$BINARIES_DIRECTORY"/proot-architecture
+
+# get user information
+
+"$BINARIES_DIRECTORY"/proot-information
+
 # download and unpack/setup image
 
 "$BINARIES_DIRECTORY"/proot-image
 
-# transfer unregsitered termux group IDs into proot
+# transfer unregsitered group IDs into proot
 
-"$BINARIES_DIRECTORY"/termux-groups
-
-# setup termux environment requirements
-
-"$BINARIES_DIRECTORY"/termux-environment
+"$BINARIES_DIRECTORY"/proot-groups
 
 # setup proot libraries preload for enhanced performance
 
