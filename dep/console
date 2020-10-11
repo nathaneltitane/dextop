@@ -302,9 +302,36 @@ console.silence () {
 # input
 
 console.input () {
+values_list=($@)
 
-	# FIX ME #
-
-	true # no-op
+for value in "${values_list[@]}"
+do
+	label=${value^}
+	prompt="$(echo ${label} | sed 's/_/ /'): "
+	
+	console.ipt "${prompt}"
+	read input
+	
+	# prevent empty input
+	
+	while true
+		do
+			if [ -z "$input" ]
+			then
+				echo
+				console.err "${label} cannot be empty:"
+				console.wrn "${label} ${message}"
+				echo
+			
+				console.ipt "${prompt}"
+				read input
+	
+			else
+				break
+			fi
+		done
+	
+	rtn+=("$value=$input")
+done
 
 }
