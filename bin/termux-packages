@@ -81,31 +81,4 @@ install_list=(
 console.inf "Installing required packages."
 echo
 
-for package in ${install_list[@]}
-do
-	if [ -z "$(command -v ${package})" ]
-	then
-		console.wrn "Required package '${package}' not present."
-		echo
-
-		console.silence "echo yes | apt install ${package}" &
-		
-		console.spin "Installing [ ${package} ]..."
-		echo
-	else
-		console.scs "Required package '${package}' already installed."
-		echo
-		
-		console.fwd "Continuing..."
-		echo
-
-		:
-	fi
-done
-
-# cleanup
-
-console.silence "apt clean" &
-
-console.spin "Cleaning..."
-echo
+console.install "apt install" ${install_list[@]}

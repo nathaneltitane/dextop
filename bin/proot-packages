@@ -244,33 +244,4 @@ fi
 console.inf "Installing required packages."
 echo
 
-for package in ${install_list[@]}
-do
-	if [ -z $(command -v ${package}) ]
-	then
-		console.wrn "Required package '${package}' not present."
-		echo
-
-		# use 'apt-get install --no-install-recommends' to keep bloat to a minimum
-		
-		console.silence "echo yes | apt-get install --no-install-recommends ${package}" &
-		
-		console.spin "Installing [ ${package} ]..."
-		echo
-	else
-		console.scs "Required package '${package}' already installed."
-		echo
-		
-		console.fwd "Continuing..."
-		echo
-
-		:
-	fi
-done
-
-# cleanup
-
-console.silence "apt-get clean" &
-
-console.spin "Cleaning..."
-echo
+console.install "apt-get install --no-install-recommends" ${install_list[@]}

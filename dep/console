@@ -341,3 +341,35 @@ console.input () {
 		console_rtn+=("$value=$input")
 	done
 }
+
+console.install () {
+	command="$1"
+	
+	# $2 - array
+	
+	list=($@:2)
+	
+	for package in $list[@]}
+	do
+		if [ -z $(command -v ${package}) ]
+		then
+			console.wrn "Required package '${package}' not present."
+			echo
+	
+			# use 'apt-get install --no-install-recommends' to keep bloat to a minimum
+			
+			console.silence "echo yes | ${command} ${package}" &
+			
+			console.spin "Installing [ ${package} ]..."
+			echo
+		else
+			console.scs "Required package '${package}' already installed."
+			echo
+			
+			console.fwd "Continuing..."
+			echo
+	
+			:
+		fi
+	done
+}
