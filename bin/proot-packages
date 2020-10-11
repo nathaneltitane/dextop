@@ -232,7 +232,7 @@ fi
 
 # applications #
 
-if [[ $applications = "yes" ]]
+if [[ $add_applications = "yes" ]]
 then
 install_list+=(
 	${applications_list}

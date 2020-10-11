@@ -15,7 +15,6 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 downloads_list=(
 	applications-setup
-	leocad
 	leocad-position
 	leocad-configuration
 	youtube-dl-configuration
