@@ -15,10 +15,13 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 # execute on first login to complete proot setup
 # terminate if checkpoint is reached
 
-# write dependencies
+# write globals
 
-cat << 'FILE' > "$PROOT_DIRECTORY"/tmp/setup
-#!/bin/bash
+cat "$BINARIES_DIRECTORY"/globals >> "$PROOT_DIRECTORY"/tmp/proot-setup
+
+# write proot-setup
+
+cat << 'FILE' >> "$PROOT_DIRECTORY"/tmp/proot-setup
 
 # dependencies #
 
@@ -29,17 +32,8 @@ source /data/data/com.termux/files/usr/bin/globals
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-console.msg "[ Linux on Android -  Termux // Dextop // Ubuntu  [ Version ${version} ] ]"
+console.fwd "Loading..."
 echo
-
-sleep 1
-FILE
-
-cat "$BINARIES_DIRECTORY"/globals >> "$PROOT_DIRECTORY"/tmp/setup
-
-# write setup
-
-cat << 'FILE' >> "$PROOT_DIRECTORY"/tmp/setup
 
 # source
 
@@ -48,100 +42,95 @@ console.get dep.dxtp.app configurations "$BINARIES_DIRECTORY"
 console.get dep.dxtp.app images "$BINARIES_DIRECTORY"
 console.get dep.dxtp.app libraries "$BINARIES_DIRECTORY"
 
-# initial prompt clear #
-
-clear
-
 # execute
-
-console.fwd "Loading..."
-echo
 
 bash "$BINARIES_DIRECTORY"/configurations
 bash "$BINARIES_DIRECTORY"/images
 bash "$BINARIES_DIRECTORY"/libraries
 
+
+# initial prompt clear #
+
 clear
 
-# setup #
+console.msg "[ Linux on Android -  Termux // Dextop // Ubuntu [ Version ${version} ] ]"
+echo
+
+sleep 1
 
 console.fwd "Completing setup [ proot ]..."
 echo
 
 sleep 2
 
-# packages
+# setup #
 
-"$BINARIES_DIRECTORY"/proot-packages
-
-# create user account
+# setup proot user account
 
 "$BINARIES_DIRECTORY"/proot-user "${first_name}" "${last_name}"
 
-# set superuser privileges for user account
+# setup proot user superuser privileges
 
 "$BINARIES_DIRECTORY"/proot-superuser "${first_name}" "${last_name}"
+
+# setup proot environment files
+
+"$BINARIES_DIRECTORY"/proot-environment
+
+# setup proot package requirements
+
+"$BINARIES_DIRECTORY"/proot-packages
 
 # setup proot login messages
 
 "$BINARIES_DIRECTORY"/proot-welcome
 
-# download optimized and precompiled arm64 applications
-
-[ "${add_applications}" = "yes" ] && "$BINARIES_DIRECTORY"/applications
-
-# setup vnc configurations
+# setup proot vnc configurations
 
 "$BINARIES_DIRECTORY"/vnc-setup
 
-# setup xorg configurations
+# setup proot xorg configurations
 
 "$BINARIES_DIRECTORY"/xorg-setup
 
-# setup preconfigured preferences
-
-"$BINARIES_DIRECTORY"/proot-environment
-
-# setup desktop environment configurations
+# setup proot desktop environment configurations
 
 bash "$PROOT_DIRECTORY"/tmp/blackbox-setup
 
-# applications
+# setup proot additional applications
 
-# setup desktop environment configurations
-
-bash "$PROOT_DIRECTORY"/tmp/applications-setup
+[ "${add_applications}" = "yes" ] && "$BINARIES_DIRECTORY"/applications
 
 # checkpoint #
 
 # confirm uninterrupted setup for cleanup
 
-echo "yes" > /tmp/setup-complete
+echo "yes" > /tmp/proot-setup-complete
 
 # clear #
 
 clear
 
-console.fwd "Setup finalized..."
+console.fwd console.fwd "Setup complete [ proot ]..."
 echo
 
 console.scs "Deployment and configuration complete."
 echo
 
-sleep 3
+sleep 2
 
 console.countdown "Exiting in" 5
 echo
 
 clear
 
-sleep 3
+sleep 2
 
 # cleanup #
 
 # remove scripts
 
-if [[ "$(cat $PROOT_DIRECTORY/tmp/setup-complete)" = "yes" ]]
+if [[ "$(cat $PROOT_DIRECTORY/tmp/proot-setup-complete)" = "yes" ]]
 then
 	# remove automatic setup launch
 

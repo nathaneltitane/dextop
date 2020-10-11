@@ -104,7 +104,7 @@ console.get dep.dxtp.app binaries "$BINARIES_DIRECTORY" && bash "$BINARIES_DIREC
 
 clear
 
-console.msg "[ Linux on Android -  Termux // Dextop // Ubuntu  [ Version ${version} ] ]"
+console.msg "[ Linux on Android -  Termux // Dextop // Ubuntu [ Version ${version} ] ]"
 echo
 
 sleep 1
@@ -128,7 +128,7 @@ cd "${SETUP_DIRECTORY}" || exit 1
 console.fwd "Setting up environments [ [ termux <<< ] | [ >>> proot ] ]..."
 echo
 
-# setup termux environment requirements
+# setup termux environment files
 
 "$BINARIES_DIRECTORY"/termux-environment
 
@@ -148,15 +148,15 @@ echo
 
 "$BINARIES_DIRECTORY"/proot-architecture
 
-# get user information
+# setup proot user information
 
 "$BINARIES_DIRECTORY"/proot-information
 
-# download and unpack/setup image
+# setup proot image
 
 "$BINARIES_DIRECTORY"/proot-image
 
-# transfer unregsitered group IDs into proot
+# setup proot group IDs
 
 "$BINARIES_DIRECTORY"/proot-groups
 
@@ -168,7 +168,7 @@ echo
 
 "$BINARIES_DIRECTORY"/proot-network
 
-# setup proot system requirements
+# setup proot install routine
 
 "$BINARIES_DIRECTORY"/proot-setup
 
@@ -197,7 +197,7 @@ rm "$HOME"/setup || :
 
 cat <<- 'FILE' >> "$PROOT_DIRECTORY"/root/.profile
 
-bash /tmp/setup
+bash /tmp/proot-setup
 FILE
 
 # run 'proot-launch' as 'root'

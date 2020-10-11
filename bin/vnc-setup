@@ -32,6 +32,9 @@ cat <<- 'FILE' > "$PROOT_DIRECTORY"/home/${user_name}/.vnc/xstartup
 unset DBUS_SESSION_BUS_ADDRESS
 unset SESSION_MANAGER
 
+$PAGER &
+$RUNNER &
+
 if [ ! -z "$APPLICATION" ]
 then
 	$DESKTOP_SESSION &
@@ -53,7 +56,7 @@ FILE
 
 # append automatic vnc session start from selection value
 
-cat <<- 'FILE' > "$PROOT_DIRECTORY"/home/${user_name}/.profile
+cat <<- 'FILE' > "$PROOT_DIRECTORY"/home/${user_name}/.bash_profile
 
 # automatic vnc session start on shell login
 

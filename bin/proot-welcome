@@ -22,7 +22,7 @@ FILE
 
 # write welcome message - replaces motd
 
-cat <<- 'FILE' >> "$PROOT_DIRECTORY"/home/"$user_name"/.profile
+cat <<- 'FILE' >> "$PROOT_DIRECTORY"/home/"$user_name"/.bash_profile
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
