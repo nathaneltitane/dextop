@@ -15,10 +15,7 @@ source /etc/os-release
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-vnc_apk="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
-
 PORT="590${DISPLAY:1}"
-
 
 vnc () {
 	console.silence "
@@ -60,7 +57,7 @@ vnc () {
 	#			-d vnc://${LOCALHOST}:${PORT} \
 	#			-S application/activity"
 	
-	console.silence "am start -d vnc://${LOCALHOST}:${PORT} -S ${vnc_apk}"
+	console.silence "am start -d vnc://${LOCALHOST}:${PORT} -S ${VNC}"
 }
 
 print_resolutions() {

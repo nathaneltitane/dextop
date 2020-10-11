@@ -33,6 +33,8 @@ DESKTOP_SESSION="blackbox"
 PAGER="bbpager"
 RUNNER="bbrun"
 
+VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
+
 # environment defaults
 
 [ -z "$DESKTOP_SESION" ]	&& DESKTOP_SESSION="$DESKTOP_SESSION"
