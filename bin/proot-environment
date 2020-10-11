@@ -20,30 +20,30 @@ echo
 
 # .bash_aliases
 
-cat <<- 'FILE' >> "$HOME"/.bash_aliases
+cat <<- 'FILE' >> "$PROOT_DIRECTORY"/home/${user_name}//.bash_aliases
 
 FILE
 
 # .bash_profile
 
-cat <<- 'FILE' >> "$HOME"/.bash_profile
+cat <<- 'FILE' >> "$PROOT_DIRECTORY"/home/${user_name}//.bash_profile
 
 FILE
 
 # .bash_logout
 
-cat <<- 'FILE' >> "$HOME"/.bash_logout
+cat <<- 'FILE' >> "$PROOT_DIRECTORY"/home/${user_name}//.bash_logout
 
 FILE
 
 # .bashrc
 
-cat <<- 'FILE' >> "$HOME"/.bashrc
+cat <<- 'FILE' >> "$PROOT_DIRECTORY"/home/${user_name}//.bashrc
 
 FILE
 
 # .profile
 
-cat <<- 'FILE' >> "$HOME"/.profile
+cat <<- 'FILE' >> "$PROOT_DIRECTORY"/home/${user_name}//.profile
 
 FILE
