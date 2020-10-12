@@ -19,12 +19,12 @@ PORT="590${DISPLAY:1}"
 
 vnc () {
 	console.silence "
-					vncserver \
-							-SecurityTypes none \
-							-localhost yes \
-							-depth 32 \
-							-cleanstale \
-							-name $NAME \
+					vncserver									\
+							-SecurityTypes none					\
+							-localhost yes						\
+							-depth 32							\
+							-cleanstale							\
+							-name $NAME							\
 							-geometry ${GEOMETRY} ${DISPLAY}"
 
 					# 'vncserver' uses $DISPLAY instead of $PORT
@@ -43,21 +43,36 @@ vnc () {
 
 	if [[ $(id -u) -ne 0 ]]
 	then
-			# integer check: do not write non numerical values to file
-			
-			if [[ "$selection" =~ ^[0-9]+$ ]]
-			then
-					echo "$selection" > /home/$(id -u -n)/.vnc/selection
-			fi
+		# integer check: do not write non numerical values to file
+		
+		if [[ "$selection" =~ ^[0-9]+$ ]]
+		then
+				echo "$selection" > /home/$(id -u -n)/.vnc/selection
+		fi
 	fi
 
 	# start android vnc intent and kill previous display before run
 	
-	# am start \
-	#			-d vnc://${LOCALHOST}:${PORT} \
-	#			-S application/activity"
+	# am start								\
+	#		-d vnc://${LOCALHOST}:${PORT}	\
+	#		-S application/activity"
 	
-	console.silence "am start -d vnc://${LOCALHOST}:${PORT} -S ${VNC}"
+	# console.silence "am start -d vnc://${LOCALHOST}:${PORT} -S ${VNC}"
+	
+	# kill active and stale vnc output processes
+	
+	console.fwd "Looking for stale session tokens..."
+	echo
+	
+	console.silence "vncserver -kill :*"
+	
+	# clean display server runtime files
+	
+	rm -rf /tmp/.X*
+	
+	# start android vnc intent
+	
+	console.silence "am start -d vnc://${LOCALHOST}:${PORT}"
 }
 
 print_resolutions() {
@@ -122,37 +137,26 @@ print_resolutions() {
 	
 	for (( i=0 ; i<${#resolutions[@]} ; i+=3 ))
 	do
-			format="${resolutions[$i]}"
-			width="${resolutions[$i+1]}"
-			height="${resolutions[$i+2]}"
-			resolution="${width}x${height}"
+		format="${resolutions[$i]}"
+		width="${resolutions[$i+1]}"
+		height="${resolutions[$i+2]}"
+		resolution="${width}x${height}"
 
-			number=$((($i/3) + 1))
+		number=$((($i/3) + 1))
 
-			if (( $i/3 >= 0 && $i/3 <= 8 ))
-			then
-					printf '\t[  %s ] %s' $number $format
-			else
-					printf '\t[ %s ] %s' $number $format
-			fi
+		if (( $i/3 >= 0 && $i/3 <= 8 ))
+		then
+				printf '\t[  %s ] %s' $number $format
+		else
+				printf '\t[ %s ] %s' $number $format
+		fi
 
-			printf '%*s' $((pad_length - ${#format}))
-			printf '%s\n' $resolution
+		printf '%*s' $((pad_length - ${#format}))
+		printf '%s\n' $resolution
 	done
 	
 	printf '\n'
 }
-
-# kill active and stale vnc output processes
-
-console.fwd "Looking for stale session tokens..."
-echo
-
-console.silence "vncserver -kill :*"
-
-# clean display server runtime files
-
-rm -rf /tmp/.X*
 
 # show selection
 
@@ -194,46 +198,46 @@ done
 # manage selection
 
 case $selection in
-		c|C)
-				format="Custom"
+	c|C)
+		format="Custom"
+	
+		console.inf "Setting custom resolution and port:"
+		echo
+	
+		console.ipt "Enter WIDTH and HEIGHT (e.g. 1920 1080): "
+		read width height
+		echo
+	
+		console.ipt "Enter port NUMBER (e.g. 1): "
+		read custom_port
+		echo
+	
+		format="Custom"
+		custom_resolution="${width}x${height}"
+	
+		DISPLAY=":$custom_port"
+		GEOMETRY="$custom_resolution"
+		PORT="590${DISPLAY:1}"
+	
+		vnc
+	;;
+	*)
+		resolution=""
+		int_check='^[0-9]+$'
+	
+		if [[ $selection =~ $int_check ]]
+		then
+			i=$(($selection-1))
+			i=$(($i*3))
 
-				console.inf "Setting custom resolution and port:"
-				echo
-
-				console.ipt "Enter WIDTH and HEIGHT (e.g. 1920 1080): "
-				read width height
-				echo
-
-				console.ipt "Enter port NUMBER (e.g. 1): "
-				read custom_port
-				echo
-
-				format="Custom"
-				custom_resolution="${width}x${height}"
-
-				DISPLAY=":$custom_port"
-				GEOMETRY="$custom_resolution"
-				PORT="590${DISPLAY:1}"
-
-				vnc
-		;;
-		*)
-				resolution=""
-				int_check='^[0-9]+$'
-
-				if [[ $selection =~ $int_check ]]
-				then
-						i=$(($selection-1))
-						i=$(($i*3))
-
-						format="${resolutions[$i-3]}"
-						width="${resolutions[$i-2]}"
-						height="${resolutions[$i-1]}"
-						resolution="${width}x${height}"
-				fi
-
-				GEOMETRY="$resolution"
-
-				vnc
+			format="${resolutions[$i-3]}"
+			width="${resolutions[$i-2]}"
+			height="${resolutions[$i-1]}"
+			resolution="${width}x${height}"
+		fi
+	
+		GEOMETRY="$resolution"
+	
+		vnc
 		;;
 esac
