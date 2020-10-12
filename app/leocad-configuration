@@ -11,22 +11,12 @@ source /data/data/com.termux/files/usr/bin/globals
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-# create directory
-
-console.directory "LeoCAD Software" "$PROOT_DIRECTORY"/home/"${user_name}"/.config
-
-# link configuration
-
-[ -d /media/Internal/MEGA/Lego/leocad/ ] && \
-	ln -s -f \
-		/media/Internal/MEGA/Lego/leocad/leocad.conf \
-		"$PROOT_DIRECTORY"/home/"$user_name"/.config/"LeoCAD Software"/LeoCAD.conf || :
-			
 # .bashrc
 
 cat <<- 'FILE' >> "$PROOT_DIRECTORY"/home/"$user_name"/.bash_profile
 
-# leocad #
+# youtube-dl #
 
-console.get app.dxtp.app leocad /usr/bin
+console.get URL leocad /usr/bin
+console.get URL leocad-position /usr/bin
 FILE

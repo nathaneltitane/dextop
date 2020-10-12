@@ -1,0 +1,183 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# usage #
+
+# variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# aliases #
+
+cat <<- 'FILE' > "$PROOT_DIRECTORY"/home/"$user_name"/.bash_aliases
+# shell #
+
+[[ $(id -u) = 0 ]] && PS1="$(tput setaf 1)>_ # $(tput sgr 0)" || PS1=">_ $ "
+
+# sudo #
+
+alias sudo='sudo -p "$(tput setaf 3)>_ ? $(tput sgr 0)"'
+
+# directories #
+
+alias '..'='cd ..'
+alias '...'='cd ../../../'
+alias '....'='cd ../../../../'
+alias '.....'='cd ../../../../'
+
+# list #
+
+alias 'ls'='ls -al'
+
+# apt-get #
+
+alias 'autoclean'='sudo apt-get autoclean'
+alias 'autoremove'='sudo apt-get autoremove'
+alias 'check'='sudo apt-get check'
+alias 'clean'='sudo apt-get clean'
+alias 'distribution-upgrade'='sudo apt-get dist-upgrade'
+alias 'download'='sudo apt-get download'
+alias 'install'='sudo apt-get install'
+alias 'purge'='sudo apt-get purge'
+alias 'reinstall'='sudo apt-get reinstall'
+alias 'repair'='sudo apt-get -f install'
+alias 'remove'='sudo apt-get remove'
+alias 'update'='sudo apt-get update'
+alias 'upgrade'='sudo apt-get upgrade'
+
+# apt-cache #
+
+alias 'dependencies'='apt-cache depends'
+alias 'search'='apt-cache search'
+
+# dd #
+
+alias 'dd'="dd if=$1 of=$2 bs=$3 status=progress"
+
+# dpkg #
+
+alias 'd-install'='sudo dpkg -i'
+alias 'd-force-install'='sudo dpkg -i --force-all'
+
+# nano #
+
+alias 'nano'='nano -c'
+
+# ping #
+
+alias 'ping'='ping -c 5'
+
+# services #
+
+alias 'kill'='sudo pkill -9'
+alias 'start'='sudo systemctl start'
+alias 'stop'='sudo systemctl stop'
+alias 'enable'='sudo systemctl enable'
+alias 'disable'='sudo systemctl disable'
+alias 'status'='sudo systemctl status'
+
+# ip #
+
+alias 'address'='curl ipinfo.io/ip'
+
+# speedtest #
+
+alias 'speedtest'='speedtest-cli --server 2406 --simple'
+
+# youtube-dl #
+
+youtube () {
+	youtube-dl							\
+		--ignore-errors					\
+		--format bestaudio				\
+		--extract-audio					\
+		--audio-format mp3				\
+		--audio-quality 160K			\
+		--output "%(title)s.%(ext)s"	\
+		--yes-playlist					\
+										$1
+}
+
+# recordmydesktop #
+
+record () {
+	stamp=$(date +"%m-%d-%Y-%H-%M-%S")
+	window_id=$(xwininfo | grep "Window id" | cut -d ' ' -f 4)
+
+	wmctrl -i -R ${window_id}
+
+	sleep 1
+
+	recordmydesktop							\
+		--windowid ${window_id}				\
+		--no-cursor							\
+		--no-wm-check						\
+		--no-sound							\
+		--overwrite							\
+		-o "$HOME"/Videos/clip-${stamp}.ogv
+}
+
+# extract #
+
+extract () {
+	if [ -f "$1" ]
+	then
+		case "$1" in
+		*.tar.bz2)
+			tar xjf "$1"
+		;;
+		*.tar.gz)
+			tar xzf "$1"
+		;;
+		*.bz2)
+			bunzip2 "$1"
+		;;
+		*.rar)
+			unrar e "$1"
+		;;
+		*.gz)
+			gunzip "$1"
+		;;
+		*.tar)
+			tar xf "$1"
+		;;
+		*.tbz2)
+			tar xjf "$1"
+		;;
+		*.tgz)
+			tar xzf "$1"
+		;;
+		*.zip)
+			unzip "$1"
+		;;
+		*.Z)
+			uncompress "$1"
+		;;
+		*.7z)
+			7z x "$1"
+		;;
+		*)
+			echo "'$1' cannot be extracted:"
+			echo "Unknown or unsupported archive type."
+		;;
+		esac
+	else
+		echo "'$1' is not a valid archive type."
+	fi
+}
+
+# sprunge #
+
+sprunge () {
+	if (($#))
+	then
+		curl -F 'sprunge=<-' http://sprunge.us < "$1"
+	else
+		curl -F 'sprunge=<-' http://sprunge.us
+	fi
+}
+FILE
