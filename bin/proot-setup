@@ -91,6 +91,10 @@ sleep 2
 
 "$BINARIES_DIRECTORY"/proot-welcome
 
+# setup proot aliased commands
+
+"$BINARIES_DIRECTORY"/proot-aliases
+
 # setup proot vnc configurations
 
 "$BINARIES_DIRECTORY"/vnc-setup
