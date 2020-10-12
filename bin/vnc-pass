@@ -14,25 +14,16 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 # values #
 
 values_list=(
-  vnc_password
+	password
 )
 
-for value in "${values_list[@]}"
-do
-	prompt="$(echo ${value^} | sed 's/_/ /')...: "
-	
-	console.ipt "${prompt}"
-	
-	[[ "$value" = *password* ]] && read -s input || read input
-	
-	# prevent empty input
-	
-	console.empty Password "is required for a successful setup."
-	
-	eval "$value"="$input"
-done
+# manage user input for values_list
 
-echo
+console_rtn=()
+
+console.input "required for secure display output" ${values_list[@]}
+
+eval ${console_rtn[@]}
 
 # hash password  using 'vncpasswd' utility and store it
 

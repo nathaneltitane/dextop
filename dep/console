@@ -309,7 +309,11 @@ console.silence () {
 # input
 
 console.input () {
-	list=($@)
+	message="$1"
+	
+	# $2 - array
+	
+	list=($@:2)
 	
 	for value in "${list[@]}"
 	do
@@ -317,26 +321,26 @@ console.input () {
 		prompt="$(echo ${label} | sed 's/_/ /'): "
 		
 		console.ipt "${prompt}"
-		read input
+		[[ "$value" = *password* ]] && read -s input || read input
 		
 		# prevent empty input
 		
 		while true
-			do
-				if [ -z "$input" ]
-				then
-					echo
-					console.err "${label} cannot be empty:"
-					console.wrn "${label} ${message}"
-					echo
-				
-					console.ipt "${prompt}"
-					read input
-		
-				else
-					break
-				fi
-			done
+		do
+			if [ -z "$input" ]
+			then
+				echo
+				console.err "${label} cannot be empty:"
+				console.wrn "${label} ${message}."
+				echo
+			
+				console.ipt "${prompt}"
+				[[ "$value" = *password* ]] && read -s input || read input
+	
+			else
+				break
+			fi
+		done
 		
 		console_rtn+=("$value=$input")
 	done

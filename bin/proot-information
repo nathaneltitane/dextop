@@ -32,7 +32,7 @@ information_list=(
 
 console_rtn=()
 
-console.input ${information_list[@]}
+console.input "required for succesful proot setup" ${information_list[@]}
 
 eval ${console_rtn[@]}
 

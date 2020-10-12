@@ -56,21 +56,24 @@ do
 
 	# write settings
 
-	xfconf-query --create \
-		-t "${type}" \
-		-c "${channel}" \
-		-p "${property}" \
-		-s "${value}"
+	xfconf-query				\
+		--create				\
+			-t "${type}"		\
+			-c "${channel}"		\
+			-p "${property}"	\
+			-s "${value}"
 
 	refresh
 
-	# sudo su - "${user}" -c "DISPLAY=${DISPLAY} DBUS_SESSION_BUS_ADDRESS=${DBUS_SESSION_BUS_ADDRESS} \
-	# xfconf-query --create \
-	# -t "${type}" \
-	# -c "${channel}" \
-	# -p "${property}" \
-	# -s "${value}""
-
+	# sudo su - "${user}"										\
+	#	-c "DISPLAY=${DISPLAY}									\
+	#	DBUS_SESSION_BUS_ADDRESS=${DBUS_SESSION_BUS_ADDRESS}	\
+	# xfconf-query												\
+	#	--create												\
+	#		-t ${type}											\
+	#		-c ${channel}										\
+	#		-p ${property}										\
+	#		-s ${value}"
 done
 
 refresh
