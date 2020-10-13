@@ -16,13 +16,13 @@ This project provides any user owning a modern android device, the ability to se
 
 ### Setup:
 
-Once the Android applications are installed on your device, open Termux and paste
+Once the Android applications are installed on your device, open Termux and paste:
 
 ```
 curl -sL get.dxtp.app > setup && bash setup | <option>
 ```
 
-where available install options are:
+Available install options are:
 
 ```
 -f | --full: download and install full desktop environment and utilities. ( xfce4 )
