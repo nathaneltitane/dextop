@@ -65,4 +65,5 @@ When in the proot environment:
 ### Note:
 If you've already logged in, your selection has been saved for automatic startup on shell login ("$HOME"/.vnc/selection).
 
-Logging out will automatically stop all vnc servers and exit the proot environment back to the Termux shell [ ```'logout'``` ] / Ctrl+D
+Logging out will automatically stop all vnc servers and exit the proot environment back to the Termux shell
+- Run ```'logout'``` / Ctrl+D
