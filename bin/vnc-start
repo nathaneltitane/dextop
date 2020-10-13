@@ -51,28 +51,15 @@ vnc () {
 		fi
 	fi
 
-	# start android vnc intent and kill previous display before run
+	# start android vnc intent
+	# and force stop existing outputs
+	# before intent launch
 	
 	# am start								\
 	#		-d vnc://${LOCALHOST}:${PORT}	\
 	#		-S application/activity"
 	
-	# console.silence "am start -d vnc://${LOCALHOST}:${PORT} -S ${VNC}"
-	
-	# kill active and stale vnc output processes
-	
-	console.fwd "Looking for stale session tokens..."
-	echo
-	
-	console.silence "vncserver -kill :*"
-	
-	# clean display server runtime files
-	
-	rm -rf /tmp/.X*
-	
-	# start android vnc intent
-	
-	console.silence "am start -d vnc://${LOCALHOST}:${PORT}"
+	console.silence "am start -d vnc://${LOCALHOST}:${PORT} -S ${VNC}"
 }
 
 print_resolutions() {
