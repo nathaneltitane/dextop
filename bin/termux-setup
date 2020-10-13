@@ -9,6 +9,7 @@
 # variables #
 
 script=$(basename -- "${BASH_SOURCE[0]}")
+
 version="10-10-2020"
 
 # usage #
@@ -22,15 +23,6 @@ do
 		-m|--minimal)
 			install_option="minimal"
 			;;
-		-a|--applications)
-			add_applications="yes"
-			;;
-		-n|--vnc)
-			display_output="vnc"
-			;;
-		-x|--xorg)
-			display_output="xorg"
-			;;
 		-h|--help)
 			echo -e ""
 			echo -e "USAGE:"
@@ -39,9 +31,6 @@ do
 			echo -e "-m, --minimal \t Minimal setup: download and install minimal desktop environment and utilities."
 			echo -e ""
 			echo -e "-a, --applications: Download a set of optimized and precompiled arm64 applications."
-			echo -e ""
-			echo -e "-n , --vnc: \t Download and setup vnc protocol display output. [ Default - vnc display when no option is selected ]"
-			echo -e "-x , --xorg: \t Download and setup xorg/xrdp protocol display output."
 			echo -e ""
 			echo -e "-h, --help \t Show help and usage."
 			echo -e "-v, --version \t Show ${script} version."
@@ -56,7 +45,7 @@ do
 			;;
 		*)
 			echo -e ""
-			echo "Usage: ${0} <install option> <display output>"
+			echo "Usage: ${0} <install option>"
 			echo -e ""
 			echo -e "$script: Unknown option $1"
 			echo -e "Type './$script --help' for help and usage information."
@@ -67,15 +56,11 @@ do
 	shift
 done
 
-install_option=$1
-display_output=$2
-image_type=$3
+install_option="$1"
 
 # set defaults
 
 [ -z $install_option ] && install_option="minimal"
-[ -z $display_output ] && display_output="vnc"
-[ -z $add_applications ] && add_applications="yes"
 
 # set globals
 
@@ -93,12 +78,35 @@ curl -sL dep.dxtp.app/globals > "$BINARIES_DIRECTORY"/globals && source "$BINARI
 
 clear
 
-# execute
+# download binaries
 
-console.fwd "Loading..."
-echo
+binaries_list=(
+	proot-aliases
+	proot-architecture
+	proot-environment
+	proot-groups
+	proot-image
+	proot-information
+	proot-launch
+	proot-libraries
+	proot-network
+	proot-packages
+	proot-setup
+	proot-superuser
+	proot-system
+	proot-user
+	proot-welcome
+	termux-environment
+	termux-packages
+	termux-storage
+	termux-welcome
+	vnc-pass
+	vnc-setup
+	vnc-start
+	vnc-stop
+)
 
-console.get dep.dxtp.app binaries "$BINARIES_DIRECTORY" && bash "$BINARIES_DIRECTORY"/binaries
+console.download bin.dxtp.app "$BINARIES_DIRECTORY" ${binaries_list[@]}
 
 # initial prompt clear #
 
@@ -183,8 +191,6 @@ export version=${version}
 # options #
 
 export install_option="${install_option}"
-export display_output="${display_output}"
-export add_applications="${add_applications}"
 FILE
 
 # cleanup #

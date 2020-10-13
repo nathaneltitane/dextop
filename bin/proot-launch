@@ -29,9 +29,7 @@ BIND_DIRECTORY=$4
 [ -z "$PROOT_DIRECTORY" ]	&& PROOT_DIRECTORY=${PREFIX%/*}/img
 [ -z "$BIND_DIRECTORY" ]	&& BIND_DIRECTORY=${PREFIX%/*}/mnt
 
-DESKTOP_SESSION="blackbox"
-PAGER="bbpager"
-RUNNER="bbrun"
+DESKTOP_SESSION="dwm"
 
 VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
 

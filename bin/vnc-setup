@@ -32,9 +32,6 @@ cat <<- 'FILE' > "$PROOT_DIRECTORY"/home/${user_name}/.vnc/xstartup
 unset DBUS_SESSION_BUS_ADDRESS
 unset SESSION_MANAGER
 
-$PAGER &
-$RUNNER &
-
 if [ ! -z "$APPLICATION" ]
 then
 	$DESKTOP_SESSION &

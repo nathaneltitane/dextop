@@ -19,30 +19,15 @@ This project provides any user owning a modern android device, the ability to se
 Once the Android applications are installed on your device, open Termux and paste
 
 ```
-curl -sL get.dxtp.app > setup && bash setup | <option> | <output>
+curl -sL get.dxtp.app > setup && bash setup | <option>
 ```
 
 where available install options are:
 
 ```
 -f | --full: download and install full desktop environment and utilities. ( xfce4 )
--m | --minimal: download and install minimal desktop environment and utilities. ( blackbox ) [ Default ]
+-m | --minimal: download and install minimal desktop environment and utilities. ( dwm ) [ Default ]
 ```
-
-available display output options are:
-
-```
--c | --vnc: download and setup vnc protocol display output.[ Default ]
--x | --xorg: download and setup xorg/xrdp protocol display output.
-```
-
-and additional optimized and precompiled arm64 applications can be downloaded using:
-
-```
--a | --applications: download a set of optimized and precompiled arm64 applications. [ Default ]
-```
-
-The options flagged with the [ Default ] tag are automatically passed if no options have been explicitly set by the user.
 
 ### Note:
 The setup speed greatly depends on your device model and internet connection speed.

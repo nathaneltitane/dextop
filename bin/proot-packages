@@ -37,22 +37,27 @@ applications_list=(
 	youtube-dl
 )
 
+frameworks_list=(
+	libqt5concurrent5
+	libqt5opengl5
+	libqt5printsupport5
+	libqt5xml5
+)
+
 utilities_list=(
 	curl
 	ffmpeg
 	git
 	hub
 	jq
-	menu
 	nano
 	sudo
 	wmctrl
 	xdotool
-)
-
-display_server_list=(
-	dbus-x11
-	x11-utils
+	p7zip
+	unrar
+	zip
+	recordmydesktop
 )
 
 security_list=(
@@ -60,20 +65,9 @@ security_list=(
 	openssl	
 )
 
-vnc_list=(
-	tigervnc-common
-	tigervnc-standalone-server
-)
-
-xorg_list=(
-	xorg
-	xserver-xorg-core
-	xorgxrdp
-	xrdp
-)
-
-web_list=(
-	midori
+session_manager_list=(
+	dbus-x11
+	x11-utils
 )
 
 themes_list=(
@@ -82,21 +76,18 @@ themes_list=(
 	qt5-style-plugin-gtk2
 )
 
-frameworks_list=(
-	libqt5concurrent5
-	libqt5opengl5
-	libqt5printsupport5
-	libqt5xml5
+vnc_list=(
+	tigervnc-common
+	tigervnc-standalone-server
 )
 
 # desktop environments
 
-blackbox_list=(
-	blackbox
-	bbmail
-	bbpager
-	bbrun
-	bbtime
+dwm_list=(
+	dwm
+	dmenu
+	ranger
+	suckless-tools
 )
 
 xfce4_list=(
@@ -153,6 +144,7 @@ xfce4_list=(
 	xfce4-weather-plugin
 	xfce4-whiskermenu-plugin
 	xfce4-xkb-plugin
+	midori
 	elementary-xfce-icon-theme
 	tango-icon-theme
 	blackbird-gtk-theme
@@ -166,8 +158,9 @@ xfce4_list=(
 # core packages lists to load and install
 
 install_list=(
+	${applications_list[@]}
 	${utilities_list[@]}
-	${display_server_list[@]}
+	${session_manager_list[@]}
 	${security_list[@]}
 	${vnc_list[@]}
 )
@@ -183,7 +176,6 @@ then
 	)
 	
 	install_list+=(
-		${web_list[@]}
 		${desktop_environment_list[@]}
 		${themes_list[@]}
 		${frameworks_list[@]}
@@ -195,41 +187,12 @@ fi
 if [[ $install_option = "minimal" ]]
 then
 	desktop_environment_list=(
-		${blackbox_list[@]}
+		${dwm_list[@]}
 	)
 	
 	install_list+=(
 		${desktop_environment_list[@]}
 		${frameworks_list[@]}
-	)
-fi
-
-# output #
-
-# vnc
-
-if [[ $display_output = "vnc" ]]
-then
-	install_list+=(
-		${vnc_list}
-	)
-fi
-
-# xorg
-
-if [[ $display_output = "xorg" ]]
-then
-	install_list+=(
-		${xorg_list}
-	)
-fi
-
-# applications #
-
-if [[ $add_applications = "yes" ]]
-then
-	install_list+=(
-		${applications_list}
 	)
 fi
 

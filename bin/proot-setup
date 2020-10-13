@@ -38,22 +38,22 @@ source /data/data/com.termux/files/usr/bin/globals
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-console.fwd "Loading..."
-echo
+# download applications
 
-# source
+applications_list=(
+	leocad-configuration
+	youtube-dl-configuration
+)
 
-console.get dep.dxtp.app applications "$BINARIES_DIRECTORY"
-console.get dep.dxtp.app configurations "$BINARIES_DIRECTORY"
-console.get dep.dxtp.app images "$BINARIES_DIRECTORY"
-console.get dep.dxtp.app libraries "$BINARIES_DIRECTORY"
+console.download app.dxtp.app "$PROOT_DIRECTORY"/usr/bin ${applications_list[@]}
 
-# execute
+# download libraries
 
-bash "$BINARIES_DIRECTORY"/configurations
-bash "$BINARIES_DIRECTORY"/images
-bash "$BINARIES_DIRECTORY"/libraries
+libraries_list=(
+	libandroid-shmem-aarch64.so
+)
 
+console.download lib.dxtp.app "$PROOT_DIRECTORY"/lib ${libraries_list[@]}
 
 # initial prompt clear #
 
@@ -99,17 +99,10 @@ sleep 2
 
 "$BINARIES_DIRECTORY"/vnc-setup
 
-# setup proot xorg configurations
-
-"$BINARIES_DIRECTORY"/xorg-setup
-
-# setup proot desktop environment configurations
-
-bash "$PROOT_DIRECTORY"/tmp/blackbox-setup
-
 # setup proot additional applications
 
-[ "${add_applications}" = "yes" ] && "$BINARIES_DIRECTORY"/applications
+"$PROOT_DIRECTORY"/usr/bin/leocad-configuration
+"$PROOT_DIRECTORY"/usr/bin/youtube-dl-configuration
 
 # checkpoint #
 

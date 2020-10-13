@@ -261,6 +261,9 @@ console.download () {
 	
 	# downloads_list is declared as an array prior to download request
 	
+	console.fwd "Loading..."
+	echo
+	
 	for file in ${list[@]}
 	do
 		curl -sL "${source}/${file}" > "${path}"/"${file}"
