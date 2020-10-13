@@ -76,41 +76,19 @@ BINARIES_DIRECTORY="${PREFIX}"/bin
 curl -sL dep.dxtp.app/console > "$BINARIES_DIRECTORY"/console && source "$BINARIES_DIRECTORY"/console
 curl -sL dep.dxtp.app/globals > "$BINARIES_DIRECTORY"/globals && source "$BINARIES_DIRECTORY"/globals
 
-clear
+# download
 
-# download binaries
+curl -sL bin.dxtp.app/termux-download > "$BINARIES_DIRECTORY"/termux-download
 
-binaries_list=(
-	proot-aliases
-	proot-architecture
-	proot-environment
-	proot-groups
-	proot-image
-	proot-information
-	proot-launch
-	proot-libraries
-	proot-network
-	proot-packages
-	proot-setup
-	proot-superuser
-	proot-system
-	proot-user
-	proot-welcome
-	termux-environment
-	termux-packages
-	termux-storage
-	termux-welcome
-	vnc-pass
-	vnc-setup
-	vnc-start
-	vnc-stop
-)
+execute
 
-console.download bin.dxtp.app "$BINARIES_DIRECTORY" ${binaries_list[@]}
+"$BINARIES_DIRECTORY"/termux-download
 
-# initial prompt clear #
+# clear #
 
 clear
+
+# welcome #
 
 console.msg "[ Linux on Android -  Termux // Dextop // Ubuntu [ Version ${version} ] ]"
 echo

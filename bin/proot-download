@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# usage #
+
+# variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# download #
+
+# applications
+
+applications_list=(
+	leocad-configuration
+	youtube-dl-configuration
+)
+
+console.download app.dxtp.app "$PROOT_DIRECTORY"/usr/bin ${applications_list[@]}
+
+# libraries
+
+libraries_list=(
+	libandroid-shmem-aarch64.so
+)
+
+console.download lib.dxtp.app "$PROOT_DIRECTORY"/lib ${libraries_list[@]}
+
+# execute

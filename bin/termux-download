@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# usage #
+
+# variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# download #
+
+# binaries
+
+binaries_list=(
+	proot-aliases
+	proot-architecture
+	proot-download
+	proot-environment
+	proot-groups
+	proot-image
+	proot-information
+	proot-launch
+	proot-libraries
+	proot-network
+	proot-packages
+	proot-setup
+	proot-superuser
+	proot-system
+	proot-user
+	proot-welcome
+	termux-download
+	termux-environment
+	termux-packages
+	termux-storage
+	termux-welcome
+	vnc-pass
+	vnc-setup
+	vnc-start
+	vnc-stop
+)
+
+console.download bin.dxtp.app "$BINARIES_DIRECTORY" ${binaries_list[@]}
+
+# execute

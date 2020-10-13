@@ -38,26 +38,19 @@ source /data/data/com.termux/files/usr/bin/globals
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-# download applications
+# download
 
-applications_list=(
-	leocad-configuration
-	youtube-dl-configuration
-)
+curl -sL bin.dxtp.app/termux-download > "$BINARIES_DIRECTORY"/proot-download
 
-console.download app.dxtp.app "$PROOT_DIRECTORY"/usr/bin ${applications_list[@]}
+execute
 
-# download libraries
+"$BINARIES_DIRECTORY"/proot-download
 
-libraries_list=(
-	libandroid-shmem-aarch64.so
-)
-
-console.download lib.dxtp.app "$PROOT_DIRECTORY"/lib ${libraries_list[@]}
-
-# initial prompt clear #
+# clear #
 
 clear
+
+# welcome #
 
 console.msg "[ Linux on Android -  Termux // Dextop // Ubuntu [ Version ${version} ] ]"
 echo
