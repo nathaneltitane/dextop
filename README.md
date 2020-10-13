@@ -18,16 +18,12 @@ This project provides any user owning a modern android device, the ability to se
 
 Once the Android applications are installed on your device, open Termux and paste:
 
-```
-curl -sL get.dxtp.app > setup && bash setup | <option>
-```
+```curl -sL get.dxtp.app > setup && bash setup | <option>```
 
 Available install options are:
 
-```
--f | --full: download and install full desktop environment and utilities. ( xfce4 )
--m | --minimal: download and install minimal desktop environment and utilities. ( dwm ) [ Default ]
-```
+```-f | --full: download and install full desktop environment and utilities. ( xfce4 )```
+```-m | --minimal: download and install minimal desktop environment and utilities. ( dwm ) [ Default ]```
 
 ### Note:
 The setup speed greatly depends on your device model and internet connection speed.
