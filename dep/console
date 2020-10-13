@@ -154,7 +154,7 @@ console.stp () {
 	echo -e "${white}${marker_stp}" $@"${reset}"
 }
 
-console.dwn () {
+console.dwl () {
 	echo -e "${magenta}${marker_bot}" $@"${reset}"
 }
 
@@ -268,7 +268,7 @@ console.download () {
 	do
 		curl -sL "${source}/${file}" > "${path}"/"${file}"
 	
-		console.dwn "Downloading [ ${file} ]."
+		console.dwl "Downloading [ ${file} ]."
 		echo
 	
 		chmod a+rx "${path}"/"${file}"
@@ -294,7 +294,7 @@ console.get () {
 	
 	curl -sL "${source}/${file}" > "${path}"/"${file}"
 
-	console.dwn "Downloading [ ${file} ]."
+	console.dwl "Downloading [ ${file} ]."
 	echo
 	
 	chmod a+rx "${path}"/"${file}"
