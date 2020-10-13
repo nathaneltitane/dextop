@@ -259,8 +259,6 @@ console.download () {
 	
 	list=(${@:3}) 
 	
-	# downloads_list is declared as an array prior to download request
-	
 	console.fwd "Loading..."
 	echo
 	
@@ -358,6 +356,9 @@ console.install () {
 	command_install="apt-get install --no-install-recommends"
 	command_clean="apt-get clean"
 	
+	console.inf "Installing required packages."
+	echo
+	
 	for package in ${list[@]}
 	do
 		if [ -z $(command -v ${package}) ]
@@ -395,6 +396,9 @@ console.install () {
 console.update () {
 	command_update="apt-get update"
 	
+	console.inf "Updating repository and package information."
+	echo
+	
 	console.silence "${command_update}" &
 	
 	console.spin "Updating..."
@@ -405,6 +409,9 @@ console.update () {
 
 console.upgrade () {
 	command_upgrade="apt-get upgrade"
+	
+	console.inf "Upgrading installed packages."
+	echo
 	
 	console.silence "echo yes | ${command_upgrade}" &
 	

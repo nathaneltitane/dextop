@@ -31,7 +31,7 @@ sudo_id=$(cat /etc/group | grep sudo | cut -d : -f 3)
 # verify that 'sudo' is installed:
 # required for the presence of /etc/sudoers* file and directory
 
-if [ -z $(command -v sudo) ]
+if [ -z "$(command -v sudo)" ]
 then
 	console.wrn "'sudo' utility not present or installed on system:"
 	console.wrn "Install 'sudo' using the package manager and restart this utility."

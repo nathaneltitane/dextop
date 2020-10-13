@@ -13,15 +13,9 @@ script=$(basename -- "${BASH_SOURCE[0]}")p
 
 # update packages list
 
-console.inf "Updating repository and package information."
-echo
-
 console.update
 
 # upgrade installed packages
-
-console.inf "Upgrading installed packages."
-echo
 
 console.upgrade
 
@@ -71,8 +65,5 @@ install_list=(
 )
 
 # install #
-
-console.inf "Installing required packages."
-echo
 
 console.install ${install_list[@]}

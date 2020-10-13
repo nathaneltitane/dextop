@@ -197,7 +197,7 @@ FILE
 
 # remove scripts
 
-rm "$HOME"/setup || :
+rm "$HOME"/"${script}" || :
 
 # automatic setup transition [ termux >>> [ proot ] ]
 
