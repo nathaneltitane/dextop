@@ -91,20 +91,24 @@ alias 'speedtest'='speedtest-cli --server 2406 --simple'
 # youtube-dl #
 
 youtube () {
-	youtube-dl							\
-		--ignore-errors					\
-		--format bestaudio				\
-		--extract-audio					\
-		--audio-format mp3				\
-		--audio-quality 160K			\
-		--output "%(title)s.%(ext)s"	\
-		--yes-playlist					\
-										$1
+	[ -z "${path}" ] && path="${PWD}" || path="$2"
+	
+	youtube-dl												\
+		--ignore-errors										\
+		--yes-playlist										\
+		--format			bestaudio						\
+		--extract-audio										\
+		--audio-format		mp3								\
+		--audio-quality		160K							\
+		--output=			"${path}"/"%(title)s.%(ext)s"	\
+															$1
 }
 
 # recordmydesktop #
 
 record () {
+	[ -f "$HOME"/Videos ] && path= "$HOME"/Videos || path="$HOME"
+	
 	stamp=$(date +"%m-%d-%Y-%H-%M-%S")
 	window_id=$(xwininfo | grep "Window id" | cut -d ' ' -f 4)
 
@@ -112,13 +116,13 @@ record () {
 
 	sleep 1
 
-	recordmydesktop							\
-		--windowid ${window_id}				\
-		--no-cursor							\
-		--no-wm-check						\
-		--no-sound							\
-		--overwrite							\
-		-o "$HOME"/Videos/clip-${stamp}.ogv
+	recordmydesktop											\
+		--no-cursor											\
+		--no-wm-check										\
+		--no-sound											\
+		--overwrite											\
+		--windowid				"${window_id}"				\
+		--output=				"${path}"/clip-"${stamp}".ogv
 }
 
 # extract #

@@ -93,10 +93,10 @@ shortcut.next-session = ctrl + 2
 
 # configure keyboard shortcut keys
 
-extra-keys = [																\
-	['ESC', '|',    '/',   'HOME', 'UP',   'END',   'PGUP', '_', 'DEL'	],	\
-	['TAB', 'CTRL', 'ALT', 'LEFT', 'DOWN', 'RIGHT', 'PGDN', '-', 'BKSP'	]	\
-]
+extra-keys = [																	\
+	['ESC', '|',    '/',   'HOME', 'UP',   'END',   'PGUP', '_', 'BKSP'		],	\
+	['TAB', 'CTRL', 'ALT', 'LEFT', 'DOWN', 'RIGHT', 'PGDN', '-', 'RETURN'	]	\
+																				]
 FILE
 
 # apply termux properties
