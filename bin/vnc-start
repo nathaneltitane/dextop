@@ -188,7 +188,7 @@ done
 
 # manage selection
 
-case ${selection} in
+case "${selection}" in
 	c|C)
 		format="Custom"
 	
