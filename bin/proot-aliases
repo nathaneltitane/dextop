@@ -86,11 +86,19 @@ alias 'address'='curl ipinfo.io/ip'
 
 # speedtest #
 
-alias 'speedtest'='speedtest-cli --server 2406 --simple'
+speedtest () {
+	[ -z "$(command -v speedtest-cli) ] && console.install speedtest-cli || :
+	
+	speedtest-cli			\
+		--server 2406		\
+		--simple
+}
 
 # youtube-dl #
 
 youtube () {
+	[ -z "$(command -v youtube-dl) ] && console.install youtube-dl || :
+
 	[ -z "${path}" ] && path="${PWD}" || path="${2}"
 	
 	youtube-dl												\
@@ -107,6 +115,8 @@ youtube () {
 # recordmydesktop #
 
 record () {
+	[ -z "$(command -v recordmydesktop) ] && console.install recordmydesktop || :
+
 	[ -f "${HOME}"/Videos ] && path="${HOME}"/Videos || path="${HOME}"
 	
 	stamp="$(date +"%m-%d-%Y-%H-%M-%S")"

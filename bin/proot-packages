@@ -46,8 +46,6 @@ utilities_list=(
 	jq
 	nano
 	p7zip
-	recordmydesktop
-	speedtest-cli
 	sudo
 	unrar
 	wmctrl
@@ -150,15 +148,7 @@ xfce4_list=(
 
 # install list #
 
-# core packages lists to load and install
-
-install_list=(
-	${applications_list[@]}
-	${utilities_list[@]}
-	${session_manager_list[@]}
-	${security_list[@]}
-	${vnc_list[@]}
-)
+install_list=()
 
 # options #
 
@@ -190,6 +180,16 @@ then
 		${frameworks_list[@]}
 	)
 fi
+
+# core packages lists to load and install
+
+install_list=(
+	${applications_list[@]}
+	${utilities_list[@]}
+	${session_manager_list[@]}
+	${security_list[@]}
+	${vnc_list[@]}
+)
 
 # install #
 
