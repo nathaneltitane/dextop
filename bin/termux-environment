@@ -15,7 +15,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # files #
 
-cat <<- 'FILE' > "${HOME}"/.hushlogin
+cat <<- 'FILE' >> "${HOME}"/.hushlogin
 
 FILE
 
@@ -24,25 +24,25 @@ echo
 
 # .bash_aliases
 
-cat <<- 'FILE' > "${HOME}"/.bash_aliases
+cat <<- 'FILE' >> "${HOME}"/.bash_aliases
 
 FILE
 
 # .bash_profile
 
-cat <<- 'FILE' > "${HOME}"/.bash_profile
+cat <<- 'FILE' >> "${HOME}"/.bash_profile
 
 FILE
 
 # .bash_logout
 
-cat <<- 'FILE' > "${HOME}"/.bash_logout
+cat <<- 'FILE' >> "${HOME}"/.bash_logout
 
 FILE
 
 # .bashrc
 
-cat <<- 'FILE' > "${HOME}"/.bashrc
+cat <<- 'FILE' >> "${HOME}"/.bashrc
 
 FILE
 
@@ -56,7 +56,7 @@ FILE
 
 [ ! -d "${HOME}"/.termux ] && mkdir "${HOME}"/.termux || :
 
-cat <<- FILE > "${HOME}"/.termux/termux.properties
+cat <<- FILE >> "${HOME}"/.termux/termux.properties
 
 # use black for drawer and dialogs - Android 9.0+ default
 

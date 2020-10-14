@@ -44,7 +44,7 @@ FILE
 
 # append automatic vnc session stop on shell exit
 
-cat <<- 'FILE' > "${PROOT_DIRECTORY}"/home/"${user_name}"/.bash_logout
+cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/home/"${user_name}"/.bash_logout
 
 # automatic vnc session stop on shell logout
 
