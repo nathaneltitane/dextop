@@ -16,35 +16,35 @@ echo
 
 # create user home vnc directory
 
-mkdir -p "$PROOT_DIRECTORY"/home/${user_name}/.vnc
+mkdir -p "${PROOT_DIRECTORY}"/home/"${user_name}"/.vnc
 
 # write user vnc password file
 
-cat <<- FILE > "$PROOT_DIRECTORY"/home/${user_name}/.vnc/passwd
+cat <<- FILE > "${PROOT_DIRECTORY}"/home/"${user_name}"/.vnc/passwd
 
 FILE
 
 # write user vnc startup file
 
-cat <<- 'FILE' > "$PROOT_DIRECTORY"/home/${user_name}/.vnc/xstartup
+cat <<- 'FILE' > "${PROOT_DIRECTORY}"/home/"${user_name}"/.vnc/xstartup
 #!/bin/bash
 
 unset DBUS_SESSION_BUS_ADDRESS
 unset SESSION_MANAGER
 
-if [ ! -z "$APPLICATION" ]
+if [ ! -z "${APPLICATION}" ]
 then
-	$DESKTOP_SESSION &
+	"${DESKTOP_SESSION}" &
 	
 	LD_PRELOAD=/lib/libandroid-shmem-aarch64.so $APPLICATION &
 else
-	dbus-launch --exit-with-session $DESKTOP_SESSION &
+	dbus-launch --exit-with-session "${DESKTOP_SESSION}" &
 fi
 FILE
 
 # append automatic vnc session stop on shell exit
 
-cat << 'FILE' > "$PROOT_DIRECTORY"/home/${user_name}/.bash_logout
+cat << 'FILE' > "${PROOT_DIRECTORY}"/home/"${user_name}"/.bash_logout
 
 # automatic vnc session stop on shell logout
 
@@ -53,9 +53,9 @@ FILE
 
 # append automatic vnc session start from selection value
 
-cat <<- 'FILE' > "$PROOT_DIRECTORY"/home/${user_name}/.bash_profile
+cat <<- 'FILE' > "${PROOT_DIRECTORY}"/home/"${user_name}"/.bash_profile
 
 # automatic vnc session start on shell login
 
-[ -f "$HOME"/.vnc/selection ] && echo $(cat "$HOME"/.vnc/selection) | vnc-start || vnc-start
+[ -f "${HOME}"/.vnc/selection ] && echo $(cat "${HOME}"/.vnc/selection) | vnc-start || vnc-start
 FILE

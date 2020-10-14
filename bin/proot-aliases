@@ -13,7 +13,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # aliases #
 
-cat <<- 'FILE' > "$PROOT_DIRECTORY"/home/"$user_name"/.bash_aliases
+cat <<- 'FILE' > "${PROOT_DIRECTORY}"/home/"${user_name}"/.bash_aliases
 # shell #
 
 [[ $(id -u) = 0 ]] && PS1="$(tput setaf 1)>_ # $(tput sgr 0)" || PS1=">_ $ "
@@ -56,7 +56,7 @@ alias 'search'='apt-cache search'
 
 # dd #
 
-alias 'dd'="dd if=$1 of=$2 bs=$3 status=progress"
+alias 'dd'="dd if=${1} of=${2} bs=${3} status=progress"
 
 # dpkg #
 
@@ -91,7 +91,7 @@ alias 'speedtest'='speedtest-cli --server 2406 --simple'
 # youtube-dl #
 
 youtube () {
-	[ -z "${path}" ] && path="${PWD}" || path="$2"
+	[ -z "${path}" ] && path="${PWD}" || path="${2}"
 	
 	youtube-dl												\
 		--ignore-errors										\
@@ -101,18 +101,18 @@ youtube () {
 		--audio-format		mp3								\
 		--audio-quality		160K							\
 		--output=			"${path}"/"%(title)s.%(ext)s"	\
-															$1
+															${1}
 }
 
 # recordmydesktop #
 
 record () {
-	[ -f "$HOME"/Videos ] && path= "$HOME"/Videos || path="$HOME"
+	[ -f "${HOME}"/Videos ] && path="${HOME}"/Videos || path="${HOME}"
 	
-	stamp=$(date +"%m-%d-%Y-%H-%M-%S")
-	window_id=$(xwininfo | grep "Window id" | cut -d ' ' -f 4)
+	stamp="$(date +"%m-%d-%Y-%H-%M-%S")"
+	window_id="$(xwininfo | grep "Window id" | cut -d ' ' -f 4)"
 
-	wmctrl -i -R ${window_id}
+	wmctrl -i -R "${window_id}"
 
 	sleep 1
 
@@ -128,49 +128,49 @@ record () {
 # extract #
 
 extract () {
-	if [ -f "$1" ]
+	if [ -f "${1}" ]
 	then
-		case "$1" in
+		case "${1}" in
 		*.tar.bz2)
-			tar xjf "$1"
+			tar xjf "${1}"
 		;;
 		*.tar.gz)
-			tar xzf "$1"
+			tar xzf "${1}"
 		;;
 		*.bz2)
-			bunzip2 "$1"
+			bunzip2 "${1}"
 		;;
 		*.rar)
-			unrar e "$1"
+			unrar e "${1}"
 		;;
 		*.gz)
-			gunzip "$1"
+			gunzip "${1}"
 		;;
 		*.tar)
-			tar xf "$1"
+			tar xf "${1}"
 		;;
 		*.tbz2)
-			tar xjf "$1"
+			tar xjf "${1}"
 		;;
 		*.tgz)
-			tar xzf "$1"
+			tar xzf "${1}"
 		;;
 		*.zip)
-			unzip "$1"
+			unzip "${1}"
 		;;
 		*.Z)
-			uncompress "$1"
+			uncompress "${1}"
 		;;
 		*.7z)
-			7z x "$1"
+			7z x "${1}"
 		;;
 		*)
-			echo "'$1' cannot be extracted:"
+			echo "'${1}' cannot be extracted:"
 			echo "Unknown or unsupported archive type."
 		;;
 		esac
 	else
-		echo "'$1' is not a valid archive type."
+		echo "'${1}' is not a valid archive type."
 	fi
 }
 
@@ -179,7 +179,7 @@ extract () {
 sprunge () {
 	if (($#))
 	then
-		curl -F 'sprunge=<-' http://sprunge.us < "$1"
+		curl -F 'sprunge=<-' http://sprunge.us < "${1}"
 	else
 		curl -F 'sprunge=<-' http://sprunge.us
 	fi

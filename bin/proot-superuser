@@ -17,16 +17,16 @@ fi
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-first_name=${1}
-last_name=${2}
-user_name=${first_name,,}
+first_name="${1}"
+last_name="${2}"
+user_name="${first_name,,}"
 
 sudo_id=$(cat /etc/group | grep sudo | cut -d : -f 3)
 
 # set defaults
 # pass sudo GID default (27) if 'sudo' group is not setup
 
-[ -z "$sudo_id" ] && sudo_id=27
+[ -z "${sudo_id}" ] && sudo_id=27
 
 # verify that 'sudo' is installed:
 # required for the presence of /etc/sudoers* file and directory
@@ -52,11 +52,11 @@ usermod -a -G ${sudo_id} ${user_name}
 
 # give user superuser privileges password override
 
-echo "${user_name} ALL=(ALL) NOPASSWD: ALL" > "$PROOT_DIRECTORY"/etc/sudoers.d/"${user_name}"
+echo "${user_name} ALL=(ALL) NOPASSWD: ALL" > "${PROOT_DIRECTORY}"/etc/sudoers.d/"${user_name}"
 
 # fix superuser privilege errors
 
-echo "Set disable_coredump false" >> "$PROOT_DIRECTORY"/etc/sudo.conf
+echo "Set disable_coredump false" >> "${PROOT_DIRECTORY}"/etc/sudo.conf
 
 # fix ownership on user superuser privileges password override
 

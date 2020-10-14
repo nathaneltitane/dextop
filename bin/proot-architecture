@@ -67,7 +67,7 @@ fi
 
 # export variables
 
-cat << FILE >> "$BINARIES_DIRECTORY"/globals
+cat << FILE >> "${BINARIES_DIRECTORY}"/globals
 
 # check architecture #
 

@@ -16,7 +16,7 @@ version="10-10-2020"
 
 while (($#))
 do
-	case "$1" in
+	case "${1}" in
 		-f|--full)
 			install_option="full"
 			;;
@@ -39,7 +39,7 @@ do
 			;;
 		-v|--version)
 			echo -e ""
-			echo -e "$script [ Version $version ]"
+			echo -e "${script} [ Version ${version} ]"
 			echo -e ""
 			exit
 			;;
@@ -47,8 +47,8 @@ do
 			echo -e ""
 			echo "Usage: ${0} <install option>"
 			echo -e ""
-			echo -e "$script: Unknown option $1"
-			echo -e "Type './$script --help' for help and usage information."
+			echo -e "${script}: Unknown option ${1}"
+			echo -e "Type './${script} --help' for help and usage information."
 			echo -e ""
 			exit 1
 			;;
@@ -56,11 +56,11 @@ do
 	shift
 done
 
-install_option="$1"
+install_option="${1}"
 
 # set defaults
 
-[ -z $install_option ] && install_option="minimal"
+[ -z "${install_option}" ] && install_option="minimal"
 
 # set globals
 
@@ -73,16 +73,16 @@ BINARIES_DIRECTORY="${PREFIX}"/bin
 
 # explicit console.get for preload
 
-curl -sL dep.dxtp.app/console > "$BINARIES_DIRECTORY"/console && source "$BINARIES_DIRECTORY"/console
-curl -sL dep.dxtp.app/globals > "$BINARIES_DIRECTORY"/globals && source "$BINARIES_DIRECTORY"/globals
+curl -sL dep.dxtp.app/console > "${BINARIES_DIRECTORY}"/console && source "${BINARIES_DIRECTORY}"/console
+curl -sL dep.dxtp.app/globals > "${BINARIES_DIRECTORY}"/globals && source "${BINARIES_DIRECTORY}"/globals
 
 # download
 
-curl -sL bin.dxtp.app/termux-download > "$BINARIES_DIRECTORY"/termux-download
+curl -sL bin.dxtp.app/termux-download > "${BINARIES_DIRECTORY}"/termux-download
 
-execute
+# execute
 
-"$BINARIES_DIRECTORY"/termux-download
+bash "${BINARIES_DIRECTORY}"/termux-download
 
 # clear #
 
@@ -116,51 +116,51 @@ echo
 
 # setup termux environment files
 
-"$BINARIES_DIRECTORY"/termux-environment
+"${BINARIES_DIRECTORY}"/termux-environment
 
 # setup termux package requirements
 
-"$BINARIES_DIRECTORY"/termux-packages
+"${BINARIES_DIRECTORY}"/termux-packages
 
 # setup transient storage - [ device <<>> [ termux <<>> [ proot ] ] ]
 
-"$BINARIES_DIRECTORY"/termux-storage
+"${BINARIES_DIRECTORY}"/termux-storage
 
 # setup termux login messages
 
-"$BINARIES_DIRECTORY"/termux-welcome
+"${BINARIES_DIRECTORY}"/termux-welcome
 
 # verify architecture compatibility
 
-"$BINARIES_DIRECTORY"/proot-architecture
+"${BINARIES_DIRECTORY}"/proot-architecture
 
 # setup proot user information
 
-"$BINARIES_DIRECTORY"/proot-information
+"${BINARIES_DIRECTORY}"/proot-information
 
 # setup proot image
 
-"$BINARIES_DIRECTORY"/proot-image
+"${BINARIES_DIRECTORY}"/proot-image
 
 # setup proot group IDs
 
-"$BINARIES_DIRECTORY"/proot-groups
+"${BINARIES_DIRECTORY}"/proot-groups
 
 # setup proot libraries preload for enhanced performance
 
-"$BINARIES_DIRECTORY"/proot-libraries
+"${BINARIES_DIRECTORY}"/proot-libraries
 
 # setup proot network requirements  - [ device <<>> [ termux <<>> [ proot ] ] ]
 
-"$BINARIES_DIRECTORY"/proot-network
+"${BINARIES_DIRECTORY}"/proot-network
 
 # setup proot install routin
 
-"$BINARIES_DIRECTORY"/proot-setup
+"${BINARIES_DIRECTORY}"/proot-setup
 
 # export #
 
-cat << FILE >> "$BINARIES_DIRECTORY"/globals
+cat << FILE >> "${BINARIES_DIRECTORY}"/globals
 
 # version #
 
@@ -168,18 +168,18 @@ export version=${version}
 
 # options #
 
-export install_option="${install_option}"
+export install_option=""${install_option}""
 FILE
 
 # cleanup #
 
 # remove scripts
 
-rm "$HOME"/"${script}" || :
+rm "${HOME}"/"${script}" || :
 
 # automatic setup transition [ termux >>> [ proot ] ]
 
-cat <<- 'FILE' >> "$PROOT_DIRECTORY"/root/.profile
+cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/root/.profile
 
 bash /tmp/proot-setup
 FILE
@@ -192,6 +192,6 @@ echo
 
 sleep 1
 
-"$BINARIES_DIRECTORY"/bash -c 'proot-launch'
+"${BINARIES_DIRECTORY}"/bash -c 'proot-launch'
 
 clear

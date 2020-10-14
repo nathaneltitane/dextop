@@ -26,7 +26,7 @@ iso_full_url="$iso_root_url/$iso_archive"
 proot-deploy () {
 	# shorthand
 	
-	# proot -l tar -xzf "$1" -X "$2" || :
+	# proot -l tar -xzf "${1}" -X "${2}" || :
 	
 	# exclude archive directories: dev | proc | sys | system
 	# 'proot-launch' will bind and mount those device directories to proot
@@ -35,7 +35,7 @@ proot-deploy () {
 		--link2symlink					\
 			tar 						\
 				--extract				\
-				--file="$1"				\
+				--file="${1}"				\
 				--exclude='dev'			\
 				--exclude='proc'		\
 				--exclude='sys'			\
@@ -60,17 +60,17 @@ setup () {
 	console.inf "Creating proot directory."
 	echo
 
-	mkdir -p "$PROOT_DIRECTORY"
+	mkdir -p "${PROOT_DIRECTORY}"
 
 	console.inf "Creating bind directory."
 	echo
 
-	mkdir -p "$BIND_DIRECTORY"
+	mkdir -p "${BIND_DIRECTORY}"
 
 	console.inf "Extracting image contents."
 	echo
 
-	cd "$PROOT_DIRECTORY" || exit 1
+	cd "${PROOT_DIRECTORY}" || exit 1
 
 	proot-deploy "${SETUP_DIRECTORY}/${iso_archive}" || exit 1 &
 
@@ -86,7 +86,7 @@ setup () {
 
 # remove previous deployments
 
-[ -d "${PROOT_DIRECTORY}" ] && rm -rf "$PROOT_DIRECTORY" || :
+[ -d "${PROOT_DIRECTORY}" ] && rm -rf "${PROOT_DIRECTORY}" || :
 
 # run setup
 

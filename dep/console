@@ -179,8 +179,8 @@ console.ipt () {
 # countdown
 
 console.countdown () {
-	message="$1"
-	seconds="$2"
+	message="${1}"
+	seconds="${2}"
 	
 	shift
 
@@ -207,7 +207,7 @@ console.spin () {
 	before="[ "
 	after="]"
 
-	message="$1"
+	message="${1}"
 
 	i=1
 
@@ -228,9 +228,9 @@ console.spin () {
 # directory
 
 console.directory () {
-	path="$1"
+	path="${1}"
 	
-	# $2 - array
+	# ${2} - array
 	
 	list=(${@:2})
 	
@@ -245,17 +245,17 @@ console.directory () {
 		
 		# set ownership
 		
-		chown ${uid}:${gid} -R "${path}"/"${directory}"
+		chown "${uid}":"${gid}" -R "${path}"/"${directory}"
 	done
 }
 
 # download
 
 console.download () {
-	source="$1"
-	path="$2"
+	source="${1}"
+	path="${2}"
 	
-	# $3 - array
+	# "${3}" - array
 	
 	list=(${@:3}) 
 	
@@ -286,9 +286,9 @@ console.upload () {
 # get
 
 console.get () {
-	source="$1"
-	file="$2"
-	path="$3"
+	source="${1}"
+	file="${2}"
+	path="${3}"
 	
 	curl -sL "${source}/${file}" > "${path}"/"${file}"
 
@@ -309,9 +309,9 @@ console.silence () {
 # input
 
 console.input () {
-	message="$1"
+	message="${1}"
 	
-	# $2 - array
+	# ${2} - array
 	
 	list=($@:2)
 	
@@ -321,7 +321,7 @@ console.input () {
 		prompt="$(echo ${label} | sed 's/_/ /'): "
 		
 		console.ipt "${prompt}"
-		[[ "$value" = *password* ]] && read -s input || read input
+		[[ "${value}" = *password* ]] && read -s input || read input
 		
 		# prevent empty input
 		
@@ -335,7 +335,7 @@ console.input () {
 				echo
 			
 				console.ipt "${prompt}"
-				[[ "$value" = *password* ]] && read -s input || read input
+				[[ "${value}" = *password* ]] && read -s input || read input
 	
 			else
 				break
@@ -361,7 +361,7 @@ console.install () {
 	
 	for package in ${list[@]}
 	do
-		if [ -z $(command -v ${package}) ]
+		if [ -z "$(command -v ${package})" ]
 		then
 			console.wrn "Required package '${package}' not present."
 			echo

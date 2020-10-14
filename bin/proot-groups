@@ -32,7 +32,7 @@ groups=${groups/groups=}
 
 IFS=','
 
-read -r -a groups_list <<< "$groups"
+read -r -a groups_list <<< "${groups}"
 
 for line in "${groups_list[@]}"
 do
@@ -46,7 +46,7 @@ do
 	# transfer unregistered IDs
 
 	read group_number group_name <<< ${line}
-	echo "${group_name}:x:${group_number}:" >> "$PROOT_DIRECTORY"/etc/group
+	echo "${group_name}:x:${group_number}:" >> "${PROOT_DIRECTORY}"/etc/group
 done
 
 # reset IFS

@@ -16,13 +16,13 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 console.inf "Silencing login messages."
 echo
 
-cat <<- 'FILE' >> "$PROOT_DIRECTORY"/home/"$user_name"/.hushlogin
+cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/home/"${user_name}"/.hushlogin
 
 FILE
 
 # write welcome message - replaces motd
 
-cat <<- 'FILE' >> "$PROOT_DIRECTORY"/home/"$user_name"/.bash_profile
+cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/home/"${user_name}"/.bash_profile
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
@@ -35,7 +35,7 @@ clear
 console.fwd "Welcome to Ubuntu Dextop!"
 echo
 
-if [ -f /home/"$user_name"/.vnc/selection ]
+if [ -f /home/"${user_name}"/.vnc/selection ]
 then
 	console.inf "You've already logged in, your selection has been saved:"
 	console.inf "Automatic vnc startup on shell login is enabled."

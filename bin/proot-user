@@ -17,21 +17,21 @@ fi
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-first_name=${1}
-last_name=${2}
-user_name=${first_name,,}
+first_name="${1}"
+last_name="${2}"
+user_name="${first_name,,}"
 
 # add user
 
 console.inf "Creating user account."
 echo
 
-useradd -m -s "$SHELL" ${user_name}
+useradd -m -s "${SHELL}" ${user_name}
 
 # get IDs
 
-uid=$(id -u ${user_name})
-gid=$(id -g ${user_name})
+uid="$(id -u ${user_name})"
+gid="$(id -g ${user_name})"
 
 # home #
 
@@ -51,7 +51,7 @@ list=(
 	Videos
 )
 
-console.directory "$PROOT_DIRECTORY"/home/"$user_name"/ ${list[@]}
+console.directory "${PROOT_DIRECTORY}"/home/"${user_name}"/ ${list[@]}
 
 # runtime #
 
@@ -60,10 +60,10 @@ echo
 
 # create directory and set permissions
 
-mkdir -p /run/user/${uid} -m 700
-mkdir -p /run/user/${user_name} -m 700
+mkdir -p /run/user/"${uid}" -m 700
+mkdir -p /run/user/"${user_name}" -m 700
 
 # set ownership
 
-chown ${uid}:${gid} -R /run/user/${uid}
-chown ${uid}:${gid} -R /run/user/${user_name}
+chown "${uid}":"${gid}" -R /run/user/"${uid}"
+chown "${uid}":"${gid}" -R /run/user/"${user_name}"

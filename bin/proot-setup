@@ -23,11 +23,11 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # write globals
 
-cat "$BINARIES_DIRECTORY"/globals >> "$PROOT_DIRECTORY"/tmp/proot-setup
+cat "${BINARIES_DIRECTORY}"/globals >> "${PROOT_DIRECTORY}"/tmp/proot-setup
 
 # write proot-setup
 
-cat << 'FILE' >> "$PROOT_DIRECTORY"/tmp/proot-setup
+cat << 'FILE' >> "${PROOT_DIRECTORY}"/tmp/proot-setup
 
 # dependencies #
 
@@ -40,11 +40,11 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # download
 
-curl -sL bin.dxtp.app/termux-download > "$BINARIES_DIRECTORY"/proot-download
+curl -sL bin.dxtp.app/termux-download > "${BINARIES_DIRECTORY}"/proot-download
 
-execute
+# execute
 
-"$BINARIES_DIRECTORY"/proot-download
+bash "${BINARIES_DIRECTORY}"/proot-download
 
 # clear #
 
@@ -66,36 +66,36 @@ sleep 2
 
 # setup proot user account
 
-"$BINARIES_DIRECTORY"/proot-user "${first_name}" "${last_name}"
+"${BINARIES_DIRECTORY}"/proot-user "${first_name}" "${last_name}"
 
 # setup proot user superuser privileges
 
-"$BINARIES_DIRECTORY"/proot-superuser "${first_name}" "${last_name}"
+"${BINARIES_DIRECTORY}"/proot-superuser "${first_name}" "${last_name}"
 
 # setup proot environment files
 
-"$BINARIES_DIRECTORY"/proot-environment
+"${BINARIES_DIRECTORY}"/proot-environment
 
 # setup proot package requirements
 
-"$BINARIES_DIRECTORY"/proot-packages
+"${BINARIES_DIRECTORY}"/proot-packages
 
 # setup proot login messages
 
-"$BINARIES_DIRECTORY"/proot-welcome
+"${BINARIES_DIRECTORY}"/proot-welcome
 
 # setup proot aliased commands
 
-"$BINARIES_DIRECTORY"/proot-aliases
+"${BINARIES_DIRECTORY}"/proot-aliases
 
 # setup proot vnc configurations
 
-"$BINARIES_DIRECTORY"/vnc-setup
+"${BINARIES_DIRECTORY}"/vnc-setup
 
 # setup proot additional applications
 
-"$PROOT_DIRECTORY"/usr/bin/leocad-configuration
-"$PROOT_DIRECTORY"/usr/bin/youtube-dl-configuration
+"${PROOT_DIRECTORY}"/usr/bin/leocad-configuration
+"${PROOT_DIRECTORY}"/usr/bin/youtube-dl-configuration
 
 # checkpoint #
 
@@ -126,15 +126,15 @@ sleep 2
 
 # remove scripts
 
-if [[ "$(cat $PROOT_DIRECTORY/tmp/proot-setup-complete)" = "yes" ]]
+if [[ "$(cat ${PROOT_DIRECTORY}/tmp/proot-setup-complete)" = "yes" ]]
 then
 	# remove automatic setup launch
 
-	sed -i '$ d' "$PROOT_DIRECTORY"/root/.profile
+	sed -i '$ d' "${PROOT_DIRECTORY}"/root/.profile
 
 	# cleanup /tmp
 
-	rm -rf "$PROOT_DIRECTORY"/tmp/*
+	rm -rf "${PROOT_DIRECTORY}"/tmp/*
 fi
 
 exit

@@ -43,6 +43,6 @@ binaries_list=(
 	vnc-stop
 )
 
-console.download bin.dxtp.app "$BINARIES_DIRECTORY" ${binaries_list[@]}
+console.download bin.dxtp.app "${BINARIES_DIRECTORY}" ${binaries_list[@]}
 
 # execute

@@ -164,7 +164,7 @@ install_list=(
 
 # full
 
-if [[ $install_option = "full" ]]
+if [[ "${install_option}" = "full" ]]
 then
 	desktop_environment_list=(
 		${xfce4_list[@]}
@@ -179,7 +179,7 @@ fi
 
 # minimal
 
-if [[ $install_option = "minimal" ]]
+if [[ "${install_option}" = "minimal" ]]
 then
 	desktop_environment_list=(
 		${dwm_list[@]}

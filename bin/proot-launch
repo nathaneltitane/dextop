@@ -17,10 +17,10 @@ fi
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-USERNAME=$1
-APPLICATION=$2
-PROOT_DIRECTORY=$3
-BIND_DIRECTORY=$4
+USERNAME=${1}
+APPLICATION=${2}
+PROOT_DIRECTORY=${3}
+BIND_DIRECTORY=${4}
 
 DESKTOP_SESSION="dwm"
 DISPLAY=":1"
@@ -29,20 +29,21 @@ VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
 
 # set defaults
 
-[ -z "$USERNAME" ]			&& USERNAME="root"
-[ -z "$APPLICATION" ]		&& APPLICATION="${TERMINAL}"
-[ -z "$PROOT_DIRECTORY" ]	&& PROOT_DIRECTORY=${PREFIX%/*}/img
-[ -z "$BIND_DIRECTORY" ]	&& BIND_DIRECTORY=${PREFIX%/*}/mnt
+[ -z "${USERNAME}" ]		&& USERNAME="root"
+[ -z "${APPLICATION}" ]		&& APPLICATION="${TERMINAL}"
+[ -z "${PROOT_DIRECTORY}" ]	&& PROOT_DIRECTORY=${PREFIX%/*}/img
+[ -z "${BIND_DIRECTORY}" ]	&& BIND_DIRECTORY=${PREFIX%/*}/mnt
 
 # set environment defaults
 
-[ -z "$DESKTOP_SESION" ]	&& DESKTOP_SESSION="$DESKTOP_SESSION"
-[ -z "$BROWSER" ]			&& BROWSER="$BROWSER"
-[ -z "$EDITOR" ]			&& EDITOR="$EDITOR"
-[ -z "$PAGER" ]				&& PAGER="$PAGER"
-[ -z "$RUNNER" ]			&& RUNNER="$RUNNER"
-[ -z "$TERMINAL" ]			&& TERMINAL="$TERM"
-[ -z "$VISUAL" ]			&& VISUAL="$VISUAL"
+[ -z "$DESKTOP_SESION" ]	&& DESKTOP_SESSION="${DESKTOP_SESSION}"
+[ -z "${BROWSER}" ]			&& BROWSER="${BROWSER}"
+[ -z "${EDITOR}" ]			&& EDITOR="${EDITOR}"
+[ -z "${PAGER}" ]			&& PAGER="${PAGER}"
+[ -z "${RUNNER}" ]			&& RUNNER="${RUNNER}"
+[ -z "${SHELL}" ]			&& SHELL="${SHELL}"
+[ -z "${TERMINAL}" ]		&& TERMINAL="${TERM}"
+[ -z "${VISUAL}" ]			&& VISUAL="${VISUAL}"
 
 # initial prompt clear #
 
@@ -63,13 +64,13 @@ while read -r entry
 do
 	IFS=':'
 
-	read USER _ USER_ID GROUP_ID FULL_NAME HOME SHELL <<< "$entry"
+	read USER _ USER_ID GROUP_ID FULL_NAME HOME SHELL <<< "${entry}"
 	
 	FULL_NAME=${FULL_NAME%,,,}
 
 	# verify that 'username' matches parsed 'user' entry
 
-	if [[ "$USERNAME" == "$USER" ]]
+	if [[ "${USERNAME}" == "${USER}" ]]
 	then
 		# break out of loop if user is found
 
@@ -79,7 +80,7 @@ do
 	# simulate EOF:
 	# default entry used only if last line is reached
 
-	if [[ "$entry" == "$last_entry" ]]
+	if [[ "${entry}" == "${last_entry}" ]]
 	then
 		USER="root"
 		USER_ID=0
@@ -96,7 +97,7 @@ IFS=' '
 
 # welcome #
 
-if [ ! -z "$APPLICATION" ]
+if [ ! -z "${APPLICATION}" ]
 then
 	console.fwd "Starting application [ ${APPLICATION} ]..."
 	echo
@@ -128,19 +129,19 @@ command+=" -b /sys"
 command+=" -b /system"
 command+=" -b /vendor"
 command+=" -i ${USER_ID}:${GROUP_ID}"
-[ -d  "$PROOT_DIRECTORY/${HOME}" ] && command+=" -w ${HOME}" || exit 1
+[ -d  "${PROOT_DIRECTORY}"/"${HOME}" ] && command+=" -w ${HOME}" || exit 1
 command+=" env -i"
-command+=" ANDROID_DATA=$ANDROID_DATA"
-command+=" ANDROID_ROOT=$ANDROID_ROOT"
-command+=" ANDROID_RUNTIME_ROOT=$ANDROID_RUNTIME_ROOT"
-command+=" ANDROID_TZDATA_ROOT=$ANDROID_TZDATA_ROOT"
-command+=" PREFIX=$PREFIX"
+command+=" ANDROID_DATA=${ANDROID_DATA}"
+command+=" ANDROID_ROOT=${ANDROID_ROOT}"
+command+=" ANDROID_RUNTIME_ROOT=${ANDROID_RUNTIME_ROOT}"
+command+=" ANDROID_TZDATA_ROOT=${ANDROID_TZDATA_ROOT}"
+command+=" PREFIX=${PREFIX}"
 command+=" SETUP_DIRECTORY=${PREFIX%/*}"
 command+=" BINARIES_DIRECTORY=${PREFIX}/bin"
 command+=" LIBRARIES_DIRECTORY=${PREFIX}/lib"
 command+=" PROOT_DIRECTORY=${PROOT_DIRECTORY}"
 command+=" BIND_DIRECTORY=${BIND_DIRECTORY}"
-command+=" DESKTOP_SESSION=$DESKTOP_SESSION"
+command+=" DESKTOP_SESSION=${DESKTOP_SESSION}"
 command+=" BROWSER=${BROWSER}"
 command+=" EDITOR=${EDITOR}"
 command+=" PAGER=${PAGER}"
@@ -151,7 +152,7 @@ command+=" HOME=${HOME}"
 command+=" USER=${USER}"
 command+=" LANG=C.UTF-8"
 command+=" LOCALHOST=${LOCALHOST}"
-command+=" PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$PREFIX/bin:$PREFIX/sbin"
+command+=" PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:${PREFIX}/bi${PREFIX}IX/sbin"
 command+=" VNC=${VNC}"
 command+=" XDG_RUNTIME_DIR=/run/user/${USER_ID}"
 command+=" XDG_CONFIG_HOME=${HOME}/.config"
@@ -165,4 +166,4 @@ command+=" ${SHELL} --login"
 
 # execute proot
 
-exec $command
+exec ${command}

@@ -38,7 +38,7 @@ eval ${console_rtn[@]}
 
 # export variables
 
-cat << FILE >> "$BINARIES_DIRECTORY"/globals
+cat << FILE >> "${BINARIES_DIRECTORY}"/globals
 
 # user information #
 

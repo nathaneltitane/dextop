@@ -13,7 +13,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # .bashrc
 
-cat <<- 'FILE' >> "$PROOT_DIRECTORY"/home/"$user_name"/.bash_profile
+cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/home/"${user_name}"/.bash_profile
 
 # youtube-dl #
 
