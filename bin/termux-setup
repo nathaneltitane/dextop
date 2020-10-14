@@ -190,7 +190,7 @@ rm "${HOME}"/"${script}" || :
 
 cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/root/.profile
 
-bash /tmp/proot-setup
+bash "${HOME}"/proot-setup
 FILE
 
 # run 'proot-launch' as 'root'
@@ -201,6 +201,6 @@ echo
 
 sleep 1
 
-"${BINARIES_DIRECTORY}"/bash -c 'proot-launch'
+bash -c "${BINARIES_DIRECTORY}"/proot-launch
 
 clear

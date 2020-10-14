@@ -23,11 +23,11 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # write globals
 
-cat "${BINARIES_DIRECTORY}"/globals >> "${PROOT_DIRECTORY}"/tmp/proot-setup
+cat "${BINARIES_DIRECTORY}"/globals >> "${PROOT_DIRECTORY}"/root/proot-setup
 
 # write proot-setup
 
-cat << 'FILE' >> "${PROOT_DIRECTORY}"/tmp/proot-setup
+cat << 'FILE' >> "${PROOT_DIRECTORY}"/root/proot-setup
 # initial prompt clear #
 
 clear
@@ -46,9 +46,9 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 console.fwd "Initializing..."
 echo
 
-console.get bin.dxtp.app termux-download "${BINARIES_DIRECTORY}"
+console.get bin.dxtp.app proot-download "${BINARIES_DIRECTORY}"
 
-# clear #!/usr/bin/env bash
+# clear #
 
 clear
 
@@ -109,7 +109,7 @@ sleep 2
 
 # confirm uninterrupted setup for cleanup
 
-echo "yes" > /tmp/proot-setup-complete
+echo "yes" > "${HOME}"/proot-setup-complete
 
 # clear #
 
@@ -134,15 +134,13 @@ sleep 2
 
 # remove scripts
 
-if [[ "$(cat ${PROOT_DIRECTORY}/tmp/proot-setup-complete)" = "yes" ]]
+rm "${HOME}"/"${script}" || :
+
+if [[ "$(cat "${HOME}"/proot-setup-complete)" = "yes" ]]
 then
 	# remove automatic setup launch
 
-	sed -i '$ d' "${PROOT_DIRECTORY}"/root/.profile
-
-	# cleanup /tmp
-
-	rm -rf "${PROOT_DIRECTORY}"/tmp/*
+	sed -i '$ d' "${HOME}"/.profile
 fi
 
 exit
