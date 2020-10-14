@@ -11,6 +11,10 @@ source /data/data/com.termux/files/usr/bin/globals
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
+# initial prompt clear #
+
+clear
+
 # list supported processor architectures
 
 cpu_architectures=(

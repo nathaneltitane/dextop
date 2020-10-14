@@ -23,6 +23,10 @@ iso_full_url="${iso_root_url}/${iso_archive}"
 
 [ -z "${distribution_version}" ] && distribution_version="20.04.1"
 
+# initial prompt clear #
+
+clear
+
 proot_unpack () {
 	# shorthand
 	

@@ -15,7 +15,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # files #
 
-console.inf "Creating required configuration files."
+console.inf "Creating configuration files."
 echo
 
 # .bash_aliases

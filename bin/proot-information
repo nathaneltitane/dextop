@@ -11,6 +11,10 @@ source /data/data/com.termux/files/usr/bin/globals
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
+# initial prompt clear #
+
+clear
+
 # get user information
 
 console.fwd "The following information is required to set up your environment."

@@ -9,7 +9,11 @@ source /data/data/com.termux/files/usr/bin/globals
 
 # variables #
 
-script=$(basename -- "${BASH_SOURCE[0]}")p
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# initial prompt clear #
+
+clear
 
 # update packages list
 

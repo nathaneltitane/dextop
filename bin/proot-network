@@ -16,19 +16,18 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 console.inf "Setting hostname."
 echo
 
-echo ${hostname} > "${PROOT_DIRECTORY}"/etc/hostname
+echo "${hostname}" > "${PROOT_DIRECTORY}"/etc/hostname
+
+# hosts
 
 console.inf "Setting host address."
 echo
 
-# hosts
-
-cat <<- 'FILE' > "${PROOT_DIRECTORY}"/etc/hosts
+cat <<- FILE > "${PROOT_DIRECTORY}"/etc/hosts
 127.0.0.1 localhost.localdomain
 127.0.0.1 localhost
+127.0.0.1 "${hostname}"
 FILE
-
-echo "127.0.0.1 ${hostname}" >> "${PROOT_DIRECTORY}"/etc/hosts
 
 # nameserver
 
