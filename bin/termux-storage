@@ -64,11 +64,12 @@ rm -rf "${HOME}"/storage
 
 # create new storage mount location
 
-mkdir -p "${SETUP_DIRECTORY}"/storage
+[ ! -d "${SETUP_DIRECTORY}"/storage ] && mkdir -p "${SETUP_DIRECTORY}"/storage
 
 # create new symbolic links for bind mounts
 
-ln -s -f /storage/emulated/0 "${SETUP_DIRECTORY}"/storage/internal || :
+[ ! f "${SETUP_DIRECTORY}"/storage/internal ] && \
+	ln -s -f /storage/emulated/0 "${SETUP_DIRECTORY}"/storage/internal || :
 	
 # use regular expression to match label UUID 'XXXX-XXXX'
 
@@ -82,7 +83,8 @@ then
 	console.fwd "Linking..."
 	echo
 
-	ln -s -f /storage/"${external_storage}" "${SETUP_DIRECTORY}"/storage/external || :
+	[ ! -f "${SETUP_DIRECTORY}"/storage/external ] && \
+		ln -s -f /storage/"${external_storage}" "${SETUP_DIRECTORY}"/storage/external || :
 
 else
 	console.err "No extrernal storage media detected."
