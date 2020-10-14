@@ -105,6 +105,8 @@ else
 	echo
 fi
 
+sleep 1
+
 # proot #
 
 # setup proot command arguments
