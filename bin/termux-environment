@@ -54,7 +54,7 @@ FILE
 
 # termux properties
 
-mkdir "${HOME}"/.termux
+[ ! -d "${HOME}"/.termux ] && mkdir "${HOME}"/.termux || :
 
 cat <<- FILE > "${HOME}"/.termux/termux.properties
 
