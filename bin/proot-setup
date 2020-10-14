@@ -28,6 +28,9 @@ cat "${BINARIES_DIRECTORY}"/globals >> "${PROOT_DIRECTORY}"/tmp/proot-setup
 # write proot-setup
 
 cat << 'FILE' >> "${PROOT_DIRECTORY}"/tmp/proot-setup
+# initial prompt clear #
+
+clear
 
 # dependencies #
 

@@ -67,6 +67,10 @@ install_option="${1}"
 SETUP_DIRECTORY="${PREFIX%/*}"
 BINARIES_DIRECTORY="${PREFIX}"/bin
 
+# initial prompt clear #
+
+clear
+
 # dependencies #
 
 # source
