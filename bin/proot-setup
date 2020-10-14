@@ -40,11 +40,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # download
 
-curl -sL bin.dxtp.app/termux-download > "${BINARIES_DIRECTORY}"/proot-download
-
-# execute
-
-bash "${BINARIES_DIRECTORY}"/proot-download
+console.get bin.dxtp.app termux-download "${BINARIES_DIRECTORY}" && bash "${BINARIES_DIRECTORY}"/proot-download
 
 # clear #
 
