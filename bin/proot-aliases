@@ -87,7 +87,7 @@ alias 'address'='curl ipinfo.io/ip'
 # speedtest #
 
 speedtest () {
-	[ -z "$(command -v speedtest-cli) ] && console.install speedtest-cli || :
+	[ -z "$(command -v speedtest-cli)" ] && console.install speedtest-cli || :
 	
 	speedtest-cli			\
 		--server 2406		\
@@ -97,7 +97,7 @@ speedtest () {
 # youtube-dl #
 
 youtube () {
-	[ -z "$(command -v youtube-dl) ] && console.install youtube-dl || :
+	[ -z "$(command -v youtube-dl)" ] && console.install youtube-dl || :
 
 	[ -z "${path}" ] && path="${PWD}" || path="${2}"
 	
@@ -115,7 +115,7 @@ youtube () {
 # recordmydesktop #
 
 record () {
-	[ -z "$(command -v recordmydesktop) ] && console.install recordmydesktop || :
+	[ -z "$(command -v recordmydesktop)" ] && console.install recordmydesktop || :
 
 	[ -f "${HOME}"/Videos ] && path="${HOME}"/Videos || path="${HOME}"
 	
