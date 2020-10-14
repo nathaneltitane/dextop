@@ -49,9 +49,9 @@ vnc () {
 	then
 		# integer check: do not write non numerical values to file
 		
-		if [[ "$selection" =~ ^[0-9]+$ ]]
+		if [[ "${selection}" =~ ^[0-9]+$ ]]
 		then
-				echo "$selection" > /home/$(id -u -n)/.vnc/selection
+				echo "${selection}" > /home/$(id -u -n)/.vnc/selection
 		fi
 	fi
 
@@ -137,13 +137,13 @@ print_resolutions() {
 
 		if (( $i/3 >= 0 && $i/3 <= 8 ))
 		then
-				printf '\t[  %s ] %s' $number $format
+				printf '\t[  %s ] %s' ${number} ${format}
 		else
-				printf '\t[ %s ] %s' $number $format
+				printf '\t[ %s ] %s' ${number} ${format}
 		fi
 
 		printf '%*s' $((pad_length - ${#format}))
-		printf '%s\n' $resolution
+		printf '%s\n' ${resolution}
 	done
 	
 	printf '\n'
@@ -171,11 +171,11 @@ eval ${console_rtn[@]}
 
 while true
 do
-	if [[ "$selection" -lt 1 ]] || [[ "$selection" -gt "$number" ]]
+	if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]]
 	then
 		echo
 		console.err "Invalid selection:"
-		console.wrn "Select a format ranging from [ 1 - $number ]."
+		console.wrn "Select a format ranging from [ 1 - ${number} ]."
 		echo
 	
 		console.ipt "Selection: "
@@ -188,7 +188,7 @@ done
 
 # manage selection
 
-case $selection in
+case ${selection} in
 	c|C)
 		format="Custom"
 	
@@ -206,19 +206,18 @@ case $selection in
 		format="Custom"
 		custom_resolution="${width}x${height}"
 	
-		DISPLAY=":$custom_port"
-		GEOMETRY="$custom_resolution"
+		DISPLAY=":${custom_port}"
+		GEOMETRY="${custom_resolution}"
 		PORT="590${DISPLAY:1}"
 	
 		vnc
 	;;
 	*)
 		resolution=""
-		int_check='^[0-9]+$'
-	
-		if [[ $selection =~ $int_check ]]
+		
+		if [[ "${selection}" =~ ^[0-9]+$ ]]
 		then
-			i=$(($selection-1))
+			i=$((${selection}-1))
 			i=$(($i*3))
 
 			format="${resolutions[$i-3]}"
@@ -227,7 +226,7 @@ case $selection in
 			resolution="${width}x${height}"
 		fi
 	
-		GEOMETRY="$resolution"
+		GEOMETRY="${resolution}"
 	
 		vnc
 		;;
