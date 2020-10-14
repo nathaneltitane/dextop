@@ -201,6 +201,6 @@ echo
 
 sleep 1
 
-bash -c "${BINARIES_DIRECTORY}"/proot-launch
+bash "${BINARIES_DIRECTORY}"/proot-launch
 
 clear
