@@ -25,7 +25,7 @@ values_list=(
 
 console_rtn=()
 
-console.input "required for secure display output" ${values_list[@]}
+console.input ${values_list[@]}
 
 eval ${console_rtn[@]}
 
