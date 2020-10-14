@@ -82,7 +82,16 @@ curl -sL dep.dxtp.app/globals > "${BINARIES_DIRECTORY}"/globals && source "${BIN
 
 # download
 
-console.get bin.dxtp.app termux-download "${BINARIES_DIRECTORY}" && bash "${BINARIES_DIRECTORY}"/termux-download
+console.fwd "Initializing..."
+echo
+
+console.get bin.dxtp.app termux-download "${BINARIES_DIRECTORY}"
+
+# clear #
+
+clear
+
+bash "${BINARIES_DIRECTORY}"/termux-download
 
 # clear #
 

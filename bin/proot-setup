@@ -43,7 +43,16 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # download
 
-console.get bin.dxtp.app termux-download "${BINARIES_DIRECTORY}" && bash "${BINARIES_DIRECTORY}"/proot-download
+console.fwd "Initializing..."
+echo
+
+console.get bin.dxtp.app termux-download "${BINARIES_DIRECTORY}"
+
+# clear #!/usr/bin/env bash
+
+clear
+
+bash "${BINARIES_DIRECTORY}"/proot-download
 
 # clear #
 
