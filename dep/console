@@ -309,11 +309,7 @@ console.silence () {
 # input
 
 console.input () {
-	message="${1}"
-	
-	# ${2} - array
-	
-	list=($@:2)
+	list=($@)
 	
 	for value in "${list[@]}"
 	do
@@ -331,7 +327,7 @@ console.input () {
 			then
 				echo
 				console.err "${label} cannot be empty:"
-				console.wrn "${label} ${message}."
+				console.wrn "${label} is required for successful setup."
 				echo
 			
 				console.ipt "${prompt}"
