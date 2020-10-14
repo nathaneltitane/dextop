@@ -22,16 +22,17 @@ APPLICATION=$2
 PROOT_DIRECTORY=$3
 BIND_DIRECTORY=$4
 
+DESKTOP_SESSION="dwm"
+DISPLAY=":1"
+LOCALHOST="127.0.0.1"
+VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
+
 # set defaults
 
 [ -z "$USERNAME" ]			&& USERNAME="root"
 [ -z "$APPLICATION" ]		&& APPLICATION="${TERMINAL}"
 [ -z "$PROOT_DIRECTORY" ]	&& PROOT_DIRECTORY=${PREFIX%/*}/img
 [ -z "$BIND_DIRECTORY" ]	&& BIND_DIRECTORY=${PREFIX%/*}/mnt
-
-DESKTOP_SESSION="dwm"
-
-VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
 
 # environment defaults
 
@@ -91,10 +92,6 @@ IFS=' '
 
 # proot #
 
-DISPLAY=":1"
-LOCALHOST_ADDRESS="127.0.0.1"
-XDG_RUNTIME_DIR="/run/user/${USER_ID}"
-
 # setup proot command arguments
 
 command="proot"
@@ -136,14 +133,10 @@ command+=" DISPLAY=${DISPLAY}"
 command+=" HOME=${HOME}"
 command+=" USER=${USER}"
 command+=" LANG=C.UTF-8"
-command+=" LOCALHOST=${LOCALHOST_ADDRESS}"
+command+=" LOCALHOST=${LOCALHOST}"
 command+=" PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$PREFIX/bin:$PREFIX/sbin"
-command+=" PULSE_SERVER=${LOCALHOST_ADDRESS}"
-command+=" QT_STYLE_OVERRIDE="
-command+=" QT_QPA_PLATFORMTHEME=gtk2"
-command+=" QT_X11_NO_MITSHM=1"
 command+=" VNC=${VNC}"
-command+=" XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR}"
+command+=" XDG_RUNTIME_DIR=/run/user/${USER_ID}"
 command+=" XDG_CONFIG_HOME=${HOME}/.config"
 command+=" XDG_CACHE_HOME=${HOME}/.cache"
 command+=" XDG_DATA_HOME=${HOME}/.local/share"
@@ -157,7 +150,7 @@ command+=" ${SHELL} --login"
 
 exec $command
 
-if [ ! -z "$application" ]
+if [ ! -z "$APPLICATION" ]
 then
 	console.fwd "Starting application [ ${APPLICATION} ]..."
 	echo
@@ -165,7 +158,3 @@ else
 	console.fwd "Starting session [ ${USER} ]..."
 	echo
 fi
-
-# return exit status
-
-exit "$?"

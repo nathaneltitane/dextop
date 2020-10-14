@@ -52,7 +52,7 @@ vnc () {
 	fi
 
 	# start android vnc intent
-	# and force stop existing outputs
+	# and force-stop existing outputs
 	# before intent launch
 	
 	# am start								\
