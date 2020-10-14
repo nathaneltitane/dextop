@@ -21,7 +21,7 @@ iso_full_url="$iso_root_url/$iso_archive"
 
 # set defaults
 
-[ -z $distribution_version ] && distribution_version="20.04.1"
+[ -z "${distribution_version}" ] && distribution_version="20.04.1"
 
 proot-deploy () {
 	# shorthand
@@ -49,10 +49,10 @@ setup () {
 	console.fwd "Initializing..."
 	echo
 
-	console.inf "Downloading image [ ${distribution_name^} $distribution_version ]."
+	console.inf "Downloading image [ ${distribution_name^} ${distribution_version} ]."
 	echo
 
-	console.get "${iso_url}" "${iso_archive}" "${PWD}" &
+	console.get "${iso_url}" "${iso_archive}" "${SETUP_DIRECTORY}" &
 
 	console.progress "Downloading..."
 	echo
