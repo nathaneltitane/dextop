@@ -17,13 +17,13 @@ proot_launcher="proot-launch"
 
 iso_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${distribution_version}/release"
 iso_archive="ubuntu-base-${distribution_version}-base-${iso_architecture}.tar.gz"
-iso_full_url="$iso_root_url/$iso_archive"
+iso_full_url="${iso_root_url}/${iso_archive}"
 
 # set defaults
 
 [ -z "${distribution_version}" ] && distribution_version="20.04.1"
 
-proot-deploy () {
+proot_unpack () {
 	# shorthand
 	
 	# proot -l tar -xzf "${1}" -X "${2}" || :
@@ -42,7 +42,7 @@ proot-deploy () {
 				--exclude='system'		|| :
 }
 
-setup () {
+proot_deploy () {
 	console.inf "Initializing proot setup."
 	echo
 
@@ -72,12 +72,14 @@ setup () {
 
 	cd "${PROOT_DIRECTORY}" || exit 1
 
-	proot-deploy "${SETUP_DIRECTORY}/${iso_archive}" || exit 1 &
+	proot_unpack "${SETUP_DIRECTORY}/${iso_archive}" || exit 1 &
 
 	console.progress "Unpacking..."
 	echo
 
 	wait
+	
+	# clean #
 	
 	# remove archive after unpacking
 
@@ -90,4 +92,4 @@ setup () {
 
 # run setup
 
-setup
+proot_deploy
