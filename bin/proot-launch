@@ -34,7 +34,7 @@ VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
 [ -z "$PROOT_DIRECTORY" ]	&& PROOT_DIRECTORY=${PREFIX%/*}/img
 [ -z "$BIND_DIRECTORY" ]	&& BIND_DIRECTORY=${PREFIX%/*}/mnt
 
-# environment defaults
+# set environment defaults
 
 [ -z "$DESKTOP_SESION" ]	&& DESKTOP_SESSION="$DESKTOP_SESSION"
 [ -z "$BROWSER" ]			&& BROWSER="$BROWSER"
@@ -43,6 +43,10 @@ VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
 [ -z "$RUNNER" ]			&& RUNNER="$RUNNER"
 [ -z "$TERMINAL" ]			&& TERMINAL="$TERM"
 [ -z "$VISUAL" ]			&& VISUAL="$VISUAL"
+
+# initial prompt clear #
+
+clear
 
 # assume termux-exec is present - unset LD_PRELOAD
 
@@ -89,10 +93,6 @@ done < "${PROOT_DIRECTORY}"/etc/passwd
 # reset IFS
 
 IFS=' '
-
-# clear
-
-clear
 
 # welcome #
 

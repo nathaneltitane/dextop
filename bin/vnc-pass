@@ -11,6 +11,10 @@ source /data/data/com.termux/files/usr/bin/globals
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
+# initial prompt clear #
+
+clear
+
 # values #
 
 values_list=(
@@ -29,5 +33,5 @@ eval ${console_rtn[@]}
 
 echo "$password" | vncpasswd -f > "$PROOT_DIRECTORY"/home/"${user_name}/.vnc/passwd
 
-console.scs "VNC password changed."
+console.scs "Password changed."
 echo

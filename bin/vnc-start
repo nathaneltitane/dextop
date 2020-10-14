@@ -15,6 +15,10 @@ source /etc/os-release
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
+# initial prompt clear #
+
+clear
+
 PORT="590${DISPLAY:1}"
 
 vnc () {

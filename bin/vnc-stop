@@ -11,6 +11,10 @@ source /data/data/com.termux/files/usr/bin/globals
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
+# initial prompt clear #
+
+clear
+
 # check for PID and kill / cleanup
 
 if [ ! -z "$(pgrep -f vnc)" ]
