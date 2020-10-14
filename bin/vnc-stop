@@ -23,7 +23,7 @@ then
 
 	console.silence "vncserver -kill :*" &
 	
-	console.spin "Stopping display server..."
+	console.progress "Stopping display server..."
 	echo
 
 	# clean display server runtime files

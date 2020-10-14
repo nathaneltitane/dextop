@@ -198,7 +198,7 @@ console.countdown () {
 
 # spinner
 
-console.spin () {
+console.progress () {
 	# catch PID of last command
 
 	PID=$!
@@ -366,7 +366,7 @@ console.install () {
 			
 			console.silence "echo yes | ${command_install} ${package}" &
 			
-			console.spin "Installing [ ${package} ]..."
+			console.progress "Installing [ ${package} ]..."
 			echo
 		else
 			console.scs "Required package '${package}' already installed."
@@ -383,7 +383,7 @@ console.install () {
 	
 	console.silence "${command_clean}" &
 	
-	console.spin "Cleaning..."
+	console.progress "Cleaning..."
 	echo
 }
 
@@ -397,7 +397,7 @@ console.update () {
 	
 	console.silence "${command_update}" &
 	
-	console.spin "Updating..."
+	console.progress "Updating..."
 	echo
 }
 
@@ -411,6 +411,6 @@ console.upgrade () {
 	
 	console.silence "echo yes | ${command_upgrade}" &
 	
-	console.spin "Upgrading..."
+	console.progress "Upgrading..."
 	echo
 }

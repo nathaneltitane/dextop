@@ -54,7 +54,7 @@ setup () {
 
 	console.get "${iso_url}" "${iso_archive}" "${PWD}" &
 
-	console.spin "Downloading..."
+	console.progress "Downloading..."
 	echo
 
 	console.inf "Creating proot directory."
@@ -74,7 +74,7 @@ setup () {
 
 	proot-deploy "${SETUP_DIRECTORY}/${iso_archive}" || exit 1 &
 
-	console.spin "Unpacking..."
+	console.progress "Unpacking..."
 	echo
 
 	wait
