@@ -75,6 +75,10 @@ sleep 2
 
 # setup #
 
+# setup proot package requirements
+
+"${BINARIES_DIRECTORY}"/proot-packages
+
 # setup proot user account
 
 "${BINARIES_DIRECTORY}"/proot-user "${first_name}" "${last_name}"
@@ -86,10 +90,6 @@ sleep 2
 # setup proot environment files
 
 "${BINARIES_DIRECTORY}"/proot-environment
-
-# setup proot package requirements
-
-"${BINARIES_DIRECTORY}"/proot-packages
 
 # setup proot login messages
 

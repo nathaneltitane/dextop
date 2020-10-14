@@ -113,12 +113,9 @@ sleep 2
 
 # setup #
 
-# set work directory
+# setup termux package requirements
 
-console.inf "Entering setup directory."
-echo
-
-cd "${SETUP_DIRECTORY}" || exit 1
+"${BINARIES_DIRECTORY}"/termux-packages
 
 # setup environments
 
@@ -128,10 +125,6 @@ echo
 # setup termux environment files
 
 "${BINARIES_DIRECTORY}"/termux-environment
-
-# setup termux package requirements
-
-"${BINARIES_DIRECTORY}"/termux-packages
 
 # setup transient storage - [ device <<>> [ termux <<>> [ proot ] ] ]
 
