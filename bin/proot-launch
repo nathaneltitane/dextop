@@ -90,6 +90,21 @@ done < "${PROOT_DIRECTORY}"/etc/passwd
 
 IFS=' '
 
+# clear
+
+clear
+
+# welcome #
+
+if [ ! -z "$APPLICATION" ]
+then
+	console.fwd "Starting application [ ${APPLICATION} ]..."
+	echo
+else
+	console.fwd "Starting session [ ${USER} ]..."
+	echo
+fi
+
 # proot #
 
 # setup proot command arguments
@@ -149,12 +164,3 @@ command+=" ${SHELL} --login"
 # execute proot
 
 exec $command
-
-if [ ! -z "$APPLICATION" ]
-then
-	console.fwd "Starting application [ ${APPLICATION} ]..."
-	echo
-else
-	console.fwd "Starting session [ ${USER} ]..."
-	echo
-fi
