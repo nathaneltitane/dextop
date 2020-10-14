@@ -318,6 +318,7 @@ console.input () {
 		
 		console.ipt "${prompt}"
 		[[ "${value}" = *password* ]] && read -s input || read input
+		echo
 		
 		# prevent empty input
 		

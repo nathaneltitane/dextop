@@ -66,7 +66,7 @@ do
 
 	read USER _ USER_ID GROUP_ID FULL_NAME HOME SHELL <<< "${entry}"
 	
-	FULL_NAME=${FULL_NAME%,,,}
+	FULL_NAME="${FULL_NAME%,,,}"
 
 	# verify that 'username' matches parsed 'user' entry
 
