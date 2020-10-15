@@ -176,6 +176,17 @@ console.ipt () {
 
 # triggers #
 
+# wait
+
+console.wait () {
+	wait="${1}"
+	
+	# wait in seconds
+
+	[ -z "${debug}" ] && sleep "${wait}" || sleep 0
+}
+
+
 # countdown
 
 console.countdown () {
@@ -416,12 +427,3 @@ console.upgrade () {
 	echo
 }
 
-# wait
-
-console.wait () {
-	wait="${1}"
-	
-	# wait in seconds
-
-	[ -z "${debug}" ] && sleep "${wait}" || sleep 0
-}

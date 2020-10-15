@@ -87,7 +87,7 @@ echo
 
 console.get bin.dxtp.app termux-download "${BINARIES_DIRECTORY}"
 
-sleep 1
+console.wait 1
 
 # clear #
 
@@ -104,12 +104,12 @@ clear
 console.msg "[ Linux on Android -  Termux // Dextop // Ubuntu [ Version ${version} ] ]"
 echo
 
-sleep 1
+console.wait 1
 
 console.fwd "Initializing setup [ termux ]..."
 echo
 
-sleep 2
+console.wait 2
 
 # setup #
 
@@ -194,7 +194,7 @@ FILE
 console.inf "Entering proot environment."
 echo
 
-sleep 1
+console.wait 1
 
 bash "${BINARIES_DIRECTORY}"/proot-launch
 

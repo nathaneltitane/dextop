@@ -131,7 +131,7 @@ record () {
 
 	wmctrl -i -R "${window_id}"
 
-	sleep 1
+	console.wait 1
 
 	recordmydesktop											\
 		--no-cursor											\

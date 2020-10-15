@@ -46,6 +46,6 @@ fi
 
 echo
 
-sleep 1
+console.wait 1
 
 FILE

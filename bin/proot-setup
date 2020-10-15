@@ -48,7 +48,7 @@ echo
 
 console.get bin.dxtp.app proot-download "${BINARIES_DIRECTORY}"
 
-sleep 1
+console.wait 1
 
 # clear #
 
@@ -65,20 +65,12 @@ clear
 console.msg "[ Linux on Android -  Termux // Dextop // Ubuntu [ Version ${version} ] ]"
 echo
 
-sleep 1
+console.wait 1
 
 console.fwd "Completing setup [ proot ]..."
 echo
 
-sleep 2
-
-# setup #
-
-# setup proot package requirements
-
-"${BINARIES_DIRECTORY}"/proot-packages
-
-# setup proot user account
+console.wait 2
 
 "${BINARIES_DIRECTORY}"/proot-user "${first_name}" "${last_name}"
 
@@ -114,7 +106,7 @@ sleep 2
 echo "yes" > "${HOME}"/proot-setup-complete
 
 # clear #
-
+bash 
 clear
 
 console.fwd "Setup complete [ proot ]..."
@@ -123,14 +115,14 @@ echo
 console.scs "Deployment and configuration complete."
 echo
 
-sleep 2
+console.wait 2
 
 console.countdown "Exiting in" 5
 echo
 
 clear
 
-sleep 2
+console.wait 2
 
 # cleanup #
 
