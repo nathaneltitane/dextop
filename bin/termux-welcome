@@ -39,4 +39,6 @@ console.inf "Run 'proot-launch <username>' to start your session."
 console.inf "Run 'proot-launch <username> <application>' to start an application with your session."
 echo
 
+sleep 1
+
 FILE
