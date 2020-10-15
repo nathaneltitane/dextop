@@ -83,6 +83,8 @@ mkdir -p "${SETUP_DIRECTORY}"/storage || :
 find_storage=$(echo$(ls /storage | sed -r '/[A0-Z9][-][A0-Z9]/!d'))
 external_storage=( "${find_storage}" )
 
+[ ! -d "${SETUP_DIRECTORY}"/storage/external ] && mkdir -p "${SETUP_DIRECTORY}"/storage/external
+
 for storage in "${external_storage[@]}"
 do
 	if [ ! -z "${external_storage}" ]
