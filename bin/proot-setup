@@ -78,11 +78,6 @@ sleep 2
 
 "${BINARIES_DIRECTORY}"/proot-packages
 
-# setup proot additional applications
-
-bash "${PROOT_DIRECTORY}"/usr/bin/leocad-configuration
-bash "${PROOT_DIRECTORY}"/usr/bin/youtube-dl-configuration
-
 # setup proot user account
 
 "${BINARIES_DIRECTORY}"/proot-user "${first_name}" "${last_name}"
@@ -106,6 +101,11 @@ bash "${PROOT_DIRECTORY}"/usr/bin/youtube-dl-configuration
 # setup proot vnc configurations
 
 "${BINARIES_DIRECTORY}"/vnc-setup
+
+# setup proot additional applications
+
+bash "${BINARIES_DIRECTORY}"/leocad-configuration
+bash "${BINARIES_DIRECTORY}"/youtube-dl-configuration
 
 # checkpoint #
 
