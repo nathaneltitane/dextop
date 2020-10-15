@@ -49,7 +49,9 @@ utilities_list=(
 	hub
 	jq
 	nano
+	net-tools
 	p7zip
+	ssh
 	sudo
 	unrar
 	wmctrl
