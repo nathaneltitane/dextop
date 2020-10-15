@@ -167,7 +167,6 @@ then
 	install_list+=(
 		${desktop_environment_list[@]}
 		${themes_list[@]}
-		${frameworks_list[@]}
 	)
 fi
 
@@ -181,14 +180,14 @@ then
 	
 	install_list+=(
 		${desktop_environment_list[@]}
-		${frameworks_list[@]}
 	)
 fi
 
 # core packages lists to load and install
 
-install_list=(
+install_list+=(
 	${applications_list[@]}
+	${frameworks_list[@]}
 	${utilities_list[@]}
 	${session_manager_list[@]}
 	${security_list[@]}
