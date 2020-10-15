@@ -68,8 +68,9 @@ rm -rf "${HOME}"/storage
 
 # handle storage mount location
 
-[ -d "${SETUP_DIRECTORY}"/storage ] && \
-	rm -rf "${SETUP_DIRECTORY}"/storage || mkdir -p "${SETUP_DIRECTORY}"/storage || :
+[ -d "${SETUP_DIRECTORY}"/storage ] && rm -rf "${SETUP_DIRECTORY}"/storage
+
+mkdir -p "${SETUP_DIRECTORY}"/storage || :
 
 # create new symbolic links for bind mounts
 
@@ -79,28 +80,31 @@ rm -rf "${HOME}"/storage
 # use regular expression to match label UUID 'XXXX-XXXX'
 # store external devce labels in array for later retrieval and linking
 
-external_storage=( $(ls /storage | sed -r '/[A0-Z9][-][A0-Z9]/!d') )
+find_storage=$(echo$(ls /storage | sed -r '/[A0-Z9][-][A0-Z9]/!d'))
+external_storage=( "${find_storage}" )
 
-if [ ! -z "${external_storage}" ]
-then
-	console.scs "External storage detected [ SD UUID: ${external_storage} ]."
-	echo
+for storage in "${external_storage[@]}"
+do
+	if [ ! -z "${external_storage}" ]
+	then
+		console.scs "External storage detected [ SD UUID: ${external_storage} ]."
+		echo
+		
+		console.fwd "Linking..."
+		echo
+
+		if [ ! -f "${SETUP_DIRECTORY}"/storage/external ]
+		then
+			ln -s -f /storage/"${storage}" "${SETUP_DIRECTORY}"/storage/external/"${storage}"
+		fi
+	else
+		console.err "No extrernal storage media detected."
+		echo
 	
-	console.fwd "Linking..."
-	echo
-
-	for storage in "${external_storage[@]}"
-	do
-		[ ! -f "${SETUP_DIRECTORY}"/storage/external ] && \
-			ln -s -f /storage/"${storage}" "${SETUP_DIRECTORY}"/storage/external/"${storage}" || :
-	done
-else
-	console.err "No extrernal storage media detected."
-	echo
-
-	console.fwd "Continuing..."
-	echo
+		console.fwd "Continuing..."
+		echo
 fi
+done
 
 # export variables
 
