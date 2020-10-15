@@ -51,6 +51,7 @@ utilities_list=(
 	nano
 	net-tools
 	p7zip
+	python
 	ssh
 	sudo
 	unrar
