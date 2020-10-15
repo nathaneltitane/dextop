@@ -117,7 +117,7 @@ echo "yes" > "${HOME}"/proot-setup-complete
 
 clear
 
-console.fwd console.fwd "Setup complete [ proot ]..."
+console.fwd "Setup complete [ proot ]..."
 echo
 
 console.scs "Deployment and configuration complete."
