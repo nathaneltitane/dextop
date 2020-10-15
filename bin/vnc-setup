@@ -53,7 +53,7 @@ FILE
 
 # append automatic vnc session start from selection value
 
-cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/home/"${user_name}"/.bash_profile
+cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/home/"${user_name}"/.profile
 
 # automatic vnc session start on shell login
 

@@ -24,12 +24,6 @@ cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/home/"${user_name}"/.bash_aliases
 
 FILE
 
-# .bash_profile
-
-cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/home/"${user_name}"/.bash_profile
-
-FILE
-
 # .bash_logout
 
 cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/home/"${user_name}"/.bash_logout

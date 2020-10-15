@@ -28,12 +28,6 @@ cat <<- 'FILE' >> "${HOME}"/.bash_aliases
 
 FILE
 
-# .bash_profile
-
-cat <<- 'FILE' >> "${HOME}"/.bash_profile
-
-FILE
-
 # .bash_logout
 
 cat <<- 'FILE' >> "${HOME}"/.bash_logout

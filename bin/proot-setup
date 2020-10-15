@@ -104,8 +104,8 @@ sleep 2
 
 # setup proot additional applications
 
-bash "${BINARIES_DIRECTORY}"/leocad-configuration
-bash "${BINARIES_DIRECTORY}"/youtube-dl-configuration
+"${BINARIES_DIRECTORY}"/leocad-configuration
+"${BINARIES_DIRECTORY}"/youtube-dl-configuration
 
 # checkpoint #
 
