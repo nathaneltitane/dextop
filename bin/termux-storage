@@ -99,6 +99,8 @@ do
 		then
 			ln -s -f /storage/"${storage}" "${SETUP_DIRECTORY}"/storage/external/"${storage}"
 		fi
+		
+		sleep 1
 	else
 		console.err "No extrernal storage media detected."
 		echo
