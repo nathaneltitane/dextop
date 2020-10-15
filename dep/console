@@ -416,8 +416,12 @@ console.upgrade () {
 	echo
 }
 
+# wait
+
 console.wait () {
+	wait="${1}"
+	
+	# wait in seconds
 
-[ -z "${debug}" ] && sleep 1 || sleep 0
-
+	[ -z "${debug}" ] && sleep "${wait}" || sleep 0
 }
