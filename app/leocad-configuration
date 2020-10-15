@@ -15,8 +15,8 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/home/"${user_name}"/.bash_profile
 
-# youtube-dl #
+# leocad #
 
-console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main/ leocad /usr/bin
-console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main/ leocad-position /usr/bin
+console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main leocad			/usr/bin
+console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main leocad-position	/usr/bin
 FILE

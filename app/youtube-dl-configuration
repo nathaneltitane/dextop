@@ -17,5 +17,5 @@ cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/home/"${user_name}"/.bash_profile
 
 # youtube-dl #
 
-console.get https://yt-dl.org/downloads/latest/ youtube-dl /usr/bin
+console.get https://yt-dl.org/downloads/latest youtube-dl /usr/bin
 FILE

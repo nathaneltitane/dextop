@@ -290,10 +290,10 @@ console.get () {
 	file="${2}"
 	path="${3}"
 	
-	curl -sL "${source}/${file}" > "${path}"/"${file}"
-
 	console.dwl "Downloading [ ${file} ]."
 	echo
+	
+	curl -sL "${source}/${file}" > "${path}"/"${file}"
 	
 	chmod a+rx "${path}"/"${file}"
 }
