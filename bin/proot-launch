@@ -15,6 +15,9 @@ fi
 
 # variables #
 
+# variables written in upper case format
+# represent environment defaults for the proot setup
+
 script=$(basename -- "${BASH_SOURCE[0]}")
 
 USERNAME=${1}
