@@ -415,3 +415,9 @@ console.upgrade () {
 	console.progress "Upgrading..."
 	echo
 }
+
+console.wait () {
+
+[ -z "${debug}" ] && sleep 1 || sleep 0
+
+}
