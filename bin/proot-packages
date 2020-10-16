@@ -87,6 +87,7 @@ dwm_list=(
 	dwm
 	dmenu
 	ranger
+	stterm
 	suckless-tools
 )
 
