@@ -96,8 +96,8 @@ console.wait 2
 
 # setup proot additional applications
 
-"${BINARIES_DIRECTORY}"/leocad-configuration
-"${BINARIES_DIRECTORY}"/youtube-dl-configuration
+"${BINARIES_DIRECTORY}"/leocad-application
+"${BINARIES_DIRECTORY}"/youtube-dl-application
 
 # checkpoint #
 

@@ -16,8 +16,8 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 # applications
 
 applications_list=(
-	leocad-configuration
-	youtube-dl-configuration
+	leocad-application
+	youtube-dl-application
 )
 
 console.download app.dxtp.app "${PROOT_DIRECTORY}"/usr/bin ${applications_list[@]}
