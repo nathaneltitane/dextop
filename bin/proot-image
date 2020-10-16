@@ -57,6 +57,8 @@ proot_deploy () {
 
 	console.inf "Downloading image [ ${distribution_name^} ${distribution_version} ]."
 	echo
+	
+	echo
 
 	console.get "${iso_url}" "${iso_archive}" "${SETUP_DIRECTORY}" &
 
