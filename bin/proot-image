@@ -35,15 +35,15 @@ proot_unpack () {
 	# exclude archive directories: dev | proc | sys | system
 	# 'proot-launch' will bind and mount those device directories to proot
 	
-	proot								\
-		--link2symlink					\
-			tar 						\
-				--extract				\
+	proot									\
+		--link2symlink						\
+			tar 							\
+				--extract					\
 				--file="${1}"				\
-				--exclude='dev'			\
-				--exclude='proc'		\
-				--exclude='sys'			\
-				--exclude='system'		|| :
+					--exclude='dev'			\
+					--exclude='proc'		\
+					--exclude='sys'			\
+					--exclude='system'		|| :
 }
 
 proot_deploy () {
@@ -52,6 +52,8 @@ proot_deploy () {
 
 	console.fwd "Initializing..."
 	echo
+	
+	console.wait 1
 
 	console.inf "Downloading image [ ${distribution_name^} ${distribution_version} ]."
 	echo
