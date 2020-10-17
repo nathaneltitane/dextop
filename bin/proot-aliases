@@ -115,8 +115,7 @@ youtube () {
 		--extract-audio										\
 		--audio-format		mp3								\
 		--audio-quality		160K							\
-		--output=			"${path}"/"%(title)s.%(ext)s"	\
-															${1}
+		--output="${path}"/"%(title)s.%(ext)s"				${1}
 }
 
 # recordmydesktop #
@@ -138,8 +137,8 @@ record () {
 		--no-wm-check										\
 		--no-sound											\
 		--overwrite											\
-		--windowid				"${window_id}"				\
-		--output=				"${path}"/clip-"${stamp}".ogv
+		--windowid "${window_id}"							\
+		--output="${path}"/clip-"${stamp}".ogv
 }
 
 # extract #
