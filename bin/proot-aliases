@@ -111,11 +111,12 @@ youtube () {
 	youtube-dl												\
 		--ignore-errors										\
 		--yes-playlist										\
-		--format			bestaudio						\
 		--extract-audio										\
+		--format			bestaudio						\
 		--audio-format		mp3								\
 		--audio-quality		160K							\
-		--output="${path}"/"%(title)s.%(ext)s"				${1}
+		--output			"${path}"/"%(title)s.%(ext)s"	\
+															${1}
 }
 
 # recordmydesktop #
