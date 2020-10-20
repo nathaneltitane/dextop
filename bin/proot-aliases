@@ -106,8 +106,9 @@ speedtest () {
 youtube () {
 	[ -z "$(command -v youtube-dl)" ] && console.install youtube-dl || :
 
-	[ -z "${path}" ] && path="${PWD}" || path="${2}"
-	
+	path="${2}"
+
+	[ -z "${path}" ] && path="${PWD}"
 	cd "${path}" || exit 1
 	
 	youtube-dl												\
