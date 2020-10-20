@@ -108,6 +108,8 @@ youtube () {
 
 	[ -z "${path}" ] && path="${PWD}" || path="${2}"
 	
+	cd "${path}" || exit 1
+	
 	youtube-dl												\
 		--ignore-errors										\
 		--yes-playlist										\
@@ -115,7 +117,7 @@ youtube () {
 		--format			bestaudio						\
 		--audio-format		mp3								\
 		--audio-quality		160K							\
-		--output			"${path}"/"%(title)s.%(ext)s"	\
+		--output			"%(title)s.%(ext)s"				\
 															${1}
 }
 
