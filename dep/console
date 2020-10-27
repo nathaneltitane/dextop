@@ -335,7 +335,7 @@ console.input () {
 		
 		while true
 		do
-			if [ -z "$input" ]
+			if [ -z "${input}" ]
 			then
 				echo
 				console.err "${label} cannot be empty:"
@@ -350,7 +350,23 @@ console.input () {
 			fi
 		done
 		
-		console_rtn+=("$value=$input")
+		console_rtn+=("${value}=${input}")
+	done
+}
+
+console.empty () {
+	while true
+	do
+		read input
+
+		if [ -z ${input} ]
+		then
+			console.wrn "Input cannot be empty."
+			console.wrn "Try again."
+			echo
+		else
+			break
+		fi
 	done
 }
 
@@ -427,3 +443,49 @@ console.upgrade () {
 	echo
 }
 
+console.dialog () {
+
+	# dialog window title
+
+	title="${script%.sh} - ${1}"
+
+	# gtk dialog - zenity
+
+	g_dialog () {
+		zenity						\
+			--file-selection		\
+			--multiple				\
+			--directory				\
+			--separator=$'\n'		\
+			--title="$title"		"${@}"
+	}
+
+	# kde dialog - kdialog
+
+	k_dialog () {
+		kdialog						\
+			--getopenfilename		\
+			--multiple				\
+			--separate-output		\
+			--title "$title"		"${@}"
+	}
+
+	# define dialog usage
+
+	if [[ -z $(command -v zenity) ]]
+	then
+		dialog=$(k_dialog)
+		
+	elif [[ -z $(command -v kdialog) ]]
+	then
+		dialog=$(g_dialog)
+	else
+		console.err "No dialog binary present on system."
+		console.inf "This utility must be run using the 'directory' option."
+		echo
+		console.fwd "Exiting..."
+		echo
+
+		exit 1
+	fi
+}
