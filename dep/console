@@ -375,6 +375,8 @@ console.empty () {
 # install
 
 console.install () {
+	export DEBIAN_FRONTEND=noninteractive
+	
 	list=($@)
 	
 	command_install="apt-get install --no-install-recommends"
@@ -418,6 +420,8 @@ console.install () {
 # update
 
 console.update () {
+	export DEBIAN_FRONTEND=noninteractive
+	
 	command_update="apt-get update"
 	
 	console.inf "Updating repository and package information."
@@ -432,6 +436,8 @@ console.update () {
 # upgrade
 
 console.upgrade () {
+	export DEBIAN_FRONTEND=noninteractive
+	
 	command_upgrade="apt-get upgrade"
 	
 	console.inf "Upgrading installed packages."
