@@ -449,6 +449,47 @@ console.upgrade () {
 	echo
 }
 
+console.purge () {
+	export DEBIAN_FRONTEND=noninteractive
+	
+	list=($@)
+	
+	command_purge="apt-get purge"
+	command_clean="apt-get autoremove"
+	
+	console.inf "Purging selected packages packages."
+	echo
+	
+	for package in ${list[@]}
+	do
+		if [ ! -z "$(command -v ${package})" ]
+		then
+			console.wrn "Selected package '${package}' now purging.."
+			echo
+	
+			console.silence "echo yes | ${command_purge} ${package}" &
+			
+			console.progress "Purging [ ${package} ]..."
+			echo
+		else
+			console.scs "Selected package '${package}' not installed."
+			echo
+			
+			console.fwd "Continuing..."
+			echo
+	
+			:
+		fi
+	done
+	
+	# cleanup
+	
+	console.silence "${command_clean}" &
+	
+	console.progress "Cleaning..."
+	echo
+}
+
 console.dialog () {
 
 	# dialog window title
