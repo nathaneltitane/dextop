@@ -489,3 +489,10 @@ console.dialog () {
 		exit 1
 	fi
 }
+
+console.trap () {
+	name="${1}"
+	
+	trap=$(mktemp /tmp/${name}.XXXXXX)
+	trap 'rm -rf "${trap}"' EXIT
+}
