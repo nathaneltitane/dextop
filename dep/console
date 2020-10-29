@@ -417,6 +417,26 @@ console.install () {
 	echo
 }
 
+console.install-local () {
+	export DEBIAN_FRONTEND=noninteractive
+	
+	directory="$1"
+	
+	if [ -d "${directory}" ]
+	then
+		for package in "${directory}"/*.deb
+		do
+			echo yes | apt-get install "${package}"
+		done
+	else
+		console.wrn "No local packages to install."
+		echo
+		
+		console.fwd " Continuing..."
+		echo
+	fi
+}
+
 # update
 
 console.update () {
