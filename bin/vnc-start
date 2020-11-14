@@ -114,10 +114,6 @@ print_resolutions() {
 		8KUHD     7680    4320
 	)
 	
-	# prepend list with default / custom entries
-	
-	printf '\n'
-	printf '\t[  1 ] Custom\n'
 	printf '\n'
 	
 	# set padding for uniform output
@@ -188,46 +184,19 @@ done
 
 # manage selection
 
-case "${selection}" in
-	1)
-		format="Custom"
-	
-		console.inf "Setting custom resolution and port:"
-		echo
-	
-		console.ipt "Enter WIDTH and HEIGHT (e.g. 1920 1080): "
-		read width height
-		echo
-	
-		console.ipt "Enter port NUMBER (e.g. 1): "
-		read custom_port
-		echo
-	
-		format="Custom"
-		custom_resolution="${width}x${height}"
-	
-		DISPLAY=":${custom_port}"
-		GEOMETRY="${custom_resolution}"
-		PORT="590${DISPLAY:1}"
-	
-		vnc
-	;;
-	*)
-		resolution=""
-		
-		if [[ "${selection}" =~ ^[0-9]+$ ]]
-		then
-			i=$((${selection}-1))
-			i=$(($i*3))
+resolution=""
 
-			format="${resolutions[$i-3]}"
-			width="${resolutions[$i-2]}"
-			height="${resolutions[$i-1]}"
-			resolution="${width}x${height}"
-		fi
-	
-		GEOMETRY="${resolution}"
-	
-		vnc
-		;;
-esac
+if [[ "${selection}" =~ ^[0-9]+$ ]]
+then
+	i=$((${selection}))
+	i=$(($i*3))
+
+	format="${resolutions[$i-3]}"
+	width="${resolutions[$i-2]}"
+	height="${resolutions[$i-1]}"
+	resolution="${width}x${height}"
+fi
+
+GEOMETRY="${resolution}"
+
+vnc
