@@ -13,15 +13,6 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # download #
 
-# applications
-
-applications_list=(
-	leocad-application
-	youtube-dl-application
-)
-
-console.download app.dxtp.app "${PROOT_DIRECTORY}"/usr/bin ${applications_list[@]}
-
 # libraries
 
 libraries_list=(
