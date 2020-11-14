@@ -54,6 +54,7 @@ proot_deploy () {
 	echo
 	
 	console.wait 1
+	echo
 
 	console.inf "Downloading image [ ${distribution_name^} ${distribution_version} ]."
 	echo
