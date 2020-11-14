@@ -46,15 +46,9 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 console.fwd "Initializing..."
 echo
 
-console.get bin.dxtp.app proot-download "${BINARIES_DIRECTORY}"
+"${BINARIES_DIRECTORY}"/proot-download
 
 console.wait 1
-
-# clear #
-
-clear
-
-"${BINARIES_DIRECTORY}"/proot-download
 
 # clear #
 
