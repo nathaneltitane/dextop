@@ -133,8 +133,12 @@ print_resolutions() {
 
 		if (( $i/3 >= 0 && $i/3 <= 8 ))
 		then
+				# handle number spacing for entries 1-9
+				
 				printf '\t[  %s ] %s' ${number} ${format}
 		else
+				# handle number spacing for entries 10+
+				
 				printf '\t[ %s ] %s' ${number} ${format}
 		fi
 
