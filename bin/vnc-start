@@ -117,8 +117,8 @@ print_resolutions() {
 	# prepend list with default / custom entries
 	
 	printf '\n'
-	printf '\t[  D ] Default\n'
-	printf '\t[  C ] Custom\n'
+	printf '\t[  1 ] Default\n'
+	printf '\t[  2 ] Custom\n'
 	printf '\n'
 	
 	# set padding for uniform output
