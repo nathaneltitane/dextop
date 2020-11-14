@@ -117,8 +117,7 @@ print_resolutions() {
 	# prepend list with default / custom entries
 	
 	printf '\n'
-	printf '\t[  1 ] Default\n'
-	printf '\t[  2 ] Custom\n'
+	printf '\t[  1 ] Custom\n'
 	printf '\n'
 	
 	# set padding for uniform output
@@ -190,7 +189,7 @@ done
 # manage selection
 
 case "${selection}" in
-	c|C)
+	1)
 		format="Custom"
 	
 		console.inf "Setting custom resolution and port:"
