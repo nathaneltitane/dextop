@@ -100,6 +100,7 @@ print_resolutions() {
 		QHD       2560    1440
 		WQXGA     2560    1600
 		QSXGA     2560    2048
+		GTS7+     2800    1752
 		QHD+      3200    1800
 		WQSXGA    3200    2048
 		QUXGA     3200    2400
