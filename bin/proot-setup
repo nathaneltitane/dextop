@@ -90,8 +90,13 @@ console.wait 2
 
 # setup proot additional applications
 
-"${BINARIES_DIRECTORY}"/leocad-application
-"${BINARIES_DIRECTORY}"/youtube-dl-application
+console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main leocad					/usr/bin
+console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main leocad-configuration	/usr/bin
+console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main leocad-get				/usr/bin
+console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main leocad-launcher		/usr/bin
+console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main leocad-position		/usr/bin
+
+console.get https://yt-dl.org/downloads/latest youtube-dl /usr/bin
 
 # checkpoint #
 
