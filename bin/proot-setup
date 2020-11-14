@@ -54,7 +54,7 @@ console.wait 1
 
 clear
 
-bash "${BINARIES_DIRECTORY}"/proot-download
+"${BINARIES_DIRECTORY}"/proot-download
 
 # clear #
 
