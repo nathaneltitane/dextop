@@ -66,6 +66,14 @@ echo
 
 console.wait 2
 
+# setup #
+
+# setup proot package requirements
+
+"${BINARIES_DIRECTORY}"/proot-packages
+
+# setup proot user
+
 "${BINARIES_DIRECTORY}"/proot-user "${first_name}" "${last_name}"
 
 # setup proot user superuser privileges
@@ -105,7 +113,7 @@ console.get https://yt-dl.org/downloads/latest youtube-dl /usr/bin
 echo "yes" > "${HOME}"/proot-setup-complete
 
 # clear #
-bash 
+
 clear
 
 console.fwd "Setup complete [ proot ]..."
