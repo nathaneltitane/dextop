@@ -71,6 +71,8 @@ print_resolutions() {
 	console.msg "or type 'c' to enter a custom display format: "
 	echo
 	
+	console.wait 2
+	
 	# list supported display resolutions
 	
 	monitors=(
