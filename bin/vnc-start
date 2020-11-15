@@ -67,8 +67,8 @@ vnc () {
 }
 
 print_resolutions() {
-	console.ipt "Enter the selection to start the display server with"
-	console.ipt "or type 'c' to enter a custom display format: "
+	console.msg "Enter the selection to start the display server with"
+	console.msg "or type 'c' to enter a custom display format: "
 	echo
 	
 	# list supported display resolutions
