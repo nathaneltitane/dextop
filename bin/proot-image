@@ -53,16 +53,14 @@ proot_deploy () {
 	console.fwd "Initializing..."
 	echo
 	
-	echo
-	
 	console.wait 1
-	echo
 
 	console.inf "Downloading image [ ${distribution_name^} ${distribution_version} ]."
 	echo
 
 	console.get "${iso_url}" "${iso_archive}" "${SETUP_DIRECTORY}" &
-
+	echo
+	
 	console.progress "Downloading..."
 	echo
 
