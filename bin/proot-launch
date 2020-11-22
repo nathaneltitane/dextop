@@ -28,7 +28,13 @@ BIND_DIRECTORY=${4}
 DESKTOP_SESSION="dwm"
 DISPLAY=":1"
 LOCALHOST="127.0.0.1"
-VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
+
+# explicit VNC viewer application to kill on launch
+
+# VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
+# VNC="com.realvnc.viewer.android/ACTIVITY"
+
+VNC=""
 
 # set defaults
 
