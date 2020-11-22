@@ -61,6 +61,7 @@ termux_list=(
 utilities_list=(
 	curl
 	proot
+	openssh
 )
 
 install_list=(
