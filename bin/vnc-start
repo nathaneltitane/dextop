@@ -21,7 +21,7 @@ clear
 
 PORT="590${DISPLAY:1}"
 
-vnc () {
+vnc_launch () {
 	console.silence "
 					vncserver									\
 							-SecurityTypes none					\
@@ -313,6 +313,12 @@ then
 	PORT="590${DISPLAY:1}"
 fi
 
+console.wait 1
+
+# clear #
+
+clear
+
 # launch vnc display
 
-vnc
+vnc_launch
