@@ -218,6 +218,7 @@ then
 else
 	print_resolutions
 fi
+
 # values #
 
 values_list=(
@@ -236,6 +237,10 @@ eval ${console_rtn[@]}
 
 while true
 do
+	# automatic #
+	
+	if [ -f /home/$(id -u -n)/.vnc/selection ] && break || :
+
 	# range #
 
 	if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]]
