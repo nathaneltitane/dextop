@@ -129,20 +129,22 @@ echo
 
 clear
 
-console.wait 2
-
 # cleanup #
 
-# remove scripts
-
-rm "${HOME}"/"${script}" || :
-
-if [[ "$(cat "${HOME}"/proot-setup-complete)" = "yes" ]]
+if [[ "$(cat /root//proot-setup-complete)" = "yes" ]]
 then
 	# remove automatic setup launch
 
-	sed -i '$ d' "${HOME}"/.profile
+	sed -i '$ d' /root/.profile
 fi
+
+# remove scripts
+
+rm /home/termux/setup			|| :
+rm /root/proot-setup			|| :
+rm /root/proot-setup-complete	|| :
+
+console.wait 2
 
 exit
 FILE

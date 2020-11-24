@@ -175,17 +175,11 @@ export version=${version}
 export install_option=""${install_option}""
 FILE
 
-# cleanup #
-
-# remove scripts
-
-rm "${HOME}"/"${script}" || :
-
 # automatic setup transition [ termux >>> [ proot ] ]
 
 cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/root/.profile
 
-bash "${HOME}"/proot-setup
+bash /root/proot-setup
 FILE
 
 # run 'proot-launch' as 'root'
