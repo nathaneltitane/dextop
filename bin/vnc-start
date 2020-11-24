@@ -212,7 +212,7 @@ print_resolutions() {
 
 # show selection
 
-if [-f /home/$(id -u -n)/.vnc/selection ]
+if [ -f /home/$(id -u -n)/.vnc/selection ]
 then
 	selection=$(cat /home/$(id -u -n)/.vnc/selection)
 else
