@@ -212,8 +212,12 @@ print_resolutions() {
 
 # show selection
 
-print_resolutions
-
+if [-f /home/$(id -u -n)/.vnc/selection ]
+then
+	selection=$(cat /home/$(id -u -n)/.vnc/selection)
+else
+	print_resolutions
+fi
 # values #
 
 values_list=(
