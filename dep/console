@@ -568,3 +568,8 @@ console.id.user () {
 	console.inf "Current user name is ${SUDO_USER:-$USER}."
 	sleep 1
 }
+
+console.clear () {
+	console.wait 1
+	clear
+}

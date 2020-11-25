@@ -31,8 +31,4 @@ then
 	rm -rf /tmp/.X*
 fi
 
-console.wait 1
-
-# clear #
-
-clear
+console.clear

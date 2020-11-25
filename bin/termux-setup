@@ -192,6 +192,6 @@ console.wait 1
 
 bash "${BINARIES_DIRECTORY}"/proot-launch
 
-clear
+console.clear
 
 exit

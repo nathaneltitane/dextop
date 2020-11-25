@@ -313,16 +313,10 @@ then
 	PORT="590${DISPLAY:1}"
 fi
 
-console.wait 1
-
-# clear #
-
-clear
+console.clear
 
 # launch vnc display
 
 vnc_launch
 
-# clear #
-
-clear
+console.clear

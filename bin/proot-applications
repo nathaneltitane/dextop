@@ -27,8 +27,4 @@ console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main	leocad-
 
 console.get https://yt-dl.org/downloads/latest								youtube-dl				/usr/bin
 
-console.wait 1
-
-# clear #
-
-clear
+console.clear

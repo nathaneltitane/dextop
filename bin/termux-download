@@ -50,8 +50,4 @@ binaries_list=(
 
 console.download bin.dxtp.app "${BINARIES_DIRECTORY}" ${binaries_list[@]}
 
-console.wait 1
-
-# clear #
-
-clear
+console.clear
