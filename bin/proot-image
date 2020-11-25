@@ -60,7 +60,7 @@ proot_deploy () {
 
 	# explicit download to avoid promt redundancy through console.get
 
-	curl -sL "${iso_url}"/"${iso_archive}" > "${SETUP_DIRECTORY}" &
+	curl -sL "${iso_url}"/"${iso_archive}" > "${SETUP_DIRECTORY}"/"${iso_archive}" &
 
 	console.progress "Downloading..."
 	echo
