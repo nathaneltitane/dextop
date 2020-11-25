@@ -17,6 +17,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 binaries_list=(
 	proot-aliases
+	proot-applications
 	proot-architecture
 	proot-download
 	proot-environment
