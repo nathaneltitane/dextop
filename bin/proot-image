@@ -55,7 +55,7 @@ proot_deploy () {
 	
 	console.wait 1
 
-	console.inf "Downloading image [ ${distribution_name^} ${distribution_version} ]."
+	console.dwl "Downloading image [ ${distribution_name^} ${distribution_version} ]."
 	echo
 
 	# explicit download through 'curl' to avoid promt redundancy through console.get
