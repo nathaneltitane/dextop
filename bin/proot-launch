@@ -108,7 +108,7 @@ IFS=' '
 
 if [ ! -z "${APPLICATION}" ]
 then
-	console.fwd "Starting application [ ${APPLICATION} ]..."
+	console.fwd "Starting application [ ${APPLICATION} ] [ ${USER} ]..."
 	echo
 else
 	console.fwd "Starting session [ ${USER} ]..."
