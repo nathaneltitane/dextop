@@ -45,7 +45,7 @@ else
 	console.usr "to enable or disable storage access permission."
 	echo
 	
-	console.countdown "Permissions dialog in:" 5
+	console.countdown "Permissions dialog in:" 3
 	echo
 
 	# trigger storage permissions dialog
@@ -58,7 +58,7 @@ else
 
 	# wait 5 seconds to permit storage permissions approval
 
-	console.countdown "Waiting" 5
+	console.countdown "Waiting" 3
 	echo
 fi
 
