@@ -35,3 +35,9 @@ echo "$password" | vncpasswd -f > "${PROOT_DIRECTORY}"/home/"${user_name}"/.vnc/
 
 console.scs "Password changed."
 echo
+
+console.wait 1
+
+# clear #
+
+clear
