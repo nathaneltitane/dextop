@@ -322,3 +322,7 @@ clear
 # launch vnc display
 
 vnc_launch
+
+# clear #
+
+clear

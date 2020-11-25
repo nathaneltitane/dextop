@@ -31,6 +31,6 @@ then
 	rm -rf /tmp/.X*
 fi
 
-# clear #!/usr/bin/env bash
+# clear #
 
 clear
