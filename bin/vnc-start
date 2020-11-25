@@ -239,7 +239,7 @@ do
 	
 	if [ -f /home/$(id -u -n)/.vnc/selection ]
 	then
-		selection=$(cat /home/$(id -u -n)/.vnc/selection)
+		selection=$(echo $(cat /home/$(id -u -n)/.vnc/selection))
 		
 		break
 	fi
