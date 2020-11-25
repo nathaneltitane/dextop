@@ -58,9 +58,13 @@ proot_deploy () {
 	console.inf "Downloading image [ ${distribution_name^} ${distribution_version} ]."
 	echo
 
-	console.get "${iso_url}" "${iso_archive}" "${SETUP_DIRECTORY}"
-	echo
+	# explicit download to avoid promt redundancy through console.get
 
+	curl -sL "${iso_url}"/"${iso_archive}" > "${SETUP_DIRECTORY}" &
+
+	console.progress "Downloading..."
+	echo
+	
 	console.inf "Creating proot directory."
 	echo
 
