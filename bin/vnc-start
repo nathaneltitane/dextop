@@ -212,10 +212,7 @@ print_resolutions() {
 
 # show selection
 
-if [ ! -f /home/$(id -u -n)/.vnc/selection ]
-then
-	print_resolutions
-fi
+print_resolutions
 
 # values #
 
