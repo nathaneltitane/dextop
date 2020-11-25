@@ -87,11 +87,7 @@ echo
 
 console.get bin.dxtp.app termux-download "${BINARIES_DIRECTORY}"
 
-console.wait 1
-
-# clear #
-
-clear
+console.clear
 
 bash "${BINARIES_DIRECTORY}"/termux-download
 
