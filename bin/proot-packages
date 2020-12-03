@@ -86,6 +86,7 @@ vnc_list=(
 dwm_list=(
 	dwm
 	dmenu
+	feh
 	ranger
 	stterm
 	suckless-tools
