@@ -87,8 +87,11 @@ dwm_list=(
 	dwm
 	dmenu
 	feh
+	irssi
+	micro
 	ranger
 	stterm
+	surf
 	suckless-tools
 )
 
