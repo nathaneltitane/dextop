@@ -91,7 +91,6 @@ dwm_list=(
 	micro
 	ranger
 	stterm
-	surf
 	suckless-tools
 )
 
