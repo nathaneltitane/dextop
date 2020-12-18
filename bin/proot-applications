@@ -19,7 +19,6 @@ clear
 
 # applications
 
-console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main	leocad					/usr/bin
 console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main	leocad-configuration	/usr/bin
 console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main	leocad-get				/usr/bin
 console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main	leocad-launcher			/usr/bin
