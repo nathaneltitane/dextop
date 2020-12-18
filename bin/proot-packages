@@ -50,6 +50,8 @@ utilities_list=(
 	jq
 	nano
 	net-tools
+	nmap
+	openssh-server
 	p7zip
 	python
 	ssh
