@@ -9,7 +9,7 @@
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
-source /data/data/com.termux/files/usr/bin/globals
+source /data/data/com.termux/files/usr/bin/termux-globals
 
 # usage #
 
@@ -23,7 +23,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # write globals
 
-cat "${BINARIES_DIRECTORY}"/globals >> "${PROOT_DIRECTORY}"/root/proot-setup
+cat "${BINARIES_DIRECTORY}"/termux-globals >> "${PROOT_DIRECTORY}"/root/proot-setup
 
 # write proot-setup
 
@@ -35,7 +35,7 @@ clear
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
-source /data/data/com.termux/files/usr/bin/globals
+source /data/data/com.termux/files/usr/bin/termux-globals
 
 # variables #
 
