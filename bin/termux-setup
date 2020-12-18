@@ -77,8 +77,7 @@ clear
 
 # explicit console.get for preload
 
-curl -sL dep.dxtp.app/console > "${BINARIES_DIRECTORY}"/console && source "${BINARIES_DIRECTORY}"/console
-curl -sL dep.dxtp.app/globals > "${BINARIES_DIRECTORY}"/globals && source "${BINARIES_DIRECTORY}"/globals
+curl -sL https://raw.githubusercontent.com/nathaneltitane/console/master/console > "${BINARIES_DIRECTORY}"/console && source "${BINARIES_DIRECTORY}"/console
 
 # download
 

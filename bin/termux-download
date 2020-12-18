@@ -39,6 +39,7 @@ binaries_list=(
 	proot-welcome
 	termux-download
 	termux-environment
+	termux-globals
 	termux-packages
 	termux-storage
 	termux-welcome
