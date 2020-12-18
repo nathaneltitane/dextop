@@ -1,10 +1,8 @@
-<p align=center>
-Linux on Android -  Termux // Dextop // Ubuntu
+# Linux on Android -  Termux // Dextop // Ubuntu
   
 ![termux dextop](https://github.com/nathaneltitane/dextop/blob/master/termux.png?raw=true)
 
 This project provides any user owning a modern android device, the ability to setup their own Linux-based work environment and use it as their primary workstation.
-</p>
 
 ### Requirements:
 - Modern Android device (running android 7.0+ / Termux limitation)
