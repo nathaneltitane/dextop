@@ -84,7 +84,7 @@ curl -sL https://raw.githubusercontent.com/nathaneltitane/console/master/console
 console.fwd "Initializing..."
 echo
 
-console.get bin.dxtp.app termux-download "${BINARIES_DIRECTORY}"
+console.get get.dxtp.app termux-download "${BINARIES_DIRECTORY}"
 
 console.clear
 
