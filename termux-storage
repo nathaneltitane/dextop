@@ -74,8 +74,8 @@ mkdir -p "${SETUP_DIRECTORY}"/storage || :
 
 # create new symbolic links for bind mounts
 
-[ ! -f "${SETUP_DIRECTORY}"/storage/internal ] && \
-	ln -s -f /storage/emulated/0 "${SETUP_DIRECTORY}"/storage/internal || :
+[ ! -f "${SETUP_DIRECTORY}"/storage/internal ]							&& \
+	ln -s -f /storage/emulated/0 "${SETUP_DIRECTORY}"/storage/internal 	|| :
 	
 # use regular expression to match label UUID 'XXXX-XXXX'
 # store external devce labels in array for later retrieval and linking
