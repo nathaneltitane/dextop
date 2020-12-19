@@ -28,6 +28,7 @@ cat "${BINARIES_DIRECTORY}"/termux-globals >> "${PROOT_DIRECTORY}"/root/proot-se
 # write proot-setup
 
 cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/root/proot-setup
+
 # initial prompt clear #
 
 clear
@@ -48,18 +49,12 @@ echo
 
 "${BINARIES_DIRECTORY}"/proot-download
 
-console.wait 1
-
-# clear #
-
-clear
+console.clear
 
 # welcome #
 
 console.msg "[ Linux on Android -  Termux // Dextop // Ubuntu [ Version ${version} ] ]"
 echo
-
-console.wait 1
 
 console.fwd "Completing setup [ proot ]..."
 echo
@@ -106,9 +101,7 @@ console.wait 2
 
 echo "yes" > "${HOME}"/proot-setup-complete
 
-# clear #
-
-clear
+console.clear
 
 console.fwd "Setup complete [ proot ]..."
 echo
@@ -125,7 +118,7 @@ clear
 
 # cleanup #
 
-if [[ "$(cat /root//proot-setup-complete)" = "yes" ]]
+if [[ "$(cat /root/proot-setup-complete)" = "yes" ]]
 then
 	# remove automatic setup launch
 

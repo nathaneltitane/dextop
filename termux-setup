@@ -77,6 +77,10 @@ clear
 
 # explicit console.get for preload
 
+# clear #
+
+console.wait 1
+
 curl -sL https://raw.githubusercontent.com/nathaneltitane/console/master/console > "${BINARIES_DIRECTORY}"/console && source "${BINARIES_DIRECTORY}"/console
 
 # download
@@ -90,16 +94,12 @@ console.clear
 
 bash "${BINARIES_DIRECTORY}"/termux-download
 
-# clear #
-
-clear
+console.clear
 
 # welcome #
 
 console.msg "[ Linux on Android -  Termux // Dextop // Ubuntu [ Version ${version} ] ]"
 echo
-
-console.wait 1
 
 console.fwd "Initializing setup [ termux ]..."
 echo

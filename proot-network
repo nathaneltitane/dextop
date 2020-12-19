@@ -24,9 +24,7 @@ console.inf "Setting host address."
 echo
 
 cat <<- FILE > "${PROOT_DIRECTORY}"/etc/hosts
-127.0.0.1 localhost.localdomain
 127.0.0.1 localhost
-127.0.0.1 "${hostname}"
 FILE
 
 # nameserver

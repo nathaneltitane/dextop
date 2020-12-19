@@ -17,6 +17,10 @@ clear
 
 # download #
 
+# console #
+
+curl -sL https://raw.githubusercontent.com/nathaneltitane/console/master/console > "${BINARIES_DIRECTORY}"/console && source "${BINARIES_DIRECTORY}"/console
+
 # binaries
 
 binaries_list=(
