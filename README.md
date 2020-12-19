@@ -20,7 +20,7 @@ This project provides any user owning a modern android device, the ability to se
 
 Once the Android applications are installed on your device, open Termux and paste:
 
-```curl -sL get.dxtp.app > setup && bash setup | <option>```
+```curl -sL run.dxtp.app > setup && bash setup | <option>```
 
 Available install options are:
 
