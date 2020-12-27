@@ -36,6 +36,8 @@ alias '...'='cd ../../../'
 alias '....'='cd ../../../../'
 alias '.....'='cd ../../../../'
 
+alias 'directory'='echo ${PWD}'
+
 # list #
 
 alias 'ls'='ls -al'
