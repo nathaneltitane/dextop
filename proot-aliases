@@ -38,6 +38,10 @@ alias '.....'='cd ../../../../'
 
 alias 'directory'='echo ${PWD}'
 
+# files #
+
+alias 'count'='find . -type f | wc -l'
+
 # list #
 
 alias 'ls'='ls -al'
