@@ -20,10 +20,10 @@ clear
 # applications
 
 console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main	leocad-configuration	/usr/bin
-console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main	leocad-get				/usr/bin
-console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main	leocad-launcher			/usr/bin
-console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main	leocad-position			/usr/bin
+console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main	leocad-get		/usr/bin
+console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main	leocad-launcher		/usr/bin
+console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main	leocad-position		/usr/bin
 
-console.get https://yt-dl.org/downloads/latest								youtube-dl				/usr/bin
+console.get https://yt-dl.org/downloads/latest					youtube-dl		/usr/bin
 
 console.clear

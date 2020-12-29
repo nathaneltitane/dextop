@@ -36,6 +36,7 @@ applications_list=(
 )
 
 frameworks_list=(
+	libxft2
 	libqt5concurrent5
 	libqt5opengl5
 	libqt5printsupport5
@@ -64,7 +65,7 @@ utilities_list=(
 
 security_list=(
 	ca-certificates
-	openssl	
+	openssl
 )
 
 session_manager_list=(
@@ -93,6 +94,7 @@ dwm_list=(
 	micro
 	ranger
 	stterm
+	surf
 	suckless-tools
 )
 
@@ -172,7 +174,7 @@ then
 	desktop_environment_list=(
 		${xfce4_list[@]}
 	)
-	
+
 	install_list+=(
 		${desktop_environment_list[@]}
 		${themes_list[@]}
@@ -186,7 +188,7 @@ then
 	desktop_environment_list=(
 		${dwm_list[@]}
 	)
-	
+
 	install_list+=(
 		${desktop_environment_list[@]}
 	)
