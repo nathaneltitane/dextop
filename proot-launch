@@ -45,14 +45,14 @@ VNC=""
 
 # set environment defaults
 
-[ -z "$DESKTOP_SESION" ]	&& DESKTOP_SESSION="${DESKTOP_SESSION}"
-[ -z "${BROWSER}" ]			&& BROWSER="${BROWSER}"
-[ -z "${EDITOR}" ]			&& EDITOR="${EDITOR}"
-[ -z "${PAGER}" ]			&& PAGER="${PAGER}"
-[ -z "${RUNNER}" ]			&& RUNNER="${RUNNER}"
-[ -z "${SHELL}" ]			&& SHELL="${SHELL}"
+[ -z "$DESKTOP_SESSION" ]	&& DESKTOP_SESSION="${DESKTOP_SESSION}"
+[ -z "${BROWSER}" ]		&& BROWSER="${BROWSER}"
+[ -z "${EDITOR}" ]		&& EDITOR="${EDITOR}"
+[ -z "${PAGER}" ]		&& PAGER="${PAGER}"
+[ -z "${RUNNER}" ]		&& RUNNER="${RUNNER}"
+[ -z "${SHELL}" ]		&& SHELL="${SHELL}"
 [ -z "${TERMINAL}" ]		&& TERMINAL="${TERM}"
-[ -z "${VISUAL}" ]			&& VISUAL="${VISUAL}"
+[ -z "${VISUAL}" ]		&& VISUAL="${VISUAL}"
 
 # initial prompt clear #
 
