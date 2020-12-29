@@ -76,6 +76,17 @@ alias 'dd'="dd if=${1} of=${2} bs=${3} status=progress"
 alias 'd-install'='sudo dpkg -i'
 alias 'd-force-install'='sudo dpkg -i --force-all'
 
+# git #
+
+alias 'gi'='git init'
+alias 'gp'='git pull'
+
+alias 'ga'='git add *'
+alias 'gc'="git commit -a -m ${1}"
+alias 'gs'='git push'
+
+alias 'gu'='ga && gc "Code & Features Update" && gs'
+
 # kill #
 
 alias 'kill'="sudo pkill -9 ${1}"
