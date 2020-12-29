@@ -43,6 +43,11 @@ frameworks_list=(
 	libqt5xml5
 )
 
+locales_list=(
+	locales
+	locales-all
+)
+
 utilities_list=(
 	curl
 	ffmpeg
@@ -71,6 +76,9 @@ security_list=(
 session_manager_list=(
 	dbus-x11
 	x11-utils
+	x11-xserver-utils
+	x11-xkb-utils
+	x11-xfs-utils
 )
 
 themes_list=(
@@ -199,6 +207,7 @@ fi
 install_list+=(
 	${applications_list[@]}
 	${frameworks_list[@]}
+	${locales_list[@]}
 	${utilities_list[@]}
 	${session_manager_list[@]}
 	${security_list[@]}
