@@ -93,7 +93,7 @@ alias 'kill'="sudo pkill -9 ${1}"
 
 # nano #
 
-alias 'nano'='nano -c -g -i -l -D -J80 -T4'
+alias 'nano'='nano -c -g -i -l -m -D -J80 -T4'
 
 # ping #
 
@@ -132,15 +132,15 @@ youtube () {
 	[ -z "${path}" ] && path="${PWD}"
 	cd "${path}" || exit 1
 	
-	youtube-dl												\
+	youtube-dl											\
 		--ignore-errors										\
 		--yes-playlist										\
 		--extract-audio										\
-		--format			bestaudio						\
+		--format		bestaudio							\
 		--audio-format		mp3								\
-		--audio-quality		160K							\
-		--output			"%(title)s.%(ext)s"				\
-															${1}
+		--audio-quality		160K								\
+		--output		"%(title)s.%(ext)s"						\
+													${1}
 }
 
 # recordmydesktop #
@@ -158,11 +158,11 @@ record () {
 	console.wait 1
 
 	recordmydesktop											\
-		--no-cursor											\
+		--no-cursor										\
 		--no-wm-check										\
-		--no-sound											\
-		--overwrite											\
-		--windowid "${window_id}"							\
+		--no-sound										\
+		--overwrite										\
+		--windowid "${window_id}"								\
 		--output="${path}"/clip-"${stamp}".ogv
 }
 
