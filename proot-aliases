@@ -93,7 +93,7 @@ alias 'kill'="sudo pkill -9 ${1}"
 
 # nano #
 
-alias 'nano'='nano -c -l'
+alias 'nano'='nano -c -g -i -l -D -J80 -T4'
 
 # ping #
 
