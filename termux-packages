@@ -65,6 +65,7 @@ utilities_list=(
 	openssh
 	proot
 	rsync
+	spell
 	wget
 )
 
