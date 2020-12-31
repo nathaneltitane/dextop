@@ -82,14 +82,15 @@ alias 'd-force-install'='sudo dpkg -i --force-all'
 
 # git #
 
+alias 'gc'='git clone'
 alias 'gi'='git init'
 alias 'gp'='git pull'
 
 alias 'ga'='git add *'
-alias 'gc'="git commit -a -m ${1}"
+alias 'gm'="git commit -a -m ${1}"
 alias 'gs'='git push'
 
-alias 'gu'='ga && gc "Code & Features Update" && gs'
+alias 'gu'='ga && gm "Code & Features Update" && gs'
 
 # kill #
 
