@@ -60,6 +60,7 @@ utilities_list=(
 	openssh-server
 	p7zip
 	python
+	rsync
 	ssh
 	sudo
 	unrar

@@ -60,8 +60,12 @@ termux_list=(
 
 utilities_list=(
 	curl
-	proot
+	jq
+	nano
 	openssh
+	proot
+	rsync
+	wget
 )
 
 install_list=(
