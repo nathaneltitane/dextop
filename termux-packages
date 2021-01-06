@@ -60,6 +60,7 @@ termux_list=(
 
 utilities_list=(
 	curl
+	dialog
 	jq
 	nano
 	openssh

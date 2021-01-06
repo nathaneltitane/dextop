@@ -50,6 +50,7 @@ locales_list=(
 
 utilities_list=(
 	curl
+	dialog
 	ffmpeg
 	git
 	hub
