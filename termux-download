@@ -25,7 +25,6 @@ curl -sL https://raw.githubusercontent.com/nathaneltitane/console/master/console
 
 binaries_list=(
 	proot-aliases
-	proot-applications
 	proot-architecture
 	proot-download
 	proot-environment
