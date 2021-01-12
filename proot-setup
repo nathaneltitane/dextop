@@ -53,8 +53,7 @@ console.clear
 
 # welcome #
 
-console.msg "[ Linux on Android - Termux // Dextop // Ubuntu [ Version ${version} ] ]"
-echo
+console.title "Linux on Android" "Termux // Dextop // Ubuntu" "${version}"
 
 console.fwd "Completing setup [ proot ]..."
 echo
