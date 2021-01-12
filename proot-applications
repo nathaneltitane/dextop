@@ -19,11 +19,16 @@ clear
 
 # applications
 
-console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main	leocad-configuration	/usr/bin
-console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main	leocad-download			/usr/bin
-console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main	leocad-launcher			/usr/bin
-console.get https://raw.githubusercontent.com/nathaneltitane/leocad/main	leocad-position			/usr/bin
+applications_list=(
+	leocad-configuration
+	leocad-download
+	leocad-launcher
+	leocad-position
+)
 
-console.get https://yt-dl.org/downloads/latest								youtube-dl				/usr/bin
+console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main	/usr/bin ${applications_list[]}
 
 console.clear
+
+
+# console.get https://yt-dl.org/downloads/latest								youtube-dl				/usr/bin
