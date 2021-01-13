@@ -19,7 +19,7 @@ clear
 
 # console #
 
-curl -sL https://raw.githubusercontent.com/nathaneltitane/console/master/console > "${BINARIES_DIRECTORY}"/console && source "${BINARIES_DIRECTORY}"/console
+curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && source "${BINARIES_DIRECTORY}"/console
 
 # binaries
 
