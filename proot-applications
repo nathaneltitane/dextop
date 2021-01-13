@@ -30,13 +30,13 @@ console.upgrade
 # packages #
 
 applications_list=(
+	blender
 	leocad
 	povray
 	youtube-dl
 )
 
 frameworks_list=(
-	libxft2
 	libqt5concurrent5
 	libqt5opengl5
 	libqt5printsupport5
