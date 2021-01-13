@@ -162,11 +162,11 @@ cat <<- FILE >> "${BINARIES_DIRECTORY}"/termux-globals
 
 # version #
 
-export version=${version}
+export version="${version}"
 
 # options #
 
-export install_option=""${install_option}""
+export install_option="${install_option}"
 FILE
 
 # automatic setup transition [ termux >>> [ proot ] ]
