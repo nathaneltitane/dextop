@@ -29,18 +29,8 @@ console.upgrade
 
 # packages #
 
-applications_list=(
-	leocad
-	povray
-	youtube-dl
-)
-
 frameworks_list=(
 	libxft2
-	libqt5concurrent5
-	libqt5opengl5
-	libqt5printsupport5
-	libqt5xml5
 )
 
 locales_list=(
@@ -48,35 +38,12 @@ locales_list=(
 	locales-all
 )
 
-utilities_list=(
-	curl
-	dialog
-	ffmpeg
-	git
-	hub
-	jq
-	nano
-	net-tools
-	nmap
-	openssh-server
-	p7zip
-	python
-	rsync
-	spell
-	ssh
-	sudo
-	unrar
-	wmctrl
-	xdotool
-	zip
-)
-
 security_list=(
 	ca-certificates
 	openssl
 )
 
-session_manager_list=(
+display_list=(
 	dbus-x11
 	x11-utils
 	x11-xserver-utils
@@ -102,7 +69,6 @@ dwm_list=(
 	dmenu
 	feh
 	irssi
-	micro
 	ranger
 	stterm
 	surf
@@ -208,11 +174,9 @@ fi
 # core packages lists to load and install
 
 install_list+=(
-	${applications_list[@]}
 	${frameworks_list[@]}
 	${locales_list[@]}
-	${utilities_list[@]}
-	${session_manager_list[@]}
+	${display_list[@]}
 	${security_list[@]}
 	${vnc_list[@]}
 )
