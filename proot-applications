@@ -1,0 +1,83 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/termux-globals
+
+# usage #
+
+# variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# initial prompt clear #
+
+clear
+
+# enable quiet package install
+
+export DEBIAN_FRONTEND=noninteractive
+
+# update packages list
+
+console.update
+
+# upgrade installed packages
+
+console.upgrade
+
+# packages #
+
+applications_list=(
+	leocad
+	povray
+	youtube-dl
+)
+
+frameworks_list=(
+	libxft2
+	libqt5concurrent5
+	libqt5opengl5
+	libqt5printsupport5
+	libqt5xml5
+)
+
+utilities_list=(
+	curl
+	dialog
+	ffmpeg
+	git
+	hub
+	jq
+	nano
+	net-tools
+	nmap
+	openssh-server
+	p7zip
+	python
+	rsync
+	spell
+	ssh
+	sudo
+	unrar
+	wmctrl
+	xdotool
+	zip
+)
+
+# install list #
+
+install_list=()
+
+# core packages lists to load and install
+
+install_list+=(
+	${applications_list[@]}
+	${frameworks_list[@]}
+	${utilities_list[@]}
+)
+
+# install #
+
+console.install ${install_list[@]}
