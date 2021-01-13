@@ -48,6 +48,10 @@ The rest of the setup is fully automated and should run its course until the pro
 ### Note:
 The setup dialogs, prompts, comaands and binaries have been made to redirect all output to the Termux ```'/var/log'``` directory, keeping output messages to a minimum.
 
+### Customization:
+
+Use the 'proot-applications' script to customize your list of installed applications, libraries, frameworks and utilities.
+
 Should you suspect any issues or errors, please provide those files when submitting a bug report.
 
 ### Usage:
