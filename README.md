@@ -71,4 +71,4 @@ Logging out will automatically stop all vnc servers and exit the proot environme
 
 ### Reports:
 
-Should you suspect any issues or errors, please provide those files when submitting a bug report.
+Should you suspect any issues or errors, please provide a copy of the files located under ```'/var/log'``` when submitting a bug report.
