@@ -52,8 +52,6 @@ The setup dialogs, prompts, comaands and binaries have been made to redirect all
 
 Use the 'proot-applications' script to customize your list of installed applications, libraries, frameworks and utilities.
 
-Should you suspect any issues or errors, please provide those files when submitting a bug report.
-
 ### Usage:
 
 On Termux load:
@@ -70,3 +68,7 @@ If you've already logged in, your selection has been saved for automatic startup
 
 Logging out will automatically stop all vnc servers and exit the proot environment back to the Termux shell
 - Run ```'logout'``` / Ctrl+D
+
+### Reports:
+
+Should you suspect any issues or errors, please provide those files when submitting a bug report.
