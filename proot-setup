@@ -20,10 +20,6 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 # execute on first login to complete proot setup
 # terminate if checkpoint is reached
 
-# write globals
-
-cat "${BINARIES_DIRECTORY}"/termux-globals >> "${PROOT_DIRECTORY}"/root/proot-setup
-
 # write proot-setup
 
 cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/root/proot-setup
