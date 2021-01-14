@@ -3,7 +3,6 @@
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
-source /data/data/com.termux/files/usr/bin/termux-globals
 
 # usage #
 
@@ -42,7 +41,6 @@ binaries_list=(
 	proot-welcome
 	termux-download
 	termux-environment
-	termux-globals
 	termux-packages
 	termux-storage
 	termux-welcome

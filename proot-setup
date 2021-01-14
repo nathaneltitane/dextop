@@ -9,7 +9,6 @@
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
-source /data/data/com.termux/files/usr/bin/termux-globals
 
 # usage #
 
@@ -36,7 +35,6 @@ clear
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
-source /data/data/com.termux/files/usr/bin/termux-globals
 
 # variables #
 

@@ -3,7 +3,6 @@
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
-source /data/data/com.termux/files/usr/bin/termux-globals
 
 # usage #
 
@@ -71,7 +70,7 @@ fi
 
 # export variables
 
-cat <<- FILE >> "${BINARIES_DIRECTORY}"/termux-globals
+cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/root/proot-globals
 
 # check architecture #
 

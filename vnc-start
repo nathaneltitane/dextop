@@ -3,7 +3,6 @@
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
-source /data/data/com.termux/files/usr/bin/termux-globals
 
 # /etc/os-release: source distribution codename variables (e.g. $NAME)
 
