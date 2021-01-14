@@ -10,10 +10,6 @@ source /data/data/com.termux/files/usr/bin/console
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-# initial prompt clear #
-
-clear
-
 # download #
 
 # libraries
