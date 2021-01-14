@@ -53,7 +53,7 @@ proot_deploy () {
 	console.dwl "Downloading image [ ${distribution_name^} ${distribution_version} ]."
 	echo
 
-	# explicit download through 'curl' to avoid prompt redundancy through console.download
+	# explicit console.download - avoids prompt redundancy
 
 	curl -sL "${iso_url}"/"${iso_archive}" > "${SETUP_DIRECTORY}"/"${iso_archive}" &
 
