@@ -79,7 +79,7 @@ clear
 
 # source
 
-# explicit console.get for preload
+# explicit console.download for preload
 
 curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && source "${BINARIES_DIRECTORY}"/console
 
@@ -92,7 +92,7 @@ console.wait 1
 console.fwd "Initializing..."
 echo
 
-console.get get.dxtp.app termux-download "${BINARIES_DIRECTORY}"
+console.download get.dxtp.app "${BINARIES_DIRECTORY}" termux-download
 
 console.clear
 
