@@ -24,9 +24,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/root/proot-setup
 
-# initial prompt clear #
-
-clear
+#!/bin/bash
 
 # dependencies #
 
@@ -43,16 +41,12 @@ echo
 
 "${BINARIES_DIRECTORY}"/proot-download
 
-console.clear
-
 # welcome #
 
 console.title "Linux on Android" "Termux // Dextop // Ubuntu" "${version}"
 
 console.fwd "Completing setup [ proot ]..."
 echo
-
-console.wait 2
 
 # setup #
 
@@ -94,20 +88,14 @@ console.wait 2
 
 echo "yes" > "${HOME}"/proot-setup-complete
 
-console.clear
-
 console.fwd "Setup complete [ proot ]..."
 echo
 
 console.scs "Deployment and configuration complete."
 echo
 
-console.wait 2
-
 console.countdown "Exiting in" 5
 echo
-
-clear
 
 # cleanup #
 
@@ -124,8 +112,6 @@ rm /home/termux/setup			|| :
 rm /root/proot-globals			|| :
 rm /root/proot-setup			|| :
 rm /root/proot-setup-complete	|| :
-
-console.wait 2
 
 exit
 FILE

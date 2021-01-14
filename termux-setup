@@ -62,6 +62,14 @@ install_option="${1}"
 
 [ -z "${install_option}" ] && install_option="minimal"
 
+# dependencies #
+
+# source
+
+# explicit console.download for preload
+
+curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && source "${BINARIES_DIRECTORY}"/console
+
 # set globals
 
 export INITIAL_DIRECTORY="${PWD}"
@@ -71,22 +79,6 @@ export LIBRARIES_DIRECTORY="${PREFIX}"/lib
 export PROOT_DIRECTORY="${SETUP_DIRECTORY}"/img
 export BIND_DIRECTORY="${SETUP_DIRECTORY}"/mnt
 
-# initial prompt clear #
-
-clear
-
-# dependencies #
-
-# source
-
-# explicit console.download for preload
-
-curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && source "${BINARIES_DIRECTORY}"/console
-
-# clear #
-
-console.wait 1
-
 # download
 
 console.fwd "Initializing..."
@@ -94,11 +86,7 @@ echo
 
 console.download get.dxtp.app "${BINARIES_DIRECTORY}" termux-download
 
-console.clear
-
 bash "${BINARIES_DIRECTORY}"/termux-download
-
-console.clear
 
 # welcome #
 
@@ -106,8 +94,6 @@ console.title "Linux on Android" "Termux // Dextop // Ubuntu" "${version}"
 
 console.fwd "Initializing setup [ termux ]..."
 echo
-
-console.wait 2
 
 # setup #
 
@@ -195,10 +181,6 @@ FILE
 console.inf "Entering proot environment."
 echo
 
-console.wait 1
-
 bash "${BINARIES_DIRECTORY}"/proot-launch
-
-console.clear
 
 exit
