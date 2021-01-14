@@ -24,6 +24,7 @@ curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && source "${BIN
 
 binaries_list=(
 	proot-aliases
+	proot-applications
 	proot-architecture
 	proot-download
 	proot-environment
