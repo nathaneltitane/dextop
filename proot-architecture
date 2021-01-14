@@ -70,9 +70,4 @@ fi
 
 # export variables
 
-cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/root/proot-globals
-
-# check architecture #
-
 export iso_architecture="${img_architecture}"
-FILE
