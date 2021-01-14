@@ -81,11 +81,11 @@ clear
 
 # explicit console.get for preload
 
+curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && source "${BINARIES_DIRECTORY}"/console
+
 # clear #
 
 console.wait 1
-
-curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && source "${BINARIES_DIRECTORY}"/console
 
 # download
 
