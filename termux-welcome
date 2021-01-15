@@ -3,6 +3,7 @@
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
 
 # usage #
 
@@ -24,7 +25,7 @@ FILE
 cat <<- 'FILE' > "${HOME}"/.bashrc
 # dependencies #
 
-source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/console\\nsource /data/data/com.termux/files/usr/bin/globals\nsource /data/data/com.termux/files/usr/bin/globals
 
 # initial prompt clear #
 

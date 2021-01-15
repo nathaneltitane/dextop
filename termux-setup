@@ -66,8 +66,8 @@ install_option="${1}"
 
 # explicit console.download for preload
 
-curl -sL get.cnsl.app/console > "${PREFIX}"/bin/console && source "${BINARIES_DIRECTORY}"/console
-curl -sL get.dxtp.app/globals > "${PREFIX}"/bin/globals && source "${BINARIES_DIRECTORY}"/globals
+curl -sL get.cnsl.app/console > "${PREFIX}"/bin/console && source "${PREFIX}"/bin/console
+curl -sL get.dxtp.app/globals > "${PREFIX}"/bin/globals && source "${PREFIX}"/bin/globals
 
 # download
 

@@ -9,6 +9,7 @@
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
 
 # usage #
 
@@ -106,6 +107,10 @@ then
 
 	sed -i '$ d' /root/.profile
 fi
+
+# remove setup information
+
+sed -i '/# setup variables #/,$d' /data/data/com.termux/files/usr/bin/console
 
 # remove scripts
 
