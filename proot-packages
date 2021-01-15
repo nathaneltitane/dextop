@@ -63,11 +63,9 @@ vnc_list=(
 dwm_list=(
 	dwm
 	dmenu
-	feh
 	irssi
 	ranger
 	stterm
-	surf
 	suckless-tools
 )
 
