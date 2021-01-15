@@ -25,6 +25,10 @@ console.upgrade
 
 # packages #
 
+administration_list=(
+	sudo
+)
+
 frameworks_list=(
 	libxft2
 )
@@ -37,7 +41,6 @@ locales_list=(
 security_list=(
 	ca-certificates
 	openssl
-	sudo
 )
 
 display_list=(

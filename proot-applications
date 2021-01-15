@@ -91,3 +91,5 @@ console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main	/u
 console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main	/usr/bin				leocad-download
 console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main	/usr/bin				leocad-launcher
 console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main	/usr/bin				leocad-position
+
+# local install #
