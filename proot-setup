@@ -29,7 +29,7 @@ cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/root/proot-setup
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
-source /root/proot-globals
+source /data/data/com.termux/files/usr/bin/globals
 
 # variables #
 
@@ -110,7 +110,6 @@ fi
 # remove scripts
 
 rm /home/termux/setup			|| :
-rm /root/proot-globals			|| :
 rm /root/proot-setup			|| :
 rm /root/proot-setup-complete	|| :
 

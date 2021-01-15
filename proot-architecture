@@ -66,4 +66,9 @@ fi
 
 # export variables
 
+cat <<- FILE >> "${BINARIES_DIRECTORY}"/globals
+
+# architecture check #
+
 export iso_architecture="${img_architecture}"
+FILE

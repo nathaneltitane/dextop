@@ -29,7 +29,7 @@ cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/home/"${user_name}"/.bash_logout
 
 FILE
 
-# .bashrc - user specific - local
+# .bashrc
 
 cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/home/"${user_name}"/.bashrc
 

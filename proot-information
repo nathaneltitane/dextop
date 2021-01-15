@@ -36,7 +36,7 @@ eval ${console_rtn[@]}
 
 # export variables
 
-cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/root/proot-globals
+cat <<- FILE >> "${BINARIES_DIRECTORY}"/globals
 
 # user information #
 
