@@ -17,7 +17,6 @@ proot_launcher="proot-launch"
 
 iso_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${distribution_version}/release"
 iso_archive="ubuntu-base-${distribution_version}-base-${iso_architecture}.tar.gz"
-iso_full_url="${iso_root_url}/${iso_archive}"
 
 # set defaults
 
