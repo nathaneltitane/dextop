@@ -55,7 +55,6 @@ utilities_list=(
 	rsync
 	spell
 	ssh
-	sudo
 	unrar
 	wmctrl
 	xdotool

@@ -37,6 +37,7 @@ locales_list=(
 security_list=(
 	ca-certificates
 	openssl
+	sudo
 )
 
 display_list=(
