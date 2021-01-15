@@ -64,12 +64,19 @@ install_option="${1}"
 
 # set globals
 
+cat <<- 'FILE' > "${HOME}"/termux-globals
+
+# globals #
+
 export INITIAL_DIRECTORY="${PWD}"
 export SETUP_DIRECTORY="${PREFIX%/*}"
 export BINARIES_DIRECTORY="${PREFIX}"/bin
 export LIBRARIES_DIRECTORY="${PREFIX}"/lib
 export PROOT_DIRECTORY="${SETUP_DIRECTORY}"/img
 export BIND_DIRECTORY="${SETUP_DIRECTORY}"/mnt
+FILE
+
+source "${HOME}"/termux-globals
 
 # dependencies #
 
@@ -146,7 +153,7 @@ echo
 
 # export #
 
-cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/root/proot-globals
+cat <<- 'FILE' > "${PROOT_DIRECTORY}"/root/proot-globals
 
 # globals #
 

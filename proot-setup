@@ -29,6 +29,7 @@ cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/root/proot-setup
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
+source /root/proot-globals
 
 # variables #
 
