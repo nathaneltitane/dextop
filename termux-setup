@@ -98,9 +98,6 @@ console.run "${BINARIES_DIRECTORY}"/termux-packages
 
 # setup environments
 
-console.fwd "Setting up environments [ [ termux <<< ] | [ >>> proot ] ]..."
-echo
-
 # setup termux environment files
 
 console.run "${BINARIES_DIRECTORY}"/termux-environment
@@ -141,7 +138,7 @@ console.run "${BINARIES_DIRECTORY}"/proot-network
 
 console.run "${BINARIES_DIRECTORY}"/proot-setup
 
-# run 'proot-launch' as 'root' - continue setup in proot environment
+# continue setup in proot environment - run 'proot-launch' as 'root'
 
 console.run "${BINARIES_DIRECTORY}"/proot-launch
 

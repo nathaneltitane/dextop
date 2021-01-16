@@ -19,6 +19,9 @@ cat <<- 'FILE' >> "${HOME}"/.hushlogin
 
 FILE
 
+console.fwd "Setting up environment [ termux ]..."
+echo
+
 console.inf "Creating files."
 echo
 
@@ -94,5 +97,7 @@ extra-keys = [																	\
 FILE
 
 # apply termux properties
+
+console.fwd "Applying changes..."
 
 termux-reload-settings
