@@ -63,10 +63,6 @@ VNC=""
 [ -z "${TERMINAL}" ]		&& TERMINAL="${TERM}"
 [ -z "${VISUAL}" ]		&& VISUAL="${VISUAL}"
 
-# initial prompt clear #
-
-clear
-
 # assume termux-exec is present - unset LD_PRELOAD
 
 unset LD_PRELOAD

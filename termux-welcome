@@ -28,10 +28,6 @@ cat <<- 'FILE' > "${HOME}"/.bashrc
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
-# initial prompt clear #
-
-clear
-
 console.fwd "Welcome to Termux Dextop!"
 echo
 

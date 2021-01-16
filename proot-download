@@ -20,5 +20,3 @@ libraries_list=(
 )
 
 console.download lib.dxtp.app "${PROOT_DIRECTORY}"/lib ${libraries_list[@]}
-
-console.clear

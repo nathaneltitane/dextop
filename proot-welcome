@@ -28,10 +28,6 @@ cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/home/"${user_name}"/.profile
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
-# initial prompt clear #
-
-clear
-
 console.fwd "Welcome to Ubuntu Dextop!"
 echo
 
