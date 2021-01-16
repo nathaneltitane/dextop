@@ -84,39 +84,13 @@ echo
 
 "${BINARIES_DIRECTORY}"/proot-applications
 
-# checkpoint #
+# setup checkpoint #
 
-# confirm uninterrupted setup for cleanup
+"${BINARIES_DIRECTORY}"/proot-checkpoint
 
-echo "yes" > "${HOME}"/proot-setup-complete
+# setup cleanup #
 
-console.fwd "Setup complete [ proot ]..."
-echo
-
-console.scs "Deployment and configuration complete."
-echo
-
-console.countdown "Exiting in" 5
-echo
-
-# cleanup #
-
-if [[ "$(cat /root/proot-setup-complete)" = "yes" ]]
-then
-	# remove automatic setup launch
-
-	sed -i '$ d' /root/.profile
-fi
-
-# remove setup information
-
-sed -i '/# setup variables #/,$d' /data/data/com.termux/files/usr/bin/console
-
-# remove scripts
-
-rm /home/termux/setup			|| :
-rm /root/proot-setup			|| :
-rm /root/proot-setup-complete	|| :
-
-exit
+"${BINARIES_DIRECTORY}"/proot-clean
 FILE
+
+console.clear

@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# usage #
+
+# variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# post setup cleanup
+
+if [[ "$(cat /root/proot-setup-complete)" = "yes" ]]
+then
+	console.fwd "Setup complete [ proot ]..."
+	echo
+
+	# remove automatic setup launch
+
+	sed -i '$ d' /root/.profile
+	
+	# remove setup information
+	
+	sed -i '/# setup variables #/,$d' /data/data/com.termux/files/usr/bin/globals
+	
+	# remove scripts
+	
+	setup_files_list=(
+		/home/termux/setup
+		/root/proot-setup
+		/root/proot-setup-complete
+	)
+	
+	for file in ${setup_files_list[@]}
+	do
+		rm "${file}" || :
+	done
+	
+	console.scs "Deployment and configuration complete."
+	echo
+	
+else
+	console.err "Some errors were encountered during setup."
+	echo
+	console.inf "Consult setup logs at '"${PREFIX}"/var/log/' for details."
+	echo
+fi
+
+console.countdown "Exiting in" 5
+echo

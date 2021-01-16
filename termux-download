@@ -23,6 +23,8 @@ binaries_list=(
 	proot-aliases
 	proot-applications
 	proot-architecture
+	proot-checkpoint
+	proot-clean
 	proot-download
 	proot-environment
 	proot-groups
