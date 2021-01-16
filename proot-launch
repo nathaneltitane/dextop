@@ -111,6 +111,9 @@ IFS=' '
 
 # welcome #
 
+console.inf "Entering proot environment."
+echo
+
 if [ ! -z "${APPLICATION}" ]
 then
 	console.fwd "Starting application [ ${APPLICATION} ] [ ${USER} ]..."

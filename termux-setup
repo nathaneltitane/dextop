@@ -148,12 +148,8 @@ cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/root/.profile
 bash /root/proot-setup
 FILE
 
-# run 'proot-launch' as 'root'
-# and carry over setup in proot environment
+# run 'proot-launch' as 'root' - continue setup in proot environment
 
-console.inf "Entering proot environment."
-echo
-
-bash "${BINARIES_DIRECTORY}"/proot-launch
+console.run "${BINARIES_DIRECTORY}"/proot-launch
 
 exit
