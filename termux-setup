@@ -74,14 +74,12 @@ curl -sL get.dxtp.app/globals > "${PREFIX}"/bin/globals && source "${PREFIX}"/bi
 echo "export version=${version}"				>> "${PREFIX}"/bin/globals
 echo "export install_option=${install_option}"	>> "${PREFIX}"/bin/globals
 
-# download
+# download #
 
 console.fwd "Initializing..."
 echo
 
 console.download get.dxtp.app "${BINARIES_DIRECTORY}" termux-download
-
-console.run "${BINARIES_DIRECTORY}"/termux-download
 
 # welcome #
 
@@ -92,11 +90,13 @@ echo
 
 # setup #
 
+# setup termux and proot utilities
+
+console.run "${BINARIES_DIRECTORY}"/termux-download
+
 # setup termux package requirements
 
 console.run "${BINARIES_DIRECTORY}"/termux-packages
-
-# setup environments
 
 # setup termux environment files
 
