@@ -69,6 +69,11 @@ install_option="${1}"
 curl -sL get.cnsl.app/console > "${PREFIX}"/bin/console && source "${PREFIX}"/bin/console
 curl -sL get.dxtp.app/globals > "${PREFIX}"/bin/globals && source "${PREFIX}"/bin/globals
 
+# export variables
+
+echo "export version=${version}"				>> "${PREFIX}"/bin/globals
+echo "export install_option=${install_option}"	>> "${PREFIX}"/bin/globals
+
 # download
 
 console.fwd "Initializing..."
@@ -76,7 +81,7 @@ echo
 
 console.download get.dxtp.app "${BINARIES_DIRECTORY}" termux-download
 
-bash "${BINARIES_DIRECTORY}"/termux-download
+console.run "${BINARIES_DIRECTORY}"/termux-download
 
 # welcome #
 
@@ -89,7 +94,7 @@ echo
 
 # setup termux package requirements
 
-"${BINARIES_DIRECTORY}"/termux-packages
+console.run "${BINARIES_DIRECTORY}"/termux-packages
 
 # setup environments
 
@@ -98,56 +103,43 @@ echo
 
 # setup termux environment files
 
-"${BINARIES_DIRECTORY}"/termux-environment
+console.run "${BINARIES_DIRECTORY}"/termux-environment
 
 # setup transient storage - [ device <<>> [ termux <<>> [ proot ] ] ]
 
-"${BINARIES_DIRECTORY}"/termux-storage
+console.run "${BINARIES_DIRECTORY}"/termux-storage
 
 # setup termux login messages
 
-"${BINARIES_DIRECTORY}"/termux-welcome
+console.run "${BINARIES_DIRECTORY}"/termux-welcome
 
 # verify architecture compatibility
 
-"${BINARIES_DIRECTORY}"/proot-architecture
+console.run "${BINARIES_DIRECTORY}"/proot-architecture
 
 # setup proot user information
 
-"${BINARIES_DIRECTORY}"/proot-information
+console.run "${BINARIES_DIRECTORY}"/proot-information
 
 # setup proot image
 
-"${BINARIES_DIRECTORY}"/proot-image
+console.run "${BINARIES_DIRECTORY}"/proot-image
 
 # setup proot group IDs
 
-"${BINARIES_DIRECTORY}"/proot-groups
+console.run "${BINARIES_DIRECTORY}"/proot-groups
 
 # setup proot libraries preload for enhanced performance
 
-"${BINARIES_DIRECTORY}"/proot-libraries
+console.run "${BINARIES_DIRECTORY}"/proot-libraries
 
 # setup proot network requirements  - [ device <<>> [ termux <<>> [ proot ] ] ]
 
-"${BINARIES_DIRECTORY}"/proot-network
+console.run "${BINARIES_DIRECTORY}"/proot-network
 
 # setup proot install routin
 
-"${BINARIES_DIRECTORY}"/proot-setup
-
-# export variables
-
-cat <<- FILE >> "${BINARIES_DIRECTORY}"/globals
-
-# version #
-
-export version=${version}
-
-# options #
-
-export install_option=""${install_option}""
-FILE
+console.run "${BINARIES_DIRECTORY}"/proot-setup
 
 # automatic setup transition [ termux >>> [ proot ] ]
 
