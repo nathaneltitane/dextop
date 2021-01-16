@@ -172,6 +172,7 @@ fi
 # core packages lists to load and install
 
 install_list+=(
+	${administration_list[@]}
 	${frameworks_list[@]}
 	${locales_list[@]}
 	${display_list[@]}
