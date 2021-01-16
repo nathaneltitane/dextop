@@ -21,6 +21,13 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 # execute on first login to complete proot setup
 # terminate if checkpoint is reached
 
+# write automatic setup transition [ termux >>> [ proot ] ]
+
+cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/root/.profile
+
+bash /root/proot-setup
+FILE
+
 # write proot-setup
 
 cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/root/proot-setup
@@ -92,5 +99,3 @@ echo
 
 "${BINARIES_DIRECTORY}"/proot-clean
 FILE
-
-console.clear
