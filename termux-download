@@ -27,6 +27,7 @@ binaries_list=(
 	proot-clean
 	proot-download
 	proot-environment
+	proot-expand
 	proot-groups
 	proot-image
 	proot-information

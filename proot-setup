@@ -59,6 +59,10 @@ echo
 
 # setup #
 
+# setup expansion to default system
+
+"${BINARIES_DIRECTORY}"/proot-expand
+
 # setup proot package requirements
 
 "${BINARIES_DIRECTORY}"/proot-packages

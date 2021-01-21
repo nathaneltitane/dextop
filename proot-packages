@@ -51,6 +51,11 @@ display_list=(
 	x11-xfs-utils
 )
 
+documentation_list=(
+	man
+	man-db
+)
+
 themes_list=(
 	arc-theme
 	qt5-style-platform-gtk2
@@ -175,6 +180,7 @@ install_list+=(
 	${administration_list[@]}
 	${frameworks_list[@]}
 	${locales_list[@]}
+	${documentation_list}
 	${display_list[@]}
 	${security_list[@]}
 	${vnc_list[@]}
