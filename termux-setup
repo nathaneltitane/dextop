@@ -141,3 +141,7 @@ console.run "${BINARIES_DIRECTORY}"/proot-setup
 # continue setup in proot environment - run 'proot-launch' as 'root'
 
 console.run "${BINARIES_DIRECTORY}"/proot-launch
+
+# setup cleanup #
+
+"${BINARIES_DIRECTORY}"/termux-clean

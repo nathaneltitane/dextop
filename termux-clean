@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# usage #
+
+# variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# post setup cleanup
+
+if [! -f "${HOME}"/setup ]
+then
+	console.fwd "Setup complete [ TERMUX ]..."
+	echo
+	console.scs "System deployment and configuration complete."
+	echo
+	console.inf "Run 'proot-launch <username>' to start your session."
+	console.inf "Run 'proot-launch <username> <application>' to start an application with your session."
+	echo
+	
+else
+	console.err "Some errors were encountered during setup."
+	echo
+	console.inf "Consult setup logs at '"${PREFIX}"/var/log/' for details."
+	echo
+fi
+
+console.countdown "Exiting in" 5
+echo
+
+exit

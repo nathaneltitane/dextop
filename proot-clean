@@ -39,7 +39,7 @@ then
 		rm "${file}" || :
 	done
 	
-	console.scs "Deployment and configuration complete."
+	console.scs "PROOT Deployment and configuration complete."
 	echo
 	
 else
@@ -51,3 +51,5 @@ fi
 
 console.countdown "Exiting in" 5
 echo
+
+exit
