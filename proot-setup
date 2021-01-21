@@ -59,7 +59,7 @@ echo
 
 # setup #
 
-# setup expansion to default system
+# setup expansion to default system + documentation
 
 "${BINARIES_DIRECTORY}"/proot-expand
 
