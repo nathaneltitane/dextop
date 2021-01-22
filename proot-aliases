@@ -92,6 +92,19 @@ alias 'gu'='ga && gm "Code & Features Update" && gs'
 
 alias 'kill'="sudo pkill -9 ${1}"
 
+# start #
+
+alias 'start'="${1}&"
+
+# restart #
+
+restart () {
+	application="${1}"
+
+	kill "${application}"
+	start "${application}"
+}
+
 # nano #
 
 alias 'nano'='nano -c -g -i -l -m -D -J80 -T4'
