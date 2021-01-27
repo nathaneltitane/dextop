@@ -40,7 +40,7 @@ alias 'count'='find . -type f | wc -l'
 
 # list #
 
-alias 'ls'='ls -al'
+alias 'ls'='ls -a -c -h -l --color=auto --group-directories-first'
 
 # apt-get #
 
