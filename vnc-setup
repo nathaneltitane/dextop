@@ -32,10 +32,12 @@ cat <<- 'FILE' > "${PROOT_DIRECTORY}"/home/"${user_name}"/.vnc/xstartup
 unset DBUS_SESSION_BUS_ADDRESS
 unset SESSION_MANAGER
 
+xsetroot -name "Dextop // ${USER}"
+
 if [ ! -z "${APPLICATION}" ]
 then
 	"${DESKTOP_SESSION}" &
-	
+
 	LD_PRELOAD=/lib/libandroid-shmem-aarch64.so $APPLICATION &
 else
 	dbus-launch --exit-with-session "${DESKTOP_SESSION}" &
