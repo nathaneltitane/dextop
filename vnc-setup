@@ -32,7 +32,10 @@ cat <<- 'FILE' > "${PROOT_DIRECTORY}"/home/"${user_name}"/.vnc/xstartup
 unset DBUS_SESSION_BUS_ADDRESS
 unset SESSION_MANAGER
 
-if [ -f /usr/bin/dwm-status ] && dwm-status & || :
+if [ "${DESKTOP_SESSION}" = "dwm" ]
+then
+	if [ -f /usr/bin/dwm-status ] && dwm-status & || :
+fi
 
 if [ ! -z "${APPLICATION}" ]
 then
