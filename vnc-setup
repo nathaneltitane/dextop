@@ -34,7 +34,7 @@ unset SESSION_MANAGER
 
 if [ "${DESKTOP_SESSION}" = "dwm" ]
 then
-	if [ -f /usr/bin/dwm-status ] && dwm-status & || :
+	[ -f /usr/bin/dwm-status ] && dwm-status & || :
 fi
 
 if [ ! -z "${APPLICATION}" ]
