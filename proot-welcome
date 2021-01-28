@@ -16,13 +16,13 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 console.inf "Silencing login messages."
 echo
 
-cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/home/"${user_name}"/.hushlogin
+cat << 'FILE' ->> "${PROOT_DIRECTORY}"/home/"${user_name}"/.hushlogin
 
 FILE
 
 # write welcome message - replaces motd
 
-cat <<- 'FILE' >> "${PROOT_DIRECTORY}"/home/"${user_name}"/.profile
+cat << 'FILE' ->> "${PROOT_DIRECTORY}"/home/"${user_name}"/.profile
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console

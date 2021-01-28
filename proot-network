@@ -23,7 +23,7 @@ echo "${hostname}" > "${PROOT_DIRECTORY}"/etc/hostname
 console.inf "Setting host address."
 echo
 
-cat <<- FILE > "${PROOT_DIRECTORY}"/etc/hosts
+cat << FILE -> "${PROOT_DIRECTORY}"/etc/hosts
 127.0.0.1 localhost
 FILE
 
@@ -32,6 +32,6 @@ FILE
 console.inf "Setting namserver address."
 echo
 
-cat <<- 'FILE' > "${PROOT_DIRECTORY}"/etc/resolv.conf
+cat << 'FILE' -> "${PROOT_DIRECTORY}"/etc/resolv.conf
 nameserver 8.8.8.8
 FILE

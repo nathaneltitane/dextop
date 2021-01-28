@@ -16,7 +16,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 console.inf "Writing command aliases."
 echo
 
-cat <<- 'FILE' > "${PROOT_DIRECTORY}"/home/"${user_name}"/.bash_aliases
+cat << 'FILE' -> "${PROOT_DIRECTORY}"/home/"${user_name}"/.bash_aliases
 # shell #
 
 [[ $(id -u) = 0 ]] && PS1="$(tput setaf 1)>_ # $(tput sgr 0)" || PS1=">_ $ "
