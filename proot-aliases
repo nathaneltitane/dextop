@@ -32,6 +32,9 @@ alias '...'='cd ../../../'
 alias '....'='cd ../../../../'
 alias '.....'='cd ../../../../'
 
+alias 'home'='cd "${HOME}'
+alias 'root'='cd /'
+
 alias 'directory'='echo ${PWD}'
 
 # files #
