@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# usage #
+
+# variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# silence login prompt
+
+console.inf "Writing intial login configuration routine."
+echo
+
+# write initial login configuration routine
+
+cat << "FILE" ->> "${PROOT_DIRECTORY}"/home/"${user_name}"/.profile
+# system configuration #
+
+sudo dpkg-reconfigure locales
+
+sudo dpkg-reconfigure tzdata
+
+# remove system configuration routine after first run
+
+sed -i '/# system configuration #/,$d' "${PROOT_DIRECTORY}"/home/"${user_name}"/.profile
+
+FILE

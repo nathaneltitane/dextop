@@ -25,6 +25,7 @@ binaries_list=(
 	proot-architecture
 	proot-checkpoint
 	proot-clean
+	proot-configuration
 	proot-download
 	proot-environment
 	proot-expand

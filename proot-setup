@@ -95,6 +95,10 @@ echo
 
 "${BINARIES_DIRECTORY}"/proot-applications
 
+# setup proot initial login configuration steps
+
+"${BINARIES_DIRECTORY}"/proot-configuration
+
 # setup checkpoint #
 
 "${BINARIES_DIRECTORY}"/proot-checkpoint
