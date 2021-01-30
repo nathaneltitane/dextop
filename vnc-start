@@ -39,13 +39,13 @@ vnc_launch () {
 	echo
 
 	# make selection available for automatic start
-	
+
 	# verify user id - do not write to root
 
 	if [[ $(id -u) -ne 0 ]]
 	then
 		# integer check: do not write non numerical values to file
-		
+
 		if [[ "${selection}" =~ ^[0-9]+$ ]]
 		then
 				echo "${selection}" > /home/$(id -u -n)/.vnc/selection
@@ -55,11 +55,11 @@ vnc_launch () {
 	# start android vnc intent
 	# and force-stop existing outputs
 	# before intent launch
-	
+
 	# am start								\
 	#		-d vnc://${LOCALHOST}:${PORT}	\
 	#		-S application/activity"
-	
+
 	console.silence "am start -d vnc://${LOCALHOST}:${PORT} -S ${VNC}"
 }
 
@@ -67,11 +67,11 @@ print_resolutions() {
 	console.msg "Enter the selection to start the display server with"
 	console.msg "or type 'c' to enter a custom display format: "
 	echo
-	
+
 	console.wait 1
-	
+
 	# list supported display resolutions
-	
+
 	monitors=(
 		VGA           640     480
 		WVGA          768     480
@@ -150,7 +150,7 @@ print_resolutions() {
 		SGS6E         2560    1440
 		SGS6          2560    1440
 	)
-	
+
 	tablets=(
 		GN9           2048    1536
 		GN7-2013      1920    1200
@@ -192,18 +192,18 @@ print_resolutions() {
 		if (( $i/3 >= 0 && $i/3 <= 8 ))
 		then
 				# handle number spacing for entries 1-9
-				
+
 				printf '\t[  %s ] %s' ${number} ${format}
 		else
 				# handle number spacing for entries 10+
-				
+
 				printf '\t[ %s ] %s' ${number} ${format}
 		fi
 
 		printf '%*s' $((pad_length - ${#format}))
 		printf '%s\n' ${resolution}
 	done
-	
+
 	printf '\n'
 }
 
@@ -238,16 +238,16 @@ do
 		console.wrn "Select a format ranging from [ 1 - ${number} ]"
 		console.wrn "or type 'c' to enter a custom display format."
 		echo
-	
+
 		console.ipt "Selection: "
 		read selection
 		echo
 	else
 		break
 	fi
-	
+
 	# custom #
-	
+
 	if [[ "${selection}" != "c" ]]
 	then
 		echo
@@ -255,16 +255,16 @@ do
 		console.wrn "Type 'c' to enter a custom display format"
 		console.wrn "or select a format ranging from [ 1 - ${number} ]."
 		echo
-	
+
 		console.ipt "Selection: "
 		read selection
 		echo
 	else
 		selection=custom
-		
+
 		break
 	fi
-	
+
 done
 
 # manage numerical selection
@@ -280,7 +280,7 @@ then
 	width="${resolutions[$i-2]}"
 	height="${resolutions[$i-1]}"
 	resolution="${width}x${height}"
-	
+
 	GEOMETRY="${resolution}"
 
 fi
