@@ -8,5 +8,6 @@ export BINARIES_DIRECTORY="${PREFIX}"/bin
 export LIBRARIES_DIRECTORY="${PREFIX}"/lib
 export PROOT_DIRECTORY="${SETUP_DIRECTORY}"/img
 export BIND_DIRECTORY="${SETUP_DIRECTORY}"/mnt
+export FAKE_DIRECTORY="${SETUP_DIRECTORY}"/fake
 
 # setup variables #
