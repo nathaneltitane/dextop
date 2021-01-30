@@ -13,9 +13,11 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # directories #
 
+mkdir -p "${FAKE_DIRECTORY}"
+
 # files #
 
-console.inf "Creating configuration files."
+console.inf "Creating /proc entries."
 echo
 
 # /proc/loadavg

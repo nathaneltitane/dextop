@@ -118,6 +118,10 @@ console.run "${BINARIES_DIRECTORY}"/proot-architecture
 
 console.run "${BINARIES_DIRECTORY}"/proot-information
 
+# setup proot fake /proc entries
+
+console.run "${BINARIES_DIRECTORY}"/proot-fake
+
 # setup proot image
 
 console.run "${BINARIES_DIRECTORY}"/proot-image
