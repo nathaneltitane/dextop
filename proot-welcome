@@ -33,8 +33,8 @@ echo
 
 if [ -f "${HOME}"/.vnc/selection ]
 then
-	console.inf "You've already logged in, your selection has been saved:"
-	console.inf "Automatic vnc startup on shell login is enabled."
+	console.wrn "You've already logged in, your selection has been saved:"
+	console.wrn "Automatic vnc startup on shell login is enabled."
 else
 	console.inf "This is your first login:"
 	console.inf "Run 'vnc-start' to start your session."
