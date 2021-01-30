@@ -46,7 +46,10 @@ do
 	# transfer unregistered IDs
 
 	read group_number group_name <<< ${line}
-	echo "${group_name}:x:${group_number}:" >> "${PROOT_DIRECTORY}"/etc/group
+
+	[ -f "${PROOT_DIRECTORY}"/etc/group ]   && echo "${group_name}:x:${group_number}:" >> "${PROOT_DIRECTORY}"/etc/group
+	[ -f "${PROOT_DIRECTORY}"/etc/gshadow ] && echo "${group_name}:x:${group_number}:" >> "${PROOT_DIRECTORY}"/etc/gshadow
+
 done
 
 # reset IFS
