@@ -64,8 +64,8 @@ vnc_launch () {
 }
 
 print_resolutions() {
-	console.msg "Enter the selection to start the display server with"
-	console.msg "or type 'c' to enter a custom display format: "
+	console.msg "Enter a selection to start the display server with"
+	console.msg "or choose a [c]ustom display geometry: "
 	echo
 
 	console.wait 1
@@ -236,7 +236,7 @@ do
 		echo
 		console.err "Invalid selection:"
 		console.wrn "Select a format ranging from [ 1 - ${number} ]"
-		console.wrn "or type 'c' to enter a custom display format."
+		console.wrn "or select a [c]ustom display geometry."
 		echo
 
 		console.ipt "Selection: "
@@ -252,7 +252,7 @@ do
 	then
 		echo
 		console.err "Invalid selection:"
-		console.wrn "Type 'c' to enter a custom display format"
+		console.wrn "Select a [c]ustom display geometry"
 		console.wrn "or select a format ranging from [ 1 - ${number} ]."
 		echo
 
@@ -294,8 +294,12 @@ then
 	console.inf "Setting custom resolution and port:"
 	echo
 
-	console.ipt "Enter WIDTH and HEIGHT (e.g. 1920 1080): "
-	read width height
+	console.ipt "Enter geometry WIDTH in pixels: "
+	read width
+	echo
+
+	console.ipt "Enter HEIGHT in pixels: "
+	read height
 	echo
 
 	console.ipt "Enter port NUMBER (e.g. 1): "
