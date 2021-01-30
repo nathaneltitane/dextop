@@ -67,5 +67,11 @@ cat << 'FILE' ->> "${PROOT_DIRECTORY}"/home/"${user_name}"/.profile
 
 # automatic vnc session start on shell login
 
-[ -f "${HOME}"/.vnc/selection ] && echo $(cat "${HOME}"/.vnc/selection) | vnc-start || vnc-start
+if [ -f "${HOME}"/.vnc/selection ]
+then
+	echo $(cat "${HOME}"/.vnc/selection) | vnc-start
+else
+	vnc-start
+fi
+
 FILE
