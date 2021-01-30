@@ -24,7 +24,23 @@ console.inf "Setting host address."
 echo
 
 cat << FILE -> "${PROOT_DIRECTORY}"/etc/hosts
-127.0.0.1 localhost
+# IPv4 #
+
+127.0.0.1	localhost.localdomain
+127.0.0.1	localhost
+
+# IPv6 #
+
+::1			localhost.localdomain
+::1			localhost
+::1			ip6-localhost
+::1			ip6-loopbak
+fe00::0		ip6-localnet
+fe00::0		ip6-mcastprefix
+ff02::1		ip6-allnodes
+ff02::2		ip6-allrouters
+ff02::3		ip6-allhosts
+
 FILE
 
 # nameserver
@@ -33,5 +49,6 @@ console.inf "Setting namserver address."
 echo
 
 cat << 'FILE' -> "${PROOT_DIRECTORY}"/etc/resolv.conf
-nameserver 8.8.8.8
+nameserver 1.1.1.1
+nameserver 1.0.0.1
 FILE
