@@ -22,7 +22,8 @@ vnc_launch () {
 					vncserver									\
 							-SecurityTypes none					\
 							-localhost yes						\
-							-depth 32							\
+							-depth 24							\
+							-cc 4								\
 							-cleanstale							\
 							-name $NAME							\
 							-geometry ${GEOMETRY} ${DISPLAY}"
