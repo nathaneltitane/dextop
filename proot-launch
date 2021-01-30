@@ -111,6 +111,8 @@ IFS=' '
 
 # welcome #
 
+console.clear
+
 console.inf "Entering proot environment."
 echo
 
