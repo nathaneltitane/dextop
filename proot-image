@@ -23,12 +23,12 @@ iso_archive="ubuntu-base-${distribution_version}-base-${iso_architecture}.tar.gz
 
 proot_unpack () {
 	# shorthand
-	
+
 	# proot -l tar -xzf "${1}" -X "${2}" || :
-	
+
 	# exclude archive directories: dev | proc | sys | system
 	# 'proot-launch' will bind and mount those device directories to proot
-	
+
 	proot									\
 		--link2symlink						\
 			tar 							\
@@ -46,7 +46,7 @@ proot_deploy () {
 
 	console.fwd "Initializing..."
 	echo
-	
+
 	console.wait 1
 
 	console.download "${iso_url}" "${SETUP_DIRECTORY}" "${iso_archive}"
@@ -72,9 +72,9 @@ proot_deploy () {
 	echo
 
 	wait
-	
+
 	# clean #
-	
+
 	# remove archive after unpacking
 
 	rm -rf "${SETUP_DIRECTORY}/${iso_archive}"
