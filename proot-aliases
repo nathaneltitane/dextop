@@ -116,6 +116,10 @@ alias 'status'='sudo systemctl status'
 
 alias 'address'='curl ipinfo.io/ip'
 
+# weather #
+
+alias 'weather'='curl wttr.in'
+
 # speedtest #
 
 speedtest () {
