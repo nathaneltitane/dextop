@@ -35,6 +35,7 @@ EDITOR="nano"
 LANG="C.UTF-8"
 LOCALHOST="127.0.0.1"
 PAGER=
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/sbin:${PREFIX}/bin:/system/bin:/system/xbin"
 RUNNER="dmenu"
 SHELL=
 TERMINAL=
@@ -49,17 +50,24 @@ VNC=
 # VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
 # VNC="com.realvnc.viewer.android/ACTIVITY"
 
+XAUTHORITY="${XDG_RUNTIME_DIR}/.Xauthority"
+
+XDG_RUNTIME_DIR="/run/user/${USER_ID}"
+XDG_CONFIG_HOME="${HOME}/.config"
+XDG_CACHE_HOME="${HOME}/.cache"
+XDG_DATA_HOME="${HOME}/.local/share"
+XDG_DATA_DIRS="/usr/local/share:/usr/share"
+XDG_CONFIG_DIRS="/etc/xdg"
+
 # set defaults
 
 [ -z "${USERNAME}" ]		&& USERNAME="root"
 [ -z "${APPLICATION}" ]		&& APPLICATION="${TERMINAL}"
-[ -z "${PROOT_DIRECTORY}" ]	&& PROOT_DIRECTORY=${PREFIX%/*}/img
-[ -z "${BIND_DIRECTORY}" ]	&& BIND_DIRECTORY=${PREFIX%/*}/mnt
-[ -z "${FAKE_DIRECTORY}" ]	&& FAKE_DIRECTORY=${PREFIX%/*}/fake
-
+[ -z "${PROOT_DIRECTORY}" ]	&& PROOT_DIRECTORY="${PREFIX%/*}/img"
+[ -z "${BIND_DIRECTORY}" ]	&& BIND_DIRECTORY="${PREFIX%/*}/mnt"
+[ -z "${FAKE_DIRECTORY}" ]	&& FAKE_DIRECTORY="${PREFIX%/*}/fake"
 
 # set environment defaults
-
 
 [ -z "$COLORTERM" ]			&& COLORTERM="${COLORTERM}"
 [ -z "$DESKTOP_SESSION" ]	&& DESKTOP_SESSION="${DESKTOP_SESSION}"
@@ -206,7 +214,7 @@ command+=" HOME=${HOME}"
 command+=" LANG=${LANG}"
 command+=" LOCALHOST=${LOCALHOST}"
 command+=" PAGER=${PAGER}"
-command+=" PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/sbin:${PREFIX}/bin:/system/bin:/system/xbin"
+command+=" PATH=${PATH}"
 command+=" TERM=${TERMINAL}"
 COMMAND+=" TMPDIR=${TMPDIR}"
 command+=" USER=${USER}"
