@@ -119,7 +119,7 @@ do
 		# login message warning
 
 		console.err "User ${entry} does not exist:"
-		console.err "Please verify user name input and try again.""
+		console.err "Please verify user name input and try again."
 		echo
 		console.wrn "Entering as '${USER}'."
 		echo
