@@ -27,9 +27,9 @@ BIND_DIRECTORY=${4}
 # variables written in upper case format
 # represent environment defaults for the proot setup
 
-DESKTOP_SESSION="dwm"
 BROWSER="surf"
 COLORTERM="truecolor"
+DESKTOP_SESSION="dwm"
 DISPLAY=":1"
 EDITOR="nano"
 LANG="C.UTF-8"
