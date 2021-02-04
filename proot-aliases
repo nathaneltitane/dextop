@@ -74,6 +74,10 @@ alias 'cp'='rsync -a -r --progress -h'
 
 alias 'dd'="dd if=${1} of=${2} bs=${3} status=progress"
 
+# du #
+
+alias 'usage'='du -a -d 1 -h -S --time 2> /dev/null | sort -n -r'
+
 # dpkg #
 
 alias 'd-install'='sudo dpkg -i'
@@ -124,7 +128,7 @@ alias 'weather'='curl wttr.in'
 
 speedtest () {
 	[ -z "$(command -v speedtest-cli)" ] && console.install speedtest-cli || :
-	
+
 	speedtest-cli			\
 		--server 2406		\
 		--simple
