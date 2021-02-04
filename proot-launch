@@ -15,9 +15,6 @@ fi
 
 # variables #
 
-# variables written in upper case format
-# represent environment defaults for the proot setup
-
 script=$(basename -- "${BASH_SOURCE[0]}")
 
 USERNAME=${1}
@@ -25,27 +22,32 @@ APPLICATION=${2}
 PROOT_DIRECTORY=${3}
 BIND_DIRECTORY=${4}
 
-# set dwm defaults
+# set defaults
+
+# variables written in upper case format
+# represent environment defaults for the proot setup
 
 DESKTOP_SESSION="dwm"
 BROWSER="surf"
+COLORTERM=
+DISPLAY=":1"
 EDITOR="nano"
+LANG="C.UTF-8"
+LOCALHOST="127.0.0.1"
 PAGER=
 RUNNER="dmenu"
 SHELL=
 TERMINAL=
-
-DISPLAY=":1"
-LOCALHOST="127.0.0.1"
-LANG="C.UTF-8"
 TMPDIR="/tmp"
+VISUAL=
+VNC=
 
-# explicit VNC viewer application to kill on launch
+# explicit VNC viewer application to kill
+# used when vncserver is stopped or restarted using vnc:// intent
+# when launched via the activity manager [ 'am start -d {URI} -S {APK}' ]
 
-VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
+# VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
 # VNC="com.realvnc.viewer.android/ACTIVITY"
-
-# VNC=""
 
 # set defaults
 
@@ -53,9 +55,13 @@ VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
 [ -z "${APPLICATION}" ]		&& APPLICATION="${TERMINAL}"
 [ -z "${PROOT_DIRECTORY}" ]	&& PROOT_DIRECTORY=${PREFIX%/*}/img
 [ -z "${BIND_DIRECTORY}" ]	&& BIND_DIRECTORY=${PREFIX%/*}/mnt
+[ -z "${FAKE_DIRECTORY}" ]	&& FAKE_DIRECTORY=${PREFIX%/*}/fake
+
 
 # set environment defaults
 
+
+[ -z "$COLORTERM" ]			&& COLORTERM="${COLORTERM}"
 [ -z "$DESKTOP_SESSION" ]	&& DESKTOP_SESSION="${DESKTOP_SESSION}"
 [ -z "${BROWSER}" ]			&& BROWSER="${BROWSER}"
 [ -z "${EDITOR}" ]			&& EDITOR="${EDITOR}"
@@ -104,6 +110,18 @@ do
 		FULL_NAME="root"
 		HOME="/root"
 		SHELL="/bin/bash"
+
+		# login message warning
+
+		console.err "User does not exist:"
+		echo
+
+		console.wait 1
+
+		console.wrn "Entering as '${USER}'."
+		echo
+
+		console.wait 1
 	fi
 
 done < "${PROOT_DIRECTORY}"/etc/passwd
@@ -114,7 +132,7 @@ IFS=' '
 
 # welcome #
 
-console.clear
+# console.clear
 
 console.inf "Entering proot environment."
 echo
@@ -152,14 +170,14 @@ command+=" -b /proc/self/fd:/dev/fd"
 command+=" -b /proc/self/fd/0:/dev/stdin"
 command+=" -b /proc/self/fd/1:/dev/stdout"
 command+=" -b /proc/self/fd/2:/dev/stderr"
-[ ! $(cat /proc/loadavg > /dev/null 2>&1) ] && command+=" -b /fake/loadavg:/proc/loadavg" || :
-[ ! $(cat /proc/stat > /dev/null 2>&1) ] && command+=" -b /fake/stat:/proc/stat" || :
-[ ! $(cat /proc/uptime > /dev/null 2>&1) ]	&& command+=" -b /fake/uptime:/proc/uptime" || :
-[ ! $(cat /proc/version > /dev/null 2>&1) ] && command+=" -b /fake/version:/proc/version" || :
-[ ! $(cat /proc/vmstat > /dev/null 2>&1) ] && command+=" -b /fake/vmstat:/proc/vmstat" || :
+[ ! $(cat /proc/loadavg > /dev/null 2>&1) ] && command+=" -b ${PREFIX/*}/fake/loadavg:/proc/loadavg" || :
+[ ! $(cat /proc/stat > /dev/null 2>&1) ] && command+=" -b ${PREFIX*/}/fake/stat:/proc/stat" || :
+[ ! $(cat /proc/uptime > /dev/null 2>&1) ] && command+=" -b ${PREFIX*/}/fake/uptime:/proc/uptime" || :
+[ ! $(cat /proc/version > /dev/null 2>&1) ] && command+=" -b ${PREFIX*/}/fake/version:/proc/version" || :
+[ ! $(cat /proc/vmstat > /dev/null 2>&1) ] && command+=" -b ${PRREFIX*/}/fake/vmstat:/proc/vmstat" || :
 command+=" -b /storage"
-[ -d "${PREFIX%/*}"/storage/external ] && command+=" -b "${PREFIX%/*}"/storage/external:/media/External" || :
-[ -d "${PREFIX%/*}"/storage/internal ] && command+=" -b "${PREFIX%/*}"/storage/internal:/media/Internal" || :
+[ -d "${PREFIX%/*}"/storage/external ] && command+=" -b ${PREFIX%/*}/storage/external:/media/External" || :
+[ -d "${PREFIX%/*}"/storage/internal ] && command+=" -b ${PREFIX%/*}/storage/internal:/media/Internal" || :
 command+=" -b /sys"
 command+=" -b /system"
 command+=" -b /vendor"
@@ -174,25 +192,25 @@ command+=" BOOTCLASSPATH=${BOOTCLASSPATH}"
 command+=" COLORTERM=${COLORTERM}"
 command+=" DEX2OATBOOTCLASSPATH=${DEX2OATBOOTCLASSPATH}"
 command+=" PREFIX=${PREFIX}"
-COMMAND+=" TMPDIR=${TMPDIR}"
 command+=" SETUP_DIRECTORY=${PREFIX%/*}"
 command+=" BINARIES_DIRECTORY=${PREFIX}/bin"
 command+=" LIBRARIES_DIRECTORY=${PREFIX}/lib"
 command+=" PROOT_DIRECTORY=${PROOT_DIRECTORY}"
 command+=" BIND_DIRECTORY=${BIND_DIRECTORY}"
-command+=" DESKTOP_SESSION=${DESKTOP_SESSION}"
 command+=" APPLICATION=${APPLICATION}"
 command+=" BROWSER=${BROWSER}"
+command+=" DESKTOP_SESSION=${DESKTOP_SESSION}"
 command+=" EDITOR=${EDITOR}"
-command+=" PAGER=${PAGER}"
-command+=" TERM=${TERMINAL}"
-command+=" VISUAL=${VISUAL}"
 command+=" DISPLAY=${DISPLAY}"
 command+=" HOME=${HOME}"
-command+=" USER=${USER}"
 command+=" LANG=${LANG}"
 command+=" LOCALHOST=${LOCALHOST}"
+command+=" PAGER=${PAGER}"
 command+=" PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/sbin:${PREFIX}/bin:/system/bin:/system/xbin"
+command+=" TERM=${TERMINAL}"
+COMMAND+=" TMPDIR=${TMPDIR}"
+command+=" USER=${USER}"
+command+=" VISUAL=${VISUAL}"
 command+=" VNC=${VNC}"
 command+=" XDG_RUNTIME_DIR=/run/user/${USER_ID}"
 command+=" XDG_CONFIG_HOME=${HOME}/.config"
