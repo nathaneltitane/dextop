@@ -105,6 +105,7 @@ do
 		HOME="/root"
 		SHELL="/bin/bash"
 	fi
+
 done < "${PROOT_DIRECTORY}"/etc/passwd
 
 # reset IFS
