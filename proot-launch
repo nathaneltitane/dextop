@@ -49,7 +49,7 @@ VNC=
 # when launched via the activity manager [ 'am start -d {URI} -S {APK}' ]
 
 VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
-# VNC="com.realvnc.viewer.android/ACTIVITY"
+#VNC="com.realvnc.viewer.android/.app.DesktopActivity"
 
 XAUTHORITY="${XDG_RUNTIME_DIR}/.Xauthority"
 
