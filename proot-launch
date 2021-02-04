@@ -36,6 +36,7 @@ LANG="C.UTF-8"
 LOCALHOST="127.0.0.1"
 PAGER=
 PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/sbin:${PREFIX}/bin:/system/bin:/system/xbin"
+PULSE_SERVER="${LOCALHOST}"
 RUNNER="dmenu"
 SHELL=
 TERMINAL=
@@ -61,13 +62,9 @@ XDG_CONFIG_DIRS="/etc/xdg"
 
 # set defaults
 
-[ -z "${USERNAME}" ]		&& USERNAME="root"
-[ -z "${APPLICATION}" ]		&& APPLICATION="${TERMINAL}"
 [ -z "${PROOT_DIRECTORY}" ]	&& PROOT_DIRECTORY="${PREFIX%/*}/img"
 [ -z "${BIND_DIRECTORY}" ]	&& BIND_DIRECTORY="${PREFIX%/*}/mnt"
 [ -z "${FAKE_DIRECTORY}" ]	&& FAKE_DIRECTORY="${PREFIX%/*}/fake"
-
-# set environment defaults
 
 [ -z "${BROWSER}" ]			&& BROWSER="${BROWSER}"
 [ -z "$COLORTERM" ]			&& COLORTERM="${COLORTERM}"
@@ -121,15 +118,13 @@ do
 
 		# login message warning
 
-		console.err "User does not exist:"
+		console.err "User ${entry} does not exist:"
+		console.err "Please verify user name input and try again.""
 		echo
-
-		console.wait 1
-
 		console.wrn "Entering as '${USER}'."
 		echo
 
-		console.wait 1
+		console.wait 2
 	fi
 
 done < "${PROOT_DIRECTORY}"/etc/passwd
@@ -215,6 +210,7 @@ command+=" LANG=${LANG}"
 command+=" LOCALHOST=${LOCALHOST}"
 command+=" PAGER=${PAGER}"
 command+=" PATH=${PATH}"
+command+=" PULSE_SERVER=${PULSE_SERVER}"
 command+=" TERM=${TERMINAL}"
 COMMAND+=" TMPDIR=${TMPDIR}"
 command+=" USER=${USER}"
