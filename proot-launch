@@ -69,9 +69,9 @@ XDG_CONFIG_DIRS="/etc/xdg"
 
 # set environment defaults
 
+[ -z "${BROWSER}" ]			&& BROWSER="${BROWSER}"
 [ -z "$COLORTERM" ]			&& COLORTERM="${COLORTERM}"
 [ -z "$DESKTOP_SESSION" ]	&& DESKTOP_SESSION="${DESKTOP_SESSION}"
-[ -z "${BROWSER}" ]			&& BROWSER="${BROWSER}"
 [ -z "${EDITOR}" ]			&& EDITOR="${EDITOR}"
 [ -z "${PAGER}" ]			&& PAGER="${PAGER}"
 [ -z "${RUNNER}" ]			&& RUNNER="${RUNNER}"
