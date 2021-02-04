@@ -37,15 +37,15 @@ TERMINAL=
 
 DISPLAY=":1"
 LOCALHOST="127.0.0.1"
-LANG=C.UTF-8
+LANG="C.UTF-8"
 TMPDIR="/tmp"
 
 # explicit VNC viewer application to kill on launch
 
-# VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
+VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
 # VNC="com.realvnc.viewer.android/ACTIVITY"
 
-VNC=""
+# VNC=""
 
 # set defaults
 
