@@ -218,13 +218,19 @@ extract () {
 				7z x "${1}"
 			;;
 			*)
+				echo
 				echo -e "'${1}' cannot be extracted:"
 				echo -e "Unknown or unsupported archive type."
-				exit 1
+				echo
+
+		exit 1
 			;;
 		esac
 	else
+		echo
 		echo -e "'${1}' is not a valid archive type."
+		echo
+
 		exit 1
 	fi
 }
