@@ -25,6 +25,7 @@ do
 			echo -e "-f, --full \t Full setup: download and install full applications list and utilities."
 			echo -e "-u, --update \t Update setup: update applications list and utilities."
 			echo -e ""
+
 			exit
 		;;
 
@@ -32,6 +33,7 @@ do
 			echo -e ""
 			echo -e "${script} [ Version ${version} ]"
 			echo -e ""
+
 			exit
 		;;
 
@@ -42,6 +44,7 @@ do
 			echo -e "${script}: Unknown option ${1}"
 			echo -e "Type './${script} --help' for help and usage information."
 			echo -e ""
+
 			exit 1
 		;;
 	esac
