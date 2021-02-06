@@ -143,7 +143,7 @@ youtube () {
 
 	[ -z "${path}" ] && path="${PWD}"
 	cd "${path}" || exit 1
-	
+
 	youtube-dl											\
 		--ignore-errors										\
 		--yes-playlist										\
@@ -161,7 +161,7 @@ record () {
 	[ -z "$(command -v recordmydesktop)" ] && console.install recordmydesktop || :
 
 	[ -f "${HOME}"/Videos ] && path="${HOME}"/Videos || path="${HOME}"
-	
+
 	stamp="$(date +"%m-%d-%Y-%H-%M-%S")"
 	window_id="$(xwininfo | grep "Window id" | cut -d ' ' -f 4)"
 
@@ -184,46 +184,48 @@ extract () {
 	if [ -f "${1}" ]
 	then
 		case "${1}" in
-		*.tar.bz2)
-			tar xjf "${1}"
-		;;
-		*.tar.gz)
-			tar xzf "${1}"
-		;;
-		*.bz2)
-			bunzip2 "${1}"
-		;;
-		*.rar)
-			unrar e "${1}"
-		;;
-		*.gz)
-			gunzip "${1}"
-		;;
-		*.tar)
-			tar xf "${1}"
-		;;
-		*.tbz2)
-			tar xjf "${1}"
-		;;
-		*.tgz)
-			tar xzf "${1}"
-		;;
-		*.zip)
-			unzip "${1}"
-		;;
-		*.Z)
-			uncompress "${1}"
-		;;
-		*.7z)
-			7z x "${1}"
-		;;
-		*)
-			echo "'${1}' cannot be extracted:"
-			echo "Unknown or unsupported archive type."
-		;;
+			*.tar.bz2)
+				tar xjf "${1}"
+			;;
+			*.tar.gz)
+				tar xzf "${1}"
+			;;
+			*.bz2)
+				bunzip2 "${1}"
+			;;
+			*.rar)
+				unrar e "${1}"
+			;;
+			*.gz)
+				gunzip "${1}"
+			;;
+			*.tar)
+				tar xf "${1}"
+			;;
+			*.tbz2)
+				tar xjf "${1}"
+			;;
+			*.tgz)
+				tar xzf "${1}"
+			;;
+			*.zip)
+				unzip "${1}"
+			;;
+			*.Z)
+				uncompress "${1}"
+			;;
+			*.7z)
+				7z x "${1}"
+			;;
+			*)
+				echo -e "'${1}' cannot be extracted:"
+				echo -e "Unknown or unsupported archive type."
+				exit 1
+			;;
 		esac
 	else
-		echo "'${1}' is not a valid archive type."
+		echo -e "'${1}' is not a valid archive type."
+		exit 1
 	fi
 }
 
