@@ -19,10 +19,12 @@ do
 	case "${1}" in
 		-f|--full)
 			install_option="full"
-			;;
+		;;
+
 		-m|--minimal)
 			install_option="minimal"
-			;;
+		;;
+
 		-h|--help)
 			echo -e ""
 			echo -e "USAGE:"
@@ -36,13 +38,15 @@ do
 			echo -e "-v, --version \t Show ${script} version."
 			echo -e ""
 			exit
-			;;
+		;;
+
 		-v|--version)
 			echo -e ""
 			echo -e "${script} [ Version ${version} ]"
 			echo -e ""
 			exit
-			;;
+		;;
+
 		*)
 			echo -e ""
 			echo "Usage: ${0} <install option>"
@@ -51,8 +55,9 @@ do
 			echo -e "Type './${script} --help' for help and usage information."
 			echo -e ""
 			exit 1
-			;;
-		esac
+		;;
+	esac
+
 	shift
 done
 
