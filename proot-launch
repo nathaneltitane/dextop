@@ -7,38 +7,28 @@ source /data/data/com.termux/files/usr/bin/globals
 
 # usage #
 
-#while (($#))
-#do
-	case "${1}" in
-		-f|--fake)
-			option="fake"
-			;;
-		-h|--help)
-			echo -e ""
-			echo -e "USAGE:"
-			echo -e ""
-			echo -e "-f, --fake \t Fake /proc entries: simulates accessible /proc on non-rooted devices."
-			echo -e ""
-			exit
-			;;
-		-v|--version)
-			echo -e ""
-			echo -e "${script} [ Version ${version} ]"
-			echo -e ""
-			exit
-			;;
-		*)
-			echo -e ""
-			echo "Usage: ${0} <install option>"
-			echo -e ""
-			echo -e "${script}: Unknown option ${1}"
-			echo -e "Type './${script} --help' for help and usage information."
-			echo -e ""
-			exit 1
-			;;
-		esac
-#	shift
-#done
+case "${1}" in
+	-f|--fake)
+		option="fake"
+		;;
+	-h|--help)
+		echo -e ""
+		echo -e "USAGE:"
+		echo -e ""
+		echo -e "-f, --fake \t Fake /proc entries: simulates accessible /proc on non-rooted devices."
+		echo -e ""
+		exit
+		;;
+	*)
+		echo -e ""
+		echo "Usage: ${0} <install option>"
+		echo -e ""
+		echo -e "${script}: Unknown option ${1}"
+		echo -e "Type './${script} --help' for help and usage information."
+		echo -e ""
+		exit 1
+		;;
+esac
 
 # set defaults
 
