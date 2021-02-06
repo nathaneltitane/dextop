@@ -7,8 +7,8 @@ source /data/data/com.termux/files/usr/bin/globals
 
 # usage #
 
-while (($#))
-do
+#while (($#))
+#do
 	case "${1}" in
 		-f|--fake)
 			option="fake"
@@ -38,7 +38,7 @@ do
 			;;
 		esac
 #	shift
-done
+#done
 
 # set defaults
 
