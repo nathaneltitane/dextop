@@ -18,16 +18,16 @@ case "${1}" in
 		echo -e "-f, --fake \t Fake /proc entries: simulates accessible /proc on non-rooted devices."
 		echo -e ""
 		exit
-		;;
+	;;
 	*)
 		echo -e ""
-		echo "Usage: ${0} <install option>"
+		echo "Usage: ${0} <option> <parameter>"
 		echo -e ""
 		echo -e "${script}: Unknown option ${1}"
 		echo -e "Type './${script} --help' for help and usage information."
 		echo -e ""
 		exit 1
-		;;
+	;;
 esac
 
 # set defaults
