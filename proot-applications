@@ -19,31 +19,31 @@ do
 		;;
 
 		-h|--help)
-			echo -e ""
+			echo
 			echo -e "USAGE:"
-			echo -e ""
+			echo
 			echo -e "-f, --full \t Full setup: download and install full applications list and utilities."
 			echo -e "-u, --update \t Update setup: update applications list and utilities."
-			echo -e ""
+			echo"
 
 			exit
 		;;
 
 		-v|--version)
-			echo -e ""
+			echo
 			echo -e "${script} [ Version ${version} ]"
-			echo -e ""
+			echo
 
 			exit
 		;;
 
 		*)
-			echo -e ""
+			echo
 			echo "Usage: ${0} <install option>"
-			echo -e ""
+			echo
 			echo -e "${script}: Unknown option ${1}"
 			echo -e "Type './${script} --help' for help and usage information."
-			echo -e ""
+			echo
 
 			exit 1
 		;;

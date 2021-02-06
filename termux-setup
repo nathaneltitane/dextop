@@ -26,34 +26,36 @@ do
 		;;
 
 		-h|--help)
-			echo -e ""
+			echo
 			echo -e "USAGE:"
-			echo -e ""
+			echo
 			echo -e "-f, --full \t Full setup: download and install full desktop environment and utilities."
 			echo -e "-m, --minimal \t Minimal setup: download and install minimal desktop environment and utilities."
-			echo -e ""
+			echo
 			echo -e "-a, --applications: Download a set of optimized and precompiled arm64 applications."
-			echo -e ""
+			echo
 			echo -e "-h, --help \t Show help and usage."
 			echo -e "-v, --version \t Show ${script} version."
-			echo -e ""
+			echo
+
 			exit
 		;;
 
 		-v|--version)
-			echo -e ""
+			echo
 			echo -e "${script} [ Version ${version} ]"
-			echo -e ""
+			echo
 			exit
 		;;
 
 		*)
-			echo -e ""
+			echo
 			echo "Usage: ${0} <install option>"
-			echo -e ""
+			echo
 			echo -e "${script}: Unknown option ${1}"
 			echo -e "Type './${script} --help' for help and usage information."
-			echo -e ""
+			echo
+
 			exit 1
 		;;
 	esac
