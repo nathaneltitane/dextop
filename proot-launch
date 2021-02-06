@@ -7,25 +7,55 @@ source /data/data/com.termux/files/usr/bin/globals
 
 # usage #
 
-if [[ $# -gt 3 ]]
-then
-	echo "Usage: ${0} | <username> | <application>"
-	exit 1
-fi
+while (($#))
+do
+	case "${1}" in
+		-f|--fake)
+			option="fake"
+			;;
+		-h|--help)
+			echo -e ""
+			echo -e "USAGE:"
+			echo -e ""
+			echo -e "-f, --fake \t Fake /proc entries: simulates accessible /proc on non-rooted devices."
+			echo -e ""
+			exit
+			;;
+		-v|--version)
+			echo -e ""
+			echo -e "${script} [ Version ${version} ]"
+			echo -e ""
+			exit
+			;;
+		*)
+			echo -e ""
+			echo "Usage: ${0} <install option>"
+			echo -e ""
+			echo -e "${script}: Unknown option ${1}"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo -e ""
+			exit 1
+			;;
+		esac
+	shift
+done
+
+# set defaults
 
 # variables #
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-USERNAME=${1}
-APPLICATION=${2}
-PROOT_DIRECTORY=${3}
-BIND_DIRECTORY=${4}
+option="${1}"
 
-# set defaults
+USERNAME="${2}"
+APPLICATION="${3}"
+PROOT_DIRECTORY="${4}"
+BIND_DIRECTORY="${5}"
 
-# variables written in upper case format
-# represent environment defaults for the proot setup
+# explicit proot setup defaults:
+# used to specify the desktop session login format
+# and environment 'env' or 'printenv'
 
 BROWSER="surf"
 COLORTERM="truecolor"
@@ -44,7 +74,7 @@ TMPDIR="/tmp"
 VISUAL=
 VNC=
 
-# explicit VNC viewer application to kill
+# explicit VNC viewer application to kill:
 # used when vncserver is stopped or restarted using vnc:// intent
 # when launched via the activity manager [ 'am start -d {URI} -S {APK}' ]
 
@@ -66,15 +96,15 @@ XDG_CONFIG_DIRS="/etc/xdg"
 [ -z "${BIND_DIRECTORY}" ]	&& BIND_DIRECTORY="${PREFIX%/*}/mnt"
 [ -z "${FAKE_DIRECTORY}" ]	&& FAKE_DIRECTORY="${PREFIX%/*}/fake"
 
-[ -z "${BROWSER}" ]			&& BROWSER="${BROWSER}"
-[ -z "$COLORTERM" ]			&& COLORTERM="${COLORTERM}"
+[ -z "${BROWSER}" ]		&& BROWSER="${BROWSER}"
+[ -z "$COLORTERM" ]		&& COLORTERM="${COLORTERM}"
 [ -z "$DESKTOP_SESSION" ]	&& DESKTOP_SESSION="${DESKTOP_SESSION}"
-[ -z "${EDITOR}" ]			&& EDITOR="${EDITOR}"
-[ -z "${PAGER}" ]			&& PAGER="${PAGER}"
-[ -z "${RUNNER}" ]			&& RUNNER="${RUNNER}"
-[ -z "${SHELL}" ]			&& SHELL="${SHELL}"
+[ -z "${EDITOR}" ]		&& EDITOR="${EDITOR}"
+[ -z "${PAGER}" ]		&& PAGER="${PAGER}"
+[ -z "${RUNNER}" ]		&& RUNNER="${RUNNER}"
+[ -z "${SHELL}" ]		&& SHELL="${SHELL}"
 [ -z "${TERMINAL}" ]		&& TERMINAL="${TERM}"
-[ -z "${VISUAL}" ]			&& VISUAL="${VISUAL}"
+[ -z "${VISUAL}" ]		&& VISUAL="${VISUAL}"
 
 # assume termux-exec is present - unset LD_PRELOAD
 
