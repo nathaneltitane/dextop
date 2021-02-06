@@ -19,14 +19,14 @@ PORT="590${DISPLAY:1}"
 
 vnc_launch () {
 	console.silence "
-					vncserver									\
-							-SecurityTypes none					\
-							-localhost yes						\
-							-depth 24							\
-							-cc 4								\
-							-cleanstale							\
-							-name $NAME							\
-							-geometry ${GEOMETRY} ${DISPLAY}"
+				vncserver								\
+					-SecurityTypes none						\
+					-localhost yes							\
+					-depth 24							\
+					-cc 4								\
+					-cleanstale							\
+					-name $NAME							\
+					-geometry ${GEOMETRY} ${DISPLAY}"
 
 					# 'vncserver' uses $DISPLAY instead of $PORT
 
@@ -48,7 +48,7 @@ vnc_launch () {
 
 		if [[ "${selection}" =~ ^[0-9]+$ ]]
 		then
-				echo "${selection}" > /home/$(id -u -n)/.vnc/selection
+			echo "${selection}" > /home/$(id -u -n)/.vnc/selection
 		fi
 	fi
 
@@ -56,9 +56,9 @@ vnc_launch () {
 	# and force-stop existing outputs
 	# before intent launch
 
-	# am start								\
-	#		-d vnc://${LOCALHOST}:${PORT}	\
-	#		-S application/activity"
+	# am start					\
+	#	-d vnc://${LOCALHOST}:${PORT}	\
+	#	-S application/activity"
 
 	console.silence "am start -d vnc://${LOCALHOST}:${PORT} -S ${VNC}"
 }
@@ -191,13 +191,13 @@ print_resolutions() {
 
 		if (( $i/3 >= 0 && $i/3 <= 8 ))
 		then
-				# handle number spacing for entries 1-9
+			# handle number spacing for entries 1-9
 
-				printf '\t[  %s ] %s' ${number} ${format}
+			printf '\t[  %s ] %s' ${number} ${format}
 		else
-				# handle number spacing for entries 10+
+			# handle number spacing for entries 10+
 
-				printf '\t[ %s ] %s' ${number} ${format}
+			printf '\t[ %s ] %s' ${number} ${format}
 		fi
 
 		printf '%*s' $((pad_length - ${#format}))
