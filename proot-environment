@@ -33,6 +33,13 @@ FILE
 # .bashrc
 
 cat << 'FILE' ->> "${PROOT_DIRECTORY}"/home/"${user_name}"/.bashrc
+if [ -f ~/.*_aliases ]
+then
+        for file in .*_aliases
+        do
+  	      . ~/"${file}"
+        done
+fi
 
 FILE
 
