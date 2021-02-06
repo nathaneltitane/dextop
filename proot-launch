@@ -18,6 +18,7 @@ case "${1}" in
 		echo -e ""
 		echo -e "-f, --fake \t Fake /proc entries: simulates accessible /proc on non-rooted devices."
 		echo -e ""
+
 		exit
 	;;
 
@@ -28,6 +29,7 @@ case "${1}" in
 		echo -e "${script}: Unknown option ${1}"
 		echo -e "Type './${script} --help' for help and usage information."
 		echo -e ""
+
 		exit 1
 	;;
 esac
