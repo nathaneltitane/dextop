@@ -13,9 +13,11 @@ do
 		-f|--full)
 			option="full"
 		;;
+
 		-u|--update)
 			option="update"
 		;;
+
 		-h|--help)
 			echo -e ""
 			echo -e "USAGE:"
@@ -25,12 +27,14 @@ do
 			echo -e ""
 			exit
 		;;
+
 		-v|--version)
 			echo -e ""
 			echo -e "${script} [ Version ${version} ]"
 			echo -e ""
 			exit
 		;;
+
 		*)
 			echo -e ""
 			echo "Usage: ${0} <install option>"
@@ -45,21 +49,23 @@ do
 	shift
 done
 
-# set defaults
-
-option="${1}"
-
-[ -z "${option}" ] && option="full" || :
-
 # variables #
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
 version="01-15-2020"
 
+option="${1}"
+
+# set defaults
+
+[ -z "${option}" ] && option="full" || :
+
 # enable quiet package install
 
 export DEBIAN_FRONTEND=noninteractive
+
+# refresh archives and upgrade packages
 
 if [[ "${option}" = "full" ]] || [[ "${option}" = "update" ]]
 then

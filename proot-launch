@@ -10,7 +10,8 @@ source /data/data/com.termux/files/usr/bin/globals
 case "${1}" in
 	-f|--fake)
 		option="fake"
-		;;
+	;;
+
 	-h|--help)
 		echo -e ""
 		echo -e "USAGE:"
@@ -19,6 +20,7 @@ case "${1}" in
 		echo -e ""
 		exit
 	;;
+
 	*)
 		echo -e ""
 		echo "Usage: ${0} <option> <parameter>"
@@ -29,8 +31,6 @@ case "${1}" in
 		exit 1
 	;;
 esac
-
-# set defaults
 
 # variables #
 
