@@ -5,6 +5,14 @@
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
+# script #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="02-07-2020"
+
 # usage #
 
 while (($#))
@@ -18,23 +26,18 @@ do
 			option="update"
 		;;
 
-		-h|--help|-?)
+		-h|--help)
 			echo
-			echo "Usage: ${0} [OPTION]"
+			echo -e "Usage: ${script} [OPTION]"
 			echo
-			echo -e "-f, --full \t\t Full setup: download and install full applications list and utilities."
-			echo -e "-u, --update \t\t Update setup: update applications list and utilities."
+			echo -e "Options:"
 			echo
-			echo -e "-h, --help, -? \t\t Show help and usage information."
-			echo -e "-v, --version \t\t Show '${0}' version."
+			echo -e "-f, --full \t Full setup: download and install full applications list and utilities."
+			echo -e "-u, --update \t Update setup: update applications list and utilities."
 			echo
-
-			exit
-		;;
-
-		-v|--version)
+			echo -e "-h, --help \t Show help and usage information."
 			echo
-			echo -e "${script} [ Version ${version} ]"
+			echo -e "'${script}' [ Version ${version} ]"
 			echo
 
 			exit
@@ -42,9 +45,9 @@ do
 
 		*)
 			echo
-			echo "Usage: ${0} [OPTION]"
+			echo "Usage: ${script} [OPTION]"
 			echo
-			echo -e "${script}: Unknown option ${1}"
+			echo -e "${script}: Unknown option '${1}'"
 			echo -e "Type './${script} --help' for help and usage information."
 			echo
 
@@ -56,10 +59,6 @@ do
 done
 
 # variables #
-
-script=$(basename -- "${BASH_SOURCE[0]}")
-
-version="01-15-2020"
 
 option="${1}"
 
@@ -151,23 +150,23 @@ then
 	
 	# youtube-dl #
 	
-	console.download https://yt-dl.org/downloads/latest								/usr/bin				youtube-dl
+	console.download https://yt-dl.org/downloads/latest								/usr/bin	youtube-dl
 	
 	# leocad #
 	
-	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main	/usr/bin				leocad-build
-	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main	/usr/bin				leocad-configuration
-	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main	/usr/bin				leocad-download
-	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main	/usr/bin				leocad-launcher
-	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main	/usr/bin				leocad-position
+	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main	/usr/bin	leocad-build
+	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main	/usr/bin	leocad-configuration
+	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main	/usr/bin	leocad-download
+	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main	/usr/bin	leocad-launcher
+	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main	/usr/bin	leocad-position
 	
 	# local install #
 	
 	# dwm #
 	
-	console.download https://raw.githubusercontent.com/nathaneltitane/dwm/main	/usr/bin				dwm-build
+	console.download https://raw.githubusercontent.com/nathaneltitane/dwm/main	/usr/bin		dwm-build
 	
 	# st #
 	
-	console.download https://raw.githubusercontent.com/nathaneltitane/st/main	/usr/bin				st-build
+	console.download https://raw.githubusercontent.com/nathaneltitane/st/main	/usr/bin		st-build
 fi
