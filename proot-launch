@@ -14,6 +14,8 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 USERNAME="${1}"
 APPLICATION="${2}"
 
+FAKE="{3}"
+
 # explicit proot setup defaults:
 # used to specify the desktop session login format
 # and environment 'env' or 'printenv'
@@ -147,19 +149,24 @@ else
 	echo
 fi
 
+# fake verification
+
+if [ -z "${FAKE}" ]
+then
+	fake="false"
+else
+	if [ "${FAKE}" = "fake" ]
+	then
+		fake="true"
+	fi
+fi
+
 # welcome #
 
 console.clear
 
 console.inf "Entering proot environment."
 echo
-
-if [ ! -z "${APPLICATION}" ]
-then
-	echo
-else
-	echo
-fi
 
 console.wait 1
 
@@ -185,11 +192,11 @@ command+=" -b /proc/self/fd:/dev/fd"
 command+=" -b /proc/self/fd/0:/dev/stdin"
 command+=" -b /proc/self/fd/1:/dev/stdout"
 command+=" -b /proc/self/fd/2:/dev/stderr"
-[ ! $(cat /proc/loadavg > /dev/null 2>&1) ] && command+=" -b ${PREFIX/*}/fake/loadavg:/proc/loadavg" || :
-[ ! $(cat /proc/stat > /dev/null 2>&1) ] && command+=" -b ${PREFIX*/}/fake/stat:/proc/stat" || :
-[ ! $(cat /proc/uptime > /dev/null 2>&1) ] && command+=" -b ${PREFIX*/}/fake/uptime:/proc/uptime" || :
-[ ! $(cat /proc/version > /dev/null 2>&1) ] && command+=" -b ${PREFIX*/}/fake/version:/proc/version" || :
-[ ! $(cat /proc/vmstat > /dev/null 2>&1) ] && command+=" -b ${PRREFIX*/}/fake/vmstat:/proc/vmstat" || :
+[ ! $(cat /proc/loadavg > /dev/null 2>&1) && "${fake}" = "true" ] && command+=" -b ${PREFIX/*}/fake/loadavg:/proc/loadavg" || :
+[ ! $(cat /proc/stat > /dev/null 2>&1)    && "${fake}" = "true" ] && command+=" -b ${PREFIX*/}/fake/stat:/proc/stat" || :
+[ ! $(cat /proc/uptime > /dev/null 2>&1)  && "${fake}" = "true" ] && command+=" -b ${PREFIX*/}/fake/uptime:/proc/uptime" || :
+[ ! $(cat /proc/version > /dev/null 2>&1) && "${fake}" = "true" ] && command+=" -b ${PREFIX*/}/fake/version:/proc/version" || :
+[ ! $(cat /proc/vmstat > /dev/null 2>&1)  && "${fake}" = "true" ] && command+=" -b ${PRREFIX*/}/fake/vmstat:/proc/vmstat" || :
 command+=" -b /storage"
 [ -d "${PREFIX%/*}"/storage/external ] && command+=" -b ${PREFIX%/*}/storage/external:/media/External" || :
 [ -d "${PREFIX%/*}"/storage/internal ] && command+=" -b ${PREFIX%/*}/storage/internal:/media/Internal" || :
