@@ -7,32 +7,44 @@ source /data/data/com.termux/files/usr/bin/globals
 
 # usage #
 
-case "${1}" in
-	-f|--fake)
-		option="fake"
-	;;
+while (($#))
+do
+	case "${1}" in
+		-b|-bind)
+			option="bind"
 
-	-h|--help)
-		echo
-		echo -e "USAGE:"
-		echo
-		echo -e "-f, --fake \t Fake /proc entries: simulates accessible /proc on non-rooted devices."
-		echo
+		-p|--proot)
+			option="proot"
+		;;
 
-		exit
-	;;
+		-f|--fake)
+			option="fake"
+		;;
 
-	*)
-		echo
-		echo "Usage: ${0} <option> <parameter>"
-		echo
-		echo -e "${script}: Unknown option ${1}"
-		echo -e "Type './${script} --help' for help and usage information."
-		echo
+		-h|--help)
+			echo
+				echo -e "USAGE:"
+			echo
+			echo -e "-f, --fake \t Fake /proc entries: simulates accessible /proc on non-rooted devices."
+			echo
 
-		exit 1
-	;;
-esac
+			exit
+		;;
+
+		*)
+			echo
+			echo "Usage: ${0} <option> <parameter>"
+			echo
+			echo -e "${script}: Unknown option ${1}"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+		;;
+	esac
+
+	shift
+done
 
 # variables #
 
@@ -64,12 +76,12 @@ SHELL=
 TERMINAL="st"
 TMPDIR="/tmp"
 VISUAL=
-VNC=
 
 # explicit VNC viewer application to kill:
 # used when vncserver is stopped or restarted using vnc:// intent
 # when launched via the activity manager [ 'am start -d {URI} -S {APK}' ]
 
+VNC=
 VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
 #VNC="com.realvnc.viewer.android/.app.DesktopActivity"
 
@@ -155,6 +167,14 @@ done < "${PROOT_DIRECTORY}"/etc/passwd
 
 IFS=' '
 
+# application check #
+
+if [ ! -z "${APPLICATION}" ] && [  ]
+then
+else
+
+fi
+
 # welcome #
 
 console.clear
@@ -162,7 +182,7 @@ console.clear
 console.inf "Entering proot environment."
 echo
 
-if [ ! -z "${APPLICATION}" ]
+if [ ! -z "${APPLICATION}" ] && [ -f "$PROOT_DIRECTORY"/usr/bin/"${APPLICATION}" ]
 then
 	console.fwd "Starting application [ ${APPLICATION} ] [ ${USER} ]..."
 	echo
