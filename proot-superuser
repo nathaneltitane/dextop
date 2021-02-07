@@ -5,6 +5,14 @@
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
+# script #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="02-07-2020"
+
 # usage #
 
 if [[ $# -lt 2 ]]
@@ -36,7 +44,7 @@ then
 	console.wrn "'sudo' utility not present or installed on system:"
 	console.wrn "Install 'sudo' using the package manager and restart this utility."
 	echo
-	
+
 	exit 1
 fi
 

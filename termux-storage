@@ -5,11 +5,49 @@
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
-# usage #
-
-# variables #
+# script #
 
 script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="02-07-2020"
+
+# usage #
+
+while (($#))
+do
+        case "${1}" in
+                -h|--help)
+                        echo
+                        echo -e "Usage: ${script} [OPTION]"
+                        echo
+                        echo -e "Options:"
+                        echo
+                        echo -e "-h, --help \t Show help and usage information."
+                        echo
+                        echo -e "'${script}' [ Version ${version} ]"
+                        echo
+
+                        exit
+                ;;
+
+                *)
+                        echo
+                        echo "Usage: ${script} [OPTION]"
+                        echo
+                        echo -e "${script}: Unknown option '${1}'"
+                        echo -e "Type './${script} --help' for help and usage information."
+                        echo
+
+                        exit 1
+                ;;
+        esac
+
+        shift
+done
+
+# variables #
 
 # verify termux storage directory existence
 
@@ -40,7 +78,7 @@ else
 	console.usr "Select 'Allow' or 'Deny' when prompted"
 	console.usr "to enable or disable storage access permission."
 	echo
-	
+
 	console.countdown "Permissions dialog in:" 3
 	echo
 
@@ -72,7 +110,7 @@ mkdir -p "${SETUP_DIRECTORY}"/storage || :
 
 [ ! -f "${SETUP_DIRECTORY}"/storage/internal ]							&& \
 	ln -s -f /storage/emulated/0 "${SETUP_DIRECTORY}"/storage/internal 	|| :
-	
+
 # use regular expression to match label UUID 'XXXX-XXXX'
 # store external devce labels in array for later retrieval and linking
 
@@ -87,7 +125,7 @@ do
 	then
 		console.scs "External storage detected [ UUID: ${external_storage} ]."
 		echo
-		
+
 		console.fwd "Linking..."
 		echo
 
@@ -95,12 +133,12 @@ do
 		then
 			ln -s -f /storage/"${storage}" "${SETUP_DIRECTORY}"/storage/external/"${storage}"
 		fi
-		
+
 		console.wait 1
 	else
 		console.err "No extrernal storage media detected."
 		echo
-	
+
 		console.fwd "Continuing..."
 		echo
 	fi

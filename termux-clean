@@ -5,11 +5,49 @@
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
-# usage #
-
-# variables #
+# script #
 
 script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="02-07-2020"
+
+# usage #
+
+while (($#))
+do
+        case "${1}" in
+                -h|--help)
+                        echo
+                        echo -e "Usage: ${script} [OPTION]"
+                        echo
+                        echo -e "Options:"
+                        echo
+                        echo -e "-h, --help \t Show help and usage information."
+                        echo
+                        echo -e "'${script}' [ Version ${version} ]"
+                        echo
+
+                        exit
+                ;;
+
+                *)
+                        echo
+                        echo "Usage: ${script} [OPTION]"
+                        echo
+                        echo -e "${script}: Unknown option '${1}'"
+                        echo -e "Type './${script} --help' for help and usage information."
+                        echo
+
+                        exit 1
+                ;;
+        esac
+
+        shift
+done
+
+# variables #
 
 # post setup cleanup
 
@@ -22,7 +60,7 @@ then
 	console.inf "Run 'proot-launch <username>' to start your session."
 	console.inf "Run 'proot-launch <username> <application>' to start an application with your session."
 	echo
-	
+
 else
 	console.err "Some errors were encountered during setup."
 	echo

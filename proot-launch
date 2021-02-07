@@ -5,6 +5,14 @@
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
+# script #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="02-07-2020"
+
 # usage #
 
 if [[ $# -gt 4 ]]
@@ -16,8 +24,6 @@ then
 fi
 
 # variables #
-
-script=$(basename -- "${BASH_SOURCE[0]}")
 
 USERNAME="${1}"
 APPLICATION="${2}"
