@@ -53,7 +53,7 @@ do
 
 		"")
 			# handle empty argument
-			# use default values specified in 'proot' command
+			# use default values specified in script
 
 			:
 		;;
