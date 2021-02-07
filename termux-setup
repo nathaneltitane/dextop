@@ -25,17 +25,17 @@ do
 			install_option="minimal"
 		;;
 
-		-h|--help|?)
+		-h|--help|-?)
 			echo
 			echo -e "USAGE:"
 			echo
-			echo -e "-f, --full \t Full setup: download and install full desktop environment and utilities."
-			echo -e "-m, --minimal \t Minimal setup: download and install minimal desktop environment and utilities."
+			echo -e "-f, --full \t\t Full setup: download and install full desktop environment and utilities."
+			echo -e "-m, --minimal \t\t Minimal setup: download and install minimal desktop environment and utilities."
 			echo
-			echo -e "-a, --applications: Download a set of optimized and precompiled arm64 applications."
+			echo -e "-a, --applications \t Download a set of optimized and precompiled arm64 applications."
 			echo
-			echo -e "-h, --help, ? \t Show help and usage information."
-			echo -e "-v, --version \t Show ${script} version."
+			echo -e "-h, --help, -? \t\t Show help and usage information."
+			echo -e "-v, --version \t\t Show ${script} version."
 			echo
 
 			exit
@@ -50,7 +50,7 @@ do
 
 		*)
 			echo
-			echo "Usage: ${0} <option>"
+			echo "Usage: ${0} [OPTION]..."
 			echo
 			echo -e "${script}: Unknown option ${1}"
 			echo -e "Type './${script} --help' for help and usage information."
