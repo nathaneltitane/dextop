@@ -13,7 +13,7 @@ do
 		-b|-bind)
 			option="bind"
 		;;
-		
+
 		-p|--proot)
 			option="proot"
 		;;
