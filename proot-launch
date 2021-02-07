@@ -200,7 +200,7 @@ IFS=' '
 
 if [ ! -z "${APPLICATION}" ]
 then
-	if [ ! -f "${ROOT_DIRECTORY}"/usr/bin/"${APPLICATION}" || ! -f "${ROOT_DIRECTORY}"/usr/local/bin/"${APPLICATION}" ]
+	if [[ ! -f "${ROOT_DIRECTORY}"/usr/bin/"${APPLICATION}" ]]
 	then
 		 console.err "Application '${APPLICATION}' not found."
 		 echo
@@ -210,10 +210,11 @@ then
 		 unset "${APPLICATION}"
 	fi
 
-	console.fwd "Starting session [ ${USER} ]..."
-	echo
-else
 	console.fwd "Starting application [ ${APPLICATION} //  ${USER} ]..."
+	echo
+
+else
+	console.fwd "Starting session [ ${USER} ]..."
 	echo
 fi
 
