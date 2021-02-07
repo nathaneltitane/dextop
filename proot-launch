@@ -168,14 +168,6 @@ done < "${PROOT_DIRECTORY}"/etc/passwd
 
 IFS=' '
 
-# application check #
-
-if [ ! -z "${APPLICATION}" ] && [  ]
-then
-else
-
-fi
-
 # welcome #
 
 console.clear
@@ -183,7 +175,7 @@ console.clear
 console.inf "Entering proot environment."
 echo
 
-if [ ! -z "${APPLICATION}" ] && [ -f "$PROOT_DIRECTORY"/usr/bin/"${APPLICATION}" ]
+if [ ! -z "${APPLICATION}" ]
 then
 	console.fwd "Starting application [ ${APPLICATION} ] [ ${USER} ]..."
 	echo
