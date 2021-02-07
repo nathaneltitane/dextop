@@ -48,9 +48,9 @@ do
 			exit
 		;;
 
-		*)
+		*|?)
 			echo
-			echo "Usage: ${0} <install option>"
+			echo "Usage: ${0} <option>"
 			echo
 			echo -e "${script}: Unknown option ${1}"
 			echo -e "Type './${script} --help' for help and usage information."
