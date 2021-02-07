@@ -15,9 +15,57 @@ version="02-07-2020"
 
 # usage #
 
+while (($#))
+do
+        case "${3}" in
+                -b|--bind)
+                        option="bind"
+                ;;
+
+                -f|--fake)
+                        option="fake"
+                ;;
+
+                -p|--proot)
+                        option="proot"
+                ;;
+
+                -h|--help)
+                        echo
+                    	echo -e "Usage: ${0} | [username] | [application] | [OPTION]"
+                        echo
+                        echo -e "Options:"
+                        echo
+                        echo -e "-b, --bind \t Full setup: download and install full applications list and utilities."
+                        echo -e "-f, --fake \t Full setup: download and install full applications list and utilities."
+                        echo -e "-p, --proot \t Update setup: update applications list and utilities."
+                        echo
+                        echo -e "-h, --help \t Show help and usage information."
+                        echo
+                        echo -e "'${script}' [ Version ${version} ]"
+                        echo
+
+                        exit
+                ;;
+
+                *)
+                        echo
+                       	echo -e "Usage: ${0} | [username] | [application] | [OPTION]"
+                        echo
+                        echo -e "${script}: Unknown option '${1}'"
+                        echo -e "Type './${script} --help' for help and usage information."
+                        echo
+
+                        exit 1
+                ;;
+        esac
+
+        shift
+done
+
 if [[ $# -gt 4 ]]
 then
-	echo -e "Usage: ${0} | [username] | [application] | [fake]"
+	echo -e "Usage: ${0} | [username] | [application] | [OPTION]"
 	echo
 
 	exit 1
@@ -27,8 +75,6 @@ fi
 
 USERNAME="${1}"
 APPLICATION="${2}"
-
-FAKE="{3}"
 
 # explicit proot setup defaults:
 # used to specify the desktop session login format
@@ -163,18 +209,6 @@ else
 	echo
 fi
 
-# fake verification
-
-if [ -z "${FAKE}" ]
-then
-	fake="false"
-else
-	if [ "${FAKE}" = "fake" ]
-	then
-		fake="true"
-	fi
-fi
-
 # welcome #
 
 console.clear
@@ -206,11 +240,11 @@ command+=" -b /proc/self/fd:/dev/fd"
 command+=" -b /proc/self/fd/0:/dev/stdin"
 command+=" -b /proc/self/fd/1:/dev/stdout"
 command+=" -b /proc/self/fd/2:/dev/stderr"
-[ ! $(cat /proc/loadavg > /dev/null 2>&1) && "${fake}" = "true" ] && command+=" -b ${PREFIX/*}/fake/loadavg:/proc/loadavg" || :
-[ ! $(cat /proc/stat > /dev/null 2>&1)    && "${fake}" = "true" ] && command+=" -b ${PREFIX*/}/fake/stat:/proc/stat" || :
-[ ! $(cat /proc/uptime > /dev/null 2>&1)  && "${fake}" = "true" ] && command+=" -b ${PREFIX*/}/fake/uptime:/proc/uptime" || :
-[ ! $(cat /proc/version > /dev/null 2>&1) && "${fake}" = "true" ] && command+=" -b ${PREFIX*/}/fake/version:/proc/version" || :
-[ ! $(cat /proc/vmstat > /dev/null 2>&1)  && "${fake}" = "true" ] && command+=" -b ${PRREFIX*/}/fake/vmstat:/proc/vmstat" || :
+[ ! $(cat /proc/loadavg > /dev/null 2>&1) && "${option}" = "fake" ] && command+=" -b ${PREFIX/*}/fake/loadavg:/proc/loadavg" || :
+[ ! $(cat /proc/stat > /dev/null 2>&1)    && "${option}" = "fake" ] && command+=" -b ${PREFIX*/}/fake/stat:/proc/stat" || :
+[ ! $(cat /proc/uptime > /dev/null 2>&1)  && "${option}" = "fake" ] && command+=" -b ${PREFIX*/}/fake/uptime:/proc/uptime" || :
+[ ! $(cat /proc/version > /dev/null 2>&1) && "${option}" = "fake" ] && command+=" -b ${PREFIX*/}/fake/version:/proc/version" || :
+[ ! $(cat /proc/vmstat > /dev/null 2>&1)  && "${option}" = "fake" ] && command+=" -b ${PRREFIX*/}/fake/vmstat:/proc/vmstat" || :
 command+=" -b /storage"
 [ -d "${PREFIX%/*}"/storage/external ] && command+=" -b ${PREFIX%/*}/storage/external:/media/External" || :
 [ -d "${PREFIX%/*}"/storage/internal ] && command+=" -b ${PREFIX%/*}/storage/internal:/media/Internal" || :
