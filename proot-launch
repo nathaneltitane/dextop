@@ -7,6 +7,12 @@ source /data/data/com.termux/files/usr/bin/globals
 
 # usage #
 
+if [[ $# -gt 4 ]]
+then
+	echo "Usage: ${0} | <username> | <application> | <fake>"
+	exit 1
+fi
+
 # variables #
 
 script=$(basename -- "${BASH_SOURCE[0]}")
