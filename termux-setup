@@ -10,7 +10,7 @@
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-version="01-15-2020"
+version="02-07-2020"
 
 # usage #
 
@@ -25,7 +25,7 @@ do
 			install_option="minimal"
 		;;
 
-		-h|--help)
+		-h|--help|?)
 			echo
 			echo -e "USAGE:"
 			echo
@@ -34,7 +34,7 @@ do
 			echo
 			echo -e "-a, --applications: Download a set of optimized and precompiled arm64 applications."
 			echo
-			echo -e "-h, --help \t Show help and usage."
+			echo -e "-h, --help, ? \t Show help and usage information."
 			echo -e "-v, --version \t Show ${script} version."
 			echo
 
@@ -48,7 +48,7 @@ do
 			exit
 		;;
 
-		*|?)
+		*)
 			echo
 			echo "Usage: ${0} <option>"
 			echo
