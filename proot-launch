@@ -96,17 +96,17 @@ XDG_CONFIG_DIRS="/etc/xdg"
 # set defaults
 
 
-if [[ "${OPTION} = "proot" ]]
+if [[ "${OPTION}" = "proot" ]]
 then
 	[ -z "${PROOT_DIRECTORY}" ]	&& PROOT_DIRECTORY="${PREFIX%/*}/img"
 fi
 
-if [[ "${OPTION} = "bind" ]]
+if [[ "${OPTION}" = "bind" ]]
 then
 	[ -z "${BIND_DIRECTORY}" ]	&& BIND_DIRECTORY="${PREFIX%/*}/mnt"
 fi
 
-if [[ "${OPTION} = "fake" ]]
+if [[ "${OPTION}" = "fake" ]]
 then
 	[ -z "${FAKE_DIRECTORY}" ]	&& FAKE_DIRECTORY="${PREFIX%/*}/fake"
 fi
@@ -184,7 +184,7 @@ IFS=' '
 
 if [ ! -z "${APPLICATION}" ]
 then
-	if [ ! -f "${PROOT_DIRECTORY}"/usr/bin/"${APPLICATION}" ] || [ ! -f "${PROOT_DIRECTORY}"/usr/local/bin/"${APPLICATION}" ]
+	if [ ! -f "${PROOT_DIRECTORY}"/usr/bin/"${APPLICATION}" || ! -f "${PROOT_DIRECTORY}"/usr/local/bin/"${APPLICATION}" ]
 	then
 		 unset "${APPLICATION}"
 
