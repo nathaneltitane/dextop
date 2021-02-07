@@ -9,7 +9,9 @@ source /data/data/com.termux/files/usr/bin/globals
 
 if [[ $# -gt 4 ]]
 then
-	echo "Usage: ${0} | <username> | <application> | <fake>"
+	echo -e "Usage: ${0} | [username] | [application] | [fake]"
+	echo
+
 	exit 1
 fi
 

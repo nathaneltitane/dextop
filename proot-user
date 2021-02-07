@@ -9,7 +9,7 @@ source /data/data/com.termux/files/usr/bin/globals
 
 if [[ $# -lt 2 ]]
 then
-	echo "Usage: ${0} <first name> <last name>"
+	echo "Usage: ${0} [First Name] [Last Name]"
 	exit 1
 fi
 

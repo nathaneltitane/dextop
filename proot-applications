@@ -18,13 +18,16 @@ do
 			option="update"
 		;;
 
-		-h|--help)
+		-h|--help|-?)
 			echo
-			echo -e "USAGE:"
+			echo "Usage: ${0} [OPTION]"
 			echo
-			echo -e "-f, --full \t Full setup: download and install full applications list and utilities."
-			echo -e "-u, --update \t Update setup: update applications list and utilities."
-			echo"
+			echo -e "-f, --full \t\t Full setup: download and install full applications list and utilities."
+			echo -e "-u, --update \t\t Update setup: update applications list and utilities."
+			echo
+			echo -e "-h, --help, -? \t\t Show help and usage information."
+			echo -e "-v, --version \t\t Show '${0}' version."
+			echo
 
 			exit
 		;;
@@ -37,9 +40,9 @@ do
 			exit
 		;;
 
-		*|?)
+		*)
 			echo
-			echo "Usage: ${0} <option>"
+			echo "Usage: ${0} [OPTION]"
 			echo
 			echo -e "${script}: Unknown option ${1}"
 			echo -e "Type './${script} --help' for help and usage information."
