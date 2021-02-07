@@ -127,15 +127,15 @@ XDG_CONFIG_DIRS="/etc/xdg"
 [ -z "${FAKE_DIRECTORY}" ]	&& FAKE_DIRECTORY="${PREFIX%/*}/fake"
 [ -z "${ROOT_DIRECTORY}" ]	&& ROOT_DIRECTORY="${PREFIX%/*}/img"
 
-[ -z "${BROWSER}" ]		&& BROWSER="${BROWSER}"
+[ -z "${BROWSER}" ]			&& BROWSER="${BROWSER}"
 [ -z "${COLORTERM}" ]		&& COLORTERM="${COLORTERM}"
-[ -z "${SESSION}" ]		&& SESSION="${SESSION}"
-[ -z "${EDITOR}" ]		&& EDITOR="${EDITOR}"
-[ -z "${PAGER}" ]		&& PAGER="${PAGER}"
-[ -z "${RUNNER}" ]		&& RUNNER="${RUNNER}"
-[ -z "${SHELL}" ]		&& SHELL="${SHELL}"
+[ -z "${SESSION}" ]			&& SESSION="${SESSION}"
+[ -z "${EDITOR}" ]			&& EDITOR="${EDITOR}"
+[ -z "${PAGER}" ]			&& PAGER="${PAGER}"
+[ -z "${RUNNER}" ]			&& RUNNER="${RUNNER}"
+[ -z "${SHELL}" ]			&& SHELL="${SHELL}"
 [ -z "${TERMINAL}" ]		&& TERMINAL="${TERM}"
-[ -z "${VISUAL}" ]		&& VISUAL="${VISUAL}"
+[ -z "${VISUAL}" ]			&& VISUAL="${VISUAL}"
 
 # assume termux-exec is present - unset LD_PRELOAD
 
