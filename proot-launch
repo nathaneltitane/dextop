@@ -12,7 +12,8 @@ do
 	case "${1}" in
 		-b|-bind)
 			option="bind"
-
+		;;
+		
 		-p|--proot)
 			option="proot"
 		;;
