@@ -16,14 +16,14 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 console.inf "Setting hostname."
 echo
 
-echo "${hostname}" > "${PROOT_DIRECTORY}"/etc/hostname
+echo "${hostname}" > "${ROOT_DIRECTORY}"/etc/hostname
 
 # hosts
 
 console.inf "Setting host address."
 echo
 
-cat << FILE -> "${PROOT_DIRECTORY}"/etc/hosts
+cat << FILE -> "${ROOT_DIRECTORY}"/etc/hosts
 # IPv4 #
 
 127.0.0.1	localhost.localdomain
@@ -48,7 +48,7 @@ FILE
 console.inf "Setting namserver address."
 echo
 
-cat << 'FILE' -> "${PROOT_DIRECTORY}"/etc/resolv.conf
+cat << 'FILE' -> "${ROOT_DIRECTORY}"/etc/resolv.conf
 nameserver 1.1.1.1
 nameserver 1.0.0.1
 FILE

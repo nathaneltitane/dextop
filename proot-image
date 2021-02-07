@@ -54,7 +54,7 @@ proot_deploy () {
 	console.inf "Creating proot directory."
 	echo
 
-	mkdir -p "${PROOT_DIRECTORY}"
+	mkdir -p "${ROOT_DIRECTORY}"
 
 	console.inf "Creating bind directory."
 	echo
@@ -64,7 +64,7 @@ proot_deploy () {
 	console.inf "Extracting image contents."
 	echo
 
-	cd "${PROOT_DIRECTORY}" || exit 1
+	cd "${ROOT_DIRECTORY}" || exit 1
 
 	proot_unpack "${SETUP_DIRECTORY}/${iso_archive}" || exit 1 &
 
@@ -82,7 +82,7 @@ proot_deploy () {
 
 # remove previous deployments
 
-[ -d "${PROOT_DIRECTORY}" ] && rm -rf "${PROOT_DIRECTORY}" || :
+[ -d "${ROOT_DIRECTORY}" ] && rm -rf "${ROOT_DIRECTORY}" || :
 
 # run setup
 

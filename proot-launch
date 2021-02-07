@@ -7,54 +7,12 @@ source /data/data/com.termux/files/usr/bin/globals
 
 # usage #
 
-while (($#))
-do
-	case "${1}" in
-		-b|-bind)
-			OPTION="bind"
-		;;
-
-		-p|--proot)
-			OPTION="proot"
-		;;
-
-		-f|--fake)
-			OPTION="fake"
-		;;
-
-		-h|--help)
-			echo
-				echo -e "USAGE:"
-			echo
-			echo -e "-f, --fake \t Fake /proc entries: simulates accessible /proc on non-rooted devices."
-			echo
-
-			exit
-		;;
-
-		*)
-			echo
-			echo "Usage: ${0} <option> <parameter>"
-			echo
-			echo -e "${script}: Unknown option ${1}"
-			echo -e "Type './${script} --help' for help and usage information."
-			echo
-
-			exit 1
-		;;
-	esac
-
-	shift
-done
-
 # variables #
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-OPTION="${1}"
-
-USERNAME="${2}"
-APPLICATION="${3}"
+USERNAME="${1}"
+APPLICATION="${2}"
 
 # explicit proot setup defaults:
 # used to specify the desktop session login format
@@ -95,31 +53,19 @@ XDG_CONFIG_DIRS="/etc/xdg"
 
 # set defaults
 
+[ -z "${ROOT_DIRECTORY}" ]	&& ROOT_DIRECTORY="${PREFIX%/*}/img"
+[ -z "${BIND_DIRECTORY}" ]	&& BIND_DIRECTORY="${PREFIX%/*}/mnt"
+[ -z "${FAKE_DIRECTORY}" ]	&& FAKE_DIRECTORY="${PREFIX%/*}/fake"
 
-if [[ "${OPTION}" = "proot" ]]
-then
-	[ -z "${PROOT_DIRECTORY}" ]	&& PROOT_DIRECTORY="${PREFIX%/*}/img"
-fi
-
-if [[ "${OPTION}" = "bind" ]]
-then
-	[ -z "${BIND_DIRECTORY}" ]	&& BIND_DIRECTORY="${PREFIX%/*}/mnt"
-fi
-
-if [[ "${OPTION}" = "fake" ]]
-then
-	[ -z "${FAKE_DIRECTORY}" ]	&& FAKE_DIRECTORY="${PREFIX%/*}/fake"
-fi
-
-[ -z "${BROWSER}" ]		&& BROWSER="${BROWSER}"
-[ -z "${COLORTERM}" ]	&& COLORTERM="${COLORTERM}"
-[ -z "${SESSION}" ]		&& SESSION="${SESSION}"
-[ -z "${EDITOR}" ]		&& EDITOR="${EDITOR}"
-[ -z "${PAGER}" ]		&& PAGER="${PAGER}"
-[ -z "${RUNNER}" ]		&& RUNNER="${RUNNER}"
-[ -z "${SHELL}" ]		&& SHELL="${SHELL}"
-[ -z "${TERMINAL}" ]	&& TERMINAL="${TERM}"
-[ -z "${VISUAL}" ]		&& VISUAL="${VISUAL}"
+[ -z "${BROWSER}" ]			&& BROWSER="${BROWSER}"
+[ -z "${COLORTERM}" ]		&& COLORTERM="${COLORTERM}"
+[ -z "${SESSION}" ]			&& SESSION="${SESSION}"
+[ -z "${EDITOR}" ]			&& EDITOR="${EDITOR}"
+[ -z "${PAGER}" ]			&& PAGER="${PAGER}"
+[ -z "${RUNNER}" ]			&& RUNNER="${RUNNER}"
+[ -z "${SHELL}" ]			&& SHELL="${SHELL}"
+[ -z "${TERMINAL}" ]		&& TERMINAL="${TERM}"
+[ -z "${VISUAL}" ]			&& VISUAL="${VISUAL}"
 
 # assume termux-exec is present - unset LD_PRELOAD
 
@@ -132,7 +78,7 @@ unset LD_PRELOAD
 # then source environment variables from file
 # default to 'root' if 'username' is invalid or does not exist
 
-last_entry="$(tail -n 1 "${PROOT_DIRECTORY}"/etc/passwd)"
+last_entry="$(tail -n 1 "${ROOT_DIRECTORY}"/etc/passwd)"
 
 while read -r entry
 do
@@ -174,7 +120,7 @@ do
 		console.wait 2
 	fi
 
-done < "${PROOT_DIRECTORY}"/etc/passwd
+done < "${ROOT_DIRECTORY}"/etc/passwd
 
 # reset IFS
 
@@ -184,7 +130,7 @@ IFS=' '
 
 if [ ! -z "${APPLICATION}" ]
 then
-	if [ ! -f "${PROOT_DIRECTORY}"/usr/bin/"${APPLICATION}" || ! -f "${PROOT_DIRECTORY}"/usr/local/bin/"${APPLICATION}" ]
+	if [ ! -f "${ROOT_DIRECTORY}"/usr/bin/"${APPLICATION}" || ! -f "${ROOT_DIRECTORY}"/usr/local/bin/"${APPLICATION}" ]
 	then
 		 unset "${APPLICATION}"
 
@@ -225,9 +171,9 @@ command="proot"
 
 command+=" --kill-on-exit"
 command+=" --link2symlink"
-command+=" -r ${PROOT_DIRECTORY}"
+command+=" -r ${ROOT_DIRECTORY}"
 command+=" -i ${USER_ID}:${GROUP_ID}"
-[ -d  "${PROOT_DIRECTORY}"/"${HOME}" ] && command+=" -w ${HOME}" || exit 1
+[ -d  "${ROOT_DIRECTORY}"/"${HOME}" ] && command+=" -w ${HOME}" || exit 1
 command+=" -b /apex"
 command+=" -b /data"
 command+=" -b /dev"
@@ -239,16 +185,11 @@ command+=" -b /proc/self/fd:/dev/fd"
 command+=" -b /proc/self/fd/0:/dev/stdin"
 command+=" -b /proc/self/fd/1:/dev/stdout"
 command+=" -b /proc/self/fd/2:/dev/stderr"
-
-if [ "${option}" = "fake" ]
-then
-	[ ! $(cat /proc/loadavg > /dev/null 2>&1) ] && command+=" -b ${PREFIX/*}/fake/loadavg:/proc/loadavg" || :
-	[ ! $(cat /proc/stat > /dev/null 2>&1) ] && command+=" -b ${PREFIX*/}/fake/stat:/proc/stat" || :
-	[ ! $(cat /proc/uptime > /dev/null 2>&1) ] && command+=" -b ${PREFIX*/}/fake/uptime:/proc/uptime" || :
-	[ ! $(cat /proc/version > /dev/null 2>&1) ] && command+=" -b ${PREFIX*/}/fake/version:/proc/version" || :
-	[ ! $(cat /proc/vmstat > /dev/null 2>&1) ] && command+=" -b ${PRREFIX*/}/fake/vmstat:/proc/vmstat" || :
-fi
-
+[ ! $(cat /proc/loadavg > /dev/null 2>&1) ] && command+=" -b ${PREFIX/*}/fake/loadavg:/proc/loadavg" || :
+[ ! $(cat /proc/stat > /dev/null 2>&1) ] && command+=" -b ${PREFIX*/}/fake/stat:/proc/stat" || :
+[ ! $(cat /proc/uptime > /dev/null 2>&1) ] && command+=" -b ${PREFIX*/}/fake/uptime:/proc/uptime" || :
+[ ! $(cat /proc/version > /dev/null 2>&1) ] && command+=" -b ${PREFIX*/}/fake/version:/proc/version" || :
+[ ! $(cat /proc/vmstat > /dev/null 2>&1) ] && command+=" -b ${PRREFIX*/}/fake/vmstat:/proc/vmstat" || :
 command+=" -b /storage"
 [ -d "${PREFIX%/*}"/storage/external ] && command+=" -b ${PREFIX%/*}/storage/external:/media/External" || :
 [ -d "${PREFIX%/*}"/storage/internal ] && command+=" -b ${PREFIX%/*}/storage/internal:/media/Internal" || :
@@ -269,7 +210,7 @@ command+=" PREFIX=${PREFIX}"
 command+=" SETUP_DIRECTORY=${PREFIX%/*}"
 command+=" BINARIES_DIRECTORY=${PREFIX}/bin"
 command+=" LIBRARIES_DIRECTORY=${PREFIX}/lib"
-command+=" PROOT_DIRECTORY=${PROOT_DIRECTORY}"
+command+=" ROOT_DIRECTORY=${ROOT_DIRECTORY}"
 command+=" BIND_DIRECTORY=${BIND_DIRECTORY}"
 command+=" APPLICATION=${APPLICATION}"
 command+=" BROWSER=${BROWSER}"

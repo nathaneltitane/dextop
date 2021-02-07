@@ -18,7 +18,7 @@ echo
 
 # write initial login configuration routine
 
-cat << "FILE" ->> "${PROOT_DIRECTORY}"/home/"${user_name}"/.profile
+cat << "FILE" ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 # system configuration #
 
 sudo dpkg-reconfigure locales
@@ -27,6 +27,6 @@ sudo dpkg-reconfigure tzdata
 
 # remove system configuration routine after first run
 
-sed -i '/# system configuration #/,$d' "${PROOT_DIRECTORY}"/home/"${user_name}"/.profile
+sed -i '/# system configuration #/,$d' "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 
 FILE

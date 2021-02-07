@@ -19,4 +19,4 @@ libraries_list=(
 	libandroid-shmem-aarch64.so
 )
 
-console.download lib.dxtp.app "${PROOT_DIRECTORY}"/lib ${libraries_list[@]}
+console.download lib.dxtp.app "${ROOT_DIRECTORY}"/lib ${libraries_list[@]}

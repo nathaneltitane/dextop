@@ -47,8 +47,8 @@ do
 
 	read group_number group_name <<< ${line}
 
-	[ -f "${PROOT_DIRECTORY}"/etc/group ]   && echo "${group_name}:x:${group_number}:" >> "${PROOT_DIRECTORY}"/etc/group
-	[ -f "${PROOT_DIRECTORY}"/etc/gshadow ] && echo "${group_name}:x:${group_number}:" >> "${PROOT_DIRECTORY}"/etc/gshadow
+	[ -f "${ROOT_DIRECTORY}"/etc/group ]   && echo "${group_name}:x:${group_number}:" >> "${ROOT_DIRECTORY}"/etc/group
+	[ -f "${ROOT_DIRECTORY}"/etc/gshadow ] && echo "${group_name}:x:${group_number}:" >> "${ROOT_DIRECTORY}"/etc/gshadow
 
 done
 

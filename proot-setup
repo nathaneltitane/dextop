@@ -23,14 +23,14 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # write automatic setup transition [ termux >>> [ proot ] ]
 
-cat << 'FILE' ->> "${PROOT_DIRECTORY}"/root/.profile
+cat << 'FILE' ->> "${ROOT_DIRECTORY}"/root/.profile
 
 bash /root/proot-setup
 FILE
 
 # write proot-setup
 
-cat << 'FILE' ->> "${PROOT_DIRECTORY}"/root/proot-setup
+cat << 'FILE' ->> "${ROOT_DIRECTORY}"/root/proot-setup
 
 #!/bin/bash
 

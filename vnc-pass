@@ -27,7 +27,7 @@ eval ${console_rtn[@]}
 
 # hash password  using 'vncpasswd' utility and store it
 
-echo "$password" | vncpasswd -f > "${PROOT_DIRECTORY}"/home/"${user_name}"/.vnc/passwd
+echo "$password" | vncpasswd -f > "${ROOT_DIRECTORY}"/home/"${user_name}"/.vnc/passwd
 
 console.scs "Password changed."
 echo
