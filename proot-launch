@@ -11,15 +11,15 @@ while (($#))
 do
 	case "${1}" in
 		-b|-bind)
-			option="bind"
+			OPTION="bind"
 		;;
 
 		-p|--proot)
-			option="proot"
+			OPTION="proot"
 		;;
 
 		-f|--fake)
-			option="fake"
+			OPTION="fake"
 		;;
 
 		-h|--help)
@@ -51,12 +51,10 @@ done
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-option="${1}"
+OPTION="${1}"
 
 USERNAME="${2}"
 APPLICATION="${3}"
-PROOT_DIRECTORY="${4}"
-BIND_DIRECTORY="${5}"
 
 # explicit proot setup defaults:
 # used to specify the desktop session login format
@@ -64,7 +62,7 @@ BIND_DIRECTORY="${5}"
 
 BROWSER="surf"
 COLORTERM="truecolor"
-DESKTOP_SESSION="dwm"
+SESSION="dwm"
 DISPLAY=":1"
 EDITOR="nano"
 LANG="C.UTF-8"
@@ -97,23 +95,37 @@ XDG_CONFIG_DIRS="/etc/xdg"
 
 # set defaults
 
-[ -z "${PROOT_DIRECTORY}" ]	&& PROOT_DIRECTORY="${PREFIX%/*}/img"
-[ -z "${BIND_DIRECTORY}" ]	&& BIND_DIRECTORY="${PREFIX%/*}/mnt"
-[ -z "${FAKE_DIRECTORY}" ]	&& FAKE_DIRECTORY="${PREFIX%/*}/fake"
+
+if [[ "${OPTION} = "proot" ]]
+then
+	[ -z "${PROOT_DIRECTORY}" ]	&& PROOT_DIRECTORY="${PREFIX%/*}/img"
+fi
+
+if [[ "${OPTION} = "bind" ]]
+then
+	[ -z "${BIND_DIRECTORY}" ]	&& BIND_DIRECTORY="${PREFIX%/*}/mnt"
+fi
+
+if [[ "${OPTION} = "fake" ]]
+then
+	[ -z "${FAKE_DIRECTORY}" ]	&& FAKE_DIRECTORY="${PREFIX%/*}/fake"
+fi
 
 [ -z "${BROWSER}" ]		&& BROWSER="${BROWSER}"
-[ -z "$COLORTERM" ]		&& COLORTERM="${COLORTERM}"
-[ -z "$DESKTOP_SESSION" ]	&& DESKTOP_SESSION="${DESKTOP_SESSION}"
+[ -z "${COLORTERM}" ]	&& COLORTERM="${COLORTERM}"
+[ -z "${SESSION}" ]		&& SESSION="${SESSION}"
 [ -z "${EDITOR}" ]		&& EDITOR="${EDITOR}"
 [ -z "${PAGER}" ]		&& PAGER="${PAGER}"
 [ -z "${RUNNER}" ]		&& RUNNER="${RUNNER}"
 [ -z "${SHELL}" ]		&& SHELL="${SHELL}"
-[ -z "${TERMINAL}" ]		&& TERMINAL="${TERM}"
+[ -z "${TERMINAL}" ]	&& TERMINAL="${TERM}"
 [ -z "${VISUAL}" ]		&& VISUAL="${VISUAL}"
 
 # assume termux-exec is present - unset LD_PRELOAD
 
 unset LD_PRELOAD
+
+# user verification
 
 # verify user existence: loop through proot /etc/passwd file
 # make sure 'user' exists and corresponds to 'username'
@@ -168,6 +180,27 @@ done < "${PROOT_DIRECTORY}"/etc/passwd
 
 IFS=' '
 
+# application verification
+
+if [ ! -z "${APPLICATION}" ]
+then
+	if [ ! -f "${PROOT_DIRECTORY}"/usr/bin/"${APPLICATION}" ] || [ ! -f "${PROOT_DIRECTORY}"/usr/local/bin/"${APPLICATION}" ]
+	then
+		 unset "${APPLICATION}"
+
+		 console.err "Application '${APPLICATION}' not found."
+		 echo
+		 console.wrn "Applications must be installed to load on session start."
+		 echo
+
+		 console.fwd "Starting session [ ${USER} ]..."
+		 echo
+	fi
+else
+	console.fwd "Starting application [ ${APPLICATION} //  ${USER} ]..."
+	echo
+fi
+
 # welcome #
 
 console.clear
@@ -177,10 +210,8 @@ echo
 
 if [ ! -z "${APPLICATION}" ]
 then
-	console.fwd "Starting application [ ${APPLICATION} ] [ ${USER} ]..."
 	echo
 else
-	console.fwd "Starting session [ ${USER} ]..."
 	echo
 fi
 
@@ -242,7 +273,7 @@ command+=" PROOT_DIRECTORY=${PROOT_DIRECTORY}"
 command+=" BIND_DIRECTORY=${BIND_DIRECTORY}"
 command+=" APPLICATION=${APPLICATION}"
 command+=" BROWSER=${BROWSER}"
-command+=" DESKTOP_SESSION=${DESKTOP_SESSION}"
+command+=" SESSION=${SESSION}"
 command+=" EDITOR=${EDITOR}"
 command+=" DISPLAY=${DISPLAY}"
 command+=" HOME=${HOME}"
