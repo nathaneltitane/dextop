@@ -15,18 +15,62 @@ version="02-07-2020"
 
 # usage #
 
+first_name="${1}"
+last_name="${2}"
+
+while (($#))
+do
+        case "${3}" in
+                -h|--help)
+                        echo
+                    	echo "Usage: ${0} [First Name] [Last Name] | [OPTION]"
+                        echo
+                        echo -e "Options:"
+                        echo
+                        echo -e "-f, --full \t Full setup: download and install full applications list and utilities."
+                        echo -e "-u, --update \t Update setup: update applications list and utilities."
+                        echo
+                        echo -e "-h, --help \t Show help and usage information."
+                        echo
+                        echo -e "'${script}' [ Version ${version} ]"
+                        echo
+
+                        exit
+                ;;
+
+		"")
+                        # handle empty argument
+                        # use default values specified in script
+
+                        :
+                ;;
+
+                *)
+                        echo
+                       	echo "Usage: ${0} [First Name] [Last Name] | [OPTION]"
+                        echo
+                        echo -e "${script}: Unknown option '${1}'"
+                        echo -e "Type './${script} --help' for help and usage information."
+                        echo
+
+                        exit 1
+                ;;
+        esac
+
+        shift
+done
+
 if [[ $# -lt 2 ]]
 then
-	echo "Usage: ${0} [First Name] [Last Name]"
+	echo
+	echo -e  "Usage: ${0} [First Name] [Last Name] | [OPTION]"
+	echo
+
 	exit 1
 fi
 
 # variables #
 
-script=$(basename -- "${BASH_SOURCE[0]}")
-
-first_name="${1}"
-last_name="${2}"
 user_name="${first_name,,}"
 
 sudo_id=$(cat /etc/group | grep sudo | cut -d : -f 3)
