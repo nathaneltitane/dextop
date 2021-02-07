@@ -20,8 +20,8 @@ PORT="590${DISPLAY:1}"
 vnc_launch () {
 	console.silence "
 				vncserver								\
-					-SecurityTypes none						\
-					-localhost yes							\
+					-SecurityTypes none					\
+					-localhost yes						\
 					-depth 24							\
 					-cc 4								\
 					-cleanstale							\
@@ -56,7 +56,7 @@ vnc_launch () {
 	# and force-stop existing outputs
 	# before intent launch
 
-	# am start					\
+	# am start							\
 	#	-d vnc://${LOCALHOST}:${PORT}	\
 	#	-S application/activity"
 
