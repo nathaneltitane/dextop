@@ -61,8 +61,6 @@ done
 
 # variables #
 
-install_option="${1}"
-
 # set defaults
 
 [ -z "${install_option}" ] && install_option="minimal" || :
