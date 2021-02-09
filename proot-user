@@ -23,7 +23,7 @@ do
         case "${3}" in
                 -h|--help)
                         echo
-                        echo -e "Usage: ${0} | [First Name] [Last Name] | [OPTION]"
+                        echo -e "Usage: ${script} | [First Name] [Last Name] | [OPTION]"
                         echo
                         echo -e "Options:"
                         echo
@@ -44,7 +44,7 @@ do
 
                 *)
                         echo
-                        echo -e "Usage: ${0} | [First Name] [Last Name] | [OPTION]"
+                        echo -e "Usage: ${script} | [First Name] [Last Name] | [OPTION]"
                         echo
                         echo -e "${script}: Unknown option '${1}'"
                         echo -e "Type './${script} --help' for help and usage information."
@@ -60,7 +60,7 @@ done
 if [[ $# -lt 2 ]]
 then
 	echo
-	echo -e "Usage: ${0} | [First Name] [Last Name] | [OPTION]"
+	echo -e "Usage: ${script} | [First Name] [Last Name] | [OPTION]"
 	echo
 
 	exit 1

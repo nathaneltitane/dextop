@@ -35,7 +35,7 @@ do
 
                 -h|--help)
                         echo
-                    	echo -e "Usage: ${0} | [USERNAME] | [APPLICATION] | [OPTION]"
+                    	echo -e "Usage: ${script} | [USERNAME] | [APPLICATION] | [OPTION]"
                         echo
                         echo -e "Options:"
                         echo
@@ -60,7 +60,7 @@ do
 
                 *)
                         echo
-                       	echo -e "Usage: ${0} | [USERNAME] | [APPLICATION] | [OPTION]"
+                       	echo -e "Usage: ${script} | [USERNAME] | [APPLICATION] | [OPTION]"
                         echo
                         echo -e "${script}: Unknown option '${1}'"
                         echo -e "Type './${script} --help' for help and usage information."
@@ -76,7 +76,7 @@ done
 if [[ $# -gt 4 ]]
 then
 	echo
-	echo -e "Usage: ${0} | [USERNAME] | [APPLICATION] | [OPTION]"
+	echo -e "Usage: ${script} | [USERNAME] | [APPLICATION] | [OPTION]"
 	echo
 
 	exit 1
