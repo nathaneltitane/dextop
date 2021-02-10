@@ -73,15 +73,6 @@ do
         shift
 done
 
-if [[ $# -gt 4 ]]
-then
-	echo
-	echo -e "Usage: ${script} | [USERNAME] | [APPLICATION] | [OPTION]"
-	echo
-
-	exit 1
-fi
-
 # variables #
 
 # explicit proot setup defaults:
