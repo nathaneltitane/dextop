@@ -57,5 +57,5 @@ done
 
 cat << 'FILE' ->> "${ROOT_DIRECTORY}"/root/.profile
 
-bash /root/proot-setup
+bash "${BINARIES_DIRECTORY}"/proot-setup
 FILE
