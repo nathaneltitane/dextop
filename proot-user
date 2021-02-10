@@ -15,6 +15,9 @@ version="02-07-2020"
 
 # usage #
 
+first_name="${1}"
+last_name="${2}"
+
 if [[ -z "${1}" ]] || [[ -z "${2}" ]]
 then
 	echo
@@ -64,9 +67,6 @@ do
 done
 
 # variables #
-
-first_name="${1}"
-last_name="${2}"
 
 user_name="${first_name,,}"
 
