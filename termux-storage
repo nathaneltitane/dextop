@@ -84,8 +84,8 @@ else
 
 	# trigger storage permissions dialog
 
-	# am broadcast	--user 0												\
-	#				--es com.termux.app.reload_style storage				\
+	# am broadcast	--user 0								\
+	#				--es com.termux.app.reload_style storage		\
 	#				-a com.termux.app.reload_style com.termux > /dev/null
 
 	termux-setup-storage
@@ -108,38 +108,33 @@ mkdir -p "${SETUP_DIRECTORY}"/storage || :
 
 # create new symbolic links for bind mounts
 
-[ ! -f "${SETUP_DIRECTORY}"/storage/internal ]							&& \
-	ln -s -f /storage/emulated/0 "${SETUP_DIRECTORY}"/storage/internal 	|| :
+storage_locations=(
+	/sdcard
+	/storage/emulated/0
+)
 
-# use regular expression to match label UUID 'XXXX-XXXX'
-# store external devce labels in array for later retrieval and linking
-
-find_storage=$(ls /storage | sed -r '/[A0-Z9][-][A0-Z9]/!d')
-external_storage=( ${find_storage} )
-
-[ ! -d "${SETUP_DIRECTORY}"/storage/external ] && mkdir -p "${SETUP_DIRECTORY}"/storage/external
-
-for storage in "${external_storage[@]}"
+for storage in ${storage_locations[@]}
 do
-	if [ ! -z "${external_storage}" ]
+	[[ "${storage}" = "/sdcard" ]] && link="external"
+	[[ "${storage}" = "/storage/emulated/0" ]] && link="internal"
+
+	if [ ! -f "${SETUP_DIRECTORY}"/storage/"${link}" ]
 	then
-		console.scs "External storage detected [ UUID: ${external_storage} ]."
-		echo
-
-		console.fwd "Linking..."
-		echo
-
-		if [ ! -f "${SETUP_DIRECTORY}"/storage/external ]
+		if [ ! -z $(ls "${storage}") ]
 		then
-			ln -s -f /storage/"${storage}" "${SETUP_DIRECTORY}"/storage/external/"${storage}"
-		fi
+			console.scs " Storage media detected [ ${link} ]."
+			echo
 
-		console.wait 1
+			console.fwd "Linking..."
+			echo
+
+			ln -s -f /sdcard "${SETUP_DIRECTORY}"/storage/external
 	else
-		console.err "No extrernal storage media detected."
-		echo
+			console.err "No storage media detected [ ${link} ]."
+			echo
 
-		console.fwd "Continuing..."
-		echo
+			console.fwd "Continuing..."
+			echo
+		fi
 	fi
 done
