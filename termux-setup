@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# author #
+# dependencies #
 
-# Nathanel Titane - nathanel.titane@gmail.com
-
-# Termux // Dextop // Ubuntu #
+curl -sL get.cnsl.app/console > "${PREFIX}"/bin/console && source "${PREFIX}"/bin/console
+curl -sL get.dxtp.app/globals > "${PREFIX}"/bin/globals && source "${PREFIX}"/bin/globals
 
 # script #
 
@@ -65,13 +64,6 @@ done
 
 [ -z "${install_option}" ] && install_option="minimal" || :
 
-# dependencies #
-
-# explicit console.download for preload
-
-curl -sL get.cnsl.app/console > "${PREFIX}"/bin/console && source "${PREFIX}"/bin/console
-curl -sL get.dxtp.app/globals > "${PREFIX}"/bin/globals && source "${PREFIX}"/bin/globals
-
 # export variables
 
 echo "export version=${version}" >> "${PREFIX}"/bin/globals
@@ -84,14 +76,11 @@ echo
 
 console.download get.dxtp.app "${BINARIES_DIRECTORY}" termux-download
 
-# welcome #
-
-console.title "Linux on Android" "Termux // Dextop // Ubuntu" "${version}"
-
-console.fwd "Initializing setup [ termux ]..."
-echo
-
 # setup #
+
+# welcome message
+
+console.run "${BINARIES_DIRECTORY}"/termux-message
 
 # setup termux and proot utilities
 
@@ -143,7 +132,7 @@ console.run "${BINARIES_DIRECTORY}"/proot-network
 
 # setup proot install routine
 
-console.run "${BINARIES_DIRECTORY}"/proot-setup
+console.run "${BINARIES_DIRECTORY}"/proot-initialize
 
 # continue setup in proot environment - run 'proot-launch' as 'root'
 
