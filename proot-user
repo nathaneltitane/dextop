@@ -57,7 +57,7 @@ do
         shift
 done
 
-if [[ $# -lt 2 ]]
+if [[ -z "${1}" ]] || [[ -z "${2}" ]]
 then
 	echo
 	echo -e "Usage: ${script} | [First Name] [Last Name] | [OPTION]"
