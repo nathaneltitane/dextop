@@ -15,8 +15,14 @@ version="02-07-2020"
 
 # usage #
 
-first_name="${1}"
-last_name="${2}"
+if [[ -z "${1}" ]] || [[ -z "${2}" ]]
+then
+	echo
+	echo -e "Usage: ${script} | [First Name] [Last Name] | [OPTION]"
+	echo
+
+	exit 1
+fi
 
 while (($#))
 do
@@ -57,16 +63,10 @@ do
         shift
 done
 
-if [[ -z "${1}" ]] || [[ -z "${2}" ]]
-then
-	echo
-	echo -e "Usage: ${script} | [First Name] [Last Name] | [OPTION]"
-	echo
-
-	exit 1
-fi
-
 # variables #
+
+first_name="${1}"
+last_name="${2}"
 
 user_name="${first_name,,}"
 
