@@ -77,7 +77,7 @@ image_unpack () {
 					--exclude='dev'			\
 					--exclude='proc'		\
 					--exclude='sys'			\
-					--exclude='system'		|| :
+					--exclude='system' 2> /dev/null	|| :
 }
 
 image_deploy () {
