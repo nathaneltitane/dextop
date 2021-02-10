@@ -120,8 +120,15 @@ do
 
 	if [ ! -f "${SETUP_DIRECTORY}"/storage/"${link}" ]
 	then
-		if [ ! -z $(ls "${storage}") ]
+		if [ -z $(ls "${storage}") ]
 		then
+			console.err "No storage media detected [ ${link} ]."
+			echo
+
+			console.fwd "Continuing..."
+			echo
+
+		else
 			console.scs " Storage media detected [ ${link} ]."
 			echo
 
@@ -129,12 +136,6 @@ do
 			echo
 
 			ln -s -f /sdcard "${SETUP_DIRECTORY}"/storage/external
-	else
-			console.err "No storage media detected [ ${link} ]."
-			echo
-
-			console.fwd "Continuing..."
-			echo
 		fi
 	fi
 done
