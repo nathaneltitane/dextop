@@ -1,15 +1,9 @@
 #!/bin/bash
 
-# author #
-
-# Nathanel Titane - nathanel.titane@gmail.com
-
-# Termux // Dextop // Ubuntu #
-
 # dependencies #
 
-source /data/data/com.termux/files/usr/bin/console
-source /data/data/com.termux/files/usr/bin/globals
+curl -sL get.cnsl.app/console > "${PREFIX}"/bin/console && source "${PREFIX}"/bin/console
+curl -sL get.dxtp.app/globals > "${PREFIX}"/bin/globals && source "${PREFIX}"/bin/globals
 
 # script #
 
@@ -81,21 +75,18 @@ source /data/data/com.termux/files/usr/bin/globals
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-# download
+# download #
 
 console.fwd "Initializing..."
 echo
 
-"${BINARIES_DIRECTORY}"/proot-download
-
-# welcome #
-
-console.title "Linux on Android" "Termux // Dextop // Ubuntu" "${version}"
-
-console.fwd "Completing setup [ proot ]..."
-echo
+console.download get.dxtp.app "${BINARIES_DIRECTORY}" proot-download
 
 # setup #
+
+# welcome message
+
+console.run "${BINARIES_DIRECTORY}"/proot-message
 
 # setup expansion to default system + documentation
 
