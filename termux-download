@@ -82,6 +82,7 @@ binaries_list=(
 	proot-system
 	proot-user
 	proot-welcome
+	termux-clean
 	termux-download
 	termux-environment
 	termux-message
