@@ -71,8 +71,10 @@ binaries_list=(
 	proot-groups
 	proot-image
 	proot-information
+	proot-initialize
 	proot-launch
 	proot-libraries
+	proot-message
 	proot-network
 	proot-packages
 	proot-setup
@@ -82,6 +84,7 @@ binaries_list=(
 	proot-welcome
 	termux-download
 	termux-environment
+	termux-message
 	termux-packages
 	termux-storage
 	termux-welcome
