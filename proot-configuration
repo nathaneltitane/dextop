@@ -65,6 +65,6 @@ sudo dpkg-reconfigure tzdata
 
 # remove system configuration routine after first run
 
-sed -i '/# system configuration #/,$d' "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
+sed -i '/# system configuration #/,$d' "${ROOT_DIRECTORY}"/home/"${USER}"/.profile
 
 FILE
