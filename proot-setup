@@ -49,31 +49,11 @@ done
 
 # variables #
 
-# create self-terminating script file
-# execute on first login to complete proot setup
-# terminate if checkpoint is reached
+# set defaults
 
-# write automatic setup transition [ termux >>> [ proot ] ]
+[ -z "${install_option}" ] && install_option="minimal" || :
 
-cat << 'FILE' ->> "${ROOT_DIRECTORY}"/root/.profile
-
-bash /root/proot-setup
-FILE
-
-# write proot-setup
-
-cat << 'FILE' ->> "${ROOT_DIRECTORY}"/root/proot-setup
-
-#!/bin/bash
-
-# dependencies #
-
-source /data/data/com.termux/files/usr/bin/console
-source /data/data/com.termux/files/usr/bin/globals
-
-# variables #
-
-script=$(basename -- "${BASH_SOURCE[0]}")
+# export variables
 
 # download #
 
@@ -135,4 +115,3 @@ console.run "${BINARIES_DIRECTORY}"/proot-message
 # setup cleanup #
 
 "${BINARIES_DIRECTORY}"/proot-clean
-FILE
