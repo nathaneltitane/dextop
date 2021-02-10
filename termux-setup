@@ -74,7 +74,7 @@ curl -sL get.dxtp.app/globals > "${PREFIX}"/bin/globals && source "${PREFIX}"/bi
 
 # export variables
 
-echo "export version=${version}"				>> "${PREFIX}"/bin/globals
+echo "export version=${version}" >> "${PREFIX}"/bin/globals
 echo "export install_option=${install_option}"	>> "${PREFIX}"/bin/globals
 
 # download #
