@@ -108,34 +108,8 @@ mkdir -p "${SETUP_DIRECTORY}"/storage || :
 
 # create new symbolic links for bind mounts
 
-storage_locations=(
-	/sdcard
-	/storage/emulated/0
-)
+console.fwd "Linking..."
+echo
 
-for storage in ${storage_locations[@]}
-do
-	[[ "${storage}" = "/sdcard" ]] && link="external"
-	[[ "${storage}" = "/storage/emulated/0" ]] && link="internal"
-
-	if [ ! -f "${SETUP_DIRECTORY}"/storage/"${link}" ]
-	then
-		if [ -z $(ls "${storage}") ]
-		then
-			console.err "No storage media detected [ ${link} ]."
-			echo
-
-			console.fwd "Continuing..."
-			echo
-
-		else
-			console.scs " Storage media detected [ ${link} ]."
-			echo
-
-			console.fwd "Linking..."
-			echo
-
-			ln -s -f /sdcard "${SETUP_DIRECTORY}"/storage/external
-		fi
-	fi
-done
+ln -s -f /sdcard "${SETUP_DIRECTORY}"/storage/external
+ln -s -f /storage/emulated/0 "${SETUP_DIRECTORY}"/storage/internal
