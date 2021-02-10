@@ -169,4 +169,16 @@ then
 	# st #
 	
 	console.download https://raw.githubusercontent.com/nathaneltitane/st/main	/usr/bin		st-build
+	
+	# execute #
+	
+	binaries_list=(
+		dwm-build
+		st-build
+	)
+	
+	for binary in ${binaries_list}
+	do
+		bash "${binary}"
+	done
 fi
