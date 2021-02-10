@@ -61,7 +61,7 @@ iso_archive="ubuntu-base-${distribution_version}-base-${iso_architecture}.tar.gz
 
 [ -z "${distribution_version}" ] && distribution_version="20.04.1"
 
-proot_unpack () {
+image_unpack () {
 	# shorthand
 
 	# proot -l tar -xzf "${1}" -X "${2}" || :
@@ -69,19 +69,19 @@ proot_unpack () {
 	# exclude archive directories: dev | proc | sys | system
 	# 'proot-launch' will bind and mount those device directories to proot
 
-	proot									\
+	proot								\
 		--link2symlink						\
-			tar 							\
-				--extract					\
-				--file="${1}"				\
+			tar 						\
+				--extract				\
+					--file="${1}"			\
 					--exclude='dev'			\
 					--exclude='proc'		\
 					--exclude='sys'			\
 					--exclude='system'		|| :
 }
 
-proot_deploy () {
-	console.inf "Initializing proot setup."
+image_deploy () {
+	console.inf "Initializing image setup."
 	echo
 
 	console.fwd "Initializing..."
@@ -91,7 +91,7 @@ proot_deploy () {
 
 	console.download "${iso_url}" "${SETUP_DIRECTORY}" "${iso_archive}"
 
-	console.inf "Creating proot directory."
+	console.inf "Creating image directory."
 	echo
 
 	mkdir -p "${ROOT_DIRECTORY}"
@@ -106,7 +106,7 @@ proot_deploy () {
 
 	cd "${ROOT_DIRECTORY}" || exit 1
 
-	proot_unpack "${SETUP_DIRECTORY}/${iso_archive}" || exit 1 &
+	image_unpack "${SETUP_DIRECTORY}/${iso_archive}" || exit 1 &
 
 	console.progress "Unpacking..."
 	echo
@@ -126,4 +126,4 @@ proot_deploy () {
 
 # run setup
 
-proot_deploy
+image_deploy
