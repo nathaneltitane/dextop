@@ -153,6 +153,19 @@ do
 
 	if [[ "${USERNAME}" == "${USER}" ]]
 	then
+		console.scs "User ${USERNAME} exists."
+		echo
+		
+		# break out of loop if user is found
+
+		break
+	fi
+	
+	if [[ -z "${USERNAME}" ]]
+	then
+		console.wrn "No user specified - Defaulting."
+		echo
+		
 		# break out of loop if user is found
 
 		break
@@ -172,8 +185,7 @@ do
 
 		# login message warning
 
-		console.err "User ${entry} does not exist:"
-		console.err "Please verify user name input and try again."
+		console.err "User ${USERNAME} does not exist."
 		echo
 		console.wrn "Entering as '${USER}'."
 		echo
