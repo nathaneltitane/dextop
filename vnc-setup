@@ -74,11 +74,9 @@ unset SESSION_MANAGER
 
 if [ "${SESSION}" = "dwm" ]
 then
-	if [ -f /usr/bin/dwm-status ]
+	if [ ! -z $(which dwm-status) ]
 	then
 		dwm-status &
-	else
-		:
 	fi
 fi
 
