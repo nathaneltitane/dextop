@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# script #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="02-07-2020"
+
+# usage #
+
+# variables #
+
+# message #
+
+console.title "Linux on Android" "Termux // Dextop // Ubuntu" "${version}"
+
+console.fwd "Initializing setup [ termux ]..."
+echo
