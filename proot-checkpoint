@@ -51,4 +51,4 @@ done
 
 # confirm uninterrupted setup for cleanup
 
-echo "yes" > "${HOME}"/proot-setup-complete
+echo "yes" > "${BINARIES_DIRECTORY}"/proot-setup-complete
