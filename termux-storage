@@ -108,8 +108,45 @@ mkdir -p "${SETUP_DIRECTORY}"/storage || :
 
 # create new symbolic links for bind mounts
 
+# internal storage
+
+[ ! -f "${SETUP_DIRECTORY}"/storage/internal ] && ln -s -f /storage/emulated/0 "${SETUP_DIRECTORY}"/storage/internal || :
+
+# external storage
+
+if [ $(cat /proc/mounts) > /dev/null ]
+then
+	# use /proc/mounts to detect mounted media:
+	# circumvents /storage access issues (Android 11+)
+	
+	find_storage=$(cat /proc/mounts | sed -r '/[A0-Z9][-][A0-Z9]/!d')
+	external_storage=( ${find_storage} )
+
+	[ ! -d "${SETUP_DIRECTORY}"/storage/external ] && mkdir -p "${SETUP_DIRECTORY}"/storage/external
+	
+	if [ ! -z "${external_storage}" ]
+	then
+		console.scs "Storage media detected [ UUID: ${external_storage} ]."
+		echo
+
+		if [ ! -f "${SETUP_DIRECTORY}"/storage/external ]
+		then
+			ln -s -f /storage/"${storage}" "${SETUP_DIRECTORY}"/storage/external/"${storage}"
+		fi
+
+		console.wait 1
+	else
+		console.err "No storage media detected."
+		echo
+
+		console.fwd "Continuing..."
+		echo
+	fi
+else
+	# use defaults
+	
+	ln -s -f /sdcard "${SETUP_DIRECTORY}"/storage/external
+fi
+
 console.fwd "Linking..."
 echo
-
-ln -s -f /sdcard "${SETUP_DIRECTORY}"/storage/external
-ln -s -f /storage/emulated/0 "${SETUP_DIRECTORY}"/storage/internal
