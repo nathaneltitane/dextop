@@ -120,20 +120,15 @@ then
 	# use /proc/mounts to detect mounted media:
 	# circumvents /storage access issues (Android 11+)
 	
-	find_storage=$(cat /proc/mounts | sed -r '/[A0-Z9][-][A0-Z9]/!d' | grep "/storage" | cut -f 2 -d ' ')
-	external_storage=( ${find_storage} )
-
-	[ ! -d "${SETUP_DIRECTORY}"/storage/external ] && mkdir -p "${SETUP_DIRECTORY}"/storage/external
+	external_storage=$(cat /proc/mounts | sed -r '/[A0-Z9][-][A0-Z9]/!d' | grep "/storage" | cut -f 2 -d ' ')
+	uuid="${external_storage/\/storage\//}"
 	
 	if [ ! -z "${external_storage}" ]
 	then
-		console.scs "Storage media detected [ UUID: ${external_storage} ]."
+		console.scs "Storage media detected [ UUID: ${uuid} ]."
 		echo
 
-		if [ ! -f "${SETUP_DIRECTORY}"/storage/external ]
-		then
-			ln -s -f /storage/"${storage}" "${SETUP_DIRECTORY}"/storage/external/"${storage}"
-		fi
+		[ ! -f "${SETUP_DIRECTORY}"/storage/external ] && ln -s -f /storage/"${external_storage}" "${SETUP_DIRECTORY}"/storage/external/"
 
 		console.wait 1
 	else
@@ -143,10 +138,6 @@ then
 		console.fwd "Continuing..."
 		echo
 	fi
-else
-	# use defaults
-	
-	ln -s -f /sdcard "${SETUP_DIRECTORY}"/storage/external
 fi
 
 console.fwd "Linking..."
