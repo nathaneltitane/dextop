@@ -151,6 +151,11 @@ unset LD_PRELOAD
 
 last_entry="$(tail -n 1 "${ROOT_DIRECTORY}"/etc/passwd)"
 
+# authentication #
+
+console.fwd "Authenticating..."
+echo
+
 while read -r entry
 do
 	IFS=':'
@@ -160,9 +165,6 @@ do
 	FULL_NAME="${FULL_NAME%,,,}"
 
 	# verify that 'username' matches parsed 'user' entry
-
-	console.fwd "Authenticating..."
-	echo
 
 	if [[ "${USERNAME}" == "${USER}" ]]
 	then
