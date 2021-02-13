@@ -280,7 +280,7 @@ while true
 do
 	# range #
 
-	if [ 1 -gt "${selection}" -lt "${number}" ]
+	if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]]
 	then
 		echo
 		console.err "Invalid selection:"
