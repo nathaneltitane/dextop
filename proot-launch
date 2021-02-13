@@ -33,6 +33,14 @@ do
                         option="root"
                 ;;
 
+				-bvnc)
+						vnc_option="bvnc"
+				;;
+
+				-rvnc)
+						vnc_option="rvnc"
+				;;
+
                 -h|--help)
                         echo
                     	echo -e "Usage: ${script} | [USERNAME] | [APPLICATION] | [OPTION]"
@@ -94,14 +102,16 @@ SHELL=
 TERMINAL="st"
 TMPDIR="/tmp"
 VISUAL=
+VNC=
 
 # explicit VNC viewer application to kill:
 # used when vncserver is stopped or restarted using vnc:// intent
 # when launched via the activity manager [ 'am start -d {URI} -S {APK}' ]
 
-VNC=
-VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
-#VNC="com.realvnc.viewer.android/.app.DesktopActivity"
+[ -z "${vnc_option}" ] && vnc_option="rvnc"
+
+[ "${option}" = "bvnc" ] && VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
+[ "${option}" = "rvnc" ] && VNC="com.realvnc.viewer.android/.app.DesktopActivity"
 
 XAUTHORITY="${XDG_RUNTIME_DIR}/.Xauthority"
 
