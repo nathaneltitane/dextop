@@ -110,7 +110,7 @@ mkdir -p "${SETUP_DIRECTORY}"/storage || :
 
 # internal storage
 
-[ ! -f "${SETUP_DIRECTORY}"/storage/internal ] && ln -s -f /storage/emulated/0 "${SETUP_DIRECTORY}"/storage/internal || :
+[ ! -f "${SETUP_DIRECTORY}"/storage/internal ] && ln -s -f /storage/emulated/0 "${SETUP_DIRECTORY}"/storage/internal
 
 # external storage
 
@@ -125,7 +125,7 @@ then
 	console.scs "Storage media detected [ UUID: ${uuid} ]."
 	echo
 
-	[ ! -f "${SETUP_DIRECTORY}"/storage/external ] && ln -s -f /storage/"${uuid}" "${SETUP_DIRECTORY}"/storage/external/
+	[ ! -f "${SETUP_DIRECTORY}"/storage/external ] && ln -s -f /storage/"${uuid}" "${SETUP_DIRECTORY}"/storage/external
 
 	console.wait 1
 else
