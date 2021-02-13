@@ -11,7 +11,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version #
 
-version="02-07-2020"
+version="02-13-2020"
 
 # usage #
 
@@ -150,6 +150,9 @@ do
 	FULL_NAME="${FULL_NAME%,,,}"
 
 	# verify that 'username' matches parsed 'user' entry
+
+	console.fwd "Authenticating..."
+	echo
 
 	if [[ "${USERNAME}" == "${USER}" ]]
 	then
