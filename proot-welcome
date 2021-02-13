@@ -66,6 +66,16 @@ cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
+console.msg "Updating system."
+
+console.clear 2
+
+console.update
+
+console.upgrade
+
+console.clear 2
+
 console.fwd "Welcome to Ubuntu Dextop!"
 echo
 
