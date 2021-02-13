@@ -11,7 +11,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version #
 
-version="02-07-2020"
+version="02-13-2020"
 
 # usage #
 
@@ -65,6 +65,15 @@ cat << 'FILE' -> "${HOME}"/.bashrc
 
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
+
+console.msg "Updating system."
+echo
+
+console.clear 2
+
+bash "${BINARIES_DIRECTORY}"/termux-download
+
+console.clear 2
 
 console.fwd "Welcome to Termux Dextop!"
 echo
