@@ -115,7 +115,7 @@ mkdir -p "${SETUP_DIRECTORY}"/storage || :
 # external storage
 
 
-if [ $(cat /proc/mounts) > /dev/null ]
+if [[ $(cat /proc/mounts) > /dev/null ]]
 then
 	# use /proc/mounts to detect mounted media:
 	# circumvents /storage access issues (Android 11+)
