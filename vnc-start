@@ -15,7 +15,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version #
 
-version="02-07-2020"
+version="02-13-2020"
 
 # usage #
 
@@ -78,7 +78,7 @@ vnc_launch () {
 
 	# make selection available for automatic start
 
-	# verify user id - do not write to root
+	# verify user id - do not write selection when 'root' user is logged in
 
 	if [[ $(id -u) -ne 0 ]]
 	then
@@ -245,21 +245,32 @@ print_resolutions() {
 	printf '\n'
 }
 
-# show selection
 
-print_resolutions
+# only show selection list when automatic start file and value are present
+
+if [ -s /home/"${USER}".vnc/selection ] && [ 1 -gt $(cat /home/"${USER}"/.vnc/selection) -lt "${number}" ]
+then
+        print_resolutions
+else
+        print_resolutions > /dev/null
+fi
 
 # values #
 
 values_list=(
-	selection
+        selection
 )
 
 # manage user input for values_list
 
 console_rtn=()
 
-console.input ${values_list[@]}
+if [ -s /home/"${USER}"/.vnc/selection ]
+then
+        selection=$(cat /home/"$USER"/.vnc/selection)
+else
+        console.input ${values_list[@]}
+fi
 
 eval ${console_rtn[@]}
 
@@ -269,7 +280,7 @@ while true
 do
 	# range #
 
-	if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]]
+	if [ 1 -gt "${selection}" -lt "${number}" ]
 	then
 		echo
 		console.err "Invalid selection:"
