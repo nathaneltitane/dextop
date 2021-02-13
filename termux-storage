@@ -128,7 +128,7 @@ then
 		console.scs "Storage media detected [ UUID: ${uuid} ]."
 		echo
 
-		[ ! -f "${SETUP_DIRECTORY}"/storage/external ] && ln -s -f /storage/"${external_storage}" "${SETUP_DIRECTORY}"/storage/external/"
+		[ ! -f "${SETUP_DIRECTORY}"/storage/external ] && ln -s -f /storage/"${external_storage}" "${SETUP_DIRECTORY}"/storage/external/
 
 		console.wait 1
 	else
