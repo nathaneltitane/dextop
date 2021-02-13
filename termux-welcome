@@ -69,8 +69,6 @@ source /data/data/com.termux/files/usr/bin/globals
 console.msg "Updating system."
 echo
 
-console.clear 2
-
 bash "${BINARIES_DIRECTORY}"/termux-download
 
 console.clear 2
