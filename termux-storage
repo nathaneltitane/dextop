@@ -115,7 +115,7 @@ mkdir -p "${SETUP_DIRECTORY}"/storage || :
 # external storage
 
 # use /proc/mounts to detect mounted media:
-# circumvents /storage access issues (Android 11+)
+# circumvents /storage access issues and DAC policy (Android 11+)
 
 external_storage=$(cat /proc/mounts | sed -r '/[A0-Z9][-][A0-Z9]/!d' | grep "/storage" | cut -f 2 -d ' ')
 uuid="${external_storage/\/storage\//}"
