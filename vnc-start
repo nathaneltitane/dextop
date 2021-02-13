@@ -248,11 +248,11 @@ print_resolutions() {
 
 # only show selection list when automatic start file and value are present
 
-if [ -s /home/"${USER}".vnc/selection ] && [ 1 -gt $(cat /home/"${USER}"/.vnc/selection) -lt "${number}" ]
+if [ -f /home/"${USER}"/.vnc/selection ]
 then
-        print_resolutions
+	print_resolutions > /dev/null
 else
-        print_resolutions > /dev/null
+	print_resolutions
 fi
 
 # values #
@@ -265,11 +265,11 @@ values_list=(
 
 console_rtn=()
 
-if [ -s /home/"${USER}"/.vnc/selection ]
+if [ -f /home/"${USER}"/.vnc/selection ]
 then
-        selection=$(cat /home/"$USER"/.vnc/selection)
+	selection=$(cat /home/"$USER"/.vnc/selection)
 else
-        console.input ${values_list[@]}
+	console.input ${values_list[@]}
 fi
 
 eval ${console_rtn[@]}
