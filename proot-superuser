@@ -15,10 +15,11 @@ version="02-14-2020"
 
 # usage #
 
-first_name="${1}"
-last_name="${2}"
+user_name="${1}"
+first_name="${2}"
+last_name="${33}"
 
-if [[ -z "${1}" ]] || [[ -z "${2}" ]]
+if [[ -z "${1}" ]]
 then
 	echo
 	echo -e "Usage: ${script} | [First Name] [Last Name] | [OPTION]"
@@ -29,7 +30,7 @@ fi
 
 while (($#))
 do
-        case "${3}" in
+        case "${4}" in
                 -h|--help)
                         echo
                     	echo "Usage: ${script} [First Name] [Last Name] | [OPTION]"
