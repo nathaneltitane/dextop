@@ -11,7 +11,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version #
 
-version="02-07-2020"
+version="02-14-2020"
 
 # usage #
 
@@ -100,7 +100,7 @@ echo
 # /etc/group:
 # group_name:x:group_number:user_name
 
-usermod -a -G ${sudo_id} ${user_name}
+usermod -a -G "${sudo_id}" "${user_name}"
 
 # give user superuser privileges password override
 
@@ -115,4 +115,4 @@ echo "Set disable_coredump false" >> "${ROOT_DIRECTORY}"/etc/sudo.conf
 # root:
 # chmod 4755 /usr/bin/sudo
 
-chmod 0440 /etc/sudoers.d/${user_name}
+chmod 0440 /etc/sudoers.d/"${user_name}"
