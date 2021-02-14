@@ -51,7 +51,7 @@ done
 
 # post setup cleanup
 
-if [! -f "${HOME}"/setup ]
+if [ ! -f "${HOME}"/setup ]
 then
 	console.fwd "Setup complete [ TERMUX ]..."
 	echo
