@@ -160,9 +160,14 @@ while read -r entry
 do
 	IFS=':'
 
-	read USER _ USER_ID GROUP_ID FULL_NAME ROOM_NUMBER WORK_PHONE HOME_PHONE USER_EMAIL HOME SHELL <<< "${entry}"
+	read USER _ USER_ID GROUP_ID GECOS HOME SHELL <<< "${entry}"
 
-	FULL_NAME="${FULL_NAME%,,,}"
+	while read -r fingerprint
+	do
+		IFS=','
+
+		read FULL_NAME ROOM_NUMBER WORK_PHONE HOME_PHONE USER_EMAIL <<< "${GECOS}"
+	done
 
 	# verify that 'username' matches parsed 'user' entry
 
@@ -170,17 +175,17 @@ do
 	then
 		console.scs "User '${USERNAME}' exists."
 		echo
-		
+
 		# break out of loop if user is found
 
 		break
 	fi
-	
+
 	if [[ -z "${USERNAME}" ]]
 	then
 		console.wrn "No user specified - Defaulting."
 		echo
-		
+
 		# break out of loop if user is found
 
 		break
