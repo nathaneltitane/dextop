@@ -71,12 +71,18 @@ done
 
 [ -z "${user_name}" ] && user_name="${first_name,,}"
 
+# set defaults
+
+room_number=""
+work_number=""
+home_number=""
+
 # add user
 
 console.inf "Creating user account."
 echo
 
-adduser "${user_name}" --gecos "${first_name} ${last_name},${work_number},${home_number},${user_email}" --shell "${SHELL}"
+adduser "${user_name}" --gecos "${first_name} ${last_name},${room_number},${work_number},${home_number},${user_email}" --shell "${SHELL}"
 
 # useradd -m -s "${SHELL}" ${user_name}
 
