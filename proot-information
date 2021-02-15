@@ -11,7 +11,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version #
 
-version="02-07-2020"
+version="02-15-2020"
 
 # usage #
 
@@ -63,6 +63,7 @@ echo
 information_list=(
 	first_name
 	last_name
+	user_name
 )
 
 # manage user input for information_list
@@ -82,5 +83,5 @@ cat << FILE ->> "${BINARIES_DIRECTORY}"/globals
 export first_name=${first_name}
 export last_name=${last_name}
 export full_name="$first_name $last_name"
-export user_name=${first_name,,}
+export user_name=${user_name}
 FILE
