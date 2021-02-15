@@ -69,7 +69,7 @@ done
 
 # variables #
 
-# user_name="${first_name,,}"
+[ -z "${user_name}" ] && user_name="${first_name,,}"
 
 # add user
 
