@@ -162,12 +162,13 @@ do
 
 	read USER _ USER_ID GROUP_ID GECOS HOME SHELL <<< "${entry}"
 
-	while read -r fingerprint
-	do
-		IFS=','
+	IFS=','
 
-		read FULL_NAME ROOM_NUMBER WORK_PHONE HOME_PHONE USER_EMAIL <<< "${GECOS}"
-	done
+	read FULL_NAME ROOM_NUMBER WORK_PHONE HOME_PHONE USER_EMAIL <<< "${GECOS}"
+
+	# reset IFS
+
+	IFS=' '
 
 	# verify that 'username' matches parsed 'user' entry
 
@@ -214,10 +215,6 @@ do
 	fi
 
 done < "${ROOT_DIRECTORY}"/etc/passwd
-
-# reset IFS
-
-IFS=' '
 
 # application verification
 
