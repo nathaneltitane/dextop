@@ -166,6 +166,18 @@ do
 
 	read FULL_NAME ROOM_NUMBER WORK_PHONE HOME_PHONE USER_EMAIL <<< "${GECOS}"
 
+	# echo "${USER}"
+	# echo "${USER_ID}"
+	# echo "${GROUP_ID}"
+	# echo "${GECOS}"
+	# echo "${HOME}"
+	# echo "${SHELL}"
+	# echo "${FULL_NAME}"
+	# echo "${ROOM_NUMBER}"
+	# echo "${WORK_PHONE}"
+	# echo "${HOME_PHONE}"
+	# echo "${USER_EMAIL}"
+
 	# reset IFS
 
 	IFS=' '
@@ -215,6 +227,8 @@ do
 	fi
 
 done < "${ROOT_DIRECTORY}"/etc/passwd
+
+exit
 
 # application verification
 
