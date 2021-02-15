@@ -11,7 +11,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version #
 
-version="02-13-2020"
+version="02-15-2020"
 
 # usage #
 
@@ -160,7 +160,7 @@ while read -r entry
 do
 	IFS=':'
 
-	read USER _ USER_ID GROUP_ID FULL_NAME HOME SHELL <<< "${entry}"
+	read USER _ USER_ID GROUP_ID FULL_NAME ROOM_NUMBER WORK_PHONE HOME_PHONE USER_EMAIL HOME SHELL <<< "${entry}"
 
 	FULL_NAME="${FULL_NAME%,,,}"
 
