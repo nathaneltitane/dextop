@@ -59,12 +59,12 @@ do
                         exit
                 ;;
 
-		"")
-			# handle empty argument
-			# use default values specified in script
+				"")
+					# handle empty argument
+					# use default values specified in script
 
-			:
-		;;
+					:
+				;;
 
                 *)
                         echo
