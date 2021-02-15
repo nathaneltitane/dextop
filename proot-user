@@ -76,7 +76,9 @@ done
 console.inf "Creating user account."
 echo
 
-useradd -m -s "${SHELL}" ${user_name}
+adduser "${user_name}" --gecos "${first_name} ${last_name},${work_number},${home_number},${user_email}" --shell "${SHELL}"
+
+# useradd -m -s "${SHELL}" ${user_name}
 
 # get IDs
 

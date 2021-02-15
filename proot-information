@@ -87,4 +87,3 @@ export full_name="$first_name $last_name"
 export user_name="${user_name}"
 export user_email"${user_emailx}"
 FILE
-
