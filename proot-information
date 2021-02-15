@@ -61,9 +61,10 @@ echo
 # values #
 
 information_list=(
+	user_name
 	first_name
 	last_name
-	user_name
+	user_email
 )
 
 # manage user input for information_list
@@ -80,8 +81,10 @@ cat << FILE ->> "${BINARIES_DIRECTORY}"/globals
 
 # user information #
 
-export first_name=${first_name}
-export last_name=${last_name}
+export first_name="${first_name}"
+export last_name="${last_name}"
 export full_name="$first_name $last_name"
-export user_name=${user_name}
+export user_name="${user_name}"
+export user_email"${user_emailx}"
 FILE
+
