@@ -228,8 +228,6 @@ do
 
 done < "${ROOT_DIRECTORY}"/etc/passwd
 
-exit
-
 # application verification
 
 if [ ! -z "${APPLICATION}" ]
