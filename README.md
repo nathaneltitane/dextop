@@ -48,6 +48,8 @@ This provides a session with fake, static entries that should bypass most errors
 
 ### Setting things up:
 
+The setup speed greatly depends on your device model and internet connection speed.
+
 Once the Android applications are installed on your device, open Termux and paste or type:
 
 `curl -sL run.dxtp.app > setup && bash setup <option>`
@@ -58,7 +60,6 @@ Available install options are:
 
 `-m | --minimal: download and install minimal desktop environment and utilities. ( dwm ) [ Default ]`
 
-The setup speed greatly depends on your device model and internet connection speed.
 
 Let the setup run and fetch all the required dependencies: it will prompt you for input once it is ready.
 The rest of the setup is fully automated and should run its course until the proot environment is ready for you to use.
@@ -91,12 +92,9 @@ Close that Termux session by pressing Ctrl+Dor by typing `exit` (simulates a reb
 
 Now you can launch Termux and you will be greeted by the Welcome Prompt:
 
-
 To access your newly created proot you must type:
 
-- `'proot-launch <username> <option>'`               to start your session
-
-or
+- `'proot-launch <username> <option>'`               to start your session or
 
 - `'proot-launch <username> <application> <option>'` to start a specific application on session load.
 
