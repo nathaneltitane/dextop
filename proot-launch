@@ -11,7 +11,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version #
 
-version="02-15-2021"
+version="02-26-2021"
 
 # usage #
 
@@ -186,7 +186,7 @@ do
 
 	if [[ "${USERNAME}" == "${USER}" ]]
 	then
-		console.scs "User '${USERNAME}' exists."
+		console.scs "'${USERNAME}' - valid user name."
 		echo
 
 		# break out of loop if user is found
@@ -218,7 +218,7 @@ do
 
 		# login message warning
 
-		console.err "User ${USERNAME} does not exist."
+		console.err "${USERNAME} - invalid user name."
 		echo
 		console.wrn "Entering as '${USER}'."
 		echo
