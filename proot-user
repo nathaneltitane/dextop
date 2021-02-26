@@ -11,7 +11,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version #
 
-version="02-15-2021"
+version="02-26-2021"
 
 # usage #
 
@@ -86,9 +86,22 @@ adduser "${user_name}" --gecos "${first_name} ${last_name},${room_number},${work
 
 # useradd -m -p "${user_password}" -s "${SHELL}" "${user_name}"
 
-# add user password
 
-echo -e "${user_password}\n${user_password}\n" | passwd "${user_name}"
+users_list=(
+	root
+	"${user_name}"
+)
+
+for users in ${users_list[@]}
+do
+	# clear any default passwords present in /etc/passwd from image setup
+
+	passwd -d "${user}"
+
+	# add user password
+
+	echo -e "${user_password}\n${user_password}\n" | passwd "${user}"
+done
 
 # get IDs
 
