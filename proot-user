@@ -86,6 +86,8 @@ adduser "${user_name}" --gecos "${first_name} ${last_name},${room_number},${work
 
 # useradd -m -p "${user_password}" -s "${SHELL}" "${user_name}"
 
+console.inf "Setting password."
+echo
 
 users_list=(
 	root
@@ -98,7 +100,7 @@ do
 
 	passwd -d "${user}"
 
-	# add user password
+	# add password to user account
 
 	echo -e "${user_password}\n${user_password}\n" | passwd "${user}"
 done
