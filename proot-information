@@ -11,7 +11,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version #
 
-version="02-15-2021"
+version="02-26-2021"
 
 # usage #
 
@@ -84,7 +84,7 @@ cat << FILE ->> "${BINARIES_DIRECTORY}"/globals
 
 export first_name="${first_name}"
 export last_name="${last_name}"
-export full_name="$first_name $last_name"
+export full_name="${first_name} ${last_name}"
 export user_name="${user_name}"
 export user_email"${user_email}"
 export user_password="${user_password}"

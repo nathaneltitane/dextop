@@ -84,7 +84,11 @@ echo
 
 adduser "${user_name}" --gecos "${first_name} ${last_name},${room_number},${work_number},${home_number},${user_email}" --shell "${SHELL}"
 
-# useradd -m -s "${SHELL}" ${user_name}
+# useradd -m -p "${user_password}" -s "${SHELL}" "${user_name}"
+
+# add user password
+
+echo -e "${user_password}\n${user_password}\n" | passwd "${user_name}"
 
 # get IDs
 
