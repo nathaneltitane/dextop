@@ -186,7 +186,7 @@ do
 
 	if [[ "${USERNAME}" == "${USER}" ]]
 	then
-		console.scs "'${USERNAME}' - valid user name."
+		console.scs "Valid user name [ '${USERNAME}' ]"
 		echo
 
 		# break out of loop if user is found
@@ -218,7 +218,7 @@ do
 
 		# login message warning
 
-		console.err "${USERNAME} - invalid user name."
+		console.err "Invalid user name [ ${USERNAME} ]"
 		echo
 		console.wrn "Entering as '${USER}'."
 		echo
