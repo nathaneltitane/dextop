@@ -10,7 +10,7 @@ Dextop is easy and user friendly.
 
 If you compare Dextop to otherprojects, you will see that:
 
-- Itprovides you with an installation of Ubuntu 20.04 (LTS): stable, popular and user-friendly knowledge bases.
+- It provides you with an installation of Ubuntu 20.04 (LTS): stable, popular and user-friendly knowledge bases.
 - It expands the installed base image to run just like a normal PC installation
 - It creates a user and a home directory for you to work in.
 - It installes all the necessary utilities to provide an experince that is close to the native default Ubuntu install ('sudo', etc.)
