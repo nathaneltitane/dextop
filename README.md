@@ -16,7 +16,7 @@ If you compare Dextop to otherprojects, you will see that:
 - It installes all the necessary utilities to provide an experince that is close to the native default Ubuntu install ('sudo', etc.)
 - It sets up your internal and external storage media locations under /media for quick access and reference.
 - It handles all the technical intricacies so that you do not have to bother with them and get right to work.
-- It is configured as a transient chroot: it talks to Android via Termux utilities to access binaries and launch your favorite VNC viewer automatically for you!
+- It is configured as a transient change root system: it talks to Android via Termux utilities to access binaries and launch your favorite VNC viewer automatically for you!
 - It uses a customized [console](https://github.com/nathaneltitane/console) system to handle the setup, colorize prompts and proved the user with a minimal, user-friendly experience. 
 
 Dextop is very quick and efficient: it  uses DWM as a default window manager/desktop session or can also be set up using the more popular XFCE4 desktop environment.
