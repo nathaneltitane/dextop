@@ -29,10 +29,6 @@ administration_list=(
 	sudo
 )
 
-frameworks_list=(
-	libxft2
-)
-
 locales_list=(
 	locales
 	locales-all
