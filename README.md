@@ -56,9 +56,9 @@ Once the Android applications are installed on your device, open Termux and past
 
 Available install options are:
 
-`-f | --full: download and install full desktop environment and utilities. ( xfce4 )`
+`-f | --full: download and install full desktop environment and utilities. ( xfce4 ) [ Default ]`
 
-`-m | --minimal: download and install minimal desktop environment and utilities. ( dwm ) [ Default ]`
+`-m | --minimal: download and install minimal desktop environment and utilities. ( dwm )`
 
 
 Let the setup run and fetch all the required dependencies: it will prompt you for input once it is ready.
