@@ -65,7 +65,7 @@ information_list=(
 	first_name
 	last_name
 	user_email
-#	user_password
+	user_password
 )
 
 # manage user input for information_list
