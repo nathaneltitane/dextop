@@ -159,26 +159,3 @@ then
 	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main	/usr/bin	leocad-download
 	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main	/usr/bin	leocad-launcher
 	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main	/usr/bin	leocad-position
-	
-	# local install #
-	
-	# dwm #
-	
-	console.download https://raw.githubusercontent.com/nathaneltitane/dwm/main	/usr/bin		dwm-build
-	
-	# st #
-	
-	console.download https://raw.githubusercontent.com/nathaneltitane/st/main	/usr/bin		st-build
-	
-	# execute #
-	
-	binaries_list=(
-		dwm-build
-		st-build
-	)
-	
-	for binary in ${binaries_list}
-	do
-		bash "${binary}"
-	done
-fi

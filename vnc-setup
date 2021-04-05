@@ -72,17 +72,10 @@ cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.vnc/xstartup
 unset DBUS_SESSION_BUS_ADDRESS
 unset SESSION_MANAGER
 
-if [ "${SESSION}" = "dwm" ]
-then
-	if [ ! -z $(which dwm-status) ]
-	then
-		dwm-status &
-	fi
-fi
-
 if [ ! -z "${APPLICATION}" ]
 then
-	"${SESSION}" &
+	xfsettingsd &
+	xfwm4 &
 
 	LD_PRELOAD=/lib/libandroid-shmem-aarch64.so $APPLICATION &
 else

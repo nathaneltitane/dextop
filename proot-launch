@@ -89,7 +89,7 @@ done
 
 BROWSER="surf"
 COLORTERM="truecolor"
-SESSION="dwm"
+SESSION="xfce4-session"
 DISPLAY=":1"
 EDITOR="nano"
 LANG="C.UTF-8"
