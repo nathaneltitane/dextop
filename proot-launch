@@ -87,7 +87,7 @@ done
 # used to specify the desktop session login format
 # and environment 'env' or 'printenv'
 
-BROWSER="surf"
+BROWSER="midori"
 COLORTERM="truecolor"
 SESSION="xfce4-session"
 DISPLAY=":1"
@@ -99,7 +99,7 @@ PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/sbi
 PULSE_SERVER="${LOCALHOST}"
 RUNNER="dmenu"
 SHELL=
-TERMINAL="st"
+TERMINAL="xfce4-terminal"
 TMPDIR="/tmp"
 VISUAL=
 VNC=
