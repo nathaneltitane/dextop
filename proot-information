@@ -86,6 +86,6 @@ export first_name="${first_name}"
 export last_name="${last_name}"
 export full_name="${first_name} ${last_name}"
 export user_name="${user_name}"
-export user_email"${user_email}"
+export user_email="${user_email}"
 export user_password="${user_password}"
 FILE
