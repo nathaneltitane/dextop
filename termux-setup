@@ -78,13 +78,13 @@ console.download get.dxtp.app "${BINARIES_DIRECTORY}" termux-download
 
 # setup #
 
-# welcome message
-
-console.run "${BINARIES_DIRECTORY}"/termux-message
-
 # setup termux and proot utilities
 
 console.run "${BINARIES_DIRECTORY}"/termux-download
+
+# welcome message
+
+console.run "${BINARIES_DIRECTORY}"/termux-message
 
 # setup termux package requirements
 
