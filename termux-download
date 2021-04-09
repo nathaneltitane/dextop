@@ -61,6 +61,7 @@ binaries_list=(
 	proot-aliases
 	proot-applications
 	proot-architecture
+	proot-bookmarks
 	proot-checkpoint
 	proot-clean
 	proot-configuration
