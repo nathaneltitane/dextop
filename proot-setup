@@ -3,6 +3,7 @@
 # dependencies #
 
 curl -sL get.cnsl.app/console > "${PREFIX}"/bin/console && source "${PREFIX}"/bin/console
+                                                           source "${PREFIX}"/bin/globals
 
 # script #
 
