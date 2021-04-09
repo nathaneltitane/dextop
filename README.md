@@ -12,15 +12,17 @@ If you compare Dextop to otherprojects, you will see that:
 
 - It provides you with an installation of Ubuntu 20.04 (LTS): stable, popular and user-friendly knowledge bases.
 - It expands the installed base image to run just like a normal PC installation
-- It creates a user and a home directory for you to work in.
-- It installes all the necessary utilities to provide an experince that is close to the native default Ubuntu install ('sudo', etc.)
+- It creates a user profile for secure access and a home directory for you to work in.
+- It installs all the necessary utilities to provide an experince that is close to the native default Ubuntu install ('sudo', etc.)
 - It sets up your internal and external storage media locations under /media for quick access and reference.
-- It handles all the technical intricacies so that you do not have to bother with them and get right to work.
+- It handles all the technical intricacies related to a change root installation so that you do not have to bother with them and get right to work.
 - It is configured as a transient change root system: it talks to Android via Termux utilities to access binaries and launch your favorite VNC viewer automatically for you!
 - It uses a customized [console](https://github.com/nathaneltitane/console) system to handle the setup, colorize prompts and proved the user with a minimal, user-friendly experience. 
 
-Dextop is very quick and efficient: it  uses DWM as a default window manager/desktop session or can also be set up using the more popular XFCE4 desktop environment.
-You get a full set of utilities using XFCE4, but you have been warned, perfomance drops are bound to happen.
+Dextop is very quick and efficient: you can choose in between the familiar XFCE4 desktop environemnt or the more minimal DWM as a window manager/desktop session.
+XFCE4 will provide all the necessary and more familiar graphical utilities but may degrade performance in some cases.
+
+If you've chosen to install and use XFCE4 and you plan on running applications that are made to create 3D models and edit them (such as Blender, LeoCAD, etc.) you need to disable compositing to optimize resource usage: this will give you teh best performance possible.
 
 ### Dextop is great and all, but...
 
