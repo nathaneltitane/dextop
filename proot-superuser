@@ -22,7 +22,7 @@ last_name="${3}"
 if [[ -z "${1}" ]]
 then
 	echo
-	echo -e "Usage: ${script} | [First Name] [Last Name] | [OPTION]"
+	echo -e "Usage: ${script} [User Name] | [First Name] [Last Name] | [OPTION]"
 	echo
 
 	exit 1
