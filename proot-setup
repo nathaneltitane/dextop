@@ -64,6 +64,10 @@ console.download get.dxtp.app "${BINARIES_DIRECTORY}" proot-download
 
 # setup #
 
+# setup proot utilities
+
+console.run "${BINARIES_DIRECTORY}"/proot-download
+
 # welcome message
 
 console.run "${BINARIES_DIRECTORY}"/proot-message
