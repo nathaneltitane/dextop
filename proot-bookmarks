@@ -1,0 +1,70 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# script #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="02-07-2021"
+
+# usage #
+
+while (($#))
+do
+        case "${1}" in
+                -h|--help)
+                        echo
+                        echo -e "Usage: ${script} [OPTION]"
+                        echo
+                        echo -e "Options:"
+			echo
+                        echo -e "-h, --help \t Show help and usage information."
+                        echo
+                        echo -e "'${script}' [ Version ${version} ]"
+                        echo
+
+                        exit
+                ;;
+
+                *)
+                        echo
+                        echo "Usage: ${script} [OPTION]"
+                        echo
+                        echo -e "${script}: Unknown option '${1}'"
+                        echo -e "Type './${script} --help' for help and usage information."
+                        echo
+
+                        exit 1
+                ;;
+        esac
+
+        shift
+done
+
+# variables #
+
+# directories #
+
+# files #
+
+console.inf "Creating configuration files."
+echo
+
+# bookmarks
+
+cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.config/gtk-3.0/
+file:///media/Internal
+FILE
+
+if [ -d /media/External ]
+then
+    cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.config/gtk-3.0/
+    file:///media/External
+    FILE
+fi
