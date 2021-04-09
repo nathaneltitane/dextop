@@ -62,13 +62,13 @@ echo
 
 # write bookmarks
 
-cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.config/gtk-3.0/
+cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.config/gtk-3.0/bookmarks
 file:///media/Internal
 FILE
 
 if [ -d /media/External ]
 then
-    cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.config/gtk-3.0/
+    cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.config/gtk-3.0/bookmarks
     file:///media/External
     FILE
 fi
