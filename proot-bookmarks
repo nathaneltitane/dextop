@@ -51,12 +51,16 @@ done
 
 # directories #
 
-# files #
+# bookmarks #
 
-console.inf "Creating configuration files."
+console.inf "Creating bookmarks."
 echo
 
-# bookmarks
+# check for directory
+
+[ ! -d "${ROOT_DIRECTORY}"/home/"${user_name}"/.config/gtk-3.0/ ] && mkdir -p "${ROOT_DIRECTORY}"/home/"${user_name}"/.config/gtk-3.0/
+
+# write bookmarks
 
 cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.config/gtk-3.0/
 file:///media/Internal
