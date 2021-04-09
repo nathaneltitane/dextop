@@ -51,7 +51,7 @@ done
 
 # set defaults
 
-[ -z "${install_option}" ] && install_option="minimal" || :
+[ -z "${install_option}" ] && install_option="full"
 
 # export variables
 
