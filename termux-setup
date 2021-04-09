@@ -3,7 +3,6 @@
 # dependencies #
 
 curl -sL get.cnsl.app/console > "${PREFIX}"/bin/console && source "${PREFIX}"/bin/console
-curl -sL get.dxtp.app/globals > "${PREFIX}"/bin/globals && source "${PREFIX}"/bin/globals
 
 # script #
 
@@ -60,14 +59,27 @@ done
 
 # variables #
 
+# setup variables #
+
 # set defaults
 
 [ -z "${install_option}" ] && install_option="full"
 
 # export variables
 
-echo "export version=${version}" >> "${PREFIX}"/bin/globals
-echo "export install_option=${install_option}"	>> "${PREFIX}"/bin/globals
+echo '# globals #'										>> "${PREFIX}"/bin/globals
+echo 'export INITIAL_DIRECTORY="${PWD}"'				>> "${PREFIX}"/bin/globals
+echo 'export SETUP_DIRECTORY="${PREFIX%/*}"'			>> "${PREFIX}"/bin/globals
+echo 'export BINARIES_DIRECTORY="${PREFIX}"/bin'		>> "${PREFIX}"/bin/globals
+echo 'export LIBRARIES_DIRECTORY="${PREFIX}"/lib'		>> "${PREFIX}"/bin/globals
+echo 'export ROOT_DIRECTORY="${SETUP_DIRECTORY}"/img'	>> "${PREFIX}"/bin/globals
+echo 'export BIND_DIRECTORY="${SETUP_DIRECTORY}"/mnt'	>> "${PREFIX}"/bin/globals
+echo 'export FAKE_DIRECTORY="${SETUP_DIRECTORY}"/fake'	>> "${PREFIX}"/bin/globals
+echo '# setup variables #'								>> "${PREFIX}"/bin/globals
+echo "export version=${version}"						>> "${PREFIX}"/bin/globals
+echo "export install_option=${install_option}"			>> "${PREFIX}"/bin/globals
+
+source "${PREFIX}"/bin/globals
 
 # download #
 
