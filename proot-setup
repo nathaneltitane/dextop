@@ -3,7 +3,6 @@
 # dependencies #
 
 curl -sL get.cnsl.app/console > "${PREFIX}"/bin/console && source "${PREFIX}"/bin/console
-curl -sL get.dxtp.app/globals > "${PREFIX}"/bin/globals && source "${PREFIX}"/bin/globals
 
 # script #
 
