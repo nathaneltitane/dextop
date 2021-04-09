@@ -89,6 +89,10 @@ console.run "${BINARIES_DIRECTORY}"/proot-message
 
 "${BINARIES_DIRECTORY}"/proot-superuser "${user_name}"
 
+# setup proot file manager bookmarks
+
+"${BINARIES_DIRECTORY}"/proot-bookmarks
+
 # setup proot environment files
 
 "${BINARIES_DIRECTORY}"/proot-environment
