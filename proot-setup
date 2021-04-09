@@ -3,7 +3,6 @@
 # dependencies #
 
 curl -sL get.cnsl.app/console > "${PREFIX}"/bin/console && source "${PREFIX}"/bin/console
-                                                           source "${PREFIX}"/bin/globals
 
 # script #
 
@@ -54,6 +53,8 @@ done
 [ -z "${install_option}" ] && install_option="full"
 
 # export variables
+
+source "${PREFIX}"/bin/globals
 
 # download #
 
