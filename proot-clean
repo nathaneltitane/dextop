@@ -67,14 +67,14 @@ then
 	# remove scripts
 
 	setup_files_list=(
-		/home/termux/setup
+		/data/data/com.termux/files//home/termux/setup
 		"${BINARIES_DIRECTORY}"/proot-setup
 		"${BINARIES_DIRECTORY}"/proot-setup-complete
 	)
 
 	for file in ${setup_files_list[@]}
 	do
-		rm "${file}" || :
+		rm "${file}"
 	done
 
 	console.scs "Proot deployment and configuration complete."
