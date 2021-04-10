@@ -51,7 +51,7 @@ done
 
 # post setup cleanup
 
-if [[ "$(cat /root/proot-setup-complete)" = "yes" ]]
+if [[ "$(cat ${BINARIES_DIRECTORY}/proot-setup-complete)" = "yes" ]]
 then
 	console.fwd "Setup complete [ proot ]..."
 	echo
@@ -69,7 +69,7 @@ then
 	setup_files_list=(
 		/home/termux/setup
 		"${BINARIES_DIRECTORY}"/proot-setup
-		"${BINARIES_DIRECTORY}"proot-setup-complete
+		"${BINARIES_DIRECTORY}"/proot-setup-complete
 	)
 
 	for file in ${setup_files_list[@]}
