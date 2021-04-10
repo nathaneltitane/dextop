@@ -164,3 +164,4 @@ then
 	
 	console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/templates/utilities/xfconf-read	/usr/bin	xfconf-read
 	console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/templates/utilities/xfconf-write	/usr/bin	xfconf-write
+fi
