@@ -162,6 +162,6 @@ then
 	
 	# xfce #
 	
-	console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/templates/utilities/xfconf-read	/usr/bin	xfconf-read
-	console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/templates/utilities/xfconf-write	/usr/bin	xfconf-write
+	console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/templates/utilities				/usr/bin	xfconf-read
+	console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/templates/utilities				/usr/bin	xfconf-write
 fi
