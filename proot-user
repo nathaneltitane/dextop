@@ -11,7 +11,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version #
 
-version="02-26-2021"
+version="04-12-2021"
 
 # usage #
 
@@ -82,7 +82,7 @@ home_number=""
 console.inf "Creating user account."
 echo
 
-adduser "${user_name}" --gecos "${first_name} ${last_name},${room_number},${work_number},${home_number},${user_email}" --shell "${SHELL}"
+adduser "${user_name}" --gecos "${full_name},${room_number},${work_number},${home_number},${user_email}" --shell "${SHELL}"
 
 # useradd -m -p "${user_password}" -s "${SHELL}" "${user_name}"
 
