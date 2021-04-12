@@ -82,7 +82,7 @@ home_number=""
 console.inf "Creating user account."
 echo
 
-adduser "${user_name}" --gecos "${full_name},${room_number},${work_number},${home_number},${user_email}" --shell "${SHELL}"
+echo -e "${user_password}\n${user_password}\n" | adduser "${user_name}" --gecos "${full_name},${room_number},${work_number},${home_number},${user_email}" --shell "${SHELL}"
 
 # useradd -m -p "${user_password}" -s "${SHELL}" "${user_name}"
 
@@ -98,11 +98,11 @@ for users in ${users_list[@]}
 do
 	# clear any default passwords present in /etc/passwd from image setup
 
-	passwd -d "${user}"
+	passwd -d "${user_name}"
 
 	# add password to user account
 
-	echo -e "${user_password}\n${user_password}\n" | passwd "${user}"
+	echo -e "${user_password}\n${user_password}\n" | passwd "${user_name}"
 done
 
 # get IDs
