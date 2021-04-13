@@ -67,7 +67,7 @@ then
 	# remove scripts
 
 	setup_files_list=(
-		/data/data/com.termux/files//home/termux/setup
+		/data/data/com.termux/files/home/setup
 		"${BINARIES_DIRECTORY}"/proot-setup
 		"${BINARIES_DIRECTORY}"/proot-setup-complete
 	)
