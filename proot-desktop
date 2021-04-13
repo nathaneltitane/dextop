@@ -30,7 +30,6 @@ xfce4-keyboard-shortcuts /commands/default/Print                    xfce4-screen
 xfce4-keyboard-shortcuts /commands/default/XF86Display              xfce4-display-settings --minimal
 xfce4-keyboard-shortcuts /commands/default/XF86Mail                 exo-open --launch MailReader
 xfce4-keyboard-shortcuts /commands/default/XF86WWW                  exo-open --launch WebBrowser
-xfce4-keyboard-shortcuts /providers                                 <<UNSUPPORTED>>
 xfce4-keyboard-shortcuts /xfwm4/custom/<Alt><Shift>Tab              cycle_reverse_windows_key
 xfce4-keyboard-shortcuts /xfwm4/custom/<Alt>Delete                  del_workspace_key
 xfce4-keyboard-shortcuts /xfwm4/custom/<Alt>F10                     maximize_window_key
@@ -139,19 +138,14 @@ xfce4-keyboard-shortcuts /xfwm4/default/Up                          up_key
 xfce4-session /general/FailsafeSessionName          Failsafe
 xfce4-session /general/LockCommand
 xfce4-session /general/PromptOnLogout               false
-xfce4-session /sessions/Failsafe/Client0_Command    <<UNSUPPORTED>>
 xfce4-session /sessions/Failsafe/Client0_PerScreen  false
 xfce4-session /sessions/Failsafe/Client0_Priority   15
-xfce4-session /sessions/Failsafe/Client1_Command    <<UNSUPPORTED>>
 xfce4-session /sessions/Failsafe/Client1_PerScreen  false
 xfce4-session /sessions/Failsafe/Client1_Priority   20
-xfce4-session /sessions/Failsafe/Client2_Command    <<UNSUPPORTED>>
 xfce4-session /sessions/Failsafe/Client2_PerScreen  false
 xfce4-session /sessions/Failsafe/Client2_Priority   25
-xfce4-session /sessions/Failsafe/Client3_Command    <<UNSUPPORTED>>
 xfce4-session /sessions/Failsafe/Client3_PerScreen  false
 xfce4-session /sessions/Failsafe/Client3_Priority   30
-xfce4-session /sessions/Failsafe/Client4_Command    <<UNSUPPORTED>>
 xfce4-session /sessions/Failsafe/Client4_PerScreen  false
 xfce4-session /sessions/Failsafe/Client4_Priority   35
 xfce4-session /sessions/Failsafe/Count              5
@@ -159,7 +153,6 @@ xfce4-session /sessions/Failsafe/IsFailsafe         true
 xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace0/color-style  0
 xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace0/image-style  0
 xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace0/last-image   /usr/share/backgrounds/xfce/xfce-stripes.png
-xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace0/rgba1        <<UNSUPPORTED>>
 xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace1/color-style  0
 xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace1/image-style  5
 xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace1/last-image   /usr/share/backgrounds/xfce/xfce-stripes.png
@@ -275,7 +268,6 @@ xfwm4 /general/urgent_blink                    false
 xfwm4 /general/use_compositing                 false
 xfwm4 /general/vblank_mode                     auto
 xfwm4 /general/workspace_count                 4
-xfwm4 /general/workspace_names                 <<UNSUPPORTED>>
 xfwm4 /general/wrap_cycle                      true
 xfwm4 /general/wrap_layout                     true
 xfwm4 /general/wrap_resistance                 10
@@ -285,12 +277,10 @@ xfwm4 /general/zoom_desktop                    true
 displays /ActiveProfile  Default
 thunar /last-view  ThunarIconView
 xfce4-panel /configver                         2
-xfce4-panel /panels                            <<UNSUPPORTED>>
 xfce4-panel /panels/panel-1/autohide-behavior  1
 xfce4-panel /panels/panel-1/disable-struts     true
 xfce4-panel /panels/panel-1/icon-size          16
 xfce4-panel /panels/panel-1/length             100
-xfce4-panel /panels/panel-1/plugin-ids         <<UNSUPPORTED>>
 xfce4-panel /panels/panel-1/position           p=6;x=0;y=0
 xfce4-panel /panels/panel-1/position-locked    true
 xfce4-panel /panels/panel-1/size               26
