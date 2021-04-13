@@ -55,7 +55,7 @@ mkdir -p "${FAKE_DIRECTORY}"
 
 # files #
 
-console.inf "Creating /proc entries."
+console.inf "Creating entries. [ /proc ]"
 echo
 
 # /proc/loadavg
