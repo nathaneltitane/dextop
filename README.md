@@ -2,32 +2,33 @@
  
 ![termux dextop](https://github.com/nathaneltitane/dextop/blob/master/termux.png?raw=true)
 
-This project provides any user owning a modern android device, the ability to setup their own Linux-based work environment and use it as their primary workstation.
+This project provides any user owning a modern Android device, the ability to setup their own Linux-based work environment and use it as their primary workstation.
 
-With Dextop, your device turns into a workstation in the matter of minutes without all the hassle of technical know-how and having to dig through the internet to get staright to work.
+Dextop turns your device into a workstation in a matter of minutes without all the hassle of technical know-how or having to dig through the internet to get it to work.
 
 Dextop is easy and user friendly.
 
-If you compare Dextop to otherprojects, you will see that:
+Comparison in between Dextop and other projects:
 
 - It provides you with an installation of Ubuntu 20.04 (LTS): stable, popular and user-friendly knowledge bases.
-- It expands the installed base image to run just like a normal PC installation
+- It expands the installed base image to run just like a normal PC installation.
 - It creates a user profile for secure access and a home directory for you to work in.
-- It installs all the necessary utilities to provide an experince that is close to the native default Ubuntu install ('sudo', etc.)
-- It sets up your internal and external storage media locations under /media for quick access and reference.
-- It handles all the technical intricacies related to a change root installation so that you do not have to bother with them and get right to work.
+- It installs all the necessary utilities to provide you with an experince that is as close as possible to the native default Ubuntu install ('sudo', etc.)
+- It sets up your internal and external storage media locations under /media (with bookmarks) for quick access and reference.
+- It handles all the technical intricacies related to a change root installation so that you do not have to bother with them and get right to work!
 - It is configured as a transient change root system: it talks to Android via Termux utilities to access binaries and launch your favorite VNC viewer automatically for you!
 - It uses a customized [console](https://github.com/nathaneltitane/console) system to handle the setup, colorize prompts and proved the user with a minimal, user-friendly experience. 
 
 Dextop is very quick and efficient: you can choose in between the familiar XFCE4 desktop environemnt or the more minimal DWM as a window manager/desktop session.
-XFCE4 will provide all the necessary and more familiar graphical utilities but may degrade performance in some cases.
+XFCE4 will provide all the necessary and more familiar graphical utilities and applications.
 
-If you've chosen to install and use XFCE4 and you plan on running applications that are made to create 3D models and edit them (such as Blender, LeoCAD, etc.) you need to disable compositing to optimize resource usage: this will give you teh best performance possible.
+Under XFCE4, compositing is disabled by default to optimize resource usage and prevent display bugs: this is done to give you the best possible performance and experience according to your device.
+Disabling compositing is required due to Android user-space limitations and limited hardware access: there is no graphics hardware acceleration available - the change root graphics are emulated and run on LLVM.
 
-### Dextop is great and all, but...
+### Power users, you have been warned!
 
 Dextop does not install or configure sound output or advanced mail services!
-It is made to run in tandem with Samsung'S Dex: all other features such as music, mail and web browsing should preferably be taken care of using native android applications.
+It is made to run in tandem with Samsung's Dex: all other features such as music, mail and web browsing should preferably be taken care of using native Android applications that are readily installed and configured on your device.
 
 Services backend and other advanced features that require access to restricted core system directories are bound to fail:
 If you want to run things just like on any other computer, you must root your device to remove those limitations and gain access to all system directories.
@@ -37,7 +38,7 @@ This provides a session with fake, static entries that should bypass most errors
 
 ### To get started, you will need:
 
-- Modern Android device (running android 7.0+: this is a Termux limitation)
+- Modern Android device (running Android 7.0+: this is a Termux limitation)
 - Mouse (bluetooth or other)
 - Keyboard (bluetooth or other)
 - Power source (for extended work periods and performance requirements: Samsung Dex limitation)
@@ -50,7 +51,7 @@ This provides a session with fake, static entries that should bypass most errors
 
 ### Setting things up:
 
-The setup speed greatly depends on your device model and internet connection speed.
+The setup speed greatly depends on your device model and internet connection speed!
 
 Once the Android applications are installed on your device, open Termux and paste or type:
 
