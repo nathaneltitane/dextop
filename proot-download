@@ -65,8 +65,8 @@ console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main			
 
 # xfce
 
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/templates/utilities	/usr/bin	xfconf-read
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/templates/utilities	/usr/bin	xfconf-write
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin	xfconf-read
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin	xfconf-write
 
 # run  #
 
@@ -77,6 +77,7 @@ echo
 console.wait 2
 
 binaries_list=(
+	leocad-download
 	leocad-configuration
 )
 
