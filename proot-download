@@ -70,11 +70,20 @@ console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/te
 
 # run  #
 
+
+console.fwd "Configuring..."
+echo
+
+console.wait 2
+
 binaries_list=(
 	leocad-configuration
 )
 
 for binary in ${binaries_list[@]}
 do
+	console.msg "Running [ '${binary}' ]"
+	echo
+
 	bash "${binary}"
 done
