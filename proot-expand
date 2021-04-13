@@ -66,4 +66,8 @@ console.upgrade
 console.fwd "Expanding root image..."
 echo
 
-console.silence "yes | unminimize"
+console.silence "yes | unminimize" &
+echo
+
+console.progress "Expanding..."
+echo
