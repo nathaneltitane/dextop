@@ -58,8 +58,8 @@ PORT="590${DISPLAY:1}"
 vnc_launch () {
 	console.silence "
 				vncserver								\
-					-SecurityTypes none					\
-					-localhost yes						\
+					-SecurityTypes none						\
+					-localhost yes							\
 					-depth 24							\
 					-cc 4								\
 					-cleanstale							\
@@ -170,6 +170,8 @@ print_resolutions() {
 		GPXL          2560    1440
 		GP            1920    1080
 
+		SGN20+        3088    1440
+		SGN20         3200    1440
 		SGN10+        3040    1440
 		SGN10         2280    1080
 		SGN9          2960    1440
