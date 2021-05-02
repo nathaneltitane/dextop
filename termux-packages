@@ -93,15 +93,25 @@ termux_list=(
 )
 
 utilities_list=(
+	aspell
 	curl
 	dialog
+	ffmpeg
+	git
+	hub
 	jq
 	nano
+	net-tools
+	nmap
 	openssh
+	p7zip
 	proot
+	python
 	rsync
-	spell
+	sshpass
+	unrar
 	wget
+	zip
 )
 
 install_list=(
