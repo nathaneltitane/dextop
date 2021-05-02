@@ -99,6 +99,7 @@ utilities_list=(
 	ffmpeg
 	git
 	hub
+	htop*
 	jq
 	nano
 	net-tools
