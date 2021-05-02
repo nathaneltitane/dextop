@@ -1,0 +1,122 @@
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace0/color-style             0
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace0/image-style             0
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace0/last-image              
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace1/color-style             0
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace1/image-style             0
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace1/last-image              
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace2/color-style             0
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace2/image-style             0
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace2/last-image              
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace3/color-style             0
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace3/image-style             0
+xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace3/last-image              
+xfce4-desktop /desktop-icons/file-icons/show-filesystem                         false
+xfce4-desktop /desktop-icons/file-icons/show-home                               false
+xfce4-desktop /desktop-icons/file-icons/show-removable                          false
+xfce4-desktop /desktop-icons/file-icons/show-trash                              false
+xsettings /Gdk/WindowScalingFactor                                              1
+xsettings /Gtk/ButtonImages                                                     true
+xsettings /Gtk/CanChangeAccels                                                  false
+xsettings /Gtk/ColorPalette                                                     black:white:gray50:red:purple:blue:light blue:green:yellow:orange:lavender:brown:goldenrod4:dodger blue:pink:light green:gray10:gray30:gray75:gray90
+xsettings /Gtk/CursorThemeName                                                  
+xsettings /Gtk/CursorThemeSize                                                  0
+xsettings /Gtk/DecorationLayout                                                 menu:minimize,maximize,close
+xsettings /Gtk/FontName                                                         Sans 10
+xsettings /Gtk/IconSizes                                                        
+xsettings /Gtk/KeyThemeName                                                     
+xsettings /Gtk/MenuBarAccel                                                     F10
+xsettings /Gtk/MenuImages                                                       true
+xsettings /Gtk/MonospaceFontName                                                Monospace 10
+xsettings /Gtk/ToolbarIconSize                                                  3
+xsettings /Gtk/ToolbarStyle                                                     icons
+xsettings /Net/CursorBlink                                                      true
+xsettings /Net/CursorBlinkTime                                                  1200
+xsettings /Net/DndDragThreshold                                                 8
+xsettings /Net/DoubleClickDistance                                              5
+xsettings /Net/DoubleClickTime                                                  400
+xsettings /Net/EnableEventSounds                                                false
+xsettings /Net/EnableInputFeedbackSounds                                        false
+xsettings /Net/IconThemeName                                                    elementary-xfce-dark
+xsettings /Net/SoundThemeName                                                   default
+xsettings /Net/ThemeName                                                        Arc-Dark
+xsettings /Xft/Antialias                                                        -1
+xsettings /Xft/HintStyle                                                        hintnone
+xsettings /Xft/Hinting                                                          -1
+xsettings /Xft/RGBA                                                             none
+xfwm4 /general/activate_action                                                  bring
+xfwm4 /general/borderless_maximize                                              true
+xfwm4 /general/box_move                                                         false
+xfwm4 /general/box_resize                                                       false
+xfwm4 /general/button_layout                                                    O|SHMC
+xfwm4 /general/button_offset                                                    0
+xfwm4 /general/button_spacing                                                   0
+xfwm4 /general/click_to_focus                                                   true
+xfwm4 /general/cycle_apps_only                                                  false
+xfwm4 /general/cycle_draw_frame                                                 true
+xfwm4 /general/cycle_hidden                                                     true
+xfwm4 /general/cycle_minimum                                                    true
+xfwm4 /general/cycle_preview                                                    false
+xfwm4 /general/cycle_raise                                                      false
+xfwm4 /general/cycle_tabwin_mode                                                0
+xfwm4 /general/cycle_workspaces                                                 false
+xfwm4 /general/double_click_action                                              maximize
+xfwm4 /general/double_click_distance                                            5
+xfwm4 /general/double_click_time                                                250
+xfwm4 /general/easy_click                                                       Alt
+xfwm4 /general/focus_delay                                                      250
+xfwm4 /general/focus_hint                                                       true
+xfwm4 /general/focus_new                                                        true
+xfwm4 /general/frame_border_top                                                 0
+xfwm4 /general/frame_opacity                                                    100
+xfwm4 /general/full_width_title                                                 true
+xfwm4 /general/horiz_scroll_opacity                                             false
+xfwm4 /general/inactive_opacity                                                 100
+xfwm4 /general/maximized_offset                                                 0
+xfwm4 /general/mousewheel_rollup                                                true
+xfwm4 /general/move_opacity                                                     100
+xfwm4 /general/placement_mode                                                   center
+xfwm4 /general/placement_ratio                                                  20
+xfwm4 /general/popup_opacity                                                    100
+xfwm4 /general/prevent_focus_stealing                                           false
+xfwm4 /general/raise_delay                                                      250
+xfwm4 /general/raise_on_click                                                   true
+xfwm4 /general/raise_on_focus                                                   false
+xfwm4 /general/raise_with_any_button                                            true
+xfwm4 /general/repeat_urgent_blink                                              false
+xfwm4 /general/resize_opacity                                                   100
+xfwm4 /general/scroll_workspaces                                                true
+xfwm4 /general/shadow_delta_height                                              0
+xfwm4 /general/shadow_delta_width                                               0
+xfwm4 /general/shadow_delta_x                                                   0
+xfwm4 /general/shadow_delta_y                                                   -3
+xfwm4 /general/shadow_opacity                                                   50
+xfwm4 /general/show_app_icon                                                    false
+xfwm4 /general/show_dock_shadow                                                 false
+xfwm4 /general/show_frame_shadow                                                false
+xfwm4 /general/show_popup_shadow                                                false
+xfwm4 /general/snap_resist                                                      false
+xfwm4 /general/snap_to_border                                                   true
+xfwm4 /general/snap_to_windows                                                  true
+xfwm4 /general/snap_width                                                       10
+xfwm4 /general/theme                                                            Arc-Dark
+xfwm4 /general/tile_on_move                                                     true
+xfwm4 /general/title_alignment                                                  center
+xfwm4 /general/title_font                                                       Sans Bold 9
+xfwm4 /general/title_horizontal_offset                                          0
+xfwm4 /general/title_shadow_active                                              false
+xfwm4 /general/title_shadow_inactive                                            false
+xfwm4 /general/title_vertical_offset_active                                     0
+xfwm4 /general/title_vertical_offset_inactive                                   0
+xfwm4 /general/titleless_maximize                                               false
+xfwm4 /general/toggle_workspaces                                                false
+xfwm4 /general/unredirect_overlays                                              false
+xfwm4 /general/urgent_blink                                                     false
+xfwm4 /general/use_compositing                                                  false
+xfwm4 /general/vblank_mode                                                      auto
+xfwm4 /general/workspace_count                                                  4
+xfwm4 /general/wrap_cycle                                                       true
+xfwm4 /general/wrap_layout                                                      true
+xfwm4 /general/wrap_resistance                                                  10
+xfwm4 /general/wrap_windows                                                     true
+xfwm4 /general/wrap_workspaces                                                  false
+xfwm4 /general/zoom_desktop                                                     true
