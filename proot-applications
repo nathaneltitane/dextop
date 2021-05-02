@@ -86,7 +86,6 @@ fi
 # packages #
 
 applications_list=(
-	blender
 	leocad
 	povray
 	youtube-dl
@@ -116,9 +115,6 @@ utilities_list=(
 	spell
 	ssh
 	unrar
-	wmctrl
- 	xclip
-	xdotool
 	zip
 )
 
