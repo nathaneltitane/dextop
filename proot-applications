@@ -99,23 +99,7 @@ frameworks_list=(
 )
 
 utilities_list=(
-	curl
-	dialog
-	ffmpeg
-	git
-	hub
-	jq
-	nano
-	net-tools
-	nmap
-	openssh-server
-	p7zip
-	python
-	rsync
-	spell
-	ssh
-	unrar
-	zip
+
 )
 
 # install list #
