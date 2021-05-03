@@ -102,7 +102,7 @@ console.run "${BINARIES_DIRECTORY}"/termux-message
 
 console.run "${BINARIES_DIRECTORY}"/termux-packages
 
-# setup termux binaries fixes and links
+# setup termux binary fixes and links
 
 console.run "${BINARIES_DIRECTORY}"/termux-links
 

@@ -77,7 +77,7 @@ console.run "${BINARIES_DIRECTORY}"/proot-message
 
 "${BINARIES_DIRECTORY}"/proot-packages
 
-# setup proot binaries fixes and links
+# setup proot binary fixes and links
 
 "${BINARIES_DIRECTORY}"/proot-links
 
