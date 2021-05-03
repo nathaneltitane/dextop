@@ -57,9 +57,13 @@ binaries_list=(
 	top
 )
 
+console.fwd "Linking binaries..."
+echo
+
 for binary in ${binaries_list[@]}
 do
-	rm -rf /usr/bin/"${binary}"
-
+	console.inf "Linking '${binary}'."
+	echo
+	
 	ln -s -f "${BINARIES_DIRECTORY}"/"$binary"
 done
