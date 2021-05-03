@@ -24,6 +24,7 @@ xfconf-query --create -c xsettings       -p /Gtk/CursorThemeName                
 xfconf-query --create -c xsettings       -p /Gtk/CursorThemeSize                                  -t int    -s  16
 xfconf-query --create -c xsettings       -p /Net/ThemeName                                        -t string -s Arc-Dark
 xfconf-query --create -c xfwm4           -p /general/theme                                        -t string -s Arc-Dark
+xfconf-query --create -c xfwm4           -p /general/title_font                                   -t string -s Sans 10
 xfconf-query --create -c xfwm4           -p /general/snap_to_border                               -t bool   -s true
 xfconf-query --create -c xfwm4           -p /general/snap_to_windows                              -t bool   -s true
 xfconf-query --create -c xfwm4           -p /general/snap_width                                   -t int    -s 10
