@@ -73,7 +73,6 @@ core_utilities_list=(
 	date
 	dd
 	dir
-	dircolors
 	dirname
 	du
 	echo
@@ -85,9 +84,7 @@ core_utilities_list=(
 	fmt
 	fold
 	ginstall
-	groups
 	head
-	id
 	join
 	kill
 	link
@@ -166,9 +163,6 @@ for binary in ${core_utilities_list[@]}
 do
 	if [ -f "${BINARIES_DIRECTORY}"/"${binary}" ]
 	then
-		console.inf "Linking '${binary}'."
-		echo
-
 		ln -s -f "${BINARIES_DIRECTORY}"/"$binary" /usr/bin/"${binary}"
 	fi
 done
@@ -177,9 +171,6 @@ for binary in ${binaries_list[@]}
 do
 	if [ -f "${BINARIES_DIRECTORY}"/"${binary}" ]
 	then
-		console.inf "Linking '${binary}'."
-		echo
-
 		ln -s -f "${BINARIES_DIRECTORY}"/"$binary" /usr/bin/"${binary}"
 	fi
 done
