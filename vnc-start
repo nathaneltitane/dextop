@@ -15,7 +15,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version #
 
-version="02-28-2021"
+version="05-03-2021"
 
 # usage #
 
@@ -58,8 +58,8 @@ PORT="590${DISPLAY:1}"
 vnc_launch () {
 	console.silence "
 				vncserver								\
-					-SecurityTypes none						\
-					-localhost yes							\
+					-SecurityTypes none					\
+					-localhost yes						\
 					-depth 24							\
 					-cc 4								\
 					-cleanstale							\
@@ -86,7 +86,7 @@ vnc_launch () {
 
 		if [[ "${selection}" =~ ^[0-9]+$ ]]
 		then
-			echo "${selection}" > /home/$(id -u -n)/.vnc/selection
+			echo "${selection}" > /home/"${USER}"/.vnc/selection
 		fi
 	fi
 
