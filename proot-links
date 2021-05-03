@@ -53,19 +53,122 @@ option="${1}"
 
 # binaries #
 
-binaries_list=(
+core_utilities_list=(
+	b2sum
+	base32
+	base64
+	basename
+	basenc
+	cat
+	chcon
+	chgrp
+	chmod
+	chown
+	chroot
+	cksum
+	comm
+	cp
+	csplit
+	cut
 	date
-	top
+	dd
+	dir
+	dircolors
+	dirname
+	du
+	echo
+	env
+	expand
+	expr
+	factor
+	false
+	fmt
+	fold
+	ginstall
+	groups
+	head
+	id
+	join
+	kill
+	link
+	ln
+	logname
+	ls
+	md5sum
+	mkdir
+	mkfifo
+	mknod
+	mktemp
+	mv
+	nice
+	nl
+	nohup
+	nproc
+	numfmt
+	od
+	paste
+	pathchk
+	pr
+	printenv
+	printf
+	ptx
+	pwd
+	readlink
+	realpath
+	rm
+	rmdir
+	runcon
+	seq
+	sha1sum
+	sha224sum
+	sha256sum
+	sha384sum
+	sha512sum
+	shred
+	shuf
+	sleep
+	sort
+	split
+	stat
+	stdbuf
+	stty
+	sum
+	sync
+	tac
+	tail
+	tee
+	test
+	timeout
+	touch
+	tr
+	true
+	truncate
+	tsort
+	tty
+	uname
+	unexpand
+	uniq
+	unlink
+	vdir
+	wc
+	whoami
 	yes
+)
+
+binaries_list=(
+	top
 )
 
 console.fwd "Linking binaries..."
 echo
 
-for binary in ${binaries_list[@]}
+for binary in ${core_utilities_list[@]}
 do
-	console.inf "Linking '${binary}'."
-	echo
-	
-	ln -s -f "${BINARIES_DIRECTORY}"/"$binary"
+	if [ -f "${BINARIES_DIRECTORY}"/"${binary}" ]
+	then
+		console.inf "Linking '${binary}'."
+		echo
+
+		ln -s -f "${BINARIES_DIRECTORY}"/"$binary"
+	fi
 done
