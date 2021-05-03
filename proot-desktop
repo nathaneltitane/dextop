@@ -1,22 +1,22 @@
-keyboard-layout /Default/XkbDisable                                    false
-keyboard-layout /Default/XkbLayout                                     ca
-keyboard-layout /Default/XkbVariant                                    fr-legacy
-xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace0/color-style    0
-xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace0/image-style    0
-xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace0/last-image
-xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace1/color-style    0
-xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace1/image-style    0
-xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace1/last-image
-xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace2/color-style    0
-xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace2/image-style    0
-xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace2/last-image
-xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace3/color-style    0
-xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace3/image-style    0
-xfce4-desktop /backdrop/screen0/monitorVNC-0/workspace3/last-image
-xfce4-desktop /desktop-icons/file-icons/show-filesystem                false
-xfce4-desktop /desktop-icons/file-icons/show-home                      false
-xfce4-desktop /desktop-icons/file-icons/show-removable                 false
-xfce4-desktop /desktop-icons/file-icons/show-trash                     false
-xsettings /Net/ThemeName                                               Arc-Dark
-xfwm4 /general/theme                                                   Arc-Dark
-xfwm4 /general/use_compositing                                         false
+xfconf-query --create -c keyboard-layout -p /Default/XkbDisable                                   -t bool   -s false
+xfconf-query --create -c keyboard-layout -p /Default/XkbLayout                                    -t string -s ca
+xfconf-query --create -c keyboard-layout -p /Default/XkbVariant                                   -t string -s fr-legacy
+xfconf-query --create -c xfce4-desktop   -p /backdrop/screen0/monitorVNC-0/workspace0/color-style -t int    -s 0
+xfconf-query --create -c xfce4-desktop   -p /backdrop/screen0/monitorVNC-0/workspace0/image-style -t int    -s 0
+xfconf-query --create -c xfce4-desktop   -p /backdrop/screen0/monitorVNC-0/workspace0/last-image  -t string -s ""
+xfconf-query --create -c xfce4-desktop   -p /backdrop/screen0/monitorVNC-0/workspace1/color-style -t int    -s 0
+xfconf-query --create -c xfce4-desktop   -p /backdrop/screen0/monitorVNC-0/workspace1/image-style -t int    -s 0
+xfconf-query --create -c xfce4-desktop   -p /backdrop/screen0/monitorVNC-0/workspace1/last-image  -t string -s ""
+xfconf-query --create -c xfce4-desktop   -p /backdrop/screen0/monitorVNC-0/workspace2/color-style -t int    -s 0
+xfconf-query --create -c xfce4-desktop   -p /backdrop/screen0/monitorVNC-0/workspace2/image-style -t int    -s 0
+xfconf-query --create -c xfce4-desktop   -p /backdrop/screen0/monitorVNC-0/workspace2/last-image  -t string -s ""
+xfconf-query --create -c xfce4-desktop   -p /backdrop/screen0/monitorVNC-0/workspace3/color-style -t int    -s 0
+xfconf-query --create -c xfce4-desktop   -p /backdrop/screen0/monitorVNC-0/workspace3/image-style -t int    -s 0
+xfconf-query --create -c xfce4-desktop   -p /backdrop/screen0/monitorVNC-0/workspace3/last-image  -t string -s ""
+xfconf-query --create -c xfce4-desktop   -p /desktop-icons/file-icons/show-filesystem             -t bool   -s false
+xfconf-query --create -c xfce4-desktop   -p /desktop-icons/file-icons/show-home                   -t bool   -s false
+xfconf-query --create -c xfce4-desktop   -p /desktop-icons/file-icons/show-removable              -t bool   -s false
+xfconf-query --create -c xfce4-desktop   -p /desktop-icons/file-icons/show-trash                  -t bool   -s false
+xfconf-query --create -c xsettings       -p /Net/ThemeName                                        -t string -s Arc-Dark
+xfconf-query --create -c xfwm4           -p /general/theme                                        -t string -s Arc-Dark
+xfconf-query --create -c xfwm4           -p /general/use_compositing                              -t bool   -s false
