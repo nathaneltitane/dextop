@@ -54,7 +54,9 @@ option="${1}"
 # binaries #
 
 binaries_list=(
+	date
 	top
+	yes
 )
 
 console.fwd "Linking binaries..."
