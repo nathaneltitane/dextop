@@ -53,7 +53,7 @@ done
 
 # youtube-dl
 
-console.download https://yt-dl.org/downloads/latest							/usr/bin	youtube-dl
+console.download https://yt-dl.org/downloads/latest											/usr/bin	youtube-dl
 
 # leocad
 
