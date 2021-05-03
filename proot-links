@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# script #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="05-03-2021"
+
+# usage #
+
+while (($#))
+do
+	case "${1}" in
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-h, --help \t Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version ${version} ]"
+			echo
+
+			exit
+		;;
+
+		*)
+			echo
+			echo "Usage: ${script} [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+		;;
+	esac
+
+	shift
+done
+
+# variables #
+
+option="${1}"
+
+# binaries #
+
+binaries_list=(
+	top
+)
+
+for binary in ${binaries_list[@]}
+do
+	rm -rf /usr/bin/"${binary}"
+
+	ln -s -f "${BINARIES_DIRECTORY}"/"$binary"
+done
