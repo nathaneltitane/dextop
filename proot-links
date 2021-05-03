@@ -169,6 +169,6 @@ do
 		console.inf "Linking '${binary}'."
 		echo
 
-		ln -s -f "${BINARIES_DIRECTORY}"/"$binary"
+		ln -s -f "${BINARIES_DIRECTORY}"/"$binary" /usr/bin/"${binary}"
 	fi
 done
