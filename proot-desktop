@@ -1,3 +1,6 @@
+console.inf "Setting desktop preferences."
+echo
+
 xfconf-query --create -c keyboard-layout -p /Default/XkbDisable                                   -t bool   -s false
 xfconf-query --create -c keyboard-layout -p /Default/XkbLayout                                    -t string -s ca
 xfconf-query --create -c keyboard-layout -p /Default/XkbVariant                                   -t string -s fr-legacy
