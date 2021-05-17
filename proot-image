@@ -69,6 +69,24 @@ iso_archive="ubuntu-base-${distribution_version}-base-${iso_architecture}.tar.gz
 
 [ -z "${distribution_version}" ] && distribution_version="20.04.2"
 
+
+image_backup () {
+	if [[ -d "${ROOT_DIRECTORY}" ]]
+	then
+		for directory in "${ROOT_DIRECTORY}"/*
+		do
+			tar --create													\
+				--verbose													\
+				--preserve-permissions										\
+				--gzip														\
+				--file="${BACKUP_DIRECTORY}"/"${directory}-backup".tar.gz	\
+				--exclude="${ROOT_DIRECTORY}"/"${directory}-backup".tar.gz	\
+				--one-file-system "${ROOT_DIRECTORY}"/"${directory}"
+		done
+	fi
+
+}
+
 image_unpack () {
 	# shorthand
 
@@ -128,22 +146,6 @@ image_deploy () {
 	rm -rf "${SETUP_DIRECTORY}/${iso_archive}"
 }
 
-deployment_backup () {
-	if [[ -d "${ROOT_DIRECTORY}" ]]
-	then
-		for directory in "${ROOT_DIRECTORY}"/*
-		do
-			tar --create													\
-				--verbose													\
-				--preserve-permissions										\
-				--gzip														\
-				--file="${BACKUP_DIRECTORY}"/"${directory}-backup".tar.gz	\
-				--exclude="${ROOT_DIRECTORY}"/"${directory}-backup".tar.gz	\
-				--one-file-system "${ROOT_DIRECTORY}"/"${directory}"
-		done
-	fi
-
-}
 
 if [[ "${option}" = "backup" ]]
 then
@@ -152,7 +154,7 @@ then
 		console.inf "Backing up."
 		echo
 
-		deployment_backup &
+		imaage_backup &
 
 		console.progress "Packing..."
 		echo
@@ -166,7 +168,7 @@ then
 
 	# remove previous deployments
 
-	[ -d "${ROOT_DIRECTORY}" ] && rm -rf "${ROOT_DIRECTORY}" || :
+	[ -d "${ROOT_DIRECTORY}" ] && rm -rf "${ROOT_DIRECTORY}"
 fi
 
 # run setup
