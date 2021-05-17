@@ -15,11 +15,12 @@ version="05-17-2021"
 
 # usage #
 
-distribution_version="${1}"
+distribution_name="${1}"
+distribution_version="${2}"
 
 while (($#))
 do
-        case "${2}" in
+        case "${3}" in
 				-b|--backup)
 					option="backup"
 				;;
@@ -61,15 +62,15 @@ done
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-distribution_name="ubuntu"
-
 iso_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${distribution_version}/release"
 iso_archive="ubuntu-base-${distribution_version}-base-${iso_architecture}.tar.gz"
 
 # set defaults
 
+[ -z "${distribution_name}" ] && distribution_version="ubuntu"
 [ -z "${distribution_version}" ] && distribution_version="20.04"
 
+[ -z "${3}" ] &&  option="wipe"
 
 image_backup () {
 	# shorthand
