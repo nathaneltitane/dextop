@@ -67,9 +67,8 @@ iso_archive="ubuntu-base-${distribution_version}-base-${iso_architecture}.tar.gz
 
 # set defaults
 
-[ -z "${distribution_name}" ] && distribution_version="ubuntu"
-[ -z "${distribution_version}" ] && distribution_version="20.04"
-
+[ -z "${1}" ] && distribution_name="ubuntu"
+[ -z "${2}" ] && distribution_version="20.04"
 [ -z "${3}" ] &&  option="wipe"
 
 image_backup () {
