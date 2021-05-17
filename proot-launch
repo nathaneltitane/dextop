@@ -267,7 +267,7 @@ command="proot"
 
 command+=" --kill-on-exit"
 command+=" --link2symlink"
-command+=" --rootfs=${ROOT_DIRECTORY}"
+command+=" --rootfs=${ROOT_DIRECTORY}/${distribution_version}"
 command+=" --change-id=${USER_ID}:${GROUP_ID}"
 command+=" --pwd=${HOME}"
 command+=" --bind=/apex"
