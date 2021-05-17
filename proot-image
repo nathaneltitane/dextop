@@ -18,6 +18,14 @@ version="02-07-2021"
 while (($#))
 do
         case "${1}" in
+				-b|--backup)
+					option="backup"
+				;;
+
+				-w|--wipe)
+					option="wipe"
+				;;
+
                 -h|--help)
                         echo
                         echo -e "Usage: ${script} [OPTION]"
@@ -69,14 +77,14 @@ image_unpack () {
 	# exclude archive directories: dev | proc | sys | system
 	# 'proot-launch' will bind and mount those device directories to proot
 
-	proot									\
-		--link2symlink							\
-			tar 							\
-				--extract					\
-					--file="${1}"				\
-					--exclude='dev'				\
-					--exclude='proc'			\
-					--exclude='sys'				\
+	proot												\
+		--link2symlink									\
+			tar 										\
+				--extract								\
+					--file="${1}"						\
+					--exclude='dev'						\
+					--exclude='proc'					\
+					--exclude='sys'						\
 					--exclude='system' 2> /dev/null		|| :
 }
 
@@ -94,7 +102,7 @@ image_deploy () {
 	console.inf "Creating image directory."
 	echo
 
-	mkdir -p "${ROOT_DIRECTORY}"
+	mkdir -p "${ROOT_DIRECTORY}"/"${distribution_version}"
 
 	console.inf "Creating bind directory."
 	echo
@@ -120,9 +128,46 @@ image_deploy () {
 	rm -rf "${SETUP_DIRECTORY}/${iso_archive}"
 }
 
-# remove previous deployments
+deployment_backup () {
+	if [[ -d "${ROOT_DIRECTORY}" ]]
+	then
+		for directory in "${ROOT_DIRECTORY}"/*
+		do
+			tar --create													\
+				--verbose													\
+				--preserve-permissions										\
+				--gzip														\
+				--file="${BACKUP_DIRECTORY}"/"${directory}-backup".tar.gz	\
+				--exclude="${ROOT_DIRECTORY}"/"${directory}-backup".tar.gz	\
+				--one-file-system "${ROOT_DIRECTORY}"/"${directory}"
+		done
+	fi
 
-[ -d "${ROOT_DIRECTORY}" ] && rm -rf "${ROOT_DIRECTORY}" || :
+}
+
+if [[ "${option}" = "backup" ]]
+then
+	for directory in "${ROOT_DIRECTORY}"/*
+	do
+		console.inf "Backing up."
+		echo
+
+		deployment_backup &
+
+		console.progress "Packing..."
+		echo
+
+		wait
+	done
+fi
+
+if [[ "${option}" = "wipe" ]]
+then
+
+	# remove previous deployments
+
+	[ -d "${ROOT_DIRECTORY}" ] && rm -rf "${ROOT_DIRECTORY}" || :
+fi
 
 # run setup
 
