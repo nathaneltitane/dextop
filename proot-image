@@ -71,18 +71,30 @@ iso_archive="ubuntu-base-${distribution_version}-base-${iso_architecture}.tar.gz
 
 
 image_backup () {
+	# shorthand
+
+	# tar -cvpzf "${1}" -X "${2}" --one-file-system
+
+	# exclude archive
+	# archive is stored under "${BACKUP_DIRECTORY}"}
+
+
 	if [[ -d "${ROOT_DIRECTORY}" ]]
 	then
+		cd "${ROOT_DIRECTORY}" || exit 1
+
 		for directory in "${ROOT_DIRECTORY}"/*
 		do
 			tar --create													\
 				--verbose													\
 				--preserve-permissions										\
 				--gzip														\
-				--file="${BACKUP_DIRECTORY}"/"${directory}-backup".tar.gz	\
-				--exclude="${ROOT_DIRECTORY}"/"${directory}-backup".tar.gz	\
+				--file="${1}"												\
+				--exclude="${2}"											\
 				--one-file-system "${ROOT_DIRECTORY}"/"${directory}"
 		done
+
+		rm -rf "${ROOT_DIRECTORY}"/"${directory}-backup.tar.gz"
 	fi
 
 }
@@ -154,7 +166,7 @@ then
 		console.inf "Backing up."
 		echo
 
-		imaage_backup &
+		imaage_backup "${BACKUP_DIRECTORY}"/"${directory}-backup.tar.gz" "${ROOT_DIRECTORY}"/"${directory}-backup.tar.gz" &
 
 		console.progress "Packing..."
 		echo
