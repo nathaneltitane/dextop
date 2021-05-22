@@ -15,6 +15,15 @@ version="05-17-2021"
 
 # usage #
 
+if [[ $# -lt 2 ]] || [[ $# -gt 3 ]]
+then
+    echo
+    echo -e "Usage: ${script} [Distribution Name] [Distribution Version]| [OPTION]"
+    echo
+
+    exit 1
+fi
+
 distribution_name="${1}"
 distribution_version="${2}"
 
@@ -27,6 +36,14 @@ do
 
 				-w|--wipe)
 					option="wipe"
+				;;
+
+
+				"")
+            	    # handle empty argument
+        	        # use default values specified in script
+
+     	           :
 				;;
 
                 -h|--help)
