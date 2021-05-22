@@ -83,6 +83,8 @@ iso_archive="ubuntu-base-${distribution_version}-base-${iso_architecture}.tar.gz
 
 # set defaults
 
+[ -z "${iso_architecture}" ] && iso_architecture="arm64"
+
 [ -z "${1}" ] && option="wipe"
 [ -z "${2}" ] && distribution_name="ubuntu"
 [ -z "${3}" ] && distribution_version="20.04"
