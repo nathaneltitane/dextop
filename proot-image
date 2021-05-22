@@ -15,7 +15,7 @@ version="05-17-2021"
 
 # usage #
 
-if [[ $# -lt 2 ]] || [[ $# -gt 3 ]]
+if [[ $# -gt 3 ]]
 then
     echo
     echo -e "Usage: ${script} [Distribution Name] [Distribution Version]| [OPTION]"
@@ -24,12 +24,9 @@ then
     exit 1
 fi
 
-distribution_name="${1}"
-distribution_version="${2}"
-
 while (($#))
 do
-        case "${3}" in
+        case "${1}" in
 				-b|--backup)
 					option="backup"
 				;;
@@ -37,7 +34,6 @@ do
 				-w|--wipe)
 					option="wipe"
 				;;
-
 
 				"")
             	    # handle empty argument
@@ -75,6 +71,9 @@ do
         shift
 done
 
+distribution_name="${2}"
+distribution_version="${3}"
+
 # variables #
 
 script=$(basename -- "${BASH_SOURCE[0]}")
@@ -84,9 +83,9 @@ iso_archive="ubuntu-base-${distribution_version}-base-${iso_architecture}.tar.gz
 
 # set defaults
 
-[ -z "${1}" ] && distribution_name="ubuntu"
-[ -z "${2}" ] && distribution_version="20.04"
-[ -z "${3}" ] && option="wipe"
+[ -z "${1}" ] && option="wipe"
+[ -z "${2}" ] && distribution_name="ubuntu"
+[ -z "${3}" ] && distribution_version="20.04"
 
 image_backup () {
 	# shorthand
