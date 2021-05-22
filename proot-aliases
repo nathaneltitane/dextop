@@ -70,8 +70,8 @@ alias '...'='cd ../../../'
 alias '....'='cd ../../../../'
 alias '.....'='cd ../../../../'
 
-alias 'home'='cd "${HOME}"'
-alias 'root'='cd /'
+alias 'hd'='cd "${HOME}"'
+alias 'rd'='cd /'
 
 alias 'directory'='echo ${PWD}'
 
