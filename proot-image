@@ -11,37 +11,13 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version #
 
-version="05-17-2021"
+version="02-07-2021"
 
 # usage #
-
-if [[ $# -gt 3 ]]
-then
-    echo
-    echo -e "Usage: ${script} [Distribution Name] [Distribution Version]| [OPTION]"
-    echo
-
-    exit 1
-fi
 
 while (($#))
 do
         case "${1}" in
-				-b|--backup)
-					option="backup"
-				;;
-
-				-w|--wipe)
-					option="wipe"
-				;;
-
-				"")
-            	    # handle empty argument
-        	        # use default values specified in script
-
-     	           :
-				;;
-
                 -h|--help)
                         echo
                         echo -e "Usage: ${script} [OPTION]"
@@ -71,52 +47,19 @@ do
         shift
 done
 
-distribution_name="${2}"
-distribution_version="${3}"
-
-# set defaults
-
-[ -z "${iso_architecture}" ] && iso_architecture="arm64"
-
-[ -z "${1}" ] && option="wipe"
-[ -z "${2}" ] && distribution_name="ubuntu"
-[ -z "${3}" ] && distribution_version="20.04"
-
 # variables #
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
+distribution_name="ubuntu"
+distribution_version="20.04.2"
+
 iso_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${distribution_version}/release"
 iso_archive="ubuntu-base-${distribution_version}-base-${iso_architecture}.tar.gz"
 
-image_backup () {
-	# shorthand
+# set defaults
 
-	# tar -cvpzf "${1}" -X "${2}" --one-file-system
-
-	# exclude archive
-	# archive is stored under "${BACKUP_DIRECTORY}"}
-
-
-	if [[ -d "${ROOT_DIRECTORY}" ]]
-	then
-		cd "${ROOT_DIRECTORY}" || exit 1
-
-		for directory in "${ROOT_DIRECTORY}"/*
-		do
-			tar --create													\
-				--verbose													\
-				--preserve-permissions										\
-				--gzip														\
-				--file="${1}"												\
-				--exclude="${2}"											\
-				--one-file-system "${ROOT_DIRECTORY}"/"${directory}"
-		done
-
-		rm -rf "${ROOT_DIRECTORY}"/"${directory}-backup.tar.gz"
-	fi
-
-}
+[ -z "${distribution_version}" ] && distribution_version="20.04.1"
 
 image_unpack () {
 	# shorthand
@@ -126,14 +69,14 @@ image_unpack () {
 	# exclude archive directories: dev | proc | sys | system
 	# 'proot-launch' will bind and mount those device directories to proot
 
-	proot												\
-		--link2symlink									\
-			tar 										\
-				--extract								\
-					--file="${1}"						\
-					--exclude='dev'						\
-					--exclude='proc'					\
-					--exclude='sys'						\
+	proot									\
+		--link2symlink							\
+			tar 							\
+				--extract					\
+					--file="${1}"				\
+					--exclude='dev'				\
+					--exclude='proc'			\
+					--exclude='sys'				\
 					--exclude='system' 2> /dev/null		|| :
 }
 
@@ -151,7 +94,7 @@ image_deploy () {
 	console.inf "Creating image directory."
 	echo
 
-	mkdir -p "${ROOT_DIRECTORY}"/"${distribution_version}"
+	mkdir -p "${ROOT_DIRECTORY}"
 
 	console.inf "Creating bind directory."
 	echo
@@ -177,30 +120,9 @@ image_deploy () {
 	rm -rf "${SETUP_DIRECTORY}/${iso_archive}"
 }
 
-if [[ "${option}" = "backup" ]]
-then
-	for directory in "${ROOT_DIRECTORY}"/*
-	do
-		console.inf "Backing up."
-		echo
+# remove previous deployments
 
-		imaage_backup "${BACKUP_DIRECTORY}"/"${directory}-backup.tar.gz" "${ROOT_DIRECTORY}"/"${directory}-backup.tar.gz" &
-
-		console.progress "Packing..."
-		echo
-
-		wait
-	done
-fi
-
-if [[ "${option}" = "wipe" ]]
-then
-
-	# remove previous deployments
-
-	[ -d "${ROOT_DIRECTORY}" ] && rm -rf "${ROOT_DIRECTORY}"
-fi
-
+[ -d "${ROOT_DIRECTORY}" ] && rm -rf "${ROOT_DIRECTORY}" || :
 
 # run setup
 
