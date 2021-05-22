@@ -74,13 +74,6 @@ done
 distribution_name="${2}"
 distribution_version="${3}"
 
-# variables #
-
-script=$(basename -- "${BASH_SOURCE[0]}")
-
-iso_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${distribution_version}/release"
-iso_archive="ubuntu-base-${distribution_version}-base-${iso_architecture}.tar.gz"
-
 # set defaults
 
 [ -z "${iso_architecture}" ] && iso_architecture="arm64"
@@ -88,6 +81,13 @@ iso_archive="ubuntu-base-${distribution_version}-base-${iso_architecture}.tar.gz
 [ -z "${1}" ] && option="wipe"
 [ -z "${2}" ] && distribution_name="ubuntu"
 [ -z "${3}" ] && distribution_version="20.04"
+
+# variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+iso_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${distribution_version}/release"
+iso_archive="ubuntu-base-${distribution_version}-base-${iso_architecture}.tar.gz"
 
 image_backup () {
 	# shorthand
