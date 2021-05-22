@@ -176,7 +176,6 @@ image_deploy () {
 	rm -rf "${SETUP_DIRECTORY}/${iso_archive}"
 }
 
-
 if [[ "${option}" = "backup" ]]
 then
 	for directory in "${ROOT_DIRECTORY}"/*
@@ -200,6 +199,7 @@ then
 
 	[ -d "${ROOT_DIRECTORY}" ] && rm -rf "${ROOT_DIRECTORY}"
 fi
+
 
 # run setup
 
