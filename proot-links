@@ -124,7 +124,6 @@ core_utilities_list=(
 	shred
 	shuf
 	sleep
-	sort
 	split
 	stat
 	stdbuf
@@ -137,7 +136,6 @@ core_utilities_list=(
 	test
 	timeout
 	touch
-	tr
 	true
 	truncate
 	tsort
