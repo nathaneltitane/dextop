@@ -11,7 +11,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version #
 
-version="02-07-2021"
+version="05-23-2021"
 
 # usage #
 
@@ -51,17 +51,12 @@ done
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-distribution_name="ubuntu"
-distribution_version="20.04.2"
-
-iso_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${distribution_version}/release"
-iso_archive="ubuntu-base-${distribution_version}-base-${iso_architecture}.tar.gz"
+iso_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${DISTRIBUTION_VERSION}/release"
+iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${iso_architecture}.tar.gz"
 
 # set defaults
 
-[ -z "${distribution_version}" ] && distribution_version="20.04"
-
-ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${distribution_name}/${distribution_version}"
+[ -z "${DISTRIBUTION_VERSION}" ] && DISTRIBUTION_VERSION="20.04"
 
 image_unpack () {
 	# shorthand
