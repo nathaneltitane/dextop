@@ -64,14 +64,14 @@ image_unpack () {
 	# exclude archive directories: dev | proc | sys | system
 	# 'proot-launch' will bind and mount those device directories to proot
 
-	proot									\
-		--link2symlink							\
-			tar 							\
-				--extract					\
-					--file="${1}"				\
-					--exclude='dev'				\
-					--exclude='proc'			\
-					--exclude='sys'				\
+	proot												\
+		--link2symlink									\
+			tar 										\
+				--extract								\
+					--file="${1}"						\
+					--exclude='dev'						\
+					--exclude='proc'					\
+					--exclude='sys'						\
 					--exclude='system' 2> /dev/null		|| :
 }
 
