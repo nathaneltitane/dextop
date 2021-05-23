@@ -77,18 +77,13 @@ image_unpack () {
 					--exclude='system' 2> /dev/null		|| :
 }
 
-image_deploy () {
-	console.inf "Initializing image setup."
+image_directories () {
+	console.inf "Creating backup directory."
 	echo
 
-	console.fwd "Initializing..."
-	echo
+	mkdir -p "${BACKUP_DIRECTORY}"
 
-	console.wait 1
-
-	console.download "${iso_url}" "${SETUP_DIRECTORY}" "${iso_archive}"
-
-	console.inf "Creating image directory."
+	console.inf "Creating root  directory."
 	echo
 
 	mkdir -p "${ROOT_DIRECTORY}"
@@ -100,6 +95,18 @@ image_deploy () {
 
 	console.inf "Extracting image contents."
 	echo
+}
+
+image_deploy () {
+	console.inf "Initializing image setup."
+	echo
+
+	console.fwd "Initializing..."
+	echo
+
+	console.wait 1
+
+	console.download "${iso_url}" "${SETUP_DIRECTORY}" "${iso_archive}"
 
 	cd "${ROOT_DIRECTORY}" || exit 1
 
@@ -122,5 +129,7 @@ image_deploy () {
 [ -d "${ROOT_DIRECTORY}" ] && rm -rf "${ROOT_DIRECTORY}" || :
 
 # run setup
+
+image_directories
 
 image_deploy
