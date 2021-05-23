@@ -71,7 +71,6 @@ echo '# globals #'																				>> "${PREFIX}"/bin/globals
 
 echo 'export DISTRIBUTION_NAME="ubuntu"'														>> "${PREFIX}"/bin/globals
 echo 'export DISTRIBUTION_VERSION="20.04"'														>> "${PREFIX}"/bin/globals
-echo 'export OS_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_VERSION}"'						>> "${PREFIX}"/bin/globals
 
 echo 'export INITIAL_DIRECTORY="${PWD}"'														>> "${PREFIX}"/bin/globals
 echo 'export SETUP_DIRECTORY="${PREFIX%/*}"'													>> "${PREFIX}"/bin/globals
@@ -82,7 +81,8 @@ echo 'export IMAGE_DIRECTORY="${SETUP_DIRECTORY}"/img'											>> "${PREFIX}"/
 echo 'export BIND_DIRECTORY="${SETUP_DIRECTORY}"/mnt'											>> "${PREFIX}"/bin/globals
 echo 'export FAKE_DIRECTORY="${SETUP_DIRECTORY}"/fake'											>> "${PREFIX}"/bin/globals
 
-echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${OS_DIRECTORY}"'								>> "${PREFIX}"/bin/globals
+echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_VERSION}"'						>> "${PREFIX}"/bin/globals
+echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'								>> "${PREFIX}"/bin/globals
 
 echo '# setup variables #'																		>> "${PREFIX}"/bin/globals
 
