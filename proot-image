@@ -58,6 +58,7 @@ iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${iso_architecture}.tar.gz
 
 image_archive () {
 	# archive previous deployments to backup directory
+
 	tar --create																					\
 		--verbose																					\
 		--preserve-permissions																		\
