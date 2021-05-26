@@ -54,7 +54,7 @@ iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${iso_architecture}.tar.gz
 
 # set defaults
 
-[ -z "${DISTRIBUTION_VERSION}" ] && DISTRIBUTION_VERSION="20.04"
+[ -z "${DISTRIBUTION_VERSION}" ] && DISTRIBUTION_VERSION="20.04.2"
 
 image_unpack () {
 	# shorthand
