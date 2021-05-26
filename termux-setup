@@ -80,7 +80,7 @@ echo 'export LIBRARIES_DIRECTORY="${PREFIX}"/lib'												>> "${PREFIX}"/bin/
 echo 'export BACKUP_DIRECTORY="${SETUP_DIRECTORY}"/bkp'											>> "${PREFIX}"/bin/globals
 echo 'export IMAGE_DIRECTORY="${SETUP_DIRECTORY}"/img'											>> "${PREFIX}"/bin/globals
 echo 'export BIND_DIRECTORY="${SETUP_DIRECTORY}"/mnt'											>> "${PREFIX}"/bin/globals
-echo 'export FAKE_DIRECTORY="${SETUP_DIRECTORY}"/fake'											>> "${PREFIX}"/bin/globals
+echo 'export PROC_DIRECTORY="${SETUP_DIRECTORY}"/proc'											>> "${PREFIX}"/bin/globals
 
 echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'						>> "${PREFIX}"/bin/globals
 echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'								>> "${PREFIX}"/bin/globals
@@ -137,9 +137,9 @@ console.run "${BINARIES_DIRECTORY}"/proot-architecture
 
 console.run "${BINARIES_DIRECTORY}"/proot-information
 
-# setup proot fake /proc entries
+# setup proot proc /proc entries
 
-console.run "${BINARIES_DIRECTORY}"/proot-fake
+console.run "${BINARIES_DIRECTORY}"/proot-proc
 
 # setup proot image
 

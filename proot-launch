@@ -25,8 +25,8 @@ do
                         option="bind"
                 ;;
 
-                -f|--fake)
-                        option="fake"
+                -f|--proc)
+                        option="proc"
                 ;;
 
                 -r|--root)
@@ -48,7 +48,7 @@ do
                         echo -e "Options:"
                         echo
                         echo -e "-b, --bind \t Full setup: download and install full applications list and utilities."
-                        echo -e "-f, --fake \t Full setup: download and install full applications list and utilities."
+                        echo -e "-f, --proc \t Full setup: download and install full applications list and utilities."
                         echo -e "-p, --proot \t Update setup: update applications list and utilities."
                         echo
                         echo -e "-h, --help \t Show help and usage information."
@@ -125,7 +125,7 @@ XDG_CONFIG_DIRS="/etc/xdg"
 # set defaults
 
 [ -z "${BIND_DIRECTORY}" ]	&& BIND_DIRECTORY="${PREFIX%/*}/mnt"
-[ -z "${FAKE_DIRECTORY}" ]	&& FAKE_DIRECTORY="${PREFIX%/*}/fake"
+[ -z "${PROC_DIRECTORY}" ]	&& PROC_DIRECTORY="${PREFIX%/*}/proc"
 [ -z "${ROOT_DIRECTORY}" ]	&& ROOT_DIRECTORY="${PREFIX%/*}/img"
 
 [ -z "${BROWSER}" ]			&& BROWSER="${BROWSER}"
@@ -280,11 +280,11 @@ command+=" --bind=/proc/self/fd:/dev/fd"
 command+=" --bind=/proc/self/fd/0:/dev/stdin"
 command+=" --bind=/proc/self/fd/1:/dev/stdout"
 command+=" --bind=/proc/self/fd/2:/dev/stderr"
-[[ "${option}" = "fake" && ! $(cat /proc/loadavg > /dev/null 2>&1) ]] && command+=" --bind=${PREFIX/*}/fake/loadavg:/proc/loadavg" || :
-[[ "${option}" = "fake" && ! $(cat /proc/stat    > /dev/null 2>&1) ]] && command+=" --bind=${PREFIX*/}/fake/stat:/proc/stat" || :
-[[ "${option}" = "fake" && ! $(cat /proc/uptime  > /dev/null 2>&1) ]] && command+=" --bind=${PREFIX*/}/fake/uptime:/proc/uptime" || :
-[[ "${option}" = "fake" && ! $(cat /proc/version > /dev/null 2>&1) ]] && command+=" --bind=${PREFIX*/}/fake/version:/proc/version" || :
-[[ "${option}" = "fake" && ! $(cat /proc/vmstat  > /dev/null 2>&1) ]] && command+=" --bind=${PRREFIX*/}/fake/vmstat:/proc/vmstat" || :
+[[ "${option}" = "proc" && ! $(cat /proc/loadavg > /dev/null 2>&1) ]] && command+=" --bind=${PREFIX/*}/proc/loadavg:/proc/loadavg" || :
+[[ "${option}" = "proc" && ! $(cat /proc/stat    > /dev/null 2>&1) ]] && command+=" --bind=${PREFIX*/}/proc/stat:/proc/stat" || :
+[[ "${option}" = "proc" && ! $(cat /proc/uptime  > /dev/null 2>&1) ]] && command+=" --bind=${PREFIX*/}/proc/uptime:/proc/uptime" || :
+[[ "${option}" = "proc" && ! $(cat /proc/version > /dev/null 2>&1) ]] && command+=" --bind=${PREFIX*/}/proc/version:/proc/version" || :
+[[ "${option}" = "proc" && ! $(cat /proc/vmstat  > /dev/null 2>&1) ]] && command+=" --bind=${PRREFIX*/}/proc/vmstat:/proc/vmstat" || :
 command+=" --bind=/storage"
 [ -d "${PREFIX%/*}"/storage/external ] && command+=" --bind=${PREFIX%/*}/storage/external:/media/External" || :
 [ -d "${PREFIX%/*}"/storage/internal ] && command+=" --bind=${PREFIX%/*}/storage/internal:/media/Internal" || :

@@ -69,7 +69,7 @@ binaries_list=(
 	proot-download
 	proot-environment
 	proot-expand
-	proot-fake
+	proot-proc
 	proot-groups
 	proot-image
 	proot-information

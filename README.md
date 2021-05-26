@@ -33,8 +33,8 @@ It is made to run in tandem with Samsung's Dex: all other features such as music
 Services backend and other advanced features that require access to restricted core system directories are bound to fail:
 If you want to run things just like on any other computer, you must root your device to remove those limitations and gain access to all system directories.
 
-For devices that have not been rooted, you can fake the access to /proc using the -fake flag when launching your user session:
-This provides a session with fake, static entries that should bypass most errors, but not all of them.
+For devices that have not been rooted, you can proc the access to /proc using the -proc flag when launching your user session:
+This provides a session with proc, static entries that should bypass most errors, but not all of them.
 
 ### To get started, you will need:
 
