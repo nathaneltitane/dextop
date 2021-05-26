@@ -264,34 +264,33 @@ console.wait 1
 # setup proot command arguments
 
 command="proot"
-
 command+=" --kill-on-exit"
 command+=" --link2symlink"
-command+=" -r ${ROOT_DIRECTORY}"
-command+=" -i ${USER_ID}:${GROUP_ID}"
-[ -d  "${ROOT_DIRECTORY}"/"${HOME}" ] && command+=" -w ${HOME}" || exit 1
-command+=" -b /apex"
-command+=" -b /data"
-command+=" -b /dev"
-command+=" -b /dev/urandom:/dev/urandom"
-command+=" -b ${PREFIX%/*}/home:/home/termux"
-command+=" -b /linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt"
-command+=" -b /proc"
-command+=" -b /proc/self/fd:/dev/fd"
-command+=" -b /proc/self/fd/0:/dev/stdin"
-command+=" -b /proc/self/fd/1:/dev/stdout"
-command+=" -b /proc/self/fd/2:/dev/stderr"
-[[ "${option}" = "fake" && ! $(cat /proc/loadavg > /dev/null 2>&1) ]] && command+=" -b ${PREFIX/*}/fake/loadavg:/proc/loadavg" || :
-[[ "${option}" = "fake" && ! $(cat /proc/stat    > /dev/null 2>&1) ]] && command+=" -b ${PREFIX*/}/fake/stat:/proc/stat" || :
-[[ "${option}" = "fake" && ! $(cat /proc/uptime  > /dev/null 2>&1) ]] && command+=" -b ${PREFIX*/}/fake/uptime:/proc/uptime" || :
-[[ "${option}" = "fake" && ! $(cat /proc/version > /dev/null 2>&1) ]] && command+=" -b ${PREFIX*/}/fake/version:/proc/version" || :
-[[ "${option}" = "fake" && ! $(cat /proc/vmstat  > /dev/null 2>&1) ]] && command+=" -b ${PRREFIX*/}/fake/vmstat:/proc/vmstat" || :
-command+=" -b /storage"
-[ -d "${PREFIX%/*}"/storage/external ] && command+=" -b ${PREFIX%/*}/storage/external:/media/External" || :
-[ -d "${PREFIX%/*}"/storage/internal ] && command+=" -b ${PREFIX%/*}/storage/internal:/media/Internal" || :
-command+=" -b /sys"
-command+=" -b /system"
-command+=" -b /vendor"
+command+=" --rootfs=${ROOT_DIRECTORY}"
+command+=" --change-id=${USER_ID}:${GROUP_ID}"
+[ -d  "${ROOT_DIRECTORY}"/"${HOME}" ] && command+=" --pwd=${HOME}" || exit 1
+command+=" --bind=/apex"
+command+=" --bind=/data"
+command+=" --bind=/dev"
+command+=" --bind=/dev/urandom:/dev/urandom"
+command+=" --bind=${PREFIX%/*}/home:/home/termux"
+command+=" --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt"
+command+=" --bind=/proc"
+command+=" --bind=/proc/self/fd:/dev/fd"
+command+=" --bind=/proc/self/fd/0:/dev/stdin"
+command+=" --bind=/proc/self/fd/1:/dev/stdout"
+command+=" --bind=/proc/self/fd/2:/dev/stderr"
+[[ "${option}" = "fake" && ! $(cat /proc/loadavg > /dev/null 2>&1) ]] && command+=" --bind=${PREFIX/*}/fake/loadavg:/proc/loadavg" || :
+[[ "${option}" = "fake" && ! $(cat /proc/stat    > /dev/null 2>&1) ]] && command+=" --bind=${PREFIX*/}/fake/stat:/proc/stat" || :
+[[ "${option}" = "fake" && ! $(cat /proc/uptime  > /dev/null 2>&1) ]] && command+=" --bind=${PREFIX*/}/fake/uptime:/proc/uptime" || :
+[[ "${option}" = "fake" && ! $(cat /proc/version > /dev/null 2>&1) ]] && command+=" --bind=${PREFIX*/}/fake/version:/proc/version" || :
+[[ "${option}" = "fake" && ! $(cat /proc/vmstat  > /dev/null 2>&1) ]] && command+=" --bind=${PRREFIX*/}/fake/vmstat:/proc/vmstat" || :
+command+=" --bind=/storage"
+[ -d "${PREFIX%/*}"/storage/external ] && command+=" --bind=${PREFIX%/*}/storage/external:/media/External" || :
+[ -d "${PREFIX%/*}"/storage/internal ] && command+=" --bind=${PREFIX%/*}/storage/internal:/media/Internal" || :
+command+=" --bind=/sys"
+command+=" --bind=/system"
+command+=" --bind=/vendor"
 command+=" env -i"
 command+=" ANDROID_ART_ROOT=${ANDROID_ART_ROOT}"
 command+=" ANDROID_DATA=${ANDROID_DATA}"
