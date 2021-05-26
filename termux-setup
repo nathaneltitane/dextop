@@ -73,14 +73,13 @@ echo 'export DISTRIBUTION_NAME="ubuntu"'														>> "${PREFIX}"/bin/globals
 echo 'export DISTRIBUTION_RELEASE="20.04"'														>> "${PREFIX}"/bin/globals
 echo 'export DISTRIBUTION_VERSION="20.04.2"'													>> "${PREFIX}"/bin/globals
 
-echo 'export MAIN_DIRECTORY="${PWD}"'														>> "${PREFIX}"/bin/globals
-echo 'export SETUP_DIRECTORY="${PREFIX%/*}"'													>> "${PREFIX}"/bin/globals
+echo 'export MAIN_DIRECTORY="${PREFIX%/*}"'													>> "${PREFIX}"/bin/globals
 echo 'export BINARIES_DIRECTORY="${PREFIX}"/bin'												>> "${PREFIX}"/bin/globals
 echo 'export LIBRARIES_DIRECTORY="${PREFIX}"/lib'												>> "${PREFIX}"/bin/globals
-echo 'export BACKUP_DIRECTORY="${SETUP_DIRECTORY}"/bkp'											>> "${PREFIX}"/bin/globals
-echo 'export IMAGE_DIRECTORY="${SETUP_DIRECTORY}"/img'											>> "${PREFIX}"/bin/globals
-echo 'export MOUNT_DIRECTORY="${SETUP_DIRECTORY}"/mnt'											>> "${PREFIX}"/bin/globals
-echo 'export PROC_DIRECTORY="${SETUP_DIRECTORY}"/proc'											>> "${PREFIX}"/bin/globals
+echo 'export BACKUP_DIRECTORY="${MAIN_DIRECTORY}"/bkp'											>> "${PREFIX}"/bin/globals
+echo 'export IMAGE_DIRECTORY="${MAIN_DIRECTORY}"/img'											>> "${PREFIX}"/bin/globals
+echo 'export MOUNT_DIRECTORY="${MAIN_DIRECTORY}"/mnt'											>> "${PREFIX}"/bin/globals
+echo 'export PROC_DIRECTORY="${MAIN_DIRECTORY}"/proc'											>> "${PREFIX}"/bin/globals
 
 echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'						>> "${PREFIX}"/bin/globals
 echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'								>> "${PREFIX}"/bin/globals

@@ -104,11 +104,11 @@ image_deploy () {
 
 	console.wait 1
 
-	console.download "${iso_url}" "${SETUP_DIRECTORY}" "${iso_archive}"
+	console.download "${iso_url}" "${MAIN_DIRECTORY}" "${iso_archive}"
 
 	cd "${ROOT_DIRECTORY}" || exit 1
 
-	image_unpack "${SETUP_DIRECTORY}/${iso_archive}" || exit 1 &
+	image_unpack "${MAIN_DIRECTORY}/${iso_archive}" || exit 1 &
 
 	console.progress "Unpacking..."
 	echo
@@ -119,7 +119,7 @@ image_deploy () {
 
 	# remove archive after unpacking
 
-	rm -rf "${SETUP_DIRECTORY}/${iso_archive}"
+	rm -rf "${MAIN_DIRECTORY}/${iso_archive}"
 }
 
 # remove previous deployments
