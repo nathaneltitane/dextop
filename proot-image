@@ -56,10 +56,19 @@ iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${iso_architecture}.tar.gz
 
 [ -z "${DISTRIBUTION_VERSION}" ] && DISTRIBUTION_VERSION="20.04.2"
 
-image_copy () {}
+image_archive () {
+	# archive previous deployments to backup directory
+	tar --create																					\
+		--verbose																					\
+		--preserve-permissions																		\
+		--gzip																						\
+		--file="${BACKUP_DIRECTORY}"/"${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup.tar.gz"	\
+		--exclude="${ROOT_DIRECTORY}"/"${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup.tar.gz"	\
+		--one-file-system "${ROOT_DIRECTORY}"														|| :
+}
 
 image_wipe () {
-	# remove previous deployments
+	# remove previous deployments from image directory
 
 	[ -d "${ROOT_DIRECTORY}" ] && rm -rf "${ROOT_DIRECTORY}" || :
 }
@@ -69,7 +78,7 @@ image_backup () {
 
 	if [ -d "${ROOT_DIRECTORY}" ] && [ "${LOAD_DIRECTORY}" == "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}" ]
 	then
-		console.inf "Root directory already exists for distribution name and release."
+		console.inf "Directory already exists for distribution name and release. [ ${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE} ]"
 		echo
 
 		console.usr "Backup directory?"
@@ -79,7 +88,7 @@ image_backup () {
 
 		if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yYeEsS] ]]
 		then
-			image_copy
+			image_archive
 		else
 			image_wipe
 		fi
@@ -155,5 +164,7 @@ image_deploy () {
 # run setup
 
 image_directories
+
+image_backup
 
 image_deploy
