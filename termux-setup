@@ -79,7 +79,7 @@ echo 'export BINARIES_DIRECTORY="${PREFIX}"/bin'												>> "${PREFIX}"/bin/g
 echo 'export LIBRARIES_DIRECTORY="${PREFIX}"/lib'												>> "${PREFIX}"/bin/globals
 echo 'export BACKUP_DIRECTORY="${SETUP_DIRECTORY}"/bkp'											>> "${PREFIX}"/bin/globals
 echo 'export IMAGE_DIRECTORY="${SETUP_DIRECTORY}"/img'											>> "${PREFIX}"/bin/globals
-echo 'export BIND_DIRECTORY="${SETUP_DIRECTORY}"/mnt'											>> "${PREFIX}"/bin/globals
+echo 'export MOUNT_DIRECTORY="${SETUP_DIRECTORY}"/mnt'											>> "${PREFIX}"/bin/globals
 echo 'export PROC_DIRECTORY="${SETUP_DIRECTORY}"/proc'											>> "${PREFIX}"/bin/globals
 
 echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'						>> "${PREFIX}"/bin/globals

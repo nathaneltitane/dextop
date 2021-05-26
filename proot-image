@@ -89,7 +89,7 @@ image_directories () {
 	console.inf "Creating bind directory."
 	echo
 
-	mkdir -p "${BIND_DIRECTORY}"
+	mkdir -p "${MOUNT_DIRECTORY}"
 
 	console.inf "Extracting image contents."
 	echo

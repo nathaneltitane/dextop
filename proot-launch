@@ -124,7 +124,7 @@ XDG_CONFIG_DIRS="/etc/xdg"
 
 # set defaults
 
-[ -z "${BIND_DIRECTORY}" ]	&& BIND_DIRECTORY="${PREFIX%/*}/mnt"
+[ -z "${MOUNT_DIRECTORY}" ]	&& MOUNT_DIRECTORY="${PREFIX%/*}/mnt"
 [ -z "${PROC_DIRECTORY}" ]	&& PROC_DIRECTORY="${PREFIX%/*}/proc"
 [ -z "${ROOT_DIRECTORY}" ]	&& ROOT_DIRECTORY="${PREFIX%/*}/img"
 
@@ -306,7 +306,7 @@ command+=" SETUP_DIRECTORY=${PREFIX%/*}"
 command+=" BINARIES_DIRECTORY=${PREFIX}/bin"
 command+=" LIBRARIES_DIRECTORY=${PREFIX}/lib"
 command+=" ROOT_DIRECTORY=${ROOT_DIRECTORY}"
-command+=" BIND_DIRECTORY=${BIND_DIRECTORY}"
+command+=" MOUNT_DIRECTORY=${MOUNT_DIRECTORY}"
 command+=" APPLICATION=${APPLICATION}"
 command+=" BROWSER=${BROWSER}"
 command+=" SESSION=${SESSION}"
