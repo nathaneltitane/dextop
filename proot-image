@@ -94,6 +94,9 @@ image_unpack () {
 	# exclude archive directories: dev | proc | sys | system
 	# 'proot-launch' will bind and mount those device directories to proot
 
+	console.inf "Extracting image contents."
+	echo
+
 	proot												\
 		--link2symlink									\
 			tar 										\
@@ -120,9 +123,6 @@ image_directories () {
 	echo
 
 	mkdir -p "${MOUNT_DIRECTORY}"
-
-	console.inf "Extracting image contents."
-	echo
 }
 
 image_deploy () {
