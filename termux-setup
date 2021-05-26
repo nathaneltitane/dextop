@@ -70,6 +70,7 @@ done
 echo '# globals #'																				>> "${PREFIX}"/bin/globals
 
 echo 'export DISTRIBUTION_NAME="ubuntu"'														>> "${PREFIX}"/bin/globals
+echo 'export DISTRIBUTION_RELEASE="20.04"'														>> "${PREFIX}"/bin/globals
 echo 'export DISTRIBUTION_VERSION="20.04.2"'														>> "${PREFIX}"/bin/globals
 
 echo 'export INITIAL_DIRECTORY="${PWD}"'														>> "${PREFIX}"/bin/globals
