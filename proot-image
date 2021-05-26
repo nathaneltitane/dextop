@@ -56,6 +56,36 @@ iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${iso_architecture}.tar.gz
 
 [ -z "${DISTRIBUTION_VERSION}" ] && DISTRIBUTION_VERSION="20.04.2"
 
+image_copy () {}
+
+image_wipe () {
+	# remove previous deployments
+
+	[ -d "${ROOT_DIRECTORY}" ] && rm -rf "${ROOT_DIRECTORY}" || :
+}
+
+image_backup () {
+	cd "${IMAGE_DIRECTORY}" || exit 1
+
+	if [ -d "${ROOT_DIRECTORY}" ] && [ "${LOAD_DIRECTORY}" == "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}" ]
+	then
+		console.inf "Root directory already exists for distribution name and release."
+		echo
+
+		console.usr "Backup directory?"
+		echo
+
+		read reply
+
+		if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yYeEsS] ]]
+		then
+			image_copy
+		else
+			image_wipe
+		fi
+	fi
+}
+
 image_unpack () {
 	# shorthand
 
@@ -121,10 +151,6 @@ image_deploy () {
 
 	rm -rf "${MAIN_DIRECTORY}/${iso_archive}"
 }
-
-# remove previous deployments
-
-[ -d "${ROOT_DIRECTORY}" ] && rm -rf "${ROOT_DIRECTORY}" || :
 
 # run setup
 
