@@ -10,7 +10,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version #
 
-version="05-23-2021"
+version="05-26-2021"
 
 # usage #
 
@@ -73,7 +73,7 @@ echo 'export DISTRIBUTION_NAME="ubuntu"'														>> "${PREFIX}"/bin/globals
 echo 'export DISTRIBUTION_RELEASE="20.04"'														>> "${PREFIX}"/bin/globals
 echo 'export DISTRIBUTION_VERSION="20.04.2"'													>> "${PREFIX}"/bin/globals
 
-echo 'export MAIN_DIRECTORY="${PREFIX%/*}"'													>> "${PREFIX}"/bin/globals
+echo 'export MAIN_DIRECTORY="${PREFIX%/*}"'														>> "${PREFIX}"/bin/globals
 echo 'export BINARIES_DIRECTORY="${PREFIX}"/bin'												>> "${PREFIX}"/bin/globals
 echo 'export LIBRARIES_DIRECTORY="${PREFIX}"/lib'												>> "${PREFIX}"/bin/globals
 echo 'export BACKUP_DIRECTORY="${MAIN_DIRECTORY}"/bkp'											>> "${PREFIX}"/bin/globals
