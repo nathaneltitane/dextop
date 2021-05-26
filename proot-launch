@@ -25,7 +25,7 @@ do
                         option="bind"
                 ;;
 
-                -f|--proc)
+                -p|--proc)
                         option="proc"
                 ;;
 
