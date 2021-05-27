@@ -11,7 +11,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version #
 
-version="05-26-2021"
+version="05-27-2021"
 
 # usage #
 
@@ -67,7 +67,7 @@ image_directories () {
 
 	mkdir -p "${ROOT_DIRECTORY}"
 
-	console.inf "Creating bind directory."
+	console.inf "Creating mount directory."
 	echo
 
 	mkdir -p "${MOUNT_DIRECTORY}"
@@ -76,19 +76,25 @@ image_directories () {
 image_archive () {
 	# archive previous deployments to backup directory
 
+	backup_archive="${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup.tar.gz"
+
 	cd "${IMAGE_DIRECTORY}" || exit 1
 
 	for deployment in "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"
 	do
-		tar																								\
-			--create																					\
-			--verbose																					\
-			--preserve-permissions																		\
-			--gzip																						\
-			--file="${BACKUP_DIRECTORY}"/"${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup.tar.gz"	\
-			--exclude="${ROOT_DIRECTORY}"/"${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup.tar.gz"	\
-			--one-file-system "${ROOT_DIRECTORY}"														|| :
+		tar													\
+			--create										\
+			--verbose										\
+			--preserve-permissions							\
+			--gzip											\
+			--file="${BACKUP_DIRECTORY}/${backup_archive}"	\
+			--exclude="${ROOT_DIRECTORY}/${backup_archive}"	\
+			--one-file-system "${ROOT_DIRECTORY}"			|| :
 	done
+
+	# remove previous directory structure for clean unpack
+
+	image_wipe
 }
 
 image_wipe () {
