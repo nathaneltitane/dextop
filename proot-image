@@ -57,20 +57,25 @@ iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${iso_architecture}.tar.gz
 [ -z "${DISTRIBUTION_VERSION}" ] && DISTRIBUTION_VERSION="20.04.2"
 
 image_directories () {
-	console.inf "Creating backup directory."
-	echo
 
-	mkdir -p "${BACKUP_DIRECTORY}"
+	directories_list=(
+		"${BACKUP_DIRECTORY}"
+		"${ROOT_DIRECTORY}"
+		"${MOUNT_DIRECTORY}"
+	)
 
-	console.inf "Creating root  directory."
-	echo
+	for directory in ${directories_list[@]}
+	do
+		if [ -d "${directory}" ]
+		then
+			:
+		else
+			console.inf "Creating directory. [ ${directory} ]"
+			echo
 
-	mkdir -p "${ROOT_DIRECTORY}"
-
-	console.inf "Creating mount directory."
-	echo
-
-	mkdir -p "${MOUNT_DIRECTORY}"
+			mkdir -p "${directory}"
+		fi
+	done
 }
 
 image_archive () {
