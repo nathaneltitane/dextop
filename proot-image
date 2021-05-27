@@ -76,6 +76,8 @@ image_wipe () {
 }
 
 image_backup () {
+	# handle backup of previous deployments in image directory
+
 	cd "${IMAGE_DIRECTORY}" || exit 1
 
 	if [ -d "${ROOT_DIRECTORY}" ] && [ "${LOAD_DIRECTORY}" == "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}" ]
