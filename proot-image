@@ -81,6 +81,9 @@ image_directories () {
 image_archive () {
 	# archive previous deployments to backup directory
 
+	console.inf "Archiving previous deployment."
+	echo
+
 	backup_archive="${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup.tar.gz"
 
 	cd "${IMAGE_DIRECTORY}" || exit 1
@@ -89,7 +92,6 @@ image_archive () {
 	do
 		tar													\
 			--create										\
-			--verbose										\
 			--preserve-permissions							\
 			--gzip											\
 			--file="${BACKUP_DIRECTORY}/${backup_archive}"	\
@@ -104,6 +106,9 @@ image_archive () {
 
 image_wipe () {
 	# remove previous deployments from image directory
+
+	console.inf "Wiping previous deployment."
+	echo
 
 	if [ -d "${ROOT_DIRECTORY}" ]
 	then
@@ -123,7 +128,17 @@ image_backup () {
 
 	cd "${IMAGE_DIRECTORY}" || exit 1
 
-	if [ -d "${ROOT_DIRECTORY}" ] && [ "${LOAD_DIRECTORY}" == "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}" ]
+	if [ -z $(ls "${IMAGE_DIRECTORY}") ]
+	then
+		console.inf "Image directory is clean."
+		echo
+
+		console.fwd "Proceeding..."
+		echo
+
+		:
+
+	else [ -d "${ROOT_DIRECTORY}" ] && [ "${LOAD_DIRECTORY}" == "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}" ]
 	then
 		console.inf "Directory already exists for distribution name and release. [ ${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE} ]"
 		echo
@@ -150,7 +165,7 @@ image_unpack () {
 	# exclude archive directories: dev | proc | sys | system
 	# 'proot-launch' will bind and mount those device directories to proot
 
-	console.inf "Extracting image contents."
+	console.inf "Extracting new deployment."
 	echo
 
 	proot												\
@@ -165,7 +180,7 @@ image_unpack () {
 }
 
 image_deploy () {
-	console.inf "Initializing image setup."
+	console.inf "Initializing deployment setup."
 	echo
 
 	console.fwd "Initializing..."
