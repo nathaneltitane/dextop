@@ -56,6 +56,23 @@ iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${iso_architecture}.tar.gz
 
 [ -z "${DISTRIBUTION_VERSION}" ] && DISTRIBUTION_VERSION="20.04.2"
 
+image_directories () {
+	console.inf "Creating backup directory."
+	echo
+
+	mkdir -p "${BACKUP_DIRECTORY}"
+
+	console.inf "Creating root  directory."
+	echo
+
+	mkdir -p "${ROOT_DIRECTORY}"
+
+	console.inf "Creating bind directory."
+	echo
+
+	mkdir -p "${MOUNT_DIRECTORY}"
+}
+
 image_archive () {
 	# archive previous deployments to backup directory
 
@@ -84,8 +101,11 @@ image_wipe () {
 			rm -rf "${directory}"
 		done
 	fi
-}
 
+	# rebuild directory structure
+
+	image_directories
+}
 
 image_backup () {
 	# handle backup of previous deployments in image directory
@@ -131,23 +151,6 @@ image_unpack () {
 					--exclude='proc'					\
 					--exclude='sys'						\
 					--exclude='system' 2> /dev/null		|| :
-}
-
-image_directories () {
-	console.inf "Creating backup directory."
-	echo
-
-	mkdir -p "${BACKUP_DIRECTORY}"
-
-	console.inf "Creating root  directory."
-	echo
-
-	mkdir -p "${ROOT_DIRECTORY}"
-
-	console.inf "Creating bind directory."
-	echo
-
-	mkdir -p "${MOUNT_DIRECTORY}"
 }
 
 image_deploy () {
