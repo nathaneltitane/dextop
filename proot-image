@@ -57,6 +57,7 @@ iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${iso_architecture}.tar.gz
 [ -z "${DISTRIBUTION_VERSION}" ] && DISTRIBUTION_VERSION="20.04.2"
 
 image_directories () {
+	# populate required directories and structure
 
 	directories_list=(
 		"${BACKUP_DIRECTORY}"
