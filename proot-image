@@ -59,14 +59,19 @@ iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${iso_architecture}.tar.gz
 image_archive () {
 	# archive previous deployments to backup directory
 
-	tar																								\
-		--create																					\
-		--verbose																					\
-		--preserve-permissions																		\
-		--gzip																						\
-		--file="${BACKUP_DIRECTORY}"/"${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup.tar.gz"	\
-		--exclude="${ROOT_DIRECTORY}"/"${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup.tar.gz"	\
-		--one-file-system "${ROOT_DIRECTORY}"														|| :
+	cd "${IMAGE_DIRECTORY}" || exit 1
+
+	for deployment in "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"
+	do
+		tar																								\
+			--create																					\
+			--verbose																					\
+			--preserve-permissions																		\
+			--gzip																						\
+			--file="${BACKUP_DIRECTORY}"/"${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup.tar.gz"	\
+			--exclude="${ROOT_DIRECTORY}"/"${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup.tar.gz"	\
+			--one-file-system "${ROOT_DIRECTORY}"														|| :
+	done
 }
 
 image_wipe () {
