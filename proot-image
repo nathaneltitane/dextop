@@ -77,8 +77,15 @@ image_archive () {
 image_wipe () {
 	# remove previous deployments from image directory
 
-	[ -d "${ROOT_DIRECTORY}" ] && rm -rf "${ROOT_DIRECTORY}" || :
+	if [ -d "${ROOT_DIRECTORY}" ]
+	then
+		for directory in "${IMAGE_DIRECTORY}/${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"
+		do
+			rm -rf "${directory}"
+		done
+	fi
 }
+
 
 image_backup () {
 	# handle backup of previous deployments in image directory
