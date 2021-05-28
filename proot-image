@@ -139,8 +139,9 @@ image_backup () {
 
 		:
 
-	else [ -d "${ROOT_DIRECTORY}" ] && [ "${LOAD_DIRECTORY}" == "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}" ]
-	then
+	else
+		if  [ -d "${ROOT_DIRECTORY}" ] && [ "${LOAD_DIRECTORY}" == "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}" ]
+		then
 		console.inf "Directory already exists for distribution name and release. [ ${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE} ]"
 		echo
 
@@ -149,11 +150,12 @@ image_backup () {
 
 		read reply
 
-		if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yYeEsS] ]]
-		then
-			image_archive
-		else
-			image_wipe
+			if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yYeEsS] ]]
+			then
+				image_archive
+			else
+				image_wipe
+			fi
 		fi
 	fi
 }
