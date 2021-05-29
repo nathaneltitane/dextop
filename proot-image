@@ -105,6 +105,8 @@ image_archive () {
 	image_wipe
 }
 
+# image_restore () {}
+
 image_wipe () {
 	# remove previous deployments from image directory
 
