@@ -70,6 +70,13 @@ do
         	exit
 		;;
 
+		"")
+			# handle empty argument
+			# use default values specified in script
+
+			:
+		;;
+
 		*)
 			echo
 		    echo -e "Usage: ${script} [Distribution Name] | [Distribution Version] | [OPTION]"
@@ -125,6 +132,10 @@ echo "export version=${version}"																>> "${PREFIX}"/bin/globals
 echo "export install_option=${install_option}"													>> "${PREFIX}"/bin/globals
 
 source "${PREFIX}"/bin/globals
+
+
+exit 
+
 
 # download #
 
