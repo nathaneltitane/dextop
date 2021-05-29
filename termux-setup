@@ -14,7 +14,7 @@ version="05-29-2021"
 
 # usage #
 
-if [[ $# -lt 1 ]] || [[ $# -gt 3 ]]
+if [[ $# -gt 3 ]]
 then
     echo
     echo -e "Usage: ${script} [Distribution Name] | [Distribution Version] | [OPTION]"
@@ -103,7 +103,19 @@ done
 
 [ -z "${distribution_name}" ]				&& distribution_name="ubuntu"
 [ -z "${distribution_version}" ]			&& distribution_version="20.04.2"
-[ -z "${distribution_release}" ]			&& distribution_release="${distribution_version%.*}"
+
+IFS='.'
+
+read code_year code_month code_revision <<< "${distribution_version}"
+
+if [ -z "${code_revision}"]
+then
+	distribution_release="${distribution_version}"
+else
+	distribution_release="${distribution_version%.*}"
+fi
+
+IFS=''
 
 [ -z "${install_option}" ]					&& install_option="full"
 
@@ -111,9 +123,9 @@ done
 
 echo '# globals #'																				>> "${PREFIX}"/bin/globals
 
-echo 'export DISTRIBUTION_NAME="${DISTRIBUTION_NAME}"'											>> "${PREFIX}"/bin/globals
-echo 'export DISTRIBUTION_VERSION="${DISTRIBUTION_VERSION}"'									>> "${PREFIX}"/bin/globals
-echo 'export DISTRIBUTION_RELEASE="${DISTRIBUTION_VERSION%.*}"'									>> "${PREFIX}"/bin/globals
+echo "export DISTRIBUTION_NAME=${distribution_name}"											>> "${PREFIX}"/bin/globals
+echo "export DISTRIBUTION_VERSION=${distribution_version}"										>> "${PREFIX}"/bin/globals
+echo "export DISTRIBUTION_RELEASE=${distribution_release}"										>> "${PREFIX}"/bin/globals
 
 echo 'export MAIN_DIRECTORY="${PREFIX%/*}"'														>> "${PREFIX}"/bin/globals
 echo 'export BINARIES_DIRECTORY="${PREFIX}"/bin'												>> "${PREFIX}"/bin/globals
@@ -132,10 +144,6 @@ echo "export version=${version}"																>> "${PREFIX}"/bin/globals
 echo "export install_option=${install_option}"													>> "${PREFIX}"/bin/globals
 
 source "${PREFIX}"/bin/globals
-
-
-exit 
-
 
 # download #
 
