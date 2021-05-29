@@ -17,34 +17,34 @@ version="05-27-2021"
 
 while (($#))
 do
-        case "${1}" in
-                -h|--help)
-                        echo
-                        echo -e "Usage: ${script} [OPTION]"
-                        echo
-                        echo -e "Options:"
-                        echo
-                        echo -e "-h, --help \t Show help and usage information."
-                        echo
-                        echo -e "'${script}' [ Version ${version} ]"
-                        echo
+	case "${1}" in
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-h, --help \t Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version ${version} ]"
+			echo
 
-                        exit
-                ;;
+			exit
+		;;
 
-                *)
-                        echo
-                        echo "Usage: ${script} [OPTION]"
-                        echo
-                        echo -e "${script}: Unknown option '${1}'"
-                        echo -e "Type './${script} --help' for help and usage information."
-                        echo
+		*)
+			echo
+			echo "Usage: ${script} [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
 
-                        exit 1
-                ;;
-        esac
+			exit 1
+		;;
+	esac
 
-        shift
+	shift
 done
 
 # variables #
