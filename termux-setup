@@ -104,7 +104,11 @@ done
 [ -z "${distribution_name}" ]				&& distribution_name="ubuntu"
 [ -z "${distribution_version}" ]			&& distribution_version="20.04.2"
 
+# set IFS
+
 IFS='.'
+
+# handle deistribution code markup
 
 read code_year code_month code_revision <<< "${distribution_version}"
 
@@ -114,6 +118,8 @@ then
 else
 	distribution_release="${distribution_version%.*}"
 fi
+
+# reset IFS
 
 IFS=''
 
