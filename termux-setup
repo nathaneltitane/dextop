@@ -35,26 +35,28 @@ do
 			echo -e "-a, --applications \t Download a set of optimized and precompiled arm64 applications."
 			echo
 			echo -e "-h, --help \t\t Show help and usage information."
-                        echo
-                        echo -e "'${script}' [ Version ${version} ]"
-                        echo
+	        echo
+    	    echo -e "'${script}' [ Version ${version} ]"
+        	echo
 
-                        exit
-                ;;
+        	exit
+		;;
 
-                *)
-                        echo
-                        echo "Usage: ${script} [OPTION]"
-                        echo
-                        echo -e "${script}: Unknown option '${1}'"
-                        echo -e "Type './${script} --help' for help and usage information."
-                        echo
+		*)
+        	echo
+        	echo "Usage: ${script} [OPTION]"
+	        echo
+	        echo -e "${script}: Unknown option '${1}'"
+	        echo -e "Type './${script} --help' for help and usage information."
+	        echo
 
-                        exit 1
-                ;;
+    	    exit 1
+		;;
+
         esac
 
-        shift
+	shift
+
 done
 
 # variables #
