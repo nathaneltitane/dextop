@@ -10,21 +10,41 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version #
 
-version="05-26-2021"
+version="05-29-2021"
 
 # usage #
 
+if [[ $# -lt 1 ]] || [[ $# -gt 3 ]]
+then
+    echo
+    echo -e "Usage: ${script} [Distribution Name] | [Distribution Version] | [OPTION]"
+    echo
 
-		-d|--distribution
-			distribution_name="ubuntu"
-			distribution_version="20.04.2"
-			distribution_release="${distribution_version%.*}"
-		;;
+    exit 1
+fi
 
+if [[ $# -eq 1 ]]
+then
+    distribution_name="${1}"
+fi
+
+if [[ $# -eq 2 ]]
+then
+    distribution_name="${1}"
+    distribution_version="${2}"
+fi
+
+if [[ $# -eq 3 ]]
+then
+	distribution_name="${1}"
+    distribution_version="${2}"
+
+	install_option="${3}"
+fi
 
 while (($#))
 do
-	case "${2}" in
+	case "${3}" in
 		-f|--full)
 			install_option="full"
 		;;
@@ -51,14 +71,15 @@ do
 		;;
 
 		*)
-        	echo
-        	echo "Usage: ${script} [OPTION]"
-	        echo
-	        echo -e "${script}: Unknown option '${1}'"
-	        echo -e "Type './${script} --help' for help and usage information."
-	        echo
+			echo
+		    echo -e "Usage: ${script} [Distribution Name] | [Distribution Version] | [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
 
-    	    exit 1
+			exit 1
+
 		;;
 
         esac
@@ -75,7 +96,7 @@ done
 
 [ -z "${distribution_name}" ]				&& distribution_name="ubuntu"
 [ -z "${distribution_version}" ]			&& distribution_version="20.04.2"
-[ -z "${install_distribution_release}" ]	&& distribution_release="${distribution_version%.*}"
+[ -z "${distribution_release}" ]			&& distribution_release="${distribution_version%.*}"
 
 [ -z "${install_option}" ]					&& install_option="full"
 
