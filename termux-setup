@@ -14,9 +14,17 @@ version="05-26-2021"
 
 # usage #
 
+
+		-d|--distribution
+			distribution_name="ubuntu"
+			distribution_version="20.04.2"
+			distribution_release="${distribution_version%.*}"
+		;;
+
+
 while (($#))
 do
-	case "${1}" in
+	case "${2}" in
 		-f|--full)
 			install_option="full"
 		;;
@@ -65,15 +73,19 @@ done
 
 # set defaults
 
-[ -z "${install_option}" ] && install_option="full"
+[ -z "${distribution_name}" ]				&& distribution_name="ubuntu"
+[ -z "${distribution_version}" ]			&& distribution_version="20.04.2"
+[ -z "${install_distribution_release}" ]	&& distribution_release="${distribution_version%.*}"
+
+[ -z "${install_option}" ]					&& install_option="full"
 
 # export variables
 
 echo '# globals #'																				>> "${PREFIX}"/bin/globals
 
-echo 'export DISTRIBUTION_NAME="ubuntu"'														>> "${PREFIX}"/bin/globals
-echo 'export DISTRIBUTION_RELEASE="20.04"'														>> "${PREFIX}"/bin/globals
-echo 'export DISTRIBUTION_VERSION="20.04.2"'													>> "${PREFIX}"/bin/globals
+echo 'export DISTRIBUTION_NAME="${DISTRIBUTION_NAME}"'											>> "${PREFIX}"/bin/globals
+echo 'export DISTRIBUTION_VERSION="${DISTRIBUTION_VERSION}"'									>> "${PREFIX}"/bin/globals
+echo 'export DISTRIBUTION_RELEASE="${DISTRIBUTION_VERSION%.*}"'									>> "${PREFIX}"/bin/globals
 
 echo 'export MAIN_DIRECTORY="${PREFIX%/*}"'														>> "${PREFIX}"/bin/globals
 echo 'export BINARIES_DIRECTORY="${PREFIX}"/bin'												>> "${PREFIX}"/bin/globals
