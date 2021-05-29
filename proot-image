@@ -49,12 +49,12 @@ done
 
 # variables #
 
-iso_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${DISTRIBUTION_VERSION}/release"
-iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${iso_architecture}.tar.gz"
-
-# set defaults
-
-[ -z "${DISTRIBUTION_VERSION}" ] && DISTRIBUTION_VERSION="20.04.2"
+case "${DISTRIBUTION_NAME}" in
+	ubuntu)
+		iso_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${DISTRIBUTION_VERSION}/release"
+		iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${iso_architecture}.tar.gz"
+	;;
+esac
 
 image_directories () {
 	# populate required directories and structure
