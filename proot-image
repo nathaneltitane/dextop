@@ -105,7 +105,25 @@ image_archive () {
 	image_wipe
 }
 
-# image_restore () {}
+image_restore () {
+	if [ -z $(ls "${BACKUP_DIRECTORY}") ]
+	then
+		console.err "Image directory is empty."
+		echo
+
+		console.wrn "No archived deployments to restore."
+		echo
+
+		console.fwd "Proceeding..."
+		echo
+
+		:
+
+	else
+		:
+	fi
+
+}
 
 image_wipe () {
 	# remove previous deployments from image directory
