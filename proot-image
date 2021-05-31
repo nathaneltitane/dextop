@@ -98,14 +98,14 @@ image_archive () {
 			--file="${BACKUP_DIRECTORY}/${backup_archive}"	\
 			--exclude="${ROOT_DIRECTORY}/${backup_archive}"	\
 			--one-file-system "${ROOT_DIRECTORY}"			|| :
-	done &
-
-	console.progress "Archiving..."
-	echo
+	done
 
 	# remove previous directory structure for clean unpack
 
-	image_wipe
+	image_wipe &
+
+	console.progress "Cleaning up..."
+	echo
 }
 
 image_restore () {
@@ -138,23 +138,24 @@ image_wipe () {
 	then
 		for directory in "${IMAGE_DIRECTORY}/${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"
 		do
-			rm -rf "${directory}" &
-
-			console.progress "Wiping..."
-			echo
-
+			rm -rf "${directory}"
 		done
 	fi
 
 	# rebuild directory structure
 
-	image_directories
+	image_directories &
+
+	console.progress "Rebuilding directory structure..."
+	echo
 }
 
 image_backup () {
 	# handle backup of previous deployments in image directory
 
 	cd "${IMAGE_DIRECTORY}" || exit 1
+
+	# verify image directory contents
 
 	if [ -z $(ls "${IMAGE_DIRECTORY}") ]
 	then
@@ -167,11 +168,19 @@ image_backup () {
 		:
 	fi
 
+	# verify load directory contents
+
 	if [ -z $(ls "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}") ]
 	then
+		console.inf "Deployment directory is clean."
+		echo
+
+		console.fwd "Proceeding..."
+		echo
+
 		:
 	else
-		if  [ -d "${ROOT_DIRECTORY}" ] && [ "${LOAD_DIRECTORY}" == "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}" ] &&  [ ! -z $(ls "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}") ]
+		if [ ! -z $(ls "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}") ] && [ "${LOAD_DIRECTORY}" == "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}" ]
 		then
 			console.inf "Deployment exists and is populated for distribution name and release. [ ${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE} ]"
 			echo
@@ -183,9 +192,17 @@ image_backup () {
 
 			if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yYeEsS] ]]
 			then
-				image_archive
+				image_archive &
+
+				console.progress "Archiving..."
+				echo
+
 			else
-				image_wipe
+				image_wipe &
+
+				console.progress "Wiping..."
+				echo
+
 			fi
 		fi
 	fi
@@ -242,8 +259,8 @@ image_deploy () {
 
 # run setup
 
-image_directories
-
 image_backup
+
+image_directories
 
 image_deploy
