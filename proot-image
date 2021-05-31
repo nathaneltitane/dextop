@@ -89,21 +89,16 @@ image_archive () {
 
 	cd "${IMAGE_DIRECTORY}" || exit 1
 
-	if [ -z "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"/ ]
-	then
-		:
-	else
-		for deployment in "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"
-		do
-			tar													\
-				--create										\
-				--preserve-permissions							\
-				--gzip											\
-				--file="${BACKUP_DIRECTORY}/${backup_archive}"	\
-				--exclude="${ROOT_DIRECTORY}/${backup_archive}"	\
-				--one-file-system "${ROOT_DIRECTORY}"			|| :
-		done
-	fi &
+	for deployment in "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"
+	do
+		tar													\
+			--create										\
+			--preserve-permissions							\
+			--gzip											\
+			--file="${BACKUP_DIRECTORY}/${backup_archive}"	\
+			--exclude="${ROOT_DIRECTORY}/${backup_archive}"	\
+			--one-file-system "${ROOT_DIRECTORY}"			|| :
+	done &
 
 	console.progress "Archiving..."
 	echo
