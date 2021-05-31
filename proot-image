@@ -165,17 +165,21 @@ image_backup () {
 		echo
 
 		:
+	fi
 
+	if [ -z $(ls "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}") ]
+	then
+		:
 	else
-		if  [ -d "${ROOT_DIRECTORY}" ] && [ "${LOAD_DIRECTORY}" == "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}" ]
+		if  [ -d "${ROOT_DIRECTORY}" ] && [ "${LOAD_DIRECTORY}" == "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}" ] &&  [ ! -z $(ls "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}") ]
 		then
-		console.inf "Directory already exists for distribution name and release. [ ${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE} ]"
-		echo
+			console.inf "Deployment exists and is populated for distribution name and release. [ ${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE} ]"
+			echo
 
-		console.usr "Backup directory?"
-		echo
+			console.usr "Backup directory?"
+			echo
 
-		read reply
+			read reply
 
 			if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yYeEsS] ]]
 			then
