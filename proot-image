@@ -98,7 +98,10 @@ image_archive () {
 			--file="${BACKUP_DIRECTORY}/${backup_archive}"	\
 			--exclude="${ROOT_DIRECTORY}/${backup_archive}"	\
 			--one-file-system "${ROOT_DIRECTORY}"			|| :
-	done
+	done &
+
+	console.progress "Archiving..."
+	echo
 
 	# remove previous directory structure for clean unpack
 
@@ -135,7 +138,11 @@ image_wipe () {
 	then
 		for directory in "${IMAGE_DIRECTORY}/${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"
 		do
-			rm -rf "${directory}"
+			rm -rf "${directory}" &
+
+			console.progress "Wiping..."
+			echo
+
 		done
 	fi
 
