@@ -65,15 +65,15 @@ image_directories () {
 		"${MOUNT_DIRECTORY}"
 	)
 
+	console.inf "Creating required deployment directories."
+	echo
+
 	for directory in ${directories_list[@]}
 	do
 		if [ -d "${directory}" ]
 		then
 			:
 		else
-			console.inf "Creating directory. [ ${directory} ]"
-			echo
-
 			mkdir -p "${directory}"
 		fi
 	done
@@ -85,30 +85,35 @@ image_archive () {
 	console.inf "Archiving previous deployment."
 	echo
 
-	backup_archive="${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup.tar.gz"
-
 	cd "${IMAGE_DIRECTORY}" || exit 1
 
-	for deployment in "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"
-	do
+	if [ -z $( ls "${IMAGE_DIRECTORY}") ]
+	then
+		console.err "Image directory is empty."
+		echo
+
+		console.wrn "No existing deployments to archive."
+		echo
+
+		console.fwd "Continuing..."
+		echo
+
+	else
 		tar													\
 			--create										\
 			--preserve-permissions							\
 			--gzip											\
-			--file="${BACKUP_DIRECTORY}/${backup_archive}"	\
-			--exclude="${ROOT_DIRECTORY}/${backup_archive}"	\
+			--file="${BACKUP_DIRECTORY}/${1}"				\
+			--exclude="${ROOT_DIRECTORY}/${1}"				\
 			--one-file-system "${ROOT_DIRECTORY}"			|| :
-	done
-
-	# remove previous directory structure for clean unpack
-
-	image_wipe &
-
-	console.progress "Cleaning up..."
-	echo
+	fi
 }
 
 image_restore () {
+	# restore backed up deployment to image directory
+
+	cd "${BACKUP_DIRECTORY}" || exit 1
+
 	if [ -z $(ls "${BACKUP_DIRECTORY}") ]
 	then
 		console.err "Image directory is empty."
@@ -117,37 +122,40 @@ image_restore () {
 		console.wrn "No archived deployments to restore."
 		echo
 
-		console.fwd "Proceeding..."
+		console.fwd "Aborting..."
 		echo
 
-		:
+		exit 1
 
 	else
-		:
+		tar												\
+			--extract									\
+				--file="${1}"							|| :
 	fi
-
 }
 
 image_wipe () {
 	# remove previous deployments from image directory
 
-	console.inf "Wiping previous deployment."
-	echo
+	cd "${IMAGE_DIRECTORY}" || exit 1
 
-	if [ -d "${ROOT_DIRECTORY}" ]
+	if [ -z $( ls "${IMAGE_DIRECTORY}") ]
 	then
-		for directory in "${IMAGE_DIRECTORY}/${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"
-		do
-			rm -rf "${directory}"
-		done
+		console.err "Image directory is empty."
+		echo
+
+		console.wrn "No archived deployments to restore."
+		echo
+
+		console.fwd "Continuing..."
+		echo
+
+	else
+		console.inf "Wiping previous deployments."
+		echo
+
+		rm -rf "${IMAGE_DIRECTORY}"/*
 	fi
-
-	# rebuild directory structure
-
-	image_directories &
-
-	console.progress "Rebuilding directory structure..."
-	echo
 }
 
 image_backup () {
@@ -165,44 +173,60 @@ image_backup () {
 		console.fwd "Proceeding..."
 		echo
 
-		:
-	fi
-
-	# verify load directory contents
-
-	if [ -z $(ls "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}") ]
-	then
-		console.inf "Deployment directory is clean."
-		echo
-
-		console.fwd "Proceeding..."
-		echo
-
-		:
 	else
-		if [ ! -z $(ls "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}") ] && [ "${LOAD_DIRECTORY}" == "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}" ]
+		# verify load directory contents
+
+		if [ -z $(ls "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}") ]
 		then
-			console.inf "Deployment exists and is populated for distribution name and release. [ ${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE} ]"
+			console.err "Deployment directory is clean."
 			echo
 
-			console.usr "Backup directory?"
+			console.wrn "No deployment to back up."
 			echo
 
-			read reply
+			console.fwd "Continuing..."
+			echo
 
-			if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yYeEsS] ]]
+			:
+		else
+			if [ ! -z $(ls "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}") ] && [ "${LOAD_DIRECTORY}" == "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}" ]
 			then
-				image_archive &
-
-				console.progress "Archiving..."
+				console.inf "Deployment exists and is populated for distribution name and release. [ ${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE} ]"
 				echo
 
-			else
-				image_wipe &
-
-				console.progress "Wiping..."
+				console.usr "Backup deployment directory?"
 				echo
 
+				read reply
+
+				if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yYeEsS] ]]
+				then
+					image_archive "${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup.tar.gz" &
+
+					console.progress "Archiving..."
+					echo
+
+				else
+					console.wrn "Cannot unpack over existing deployment."
+					echo
+
+					console.usr "Wipe previous deployments?"
+					echo
+
+					if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yYeEsS] ]]
+					then
+						image_wipe &
+
+						console.progress "Wiping..."
+						echo
+					else
+						console.err "No viable option selected for existing deployment."
+						echo
+
+						console.fwd "Aborting..."
+						echo
+					fi
+				fi
 			fi
 		fi
 	fi
@@ -230,37 +254,33 @@ image_unpack () {
 					--exclude='system' 2> /dev/null		|| :
 }
 
-image_deploy () {
-	console.inf "Initializing deployment setup."
-	echo
-
-	console.fwd "Initializing..."
-	echo
-
-	console.wait 1
-
-	console.download "${iso_url}" "${MAIN_DIRECTORY}" "${iso_archive}"
-
-	cd "${ROOT_DIRECTORY}" || exit 1
-
-	image_unpack "${MAIN_DIRECTORY}/${iso_archive}" || exit 1 &
-
-	console.progress "Unpacking..."
-	echo
-
-	wait
-
-	# clean #
-
-	# remove archive after unpacking
-
-	rm -rf "${MAIN_DIRECTORY}/${iso_archive}"
-}
-
 # run setup
 
 image_backup
 
 image_directories
 
-image_deploy
+console.inf "Initializing deployment setup."
+echo
+
+console.fwd "Initializing..."
+echo
+
+console.wait 1
+
+console.download "${iso_url}" "${MAIN_DIRECTORY}" "${iso_archive}"
+
+cd "${ROOT_DIRECTORY}" || exit 1
+
+image_unpack "${MAIN_DIRECTORY}/${iso_archive}" || exit 1 &
+
+console.progress "Unpacking..."
+echo
+
+wait
+
+# clean #
+
+# remove archive after unpacking
+
+rm -rf "${MAIN_DIRECTORY}/${iso_archive}"
