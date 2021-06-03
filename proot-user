@@ -132,7 +132,7 @@ gid="$(id -g ${user_name})"
 console.inf "Setting up user home directory."
 echo
 
-list=(
+directories_list=(
 	Desktop
 	Documents
 	Downloads
@@ -144,7 +144,7 @@ list=(
 	Videos
 )
 
-console.directory "${ROOT_DIRECTORY}"/home/"${user_name}"/ ${list[@]}
+console.directory "${ROOT_DIRECTORY}"/home/"${user_name}"/ ${directories_list[@]}
 
 # runtime #
 
