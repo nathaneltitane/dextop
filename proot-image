@@ -99,13 +99,37 @@ image_archive () {
 		echo
 
 	else
-		tar													\
-			--create										\
-			--preserve-permissions							\
-			--gzip											\
-			--file="${BACKUP_DIRECTORY}/${1}"				\
-			--exclude="${ROOT_DIRECTORY}/${1}"				\
-			--one-file-system "${ROOT_DIRECTORY}"			|| :
+		# set IFS
+
+		IFS=$'\n'
+
+		deployments_list=()
+
+		for directory in $(find "${IMAGE_DIRECTORY}" -maxdepth 2 -type d ! -wholename "${IMAGE_DIRECTORY}")
+		do
+			deployments_list+=("${directory}")
+		done
+
+		console.inf "Number of deployments found: " ${#deployments_list[@]}
+		echo
+
+		select backup_selection in ${array[@]}
+		do
+			console.inf "$backup_dir has been selected for backup"
+			echo
+
+			tar														\
+				--create											\
+				--preserve-permissions								\
+				--gzip												\
+				--file="${BACKUP_DIRECTORY}/${backup_selection}"	\
+				--exclude="${ROOT_DIRECTORY}/${backup_selection}"	\
+				--one-file-system "${ROOT_DIRECTORY}"				|| :
+
+			break
+
+		done
+
 	fi
 }
 
@@ -144,7 +168,7 @@ image_wipe () {
 		console.err "Image directory is empty."
 		echo
 
-		console.wrn "No archived deployments to restore."
+		console.wrn "No deployments to wipe."
 		echo
 
 		console.fwd "Continuing..."
