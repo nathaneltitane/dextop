@@ -105,30 +105,14 @@ image_archive () {
 	console.inf "Archiving selected deployment."
 	echo
 
-	cd "${ROOT_DIRECTORY}" || exit 1
-
-	tar																								\
-		--create																					\
-		--verbose																					\
-		--preserve-permissions																		\
-		--gzip																						\
-		--file="${BACKUP_DIRECTORY}/${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup.tar.gz"		\
-			--exclude='dev'																			\
-			--exclude="media"																		\
-			--exclude='proc'																		\
-			--exclude='sys'																			\
-			--exclude='system'																		\
-				--directory "${deployment_selection}" *
-
-#	tar																								\
-#		--create																					\
-#		--verbose																					\
-#		--preserve-permissions																		\
-#		--gzip																						\
-#		--file="${BACKUP_DIRECTORY}/${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup.tar.gz"		\
-#		--directory="${deployment_selection}"														\
-#		--exclude="${ROOT_DIRECTORY}/${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup.tar.gz"
-#		--one-file-system "${deployment_selection}"
+	tar																									\
+		--create																						\
+		--verbose																						\
+		--gzip																							\
+		--preserve-permissions																			\
+			--file="${BACKUP_DIRECTORY}/${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup.tar.gz"		\
+			--exclude="${ROOT_DIRECTORY}/${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup.tar.gz"	\
+			--one-file-system "${ROOT_DIRECTORY}"														|| :
 }
 
 image_restore () {
