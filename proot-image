@@ -147,8 +147,12 @@ image_unpack () {
 	# exclude archive directories: dev | proc | sys | system
 	# 'proot-launch' will bind and mount those device directories to proot
 
+	ROOT_DIRECTORY="${ROOT_DIRECTORY}"
+
 	console.inf "Extracting new deployment."
 	echo
+
+	cd "${ROOT_DIRECTORY}" || exit 1
 
 	proot												\
 		--link2symlink									\
@@ -178,6 +182,7 @@ directories_list=(
 	"${BACKUP_DIRECTORY}"
 	"${ISO_DIRECTORY}"
 	"${IMAGE_DIRECTORY}"
+	"${ROOT_DIRECTORY}"
 	"${MOUNT_DIRECTORY}"
 )
 
@@ -191,11 +196,4 @@ console.wait 1
 
 console.download "${iso_url}" "${ISO_DIRECTORY}" "${iso_archive}"
 
-cd "${ROOT_DIRECTORY}" || exit 1
-
-image_unpack "${ISO_DIRECTORY}/${iso_archive}" || exit 1 &
-
-console.progress "Unpacking..."
-echo
-
-wait
+image_unpack "${ISO_DIRECTORY}/${iso_archive}"
