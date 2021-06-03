@@ -132,6 +132,7 @@ echo '# globals #'																				>> "${PREFIX}"/bin/globals
 echo "export DISTRIBUTION_NAME=${distribution_name}"											>> "${PREFIX}"/bin/globals
 echo "export DISTRIBUTION_VERSION=${distribution_version}"										>> "${PREFIX}"/bin/globals
 echo "export DISTRIBUTION_RELEASE=${distribution_release}"										>> "${PREFIX}"/bin/globals
+echo 'export ISO_DIRECTORY="${MAIN_DIRECTORY}"/iso'												>> "${PREFIX}"/bin/globals
 
 echo 'export MAIN_DIRECTORY="${PREFIX%/*}"'														>> "${PREFIX}"/bin/globals
 echo 'export BINARIES_DIRECTORY="${PREFIX}"/bin'												>> "${PREFIX}"/bin/globals

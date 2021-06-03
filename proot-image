@@ -145,7 +145,8 @@ image_restore () {
 
 	tar													\
 		--extract										\
-			--file="${restore_selection}"				|| :
+			--file="${restore_selection}"				\
+			--directory=
 }
 
 image_wipe () {
@@ -235,15 +236,17 @@ fi
 
 # run setup
 
-image_directories
-
-image_archive
-
 console.inf "Initializing deployment setup."
 echo
 
 console.fwd "Initializing..."
 echo
+
+image_directories
+
+console.wait 1
+
+image_archive
 
 console.wait 1
 
