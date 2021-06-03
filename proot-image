@@ -256,9 +256,9 @@ image_unpack () {
 
 # run setup
 
-image_backup
-
 image_directories
+
+image_backup
 
 console.inf "Initializing deployment setup."
 echo
