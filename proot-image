@@ -124,10 +124,10 @@ image_restore () {
 	console.inf "Extracting selected archive."
 	echo
 
-	tar													\
-		--extract										\
-			--file="${restore_selection}"				\
-			--directory=
+	tar												\
+		--extract									\
+			--file="${restore_selection}"			\
+			--directory="${IMAGE_DIRECTORY}"
 }
 
 image_wipe () {
@@ -180,19 +180,15 @@ echo
 
 directories_list=(
 	"${BACKUP_DIRECTORY}"
-	"${ISO_DIRECTORY}"
 	"${IMAGE_DIRECTORY}"
+	"${ISO_DIRECTORY}"
 	"${ROOT_DIRECTORY}"
 	"${MOUNT_DIRECTORY}"
 )
 
 console.directory "${MAIN_DIRECTORY}" ${directories_list[@]}
 
-console.wait 1
-
 image_archive "${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup.tar.gz"
-
-console.wait 1
 
 console.download "${iso_url}" "${ISO_DIRECTORY}" "${iso_archive}"
 
