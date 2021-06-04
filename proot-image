@@ -143,7 +143,7 @@ image_restore () {
 
 	tar												\
 		--extract									\
-			--file="${restore_selection}"			\
+			--file="${archive_selection}"			\
 			--directory="${IMAGE_DIRECTORY}"
 }
 
@@ -192,7 +192,9 @@ echo
 
 image_directories
 
-image_archive "${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup.tar.gz"
+image_archive "${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-${stamp}-backup.tar.gz"
+
+image_restore
 
 console.download "${iso_url}" "${ISO_DIRECTORY}" "${iso_archive}"
 
