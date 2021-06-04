@@ -138,13 +138,19 @@ image_restore () {
 		break
 	done
 
+	IFS='-'
+
+	archive_label="${archive_selection##*/}"
+
+	read archive_name archive_release _ _ _ _ _ _ _ <<< $(echo "${archive_label}")
+
 	console.inf "Extracting selected archive."
 	echo
 
 	tar												\
 		--extract									\
 			--file="${archive_selection}"			\
-			--directory="${IMAGE_DIRECTORY}"
+			--directory="/"
 }
 
 image_wipe () {
