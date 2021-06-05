@@ -199,6 +199,7 @@ echo
 image_directories
 
 console.usr "Archive deployments?"
+echo
 
 read reply
 
@@ -206,11 +207,17 @@ if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 then
 	image_archive "${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-${stamp}-backup.tar.gz"
 else
-	:
+	console.usr "Restore deployments?"
+	echo
+
+	if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+	then
+		image_restore
+	else
+		console.download "${iso_url}" "${ISO_DIRECTORY}" "${iso_archive}"
+
+		image_unpack "${ISO_DIRECTORY}/${iso_archive}"
+	fi
 fi
 
-image_restore
 
-console.download "${iso_url}" "${ISO_DIRECTORY}" "${iso_archive}"
-
-image_unpack "${ISO_DIRECTORY}/${iso_archive}"
