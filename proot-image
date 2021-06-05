@@ -196,28 +196,35 @@ echo
 console.fwd "Initializing..."
 echo
 
-image_directories
-
-console.usr "Archive deployments?"
-echo
-
-read reply
-
-if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+if [[ ! -d "${IMAGE_DIRECTORY}" ]] || [[ ! -d "${ISO_DIRECTORY}" ]]
 then
-	image_archive "${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-${stamp}-backup.tar.gz"
+	image_directories
 else
-	console.usr "Restore deployments?"
-	echo
-
-	if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+	if [[ ! -z "$(ls ${IMAGE_DIRECTORY})" ]]
 	then
-		image_restore
-	else
-		console.download "${iso_url}" "${ISO_DIRECTORY}" "${iso_archive}"
+		console.usr "Archive deployments?"
+		echo
 
-		image_unpack "${ISO_DIRECTORY}/${iso_archive}"
+		read reply
+
+		if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+		then
+			image_archive "${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup-${stamp}.tar.gz"
+		else
+			if [[ ! -z "$(ls ${BACKUP_DIRECTORY})" ]]
+			then
+				console.usr "Restore deployments?"
+				echo
+
+				if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+				then
+					image_restore
+				else
+					console.download "${iso_url}" "${ISO_DIRECTORY}" "${iso_archive}"
+
+					image_unpack "${ISO_DIRECTORY}/${iso_archive}"
+				fi
+			fi
+		fi
 	fi
 fi
-
-
