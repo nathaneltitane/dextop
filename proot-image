@@ -198,7 +198,16 @@ echo
 
 image_directories
 
-image_archive "${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-${stamp}-backup.tar.gz"
+console.usr "Archive deployments?"
+
+read reply
+
+if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+then
+	image_archive "${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-${stamp}-backup.tar.gz"
+else
+	:
+fi
 
 image_restore
 
