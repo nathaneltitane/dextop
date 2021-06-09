@@ -82,10 +82,14 @@ image_archive () {
 
 	deployments_list=()
 
-	for deployment in $(find "${IMAGE_DIRECTORY}" -maxdepth 2 -type d ! -wholename "${IMAGE_DIRECTORY}")
+	for deployment in $(find "${IMAGE_DIRECTORY}" -maxdepth 2 -mindepth 1 -type d ! -wholename "${IMAGE_DIRECTORY}")
 	do
 		deployments_list+=("${deployment}")
 	done
+
+	# reset IFS
+
+	IFS=''
 
 	console.inf "Number of deployments found" ${#deployments_list[@]}
 	echo
@@ -97,11 +101,12 @@ image_archive () {
 
 	printf '\n'
 
-	# print depployments numbered list for selection
+	# print numbered list for selection
 
 	for (( i=0 ; i<${#deployments_list[@]} ; i++ ))
 	do
-		deployment_directory="${deployments_list[$i]}"
+		deployment_directory="$(basename ${deployments_list[$i]})"
+		distribution_directory="$(basename $(dirname ${deployments_list[$i]}))"
 
 		number=$(($i + 1))
 
@@ -109,11 +114,11 @@ image_archive () {
 		then
 			# handle number spacing for entries 1-9
 
-			printf '\t[  %s ] %s\n' ${number} ${deployment_directory}
+			printf '\t[  %s ] %s'/'%s \n' ${number} ${distribution_directory} ${deployment_directory}
 		else
 			# handle number spacing for entries 10+
 
-			printf '\t[ %s ] %s\n' ${number} ${deployment_directory}
+			printf '\t[ %s ] %s'/'%s \n' ${number} ${distribution_directory} ${deployment_directory}
 		fi
 	done
 
@@ -143,7 +148,7 @@ image_archive () {
 		then
 			echo
 			console.err "Invalid selection:"
-			console.wrn "Select a deployment ranging from [ 1 - ${number} ]"
+			console.wrn "Select a number ranging from [ 1 - ${number} ]"
 			echo
 
 			console.ipt "Selection: "
@@ -191,13 +196,83 @@ image_restore () {
 	console.inf "Number of archives" ${#archives_list[@]}
 	echo
 
-	select archive_selection in ${archives_list[@]}
-	do
-		console.inf "Restoring. [ ${archive_selection} ]"
-		echo
+	# reset IFS
 
-		break
+	IFS=''
+
+	console.inf "Number of archives found" ${#deployments_list[@]}
+	echo
+
+	console.msg "Select archive to restore: "
+	echo
+
+	console.wait 1
+
+	printf '\n'
+
+	# print numbered list for selection
+
+	for (( i=0 ; i<${#archives_list[@]} ; i++ ))
+	do
+		archives_directory="${archives_list[$i]}"
+
+		number=$(($i + 1))
+
+		if (( $i >= 0 && $i <=8 ))
+		then
+			# handle number spacing for entries 1-9
+
+			printf '\t[  %s ] %s\n' ${number} ${archives_directory}
+		else
+			# handle number spacing for entries 10+
+
+			printf '\t[ %s ] %s\n' ${number} ${archives_directory}
+		fi
 	done
+
+	printf '\n'
+
+	# values #
+
+	values_list=(
+	        selection
+	)
+
+	# manage user input for values_list
+
+	console_rtn=()
+
+	console.input ${values_list[@]}
+
+	eval ${console_rtn[@]}
+
+	# check selection input against selection list
+
+	while true
+	do
+		# range #
+
+		if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]]
+		then
+			echo
+			console.err "Invalid selection:"
+			console.wrn "Select a number ranging from [ 1 - ${number} ]"
+			echo
+
+			console.ipt "Selection: "
+			read selection
+			echo
+		else
+			ROOT_DIRECTORY="${deployment_selection}"
+
+			console.inf "Restoring. [ ${archives_directory} ]"
+			echo
+
+			break
+		fi
+	done
+
+	exit
 
 	IFS='-'
 
