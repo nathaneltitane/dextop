@@ -101,7 +101,7 @@ vnc_launch () {
 	console.silence "am start -d vnc://${LOCALHOST}:${PORT} -S ${VNC}"
 }
 
-print_resolutions() {
+print_resolutions () {
 	console.msg "Enter a selection to start the display server with"
 	console.msg "or choose a [c]ustom display geometry: "
 	echo
