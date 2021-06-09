@@ -82,9 +82,24 @@ image_archive () {
 
 	deployments_list=()
 
-	for deployment in $(find "${IMAGE_DIRECTORY}/${DISTRIBUTION_NAME}" -maxdepth 1 -mindepth 1 -type d ! -wholename "${IMAGE_DIRECTORY}")
+	for deployment in $(find "${IMAGE_DIRECTORY}" -maxdepth 2 -type d ! -wholename "${IMAGE_DIRECTORY}")
 	do
-		deployments_list+=("${deployment}")
+		distribution_path="${deployment%/*}"
+		distribution_name="$(basename ${distribution_path})"
+
+		release_path="${deployment##*/}"
+		release_name="$(basename ${release_path})"
+
+		deployment="${distribution_name}/${release_name}"
+
+		# filter out parent directory
+
+		if [[ "${deployment}" = *img* ]]
+		then
+			:
+		else
+			deployments_list+=("${deployment}")
+		fi
 	done
 
 	# reset IFS
@@ -105,20 +120,17 @@ image_archive () {
 
 	for (( i=0 ; i<${#deployments_list[@]} ; i++ ))
 	do
-		deployment_directory="$(basename ${deployments_list[$i]})"
-		distribution_directory="$(basename $(dirname ${deployments_list[$i]}))"
-
 		number=$(($i + 1))
 
 		if (( $i >= 0 && $i <=8 ))
 		then
 			# handle number spacing for entries 1-9
 
-			printf '\t[  %s ] %s'/'%s \n' ${number} ${distribution_directory} ${deployment_directory}
+			printf '\t[  %s ] %s \n' ${number} ${deployments_list[i]}
 		else
 			# handle number spacing for entries 10+
 
-			printf '\t[ %s ] %s'/'%s \n' ${number} ${distribution_directory} ${deployment_directory}
+			printf '\t[ %s ] %s \n' ${number} ${deployments_list[i]}
 		fi
 	done
 
