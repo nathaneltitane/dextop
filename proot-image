@@ -117,6 +117,42 @@ image_archive () {
 
 	##############
 
+# values #
+
+values_list=(
+        selection
+)
+
+# manage user input for values_list
+
+console_rtn=()
+
+console.input ${values_list[@]}
+
+eval ${console_rtn[@]}
+
+# check selection input against selection list
+
+while true
+do
+	# range #
+
+	if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]]
+	then
+		echo
+		console.err "Invalid selection:"
+		console.wrn "Select a format ranging from [ 1 - ${number} ]"
+		console.wrn "or select a [c]ustom display geometry."
+		echo
+
+		console.ipt "Selection: "
+		read selection
+		echo
+	else
+		break
+	fi
+
+
 	select deployment_selection in ${deployments_list[@]}
 	do
 		ROOT_DIRECTORY="${deployment_selection}"
