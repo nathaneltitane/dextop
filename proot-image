@@ -163,9 +163,22 @@ image_wipe () {
 }
 
 image_move () {
-	# move identical image directory contents
+	# move same distribution/release directory contents
 
-	console.inf
+	console.inf "Moving deployments."
+
+	for directory in $(find "${IMAGE_DIRECTORY}" -maxdepth 2 -type d ! -wholename "${IMAGE_DIRECTORY}")
+	do
+		directories_list+=("${directory}")
+	done
+
+	for deployment in ${directories_list[@]}
+	do
+		if [[ "${deployment}" == "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}" ]]
+		then
+			mv "${deployment}" "${deployment}-${stamp}"
+		fi
+	done
 }
 
 image_unpack () {
