@@ -145,7 +145,7 @@ image_archive () {
 		else
 			ROOT_DIRECTORY="${deployment_selection}"
 
-			console.inf "Archiving. [ ${deployment_selection} ]"
+			console.inf "Archiving. [ ${deployment_directory} ]"
 			echo
 
 			break
