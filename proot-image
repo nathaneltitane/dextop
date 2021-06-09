@@ -89,6 +89,55 @@ image_archive () {
 
 	console.inf "Number of deployments" ${#deployments_list[@]}
 	echo
+	
+	
+	##############
+	
+	console.msg "Enter a selection to start the display server with"
+	console.msg "or choose a [c]ustom display geometry: "
+	echo
+
+	console.wait 1
+
+	printf '\n'
+
+	# set padding for uniform output
+
+	pad_length=10
+
+	# continue list using array selection of suppported values
+
+	for (( i=0 ; i<${#deployments_list[@]} ; i++ ))
+	do
+		format="${deployments_list[$i]}"
+		#width="${resolutions[$i+1]}"
+		#height="${resolutions[$i+2]}"
+		#resolution="${width}x${height}"
+
+		#number=$((($i/3) + 1))
+		number=$($i)
+		
+		printf '\t[  %s ] %s' ${number} ${format}
+
+
+#		if (( $i/3 >= 0 && $i/3 <= 8 ))
+#		then
+			# handle number spacing for entries 1-9
+
+#			printf '\t[  %s ] %s' ${number} ${format}
+#		else
+			# handle number spacing for entries 10+
+
+#			printf '\t[ %s ] %s' ${number} ${format}
+#		fi
+
+#		printf '%*s' $((pad_length - ${#format}))
+#		printf '%s\n' ${resolution}
+	done
+
+	printf '\n'
+	
+	##############
 
 	select deployment_selection in ${deployments_list[@]}
 	do
