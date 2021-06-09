@@ -114,11 +114,17 @@ image_archive () {
 		then
 			# handle number spacing for entries 1-9
 
-			printf '\t[  %s ] %s'/'%s \n' ${number} ${distribution_directory} ${deployment_directory}
+			printf '\t[  %s ] %s'/'%s \n' ${number} ${distribution_directory} ${deployment_directory} &
+
+			console.progress "Loading..."
+			echo
 		else
 			# handle number spacing for entries 10+
 
-			printf '\t[ %s ] %s'/'%s \n' ${number} ${distribution_directory} ${deployment_directory}
+			printf '\t[ %s ] %s'/'%s \n' ${number} ${distribution_directory} ${deployment_directory} &
+
+			console.progress "Loading..."
+			echo
 		fi
 	done
 
