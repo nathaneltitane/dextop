@@ -162,6 +162,12 @@ image_wipe () {
 	rm -rf "${IMAGE_DIRECTORY}"/*
 }
 
+image_move () {
+	# move identical image directory contents
+
+	console.inf
+}
+
 image_unpack () {
 	# shorthand
 
