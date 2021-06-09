@@ -196,7 +196,7 @@ echo
 console.fwd "Initializing..."
 echo
 
-if [[ ! -d "${IMAGE_DIRECTORY}" ]]
+if [[ ! -d "${IMAGE_DIRECTORY}" || -z "$(ls ${IMAGE_DIRECTORY})" ]]
 then
 	image_directories
 else
@@ -245,10 +245,52 @@ else
 						if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 						then
 							image_restore
-						else
-							console.download "${iso_url}" "${ISO_DIRECTORY}" "${iso_archive}"
 
-							image_unpack "${ISO_DIRECTORY}/${iso_archive}"
+							unset reply
+						else
+							if [[ ! -z "$(ls ${IMAGE_DIRECTORY})" ]] && [[ "${LOAD_DIRECTORY}" == "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}" ]]
+							then
+								console.wrn "Image directory contains previous deployments."
+								echo
+
+								console.err "Deployment matches setup settings [ ${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE} ]"
+								echo
+
+								console.usr "Archive matching deployment?"
+								echo
+
+								read reply
+
+								if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+								then
+									image_archive "${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup-${stamp}.tar.gz"
+
+									unset reply
+								else
+									console.err "Cannot deploy over existing image with same configuration."
+									echo
+
+									console.usr "Wipe image directory?"
+									echo
+
+									read reply
+
+									if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+									then
+										image_wipe
+
+										unset reply
+									else
+										console.err "Error."
+										echo
+
+										console.fwd "Aborting..."
+										echo
+
+										exit 1
+									fi
+								fi
+							fi
 						fi
 					fi
 				fi
@@ -256,3 +298,8 @@ else
 		fi
 	fi
 fi
+
+
+console.download "${iso_url}" "${ISO_DIRECTORY}" "${iso_archive}"
+
+image_unpack "${ISO_DIRECTORY}/${iso_archive}"
