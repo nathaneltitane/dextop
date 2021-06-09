@@ -164,22 +164,28 @@ image_archive () {
 			echo
 
 			console.ipt "Selection: "
+
 			read selection
 			echo
 		else
-			ROOT_DIRECTORY="${deployment_selection}"
+			# manage numerical selection
 
-			console.inf "Archiving. [ ${deployment_directory} ]"
+			i=$((${selection}))
+
+			deployment=${deployments_list[i]}
+
+			# define archiving variables
+
+			ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${deployment}"
+
+			console.inf "Archiving. [ ${deployment} ]"
 			echo
 
 			break
 		fi
 	done
 
-	exit
-
-	console.inf "Archiving selected deployment."
-	echo
+	# archive routine
 
 	tar												\
 		--create									\
