@@ -281,7 +281,7 @@ else
 
 										unset reply
 									else
-										console.err "Error."
+										console.err "Cannot deploy over existing image with same configuration."
 										echo
 
 										console.fwd "Aborting..."
