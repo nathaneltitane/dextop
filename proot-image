@@ -322,6 +322,7 @@ else
 						echo
 
 						read reply
+						echo
 
 						if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 						then
@@ -341,6 +342,7 @@ else
 								echo
 
 								read reply
+								echo
 
 								if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 								then
@@ -355,6 +357,7 @@ else
 									echo
 
 									read reply
+									echo
 
 									if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 									then
@@ -369,6 +372,7 @@ else
 										echo
 
 										read reply
+										echo
 
 										if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 										then
