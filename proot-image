@@ -188,7 +188,7 @@ image_restore () {
 
 	archives_list=()
 
-	for archive in $(find "${BACKUP_DIRECTORY}" -maxdepth 2 -type f -iname "*.tar.gz" ! -wholename "${BACKUP_DIRECTORY}")
+	for archive in $(find "${BACKUP_DIRECTORY}" -maxdepth 1 -mindepth 1 -type f -iname "*.tar.gz" ! -wholename "${BACKUP_DIRECTORY}")
 	do
 		archives_list+=("${archive}")
 	done
