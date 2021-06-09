@@ -284,10 +284,23 @@ else
 										console.err "Cannot deploy over existing image with same configuration."
 										echo
 
-										console.fwd "Aborting..."
+										console.usr "Rename deployment directory?"
 										echo
 
-										exit 1
+										read reply
+
+										if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+										then
+											image_move
+										else
+											console.err "Unable to deploy system image with current set of options."
+											echo
+
+											console.fwd "Aborting..."
+											echo
+
+											exit 1
+										fi
 									fi
 								fi
 							fi
