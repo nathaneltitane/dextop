@@ -105,7 +105,7 @@ image_archive () {
 
 		number=$(($i + 1))
 
-		if (( $i >= 0 && $i <= 9 ))
+		if (( $i >= 0 && $i <=8 ))
 		then
 			# handle number spacing for entries 1-9
 
@@ -297,6 +297,7 @@ else
 			echo
 
 			read reply
+			echo
 
 			if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 			then
