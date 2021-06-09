@@ -105,7 +105,16 @@ image_archive () {
 
 		number=$(($i + 1))
 
-		printf '\t[  %s ] %s\n' ${number} ${deployment_directory}
+		if (( $i >= 0 && $i <= 9 ))
+		then
+			# handle number spacing for entries 1-9
+
+			printf '\t[  %s ] %s\n' ${number} ${format}
+		else
+			# handle number spacing for entries 10+
+
+			printf '\t[ %s ] %s\n' ${number} ${format}
+		fi
 	done
 
 	printf '\n'
