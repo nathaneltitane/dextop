@@ -97,9 +97,7 @@ image_archive () {
 
 	printf '\n'
 
-	# set padding for uniform output
-
-	pad_length=10
+	# print depployments numbered list for selection
 
 	for (( i=0 ; i<${#deployments_list[@]} ; i++ ))
 	do
