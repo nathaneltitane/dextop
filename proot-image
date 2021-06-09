@@ -152,6 +152,8 @@ image_archive () {
 		fi
 	done
 
+	exit
+
 	console.inf "Archiving selected deployment."
 	echo
 
