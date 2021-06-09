@@ -82,7 +82,7 @@ image_archive () {
 
 	deployments_list=()
 
-	for deployment in $(find "${IMAGE_DIRECTORY}" -maxdepth 2 -mindepth 1 -type d ! -wholename "${IMAGE_DIRECTORY}")
+	for deployment in $(find "${IMAGE_DIRECTORY}/${DISTRIBUTION_NAME}" -maxdepth 1 -mindepth 1 -type d ! -wholename "${IMAGE_DIRECTORY}")
 	do
 		deployments_list+=("${deployment}")
 	done
