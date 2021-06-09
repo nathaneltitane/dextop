@@ -162,8 +162,8 @@ image_wipe () {
 	rm -rf "${IMAGE_DIRECTORY}"/*
 }
 
-image_move () {
-	# move same distribution/release directory contents
+image_rename () {
+	# rename same distribution/release directory contents
 
 	console.inf "Moving deployments."
 
@@ -310,7 +310,7 @@ else
 
 										if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 										then
-											image_move
+											image_rename
 										else
 											console.err "Unable to deploy system image with current set of options."
 											echo
