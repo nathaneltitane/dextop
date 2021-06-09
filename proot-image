@@ -87,13 +87,10 @@ image_archive () {
 		deployments_list+=("${deployment}")
 	done
 
-	console.inf "Number of deployments" ${#deployments_list[@]}
+	console.inf "Number of deployments found" ${#deployments_list[@]}
 	echo
 
-	##############
-
-	console.msg "Enter a selection to start the display server with"
-	console.msg "or choose a [c]ustom display geometry: "
+	console.msg "Select deployment to archive: "
 	echo
 
 	console.wait 1
@@ -115,52 +112,44 @@ image_archive () {
 
 	printf '\n'
 
-	##############
+	# values #
 
-# values #
+	values_list=(
+	        selection
+	)
 
-values_list=(
-        selection
-)
+	# manage user input for values_list
 
-# manage user input for values_list
+	console_rtn=()
 
-console_rtn=()
+	console.input ${values_list[@]}
 
-console.input ${values_list[@]}
+	eval ${console_rtn[@]}
 
-eval ${console_rtn[@]}
+	# check selection input against selection list
 
-# check selection input against selection list
-
-while true
-do
-	# range #
-
-	if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]]
-	then
-		echo
-		console.err "Invalid selection:"
-		console.wrn "Select a format ranging from [ 1 - ${number} ]"
-		console.wrn "or select a [c]ustom display geometry."
-		echo
-
-		console.ipt "Selection: "
-		read selection
-		echo
-	else
-		break
-	fi
-
-
-	select deployment_selection in ${deployments_list[@]}
+	while true
 	do
-		ROOT_DIRECTORY="${deployment_selection}"
+		# range #
 
-		console.inf "Archiving. [ ${deployment_selection} ]"
-		echo
+		if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]]
+		then
+			echo
+			console.err "Invalid selection:"
+			console.wrn "Select a deployment ranging from [ 1 - ${number} ]"
+			echo
 
-		break
+			console.ipt "Selection: "
+			read selection
+			echo
+		else
+			ROOT_DIRECTORY="${deployment_selection}"
+
+			console.inf "Archiving. [ ${deployment_selection} ]"
+			echo
+
+			break
+		fi
 	done
 
 	console.inf "Archiving selected deployment."
