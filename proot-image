@@ -139,7 +139,7 @@ image_archive () {
 	# values #
 
 	values_list=(
-	        selection
+		selection
 	)
 
 	# manage user input for values_list
