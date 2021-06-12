@@ -20,18 +20,18 @@ APPLICATION="${2}"
 
 while (($#))
 do
-        case "${3}" in
-                -b|--bind)
-                        option="bind"
-                ;;
+	case "${3}" in
+		-b|--bind)
+			option="bind"
+		;;
 
-                -p|--proc)
-                        option="proc"
-                ;;
+		-p|--proc)
+			option="proc"
+		;;
 
-                -r|--root)
-                        option="root"
-                ;;
+		-r|--root)
+			option="root"
+		;;
 
 				-bvnc)
 						vnc_option="bvnc"
@@ -41,23 +41,23 @@ do
 						vnc_option="rvnc"
 				;;
 
-                -h|--help)
-                        echo
-                    	echo -e "Usage: ${script} | [USERNAME] | [APPLICATION] | [OPTION]"
-                        echo
-                        echo -e "Options:"
-                        echo
-                        echo -e "-b, --bind \t Full setup: download and install full applications list and utilities."
-                        echo -e "-f, --proc \t Full setup: download and install full applications list and utilities."
-                        echo -e "-p, --proot \t Update setup: update applications list and utilities."
-                        echo
-                        echo -e "-h, --help \t Show help and usage information."
-                        echo
-                        echo -e "'${script}' [ Version ${version} ]"
-                        echo
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} | [USERNAME] | [APPLICATION] | [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-b, --bind \t Full setup: download and install full applications list and utilities."
+			echo -e "-f, --proc \t Full setup: download and install full applications list and utilities."
+			echo -e "-p, --proot \t Update setup: update applications list and utilities."
+			echo
+			echo -e "-h, --help \t Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version ${version} ]"
+			echo
 
-                        exit
-                ;;
+			exit
+		;;
 
 				"")
 					# handle empty argument
@@ -66,19 +66,19 @@ do
 					:
 				;;
 
-                *)
-                        echo
-                       	echo -e "Usage: ${script} | [USERNAME] | [APPLICATION] | [OPTION]"
-                        echo
-                        echo -e "${script}: Unknown option '${1}'"
-                        echo -e "Type './${script} --help' for help and usage information."
-                        echo
+		*)
+			echo
+			echo -e "Usage: ${script} | [USERNAME] | [APPLICATION] | [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
 
-                        exit 1
-                ;;
-        esac
+			exit 1
+		;;
+	esac
 
-        shift
+	shift
 done
 
 # variables #
