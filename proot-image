@@ -183,7 +183,7 @@ image_archive () {
 
 			break
 		fi
-	done
+	done 
 
 	# archive routine
 
@@ -206,9 +206,18 @@ image_restore () {
 
 	archives_list=()
 
-	for archive in $(find "${BACKUP_DIRECTORY}" -maxdepth 1 -mindepth 1 -type f -iname "*.tar.gz" ! -wholename "${BACKUP_DIRECTORY}")
+	for archive_selection in $(find "${BACKUP_DIRECTORY}" -maxdepth 1 -type f -iname "*.tar.gz" ! -wholename "${BACKUP_DIRECTORY}")
 	do
-		archives_list+=("${archive}")
+
+		archive_label="${archive_selection##*/}"
+
+		IFS='-'
+
+		read archive_distribution archive_release archive_stamp archive_tail <<< "${archive_label}"
+
+		# filter out parent directory
+
+		archives_list+=("${archive_selection}")
 	done
 
 	console.inf "Number of archives" ${#archives_list[@]}
@@ -291,12 +300,6 @@ image_restore () {
 	done
 
 	exit
-
-	IFS='-'
-
-	archive_label="${archive_selection##*/}"
-
-	read archive_name archive_release _ _ _ _ _ _ _ <<< $(echo "${archive_label}")
 
 	console.inf "Extracting selected archive."
 	echo
