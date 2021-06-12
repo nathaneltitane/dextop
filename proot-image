@@ -211,23 +211,20 @@ image_restore () {
 
 		archive_label="${archive_selection##*/}"
 
+		# set IFS
+
 		IFS='-'
 
-		read archive_distribution archive_release archive_stamp archive_tail <<< "${archive_label}"
+		read archive_distribution archive_release month day year hour minute second archive_tail <<< "${archive_label}"
 
-		# filter out parent directory
+		# reset IFS
 
-		archives_list+=("${archive_selection}")
+		IFS=''
+
+		archives_list+=("${archive_label}")
 	done
 
-	console.inf "Number of archives" ${#archives_list[@]}
-	echo
-
-	# reset IFS
-
-	IFS=''
-
-	console.inf "Number of archives found" ${#deployments_list[@]}
+	console.inf "Number of archives found" ${#archives_list[@]}
 	echo
 
 	console.msg "Select archive to restore: "
@@ -249,11 +246,11 @@ image_restore () {
 		then
 			# handle number spacing for entries 1-9
 
-			printf '\t[  %s ] %s\n' ${number} ${archives_directory}
+			printf '\t[  %s ] %s\n' ${number} ${archives_list[i]}
 		else
 			# handle number spacing for entries 10+
 
-			printf '\t[ %s ] %s\n' ${number} ${archives_directory}
+			printf '\t[ %s ] %s\n' ${number} ${archives_list[i]}
 		fi
 	done
 
@@ -290,9 +287,18 @@ image_restore () {
 			read selection
 			echo
 		else
-			ROOT_DIRECTORY="${deployment_selection}"
+		# manage numerical selection
 
-			console.inf "Restoring. [ ${archives_directory} ]"
+			i=$((${selection}))
+
+			archive=${deployments_list[i]}
+			deployment="${archive_distribution}/${archive_release}"
+
+			# define archiving variables
+
+			ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${deployment}"
+
+			console.inf "Restoring. [ ${deployment} ]"
 			echo
 
 			break
