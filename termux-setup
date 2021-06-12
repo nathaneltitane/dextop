@@ -16,28 +16,28 @@ version="05-29-2021"
 
 if [[ $# -gt 3 ]]
 then
-    echo
-    echo -e "Usage: ${script} [Distribution Name] | [Distribution Version] | [OPTION]"
-    echo
+	echo
+	echo -e "Usage: ${script} [Distribution Name] | [Distribution Version] | [OPTION]"
+	echo
 
-    exit 1
+	exit 1
 fi
 
 if [[ $# -eq 1 ]]
 then
-    distribution_name="${1}"
+	distribution_name="${1}"
 fi
 
 if [[ $# -eq 2 ]]
 then
-    distribution_name="${1}"
-    distribution_version="${2}"
+	distribution_name="${1}"
+	distribution_version="${2}"
 fi
 
 if [[ $# -eq 3 ]]
 then
 	distribution_name="${1}"
-    distribution_version="${2}"
+	distribution_version="${2}"
 
 	install_option="${3}"
 fi
@@ -63,11 +63,11 @@ do
 			echo -e "-a, --applications \t Download a set of optimized and precompiled arm64 applications."
 			echo
 			echo -e "-h, --help \t\t Show help and usage information."
-	        echo
-    	    echo -e "'${script}' [ Version ${version} ]"
-        	echo
+			echo
+			echo -e "'${script}' [ Version ${version} ]"
+			echo
 
-        	exit
+			exit
 		;;
 
 		"")
@@ -79,7 +79,7 @@ do
 
 		*)
 			echo
-		    echo -e "Usage: ${script} [Distribution Name] | [Distribution Version] | [OPTION]"
+			echo -e "Usage: ${script} [Distribution Name] | [Distribution Version] | [OPTION]"
 			echo
 			echo -e "${script}: Unknown option '${1}'"
 			echo -e "Type './${script} --help' for help and usage information."
@@ -89,7 +89,7 @@ do
 
 		;;
 
-        esac
+		esac
 
 	shift
 
