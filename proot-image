@@ -183,7 +183,7 @@ image_archive () {
 
 			break
 		fi
-	done 
+	done
 
 	# archive routine
 
@@ -292,13 +292,15 @@ image_restore () {
 			i=$((${selection}))
 
 			archive=${deployments_list[i]}
+			archive_stamp="${month}-${day}-${year}-${hour}-${minute}-${second}"
+
 			deployment="${archive_distribution}/${archive_release}"
 
 			# define archiving variables
 
 			ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${deployment}"
 
-			console.inf "Restoring. [ ${deployment} ]"
+			console.inf "Restoring. [ ${deployment} // ${archive_stamp} ]"
 			echo
 
 			break
