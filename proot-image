@@ -301,6 +301,8 @@ image_restore () {
 	console.inf "Extracting selected archive."
 	echo
 
+	# restore routine
+
 	tar												\
 		--extract									\
 			--file="${archive_selection}"			\
