@@ -187,8 +187,6 @@ image_archive () {
 
 	# archive routine
 
-	cd "${ROOT_DIRECTORY}" || exit 1
-
 	tar												\
 		--create									\
 		--verbose									\
