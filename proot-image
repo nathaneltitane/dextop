@@ -170,7 +170,7 @@ image_archive () {
 		else
 			# manage numerical selection
 
-			i=$((${selection}))
+			i=$((${selection} - 1))
 
 			deployment=${deployments_list[i]}
 
