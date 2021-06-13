@@ -185,6 +185,8 @@ image_archive () {
 		fi
 	done
 
+	exit
+
 	# archive routine
 
 	cd "${ROOT_DIRECTORY}" || exit 1
