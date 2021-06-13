@@ -187,6 +187,8 @@ image_archive () {
 
 	# archive routine
 
+	cd "${ROOT_DIRECTORY}" || exit 1
+
 	tar												\
 		--create									\
 		--verbose									\
@@ -407,7 +409,7 @@ else
 
 			if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 			then
-				image_archive "${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup-${stamp}.tar.gz"
+				image_archive "${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-${stamp}-backup.tar.gz"
 
 				unset reply
 			else
