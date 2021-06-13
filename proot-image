@@ -106,7 +106,7 @@ image_archive () {
 
 	IFS=''
 
-	console.inf "Number of deployments found" ${#deployments_list[@]}
+	console.inf "Number of deployments found" ${#deployments_list[@]} ":"
 	echo
 
 	console.msg "Select deployment to archive: "
@@ -228,7 +228,7 @@ image_restore () {
 		archives_list+=("${archive_label}")
 	done
 
-	console.inf "Number of archives found" ${#archives_list[@]}
+	console.inf "Number of archives found" ${#archives_list[@]} ":"
 	echo
 
 	console.msg "Select archive to restore: "
