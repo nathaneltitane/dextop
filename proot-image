@@ -70,7 +70,7 @@ image_directories () {
 		"${MOUNT_DIRECTORY}"
 	)
 
-	console.directory "${MAIN_DIRECTORY}" ${directories_list[@]}
+	console.directory "/" ${directories_list[@]}
 }
 
 image_archive () {
