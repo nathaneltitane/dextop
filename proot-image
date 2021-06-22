@@ -66,8 +66,8 @@ image_directories () {
 		"${BACKUP_DIRECTORY}"
 		"${IMAGE_DIRECTORY}"
 		"${ISO_DIRECTORY}"
-		"${ROOT_DIRECTORY}"
 		"${MOUNT_DIRECTORY}"
+		"${ROOT_DIRECTORY}"
 	)
 
 	console.directory "/" ${directories_list[@]}
