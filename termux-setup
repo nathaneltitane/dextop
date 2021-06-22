@@ -112,7 +112,7 @@ IFS='.'
 
 read code_year code_month code_revision <<< "${distribution_version}"
 
-if [ -z "${code_revision}"]
+if [ -z "${code_revision}" ]
 then
 	distribution_release="${distribution_version}"
 else
