@@ -382,7 +382,7 @@ echo
 console.fwd "Initializing..."
 echo
 
-if [[ ! -d "${IMAGE_DIRECTORY}" || -z "$(ls ${IMAGE_DIRECTORY})" ]]
+if [[ ! -d "${IMAGE_DIRECTORY}" ]]
 then
 	image_directories
 else
