@@ -76,7 +76,6 @@ binaries_list=(
 	proot-initialize
 	proot-launch
 	proot-libraries
-	proot-links
 	proot-message
 	proot-network
 	proot-packages
