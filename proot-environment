@@ -71,10 +71,6 @@ FILE
 # .bashrc
 
 cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bashrc
-for file in .*_aliases
-do
-	. ~/"${file}"
-done
 
 FILE
 
