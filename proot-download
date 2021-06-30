@@ -51,9 +51,17 @@ done
 
 # download #
 
+# bash
+
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${user_name}"/.bash_functions	extract
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${user_name}"/.bash_functions	record
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${user_name}"/.bash_functions	speed
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${user_name}"/.bash_functions	sprunge
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${user_name}"/.bash_functions	youtube
+
 # youtube-dl
 
-console.download https://yt-dl.org/downloads/latest											/usr/bin	youtube-dl
+console.download https://yt-dl.org/downloads/latest											/usr/bin								youtube-dl
 
 # leocad
 
