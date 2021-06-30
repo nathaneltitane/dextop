@@ -59,9 +59,9 @@ echo
 cat << "FILE" ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 # system configuration #
 
-xfce4-terminal --initial-title='- Dextop - Configure locales and language input' -x sudo dpkg-reconfigure locales
+xfce4-terminal --geometry=200x50 --hide-menubar --initial-title='- Dextop - Configure locales and language input' -x sudo dpkg-reconfigure locales
 
-xfce4-terminal --initial-title='- Dextop - Configure time zone' -x sudo dpkg-reconfigure tzdata
+xfce4-terminal --geometry=200x50 --hide-menubar --initial-title='- Dextop - Configure time zone' -x sudo dpkg-reconfigure tzdata
 
 # remove system configuration routine after first run
 
