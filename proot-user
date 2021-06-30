@@ -132,16 +132,25 @@ gid="$(id -g ${user_name})"
 console.inf "Setting up user home directory."
 echo
 
-directories_list=(
+standard_directories_list=(
 	Desktop
 	Documents
 	Downloads
-	Git
 	Music
 	Pictures
 	Public
 	Templates
 	Videos
+)
+
+optional_directories_list=(
+	Git
+	.bashrc_functions
+)
+
+directories_list=(
+	${standard_directories_list[@]}
+	${optional_directories_list[@]}
 )
 
 console.directory "${ROOT_DIRECTORY}"/home/"${user_name}"/ ${directories_list[@]}
