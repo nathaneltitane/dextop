@@ -63,10 +63,6 @@ sudo dpkg-reconfigure locales
 
 sudo dpkg-reconfigure tzdata
 
-# set desktop preferences #
-
-bash proot-desktop
-
 # remove system configuration routine after first run
 
 sed -i '/# system configuration #/,$d' "${ROOT_DIRECTORY}"/home/"${USER}"/.profile

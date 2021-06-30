@@ -87,6 +87,7 @@ console.wait 2
 binaries_list=(
 	leocad-download
 	leocad-configuration
+	proot-desktop
 )
 
 for binary in ${binaries_list[@]}
