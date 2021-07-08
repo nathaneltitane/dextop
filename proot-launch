@@ -16,11 +16,14 @@ version="02-26-2021"
 # usage #
 
 USERNAME="${1}"
-APPLICATION="${2}"
 
 while (($#))
 do
-	case "${3}" in
+	case "${2}" in
+		-a| --application)
+			APPLICATION="${@}"
+		;;
+		
 		-b|--bind)
 			option="bind"
 		;;
@@ -33,13 +36,13 @@ do
 			option="root"
 		;;
 
-				-bvnc)
-						vnc_option="bvnc"
-				;;
+		-bvnc)
+				vnc_option="bvnc"
+		;;
 
-				-rvnc)
-						vnc_option="rvnc"
-				;;
+		-rvnc)
+				vnc_option="rvnc"
+		;;
 
 		-h|--help)
 			echo
@@ -59,12 +62,12 @@ do
 			exit
 		;;
 
-				"")
-					# handle empty argument
-					# use default values specified in script
+			"")
+				# handle empty argument
+				# use default values specified in script
 
-					:
-				;;
+				:
+			;;
 
 		*)
 			echo
