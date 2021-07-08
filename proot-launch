@@ -21,7 +21,9 @@ while (($#))
 do
 	case "${2}" in
 		-a| --application)
-			APPLICATION="${@}"
+			APPLICATION="${3}"
+			
+			shift
 		;;
 		
 		-b|--bind)
@@ -37,11 +39,11 @@ do
 		;;
 
 		-bvnc)
-				vnc_option="bvnc"
+			vnc_option="bvnc"
 		;;
 
 		-rvnc)
-				vnc_option="rvnc"
+			vnc_option="rvnc"
 		;;
 
 		-h|--help)
