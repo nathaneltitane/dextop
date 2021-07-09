@@ -70,6 +70,7 @@ alias '...'='cd ../../../'
 alias '....'='cd ../../../../'
 alias '.....'='cd ../../../../'
 
+alias 'gd'='cd "${HOME}"/Git'
 alias 'hd'='cd "${HOME}"'
 alias 'rd'='cd /'
 
