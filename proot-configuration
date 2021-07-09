@@ -59,8 +59,17 @@ echo
 cat << "FILE" ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 # system configuration #
 
-xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x sudo dpkg-reconfigure locales
-xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x sudo dpkg-reconfigure txdata
+# wait for display manager to load
+
+sleep 5
+
+# configure languages and locales
+
+xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x sudo dpkg-reconfigure locales && wait
+
+# configure time zone data
+
+xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x sudo dpkg-reconfigure txdata && wait
 
 # remove system configuration routine after first run
 
