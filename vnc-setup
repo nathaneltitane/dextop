@@ -89,7 +89,7 @@ cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bash_logout
 
 # automatic vnc session stop on shell logout
 
-vnc-stop && clear
+clear && vnc-stop && clear
 FILE
 
 # append automatic vnc session start from selection value
