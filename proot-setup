@@ -77,6 +77,10 @@ console.run "${BINARIES_DIRECTORY}"/proot-message
 
 "${BINARIES_DIRECTORY}"/proot-packages
 
+# setup proot binary fixes and links
+
+"${BINARIES_DIRECTORY}"/proot-links
+
 # setup proot user
 
 "${BINARIES_DIRECTORY}"/proot-user "${user_name}"

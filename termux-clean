@@ -53,7 +53,7 @@ done
 
 if [ ! -f "${HOME}"/setup ]
 then
-	console.fwd "Setup complete [ TERMUX ]..."
+	console.fwd "Setup complete [ termux ]..."
 	echo
 	console.scs "System deployment and configuration complete."
 	echo
