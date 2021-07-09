@@ -123,33 +123,33 @@ fi
 
 IFS=''
 
-[ -z "${install_option}" ]					&& install_option="full"
+[ -z "${install_option}" ] && install_option="full"
 
 # export variables
 
-echo '# globals #'																				>> "${PREFIX}"/bin/globals
+echo '# globals #'																>> "${PREFIX}"/bin/globals
 
-echo "export DISTRIBUTION_NAME=${distribution_name}"											>> "${PREFIX}"/bin/globals
-echo "export DISTRIBUTION_VERSION=${distribution_version}"										>> "${PREFIX}"/bin/globals
-echo "export DISTRIBUTION_RELEASE=${distribution_release}"										>> "${PREFIX}"/bin/globals
+echo "export DISTRIBUTION_NAME=${distribution_name}"							>> "${PREFIX}"/bin/globals
+echo "export DISTRIBUTION_VERSION=${distribution_version}"						>> "${PREFIX}"/bin/globals
+echo "export DISTRIBUTION_RELEASE=${distribution_release}"						>> "${PREFIX}"/bin/globals
 
-echo 'export MAIN_DIRECTORY="${PREFIX%/*}"'														>> "${PREFIX}"/bin/globals
-echo 'export BINARIES_DIRECTORY="${PREFIX}"/bin'												>> "${PREFIX}"/bin/globals
-echo 'export LIBRARIES_DIRECTORY="${PREFIX}"/lib'												>> "${PREFIX}"/bin/globals
-echo 'export BACKUP_DIRECTORY="${MAIN_DIRECTORY}"/bkp'											>> "${PREFIX}"/bin/globals
-echo 'export IMAGE_DIRECTORY="${MAIN_DIRECTORY}"/img'											>> "${PREFIX}"/bin/globals
-echo 'export MOUNT_DIRECTORY="${MAIN_DIRECTORY}"/mnt'											>> "${PREFIX}"/bin/globals
-echo 'export PROC_DIRECTORY="${MAIN_DIRECTORY}"/proc'											>> "${PREFIX}"/bin/globals
+echo 'export MAIN_DIRECTORY="${PREFIX%/*}"'										>> "${PREFIX}"/bin/globals
+echo 'export BINARIES_DIRECTORY="${PREFIX}"/bin'								>> "${PREFIX}"/bin/globals
+echo 'export LIBRARIES_DIRECTORY="${PREFIX}"/lib'								>> "${PREFIX}"/bin/globals
+echo 'export BACKUP_DIRECTORY="${MAIN_DIRECTORY}"/bkp'							>> "${PREFIX}"/bin/globals
+echo 'export IMAGE_DIRECTORY="${MAIN_DIRECTORY}"/img'							>> "${PREFIX}"/bin/globals
+echo 'export MOUNT_DIRECTORY="${MAIN_DIRECTORY}"/mnt'							>> "${PREFIX}"/bin/globals
+echo 'export PROC_DIRECTORY="${MAIN_DIRECTORY}"/proc'							>> "${PREFIX}"/bin/globals
 
-echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'						>> "${PREFIX}"/bin/globals
-echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'								>> "${PREFIX}"/bin/globals
+echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'		>> "${PREFIX}"/bin/globals
+echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'				>> "${PREFIX}"/bin/globals
 
-echo 'export ISO_DIRECTORY="${MAIN_DIRECTORY}"/iso'												>> "${PREFIX}"/bin/globals
+echo 'export ISO_DIRECTORY="${MAIN_DIRECTORY}"/iso'								>> "${PREFIX}"/bin/globals
 
-echo '# setup variables #'																		>> "${PREFIX}"/bin/globals
+echo '# setup variables #'														>> "${PREFIX}"/bin/globals
 
-echo "export version=${version}"																>> "${PREFIX}"/bin/globals
-echo "export install_option=${install_option}"													>> "${PREFIX}"/bin/globals
+echo "export version=${version}"												>> "${PREFIX}"/bin/globals
+echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/globals
 
 source "${PREFIX}"/bin/globals
 

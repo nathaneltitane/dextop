@@ -49,9 +49,21 @@ done
 
 # variables #
 
+option="${1}"
+
 # binaries #
 
-console.fwd "Fixing binary entries..."
+binaries_list=(
+	top
+)
+
+console.fwd "Linking binaries..."
 echo
 
-ln -s -f "${BINARIES_DIRECTORY}"/top "${BINARIES_DIRECTORY}"/htop
+for binary in ${binaries_list[@]}
+do
+	if [ -f "${BINARIES_DIRECTORY}"/"${binary}" ]
+	then
+		ln -s -f "${BINARIES_DIRECTORY}"/"$binary" /usr/bin/"${binary}"
+	fi
+done
