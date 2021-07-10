@@ -87,7 +87,6 @@ console.wait 2
 binaries_list=(
 	leocad-download
 	leocad-configuration
-	xfconf-desktop
 )
 
 for binary in ${binaries_list[@]}
