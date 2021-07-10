@@ -65,7 +65,6 @@ binaries_list=(
 	proot-checkpoint
 	proot-clean
 	proot-configuration
-	proot-desktop
 	proot-download
 	proot-environment
 	proot-expand
