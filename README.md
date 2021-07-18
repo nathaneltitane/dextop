@@ -19,8 +19,7 @@ Comparison in between Dextop and other projects:
 - It is configured as a transient change root system: it talks to Android via Termux utilities to access binaries and launch your favorite VNC viewer automatically for you!
 - It uses a customized [console](https://github.com/nathaneltitane/console) system to handle the setup, colorize prompts and proved the user with a minimal, user-friendly experience. 
 
-Dextop is very quick and efficient: you can choose in between the familiar XFCE4 desktop environemnt or the more minimal DWM as a window manager/desktop session.
-XFCE4 will provide all the necessary and more familiar graphical utilities and applications.
+Dextop is very quick and efficient: the familiar XFCE4 desktop environemnt will provide all the necessary and more familiar graphical utilities and applications for you to get your work done.
 
 Under XFCE4, compositing is disabled by default to optimize resource usage and prevent display bugs: this is done to give you the best possible performance and experience according to your device.
 Disabling compositing is required due to Android user-space limitations and limited hardware access: there is no graphics hardware acceleration available - the change root graphics are emulated and run on LLVM.
@@ -59,9 +58,9 @@ Once the Android applications are installed on your device, open Termux and past
 
 Available install options are:
 
-`-f | --full: download and install full desktop environment and utilities. ( xfce4 ) [ Default ]`
+`-f | --full:    download and install full desktop environment, utilities and themes. ( xfce4 ) [ Default ]`
 
-`-m | --minimal: download and install minimal desktop environment and utilities. ( dwm )`
+`-m | --minimal: download and install full desktop environment and utilities.         ( xfce4 )`
 
 
 Let the setup run and fetch all the required dependencies: it will prompt you for input once it is ready.

@@ -63,16 +63,7 @@ vnc_list=(
 	tigervnc-standalone-server
 )
 
-# desktop environments
-
-dwm_list=(
-	dwm
-	dmenu
-	irssi
-	ranger
-	stterm
-	suckless-tools
-)
+# desktop environment
 
 xfce4_list=(
 	xfce4
@@ -162,7 +153,7 @@ fi
 if [[ "${install_option}" = "minimal" ]]
 then
 	desktop_environment_list=(
-		${dwm_list[@]}
+		${xfce4_list[@]}
 	)
 
 	install_list+=(

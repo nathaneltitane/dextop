@@ -51,6 +51,12 @@ done
 
 # configuration
 
+terminal_command () {
+	# package terminal command to prevent user bypass
+	
+	xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x "${1}"
+}
+
 commands_list=(
 	xfconf-desktop
 	sudo dpkg-reconfigure locales
@@ -59,5 +65,5 @@ commands_list=(
 
 for command in ${commands_list[@]}
 do
-	
+	sudo -H -u "${user_name}" terminal_command "${command}"
 done
