@@ -49,34 +49,15 @@ done
 
 # variables #
 
-# silence login prompt
+# configuration
 
-console.inf "Writing intial login configuration routine."
-echo
+commands_list=(
+	xfconf-desktop
+	sudo dpkg-reconfigure locales
+	sudo dpkg-reconfigure tzdata
+)
 
-# write initial login configuration routine
-
-cat << "FILE" ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
-# system configuration #
-
-# wait for display manager to load
-
-sleep 5
-
-# configure desktop preferences
-
-xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x xfconf-desktop && wait
-
-# configure languages and locales
-
-xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x sudo dpkg-reconfigure locales && wait
-
-# configure time zone data
-
-xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x sudo dpkg-reconfigure txdata && wait
-
-# remove system configuration routine after first run
-
-sed -i '/# system configuration #/,$d' "${ROOT_DIRECTORY}"/home/"${USER}"/.profile
-
-FILE
+for command in ${commands_list[@]}
+do
+	
+done

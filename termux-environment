@@ -53,15 +53,17 @@ done
 
 # files #
 
-cat << 'FILE' ->> "${HOME}"/.hushlogin
-
-FILE
-
 console.fwd "Setting up environment [ termux ]..."
 echo
 
 console.inf "Creating files."
 echo
+
+# silence login prompt
+
+cat << 'FILE' ->> "${HOME}"/.hushlogin
+
+FILE
 
 # .bash_aliases
 

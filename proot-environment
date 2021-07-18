@@ -53,8 +53,17 @@ done
 
 # files #
 
-console.inf "Creating configuration files."
+console.fwd "Setting up environment [ proot ]..."
 echo
+
+console.inf "Creating files."
+echo
+
+# silence login prompt
+
+cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.hushlogin
+
+FILE
 
 # .bash_aliases
 
@@ -84,5 +93,27 @@ FILE
 # .profile
 
 cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
+
+# system configuration #
+
+# wait for display manager to load
+
+sleep 5
+
+# configure desktop preferences
+
+xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x xfconf-desktop && wait
+
+# configure languages and locales
+
+xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x sudo dpkg-reconfigure locales && wait
+
+# configure time zone data
+
+xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x sudo dpkg-reconfigure txdata && wait
+
+# remove system configuration routine after first run
+
+sed -i '/# system configuration #/,$d' "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 
 FILE
