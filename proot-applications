@@ -114,13 +114,25 @@ install_list+=(
 	${utilities_list[@]}
 )
 
+purge_list=(
+	xfce4-panel	
+)
+
+# purge #
+
+if [ ! -z ${#purge_list[@]} ]
+then
+	console.purge ${purge_list[@]}
+fi
+
+# install #
+
 if [[ "${option}" = "full" ]]
 then
-	# install #
-
 	console.install ${install_list[@]}
 fi
 
+# update #
 
 if [[ "${option}" = "update" ]]
 then
