@@ -11,7 +11,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version #
 
-version="02-26-2021"
+version="08-04-2021"
 
 # usage #
 
@@ -44,6 +44,10 @@ do
 
 		-rvnc)
 			vnc_option="rvnc"
+		;;
+
+		-nvnc)
+			vnc_option="nvnc"
 		;;
 
 		-h|--help)
@@ -117,6 +121,8 @@ VNC=
 
 [ "${option}" = "bvnc" ] && VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
 [ "${option}" = "rvnc" ] && VNC="com.realvnc.viewer.android/.app.DesktopActivity"
+[ "${option}" = "nvnc" ] && VNC="com.nulana.android.remotix/.Viewer"
+
 
 XAUTHORITY="${XDG_RUNTIME_DIR}/.Xauthority"
 
