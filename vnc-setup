@@ -74,12 +74,11 @@ unset SESSION_MANAGER
 
 if [ ! -z "${APPLICATION}" ]
 then
-	xfsettingsd &
-	xfwm4 &
+	"${WINDOW_MANAGER}" &
 
-	LD_PRELOAD=/lib/libandroid-shmem-aarch64.so $APPLICATION &
+	"${APPLICATION}" &
 else
-	dbus-launch --exit-with-session "${SESSION}" &
+	dbus-launch --exit-with-session "${SESSION_MANAGER}" &
 fi
 FILE
 

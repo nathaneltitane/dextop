@@ -63,8 +63,10 @@ vnc_start () {
 					-localhost yes						\
 					-depth 32							\
 					-cleanstale							\
+					-noxstartup							\
 					-name $NAME							\
-					-geometry ${GEOMETRY} ${DISPLAY}"
+					-geometry ${GEOMETRY} ${DISPLAY}	\
+						-- ${SESSION}"
 
 					# 'vncserver' uses $DISPLAY instead of $PORT
 
