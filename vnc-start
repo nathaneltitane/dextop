@@ -61,7 +61,7 @@ vnc_start () {
 					-IdleTimeout 0						\
 					-SecurityTypes none					\
 					-localhost yes						\
-					-depth 24							\
+					-depth 32							\
 					-cleanstale							\
 					-name $NAME							\
 					-geometry ${GEOMETRY} ${DISPLAY}"
