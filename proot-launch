@@ -11,7 +11,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version #
 
-version="08-04-2021"
+version="08-05-2021"
 
 # usage #
 
@@ -20,7 +20,7 @@ USERNAME="${1}"
 while (($#))
 do
 	case "${2}" in
-		-a| --application)
+		-a|--application)
 			APPLICATION="${3}"
 			
 			shift
