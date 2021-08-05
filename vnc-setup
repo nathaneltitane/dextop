@@ -72,6 +72,8 @@ cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.vnc/xstartup
 unset DBUS_SESSION_BUS_ADDRESS
 unset SESSION_MANAGER
 
+SESSION_MANAGER="xfce4-session" # FIX ME #
+
 if [ ! -z "${APPLICATION}" ]
 then
 	"${WINDOW_MANAGER}" &
