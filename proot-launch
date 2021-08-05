@@ -98,9 +98,9 @@ done
 
 [ -z "${vnc_option}" ] && vnc_option="nvnc"
 
-[ "${option}" = "bvnc" ] && VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
-[ "${option}" = "rvnc" ] && VNC="com.realvnc.viewer.android/.app.DesktopActivity"
-[ "${option}" = "nvnc" ] && VNC="com.nulana.android.remotix/.Viewer"
+[ "${vnc_option}" = "bvnc" ] && VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
+[ "${vnc_option}" = "rvnc" ] && VNC="com.realvnc.viewer.android/.app.DesktopActivity"
+[ "${vnc_option}" = "nvnc" ] && VNC="com.nulana.android.remotix/.Viewer"
 
 # explicit proot setup defaults:
 # used to specify the desktop session login format
