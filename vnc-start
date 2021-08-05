@@ -63,7 +63,6 @@ vnc_start () {
 					-localhost yes						\
 					-depth 32							\
 					-cleanstale							\
-					-noxstartup							\
 					-name $NAME							\
 					-geometry ${GEOMETRY} ${DISPLAY}	\
 						-- ${SESSION}"
