@@ -369,3 +369,14 @@ fi
 # start vnc display
 
 vnc_start
+
+unset DBUS_SESSION_BUS_ADDRESS
+unset SESSION_MANAGER
+
+if [ ! -z "${APPLICATION}" ]
+then
+	"${WINDOW_MANAGER}" &
+	"${APPLICATION}" &
+else
+	dbus-launch --exit-with-session "${SESSION_MANAGER}" &
+fi

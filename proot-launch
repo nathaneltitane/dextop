@@ -92,6 +92,16 @@ done
 
 # variables #
 
+# explicit VNC viewer application to kill:
+# used when vncserver is stopped or restarted using vnc:// intent
+# when launched via the activity manager [ 'am start -d {URI} -S {APK}' ]
+
+[ -z "${vnc_option}" ] && vnc_option="nvnc"
+
+[ "${option}" = "bvnc" ] && VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
+[ "${option}" = "rvnc" ] && VNC="com.realvnc.viewer.android/.app.DesktopActivity"
+[ "${option}" = "nvnc" ] && VNC="com.nulana.android.remotix/.Viewer"
+
 # explicit proot setup defaults:
 # used to specify the desktop session login format
 # and environment 'env' or 'printenv'
@@ -110,22 +120,11 @@ SHELL=
 TERMINAL=
 TMPDIR="/tmp"
 VISUAL=
-VNC=
+VNC="${vnc_option}"
 
 SESSION="xfce"
 SESSION_MANAGER="xfce4-session"
 WINDOW_MANAGER="xfwm4"
-
-# explicit VNC viewer application to kill:
-# used when vncserver is stopped or restarted using vnc:// intent
-# when launched via the activity manager [ 'am start -d {URI} -S {APK}' ]
-
-[ -z "${vnc_option}" ] && vnc_option="nvnc"
-
-[ "${option}" = "bvnc" ] && VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
-[ "${option}" = "rvnc" ] && VNC="com.realvnc.viewer.android/.app.DesktopActivity"
-[ "${option}" = "nvnc" ] && VNC="com.nulana.android.remotix/.Viewer"
-
 
 XAUTHORITY="${XDG_RUNTIME_DIR}/.Xauthority"
 

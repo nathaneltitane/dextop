@@ -67,22 +67,10 @@ FILE
 # write user vnc startup file
 
 cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.vnc/xstartup
-#!/bin/bash
 
-unset DBUS_SESSION_BUS_ADDRESS
-unset SESSION_MANAGER
-
-if [ ! -z "${APPLICATION}" ]
-then
-	"${WINDOW_MANAGER}" &
-
-	"${APPLICATION}" &
-else
-	dbus-launch --exit-with-session "${SESSION_MANAGER}" &
-fi
 FILE
 
-# append automatic vnc session stop on shell exit
+# append automatic vnc session stop on shell logout
 
 cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bash_logout
 
