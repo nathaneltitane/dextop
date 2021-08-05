@@ -64,6 +64,7 @@ vnc_start () {
 					-depth 32							\
 					-cleanstale							\
 					-name $NAME							\
+					-geometry ${GEOMETRY} ${DISPLAY}"
 
 					# 'vncserver' uses $DISPLAY instead of $PORT
 
