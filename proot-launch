@@ -120,7 +120,6 @@ SHELL=
 TERMINAL=
 TMPDIR="/tmp"
 VISUAL=
-VNC="${vnc_option}"
 
 SESSION="xfce"
 SESSION_MANAGER="xfce4-session"
@@ -323,6 +322,8 @@ command+=" MOUNT_DIRECTORY=${MOUNT_DIRECTORY}"
 command+=" APPLICATION=${APPLICATION}"
 command+=" BROWSER=${BROWSER}"
 command+=" SESSION=${SESSION}"
+command+=" SESSION_MANAGER=${SESSION_MANAGER}"
+command+=" WINDOW_MANAGER=${WINDOW_MANAGER}"
 command+=" EDITOR=${EDITOR}"
 command+=" DISPLAY=${DISPLAY}"
 command+=" HOME=${HOME}"
