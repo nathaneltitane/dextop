@@ -206,23 +206,37 @@ do
 	IFS=' '
 
 	# verify that 'username' matches parsed 'user' entry
+	
+	if [[ -z "${USERNAME}" ]]
+	then
+		USERNAME="root"
+		
+		console.wrn "No user specified - Defaulting."
+		echo
+
+		# break out of loop - empty "${USERNAME}" - default to 'root'
+
+		break
+	fi
+	
+	if [[ "${option}" == "root" ]]
+	then
+		USERNAME="root"
+		
+		console.wrn "Logging in as [ '${USERNAME}' ]"
+		echo
+
+		# break out of loop - login as 'root'
+
+		break
+	fi
 
 	if [[ "${USERNAME}" == "${USER}" ]]
 	then
 		console.scs "Valid user name [ '${USERNAME}' ]"
 		echo
 
-		# break out of loop if user is found
-
-		break
-	fi
-
-	if [[ -z "${USERNAME}" ]]
-	then
-		console.wrn "No user specified - Defaulting."
-		echo
-
-		# break out of loop if user is found
+		# break out of loop: matching "${USERNAME}"
 
 		break
 	fi
@@ -242,8 +256,6 @@ do
 		# login message warning
 
 		console.err "Invalid user name [ ${USERNAME} ]"
-		echo
-		console.wrn "Entering as '${USER}'."
 		echo
 
 		console.wait 2
@@ -269,7 +281,7 @@ then
 	echo
 
 else
-	console.fwd "Starting session [ ${USER} ]..."
+	console.fwd "Starting session [ ${SESSIONˆˆ} // ${USER} ]..."
 	echo
 fi
 
