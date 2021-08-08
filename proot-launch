@@ -18,13 +18,22 @@ version="08-07-2021"
 while (($#))
 do
 	case "${1}" in
+		-r|--root)
+			option="root"
+			USERNAME="root"
+			
+			shift
+		;;
+			
 		-u|--username)
+			option="user"
 			USERNAME="${2}"
 			
 			shift
 		;;
-		
+
 		-a|--application)
+			option="application"
 			APPLICATION="${2}"
 			
 			shift
@@ -36,10 +45,6 @@ do
 
 		-p|--proc)
 			option="proc"
-		;;
-
-		-r|--root)
-			option="root"
 		;;
 
 		-bvnc)
@@ -60,12 +65,12 @@ do
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-u, --username \t\t Specify user for session login."
-			echo -e "-a, --application \t Specify application to start session with."
+			echo -e "-r, --root \t\t Specify 'root' as user for session login."
+			echo -e "-u, --username \t Specify 'user' for session login."
+			echo -e "-a, --application \t Specify application to start on session login."
 			echo
-			echo -e "-b, --bind \t Specify alternate bind mounts."
+			echo -e "-b, --bind \t Specify alternate bind mounts on proot login."
 			echo -e "-p, --proc \t Enable fake /proc directory mounts for hardware error bypass."
-			echo -e "-r, --root \t Use 'root' as user for session login."
 			echo
 			echo -e "-bvnc      \t Specify FreebVNC as the VNC viewer application."
 			echo -e "-rvnc      \t Specify RealVNC as the VNC viewer application."
@@ -206,12 +211,10 @@ do
 
 	IFS=' '
 
-	# verify that 'username' matches parsed 'user' entry
+	# verify options and parameters
 	
 	if [[ -z "${USERNAME}" ]]
 	then
-		USERNAME="root"
-		
 		console.wrn "No user specified - Defaulting."
 		echo
 
@@ -222,8 +225,6 @@ do
 	
 	if [[ "${option}" == "root" ]]
 	then
-		USERNAME="root"
-		
 		console.wrn "Logging in as [ '${USERNAME}' ]"
 		echo
 
@@ -231,6 +232,8 @@ do
 
 		break
 	fi
+	
+	# verify that 'username' matches parsed 'user' entry
 
 	if [[ "${USERNAME}" == "${USER}" ]]
 	then
@@ -247,19 +250,20 @@ do
 
 	if [[ "${entry}" == "${last_entry}" ]]
 	then
+		console.err "Invalid user name [ ${USERNAME} ]"
+		echo
+	fi
+	
+	#specify default login parameters
+	
+	if [[ -z "${USERNAME}" ]] ||  [[ "${option}" == "root" ]]
+	then
 		USER="root"
 		USER_ID=0
 		GROUP_ID=0
 		FULL_NAME="root"
 		HOME="/root"
 		SHELL="/bin/bash"
-
-		# login message warning
-
-		console.err "Invalid user name [ ${USERNAME} ]"
-		echo
-
-		console.wait 2
 	fi
 
 done < "${ROOT_DIRECTORY}"/etc/passwd
