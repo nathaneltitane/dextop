@@ -259,7 +259,8 @@ do
 		echo
 		
 		USERNAME="root"
-		
+		USER="${USERNAME}"
+
 		# break out of loop: invalid "${USERNAME}"
 
 		break
