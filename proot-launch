@@ -11,17 +11,21 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version #
 
-version="08-05-2021"
+version="08-07-2021"
 
 # usage #
 
-USERNAME="${1}"
-
 while (($#))
 do
-	case "${2}" in
+	case "${1}" in
+		-u|--username)
+			USERNAME="${2}"
+			
+			shift
+		;;
+		
 		-a|--application)
-			APPLICATION="${3}"
+			APPLICATION="${2}"
 			
 			shift
 		;;
@@ -56,9 +60,16 @@ do
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-b, --bind \t Full setup: download and install full applications list and utilities."
-			echo -e "-f, --proc \t Full setup: download and install full applications list and utilities."
-			echo -e "-p, --proot \t Update setup: update applications list and utilities."
+			echo -e "-u, --username \t\t Specify user for session login."
+			echo -e "-a, --application \t Specify application to start session with."
+			echo
+			echo -e "-b, --bind \t Specify alternate bind mounts."
+			echo -e "-p, --proc \t Enable fake /proc directory mounts for hardware error bypass."
+			echo -e "-r, --root \t Use 'root' as user for session login."
+			echo
+			echo -e "-bvnc      \t Specify FreebVNC as the VNC viewer application."
+			echo -e "-rvnc      \t Specify RealVNC as the VNC viewer application."
+			echo -e "-nvnc      \t Specify Remotix as the VNC viewer application."
 			echo
 			echo -e "-h, --help \t Show help and usage information."
 			echo
