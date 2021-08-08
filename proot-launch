@@ -133,6 +133,7 @@ TMPDIR="/tmp"
 VISUAL=
 
 SESSION="xfce"
+SESSION_NAME="${SESSIONˆˆ}"
 SESSION_MANAGER="xfce4-session"
 WINDOW_MANAGER="xfwm4"
 
@@ -281,7 +282,7 @@ then
 	echo
 
 else
-	console.fwd "Starting session [ ${SESSIONˆˆ} // ${USER} ]..."
+	console.fwd "Starting session [ ${SESSION_NAME} // ${USER} ]..."
 	echo
 fi
 
@@ -345,6 +346,7 @@ command+=" MOUNT_DIRECTORY=${MOUNT_DIRECTORY}"
 command+=" APPLICATION=${APPLICATION}"
 command+=" BROWSER=${BROWSER}"
 command+=" SESSION=${SESSION}"
+command+=" SESSION_NAME=${SESSION_NAME}"
 command+=" SESSION_MANAGER=${SESSION_MANAGER}"
 command+=" WINDOW_MANAGER=${WINDOW_MANAGER}"
 command+=" EDITOR=${EDITOR}"
