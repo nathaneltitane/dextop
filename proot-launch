@@ -292,7 +292,7 @@ then
 		 unset "${APPLICATION}"
 	fi
 
-	console.fwd "Starting application [ ${APPLICATION} //  ${USER} ]..."
+	console.fwd "Starting application [ ${SESSION_NAME} // ${USER} // ${APPLICATION} ]..."
 	echo
 
 else
