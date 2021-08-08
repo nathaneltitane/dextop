@@ -138,7 +138,7 @@ TMPDIR="/tmp"
 VISUAL=
 
 SESSION="xfce"
-SESSION_NAME="${SESSIONˆˆ}"
+SESSION_NAME="$(echo ${SESSIONˆˆ})"
 SESSION_MANAGER="xfce4-session"
 WINDOW_MANAGER="xfwm4"
 
