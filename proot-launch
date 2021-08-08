@@ -253,8 +253,12 @@ do
 		console.err "Invalid user name [ ${USERNAME} ]"
 		echo
 		
+		unset "${USERNAME}"
+		
 		console.wrn "Defaulting."
 		echo
+		
+		USERNAME="root"
 		
 		# break out of loop: invalid "${USERNAME}"
 
@@ -281,11 +285,9 @@ if [ ! -z "${APPLICATION}" ]
 then
 	if [[ ! -f "${ROOT_DIRECTORY}"/usr/bin/"${APPLICATION}" ]]
 	then
-		 console.err "Application '${APPLICATION}' not found."
+		 console.err "Invalid application name [ ${APPLICATION} ]"
 		 echo
-		 console.wrn "Applications must be installed to load on session start."
-		 echo
-
+		 
 		 unset "${APPLICATION}"
 	fi
 
