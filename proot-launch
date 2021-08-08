@@ -252,6 +252,13 @@ do
 	then
 		console.err "Invalid user name [ ${USERNAME} ]"
 		echo
+		
+		console.wrn "Defaulting."
+		echo
+		
+		# break out of loop: invalid "${USERNAME}"
+
+		break
 	fi
 	
 	#specify default login parameters
