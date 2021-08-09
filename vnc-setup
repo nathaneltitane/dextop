@@ -76,6 +76,7 @@ SESSION_MANAGER="xfce4-session" # FIX ME #
 
 if [ ! -z "${APPLICATION}" ]
 then
+	"${SETTINGS_MANAGER}" &
 	"${WINDOW_MANAGER}" &
 	"${APPLICATION}" &
 else
