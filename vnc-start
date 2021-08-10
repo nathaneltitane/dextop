@@ -95,10 +95,12 @@ vnc_start () {
 	# before intent launch
 
 	# am start							\
+	#	-a andoird.intent.action.VIEW	\
 	#	-d vnc://${LOCALHOST}:${PORT}	\
 	#	-S application/activity"
 
-	console.silence "am start -d vnc://${LOCALHOST}:${PORT} -S ${VNC}"
+	# console.silence "am start -a android.intent.action.VIEW -d vnc://${LOCALHOST}:${PORT} -S ${VNC}"
+	console.silence "am start -a android.intent.action.VIEW -d vnc://${LOCALHOST}:${PORT}"
 }
 
 vnc_resolutions () {
