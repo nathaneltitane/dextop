@@ -90,16 +90,27 @@ vnc_start () {
 		fi
 	fi
 
-	# start android vnc intent
-	# and force-stop existing outputs
-	# before intent launch
-
 	# am start							\
 	#	-a andoird.intent.action.VIEW	\
 	#	-d vnc://${LOCALHOST}:${PORT}	\
 	#	-S application/activity"
+	
+	# explicit VNC viewer application to kill:
+	# used when vncserver is stopped or restarted using vnc:// intent
+	# when launched via the activity manager [ 'am start -d {URI} -S {APK}' ]
+	
+	# reference vnc session activity for known applications:
+	
+	# FreebVNC: com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity
+	# RealVNC:  com.realvnc.viewer.android/.app.DesktopActivity
+	# Remotix:  com.nulana.android.remotix/.Viewer
+
+	# start android vnc intent and force-stop existing activity
 
 	# console.silence "am start -a android.intent.action.VIEW -d vnc://${LOCALHOST}:${PORT} -S ${VNC}"
+
+	# start android vnc intent and set to view
+
 	console.silence "am start -a android.intent.action.VIEW -d vnc://${LOCALHOST}:${PORT}"
 }
 

@@ -47,18 +47,6 @@ do
 			option="proc"
 		;;
 
-		-bvnc)
-			vnc_option="bvnc"
-		;;
-
-		-rvnc)
-			vnc_option="rvnc"
-		;;
-
-		-nvnc)
-			vnc_option="nvnc"
-		;;
-
 		-h|--help)
 			echo
 			echo -e "Usage: ${script} | [USERNAME] | [APPLICATION] | [OPTION]"
@@ -71,10 +59,6 @@ do
 			echo
 			echo -e "-b, --bind \t Specify alternate bind mounts on proot login."
 			echo -e "-p, --proc \t Enable fake /proc directory mounts for hardware error bypass."
-			echo
-			echo -e "-bvnc      \t Specify FreebVNC as the VNC viewer application."
-			echo -e "-rvnc      \t Specify RealVNC as the VNC viewer application."
-			echo -e "-nvnc      \t Specify Remotix as the VNC viewer application."
 			echo
 			echo -e "-h, --help \t Show help and usage information."
 			echo
@@ -107,16 +91,6 @@ do
 done
 
 # variables #
-
-# explicit VNC viewer application to kill:
-# used when vncserver is stopped or restarted using vnc:// intent
-# when launched via the activity manager [ 'am start -d {URI} -S {APK}' ]
-
-[ -z "${vnc_option}" ] && vnc_option="nvnc"
-
-[ "${vnc_option}" = "bvnc" ] && VNC="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
-[ "${vnc_option}" = "rvnc" ] && VNC="com.realvnc.viewer.android/.app.DesktopActivity"
-[ "${vnc_option}" = "nvnc" ] && VNC="com.nulana.android.remotix/.Viewer"
 
 # explicit proot setup defaults:
 # used to specify the desktop session login format
@@ -378,7 +352,6 @@ command+=" PULSE_SERVER=${PULSE_SERVER}"
 command+=" TERM=${TERMINAL}"
 command+=" TMPDIR=${TMPDIR}"
 command+=" USER=${USER}"
-command+=" VNC=${VNC}"
 command+=" XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR}"
 command+=" XDG_CONFIG_HOME=${HOME}/.config"
 command+=" XDG_CACHE_HOME=${HOME}/.cache"
