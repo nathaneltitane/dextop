@@ -51,6 +51,35 @@ done
 
 # configuration
 
-sudo -H -u "${user_name}" xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x "xfconf-desktop"
-sudo -H -u "${user_name}" xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x "sudo dpkg-reconfigure locales"
-sudo -H -u "${user_name}" xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x "sudo dpkg-reconfigure tzdata"
+console.fwd "Configuring..."
+echo
+
+commands_list=(
+	xfconf-desktop
+	sudo dpkg-reconfigure locales
+	sudo dpkg-reconfigure tzdata
+	)
+
+for command in ${commands_list[@]}
+do
+	console.msg "Configuring [ '${command}' ]"
+	echo
+	
+	sudo -H -u "${user_name}" xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x "${command}"
+	
+	wait
+done
+
+binaries_list=(
+	leocad-download
+	leocad-configuration
+)
+
+for binary in ${binaries_list[@]}
+do
+	console.msg "Running [ '${binary}' ]"
+	echo
+
+	sudo -H -u "${user_name}" bash -c "${binary}"
+done
+
