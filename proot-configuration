@@ -51,19 +51,6 @@ done
 
 # configuration
 
-terminal_command () {
-	# package terminal command to prevent user bypass
-	
-	xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x "${1}"
-}
-
-commands_list=(
-	xfconf-desktop
-	sudo dpkg-reconfigure locales
-	sudo dpkg-reconfigure tzdata
-)
-
-for command in ${commands_list[@]}
-do
-	sudo -H -u "${user_name}" terminal_command "${command}"
-done
+sudo -H -u "${user_name}" xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x "xfconf-desktop"
+sudo -H -u "${user_name}" xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x "sudo dpkg-reconfigure locales"
+sudo -H -u "${user_name}" xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x "sudo dpkg-reconfigure tzdata"

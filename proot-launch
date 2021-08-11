@@ -103,7 +103,6 @@ LOCALHOST="127.0.0.1"
 PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/sbin:${PREFIX}/bin:/system/bin:/system/xbin"
 PULSE_SERVER="${LOCALHOST}"
 SHELL=
-TERMINAL=
 TMPDIR="/tmp"
 
 SESSION="xfce"
@@ -116,6 +115,7 @@ BROWSER="midori"
 EDITOR="nano"
 PAGER="less"
 RUNNER="xfce4-appfinder"
+TERMINAL="xfce4-terminal"
 VISUAL="mousepad"
 
 XDG_RUNTIME_DIR="/run/user/${USER_ID}"
