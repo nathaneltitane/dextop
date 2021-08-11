@@ -97,7 +97,7 @@ vnc_start () {
 	
 	# explicit VNC viewer application to kill:
 	# used when vncserver is stopped or restarted using vnc:// intent
-	# when launched via the activity manager [ 'am start -d {URI} -S {APK}' ]
+	# when launched via the activity manager [ 'am start -d {URI} -S {ACTIVITY}' ]
 	
 	# reference vnc session activity for known applications:
 	
