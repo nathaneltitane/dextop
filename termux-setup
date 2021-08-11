@@ -182,7 +182,7 @@ console.run "${BINARIES_DIRECTORY}"/termux-links
 
 console.run "${BINARIES_DIRECTORY}"/termux-environment
 
-# setup transient storage - [ device <<>> [ termux <<>> [ proot ] ] ]
+# setup transient storage - [ device < // > [ termux < // > [ proot ] ] ]
 
 console.run "${BINARIES_DIRECTORY}"/termux-storage
 
@@ -214,7 +214,7 @@ console.run "${BINARIES_DIRECTORY}"/proot-groups
 
 console.run "${BINARIES_DIRECTORY}"/proot-libraries
 
-# setup proot network requirements  - [ device <<>> [ termux <<>> [ proot ] ] ]
+# setup proot network requirements  - [ device < // > [ termux < // > [ proot ] ] ]
 
 console.run "${BINARIES_DIRECTORY}"/proot-network
 
