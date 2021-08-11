@@ -54,8 +54,10 @@ documentation_list=(
 
 themes_list=(
 	arc-theme
+	breeze-cursor-theme
 	qt5-style-platform-gtk2
 	qt5-style-plugin-gtk2
+	tango-icon-theme
 )
 
 vnc_list=(
@@ -121,11 +123,9 @@ xfce4_list=(
 	xfce4-xkb-plugin
 	midori
 	elementary-xfce-icon-theme
-	tango-icon-theme
 	blackbird-gtk-theme
 	bluebird-gtk-theme
 	greybird-gtk-theme
-	breeze-cursor-theme
 )
 
 # install list #
