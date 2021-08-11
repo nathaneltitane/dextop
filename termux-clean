@@ -57,8 +57,8 @@ then
 	echo
 	console.scs "System deployment and configuration complete."
 	echo
-	console.inf "Run 'proot-launch <username>' to start your session."
-	console.inf "Run 'proot-launch <username> <application>' to start an application with your session."
+	console.inf "Run 'proot-launch -u <username>' to start your session."
+	console.inf "Run 'proot-launch -u <username> -a <application>' to start an application with your session."
 	echo
 
 else
@@ -68,7 +68,4 @@ else
 	echo
 fi
 
-console.countdown "Exiting in" 5
-echo
-
-exit
+console.wait 5

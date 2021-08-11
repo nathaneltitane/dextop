@@ -77,7 +77,9 @@ then
 		rm "${file}"
 	done
 
-	console.scs "Proot deployment and configuration complete."
+	console.fwd "Setup complete [ proot ]..."
+	echo
+	console.scs "System deployment and configuration complete."
 	echo
 
 else
@@ -87,7 +89,4 @@ else
 	echo
 fi
 
-console.countdown "Exiting in" 5
-echo
-
-exit
+console.wait 5
