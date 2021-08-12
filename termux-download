@@ -90,6 +90,7 @@ binaries_list=(
 	termux-environment
 	termux-links
 	termux-message
+	termux-repositories
 	termux-packages
 	termux-storage
 	termux-welcome

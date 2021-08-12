@@ -136,6 +136,7 @@ echo "export DISTRIBUTION_RELEASE=${distribution_release}"						>> "${PREFIX}"/b
 echo 'export MAIN_DIRECTORY="${PREFIX%/*}"'										>> "${PREFIX}"/bin/globals
 echo 'export BINARIES_DIRECTORY="${PREFIX}"/bin'								>> "${PREFIX}"/bin/globals
 echo 'export LIBRARIES_DIRECTORY="${PREFIX}"/lib'								>> "${PREFIX}"/bin/globals
+echo 'export SOURCES_DIRECTORY="${PREFIX}"/etc/apt'								>> "${PREFIX}"/bin/globals
 echo 'export BACKUP_DIRECTORY="${MAIN_DIRECTORY}"/bkp'							>> "${PREFIX}"/bin/globals
 echo 'export IMAGE_DIRECTORY="${MAIN_DIRECTORY}"/img'							>> "${PREFIX}"/bin/globals
 echo 'export MOUNT_DIRECTORY="${MAIN_DIRECTORY}"/mnt'							>> "${PREFIX}"/bin/globals
@@ -169,6 +170,10 @@ console.run "${BINARIES_DIRECTORY}"/termux-download
 # welcome message
 
 console.run "${BINARIES_DIRECTORY}"/termux-message
+
+# setup termux repository requirements
+
+console.run "${BINARIES_DIRECTORY}"/termux-repositories
 
 # setup termux package requirements
 

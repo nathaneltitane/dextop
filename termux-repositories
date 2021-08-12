@@ -1,0 +1,73 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# script #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="08-11-2021"
+
+# usage #
+
+while (($#))
+do
+	case "${1}" in
+		 -h|--help)
+			echo
+			echo -e "Usage: ${script} [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-h, --help \t Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version ${version} ]"
+			echo
+
+			exit
+		;;
+
+		*)
+			echo
+			echo "Usage: ${script} [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+		;;
+	esac
+
+	shift
+done
+
+# variables #
+
+repositories_list=(
+	deb https://grimler.se/game-packages-24 games stable
+	deb https://grimler.se/termux-root-packages-24 root stable
+	deb https://grimler.se/science-packages-24 science stable
+	deb https://grimler.se/unstable-packages unstable main
+	deb https://grimler.se/x11-packages x11 main
+)
+
+# setup repositories
+
+console.fwd "Setting up repositories [ termux ]..."
+echo
+
+echo "deb https://grimler.se/termux-packages-24 stable main" > "${SOURCES_DIRECTORY}"/sources.list
+
+for repository in ${repositories_list[@]}
+do
+	source_name=$(echo ${repository} | cut -f 3 -d ' ')
+	source_file="${source_name}.list"
+	
+	echo "${repository}" > "${SOURCES_DIRECTORY}"/"${source_file}"
+done
