@@ -17,4 +17,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 # configure
 
+console.inf "Configuring timezones. [ 'tzdata' ]"
+echo
+
 sudo dpkg-reconfigure tzdata
