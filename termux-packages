@@ -75,6 +75,7 @@ libraries_list=(
 termux_list=(
 	termux-am
 	termux-api
+	termux-apt-repo
 	termux-auth
 	termux-create-package
 	termux-elf-cleaner
