@@ -50,11 +50,11 @@ done
 # variables #
 
 repositories_list=(
-	deb https://grimler.se/game-packages-24 games stable
-	deb https://grimler.se/termux-root-packages-24 root stable
-	deb https://grimler.se/science-packages-24 science stable
-	deb https://grimler.se/unstable-packages unstable main
-	deb https://grimler.se/x11-packages x11 main
+	"deb https://grimler.se/game-packages-24 games stable"
+	"deb https://grimler.se/termux-root-packages-24 root stable"
+	"deb https://grimler.se/science-packages-24 science stable"
+	"deb https://grimler.se/unstable-packages unstable main"
+	"deb https://grimler.se/x11-packages x11 main"
 )
 
 # setup repositories
