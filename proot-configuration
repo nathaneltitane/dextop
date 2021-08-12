@@ -65,7 +65,7 @@ do
 	console.msg "Configuring [ '${command}' ]"
 	echo
 	
-	sudo -H -u "${user_name}" xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x "${command}"
+	sudo -H -u "${user_name}" xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x ${command}
 	
 	wait
 done
