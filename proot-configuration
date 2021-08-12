@@ -51,8 +51,12 @@ done
 
 # configuration
 
-console.fwd "Configuring..."
+console.fwd "Writing configuration..."
 echo
+
+cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
+
+# proot configuration #
 
 commands_list=(
 	proot-locales
@@ -68,3 +72,13 @@ do
 
 	wait
 done
+FILE
+
+# configuration purge
+
+cat << FILE ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
+
+# remove configuration commands after execution
+
+sed -i '/# proot configuration #/,$d' "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
+FILE
