@@ -68,15 +68,8 @@ libraries_list=(
 	libandroid-spawn-static
 	libandroid-support
 	libandroid-support-static
-)
-
-repositories_list=(
-	game-repo
-	root-repo
-	science-repo
-	termux-apt-repo
-	unstable-repo
-	x11-repo
+	libandroid-wordexp
+	libandroid-wordexp-static
 )
 
 termux_list=(
