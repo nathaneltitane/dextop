@@ -54,15 +54,17 @@ done
 console.fwd "Configuring..."
 echo
 
-# keep commands litteral to avoid execution errors # FIX ME #
+commands_list=(
+	sudo dpkg-reconfigure locales
+	sudo dpkg-reconfigure tzdata
+	leocad-download
+	leocad-configuration
+	xfconf-desktop
+)
 
-# system
+for command on ${commands_list[@]}
+do
+	sudo -H -u "${user_name}" xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x "${command}"
 
-sudo -H -u "${user_name}" xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x sudo dpkg-reconfigure locales
-sudo -H -u "${user_name}" xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x sudo dpkg-reconfigure tzdata
-
-# scripts
-
-sudo -H -u "${user_name}" xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x leocad-download
-sudo -H -u "${user_name}" xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x leocad-configuration
-sudo -H -u "${user_name}" xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x xfconf-desktop
+	wait
+done
