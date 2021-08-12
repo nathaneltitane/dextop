@@ -49,6 +49,8 @@ done
 
 # variables #
 
+console.clear
+
 # check for PID and kill / cleanup
 
 if [ ! -z "$(pgrep -f vnc)" ]
@@ -64,3 +66,5 @@ then
 
 	rm -rf /tmp/.X*
 fi
+
+console.clear
