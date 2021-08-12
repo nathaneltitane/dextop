@@ -49,10 +49,10 @@ done
 
 # variables #
 
-# configuration
-
 console.fwd "Writing configuration..."
 echo
+
+# write configuration
 
 cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 
@@ -74,7 +74,7 @@ do
 done
 FILE
 
-# configuration purge
+# purge configuration
 
 cat << FILE ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 
