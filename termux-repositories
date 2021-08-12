@@ -62,12 +62,36 @@ repositories_list=(
 console.fwd "Setting up repositories [ termux ]..."
 echo
 
+# create sources lists directory
+
+[ ! -d "${SOURCES_DIRECTORY}"/sources.list.d ] && mkdir -p "${SOURCES_DIRECTORY}"/sources.list.d
+
+# override main source list file
+
 echo "deb https://grimler.se/termux-packages-24 stable main" > "${SOURCES_DIRECTORY}"/sources.list
 
-for repository in ${repositories_list[@]}
+# write sources list files
+
+# set IFS
+
+IFS=$'\n'
+
+while read line
 do
-	source_name=$(echo ${repository} | cut -f 3 -d ' ')
-	source_file="${source_name}.list"
-	
-	echo "${repository}" > "${SOURCES_DIRECTORY}"/"${source_file}"
-done
+	for repository in ${repositories_list[@]}
+	do
+		# set file name
+		
+		source_name=$(echo ${repository} | cut -f 3 -d ' ')
+		source_file="${source_name}.list"
+		
+		# write file
+		
+		echo "${repository}" > "${SOURCES_DIRECTORY}"/"${source_file}"
+	done
+
+done <<< ${repositories_list[@]}
+
+# reset IFS
+
+IFS=''
