@@ -113,9 +113,9 @@ WINDOW_MANAGER="xfwm4"
 
 BROWSER="midori"
 EDITOR="nano"
+EMULATOR="xfce4-terminal"
 PAGER="less"
 RUNNER="xfce4-appfinder"
-TERMINAL="xfce4-terminal"
 VISUAL="mousepad"
 
 XDG_RUNTIME_DIR="/run/user/${USER_ID}"
