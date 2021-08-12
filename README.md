@@ -90,7 +90,7 @@ You can fill and organize those items under the various arrays and create your o
 
 When the setup completes, it should exit the subshell and return to the default Termux prompt.
 
-Close that Termux session by pressing Ctrl+Dor by typing `exit` (simulates a reboot).
+Close that Termux session by pressing Ctrl+D or by typing `exit` (simulates a reboot).
 
 Now you can launch Termux and you will be greeted by the Welcome Prompt:
 
