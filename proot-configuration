@@ -76,7 +76,7 @@ FILE
 
 # purge configuration
 
-cat << FILE ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
+cat << "FILE" ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 
 # remove configuration commands after execution
 
