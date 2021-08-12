@@ -55,14 +55,14 @@ console.fwd "Configuring..."
 echo
 
 commands_list=(
-	sudo dpkg-reconfigure locales
-	sudo dpkg-reconfigure tzdata
+	proot-locales
+	proot-timezones
 	leocad-download
 	leocad-configuration
 	xfconf-desktop
 )
 
-for command on ${commands_list[@]}
+for command in ${commands_list[@]}
 do
 	sudo -H -u "${user_name}" xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x "${command}"
 

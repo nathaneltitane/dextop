@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# usage #
+
+# variables #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# enable quiet package install
+
+export DEBIAN_FRONTEND=noninteractive
+
+# configure
+
+sudo dpkg-reconfigure locales
