@@ -87,7 +87,7 @@ do
 		
 		# write file
 		
-		echo "${repository}" > "${SOURCES_DIRECTORY}"/"${source_file}"
+		echo "${repository}" > "${SOURCES_DIRECTORY}"/sources.list.d/"${source_file}"
 	done
 
 done <<< ${repositories_list[@]}
