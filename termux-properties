@@ -49,18 +49,22 @@ done
 
 # variables #
 
-# directories #
-
-# files #
-
-# termux properties
-
 console.fwd "Setting up properties and preferences [ termux ]..."
 echo
+
+cd "${HOME}" || exit 1
+
+# directories #
+
+# create directory
 
 [ -d "${HOME}"/.termux ] && rm -rf "${HOME}"/.termux || mkdir -p "${HOME}"/.termux
 
 mkdir -p "${HOME}"/.termux
+
+# files #
+
+# termux properties
 
 cat << FILE ->> "${HOME}"/.termux/termux.properties
 
