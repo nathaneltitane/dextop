@@ -81,9 +81,9 @@ FILE
 
 cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bashrc
 
-if [ -d /home/"${user_name}"/.bash_functions ]
+if [ -d /home/"${USER}"/.bash_functions ]
 then
-	for file in /home/"${user_name}"/.bash_functions/*
+	for file in /home/"${USER}"/.bash_functions/*
 	do
 		test -x "${file}" && source "${file}"
 	done

@@ -79,8 +79,15 @@ FILE
 
 # .bashrc
 
-cat << 'FILE' ->> "${HOME}"/.bashrc
+cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bashrc
 
+if [ -d /home/"${USER}"/.bash_functions ]
+then
+	for file in /home/"${USER}"/.bash_functions/*
+	do
+		test -x "${file}" && source "${file}"
+	done
+fi
 FILE
 
 # .profile
