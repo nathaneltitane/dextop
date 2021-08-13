@@ -97,13 +97,13 @@ console.run "${BINARIES_DIRECTORY}"/proot-message
 
 "${BINARIES_DIRECTORY}"/proot-environment
 
+# setup proot command aliases
+
+"${BINARIES_DIRECTORY}"/proot-aliases
+
 # setup proot login messages
 
 "${BINARIES_DIRECTORY}"/proot-welcome
-
-# setup proot aliased commands
-
-"${BINARIES_DIRECTORY}"/proot-aliases
 
 # setup proot vnc configurations
 

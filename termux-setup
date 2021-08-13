@@ -191,6 +191,10 @@ console.run "${BINARIES_DIRECTORY}"/termux-properties
 
 console.run "${BINARIES_DIRECTORY}"/termux-environment
 
+# setup termux command aliases
+
+console.run "${BINARIES_DIRECTORY}"/termux-aliases
+
 # setup transient storage - [ device < // > [ termux < // > [ proot ] ] ]
 
 console.run "${BINARIES_DIRECTORY}"/termux-storage

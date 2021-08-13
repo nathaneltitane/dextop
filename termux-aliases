@@ -54,7 +54,7 @@ done
 console.inf "Writing command aliases."
 echo
 
-cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bash_aliases
+cat << 'FILE' -> "${HOME}"/.bash_aliases
 # shell #
 
 [[ $(id -u) = 0 ]] && PS1="$(tput setaf 1)>_ # $(tput sgr 0)" || PS1=">_ $ "
