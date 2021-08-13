@@ -68,7 +68,7 @@ commands_list=(
 
 for command in ${commands_list[@]}
 do
-	"${command}"
+	"${BINARIES_DIRECTORY}"/"${command}"
 
 	wait
 done
