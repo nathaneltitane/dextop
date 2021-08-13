@@ -102,7 +102,7 @@ done
 # set defaults
 
 [ -z "${distribution_name}" ]				&& distribution_name="ubuntu"
-[ -z "${distribution_version}" ]			&& distribution_version="20.04"
+[ -z "${distribution_version}" ]			&& distribution_version="20.04.2"
 
 # set IFS
 
