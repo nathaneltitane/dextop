@@ -29,6 +29,19 @@ administration_list=(
 	sudo
 )
 
+applications_list=(
+	leocad
+	povray
+	youtube-dl
+)
+
+frameworks_list=(
+	libqt5concurrent5
+	libqt5opengl5
+	libqt5printsupport5
+	libqt5xml5
+)
+
 locales_list=(
 	locales
 	locales-all
@@ -165,6 +178,7 @@ fi
 
 install_list+=(
 	${administration_list[@]}
+	${applications_list[@]}
 	${frameworks_list[@]}
 	${locales_list[@]}
 	${documentation_list}

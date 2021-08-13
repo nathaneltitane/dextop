@@ -113,10 +113,6 @@ console.run "${BINARIES_DIRECTORY}"/proot-silent
 
 "${BINARIES_DIRECTORY}"/vnc-setup
 
-# setup proot additional applications
-
-"${BINARIES_DIRECTORY}"/proot-applications
-
 # setup proot initial login configuration steps
 
 "${BINARIES_DIRECTORY}"/proot-configuration

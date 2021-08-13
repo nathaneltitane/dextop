@@ -59,6 +59,10 @@ console.upgrade
 
 # packages #
 
+documentation_list=(
+	man
+)
+
 libraries_list=(
 	libandroid-glob
 	libandroid-glob-static
@@ -110,7 +114,9 @@ utilities_list=(
 )
 
 install_list=(
+	${documentation_list[@]}
 	${libraries_list[@]}
+	${termux_list[@]}
 	${utilities_list[@]}
 )
 
