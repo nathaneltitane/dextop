@@ -10,7 +10,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version #
 
-version="05-29-2021"
+version="08-12-2021"
 
 # usage #
 
@@ -31,13 +31,13 @@ fi
 if [[ $# -eq 2 ]]
 then
 	distribution_name="${1}"
-	distribution_version="${2}"
+	distribution_version="08-12-2021"
 fi
 
 if [[ $# -eq 3 ]]
 then
 	distribution_name="${1}"
-	distribution_version="${2}"
+	distribution_version="08-12-2021"
 
 	install_option="${3}"
 fi
@@ -102,7 +102,7 @@ done
 # set defaults
 
 [ -z "${distribution_name}" ]				&& distribution_name="ubuntu"
-[ -z "${distribution_version}" ]			&& distribution_version="20.04.2"
+[ -z "${distribution_version}" ]			&& distribution_version="08-12-2021"
 
 # set IFS
 
