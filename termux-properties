@@ -1,0 +1,112 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# script #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="08-12-2021"
+
+# usage #
+
+while (($#))
+do
+	case "${1}" in
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-h, --help \t Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version ${version} ]"
+			echo
+
+			exit
+		;;
+
+		*)
+			echo
+			echo "Usage: ${script} [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+		;;
+	esac
+
+	shift
+done
+
+# variables #
+
+# directories #
+
+# files #
+
+# termux properties
+
+console.fwd "Setting up properties and preferences [ termux ]..."
+echo
+
+[ -d "${HOME}"/.termux ] && rm -rf "${HOME}"/.termux || mkdir -p "${HOME}"/.termux
+
+mkdir -p "${HOME}"/.termux
+
+cat << FILE ->> "${HOME}"/.termux/termux.properties
+
+# use black for drawer and dialogs - Android 9.0+ default
+
+use-black-ui = true
+
+# enforce character based input - workaround for word-based input keyboards
+
+enforce-char-based-input = true
+
+# handle the bell character - vibrate | beep | ignore
+
+bell-character=beep
+
+# handle the escape key - escape | back
+
+back-key=back
+
+# rename current terminal session
+
+shortcut.rename-session = ctrl + n
+
+# open a new terminal with ctrl + t (volume down + t)
+
+shortcut.create-session = ctrl + t
+
+# move to previous terminal session
+
+shortcut.previous-session = ctrl + 1
+
+# move to next terminal session
+
+shortcut.next-session = ctrl + 2
+
+
+# configure keyboard shortcut keys
+
+extra-keys = [																	\
+	['ESC', '|',    '/',   'HOME', 'UP',   'END',   'PGUP', '_', 'BKSP'		],	\
+	['TAB', 'CTRL', 'ALT', 'LEFT', 'DOWN', 'RIGHT', 'PGDN', '-', 'RETURN'	]	\
+																				]
+FILE
+
+# apply termux properties
+
+console.fwd "Applying changes..."
+
+termux-reload-settings

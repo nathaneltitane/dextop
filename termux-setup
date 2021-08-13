@@ -183,6 +183,10 @@ console.run "${BINARIES_DIRECTORY}"/termux-packages
 
 console.run "${BINARIES_DIRECTORY}"/termux-links
 
+# setup termux properties and preferences
+
+console.run "${BINARIES_DIRECTORY}"/termux-properties
+
 # setup termux environment files
 
 console.run "${BINARIES_DIRECTORY}"/termux-environment
