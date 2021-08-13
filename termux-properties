@@ -52,13 +52,18 @@ done
 console.fwd "Setting up properties and preferences [ termux ]..."
 echo
 
+# force current directory to "${HOME}":
+# prevents 'termux-reload-settings' segfault
+
 cd "${HOME}" || exit 1
 
 # directories #
 
-# create directory
+# remove default properties directory
 
-[ -d "${HOME}"/.termux ] && rm -rf "${HOME}"/.termux || mkdir -p "${HOME}"/.termux
+[ -d "${HOME}"/.termux ] && rm -rf "${HOME}"/.termux
+
+# create new properties directory
 
 mkdir -p "${HOME}"/.termux
 
