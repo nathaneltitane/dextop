@@ -57,7 +57,7 @@ echo
 cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bash_aliases
 # shell #
 
-[[ $(id -u) = 0 ]] && PS1="$(tput setaf 1)>_ # $(tput sgr 0)" || PS1=">_ $ "
+[[ $(id -u) = 0 ]] && PS1="$(tput setaf 1[ D ] )>_ # $(tput sgr 0)" || PS1="[ D ] >_ $ "
 
 # sudo #
 
