@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# script #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="08-12-2021"
+
+# usage #
+
+# variables #
+
+# silent login prompt
+
+console.fwd "Silencing login prompt [ termux ]..."
+echo
+
+cat << 'FILE' ->> "${HOME}"/.hushlogin
+
+FILE

@@ -93,6 +93,10 @@ console.run "${BINARIES_DIRECTORY}"/proot-message
 
 "${BINARIES_DIRECTORY}"/proot-bookmarks
 
+# setup proot silent login
+
+console.run "${BINARIES_DIRECTORY}"/proot-silent
+
 # setup proot environment files
 
 "${BINARIES_DIRECTORY}"/proot-environment

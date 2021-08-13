@@ -187,6 +187,10 @@ console.run "${BINARIES_DIRECTORY}"/termux-links
 
 console.run "${BINARIES_DIRECTORY}"/termux-properties
 
+# setup termux silent login
+
+console.run "${BINARIES_DIRECTORY}"/termux-silent
+
 # setup termux environment files
 
 console.run "${BINARIES_DIRECTORY}"/termux-environment

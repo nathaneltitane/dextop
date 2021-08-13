@@ -59,12 +59,6 @@ echo
 console.inf "Creating files."
 echo
 
-# silence login prompt
-
-cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.hushlogin
-
-FILE
-
 # .bash_aliases
 
 cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bash_aliases
