@@ -68,7 +68,7 @@ commands_list=(
 
 for command in ${commands_list[@]}
 do
-	sudo -H -u "${user_name}" xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x "${command}"
+	sudo -H -u "${USER}" xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x "${command}"
 
 	wait
 done
@@ -80,5 +80,5 @@ cat << "FILE" ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 
 # remove configuration commands after execution
 
-sed -i '/# proot configuration #/,$d' "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
+sed -i '/# proot configuration #/,$d' "${ROOT_DIRECTORY}"/home/"${USER}"/.profile
 FILE
