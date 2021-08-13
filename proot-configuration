@@ -68,7 +68,7 @@ commands_list=(
 
 for command in ${commands_list[@]}
 do
-	sudo -H -u "${USER}" xfce4-terminal --fullscreen --hide-menubar --hide-scrollbar -x "${command}"
+	"${command}"
 
 	wait
 done
