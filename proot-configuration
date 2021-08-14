@@ -58,6 +58,36 @@ cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 
 # proot configuration #
 
+# download scripts
+
+# bash
+
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions	extract
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions	record
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions	speed
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions	sprunge
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions	youtube
+
+# youtube-dl
+
+console.download https://yt-dl.org/downloads/latest											/usr/bin								youtube-dl
+
+# leocad
+
+console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin								leocad-build
+console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin								leocad-configuration
+console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin								leocad-download
+console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin								leocad-launcher
+console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin								leocad-position
+
+# xfce
+
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin								xfconf-desktop
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin								xfconf-read
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin								xfconf-write
+
+# execute scripts
+
 commands_list=(
 	proot-locales
 	proot-timezones
@@ -78,7 +108,7 @@ FILE
 
 cat << "FILE" ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 
-# remove configuration commands after execution
+# remove configuration content after execution 
 
 sed -i '/# proot configuration #/,$d' "${ROOT_DIRECTORY}"/home/"${USER}"/.profile
 FILE

@@ -51,28 +51,40 @@ done
 
 # download #
 
-# bash
+# console #
 
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${user_name}"/.bash_functions	extract
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${user_name}"/.bash_functions	record
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${user_name}"/.bash_functions	speed
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${user_name}"/.bash_functions	sprunge
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${user_name}"/.bash_functions	youtube
+curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && source "${BINARIES_DIRECTORY}"/console
 
-# youtube-dl
+# binaries
 
-console.download https://yt-dl.org/downloads/latest											/usr/bin								youtube-dl
+binaries_list=(
+	proot-aliases
+	proot-architecture
+	proot-bookmarks
+	proot-checkpoint
+	proot-clean
+	proot-configuration
+	proot-download
+	proot-environment
+	proot-expand
+	proot-proc
+	proot-groups
+	proot-image
+	proot-information
+	proot-initialize
+	proot-launch
+	proot-libraries
+	proot-links
+	proot-locales
+	proot-message
+	proot-network
+	proot-packages
+	proot-setup
+	proot-silent
+	proot-superuser
+	proot-timezones
+	proot-user
+	proot-welcome
+)
 
-# leocad
-
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin								leocad-build
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin								leocad-configuration
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin								leocad-download
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin								leocad-launcher
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin								leocad-position
-
-# xfce
-
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin								xfconf-desktop
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin								xfconf-read
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin								xfconf-write
+console.download get.dxtp.app "${BINARIES_DIRECTORY}" ${binaries_list[@]}

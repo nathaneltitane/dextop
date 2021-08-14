@@ -53,6 +53,9 @@ archive=$(curl -sL https://f-droid.org/en/packages/com.termux | grep -o com.term
 
 archive_url="https://f-droid.org/repo/${archive}"
 
+console.inf "Updating Termux Packages."
+echo
+
 # download
 
 console.download "${archive_url}" "${PWD}" "${archive}"
