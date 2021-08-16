@@ -207,41 +207,9 @@ console.run "${BINARIES_DIRECTORY}"/termux-storage
 
 console.run "${BINARIES_DIRECTORY}"/termux-welcome
 
-# verify architecture compatibility
+# setup checkpoint #
 
-console.run "${BINARIES_DIRECTORY}"/proot-architecture
-
-# setup proot user information
-
-console.run "${BINARIES_DIRECTORY}"/proot-information
-
-# setup proot proc /proc entries
-
-console.run "${BINARIES_DIRECTORY}"/proot-proc
-
-# setup proot image
-
-console.run "${BINARIES_DIRECTORY}"/proot-image
-
-# setup proot group IDs
-
-console.run "${BINARIES_DIRECTORY}"/proot-groups
-
-# setup proot libraries preload for enhanced performance
-
-console.run "${BINARIES_DIRECTORY}"/proot-libraries
-
-# setup proot network requirements  - [ device < // > [ termux < // > [ proot ] ] ]
-
-console.run "${BINARIES_DIRECTORY}"/proot-network
-
-# setup proot install routine
-
-console.run "${BINARIES_DIRECTORY}"/proot-initialize
-
-# continue setup in proot environment - run 'proot-launch' as 'root'
-
-console.run "${BINARIES_DIRECTORY}"/proot-launch
+"${BINARIES_DIRECTORY}"/termux-checkpoint
 
 # setup cleanup #
 
