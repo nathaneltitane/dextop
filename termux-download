@@ -70,6 +70,7 @@ binaries_list=(
 	termux-repositories
 	termux-silent
 	termux-storage
+	termux-update
 	termux-welcome
 )
 
