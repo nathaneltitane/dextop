@@ -58,13 +58,6 @@ done
 
 source "${PREFIX}"/bin/globals
 
-# download #
-
-console.fwd "Initializing..."
-echo
-
-console.download get.dxtp.app "${BINARIES_DIRECTORY}" vnc-download
-
 # setup #
 
 # setup vncutilities

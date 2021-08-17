@@ -1,3 +1,93 @@
-termux
-proot
-vnc
+#!/bin/bash
+
+# dependencies #
+
+curl -sL get.cnsl.app/console > "${PREFIX}"/bin/console && source "${PREFIX}"/bin/console
+
+# script #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="08-12-2021"
+
+# usage #
+
+while (($#))
+do
+	case "${1}" in
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-h, --help \t Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version ${version} ]"
+			echo
+
+			exit
+		;;
+
+		*)
+			echo
+			echo "Usage: ${script} [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+		;;
+	esac
+
+	shift
+done
+
+# variables #
+
+# setup variables #
+
+# set defaults
+
+# export variables
+
+# source variables
+
+source "${PREFIX}"/bin/globals
+
+# clear
+
+console.clear
+
+# download #
+
+console.fwd "Initializing..."
+echo
+
+utilities_list=(
+	termux-download
+	proot-download
+	vnc-download
+)
+
+for utilities in ${utilities_list[@]}
+do
+	console.download get.dxtp.app "${BINARIES_DIRECTORY}" "${utility}"
+done
+
+# setup #
+
+# setup termux
+
+console.run "${BINARIES_DIRECTORY}"/termux-setup
+
+# setup proot
+
+console.run "${BINARIES_DIRECTORY}"/proot-setup
+
+# setup vnc
+
+console.run "${BINARIES_DIRECTORY}"/vnc-setup

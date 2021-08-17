@@ -137,13 +137,6 @@ echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'		>> 
 
 source "${PREFIX}"/bin/globals
 
-# download #
-
-console.fwd "Initializing..."
-echo
-
-console.download get.dxtp.app "${BINARIES_DIRECTORY}" proot-download
-
 # setup #
 
 # setup proot utilities

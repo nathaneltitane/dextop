@@ -77,12 +77,6 @@ echo "export version=${version}"												>> "${PREFIX}"/bin/globals
 
 source "${PREFIX}"/bin/globals
 
-# download #
-
-console.fwd "Initializing..."
-echo
-
-console.download get.dxtp.app "${BINARIES_DIRECTORY}" termux-download
 
 # setup #
 
