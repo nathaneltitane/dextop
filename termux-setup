@@ -86,7 +86,7 @@ console.download get.dxtp.app "${BINARIES_DIRECTORY}" termux-download
 
 # setup #
 
-# setup termux and proot utilities
+# setup termux utilities
 
 console.run "${BINARIES_DIRECTORY}"/termux-download
 

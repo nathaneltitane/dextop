@@ -2,7 +2,8 @@
 
 # dependencies #
 
-curl -sL get.cnsl.app/console > "${PREFIX}"/bin/console && source "${PREFIX}"/bin/console
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
 
 # script #
 
@@ -48,33 +49,20 @@ done
 
 # variables #
 
-# setup variables #
-
-# set defaults
-
-# export variables
-
-# source variables
-
-source "${PREFIX}"/bin/globals
-
 # download #
 
-console.fwd "Initializing..."
-echo
+# console #
 
-console.download get.dxtp.app "${BINARIES_DIRECTORY}" vnc-download
+curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && source "${BINARIES_DIRECTORY}"/console
 
-# setup #
+# binaries
 
-# setup vncutilities
+binaries_list=(
+	vnc-environment
+	vnc-pass
+	vnc-setup
+	vnc-start
+	vnc-stop
+)
 
-console.run "${BINARIES_DIRECTORY}"/vnc-download
-
-# welcome message
-
-console.run "${BINARIES_DIRECTORY}"/vnc-message
-
-# setup vnc environment files
-
-console.run "${BINARIES_DIRECTORY}"/vnc-environment
+console.download get.dxtp.app "${BINARIES_DIRECTORY}" ${binaries_list[@]}

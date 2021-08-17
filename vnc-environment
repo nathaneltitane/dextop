@@ -1,0 +1,115 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# script #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="08-12-2021"
+
+# usage #
+
+while (($#))
+do
+	case "${1}" in
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-h, --help \t Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version ${version} ]"
+			echo
+
+			exit
+		;;
+
+		*)
+			echo
+			echo "Usage: ${script} [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+		;;
+	esac
+
+	shift
+done
+
+# variables #
+
+# directories #
+
+# files #
+
+console.fwd "Setting up environment [ vnc ]..."
+echo
+
+console.inf "Creating files."
+echo
+
+# create user home vnc directory
+
+mkdir -p "${ROOT_DIRECTORY}"/home/"${user_name}"/.vnc
+
+# write user vnc password file
+
+cat << FILE -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.vnc/passwd
+
+FILE
+
+# write user vnc startup file
+
+cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.vnc/xstartup
+#!/bin/bash
+
+unset DBUS_SESSION_BUS_ADDRESS
+unset SESSION_MANAGER
+
+SESSION_MANAGER="xfce4-session" # FIX ME #
+
+if [ ! -z "${APPLICATION}" ]
+then
+	"${SETTINGS_MANAGER}" &
+	"${WINDOW_MANAGER}" &
+	"${APPLICATION}" &
+else
+	dbus-launch --exit-with-session "${SESSION_MANAGER}" &
+fi
+
+FILE
+
+# append automatic vnc session stop on shell logout
+
+cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bash_logout
+
+# automatic vnc session stop on shell logout
+
+vnc-stop
+FILE
+
+# append automatic vnc session start from selection value
+
+cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
+
+# automatic vnc session start on shell login
+
+if [ -f "${HOME}"/.vnc/selection ]
+then
+	echo $(cat "${HOME}"/.vnc/selection) | vnc-start
+else
+	vnc-start
+fi
+
+FILE

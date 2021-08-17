@@ -146,7 +146,7 @@ console.download get.dxtp.app "${BINARIES_DIRECTORY}" proot-download
 
 # setup #
 
-# setup termux and proot utilities
+# setup proot utilities
 
 console.run "${BINARIES_DIRECTORY}"/proot-download
 
@@ -229,10 +229,6 @@ console.run "${BINARIES_DIRECTORY}"/proot-silent
 # setup proot login messages
 
 "${BINARIES_DIRECTORY}"/proot-welcome
-
-# setup proot vnc configurations
-
-"${BINARIES_DIRECTORY}"/vnc-setup
 
 # setup proot initial login configuration steps
 
