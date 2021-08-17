@@ -49,15 +49,6 @@ done
 
 # variables #
 
-# silence login prompt
-
-console.inf "Silencing login messages."
-echo
-
-cat << 'FILE' ->> "${HOME}"/.hushlogin
-
-FILE
-
 # write welcome message - replaces motd
 
 cat << 'FILE' -> "${HOME}"/.bashrc

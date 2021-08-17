@@ -58,33 +58,6 @@ curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && source "${BIN
 # binaries
 
 binaries_list=(
-	proot-aliases
-	proot-architecture
-	proot-bookmarks
-	proot-checkpoint
-	proot-clean
-	proot-configuration
-	proot-download
-	proot-environment
-	proot-expand
-	proot-proc
-	proot-groups
-	proot-image
-	proot-information
-	proot-initialize
-	proot-launch
-	proot-libraries
-	proot-links
-	proot-locales
-	proot-message
-	proot-network
-	proot-packages
-	proot-setup
-	proot-silent
-	proot-superuser
-	proot-timezones
-	proot-user
-	proot-welcome
 	termux-aliases
 	termux-checkpoint
 	termux-clean
@@ -98,10 +71,6 @@ binaries_list=(
 	termux-silent
 	termux-storage
 	termux-welcome
-	vnc-pass
-	vnc-setup
-	vnc-start
-	vnc-stop
 )
 
 console.download get.dxtp.app "${BINARIES_DIRECTORY}" ${binaries_list[@]}

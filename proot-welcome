@@ -49,15 +49,6 @@ done
 
 # variables #
 
-# silence login prompt
-
-console.inf "Silencing login messages."
-echo
-
-cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.hushlogin
-
-FILE
-
 # write welcome message - replaces motd
 
 cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
