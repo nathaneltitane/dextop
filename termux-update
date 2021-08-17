@@ -59,23 +59,23 @@ packages_list=(
 	com.termux.api
 	)
 
-console.inf "Updating Termux Packages."
+console.inf "Updating Termux packages."
 echo
 
 # prompt #
 
-console.err "Termux is no longer being updated in the Google Play store:"
+console.err "Termux packages are no longer being updated in the Google Play store:"
 console.err "A recent Google Play Store policy forcing all applications to update"
-console.err "to SDK 29 has made Termux incomaptible with latest Play Store guidelines."
-console.err "Updates have not been published since November 2020 for that release."
+console.err "to SDK 29 has made TeStor packages incomaptible with latest Play Store"
+console.err "guidelines, halting updates since November 2020 for that release."
 echo
 
-console.inf "This utility fetches the Termux APK from the F-Droid repository"
-console.inf "and installs it for you:"
+console.inf "This utility fetches the Termux/API APKs from the F-Droid repository"
+console.inf "and installs them for you:"
 echo
 
-console.wrn "This process only functions only if you've previously backed up/uninstalled"
-console.wrn "the Google Play Store version of the application."
+console.wrn "This process only functions if you've previously backed up/uninstalled"
+console.wrn "the Google Play Store version of those APKs."
 echo
 
 console.inf "If you have not already done so, please visit the following wiki pages"
@@ -93,7 +93,7 @@ echo
 console.countdown "Prompt in:" 10
 echo
 
-console.usr "Update Termux?"
+console.usr "Update Termux packages?"
 echo
 
 read reply
@@ -101,6 +101,9 @@ echo
 
 if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 then
+		console.fwd "Dowloading updates [ termux ]..."
+		echo
+
 	for package in ${packages_list[@]}
 	do
 		archive=$(curl -sL "${packages_url}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
@@ -108,9 +111,6 @@ then
 		archive_url="${repository_url}/${archive}"
 		
 		# download
-		
-		console.fwd "Dowloading updates [ termux ]..."
-		echo
 		
 		console.download "${repository_url}" "${PWD}" ${archive}
 		
