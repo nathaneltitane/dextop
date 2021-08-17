@@ -90,21 +90,31 @@ then
 		com.termux
 		com.termux.api
 		)
+		
+	# urls #
+	
+	urls_list=()
 	
 	# variables #
 	
 	for package in ${packages_list[@]}
 	do
-		archive=$(curl -sL https://f-droid.org/en/packages/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
+		packages_url="https://f-droid.org/en/packages"
+		archive=$(curl -sL "${packages_url}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
 		
-		archive_url="https://f-droid.org/repo/${archive}"
+		repository_url="https://f-droid.org/repo"
+		archive_url="${repository_url}/${archive}"
+		
+		urls_list+=(
+			"${archive_url}"
+			)
 		
 		# download
 		
-		console.fwd "Dowloading update [ termux ]..."
+		console.fwd "Dowloading updates [ termux ]..."
 		echo
 		
-		console.download "${archive_url}" "${PWD}" "${archive}"
+		console.download "${repository_url}" "${PWD}" ${urls_list[@]}
 		
 		# update
 		
