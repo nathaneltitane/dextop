@@ -17,13 +17,22 @@ version="08-12-2021"
 while (($#))
 do
 	case "${1}" in
+		-t|--termux)
+			dextop_option="termux"
+		;;
+		
+		-p|--proot)
+			dextop_option="proot"
+		;;
+				
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} [OPTION]"
+			echo -e "USAGE:"
 			echo
-			echo -e "Options:"
+			echo -e "-t, --termux \t\t Setup Termux environment - VNC setup not included."
+			echo -e "-p, --proot \t\t Setup Proot environment - VNC setup included."
 			echo
-			echo -e "-h, --help \t Show help and usage information."
+			echo -e "-h, --help \t\t Show help and usage information."
 			echo
 			echo -e "'${script}' [ Version ${version} ]"
 			echo
@@ -31,26 +40,36 @@ do
 			exit
 		;;
 
+		"")
+			# handle empty argument
+			# use default values specified in script
+
+			:
+		;;
+
 		*)
 			echo
-			echo "Usage: ${script} [OPTION]"
+			echo -e "Usage: ${script} | [OPTION]"
 			echo
 			echo -e "${script}: Unknown option '${1}'"
 			echo -e "Type './${script} --help' for help and usage information."
 			echo
 
 			exit 1
+
 		;;
-	esac
+
+		esac
 
 	shift
+
 done
 
 # variables #
 
-# setup variables #
-
 # set defaults
+
+[ -z "${dextop_option}" ] && dextop_option="proot"
 
 # export variables
 
@@ -78,16 +97,49 @@ do
 	console.download get.dxtp.app "${BINARIES_DIRECTORY}" "${utility}"
 done
 
+# options lists #
+
+termux_list=(
+	termux-setup
+)
+
+proot_list=(
+	proot-setup
+)
+
+vnc_list=(
+	vnc-setup
+)
+
+# setup list #
+
+setup_list=()
+
+# options #
+
+# termux
+
+if [[ "${dextop_option}" = "termux" ]]
+then
+	setup_list+=(
+		$(termux_list[@])
+		)
+fi
+
+# proot
+
+if [[ "${dextop_option}" = "proot" ]]
+then
+	setup_list+=(
+		$(termux_list[@])
+		$(proot_list[@])
+		$(vnc_list[@])
+		)
+fi
+
 # setup #
 
-# setup termux
-
-console.run "${BINARIES_DIRECTORY}"/termux-setup
-
-# setup proot
-
-console.run "${BINARIES_DIRECTORY}"/proot-setup
-
-# setup vnc
-
-console.run "${BINARIES_DIRECTORY}"/vnc-setup
+for setup in ${setup_list[@]}
+do
+	console.run "${BINARIES_DIRECTORY}"/"${setup}"
+done

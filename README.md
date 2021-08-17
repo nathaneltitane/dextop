@@ -54,7 +54,7 @@ The setup speed greatly depends on your device model and internet connection spe
 
 Once the Android applications are installed on your device, open Termux and paste or type:
 
-`curl -sL run.dxtp.app > setup && bash setup <option>`
+`curl -sL run.dxtp.app > dextop && bash dextop |  <option>`
 
 Available install options are:
 
