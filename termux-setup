@@ -88,6 +88,10 @@ console.run "${BINARIES_DIRECTORY}"/termux-download
 
 console.run "${BINARIES_DIRECTORY}"/termux-message
 
+# setup termux application update
+
+console.run "${BINARIES_DIRECTORY}"/termux-update
+
 # setup termux repository requirements
 
 console.run "${BINARIES_DIRECTORY}"/termux-repositories

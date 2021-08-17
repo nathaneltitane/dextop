@@ -49,10 +49,6 @@ done
 
 # variables #
 
-archive=$(curl -sL https://f-droid.org/en/packages/com.termux | grep -o com.termux[aA0-zZ9-_]*.apk | head -n 1)
-
-archive_url="https://f-droid.org/repo/${archive}"
-
 console.inf "Updating Termux Packages."
 echo
 
@@ -88,16 +84,32 @@ echo
 
 if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 then
-	# download
+	# packages #
 	
-	console.fwd "Dowloading update [ termux ]..."
-	echo
+	packages_list=(
+		com.termux
+		com.termux.api
+		)
 	
-	console.download "${archive_url}" "${PWD}" "${archive}"
+	# variables #
 	
-	# update
-	
-	xdg-open "${archive}"
+	for package in ${packages_list[@]}
+	do
+		archive=$(curl -sL https://f-droid.org/en/packages/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
+		
+		archive_url="https://f-droid.org/repo/${archive}"
+		
+		# download
+		
+		console.fwd "Dowloading update [ termux ]..."
+		echo
+		
+		console.download "${archive_url}" "${PWD}" "${archive}"
+		
+		# update
+		
+		xdg-open "${archive}"
+	done
 else
 	# continue without update
 	
@@ -109,4 +121,3 @@ else
 	console.inf "and restart setup process on a fresh Termux installation."
 	echo
 fi
-
