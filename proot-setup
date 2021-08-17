@@ -14,16 +14,53 @@ version="08-12-2021"
 
 # usage #
 
+if [[ $# -gt 3 ]]
+then
+	echo
+	echo -e "Usage: ${script} [Distribution Name] | [Distribution Version] | [OPTION]"
+	echo
+
+	exit 1
+fi
+
+if [[ $# -eq 1 ]]
+then
+	distribution_name="${1}"
+fi
+
+if [[ $# -eq 2 ]]
+then
+	distribution_name="${1}"
+	distribution_version="${2}"
+fi
+
+if [[ $# -eq 3 ]]
+then
+	distribution_name="${1}"
+	distribution_version="${2}"
+
+	install_option="${3}"
+fi
+
 while (($#))
 do
-	case "${1}" in
+	case "${3}" in
+		-f|--full)
+			install_option="full"
+		;;
+
+		-m|--minimal)
+			install_option="minimal"
+		;;
+
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} [OPTION]"
+			echo -e "USAGE:"
 			echo
-			echo -e "Options:"
+			echo -e "-f, --full \t\t Full setup: download and install full desktop environment and utilities."
+			echo -e "-m, --minimal \t\t Minimal setup: download and install minimal desktop environment and utilities."
 			echo
-			echo -e "-h, --help \t Show help and usage information."
+			echo -e "-h, --help \t\t Show help and usage information."
 			echo
 			echo -e "'${script}' [ Version ${version} ]"
 			echo
@@ -31,28 +68,70 @@ do
 			exit
 		;;
 
+		"")
+			# handle empty argument
+			# use default values specified in script
+
+			:
+		;;
+
 		*)
 			echo
-			echo "Usage: ${script} [OPTION]"
+			echo -e "Usage: ${script} [Distribution Name] | [Distribution Version] | [OPTION]"
 			echo
 			echo -e "${script}: Unknown option '${1}'"
 			echo -e "Type './${script} --help' for help and usage information."
 			echo
 
 			exit 1
+
 		;;
-	esac
+
+		esac
 
 	shift
+
 done
 
 # variables #
 
 # set defaults
 
-[ -z "${install_option}" ] && install_option="full"
+[ -z "${distribution_name}" ]				&& distribution_name="ubuntu"
+[ -z "${distribution_version}" ]			&& distribution_version="20.04.2"
+
+[ -z "${install_option}" ]					&& install_option="full"
+
+# handle distribution code markup
+
+# set IFS
+
+IFS='.'
+
+read code_year code_month code_revision <<< "${distribution_version}"
+
+if [ -z "${code_revision}" ]
+then
+	distribution_release="${distribution_version}"
+else
+	distribution_release="${distribution_version%.*}"
+fi
+
+# reset IFS
+
+IFS=''
 
 # export variables
+
+echo '# proot variables #'														>> "${PREFIX}"/bin/globals
+
+echo "export DISTRIBUTION_NAME=${distribution_name}"							>> "${PREFIX}"/bin/globals
+echo "export DISTRIBUTION_VERSION=${distribution_version}"						>> "${PREFIX}"/bin/globals
+echo "export DISTRIBUTION_RELEASE=${distribution_release}"						>> "${PREFIX}"/bin/globals
+
+echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/globals
+
+# source variables
 
 source "${PREFIX}"/bin/globals
 
@@ -64,6 +143,10 @@ echo
 console.download get.dxtp.app "${BINARIES_DIRECTORY}" proot-download
 
 # setup #
+
+# setup termux and proot utilities
+
+console.run "${BINARIES_DIRECTORY}"/proot-download
 
 # welcome message
 
