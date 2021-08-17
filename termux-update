@@ -86,6 +86,10 @@ console.inf "Backing up Termux : https://wiki.termux.com/wiki/Backing_up_Termux"
 console.inf "Installing Termux: https://wiki.termux.com/wiki/installation"
 echo
 
+console.usr "Select 'Package Installer' when prompted"
+console.usr "to install the APK updates."
+echo
+
 console.usr "Update Termux?"
 echo
 
@@ -94,30 +98,22 @@ echo
 
 if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 then
-	# initialize downloads list
-	
-	urls_list=()
-	
 	for package in ${packages_list[@]}
 	do
 		archive=$(curl -sL "${packages_url}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
 		
 		archive_url="${repository_url}/${archive}"
 		
-		urls_list+=(
-			"${archive_url}"
-			)
-		
 		# download
 		
 		console.fwd "Dowloading updates [ termux ]..."
 		echo
 		
-		console.download "${repository_url}" "${PWD}" ${urls_list[@]}
+		console.download "${repository_url}" "${PWD}" ${archive}
 		
 		# update
 		
-		xdg-open "${archive}"
+		xdg-open "${archive}" && wait
 	done
 else
 	# continue without update
