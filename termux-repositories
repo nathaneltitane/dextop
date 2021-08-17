@@ -82,7 +82,7 @@ do
 	do
 		# set file name
 		
-		source_name=$(echo ${repository} | cut -f 3 -d ' ')
+		source_name=$(echo ${repository} | cut -d ' ' -f 3)
 		source_file="${source_name}.list"
 		
 		# write file
