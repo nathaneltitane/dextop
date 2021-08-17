@@ -56,10 +56,57 @@ archive_url="https://f-droid.org/repo/${archive}"
 console.inf "Updating Termux Packages."
 echo
 
-# download
+# prompt #
 
-console.download "${archive_url}" "${PWD}" "${archive}"
+console.err "Termux is no longer being updated in the Google Play store:"
+console.err "A recent Google Play Store policy forcing all applications to update"
+console.err "to SDK 29 has made Termux incomaptible with latest Play Store guidelines."
+console.err "Updates have not been published since November 2020 for that release."
+echo
 
-# update
+console.inf "This utility fetches the Termux APK from the F-Droid repository"
+console.inf "and installs it for you:"
+echo
 
-xdg-open "${archive}"
+console.wrn "This process only functions only if you've previously backed up/uninstalled"
+console.wrn "the Google Play Store version of the application."
+echo
+
+console.inf "If you have not already done so, please visit the following wiki pages"
+console.inf "on how to proceed:"
+echo
+
+console.inf "Backing up Termux : https://wiki.termux.com/wiki/Backing_up_Termux"
+console.inf "Installing Termux: https://wiki.termux.com/wiki/installation"
+echo
+
+console.usr "Update Termux?"
+echo
+
+read reply
+echo
+
+if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+then
+	# download
+	
+	console.fwd "Dowloading update [ termux ]..."
+	echo
+	
+	console.download "${archive_url}" "${PWD}" "${archive}"
+	
+	# update
+	
+	xdg-open "${archive}"
+else
+	# continue without update
+	
+	console.err "Proceeding without update."
+	console.wrn "Setup process may encounter errors:"
+	echo
+	
+	console.inf "Follow wiki pages stated above to correct issues"
+	console.inf "and restart setup process on a fresh Termux installation."
+	echo
+fi
+

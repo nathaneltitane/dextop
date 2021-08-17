@@ -67,7 +67,7 @@ else
 	console.wrn "Termux requires user permission to access storage on this device..."
 	echo
 
-	console.fwd "Both internal and external storage are made available:"
+	console.wrn "Both internal and external storage are made available:"
 	echo
 
 	console.inf "Allowing access greatly benefits the desktop experience"
@@ -84,8 +84,8 @@ else
 
 	# trigger storage permissions dialog
 
-	# am broadcast	--user 0								\
-	#				--es com.termux.app.reload_style storage		\
+	# am broadcast	--user 0												\
+	#				--es com.termux.app.reload_style storage				\
 	#				-a com.termux.app.reload_style com.termux > /dev/null
 
 	termux-setup-storage
