@@ -49,6 +49,16 @@ done
 
 # variables #
 
+packages_url="https://f-droid.org/en/packages"
+repository_url="https://f-droid.org/repo"
+
+# packages #
+
+packages_list=(
+	com.termux
+	com.termux.api
+	)
+
 console.inf "Updating Termux Packages."
 echo
 
@@ -84,25 +94,14 @@ echo
 
 if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 then
-	# packages #
-	
-	packages_list=(
-		com.termux
-		com.termux.api
-		)
-		
-	# urls #
+	# initialize downloads list
 	
 	urls_list=()
 	
-	# variables #
-	
 	for package in ${packages_list[@]}
 	do
-		packages_url="https://f-droid.org/en/packages"
 		archive=$(curl -sL "${packages_url}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
 		
-		repository_url="https://f-droid.org/repo"
 		archive_url="${repository_url}/${archive}"
 		
 		urls_list+=(
