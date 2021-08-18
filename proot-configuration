@@ -74,23 +74,23 @@ console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/fu
 
 # youtube-dl
 
-console.download https://yt-dl.org/downloads/latest											/usr/bin								youtube-dl
+console.download https://yt-dl.org/downloads/latest											/usr/bin									youtube-dl
 
 # leocad
 
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin								leocad-build
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin								leocad-configuration
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin								leocad-download
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin								leocad-launcher
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin								leocad-position
+console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin									leocad-build
+console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin									leocad-configuration
+console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin									leocad-download
+console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin									leocad-launcher
+console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin									leocad-position
 
 # xfce
 
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin								xfconf-desktop
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin								xfconf-read
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin								xfconf-write
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin									xfconf-desktop
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin									xfconf-read
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin									xfconf-write
 
-# execute scripts
+# values #
 
 commands_list=(
 	proot-locales
@@ -99,6 +99,8 @@ commands_list=(
 	leocad-configuration
 	xfconf-desktop
 )
+
+# execute scripts
 
 for command in ${commands_list[@]}
 do

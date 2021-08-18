@@ -68,7 +68,7 @@ console.update
 
 console.upgrade
 
-# packages #
+# values #
 
 administration_list=(
 	sudo
@@ -122,8 +122,6 @@ vnc_list=(
 	tigervnc-common
 	tigervnc-standalone-server
 )
-
-# desktop environment
 
 xfce4_list=(
 	xfce4
@@ -186,7 +184,7 @@ xfce4_list=(
 	greybird-gtk-theme
 )
 
-# install list #
+# initialize install list
 
 install_list=()
 
@@ -219,7 +217,7 @@ then
 	)
 fi
 
-# core packages lists to load and install
+# populate install list
 
 install_list+=(
 	${administration_list[@]}

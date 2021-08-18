@@ -79,7 +79,7 @@ console.inf "Initializing setup [ dextop ]."
 
 # source variables
 
-source "${PREFIX}"/bin/globals
+if [ -f "${PREFIX}"/bin/globals ] && source "${PREFIX}"/bin/globals
 
 # clear
 
@@ -101,7 +101,7 @@ do
 	console.download get.dxtp.app "${BINARIES_DIRECTORY}" "${utility}"
 done
 
-# options lists #
+# values #
 
 termux_list=(
 	termux-setup
@@ -115,7 +115,7 @@ vnc_list=(
 	vnc-setup
 )
 
-# setup list #
+# initialize setup list
 
 setup_list=()
 
@@ -125,6 +125,8 @@ setup_list=()
 
 if [[ "${dextop_option}" = "termux" ]]
 then
+	# populate setup list
+	
 	setup_list+=(
 		$(termux_list[@])
 		)
@@ -134,6 +136,8 @@ fi
 
 if [[ "${dextop_option}" = "proot" ]]
 then
+	# populate setup list
+
 	setup_list+=(
 		$(termux_list[@])
 		$(proot_list[@])

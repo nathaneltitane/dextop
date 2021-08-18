@@ -78,7 +78,7 @@ echo "export version=${version}"												>> "${PREFIX}"/bin/globals
 
 # source variables
 
-source "${PREFIX}"/bin/globals
+if [ -f "${PREFIX}"/bin/globals ] && source "${PREFIX}"/bin/globals
 
 # setup #
 
