@@ -60,8 +60,6 @@ PORT="590${DISPLAY:1}"
 
 # export variables
 
-# source variables
-
 # /etc/os-release: source distribution codename variables (e.g. $NAME)
 
 if [ -f /etc/os-release ] && source /etc/os-release

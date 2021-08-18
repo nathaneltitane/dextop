@@ -58,7 +58,8 @@ console.inf "Starting setup [ vnc ]."
 # export variables
 
 # source variables
-if [ -f "${PREFIX}"/bin/globals ] && source "${PREFIX}"/bin/globals
+
+[ -f "${PREFIX}"/bin/globals ] && source "${PREFIX}"/bin/globals
 
 # setup #
 
