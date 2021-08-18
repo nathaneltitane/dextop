@@ -63,18 +63,17 @@ then
 	console.fwd "Setup complete [ proot ]..."
 	echo
 
-	# remove automatic setup launch
+	# remove proot initialization routine
 
 	sed -i '$ d' /root/.profile
 
 	# remove setup information
 
-	sed -i '/# setup variables #/,$d' /data/data/com.termux/files/usr/bin/globals
+	sed -i '/# proot variables #/,$d' /data/data/com.termux/files/usr/bin/globals
 
 	# remove scripts
 
 	setup_files_list=(
-		/data/data/com.termux/files/home/setup
 		"${BINARIES_DIRECTORY}"/proot-setup
 		"${BINARIES_DIRECTORY}"/proot-setup-complete
 	)
@@ -83,6 +82,8 @@ then
 	do
 		rm "${file}"
 	done
+	
+	# message #
 
 	console.fwd "Setup complete [ proot ]..."
 	echo

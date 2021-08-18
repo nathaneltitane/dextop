@@ -59,7 +59,7 @@ console.inf "Starting setup [ termux ]."
 
 # export variables
 
-echo '# proot variables #'														>> "${PREFIX}"/bin/globals
+echo '# termux variables #'														>> "${PREFIX}"/bin/globals
 
 # source variables
 
