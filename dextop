@@ -142,7 +142,7 @@ then
 		$(termux_list[@])
 		$(proot_list[@])
 		$(vnc_list[@])
-		)
+	)
 fi
 
 # setup #
