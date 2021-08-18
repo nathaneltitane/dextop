@@ -76,6 +76,7 @@ binaries_list=(
 	termux-packages
 	termux-properties
 	termux-repositories
+	termux-setup
 	termux-silent
 	termux-storage
 	termux-update

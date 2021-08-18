@@ -140,8 +140,8 @@ then
 
 	setup_list+=(
 		${termux_list[@]}
-		${(}proot_list[@]}
-		${(}vnc_list[@]}
+		${proot_list[@]}
+		${vnc_list[@]}
 	)
 fi
 
