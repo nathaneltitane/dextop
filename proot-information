@@ -47,7 +47,14 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Gathering setup information [ proot ] ."
+echo
+
 # variables #
+
+# set defaults
 
 # get user information
 

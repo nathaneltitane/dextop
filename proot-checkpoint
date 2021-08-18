@@ -47,7 +47,14 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Verifying setup checkpoint [ proot ]."
+echo
+
 # variables #
+
+# set defaults
 
 # confirm uninterrupted setup for cleanup
 

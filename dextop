@@ -65,6 +65,10 @@ do
 
 done
 
+# prompt #
+
+console.inf "Initializing setup [ dextop ]."
+
 # variables #
 
 # set defaults

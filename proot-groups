@@ -47,28 +47,32 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Transferring unregistered group IDs [ proot ]."
+echo
+
 # variables #
+
+# set defaults
 
 # set IFS
 
 IFS=' '
 
-read uid gid groups <<< $(id)
+# read android system IDs
 
-# variables
+read uid gid groups <<< $(id)
 
 uid=${uid/uid=}
 gid=${gid/gid=}
 groups=${groups/groups=}
 
-# parse existing groups
-
-console.inf "Transferring unregistered group IDs."
-echo
-
 # set IFS
 
 IFS=','
+
+# parse existing groups
 
 read -r -a groups_list <<< "${groups}"
 

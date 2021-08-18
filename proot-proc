@@ -47,16 +47,18 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Setting up hardware entries [ proot ]."
+echo
+
 # variables #
 
-# directories #
+#set defaults
 
-mkdir -p "${PROC_DIRECTORY}"
+# create directory
 
-# files #
-
-console.inf "Creating entries. [ /proc ]"
-echo
+if [ -z "${PROC_DIRECTORY}" ] || mkdir -p "${PROC_DIRECTORY}"
 
 # /proc/loadavg
 

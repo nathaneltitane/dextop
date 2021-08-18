@@ -88,7 +88,12 @@ do
 	esac
 
 	shift
-done
+dshi
+
+# prompt #
+
+console.inf "Logging in [ proot ] ."
+echo
 
 # variables #
 
@@ -255,7 +260,7 @@ do
 
 done < "${ROOT_DIRECTORY}"/etc/passwd
 
-# application verification
+# application verification #
 
 if [ ! -z "${APPLICATION}" ]
 then
@@ -274,17 +279,6 @@ else
 	console.fwd "Starting session [ ${SESSION_NAME} // ${USER} ]..."
 	echo
 fi
-
-# welcome #
-
-console.clear
-
-console.inf "Entering proot environment."
-echo
-
-console.wait 1
-
-# proot #
 
 # setup proot command arguments
 

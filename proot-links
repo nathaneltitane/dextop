@@ -47,18 +47,22 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Linking binaries [ proot ]."
+echo
+
 # variables #
 
-option="${1}"
+# set defaults
 
-# binaries #
+# values #
 
 binaries_list=(
 	top
 )
 
-console.fwd "Linking binaries..."
-echo
+# link binaries
 
 for binary in ${binaries_list[@]}
 do

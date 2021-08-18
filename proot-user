@@ -82,6 +82,11 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Generating user account [ proot ]."
+echo
+
 # variables #
 
 full_name="${first_name} ${last_name}"
@@ -92,16 +97,18 @@ room_number=""
 work_number=""
 home_number=""
 
-# add user
+# user #
 
-console.inf "Creating user account."
+console.fwd "Creating user account..."
 echo
+
+# generate user entry
 
 echo -e "${user_password}\n${user_password}\n" | adduser "${user_name}" --gecos "${full_name},${room_number},${work_number},${home_number},${user_email}" --shell "${SHELL}"
 
 # useradd -m -p "${user_password}" -s "${SHELL}" "${user_name}"
 
-console.inf "Setting password."
+console.fwd "Setting password..."
 echo
 
 users_list=(
@@ -127,10 +134,10 @@ gid="$(id -g ${user_name})"
 
 # home #
 
-# populate home directory with standard folders
-
-console.inf "Setting up user home directory."
+console.fwd "Setting up user home directory..."
 echo
+
+# populate home directory with standard folders
 
 standard_directories_list=(
 	Desktop
@@ -157,15 +164,15 @@ console.directory "${ROOT_DIRECTORY}"/home/"${user_name}"/ ${directories_list[@]
 
 # runtime #
 
-console.inf "Setting up user runtime directory."
+console.fwd "Setting up user runtime directory..."
 echo
 
-# create directory and set permissions
+# create directories and set permissions
 
 mkdir -p /run/user/"${uid}" -m 700
 mkdir -p /run/user/"${user_name}" -m 700
 
-# set ownership
+# set runtime directories ownership
 
 chown "${uid}":"${gid}" -R /run/user/"${uid}"
 chown "${uid}":"${gid}" -R /run/user/"${user_name}"

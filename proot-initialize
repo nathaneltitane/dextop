@@ -47,7 +47,14 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Adding setup startup file [ proot ] ."
+echo
+
 # variables #
+
+# set defaults
 
 # create self-terminating script file
 # execute on first login to complete proot setup

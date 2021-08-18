@@ -47,9 +47,16 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Cleaning up [ proot ]."
+echo
+
 # variables #
 
-# post setup cleanup
+# set defaults
+
+# initialize cleanup: find setup completion flag
 
 if [[ "$(cat ${BINARIES_DIRECTORY}/proot-setup-complete)" = "yes" ]]
 then

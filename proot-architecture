@@ -47,7 +47,14 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Checking system architecture [ proot ]."
+echo
+
 # variables #
+
+# set defaults
 
 # list supported processor architectures
 
@@ -70,9 +77,6 @@ img_architectures=(
 )
 
 # test processor architecture string
-
-console.inf "Checking system architecture."
-echo
 
 print_architecture="$(dpkg --print-architecture)"
 

@@ -46,6 +46,11 @@ do
 
 	shift
 done
+# prompt #
+
+console.inf "Initializing deployment setup [ proot ] ."
+echo
+
 
 # variables #
 
@@ -55,6 +60,10 @@ case "${DISTRIBUTION_NAME}" in
 		iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${iso_architecture}.tar.gz"
 	;;
 esac
+
+# set defaults
+
+# functions #
 
 image_directories () {
 	# populate required directories and structure
@@ -375,12 +384,6 @@ image_unpack () {
 }
 
 # run setup
-
-console.inf "Initializing deployment setup."
-echo
-
-console.fwd "Initializing..."
-echo
 
 if [[ ! -d "${IMAGE_DIRECTORY}" ]]
 then

@@ -82,6 +82,11 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Generating superuser privileges [ proot ]."
+echo
+
 # variables #
 
 full_name="${first_name} ${last_name}"
@@ -89,6 +94,7 @@ full_name="${first_name} ${last_name}"
 sudo_id=$(cat /etc/group | grep sudo | cut -d : -f 3)
 
 # set defaults
+
 # pass sudo GID default (27) if 'sudo' group is not setup
 
 [ -z "${sudo_id}" ] && sudo_id=27
@@ -104,6 +110,8 @@ then
 
 	exit 1
 fi
+
+# create superuser entry for user
 
 console.inf "Setting superuser privileges for user '${user_name}'."
 echo

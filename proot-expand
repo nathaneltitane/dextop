@@ -47,7 +47,14 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Expanding system image [ proot ]."
+echo
+
 # variables #
+
+# set defaults
 
 # enable quiet package install
 
@@ -62,9 +69,6 @@ console.update
 console.upgrade
 
 # unminimize system image
-
-console.fwd "Expanding root image..."
-echo
 
 console.silence "yes | unminimize" &
 echo

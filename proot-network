@@ -47,19 +47,20 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Configuring network [ proot ]."
+echo
+
 # variables #
 
-# hostname
+# set defaults
 
-console.inf "Setting hostname."
-echo
+# set hostname
 
 echo "${hostname}" > "${ROOT_DIRECTORY}"/etc/hostname
 
-# hosts
-
-console.inf "Setting host address."
-echo
+# set hosts
 
 cat << FILE -> "${ROOT_DIRECTORY}"/etc/hosts
 # IPv4 #
@@ -81,10 +82,7 @@ ff02::3		ip6-allhosts
 
 FILE
 
-# nameserver
-
-console.inf "Setting namserver address."
-echo
+# set nameserver
 
 cat << 'FILE' -> "${ROOT_DIRECTORY}"/etc/resolv.conf
 nameserver 1.1.1.1

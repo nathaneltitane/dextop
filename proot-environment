@@ -47,17 +47,14 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Writing environment files [ proot ]."
+echo
+
 # variables #
 
-# directories #
-
-# files #
-
-console.fwd "Setting up environment [ proot ]..."
-echo
-
-console.inf "Creating files."
-echo
+# set defaults
 
 # .bash_aliases
 

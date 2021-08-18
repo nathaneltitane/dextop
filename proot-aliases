@@ -47,12 +47,14 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Writing command aliases [ proot ]."
+echo
+
 # variables #
 
-# aliases #
-
-console.inf "Writing command aliases."
-echo
+# set defaults
 
 cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bash_aliases
 # shell #

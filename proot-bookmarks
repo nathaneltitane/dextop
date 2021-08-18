@@ -47,14 +47,14 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Creating bookmarks [ proot ]."
+echo
+
 # variables #
 
-# directories #
-
-# bookmarks #
-
-console.inf "Creating bookmarks."
-echo
+# set defaults
 
 # check for directory
 

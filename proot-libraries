@@ -47,12 +47,14 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Setting library preload [ proot ]."
+echo
+
 # variables #
 
-# environment
-
-console.inf "Setting library preload."
-echo
+# set defaults
 
 cat << "FILE" ->> "${ROOT_DIRECTORY}"/etc/environment
 LD_PRELOAD=/lib/aarch64-linux-gnu/libgcc_s.so.1

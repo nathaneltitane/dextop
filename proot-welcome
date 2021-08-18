@@ -47,7 +47,12 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Writing login greeter [ proot ]."
 # variables #
+
+# set defaults
 
 # write welcome message - replaces motd
 

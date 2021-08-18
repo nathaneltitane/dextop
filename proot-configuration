@@ -47,10 +47,14 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Writing configuration [ proot ]."
+echo
+
 # variables #
 
-console.fwd "Writing configuration..."
-echo
+# set defaults
 
 # write configuration
 

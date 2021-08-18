@@ -93,6 +93,10 @@ do
 
 done
 
+# prompt #
+
+console.inf "Starting setup [ proot ]."
+
 # variables #
 
 # set defaults
