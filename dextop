@@ -108,8 +108,11 @@ console.clear
 # values #
 
 utilities_list=(
+	termux-download
 	termux-setup
+	proot-download
 	proot-setup
+	vnc-download
 	vnc-setup
 )
 
