@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.fwd "Silencing login prompt [ proot ]..."
+console.inf "Silencing login prompt [ proot ]."
 echo
 
 # variables #

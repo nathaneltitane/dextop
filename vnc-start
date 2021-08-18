@@ -5,10 +5,6 @@
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/globals
 
-# /etc/os-release: source distribution codename variables (e.g. $NAME)
-
-source /etc/os-release
-
 # script #
 
 script=$(basename -- "${BASH_SOURCE[0]}")
@@ -51,9 +47,26 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Starting display [ vnc ]."
+echo
+
 # variables #
 
 PORT="590${DISPLAY:1}"
+
+# set defaults
+
+# export variables
+
+# source variables
+
+# /etc/os-release: source distribution codename variables (e.g. $NAME)
+
+source /etc/os-release
+
+# functions #
 
 vnc_start () {
 	console.silence "

@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.inf "Writing environment files [ proot ]."
+console.inf "Setting up environment [ proot ]."
 echo
 
 # variables #

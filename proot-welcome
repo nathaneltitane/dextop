@@ -50,11 +50,12 @@ done
 # prompt #
 
 console.inf "Writing login greeter [ proot ]."
+
 # variables #
 
 # set defaults
 
-# write welcome message - replaces motd
+# write welcome message: replaces motd
 
 cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 # dependencies #

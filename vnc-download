@@ -47,15 +47,20 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Downloading utilities [ vnc ]."
+echo
+
 # variables #
 
-# download #
+# set defaults
 
-# console #
+# source
 
 curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && source "${BINARIES_DIRECTORY}"/console
 
-# binaries
+# values #
 
 binaries_list=(
 	vnc-environment

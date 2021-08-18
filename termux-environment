@@ -47,17 +47,14 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Setting up environment [ termux ]."
+echo
+
 # variables #
 
-# directories #
-
-# files #
-
-console.fwd "Setting up environment [ termux ]..."
-echo
-
-console.inf "Creating files."
-echo
+# set defaults
 
 # .bash_aliases
 

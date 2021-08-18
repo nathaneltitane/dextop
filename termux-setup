@@ -47,9 +47,11 @@ do
 	shift
 done
 
-# variables #
+# prompt #
 
-# setup variables #
+console.inf "Starting setup [ termux ]."
+
+# variables #
 
 # set defaults
 
@@ -77,7 +79,6 @@ echo "export version=${version}"												>> "${PREFIX}"/bin/globals
 # source variables
 
 source "${PREFIX}"/bin/globals
-
 
 # setup #
 

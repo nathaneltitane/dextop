@@ -47,24 +47,36 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Stopping display [ vnc ]."
+echo
+
 # variables #
 
-console.clear
+# set defaults
 
-# check for PID and kill / cleanup
+# check for PID and stop display server
 
 if [ ! -z "$(pgrep -f vnc)" ]
 then
+	# clear
+	
+	console.clear
+	
 	# kill active and stale vnc output processes
 
 	console.silence "vncserver -kill :*" &
 
-	console.progress "Stopping display server..."
+	console.progress "Killing display server..."
 	echo
 
 	# clean display server runtime files
 
-	rm -rf /tmp/.X*
+	rm -rf "${TMPDIR}"/.X*
+
+	# clear
+
+	console.clear
 fi
 
-console.clear

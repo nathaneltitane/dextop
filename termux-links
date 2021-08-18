@@ -47,11 +47,21 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Linking binaries [ proot ]."
+echo
+
 # variables #
 
-# binaries #
+# set defaults
 
-console.fwd "Fixing binary entries..."
-echo
+# values #
+
+binaries_list=(
+	htop
+)
+
+# link binaries
 
 ln -s -f "${BINARIES_DIRECTORY}"/top "${BINARIES_DIRECTORY}"/htop

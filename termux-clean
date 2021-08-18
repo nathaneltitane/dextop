@@ -47,25 +47,38 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Cleaning up [ proot ]."
+echo
+
 # variables #
 
-# post setup cleanup
+# set defaults
 
-if [ ! -f "${HOME}"/setup ]
+# initialize cleanup: find setup completion flag
+
+if [[ "$(cat ${BINARIES_DIRECTORY}/termux-setup-complete)" = "yes" ]]
 then
-	console.fwd "Setup complete [ termux ]..."
-	echo
-	console.scs "System deployment and configuration complete."
-	echo
-	console.inf "Run 'proot-launch -u <username>' to start your session."
-	console.inf "Run 'proot-launch -u <username> -a <application>' to start an application with your session."
+	console.fwd "Setup complete [ proot ]..."
 	echo
 
-else
-	console.err "Some errors were encountered during setup."
-	echo
-	console.inf "Consult setup logs at '"${PREFIX}"/var/log/' for details."
-	echo
+	if [ ! -f "${HOME}"/setup ]
+	then
+		console.fwd "Setup complete [ termux ]..."
+		echo
+		console.scs "System deployment and configuration complete."
+		echo
+		console.inf "Run 'proot-launch -u <username>' to start your session."
+		console.inf "Run 'proot-launch -u <username> -a <application>' to start an application with your session."
+		echo
+	
+	else
+		console.err "Some errors were encountered during setup."
+		echo
+		console.inf "Consult setup logs at '"${PREFIX}"/var/log/' for details."
+		echo
+	fi
 fi
 
 console.wait 5

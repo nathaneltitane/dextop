@@ -47,6 +47,11 @@ do
 	shift
 done
 
+# prompt
+
+console.fwd "Setting up repositories [ termux ]..."
+echo
+
 # variables #
 
 repositories_list=(
@@ -57,10 +62,7 @@ repositories_list=(
 	"deb https://grimler.se/x11-packages x11 main"
 )
 
-# setup repositories
-
-console.fwd "Setting up repositories [ termux ]..."
-echo
+# set defaults
 
 # create sources lists directory
 
@@ -75,6 +77,8 @@ echo "deb https://grimler.se/termux-packages-24 stable main" > "${SOURCES_DIRECT
 # set IFS
 
 IFS=$'\n'
+
+# setup repositories
 
 while read line
 do

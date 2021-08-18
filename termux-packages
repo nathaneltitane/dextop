@@ -47,7 +47,18 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Setting up packages [ termux ]."
+echo
+
 # variables #
+
+# set defaults
+
+# enable quiet package install
+
+export DEBIAN_FRONTEND=noninteractive
 
 # update packages list
 
@@ -57,7 +68,6 @@ console.update
 
 console.upgrade
 
-# packages #
 
 documentation_list=(
 	man

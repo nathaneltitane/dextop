@@ -47,6 +47,12 @@ do
 	shift
 done
 
+# prompt #
+
+
+console.inf "Updating packages [ termux ]."
+echo
+
 # variables #
 
 packages_url="https://f-droid.org/en/packages"
@@ -59,10 +65,7 @@ packages_list=(
 	com.termux.api
 	)
 
-console.inf "Updating Termux packages."
-echo
-
-# prompt #
+# message #
 
 console.err "Termux packages are no longer being updated in the Google Play store:"
 console.err "A recent Google Play Store policy forcing all applications to update"
@@ -93,11 +96,15 @@ echo
 console.countdown "Prompt in:" 10
 echo
 
+# request update permission
+
 console.usr "Update Termux packages?"
 echo
 
 read reply
 echo
+
+# process update
 
 if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 then

@@ -47,12 +47,14 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Writing command aliases [ termux ]."
+echo
+
 # variables #
 
-# aliases #
-
-console.inf "Writing command aliases."
-echo
+# set defaults
 
 cat << 'FILE' -> "${HOME}"/.bash_aliases
 # shell #

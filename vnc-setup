@@ -2,7 +2,8 @@
 
 # dependencies #
 
-curl -sL get.cnsl.app/console > "${PREFIX}"/bin/console && source "${PREFIX}"/bin/console
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
 
 # script #
 
@@ -46,9 +47,11 @@ do
 	shift
 done
 
-# variables #
+# prompt #
 
-# setup variables #
+console.inf "Starting setup [ vnc ]."
+
+# variables #
 
 # set defaults
 

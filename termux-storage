@@ -47,7 +47,14 @@ do
 	shift
 done
 
+# prompt #
+
+console.fwd "Settign up storage preferences [ termux ]..."
+echo
+
 # variables #
+
+# set defaults
 
 # verify termux storage directory existence
 
@@ -103,6 +110,8 @@ rm -rf "${HOME}"/storage
 # handle storage mount location
 
 [ -d "${MAIN_DIRECTORY}"/storage ] && rm -rf "${MAIN_DIRECTORY}"/storage
+
+# create directory
 
 mkdir -p "${MAIN_DIRECTORY}"/storage || :
 

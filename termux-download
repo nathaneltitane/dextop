@@ -47,15 +47,20 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Downloading utilities [ termux ]."
+echo
+
 # variables #
 
-# download #
+# set defaults
 
-# console #
+# source
 
 curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && source "${BINARIES_DIRECTORY}"/console
 
-# binaries
+# values #
 
 binaries_list=(
 	termux-aliases
@@ -73,5 +78,7 @@ binaries_list=(
 	termux-update
 	termux-welcome
 )
+
+# download #
 
 console.download get.dxtp.app "${BINARIES_DIRECTORY}" ${binaries_list[@]}

@@ -47,17 +47,19 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Setting up terminal properties and preferences [ termux ]."
+echo
+
 # variables #
 
-console.fwd "Setting up properties and preferences [ termux ]..."
-echo
+# set defaults
 
 # force current directory to "${HOME}":
 # prevents 'termux-reload-settings' segfault
 
 cd "${HOME}" || exit 1
-
-# directories #
 
 # remove default properties directory
 
@@ -67,9 +69,7 @@ cd "${HOME}" || exit 1
 
 mkdir -p "${HOME}"/.termux
 
-# files #
-
-# termux properties
+# write properties
 
 cat << FILE ->> "${HOME}"/.termux/termux.properties
 
@@ -114,8 +114,9 @@ extra-keys = [																	\
 																				]
 FILE
 
-# apply termux properties
+# set properties
 
 console.fwd "Applying changes..."
+echo
 
 termux-reload-settings

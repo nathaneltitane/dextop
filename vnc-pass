@@ -47,7 +47,14 @@ do
 	shift
 done
 
+# prompt #
+
+console.fwd "Setting up password [ vnc ]..."
+echo
+
 # variables #
+
+# set defaults
 
 # values #
 

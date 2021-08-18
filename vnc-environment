@@ -47,19 +47,16 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Setting up environment [ vnc ]."
+echo
+
 # variables #
 
-# directories #
+# set defaults
 
-# files #
-
-console.fwd "Setting up environment [ vnc ]..."
-echo
-
-console.inf "Creating files."
-echo
-
-# create user home vnc directory
+# create user vnc directory
 
 mkdir -p "${ROOT_DIRECTORY}"/home/"${user_name}"/.vnc
 

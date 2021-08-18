@@ -47,7 +47,13 @@ do
 	shift
 done
 
+# prompt #
+
+console.inf "Writing login greeter [ termux ]."
+
 # variables #
+
+# set defaults
 
 # write welcome message - replaces motd
 
