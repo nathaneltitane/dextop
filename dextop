@@ -92,9 +92,9 @@ console.fwd "Loading..."
 echo
 
 utilities_list=(
-	termux-download
-	proot-download
-	vnc-download
+	termux-setup
+	proot-setup
+	vnc-setup
 )
 
 # download #
