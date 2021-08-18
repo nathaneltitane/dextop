@@ -58,7 +58,7 @@ echo
 
 # create directory
 
-if [ -z "${PROC_DIRECTORY}" ] || mkdir -p "${PROC_DIRECTORY}"
+[ -z "${PROC_DIRECTORY}" ] || mkdir -p "${PROC_DIRECTORY}"
 
 # /proc/loadavg
 
