@@ -99,7 +99,7 @@ utilities_list=(
 
 # download #
 
-console.download get.dxtp.app "${BINARIES_DIRECTORY}" "${utilities_list}"
+console.download get.dxtp.app "${BINARIES_DIRECTORY}" ${utilities_list[@]}
 
 # values #
 
@@ -128,7 +128,7 @@ then
 	# populate setup list
 	
 	setup_list+=(
-		$(termux_list[@])
+		${termux_list[@]}
 		)
 fi
 
@@ -139,9 +139,9 @@ then
 	# populate setup list
 
 	setup_list+=(
-		$(termux_list[@])
-		$(proot_list[@])
-		$(vnc_list[@])
+		${termux_list[@]}
+		${(}proot_list[@]}
+		${(}vnc_list[@]}
 	)
 fi
 
