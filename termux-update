@@ -135,4 +135,6 @@ else
 	console.inf "Follow wiki pages stated above to correct issues"
 	console.inf "and restart setup process on a fresh Termux installation."
 	echo
+	
+	console.wait 2
 fi
