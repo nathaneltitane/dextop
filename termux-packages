@@ -68,6 +68,7 @@ console.update
 
 console.upgrade
 
+# values #
 
 documentation_list=(
 	man
@@ -122,6 +123,11 @@ utilities_list=(
 	wget
 	zip
 )
+# initialize install list
+
+install_list=()
+
+# populate install list
 
 install_list=(
 	${documentation_list[@]}

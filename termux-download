@@ -56,7 +56,9 @@ echo
 
 # set defaults
 
-# source
+# export variables
+
+# source variables
 
 curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && source "${BINARIES_DIRECTORY}"/console
 
@@ -64,6 +66,7 @@ curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && source "${BIN
 
 binaries_list=(
 	termux-aliases
+	termux-bookmarks
 	termux-checkpoint
 	termux-clean
 	termux-download

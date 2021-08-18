@@ -110,6 +110,10 @@ console.run "${BINARIES_DIRECTORY}"/termux-links
 
 console.run "${BINARIES_DIRECTORY}"/termux-properties
 
+# setup proot file manager bookmarks
+
+"${BINARIES_DIRECTORY}"/termux-bookmarks
+
 # setup termux silent login
 
 console.run "${BINARIES_DIRECTORY}"/termux-silent
