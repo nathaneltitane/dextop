@@ -68,6 +68,7 @@ done
 # prompt #
 
 console.inf "Initializing setup [ dextop ]."
+echo
 
 # variables #
 
@@ -87,7 +88,7 @@ console.clear
 
 # download #
 
-console.fwd "Initializing..."
+console.fwd "Loading..."
 echo
 
 utilities_list=(
