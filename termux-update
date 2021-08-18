@@ -132,8 +132,8 @@ else
 	console.wrn "Setup process may encounter errors:"
 	echo
 	
-	console.inf "Follow wiki pages stated above to correct issues"
-	console.inf "and restart setup process on a fresh Termux installation."
+	console.inf "Follow wiki pages stated above to correct issues."
+	console.inf "Restart setup process on a fresh Termux installation to proceed."
 	echo
 	
 	console.wait 2
