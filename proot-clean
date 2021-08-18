@@ -52,7 +52,7 @@ done
 console.inf "Cleaning up [ proot ]."
 echo
 
-# variables #
+# variables #1
 
 # set defaults
 

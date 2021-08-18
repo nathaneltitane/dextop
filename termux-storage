@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.fwd "Setting up storage preferences [ termux ]..."
+console.inf "Setting up storage preferences [ termux ]."
 echo
 
 # variables #
