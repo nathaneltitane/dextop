@@ -68,7 +68,7 @@ esac
 image_directories () {
 	# populate required directories and structure
 
-	console.inf "Creating required deployment directories."
+	console.fwd "Creating required deployment directories..."
 	echo
 
 	directories_list=(
