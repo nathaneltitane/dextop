@@ -93,7 +93,7 @@ echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'				>> "${PRE
 
 echo 'export ISO_DIRECTORY="${MAIN_DIRECTORY}"/iso'								>> "${PREFIX}"/bin/globals
 
-echo '# variables #'														>> "${PREFIX}"/bin/globals
+echo '# variables #'															>> "${PREFIX}"/bin/globals
 
 echo "export version=${version}"												>> "${PREFIX}"/bin/globals
 
