@@ -58,11 +58,11 @@ echo
 
 # get user information
 
-console.fwd "The following information is required to set up your environment."
+console.fwd "Information is required to set up your environment..."
 echo
 
-console.wrn "The information will be used to set up the user account."
-console.wrn "The fields cannot be empty."
+console.wrn "Some information will be used to set up the user account:"
+console.wrn "the fields cannot be empty."
 echo
 
 # values #
