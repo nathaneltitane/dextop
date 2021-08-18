@@ -70,7 +70,7 @@ FILE
 
 # .bashrc
 
-cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bashrc
+cat << 'FILE' ->> "${HOME}"/.bashrc
 
 if [ -d /home/"${USER}"/.bash_functions ]
 then
