@@ -74,7 +74,7 @@ binaries_list=(
 	proot-download
 	proot-environment
 	proot-expand
-	proot-proc
+	proot-finalize
 	proot-groups
 	proot-image
 	proot-information
@@ -86,6 +86,7 @@ binaries_list=(
 	proot-message
 	proot-network
 	proot-packages
+	proot-proc
 	proot-setup
 	proot-silent
 	proot-superuser

@@ -2,7 +2,8 @@
 
 # dependencies #
 
-curl -sL get.cnsl.app/console > "${PREFIX}"/bin/console && source "${PREFIX}"/bin/console
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
 
 # script #
 
@@ -14,53 +15,16 @@ version="08-12-2021"
 
 # usage #
 
-if [[ $# -gt 3 ]]
-then
-	echo
-	echo -e "Usage: ${script} [Distribution Name] | [Distribution Version] | [OPTION]"
-	echo
-
-	exit 1
-fi
-
-if [[ $# -eq 1 ]]
-then
-	distribution_name="${1}"
-fi
-
-if [[ $# -eq 2 ]]
-then
-	distribution_name="${1}"
-	distribution_version="${2}"
-fi
-
-if [[ $# -eq 3 ]]
-then
-	distribution_name="${1}"
-	distribution_version="${2}"
-
-	install_option="${3}"
-fi
-
 while (($#))
 do
-	case "${3}" in
-		-f|--full)
-			install_option="full"
-		;;
-
-		-m|--minimal)
-			install_option="minimal"
-		;;
-
+	case "${1}" in
 		-h|--help)
 			echo
-			echo -e "USAGE:"
+			echo -e "Usage: ${script} [OPTION]"
 			echo
-			echo -e "-f, --full \t\t Full setup: download and install full desktop environment and utilities."
-			echo -e "-m, --minimal \t\t Minimal setup: download and install minimal desktop environment and utilities."
+			echo -e "Options:"
 			echo
-			echo -e "-h, --help \t\t Show help and usage information."
+			echo -e "-h, --help \t Show help and usage information."
 			echo
 			echo -e "'${script}' [ Version ${version} ]"
 			echo
@@ -68,34 +32,24 @@ do
 			exit
 		;;
 
-		"")
-			# handle empty argument
-			# use default values specified in script
-
-			:
-		;;
-
 		*)
 			echo
-			echo -e "Usage: ${script} [Distribution Name] | [Distribution Version] | [OPTION]"
+			echo "Usage: ${script} [OPTION]"
 			echo
 			echo -e "${script}: Unknown option '${1}'"
 			echo -e "Type './${script} --help' for help and usage information."
 			echo
 
 			exit 1
-
 		;;
-
-		esac
+	esac
 
 	shift
-
 done
 
 # prompt #
 
-console.inf "Initializing session [ proot ]."
+console.inf "Initializing setup [ proot ]."
 echo
 
 # variables #
@@ -120,59 +74,6 @@ cat << 'FILE' ->> "${ROOT_DIRECTORY}"/root/.profile
 
 # setup proot expansion to default system
 
-"${BINARIES_DIRECTORY}"/proot-expand
-
-# setup proot package requirements
-
-"${BINARIES_DIRECTORY}"/proot-packages
-
-# setup proot binary fixes and links
-
-"${BINARIES_DIRECTORY}"/proot-links
-
-# setup proot user
-
-"${BINARIES_DIRECTORY}"/proot-user "${user_name}"
-
-# setup proot user superuser privileges
-
-"${BINARIES_DIRECTORY}"/proot-superuser "${user_name}"
-
-# setup proot file manager bookmarks
-
-"${BINARIES_DIRECTORY}"/proot-bookmarks
-
-# setup proot silent login
-
-console.run "${BINARIES_DIRECTORY}"/proot-silent
-
-# setup proot environment files
-
-"${BINARIES_DIRECTORY}"/proot-environment
-
-# setup proot command aliases
-
-"${BINARIES_DIRECTORY}"/proot-aliases
-
-# setup proot login messages
-
-"${BINARIES_DIRECTORY}"/proot-welcome
-
-# setup proot initial login configuration steps
-
-"${BINARIES_DIRECTORY}"/proot-configuration
-
-# setup proot utilities
-
-console.run "${BINARIES_DIRECTORY}"/proot-download
-
-# setup checkpoint #
-
-"${BINARIES_DIRECTORY}"/proot-checkpoint
-
-# setup cleanup #
-
-"${BINARIES_DIRECTORY}"/proot-clean
-
+console.run "${BINARIES_DIRECTORY}"/proot-finalize
 
 FILE

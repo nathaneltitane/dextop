@@ -1,0 +1,121 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
+# script #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="08-12-2021"
+
+# usage #
+
+while (($#))
+do
+	case "${1}" in
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-h, --help \t Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version ${version} ]"
+			echo
+
+			exit
+		;;
+
+		*)
+			echo
+			echo "Usage: ${script} [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+		;;
+	esac
+
+	shift
+done
+
+# prompt #
+
+console.inf "Finalizing setup [ proot ]."
+echo
+
+# variables #
+
+# set defaults
+
+# export variables
+
+# source variables
+
+[ -f "${PREFIX}"/bin/globals ] && source "${PREFIX}"/bin/globals
+
+# setup #
+
+# setup proot expansion to default system
+
+console.run "${BINARIES_DIRECTORY}"/proot-expand
+
+# setup proot package requirements
+
+console.run "${BINARIES_DIRECTORY}"/proot-packages
+
+# setup proot binary fixes and links
+
+console.run "${BINARIES_DIRECTORY}"/proot-links
+
+# setup proot user
+
+console.run "${BINARIES_DIRECTORY}"/proot-user "${user_name}"
+
+# setup proot user superuser privileges
+
+console.run "${BINARIES_DIRECTORY}"/proot-superuser "${user_name}"
+
+# setup proot file manager bookmarks
+
+console.run "${BINARIES_DIRECTORY}"/proot-bookmarks
+
+# setup proot silent login
+
+console.run "${BINARIES_DIRECTORY}"/proot-silent
+
+# setup proot environment files
+
+"${BINARIES_DIRECTORY}"/proot-environment
+
+# setup proot command aliases
+
+"${BINARIES_DIRECTORY}"/proot-aliases
+
+# setup proot login messages
+
+"${BINARIES_DIRECTORY}"/proot-welcome
+
+# setup proot initial login configuration steps
+
+"${BINARIES_DIRECTORY}"/proot-configuration
+
+# setup proot utilities
+
+console.run "${BINARIES_DIRECTORY}"/proot-download
+
+# setup checkpoint #
+
+"${BINARIES_DIRECTORY}"/proot-checkpoint
+
+# setup cleanup #
+
+"${BINARIES_DIRECTORY}"/proot-clean

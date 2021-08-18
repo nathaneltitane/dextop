@@ -92,7 +92,7 @@ done
 
 # prompt #
 
-console.inf "Logging in [ proot ] ."
+console.inf "Logging in [ proot ]."
 echo
 
 # variables #
