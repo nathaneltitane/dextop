@@ -97,7 +97,7 @@ utilities_list=(
 	vnc-download
 )
 
-for utilities in ${utilities_list[@]}
+for utility in ${utilities_list[@]}
 do
 	console.download get.dxtp.app "${BINARIES_DIRECTORY}" "${utility}"
 done
