@@ -58,9 +58,15 @@ echo
 
 # set hostname
 
+console.fwd "Setting up [ hostname ]..."
+echo
+
 echo "${hostname}" > "${ROOT_DIRECTORY}"/etc/hostname
 
 # set hosts
+
+console.fwd "Setting up [ hosts ]..."
+echo
 
 cat << FILE -> "${ROOT_DIRECTORY}"/etc/hosts
 # IPv4 #
@@ -83,6 +89,9 @@ ff02::3		ip6-allhosts
 FILE
 
 # set nameserver
+
+console.fwd "Setting up [ nameserver ]..."
+echo
 
 cat << 'FILE' -> "${ROOT_DIRECTORY}"/etc/resolv.conf
 nameserver 1.1.1.1
