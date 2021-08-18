@@ -394,7 +394,7 @@ else
 		console.inf "Image directory clean:"
 		echo
 
-		console.wrn "Image directory does not contain any previous deployments"
+		console.wrn "Image directory does not contain any previous deployments."
 		echo
 
 		console.fwd "Proceeding..."
