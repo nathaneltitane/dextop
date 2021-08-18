@@ -72,6 +72,11 @@ echo
 
 cat << 'FILE' ->> "${ROOT_DIRECTORY}"/root/.profile
 
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/globals
+
 # setup proot expansion to default system
 
 console.run "${BINARIES_DIRECTORY}"/proot-finalize
