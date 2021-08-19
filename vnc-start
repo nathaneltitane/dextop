@@ -135,20 +135,20 @@ vnc_resolutions () {
 	# list supported display resolutions
 
 	monitors=(
-		VGA		  640     480
-		WVGA	  768     480
-		SVGA	  800     600
-		FWVGA	  854     480
-		qHD		  960     540
-		DVGA	  960     640
-		WSVGA	 1024    576
-		WSVGA	 1024    600
-		XGA	     1024    768
-		XGA+	 1152    864
-		HD		 1280    720
-		WXGA	 1366    768
-		WXGA+	 1440    900
-		HD+		 1600    900
+		VGA		 0640    0480
+		WVGA	 0768    0480
+		SVGA	 0800    0600
+		FWVGA	 0854    0480
+		qHD		 0960    0540
+		DVGA	 0960    0640
+		WSVGA	 1024    0576
+		WSVGA	 1024    0600
+		XGA		 1024    0768
+		XGA+	 1152    0864
+		HD		 1280    0720
+		WXGA	 1366    0768
+		WXGA+	 1440    0900
+		HD+		 1600    0900
 
 		SXGA	 1280    1024
 		SXGA+	 1400    1050
