@@ -56,10 +56,6 @@ echo
 
 # set defaults
 
-# enable quiet package install
-
-export DEBIAN_FRONTEND=noninteractive
-
 # update packages list
 
 console.update

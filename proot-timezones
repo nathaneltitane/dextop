@@ -56,10 +56,6 @@ echo
 
 # set defaults
 
-# enable quiet package install
-
-export DEBIAN_FRONTEND=noninteractive
-
 # configure
 
 sudo dpkg-reconfigure tzdata
