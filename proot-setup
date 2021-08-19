@@ -130,13 +130,15 @@ IFS=''
 
 echo '# proot variables #'														>> "${PREFIX}"/bin/globals
 
-echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/globals
-
 echo "export DISTRIBUTION_NAME=${distribution_name}"							>> "${PREFIX}"/bin/globals
 echo "export DISTRIBUTION_VERSION=${distribution_version}"						>> "${PREFIX}"/bin/globals
 echo "export DISTRIBUTION_RELEASE=${distribution_release}"						>> "${PREFIX}"/bin/globals
 
 echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'		>> "${PREFIX}"/bin/globals
+
+echo '# installation #'															>> "${PREFIX}"/bin/globals
+
+echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/globals
 
 # source variables
 

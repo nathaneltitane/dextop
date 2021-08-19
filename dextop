@@ -78,6 +78,10 @@ echo
 
 # export variables
 
+echo '# variables #'															>> "${PREFIX}"/bin/globals
+
+echo "export version=${version}"												>> "${PREFIX}"/bin/globals
+
 echo '# globals #'																>> "${PREFIX}"/bin/globals
 
 echo 'export MAIN_DIRECTORY="${PREFIX%/*}"'										>> "${PREFIX}"/bin/globals
@@ -92,10 +96,6 @@ echo 'export PROC_DIRECTORY="${MAIN_DIRECTORY}"/proc'							>> "${PREFIX}"/bin/g
 echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'				>> "${PREFIX}"/bin/globals
 
 echo 'export ISO_DIRECTORY="${MAIN_DIRECTORY}"/iso'								>> "${PREFIX}"/bin/globals
-
-echo '# variables #'															>> "${PREFIX}"/bin/globals
-
-echo "export version=${version}"												>> "${PREFIX}"/bin/globals
 
 # source variables
 

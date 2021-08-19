@@ -81,4 +81,8 @@ source /data/data/com.termux/files/usr/bin/globals
 
 console.run "${BINARIES_DIRECTORY}"/proot-finalize
 
+# exit proot after successful setup
+
+exit
+
 FILE

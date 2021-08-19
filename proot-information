@@ -85,14 +85,11 @@ eval ${console_rtn[@]}
 
 # export variables
 
-cat << FILE ->> "${BINARIES_DIRECTORY}"/globals
+echo '# information #'															>> "${PREFIX}"/bin/globals
 
-# user information #
-
-export first_name="${first_name}"
-export last_name="${last_name}"
-export full_name="${first_name} ${last_name}"
-export user_name="${user_name}"
-export user_email="${user_email}"
-export user_password="${user_password}"
-FILE
+export "first_name=${first_name}"												>> "${PREFIX}"/bin/globals
+export "last_name=${last_name}"													>> "${PREFIX}"/bin/globals
+export "full_name=${first_name} ${last_name}"									>> "${PREFIX}"/bin/globals
+export "user_name=${user_name}"													>> "${PREFIX}"/bin/globals
+export "user_email=${user_email}"												>> "${PREFIX}"/bin/globals
+export "user_password=${user_password}"											>> "${PREFIX}"/bin/globals
