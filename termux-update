@@ -97,7 +97,7 @@ echo
 
 # request update permission
 
-console.usr "Update Termux packages?"
+console.ipt "Update Termux packages?"
 echo
 
 read reply
