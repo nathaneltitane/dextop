@@ -61,7 +61,6 @@ echo
 cat << 'FILE' ->> "${HOME}"/.profile
 
 # termux configuration #
-
 FILE
 
 # purge configuration
