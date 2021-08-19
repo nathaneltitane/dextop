@@ -87,9 +87,9 @@ eval ${console_rtn[@]}
 
 echo '# information #'															>> "${PREFIX}"/bin/globals
 
-export "first_name=${first_name}"												>> "${PREFIX}"/bin/globals
-export "last_name=${last_name}"													>> "${PREFIX}"/bin/globals
-export "full_name=${first_name} ${last_name}"									>> "${PREFIX}"/bin/globals
-export "user_name=${user_name}"													>> "${PREFIX}"/bin/globals
-export "user_email=${user_email}"												>> "${PREFIX}"/bin/globals
-export "user_password=${user_password}"											>> "${PREFIX}"/bin/globals
+echo "export first_name=${first_name}"											>> "${PREFIX}"/bin/globals
+echo "export last_name=${last_name}"											>> "${PREFIX}"/bin/globals
+echo "export full_name=${first_name} ${last_name}"								>> "${PREFIX}"/bin/globals
+echo "export user_name=${user_name}"											>> "${PREFIX}"/bin/globals
+echo "export user_email=${user_email}"											>> "${PREFIX}"/bin/globals
+echo "export user_password=${user_password}"									>> "${PREFIX}"/bin/globals

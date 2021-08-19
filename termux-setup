@@ -57,8 +57,6 @@ console.inf "Starting setup [ termux ]."
 
 # export variables
 
-# export variables
-
 echo '# termux variables #'														>> "${PREFIX}"/bin/globals
 
 # source variables
