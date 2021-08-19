@@ -152,7 +152,6 @@ standard_directories_list=(
 
 optional_directories_list=(
 	Git
-	.bash_functions
 )
 
 directories_list=(

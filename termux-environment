@@ -56,6 +56,10 @@ echo
 
 # set defaults
 
+# .bash_functions
+
+mkdir -p "${HOME}"/.bash_functions
+
 # .bash_aliases
 
 cat << 'FILE' ->> "${HOME}"/.bash_aliases
@@ -72,9 +76,9 @@ FILE
 
 cat << 'FILE' ->> "${HOME}"/.bashrc
 
-if [ -d /home/"${USER}"/.bash_functions ]
+if [ -d "${HOME}"/.bash_functions ]
 then
-	for file in /home/"${USER}"/.bash_functions/*
+	for file in "${HOME}"/.bash_functions/*
 	do
 		test -x "${file}" && source "${file}"
 	done
@@ -85,8 +89,16 @@ FILE
 
 cat << 'FILE' ->> "${HOME}"/.profile
 
+if [ -n "${BASH_VERSION}" ]
+then
+	if [ -f "${HOME}/.bashrc" ]
+	then
+		source "${HOME}/.bashrc"
+	fi
+fi
+
 if [ -f "${HOME}"/.bash_aliases ]
 then
-	SOURCE "${HOME}"/.bash_aliases
+	source "${HOME}"/.bash_aliases
 fi
 FILE

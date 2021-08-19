@@ -56,6 +56,10 @@ echo
 
 # set defaults
 
+# .bash_functions
+
+mkdir -p "${ROOT_DIRECTORY}"/home/"${user_name}"/.bash_functions
+
 # .bash_aliases
 
 cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bash_aliases
