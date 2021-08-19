@@ -65,6 +65,10 @@ do
 
 done
 
+# clear
+
+console.clear
+
 # prompt #
 
 console.inf "Initializing setup [ dextop ]."
@@ -100,10 +104,6 @@ echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'				>> "${PRE
 # source variables
 
 [ -f "${PREFIX}"/bin/globals ] && source "${PREFIX}"/bin/globals
-
-# clear
-
-console.clear
 
 # values #
 
