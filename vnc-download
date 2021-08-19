@@ -65,7 +65,9 @@ curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && source "${BIN
 # values #
 
 binaries_list=(
+	vnc-download
 	vnc-environment
+	vnc-message
 	vnc-pass
 	vnc-setup
 	vnc-start
