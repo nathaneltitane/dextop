@@ -66,9 +66,9 @@ FILE
 
 # purge configuration
 
-cat << "FILE" ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
+cat << "FILE" ->> "${HOME}"/.profile
 
 # remove configuration content after execution 
 
-sed -i '/# termux configuration #/,$d' "${ROOT_DIRECTORY}"/home/"${USER}"/.profile
+sed -i '/# termux configuration #/,$d' "${HOME}"/.profile
 FILE
