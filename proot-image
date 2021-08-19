@@ -121,7 +121,7 @@ image_archive () {
 	console.msg "Select deployment to archive: "
 	echo
 
-	console.wait 1
+	console.wait
 
 	printf '\n'
 
@@ -239,7 +239,7 @@ image_restore () {
 	console.msg "Select archive to restore: "
 	echo
 
-	console.wait 1
+	console.wait
 
 	printf '\n'
 

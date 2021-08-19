@@ -136,7 +136,7 @@ then
 
 	[ ! -f "${MAIN_DIRECTORY}"/storage/external ] && ln -s -f /storage/"${uuid}" "${MAIN_DIRECTORY}"/storage/external
 
-	console.wait 1
+	console.wait
 else
 	console.err "No storage media detected."
 	echo

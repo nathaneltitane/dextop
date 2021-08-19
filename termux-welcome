@@ -80,5 +80,5 @@ console.inf "Run 'proot-launch -u <username>' to start your session."
 console.inf "Run 'proot-launch -u <username> -a <application>' to start an application with your session."
 echo
 
-console.wait 1
+console.wait
 FILE

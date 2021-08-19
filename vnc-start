@@ -130,7 +130,7 @@ vnc_resolutions () {
 	console.msg "or choose a [c]ustom display geometry: "
 	echo
 
-	console.wait 1
+	console.wait
 
 	# list supported display resolutions
 

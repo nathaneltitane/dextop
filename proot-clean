@@ -77,9 +77,7 @@ then
 	
 	# message #
 
-	console.fwd "Setup complete [ proot ]..."
-	echo
-	console.scs "System deployment and configuration complete."
+	console.scs "Setup complete [ proot ]."
 	echo
 
 else
