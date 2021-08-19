@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.inf "Cleaning up [ proot ]."
+console.inf "Cleaning up [ termux ]."
 echo
 
 # variables #
@@ -60,7 +60,7 @@ echo
 
 if [[ "$(cat ${BINARIES_DIRECTORY}/termux-setup-complete)" = "yes" ]]
 then
-	console.fwd "Setup complete [ termux ]..."
+	console.fwd "Removing setup files [ termux ]..."
 	echo
 
 	# remove dextop initialization script

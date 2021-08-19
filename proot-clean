@@ -60,7 +60,7 @@ echo
 
 if [[ "$(cat ${BINARIES_DIRECTORY}/proot-setup-complete)" = "yes" ]]
 then
-	console.fwd "Setup complete [ proot ]..."
+	console.fwd "Removing setup files [ proot ]..."
 	echo
 
 	# remove proot initialization routine
