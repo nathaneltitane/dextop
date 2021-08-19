@@ -85,4 +85,8 @@ FILE
 
 cat << 'FILE' ->> "${HOME}"/.profile
 
+if [ -f "${HOME}"/.bash_aliases ]
+then
+	SOURCE "${HOME}"/.bash_aliases
+fi
 FILE
