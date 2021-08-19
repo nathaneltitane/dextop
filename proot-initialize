@@ -81,7 +81,13 @@ source /data/data/com.termux/files/usr/bin/globals
 
 console.run "${BINARIES_DIRECTORY}"/proot-finalize
 
-# exit proot after successful setup
+# exit proot after successful setup:
+# continue vnc components setup on Termux shell
+
+consle. clear
+
+console.inf "Logging out [ proot ]."
+echo
 
 exit
 
