@@ -72,6 +72,8 @@ echo
 
 cat << 'FILE' ->> "${ROOT_DIRECTORY}"/root/.profile
 
+# proot initialize #
+
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
@@ -89,6 +91,8 @@ console.clear
 console.inf "Logging out [ proot ]."
 echo
 
-exit
+# remove after execution 
+
+sed -i '/# proot initialize #/,$d' /root/.profile && exit
 
 FILE

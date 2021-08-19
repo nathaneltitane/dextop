@@ -114,7 +114,7 @@ FILE
 
 cat << "FILE" ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 
-# remove configuration content after execution 
+# remove after execution  
 
 sed -i '/# proot configuration #/,$d' "${ROOT_DIRECTORY}"/home/"${USER}"/.profile
 FILE

@@ -67,7 +67,7 @@ FILE
 
 cat << "FILE" ->> "${HOME}"/.profile
 
-# remove configuration content after execution 
+# remove after execution 
 
 sed -i '/# termux configuration #/,$d' "${HOME}"/.profile
 FILE
