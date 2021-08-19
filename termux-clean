@@ -89,9 +89,6 @@ then
 	echo
 	console.scs "System deployment and configuration complete."
 	echo
-	console.inf "Run 'proot-launch -u <username>' to start your session."
-	console.inf "Run 'proot-launch -u <username> -a <application>' to start an application with your session."
-	echo
 
 else
 	console.err "Some errors were encountered during setup."

@@ -108,10 +108,6 @@ console.run "${BINARIES_DIRECTORY}"/proot-silent
 
 "${BINARIES_DIRECTORY}"/proot-configuration
 
-# setup proot utilities
-
-console.run "${BINARIES_DIRECTORY}"/proot-download
-
 # setup checkpoint #
 
 "${BINARIES_DIRECTORY}"/proot-checkpoint

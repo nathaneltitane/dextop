@@ -246,7 +246,7 @@ do
 		break
 	fi
 	
-	#specify default login parameters
+	# specify default login parameters
 	
 	if [[ -z "${USERNAME}" ]] ||  [[ "${option}" == "root" ]]
 	then

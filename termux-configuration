@@ -49,41 +49,26 @@ done
 
 # prompt #
 
-console.inf "Downloading utilities [ termux ]."
+console.inf "Writing configuration [ termux ]."
 echo
 
 # variables #
 
 # set defaults
 
-# export variables
+# write configuration
 
-# source variables
+cat << 'FILE' ->> "${HOME}"/.profile
 
-curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && source "${BINARIES_DIRECTORY}"/console
+# termux configuration #
 
-# values #
+FILE
 
-binaries_list=(
-	termux-aliases
-	termux-bookmarks
-	termux-checkpoint
-	termux-clean
-	termux-configuration
-	termux-download
-	termux-environment
-	termux-links
-	termux-message
-	termux-packages
-	termux-properties
-	termux-repositories
-	termux-setup
-	termux-silent
-	termux-storage
-	termux-update
-	termux-welcome
-)
+# purge configuration
 
-# download #
+cat << "FILE" ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 
-console.download get.dxtp.app "${BINARIES_DIRECTORY}" ${binaries_list[@]}
+# remove configuration content after execution 
+
+sed -i '/# termux configuration #/,$d' "${ROOT_DIRECTORY}"/home/"${USER}"/.profile
+FILE

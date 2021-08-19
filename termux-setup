@@ -117,6 +117,10 @@ console.run "${BINARIES_DIRECTORY}"/termux-storage
 
 console.run "${BINARIES_DIRECTORY}"/termux-welcome
 
+# setup termux initial login configuration steps
+
+"${BINARIES_DIRECTORY}"/termux-configuration
+
 # setup checkpoint #
 
 "${BINARIES_DIRECTORY}"/termux-checkpoint

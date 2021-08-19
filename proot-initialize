@@ -84,7 +84,7 @@ console.run "${BINARIES_DIRECTORY}"/proot-finalize
 # exit proot after successful setup:
 # continue vnc components setup on Termux shell
 
-consle. clear
+console.clear
 
 console.inf "Logging out [ proot ]."
 echo
