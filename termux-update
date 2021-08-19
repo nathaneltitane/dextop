@@ -67,7 +67,7 @@ packages_list=(
 
 # message #
 
-console.err "Termux packages are no longer being updated in the Google Play store:"
+console.err "Termux packages are no longer being updated in the Google Play Store:"
 console.err "A recent Google Play Store policy forcing all applications to update"
 console.err "to SDK 29 has made TeStor packages incomaptible with latest Play Store"
 console.err "guidelines, halting updates since November 2020 for that release."

@@ -45,7 +45,7 @@ This provides a session with proc, static entries that should bypass most errors
 - Internet connectivity (for setup, updates and additional package downloads)
 
 ### The first thing you want to do is:
-- Install [Termux](https://f-droid.org/en/packages/com.termux/ "Termux by Fredrik Fornwall") via F-Droid - the Google Play store version is deprecated since November 2020
+- Install [Termux](https://f-droid.org/en/packages/com.termux/ "Termux by Fredrik Fornwall") via F-Droid - the Google Play Store version is deprecated since November 2020
 - Install a VNC viewer application with full screen or immersive capabillities for a better experience [Remotix](https://play.google.com/store/apps/details?id=com.nulana.android.remotix "Remotix Remote Desktop by Nulana"), [VNC Viewer ](https://play.google.com/store/apps/details?id=com.realvnc.viewer.android "VNC Viewer by RealVNC Ltd.") or [bVNC](https://play.google.com/store/apps/details?id=com.iiordanov.freebVNC "bVNC by Iordan Iordanov") are great choices.
 
 ### Setting things up:
