@@ -61,7 +61,11 @@ echo
 console.fwd "Setting up [ hostname ]..."
 echo
 
-echo "${hostname}" > "${ROOT_DIRECTORY}"/etc/hostname
+cat << FILE -> "${ROOT_DIRECTORY}"/etc/hostname 
+"${hostname}"
+FILE
+
+console.wait
 
 # set hosts
 
@@ -88,6 +92,8 @@ ff02::3		ip6-allhosts
 
 FILE
 
+console.wait
+
 # set nameserver
 
 console.fwd "Setting up [ nameserver ]..."
@@ -97,3 +103,5 @@ cat << 'FILE' -> "${ROOT_DIRECTORY}"/etc/resolv.conf
 nameserver 1.1.1.1
 nameserver 1.0.0.1
 FILE
+
+console.wait
