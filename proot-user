@@ -99,7 +99,7 @@ home_number=""
 
 # user #
 
-console.fwd "Creating user account..."
+console.fwd "Creating account..."
 echo
 
 # generate user entry
@@ -134,7 +134,7 @@ gid="$(id -g ${user_name})"
 
 # home #
 
-console.fwd "Setting up user home directory..."
+console.fwd "Setting up home directory..."
 echo
 
 # populate home directory with standard folders
@@ -163,7 +163,7 @@ console.directory "${ROOT_DIRECTORY}"/home/"${user_name}"/ ${directories_list[@]
 
 # runtime #
 
-console.fwd "Setting up user runtime directory..."
+console.fwd "Setting up runtime directory..."
 echo
 
 # create directories and set permissions
