@@ -71,7 +71,6 @@ console.upgrade
 # unminimize system image
 
 console.silence "yes | unminimize" &
-echo
 
 console.progress "Expanding..."
 echo
