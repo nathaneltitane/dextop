@@ -73,8 +73,8 @@ console.err "to SDK 29 has made TeStor packages incomaptible with latest Play St
 console.err "guidelines, halting updates since November 2020 for that release."
 echo
 
-console.inf "This utility fetches the Termux/API APKs from the F-Droid repository"
-console.inf "and installs them for you:"
+console.wrn "This utility fetches the Termux/API APKs from the F-Droid repository"
+console.wrn "and installs them for you:"
 echo
 
 console.wrn "This process only functions if you've previously backed up/uninstalled"
