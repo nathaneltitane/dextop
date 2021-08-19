@@ -62,7 +62,7 @@ PORT="590${DISPLAY:1}"
 
 # /etc/os-release: source distribution codename variables (e.g. $NAME)
 
-if [ -f /etc/os-release ] && source /etc/os-release
+[ -f /etc/os-release ] && source /etc/os-release
 
 # functions #
 
