@@ -57,7 +57,7 @@ console.inf "Writing login greeter [ termux ]."
 
 # write welcome message - replaces motd
 
-cat << 'FILE' -> "${HOME}"/.bashrc
+cat << 'FILE' ->> "${HOME}"/.bashrc
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
