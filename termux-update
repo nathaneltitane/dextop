@@ -81,8 +81,7 @@ console.wrn "This process only functions if you've previously backed up/uninstal
 console.wrn "the Google Play Store version of those APKs."
 echo
 
-console.inf "If you have not already done so, please visit the following wiki pages"
-console.inf "on how to proceed:"
+console.inf "If you have not already done so, please visit the following wiki pages:"
 echo
 
 console.inf "Backing up Termux : https://wiki.termux.com/wiki/Backing_up_Termux"
