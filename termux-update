@@ -84,7 +84,7 @@ echo
 console.inf "If you have not already done so, please visit the following wiki pages:"
 echo
 
-console.inf "Backing up Termux : https://wiki.termux.com/wiki/Backing_up_Termux"
+console.inf "Backing up Termux: https://wiki.termux.com/wiki/Backing_up_Termux"
 console.inf "Installing Termux: https://wiki.termux.com/wiki/installation"
 echo
 
