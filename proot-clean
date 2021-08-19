@@ -60,18 +60,10 @@ echo
 
 if [[ "$(cat ${BINARIES_DIRECTORY}/proot-setup-complete)" = "yes" ]]
 then
-	console.fwd "Removing setup files [ proot ]..."
+	console.fwd "Removing setup [ proot ]..."
 	echo
 
-	# remove proot initialization routine
-
-	sed -i '$ d' /root/.profile
-
-	# remove setup information
-
-	sed -i '/# proot variables #/,$d' /data/data/com.termux/files/usr/bin/globals
-
-	# remove scripts
+	# remove setup files
 
 	setup_files_list=(
 		"${BINARIES_DIRECTORY}"/proot-setup

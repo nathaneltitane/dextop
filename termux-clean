@@ -63,17 +63,10 @@ then
 	console.fwd "Removing setup files [ termux ]..."
 	echo
 
-	# remove dextop initialization script
-
-	rm -rf "${HOME}"/dextop
-
-	# remove setup information
-
-	sed -i '/# termux variables #/,$d' /data/data/com.termux/files/usr/bin/globals
-
-	# remove scripts
+	# remove setup files
 
 	setup_files_list=(
+		"${HOME}"/dextop
 		"${BINARIES_DIRECTORY}"/termux-setup
 		"${BINARIES_DIRECTORY}"/termux-setup-complete
 	)
