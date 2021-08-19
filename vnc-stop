@@ -47,6 +47,10 @@ do
 	shift
 done
 
+# clear
+
+console.clear
+	
 # prompt #
 
 console.inf "Stopping display [ vnc ]."
@@ -60,10 +64,7 @@ echo
 
 if [ ! -z "$(pgrep -f vnc)" ]
 then
-	# clear
-	
-	console.clear
-	
+
 	# kill active and stale vnc output processes
 
 	console.silence "vncserver -kill :*" &
