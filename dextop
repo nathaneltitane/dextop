@@ -98,9 +98,6 @@ echo 'export ISO_DIRECTORY="${MAIN_DIRECTORY}"/iso'								>> "${PREFIX}"/bin/gl
 echo 'export MOUNT_DIRECTORY="${MAIN_DIRECTORY}"/mnt'							>> "${PREFIX}"/bin/globals
 echo 'export PROC_DIRECTORY="${MAIN_DIRECTORY}"/proc'							>> "${PREFIX}"/bin/globals
 
-echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'				>> "${PREFIX}"/bin/globals
-
-
 # source variables
 
 [ -f "${PREFIX}"/bin/globals ] && source "${PREFIX}"/bin/globals

@@ -135,6 +135,7 @@ echo "export DISTRIBUTION_VERSION=${distribution_version}"						>> "${PREFIX}"/b
 echo "export DISTRIBUTION_RELEASE=${distribution_release}"						>> "${PREFIX}"/bin/globals
 
 echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'		>> "${PREFIX}"/bin/globals
+echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'				>> "${PREFIX}"/bin/globals
 
 echo '# installation #'															>> "${PREFIX}"/bin/globals
 
