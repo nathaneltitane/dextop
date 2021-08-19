@@ -58,6 +58,7 @@ console.inf "Writing login greeter [ termux ]."
 # write welcome message - replaces motd
 
 cat << 'FILE' ->> "${HOME}"/.bashrc
+
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
@@ -66,11 +67,13 @@ source /data/data/com.termux/files/usr/bin/globals
 console.msg "Updating system."
 echo
 
-bash "${BINARIES_DIRECTORY}"/termux-download
+console.update
+
+console.upgrade
 
 console.clear 2
 
-console.fwd "Welcome to Termux Dextop!"
+console.fwd "Welcome to [ Termux ] Dextop!"
 echo
 
 console.inf "Run 'proot-launch -u <username>' to start your session."
@@ -78,5 +81,4 @@ console.inf "Run 'proot-launch -u <username> -a <application>' to start an appli
 echo
 
 console.wait 1
-
 FILE

@@ -58,6 +58,7 @@ console.inf "Writing login greeter [ proot ]."
 # write welcome message: replaces motd
 
 cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
+
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
@@ -72,7 +73,7 @@ console.upgrade
 
 console.clear 2
 
-console.fwd "Welcome to Ubuntu Dextop!"
+console.fwd "Welcome to [ Ubuntu ] Dextop!"
 echo
 
 if [ -f "${HOME}"/.vnc/selection ]
@@ -87,5 +88,4 @@ fi
 echo
 
 console.wait 1
-
 FILE
