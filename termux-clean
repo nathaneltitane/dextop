@@ -65,7 +65,7 @@ then
 
 	# remove dextop initialization script
 
-	"${HOME}"/dextop
+	rm -rf "${HOME}"/dextop
 
 	# remove setup information
 
