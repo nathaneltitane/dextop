@@ -411,7 +411,6 @@ else
 		if [[ ! -z "$(ls ${IMAGE_DIRECTORY})" ]]
 		then
 			console.ask "Archive deployments?"
-			echo
 
 			read reply
 			echo
@@ -438,7 +437,6 @@ else
 					if [[ ! -z "$(ls ${BACKUP_DIRECTORY})" ]]
 					then
 						console.ask "Restore deployments?"
-						echo
 
 						read reply
 						echo
@@ -458,7 +456,6 @@ else
 								echo
 
 								console.ask "Archive matching deployment?"
-								echo
 
 								read reply
 								echo
