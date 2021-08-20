@@ -126,7 +126,7 @@ then
 		
 		xdg-open "${archive}"
 		
-		Console.fwd "Updating..."
+		console.fwd "Updating..."
 		echo
 				
 		console.wait
