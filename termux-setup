@@ -67,7 +67,7 @@ echo '# termux variables #'														>> "${PREFIX}"/bin/globals
 
 # setup termux utilities
 
-console.run "${BINARIES_DIRECTORY}"/termux-download
+console.run "${BINARIES_DIRECTORY}"/termux-utilities
 
 # welcome message
 

@@ -149,7 +149,7 @@ echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/global
 
 # setup proot utilities
 
-console.run "${BINARIES_DIRECTORY}"/proot-download
+console.run "${BINARIES_DIRECTORY}"/proot-utilities
 
 # welcome message
 

@@ -65,33 +65,13 @@ curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && source "${BIN
 # values #
 
 binaries_list=(
-	proot-aliases
-	proot-architecture
-	proot-bookmarks
-	proot-checkpoint
-	proot-clean
-	proot-configuration
-	proot-download
-	proot-environment
-	proot-expand
-	proot-finalize
-	proot-groups
-	proot-image
-	proot-information
-	proot-initialize
-	proot-launch
-	proot-links
-	proot-locales
-	proot-message
-	proot-network
-	proot-packages
-	proot-proc
-	proot-setup
-	proot-silent
-	proot-superuser
-	proot-timezones
-	proot-user
-	proot-welcome
+	vnc-utilities
+	vnc-environment
+	vnc-message
+	vnc-pass
+	vnc-setup
+	vnc-start
+	vnc-stop
 )
 
 # download #

@@ -105,11 +105,11 @@ echo 'export PROC_DIRECTORY="${MAIN_DIRECTORY}"/proc'							>> "${PREFIX}"/bin/g
 # values #
 
 utilities_list=(
-	termux-download
+	termux-utilities
 	termux-setup
-	proot-download
+	proot-utilities
 	proot-setup
-	vnc-download
+	vnc-utilities
 	vnc-setup
 )
 

@@ -67,7 +67,7 @@ echo '# vnc variables #'														>> "${PREFIX}"/bin/globals
 
 # setup vncutilities
 
-console.run "${BINARIES_DIRECTORY}"/vnc-download
+console.run "${BINARIES_DIRECTORY}"/vnc-utilities
 
 # welcome message
 
