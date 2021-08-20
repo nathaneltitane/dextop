@@ -74,7 +74,7 @@ echo
 
 console.wait
 
-console.wrn "This utility downloads the Termux/API APKs from the F-Droid repository."
+console.wrn "This utility downloads the Termux/API APKs from the F-Droid repository"
 console.wrn "and installs them."
 echo
 
@@ -96,12 +96,11 @@ console.wait
 console.usr "Select 'Package Installer' when prompted to proceed."
 echo
 
-console.wait
+console.wait 3
 
 # request update permission
 
 console.ask "Update packages?"
-echo
 
 read reply
 echo
@@ -110,7 +109,7 @@ echo
 
 if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 then
-	console.fwd "Dowloading updates..."
+	console.inf "Dowloading updates."
 	echo
 
 	for package in ${packages_list[@]}
@@ -126,17 +125,22 @@ then
 		# update
 		
 		xdg-open "${archive}"
+		
+		Console.fwd "Updating..."
+		echo
+				
+		console.wait
 	done
 else
 	# continue without update
 	
 	console.err "Proceeding without update."
-	console.wrn "Setup process may encounter errors:"
+	console.wrn "Setup process may encounter errors."
 	echo
 	
 	console.inf "Follow wiki pages stated above to correct issues."
 	console.inf "Restart setup process on a fresh Termux installation to proceed."
 	echo
 	
-	console.wait 2
+	console.wait 3
 fi
