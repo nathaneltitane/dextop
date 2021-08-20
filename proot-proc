@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.script "Setting up hardware entries  [ ${script%-*} ]"
+console.script "Setting up process entries [ ${script%-*} ]"
 echo
 
 # variables #
@@ -62,11 +62,19 @@ echo
 
 # /proc/loadavg
 
+console.fwd "Setting up [ /proc/loadavg ]..."
+echo
+
 cat << 'FILE' -> "${PROC_DIRECTORY}"/loadavg
 0.54 0.41 0.30 1/931 370386
 FILE
 
+console.wait
+
 # /proc/stat
+
+console.fwd "Setting up [ /proc/stat ]..."
+echo
 
 cat << 'FILE' -> "${PROC_DIRECTORY}"/stat
 cpu  1050008 127632 898432 43828767 37203 63 99244 0 0 0
@@ -85,19 +93,34 @@ procs_blocked 0
 softirq 25293348 2883 7658936 40779 539155 497187 2864 1908702 7229194 279723 7133925
 FILE
 
+console.wait
+
 # /proc/uptime
+
+console.fwd "Setting up [ /proc/uptime ]..."
+echo
 
 cat << 'FILE' -> "${PROC_DIRECTORY}"/uptime
 284684.56 513853.46
 FILE
 
+console.wait
+
 # /proc/version
+
+console.fwd "Setting up [ /proc/version ]..."
+echo
 
 cat << 'FILE' -> "${PROC_DIRECTORY}"/version
 Linux version 5.4.0-proc (termux@androidos) (gcc version 4.9.x (Fake /proc/version by proot-launch@Dextop)
 FILE
 
+console.wait
+
 # /proc/vmstat
+
+console.fwd "Setting up [ /proc/vmstat ]..."
+echo
 
 cat << 'FILE' -> "${PROC_DIRECTORY}"/vmstat
 nr_free_pages 146031
@@ -239,3 +262,5 @@ balloon_migrate 0
 swap_ra 9661
 swap_ra_hit 7872
 FILE
+
+console.wait

@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.script "Setting up terminal properties and preferences [ ${script%-*} ]"
+console.script "Setting up properties [ ${script%-*} ]"
 echo
 
 # variables #
@@ -114,9 +114,13 @@ extra-keys = [																	\
 																				]
 FILE
 
+console.wait
+
 # set properties
 
 console.fwd "Applying changes..."
 echo
 
 termux-reload-settings
+
+console.wait

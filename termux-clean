@@ -60,7 +60,14 @@ echo
 
 if [[ "$(cat ${BINARIES_DIRECTORY}/termux-setup-complete)" = "yes" ]]
 then
-	console.fwd "Removing setup files [ termux ]..."
+	# message #
+
+	console.scs "Setup complete [ ${script%-*} ]"
+	echo
+	
+	console.wait
+	
+	console.fwd "Removing setup files..."
 	echo
 
 	# remove setup files
@@ -76,16 +83,11 @@ then
 		rm "${file}"
 	done
 
-	# message #
-	
-	console.scs "Setup complete [ ${script%-*} ]"
-	echo
-
 else
 	console.err "Some errors were encountered during setup."
 	echo
 	console.inf "Consult setup logs at '"${PREFIX}"/var/log/' for details."
 	echo
+	
+	console.wait 3
 fi
-
-console.wait 5

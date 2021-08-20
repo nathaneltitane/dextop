@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.script "Setting up storage preferences [ ${script%-*} ]"
+console.script "Setting up storage [ ${script%-*} ]"
 echo
 
 # variables #
@@ -62,29 +62,30 @@ if [ -d "${HOME}"/storage ]
 then
 	# exists - proceed with setup
 
-	console.scs "Storage directory detected under"
-	console.scs "${HOME}"
+	console.scs "Storage directory detected [ "${HOME}" ]."
 	echo
+	
+	console.wait
 
 	console.fwd "Continuing..."
 	echo
 else
 	# does not exist - enable storage permissions: requires user touch input
 
-	console.wrn "Termux requires user permission to access storage on this device..."
-	echo
-
-	console.wrn "Both internal and external storage are made available:"
+	console.wrn "Termux requires user permission to access storage on this device."
+	console.wrn "Both internal and external storage locations are made available:"
 	echo
 
 	console.inf "Allowing access greatly benefits the desktop experience"
 	console.inf "and will make the device's storage visble and accessible"
-	console.inf "through your desktop session and file manager."
+	console.inf "through your proot session and file manager."
 	echo
 
 	console.usr "Select 'Allow' or 'Deny' when prompted"
 	console.usr "to enable or disable storage access permission."
 	echo
+	
+	console.wait 3
 
 	console.countdown "Permissions dialog in:" 3
 	echo
@@ -131,7 +132,7 @@ uuid="${external_storage/\/storage\//}"
 
 if [ ! -z "${external_storage}" ]
 then
-	console.scs "Storage media detected [ UUID: ${uuid} ]."
+	console.scs "Storage media detected [ ${uuid} ]."
 	echo
 
 	[ ! -f "${MAIN_DIRECTORY}"/storage/external ] && ln -s -f /storage/"${uuid}" "${MAIN_DIRECTORY}"/storage/external
@@ -140,6 +141,8 @@ then
 else
 	console.err "No storage media detected."
 	echo
+
+	console.wait
 
 	console.fwd "Continuing..."
 	echo

@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.script "Gathering setup information [ proot ] ."
+console.script "Gathering setup information [ ${script%-*} ] ."
 echo
 
 # variables #
@@ -57,13 +57,14 @@ echo
 # set defaults
 
 # get user information
-
-console.fwd "Information is required to set up your environment..."
+console.inf "This information will be used to set up the user account."
 echo
 
-console.wrn "Some information will be used to set up the user account:"
+console.wrn "Information is required to set up your environment:"
 console.wrn "the fields cannot be empty."
 echo
+
+console.wait
 
 # values #
 

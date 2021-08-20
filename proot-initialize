@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.script "Initializing setup  [ ${script%-*} ]"
+console.script "Initializing setup [ ${script%-*} ]"
 echo
 
 # variables #
@@ -88,7 +88,7 @@ console.run "${BINARIES_DIRECTORY}"/proot-finalize
 
 console.clear
 
-console.inf "Logging out  [ ${script%-*} ]"
+console.inf "Logging out [ ${script%-*} ]"
 echo
 
 # remove after execution 

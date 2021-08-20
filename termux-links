@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.script "Linking binaries  [ ${script%-*} ]"
+console.script "Linking binaries [ ${script%-*} ]"
 echo
 
 # variables #

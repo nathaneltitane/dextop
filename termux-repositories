@@ -49,7 +49,7 @@ done
 
 # prompt
 
-console.fwd "Setting up repositories [ termux ]..."
+console.script "Setting up repositories [ ${script%-*} ]"
 echo
 
 # variables #

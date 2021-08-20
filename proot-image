@@ -48,9 +48,8 @@ do
 done
 # prompt #
 
-console.script "Initializing deployment setup [ proot ] ."
+console.script "Initializing deployment setup [ ${script%-*} ]"
 echo
-
 
 # variables #
 
@@ -70,6 +69,8 @@ image_directories () {
 
 	console.fwd "Creating required deployment directories..."
 	echo
+	
+	console.wait
 
 	directories_list=(
 		"${BACKUP_DIRECTORY}"
@@ -118,7 +119,7 @@ image_archive () {
 	console.inf "Number of deployments found: ${#deployments_list[@]}"
 	echo
 
-	console.msg "Select deployment to archive: "
+	console.ipt "Select deployment to archive:"
 	echo
 
 	console.wait
@@ -172,8 +173,8 @@ image_archive () {
 			console.wrn "Select a number ranging from [ 1 - ${number} ]"
 			echo
 
-			console.ipt "Selection: "
-
+			console.ipt "Selection:"
+			
 			read selection
 			echo
 		else
@@ -187,8 +188,10 @@ image_archive () {
 
 			ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${deployment}"
 
-			console.inf "Archiving. [ ${deployment} ]"
+			console.fwd "Archiving [ ${deployment} ]... "
 			echo
+			
+			console.wait
 
 			break
 		fi
@@ -236,7 +239,7 @@ image_restore () {
 	console.inf "Number of archives found: ${#archives_list[@]}"
 	echo
 
-	console.msg "Select archive to restore: "
+	console.ipt "Select archive to restore:"
 	echo
 
 	console.wait
@@ -292,7 +295,8 @@ image_restore () {
 			console.wrn "Select a number ranging from [ 1 - ${number} ]"
 			echo
 
-			console.ipt "Selection: "
+			console.ipt "Selection:"
+			
 			read selection
 			echo
 		else
@@ -309,8 +313,10 @@ image_restore () {
 
 			ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${deployment}"
 
-			console.inf "Restoring. [ ${deployment} // ${archive_stamp} ]"
+			console.fwd "Restoring [ ${deployment} // ${archive_stamp} ]... "
 			echo
+			
+			console.wait
 
 			break
 		fi
@@ -318,7 +324,7 @@ image_restore () {
 
 	exit
 
-	console.inf "Extracting selected archive."
+	console.inf "Extracting deployment archive [ $[archive_selection ]."
 	echo
 
 	# restore routine
@@ -341,7 +347,7 @@ image_wipe () {
 image_rename () {
 	# rename same distribution/release directory contents
 
-	console.inf "Moving deployments."
+	console.inf "Moving existing deployments."
 
 	for directory in $(find "${IMAGE_DIRECTORY}" -maxdepth 2 -type d ! -wholename "${IMAGE_DIRECTORY}")
 	do
@@ -394,15 +400,17 @@ else
 		console.inf "Image directory clean:"
 		echo
 
-		console.wrn "Image directory does not contain any previous deployments."
+		console.wrn "Image directory does not contain any existing deployments."
 		echo
+		
+		console.wait
 
 		console.fwd "Proceeding..."
 		echo
 	else
 		if [[ ! -z "$(ls ${IMAGE_DIRECTORY})" ]]
 		then
-			console.usr "Archive deployments?"
+			console.ask "Archive deployments?"
 			echo
 
 			read reply
@@ -421,13 +429,15 @@ else
 
 					console.wrn "Backup directory does not contain any archives."
 					echo
-
+					
+					console.wait
+					
 					console.fwd "Proceeding..."
 					echo
 				else
 					if [[ ! -z "$(ls ${BACKUP_DIRECTORY})" ]]
 					then
-						console.usr "Restore deployments?"
+						console.ask "Restore deployments?"
 						echo
 
 						read reply
@@ -447,7 +457,7 @@ else
 								console.err "Deployment matches setup settings [ ${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE} ]"
 								echo
 
-								console.usr "Archive matching deployment?"
+								console.ask "Archive matching deployment?"
 								echo
 
 								read reply
@@ -462,7 +472,7 @@ else
 									console.err "Cannot deploy over existing image with same configuration."
 									echo
 
-									console.usr "Wipe image directory?"
+									console.ask "Wipe image directory?"
 									echo
 
 									read reply
@@ -477,7 +487,7 @@ else
 										console.err "Cannot deploy over existing image with same configuration."
 										echo
 
-										console.usr "Rename deployment directory?"
+										console.ask "Rename deployment directory?"
 										echo
 
 										read reply
@@ -489,6 +499,8 @@ else
 										else
 											console.err "Unable to deploy system image with current set of options."
 											echo
+											
+											console.wait
 
 											console.fwd "Aborting..."
 											echo
@@ -506,7 +518,8 @@ else
 	fi
 fi
 
-
 console.download "${iso_url}" "${ISO_DIRECTORY}" "${iso_archive}"
+
+console.wait
 
 image_unpack "${ISO_DIRECTORY}/${iso_archive}"

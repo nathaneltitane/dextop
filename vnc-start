@@ -67,6 +67,11 @@ PORT="590${DISPLAY:1}"
 # functions #
 
 vnc_start () {
+	console.fwd "Starting display server [ ${formt} // ${GEOMETRY} // ${PORT} ]..."
+	echo
+	
+	# 'vncserver' uses $DISPLAY instead of $PORT
+	
 	console.silence "
 				vncserver								\
 					-IdleTimeout 0						\
@@ -77,18 +82,7 @@ vnc_start () {
 					-name $NAME							\
 					-geometry ${GEOMETRY} ${DISPLAY}"
 
-					# 'vncserver' uses $DISPLAY instead of $PORT
-
-	console.fwd "Starting display server..."
-	echo
-
-	console.inf "Format" "${format}"
-	console.inf "Resolution" "${GEOMETRY}"
-	console.inf "Port" "${PORT}"
-	echo
-
-	# make selection available for automatic start
-
+	# make selection available for automatic start:
 	# verify user id - do not write selection when 'root' user is logged in
 
 	if [[ $(id -u) -ne 0 ]]
@@ -126,8 +120,8 @@ vnc_start () {
 }
 
 vnc_resolutions () {
-	console.msg "Enter a selection to start the display server with"
-	console.msg "or choose a [c]ustom display geometry: "
+	console.msg "Select geometry to start the display server"
+	console.msg "or input [c]ustom properties:"
 	echo
 
 	console.wait
@@ -271,13 +265,16 @@ vnc_resolutions () {
 	printf '\n'
 }
 
-
-# only show selection list when automatic start file and value are present
+# manage selections display
 
 if [ -f /home/"${USER}"/.vnc/selection ]
 then
+	# hide if selection file is present
+
 	vnc_resolutions > /dev/null
 else
+	# show if selection file is not present
+	
 	vnc_resolutions
 fi
 
@@ -310,11 +307,12 @@ do
 	then
 		echo
 		console.err "Invalid selection:"
-		console.wrn "Select a number ranging from [ 1 - ${number} ]"
-		console.wrn "or input a [c]ustom display geometry."
+		console.wrn "Select geometry ranging from [ 1 - ${number} ]"
+		console.wrn "or input [c]ustom properties."
 		echo
 
-		console.ipt "Selection: "
+		console.ipt "Selection:"
+		
 		read selection
 		echo
 	else
@@ -327,11 +325,12 @@ do
 	then
 		echo
 		console.err "Invalid selection:"
-		console.wrn "Input a [c]ustom display geometry"
-		console.wrn "or select a number ranging from [ 1 - ${number} ]."
+		console.wrn "Input [c]ustom properties"
+		console.wrn "or select geometry ranging from [ 1 - ${number} ]."
 		echo
 
-		console.ipt "Selection: "
+		console.ipt "Selection:"
+		
 		read selection
 		echo
 	else
@@ -364,20 +363,23 @@ fi
 
 if [[ "${selection}" = "custom" ]]
 then
-	format="Custom"
-
-	console.inf "Setting custom resolution and port:"
+	console.inf "Setting custom properties."
 	echo
+	
+	console.wait
 
-	console.ipt "Enter geometry WIDTH in pixels: "
+	console.ipt "Geometry WIDTH in pixels:"
+	
 	read width
 	echo
 
-	console.ipt "Enter HEIGHT in pixels: "
+	console.ipt "Geometry HEIGHT in pixels:"
+	
 	read height
 	echo
 
-	console.ipt "Enter port NUMBER (e.g. 1): "
+	console.ipt "Port NUMBER (e.g. 1):"
+	
 	read custom_port
 	echo
 

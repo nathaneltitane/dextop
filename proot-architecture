@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.script "Checking system architecture  [ ${script%-*} ]"
+console.script "Checking architecture [ ${script%-*} ]"
 echo
 
 # variables #
@@ -88,6 +88,8 @@ do
 
 		console.scs "Valid architecture detected [ ${img_architecture} ]."
 		echo
+		
+		console.wait
 
 		break
 	fi
@@ -97,12 +99,18 @@ done
 
 if [ -z "$img_architecture" ]
 then
-	console.wrn "Unknown architecture:"
-	console.wrn "Aborting."
+	console.wrn "Unknown architecture."
 	echo
+	
+	console.fwd "Aborting..."
+	echo
+
+	console.wait
 
 	console.stp "Exiting."
 	echo
+	
+	console.wait
 
 	exit 1
 fi

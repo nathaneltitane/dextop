@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.fwd "Initializing setup [ termux ]..."
+console.fwd "Initializing setup [ ${script%-*} ]..."
 echo
 
 # variables #

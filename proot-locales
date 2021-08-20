@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.script "Configuring locales  [ ${script%-*} ]"
+console.script "Configuring locales [ ${script%-*} ]"
 echo
 
 # variables #

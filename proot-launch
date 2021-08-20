@@ -92,7 +92,7 @@ done
 
 # prompt #
 
-console.script "Logging in  [ ${script%-*} ]"
+console.script "Logging in [ ${script%-*} ]"
 echo
 
 # variables #
@@ -165,6 +165,8 @@ last_entry="$(tail -n 1 "${ROOT_DIRECTORY}"/etc/passwd)"
 console.fwd "Authenticating..."
 echo
 
+console.wait
+
 while read -r entry
 do
 	IFS=':'
@@ -195,8 +197,10 @@ do
 	
 	if [[ -z "${USERNAME}" ]]
 	then
-		console.wrn "No user specified - Defaulting."
+		console.wrn "No user name - Defaulting  [ ${USERNAME} ]."
 		echo
+		
+		console.wait
 
 		# break out of loop - empty "${USERNAME}" - default to 'root'
 
@@ -205,9 +209,11 @@ do
 	
 	if [[ "${option}" == "root" ]]
 	then
-		console.wrn "Logging in as [ '${USERNAME}' ]"
+		console.wrn "Logging in [ '${USERNAME}' ]"
 		echo
-
+		
+		console.wait
+		
 		# break out of loop - login as 'root'
 
 		break
@@ -217,9 +223,11 @@ do
 
 	if [[ "${USERNAME}" == "${USER}" ]]
 	then
-		console.scs "Valid user name [ '${USERNAME}' ]"
+		console.scs "Valid user name [ '${USERNAME}' ]."
 		echo
-
+		
+		console.wait
+		
 		# break out of loop: matching "${USERNAME}"
 
 		break
@@ -230,17 +238,16 @@ do
 
 	if [[ "${entry}" == "${last_entry}" ]]
 	then
-		console.err "Invalid user name [ ${USERNAME} ]"
+		console.err "Invalid user name - Defaulting [ ${USERNAME} ]."
 		echo
 		
 		unset "${USERNAME}"
-		
-		console.wrn "Defaulting."
-		echo
-		
+
 		USERNAME="root"
 		USER="${USERNAME}"
 
+		console.wait
+		
 		# break out of loop: invalid "${USERNAME}"
 
 		break
@@ -264,13 +271,18 @@ done < "${ROOT_DIRECTORY}"/etc/passwd
 
 if [ ! -z "${APPLICATION}" ]
 then
+	 console.scs "Valid application name [ ${APPLICATION} ]."
+	 echo
+	 
 	if [[ ! -f "${ROOT_DIRECTORY}"/usr/bin/"${APPLICATION}" ]]
 	then
-		 console.err "Invalid application name [ ${APPLICATION} ]"
+		 console.err "Invalid application name [ ${APPLICATION} ]."
 		 echo
 		 
 		 unset "${APPLICATION}"
 	fi
+
+	 console.wait
 
 	console.fwd "Starting application [ ${SESSION_NAME} // ${USER} // ${APPLICATION} ]..."
 	echo
@@ -283,6 +295,7 @@ fi
 # setup proot command arguments
 
 command="proot"
+
 command+=" --kill-on-exit"
 command+=" --link2symlink"
 command+=" --rootfs=${ROOT_DIRECTORY}"

@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.script "Writing configuration  [ ${script%-*} ]"
+console.script "Writing configuration [ ${script%-*} ]"
 echo
 
 # variables #

@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.script "Writing command aliases  [ ${script%-*} ]"
+console.script "Writing command aliases [ ${script%-*} ]"
 echo
 
 # variables #

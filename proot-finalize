@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.script "Finalizing setup  [ ${script%-*} ]"
+console.script "Finalizing setup [ ${script%-*} ]"
 echo
 
 # variables #

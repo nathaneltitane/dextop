@@ -95,7 +95,7 @@ done
 
 # prompt #
 
-console.script "Starting setup  [ ${script%-*} ]"
+console.script "Starting setup [ ${script%-*} ]"
 echo
 
 # variables #
@@ -174,10 +174,6 @@ console.run "${BINARIES_DIRECTORY}"/proot-image
 # setup proot group IDs
 
 console.run "${BINARIES_DIRECTORY}"/proot-groups
-
-# setup proot libraries preload for enhanced performance
-
-console.run "${BINARIES_DIRECTORY}"/proot-libraries
 
 # setup proot network requirements  - [ device < // > [ termux < // > [ proot ] ] ]
 

@@ -74,6 +74,8 @@ cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.vnc/xstartup
 unset DBUS_SESSION_BUS_ADDRESS
 unset SESSION_MANAGER
 
+LD_PRELOAD=/lib/aarch64-linux-gnu/libgcc_s.so.1
+
 SESSION_MANAGER="xfce4-session" # FIX ME #
 
 if [ ! -z "${APPLICATION}" ]

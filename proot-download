@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.script "Downloading utilities  [ ${script%-*} ]"
+console.script "Downloading setup utilities [ ${script%-*} ]"
 echo
 
 # variables #
@@ -80,7 +80,6 @@ binaries_list=(
 	proot-information
 	proot-initialize
 	proot-launch
-	proot-libraries
 	proot-links
 	proot-locales
 	proot-message

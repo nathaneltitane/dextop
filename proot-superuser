@@ -84,7 +84,7 @@ done
 
 # prompt #
 
-console.script "Generating superuser privileges  [ ${script%-*} ]"
+console.script "Generating superuser account [ ${script%-*} ]"
 echo
 
 # variables #
