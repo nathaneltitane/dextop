@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.inf "Setting up packages [ proot ]."
+console.script "Setting up packages  [ ${script%-*} ]"
 echo
 
 # variables #

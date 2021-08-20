@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.inf "Setting up hardware entries [ proot ]."
+console.script "Setting up hardware entries  [ ${script%-*} ]"
 echo
 
 # variables #

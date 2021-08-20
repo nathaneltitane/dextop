@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.inf "Starting setup [ vnc ]."
+console.script "Starting setup [ ${script%-*} ]"
 
 # variables #
 

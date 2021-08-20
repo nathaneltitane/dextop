@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.fwd "Setting up password [ vnc ]..."
+console.script "Setting up password [ ${script%-*} ]"
 echo
 
 # variables #

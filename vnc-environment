@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.inf "Setting up environment [ vnc ]."
+console.script "Setting up environment [ ${script%-*} ]"
 echo
 
 # variables #

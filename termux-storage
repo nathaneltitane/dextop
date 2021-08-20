@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.inf "Setting up storage preferences [ termux ]."
+console.script "Setting up storage preferences [ ${script%-*} ]"
 echo
 
 # variables #

@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.inf "Linking binaries [ proot ]."
+console.script "Linking binaries  [ ${script%-*} ]"
 echo
 
 # variables #

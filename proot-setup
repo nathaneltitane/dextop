@@ -95,7 +95,7 @@ done
 
 # prompt #
 
-console.inf "Starting setup [ proot ]."
+console.script "Starting setup  [ ${script%-*} ]"
 echo
 
 # variables #

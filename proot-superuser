@@ -84,7 +84,7 @@ done
 
 # prompt #
 
-console.inf "Generating superuser privileges [ proot ]."
+console.script "Generating superuser privileges  [ ${script%-*} ]"
 echo
 
 # variables #

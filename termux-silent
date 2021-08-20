@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.inf "Silencing login prompt [ termux ]."
+console.script "Silencing login prompt [ ${script%-*} ]"
 echo
 
 # variables #

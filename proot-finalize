@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.inf "Finalizing setup [ proot ]."
+console.script "Finalizing setup  [ ${script%-*} ]"
 echo
 
 # variables #

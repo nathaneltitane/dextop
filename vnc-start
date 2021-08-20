@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.inf "Starting display [ vnc ]."
+console.script "Starting display [ ${script%-*} ]"
 echo
 
 # variables #

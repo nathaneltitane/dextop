@@ -84,7 +84,7 @@ done
 
 # prompt #
 
-console.inf "Generating user account [ proot ]."
+console.script "Generating user account  [ ${script%-*} ]"
 echo
 
 # variables #

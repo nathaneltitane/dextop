@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.inf "Checking system architecture [ proot ]."
+console.script "Checking system architecture  [ ${script%-*} ]"
 echo
 
 # variables #

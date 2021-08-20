@@ -48,7 +48,7 @@ do
 done
 # prompt #
 
-console.inf "Initializing deployment setup [ proot ] ."
+console.script "Initializing deployment setup [ proot ] ."
 echo
 
 

@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.inf "Configuring locales [ proot ]."
+console.script "Configuring locales  [ ${script%-*} ]"
 echo
 
 # variables #

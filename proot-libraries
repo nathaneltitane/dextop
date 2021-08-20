@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.inf "Setting library preload [ proot ]."
+console.script "Setting library preload  [ ${script%-*} ]"
 echo
 
 # variables #

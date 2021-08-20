@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.inf "Writing login greeter [ proot ]."
+console.script "Writing login greeter  [ ${script%-*} ]"
 
 # variables #
 

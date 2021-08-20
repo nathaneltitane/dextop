@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.inf "Writing login greeter [ termux ]."
+console.script "Writing login greeter [ ${script%-*} ]"
 
 # variables #
 

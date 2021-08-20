@@ -49,8 +49,7 @@ done
 
 # prompt #
 
-
-console.inf "Updating packages [ termux ]."
+console.script "Updating packages [ ${script%-*} ]"
 echo
 
 # variables #

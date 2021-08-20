@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.inf "Verifying setup checkpoint [ termux ]."
+console.script "Verifying setup checkpoint [ ${script%-*} ]"
 echo
 
 # variables #

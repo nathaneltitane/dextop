@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.inf "Expanding system image [ proot ]."
+console.script "Expanding system image  [ ${script%-*} ]"
 echo
 
 # variables #

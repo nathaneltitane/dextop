@@ -53,7 +53,7 @@ console.clear
 	
 # prompt #
 
-console.inf "Stopping display [ vnc ]."
+console.script "Stopping display [ ${script%-*} ]"
 echo
 
 # variables #

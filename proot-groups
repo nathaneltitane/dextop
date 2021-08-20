@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.inf "Transferring unregistered group IDs [ proot ]."
+console.script "Transferring unregistered group IDs  [ ${script%-*} ]"
 echo
 
 # variables #

@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.inf "Cleaning up [ termux ]."
+console.script "Cleaning up [ ${script%-*} ]"
 echo
 
 # variables #
@@ -78,7 +78,7 @@ then
 
 	# message #
 	
-	console.scs "Setup complete [ termux ]."
+	console.scs "Setup complete [ ${script%-*} ]"
 	echo
 
 else

@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.inf "Downloading utilities [ proot ]."
+console.script "Downloading utilities  [ ${script%-*} ]"
 echo
 
 # variables #

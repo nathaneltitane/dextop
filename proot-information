@@ -49,7 +49,7 @@ done
 
 # prompt #
 
-console.inf "Gathering setup information [ proot ] ."
+console.script "Gathering setup information [ proot ] ."
 echo
 
 # variables #

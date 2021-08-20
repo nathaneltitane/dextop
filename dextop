@@ -71,7 +71,7 @@ console.clear
 
 # prompt #
 
-console.inf "Initializing setup [ dextop ]."
+console.script "Initializing setup [ ${script%-*} ]"
 echo
 
 # variables #
