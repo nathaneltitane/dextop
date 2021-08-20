@@ -135,17 +135,13 @@ else
 	# continue without update
 	
 	console.err "Proceeding without update."
+	console.err "Setup process may encounter errors."
 	echo
 	
 	console.wait
 	
-	console.wrn "Setup process may encounter errors."
-	echo
-	
-	console.wait
-	
-	console.inf "Follow wiki pages stated above to correct issues."
-	console.inf "Restart setup process on a fresh Termux installation to proceed."
+	console.inf "Follow wiki pages stated above to correct issues and"
+	console.inf "restart setup on a fresh Termux installation to proceed."
 	echo
 	
 	console.wait 3
