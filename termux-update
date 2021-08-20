@@ -72,13 +72,17 @@ console.err "to SDK 29 has made TeStor packages incomaptible with latest Play St
 console.err "guidelines, halting updates since November 2020 for that release."
 echo
 
-console.wrn "This utility fetches the Termux/API APKs from the F-Droid repository"
-console.wrn "and installs them for you:"
+console.wait
+
+console.wrn "This utility downloads the Termux/API APKs from the F-Droid repository."
+console.wrn "and installs them."
 echo
 
 console.wrn "This process only functions if you've previously backed up/uninstalled"
 console.wrn "the Google Play Store version of those APKs."
 echo
+
+console.wait
 
 console.inf "If you have not already done so, please visit the following wiki pages:"
 echo
@@ -87,8 +91,9 @@ console.inf "Backing up Termux: https://wiki.termux.com/wiki/Backing_up_Termux"
 console.inf "Installing Termux: https://wiki.termux.com/wiki/installation"
 echo
 
-console.usr "Select 'Package Installer' when prompted"
-console.usr "to install the APK updates."
+console.wait
+
+console.usr "Select 'Package Installer' when prompted to proceed."
 echo
 
 console.wait
