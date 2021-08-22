@@ -265,7 +265,7 @@ vnc_resolutions () {
 	printf '\n'
 }
 
-# manage selections display
+# handle selections display
 
 if [ -f /home/"${USER}"/.vnc/selection ]
 then
@@ -284,7 +284,7 @@ values_list=(
 	selection
 )
 
-# manage user input for values_list
+# handle user input for values_list
 
 console_rtn=()
 
@@ -341,7 +341,7 @@ do
 
 done
 
-# manage numerical selection
+# handle numerical selection
 
 resolution=""
 
@@ -359,7 +359,7 @@ then
 
 fi
 
-# manage custom selection
+# handle custom selection
 
 if [[ "${selection}" = "custom" ]]
 then

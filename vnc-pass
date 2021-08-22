@@ -62,7 +62,7 @@ values_list=(
 	password
 )
 
-# manage user input for values_list
+# handle user input for values_list
 
 console_rtn=()
 

@@ -152,7 +152,7 @@ image_archive () {
 		selection
 	)
 
-	# manage user input for values_list
+	# handle user input for values_list
 
 	console_rtn=()
 
@@ -178,7 +178,7 @@ image_archive () {
 			read selection
 			echo
 		else
-			# manage numerical selection
+			# handle numerical selection
 
 			i=$((${selection} - 1))
 
@@ -274,7 +274,7 @@ image_restore () {
 		selection
 	)
 
-	# manage user input for values_list
+	# handle user input for values_list
 
 	console_rtn=()
 
@@ -300,7 +300,7 @@ image_restore () {
 			read selection
 			echo
 		else
-		# manage numerical selection
+		# handle numerical selection
 
 			i=$((${selection}))
 

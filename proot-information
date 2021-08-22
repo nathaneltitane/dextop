@@ -76,7 +76,7 @@ information_list=(
 	user_password
 )
 
-# manage user input for information_list
+# handle user input for information_list
 
 console_rtn=()
 

@@ -58,18 +58,8 @@ echo
 
 # verify termux storage directory existence
 
-if [ -d "${HOME}"/storage ]
+if [ ! -d "${HOME}"/storage ]
 then
-	# exists - proceed with setup
-
-	console.scs "Storage directory detected [ "${HOME}" ]."
-	echo
-	
-	console.wait
-
-	console.fwd "Continuing..."
-	echo
-else
 	# does not exist - enable storage permissions: requires user touch input
 
 	console.wrn "Termux requires user permission to access storage on this device:"
@@ -97,7 +87,21 @@ else
 		-a com.termux.app.reload_style com.termux				> /dev/null
 
 	console.wait
+
+else
+	# exists - proceed with setup
+
+	console.scs "Storage directory detected [ "${HOME}" ]."
+	echo
+	
+	console.wait
+
+	console.fwd "Continuing..."
+	echo
 fi
+
+console.fwd "Setting up storage directories..."
+echo
 
 # remove termux storage link defaults
 
@@ -111,11 +115,19 @@ rm -rf "${HOME}"/storage
 
 mkdir -p "${MAIN_DIRECTORY}"/storage || :
 
-# create new symbolic links for storage mounts
+console.wait
+
+# create symbolic links
+
+console.fwd "Creating links..."
+echo
 
 # internal storage
 
-[ ! -f "${MAIN_DIRECTORY}"/storage/internal ] && ln -s -f /storage/emulated/0 "${MAIN_DIRECTORY}"/storage/internal
+if [ ! -f "${MAIN_DIRECTORY}"/storage/internal ]
+then
+	ln -s -f /storage/emulated/0 "${MAIN_DIRECTORY}"/storage/internal
+fi
 
 # external storage
 
@@ -130,8 +142,11 @@ then
 	console.scs "Storage media detected [ ${uuid} ]."
 	echo
 
-	[ ! -f "${MAIN_DIRECTORY}"/storage/external ] && ln -s -f /storage/"${uuid}" "${MAIN_DIRECTORY}"/storage/external
-
+	if [ ! -f "${MAIN_DIRECTORY}"/storage/external ]
+	then
+		ln -s -f /storage/"${uuid}" "${MAIN_DIRECTORY}"/storage/external
+	fi
+	
 	console.wait
 else
 	console.err "No storage media detected."
@@ -142,8 +157,5 @@ else
 	console.fwd "Continuing..."
 	echo
 fi
-
-console.fwd "Linking..."
-echo
 
 console.wait
