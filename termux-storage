@@ -74,7 +74,7 @@ then
 	
 	console.wait
 
-	console.usr "Select 'Allow' or 'Deny' when prompted to proceed."
+	console.usr "Select 'Allow' when prompted to proceed."
 	echo
 	
 	console.wait 3
