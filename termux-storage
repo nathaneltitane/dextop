@@ -72,36 +72,31 @@ then
 else
 	# does not exist - enable storage permissions: requires user touch input
 
-	console.wrn "Termux requires user permission to access storage on this device."
-	console.wrn "Both internal and external storage locations are made available:"
+	console.wrn "Termux requires user permission to access storage on this device:"
+	console.wrn "Both internal and external storage locations are made available."
 	echo
+	
+	console.wait
 
-	console.inf "Allowing access greatly benefits the desktop experience"
-	console.inf "and will make the device's storage visble and accessible"
-	console.inf "through your proot session and file manager."
+	console.inf "Allowing access will make the device's storage accessible"
+	console.inf "through your proot session and its file manager."
 	echo
+	
+	console.wait
 
-	console.usr "Select 'Allow' or 'Deny' when prompted"
-	console.usr "to enable or disable storage access permission."
+	console.usr "Select 'Allow' or 'Deny' when prompted to proceed."
 	echo
 	
 	console.wait 3
 
-	console.countdown "Permissions dialog in:" 3
-	echo
-
 	# trigger storage permissions dialog
 
-	# am broadcast	--user 0												\
-	#				--es com.termux.app.reload_style storage				\
-	#				-a com.termux.app.reload_style com.termux > /dev/null
+	am broadcast												\
+		--user 0												\
+		--es com.termux.app.reload_style storage				\
+		-a com.termux.app.reload_style com.termux				> /dev/null
 
-	termux-setup-storage
-
-	# wait 5 seconds to permit storage permissions approval
-
-	console.countdown "Waiting" 3
-	echo
+	console.wait
 fi
 
 # remove termux storage link defaults
@@ -150,3 +145,5 @@ fi
 
 console.fwd "Linking..."
 echo
+
+console.wait
