@@ -60,7 +60,8 @@ echo
 
 if [ ! -d "${HOME}"/storage ]
 then
-	# does not exist - enable storage permissions: requires user touch input
+	# does not exist:
+	# enable storage permissions: requires user touch input
 
 	console.wrn "Termux requires user permission to access storage on this device:"
 	console.wrn "Both internal and external storage locations are made available."
@@ -79,17 +80,18 @@ then
 	
 	console.wait 3
 
-	# trigger storage permissions dialog
+	# storage permissions dialog
 
-	am broadcast												\
-		--user 0												\
-		--es com.termux.app.reload_style storage				\
-		-a com.termux.app.reload_style com.termux				> /dev/null
+	console.silence "
+		am broadcast												\
+			-e com.termux.app.reload_style storage					\
+			-a com.termux.app.reload_style com.termux"
 
 	console.wait
 
 else
-	# exists - proceed with setup
+	# exists:
+	# proceed with setup
 
 	console.scs "Storage directory detected [ "${HOME}" ]."
 	echo
@@ -103,7 +105,7 @@ fi
 console.fwd "Setting up storage directories..."
 echo
 
-# remove termux storage link defaults
+# remove termux storage setup defaults
 
 rm -rf "${HOME}"/storage
 
