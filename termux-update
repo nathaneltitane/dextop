@@ -96,7 +96,7 @@ console.wait
 console.usr "Select 'Package Installer' when prompted to proceed."
 echo
 
-console.wait 3
+console.wait
 
 # request update permission
 
