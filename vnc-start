@@ -67,7 +67,7 @@ PORT="590${DISPLAY:1}"
 # functions #
 
 vnc_start () {
-	console.fwd "Starting display server [ ${formt} // ${GEOMETRY} // ${PORT} ]..."
+	console.fwd "Starting display server [ ${format} // ${GEOMETRY} // ${PORT} ]..."
 	echo
 	
 	# 'vncserver' uses $DISPLAY instead of $PORT
