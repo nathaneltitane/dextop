@@ -56,14 +56,6 @@ echo
 
 # set defaults
 
-# update packages list
-
-console.update
-
-# upgrade installed packages
-
-console.upgrade
-
 # unminimize system image
 
 console.silence "yes | unminimize" &
