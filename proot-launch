@@ -195,9 +195,9 @@ do
 
 	# verify options and parameters
 	
-	if [[ -z "${USERNAME}" ]]
+	if [[ -z "${1}" ]]
 	then
-		console.wrn "No user name - Defaulting  [ ${USERNAME} ]."
+		console.wrn "No user name - Defaulting [ '${USERNAME}' ]."
 		echo
 		
 		console.wait
@@ -209,7 +209,7 @@ do
 	
 	if [[ "${option}" == "root" ]]
 	then
-		console.wrn "Logging in [ '${USERNAME}' ]"
+		console.wrn "Logging in [ '${USERNAME}' ]."
 		echo
 		
 		console.wait
@@ -228,7 +228,7 @@ do
 		
 		console.wait
 		
-		# break out of loop: matching "${USERNAME}"
+		# break out of loop - matching "${USERNAME}"
 
 		break
 	fi
@@ -240,15 +240,10 @@ do
 	then
 		console.err "Invalid user name - Defaulting [ ${USERNAME} ]."
 		echo
-		
-		unset "${USERNAME}"
-
-		USERNAME="root"
-		USER="${USERNAME}"
 
 		console.wait
 		
-		# break out of loop: invalid "${USERNAME}"
+		# break out of loop - invalid "${USERNAME}" - default to 'root'
 
 		break
 	fi
