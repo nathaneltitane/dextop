@@ -242,15 +242,11 @@ do
 		echo
 
 		console.wait
-		
-		# break out of loop - invalid "${USERNAME}" - default to 'root'
-
-		break
 	fi
 	
 	# specify default login parameters
 	
-	if [[ -z "${USERNAME}" ]] ||  [[ "${option}" == "root" ]]
+	if [[ -z "${USERNAME}" ]] ||  [[ "${option}" == "root" ]] || [[ "${entry}" == "${last_entry}" ]]
 	then
 		USER="root"
 		USER_ID=0
