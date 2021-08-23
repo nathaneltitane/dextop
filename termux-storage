@@ -70,7 +70,7 @@ then
 	console.wait
 
 	console.inf "Allowing access will make the device's storage accessible"
-	console.inf "through your proot session and its file manager."
+	console.inf "through the proot session and its file manager."
 	echo
 	
 	console.wait
