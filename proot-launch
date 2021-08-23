@@ -153,10 +153,10 @@ unset LD_PRELOAD
 
 # user verification
 
-# verify user existence: loop through proot /etc/passwd file
-# make sure 'user' exists and corresponds to 'username'
-# then source environment variables from file
-# default to 'root' if 'username' is invalid or does not exist
+# verify user existence:
+# loop through proot /etc/passwd and make sure 'user' exists
+# and corresponds to 'username' then source environment variables from file
+# default to 'root' if 'username' is invalid, not specified or does not exist
 
 last_entry="$(tail -n 1 "${ROOT_DIRECTORY}"/etc/passwd)"
 
