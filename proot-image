@@ -397,11 +397,13 @@ then
 else
 	if [[ -z "$(ls ${IMAGE_DIRECTORY})" ]]
 	then
-		console.inf "Image directory clean:"
+		console.wrn "Image directory clean [ ${IMAGE_DIRECTORY} ]."
 		echo
 
-		console.wrn "Image directory does not contain any existing deployments."
+		console.wrn "No existing deployment found."
 		echo
+		
+		image_directories
 		
 		console.wait
 
@@ -423,10 +425,10 @@ else
 			else
 				if [[ -z "$(ls ${BACKUP_DIRECTORY})" ]]
 				then
-					console.inf "Backup directory clean:"
+					console.wrn "Backup directory clean [ ${BACKUP_DIRECTORY} ]."
 					echo
 
-					console.wrn "Backup directory does not contain any archives."
+					console.inf "No existing archives found."
 					echo
 					
 					console.wait
