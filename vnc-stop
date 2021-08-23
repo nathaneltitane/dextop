@@ -60,7 +60,7 @@ echo
 
 # set defaults
 
-# check for PID and stop display server
+# verify directory existencefor PID and stop display server
 
 if [ ! -z "$(pgrep -f vnc)" ]
 then

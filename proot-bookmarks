@@ -56,7 +56,7 @@ echo
 
 # set defaults
 
-# check for directory
+# verifydirectory existence
 
 [ ! -d "${ROOT_DIRECTORY}"/home/"${user_name}"/.config/gtk-3.0/ ] && mkdir -p "${ROOT_DIRECTORY}"/home/"${user_name}"/.config/gtk-3.0/
 

@@ -70,7 +70,7 @@ console.input ${values_list[@]}
 
 eval ${console_rtn[@]}
 
-# hash password  using 'vncpasswd' utility and store it
+# hash password  using 'vncpasswd' and store it
 
 consle.fwd "Setting password..."
 echo

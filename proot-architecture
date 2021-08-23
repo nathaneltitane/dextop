@@ -54,7 +54,6 @@ echo
 
 # variables #
 
-# set defaults
 
 # list supported processor architectures
 
@@ -75,6 +74,8 @@ img_architectures=(
 	i386
 	amd64
 )
+
+# set defaults
 
 # test processor architecture string
 
