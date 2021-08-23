@@ -145,14 +145,14 @@ fi
 console.fwd "Setting superuser privileges [ '${user_name}' ]..."
 echo
 
-# give user superuser privileges
+# set superuser privilege
 
 # /etc/group:
 # group_name:x:group_number:user_name
 
 usermod -a -G "${sudo_id}" "${user_name}"
 
-# give user superuser privileges password override
+# set superuser privilege password override
 
 echo "${user_name} ALL=(ALL) NOPASSWD: ALL" > "${ROOT_DIRECTORY}"/etc/sudoers.d/"${user_name}"
 
@@ -160,7 +160,7 @@ echo "${user_name} ALL=(ALL) NOPASSWD: ALL" > "${ROOT_DIRECTORY}"/etc/sudoers.d/
 
 echo "Set disable_coredump false" >> "${ROOT_DIRECTORY}"/etc/sudo.conf
 
-# fix ownership on user superuser privileges password override
+# fix ownership on superuser privilege password override
 
 # root:
 # chmod 4755 /usr/bin/sudo
