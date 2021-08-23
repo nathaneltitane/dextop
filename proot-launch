@@ -195,7 +195,7 @@ do
 
 	# verify options and parameters
 	
-	if [[ -z "${1}" ]]
+	if [[ -z "${USERNAME}" ]]
 	then
 		console.wrn "No user name - Defaulting [ '${USERNAME}' ]."
 		echo
