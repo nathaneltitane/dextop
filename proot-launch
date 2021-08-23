@@ -219,8 +219,6 @@ do
 		break
 	fi
 	
-	# verify that 'username' matches parsed 'user' entry
-
 	if [[ "${USERNAME}" == "${USER}" ]]
 	then
 		console.scs "Valid user name [ '${USERNAME}' ]."
@@ -233,9 +231,6 @@ do
 		break
 	fi
 
-	# simulate EOF:
-	# default entry used only if last line is reached
-
 	if [[ "${entry}" == "${last_entry}" ]]
 	then
 		console.err "Invalid user name - Defaulting [ '${USERNAME}'' ]."
@@ -244,7 +239,7 @@ do
 		console.wait
 	fi
 	
-	# specify default login parameters
+	# specify login defaults
 	
 	if [[ -z "${USERNAME}" ]] ||  [[ "${option}" == "root" ]] || [[ "${entry}" == "${last_entry}" ]]
 	then
