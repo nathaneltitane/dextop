@@ -143,6 +143,7 @@ else
 	console.inf "1 - Follow wiki pages stated above to correct issues."
 	console.inf "2 - Restart setup on a fresh Termux installation to proceed."
 	echo
+
+	console.countdown "Continuing in" 3
 	
-	console.wait 3
 fi
