@@ -3,7 +3,7 @@
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
-source /data/data/com.termux/files/usr/bin/globals
+source /data/data/com.termux/files/usr/bin/dextop
 
 # script #
 
@@ -62,7 +62,7 @@ cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
-source /data/data/com.termux/files/usr/bin/globals
+source /data/data/com.termux/files/usr/bin/dextop
 
 console.msg "Updating system."
 echo

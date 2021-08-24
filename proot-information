@@ -3,7 +3,7 @@
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
-source /data/data/com.termux/files/usr/bin/globals
+source /data/data/com.termux/files/usr/bin/dextop
 
 # script #
 
@@ -86,11 +86,11 @@ eval ${console_rtn[@]}
 
 # export variables
 
-echo '# information #'															>> "${PREFIX}"/bin/globals
+echo '# information #'															>> "${PREFIX}"/bin/dextop
 
-echo "export first_name=${first_name}"											>> "${PREFIX}"/bin/globals
-echo "export last_name=${last_name}"											>> "${PREFIX}"/bin/globals
-echo "export full_name=${first_name} ${last_name}"								>> "${PREFIX}"/bin/globals
-echo "export user_name=${user_name}"											>> "${PREFIX}"/bin/globals
-echo "export user_email=${user_email}"											>> "${PREFIX}"/bin/globals
-echo "export user_password=${user_password}"									>> "${PREFIX}"/bin/globals
+echo "export first_name=${first_name}"											>> "${PREFIX}"/bin/dextop
+echo "export last_name=${last_name}"											>> "${PREFIX}"/bin/dextop
+echo "export full_name=${first_name} ${last_name}"								>> "${PREFIX}"/bin/dextop
+echo "export user_name=${user_name}"											>> "${PREFIX}"/bin/dextop
+echo "export user_email=${user_email}"											>> "${PREFIX}"/bin/dextop
+echo "export user_password=${user_password}"									>> "${PREFIX}"/bin/dextop

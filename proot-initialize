@@ -3,7 +3,7 @@
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
-source /data/data/com.termux/files/usr/bin/globals
+source /data/data/com.termux/files/usr/bin/dextop
 
 # script #
 
@@ -60,7 +60,7 @@ echo
 
 # source variables
 
-[ -f "${PREFIX}"/bin/globals ] && source "${PREFIX}"/bin/globals
+[ -f "${PREFIX}"/bin/dextop ] && source "${PREFIX}"/bin/dextop
 
 # initialize #
 
@@ -77,7 +77,7 @@ cat << 'FILE' ->> "${ROOT_DIRECTORY}"/root/.profile
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
-source /data/data/com.termux/files/usr/bin/globals
+source /data/data/com.termux/files/usr/bin/dextop
 
 # setup proot expansion to default system
 

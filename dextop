@@ -82,25 +82,25 @@ echo
 
 # export variables
 
-echo '# variables #'															>> "${PREFIX}"/bin/globals
+echo '# variables #'															>> "${PREFIX}"/bin/dextop
 
-echo "export version=${version}"												>> "${PREFIX}"/bin/globals
+echo "export version=${version}"												>> "${PREFIX}"/bin/dextop
 
-echo '# globals #'																>> "${PREFIX}"/bin/globals
+echo '# dextop #'																>> "${PREFIX}"/bin/dextop
 
-echo 'export MAIN_DIRECTORY="${PREFIX%/*}"'										>> "${PREFIX}"/bin/globals
-echo 'export BINARIES_DIRECTORY="${PREFIX}"/bin'								>> "${PREFIX}"/bin/globals
-echo 'export LIBRARIES_DIRECTORY="${PREFIX}"/lib'								>> "${PREFIX}"/bin/globals
-echo 'export SOURCES_DIRECTORY="${PREFIX}"/etc/apt'								>> "${PREFIX}"/bin/globals
-echo 'export BACKUP_DIRECTORY="${MAIN_DIRECTORY}"/bkp'							>> "${PREFIX}"/bin/globals
-echo 'export IMAGE_DIRECTORY="${MAIN_DIRECTORY}"/img'							>> "${PREFIX}"/bin/globals
-echo 'export ISO_DIRECTORY="${MAIN_DIRECTORY}"/iso'								>> "${PREFIX}"/bin/globals
-echo 'export MOUNT_DIRECTORY="${MAIN_DIRECTORY}"/mnt'							>> "${PREFIX}"/bin/globals
-echo 'export PROC_DIRECTORY="${MAIN_DIRECTORY}"/proc'							>> "${PREFIX}"/bin/globals
+echo 'export MAIN_DIRECTORY="${PREFIX%/*}"'										>> "${PREFIX}"/bin/dextop
+echo 'export BINARIES_DIRECTORY="${PREFIX}"/bin'								>> "${PREFIX}"/bin/dextop
+echo 'export LIBRARIES_DIRECTORY="${PREFIX}"/lib'								>> "${PREFIX}"/bin/dextop
+echo 'export SOURCES_DIRECTORY="${PREFIX}"/etc/apt'								>> "${PREFIX}"/bin/dextop
+echo 'export BACKUP_DIRECTORY="${MAIN_DIRECTORY}"/bkp'							>> "${PREFIX}"/bin/dextop
+echo 'export IMAGE_DIRECTORY="${MAIN_DIRECTORY}"/img'							>> "${PREFIX}"/bin/dextop
+echo 'export ISO_DIRECTORY="${MAIN_DIRECTORY}"/iso'								>> "${PREFIX}"/bin/dextop
+echo 'export MOUNT_DIRECTORY="${MAIN_DIRECTORY}"/mnt'							>> "${PREFIX}"/bin/dextop
+echo 'export PROC_DIRECTORY="${MAIN_DIRECTORY}"/proc'							>> "${PREFIX}"/bin/dextop
 
 # source variables
 
-[ -f "${PREFIX}"/bin/globals ] && source "${PREFIX}"/bin/globals
+[ -f "${PREFIX}"/bin/dextop ] && source "${PREFIX}"/bin/dextop
 
 # values #
 

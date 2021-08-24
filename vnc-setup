@@ -3,7 +3,7 @@
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
-source /data/data/com.termux/files/usr/bin/globals
+source /data/data/com.termux/files/usr/bin/dextop
 
 # script #
 
@@ -57,11 +57,11 @@ console.script "Starting setup [ ${script%-*} ]"
 
 # export variables
 
-echo '# vnc variables #'														>> "${PREFIX}"/bin/globals
+echo '# vnc variables #'														>> "${PREFIX}"/bin/dextop
 
 # source variables
 
-[ -f "${PREFIX}"/bin/globals ] && source "${PREFIX}"/bin/globals
+[ -f "${PREFIX}"/bin/dextop ] && source "${PREFIX}"/bin/dextop
 
 # setup #
 

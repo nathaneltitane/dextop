@@ -128,22 +128,22 @@ IFS=''
 
 # export variables
 
-echo '# proot variables #'														>> "${PREFIX}"/bin/globals
+echo '# proot variables #'														>> "${PREFIX}"/bin/dextop
 
-echo "export DISTRIBUTION_NAME=${distribution_name}"							>> "${PREFIX}"/bin/globals
-echo "export DISTRIBUTION_VERSION=${distribution_version}"						>> "${PREFIX}"/bin/globals
-echo "export DISTRIBUTION_RELEASE=${distribution_release}"						>> "${PREFIX}"/bin/globals
+echo "export DISTRIBUTION_NAME=${distribution_name}"							>> "${PREFIX}"/bin/dextop
+echo "export DISTRIBUTION_VERSION=${distribution_version}"						>> "${PREFIX}"/bin/dextop
+echo "export DISTRIBUTION_RELEASE=${distribution_release}"						>> "${PREFIX}"/bin/dextop
 
-echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'		>> "${PREFIX}"/bin/globals
-echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'				>> "${PREFIX}"/bin/globals
+echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'		>> "${PREFIX}"/bin/dextop
+echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'				>> "${PREFIX}"/bin/dextop
 
-echo '# installation #'															>> "${PREFIX}"/bin/globals
+echo '# installation #'															>> "${PREFIX}"/bin/dextop
 
-echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/globals
+echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/dextop
 
 # source variables
 
-[ -f "${PREFIX}"/bin/globals ] && source "${PREFIX}"/bin/globals
+[ -f "${PREFIX}"/bin/dextop ] && source "${PREFIX}"/bin/dextop
 
 # setup #
 

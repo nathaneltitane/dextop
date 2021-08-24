@@ -3,7 +3,7 @@
 # dependencies #
 
 source /data/data/com.termux/files/usr/bin/console
-source /data/data/com.termux/files/usr/bin/globals
+source /data/data/com.termux/files/usr/bin/dextop
 
 # script #
 
@@ -118,6 +118,6 @@ fi
 
 # export variables
 
-echo '# architecture #'															>> "${PREFIX}"/bin/globals
+echo '# architecture #'															>> "${PREFIX}"/bin/dextop
 
-echo "export iso_architecture=${img_architecture}"								>> "${PREFIX}"/bin/globals
+echo "export iso_architecture=${img_architecture}"								>> "${PREFIX}"/bin/dextop
