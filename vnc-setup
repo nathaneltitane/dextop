@@ -65,14 +65,18 @@ echo '# vnc variables #'														>> "${PREFIX}"/bin/dextop
 
 # setup #
 
-# setup vncutilities
+setup_list=(
+	# setup vncutilities
+	vnc-utilities
+	# welcome message
+	vnc-message
+	# setup vnc environment files
+	vnc-environment
+)
 
-console.run "${BINARIES_DIRECTORY}"/vnc-utilities
+# setup #
 
-# welcome message
-
-console.run "${BINARIES_DIRECTORY}"/vnc-message
-
-# setup vnc environment files
-
-console.run "${BINARIES_DIRECTORY}"/vnc-environment
+for setup in ${setup_list[@]}
+do
+	console.run "${BINARIES_DIRECTORY}"/"${setup}"
+done

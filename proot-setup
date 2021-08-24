@@ -147,42 +147,32 @@ echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/dextop
 
 # setup #
 
-# setup proot utilities
+setup_list=(
+	# setup proot utilities
+	proot-utilities
+	# setup welcome message
+	proot-message
+	# verify architecture compatibility
+	proot-architecture
+	# setup proot user information
+	proot-information
+	# setup proot /proc entries
+	proot-proc
+	# setup proot image
+	proot-image
+	# setup proot group IDs
+	proot-groups
+	# setup proot network requirements  - [ device < // > [ termux < // > [ proot ] ] ]
+	proot-network
+	# setup proot initialization routine
+	proot-initialize
+	# setup proot session
+	proot-launch
+)
 
-console.run "${BINARIES_DIRECTORY}"/proot-utilities
+# setup #
 
-# welcome message
-
-console.run "${BINARIES_DIRECTORY}"/proot-message
-
-# verify architecture compatibility
-
-console.run "${BINARIES_DIRECTORY}"/proot-architecture
-
-# setup proot user information
-
-console.run "${BINARIES_DIRECTORY}"/proot-information
-
-# setup proot proc /proc entries
-
-console.run "${BINARIES_DIRECTORY}"/proot-proc
-
-# setup proot image
-
-console.run "${BINARIES_DIRECTORY}"/proot-image
-
-# setup proot group IDs
-
-console.run "${BINARIES_DIRECTORY}"/proot-groups
-
-# setup proot network requirements  - [ device < // > [ termux < // > [ proot ] ] ]
-
-console.run "${BINARIES_DIRECTORY}"/proot-network
-
-# setup proot initialization routine
-
-console.run "${BINARIES_DIRECTORY}"/proot-initialize
-
-# setup proot session
-
-console.run "${BINARIES_DIRECTORY}"/proot-launch
+for setup in ${setup_list[@]}
+do
+	console.run "${BINARIES_DIRECTORY}"/"${setup}"
+done

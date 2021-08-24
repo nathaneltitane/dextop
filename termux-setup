@@ -65,66 +65,44 @@ echo '# termux variables #'														>> "${PREFIX}"/bin/dextop
 
 # setup #
 
-# setup termux utilities
+setup_list=(
+	# setup termux utilities
+	termux-utilities
+	# welcome message
+	termux-message
+	# setup termux application update
+	termux-update
+	# setup termux repository requirements
+	termux-repositories
+	# setup termux package requirements
+	termux-packages
+	# setup termux binary fixes and links
+	termux-links
+	# setup termux properties and preferences
+	termux-properties
+	# setup proot file manager bookmarks
+	termux-bookmarks
+	# setup termux silent login
+	termux-silent
+	# setup termux environment files
+	termux-environment
+	# setup termux command aliases
+	termux-aliases
+	# setup transient storage - [ device < // > [ termux < // > [ proot ] ] ]
+	termux-storage
+	# setup termux login messages
+	termux-welcome
+	# setup termux initial login configuration steps
+	termux-configuration
+	# setup checkpoint
+	termux-checkpoint
+	# setup cleanup
+	termux-clean
+)
 
-console.run "${BINARIES_DIRECTORY}"/termux-utilities
+# setup #
 
-# welcome message
-
-console.run "${BINARIES_DIRECTORY}"/termux-message
-
-# setup termux application update
-
-console.run "${BINARIES_DIRECTORY}"/termux-update
-
-# setup termux repository requirements
-
-console.run "${BINARIES_DIRECTORY}"/termux-repositories
-
-# setup termux package requirements
-
-console.run "${BINARIES_DIRECTORY}"/termux-packages
-
-# setup termux binary fixes and links
-
-console.run "${BINARIES_DIRECTORY}"/termux-links
-
-# setup termux properties and preferences
-
-console.run "${BINARIES_DIRECTORY}"/termux-properties
-
-# setup proot file manager bookmarks
-
-"${BINARIES_DIRECTORY}"/termux-bookmarks
-
-# setup termux silent login
-
-console.run "${BINARIES_DIRECTORY}"/termux-silent
-
-# setup termux environment files
-
-console.run "${BINARIES_DIRECTORY}"/termux-environment
-
-# setup termux command aliases
-
-console.run "${BINARIES_DIRECTORY}"/termux-aliases
-
-# setup transient storage - [ device < // > [ termux < // > [ proot ] ] ]
-
-console.run "${BINARIES_DIRECTORY}"/termux-storage
-
-# setup termux login messages
-
-console.run "${BINARIES_DIRECTORY}"/termux-welcome
-
-# setup termux initial login configuration steps
-
-"${BINARIES_DIRECTORY}"/termux-configuration
-
-# setup checkpoint #
-
-"${BINARIES_DIRECTORY}"/termux-checkpoint
-
-# setup cleanup #
-
-"${BINARIES_DIRECTORY}"/termux-clean
+for setup in ${setup_list[@]}
+do
+	console.run "${BINARIES_DIRECTORY}"/"${setup}"
+done
