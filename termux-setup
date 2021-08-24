@@ -105,4 +105,6 @@ setup_list=(
 for setup in ${setup_list[@]}
 do
 	"${BINARIES_DIRECTORY}"/"${setup}"
+	
+	console.clear
 done
