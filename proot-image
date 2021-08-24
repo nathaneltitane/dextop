@@ -369,7 +369,7 @@ image_unpack () {
 	# proot -l tar -xzf "${1}" -X "${2}" || :
 
 	# exclude archive directories: dev | proc | sys | system
-	# 'proot-launch' will bind and mount those device directories to proot
+	# 'proot-session' will bind and mount those device directories to proot
 
 	ROOT_DIRECTORY="${ROOT_DIRECTORY}"
 

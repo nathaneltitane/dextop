@@ -167,7 +167,7 @@ setup_list=(
 	# setup proot initialization routine
 	proot-initialize
 	# setup proot session
-	proot-launch
+	proot-session
 )
 
 # setup #

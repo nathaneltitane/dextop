@@ -112,7 +112,7 @@ console.fwd "Setting up [ /proc/version ]..."
 echo
 
 cat << 'FILE' -> "${PROC_DIRECTORY}"/version
-Linux version 5.4.0-proc (termux@androidos) (gcc version 4.9.x (Fake /proc/version by proot-launch@Dextop)
+Linux version 5.4.0-proc (termux@androidos) (gcc version 4.9.x (Fake /proc/version by proot-session@Dextop)
 FILE
 
 console.wait
