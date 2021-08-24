@@ -133,4 +133,5 @@ else
 	echo
 
 	console.countdown "Continuing in" 3
+	echo
 fi
