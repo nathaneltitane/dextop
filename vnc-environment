@@ -86,7 +86,6 @@ then
 else
 	dbus-launch --exit-with-session "${SESSION_MANAGER}" &
 fi
-
 FILE
 
 # append automatic vnc session stop on shell logout
@@ -110,5 +109,4 @@ then
 else
 	vnc-start
 fi
-
 FILE
