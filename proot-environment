@@ -89,4 +89,8 @@ FILE
 
 cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 
+if [ -f "${HOME}"/.bash_aliases ]
+then
+	source "${HOME}"/.bash_aliases
+fi
 FILE
