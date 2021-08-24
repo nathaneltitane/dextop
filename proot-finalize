@@ -64,54 +64,38 @@ echo
 
 # setup #
 
-# setup proot expansion to default system
+setup_list=(
+	# setup proot expansion to default system
+	proot-expand
+	# setup proot package requirements
+	proot-packages
+	# setup proot binary fixes and links
+	proot-links
+	# setup proot user
+	"proot-user ${user_name}"
+	# setup proot user superuser privileges
+	"proot-superuser ${user_name}"
+	# setup proot file manager bookmarks
+	proot-bookmarks
+	# setup proot silent login
+	proot-silent
+	# setup proot environment files
+	proot-environment
+	# setup proot command aliases
+	proot-aliases
+	# setup proot login messages
+	proot-welcome
+	# setup proot initial login configuration steps
+	proot-configuration
+	# setup checkpoint
+	proot-checkpoint
+	# setup cleanup
+	proot-clean
+)
 
-console.run "${BINARIES_DIRECTORY}"/proot-expand
+# setup #
 
-# setup proot package requirements
-
-console.run "${BINARIES_DIRECTORY}"/proot-packages
-
-# setup proot binary fixes and links
-
-console.run "${BINARIES_DIRECTORY}"/proot-links
-
-# setup proot user
-
-console.run "${BINARIES_DIRECTORY}"/proot-user "${user_name}"
-
-# setup proot user superuser privileges
-
-console.run "${BINARIES_DIRECTORY}"/proot-superuser "${user_name}"
-
-# setup proot file manager bookmarks
-
-console.run "${BINARIES_DIRECTORY}"/proot-bookmarks
-
-# setup proot silent login
-
-console.run "${BINARIES_DIRECTORY}"/proot-silent
-
-# setup proot environment files
-
-"${BINARIES_DIRECTORY}"/proot-environment
-
-# setup proot command aliases
-
-"${BINARIES_DIRECTORY}"/proot-aliases
-
-# setup proot login messages
-
-"${BINARIES_DIRECTORY}"/proot-welcome
-
-# setup proot initial login configuration steps
-
-"${BINARIES_DIRECTORY}"/proot-configuration
-
-# setup checkpoint #
-
-"${BINARIES_DIRECTORY}"/proot-checkpoint
-
-# setup cleanup #
-
-"${BINARIES_DIRECTORY}"/proot-clean
+for setup in ${setup_list[@]}
+do
+	console.run "${BINARIES_DIRECTORY}"/"${setup}"
+done
