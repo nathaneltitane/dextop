@@ -100,44 +100,20 @@ sudo_id=$(cat /etc/group | grep sudo | cut -d : -f 3)
 [ -z "${sudo_id}" ] && sudo_id=27
 
 # verify that 'sudo' is installed:
-# required for the presence of /etc/sudoers file and directory
+# required for the presence of /etc/sudoers file
 
-if [ -z "$(command -v sudo)" ]
-then
-	console.wrn "'sudo' not present or installed on system:"
-	console.wrn "This utility must be run with 'sudo' installed on the system."
-	echo
-	
-	console.ask "Install 'sudo' package?"
-	
-	read reply
-	echo
-	
-	if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
-	then
-		console.fwd "Installing..."
-		echo
-		
-		install_list=(
-			sudo
-		)
-		
-		console.install ${install_list[@]}
-		
-	else
-		console.err "'sudo' will not be installed."
-		echo
-		
-		console.inf "1 - Install 'sudo' using the package manager."
-		console.inf "2 - Restart ${script} to proceed."
-		echo
-		
-		console.fwd "Aborting..."
-		echo
-		
-		exit 1
-	fi
-fi
+console.wrn "'sudo' not present or installed on system:"
+console.wrn "This utility must be run with 'sudo' installed on the system."
+echo
+
+console.fwd "Installing..."
+echo
+
+install_list=(
+	sudo
+)
+
+console.install ${install_list[@]}
 
 # create superuser entry for user
 
