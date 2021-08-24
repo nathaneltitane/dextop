@@ -88,6 +88,4 @@ else
 fi
 
 echo
-
-console.wait
 FILE

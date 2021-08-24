@@ -62,7 +62,6 @@ Available install options are:
 
 `-m | --minimal: download and install full desktop environment and utilities.         ( xfce4 )`
 
-
 Let the setup run and fetch all the required dependencies: it will prompt you for input once it is ready.
 The rest of the setup is fully automated and should run its course until the proot environment is ready for you to use.
 

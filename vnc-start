@@ -127,7 +127,7 @@ vnc_resolutions () {
 	console.msg "or input [c]ustom properties:"
 	echo
 
-	console.wait
+	
 
 	# list supported display resolutions
 
@@ -369,7 +369,7 @@ then
 	console.inf "Setting custom properties."
 	echo
 	
-	console.wait
+	
 
 	console.ipt "Geometry WIDTH in pixels:"
 	

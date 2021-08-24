@@ -72,8 +72,6 @@ console.err "to SDK 29 making Termux packages incomaptible with new Play Store"
 console.err "guidelines. Updates are halted since November 2020 for that release."
 echo
 
-console.wait
-
 console.wrn "This utility downloads the Termux/API APKs from the F-Droid repository"
 console.wrn "and installs them."
 echo
@@ -82,8 +80,6 @@ console.wrn "This process only functions if you've previously backed up/uninstal
 console.wrn "the Google Play Store version of those APKs."
 echo
 
-console.wait
-
 console.inf "If you have not already done so, please visit the following wiki pages:"
 echo
 
@@ -91,12 +87,8 @@ console.inf "Backing up Termux: https://wiki.termux.com/wiki/Backing_up_Termux"
 console.inf "Installing Termux: https://wiki.termux.com/wiki/installation"
 echo
 
-console.wait
-
 console.usr "Select 'Package Installer' when prompted to proceed."
 echo
-
-console.wait
 
 # request update permission
 
@@ -129,7 +121,7 @@ then
 		console.fwd "Updating..."
 		echo
 				
-		console.wait
+		
 	done
 else
 	# continue without update
@@ -138,7 +130,7 @@ else
 	console.err "Setup process may encounter errors."
 	echo
 	
-	console.wait
+	
 	
 	console.inf "1 - Follow wiki pages stated above to correct issues."
 	console.inf "2 - Restart setup on a fresh Termux installation to proceed."

@@ -77,7 +77,5 @@ echo
 
 echo "$password" | vncpasswd -f > "${ROOT_DIRECTORY}"/home/"${user_name}"/.vnc/passwd
 
-console.wait
-
 console.scs "Password changed."
 echo

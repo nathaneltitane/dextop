@@ -65,8 +65,6 @@ cat << FILE -> "${ROOT_DIRECTORY}"/etc/hostname
 "${hostname}"
 FILE
 
-console.wait
-
 # set hosts
 
 console.fwd "Setting up [ hosts ]..."
@@ -92,8 +90,6 @@ ff02::3		ip6-allhosts
 
 FILE
 
-console.wait
-
 # set nameserver
 
 console.fwd "Setting up [ nameserver ]..."
@@ -104,4 +100,3 @@ nameserver 1.1.1.1
 nameserver 1.0.0.1
 FILE
 
-console.wait

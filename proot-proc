@@ -69,8 +69,6 @@ cat << 'FILE' -> "${PROC_DIRECTORY}"/loadavg
 0.54 0.41 0.30 1/931 370386
 FILE
 
-console.wait
-
 # /proc/stat
 
 console.fwd "Setting up [ /proc/stat ]..."
@@ -93,8 +91,6 @@ procs_blocked 0
 softirq 25293348 2883 7658936 40779 539155 497187 2864 1908702 7229194 279723 7133925
 FILE
 
-console.wait
-
 # /proc/uptime
 
 console.fwd "Setting up [ /proc/uptime ]..."
@@ -104,8 +100,6 @@ cat << 'FILE' -> "${PROC_DIRECTORY}"/uptime
 284684.56 513853.46
 FILE
 
-console.wait
-
 # /proc/version
 
 console.fwd "Setting up [ /proc/version ]..."
@@ -114,8 +108,6 @@ echo
 cat << 'FILE' -> "${PROC_DIRECTORY}"/version
 Linux version 5.4.0-proc (termux@androidos) (gcc version 4.9.x (Fake /proc/version by proot-session@Dextop)
 FILE
-
-console.wait
 
 # /proc/vmstat
 
@@ -263,4 +255,3 @@ swap_ra 9661
 swap_ra_hit 7872
 FILE
 
-console.wait

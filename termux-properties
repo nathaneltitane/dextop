@@ -105,7 +105,6 @@ shortcut.previous-session = ctrl + 1
 
 shortcut.next-session = ctrl + 2
 
-
 # configure keyboard shortcut keys
 
 extra-keys = [																	\
@@ -114,8 +113,6 @@ extra-keys = [																	\
 																				]
 FILE
 
-console.wait
-
 # set properties
 
 console.fwd "Applying changes..."
@@ -123,4 +120,3 @@ echo
 
 termux-reload-settings
 
-console.wait

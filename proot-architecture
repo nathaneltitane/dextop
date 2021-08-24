@@ -54,7 +54,6 @@ echo
 
 # variables #
 
-
 # list supported processor architectures
 
 cpu_architectures=(
@@ -90,7 +89,7 @@ do
 		console.scs "Valid architecture detected [ ${img_architecture} ]."
 		echo
 		
-		console.wait
+		
 
 		break
 	fi
@@ -106,12 +105,12 @@ then
 	console.fwd "Aborting..."
 	echo
 
-	console.wait
+	
 
 	console.stp "Exiting."
 	echo
 	
-	console.wait
+	
 
 	exit 1
 fi

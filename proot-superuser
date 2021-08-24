@@ -124,7 +124,7 @@ then
 		
 		console.install ${install_list[@]}
 		
-		console.wait
+		
 	else
 		console.err "'sudo' will not be installed."
 		echo

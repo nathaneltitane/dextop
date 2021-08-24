@@ -70,7 +70,7 @@ image_directories () {
 	console.fwd "Creating required deployment directories..."
 	echo
 	
-	console.wait
+	
 
 	directories_list=(
 		"${BACKUP_DIRECTORY}"
@@ -122,7 +122,7 @@ image_archive () {
 	console.ipt "Select deployment to archive:"
 	echo
 
-	console.wait
+	
 
 	printf '\n'
 
@@ -191,7 +191,7 @@ image_archive () {
 			console.fwd "Archiving [ ${deployment} ]... "
 			echo
 			
-			console.wait
+			
 
 			break
 		fi
@@ -242,7 +242,7 @@ image_restore () {
 	console.ipt "Select archive to restore:"
 	echo
 
-	console.wait
+	
 
 	printf '\n'
 
@@ -316,7 +316,7 @@ image_restore () {
 			console.fwd "Restoring [ ${deployment} // ${archive_stamp} ]... "
 			echo
 			
-			console.wait
+			
 
 			break
 		fi
@@ -405,7 +405,7 @@ else
 		
 		image_directories
 		
-		console.wait
+		
 
 		console.fwd "Proceeding..."
 		echo
@@ -431,7 +431,7 @@ else
 					console.inf "No existing archives found."
 					echo
 					
-					console.wait
+					
 					
 					console.fwd "Proceeding..."
 					echo
@@ -499,7 +499,7 @@ else
 											console.err "Unable to deploy system image with current set of options."
 											echo
 											
-											console.wait
+											
 
 											console.fwd "Aborting..."
 											echo
@@ -518,7 +518,5 @@ else
 fi
 
 console.download "${iso_url}" "${ISO_DIRECTORY}" "${iso_archive}"
-
-console.wait
 
 image_unpack "${ISO_DIRECTORY}/${iso_archive}"

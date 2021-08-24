@@ -165,8 +165,6 @@ last_entry="$(tail -n 1 "${ROOT_DIRECTORY}"/etc/passwd)"
 console.fwd "Authenticating..."
 echo
 
-console.wait
-
 while read -r entry
 do
 	IFS=':'
@@ -200,7 +198,7 @@ do
 		console.wrn "No user name - Defaulting [ '${USERNAME}' ]."
 		echo
 		
-		console.wait
+		
 
 		# break out of loop - empty "${USERNAME}" - default to 'root'
 
@@ -212,7 +210,7 @@ do
 		console.wrn "Logging in [ '${USERNAME}' ]."
 		echo
 		
-		console.wait
+		
 		
 		# break out of loop - login as 'root'
 
@@ -224,7 +222,7 @@ do
 		console.scs "Valid user name [ '${USERNAME}' ]."
 		echo
 		
-		console.wait
+		
 		
 		# break out of loop - matching "${USERNAME}"
 
@@ -236,7 +234,7 @@ do
 		console.err "Invalid user name - Defaulting [ '${USERNAME}'' ]."
 		echo
 
-		console.wait
+		
 	fi
 	
 	# specify login defaults
@@ -267,18 +265,18 @@ then
 		 
 		 unset "${APPLICATION}"
 		 
-	 	 console.wait
+	 	 
 	fi
 
 	console.fwd "Starting application [ ${SESSION_NAME} // ${USER} // ${APPLICATION} ]..."
 	echo
 
-	 console.wait
+	 
 else
 	console.fwd "Starting session [ ${SESSION_NAME} // ${USER} ]..."
 	echo
 	
-	 console.wait
+	 
 fi
 
 # clear

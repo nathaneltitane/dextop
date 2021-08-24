@@ -79,6 +79,4 @@ echo
 console.inf "Run 'proot-session -u <username>' to start your session."
 console.inf "Run 'proot-session -u <username> -a <application>' to start an application with your session."
 echo
-
-console.wait
 FILE

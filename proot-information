@@ -64,8 +64,6 @@ console.wrn "Information is required to set up your environment:"
 console.wrn "the fields cannot be empty."
 echo
 
-console.wait
-
 # values #
 
 information_list=(

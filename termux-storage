@@ -67,18 +67,18 @@ then
 	console.wrn "Both internal and external storage locations are made available."
 	echo
 	
-	console.wait
+	
 
 	console.inf "Allowing access will make the device's storage accessible"
 	console.inf "through the proot session and its file manager."
 	echo
 	
-	console.wait
+	
 
 	console.usr "Select 'Allow' when prompted to proceed."
 	echo
 	
-	console.wait 3
+	
 
 	# storage permissions dialog
 
@@ -96,7 +96,7 @@ else
 	console.scs "Storage directory detected [ "${HOME}" ]."
 	echo
 	
-	console.wait
+	
 
 	console.fwd "Continuing..."
 	echo
@@ -116,8 +116,6 @@ rm -rf "${HOME}"/storage
 # create directory
 
 mkdir -p "${MAIN_DIRECTORY}"/storage || :
-
-console.wait
 
 # create symbolic links
 
@@ -149,15 +147,13 @@ then
 		ln -s -f /storage/"${uuid}" "${MAIN_DIRECTORY}"/storage/external
 	fi
 	
-	console.wait
+	
 else
 	console.err "No storage media detected."
 	echo
 
-	console.wait
+	
 
 	console.fwd "Continuing..."
 	echo
 fi
-
-console.wait

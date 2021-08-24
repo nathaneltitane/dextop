@@ -65,7 +65,7 @@ then
 	console.scs "Setup complete [ ${script%-*} ]"
 	echo
 	
-	console.wait
+	
 	
 	console.fwd "Removing setup files..."
 	echo
@@ -88,5 +88,5 @@ else
 	console.inf "Consult setup logs at '"${PREFIX}"/var/log/' for details."
 	echo
 	
-	console.wait 3
+	
 fi
