@@ -72,9 +72,9 @@ setup_list=(
 	# setup proot binary fixes and links
 	proot-links
 	# setup proot user
-	"proot-user ${user_name}"
+	proot-user "${user_name}"
 	# setup proot user superuser privileges
-	"proot-superuser ${user_name}"
+	proot-superuser "${user_name}"
 	# setup proot file manager bookmarks
 	proot-bookmarks
 	# setup proot silent login
@@ -97,5 +97,7 @@ setup_list=(
 
 for setup in ${setup_list[@]}
 do
-	console.run "${BINARIES_DIRECTORY}"/"${setup}"
+	"${BINARIES_DIRECTORY}"/"${setup}"
+	
+	console.wait
 done

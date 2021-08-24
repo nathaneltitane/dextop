@@ -104,5 +104,5 @@ setup_list=(
 
 for setup in ${setup_list[@]}
 do
-	console.run "${BINARIES_DIRECTORY}"/"${setup}"
+	"${BINARIES_DIRECTORY}"/"${setup}"
 done

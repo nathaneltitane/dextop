@@ -81,7 +81,7 @@ source /data/data/com.termux/files/usr/bin/dextop
 
 # setup proot expansion to default system
 
-console.run "${BINARIES_DIRECTORY}"/proot-finalize
+"${BINARIES_DIRECTORY}"/proot-finalize
 
 # exit proot after successful setup:
 # continue vnc components setup on Termux shell
