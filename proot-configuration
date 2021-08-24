@@ -95,12 +95,13 @@ console.download https://yt-dl.org/downloads/latest											/usr/bin									y
 commands_list=(
 	proot-locales
 	proot-timezones
-	leocad-download
-	leocad-configuration
-	xfconf-desktop
 )
 
 # execute scripts
+
+leocad-download
+leocad-configuration
+xfconf-desktop
 
 for command in ${commands_list[@]}
 do
