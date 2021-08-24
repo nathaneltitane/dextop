@@ -253,7 +253,7 @@ do
 
 done < "${ROOT_DIRECTORY}"/etc/passwd
 
-# application verification #
+# verify application argument
 
 if [ ! -z "${APPLICATION}" ]
 then
@@ -266,17 +266,24 @@ then
 		 echo
 		 
 		 unset "${APPLICATION}"
+		 
+	 	 console.wait
 	fi
-
-	 console.wait
 
 	console.fwd "Starting application [ ${SESSION_NAME} // ${USER} // ${APPLICATION} ]..."
 	echo
 
+	 console.wait
 else
 	console.fwd "Starting session [ ${SESSION_NAME} // ${USER} ]..."
 	echo
+	
+	 console.wait
 fi
+
+# clear
+
+console.clear
 
 # setup proot command arguments
 
