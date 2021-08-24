@@ -197,8 +197,6 @@ do
 	then
 		console.wrn "No user name - Defaulting [ '${USERNAME}' ]."
 		echo
-		
-		
 
 		# break out of loop - empty "${USERNAME}" - default to 'root'
 
@@ -209,9 +207,7 @@ do
 	then
 		console.wrn "Logging in [ '${USERNAME}' ]."
 		echo
-		
-		
-		
+
 		# break out of loop - login as 'root'
 
 		break
@@ -221,9 +217,7 @@ do
 	then
 		console.scs "Valid user name [ '${USERNAME}' ]."
 		echo
-		
-		
-		
+
 		# break out of loop - matching "${USERNAME}"
 
 		break
@@ -234,7 +228,6 @@ do
 		console.err "Invalid user name - Defaulting [ '${USERNAME}' ]."
 		echo
 
-		
 	fi
 	
 	# specify login defaults
@@ -264,19 +257,13 @@ then
 		 echo
 		 
 		 unset "${APPLICATION}"
-		 
-	 	 
 	fi
 
 	console.fwd "Starting application [ ${SESSION_NAME} // ${USER} // ${APPLICATION} ]..."
 	echo
-
-	 
 else
 	console.fwd "Starting session [ ${SESSION_NAME} // ${USER} ]..."
 	echo
-	
-	 
 fi
 
 # clear

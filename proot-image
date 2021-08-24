@@ -69,8 +69,6 @@ image_directories () {
 
 	console.fwd "Creating required deployment directories..."
 	echo
-	
-	
 
 	directories_list=(
 		"${BACKUP_DIRECTORY}"
@@ -121,8 +119,6 @@ image_archive () {
 
 	console.ipt "Select deployment to archive:"
 	echo
-
-	
 
 	printf '\n'
 
@@ -190,8 +186,6 @@ image_archive () {
 
 			console.fwd "Archiving [ ${deployment} ]... "
 			echo
-			
-			
 
 			break
 		fi
@@ -241,8 +235,6 @@ image_restore () {
 
 	console.ipt "Select archive to restore:"
 	echo
-
-	
 
 	printf '\n'
 
@@ -315,8 +307,6 @@ image_restore () {
 
 			console.fwd "Restoring [ ${deployment} // ${archive_stamp} ]... "
 			echo
-			
-			
 
 			break
 		fi
@@ -404,8 +394,6 @@ else
 		echo
 		
 		image_directories
-		
-		
 
 		console.fwd "Proceeding..."
 		echo
@@ -430,8 +418,6 @@ else
 
 					console.inf "No existing archives found."
 					echo
-					
-					
 					
 					console.fwd "Proceeding..."
 					echo
@@ -499,8 +485,6 @@ else
 											console.err "Unable to deploy system image with current set of options."
 											echo
 											
-											
-
 											console.fwd "Aborting..."
 											echo
 

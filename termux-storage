@@ -66,19 +66,13 @@ then
 	console.wrn "Termux requires user permission to access storage on this device:"
 	console.wrn "Both internal and external storage locations are made available."
 	echo
-	
-	
 
 	console.inf "Allowing access will make the device's storage accessible"
 	console.inf "through the proot session and its file manager."
 	echo
-	
-	
 
 	console.usr "Select 'Allow' when prompted to proceed."
 	echo
-	
-	
 
 	# storage permissions dialog
 
@@ -95,8 +89,6 @@ else
 
 	console.scs "Storage directory detected [ "${HOME}" ]."
 	echo
-	
-	
 
 	console.fwd "Continuing..."
 	echo
@@ -146,13 +138,9 @@ then
 	then
 		ln -s -f /storage/"${uuid}" "${MAIN_DIRECTORY}"/storage/external
 	fi
-	
-	
 else
 	console.err "No storage media detected."
 	echo
-
-	
 
 	console.fwd "Continuing..."
 	echo

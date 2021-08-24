@@ -88,8 +88,6 @@ do
 
 		console.scs "Valid architecture detected [ ${img_architecture} ]."
 		echo
-		
-		
 
 		break
 	fi
@@ -105,12 +103,8 @@ then
 	console.fwd "Aborting..."
 	echo
 
-	
-
 	console.stp "Exiting."
 	echo
-	
-	
 
 	exit 1
 fi

@@ -120,8 +120,6 @@ then
 		
 		console.fwd "Updating..."
 		echo
-				
-		
 	done
 else
 	# continue without update
@@ -130,12 +128,9 @@ else
 	console.err "Setup process may encounter errors."
 	echo
 	
-	
-	
 	console.inf "1 - Follow wiki pages stated above to correct issues."
 	console.inf "2 - Restart setup on a fresh Termux installation to proceed."
 	echo
 
 	console.countdown "Continuing in" 3
-	
 fi
