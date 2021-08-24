@@ -231,7 +231,7 @@ do
 
 	if [[ "${entry}" == "${last_entry}" ]]
 	then
-		console.err "Invalid user name - Defaulting [ '${USERNAME}'' ]."
+		console.err "Invalid user name - Defaulting [ '${USERNAME}' ]."
 		echo
 
 		
