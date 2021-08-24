@@ -64,6 +64,19 @@ echo
 
 # setup #
 
+# setup user
+
+# setup proot user
+
+"${BINARIES_DIRECTORY}"/proot-user "${user_name}"
+
+# setup proot user superuser privileges
+
+"${BINARIES_DIRECTORY}"/proot-superuser "${user_name}"
+
+	
+# continue with setup
+
 setup_list=(
 	# setup proot expansion to default system
 	proot-expand
@@ -71,10 +84,6 @@ setup_list=(
 	proot-packages
 	# setup proot binary fixes and links
 	proot-links
-	# setup proot user
-	proot-user "${user_name}"
-	# setup proot user superuser privileges
-	proot-superuser "${user_name}"
 	# setup proot file manager bookmarks
 	proot-bookmarks
 	# setup proot silent login

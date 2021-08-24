@@ -115,7 +115,7 @@ then
 	
 	if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 	then
-		console.fwd "INstalling..."
+		console.fwd "Installing..."
 		echo
 		
 		install_list=(
