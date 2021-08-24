@@ -47,10 +47,6 @@ do
 	shift
 done
 
-# clear
-
-console.clear
-	
 # prompt #
 
 console.script "Stopping display [ ${script%-*} ]"
@@ -75,9 +71,5 @@ then
 	# clean display server runtime files
 
 	rm -rf "${TMPDIR}"/.X*
-
-	# clear
-
-	console.clear
 fi
 
