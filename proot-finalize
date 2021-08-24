@@ -78,27 +78,16 @@ echo
 # continue with setup
 
 setup_list=(
-	# setup proot expansion to default system
 	proot-expand
-	# setup proot package requirements
 	proot-packages
-	# setup proot binary fixes and links
 	proot-links
-	# setup proot file manager bookmarks
 	proot-bookmarks
-	# setup proot silent login
 	proot-silent
-	# setup proot environment files
 	proot-environment
-	# setup proot command aliases
 	proot-aliases
-	# setup proot login messages
 	proot-welcome
-	# setup proot initial login configuration steps
 	proot-configuration
-	# setup checkpoint
 	proot-checkpoint
-	# setup cleanup
 	proot-clean
 )
 

@@ -66,11 +66,8 @@ echo '# vnc variables #'														>> "${PREFIX}"/bin/dextop
 # setup #
 
 setup_list=(
-	# setup vncutilities
 	vnc-utilities
-	# welcome message
 	vnc-message
-	# setup vnc environment files
 	vnc-environment
 )
 

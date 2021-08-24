@@ -148,25 +148,15 @@ echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/dextop
 # setup #
 
 setup_list=(
-	# setup proot utilities
 	proot-utilities
-	# setup welcome message
 	proot-message
-	# verify architecture compatibility
 	proot-architecture
-	# setup proot user information
 	proot-information
-	# setup proot /proc entries
 	proot-proc
-	# setup proot image
 	proot-image
-	# setup proot group IDs
 	proot-groups
-	# setup proot network requirements  - [ device < // > [ termux < // > [ proot ] ] ]
 	proot-network
-	# setup proot initialization routine
 	proot-initialize
-	# setup proot session
 	proot-session
 )
 
