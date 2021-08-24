@@ -72,9 +72,11 @@ console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/fu
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions	sprunge
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions	youtube
 
-# youtube-dl
+# xfce
 
-console.download https://yt-dl.org/downloads/latest											/usr/bin									youtube-dl
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin									xfconf-desktop
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin									xfconf-read
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin									xfconf-write
 
 # leocad
 
@@ -84,11 +86,9 @@ console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main			
 console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin									leocad-launcher
 console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin									leocad-position
 
-# xfce
+# youtube-dl
 
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin									xfconf-desktop
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin									xfconf-read
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin									xfconf-write
+console.download https://yt-dl.org/downloads/latest											/usr/bin									youtube-dl
 
 # values #
 
