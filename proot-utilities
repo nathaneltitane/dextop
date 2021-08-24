@@ -79,13 +79,13 @@ binaries_list=(
 	proot-image
 	proot-information
 	proot-initialize
-	proot-session
 	proot-links
 	proot-locales
 	proot-message
 	proot-network
 	proot-packages
 	proot-proc
+	proot-session
 	proot-setup
 	proot-silent
 	proot-superuser
