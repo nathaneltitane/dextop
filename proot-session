@@ -191,6 +191,20 @@ do
 
 	IFS=' '
 
+	# specify login defaults
+	
+	if [[ -z "${USERNAME}" ]] ||  [[ "${option}" == "root" ]] || [[ "${entry}" == "${last_entry}" ]]
+	then
+		USER="root"
+		USERNAME="${USER}"
+		USER_ID=0
+		GROUP_ID=0
+		FULL_NAME="root"
+		HOME="/root"
+		SHELL="/bin/bash"
+	fi
+	
+	# messages:
 	# verify options and parameters
 	
 	if [[ -z "${USERNAME}" ]]
@@ -230,18 +244,6 @@ do
 
 	fi
 	
-	# specify login defaults
-	
-	if [[ -z "${USERNAME}" ]] ||  [[ "${option}" == "root" ]] || [[ "${entry}" == "${last_entry}" ]]
-	then
-		USER="root"
-		USER_ID=0
-		GROUP_ID=0
-		FULL_NAME="root"
-		HOME="/root"
-		SHELL="/bin/bash"
-	fi
-
 done < "${ROOT_DIRECTORY}"/etc/passwd
 
 # verify application argument
