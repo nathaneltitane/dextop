@@ -129,7 +129,7 @@ usermod -a -G "${sudo_id}" "${user_name}"
 
 # create sudoers directory
 
-[ | -D "${ROOT_DIRECTORY}"/etc/sudoers.d ] && mkdir -p "${ROOT_DIRECTORY}"/etc/sudoers.d
+[ ! -d "${ROOT_DIRECTORY}"/etc/sudoers.d ] && mkdir -p "${ROOT_DIRECTORY}"/etc/sudoers.d
 
 # set superuser privilege password override
 
