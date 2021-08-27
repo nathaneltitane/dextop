@@ -64,7 +64,8 @@ echo
 
 # setup #
 
-# setup user
+# setup user:
+# keep outside of array to pass and handle arguments
 
 # setup proot user
 
@@ -75,7 +76,7 @@ echo
 "${BINARIES_DIRECTORY}"/proot-superuser "${user_name}"
 
 	
-# continue with setup
+# continue setup
 
 setup_list=(
 	proot-expand
