@@ -71,7 +71,7 @@ echo
 
 "${BINARIES_DIRECTORY}"/proot-user "${user_name}"
 
-# setup proot user superuser privileges
+# setup proot superuser privilege
 
 "${BINARIES_DIRECTORY}"/proot-superuser "${user_name}"
 
