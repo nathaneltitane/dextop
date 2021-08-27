@@ -70,7 +70,7 @@ console.err "Google Play Store updates no longer supported since November 2020:"
 echo
 
 console.wrn "Back up and uninstall the Google Play Store version of Termux."
-console.wrn "Visit the following wiki pages to do so:"
+console.wrn "Visit the following wiki pages on how to proceed:"
 echo
 
 console.inf "Backing up Termux: https://wiki.termux.com/wiki/Backing_up_Termux"
