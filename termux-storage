@@ -63,12 +63,11 @@ then
 	# does not exist:
 	# enable storage permissions: requires user touch input
 
-	console.wrn "Termux requires user permission to access storage on this device:"
-	console.wrn "Both internal and external storage locations are made available."
+	console.wrn "User permission required to access storage on this device:"
+	console.wrn "Internal and external storage locations are made available."
 	echo
 
-	console.inf "Allowing access will make the device's storage accessible"
-	console.inf "through the proot session and its file manager."
+	console.inf "Storage is made accessible through the proot session."
 	echo
 
 	console.usr "Select 'Allow' when prompted to proceed."

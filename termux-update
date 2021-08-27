@@ -66,21 +66,11 @@ packages_list=(
 
 # message #
 
-console.err "Termux packages are no longer being updated in the Google Play Store:"
-console.err "A recent Google Play Store policy forcing all applications to update"
-console.err "to SDK 29 making Termux packages incomaptible with new Play Store"
-console.err "guidelines. Updates are halted since November 2020 for that release."
+console.err "Google Play Store updates no longer supported since November 2020:"
 echo
 
-console.wrn "This utility downloads the Termux/API APKs from the F-Droid repository"
-console.wrn "and installs them."
-echo
-
-console.wrn "This process only functions if you've previously backed up/uninstalled"
-console.wrn "the Google Play Store version of those APKs."
-echo
-
-console.inf "If you have not already done so, please visit the following wiki pages:"
+console.wrn "Back up and uninstall the Google Play Store version of Termux."
+console.wrn "Visit the following wiki pages to do so:"
 echo
 
 console.inf "Backing up Termux: https://wiki.termux.com/wiki/Backing_up_Termux"
