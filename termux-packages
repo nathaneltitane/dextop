@@ -107,6 +107,7 @@ utilities_list=(
 	htop*
 	jq
 	nano
+	ncurses-utils
 	net-tools
 	nmap
 	openssh
