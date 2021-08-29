@@ -85,6 +85,7 @@ then
 else
 	console.err "Some errors were encountered during setup."
 	echo
+	
 	console.inf "Consult setup logs at '"${PREFIX}"/var/log/' for details."
 	echo
 	

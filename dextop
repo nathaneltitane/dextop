@@ -170,6 +170,10 @@ do
 	console.clear
 done
 
+# cleanup #
+
+
+
 # close terminal after setup
 
 console.scs "Dextop setup complete."
