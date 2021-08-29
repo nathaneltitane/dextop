@@ -109,6 +109,21 @@ do
 	wait
 done
 
+# start session
+
+vnc-start
+
+# wait for processes to load
+
+sleep 10
+
+# check for process and execute
+
+if [ ! -z $(pgrep -f xfdesktop) ]
+then
+	xfconf-desktop
+fi
+
 # remove after execution  
 
 sed -i '/# proot configuration #/,$d' "${ROOT_DIRECTORY}"/home/"${USER}"/.profile

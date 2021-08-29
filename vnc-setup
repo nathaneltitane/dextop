@@ -71,7 +71,6 @@ setup_list=(
 	vnc-utilities
 	vnc-message
 	vnc-environment
-	vnc-configuration
 )
 
 # setup #
