@@ -169,3 +169,12 @@ do
 	
 	console.clear
 done
+
+# close terminal after setup
+
+console.scs "Dextop setup complete."
+echo
+
+console.countdown "Closing terminal to load changes in" 5
+
+kill -9 $(pgrep -f "${SHELL}")
