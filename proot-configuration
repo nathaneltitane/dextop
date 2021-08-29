@@ -58,7 +58,7 @@ echo
 
 # write configuration
 
-cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
+cat << "FILE" ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 
 # proot configuration #
 
@@ -66,29 +66,29 @@ cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 
 # bash
 
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions	extract
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions	record
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions	speed
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions	sprunge
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions	youtube
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		extract
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		record
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		speed
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		sprunge
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		youtube
 
 # xfce
 
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin									xfconf-desktop
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin									xfconf-read
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin									xfconf-write
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin							xfconf-desktop
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin							xfconf-read
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin							xfconf-write
 
 # leocad
 
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin									leocad-build
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin									leocad-configuration
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin									leocad-download
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin									leocad-launcher
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin									leocad-position
+console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin							leocad-build
+console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin							leocad-configuration
+console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin							leocad-download
+console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin							leocad-launcher
+console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin							leocad-position
 
 # youtube-dl
 
-console.download https://yt-dl.org/downloads/latest											/usr/bin									youtube-dl
+console.download https://yt-dl.org/downloads/latest											/usr/bin							youtube-dl
 
 # values #
 
@@ -101,7 +101,6 @@ commands_list=(
 
 leocad-download
 leocad-configuration
-xfconf-desktop
 
 for command in ${commands_list[@]}
 do
@@ -109,11 +108,6 @@ do
 
 	wait
 done
-FILE
-
-# purge configuration
-
-cat << "FILE" ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 
 # remove after execution  
 

@@ -65,10 +65,13 @@ echo '# vnc variables #'														>> "${PREFIX}"/bin/dextop
 
 # setup #
 
+# in order of execution
+
 setup_list=(
-	vnc-environment
-	vnc-message
 	vnc-utilities
+	vnc-message
+	vnc-environment
+	vnc-configuration
 )
 
 # setup #

@@ -49,32 +49,34 @@ done
 
 # prompt #
 
-console.script "Downloading setup utilities [ ${script%-*} ]"
+console.script "Writing configuration [ ${script%-*} ]"
 echo
 
 # variables #
 
 # set defaults
 
-# export variables
+# write configuration
 
-# source variables
+cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.vnc/xstartup
 
-curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && source "${BINARIES_DIRECTORY}"/console
+# vnc configuration #
 
-# values #
+# wait for session process start
 
-binaries_list=(
-	vnc-configuration
-	vnc-environment
-	vnc-message
-	vnc-pass
-	vnc-setup
-	vnc-start
-	vnc-stop
-	vnc-utilities
-)
+while ! pgrep -f "${SESSION_MANAGER}" > /dev/null
+do
+	sleep 0.25
+done
 
-# download #
+# confirm session process and execute
 
-console.download get.dxtp.app "${BINARIES_DIRECTORY}" ${binaries_list[@]}
+if [ ! -z $(pgrep -f "${SESSION_MANAGER}") ]
+then
+	xfconf-desktop
+fi
+
+# remove after execution  
+
+sed -i '/# vnc configuration #/,$d' "${ROOT_DIRECTORY}"/home/"${USER}"/.vnc/xstartup
+FILE

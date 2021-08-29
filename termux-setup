@@ -65,6 +65,8 @@ echo '# termux variables #'														>> "${PREFIX}"/bin/dextop
 
 # setup #
 
+# in order of execution
+
 setup_list=(
 	termux-utilities
 	termux-message
