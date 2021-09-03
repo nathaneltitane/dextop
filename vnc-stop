@@ -56,20 +56,25 @@ echo
 
 # set defaults
 
+# functions #
+
+vnc_stop () {
+	console.silence "
+				vncserver		\
+					-kill		\
+					-clean		:*" &
+
+	console.progress "Killing display server..."
+	echo
+	
+	# clean display server runtime files
+
+	rm -rf "${TMPDIR}"/.X*
+}
+
 # verify directory existencefor PID and stop display server
 
 if [ ! -z "$(pgrep -f vnc)" ]
 then
-
-	# kill active and stale vnc output processes
-
-	console.silence "vncserver -kill :*" &
-
-	console.progress "Killing display server..."
-	echo
-
-	# clean display server runtime files
-
-	rm -rf "${TMPDIR}"/.X*
+	vnc_stop
 fi
-
