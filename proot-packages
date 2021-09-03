@@ -84,6 +84,7 @@ frameworks_list=(
 )
 
 locales_list=(
+	keyboard-configuration
 	locales
 	locales-all
 )

@@ -92,6 +92,7 @@ console.download https://yt-dl.org/downloads/latest											/usr/bin							you
 
 # execute scripts
 
+proot-keyboard
 proot-locales
 proot-timezones
 leocad-download
