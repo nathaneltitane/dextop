@@ -152,6 +152,7 @@ echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/dextop
 setup_list=(
 	proot-utilities
 	proot-message
+	proot-repositories
 	proot-architecture
 	proot-information
 	proot-proc

@@ -85,6 +85,7 @@ binaries_list=(
 	proot-network
 	proot-packages
 	proot-proc
+	proot-repositories
 	proot-session
 	proot-setup
 	proot-silent

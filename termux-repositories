@@ -99,11 +99,3 @@ done <<< ${repositories_list[@]}
 # reset IFS
 
 IFS=''
-
-# update packages list
-
-console.update
-
-# upgrade installed packages
-
-console.upgrade
