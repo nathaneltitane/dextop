@@ -90,24 +90,12 @@ console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main			
 
 console.download https://yt-dl.org/downloads/latest											/usr/bin							youtube-dl
 
-# values #
-
-commands_list=(
-	proot-locales
-	proot-timezones
-)
-
 # execute scripts
 
+proot-locales
+proot-timezones
 leocad-download
 leocad-configuration
-
-for command in ${commands_list[@]}
-do
-	"${BINARIES_DIRECTORY}"/"${command}"
-
-	wait
-done
 
 # start session
 
