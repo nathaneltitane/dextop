@@ -117,23 +117,9 @@ utilities_list=(
 
 console.download get.dxtp.app "${BINARIES_DIRECTORY}" ${utilities_list[@]}
 
-# values #
+# clear #
 
-termux_list=(
-	termux-setup
-)
-
-proot_list=(
-	proot-setup
-)
-
-vnc_list=(
-	vnc-setup
-)
-
-# initialize setup list
-
-setup_list=()
+console.clear
 
 # options #
 
@@ -144,7 +130,7 @@ then
 	# populate setup list
 	
 	setup_list+=(
-		${termux_list[@]}
+		termux-setup
 		)
 fi
 
@@ -155,9 +141,9 @@ then
 	# populate setup list
 
 	setup_list+=(
-		${termux_list[@]}
-		${proot_list[@]}
-		${vnc_list[@]}
+		termux-setup
+		proot-setup
+		vnc-setup
 	)
 fi
 
@@ -171,8 +157,6 @@ do
 done
 
 # cleanup #
-
-
 
 # close terminal after setup
 

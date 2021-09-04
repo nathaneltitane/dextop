@@ -76,8 +76,8 @@ console.clear 2
 console.fwd "Welcome to [ Termux ] Dextop!"
 echo
 
-console.inf "Launch session // Run 'proot-session -u <username>'                  - "
-console.inf "Launch application on session load // Run 'proot-session -u <username> -a <application>' - "
+console.inf "Launch session | application:"
+console.inf "'proot-session -u <username> | -a <application>'"
 echo
 FILE
 
