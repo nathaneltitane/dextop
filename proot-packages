@@ -120,6 +120,49 @@ vnc_list=(
 	tigervnc-standalone-server
 )
 
+kde_list=(
+	plasma-desktop
+	plasma-applet-redshift-control
+	plasma-browser-integration
+	plasma-calendar-addons
+	plasma-dataengines-addons
+	plasma-desktop
+	plasma-discover
+	plasma-discover-common
+	plasma-framework
+	plasma-gmailfeed
+	plasma-integration
+	plasma-kdevelop
+	plasma-marble
+	plasma-nm
+	plasma-pa
+	plasma-runner-installer
+	plasma-runner-telepathy-contact
+	plasma-runners-addons
+	plasma-thunderbolt
+	plasma-vault
+	plasma-wallpapers-addons
+	plasma-widgets-addons
+	plasma-workspace
+	plasma-workspace-wallpapers
+	ark
+	dolphin
+	kate
+	kcalc
+	kdialog
+	keditbookmarks
+	kfind
+	kwalletmanager
+	konqueror
+	konsole
+	konversation
+	kwin
+	kwrite
+	milou
+	muon
+	okular
+)
+
 xfce4_list=(
 	xfce4
 	xfce4-goodies
@@ -174,11 +217,11 @@ xfce4_list=(
 	xfce4-weather-plugin
 	xfce4-whiskermenu-plugin
 	xfce4-xkb-plugin
-	midori
 	elementary-xfce-icon-theme
 	blackbird-gtk-theme
 	bluebird-gtk-theme
 	greybird-gtk-theme
+	midori
 )
 
 # initialize install list
