@@ -72,7 +72,6 @@ cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.vnc/xstartup
 #!/bin/bash
 
 unset DBUS_SESSION_BUS_ADDRESS
-unset SESSION_MANAGER
 
 LD_PRELOAD=/lib/aarch64-linux-gnu/libgcc_s.so.1
 
