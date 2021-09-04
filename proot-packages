@@ -121,7 +121,11 @@ kde_list=(
 	plasma-dataengines-addons
 	plasma-desktop
 	plasma-discover
+	plasma-discover-backend-flatpak
+	plasma-discover-backend-snap
 	plasma-discover-common
+	plasma-discover-flatpak-backend
+	plasma-discover-snap-backend
 	plasma-framework
 	plasma-gmailfeed
 	plasma-integration
@@ -140,6 +144,7 @@ kde_list=(
 	plasma-workspace-wallpapers
 	ark
 	dolphin
+	elisa
 	fonts-hack
 	fonts-noto-cjk
 	fonts-noto-hinted
@@ -161,7 +166,8 @@ kde_list=(
 	kscreen
 	ksshaskpass
 	ksysguard
-	|kwin-x11
+	ktorrent
+	kwin-x11
 	kwin
 	kwalletmanager
 	konqueror
