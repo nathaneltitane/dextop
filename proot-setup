@@ -45,6 +45,14 @@ fi
 while (($#))
 do
 	case "${3}" in
+		-k|--kde)
+			desktop_option="kde"
+		;;
+
+		-x|--xfce)
+			desktop_option="xfce"
+		;;
+		
 		-f|--full)
 			install_option="full"
 		;;
@@ -53,23 +61,15 @@ do
 			install_option="minimal"
 		;;
 		
-		-k|--kde)
-			desktop_option="kde"
-		;;
-
-		-x|--xfce)
-			desktop_option="xfce"
-		;;
-
 		-h|--help)
 			echo
 			echo -e "USAGE:"
 			echo
-			echo -e "-f, --full \t\t Full setup: download and install full desktop environment and utilities."
-			echo -e "-m, --minimal \t\t Minimal setup: download and install minimal desktop environment and utilities."
-			echo
 			echo -e "-k, --kde  \t\t Install K desktop environment and utilities."
 			echo -e "-x, --xfce  \t\t Install XFCE desktop environment and utilities."
+			echo
+			echo -e "-f, --full \t\t Full setup: download and install full desktop environment and utilities."
+			echo -e "-m, --minimal \t\t Minimal setup: download and install minimal desktop environment and utilities."
 			echo
 			echo -e "-h, --help \t\t Show help and usage information."
 			echo
@@ -114,10 +114,10 @@ echo
 # set defaults
 
 [ -z "${distribution_name}" ]				&& distribution_name="ubuntu"
-[ -z "${distribution_version}" ]			&& distribution_version="20.04.2"
+[ -z "${distribution_version}" ]			&& distribution_version="20.04.3"
 
-[ -z "${install_option}" ]					&& install_option="full"
 [ -z "${desktop_option}" ]					&& desktop_option="kde"
+[ -z "${install_option}" ]					&& install_option="full"
 
 # handle distribution code markup
 

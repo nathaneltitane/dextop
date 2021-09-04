@@ -110,18 +110,8 @@ PULSE_SERVER="${LOCALHOST}"
 SHELL=
 TMPDIR="/tmp"
 
-SESSION="xfce"
-SESSION_NAME="XFCE"
-SESSION_MANAGER="xfce4-session"
-SETTINGS_MANAGER="xfsettingsd"
-WINDOW_MANAGER="xfwm4"
-
-BROWSER="midori"
 EDITOR="nano"
-EMULATOR="xfce4-terminal"
 PAGER="less"
-RUNNER="xfce4-appfinder"
-VISUAL="mousepad"
 
 XDG_RUNTIME_DIR="/run/user/${USER_ID}"
 XAUTHORITY="${XDG_RUNTIME_DIR}/.Xauthority"
@@ -131,21 +121,47 @@ XDG_DATA_HOME="${HOME}/.local/share"
 XDG_DATA_DIRS="/usr/local/share:/usr/share"
 XDG_CONFIG_DIRS="/etc/xdg"
 
+# kde #
+
+[ "${desktop_option}" = "kde" ] && SESSION="kde"
+[ "${desktop_option}" = "kde" ] && SESSION_NAME="KDE"
+[ "${desktop_option}" = "kde" ] && SESSION_MANAGER="xfce4-session"
+[ "${desktop_option}" = "kde" ] && SETTINGS_MANAGER="xfsettingsd"
+[ "${desktop_option}" = "kde" ] && WINDOW_MANAGER="kwin"
+
+[ "${desktop_option}" = "kde" ] && BROWSER="konqueror"
+[ "${desktop_option}" = "kde" ] && EMULATOR="konsole"
+[ "${desktop_option}" = "kde" ] && RUNNER="krunner"
+[ "${desktop_option}" = "kde" ] && VISUAL="kate"
+
+# xfce #
+
+[ "${desktop_option}" = "xfce" ] && SESSION="xfce"
+[ "${desktop_option}" = "xfce" ] && SESSION_NAME="XFCE"
+[ "${desktop_option}" = "xfce" ] && SESSION_MANAGER="xfce4-session"
+[ "${desktop_option}" = "xfce" ] && SETTINGS_MANAGER="xfsettingsd"
+[ "${desktop_option}" = "xfce" ] && WINDOW_MANAGER="xfwm4"
+
+[ "${desktop_option}" = "xfce" ] && BROWSER="midori"
+[ "${desktop_option}" = "xfce" ] && EMULATOR="xfce4-terminal"
+[ "${desktop_option}" = "xfce" ] && RUNNER="xfce4-appfinder"
+[ "${desktop_option}" = "xfce" ] && VISUAL="mousepad"
+
 # set defaults
 
-[ -z "${MOUNT_DIRECTORY}" ]	&& MOUNT_DIRECTORY="${PREFIX%/*}/mnt"
-[ -z "${PROC_DIRECTORY}" ]	&& PROC_DIRECTORY="${PREFIX%/*}/proc"
-[ -z "${ROOT_DIRECTORY}" ]	&& ROOT_DIRECTORY="${PREFIX%/*}/img"
+[ -z "${MOUNT_DIRECTORY}" ]		&& MOUNT_DIRECTORY="${PREFIX%/*}/mnt"
+[ -z "${PROC_DIRECTORY}" ]		&& PROC_DIRECTORY="${PREFIX%/*}/proc"
+[ -z "${ROOT_DIRECTORY}" ]		&& ROOT_DIRECTORY="${PREFIX%/*}/img"
 
-[ -z "${BROWSER}" ]			&& BROWSER="${BROWSER}"
-[ -z "${COLORTERM}" ]		&& COLORTERM="${COLORTERM}"
-[ -z "${SESSION}" ]			&& SESSION="${SESSION}"
-[ -z "${EDITOR}" ]			&& EDITOR="${EDITOR}"
-[ -z "${PAGER}" ]			&& PAGER="${PAGER}"
-[ -z "${RUNNER}" ]			&& RUNNER="${RUNNER}"
-[ -z "${SHELL}" ]			&& SHELL="${SHELL}"
-[ -z "${TERMINAL}" ]		&& TERMINAL="${TERM}"
-[ -z "${VISUAL}" ]			&& VISUAL="${VISUAL}"
+[ -z "${BROWSER}" ]				&& BROWSER="${BROWSER}"
+[ -z "${COLORTERM}" ]			&& COLORTERM="${COLORTERM}"
+[ -z "${SESSION}" ]				&& SESSION="${SESSION}"
+[ -z "${EDITOR}" ]				&& EDITOR="${EDITOR}"
+[ -z "${PAGER}" ]				&& PAGER="${PAGER}"
+[ -z "${RUNNER}" ]				&& RUNNER="${RUNNER}"
+[ -z "${SHELL}" ]				&& SHELL="${SHELL}"
+[ -z "${TERMINAL}" ]			&& TERMINAL="${TERM}"
+[ -z "${VISUAL}" ]				&& VISUAL="${VISUAL}"
 
 # assume termux-exec is present - unset LD_PRELOAD
 
