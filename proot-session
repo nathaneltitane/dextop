@@ -125,8 +125,8 @@ XDG_CONFIG_DIRS="/etc/xdg"
 
 [ "${desktop_option}" = "kde" ] && SESSION="kde"
 [ "${desktop_option}" = "kde" ] && SESSION_NAME="KDE"
-[ "${desktop_option}" = "kde" ] && SESSION_MANAGER="xfce4-session"
-[ "${desktop_option}" = "kde" ] && SETTINGS_MANAGER="xfsettingsd"
+[ "${desktop_option}" = "kde" ] && SESSION_MANAGER="plasmashell"
+[ "${desktop_option}" = "kde" ] && SETTINGS_MANAGER="systemsettings5"
 [ "${desktop_option}" = "kde" ] && WINDOW_MANAGER="kwin"
 
 [ "${desktop_option}" = "kde" ] && BROWSER="konqueror"

@@ -76,7 +76,12 @@ unset SESSION_MANAGER
 
 LD_PRELOAD=/lib/aarch64-linux-gnu/libgcc_s.so.1
 
-SESSION_MANAGER="xfce4-session" # FIX ME #
+if [ "${SESSION}" = "kde" ]
+then
+	export QT_AUTO_SCREEN_SCALE_FACTOR=0
+	export QT_SCALE_FACTOR=1
+	export QT_X11_NO_MITSHM=1
+fi
 
 if [ ! -z "${APPLICATION}" ]
 then
@@ -84,7 +89,8 @@ then
 	"${WINDOW_MANAGER}" &
 	"${APPLICATION}" &
 else
-	dbus-launch --exit-with-session "${SESSION_MANAGER}" &
+	"${SESSION_MANAGER}" &
+	"${WINDOW_MANAGER} &
 fi
 FILE
 

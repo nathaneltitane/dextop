@@ -89,10 +89,14 @@ security_list=(
 
 display_list=(
 	dbus-x11
+	x11-apps
+	x11-common
+	x11-session-utils
+	x11-touchscreen-calibrator
 	x11-utils
-	x11-xserver-utils
-	x11-xkb-utils
 	x11-xfs-utils
+	x11-xkb-utils
+	x11-xserver-utils
 )
 
 documentation_list=(
