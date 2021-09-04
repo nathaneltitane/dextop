@@ -52,6 +52,14 @@ do
 		-m|--minimal)
 			install_option="minimal"
 		;;
+		
+		-k|--kde)
+			desktop_option="kde"
+		;;
+
+		-x|--xfce)
+			desktop_option="xfce"
+		;;
 
 		-h|--help)
 			echo
@@ -59,6 +67,9 @@ do
 			echo
 			echo -e "-f, --full \t\t Full setup: download and install full desktop environment and utilities."
 			echo -e "-m, --minimal \t\t Minimal setup: download and install minimal desktop environment and utilities."
+			echo
+			echo -e "-k, --kde  \t\t Install K desktop environment and utilities."
+			echo -e "-x, --xfce  \t\t Install XFCE desktop environment and utilities."
 			echo
 			echo -e "-h, --help \t\t Show help and usage information."
 			echo
@@ -106,6 +117,7 @@ echo
 [ -z "${distribution_version}" ]			&& distribution_version="20.04.2"
 
 [ -z "${install_option}" ]					&& install_option="full"
+[ -z "${desktop_option}" ]					&& desktop_option="kde"
 
 # handle distribution code markup
 
@@ -140,6 +152,7 @@ echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'				>> "${PRE
 echo '# installation #'															>> "${PREFIX}"/bin/dextop
 
 echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/dextop
+echo "export desktop_option=${desktop_option}"									>> "${PREFIX}"/bin/dextop
 
 # source variables
 
