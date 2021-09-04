@@ -99,3 +99,14 @@ done <<< ${repositories_list[@]}
 # reset IFS
 
 IFS=''
+
+console.fwd "Forcing refresh..."
+echo
+
+# update packages list
+
+console.update
+
+# upgrade installed packages
+
+console.upgrade
