@@ -72,9 +72,13 @@ alias '...'='cd ../../../'
 alias '....'='cd ../../../../'
 alias '.....'='cd ../../../../'
 
-alias 'gd'='cd "${HOME}"/Git'
 alias 'hd'='cd "${HOME}"'
+alias 'gd'='cd "${HOME}"/Git'
+alias 'vd'='cd "${HOME}"/.vnc'
 alias 'rd'='cd /'
+alias 'md'='cd /media'
+alias 'id'='cd /media/Internal'
+alias 'ed'='cd /media/External'
 
 alias 'directory'='echo ${PWD}'
 
@@ -94,18 +98,21 @@ alias 'check'='sudo apt-get check'
 alias 'clean'='sudo apt-get clean'
 alias 'distribution-upgrade'='sudo apt-get dist-upgrade'
 alias 'download'='sudo apt-get download'
-alias 'install'='sudo apt-get install'
+alias 'install'='sudo apt-get install --no-install-recommends --no-upgrade'
 alias 'purge'='sudo apt-get purge'
 alias 'reinstall'='sudo apt-get reinstall'
 alias 'repair'='sudo apt-get -f install'
 alias 'remove'='sudo apt-get remove'
+alias 'source'='sudo apt-get source'
 alias 'update'='sudo apt-get update'
 alias 'upgrade'='sudo apt-get upgrade'
 
 # apt-cache #
 
-alias 'dependencies'='apt-cache depends'
+alias 'depends'='apt-cache depends'
+alias 'reverse'='apt-cache rdepends'
 alias 'search'='apt-cache search'
+alias 'status'='apt-cache stats'
 
 # cp #
 
