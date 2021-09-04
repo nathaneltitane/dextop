@@ -76,13 +76,6 @@ applications_list=(
 	youtube-dl
 )
 
-frameworks_list=(
-	libqt5concurrent5
-	libqt5opengl5
-	libqt5printsupport5
-	libqt5xml5
-)
-
 locales_list=(
 	keyboard-configuration
 	locales
@@ -147,20 +140,40 @@ kde_list=(
 	plasma-workspace-wallpapers
 	ark
 	dolphin
+	fonts-hack
+	fonts-noto-cjk
+	fonts-noto-hinted
+	fonts-noto-mono
+	fonts-noto-unhinted
 	kate
 	kcalc
 	kdialog
 	keditbookmarks
 	kfind
+	kgamma5
+	khelpcenter
+	khotkeys
+	kinfocenter
+	kio
+	kio-extras
+	kio-extras-data
+	kmenuedit
+	kscreen
+	ksshaskpass
+	ksysguard
+	|kwin-x11
+	kwin
 	kwalletmanager
 	konqueror
 	konsole
 	konversation
 	kwin
 	kwrite
+	kwrited
 	milou
 	muon
 	okular
+	systemsettings
 )
 
 xfce4_list=(
@@ -230,14 +243,26 @@ install_list=()
 
 # options #
 
-# full
+# desktop
 
-if [[ "${install_option}" = "full" ]]
+if [[ "${desktop_option}" = "kde" ]]
+then
+	desktop_environment_list=(
+		${kde_list[@]}
+	)
+fi
+
+if [[ "${desktop_option}" = "xfce" ]]
 then
 	desktop_environment_list=(
 		${xfce4_list[@]}
 	)
+fi
 
+# full
+
+if [[ "${install_option}" = "full" ]]
+then
 	install_list+=(
 		${desktop_environment_list[@]}
 		${themes_list[@]}
@@ -248,10 +273,6 @@ fi
 
 if [[ "${install_option}" = "minimal" ]]
 then
-	desktop_environment_list=(
-		${xfce4_list[@]}
-	)
-
 	install_list+=(
 		${desktop_environment_list[@]}
 	)
@@ -262,7 +283,6 @@ fi
 install_list+=(
 	${administration_list[@]}
 	${applications_list[@]}
-	${frameworks_list[@]}
 	${locales_list[@]}
 	${documentation_list}
 	${display_list[@]}

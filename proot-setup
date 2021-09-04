@@ -117,7 +117,7 @@ echo
 [ -z "${distribution_version}" ]			&& distribution_version="20.04.3"
 
 [ -z "${desktop_option}" ]					&& desktop_option="kde"
-[ -z "${install_option}" ]					&& install_option="full"
+[ -z "${install_option}" ]					&& install_option="minimal"
 
 # handle distribution code markup
 
