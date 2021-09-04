@@ -152,6 +152,7 @@ kde_list=(
 	fonts-noto-unhinted
 	kate
 	kcalc
+	kcharselect
 	kdialog
 	keditbookmarks
 	kfind
