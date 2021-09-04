@@ -62,3 +62,18 @@ sed -i					\
 	-e '/.*-src/d'		\
 	-e '/ˆ\#/d'			\
 	-e '/ˆ$/d'			"${ROOT_DIRECTORY}"/etc/apt/sources.list
+	
+
+# update lists
+
+
+console.fwd "Forcing refresh..."
+echo
+
+# update packages list
+
+console.update
+
+# upgrade installed packages
+
+console.upgrade

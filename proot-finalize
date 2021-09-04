@@ -80,6 +80,7 @@ echo
 
 setup_list=(
 	proot-expand
+	proot-repositories
 	proot-packages
 	proot-links
 	proot-bookmarks

@@ -100,6 +100,8 @@ done <<< ${repositories_list[@]}
 
 IFS=''
 
+# update lists
+
 console.fwd "Forcing refresh..."
 echo
 
