@@ -131,7 +131,6 @@ kde_list=(
 	plasma-discover-flatpak-backend
 	plasma-discover-snap-backend
 	plasma-framework
-	plasma-gmailfeed
 	plasma-integration
 	plasma-kdevelop
 	plasma-marble
