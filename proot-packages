@@ -136,11 +136,9 @@ kde_list=(
 	plasma-kdevelop
 	plasma-marble
 	plasma-nm
-	plasma-pa
 	plasma-runner-installer
 	plasma-runner-telepathy-contact
 	plasma-runners-addons
-	plasma-thunderbolt
 	plasma-vault
 	plasma-wallpapers-addons
 	plasma-widgets-addons
