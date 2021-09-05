@@ -120,7 +120,6 @@ vnc_list=(
 
 kde_list=(
 	plasma-desktop
-	plasma-applet-redshift-control
 	plasma-browser-integration
 	plasma-calendar-addons
 	plasma-dataengines-addons
@@ -141,7 +140,6 @@ kde_list=(
 	plasma-runners-addons
 	plasma-vault
 	plasma-wallpapers-addons
-	plasma-widgets-addons
 	plasma-workspace
 	plasma-workspace-wallpapers
 	ark
@@ -185,7 +183,7 @@ kde_list=(
 	systemsettings
 )
 
-xfce4_list=(
+xfce_list=(
 	xfce4
 	xfce4-goodies
 	xfce4-appfinder
@@ -215,9 +213,6 @@ xfce4_list=(
 	xfce4-panel
 	xfce4-panel-profiles
 	xfce4-places-plugin
-	xfce4-power-manager
-	xfce4-power-manager-data
-	xfce4-power-manager-plugins
 	xfce4-screensaver
 	xfce4-screenshooter
 	xfce4-sensors-plugin
@@ -262,7 +257,7 @@ fi
 if [[ "${desktop_option}" = "xfce" ]]
 then
 	desktop_environment_list=(
-		${xfce4_list[@]}
+		${xfce_list[@]}
 	)
 fi
 
