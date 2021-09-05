@@ -69,7 +69,6 @@ binaries_list=(
 	termux-bookmarks
 	termux-checkpoint
 	termux-clean
-	termux-configuration
 	termux-environment
 	termux-links
 	termux-message

@@ -56,6 +56,6 @@ echo
 
 # set defaults
 
-# confirm uninterrupted setup for cleanup
+# confirm uninterrupted setup
 
 echo "yes" > "${BINARIES_DIRECTORY}"/proot-setup-complete

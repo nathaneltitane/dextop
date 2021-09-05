@@ -81,7 +81,6 @@ setup_list=(
 	termux-aliases
 	termux-storage
 	termux-welcome
-	termux-configuration
 	termux-checkpoint
 	termux-clean
 )

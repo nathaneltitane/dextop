@@ -70,7 +70,6 @@ binaries_list=(
 	proot-bookmarks
 	proot-checkpoint
 	proot-clean
-	proot-configuration
 	proot-utilities
 	proot-environment
 	proot-expand

@@ -65,8 +65,6 @@ then
 	console.scs "Setup complete [ ${script%-*} ]"
 	echo
 	
-	
-	
 	console.fwd "Removing setup files..."
 	echo
 
