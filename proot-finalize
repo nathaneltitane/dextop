@@ -75,7 +75,10 @@ echo
 
 "${BINARIES_DIRECTORY}"/proot-superuser "${user_name}"
 
-	
+# clear
+
+console.clear
+
 # continue setup
 
 setup_list=(
@@ -98,5 +101,5 @@ for setup in ${setup_list[@]}
 do
 	"${BINARIES_DIRECTORY}"/"${setup}"
 	
-	console.wait
+	console.clear
 done
