@@ -143,8 +143,6 @@ kde_list=(
 	plasma-vault
 	plasma-wallpapers-addons
 	plasma-widgets-addons
-	plasma-workspace
-	plasma-workspace-wallpapers
 	ark
 	dolphin
 	elisa
