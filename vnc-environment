@@ -80,7 +80,7 @@ then
 	"${APPLICATION}" &
 else
 	"${SESSION_MANAGER}" &
-	"${WINDOW_MANAGER} &
+	"${WINDOW_MANAGER}" &
 fi
 FILE
 
