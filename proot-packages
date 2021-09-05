@@ -108,6 +108,7 @@ themes_list=(
 	arc-theme
 	breeze-cursor-theme
 	tango-icon-theme
+	
 	qt5-style-platform-gtk2
 	qt5-style-plugin-gtk2
 )
@@ -143,6 +144,8 @@ kde_list=(
 	plasma-vault
 	plasma-wallpapers-addons
 	plasma-widgets-addons
+	plasma-workspace
+	plasma-workspace-wallpapers
 	ark
 	dolphin
 	elisa
