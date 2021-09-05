@@ -107,9 +107,9 @@ documentation_list=(
 themes_list=(
 	arc-theme
 	breeze-cursor-theme
+	tango-icon-theme
 	qt5-style-platform-gtk2
 	qt5-style-plugin-gtk2
-	tango-icon-theme
 )
 
 vnc_list=(
