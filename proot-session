@@ -204,7 +204,7 @@ PAGER="less"
 # kde #
 
 [ "${desktop_option}" = "kde" ]		&& SESSION="kde"
-[ "${desktop_option}" = "kde" ]		&& SESSION_NAME="KDE"
+[ "${desktop_option}" = "kde" ]		&& SESSION_NAME="KDE5"
 [ "${desktop_option}" = "kde" ]		&& SESSION_MANAGER="plasmashell"
 [ "${desktop_option}" = "kde" ]		&& SETTINGS_MANAGER="systemsettings5"
 [ "${desktop_option}" = "kde" ]		&& WINDOW_MANAGER="kwin"
@@ -217,7 +217,7 @@ PAGER="less"
 # xfce #
 
 [ "${desktop_option}" = "xfce" ]	&& SESSION="xfce"
-[ "${desktop_option}" = "xfce" ]	&& SESSION_NAME="XFCE"
+[ "${desktop_option}" = "xfce" ]	&& SESSION_NAME="XFCE4"
 [ "${desktop_option}" = "xfce" ]	&& SESSION_MANAGER="xfce4-session"
 [ "${desktop_option}" = "xfce" ]	&& SETTINGS_MANAGER="xfsettingsd"
 [ "${desktop_option}" = "xfce" ]	&& WINDOW_MANAGER="xfwm4"
