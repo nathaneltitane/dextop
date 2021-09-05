@@ -117,43 +117,35 @@ vnc_list=(
 )
 
 kde_list=(
-	plasma-desktop
-	plasma-browser-integration
-	plasma-calendar-addons
-	plasma-dataengines-addons
-	plasma-desktop
-	plasma-discover
-	plasma-discover-backend-flatpak
-	plasma-discover-backend-snap
-	plasma-discover-common
-	plasma-discover-flatpak-backend
-	plasma-discover-snap-backend
-	plasma-framework
-	plasma-integration
-	plasma-kdevelop
-	plasma-marble
-	plasma-nm
-	plasma-runner-installer
-	plasma-runner-telepathy-contact
-	plasma-runners-addons
-	plasma-vault
-	plasma-wallpapers-addons
-	plasma-workspace
-	plasma-workspace-wallpapers
+		plasma-desktop
+		plasma-framework
+		plasma-integration
+		plasma-workspace
+		plasma-workspace-wallpapers
+		plasma-wallpapers-addons
+		plasma-discover
+		plasma-discover-backend-flatpak
+		plasma-discover-backend-snap
+		plasma-discover-common
+		plasma-discover-flatpak-backend
+		plasma-discover-snap-backend
+		dolphin
+		kate
+		kdialog
+		keditbookmarks
+		kfind
+		konsole
+		konqueror
+		gwenview
+		okular
+		systemsettings
+)
+
+kde_addons_list=(
 	ark
-	dolphin
 	elisa
-	fonts-hack
-	fonts-noto-cjk
-	fonts-noto-hinted
-	fonts-noto-mono
-	fonts-noto-unhinted
-	kate
 	kcalc
 	kcharselect
-	kdialog
-	keditbookmarks
-	kfind
 	kgamma5
 	khelpcenter
 	khotkeys
@@ -162,36 +154,71 @@ kde_list=(
 	kio-extras
 	kio-extras-data
 	kmenuedit
+	konversation
 	kscreen
 	ksshaskpass
 	ksysguard
 	ktorrent
-	kwin-x11
-	kwin
 	kwalletmanager
-	konqueror
-	konsole
-	konversation
-	kwin
 	kwrite
-	kwrited
 	milou
-	muon
-	okular
-	systemsettings
+	plasma-browser-integration
+	plasma-calendar-addons
+	plasma-dataengines-addons
+	plasma-kdevelop
+	plasma-marble
+	plasma-nm
+	plasma-runner-installer
+	plasma-runner-telepathy-contact
+	plasma-runners-addons
+	plasma-vault
+)
+
+kde_fonts_list=(
+	fonts-hack
+	fonts-noto-cjk
+	fonts-noto-hinted
+	fonts-noto-mono
+	fonts-noto-unhinted
+)
+
+kde_themes_ist=(
+	breeze
 )
 
 xfce_list=(
 	xfce4
+	xfce4-appfinder
 	xfce4-clipman
 	xfce4-dict
 	xfce4-notes
+	xfce4-notifyd
 	xfce4-panel
+	xfce4-screensaver
+	xfce4-screenshooter
 	xfce4-session
 	xfce4-settings
+	xfce4-taskmanager
 	xfce4-terminal
-	xfce4-goodies
-	xfce4-appfinder
+	thunar
+	thunar-archive-plugin
+	thunar-media-tags-plugin
+	mousepad
+	midori
+	ristretto
+)
+
+xfce_fonts_list=(
+)
+
+xfce_themes_list=(
+	blackbird-gtk-theme
+	bluebird-gtk-theme
+	greybird-gtk-theme
+	elementary-xfce-icon-theme
+)
+
+xfce_addons_list=(
 	xfce4-appmenu-plugin
 	xfce4-battery-plugin
 	xfce4-clipman-plugin
@@ -203,25 +230,20 @@ xfce_list=(
 	xfce4-eyes-plugin
 	xfce4-fsguard-plugin
 	xfce4-genmon-plugin
-	xfce4-goodies
 	xfce4-indicator-plugin
 	xfce4-mailwatch-plugin
 	xfce4-mount-plugin
 	xfce4-mpc-plugin
 	xfce4-netload-plugin
 	xfce4-notes-plugin
-	xfce4-notifyd
 	xfce4-panel-profiles
 	xfce4-places-plugin
-	xfce4-screensaver
-	xfce4-screenshooter
 	xfce4-sensors-plugin
 	xfce4-smartbookmark-plugin
 	xfce4-sntray-plugin
 	xfce4-sntray-plugin-common
 	xfce4-statusnotifier-plugin
 	xfce4-systemload-plugin
-	xfce4-taskmanager
 	xfce4-time-out-plugin
 	xfce4-timer-plugin
 	xfce4-verve-plugin
@@ -229,11 +251,6 @@ xfce_list=(
 	xfce4-weather-plugin
 	xfce4-whiskermenu-plugin
 	xfce4-xkb-plugin
-	elementary-xfce-icon-theme
-	blackbird-gtk-theme
-	bluebird-gtk-theme
-	greybird-gtk-theme
-	midori
 )
 
 # initialize install list
