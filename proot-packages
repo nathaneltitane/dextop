@@ -218,7 +218,6 @@ xfce4_list=(
 	xfce4-power-manager
 	xfce4-power-manager-data
 	xfce4-power-manager-plugins
-	xfce4-pulseaudio-plugin
 	xfce4-screensaver
 	xfce4-screenshooter
 	xfce4-sensors-plugin
@@ -234,7 +233,6 @@ xfce4_list=(
 	xfce4-time-out-plugin
 	xfce4-timer-plugin
 	xfce4-verve-plugin
-	xfce4-volumed
 	xfce4-wavelan-plugin
 	xfce4-weather-plugin
 	xfce4-whiskermenu-plugin
