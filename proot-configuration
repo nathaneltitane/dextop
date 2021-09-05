@@ -58,10 +58,6 @@ echo
 
 # write configuration
 
-cat << "FILE" ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
-
-# proot configuration #
-
 # download scripts
 
 # bash
@@ -72,9 +68,13 @@ console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/fu
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		sprunge
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		youtube
 
+# kde #
+
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin							kde-desktop
+
 # xfce
 
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin							xfconf-desktop
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin							xfce-desktop
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin							xfconf-read
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/usr/bin							xfconf-write
 
@@ -108,12 +108,18 @@ sleep 10
 
 # check for process and execute
 
-if [ ! -z $(pgrep -l ${SESSION_MANAGER}) ]
+if [ "${SESSION}" = "kde" ]
 then
-	xfconf-desktop
+	if [ ! -z $(pgrep -l ${SESSION_MANAGER}) ]
+	then
+		kde-desktop
+	fi
 fi
 
-# remove after execution  
-
-sed -i '/# proot configuration #/,$d' "${ROOT_DIRECTORY}"/home/"${USER}"/.profile
-FILE
+if [ "${SESSION}" = "xfce" ]
+then
+	if [ ! -z $(pgrep -l ${SESSION_MANAGER}) ]
+	then
+		xfconf-desktop
+	fi
+fi
