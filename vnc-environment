@@ -71,15 +71,6 @@ FILE
 cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.vnc/xstartup
 #!/bin/bash
 
-LD_PRELOAD=/lib/aarch64-linux-gnu/libgcc_s.so.1
-
-if [ "${SESSION}" = "kde" ]
-then
-	export QT_AUTO_SCREEN_SCALE_FACTOR=0
-	export QT_SCALE_FACTOR=1
-	export QT_X11_NO_MITSHM=1
-fi
-
 if [ ! -z "${APPLICATION}" ]
 then
 	"${SETTINGS_MANAGER}" &
