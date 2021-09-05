@@ -170,10 +170,8 @@ cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 # use this section to customize setup:
 # download / install / configure packages and scripts accordingly
 
-if [[ "$(cat ${BINARIES_DIRECTORY}/dextop-configuration-complete)" = "yes" ]]
+if [ -z "$(cat ${BINARIES_DIRECTORY}/dextop-configuration-complete)" ]
 then
-	:
-else
 	# download scripts
 	
 	# bash
@@ -207,6 +205,8 @@ else
 	# confirm uninterrupted configuration
 	
 	echo "yes" > "${BINARIES_DIRECTORY}"/dextop-configuration-complete
+else
+	:
 fi
 FILE
 
