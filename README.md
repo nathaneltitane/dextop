@@ -20,8 +20,10 @@ Choose between KDE5 or XFCE4 desktop environemnts to get your work done or keep 
 
 ### Note:
 
-Compositing must be disabled to optimize resource usage and prevent display bugs: this allows for the best possible performance and experience in accordance to current Android system and security limitations:
+Compositing isdisabled to optimize resource usage and prevent display bugs: this allows for the best possible performance and experience in accordance to current Android system and security limitations:
 Disabling compositing is required due to the Android user-space runtime and limited hardware access: there is no graphics hardware acceleration available - the change root graphics are emulated and run using LLVM.
+
+**It is strongly recommended to disable all other superfluous effects that may hinder performance or overload the processor! [KDE5] **
 
 ### Power users be warned:
 
@@ -46,7 +48,7 @@ Services backend and other advanced features that require access to restricted c
 
 ### Software requirements:
 
-- [Termux](https://f-droid.org/en/packages/com.termux/ "Termux by Fredrik Fornwall")         via F-Droid - the Google Play Store version is deprecated since November 2020
+- [Termux](https://f-droid.org/en/packages/com.termux/ "Termux by Fredrik Fornwall")             via F-Droid - the Google Play Store version is deprecated since November 2020
 - [Termux API](https://f-droid.org/en/packages/com.termux.api/ "Termux API by Fredrik Fornwall") via F-Droid - the Google Play Store version is deprecated since November 2020
 - A VNC viewer application with full screen or immersive capabillities for a better experience such as:
    - [Remotix](https://play.google.com/store/apps/details?id=com.nulana.android.remotix "Remotix Remote Desktop by Nulana")
