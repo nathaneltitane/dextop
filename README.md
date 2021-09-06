@@ -6,7 +6,7 @@ Dextop turns your modern Android device into a full workstation in a matter of m
 
 Comparison in between Dextop and other projects:
 
-- It provides you with an installation of Ubuntu 20.04 (LTS): stable, popular and user-friendly knowledge bases.
+- It provides you with an installation of Ubuntu 20.04 (LTS) core distribution: stable, popular and user-friendly knowledge bases.
 - It expands the installed base image to run just like a normal PC installation.
 - It creates a user profile for secure access and a home directory for you to work in.
 - It installs all the necessary applications and utilities to provide you with the right experience.
@@ -15,7 +15,8 @@ Comparison in between Dextop and other projects:
 - It is configured as a transient change root system: it talks to Android via the Termux shell to access Android and launch your favorite viewer for you.
 - It uses [console](https://github.com/nathaneltitane/console), a custom system to handle the setup, colorize prompts and proved the user with an elegant and user-friendly experience.
 
-Dextop is very quick and efficient: choose between KDE5 or XFCE4 desktop environemnts to get your work done. They will provide all the necessary and familiar graphical utilities and applications for you to get your work done.
+Dextop is very quick and efficient:
+Choose between KDE5 or XFCE4 desktop environemnts to get your work done or keep the Core install only for command line interface and programming workflows.
 
 ### Note:
 
@@ -60,23 +61,23 @@ Once the Android applications are installed on your device, open Termux and past
 
 Dextop setup options are:
 
-`-t | --termux:  setup Termux environment only - VNC setup not included.                              `
+`-t | --termux: setup Termux environment only           - VNC setup not included.                  `
 
-`-p | --proot:   setup Proot environment       - VNC setup included.                       [ Default ]`
+`-p | --proot:  setup Proot environment in Termux shell - VNC setup included.           [ Default ]`
 
 Proot container install options are:
 
-`-k | --kde:     install K desktop environment and utilities (KDE5).                     [ Default ]`
+`-k | --kde:    install K desktop environment and utilities (KDE5).                     [ Default ]`
 
-`-x |--xfce:     install XFCE desktop environment and utilities (XFCE4).                            `
-
-
-`-f | --full:    download and install full desktop environment, utilities and themes.               `
-
-`-m | --minimal: download and install full desktop environment and utilities.            [ Default ]`
+`-x |--xfce:    install XFCE desktop environment and utilities (XFCE4).                            `
 
 
-`-c | --core:    download and install core distribution image only.                                 `
+`-f | --full:   download and install full desktop environment, utilities and themes.               `
+
+`-l | --lite:   download and install lite desktop environment and utilities.            [ Default ]`
+
+
+`-c | --core:   download and install core distribution image only.                                 `
 
 ### Process:
 

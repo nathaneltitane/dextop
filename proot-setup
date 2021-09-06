@@ -61,8 +61,8 @@ do
 			install_option="full"
 		;;
 
-		-m|--minimal)
-			install_option="minimal"
+		-l|--lite)
+			install_option="lite"
 		;;
 		
 		-h|--help)
@@ -70,10 +70,10 @@ do
 			echo -e "USAGE:"
 			echo
 			echo -e "-k, --kde  \t\t KDE5 setup: install K desktop environment and utilities."
-			echo -e "-x, --xfce  \t\t XFCE4 setup: install XFCE desktop environment and utilities."
+			echo -e "-x, --xfce \t\t XFCE4 setup: install XFCE desktop environment and utilities."
 			echo
 			echo -e "-f, --full \t\t Full setup: download and install full desktop environment and utilities."
-			echo -e "-m, --minimal \t\t Minimal setup: download and install minimal desktop environment and utilities."
+			echo -e "-l, --lite \t\t Lite setup: download and install lite desktop environment and utilities."
 			echo
 			echo -e "-c, --core \t\t Core setup: download and install core distribution image only."
 			echo
@@ -123,7 +123,7 @@ echo
 [ -z "${distribution_version}" ]			&& distribution_version="20.04.3"
 
 [ -z "${desktop_option}" ]					&& desktop_option="kde"
-[ -z "${install_option}" ]					&& install_option="minimal"
+[ -z "${install_option}" ]					&& install_option="lite"
 
 # handle distribution code markup
 

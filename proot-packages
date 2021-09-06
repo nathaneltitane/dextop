@@ -317,9 +317,9 @@ then
 	)
 fi
 
-# minimal
+# lite
 
-if [[ "${install_option}" = "minimal" ]]
+if [[ "${install_option}" = "lite" ]]
 then
 	install_list+=(
 		${core_list[@]}
