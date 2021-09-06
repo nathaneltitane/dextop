@@ -1,0 +1,96 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/dextop
+
+# script #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="08-12-2021"
+
+# usage #
+
+while (($#))
+do
+	case "${1}" in
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-h, --help \t Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version ${version} ]"
+			echo
+
+			exit
+		;;
+
+		*)
+			echo
+			echo "Usage: ${script} [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+		;;
+	esac
+
+	shift
+done
+
+# prompt #
+
+console.script "Disabling cmpositing [ ${script%-*} ]"
+echo
+
+# variables #
+
+# set defaults
+
+# disable compositing
+
+if [ -z "$(cat ${BINARIES_DIRECTORY}/proot-compositing-complete)" ]
+then
+	# kde
+
+	if [ "${SESSION}" = "kde" ]
+	then
+		cat <<- 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.config/kwinrc
+		[Compositing]
+		Backend=XRender
+		Enabled=false
+		GLCore=false
+		GLPreferBufferSwap=a
+		GLTextureFilter=1
+		HiddenPreviews=5
+		OpenGLIsUnsafe=false
+		WindowsBlockCompositing=true
+		XRenderSmoothScale=true
+		FILE
+	fi
+	
+	# xfce
+	
+	if [ "${SESSION}" = "kde" ]
+	then
+		xfconf-query --create -c xfwm4 -p /general/use_compositing -t bool -s false
+	fi
+	# reload window manager
+	
+	"${WINDOW_MANAGER}" --replace
+	
+	# confirm compositing disabled
+	
+	echo "yes" > "${BINARIES_DIRECTORY}"/proot-compositing-complete
+else
+	:
+fi

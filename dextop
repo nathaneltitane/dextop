@@ -209,15 +209,15 @@ then
 	
 	# leocad
 	
-	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin								leocad-build
-	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin								leocad-configuration
-	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin								leocad-download
-	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin								leocad-launcher
-	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin								leocad-position
+	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin							leocad-build
+	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin							leocad-configuration
+	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin							leocad-download
+	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin							leocad-launcher
+	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin							leocad-position
 	
 	# youtube-dl
 	
-	console.download https://yt-dl.org/downloads/latest											/usr/bin								youtube-dl
+	console.download https://yt-dl.org/downloads/latest											/usr/bin							youtube-dl
 	
 	# execute scripts
 	

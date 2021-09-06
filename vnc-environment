@@ -82,6 +82,13 @@ else
 	"${SESSION_MANAGER}" &
 	"${WINDOW_MANAGER}" &
 fi
+
+console.wait
+
+if [ ! -z $(pgrep -f "${SESSION}) ]
+then
+	proot-compositing
+fi
 FILE
 
 # append automatic vnc session stop on shell logout
