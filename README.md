@@ -89,20 +89,15 @@ The rest of the setup is fully automated and should run its course until the pro
       - Set up configurations, utilities and shell requirements
 - Dextop setup exits to force reload all changes and greet you with your freshly installed dextop setup once Termux is reopened.
 
-### Note:
-
-All setup dialogs, prompts, commands and binaries have all been made to redirect all output to the Termux's `'/var/log'` directory, keeping output messages to a minimum.
-
 ### Customization:
 
-Use and edit the 'proot-applications' script to customize your list of installed applications, libraries, frameworks, utilities and other third party package locations.
-You can fill and organize those items under the various arrays and create your own too: do not forget to append the newly made array names under the main installation array!
+Use and edit 'dextop' prior to starting the setup to customize your list of installed applications, libraries, frameworks, utilities and other third party package locations.
 
 ### Usage:
 
 To access your newly created proot you must type:
 
-- `'proot-session -u <username> | -a <application> | <option>'` to start your session or a specific application on session load.
+`'proot-session -u <username> | -a <application> | <option>'` to start your session, run a specific application or setup session options on load.
 
 ### The fun begins:
 
@@ -120,4 +115,5 @@ To start the display once again, type `'vnc-start'`.
 
 ### Reports:
 
+All setup dialogs, prompts, commands and binaries have all been made to redirect all output to the Termux `'/var/log'` directory, keeping output messages to a minimum.
 Should you suspect any issues or errors, please provide a copy of the files located under Termux's `'/var/log'` directory when submitting a bug report.
