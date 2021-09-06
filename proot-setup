@@ -157,8 +157,8 @@ echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'				>> "${PRE
 
 echo '# installation #'															>> "${PREFIX}"/bin/dextop
 
-echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/dextop
 echo "export desktop_option=${desktop_option}"									>> "${PREFIX}"/bin/dextop
+echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/dextop
 
 # source variables
 
