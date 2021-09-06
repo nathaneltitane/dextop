@@ -17,15 +17,18 @@ Comparison in between Dextop and other projects:
 
 Dextop is very quick and efficient: choose between KDE5 or XFCE4 desktop environemnts to get your work done. They will provide all the necessary and familiar graphical utilities and applications for you to get your work done.
 
-Compositing is disabled by default to optimize resource usage and prevent display bugs: this is done to give you the best possible performance and experience in accordance to Android hardware performance.
+### Note:
 
-Disabling compositing is required due to Android user-space limitations and limited hardware access: there is no graphics hardware acceleration available - the change root graphics are emulated and run using LLVM.
+Compositing must be disabled to optimize resource usage and prevent display bugs: this allows for the best possible performance and experience in accordance to current Android system and security limitations:
+Disabling compositing is required due to the Android user-space runtime and limited hardware access: there is no graphics hardware acceleration available - the change root graphics are emulated and run using LLVM.
 
 ### Power users be warned:
 
 - Dextop does not install or configure sound output or advanced mail services!
-- Dextop does not have access to system processes as it does not root your device!
-- Dextop does not load any services: applications are run as needed to get the session running!
+- Dextop does not root your device!
+- Dextop does not have access to system process files!
+- Dextop does not load any services or backends!
+- Dextop only loads applications as needed to keep a minimal footprint!
 
 Dextop is made to run in tandem with Samsung's Dex: music, mail and web browsing should preferably be taken care of using native Android applications that are readily installed and configured on your device.
 
