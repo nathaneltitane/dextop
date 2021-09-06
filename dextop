@@ -176,11 +176,11 @@ then
 	
 	# bash
 	
-	console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME}"/"${USER}"/.bash_functions		extract
-	console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME}"/"${USER}"/.bash_functions		record
-	console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME}"/"${USER}"/.bash_functions		speed
-	console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME}"/"${USER}"/.bash_functions		sprunge
-	console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME}"/"${USER}"/.bash_functions		youtube
+	console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		extract
+	console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		record
+	console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		speed
+	console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		sprunge
+	console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		youtube
 	
 	# leocad
 	
