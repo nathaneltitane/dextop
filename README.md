@@ -63,10 +63,10 @@ Available install options are:
 `-k | --kde:     install K desktop environment and utilities (KDE5).                     [ Default ]`
 `-x |--xfce:     install XFCE desktop environment and utilities (XFCE4).                            `
 
-`-c | --core:    download and install core distribution image only.                                 `
-
 `-f | --full:    download and install full desktop environment, utilities and themes.               `
 `-m | --minimal: download and install full desktop environment and utilities.            [ Default ]`
+
+`-c | --core:    download and install core distribution image only.                                 `
 
 ### Process:
 

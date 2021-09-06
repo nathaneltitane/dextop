@@ -171,6 +171,28 @@ cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 
 if [ -z "$(cat ${BINARIES_DIRECTORY}/dextop-configuration-complete)" ]
 then
+	# install applications
+
+	applications_list=(
+		leocad
+		povray
+		youtube-dl
+	)
+	
+	# initialize install install list
+	
+	install_list=()
+	
+	# populate install list
+	
+	install_list+=(
+		${applications_list[@]}
+	)
+	
+	# install #
+	
+	console.install ${install_list[@]}
+	
 	# download scripts
 	
 	# bash

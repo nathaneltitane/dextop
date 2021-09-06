@@ -70,11 +70,6 @@ administration_list=(
 	sudo
 )
 
-applications_list=(
-	leocad
-	povray
-	youtube-dl
-)
 display_list=(
 	dbus-x11
 	x11-apps
@@ -252,21 +247,22 @@ xfce_addons_list=(
 	xfce4-xkb-plugin
 )
 
-# initialize install list
-
-install_list=()
-
-# populate install list
-
-install_list+=(
+core_list=(
 	${administration_list[@]}
-	${applications_list[@]}
 	${display_list[@]}
 	${documentation_list}
 	${locales_list[@]}
 	${security_list[@]}
 	${vnc_list[@]}
 )
+
+# initialize desktop environment list
+
+desktop_environment_list=()
+
+# initialize install list
+
+install_list=()
 
 # options #
 
@@ -310,18 +306,12 @@ fi
 
 # install
 
-# core
-
-if [[ "${install_option}" = "core" ]]
-then
-
-fi
-
 # full
 
 if [[ "${install_option}" = "full" ]]
 then
 	install_list+=(
+		${core_list[@]}
 		${desktop_environment_list[@]}
 		${themes_list[@]}
 	)
@@ -332,7 +322,17 @@ fi
 if [[ "${install_option}" = "minimal" ]]
 then
 	install_list+=(
+		${core_list[@]}
 		${desktop_environment_list[@]}
+	)
+fi
+
+# core
+
+if [[ "${install_option}" = "core" ]]
+then
+	install_list+=(
+		${core_list[@]}
 	)
 fi
 

@@ -72,10 +72,10 @@ do
 			echo -e "-k, --kde  \t\t KDE5 setup: install K desktop environment and utilities."
 			echo -e "-x, --xfce  \t\t XFCE4 setup: install XFCE desktop environment and utilities."
 			echo
-			echo -e "-c, --core \t\t Core setup: download and install core distribution image only."
-			echo
 			echo -e "-f, --full \t\t Full setup: download and install full desktop environment and utilities."
 			echo -e "-m, --minimal \t\t Minimal setup: download and install minimal desktop environment and utilities."
+			echo
+			echo -e "-c, --core \t\t Core setup: download and install core distribution image only."
 			echo
 			echo -e "-h, --help \t\t Show help and usage information."
 			echo
