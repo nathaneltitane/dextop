@@ -117,28 +117,28 @@ vnc_list=(
 )
 
 kde_list=(
-		plasma-desktop
-		plasma-framework
-		plasma-integration
-		plasma-workspace
-		plasma-workspace-wallpapers
-		plasma-wallpapers-addons
-		plasma-discover
-		plasma-discover-backend-flatpak
-		plasma-discover-backend-snap
-		plasma-discover-common
-		plasma-discover-flatpak-backend
-		plasma-discover-snap-backend
-		dolphin
-		kate
-		kdialog
-		keditbookmarks
-		kfind
-		konsole
-		konqueror
-		gwenview
-		okular
-		systemsettings
+	plasma-desktop
+	plasma-framework
+	plasma-integration
+	plasma-workspace
+	plasma-workspace-wallpapers
+	plasma-wallpapers-addons
+	plasma-discover
+	plasma-discover-backend-flatpak
+	plasma-discover-backend-snap
+	plasma-discover-common
+	plasma-discover-flatpak-backend
+	plasma-discover-snap-backend
+	dolphin
+	kate
+	kdialog
+	keditbookmarks
+	kfind
+	konsole
+	konqueror
+	gwenview
+	okular
+	systemsettings
 )
 
 kde_addons_list=(
@@ -265,6 +265,9 @@ if [[ "${desktop_option}" = "kde" ]]
 then
 	desktop_environment_list=(
 		${kde_list[@]}
+		${kde_fonts_list[@]}
+		${kde_themes_list[@]}
+		
 	)
 fi
 
@@ -272,6 +275,8 @@ if [[ "${desktop_option}" = "xfce" ]]
 then
 	desktop_environment_list=(
 		${xfce_list[@]}
+		${xfce_fonts_list[@]}
+		${xfce_themes_list[@]}
 	)
 fi
 
