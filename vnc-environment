@@ -83,8 +83,6 @@ else
 	"${WINDOW_MANAGER}" &
 fi
 
-console.wait
-
 if [ ! -z $(pgrep -f "${SESSION}) ]
 then
 	proot-compositing
