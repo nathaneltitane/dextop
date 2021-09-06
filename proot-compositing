@@ -75,6 +75,34 @@ then
 		OpenGLIsUnsafe=false
 		WindowsBlockCompositing=true
 		XRenderSmoothScale=true
+		
+		[KDE]
+		AnimationDurationFactor=0
+		
+		[Plugins]
+		blurEnabled=false
+		contrastEnabled=false
+		desktopgridEnabled=false
+		kwin4_effect_dialogparentEnabled=false
+		kwin4_effect_fadeEnabled=false
+		kwin4_effect_fadingpopupsEnabled=false
+		kwin4_effect_frozenappEnabled=false
+		kwin4_effect_loginEnabled=false
+		kwin4_effect_logoutEnabled=false
+		kwin4_effect_maximizeEnabled=false
+		kwin4_effect_morphingpopupsEnabled=false
+		kwin4_effect_squashEnabled=false
+		kwin4_effect_translucencyEnabled=false
+		kwin4_effect_windowapertureEnabled=false
+		presentwindowsEnabled=false
+		screenedgeEnabled=false
+		slideEnabled=false
+		slidingpopupsEnabled=false
+		zoomEnabled=false
+		
+		[org.kde.kdecoration2]
+		BorderSize=None
+		BorderSizeAuto=false
 		FILE
 	fi
 	
