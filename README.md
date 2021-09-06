@@ -20,10 +20,9 @@ Choose between KDE5 or XFCE4 desktop environemnts to get your work done or keep 
 
 ### Note:
 
-Compositing isdisabled to optimize resource usage and prevent display bugs: this allows for the best possible performance and experience in accordance to current Android system and security limitations:
-Disabling compositing is required due to the Android user-space runtime and limited hardware access: there is no graphics hardware acceleration available - the change root graphics are emulated and run using LLVM.
+Compositing is disabled to optimize resource usage and prevent display tearing and other glitches: this allows for the best possible performance and experience in accordance to current Android system and security limitations.
 
-**It is strongly recommended to disable all other superfluous effects that may hinder performance or overload the processor! [KDE5] **
+Disabling compositing is required due to the Android user-space runtime and limited hardware access: there is no graphics hardware acceleration available - the change root graphics are emulated and run using LLVM.
 
 ### Power users be warned:
 
