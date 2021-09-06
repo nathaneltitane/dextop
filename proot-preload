@@ -58,7 +58,6 @@ echo
 
 # environment
 
-cat << 'FILE' ->> "${ROOT_DIRECTORY}"/etc/environment
-
-LD_PRELOAD="/lib/aarch64-linux-gnu/libgcc_s.so.1"
+cat << 'FILE' ->> "${ROOT_DIRECTORY}"/etc/ld.so.preload
+/lib/aarch64-linux-gnu/libgcc_s.so.1
 FILE
