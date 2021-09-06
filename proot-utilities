@@ -71,7 +71,6 @@ binaries_list=(
 	proot-checkpoint
 	proot-clean
 	proot-compositing
-	proot-utilities
 	proot-environment
 	proot-expand
 	proot-finalize
@@ -91,6 +90,7 @@ binaries_list=(
 	proot-silent
 	proot-superuser
 	proot-timezones
+	proot-utilities
 	proot-user
 	proot-welcome
 )
