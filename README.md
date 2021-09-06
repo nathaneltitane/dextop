@@ -13,7 +13,7 @@ Comparison in between Dextop and other projects:
 - It sets up your internal and external (when available) storage media for quick access.
 - It handles all the technical intricacies related to a change root (chroot/proot) installation so that you do not have to bother with them and get right to work.
 - It is configured as a transient change root system: it talks to Android via the Termux shell to access Android and launch your favorite viewer for you.
-- It uses [console](https://github.com/nathaneltitane/console), a custom system to handle the setup, colorize prompts and proved the user with an elegant and user-friendly experience.
+- It uses [console](https://github.com/nathaneltitane/console), a custom shell parser to handle the setup, colorize prompts and provide the user with an elegant, comprehensive and user-friendly experience.
 
 Dextop is very quick and efficient:
 Choose between KDE5 or XFCE4 desktop environemnts to get your work done or keep the Base install only for command line interface and programming workflows.
