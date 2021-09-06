@@ -84,9 +84,10 @@ then
 	then
 		xfconf-query --create -c xfwm4 -p /general/use_compositing -t bool -s false
 	fi
+	
 	# reload window manager
 	
-	"${WINDOW_MANAGER}" --replace
+	"${WINDOW_MANAGER}" --replace &
 	
 	# confirm compositing disabled
 	
