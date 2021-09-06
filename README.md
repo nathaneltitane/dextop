@@ -86,7 +86,7 @@ The rest of the setup is fully automated and should run its course until the pro
          - Login as root in newly created container
          - Finalize setup from within Proot
    - VNC setup:
-       - Set up configurations, utilities and shell requirements
+      - Set up configurations, utilities and shell requirements
 - Dextop setup exits to force reload all changes and greet you with your freshly installed dextop setup once Termux is reopened.
 
 ### Note:
