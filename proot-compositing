@@ -80,7 +80,7 @@ then
 	
 	# xfce
 	
-	if [ "${SESSION}" = "kde" ]
+	if [ "${SESSION}" = "xfce" ]
 	then
 		xfconf-query --create -c xfwm4 -p /general/use_compositing -t bool -s false
 	fi
