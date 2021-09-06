@@ -247,7 +247,7 @@ xfce_addons_list=(
 	xfce4-xkb-plugin
 )
 
-core_list=(
+base_list=(
 	${administration_list[@]}
 	${display_list[@]}
 	${documentation_list}
@@ -311,7 +311,7 @@ fi
 if [[ "${install_option}" = "full" ]]
 then
 	install_list+=(
-		${core_list[@]}
+		${base_list[@]}
 		${desktop_environment_list[@]}
 		${themes_list[@]}
 	)
@@ -322,17 +322,17 @@ fi
 if [[ "${install_option}" = "lite" ]]
 then
 	install_list+=(
-		${core_list[@]}
+		${base_list[@]}
 		${desktop_environment_list[@]}
 	)
 fi
 
-# core
+# base
 
-if [[ "${install_option}" = "core" ]]
+if [[ "${install_option}" = "base" ]]
 then
 	install_list+=(
-		${core_list[@]}
+		${base_list[@]}
 	)
 fi
 

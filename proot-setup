@@ -53,8 +53,8 @@ do
 			desktop_option="xfce"
 		;;
 		
-		-c|--core)
-			install_option="core"
+		-b|--base)
+			install_option="base"
 		;;
 
 		-f|--full)
@@ -75,7 +75,7 @@ do
 			echo -e "-f, --full \t\t Full setup: download and install full desktop environment and utilities."
 			echo -e "-l, --lite \t\t Lite setup: download and install lite desktop environment and utilities."
 			echo
-			echo -e "-c, --core \t\t Core setup: download and install core distribution image only."
+			echo -e "-b, --base \t\t Base setup: download and install base distribution image only."
 			echo
 			echo -e "-h, --help \t\t Show help and usage information."
 			echo

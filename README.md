@@ -6,7 +6,7 @@ Dextop turns your modern Android device into a full workstation in a matter of m
 
 Comparison in between Dextop and other projects:
 
-- It provides you with an installation of Ubuntu 20.04 (LTS) core distribution: stable, popular and user-friendly knowledge bases.
+- It provides you with an installation of Ubuntu 20.04 (LTS) base distribution: stable, popular and user-friendly knowledge bases.
 - It expands the installed base image to run just like a normal PC installation.
 - It creates a user profile for secure access and a home directory for you to work in.
 - It installs all the necessary applications and utilities to provide you with the right experience.
@@ -16,7 +16,7 @@ Comparison in between Dextop and other projects:
 - It uses [console](https://github.com/nathaneltitane/console), a custom system to handle the setup, colorize prompts and proved the user with an elegant and user-friendly experience.
 
 Dextop is very quick and efficient:
-Choose between KDE5 or XFCE4 desktop environemnts to get your work done or keep the Core install only for command line interface and programming workflows.
+Choose between KDE5 or XFCE4 desktop environemnts to get your work done or keep the Base install only for command line interface and programming workflows.
 
 ### Note:
 
@@ -77,7 +77,7 @@ Proot container install options are:
 `-l | --lite:   download and install lite desktop environment and utilities.            [ Default ]`
 
 
-`-c | --core:   download and install core distribution image only.                                 `
+`-b | --base:   download and install base distribution image only.                                 `
 
 ### Process:
 
@@ -95,7 +95,7 @@ The rest of the setup is fully automated and should run its course until the pro
    - Proot setup:
       - Set up configurations, utilities, package dependencies and shell requirements
       - Set up proot container directories
-      - Download, unpack and prepare core system image for use
+      - Download, unpack and prepare base system image for use
       - Gather user information for successful setup
          - Initialize setup from within Termux
          - Enter blank proot container as 'root'
