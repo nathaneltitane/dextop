@@ -75,18 +75,6 @@ applications_list=(
 	povray
 	youtube-dl
 )
-
-locales_list=(
-	keyboard-configuration
-	locales
-	locales-all
-)
-
-security_list=(
-	ca-certificates
-	openssl
-)
-
 display_list=(
 	dbus-x11
 	x11-apps
@@ -104,16 +92,27 @@ documentation_list=(
 	man-db
 )
 
-themes_list=(
-	arc-theme
-	tango-icon-theme
-	qt5-style-platform-gtk2
-	qt5-style-plugin-gtk2
+locales_list=(
+	keyboard-configuration
+	locales
+	locales-all
+)
+
+security_list=(
+	ca-certificates
+	openssl
 )
 
 vnc_list=(
 	tigervnc-common
 	tigervnc-standalone-server
+)
+
+themes_list=(
+	arc-theme
+	tango-icon-theme
+	qt5-style-platform-gtk2
+	qt5-style-plugin-gtk2
 )
 
 kde_list=(
@@ -139,6 +138,18 @@ kde_list=(
 	gwenview
 	okular
 	systemsettings
+)
+
+kde_fonts_list=(
+	fonts-hack
+	fonts-noto-cjk
+	fonts-noto-hinted
+	fonts-noto-mono
+	fonts-noto-unhinted
+)
+
+kde_themes_ist=(
+	breeze
 )
 
 kde_addons_list=(
@@ -172,18 +183,6 @@ kde_addons_list=(
 	plasma-runner-telepathy-contact
 	plasma-runners-addons
 	plasma-vault
-)
-
-kde_fonts_list=(
-	fonts-hack
-	fonts-noto-cjk
-	fonts-noto-hinted
-	fonts-noto-mono
-	fonts-noto-unhinted
-)
-
-kde_themes_ist=(
-	breeze
 )
 
 xfce_list=(
@@ -257,9 +256,23 @@ xfce_addons_list=(
 
 install_list=()
 
+# populate install list
+
+install_list+=(
+	${administration_list[@]}
+	${applications_list[@]}
+	${display_list[@]}
+	${documentation_list}
+	${locales_list[@]}
+	${security_list[@]}
+	${vnc_list[@]}
+)
+
 # options #
 
-# desktop
+# desktops
+
+# kde
 
 if [[ "${desktop_option}" = "kde" ]]
 then
@@ -267,9 +280,17 @@ then
 		${kde_list[@]}
 		${kde_fonts_list[@]}
 		${kde_themes_list[@]}
-		
 	)
+	
+	if [[ "${install_option}" = "full" ]]
+	then
+		desktop_environment_list+=(
+			${kde_addons_list[@]}
+		)
+	fi
 fi
+
+# xfce
 
 if [[ "${desktop_option}" = "xfce" ]]
 then
@@ -278,7 +299,16 @@ then
 		${xfce_fonts_list[@]}
 		${xfce_themes_list[@]}
 	)
+	
+	if [[ "${install_option}" = "full" ]]
+	then
+		desktop_environment_list+=(
+			${xfce_addons_list[@]}
+		)
+	fi
 fi
+
+# install
 
 # full
 
@@ -298,18 +328,6 @@ then
 		${desktop_environment_list[@]}
 	)
 fi
-
-# populate install list
-
-install_list+=(
-	${administration_list[@]}
-	${applications_list[@]}
-	${locales_list[@]}
-	${documentation_list}
-	${display_list[@]}
-	${security_list[@]}
-	${vnc_list[@]}
-)
 
 # install #
 
