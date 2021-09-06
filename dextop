@@ -167,7 +167,7 @@ cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 # dextop configuration #
 
 # use this section to customize setup:
-# download / install / configure packages and scripts accordingly
+# download / install / configure packages and scripts for user session
 
 if [ -z "$(cat ${BINARIES_DIRECTORY}/dextop-configuration-complete)" ]
 then
