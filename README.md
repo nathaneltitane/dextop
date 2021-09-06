@@ -64,21 +64,30 @@ Available install options are:
 
 `-m | --minimal: download and install full desktop environment and utilities.        [ Default ]`
 
-**Be attentive!**
-
-**User input is required to capture necessary setup information and give Termux storage access permissions:**
-**this can only be done through user interaction and there are no workarounds for now.**
-
-The rest of the setup is fully automated and should run its course until the proot environment is ready for you to use.
-
 ### Process:
 
-- The script goes through usual update and upgrade processes using 'apt' to get the Termux system up to date and ready.
-- Necessary dependencies, configurations and binaries are downloaded and set up in both the Termux and proot environment.
-- The base Ubuntu image is downloaded, unpacked and setup from within the Termux environment.
-- Information is then captured to properly configure and setup a user account and environment features in the proot.
-- The setup transitions automatically into the newly unpacked proot environment and proceeds with configuring and installing the rest of your packages, dependencies and additional applications and customizations..
-- The setups exits to force reload all changes and greet you with your freshly installed dextop setup once Termux is reopened.
+**Be attentive!**
+
+**User input is required to give Termux storage access permissions:**
+**this can only be done through user interaction and there are no workarounds.**
+
+User information will be captured later on to set up profiles and home directories:
+The rest of the setup is fully automated and should run its course until the proot environment is ready for you to use.
+
+- Dextop setup:
+   - Termux setup:
+      - Set up configurations,utilities, package dependencies and shell requirements
+   - Proot setup:
+      - Set up configurations, utilities, package dependencies and shell requirements
+      - Download, unpack and prepare core system image for use
+      - Gather user information for successful setup
+         - Initialize setup from within Termux
+         - Expand system image for normal use
+         - Login as root in newly created container
+         - Finalize setup from within Proot
+   - VNC setup:
+       - Set up configurations, utilities and shell requirements
+- Dextop setup exits to force reload all changes and greet you with your freshly installed dextop setup once Termux is reopened.
 
 ### Note:
 
