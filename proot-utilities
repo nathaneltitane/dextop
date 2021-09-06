@@ -84,6 +84,7 @@ binaries_list=(
 	proot-message
 	proot-network
 	proot-packages
+	proot-preload
 	proot-repositories
 	proot-session
 	proot-setup

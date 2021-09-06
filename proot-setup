@@ -176,6 +176,7 @@ setup_list=(
 	proot-image
 	proot-groups
 	proot-network
+	proot-preload
 	proot-initialize
 	proot-session
 )
