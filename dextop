@@ -29,7 +29,7 @@ do
 			echo
 			echo -e "USAGE:"
 			echo
-			echo -e "-t, --termux \t\t Setup Termux environment - VNC setup not included."
+			echo -e "-t, --termux \t\t Setup Termux environment only - VNC setup not included."
 			echo -e "-p, --proot \t\t Setup Proot environment - VNC setup included."
 			echo
 			echo -e "-h, --help \t\t Show help and usage information."
@@ -119,6 +119,10 @@ console.download get.dxtp.app "${BINARIES_DIRECTORY}" ${utilities_list[@]}
 # clear #
 
 console.clear
+
+# initialize setup list
+
+setup_list=()
 
 # options #
 

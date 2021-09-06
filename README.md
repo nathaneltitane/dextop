@@ -58,7 +58,13 @@ Once the Android applications are installed on your device, open Termux and past
 
 `curl -sL run.dxtp.app > dextop && bash dextop | <option>`
 
-Available install options are:
+Dextop setup options are:
+
+`-t | --termux:  setup Termux environment only - VNC setup not included.                              `
+
+`-p | --proot:   setup Proot environment       - VNC setup included.                       [ Default ]`
+
+Proot container install options are:
 
 `-k | --kde:     install K desktop environment and utilities (KDE5).                     [ Default ]`
 
