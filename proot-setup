@@ -167,7 +167,6 @@ setup_list=(
 	proot-message
 	proot-architecture
 	proot-information
-	proot-proc
 	proot-image
 	proot-groups
 	proot-network

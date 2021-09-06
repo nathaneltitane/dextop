@@ -229,7 +229,6 @@ PAGER="less"
 # set defaults
 
 [ -z "${MOUNT_DIRECTORY}" ]			&& MOUNT_DIRECTORY="${PREFIX%/*}/mnt"
-[ -z "${PROC_DIRECTORY}" ]			&& PROC_DIRECTORY="${PREFIX%/*}/proc"
 [ -z "${ROOT_DIRECTORY}" ]			&& ROOT_DIRECTORY="${PREFIX%/*}/img"
 
 [ -z "${BROWSER}" ]					&& BROWSER="${BROWSER}"
@@ -288,11 +287,6 @@ command+=" --bind=/proc/self/fd:/dev/fd"
 command+=" --bind=/proc/self/fd/0:/dev/stdin"
 command+=" --bind=/proc/self/fd/1:/dev/stdout"
 command+=" --bind=/proc/self/fd/2:/dev/stderr"
-command+=" --bind=${PREFIX/*}/proc/loadavg:/proc/loadavg"
-command+=" --bind=${PREFIX*/}/proc/stat:/proc/stat"
-command+=" --bind=${PREFIX*/}/proc/uptime:/proc/uptime"
-command+=" --bind=${PREFIX*/}/proc/version:/proc/version"
-command+=" --bind=${PRREFIX*/}/proc/vmstat:/proc/vmstat"
 command+=" --bind=/storage"
 [ -d "${PREFIX%/*}"/storage/external ] && command+=" --bind=${PREFIX%/*}/storage/external:/media/External" || :
 [ -d "${PREFIX%/*}"/storage/internal ] && command+=" --bind=${PREFIX%/*}/storage/internal:/media/Internal" || :
