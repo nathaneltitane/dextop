@@ -310,6 +310,13 @@ fi
 
 # install
 
+# core
+
+if [[ "${install_option}" = "core" ]]
+then
+
+fi
+
 # full
 
 if [[ "${install_option}" = "full" ]]

@@ -67,7 +67,7 @@ then
 	console.wrn "Internal and external storage locations are made available."
 	echo
 
-	console.inf "Storage is made accessible through the proot session."
+	console.inf "Storage is made accessible through the proot container."
 	echo
 
 	console.usr "Select 'Allow' when prompted to proceed."

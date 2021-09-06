@@ -45,7 +45,8 @@ Services backend and other advanced features that require access to restricted c
 
 ### Software requirements:
 
-- [Termux](https://f-droid.org/en/packages/com.termux/ "Termux by Fredrik Fornwall") via F-Droid - the Google Play Store version is deprecated since November 2020
+- [Termux](https://f-droid.org/en/packages/com.termux/ "Termux by Fredrik Fornwall")         via F-Droid - the Google Play Store version is deprecated since November 2020
+- [Termux API](https://f-droid.org/en/packages/com.termux.api/ "Termux API by Fredrik Fornwall") via F-Droid - the Google Play Store version is deprecated since November 2020
 - A VNC viewer application with full screen or immersive capabillities for a better experience such as:
    - [Remotix](https://play.google.com/store/apps/details?id=com.nulana.android.remotix "Remotix Remote Desktop by Nulana")
    - [VNC Viewer ](https://play.google.com/store/apps/details?id=com.realvnc.viewer.android "VNC Viewer by RealVNC Ltd.")
@@ -61,6 +62,9 @@ Available install options are:
 
 `-k | --kde:     install K desktop environment and utilities (KDE5).                     [ Default ]`
 `-x |--xfce:     install XFCE desktop environment and utilities (XFCE4).                            `
+
+`-c | --core:    download and install core distribution image only.                                 `
+
 `-f | --full:    download and install full desktop environment, utilities and themes.               `
 `-m | --minimal: download and install full desktop environment and utilities.            [ Default ]`
 
@@ -72,19 +76,21 @@ Available install options are:
 **this can only be done through user interaction and there are no workarounds.**
 
 User information will be captured later on to set up profiles and home directories:
-The rest of the setup is fully automated and should run its course until the proot environment is ready for you to use.
+The rest of the setup is fully automated and should run its course until the proot container is ready for you to use.
 
 - Dextop setup:
    - Termux setup:
       - Set up configurations,utilities, package dependencies and shell requirements
    - Proot setup:
       - Set up configurations, utilities, package dependencies and shell requirements
+      - Set up proot container directories
       - Download, unpack and prepare core system image for use
       - Gather user information for successful setup
          - Initialize setup from within Termux
+         - Enter blank proot container as 'root'
          - Expand system image for normal use
-         - Login as root in newly created container
-         - Finalize setup from within Proot
+         - Login as root in newly created proot container
+         - Finalize setup from within proot container
    - VNC setup:
       - Set up configurations, utilities and shell requirements
 - Dextop setup exits to force reload all changes and greet you with your freshly installed dextop setup once Termux is reopened.
@@ -95,25 +101,25 @@ Use and edit 'dextop' prior to starting the setup to customize your list of inst
 
 ### Usage:
 
-To access your newly created proot you must type:
+To access your newly created proot container:
 
 `'proot-session -u <username> | -a <application> | <option>'` to start your session, run a specific application or setup session options on load.
 
 ### The fun begins:
 
-When logging into the proot environment for the first time, you need to start the vnc server manually.
-This will let you select the appropriate device resolution settings for you to enjoy the display you have chosen to its full potential.
+When logging into the proot container for the first time, you need to start the vnc server manually:
+Type `'vnc-start'` and follow the prompt to select the appropriate device resolution settings for the Android device or external monitor.
 
-To set this up, just type `'vnc-start'` and follow the prompt to select the desired resolution geometry.
 
-The next time you log into your proot session on that same device/display, the session greeter will automatically launch the session for you.
-The first login records your preferred geometry selection under `"${HOME}"/.vnc/selection`. and uses it to start the VNC server and viewer automatically for your convenience!
+The next login will automatically launch the session for you using the settings you've chosen previously:
+The first login saves the selection under `"${HOME}"/.vnc/selection` and uses it to start the VNC server and viewer automatically for your convenience!
 
-Logging out by pressing Ctrl+D or by typing `'logout'` or `'exit'``will automatically stop all vnc servers that are running and exit the proot environment back to the Termux shell.
-If you wish to simply stop the display output and continue work using the CLI, simply type `'vnc-stop'`.
-To start the display once again, type `'vnc-start'`.
+Logging out by pressing Ctrl+D or by typing `'logout'` or `'exit'``will automatically stop the vnc session and exit the proot container back to the Termux shell.
+
+To stop the vnc server and halt the display output, type `'vnc-stop'`.
+To start the vnc server and restart the display output, type `'vnc-start'`.
 
 ### Reports:
 
-All setup dialogs, prompts, commands and binaries have all been made to redirect all output to the Termux `'/var/log'` directory, keeping output messages to a minimum.
-Should you suspect any issues or errors, please provide a copy of the files located under Termux's `'/var/log'` directory when submitting a bug report.
+All setup dialogs, prompts, commands and binary execution outputs have been set to redirect to the Termux `'/var/log'` directory to keep output messages to a minimum.
+Should you suspect any issues or errors, please provide a copy of the files located under the Termux `'/var/log'` directory when submitting a bug report.
