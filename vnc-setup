@@ -59,6 +59,10 @@ console.script "Starting setup [ ${script%-*} ]"
 
 echo '# vnc variables #'														>> "${PREFIX}"/bin/dextop
 
+# clear #
+
+console.clear
+
 # source variables
 
 [ -f "${PREFIX}"/bin/dextop ] && source "${PREFIX}"/bin/dextop

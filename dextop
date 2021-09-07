@@ -97,6 +97,10 @@ echo 'export IMAGE_DIRECTORY="${MAIN_DIRECTORY}"/img'							>> "${PREFIX}"/bin/d
 echo 'export ISO_DIRECTORY="${MAIN_DIRECTORY}"/iso'								>> "${PREFIX}"/bin/dextop
 echo 'export MOUNT_DIRECTORY="${MAIN_DIRECTORY}"/mnt'							>> "${PREFIX}"/bin/dextop
 
+# clear #
+
+console.clear
+
 # source variables
 
 [ -f "${PREFIX}"/bin/dextop ] && source "${PREFIX}"/bin/dextop
@@ -115,10 +119,6 @@ utilities_list=(
 # download #
 
 console.download get.dxtp.app "${BINARIES_DIRECTORY}" ${utilities_list[@]}
-
-# clear #
-
-console.clear
 
 # initialize setup list
 
