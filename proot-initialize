@@ -92,7 +92,7 @@ console.clear
 
 # log out
 
-console.inf "Logging out [ ${script%-*} ]"
+console.fwd "Logging out..."
 echo
 
 # remove after execution 

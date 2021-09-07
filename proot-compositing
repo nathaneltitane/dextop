@@ -103,6 +103,17 @@ then
 		[org.kde.kdecoration2]
 		BorderSize=None
 		BorderSizeAuto=false
+		ButtonsOnLeft=
+		ButtonsOnRight=IAX
+		FILE
+
+		cat <<- 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.config/breezerc
+		[Common]
+		ShadowSize=ShadowNone
+		
+		[Windeco]
+		AnimationsEnabled=false
+		DrawBackgroundGradient=false
 		FILE
 	fi
 	

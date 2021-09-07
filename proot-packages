@@ -123,6 +123,7 @@ kde_list=(
 	plasma-discover-common
 	plasma-discover-flatpak-backend
 	plasma-discover-snap-backend
+	ark
 	dolphin
 	kate
 	kdialog
@@ -130,6 +131,7 @@ kde_list=(
 	kfind
 	konsole
 	konqueror
+	kwin
 	gwenview
 	okular
 	systemsettings
@@ -148,7 +150,16 @@ kde_themes_ist=(
 )
 
 kde_addons_list=(
-	ark
+	plasma-browser-integration
+	plasma-calendar-addons
+	plasma-dataengines-addons
+	plasma-kdevelop
+	plasma-marble
+	plasma-nm
+	plasma-runner-installer
+	plasma-runner-telepathy-contact
+	plasma-runners-addons
+	plasma-vault
 	elisa
 	kcalc
 	kcharselect
@@ -168,16 +179,6 @@ kde_addons_list=(
 	kwalletmanager
 	kwrite
 	milou
-	plasma-browser-integration
-	plasma-calendar-addons
-	plasma-dataengines-addons
-	plasma-kdevelop
-	plasma-marble
-	plasma-nm
-	plasma-runner-installer
-	plasma-runner-telepathy-contact
-	plasma-runners-addons
-	plasma-vault
 )
 
 xfce_list=(

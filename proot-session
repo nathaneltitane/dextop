@@ -251,7 +251,7 @@ then
 	then
 		 console.err "Invalid application name [ ${APPLICATION} ]."
 		 echo
-		 
+
 		 unset "${APPLICATION}"
 	fi
 
@@ -327,7 +327,6 @@ command+=" HOME=${HOME}"
 command+=" LANG=${LANG}"
 command+=" LOCALHOST=${LOCALHOST}"
 command+=" PATH=${PATH}"
-command+=" PULSE_SERVER=${PULSE_SERVER}"
 command+=" TERM=${TERMINAL}"
 command+=" TMPDIR=${TMPDIR}"
 command+=" USER=${USER}"
