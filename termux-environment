@@ -87,9 +87,9 @@ fi
 
 if [[ $(id -u) = 0 ]]
 then
-	PS1="$(tput setaf 1[ D ] )>_ # $(tput sgr 0)"
+	PS1="$(tput setaf 1[ T ] )>_ # $(tput sgr 0)"
 else
-	PS1="[ D ] >_ $ "
+	PS1="[ T ] >_ $ "
 fi
 
 FILE
