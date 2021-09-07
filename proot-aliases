@@ -172,5 +172,4 @@ alias 'address'='echo "External IP address: $(curl ipinfo.io/ip)"'
 # weather #
 
 alias 'weather'='curl wttr.in'
-
 FILE
