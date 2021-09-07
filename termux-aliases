@@ -63,7 +63,7 @@ cat << 'FILE' -> "${HOME}"/.bash_aliases
 
 # sudo #
 
-alias sudo='sudo -p "$(tput setaf 3)[ D ] >_ ? $(tput sgr 0)"'
+alias sudo='sudo -p "$(tput setaf 3)[ T ] >_ ? $(tput sgr 0)"'
 
 # directories #
 
