@@ -155,7 +155,7 @@ IFS=''
 
 # export variables
 
-echo '# proot #'															>> "${PREFIX}"/bin/dextop
+echo '# proot #'																>> "${PREFIX}"/bin/dextop
 
 echo "export DISTRIBUTION_NAME=${distribution_name}"							>> "${PREFIX}"/bin/dextop
 echo "export DISTRIBUTION_VERSION=${distribution_version}"						>> "${PREFIX}"/bin/dextop
