@@ -19,28 +19,24 @@ while (($#))
 do
 	case "${1}" in
 		-r|--root)
-			option="root"
+			login_option="root"
 			USERNAME="root"
 			
 			shift
 		;;
 			
 		-u|--username)
-			option="user"
+			login_option="user"
 			USERNAME="${2}"
 			
 			shift
 		;;
 
 		-a|--application)
-			option="application"
+			login_option="application"
 			APPLICATION="${2}"
 			
 			shift
-		;;
-		
-		-b|--bind)
-			option="bind"
 		;;
 
 		-h|--help)
@@ -52,7 +48,6 @@ do
 			echo -e "-r, --root \t\t Specify 'root' as user for session login."
 			echo -e "-u, --username \t Specify 'user' for session login."
 			echo -e "-a, --application \t Specify application to start on session login."
-			echo -e "-b, --bind \t Specify alternate bind mounts on proot login."
 			echo
 			echo -e "-h, --help \t Show help and usage information."
 			echo
@@ -127,7 +122,7 @@ do
 	IFS=' '
 
 	# messages:
-	# verify options and parameters
+	# verify login options and parameters
 	
 	if [[ -z "${USERNAME}" ]]
 	then
@@ -141,7 +136,7 @@ do
 		break
 	fi
 	
-	if [[ "${option}" == "root" ]]
+	if [[ "${login_option}" == "root" ]]
 	then
 		console.wrn "Logging in [ '${USERNAME}' ]."
 		echo
@@ -171,7 +166,7 @@ do
 	
 	# specify login defaults
 	
-	if [[ -z "${USERNAME}" ]] ||  [[ "${option}" == "root" ]] || [[ "${entry}" == "${last_entry}" ]]
+	if [[ -z "${USERNAME}" ]] ||  [[ "${login_option}" == "root" ]] || [[ "${entry}" == "${last_entry}" ]]
 	then
 		USER="root"
 		USER_ID=0
@@ -202,44 +197,44 @@ PAGER="less"
 
 # kde #
 
-[ "${desktop_option}" = "kde" ]		&& SESSION="kde"
-[ "${desktop_option}" = "kde" ]		&& SESSION_NAME="KDE5"
-[ "${desktop_option}" = "kde" ]		&& SESSION_MANAGER="plasmashell"
-[ "${desktop_option}" = "kde" ]		&& SETTINGS_MANAGER="systemsettings5"
-[ "${desktop_option}" = "kde" ]		&& WINDOW_MANAGER="kwin"
+[ "${desktop_option}" = "kde" ]													&& SESSION="kde"
+[ "${desktop_option}" = "kde" ]													&& SESSION_NAME="KDE5"
+[ "${desktop_option}" = "kde" ]													&& SESSION_MANAGER="plasmashell"
+[ "${desktop_option}" = "kde" ]													&& SETTINGS_MANAGER="systemsettings5"
+[ "${desktop_option}" = "kde" ]													&& WINDOW_MANAGER="kwin"
 
-[ "${desktop_option}" = "kde" ]		&& BROWSER="konqueror"
-[ "${desktop_option}" = "kde" ]		&& EMULATOR="konsole"
-[ "${desktop_option}" = "kde" ]		&& RUNNER="krunner"
-[ "${desktop_option}" = "kde" ]		&& VISUAL="kate"
+[ "${desktop_option}" = "kde" ]													&& BROWSER="konqueror"
+[ "${desktop_option}" = "kde" ]													&& EMULATOR="konsole"
+[ "${desktop_option}" = "kde" ]													&& RUNNER="krunner"
+[ "${desktop_option}" = "kde" ]													&& VISUAL="kate"
 
 # xfce #
 
-[ "${desktop_option}" = "xfce" ]	&& SESSION="xfce"
-[ "${desktop_option}" = "xfce" ]	&& SESSION_NAME="XFCE4"
-[ "${desktop_option}" = "xfce" ]	&& SESSION_MANAGER="xfce4-session"
-[ "${desktop_option}" = "xfce" ]	&& SETTINGS_MANAGER="xfsettingsd"
-[ "${desktop_option}" = "xfce" ]	&& WINDOW_MANAGER="xfwm4"
+[ "${desktop_option}" = "xfce" ]												&& SESSION="xfce"
+[ "${desktop_option}" = "xfce" ]												&& SESSION_NAME="XFCE4"
+[ "${desktop_option}" = "xfce" ]												&& SESSION_MANAGER="xfce4-session"
+[ "${desktop_option}" = "xfce" ]												&& SETTINGS_MANAGER="xfsettingsd"
+[ "${desktop_option}" = "xfce" ]												&& WINDOW_MANAGER="xfwm4"
 
-[ "${desktop_option}" = "xfce" ]	&& BROWSER="midori"
-[ "${desktop_option}" = "xfce" ]	&& EMULATOR="xfce4-terminal"
-[ "${desktop_option}" = "xfce" ]	&& RUNNER="xfce4-appfinder"
-[ "${desktop_option}" = "xfce" ]	&& VISUAL="mousepad"
+[ "${desktop_option}" = "xfce" ]												&& BROWSER="midori"
+[ "${desktop_option}" = "xfce" ]												&& EMULATOR="xfce4-terminal"
+[ "${desktop_option}" = "xfce" ]												&& RUNNER="xfce4-appfinder"
+[ "${desktop_option}" = "xfce" ]												&& VISUAL="mousepad"
 
 # set defaults
 
-[ -z "${MOUNT_DIRECTORY}" ]			&& MOUNT_DIRECTORY="${PREFIX%/*}/mnt"
-[ -z "${ROOT_DIRECTORY}" ]			&& ROOT_DIRECTORY="${PREFIX%/*}/img"
+[ -z "${MOUNT_DIRECTORY}" ]														&& MOUNT_DIRECTORY="${PREFIX%/*}/mnt"
+[ -z "${ROOT_DIRECTORY}" ]														&& ROOT_DIRECTORY="${PREFIX%/*}/img"
 
-[ -z "${BROWSER}" ]					&& BROWSER="${BROWSER}"
-[ -z "${COLORTERM}" ]				&& COLORTERM="${COLORTERM}"
-[ -z "${SESSION}" ]					&& SESSION="${SESSION}"
-[ -z "${EDITOR}" ]					&& EDITOR="${EDITOR}"
-[ -z "${PAGER}" ]					&& PAGER="${PAGER}"
-[ -z "${RUNNER}" ]					&& RUNNER="${RUNNER}"
-[ -z "${SHELL}" ]					&& SHELL="${SHELL}"
-[ -z "${TERMINAL}" ]				&& TERMINAL="${TERM}"
-[ -z "${VISUAL}" ]					&& VISUAL="${VISUAL}"
+[ -z "${BROWSER}" ]																&& BROWSER="${BROWSER}"
+[ -z "${COLORTERM}" ]															&& COLORTERM="${COLORTERM}"
+[ -z "${SESSION}" ]																&& SESSION="${SESSION}"
+[ -z "${EDITOR}" ]																&& EDITOR="${EDITOR}"
+[ -z "${PAGER}" ]																&& PAGER="${PAGER}"
+[ -z "${RUNNER}" ]																&& RUNNER="${RUNNER}"
+[ -z "${SHELL}" ]																&& SHELL="${SHELL}"
+[ -z "${TERMINAL}" ]															&& TERMINAL="${TERM}"
+[ -z "${VISUAL}" ]																&& VISUAL="${VISUAL}"
 
 # verify application argument
 
