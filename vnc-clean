@@ -50,13 +50,44 @@ done
 
 # prompt #
 
-console.script "Initializing setup [ ${script%-*} ]"
+console.script "Cleaning up [ ${script%-*} ]"
 echo
 
 # variables #
 
 # set defaults
 
-# message #
+# initialize cleanup: find setup completion flag
 
-console.title "Linux on Android" "Termux // Dextop // Ubuntu" "${version}"
+if [[ "$(cat ${BINARIES_DIRECTORY}/vnc-setup-complete)" = "yes" ]]
+then
+	# message #
+
+	console.scs "Setup complete [ ${script%-*} ]"
+	echo
+	
+	console.fwd "Removing setup files..."
+	echo
+
+	# remove setup files
+
+	setup_files_list=(
+		"${HOME}"/dextop
+		"${BINARIES_DIRECTORY}"/vnc-setup
+		"${BINARIES_DIRECTORY}"/vnc-setup-complete
+	)
+
+	for file in ${setup_files_list[@]}
+	do
+		rm "${file}"
+	done
+
+else
+	console.err "Some errors were encountered during setup."
+	echo
+	
+	console.inf "Consult setup logs at '"${PREFIX}"/var/log/' for details."
+	echo
+	
+	
+fi

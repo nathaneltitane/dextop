@@ -42,6 +42,7 @@ do
 
 			exit 1
 		;;
+		
 	esac
 
 	shift
@@ -57,7 +58,7 @@ console.script "Starting setup [ ${script%-*} ]"
 
 # export variables
 
-echo '# termux variables #'														>> "${PREFIX}"/bin/dextop
+echo '# termux #'														>> "${PREFIX}"/bin/dextop
 
 # clear #
 

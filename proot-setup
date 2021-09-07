@@ -69,15 +69,15 @@ do
 			echo
 			echo -e "USAGE:"
 			echo
-			echo -e "-k, --kde  \t\t KDE5 setup: install K desktop environment and utilities."
-			echo -e "-x, --xfce \t\t XFCE4 setup: install XFCE desktop environment and utilities."
+			echo -e "-k, --kde  \t KDE5 setup: install K desktop environment and utilities."
+			echo -e "-x, --xfce \t XFCE4 setup: install XFCE desktop environment and utilities."
 			echo
-			echo -e "-f, --full \t\t Full setup: download and install full desktop environment and utilities."
-			echo -e "-l, --lite \t\t Lite setup: download and install lite desktop environment and utilities."
+			echo -e "-b, --base \t Base setup: download and install base distribution image only."
 			echo
-			echo -e "-b, --base \t\t Base setup: download and install base distribution image only."
+			echo -e "-f, --full \t Full setup: download and install full desktop environment and utilities."
+			echo -e "-l, --lite \t Lite setup: download and install lite desktop environment and utilities."
 			echo
-			echo -e "-h, --help \t\t Show help and usage information."
+			echo -e "-h, --help \t Show help and usage information."
 			echo
 			echo -e "'${script}' [ Version ${version} ]"
 			echo
@@ -107,7 +107,6 @@ do
 		esac
 
 	shift
-
 done
 
 # prompt #
@@ -146,7 +145,7 @@ IFS=''
 
 # export variables
 
-echo '# proot variables #'														>> "${PREFIX}"/bin/dextop
+echo '# proot #'														>> "${PREFIX}"/bin/dextop
 
 echo "export DISTRIBUTION_NAME=${distribution_name}"							>> "${PREFIX}"/bin/dextop
 echo "export DISTRIBUTION_VERSION=${distribution_version}"						>> "${PREFIX}"/bin/dextop
@@ -154,11 +153,6 @@ echo "export DISTRIBUTION_RELEASE=${distribution_release}"						>> "${PREFIX}"/b
 
 echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'		>> "${PREFIX}"/bin/dextop
 echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'				>> "${PREFIX}"/bin/dextop
-
-echo '# installation #'															>> "${PREFIX}"/bin/dextop
-
-echo "export desktop_option=${desktop_option}"									>> "${PREFIX}"/bin/dextop
-echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/dextop
 
 # clear #
 

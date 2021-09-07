@@ -42,6 +42,7 @@ do
 
 			exit 1
 		;;
+		
 	esac
 
 	shift
@@ -57,7 +58,7 @@ console.script "Starting setup [ ${script%-*} ]"
 
 # export variables
 
-echo '# vnc variables #'														>> "${PREFIX}"/bin/dextop
+echo '# vnc #'														>> "${PREFIX}"/bin/dextop
 
 # clear #
 
@@ -75,6 +76,8 @@ setup_list=(
 	vnc-utilities
 	vnc-message
 	vnc-environment
+	vnc-checkpoint
+	vnc-clean
 )
 
 # setup #

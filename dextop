@@ -24,15 +24,43 @@ do
 		-p|--proot)
 			dextop_option="proot"
 		;;
-				
+		
+		-k|--kde)
+			desktop_option="kde"
+		;;
+
+		-x|--xfce)
+			desktop_option="xfce"
+		;;
+		
+		-b|--base)
+			install_option="base"
+		;;
+
+		-f|--full)
+			install_option="full"
+		;;
+
+		-l|--lite)
+			install_option="lite"
+		;;
+
 		-h|--help)
 			echo
 			echo -e "USAGE:"
 			echo
-			echo -e "-t, --termux \t\t Setup Termux environment only - VNC setup not included."
-			echo -e "-p, --proot \t\t Setup Proot environment - VNC setup included."
+			echo -e "-t, --termux \t Setup Termux environment only - VNC setup not included."
+			echo -e "-p, --proot  \t Setup Proot environment - VNC setup included."
 			echo
-			echo -e "-h, --help \t\t Show help and usage information."
+			echo -e "-k, --kde    \t KDE5 setup: install K desktop environment and utilities."
+			echo -e "-x, --xfce   \t XFCE4 setup: install XFCE desktop environment and utilities."
+			echo
+			echo -e "-b, --base   \t Base setup: download and install base distribution image only."
+			echo
+			echo -e "-f, --full   \t Full setup: download and install full desktop environment and utilities."
+			echo -e "-l, --lite   \t Lite setup: download and install lite desktop environment and utilities."
+			echo
+			echo -e "-h, --help   \t Show help and usage information."
 			echo
 			echo -e "'${script}' [ Version ${version} ]"
 			echo
@@ -78,7 +106,9 @@ echo
 
 # set defaults
 
-[ -z "${dextop_option}" ] && dextop_option="proot"
+[ -z "${dextop_option}" ]														&& dextop_option="proot"
+[ -z "${desktop_option}" ]														&& desktop_option="kde"
+[ -z "${install_option}" ]														&& install_option="lite"
 
 # export variables
 
@@ -96,6 +126,12 @@ echo 'export BACKUP_DIRECTORY="${MAIN_DIRECTORY}"/bkp'							>> "${PREFIX}"/bin/
 echo 'export IMAGE_DIRECTORY="${MAIN_DIRECTORY}"/img'							>> "${PREFIX}"/bin/dextop
 echo 'export ISO_DIRECTORY="${MAIN_DIRECTORY}"/iso'								>> "${PREFIX}"/bin/dextop
 echo 'export MOUNT_DIRECTORY="${MAIN_DIRECTORY}"/mnt'							>> "${PREFIX}"/bin/dextop
+
+echo '# options #'																>> "${PREFIX}"/bin/dextop
+
+echo "export dextop_option=${dextop_option}"									>> "${PREFIX}"/bin/dextop
+echo "export desktop_option=${desktop_option}"									>> "${PREFIX}"/bin/dextop
+echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/dextop
 
 # clear #
 

@@ -42,6 +42,7 @@ do
 
 			exit 1
 		;;
+		
 	esac
 
 	shift
@@ -78,7 +79,7 @@ echo
 
 if [ -f "${HOME}"/.vnc/selection ]
 then
-	console.inf "You've already logged in - vnc selection has been saved:"
+	console.inf "You have already logged in - vnc selection has been saved:"
 	console.inf "Automatic session launch on shell login is enabled."
 	echo
 else

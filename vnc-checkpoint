@@ -18,7 +18,7 @@ version="08-12-2021"
 while (($#))
 do
 	case "${1}" in
-		-h|--help)
+		 -h|--help)
 			echo
 			echo -e "Usage: ${script} [OPTION]"
 			echo
@@ -50,13 +50,13 @@ done
 
 # prompt #
 
-console.script "Initializing setup [ ${script%-*} ]"
+console.script "Verifying setup checkpoint [ ${script%-*} ]"
 echo
 
 # variables #
 
 # set defaults
 
-# message #
+# confirm uninterrupted setup
 
-console.title "Linux on Android" "Termux // Dextop // Ubuntu" "${version}"
+echo "yes" > "${BINARIES_DIRECTORY}"/vnc-setup-complete
