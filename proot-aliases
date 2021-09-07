@@ -110,7 +110,7 @@ alias 'enable'=					'sudo systemctl enable'
 alias 'disable'=				'sudo systemctl disable'
 alias 'status'=					'sudo systemctl status'
 
-alias 'kill'=					"sudo pkill -9 ${1}"
+alias 'kill'=					"sudo pkill -9"
 
 alias '..'=						'cd ..'
 alias '...'=					'cd ../../../'
