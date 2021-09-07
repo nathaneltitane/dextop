@@ -61,7 +61,7 @@ do
 		;;
 
 		"")
-			# handle empty argument
+			# handle empty argument:
 			# use default values specified in script
 
 			:

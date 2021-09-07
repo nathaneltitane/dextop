@@ -39,12 +39,22 @@ then
 	distribution_name="${1}"
 	distribution_version="${2}"
 
-	install_option="${3}"
+	desktop_option="${3}"
+fi
+
+if [[ $# -eq 4 ]]
+then
+	distribution_name="${1}"
+	distribution_version="${2}"
+
+	desktop_option="${3}"
+	
+	install_option="${4}"
 fi
 
 while (($#))
 do
-	case "${3}" in
+	case "${5}" in
 		-k|--kde)
 			desktop_option="kde"
 		;;
@@ -86,7 +96,7 @@ do
 		;;
 
 		"")
-			# handle empty argument
+			# handle empty argument:
 			# use default values specified in script
 
 			:
@@ -145,7 +155,7 @@ IFS=''
 
 # export variables
 
-echo '# proot #'														>> "${PREFIX}"/bin/dextop
+echo '# proot #'															>> "${PREFIX}"/bin/dextop
 
 echo "export DISTRIBUTION_NAME=${distribution_name}"							>> "${PREFIX}"/bin/dextop
 echo "export DISTRIBUTION_VERSION=${distribution_version}"						>> "${PREFIX}"/bin/dextop
