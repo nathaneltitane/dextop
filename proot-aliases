@@ -58,119 +58,76 @@ echo
 # set defaults
 
 cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bash_aliases
-# shell #
+# dependant aliases #
 
-[[ $(id -u) = 0 ]] && PS1="$(tput setaf 1[ D ] )>_ # $(tput sgr 0)" || PS1="[ D ] >_ $ "
+[ -d "/" ]						&& alias 'rd'='cd /'
+[ -d "${HOME}" ]				&& alias 'hd'='cd "${HOME}"'
+[ -d "${HOME}"/Git ]			&& alias 'gd'='cd "${HOME}"/Git'
+[ -d "${HOME}"/.vnc ]			&& alias 'vd'='cd "${HOME}"/.vnc'
+[ -d "/media" ]					&& alias 'md'='cd /media'
+[ -d "/media/Internal" ]		&& alias 'id'='cd /media/Internal'
+[ -d "/media/External" ]		&& alias 'ed'='cd /media/External'
 
-# sudo #
+[ -x $(which sudo) ]			&& alias sudo='sudo -p "$(tput setaf 3)[ D ] >_ ? $(tput sgr 0)"'
 
-alias sudo='sudo -p "$(tput setaf 3)[ D ] >_ ? $(tput sgr 0)"'
+[ -x $(which rsync) ]			&& alias 'cp'='rsync -a -r --progress -h'
 
-# directories #
+[ -x $(which git) ]				&& alias 'gc'='git clone'
+[ -x $(which git) ]				&& alias 'gi'='git init'
+[ -x $(which git) ]				&& alias 'gp'='git pull'
+[ -x $(which git) ]				&& alias 'ga'='git add *'
+[ -x $(which git) ]				&& alias 'gm'="git commit -a -m ${1}"
+[ -x $(which git) ]				&& alias 'gs'='git push'
+[ -x $(which git) ]				&& alias 'gu'='ga && gm "Code & Features Update" && gs'
 
-alias '..'='cd ..'
-alias '...'='cd ../../../'
-alias '....'='cd ../../../../'
-alias '.....'='cd ../../../../'
+[ -x $(which nano) ]			&& alias 'nano'='nano -c -g -i -l -m -D -F -J80 -T4'
 
-alias 'hd'='cd "${HOME}"'
-alias 'gd'='cd "${HOME}"/Git'
-alias 'vd'='cd "${HOME}"/.vnc'
-alias 'rd'='cd /'
-alias 'md'='cd /media'
-alias 'id'='cd /media/Internal'
-alias 'ed'='cd /media/External'
+# aliases #
 
-alias 'directory'='echo ${PWD}'
-alias 'mkdir'='mkdir -p'
+alias 'autoclean'=				'sudo apt-get autoclean'
+alias 'autoremove'=				'sudo apt-get autoremove'
+alias 'check'=					'sudo apt-get check'
+alias 'clean'=					'sudo apt-get clean'
+alias 'distribution-upgrade'=	'sudo apt-get dist-upgrade'
+alias 'download'=				'sudo apt-get download'
+alias 'install'=				'sudo apt-get install --no-install-recommends --no-upgrade'
+alias 'purge'=					'sudo apt-get purge'
+alias 'reinstall'=				'sudo apt-get reinstall'
+alias 'repair'=					'sudo apt-get -f install'
+alias 'remove'=					'sudo apt-get remove'
+alias 'source'=					'sudo apt-get source'
+alias 'update'=					'sudo apt-get update'
+alias 'upgrade'=				'sudo apt-get upgrade'
 
-# files #
+alias 'depend'=					'sudo apt-cache depends'
+alias 'reverse'=				'sudo apt-cache rdepends'
+alias 'search'=					'sudo apt-cache search'
+alias 'status'=					'sudo apt-cache stats'
 
-alias 'count'='find . -type f | wc -l'
+alias 'start'=					'sudo systemctl start'
+alias 'stop'=					'sudo systemctl stop'
+alias 'enable'=					'sudo systemctl enable'
+alias 'disable'=				'sudo systemctl disable'
+alias 'status'=					'sudo systemctl status'
 
-# list #
+alias 'kill'=					"sudo pkill -9 ${1}"
 
-alias 'ls'='ls -a -c -h -l --color=auto --group-directories-first'
+alias '..'=						'cd ..'
+alias '...'=					'cd ../../../'
+alias '....'=					'cd ../../../../'
+alias '.....'=					'cd ../../../../'
 
-# apt-get #
+alias 'list'=					'ls -a -c -h -l --color=auto --group-directories-first'
 
-alias 'autoclean'='sudo apt-get autoclean'
-alias 'autoremove'='sudo apt-get autoremove'
-alias 'check'='sudo apt-get check'
-alias 'clean'='sudo apt-get clean'
-alias 'distribution-upgrade'='sudo apt-get dist-upgrade'
-alias 'download'='sudo apt-get download'
-alias 'install'='sudo apt-get install --no-install-recommends --no-upgrade'
-alias 'purge'='sudo apt-get purge'
-alias 'reinstall'='sudo apt-get reinstall'
-alias 'repair'='sudo apt-get -f install'
-alias 'remove'='sudo apt-get remove'
-alias 'source'='sudo apt-get source'
-alias 'update'='sudo apt-get update'
-alias 'upgrade'='sudo apt-get upgrade'
+alias 'where'=					'echo ${PWD}'
 
-# apt-cache #
+alias 'directory'=				'mkdir -p'
 
-alias 'depends'='apt-cache depends'
-alias 'reverse'='apt-cache rdepends'
-alias 'search'='apt-cache search'
-alias 'status'='apt-cache stats'
+alias 'count'=					'find . -type f | wc -l'
 
-# cp #
+alias 'duplicate'=				"dd if=${1} of=${2} bs=${3} status=progress"
 
-alias 'cp'='rsync -a -r --progress -h'
+alias 'usage'=					'du -a -d 1 -h -S --time 2> /dev/null | sort -n -r'
 
-# dd #
-
-alias 'dd'="dd if=${1} of=${2} bs=${3} status=progress"
-
-# du #
-
-alias 'usage'='du -a -d 1 -h -S --time 2> /dev/null | sort -n -r'
-
-# dpkg #
-
-alias 'd-install'='sudo dpkg -i'
-alias 'd-force-install'='sudo dpkg -i --force-all'
-
-# git #
-
-alias 'gc'='git clone'
-alias 'gi'='git init'
-alias 'gp'='git pull'
-
-alias 'ga'='git add *'
-alias 'gm'="git commit -a -m ${1}"
-alias 'gs'='git push'
-
-alias 'gu'='ga && gm "Code & Features Update" && gs'
-
-# kill #
-
-alias 'kill'="sudo pkill -9 ${1}"
-
-# nano #
-
-alias 'nano'='nano -c -g -i -l -m -D -F -J80 -T4'
-
-# ping #
-
-alias 'ping'='ping -c 5'
-
-# services #
-
-alias 'kill'='sudo pkill -9'
-alias 'start'='sudo systemctl start'
-alias 'stop'='sudo systemctl stop'
-alias 'enable'='sudo systemctl enable'
-alias 'disable'='sudo systemctl disable'
-alias 'status'='sudo systemctl status'
-
-# ip #
-
-alias 'address'='echo "External IP address: $(curl ipinfo.io/ip)"'
-
-# weather #
-
-alias 'weather'='curl wttr.in'
+alias 'ping'=					'ping -c 5'
 FILE
