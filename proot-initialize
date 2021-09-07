@@ -79,14 +79,18 @@ cat << 'FILE' ->> "${ROOT_DIRECTORY}"/root/.profile
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/dextop
 
-# setup proot expansion to default system
+# finalize proot system setup
 
 "${BINARIES_DIRECTORY}"/proot-finalize
 
 # exit proot after successful setup:
 # continue vnc components setup on Termux shell
 
+# clear #
+
 console.clear
+
+# log out
 
 console.inf "Logging out [ ${script%-*} ]"
 echo
