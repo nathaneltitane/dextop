@@ -81,6 +81,7 @@ alias 'id'='cd /media/Internal'
 alias 'ed'='cd /media/External'
 
 alias 'directory'='echo ${PWD}'
+alias 'mkdir'='mkdir -p'
 
 # files #
 
