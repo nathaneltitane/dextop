@@ -58,7 +58,7 @@ console.script "Starting setup [ ${script%-*} ]"
 
 # export variables
 
-echo '# termux #'														>> "${PREFIX}"/bin/dextop
+echo '# termux #'																>> "${PREFIX}"/bin/dextop
 
 # clear #
 
