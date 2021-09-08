@@ -97,6 +97,7 @@ termux_list=(
 utilities_list=(
 	htop
 	ncurses
+	ncurses-utils
 	proot
 	zip
 	unzip

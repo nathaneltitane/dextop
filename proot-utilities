@@ -71,6 +71,7 @@ binaries_list=(
 	proot-checkpoint
 	proot-clean
 	proot-compositing
+	proot-configuration
 	proot-environment
 	proot-expand
 	proot-finalize
