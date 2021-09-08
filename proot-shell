@@ -65,19 +65,19 @@ echo
 
 # .bash_aliases
 
-cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bash_aliases
+cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bash_aliases
 
 FILE
 
 # .bash_logout
 
-cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bash_logout
+cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bash_logout
 
 FILE
 
 # .bashrc
 
-cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bashrc
+cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bashrc
 shopt -s checkwinsize
 shopt -s histappend
 shopt -s histverify
@@ -102,7 +102,7 @@ if [[ $(id -u) = 0 ]]
 then
 	PS1="$(tput setaf 1)[ D ] >_ # $(tput sgr 0)"
 else
-	PS1="$(tput setaf 1)[ D ] >_ $ $(tput sgr 0)"
+	PS1="$(tput setaf 7)[ D ] >_ $ $(tput sgr 0)"
 fi
 
 if [ -x $(which sudo) ]
@@ -126,7 +126,7 @@ FILE
 
 # .profile
 
-cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
+cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 
 if [ -n "${BASH_VERSION}" ]
 then
