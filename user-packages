@@ -71,6 +71,7 @@ applications_list=(
 	leocad
 	povray
 	youtube-dl
+	ffmpeg
 )
 
 # initialize install list
