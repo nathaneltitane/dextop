@@ -211,59 +211,8 @@ cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 
 if [ -z "$(cat ${BINARIES_DIRECTORY}/dextop-configuration-complete)" ]
 then
-	# install applications
-
-	applications_list=(
-		leocad
-		povray
-		youtube-dl
-	)
-	
-	# initialize install install list
-	
-	install_list=()
-	
-	# populate install list
-	
-	install_list+=(
-		${applications_list[@]}
-	)
-	
-	# install #
-	
-	console.install ${install_list[@]}
-	
-	# download scripts
-	
-	# bash functions
-	
-	console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		address
-	console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		extract
-	console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		record
-	console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		speed
-	console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		sprunge
-	console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		weather
-	console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		youtube
-	
-	# leocad
-	
-	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin							leocad-build
-	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin							leocad-configuration
-	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin							leocad-download
-	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin							leocad-launcher
-	console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin							leocad-position
-	
-	# youtube-dl
-	
-	console.download https://yt-dl.org/downloads/latest											/usr/bin							youtube-dl
-	
-	# execute scripts
-	
-	proot-keyboard
-	proot-locales
-	proot-timezones
-	leocad-download
-	leocad-configuration
+	"${BINARIES_DIRECTORY}"/proot-configuration
+	"${BINARIES_DIRECTORY}"/proot-cmpositing
 	
 	# confirm uninterrupted configuration
 	
