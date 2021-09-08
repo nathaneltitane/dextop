@@ -180,8 +180,8 @@ setup_list=(
 	proot-utilities
 	proot-message
 	proot-architecture
-	proot-information
 	proot-image
+	proot-information
 	proot-environment
 	proot-groups
 	proot-network
