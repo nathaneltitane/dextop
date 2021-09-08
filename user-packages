@@ -70,9 +70,21 @@ console.upgrade
 applications_list=(
 	leocad
 	povray
-	youtube-dl
+)
+
+development_list=(
+	git
+	hub
+	python
+)
+
+multimedia_list=(
 	ffmpeg
 )
+
+utilities_list=(
+	youtube-dl
+		)
 
 # initialize install list
 
@@ -82,6 +94,9 @@ install_list=()
 
 install_list=(
 	${applications_list[@]}
+	${development_list_list[@]}
+	${multimedia_list_list[@]}
+	${utilities_list_list[@]}
 )
 
 # install #

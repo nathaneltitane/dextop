@@ -83,12 +83,6 @@ display_list=(
 	x11-xserver-utils
 )
 
-development_list=(
-	git
-	hub
-	python
-)
-
 documentation_list=(
 	man
 	man-db
@@ -98,10 +92,6 @@ locales_list=(
 	keyboard-configuration
 	locales
 	locales-all
-)
-
-multimedia_list=(
-	ffmpeg
 )
 
 security_list=(
@@ -120,9 +110,6 @@ themes_list=(
 	qt5-style-platform-gtk2
 	qt5-style-plugin-gtk2
 )
-
-utilities_list=(
-	)
 
 kde_list=(
 	plasma-desktop
