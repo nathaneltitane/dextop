@@ -83,6 +83,10 @@ console.install ${install_list[@]}
 
 # download scripts
 
+# bash aliases
+
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		/home/"${USER}"						.bash_aliases
+
 # bash functions
 
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		address

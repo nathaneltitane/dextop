@@ -47,6 +47,7 @@ do
 
 	shift
 done
+
 # prompt #
 
 console.script "Initializing deployment setup [ ${script%-*} ]"

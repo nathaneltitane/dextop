@@ -77,29 +77,71 @@ FILE
 
 cat << 'FILE' ->> "${HOME}"/.bashrc
 
-if [ -d "${HOME}"/.bash_functions ]
+shopt -s checkwinsize
+shopt -s histappend
+shopt -s histverify
+
+HISTCONTROL=ignoreboth
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+if ! shopt -oq posix
 then
-	for file in "${HOME}"/.bash_functions/*
-	do
-		test -x "${file}" && source "${file}"
-	done
+	if [ -f /usr/share/bash-completion/bash_completion ]
+	then
+		source /usr/share/bash-completion/bash_completion
+
+	elif [ -f /etc/bash_completion ]
+	then
+		source /etc/bash_completion
+	fi
 fi
 
 if [[ $(id -u) = 0 ]]
 then
-	PS1="$(tput setaf 1[ T ] )>_ # $(tput sgr 0)"
+	PS1="$(tput setaf 1)[ T ] >_ # $(tput sgr 0)"
 else
-	PS1="[ T ] >_ $ "
+	PS1="$(tput setaf 1)[ T ] >_ $ $(tput sgr 0)"
 fi
 
+if [ -x $(which sudo) ]
+then
+	alias sudo='sudo -p "$(tput setaf 3)[ T ] >_ ? $(tput sgr 0)"'
+fi
+
+if [ -d "${HOME}"/.bash_functions ]
+then
+	for function in "${HOME}"/.bash_functions/*
+	do
+		test -x "${function}" && source "${function}"
+	done
+fi
+
+if [ -f "${HOME}"/.bash_aliases ]
+then
+	source "${HOME}"/.bash_aliases
+fi
 FILE
 
 # .profile
 
 cat << 'FILE' ->> "${HOME}"/.profile
 
-if [ -f "${HOME}"/.bash_aliases ]
+if [ -n "${BASH_VERSION}" ]
 then
-	source "${HOME}"/.bash_aliases
+	if [ -f "{$HOME}"/.bashrc ]
+	then
+		source "$HOME/.bashrc"
+	fi
+fi
+
+if [ -d "${HOME}"/bin ]
+then
+	PATH="$HOME/bin:$PATH"
+fi
+
+if [ -d "${HOME}"/.local/bin ]
+then
+	PATH="$HOME/.local/bin:$PATH"
 fi
 FILE

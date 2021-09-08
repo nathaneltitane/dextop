@@ -83,7 +83,6 @@ setup_list=(
 	termux-bookmarks
 	termux-silent
 	termux-environment
-	termux-aliases
 	termux-storage
 	termux-welcome
 	termux-checkpoint

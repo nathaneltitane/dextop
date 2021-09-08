@@ -90,7 +90,6 @@ setup_list=(
 	proot-bookmarks
 	proot-silent
 	proot-environment
-	proot-aliases
 	proot-welcome
 	proot-checkpoint
 	proot-clean
