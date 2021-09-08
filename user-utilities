@@ -63,7 +63,20 @@ echo
 
 curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && source "${BINARIES_DIRECTORY}"/console
 
+# values #
+
+binaries_list=(
+	user-utilities
+	user-packages
+	user-setup
+)
+
 # download #
+
+console.download get.dxtp.app "${BINARIES_DIRECTORY}" ${binaries_list[@]}
+
+console.fwd "Loading additional utilities..."
+echo
 
 # bash aliases
 

@@ -150,6 +150,8 @@ utilities_list=(
 	proot-setup
 	vnc-utilities
 	vnc-setup
+	user-utilities
+	user-setup
 )
 
 # download #
