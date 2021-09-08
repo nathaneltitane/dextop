@@ -60,7 +60,7 @@ echo
 # values #
 
 values_list=(
-	password
+	vnc_password
 )
 
 # handle user input for values_list
@@ -76,7 +76,7 @@ eval ${console_rtn[@]}
 console.fwd "Setting password..."
 echo
 
-echo "$password" | vncpasswd -f > "${ROOT_DIRECTORY}"/home/"${user_name}"/.vnc/passwd
+echo "$vnc_password" | vncpasswd -f > "${ROOT_DIRECTORY}"/home/"${user_name}"/.vnc/passwd
 
 console.scs "Password changed."
 echo
