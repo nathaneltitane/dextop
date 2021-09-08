@@ -59,4 +59,15 @@ echo
 
 # configure
 
-sudo dpkg-reconfigure keyboard-configuration
+if [ -z "$(cat ${BINARIES_DIRECTORY}/proot-keyboard-complete)" ]
+then
+	# configure keyboard setup
+	
+	sudo dpkg-reconfigure keyboard-configuration
+	
+	# confirm uninterrupted configuration
+	
+	echo "yes" > "${BINARIES_DIRECTORY}"/proot-keyboard-complete
+else
+	:
+fi

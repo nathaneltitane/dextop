@@ -50,69 +50,32 @@ done
 
 # prompt #
 
-console.script "Configuring session [ ${script%-*} ]"
+console.script "Configuring user session [ ${script%-*} ]"
 echo
 
 # variables #
 
 # set defaults
 
-# configure #
+# configure
 
-# install applications
-
-applications_list=(
-	leocad
-	povray
-	youtube-dl
-)
-
-# initialize install install list
-
-install_list=()
-
-# populate install list
-
-install_list+=(
-	${applications_list[@]}
-)
-
-# install #
-
-console.install ${install_list[@]}
-
-# download scripts
-
-# bash aliases
-
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"					.bash_aliases
-
-# bash functions
-
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		address
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		extract
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		record
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		speed
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		sprunge
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		weather
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		/home/"${USER}"/.bash_functions		youtube
-
-# leocad
-
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin							leocad-build
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin							leocad-configuration
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin							leocad-download
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin							leocad-launcher
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				/usr/bin							leocad-position
-
-# youtube-dl
-
-console.download https://yt-dl.org/downloads/latest											/usr/bin							youtube-dl
-
-# execute scripts
-
-proot-keyboard
-proot-locales
-proot-timezones
-leocad-download
-leocad-configuration
+if [ -z "$(cat ${BINARIES_DIRECTORY}/proot-configuration-complete)" ]
+then
+	# run configuration utilities
+	
+	configuration_list=(
+		user-packages
+		user-utilities
+	)
+	
+	for configuration in ${configuration_list[@]}
+	do
+		"${BINARIES_DIRECTORY}"/"${setup}"
+	done
+	
+	# confirm uninterrupted configuration
+	
+	echo "yes" > "${BINARIES_DIRECTORY}"/proot-configuration-complete
+else
+	:
+fi

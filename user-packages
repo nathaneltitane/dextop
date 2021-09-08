@@ -50,24 +50,39 @@ done
 
 # prompt #
 
-console.script "Configuring locales [ ${script%-*} ]"
+console.script "Setting up packages [ ${script%-*} ]"
 echo
 
 # variables #
 
 # set defaults
 
-# configure
+# update packages list
 
-if [ -z "$(cat ${BINARIES_DIRECTORY}/proot-locales-complete)" ]
-then
-	# configure locales setup
-	
-	sudo dpkg-reconfigure locales
-	
-	# confirm uninterrupted configuration
-	
-	echo "yes" > "${BINARIES_DIRECTORY}"/proot-locales-complete
-else
-	:
-fi
+console.update
+
+# upgrade installed packages
+
+console.upgrade
+
+# values #
+
+applications_list=(
+	leocad
+	povray
+	youtube-dl
+)
+
+# initialize install list
+
+install_list=()
+
+# populate install list
+
+install_list=(
+	${applications_list[@]}
+)
+
+# install #
+
+console.install ${install_list[@]}

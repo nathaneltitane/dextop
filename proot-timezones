@@ -59,4 +59,15 @@ echo
 
 # configure
 
-sudo dpkg-reconfigure tzdata
+if [ -z "$(cat ${BINARIES_DIRECTORY}/proot-timezones-complete)" ]
+then
+	# configure timezones setup
+	
+	sudo dpkg-reconfigure tzdata
+	
+	# confirm uninterrupted configuration
+	
+	echo "yes" > "${BINARIES_DIRECTORY}"/proot-timezones-complete
+else
+	:
+fi

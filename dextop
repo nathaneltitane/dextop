@@ -195,7 +195,7 @@ do
 	console.clear
 done
 
-# source variables
+# source variables:
 # get additional setup values
 
 [ -f "${PREFIX}"/bin/dextop ] && source "${PREFIX}"/bin/dextop
@@ -206,13 +206,25 @@ cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 
 # dextop configuration #
 
-# use this section to customize setup:
-# download / install / configure packages and scripts for user session
+# download / install / configure packages and scripts for user session:
+# use 'user-packages' and 'user-utilities' to customize setup
 
 if [ -z "$(cat ${BINARIES_DIRECTORY}/dextop-configuration-complete)" ]
 then
-	"${BINARIES_DIRECTORY}"/proot-configuration
-	"${BINARIES_DIRECTORY}"/proot-cmpositing
+	# run configuration utilities
+
+	configuration_list=(
+		proot-configuration
+		proot-compositing
+		proot-keyboard
+		proot-locales
+		proot-timezones
+	)
+	
+	for configuration in ${configuration_list[@]}
+	do
+		"${BINARIES_DIRECTORY}"/"${setup}"
+	done
 	
 	# confirm uninterrupted configuration
 	

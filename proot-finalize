@@ -91,6 +91,7 @@ setup_list=(
 	proot-silent
 	proot-environment
 	proot-welcome
+	proot-configuration
 	proot-checkpoint
 	proot-clean
 )
