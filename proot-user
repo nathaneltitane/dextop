@@ -175,4 +175,3 @@ chmod 700 /run/user/"${user_name}"
 
 chown "${uid}":"${gid}" -R /run/user/"${uid}"
 chown "${uid}":"${gid}" -R /run/user/"${user_name}"
-
