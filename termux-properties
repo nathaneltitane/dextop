@@ -57,11 +57,6 @@ echo
 
 # set defaults
 
-# force current directory to "${HOME}":
-# prevents 'termux-reload-settings' segfault
-
-cd "${HOME}" || exit 1
-
 # remove default properties directory
 
 [ -d "${HOME}"/.termux ] && rm -rf "${HOME}"/.termux
@@ -113,11 +108,3 @@ extra-keys = [																	\
 	['TAB', 'CTRL', 'ALT', 'LEFT', 'DOWN', 'RIGHT', 'PGDN', '-', 'RETURN'	]	\
 																				]
 FILE
-
-# set properties
-
-console.fwd "Applying changes..."
-echo
-
-termux-reload-settings
-
