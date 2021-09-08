@@ -167,12 +167,18 @@ console.directory "${ROOT_DIRECTORY}"/home/"${user_name}"/ ${directories_list[@]
 console.fwd "Setting up runtime directory..."
 echo
 
-# create directories and set permissions
+# create runtime directory
 
-mkdir -p /run/user/"${uid}" -m 700
-mkdir -p /run/user/"${user_name}" -m 700
+[ ! -d /run/user/"${uid}" ] && mkdir -p /run/user/"${uid}"
+[ ! -d /run/user/"${user_name}" ] && mkdir -p /run/user/"${user_name}"
 
-# set runtime directories ownership
+# set runtime directory permission
+
+chmod 700 /run/user/"${uid}"
+chmod 700 /run/user/"${user_name}"
+
+# set runtime directory ownership
 
 chown "${uid}":"${gid}" -R /run/user/"${uid}"
 chown "${uid}":"${gid}" -R /run/user/"${user_name}"
+

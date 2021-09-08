@@ -57,7 +57,7 @@ echo
 
 # set defaults
 
-# verifydirectory existence
+# create bookmarks directory
 
 [ ! -d "${HOME}"/.config/gtk-3.0/ ] && mkdir -p "${HOME}"/.config/gtk-3.0/
 

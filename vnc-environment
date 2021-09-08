@@ -57,9 +57,9 @@ echo
 
 # set defaults
 
-# create user vnc directory
+# create vnc directory
 
-mkdir -p "${ROOT_DIRECTORY}"/home/"${user_name}"/.vnc
+[ ! -d "${ROOT_DIRECTORY}"/home/"${user_name}"/.vnc ] && mkdir -p "${ROOT_DIRECTORY}"/home/"${user_name}"/.vnc
 
 # write user vnc password file
 

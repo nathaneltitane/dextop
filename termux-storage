@@ -107,9 +107,9 @@ rm -rf "${HOME}"/storage
 
 [ -d "${MAIN_DIRECTORY}"/storage ] && rm -rf "${MAIN_DIRECTORY}"/storage
 
-# create directory
+# create storage directory
 
-mkdir -p "${MAIN_DIRECTORY}"/storage || :
+[ ! -d "${MAIN_DIRECTORY}"/storage ] &&  mkdir -p "${MAIN_DIRECTORY}"/storage
 
 # create symbolic links
 

@@ -66,9 +66,9 @@ cd "${HOME}" || exit 1
 
 [ -d "${HOME}"/.termux ] && rm -rf "${HOME}"/.termux
 
-# create new properties directory
+# create properties directory
 
-mkdir -p "${HOME}"/.termux
+[ ! -d "${HOME}"/.config/gtk-3.0/ ] && mkdir -p "${HOME}"/.termux
 
 # write properties
 

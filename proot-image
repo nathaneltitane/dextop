@@ -158,7 +158,7 @@ image_archive () {
 
 	eval ${console_rtn[@]}
 
-	# verify directory existenceselection input against selection list
+	# verify selection input against selection list
 
 	while true
 	do
@@ -276,7 +276,7 @@ image_restore () {
 
 	eval ${console_rtn[@]}
 
-	# verify directory existenceselection input against selection list
+	# verify selection input against selection list
 
 	while true
 	do
