@@ -95,11 +95,8 @@ termux_list=(
 )
 
 utilities_list=(
-	aspell
-	curl
-	htop*
-	nano
-	ncurses-utils
+	htop
+	ncurses
 	proot
 	zip
 	unzip
