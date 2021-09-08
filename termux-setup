@@ -82,7 +82,7 @@ setup_list=(
 	termux-properties
 	termux-bookmarks
 	termux-silent
-	termux-environment
+	termux-shell
 	termux-storage
 	termux-welcome
 	termux-checkpoint

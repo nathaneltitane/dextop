@@ -89,7 +89,7 @@ setup_list=(
 	proot-links
 	proot-bookmarks
 	proot-silent
-	proot-environment
+	proot-shell
 	proot-welcome
 	proot-configuration
 	proot-checkpoint

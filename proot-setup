@@ -182,6 +182,7 @@ setup_list=(
 	proot-architecture
 	proot-information
 	proot-image
+	proot-environment
 	proot-groups
 	proot-network
 	proot-preload

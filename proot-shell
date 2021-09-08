@@ -50,7 +50,7 @@ done
 
 # prompt #
 
-console.script "Setting up environment [ ${script%-*} ]"
+console.script "Setting up shell [ ${script%-*} ]"
 echo
 
 # variables #
@@ -61,24 +61,23 @@ echo
 
 # create bash functions directory
 
-[ ! -d "${HOME}"/.bash_functions ] && mkdir -p "${HOME}"/.bash_functions
+[ ! -d "${ROOT_DIRECTORY}"/home/"${user_name}"/.bash_functions ] &&  mkdir -p "${ROOT_DIRECTORY}"/home/"${user_name}"/.bash_functions
 
 # .bash_aliases
 
-cat << 'FILE' ->> "${HOME}"/.bash_aliases
+cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bash_aliases
 
 FILE
 
 # .bash_logout
 
-cat << 'FILE' ->> "${HOME}"/.bash_logout
+cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bash_logout
 
 FILE
 
 # .bashrc
 
-cat << 'FILE' ->> "${HOME}"/.bashrc
-
+cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bashrc
 shopt -s checkwinsize
 shopt -s histappend
 shopt -s histverify
@@ -101,14 +100,14 @@ fi
 
 if [[ $(id -u) = 0 ]]
 then
-	PS1="$(tput setaf 1)[ T ] >_ # $(tput sgr 0)"
+	PS1="$(tput setaf 1)[ D ] >_ # $(tput sgr 0)"
 else
-	PS1="$(tput setaf 1)[ T ] >_ $ $(tput sgr 0)"
+	PS1="$(tput setaf 1)[ D ] >_ $ $(tput sgr 0)"
 fi
 
 if [ -x $(which sudo) ]
 then
-	alias sudo='sudo -p "$(tput setaf 3)[ T ] >_ ? $(tput sgr 0)"'
+	alias sudo='sudo -p "$(tput setaf 3)[ D ] >_ ? $(tput sgr 0)"'
 fi
 
 if [ -d "${HOME}"/.bash_functions ]
@@ -127,7 +126,7 @@ FILE
 
 # .profile
 
-cat << 'FILE' ->> "${HOME}"/.profile
+cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 
 if [ -n "${BASH_VERSION}" ]
 then

@@ -1,0 +1,149 @@
+#!/bin/bash
+
+# dependencies #
+
+source /data/data/com.termux/files/usr/bin/console
+source /data/data/com.termux/files/usr/bin/dextop
+
+# script #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="08-12-2021"
+
+# usage #
+
+while (($#))
+do
+	case "${1}" in
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-h, --help \t Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version ${version} ]"
+			echo
+
+			exit
+		;;
+
+		*)
+			echo
+			echo "Usage: ${script} [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+		;;
+		
+	esac
+
+	shift
+done
+
+# prompt #
+
+console.script "Setting up shell [ ${script%-*} ]"
+echo
+
+# variables #
+
+# set defaults
+
+# .bash_functions
+
+# create bash functions directory
+
+[ ! -d "${HOME}"/.bash_functions ] && mkdir -p "${HOME}"/.bash_functions
+
+# .bash_aliases
+
+cat << 'FILE' ->> "${HOME}"/.bash_aliases
+
+FILE
+
+# .bash_logout
+
+cat << 'FILE' ->> "${HOME}"/.bash_logout
+
+FILE
+
+# .bashrc
+
+cat << 'FILE' ->> "${HOME}"/.bashrc
+
+shopt -s checkwinsize
+shopt -s histappend
+shopt -s histverify
+
+HISTCONTROL=ignoreboth
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+if ! shopt -oq posix
+then
+	if [ -f /usr/share/bash-completion/bash_completion ]
+	then
+		source /usr/share/bash-completion/bash_completion
+
+	elif [ -f /etc/bash_completion ]
+	then
+		source /etc/bash_completion
+	fi
+fi
+
+if [[ $(id -u) = 0 ]]
+then
+	PS1="$(tput setaf 1)[ T ] >_ # $(tput sgr 0)"
+else
+	PS1="$(tput setaf 1)[ T ] >_ $ $(tput sgr 0)"
+fi
+
+if [ -x $(which sudo) ]
+then
+	alias sudo='sudo -p "$(tput setaf 3)[ T ] >_ ? $(tput sgr 0)"'
+fi
+
+if [ -d "${HOME}"/.bash_functions ]
+then
+	for function in "${HOME}"/.bash_functions/*
+	do
+		test -x "${function}" && source "${function}"
+	done
+fi
+
+if [ -f "${HOME}"/.bash_aliases ]
+then
+	source "${HOME}"/.bash_aliases
+fi
+FILE
+
+# .profile
+
+cat << 'FILE' ->> "${HOME}"/.profile
+
+if [ -n "${BASH_VERSION}" ]
+then
+	if [ -f "{$HOME}"/.bashrc ]
+	then
+		source "$HOME/.bashrc"
+	fi
+fi
+
+if [ -d "${HOME}"/bin ]
+then
+	PATH="$HOME/bin:$PATH"
+fi
+
+if [ -d "${HOME}"/.local/bin ]
+then
+	PATH="$HOME/.local/bin:$PATH"
+fi
+FILE

@@ -67,10 +67,6 @@ console.upgrade
 
 # values #
 
-documentation_list=(
-	man
-)
-
 libraries_list=(
 	libandroid-glob
 	libandroid-glob-static
@@ -101,26 +97,19 @@ termux_list=(
 utilities_list=(
 	aspell
 	curl
-	dialog
-	ffmpeg
-	git
-	hub
 	htop*
-	jq
 	nano
 	ncurses-utils
-	net-tools
-	nmap
-	openssh
-	p7zip
 	proot
-	python
-	rsync
-	sshpass
-	unrar
-	wget
 	zip
-)
+	unzip
+	bzip2
+	gzip
+	lzip
+	p7zip
+	rsync
+	wget
+	)
 
 # initialize install list
 
@@ -129,7 +118,6 @@ install_list=()
 # populate install list
 
 install_list=(
-	${documentation_list[@]}
 	${libraries_list[@]}
 	${termux_list[@]}
 	${utilities_list[@]}

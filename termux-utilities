@@ -50,7 +50,7 @@ done
 
 # prompt #
 
-console.script "Downloading setup utilities [ ${script%-*} ]"
+console.script "Downloading utilities [ ${script%-*} ]"
 echo
 
 # variables #
@@ -69,13 +69,13 @@ binaries_list=(
 	termux-bookmarks
 	termux-checkpoint
 	termux-clean
-	termux-environment
 	termux-links
 	termux-message
 	termux-packages
 	termux-properties
 	termux-repositories
 	termux-setup
+	termux-shell
 	termux-silent
 	termux-storage
 	termux-update

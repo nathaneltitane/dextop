@@ -50,7 +50,7 @@ done
 
 # prompt #
 
-console.script "Downloading setup utilities [ ${script%-*} ]"
+console.script "Downloading utilities [ ${script%-*} ]"
 echo
 
 # variables #

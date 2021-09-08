@@ -19,23 +19,26 @@ while (($#))
 do
 	case "${1}" in
 		-r|--root)
-			login_option="root"
 			USERNAME="root"
-			
+
+			login_option="root"
+
 			shift
 		;;
 			
 		-u|--username)
-			login_option="user"
 			USERNAME="${2}"
-			
+
+			login_option="user"
+
 			shift
 		;;
 
 		-a|--application)
-			login_option="application"
 			APPLICATION="${2}"
-			
+
+			login_option="application"
+
 			shift
 		;;
 
