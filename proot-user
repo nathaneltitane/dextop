@@ -138,9 +138,10 @@ gid="$(id -g ${user_name})"
 console.fwd "Setting up home directory..."
 echo
 
-# populate home directory with standard folders
+# populate directory list:
+# use standard home directories
 
-standard_directories_list=(
+directories_list=(
 	Desktop
 	Documents
 	Downloads
@@ -151,14 +152,7 @@ standard_directories_list=(
 	Videos
 )
 
-optional_directories_list=(
-	Git
-)
-
-directories_list=(
-	${standard_directories_list[@]}
-	${optional_directories_list[@]}
-)
+# create home directory
 
 console.directory "${ROOT_DIRECTORY}"/home/"${user_name}"/ ${directories_list[@]}
 
