@@ -59,7 +59,7 @@ echo
 
 # configure
 
-if [ -z "$(cat ${BINARIES_DIRECTORY}/proot-locales-complete)" ]
+if [ ! -f "${BINARIES_DIRECTORY}"/proot-locales-complete ]
 then
 	# configure locales setup
 	

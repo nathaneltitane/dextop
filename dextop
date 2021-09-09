@@ -211,23 +211,16 @@ cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 # download / install / configure packages and scripts for user session:
 # use 'user-packages' and 'user-utilities' to customize setup
 
-if [ -z "$(cat ${BINARIES_DIRECTORY}/dextop-configuration-complete)" ]
+if [ ! -f "${BINARIES_DIRECTORY}"/dextop-configuration-complete ]
 then
 	# run configuration utilities
 
-	configuration_list=(
-		proot-configuration
-		proot-compositing
-		proot-keyboard
-		proot-locales
-		proot-timezones
-	)
-	
-	for configuration in ${configuration_list[@]}
-	do
-		"${BINARIES_DIRECTORY}"/"${setup}"
-	done
-	
+	"${BINARIES_DIRECTORY}"/proot-configuration
+	"${BINARIES_DIRECTORY}"/proot-compositing
+	"${BINARIES_DIRECTORY}"/proot-keyboard
+	"${BINARIES_DIRECTORY}"/proot-locales
+	"${BINARIES_DIRECTORY}"/proot-timezones
+
 	# confirm uninterrupted configuration
 	
 	echo "yes" > "${BINARIES_DIRECTORY}"/dextop-configuration-complete

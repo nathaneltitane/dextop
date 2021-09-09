@@ -59,7 +59,7 @@ echo
 
 # configure
 
-if [ -z "$(cat ${BINARIES_DIRECTORY}/proot-keyboard-complete)" ]
+if [ ! -f "${BINARIES_DIRECTORY}"/proot-keyboard-complete ]
 then
 	# configure keyboard setup
 	

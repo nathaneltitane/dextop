@@ -59,7 +59,7 @@ echo
 
 # initialize cleanup: find setup completion flag
 
-if [[ "$(cat ${BINARIES_DIRECTORY}/vnc-setup-complete)" = "yes" ]]
+if [ -f "${BINARIES_DIRECTORY}"/vnc-setup-complete ]
 then
 	# message #
 

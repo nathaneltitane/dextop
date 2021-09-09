@@ -59,7 +59,7 @@ echo
 
 # configure
 
-if [ -z "$(cat ${BINARIES_DIRECTORY}/proot-timezones-complete)" ]
+if [ ! -f "${BINARIES_DIRECTORY}"/proot-timezones-complete ]
 then
 	# configure timezones setup
 	

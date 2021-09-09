@@ -59,7 +59,7 @@ echo
 
 # disable compositing
 
-if [ -z "$(cat ${BINARIES_DIRECTORY}/proot-compositing-complete)" ]
+if [ ! -f "${BINARIES_DIRECTORY}"/proot-compositing-complete ]
 then
 	# kde
 

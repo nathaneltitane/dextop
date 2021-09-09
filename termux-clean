@@ -59,7 +59,7 @@ echo
 
 # initialize cleanup: find setup completion flag
 
-if [[ "$(cat ${BINARIES_DIRECTORY}/termux-setup-complete)" = "yes" ]]
+if [ -f "${BINARIES_DIRECTORY}"/termux-setup-complete ]
 then
 	# message #
 

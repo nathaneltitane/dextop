@@ -59,7 +59,7 @@ echo
 
 # configure
 
-if [ -z "$(cat ${BINARIES_DIRECTORY}/proot-configuration-complete)" ]
+if [ ! -f "${BINARIES_DIRECTORY}"/proot-configuration-complete ]
 then
 	# run configuration utilities
 	
