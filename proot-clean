@@ -59,7 +59,7 @@ echo
 
 # initialize cleanup: find setup completion flag
 
-if [ -f "${BINARIES_DIRECTORY}"/proot-keyboard-complete ]
+if [ -f "${BINARIES_DIRECTORY}"/proot-setup-complete ]
 then
 	# message #
 
