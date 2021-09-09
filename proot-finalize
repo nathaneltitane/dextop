@@ -83,15 +83,17 @@ console.clear
 # continue setup
 
 setup_list=(
-	proot-expand
-	proot-repositories
-	proot-packages
-	proot-links
+	proot-environment
+	proot-network
+	proot-preload
 	proot-bookmarks
 	proot-silent
 	proot-shell
 	proot-welcome
-	proot-configuration
+	proot-expand
+	proot-repositories
+	proot-packages
+	proot-links
 	proot-checkpoint
 	proot-clean
 )

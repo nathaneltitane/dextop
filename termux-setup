@@ -76,15 +76,17 @@ setup_list=(
 	termux-utilities
 	termux-message
 	termux-update
-	termux-repositories
-	termux-packages
-	termux-links
+	termux-architecture
+	termux-information
 	termux-properties
+	termux-storage
 	termux-bookmarks
 	termux-silent
 	termux-shell
-	termux-storage
 	termux-welcome
+	termux-repositories
+	termux-packages
+	termux-links
 	termux-checkpoint
 	termux-clean
 )

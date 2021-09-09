@@ -179,17 +179,11 @@ console.clear
 setup_list=(
 	proot-utilities
 	proot-message
-	proot-architecture
 	proot-image
-	proot-information
-	proot-environment
 	proot-groups
-	proot-network
-	proot-preload
 	proot-initialize
 	proot-session
 )
-
 # setup #
 
 for setup in ${setup_list[@]}
