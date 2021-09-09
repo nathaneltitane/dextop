@@ -62,7 +62,7 @@ console.inf "This information will be used to set up the user account."
 echo
 
 console.wrn "Information is required to set up your environment:"
-console.wrn "the fields cannot be empty."
+console.wrn "Fields cannot be empty."
 echo
 
 # values #

@@ -243,6 +243,6 @@ FILE
 console.scs "Setup complete [ ${script%-*} ]"
 echo
 
-console.countdown "Closing terminal to load changes in" 5
+console.countdown "Closing Termux in" 5
 
 kill -9 $(pgrep -f "${SHELL}")
