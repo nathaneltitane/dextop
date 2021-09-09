@@ -59,7 +59,7 @@ echo
 
 # create vnc directory
 
-[ ! -d "${ROOT_DIRECTORY}"/home/"${user_name}"/.vnc ] && mkdir -p "${ROOT_DIRECTORY}"/home/"${user_name}"/.vnc
+console.directory "${ROOT_DIRECTORY}"/home/"${user_name}" .vnc
 
 # write user vnc password file
 

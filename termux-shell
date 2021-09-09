@@ -61,7 +61,7 @@ echo
 
 # create bash functions directory
 
-[ ! -d "${HOME}"/.bash_functions ] && mkdir -p "${HOME}"/.bash_functions
+console.directory "${HOME}" .bash_functions
 
 # .bash_aliases
 

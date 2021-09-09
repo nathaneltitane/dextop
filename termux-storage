@@ -109,7 +109,7 @@ rm -rf "${HOME}"/storage
 
 # create storage directory
 
-[ ! -d "${MAIN_DIRECTORY}"/storage ] &&  mkdir -p "${MAIN_DIRECTORY}"/storage
+console.directory "${MAIN_DIRECTORY}" storage
 
 # create symbolic links
 

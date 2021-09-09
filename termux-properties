@@ -63,7 +63,7 @@ echo
 
 # create properties directory
 
-[ ! -d "${HOME}"/.config/gtk-3.0/ ] && mkdir -p "${HOME}"/.termux
+console.directory "${HOME}" .termux
 
 # write properties
 

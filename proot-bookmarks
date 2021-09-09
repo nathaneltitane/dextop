@@ -59,7 +59,7 @@ echo
 
 # create bookmarks directory
 
-[ ! -d "${ROOT_DIRECTORY}"/home/"${user_name}"/.config/gtk-3.0/ ] && mkdir -p "${ROOT_DIRECTORY}"/home/"${user_name}"/.config/gtk-3.0/
+console.directory "${ROOT_DIRECTORY}"/home/"${user_name}" .config/gtk-3.0
 
 # write bookmarks
 

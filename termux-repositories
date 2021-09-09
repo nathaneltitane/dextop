@@ -67,7 +67,7 @@ repositories_list=(
 
 # create sources directory
 
-[ ! -d "${SOURCES_DIRECTORY}"/sources.list.d ] && mkdir -p "${SOURCES_DIRECTORY}"/sources.list.d
+console.directory "${SOURCES_DIRECTORY}" sources.list.d
 
 # override main source list file
 

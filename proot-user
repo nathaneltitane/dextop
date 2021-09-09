@@ -154,7 +154,7 @@ directories_list=(
 
 # create home directory
 
-console.directory "${ROOT_DIRECTORY}"/home/"${user_name}"/ ${directories_list[@]}
+console.directory "${ROOT_DIRECTORY}"/home/"${user_name}" ${directories_list[@]}
 
 # runtime #
 
@@ -163,8 +163,8 @@ echo
 
 # create runtime directory
 
-[ ! -d /run/user/"${uid}" ] && mkdir -p /run/user/"${uid}"
-[ ! -d /run/user/"${user_name}" ] && mkdir -p /run/user/"${user_name}"
+console.directory /run/user "${uid}"
+console.directory /run/user "${user_name}"
 
 # set runtime directory permission
 
