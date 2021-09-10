@@ -71,9 +71,9 @@ binaries_list=(
 	proot-checkpoint
 	proot-clean
 	proot-compositing
+	proot-configuration
 	proot-environment
 	proot-expand
-	proot-finalize
 	proot-groups
 	proot-image
 	proot-information
@@ -81,7 +81,6 @@ binaries_list=(
 	proot-keyboard
 	proot-links
 	proot-locales
-	proot-message
 	proot-network
 	proot-packages
 	proot-preload
@@ -92,8 +91,8 @@ binaries_list=(
 	proot-silent
 	proot-superuser
 	proot-timezones
-	proot-utilities
 	proot-user
+	proot-utilities
 	proot-welcome
 )
 

@@ -75,29 +75,32 @@ cat << 'FILE' ->> "${ROOT_DIRECTORY}"/root/.profile
 
 # proot initialize #
 
-# dependencies #
-
-source /data/data/com.termux/files/usr/bin/console
-source /data/data/com.termux/files/usr/bin/dextop
-
-# continue proot setup
-
-"${BINARIES_DIRECTORY}"/proot-setup
-
-# exit proot after successful setup:
-# continue with vnc setup on Termux shell
-
-# clear #
-
-console.clear
-
-# log out
-
-console.fwd "Logging out..."
-echo
-
-# remove after execution 
-
-sed -i '/# proot initialize #/,$d' /root/.profile && exit
+if [ ! -f "${}"/proot-initialize-complete ]
+then
+	# dependencies #
+	
+	source /data/data/com.termux/files/usr/bin/console
+	source /data/data/com.termux/files/usr/bin/dextop
+	
+	# continue proot setup
+	
+	"${BINARIES_DIRECTORY}"/proot-setup
+	
+	# clear #
+	
+	console.clear
+	
+	# exit proot after successful setup:
+	# continue with vnc setup on Termux shell
+	
+	console.fwd "Logging out..."
+	echo
+	
+	# confirm uninterrupted setup
+	
+	echo "yes" > "${BINARIES_DIRECTORY}"/proot-checkpoint-complete
+else
+	:
+fi
 
 FILE

@@ -74,7 +74,6 @@ console.clear
 
 setup_list=(
 	vnc-utilities
-	vnc-message
 	vnc-environment
 	vnc-checkpoint
 	vnc-clean

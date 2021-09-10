@@ -215,10 +215,10 @@ if [ ! -f "${BINARIES_DIRECTORY}"/dextop-configuration-complete ]
 then
 	# run configuration utilities
 
-	"${BINARIES_DIRECTORY}"/proot-compositing
-	"${BINARIES_DIRECTORY}"/proot-keyboard
-	"${BINARIES_DIRECTORY}"/proot-locales
-	"${BINARIES_DIRECTORY}"/proot-timezones
+	"${BINARIES_DIRECTORY}"/proot-configuration
+	
+	# run user setup
+	
 	"${BINARIES_DIRECTORY}"/user-setup
 
 	# confirm uninterrupted configuration

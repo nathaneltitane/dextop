@@ -50,13 +50,40 @@ done
 
 # prompt #
 
-console.script "Initializing setup [ ${script%-*} ]"
-echo
+console.script "Starting setup [ ${script%-*} ]"
 
 # variables #
 
 # set defaults
 
-# message #
+# export variables
 
-console.title "Linux on Android" "Termux // Dextop // Ubuntu" "${version}"
+echo '# configuration #'														>> "${PREFIX}"/bin/dextop
+
+# clear #
+
+console.clear
+
+# source variables
+
+[ -f "${PREFIX}"/bin/dextop ] && source "${PREFIX}"/bin/dextop
+
+# setup #
+
+# in order of execution
+
+setup_list=(
+	proot-compositing
+	proot-keyboard
+	proot-locales
+	proot-timezones
+)
+
+# setup #
+
+for setup in ${setup_list[@]}
+do
+	"${BINARIES_DIRECTORY}"/"${setup}"
+	
+	console.clear
+done

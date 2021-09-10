@@ -155,14 +155,19 @@ IFS=''
 
 # export variables
 
-echo '# proot #'																>> "${PREFIX}"/bin/dextop
-
-echo "export DISTRIBUTION_NAME=${distribution_name}"							>> "${PREFIX}"/bin/dextop
-echo "export DISTRIBUTION_VERSION=${distribution_version}"						>> "${PREFIX}"/bin/dextop
-echo "export DISTRIBUTION_RELEASE=${distribution_release}"						>> "${PREFIX}"/bin/dextop
-
-echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'		>> "${PREFIX}"/bin/dextop
-echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'				>> "${PREFIX}"/bin/dextop
+if [ ! -f "${BINARIES_DIRECTORY}"/proot-setup-complete ]
+then
+	echo '# proot #'															>> "${PREFIX}"/bin/dextop
+	
+	echo "export DISTRIBUTION_NAME=${distribution_name}"						>> "${PREFIX}"/bin/dextop
+	echo "export DISTRIBUTION_VERSION=${distribution_version}"					>> "${PREFIX}"/bin/dextop
+	echo "export DISTRIBUTION_RELEASE=${distribution_release}"					>> "${PREFIX}"/bin/dextop
+	
+	echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'	>> "${PREFIX}"/bin/dextop
+	echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'			>> "${PREFIX}"/bin/dextop
+else
+	:
+fi
 
 # clear #
 
@@ -180,9 +185,11 @@ setup_list=()
 
 if [ ! -f "${BINARIES_DIRECTORY}"/proot-setup-complete ]
 then
+	# outside of proot container:
+	# prepare container
+
 	setup_list+=(
 		proot-utilities
-		proot-message
 		proot-architecture
 		proot-information
 		proot-image
@@ -191,14 +198,16 @@ then
 		proot-session
 	)
 else
+	# inside of proot container
+	# finish container setup
+
 	setup_list+=(
-		proot-message
 		proot-environment
 		proot-network
 		proot-preload
 		proot-bookmarks
-		proot-silent
 		proot-shell
+		proot-silent
 		proot-welcome
 		proot-expand
 		proot-repositories
@@ -207,6 +216,17 @@ else
 		proot-checkpoint
 		proot-clean
 	)
+	
+	# setup user:
+	# keep outside of array to pass and handle arguments
+	
+	# setup proot user
+	
+	"${BINARIES_DIRECTORY}"/proot-user "${user_name}"
+	
+	# setup proot superuser privilege
+	
+	"${BINARIES_DIRECTORY}"/proot-superuser "${user_name}"
 fi
 
 # setup #

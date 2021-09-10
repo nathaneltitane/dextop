@@ -74,13 +74,12 @@ console.clear
 
 setup_list=(
 	termux-utilities
-	termux-message
 	termux-update
 	termux-properties
 	termux-storage
 	termux-bookmarks
-	termux-silent
 	termux-shell
+	termux-silent
 	termux-welcome
 	termux-repositories
 	termux-packages

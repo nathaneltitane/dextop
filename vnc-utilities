@@ -69,7 +69,6 @@ binaries_list=(
 	vnc-checkpoint
 	vnc-clean
 	vnc-environment
-	vnc-message
 	vnc-pass
 	vnc-setup
 	vnc-start

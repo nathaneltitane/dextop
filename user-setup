@@ -73,8 +73,9 @@ console.clear
 # in order of execution
 
 setup_list=(
-	user-packages
 	user-utilities
+	user-packages
+	user-checkpoint
 )
 
 # setup #
