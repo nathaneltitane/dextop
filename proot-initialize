@@ -80,12 +80,12 @@ cat << 'FILE' ->> "${ROOT_DIRECTORY}"/root/.profile
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/dextop
 
-# finalize proot system setup
+# continue proot setup
 
-"${BINARIES_DIRECTORY}"/proot-finalize
+"${BINARIES_DIRECTORY}"/proot-setup
 
 # exit proot after successful setup:
-# continue vnc components setup on Termux shell
+# continue with vnc setup on Termux shell
 
 # clear #
 

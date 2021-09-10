@@ -18,7 +18,7 @@ version="08-12-2021"
 while (($#))
 do
 	case "${1}" in
-		-h|--help)
+		 -h|--help)
 			echo
 			echo -e "Usage: ${script} [OPTION]"
 			echo
@@ -50,31 +50,13 @@ done
 
 # prompt #
 
-console.script "Configuring user session [ ${script%-*} ]"
+console.script "Verifying setup checkpoint [ ${script%-*} ]"
 echo
 
 # variables #
 
 # set defaults
 
-# configure
+# confirm uninterrupted setup
 
-if [ ! -f "${BINARIES_DIRECTORY}"/proot-configuration-complete ]
-then
-	# run configuration utilities
-	
-	configuration_list=(
-		user-setup
-	)
-	
-	for configuration in ${configuration_list[@]}
-	do
-		"${BINARIES_DIRECTORY}"/"${setup}"
-	done
-	
-	# confirm uninterrupted configuration
-	
-	echo "yes" > "${BINARIES_DIRECTORY}"/proot-configuration-complete
-else
-	:
-fi
+echo "yes" > "${BINARIES_DIRECTORY}"/user-checkpoint-complete

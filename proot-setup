@@ -174,16 +174,41 @@ console.clear
 
 # setup #
 
+setup_list=()
+
 # in order of execution
 
-setup_list=(
-	proot-utilities
-	proot-message
-	proot-image
-	proot-groups
-	proot-initialize
-	proot-session
-)
+if [ ! -f "${BINARIES_DIRECTORY}"/proot-setup-complete ]
+then
+	setup_list+=(
+		proot-utilities
+		proot-message
+		proot-architecture
+		proot-information
+		proot-image
+		proot-groups
+		proot-initialize
+		proot-session
+	)
+else
+	setup_list+=(
+		proot-message
+		proot-environment
+		proot-network
+		proot-preload
+		proot-bookmarks
+		proot-silent
+		proot-shell
+		proot-welcome
+		proot-expand
+		proot-repositories
+		proot-packages
+		proot-links
+		proot-checkpoint
+		proot-clean
+	)
+fi
+
 # setup #
 
 for setup in ${setup_list[@]}
@@ -192,3 +217,5 @@ do
 	
 	console.clear
 done
+
+echo "yes" > "${BINARIES_DIRECTORY}"/proot-setup-complete

@@ -76,8 +76,6 @@ setup_list=(
 	termux-utilities
 	termux-message
 	termux-update
-	termux-architecture
-	termux-information
 	termux-properties
 	termux-storage
 	termux-bookmarks

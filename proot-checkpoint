@@ -59,4 +59,4 @@ echo
 
 # confirm uninterrupted setup
 
-echo "yes" > "${BINARIES_DIRECTORY}"/proot-setup-complete
+echo "yes" > "${BINARIES_DIRECTORY}"/proot-checkpoint-complete

@@ -59,4 +59,4 @@ echo
 
 # confirm uninterrupted setup
 
-echo "yes" > "${BINARIES_DIRECTORY}"/vnc-setup-complete
+echo "yes" > "${BINARIES_DIRECTORY}"/vnc-checkpoint-complete

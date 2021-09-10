@@ -59,4 +59,4 @@ echo
 
 # confirm uninterrupted setup
 
-echo "yes" > "${BINARIES_DIRECTORY}"/termux-setup-complete
+echo "yes" > "${BINARIES_DIRECTORY}"/termux-checkpoint-complete
