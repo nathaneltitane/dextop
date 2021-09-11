@@ -88,6 +88,9 @@ libraries_list=(
 
 multimedia_list=(
 	ffmpeg
+	flac
+	gstreamer
+	
 )
 
 termux_list=(
