@@ -67,6 +67,12 @@ console.upgrade
 
 # values #
 
+development_list=(
+	git
+	hub
+	python
+)
+
 libraries_list=(
 	libandroid-glob
 	libandroid-glob-static
@@ -78,6 +84,10 @@ libraries_list=(
 	libandroid-support-static
 	libandroid-wordexp
 	libandroid-wordexp-static
+)
+
+multimedia_list=(
+	ffmpeg
 )
 
 termux_list=(
@@ -106,6 +116,7 @@ utilities_list=(
 	lzip
 	p7zip
 	rsync
+	tsu
 	wget
 	)
 
@@ -116,7 +127,9 @@ install_list=()
 # populate install list
 
 install_list=(
+	${development_list[@]}
 	${libraries_list[@]}
+	${multimedia_list[@]}
 	${termux_list[@]}
 	${utilities_list[@]}
 )

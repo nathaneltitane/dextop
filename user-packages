@@ -84,7 +84,7 @@ multimedia_list=(
 
 utilities_list=(
 	youtube-dl
-		)
+)
 
 # initialize install list
 

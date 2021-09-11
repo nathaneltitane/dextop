@@ -93,7 +93,7 @@ do
 
 done
 
-# clear
+# clear #
 
 console.clear
 
@@ -172,7 +172,7 @@ then
 	
 	setup_list+=(
 		termux-setup
-		)
+	)
 fi
 
 # proot

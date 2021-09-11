@@ -119,7 +119,7 @@ users_list=(
 
 for users in ${users_list[@]}
 do
-	# clear any default passwords present in /etc/passwd from image setup
+	# clear # any default passwords present in /etc/passwd from image setup
 
 	passwd -d "${user_name}"
 
