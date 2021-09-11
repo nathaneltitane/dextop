@@ -59,7 +59,7 @@ echo
 
 # initialize cleanup: find setup completion flag
 
-if [ -f "${BINARIES_DIRECTORY}"/termux-setup-complete ]
+if [ -f "${BINARIES_DIRECTORY}"/termux-checkpoint-complete ]
 then
 	# message #
 
@@ -72,7 +72,6 @@ then
 	# remove setup files
 
 	setup_files_list=(
-		"${HOME}"/dextop
 		"${BINARIES_DIRECTORY}"/termux-setup
 		"${BINARIES_DIRECTORY}"/termux-setup-complete
 	)
@@ -83,11 +82,9 @@ then
 	done
 
 else
-	console.err "Some errors were encountered during setup."
+	console.err "Setup errors were encountered [ ${script%-*} ]"
 	echo
 	
 	console.inf "Consult setup logs at '"${PREFIX}"/var/log/' for details."
 	echo
-	
-	
 fi

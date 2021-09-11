@@ -75,7 +75,9 @@ console.clear
 setup_list=(
 	user-utilities
 	user-packages
+	user-addons
 	user-checkpoint
+	user-clean
 )
 
 # setup #

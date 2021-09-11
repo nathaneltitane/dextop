@@ -65,7 +65,7 @@ cat << 'FILE' ->> "${HOME}"/.bashrc
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/dextop
 
-console.fwd "Welcome to [ Termux ] Dextop!"
+console.fwd "Welcome to Dextop [ Termux ]"
 echo
 
 console.inf "Launch session or application: 'proot-session -u <username> | -a <application>'"

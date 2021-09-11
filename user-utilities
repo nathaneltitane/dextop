@@ -66,42 +66,14 @@ curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && source "${BIN
 # values #
 
 binaries_list=(
-	user-utilities
+	user-addons
+	user-checkpoint
+	user-clean
 	user-packages
 	user-setup
+	user-utilities
 )
 
 # download #
 
 console.download get.dxtp.app "${BINARIES_DIRECTORY}" ${binaries_list[@]}
-
-console.fwd "Loading additional utilities..."
-echo
-
-# bash aliases
-
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${MAIN_DIRECTORY}"/home								.bash_aliases
-
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"						.bash_aliases
-
-# bash functions
-
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_functions		address
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_functions		extract
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_functions		record
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_functions		speed
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_functions		sprunge
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_functions		weather
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_functions		youtube
-
-# leocad
-
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				"${ROOT_DIRECTORY}"/usr/bin								leocad-build
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				"${ROOT_DIRECTORY}"/usr/bin								leocad-configuration
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				"${ROOT_DIRECTORY}"/usr/bin								leocad-download
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				"${ROOT_DIRECTORY}"/usr/bin								leocad-launcher
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				"${ROOT_DIRECTORY}"/usr/bin								leocad-position
-
-# youtube-dl
-
-console.download https://yt-dl.org/downloads/latest											"${ROOT_DIRECTORY}"/usr/bin								youtube-dl

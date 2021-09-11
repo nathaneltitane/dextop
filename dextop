@@ -236,6 +236,6 @@ FILE
 console.scs "Setup complete [ ${script%-*} ]"
 echo
 
-console.countdown "Closing Termux in" 5
+console.countdown "Closing in" 3 
 
 kill -9 $(pgrep -f "${SHELL}")

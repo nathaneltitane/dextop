@@ -53,13 +53,13 @@ done
 console.script "Cleaning up [ ${script%-*} ]"
 echo
 
-# variables #1
+# variables #
 
 # set defaults
 
 # initialize cleanup: find setup completion flag
 
-if [ -f "${BINARIES_DIRECTORY}"/proot-setup-complete ]
+if [ -f "${BINARIES_DIRECTORY}"/proot-checkpoint-complete ]
 then
 	# message #
 
@@ -82,7 +82,7 @@ then
 	done
 	
 else
-	console.err "Some errors were encountered during setup."
+	console.err "Setup errors were encountered [ ${script%-*} ]"
 	echo
 	
 	console.inf "Consult setup logs at '"${PREFIX}"/var/log/' for details."

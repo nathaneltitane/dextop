@@ -65,7 +65,7 @@ cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 source /data/data/com.termux/files/usr/bin/console
 source /data/data/com.termux/files/usr/bin/dextop
 
-console.fwd "Welcome to [ Ubuntu ] Dextop!"
+console.fwd "Welcome to Dextop [ Ubuntu ]"
 echo
 
 if [ -f "${HOME}"/.vnc/selection ]

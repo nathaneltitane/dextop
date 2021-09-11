@@ -50,50 +50,41 @@ done
 
 # prompt #
 
-console.script "Starting setup [ ${script%-*} ]"
+console.script "Cleaning up [ ${script%-*} ]"
+echo
 
 # variables #
 
 # set defaults
 
-# export variables
+# initialize cleanup: find setup completion flag
 
-echo '# termux #'																>> "${PREFIX}"/bin/dextop
+if [ -f "${BINARIES_DIRECTORY}"/user-checkpoint-complete ]
+then
+	# message #
 
-# clear #
-
-console.clear
-
-# source variables
-
-[ -f "${PREFIX}"/bin/dextop ] && source "${PREFIX}"/bin/dextop
-
-# setup #
-
-# in order of execution
-
-setup_list=(
-	termux-utilities
-	termux-update
-	termux-properties
-	termux-storage
-	termux-addons
-	termux-bookmarks
-	termux-shell
-	termux-silent
-	termux-welcome
-	termux-repositories
-	termux-packages
-	termux-links
-	termux-checkpoint
-	termux-clean
-)
-
-# setup #
-
-for setup in ${setup_list[@]}
-do
-	"${BINARIES_DIRECTORY}"/"${setup}"
+	console.scs "Setup complete [ ${script%-*} ]"
+	echo
 	
-	console.clear
-done
+	console.fwd "Removing setup files..."
+	echo
+
+	# remove setup files
+
+	setup_files_list=(
+		"${BINARIES_DIRECTORY}"/user-setup
+		"${BINARIES_DIRECTORY}"/user-setup-complete
+	)
+
+	for file in ${setup_files_list[@]}
+	do
+		rm "${file}"
+	done
+	
+else
+	console.err "Setup errors were encountered [ ${script%-*} ]"
+	echo
+	
+	console.inf "Consult setup logs at '"${PREFIX}"/var/log/' for details."
+	echo
+fi
