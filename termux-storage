@@ -68,7 +68,7 @@ then
 	console.wrn "Internal and external storage locations are made available."
 	echo
 
-	console.inf "Storage is made accessible through the proot container."
+	console.inf "Storage is made accessible through proot container."
 	echo
 
 	console.usr "Select 'Allow' when prompted to proceed."
@@ -83,7 +83,6 @@ then
 
 	console.countdown "Continuing in" 3
 	echo
-
 
 else
 	# exists:
