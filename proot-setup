@@ -238,4 +238,6 @@ do
 	console.clear
 done
 
+# confirm uninterrupted setup
+
 echo "yes" > "${BINARIES_DIRECTORY}"/proot-setup-complete
