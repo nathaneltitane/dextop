@@ -159,6 +159,10 @@ utilities_list=(
 
 console.download get.dxtp.app "${BINARIES_DIRECTORY}" ${utilities_list[@]}
 
+# clear #
+
+console.clear
+
 # initialize setup list
 
 setup_list=()
