@@ -59,6 +59,6 @@ echo
 
 # environment #
 
-cat << "FILE" -> "${ROOT_DIRECTORY}"/etc/environment
-PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/sbin:${PREFIX}/bin:/system/bin:/system/xbin"
+cat << "FILE" ->> "${ROOT_DIRECTORY}"/etc/environment
+
 FILE
