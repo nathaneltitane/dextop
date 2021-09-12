@@ -97,6 +97,11 @@ done
 
 console.clear
 
+# message #
+
+console.title "Linux on Android" "Termux // Dextop // Ubuntu" "${version}"
+echo
+
 # prompt #
 
 console.script "Initializing setup [ ${script%-*} ]"
