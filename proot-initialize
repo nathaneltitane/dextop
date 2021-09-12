@@ -75,7 +75,7 @@ cat << 'FILE' ->> "${ROOT_DIRECTORY}"/root/.profile
 
 # proot initialize #
 
-if [ ! -f "${}"/proot-initialize-complete ]
+if [ ! -f "${BINARIES_DIRECTORY}"/proot-initialize-complete ]
 then
 	# dependencies #
 	
