@@ -133,10 +133,6 @@ echo "export dextop_option=${dextop_option}"									>> "${PREFIX}"/bin/dextop
 echo "export desktop_option=${desktop_option}"									>> "${PREFIX}"/bin/dextop
 echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/dextop
 
-# clear #
-
-console.clear
-
 # source variables
 
 [ -f "${PREFIX}"/bin/dextop ] && source "${PREFIX}"/bin/dextop

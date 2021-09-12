@@ -77,11 +77,11 @@ setup_list=(
 	termux-update
 	termux-properties
 	termux-storage
-	termux-addons
 	termux-bookmarks
 	termux-shell
 	termux-silent
 	termux-welcome
+	termux-addons
 	termux-repositories
 	termux-packages
 	termux-links
