@@ -98,7 +98,7 @@ then
 	
 	# confirm uninterrupted setup
 	
-	echo "yes" > "${BINARIES_DIRECTORY}"/proot-checkpoint-complete
+	echo "yes" > "${BINARIES_DIRECTORY}"/proot-initialize-complete
 else
 	:
 fi

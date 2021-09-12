@@ -183,7 +183,7 @@ setup_list=()
 
 # in order of execution
 
-if [ ! -f "${BINARIES_DIRECTORY}"/proot-setup-complete ]
+if [ ! -f "${BINARIES_DIRECTORY}"/proot-checkpoint-complete ]
 then
 	# outside of proot container:
 	# prepare container
@@ -194,17 +194,18 @@ then
 		proot-information
 		proot-image
 		proot-groups
-		proot-initialize
-		proot-session
-	)
-else
-	# inside of proot container
-	# finish container setup
-
-	setup_list+=(
 		proot-environment
 		proot-network
 		proot-preload
+		proot-initialize
+		proot-checkpoint
+		proot-session
+	)
+else
+	# inside of proot container:
+	# finish container setup
+
+	setup_list+=(
 		proot-bookmarks
 		proot-shell
 		proot-silent
@@ -213,7 +214,6 @@ else
 		proot-repositories
 		proot-packages
 		proot-links
-		proot-checkpoint
 		proot-clean
 	)
 	
