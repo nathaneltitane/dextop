@@ -71,15 +71,10 @@ then
 
 	# remove setup files
 
-	setup_files_list=(
-		"${BINARIES_DIRECTORY}"/vnc-setup
-		"${BINARIES_DIRECTORY}"/vnc-setup-complete
+	remove_list=(
 	)
 
-	for file in ${setup_files_list[@]}
-	do
-		rm "${file}"
-	done
+	console.delete ${remove_list[@]}
 
 else
 	console.err "Setup errors were encountered [ ${script%-*} ]"
