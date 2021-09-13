@@ -91,11 +91,11 @@ if ! shopt -oq posix
 then
 	if [ -f /usr/share/bash-completion/bash_completion ]
 	then
-		source /usr/share/bash-completion/bash_completion
+		. /usr/share/bash-completion/bash_completion
 
 	elif [ -f /etc/bash_completion ]
 	then
-		source /etc/bash_completion
+		. /etc/bash_completion
 	fi
 fi
 
@@ -115,13 +115,13 @@ if [ -d "${HOME}"/.bash_functions ]
 then
 	for function in "${HOME}"/.bash_functions/*
 	do
-		test -x "${function}" && source "${function}"
+		test -x "${function}" && . "${function}"
 	done
 fi
 
 if [ -f "${HOME}"/.bash_aliases ]
 then
-	source "${HOME}"/.bash_aliases
+	. "${HOME}"/.bash_aliases
 fi
 FILE
 
@@ -133,7 +133,7 @@ if [ -n "${BASH_VERSION}" ]
 then
 	if [ -f "{$HOME}"/.bashrc ]
 	then
-		source "${HOME}"/.bashrc
+		. "${HOME}"/.bashrc
 	fi
 fi
 
