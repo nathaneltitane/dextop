@@ -85,6 +85,10 @@ then
 	# continue proot setup
 	
 	"${BINARIES_DIRECTORY}"/proot-setup
+
+	# confirm uninterrupted setup
+	
+	echo "yes" > "${BINARIES_DIRECTORY}"/proot-initialize-complete
 	
 	# clear #
 	
@@ -96,9 +100,7 @@ then
 	console.fwd "Logging out..."
 	echo
 	
-	# confirm uninterrupted setup
-	
-	echo "yes" > "${BINARIES_DIRECTORY}"/proot-initialize-complete
+	exit
 else
 	:
 fi
