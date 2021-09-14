@@ -99,16 +99,19 @@ then
 	fi
 fi
 
+LETTER=${USER::1}
+LETTER=${LETTERˆˆ}
+
 if [[ $(id -u) = 0 ]]
 then
-	PS1="$(tput setaf 1)[ T ] >_ # $(tput sgr 0)"
+	PS1="$(tput setaf 1)[ ${LETTER} ] >_ # $(tput sgr 0)"
 else
-	PS1="$(tput setaf 7)[ T ] >_ $ $(tput sgr 0)"
+	PS1="$(tput setaf 7)[ ${LETTER} ] >_ $ $(tput sgr 0)"
 fi
 
 if [ -x $(which sudo) ]
 then
-	alias sudo='sudo -p "$(tput setaf 3)[ T ] >_ ? $(tput sgr 0)"'
+	alias sudo='sudo -p "$(tput setaf 3)[ S ] >_ ? $(tput sgr 0)"'
 fi
 
 if [ -d "${HOME}"/.bash_functions ]
