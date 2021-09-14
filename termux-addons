@@ -55,7 +55,7 @@ echo
 
 # bash aliases
 
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME}"						.bash_aliases
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		"${HOME}"						.bash_aliases
 
 # bash functions
 
