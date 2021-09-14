@@ -57,7 +57,9 @@ echo
 
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		"${HOME}"						.bash_aliases
 
-# bash functions
+# .bash_functions
+
+console.directory "${HOME}" .bash_functions
 
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME}"/.bash_functions		address
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME}"/.bash_functions		extract

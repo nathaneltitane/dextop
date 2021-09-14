@@ -57,12 +57,6 @@ echo
 
 # set defaults
 
-# .bash_functions
-
-# create bash functions directory
-
-console.directory "${HOME}" .bash_functions
-
 # .bash_aliases
 
 cat << 'FILE' -> "${HOME}"/.bash_aliases

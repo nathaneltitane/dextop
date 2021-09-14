@@ -59,6 +59,8 @@ console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/ut
 
 # bash functions
 
+console.directory "${ROOT_DIRECTORY}"/home/"${USER}" .bash_functions
+
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_functions		address
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_functions		extract
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_functions		record
