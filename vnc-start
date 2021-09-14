@@ -2,8 +2,8 @@
 
 # dependencies #
 
-source /data/data/com.termux/files/usr/bin/console
-source /data/data/com.termux/files/usr/bin/dextop
+. /data/data/com.termux/files/usr/bin/console
+. /data/data/com.termux/files/usr/bin/dextop
 
 # script #
 
@@ -63,7 +63,7 @@ PORT="590${DISPLAY:1}"
 
 # /etc/os-release: source distribution codename variables (e.g. $NAME)
 
-[ -f /etc/os-release ] && source /etc/os-release
+[ -f /etc/os-release ] && . /etc/os-release
 
 # functions #
 

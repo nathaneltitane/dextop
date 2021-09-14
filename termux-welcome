@@ -2,8 +2,8 @@
 
 # dependencies #
 
-source /data/data/com.termux/files/usr/bin/console
-source /data/data/com.termux/files/usr/bin/dextop
+. /data/data/com.termux/files/usr/bin/console
+. /data/data/com.termux/files/usr/bin/dextop
 
 # script #
 
@@ -62,8 +62,8 @@ cat << 'FILE' ->> "${HOME}"/.bashrc
 
 # dependencies #
 
-source /data/data/com.termux/files/usr/bin/console
-source /data/data/com.termux/files/usr/bin/dextop
+. /data/data/com.termux/files/usr/bin/console
+. /data/data/com.termux/files/usr/bin/dextop
 
 console.fwd "Welcome to Dextop [ Termux ]"
 echo

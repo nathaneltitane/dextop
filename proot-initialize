@@ -2,8 +2,8 @@
 
 # dependencies #
 
-source /data/data/com.termux/files/usr/bin/console
-source /data/data/com.termux/files/usr/bin/dextop
+. /data/data/com.termux/files/usr/bin/console
+. /data/data/com.termux/files/usr/bin/dextop
 
 # script #
 
@@ -61,7 +61,7 @@ echo
 
 # source variables
 
-[ -f "${PREFIX}"/bin/dextop ] && source "${PREFIX}"/bin/dextop
+[ -f "${PREFIX}"/bin/dextop ] && . "${PREFIX}"/bin/dextop
 
 # initialize #
 
@@ -79,8 +79,8 @@ if [ ! -f "${BINARIES_DIRECTORY}"/proot-initialize-complete ]
 then
 	# dependencies #
 	
-	source /data/data/com.termux/files/usr/bin/console
-	source /data/data/com.termux/files/usr/bin/dextop
+	. /data/data/com.termux/files/usr/bin/console
+	. /data/data/com.termux/files/usr/bin/dextop
 	
 	# continue proot setup
 	

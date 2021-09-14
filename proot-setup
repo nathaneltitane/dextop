@@ -2,7 +2,7 @@
 
 # dependencies #
 
-curl -sL get.cnsl.app/console > "${PREFIX}"/bin/console && source "${PREFIX}"/bin/console
+curl -sL get.cnsl.app/console > "${PREFIX}"/bin/console && . "${PREFIX}"/bin/console
 
 # script #
 
@@ -175,7 +175,7 @@ console.clear
 
 # source variables
 
-[ -f "${PREFIX}"/bin/dextop ] && source "${PREFIX}"/bin/dextop
+[ -f "${PREFIX}"/bin/dextop ] && . "${PREFIX}"/bin/dextop
 
 # setup #
 

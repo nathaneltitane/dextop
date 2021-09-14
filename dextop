@@ -2,7 +2,7 @@
 
 # dependencies #
 
-curl -sL get.cnsl.app/console > "${PREFIX}"/bin/console && source "${PREFIX}"/bin/console
+curl -sL get.cnsl.app/console > "${PREFIX}"/bin/console && . "${PREFIX}"/bin/console
 
 # script #
 
@@ -140,7 +140,7 @@ echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/dextop
 
 # source variables
 
-[ -f "${PREFIX}"/bin/dextop ] && source "${PREFIX}"/bin/dextop
+[ -f "${PREFIX}"/bin/dextop ] && . "${PREFIX}"/bin/dextop
 
 # values #
 
@@ -205,7 +205,7 @@ done
 # source variables:
 # get additional setup values
 
-[ -f "${PREFIX}"/bin/dextop ] && source "${PREFIX}"/bin/dextop
+[ -f "${PREFIX}"/bin/dextop ] && . "${PREFIX}"/bin/dextop
 
 # write configuration
 
