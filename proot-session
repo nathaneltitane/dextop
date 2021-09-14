@@ -270,15 +270,15 @@ PAGER="less"
 
 if [ ! -z "${APPLICATION}" ]
 then
-	 console.scs "Valid application name [ ${APPLICATION} ]."
-	 echo
-	 
+	console.scs "Valid application name [ ${APPLICATION} ]."
+	echo
+	
 	if [[ ! -f "${ROOT_DIRECTORY}"/usr/bin/"${APPLICATION}" ]]
 	then
-		 console.err "Invalid application name [ ${APPLICATION} ]."
-		 echo
-
-		 unset "${APPLICATION}"
+		console.err "Invalid application name [ ${APPLICATION} ]."
+		echo
+		
+		unset "${APPLICATION}"
 	fi
 
 	console.fwd "Starting application [ ${SESSION_NAME} // ${USER} // ${APPLICATION} ]..."
@@ -294,13 +294,14 @@ console.clear
 
 # setup proot command arguments
 
-command="proot"
+unset "${command}"
 
+command+="proot"
 command+=" --kill-on-exit"
 command+=" --link2symlink"
 command+=" --rootfs=${ROOT_DIRECTORY}"
 command+=" --change-id=${USER_ID}:${GROUP_ID}"
-[ -d  "${ROOT_DIRECTORY}"/"${HOME}" ] && command+=" --pwd=${HOME}" || exit 1
+command+=" --pwd=${HOME}"
 command+=" --bind=/apex"
 command+=" --bind=/data"
 command+=" --bind=/dev"
@@ -313,11 +314,11 @@ command+=" --bind=/proc/self/fd/0:/dev/stdin"
 command+=" --bind=/proc/self/fd/1:/dev/stdout"
 command+=" --bind=/proc/self/fd/2:/dev/stderr"
 command+=" --bind=/storage"
-[ -d "${PREFIX%/*}"/storage/external ] && command+=" --bind=${PREFIX%/*}/storage/external:/media/External" || :
-[ -d "${PREFIX%/*}"/storage/internal ] && command+=" --bind=${PREFIX%/*}/storage/internal:/media/Internal" || :
 command+=" --bind=/sys"
 command+=" --bind=/system"
 command+=" --bind=/vendor"
+[ -d "${PREFIX%/*}"/storage/external ] && command+=" --bind=${PREFIX%/*}/storage/external:/media/External" || :
+[ -d "${PREFIX%/*}"/storage/internal ] && command+=" --bind=${PREFIX%/*}/storage/internal:/media/Internal" || :
 command+=" env -i"
 command+=" ANDROID_ART_ROOT=${ANDROID_ART_ROOT}"
 command+=" ANDROID_DATA=${ANDROID_DATA}"
@@ -333,9 +334,6 @@ command+=" BINARIES_DIRECTORY=${PREFIX}/bin"
 command+=" LIBRARIES_DIRECTORY=${PREFIX}/lib"
 command+=" ROOT_DIRECTORY=${ROOT_DIRECTORY}"
 command+=" MOUNT_DIRECTORY=${MOUNT_DIRECTORY}"
-[ "${SESSION}" = "kde" ] && command+=" QT_AUTO_SCREEN_SCALE_FACTOR=0"
-[ "${SESSION}" = "kde" ] && command+=" QT_SCALE_FACTOR=1"
-[ "${SESSION}" = "kde" ] && command+=" QT_X11_NO_MITSHM=1"
 command+=" SESSION=${SESSION}"
 command+=" SESSION_NAME=${SESSION_NAME}"
 command+=" SESSION_MANAGER=${SESSION_MANAGER}"
@@ -363,6 +361,9 @@ command+=" XDG_DATA_HOME=${HOME}/.local/share"
 command+=" XDG_DATA_DIRS=/usr/local/share:/usr/share"
 command+=" XDG_CONFIG_DIRS=/etc/xdg"
 command+=" XAUTHORITY=${XDG_RUNTIME_DIR}/.Xauthority"
+[ "${SESSION}" = "kde" ] && command+=" QT_AUTO_SCREEN_SCALE_FACTOR=0"
+[ "${SESSION}" = "kde" ] && command+=" QT_SCALE_FACTOR=1"
+[ "${SESSION}" = "kde" ] && command+=" QT_X11_NO_MITSHM=1"
 command+=" ${SHELL} --login"
 
 # execute proot
