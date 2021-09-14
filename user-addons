@@ -55,35 +55,35 @@ echo
 
 # bash aliases
 
-console.directory "${ROOT_DIRECTORY}"/home/"${USER}" .bash_aliases
+console.directory "${ROOT_DIRECTORY}"/home/"${USER}" .bash-aliases
 
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_aliases		apt
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_aliases		copy
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_aliases		count
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_aliases		directory
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_aliases		duplicate
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_aliases		git
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_aliases		grep
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_aliases		kill
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_aliases		list
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_aliases		nano
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_aliases		ping
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_aliases		sudo
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_aliases		system
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_aliases		usage
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_aliases		where
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		apt
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		copy
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		count
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		directory
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		duplicate
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		git
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		grep
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		kill
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		list
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		nano
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		ping
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		sudo
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		system
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		usage
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		where
 
 # bash functions
 
-console.directory "${ROOT_DIRECTORY}"/home/"${USER}" .bash_functions
+console.directory "${ROOT_DIRECTORY}"/home/"${USER}" .bash-functions
 
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_functions		address
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_functions		extract
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_functions		record
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_functions		speed
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_functions		sprunge
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_functions		weather
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash_functions		youtube
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-functions		address
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-functions		extract
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-functions		record
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-functions		speed
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-functions		sprunge
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-functions		weather
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-functions		youtube
 
 # leocad
 

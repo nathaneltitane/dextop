@@ -61,9 +61,9 @@ echo
 
 cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bash_aliases
 
-if [ -d "${HOME}"/.bash_aliases ]
+if [ -d "${HOME}"/.bash-aliases ]
 then
-	for alias in "${HOME}"/.bash_aliases/*
+	for alias in "${HOME}"/.bash-aliases/*
 	do
 		test -x "${alias}" && . "${alias}"
 	done
@@ -114,9 +114,9 @@ then
 	alias sudo='sudo -p "$(tput setaf 3)[ S ] >_ ? $(tput sgr 0)"'
 fi
 
-if [ -d "${HOME}"/.bash_functions ]
+if [ -d "${HOME}"/.bash-functions ]
 then
-	for function in "${HOME}"/.bash_functions/*
+	for function in "${HOME}"/.bash-functions/*
 	do
 		test -x "${function}" && . "${function}"
 	done

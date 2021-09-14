@@ -55,35 +55,35 @@ echo
 
 # bash aliases
 
-console.directory "${HOME}" .bash_aliases
+console.directory "${HOME}" .bash-aliases
 
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			apt
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			copy
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			count
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			directory
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			duplicate
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			git
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			grep
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			kill
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			list
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			nano
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			ping
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			sudo
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			system
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			usage
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			where
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			apt
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			copy
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			count
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			directory
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			duplicate
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			git
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			grep
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			kill
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			list
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			nano
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			ping
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			sudo
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			system
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			usage
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			where
 
-# .bash_functions
+# .bash-functions
 
-console.directory "${HOME}" .bash_functions
+console.directory "${HOME}" .bash-functions
 
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME}"/.bash_functions		address
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME}"/.bash_functions		extract
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME}"/.bash_functions		record
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME}"/.bash_functions		speed
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME}"/.bash_functions		sprunge
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME}"/.bash_functions		weather
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME}"/.bash_functions		youtube
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME}"/.bash-functions		address
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME}"/.bash-functions		extract
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME}"/.bash-functions		record
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME}"/.bash-functions		speed
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME}"/.bash-functions		sprunge
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME}"/.bash-functions		weather
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME}"/.bash-functions		youtube
 
 # youtube-dl
 
