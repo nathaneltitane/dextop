@@ -58,7 +58,7 @@ console.script "Writing login greeter [ ${script%-*} ]"
 
 # write welcome message: replaces motd
 
-cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
+cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bashrc
 
 # dependencies #
 
