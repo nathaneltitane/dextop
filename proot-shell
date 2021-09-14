@@ -59,13 +59,26 @@ echo
 
 # .bash_aliases
 
-cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bash_aliases
+cat << 'FILE' -> "${HOME}"/.bash_aliases
 
 if [ -d "${HOME}"/.bash-aliases ]
 then
 	for alias in "${HOME}"/.bash-aliases/*
 	do
 		test -x "${alias}" && . "${alias}"
+	done
+fi
+FILE
+
+# .bash functions
+
+cat << 'FILE' -> "${HOME}"/.bash_functions
+
+if [ -d "${HOME}"/.bash-functions ]
+then
+	for function in "${HOME}"/.bash-functions/*
+	do
+		test -x "${function}" && . "${function}"
 	done
 fi
 FILE
@@ -79,6 +92,7 @@ FILE
 # .bashrc
 
 cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bashrc
+
 shopt -s checkwinsize
 shopt -s histappend
 shopt -s histverify
@@ -100,7 +114,6 @@ then
 fi
 
 INITIAL=${USER::1}
-INITIAL=${INITIALˆˆ}
 
 if [[ $(id -u) = 0 ]]
 then
@@ -109,22 +122,14 @@ else
 	PS1="$(tput setaf 7)[ ${INITIAL} ] >_ $ $(tput sgr 0)"
 fi
 
-if [ -x $(which sudo) ]
-then
-	alias sudo='sudo -p "$(tput setaf 3)[ S ] >_ ? $(tput sgr 0)"'
-fi
-
-if [ -d "${HOME}"/.bash-functions ]
-then
-	for function in "${HOME}"/.bash-functions/*
-	do
-		test -x "${function}" && . "${function}"
-	done
-fi
-
 if [ -f "${HOME}"/.bash_aliases ]
 then
 	. "${HOME}"/.bash_aliases
+fi
+
+if [ -f "${HOME}"/.bash_functions ]
+then
+	. "${HOME}"/.bash_functions
 fi
 FILE
 

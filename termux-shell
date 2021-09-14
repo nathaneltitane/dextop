@@ -70,6 +70,19 @@ then
 fi
 FILE
 
+# .bash functions
+
+cat << 'FILE' -> "${HOME}"/.bash_functions
+
+if [ -d "${HOME}"/.bash-functions ]
+then
+	for function in "${HOME}"/.bash-functions/*
+	do
+		test -x "${function}" && . "${function}"
+	done
+fi
+FILE
+
 # .bash_logout
 
 cat << 'FILE' -> "${HOME}"/.bash_logout
@@ -101,7 +114,6 @@ then
 fi
 
 INITIAL=${USER::1}
-INITIAL=${INITIALˆˆ}
 
 if [[ $(id -u) = 0 ]]
 then
@@ -110,22 +122,14 @@ else
 	PS1="$(tput setaf 7)[ ${INITIAL} ] >_ $ $(tput sgr 0)"
 fi
 
-if [ -x $(which sudo) ]
-then
-	alias sudo='sudo -p "$(tput setaf 3)[ S ] >_ ? $(tput sgr 0)"'
-fi
-
-if [ -d "${HOME}"/.bash_functions ]
-then
-	for function in "${HOME}"/.bash_functions/*
-	do
-		test -x "${function}" && . "${function}"
-	done
-fi
-
 if [ -f "${HOME}"/.bash_aliases ]
 then
 	. "${HOME}"/.bash_aliases
+fi
+
+if [ -f "${HOME}"/.bash_functions ]
+then
+	. "${HOME}"/.bash_functions
 fi
 FILE
 
