@@ -184,14 +184,41 @@ done < "${ROOT_DIRECTORY}"/etc/passwd
 # system
 
 # explicit proot setup defaults:
-# used to specify the desktop session login format
-# and environment 'env' or 'printenv'
+# used to specify the desktop session:
+# login format / environment /pathnv'
+
+# set path:
+# in order of retreival
+
+unset "${PATH}"
+
+# proot container
+
+[ -d "${ROOT_DIRECTORY}"/usr/local/sbin ]										&& PATH+="/usr/local/sbin:"
+[ -d "${ROOT_DIRECTORY}"/usr/local/bin ]										&& PATH+="/usr/local/bin:"
+[ -d "${ROOT_DIRECTORY}"/usr/sbin ]												&& PATH+="/usr/sbin:"
+[ -d "${ROOT_DIRECTORY}"/usr/sbin ]												&& PATH+="/usr/bin:"
+[ -d "${ROOT_DIRECTORY}"/sbin ]													&& PATH+="/sbin:"
+[ -d "${ROOT_DIRECTORY}"/bin ]													&& PATH+="/bin:"
+
+# termux shell
+
+[ -d "${PREFIX}"/sbin ]															&& PATH+="${PREFIX}/sbin:"
+[ -d "${PREFIX}"/bin ]															&& PATH+="${PREFIX}/bin:"
+
+# android subsystem
+
+[ -d "${ROOT_DIRECTORY}"/system/sbin ]											&& PATH+="/system/sbin:"
+[ -d "${ROOT_DIRECTORY}"/system/bin ]											&& PATH+="/system/bin:"
+
+PATH="${PATH}"
+
+# set environment
 
 COLORTERM="truecolor"
 DISPLAY=":1"
 LANG="C.UTF-8"
 LOCALHOST="127.0.0.1"
-PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/sbin:${PREFIX}/bin:/system/bin:/system/xbin"
 SHELL="/usr/bin/bash"
 TMPDIR="/tmp"
 
