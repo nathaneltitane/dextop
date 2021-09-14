@@ -234,13 +234,41 @@ else
 fi
 FILE
 
+# checkpoint #
+
+# confirm uninterrupted configuration
+
+echo "yes" > "${BINARIES_DIRECTORY}"/dextop-checkpoint-complete
+
 # cleanup #
 
-# close terminal after setup
+if [ -f "${BINARIES_DIRECTORY}"/dextop-checkpoint-complete ]
+then
+	# message #
 
-console.scs "Setup complete [ ${script%-*} ]"
-echo
+	console.scs "Setup complete [ ${script%-*} ]"
+	echo
+	
+	console.fwd "Removing setup files..."
+	echo
 
-console.countdown "Closing in" 3 
+	# remove setup files
 
-kill -9 $(pgrep -f "${SHELL}")
+	remove_list=(
+		"${HOME}/dextop"
+	)
+
+	console.delete ${remove_list[@]}
+	
+	# exit shell after setup
+	
+	console.countdown "Closing in" 3 
+	
+	kill -9 $(pgrep -f "${SHELL}")
+else
+	console.err "Setup errors were encountered [ ${script%-*} ]"
+	echo
+	
+	console.inf "Consult setup logs at '"${PREFIX}"/var/log/' for details."
+	echo
+fi
