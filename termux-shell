@@ -99,14 +99,14 @@ then
 	fi
 fi
 
-LETTER=${USER::1}
-LETTER=${LETTERˆˆ}
+INITIAL=${USER::1}
+INITIAL=${INITIALˆˆ}
 
 if [[ $(id -u) = 0 ]]
 then
-	PS1="$(tput setaf 1)[ ${LETTER} ] >_ # $(tput sgr 0)"
+	PS1="$(tput setaf 1)[ ${INITIAL} ] >_ # $(tput sgr 0)"
 else
-	PS1="$(tput setaf 7)[ ${LETTER} ] >_ $ $(tput sgr 0)"
+	PS1="$(tput setaf 7)[ ${INITIAL} ] >_ $ $(tput sgr 0)"
 fi
 
 if [ -x $(which sudo) ]
