@@ -61,6 +61,13 @@ echo
 
 cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bash_aliases
 
+if [ -d "${HOME}"/.bash_aliases ]
+then
+	for alias in "${HOME}"/.bash_aliases/*
+	do
+		test -x "${alias}" && . "${alias}"
+	done
+fi
 FILE
 
 # .bash_logout

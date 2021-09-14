@@ -55,7 +55,23 @@ echo
 
 # bash aliases
 
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/utilities		"${HOME}"						.bash_aliases
+console.directory "${HOME}" .bash_aliases
+
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			apt
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			copy
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			count
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			directory
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			duplicate
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			git
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			grep
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			kill
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			list
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			nano
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			ping
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			sudo
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			system
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			usage
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash_aliases			where
 
 # .bash_functions
 
