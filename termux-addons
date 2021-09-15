@@ -58,6 +58,7 @@ echo
 console.directory "${HOME}" .bash-aliases
 
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			apt
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			command
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			copy
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			count
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			directory
@@ -69,6 +70,7 @@ console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/al
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			nano
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			ping
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			sudo
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			shortcuts
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			system
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			usage
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME}"/.bash-aliases			where

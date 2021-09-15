@@ -58,6 +58,7 @@ echo
 console.directory "${ROOT_DIRECTORY}"/home/"${USER}" .bash-aliases
 
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		apt
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		command
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		copy
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		count
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		directory
@@ -69,6 +70,7 @@ console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/al
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		nano
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		ping
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		sudo
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		shortcuts
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		system
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		usage
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		where
