@@ -93,6 +93,12 @@ FILE
 
 cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bashrc
 
+# check for interactive session
+
+[ -z "$PS1" ] && return
+
+# set shell options
+
 shopt -s checkwinsize
 shopt -s histappend
 shopt -s histverify
@@ -101,7 +107,9 @@ HISTCONTROL=ignoreboth
 HISTSIZE=1000
 HISTFILESIZE=2000
 
-if ! shopt -oq posix
+# bash completion
+
+if [ ! $(shopt -oq posix) ]
 then
 	if [ -f /usr/share/bash-completion/bash_completion ]
 	then
@@ -113,7 +121,51 @@ then
 	fi
 fi
 
-# dextop #
+# sudo
+
+if [ ! -e "${HOME}"/.sudo_as_admin_successful ] && [ ! -e "${HOME}/.hushlogin ]
+then
+	case " $(groups) " in
+		*\ admin\ *|*\ sudo\ *)
+			if [ -x /usr/bin/sudo ]
+			then
+				cat <<- EOF
+					To run a command as administrator use 'sudo <command>':
+					See "man sudo_root" for details.
+				
+				EOF
+			fi
+		;;
+	esac
+fi
+
+# command not found
+
+if [ -x /usr/lib/command-not-found ] || [ -x /usr/share/command-not-found/command-not-found ]
+then
+	command_not_found_handle () {
+		if [ -x /usr/lib/command-not-found ]
+		then
+			/usr/lib/command-not-found -- "${1}"
+
+			return $?
+
+		elif [ -x /usr/share/command-not-found/command-not-found ]
+		then
+			/usr/share/command-not-found/command-not-found -- "${1}"
+
+			return $?
+		else
+			printf "%s: command not found\n" "${1}" >&2
+
+			return 127
+		fi
+	}
+fi
+
+# prompt string
+
+# ansi colors escape setup using 'tput'
 
 black="\001$(tput setaf 0)\002"
 red="\001$(tput setaf 1)\002"
@@ -143,10 +195,14 @@ else
 	PS1+="${white} >_ $ ${reset}"
 fi
 
+# bash aliases
+
 if [ -f "${HOME}"/.bash_aliases ]
 then
 	. "${HOME}"/.bash_aliases
 fi
+
+# bash functions
 
 if [ -f "${HOME}"/.bash_functions ]
 then
@@ -158,6 +214,8 @@ FILE
 
 cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 
+# bashrc
+
 if [ -n "${BASH_VERSION}" ]
 then
 	if [ -f "${HOME}"/.bashrc ]
@@ -165,6 +223,8 @@ then
 		. "${HOME}"/.bashrc
 	fi
 fi
+
+# paths
 
 if [ -d "${HOME}"/bin ]
 then

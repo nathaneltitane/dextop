@@ -99,6 +99,10 @@ security_list=(
 	openssl
 )
 
+utilities_list=(
+	command-not-found
+)
+
 vnc_list=(
 	tigervnc-common
 	tigervnc-standalone-server
@@ -255,6 +259,7 @@ base_list=(
 	${documentation_list}
 	${locales_list[@]}
 	${security_list[@]}
+	${utilities_list[@]}
 	${vnc_list[@]}
 )
 
@@ -341,3 +346,7 @@ fi
 # install #
 
 console.install ${install_list[@]}
+
+# fix #
+
+rm -rf /var/lib/dpkg/info/udisks2.postinst
