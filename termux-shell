@@ -119,9 +119,9 @@ fi
 
 if [[ $(id -u) = 0 ]]
 then
-	PS1="$(tput setaf 1)[ ${USER} ] >_ # $(tput sgr 0)"
+	PS1="$(tput setaf 1)[ ${USER} ] >_ # $(tput sgr 0)$(tput el)"
 else
-	PS1="$(tput setaf 7)[ ${USER} ] >_ $ $(tput sgr 0)"
+	PS1="$(tput setaf 7)[ ${USER} ] >_ $ $(tput sgr 0)$(tput el)"
 fi
 
 if [ -f "${HOME}"/.bash_aliases ]
