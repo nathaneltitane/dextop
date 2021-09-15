@@ -115,13 +115,32 @@ fi
 
 # dextop #
 
+black="\001$(tput setaf 0)\002"
+red="\001$(tput setaf 1)\002"
+green="\001$(tput setaf 2)\002"
+yellow="\001$(tput setaf 3)\002"
+blue="\001$(tput setaf 4)\002"
+magenta="\001$(tput setaf 5)\002"
+cyan="\001$(tput setaf 6)\002"
+white="\001$(tput setaf 7)\002"
+
+reset="\001$(tput sgr 0)\002"
+
 [ -z "${USER}" ] && USER="termux"
+
+unset PS1
 
 if [[ $(id -u) = 0 ]]
 then
-	PS1="$(tput setaf 1)[ ${USER} ] >_ # $(tput sgr 0)$(tput el)"
+	PS1+="${reset}[ "
+	PS1+="${red}${USER}"
+	PS1+="${reset} ]"
+	PS1+="${white} >_ # ${reset}"
 else
-	PS1="$(tput setaf 7)[ ${USER} ] >_ $ $(tput sgr 0)$(tput el)"
+	PS1+="${reset}[ "
+	PS1+="${green}${USER}"
+	PS1+="${reset} ]"
+	PS1+="${white} >_ $ ${reset}"
 fi
 
 if [ -f "${HOME}"/.bash_aliases ]
