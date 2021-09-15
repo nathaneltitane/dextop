@@ -95,15 +95,13 @@ cat << 'FILE' ->> "${HOME}"/.bashrc
 
 # dextop #
 
-[ -z "${USER}"] && USER="termux"
-
-INITIAL_USER=${USER::1}
+[ -z "${USER}" ] && USER="termux"
 
 if [[ $(id -u) = 0 ]]
 then
-	PS1="$(tput setaf 1)[ $(echo ${INITIAL_USERˆˆ}) ] >_ # $(tput sgr 0)"
+	PS1="$(tput setaf 1)[ ${USER} ] >_ # $(tput sgr 0)"
 else
-	PS1="$(tput setaf 7)[ $(echo ${INITIAL_USERˆˆ}) ] >_ $ $(tput sgr 0)"
+	PS1="$(tput setaf 7)[ ${USER} ] >_ $ $(tput sgr 0)"
 fi
 
 if [ -f "${HOME}"/.bash_aliases ]
