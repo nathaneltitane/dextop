@@ -91,7 +91,8 @@ FILE
 
 # .bashrc
 
-cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bashrc
+cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bashrc
+
 shopt -s checkwinsize
 shopt -s histappend
 shopt -s histverify
@@ -136,11 +137,11 @@ FILE
 
 # .profile
 
-cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
+cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
 
 if [ -n "${BASH_VERSION}" ]
 then
-	if [ -f "${$HOME}"/.bashrc ]
+	if [ -f "${HOME}"/.bashrc ]
 	then
 		. "${HOME}"/.bashrc
 	fi
