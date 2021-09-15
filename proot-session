@@ -176,7 +176,7 @@ do
 		GROUP_ID=0
 		FULL_NAME="root"
 		HOME="/root"
-		SHELL="/bin/bash"
+		SHELL="/usr/bin/bash"
 	fi
 	
 done < "${ROOT_DIRECTORY}"/etc/passwd
