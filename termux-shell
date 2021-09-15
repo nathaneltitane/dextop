@@ -91,38 +91,19 @@ FILE
 
 # .bashrc
 
-cat << 'FILE' -> "${HOME}"/.bashrc
+cat << 'FILE' ->> "${HOME}"/.bashrc
 
-shopt -s checkwinsize
-shopt -s histappend
-shopt -s histverify
-
-HISTCONTROL=ignoreboth
-HISTSIZE=1000
-HISTFILESIZE=2000
-
-if ! shopt -oq posix
-then
-	if [ -f /usr/share/bash-completion/bash_completion ]
-	then
-		. /usr/share/bash-completion/bash_completion
-
-	elif [ -f /etc/bash_completion ]
-	then
-		. /etc/bash_completion
-	fi
-fi
+# dextop #
 
 [ -z "${USER}"] && USER="termux"
 
 INITIAL_USER=${USER::1}
-INITIAL_PROMPT=${INITIAL_USERˆˆ}
 
 if [[ $(id -u) = 0 ]]
 then
-	PS1="$(tput setaf 1)[ ${INITIAL_PROMPT} ] >_ # $(tput sgr 0)"
+	PS1="$(tput setaf 1)[ $(echo ${INITIAL_USERˆˆ}) ] >_ # $(tput sgr 0)"
 else
-	PS1="$(tput setaf 7)[ ${INITIAL_PROMPT} ] >_ $ $(tput sgr 0)"
+	PS1="$(tput setaf 7)[ $(echo ${INITIAL_USERˆˆ}) ] >_ $ $(tput sgr 0)"
 fi
 
 if [ -f "${HOME}"/.bash_aliases ]
@@ -138,7 +119,7 @@ FILE
 
 # .profile
 
-cat << 'FILE' -> "${HOME}"/.profile
+cat << 'FILE' ->> "${HOME}"/.profile
 
 if [ -n "${BASH_VERSION}" ]
 then
