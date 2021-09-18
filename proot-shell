@@ -121,24 +121,6 @@ then
 	fi
 fi
 
-# sudo
-
-if [ ! -e "${HOME}"/.sudo_as_admin_successful ] && [ ! -e "${HOME}/.hushlogin ]
-then
-	case " $(groups) " in
-		*\ admin\ *|*\ sudo\ *)
-			if [ -x /usr/bin/sudo ]
-			then
-				cat <<- EOF
-					To run a command as administrator use 'sudo <command>':
-					See "man sudo_root" for details.
-				
-				EOF
-			fi
-		;;
-	esac
-fi
-
 # command not found
 
 if [ -x /usr/lib/command-not-found ] || [ -x /usr/share/command-not-found/command-not-found ]
@@ -182,18 +164,10 @@ reset="\001$(tput sgr 0)\002"
 
 unset PS1
 
-if [[ $(id -u) = 0 ]]
-then
-	PS1+="${reset}[ "
-	PS1+="${red}${USER}"
-	PS1+="${reset} ]"
-	PS1+="${white} >_ # ${reset}"
-else
-	PS1+="${reset}[ "
-	PS1+="${green}${USER}"
-	PS1+="${reset} ]"
-	PS1+="${white} >_ $ ${reset}"
-fi
+[[ $(id -u) = 0 ]] && PS1+="${reset}[ "				|| PS1+="${reset}[ "
+[[ $(id -u) = 0 ]] && PS1+="${red}${USER}"			|| PS1+="${green}${USER}"
+[[ $(id -u) = 0 ]] && PS1+="${reset} ]"				|| PS1+="${reset} ]"
+[[ $(id -u) = 0 ]] && PS1+="${white} >_ # ${reset}"	|| PS1+="${white} >_ $ ${reset}"
 
 # bash aliases
 
