@@ -111,8 +111,6 @@ vnc_list=(
 themes_list=(
 	arc-theme
 	tango-icon-theme
-	qt5-style-platform-gtk2
-	qt5-style-plugin-gtk2
 )
 
 kde_list=(
@@ -152,6 +150,8 @@ kde_fonts_list=(
 
 kde_themes_ist=(
 	breeze
+	qt5-style-platform-gtk2
+	qt5-style-plugin-gtk2
 )
 
 kde_addons_list=(
