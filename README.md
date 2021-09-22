@@ -16,7 +16,7 @@ Comparison in between Dextop and other projects:
 - It uses [console](https://github.com/nathaneltitane/console), a custom shell parser to handle the setup, colorize prompts and provide the user with an elegant, comprehensive and user-friendly experience.
 
 Dextop is very quick and efficient:
-Choose between KDE5 or XFCE4 desktop environemnts to get your work done or keep the Base install only for command line interface and programming workflows.
+Choose between KDE5 or XFCE4 desktop environments to get your work done or keep the Base install only for command line interface and programming workflows.
 
 ### Note:
 
