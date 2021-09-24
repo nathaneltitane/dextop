@@ -149,7 +149,11 @@ kde_fonts_list=(
 )
 
 kde_themes_ist=(
-	breeze
+	breeze-cursor-theme
+	breeze-icon-theme
+	breeze-gtk-theme
+	kde-config-gtk-style
+	kde-config-gtk-style-preview
 	qt5-style-platform-gtk2
 	qt5-style-plugin-gtk2
 )
