@@ -82,6 +82,11 @@ else
 	"${WINDOW_MANAGER}" &
 fi
 
+if [ -z (pgrep -x "${RUNNER}) ]
+then
+	"${RUNNER}" -d &
+fi
+
 if [ ! -z $(pgrep -f "${SESSION}) ]
 then
 	proot-compositing
