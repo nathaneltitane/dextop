@@ -94,6 +94,10 @@ locales_list=(
 	locales-all
 )
 
+packaging_list=(
+	software-properties-common
+)
+
 security_list=(
 	ca-certificates
 	openssl
@@ -262,6 +266,7 @@ base_list=(
 	${display_list[@]}
 	${documentation_list}
 	${locales_list[@]}
+	${packaging_list[@]}
 	${security_list[@]}
 	${utilities_list[@]}
 	${vnc_list[@]}
