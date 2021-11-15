@@ -87,7 +87,7 @@ then
 	"${RUNNER}" -d &
 fi
 
-if [ ! -z $(pgrep -f "${SESSION}) ]
+if [ ! -z $(pgrep -f "${SESSION}") ]
 then
 	proot-compositing
 fi
