@@ -83,9 +83,12 @@ do
 		
 		if [ "${termux_version}" != "${archive_version}" ]
 		then
-			# message
+			console.inf "Termux application version has been updated [ ${archive_version} ]"
+			echo
+					
+			# notice
 			
-			console.err "Google Play Store updates no longer supported since November 2020:"
+			console.err "Google Play Store updates deprecated since November 2020:"
 			echo
 			
 			console.wrn "Back up and uninstall the Google Play Store version of Termux."
@@ -100,9 +103,6 @@ do
 			echo
 		
 			# request update permission
-			
-			console.inf "A new Termux application version is available [ ${archive_version} ]"
-			echo
 			
 			console.ask "Update packages?"
 			
