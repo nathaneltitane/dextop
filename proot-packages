@@ -352,6 +352,6 @@ fi
 
 console.install ${install_list[@]}
 
-# fix #
+# fix dpkg lock and errors #
 
-rm -rf /var/lib/dpkg/info/udisks2.postinst
+rm -rf /var/lib/dpkg/info/*.postinst
