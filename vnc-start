@@ -11,17 +11,13 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version #
 
-version="11-14-2021"
+version="09-14-2021"
 
 # usage #
 
 while (($#))
 do
 	case "${1}" in
-		-n|--new)
-			option="new"
-		;;
-		
 		-h|--help)
 			echo
 			echo -e "Usage: ${script} [OPTION]"
@@ -272,14 +268,6 @@ vnc_resolutions () {
 }
 
 # handle selections display
-
-if [ "${option}" = "new" ]
-then
-	if [ -f /home/"${USER}"/.vnc/selection ]
-	then
-		rm -rf /home/"${USER}"/.vnc/selection
-	fi
-fi
 
 if [ -f /home/"${USER}"/.vnc/selection ]
 then
