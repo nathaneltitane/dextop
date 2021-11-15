@@ -230,7 +230,3 @@ for shell_file in ${shell_files_list[@]}
 do
 	cp "${ROOT_DIRECTORY}"/home/"${user_name}"/"${shell_file}" /root/"${shell_file}"
 done
-
-
-
-
