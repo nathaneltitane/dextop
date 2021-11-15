@@ -74,11 +74,17 @@ console.clear
 
 setup_list=(
 	user-utilities
-	user-packages
 	user-addons
 	user-checkpoint
 	user-clean
 )
+
+# setup packages:
+# keep outside of array to run as root
+
+# setup user packages
+
+sudo "${BINARIES_DIRECTORY}"/user-packages
 
 # setup #
 
