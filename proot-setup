@@ -222,11 +222,11 @@ else
 	
 	# setup proot user
 	
-	"${BINARIES_DIRECTORY}"/proot-user "${user_name}"
+	console.wait 2 && "${BINARIES_DIRECTORY}"/proot-user "${user_name}"
 	
 	# setup proot superuser privilege
 	
-	"${BINARIES_DIRECTORY}"/proot-superuser "${user_name}"
+	console.wait 2 && "${BINARIES_DIRECTORY}"/proot-superuser "${user_name}"
 fi
 
 # setup #
