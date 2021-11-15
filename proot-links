@@ -61,6 +61,8 @@ echo
 
 binaries_list=(
 	top
+	nano
+	curl
 )
 
 # link binaries

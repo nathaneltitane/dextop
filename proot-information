@@ -50,7 +50,7 @@ done
 
 # prompt #
 
-console.script "Gathering setup information [ ${script%-*} ] ."
+console.script "Gathering setup information [ ${script%-*} ]"
 echo
 
 # variables #
