@@ -55,7 +55,7 @@ echo
 
 # variables #
 
-termux_version=$(echo "${TERMUX_VERSION}" | cut -d '.' -f 2)
+
 
 packages_url="https://f-droid.org/en/packages"
 repository_url="https://f-droid.org/repo"
@@ -67,6 +67,24 @@ packages_list=(
 	com.termux.api
 	)
 
+# notice
+
+console.err "Google Play Store updates deprecated since November 2020:"
+echo
+
+console.wrn "Back up and uninstall the Google Play Store version of Termux."
+echo
+
+console.inf "Visit the following wiki pages on how to proceed:"
+echo
+
+console.inf "Backing up Termux: https://wiki.termux.com/wiki/Backing_up_Termux"
+console.inf "Installing Termux: https://wiki.termux.com/wiki/installation"
+echo
+
+console.usr "Select 'Package Installer' when prompted to proceed."
+echo
+
 # process update
 
 for package in ${packages_list[@]}
@@ -76,35 +94,28 @@ do
 	archive_version=$(echo "${archive}" | cut -d '_' -f 2 | sed 's/\..*//g')
 	
 	archive_url="${repository_url}/${archive}"
-
+	
 	if [ "${package}" = "com.termux" ]
 	then
-		# termux application version is deprecated
+		# com.termux apk
 		
-		if [ "${termux_version}" != "${archive_version}" ]
+		installed_version=$(echo "${TERMUX_VERSION}" | cut -d '.' -f 2)
+	else
+		# com.termux.api apk
+		
+		installed_version=$(echo "${TERMUX_API_VERSION}" | cut -d '.' -f 2)
+	fi
+	
+		# pplication version is deprecated
+		
+		if [ "${installed_version}" != "${archive_version}" ]
 		then
-			console.inf "Termux application version has been updated [ ${archive_version} ]"
+			console.inf "Application version has been updated [ "${package}" // ${archive_version} ]"
 			echo
-					
-			# notice
-			
-			console.err "Google Play Store updates deprecated since November 2020:"
-			echo
-			
-			console.wrn "Back up and uninstall the Google Play Store version of Termux."
-			console.wrn "Visit the following wiki pages on how to proceed:"
-			echo
-			
-			console.inf "Backing up Termux: https://wiki.termux.com/wiki/Backing_up_Termux"
-			console.inf "Installing Termux: https://wiki.termux.com/wiki/installation"
-			echo
-			
-			console.usr "Select 'Package Installer' when prompted to proceed."
-			echo
-		
+
 			# request update permission
 			
-			console.ask "Update packages?"
+			console.ask "Update packages"
 			
 			read reply
 			echo
@@ -125,9 +136,9 @@ do
 				console.fwd "Updating..."
 				echo
 			else
-				# continue without termux application update
+				# continue without application update
 				
-				console.err "Proceeding without update."
+				console.wrn "Proceeding without update."
 				console.err "Setup process may encounter errors."
 				echo
 				
@@ -141,13 +152,13 @@ do
 				
 			# termux application version is up to date
 		else
-			if [ "${termux_version}" == "${archive_version}" ]
+			if [ "${installed_version}" == "${archive_version}" ]
 			then
-					console.inf "Termux application version is up to date [ ${archive_version} ]"
-					echo
-					
-					console.fwd "Continuing..."
-					echo
+				console.inf "Application version is up to date [ "${package}" // ${archive_version} ]"
+				echo
+				
+				console.fwd "Continuing..."
+				echo
 			fi
 		fi
 	fi
