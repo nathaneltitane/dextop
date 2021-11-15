@@ -60,30 +60,12 @@ termux_version=$(echo "${TERMUX_VERSION}" | cut -d '.' -f 2)
 packages_url="https://f-droid.org/en/packages"
 repository_url="https://f-droid.org/repo"
 
-
-
 # packages #
 
 packages_list=(
 	com.termux
 	com.termux.api
 	)
-
-# message #
-
-console.err "Google Play Store updates no longer supported since November 2020:"
-echo
-
-console.wrn "Back up and uninstall the Google Play Store version of Termux."
-console.wrn "Visit the following wiki pages on how to proceed:"
-echo
-
-console.inf "Backing up Termux: https://wiki.termux.com/wiki/Backing_up_Termux"
-console.inf "Installing Termux: https://wiki.termux.com/wiki/installation"
-echo
-
-console.usr "Select 'Package Installer' when prompted to proceed."
-echo
 
 # process update
 
@@ -101,6 +83,22 @@ do
 		
 		if [ "${termux_version}" != "${archive_version}" ]
 		then
+			# message
+			
+			console.err "Google Play Store updates no longer supported since November 2020:"
+			echo
+			
+			console.wrn "Back up and uninstall the Google Play Store version of Termux."
+			console.wrn "Visit the following wiki pages on how to proceed:"
+			echo
+			
+			console.inf "Backing up Termux: https://wiki.termux.com/wiki/Backing_up_Termux"
+			console.inf "Installing Termux: https://wiki.termux.com/wiki/installation"
+			echo
+			
+			console.usr "Select 'Package Installer' when prompted to proceed."
+			echo
+		
 			# request update permission
 			
 			console.inf "A new Termux application version is available [ ${archive_version} ]"
