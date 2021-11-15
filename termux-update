@@ -60,11 +60,7 @@ termux_version=$(echo "${TERMUX_VERSION}" | cut -d '.' -f 2)
 packages_url="https://f-droid.org/en/packages"
 repository_url="https://f-droid.org/repo"
 
-archive=$(curl -sL "${packages_url}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
 
-archive_version=$(echo "${archive}" | cut -d '_' -f 2 | sed 's/\..*//g')
-
-archive_url="${repository_url}/${archive}"
 
 # packages #
 
@@ -93,6 +89,12 @@ echo
 
 for package in ${packages_list[@]}
 do
+	archive=$(curl -sL "${packages_url}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
+	
+	archive_version=$(echo "${archive}" | cut -d '_' -f 2 | sed 's/\..*//g')
+	
+	archive_url="${repository_url}/${archive}"
+
 	if [ "${package}" = "com.termux" ]
 	then
 		# termux application version is deprecated
@@ -101,7 +103,7 @@ do
 		then
 			# request update permission
 			
-			console.inf "A new Termux application version is aavailable [${archive_version} ]"
+			console.inf "A new Termux application version is available [ ${archive_version} ]"
 			echo
 			
 			console.ask "Update packages?"
@@ -124,13 +126,6 @@ do
 				
 				console.fwd "Updating..."
 				echo
-				
-			# termux application version is up to date
-			
-			elif [ "${termux_version}" == "${archive_version}" ]
-			then
-					console.inf "Termux application version is up to date."
-					echo
 			else
 				# continue without termux application update
 				
@@ -144,6 +139,17 @@ do
 			
 				console.countdown "Continuing in" 3
 				echo
+			fi
+				
+			# termux application version is up to date
+		else
+			if [ "${termux_version}" == "${archive_version}" ]
+			then
+					console.inf "Termux application version is up to date [ ${archive_version} ]"
+					echo
+					
+					console.fwd "Continuing..."
+					echo
 			fi
 		fi
 	fi
