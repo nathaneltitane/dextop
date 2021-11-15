@@ -59,7 +59,7 @@ echo
 
 # .bash_aliases
 
-cat << 'FILE' -> "${HOME}"/.bash_aliases
+cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bash_aliases
 
 if [ -d "${HOME}"/.bash-aliases ]
 then
@@ -72,7 +72,7 @@ FILE
 
 # .bash functions
 
-cat << 'FILE' -> "${HOME}"/.bash_functions
+cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bash_functions
 
 if [ -d "${HOME}"/.bash-functions ]
 then
@@ -210,3 +210,27 @@ then
 	PATH="${HOME}/.local/bin:${PATH}"
 fi
 FILE
+
+# copy shell files to root account home:
+# make all customizations and commands available
+
+# files list #
+
+shell_files_list=(
+	.bash_aliases
+	.bash_functions
+	.bash_logout
+	.bashrc
+	.profile
+)
+
+# copy #
+
+for shell_file in ${shell_files_list[@]}
+do
+	cp "${ROOT_DIRECTORY}"/home/"${user_name}"/"${shell_file}" /root/"${shell_file}"
+done
+
+
+
+
