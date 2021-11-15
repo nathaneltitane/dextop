@@ -55,7 +55,7 @@ echo
 
 # variables #
 
-termux_version=$(termux-info | head -n 2 | cut -d ':' -f 2 | cut -d '.' -f 2)
+termux_version=$(echo "${TERMUX_VERSION}" | cut -d '.' -f 2)
 
 packages_url="https://f-droid.org/en/packages"
 repository_url="https://f-droid.org/repo"
