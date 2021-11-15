@@ -68,8 +68,10 @@ console.upgrade
 # values #
 
 applications_list=(
+	freecad
 	leocad
 	povray
+	puddletag
 )
 
 development_list=(
@@ -83,6 +85,7 @@ multimedia_list=(
 )
 
 utilities_list=(
+	fstl
 	youtube-dl
 )
 

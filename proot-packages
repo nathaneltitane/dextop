@@ -125,8 +125,6 @@ kde_list=(
 	plasma-workspace-wallpapers
 	plasma-wallpapers-addons
 	plasma-discover
-	plasma-discover-backend-flatpak
-	plasma-discover-backend-snap
 	plasma-discover-common
 	plasma-discover-flatpak-backend
 	plasma-discover-snap-backend
