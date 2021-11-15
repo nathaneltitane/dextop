@@ -55,8 +55,16 @@ echo
 
 # variables #
 
+termux_version=$(termux-info | head -n 2 | cut -d ':' -f 2 | cut -d '.' -f 2)
+
 packages_url="https://f-droid.org/en/packages"
 repository_url="https://f-droid.org/repo"
+
+archive=$(curl -sL "${packages_url}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
+
+archive_version=$(echo "${archive}" | cut -d '_' -f 2 | sed 's/\..*//g')
+
+archive_url="${repository_url}/${archive}"
 
 # packages #
 
@@ -81,48 +89,62 @@ echo
 console.usr "Select 'Package Installer' when prompted to proceed."
 echo
 
-# request update permission
-
-console.ask "Update packages?"
-
-read reply
-echo
-
 # process update
 
-if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
-then
-	console.inf "Dowloading updates."
-	echo
+for package in ${packages_list[@]}
+do
+	if [ "${package}" = "com.termux" ]
+	then
+		# termux application version is deprecated
+		
+		if [ "${termux_version}" != "${archive_version}" ]
+		then
+			# request update permission
+			
+			console.inf "A new Termux application version is aavailable [${archive_version} ]"
+			echo
+			
+			console.ask "Update packages?"
+			
+			read reply
+			echo
 
-	for package in ${packages_list[@]}
-	do
-		archive=$(curl -sL "${packages_url}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
-		
-		archive_url="${repository_url}/${archive}"
-		
-		# download
-		
-		console.download "${repository_url}" "${PWD}" ${archive}
-		
-		# update
-		
-		xdg-open "${archive}"
-		
-		console.fwd "Updating..."
-		echo
-	done
-else
-	# continue without update
+			if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+			then
+				console.inf "Dowloading updates."
+				echo
 	
-	console.err "Proceeding without update."
-	console.err "Setup process may encounter errors."
-	echo
+				# download
+			
+				console.download "${repository_url}" "${PWD}" ${archive}
 	
-	console.inf "1 - Follow wiki pages stated above to correct issues."
-	console.inf "2 - Restart setup on a fresh Termux installation to proceed."
-	echo
-
-	console.countdown "Continuing in" 3
-	echo
-fi
+				# update
+				
+				xdg-open "${archive}"
+				
+				console.fwd "Updating..."
+				echo
+				
+			# termux application version is up to date
+			
+			elif [ "${termux_version}" == "${archive_version}" ]
+			then
+					console.inf "Termux application version is up to date."
+					echo
+			else
+				# continue without termux application update
+				
+				console.err "Proceeding without update."
+				console.err "Setup process may encounter errors."
+				echo
+				
+				console.inf "1 - Follow wiki pages stated above to correct issues."
+				console.inf "2 - Restart setup on a fresh Termux installation to proceed."
+				echo
+			
+				console.countdown "Continuing in" 3
+				echo
+			fi
+		fi
+	fi
+done
