@@ -126,8 +126,6 @@ kde_list=(
 	plasma-wallpapers-addons
 	plasma-discover
 	plasma-discover-common
-	plasma-discover-flatpak-backend
-	plasma-discover-snap-backend
 	ark
 	dolphin
 	kate
