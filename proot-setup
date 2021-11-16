@@ -129,7 +129,7 @@ echo
 # set defaults
 
 [ -z "${distribution_name}" ]													&& distribution_name="ubuntu"
-[ -z "${distribution_version}" ]												&& distribution_version="21.04"
+[ -z "${distribution_version}" ]												&& distribution_version="21.10"
 
 [ -z "${desktop_option}" ]														&& desktop_option="kde"
 [ -z "${install_option}" ]														&& install_option="lite"
