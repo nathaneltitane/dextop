@@ -117,6 +117,12 @@ themes_list=(
 	tango-icon-theme
 )
 
+enlightenment_list=(
+	enlightenment
+	eterm
+	ephoto
+)
+
 kde_list=(
 	plasma-desktop
 	plasma-framework
@@ -279,6 +285,15 @@ install_list=()
 # options #
 
 # desktops
+
+# enlightenment
+
+if [[ "${desktop_option}" = "enlightenment" ]]
+then
+	desktop_environment_list=(
+		${enlightenment_list[@]}
+	)
+fi
 
 # kde
 
