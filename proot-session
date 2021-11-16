@@ -225,10 +225,21 @@ TMPDIR="/tmp"
 EDITOR="nano"
 PAGER="less"
 
+# base
+
+[ "${desktop_option}" = "none" ]												&& SESSION_NAME="CONSOLE"
+
+# enlightenment #
+
+[ -f "${ROOT_DIRECTORY}"/usr/bin/enlightenment ]								&& SESSION_NAME="E24"
+
+[ "${desktop_option}" = "enlightenment" ]										&& SESSION_MANAGER="enlightenment"
+
 # kde #
 
+[ -f "${ROOT_DIRECTORY}"/usr/bin/kwin ]											&& SESSION_NAME="KDE5"
+
 [ "${desktop_option}" = "kde" ]													&& SESSION="kde"
-[ "${desktop_option}" = "kde" ]													&& SESSION_NAME="KDE5"
 [ "${desktop_option}" = "kde" ]													&& SESSION_MANAGER="plasmashell"
 [ "${desktop_option}" = "kde" ]													&& SETTINGS_MANAGER="systemsettings5"
 [ "${desktop_option}" = "kde" ]													&& WINDOW_MANAGER="kwin"
@@ -240,8 +251,9 @@ PAGER="less"
 
 # xfce #
 
+[ -f "${ROOT_DIRECTORY}"/usr/bin/xfwm4 ]										&& SESSION_NAME="XFCE4"
+
 [ "${desktop_option}" = "xfce" ]												&& SESSION="xfce"
-[ "${desktop_option}" = "xfce" ]												&& SESSION_NAME="XFCE4"
 [ "${desktop_option}" = "xfce" ]												&& SESSION_MANAGER="xfce4-session"
 [ "${desktop_option}" = "xfce" ]												&& SETTINGS_MANAGER="xfsettingsd"
 [ "${desktop_option}" = "xfce" ]												&& WINDOW_MANAGER="xfwm4"

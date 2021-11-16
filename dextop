@@ -25,12 +25,20 @@ do
 			dextop_option="proot"
 		;;
 		
+		-e|--enlightenment)
+			desktop_option="enlightenment"
+		;;
+		
 		-k|--kde)
 			desktop_option="kde"
 		;;
 
 		-x|--xfce)
 			desktop_option="xfce"
+		;;
+		
+		-n|--none)
+			desktop_option="none"
 		;;
 		
 		-b|--base)
@@ -49,18 +57,20 @@ do
 			echo
 			echo -e "USAGE:"
 			echo
-			echo -e "-t, --termux \t Setup Termux environment only - VNC setup not included."
-			echo -e "-p, --proot  \t Setup Proot environment - VNC setup included."
+			echo -e "-t, --termux           \t Setup Termux environment only - VNC setup not included."
+			echo -e "-p, --proot            \t Setup Proot environment - VNC setup included."
 			echo
-			echo -e "-k, --kde    \t KDE5 setup: install K desktop environment and utilities."
-			echo -e "-x, --xfce   \t XFCE4 setup: install XFCE desktop environment and utilities."
+			echo -e "-k, --kde              \t KDE5 setup: install K desktop environment and utilities."
+			echo -e "-e, --enlightenment    \t E24 setup: install E desktop environment and utilities."
+			echo -e "-x, --xfce             \t XFCE4 setup: install XFCE desktop environment and utilities."
+			echo -e "-n, --none             \t No DE setup: console access to environment and utilities."
 			echo
-			echo -e "-b, --base   \t Base setup: download and install base distribution image only."
+			echo -e "-b, --base             \t Base setup: download and install base distribution image only."
 			echo
-			echo -e "-f, --full   \t Full setup: download and install full desktop environment and utilities."
-			echo -e "-l, --lite   \t Lite setup: download and install lite desktop environment and utilities."
+			echo -e "-f, --full             \t Full setup: download and install full desktop environment and utilities."
+			echo -e "-l, --lite             \t Lite setup: download and install lite desktop environment and utilities."
 			echo
-			echo -e "-h, --help   \t Show help and usage information."
+			echo -e "-h, --help             \t Show help and usage information."
 			echo
 			echo -e "'${script}' [ Version ${version} ]"
 			echo
@@ -110,6 +120,18 @@ echo
 # variables #
 
 # set defaults
+
+# combinations
+
+[ "${desktop_option}" = "none" ]												&& install_option="base"
+[ "${desktop_option}" = "kde" ]													&& install_option="lite"
+[ "${desktop_option}" = "xfce" ]												&& install_option="full"
+
+[ "${install_option}" = "base" ]												&& desktop_option="none"
+[ "${install_option}" = "lite" ]												&& desktop_option="kde"
+[ "${install_option}" = "full" ]												&& desktop_option="xfce"
+
+# failsafe
 
 [ -z "${dextop_option}" ]														&& dextop_option="proot"
 [ -z "${desktop_option}" ]														&& desktop_option="kde"
