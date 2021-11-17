@@ -72,13 +72,18 @@ FILE
 cat << 'FILE' -> "${ROOT_DIRECTORY}"/home/"${user_name}"/.vnc/xstartup
 #!/bin/bash
 
+# uncomment if using 'dbus-launch'
+
+# unset DBUS_SESSION_BUS_ADDRESS
+# unset SESSION_MANAGER
+
 if [ ! -z "${APPLICATION}" ]
 then
 	"${SETTINGS_MANAGER}" &
 	"${WINDOW_MANAGER}" &
 	"${APPLICATION}" &
 else
-	"${SESSION_MANAGER}" &
+	"${SESSION_LOADER}" &
 	"${WINDOW_MANAGER}" &
 fi
 
