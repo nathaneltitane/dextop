@@ -72,6 +72,7 @@ binaries_list=(
 	proot-clean
 	proot-compositing
 	proot-configuration
+	proot-distribution
 	proot-environment
 	proot-expand
 	proot-groups
