@@ -125,7 +125,7 @@ vnc_start () {
 	# start android vnc intent and set to view session with supported application
 
 	unset "${command}"
-	
+
 	command+="am start"
 	command+=" -a android.intent.action.VIEW"
 	command+=" -d vnc://${LOCALHOST}:${PORT}"
