@@ -60,9 +60,17 @@ case "${DISTRIBUTION_NAME}" in
 		iso_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${DISTRIBUTION_VERSION}/release"
 		iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${iso_architecture}.tar.gz"
 	;;
+
+	fedora)
+			# iso_url=""
+			# iso_archive=""
+	;;
 esac
 
 # set defaults
+
+[ -z "${distribution_name}" ]													&& distribution_name="ubuntu"
+[ -z "${distribution_version}" ]												&& distribution_version="20.04.3"
 
 # functions #
 

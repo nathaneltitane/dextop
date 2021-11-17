@@ -79,13 +79,17 @@ do
 			echo
 			echo -e "USAGE:"
 			echo
-			echo -e "-k, --kde  \t KDE5 setup: install K desktop environment and utilities."
-			echo -e "-x, --xfce \t XFCE4 setup: install XFCE desktop environment and utilities."
+			echo -e "-i, --i3wm             \t I3WM setup: install i3 window manager and utilities."
 			echo
-			echo -e "-b, --base \t Base setup: download and install base distribution image only."
+			echo -e "-e, --ede              \t EDE setup: install E desktop environment and utilities."
+			echo -e "-k, --kde              \t KDE5 setup: install K desktop environment and utilities."
+			echo -e "-x, --xfce             \t XFCE4 setup: install XFCE desktop environment and utilities."
+			echo -e "-n, --none             \t No DE setup: console access to environment and utilities."
 			echo
-			echo -e "-f, --full \t Full setup: download and install full desktop environment and utilities."
-			echo -e "-l, --lite \t Lite setup: download and install lite desktop environment and utilities."
+			echo -e "-b, --base             \t Base setup: download and install base distribution image only."
+			echo
+			echo -e "-f, --full             \t Full setup: download and install full desktop environment and utilities."
+			echo -e "-l, --lite             \t Lite setup: download and install lite desktop environment and utilities."
 			echo
 			echo -e "-h, --help \t Show help and usage information."
 			echo
@@ -127,9 +131,6 @@ echo
 # variables #
 
 # set defaults
-
-[ -z "${distribution_name}" ]													&& distribution_name="ubuntu"
-[ -z "${distribution_version}" ]												&& distribution_version="20.04.3"
 
 [ -z "${desktop_option}" ]														&& desktop_option="kde"
 [ -z "${install_option}" ]														&& install_option="lite"
@@ -192,6 +193,7 @@ then
 		proot-utilities
 		proot-architecture
 		proot-information
+		proot-distribution
 		proot-image
 		proot-groups
 		proot-environment
