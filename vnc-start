@@ -81,7 +81,7 @@ vnc_start () {
 	command+=" -localhost yes"
 	command+=" -depth 32"
 	command+=" -cleanstale"
-	command+=" -name $NAME"
+	command+=" -name $NAME // Dextop"
 	command+=" -geometry ${GEOMETRY} ${DISPLAY}"
 	[ "${desktop_option}" = "i3wm" ] && command+=" -xstartup /usr/bin/i3"                 || :
 	[ "${desktop_option}" = "ede" ]  && command+=" -xstartup /usr/bin/enlightenment"      || :
