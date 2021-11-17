@@ -87,6 +87,11 @@ console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/fu
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-functions		weather
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-functions		youtube
 
+# dmenu #
+
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								change-wallpaper
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								open-stl
+
 # i3wm #
 
 console.directory "${ROOT_DIRECTORY}"/home/"${USER}"/.config i3
