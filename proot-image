@@ -55,18 +55,6 @@ echo
 
 # variables #
 
-case "${DISTRIBUTION_NAME}" in
-	ubuntu)
-		iso_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${DISTRIBUTION_VERSION}/release"
-		iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${iso_architecture}.tar.gz"
-	;;
-
-	fedora)
-			# iso_url=""
-			# iso_archive=""
-	;;
-esac
-
 # set defaults
 
 [ -z "${distribution_name}" ]													&& distribution_name="ubuntu"
@@ -522,6 +510,22 @@ else
 		fi
 	fi
 fi
+
+# handle distribution name and version
+
+case "${DISTRIBUTION_NAME}" in
+	ubuntu)
+		iso_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${DISTRIBUTION_VERSION}/release"
+		iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${iso_architecture}.tar.gz"
+	;;
+
+	fedora)
+			# iso_url=""
+			# iso_archive=""
+	;;
+esac
+
+# download image and unpack deployment
 
 console.download "${iso_url}" "${ISO_DIRECTORY}" "${iso_archive}"
 

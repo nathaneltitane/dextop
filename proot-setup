@@ -135,41 +135,6 @@ echo
 [ -z "${desktop_option}" ]														&& desktop_option="kde"
 [ -z "${install_option}" ]														&& install_option="lite"
 
-# handle distribution code markup
-
-# set IFS
-
-IFS='.'
-
-read code_year code_month code_revision <<< "${distribution_version}"
-
-if [ -z "${code_revision}" ]
-then
-	distribution_release="${distribution_version}"
-else
-	distribution_release="${distribution_version%.*}"
-fi
-
-# reset IFS
-
-IFS=''
-
-# export variables
-
-if [ ! -f "${BINARIES_DIRECTORY}"/proot-setup-complete ]
-then
-	echo '# proot #'															>> "${PREFIX}"/bin/dextop
-	
-	echo "export DISTRIBUTION_NAME=${distribution_name}"						>> "${PREFIX}"/bin/dextop
-	echo "export DISTRIBUTION_VERSION=${distribution_version}"					>> "${PREFIX}"/bin/dextop
-	echo "export DISTRIBUTION_RELEASE=${distribution_release}"					>> "${PREFIX}"/bin/dextop
-	
-	echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'	>> "${PREFIX}"/bin/dextop
-	echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'			>> "${PREFIX}"/bin/dextop
-else
-	:
-fi
-
 # clear #
 
 console.clear
