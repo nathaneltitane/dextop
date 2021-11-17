@@ -79,7 +79,7 @@ then
 	unset "${command}"
 
 	command+="am broadcast"
-	command++" -e com.termux.app.reload_style storage"
+	command+=" -e com.termux.app.reload_style storage"
 	command+=" -a com.termux.app.reload_style com.termux"
 
 	console.silence "exec ${command}"
