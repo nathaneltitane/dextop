@@ -106,60 +106,59 @@ do
 		installed_version=$(echo "${TERMUX_API_VERSION}" | cut -d '.' -f 2)
 	fi
 	
-		# pplication version is deprecated
+	# pplication version is deprecated
+	
+	if [ "${installed_version}" != "${archive_version}" ]
+	then
+		console.inf "Application version has been updated [ "${package}" // ${archive_version} ]."
+		echo
+
+		# request update permission
 		
-		if [ "${installed_version}" != "${archive_version}" ]
+		console.ask "Update packages"
+		
+		read reply
+		echo
+
+		if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 		then
-			console.inf "Application version has been updated [ "${package}" // ${archive_version} ]."
+			console.inf "Dowloading updates."
 			echo
 
-			# request update permission
-			
-			console.ask "Update packages"
-			
-			read reply
-			echo
+			# download
 
-			if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
-			then
-				console.inf "Dowloading updates."
-				echo
-	
-				# download
+			console.download "${repository_url}" "${PWD}" ${archive}
+
+			# update
+
+			xdg-open "${archive}"
 			
-				console.download "${repository_url}" "${PWD}" ${archive}
-	
-				# update
-				
-				xdg-open "${archive}"
-				
-				console.fwd "Updating..."
-				echo
-			else
-				# continue without application update
-				
-				console.wrn "Proceeding without update."
-				console.err "Setup process may encounter errors."
-				echo
-				
-				console.inf "1 - Follow wiki pages stated above to correct issues."
-				console.inf "2 - Restart setup on a fresh Termux installation to proceed."
-				echo
-			
-				console.countdown "Continuing in" 3
-				echo
-			fi
-				
-			# termux application version is up to date
+			console.fwd "Updating..."
+			echo
 		else
-			if [ "${installed_version}" == "${archive_version}" ]
-			then
-				console.inf "Application version is up to date [ "${package}" // ${archive_version} ]."
-				echo
-				
-				console.fwd "Continuing..."
-				echo
-			fi
+			# continue without application update
+			
+			console.wrn "Proceeding without update."
+			console.err "Setup process may encounter errors."
+			echo
+			
+			console.inf "1 - Follow wiki pages stated above to correct issues."
+			console.inf "2 - Restart setup on a fresh Termux installation to proceed."
+			echo
+		
+			console.countdown "Continuing in" 3
+			echo
+		fi
+			
+		# termux application version is up to date
+	else
+		if [ "${installed_version}" == "${archive_version}" ]
+		then
+			console.inf "Application version is up to date [ "${package}" // ${archive_version} ]."
+			echo
+			
+			console.fwd "Continuing..."
+			echo
 		fi
 	fi
 done
