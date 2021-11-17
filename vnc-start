@@ -70,18 +70,25 @@ PORT="590${DISPLAY:1}"
 vnc_start () {
 	console.fwd "Starting display server [ ${format} // ${GEOMETRY} // ${PORT} ]..."
 	echo
-	
+
 	# 'vncserver' uses $DISPLAY instead of $PORT
-	
-	console.silence "
-				vncserver								\
-					-IdleTimeout 0						\
-					-SecurityTypes none					\
-					-localhost yes						\
-					-depth 32							\
-					-cleanstale							\
-					-name $NAME							\
-					-geometry ${GEOMETRY} ${DISPLAY}"
+
+	unset "${command}"
+
+	command+="vncserver"
+	command+=" -IdleTimeout 0"
+	command+=" -SecurityTypes none"
+	command+=" -localhost yes"
+	command+=" -depth 32"
+	command+=" -cleanstale"
+	command+=" -name $NAME"
+	command+=" -geometry ${GEOMETRY} ${DISPLAY}"
+	[ "${desktop_option}" = "i3wm" ] && command+=" -xstartup /usr/bin/i3"                 || :
+	[ "${desktop_option}" = "ede" ]  && command+=" -xstartup /usr/bin/enlightenment"      || :
+	[ "${desktop_option}" = "kde" ]  && command+=" -xstartup /home/${USER}/.vnc/xstartup" || :
+	[ "${desktop_option}" = "xfce" ] && command+=" -xstartup /home/${USER}/.vnc/xstartup" || :
+
+	console.silence "exec ${command}"
 
 	# make selection available for automatic start:
 	# verify user id - do not write selection when 'root' user is logged in
