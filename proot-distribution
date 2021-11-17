@@ -172,8 +172,8 @@ then
 	echo '# distribution #'														>> "${PREFIX}"/bin/dextop
 
 	echo "export DISTRIBUTION_NAME=${distribution_name}"						>> "${PREFIX}"/bin/dextop
-	echo "export DISTRIBUTION_VERSION=${distribution_version}"					>> "${PREFIX}"/bin/dextop
 	echo "export DISTRIBUTION_RELEASE=${distribution_release}"					>> "${PREFIX}"/bin/dextop
+	echo "export DISTRIBUTION_VERSION=${distribution_version}"					>> "${PREFIX}"/bin/dextop
 
 	echo '# proot #'															>> "${PREFIX}"/bin/dextop
 
