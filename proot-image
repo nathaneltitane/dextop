@@ -194,15 +194,19 @@ image_archive () {
 	done
 
 	# archive routine
+	
+	unset "${command}"
 
-	tar												\
-		--create									\
-		--verbose									\
-		--gzip										\
-		--preserve-permissions						\
-			--file="${BACKUP_DIRECTORY}/${1}"		\
-			--exclude="${ROOT_DIRECTORY}/${1}"		\
-			--one-file-system "${ROOT_DIRECTORY}"	|| :
+	command+="tar"
+	command+=" --create"
+	command+=" --verbose"
+	command+=" --gzip"
+	command+=" --preserve-permissions"
+	command+=" --file=${BACKUP_DIRECTORY}/${1}"
+	command+=" --exclude=${ROOT_DIRECTORY}/${1}"
+	command+=" --one-file-system ${ROOT_DIRECTORY} || :"
+	
+	exec ${command}
 }
 
 image_restore () {
@@ -320,11 +324,15 @@ image_restore () {
 	echo
 
 	# restore routine
+	
+	unset "${command}"
 
-	tar												\
-		--extract									\
-			--file="${archive_selection}"			\
-			--directory="/"
+	command+="tar"
+	command+=" --extract"
+	command+=" --file=${archive_selection}"
+	command+=" --directory='/'"
+	
+	exec ${command}
 }
 
 image_wipe () {
@@ -369,16 +377,20 @@ image_unpack () {
 	echo
 
 	cd "${ROOT_DIRECTORY}" || exit 1
+	
+	unset "${command}"
 
-	proot												\
-		--link2symlink									\
-			tar 										\
-				--extract								\
-					--file="${1}"						\
-					--exclude='dev'						\
-					--exclude='proc'					\
-					--exclude='sys'						\
-					--exclude='system' 2> /dev/null		|| :
+	command+="proot"
+	command+=" --link2symlink"
+	command+=" tar"
+	command+=" --extract"
+	command+=" --file=${1}"
+	command+=" --exclude='dev'"
+	command+=" --exclude='proc'"
+	command+=" --exclude='sys'"
+	command+=" --exclude='system' 2> /dev/nullv|| :"
+	
+	exec ${command}
 }
 
 # run setup

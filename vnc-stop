@@ -60,14 +60,17 @@ echo
 # functions #
 
 vnc_stop () {
-	console.silence "
-				vncserver		\
-					-kill		\
-					-clean		:*" &
+	unset "${command}"
+	
+	command+="vncserver"
+	command+=" -kill"
+	command+=" -clean :* &"
+
+	console.silence "exec ${command}"
 
 	console.progress "Killing display server..."
 	echo
-	
+
 	# clean display server runtime files
 
 	rm -rf "${TMPDIR}"/.X*
