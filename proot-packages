@@ -117,7 +117,11 @@ themes_list=(
 	tango-icon-theme
 )
 
-enlightenment_list=(
+i3wm_list=(
+	i3
+	)
+
+ede_list=(
 	enlightenment
 	eterm
 	ephoto
@@ -286,12 +290,21 @@ install_list=()
 
 # desktops
 
-# enlightenment
-
-if [[ "${desktop_option}" = "enlightenment" ]]
+# i3wm #
+if [[ "${desktop_option}" = "i3wm" ]]
 then
 	desktop_environment_list=(
-		${enlightenment_list[@]}
+		${i3wm_list[@]}
+	)
+fi
+
+
+# enlightenment
+
+if [[ "${desktop_option}" = "ede" ]]
+then
+	desktop_environment_list=(
+		${ede_list[@]}
 	)
 fi
 

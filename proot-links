@@ -60,9 +60,10 @@ echo
 # values #
 
 binaries_list=(
-	top
-	nano
 	curl
+	nano
+	top
+	wget
 )
 
 # link binaries

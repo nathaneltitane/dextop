@@ -25,10 +25,14 @@ do
 			dextop_option="proot"
 		;;
 		
-		-e|--enlightenment)
-			desktop_option="enlightenment"
+		-i|--i3wm)
+			desktop_option="i3wm"
 		;;
 		
+		-e|--ede)
+			desktop_option="ede"
+		;;
+
 		-k|--kde)
 			desktop_option="kde"
 		;;
@@ -60,8 +64,10 @@ do
 			echo -e "-t, --termux           \t Setup Termux environment only - VNC setup not included."
 			echo -e "-p, --proot            \t Setup Proot environment - VNC setup included."
 			echo
+			echo -e "-i, --i3wm             \t I3WM setup: install i3 window manager and utilities."
+			echo
+			echo -e "-e, --ede              \t EDE setup: install E desktop environment and utilities."
 			echo -e "-k, --kde              \t KDE5 setup: install K desktop environment and utilities."
-			echo -e "-e, --enlightenment    \t E24 setup: install E desktop environment and utilities."
 			echo -e "-x, --xfce             \t XFCE4 setup: install XFCE desktop environment and utilities."
 			echo -e "-n, --none             \t No DE setup: console access to environment and utilities."
 			echo

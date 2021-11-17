@@ -229,15 +229,22 @@ PAGER="less"
 
 [ "${desktop_option}" = "none" ]												&& SESSION_NAME="CONSOLE"
 
+# i3 #
+
+[ -f "${ROOT_DIRECTORY}"/usr/bin/i3 ]											&& SESSION_NAME="I3WM"
+
+[ "${desktop_option}" = "i3wm" ]												&& SESSION_MANAGER="i3"
+
+
 # enlightenment #
 
-[ -f "${ROOT_DIRECTORY}"/usr/bin/enlightenment ]								&& SESSION_NAME="E24"
+[ -f "${ROOT_DIRECTORY}"/usr/bin/enlightenment ]								&& SESSION_NAME="EDE"
 
-[ "${desktop_option}" = "enlightenment" ]										&& SESSION_MANAGER="enlightenment"
+[ "${desktop_option}" = "ede" ]										&& SESSION_MANAGER="enlightenment"
 
 # kde #
 
-[ -f "${ROOT_DIRECTORY}"/usr/bin/kwin ]											&& SESSION_NAME="KDE5"
+[ -f "${ROOT_DIRECTORY}"/usr/bin/kwin ]											&& SESSION_NAME="KDE"
 
 [ "${desktop_option}" = "kde" ]													&& SESSION="kde"
 [ "${desktop_option}" = "kde" ]													&& SESSION_MANAGER="plasmashell"
@@ -251,7 +258,7 @@ PAGER="less"
 
 # xfce #
 
-[ -f "${ROOT_DIRECTORY}"/usr/bin/xfwm4 ]										&& SESSION_NAME="XFCE4"
+[ -f "${ROOT_DIRECTORY}"/usr/bin/xfwm4 ]										&& SESSION_NAME="XFCE"
 
 [ "${desktop_option}" = "xfce" ]												&& SESSION="xfce"
 [ "${desktop_option}" = "xfce" ]												&& SESSION_MANAGER="xfce4-session"

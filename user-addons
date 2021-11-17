@@ -87,6 +87,11 @@ console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/fu
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-functions		weather
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-functions		youtube
 
+# i3wm #
+
+console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/i3				"${ROOT_DIRECTORY}"/home/"${USER}"/.config/i3			config
+console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/i3status		"${ROOT_DIRECTORY}"/home/"${USER}"/.config/i3status		config
+
 # leocad
 
 console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				"${ROOT_DIRECTORY}"/usr/bin								leocad-build
