@@ -388,7 +388,7 @@ image_unpack () {
 	command+=" --exclude='dev'"
 	command+=" --exclude='proc'"
 	command+=" --exclude='sys'"
-	command+=" --exclude='system' 2> /dev/nullv|| :"
+	command+=" --exclude='system' 2> /dev/null || :"
 	
 	exec ${command}
 }

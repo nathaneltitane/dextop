@@ -355,7 +355,7 @@ done
 
 # handle numerical selection
 
-resolution=""
+unset resolution
 
 if [[ "${selection}" =~ ^[0-9]+$ ]]
 then
@@ -367,8 +367,7 @@ then
 	height="${resolutions[$i-1]}"
 	resolution="${width}x${height}"
 
-	GEOMETRY="${resolution}"
-
+	GEOMETRY="${resolution}
 fi
 
 # handle custom selection

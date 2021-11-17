@@ -1,3 +1,70 @@
+#!/bin/bash
+
+# dependencies #
+
+. /data/data/com.termux/files/usr/bin/console
+. /data/data/com.termux/files/usr/bin/dextop
+
+# script #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="11-14-2021"
+
+# usage #
+
+while (($#))
+do
+	case "${1}" in
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-h, --help \t Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version ${version} ]"
+			echo
+
+			exit
+		;;
+
+		*)
+			echo
+			echo "Usage: ${script} [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+		;;
+
+	esac
+
+	shift
+done
+
+# prompt #
+
+console.script "Setting up distribution and version [ ${script%-*} ]"
+echo
+
+# variables #
+
+PORT="590${DISPLAY:1}"
+
+# set defaults
+
+# /etc/os-release: source distribution codename variables (e.g. $NAME)
+
+[ -f /etc/os-release ] && . /etc/os-release
+
+# functions #
+
 distribution_versions () {
 	console.msg "Select distribution version to setup."
 	echo
@@ -5,10 +72,11 @@ distribution_versions () {
 	# list supported display resolutions
 
 	versions=(
-		UBUNTU	 20.04.3
-		UBUNTU	 20.10
-		UBUNTU	 21.04
-		UBUNTU	 21.10
+		ubuntu	20.04.3
+		ubuntu	20.10
+		ubuntu	21.04
+		ubuntu	21.10
+	)
 
 	printf '\n'
 
@@ -18,29 +86,69 @@ distribution_versions () {
 
 	# continue list using array selection of suppported values
 
-	for (( i=0 ; i<${#versions[@]} ; i+=3 ))
+	for (( i=0 ; i<${#versions[@]} ; i+=2 ))
 	do
-		name="${versions[$i]}"
-		version="${versions[$i+1]}"
+			name="${versions[$i]}"
+			version="${versions[$i+1]}"
 
-		number=$((($i/2) + 1))
+			number=$((($i/2) + 1))
 
-		if (( $i/3 >= 0 && $i/3 <= 8 ))
-		then
-			# handle number spacing for entries 1-9
+			if (( $i/2 >= 0 && $i/2 <= 8 ))
+			then
+					# handle number spacing for entries 1-9
 
-			printf '\t[  %s ] %s' ${number} ${name}
-		else
-			# handle number spacing for entries 10+
+					printf '\t[  %s ] %s %s' ${number} ${name}
+			else
+					# handle number spacing for entries 10+
 
-			printf '\t[ %s ] %s' ${number} ${name}
-		fi
+					printf '\t[ %s ] %s %s' ${number} ${name}
+			fi
 
-		printf '%*s' $((pad_length - ${#name}))
-		printf '%s\n' ${versions}
+			printf '%*s' $((pad_length - ${#name}))
+			printf '%s\n' ${version}
 	done
 
 	printf '\n'
 }
 
+# select distribution
+
 distribution_versions
+
+# values #
+
+values_list=(
+	selection
+)
+
+# handle user input for values_list
+
+eval ${console_rtn[@]}
+
+console.ipt "Selection:"
+
+read selection
+echo
+
+unset distribution_version
+
+# handle numerical selection
+
+if [[ "${selection}" =~ ^[0-9]+$ ]]
+then
+	i=$((${selection}))
+	i=$(($i*2))
+
+	version="${versions[i-1]}"
+	name="${versions[i-2]}"
+
+	distribution_name="${name}"
+	distribution_version="${version}"
+fi
+
+# export variables
+
+echo '# distribution #'															>> "${PREFIX}"/bin/dextop
+
+echo "export distribution_name=${distribution_name}"							>> "${PREFIX}"/bin/dextop
+echo "export distribution_version=${distribution_version}"						>> "${PREFIX}"/bin/dextop

@@ -137,9 +137,6 @@ echo
 [ -z "${desktop_option}" ]														&& desktop_option="kde"
 [ -z "${install_option}" ]														&& install_option="lite"
 
-
-[ -z "${distribution_version}" ]												&& distribution_version="20.04.3"
-
 # export variables
 
 echo '# variables #'															>> "${PREFIX}"/bin/dextop
