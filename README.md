@@ -68,17 +68,27 @@ Dextop setup options are:
 
 Proot container install options are:
 
-`-k | --kde:    install K desktop environment and utilities (KDE5).                     [ Default ]`
+`-i, --i3wm             \t I3WM setup: install i3 window manager and utilities.``
 
-`-x |--xfce:    install XFCE desktop environment and utilities (XFCE4).                            `
 
+`-e, --ede              \t EDE setup: install E desktop environment and utilities.``
+
+`-k, --kde              \t KDE5 setup: install K desktop environment and utilities.      [ Default ]`
+
+`-x, --xfce             \t XFCE4 setup: install XFCE desktop environment and utilities.``
+
+
+`-n, --none             \t No DE setup: console access to environment and utilities.``
 
 `-f | --full:   download and install full desktop environment, utilities and themes.               `
 
 `-l | --lite:   download and install lite desktop environment and utilities.            [ Default ]`
 
-
 `-b | --base:   download and install base distribution image only.                                 `
+
+
+By selecting the 'none' option, Dextop setup automatically defaults to a 'base' install.
+This option is great for users who would like to either experiment or setup their own desktop environment or window manager.
 
 ### Process:
 
