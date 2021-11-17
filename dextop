@@ -125,19 +125,13 @@ echo
 
 # variables #
 
-# set defaults
-
-# combinations
+# failsafe:
+# if no desktop environment or window manager is selected
+# revert to console session and install base utilities only
 
 [ "${desktop_option}" = "none" ]												&& install_option="base"
-[ "${desktop_option}" = "kde" ]													&& install_option="lite"
-[ "${desktop_option}" = "xfce" ]												&& install_option="full"
 
-[ "${install_option}" = "base" ]												&& desktop_option="none"
-[ "${install_option}" = "lite" ]												&& desktop_option="kde"
-[ "${install_option}" = "full" ]												&& desktop_option="xfce"
-
-# failsafe
+# set defaults
 
 [ -z "${dextop_option}" ]														&& dextop_option="proot"
 [ -z "${desktop_option}" ]														&& desktop_option="kde"
