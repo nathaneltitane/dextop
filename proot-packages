@@ -121,8 +121,10 @@ i3wm_list=(
 	i3
 	i3lock
 	i3status
+	suckless-tools
 	feh
 	stterm
+	surf
 	ranger
 	)
 
