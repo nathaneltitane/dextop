@@ -85,7 +85,7 @@ echo
 console.usr "Select 'Package Installer' when prompted to proceed."
 echo
 
-console.sep
+console.separate
 
 # process update
 
