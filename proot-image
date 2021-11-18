@@ -508,8 +508,8 @@ case "${DISTRIBUTION_NAME}" in
 	;;
 
 	fedora)
-		iso_url="http://download.fedoraproject.org/pub/fedora/linux/releases/35/Container/armhfp/images/"
-		iso_archive="Fedora-Container-Base-35-1.2.armhfp.tar.xz"
+		# iso_url="http://download.fedoraproject.org/pub/fedora/linux/releases/35/Container/armhfp/images/"
+		# iso_archive="Fedora-Container-Base-35-1.2.armhfp.tar.xz"
 	;;
 esac
 

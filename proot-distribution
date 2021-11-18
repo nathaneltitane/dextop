@@ -78,13 +78,13 @@ distribution_versions () {
 		ubuntu	21.10
 	)
 	
-	fedora_versions=(
-		fedora	35
-	)
+#	fedora_versions=(
+#		fedora	35
+#	)
 	
 	versions=(
 		${ubuntu_versions[@]}
-		${fedora_versions[@]}
+#		${fedora_versions[@]}
 	)
 
 	printf '\n'
