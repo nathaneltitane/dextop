@@ -73,6 +73,11 @@ then
 
 	console.usr "Select 'Allow' when prompted to proceed."
 	echo
+	
+	# extra 'echo' for vertical padding after console.usr
+	echo
+	
+	console.separate
 
 	# storage permissions dialog
 
