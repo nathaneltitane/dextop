@@ -59,15 +59,10 @@ echo
 
 # override main source list file
 
-unset "${command}"
-
-command+="sed"
-command+=" -i"
-command +=" -e 's/ˆ\# deb-src/deb-src/g'"
-command +=" -e '/ˆ\#.*/d'"
-command +=" -e '/ˆ$/d' ${ROOT_DIRECTORY}/etc/apt/sources.list"
-
-exec ${command}
+sed -i									\
+	-e 's/ˆ\# deb-src/deb-src/g'		\
+	-e '/ˆ\#.*/d'						\
+	-e '/ˆ$/d'							"${ROOT_DIRECTORY}"/etc/apt/sources.list
 
 # update lists
 
