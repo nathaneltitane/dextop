@@ -367,7 +367,7 @@ then
 	height="${resolutions[$i-1]}"
 	resolution="${width}x${height}"
 
-	GEOMETRY="${resolution}
+	GEOMETRY="${resolution}"
 fi
 
 # handle custom selection
