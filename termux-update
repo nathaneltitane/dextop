@@ -115,7 +115,7 @@ do
 
 		# request update permission
 		
-		console.ask "Update packages"
+		console.ask "Update package"
 		
 		read reply
 		echo
