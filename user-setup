@@ -79,13 +79,6 @@ setup_list=(
 	user-clean
 )
 
-# setup packages:
-# keep outside of array to run as root
-
-# setup user packages
-
-sudo "${BINARIES_DIRECTORY}"/user-packages
-
 # setup #
 
 for setup in ${setup_list[@]}
@@ -94,3 +87,10 @@ do
 	
 	console.clear
 done
+
+# setup packages:
+# keep outside of array to run as root
+
+# setup user packages
+
+sudo "${BINARIES_DIRECTORY}"/user-packages
