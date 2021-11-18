@@ -79,7 +79,7 @@ img_architectures=(
 
 # test processor architecture string
 
-print_architecture="$(dpkg --print-architecture)"
+print_architecture="$(uname -m)"
 
 for i in ${!cpu_architectures[@]}
 do

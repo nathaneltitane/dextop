@@ -71,11 +71,20 @@ distribution_versions () {
 
 	# list supported display resolutions
 
-	versions=(
+	ubuntu_versions=(
 		ubuntu	20.04.3
 		ubuntu	20.10
 		ubuntu	21.04
 		ubuntu	21.10
+	)
+	
+	fedora_versions=(
+		fedora	35
+	)
+	
+	versions=(
+		${ubuntu_versions[@]}
+		${fedora_versions[@]}
 	)
 
 	printf '\n'
