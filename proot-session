@@ -176,6 +176,7 @@ do
 		GROUP_ID=0
 		FULL_NAME="root"
 		HOME="/root"
+		SESSION_NAME="CONSOLE"
 		SHELL="/usr/bin/bash"
 	fi
 	
