@@ -89,8 +89,11 @@ console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/fu
 
 # dmenu #
 
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								change-wallpaper
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								open-stl
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-change-background
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-exit-session
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-open-stl
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-show-cheats
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								i3-shortcuts
 
 # i3wm #
 
