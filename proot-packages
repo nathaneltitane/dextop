@@ -119,6 +119,7 @@ themes_list=(
 
 i3wm_list=(
 	i3
+	i3lock
 	i3status
 	feh
 	stterm
