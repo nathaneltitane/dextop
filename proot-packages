@@ -121,12 +121,15 @@ i3wm_list=(
 	i3
 	i3lock
 	i3status
+)
+
+suckless_list=(
 	suckless-tools
 	feh
 	stterm
 	surf
 	ranger
-	)
+)
 
 ede_list=(
 	enlightenment
@@ -302,6 +305,7 @@ if [[ "${desktop_option}" = "i3wm" ]]
 then
 	desktop_environment_list=(
 		${i3wm_list[@]}
+		${suckless_list[@]}
 	)
 fi
 
