@@ -103,10 +103,10 @@ vnc_start () {
 		fi
 	fi
 
-	# command+="am start"
-	#command+=" -a android.intent.action.VIEW"
-	#command+=" -d vnc://${LOCALHOST}:${PORT}"
-	#command+=" -S application/activity"
+	# am start							\
+	#	-a andoird.intent.action.VIEW	\
+	#	-d vnc://${LOCALHOST}:${PORT}	\
+	#	-S application/activity"
 	
 	# explicit VNC viewer application to kill:
 	# used when vncserver is stopped or restarted using vnc:// intent
@@ -124,13 +124,10 @@ vnc_start () {
 
 	# start android vnc intent and set to view session with supported application
 
-	unset "${command}"
-
-	command+="am start"
-	command+=" -a android.intent.action.VIEW"
-	command+=" -d vnc://${LOCALHOST}:${PORT}"
-
-	console.silence "exec ${command}"
+	console.silence "
+				am start							\
+					-a android.intent.action.VIEW	\
+					-d vnc://${LOCALHOST}:${PORT}"
 }
 
 vnc_resolutions () {
