@@ -108,7 +108,7 @@ vnc_start () {
 	then
 		# integer check: do not write non numerical values to file
 
-		if [[ "${selection}" =~ ^[0-9]+$ ]]
+		if [[ "${selection}" =~ ˆ[0-9]+$ ]]
 		then
 			echo "${selection}" > /home/"${USER}"/.vnc/selection
 		fi
@@ -293,10 +293,29 @@ vnc_stop () {
 
 	console.progress "Killing display server..."
 	echo
-	
+
 	# clean display server runtime files
 
 	rm -rf "${TMPDIR}"/.X*
+}
+
+vnc_list () {
+	console.fwd "Listing servers..."
+	echo
+
+	read vnc_display vnc_port vnc_process vnc_server <<< $(echo $(vncserver -list | tail -n 1))
+
+	if [[ "${vnc_process}" = ˆ[0-9]+$ ]]
+	then
+		console.wrn "No active servers detected."
+		echo
+	else
+		console.inf "Display" "${vnc_display}" "-"
+		console.inf "Port"    "${vnc_port}"    "-"
+		console.inf "Process" "${vnc_process}" "-"
+		console.inf "Server"  "${vnc_server}"  "-"
+		echo
+	fi
 }
 
 if [ "${option}" = "start" ]
@@ -435,3 +454,7 @@ then
 
 	vnc_stop
 fi
+
+# list vnc session
+
+vnc_list
