@@ -85,7 +85,8 @@ echo
 console.usr "Select 'Package Installer' when prompted to proceed."
 echo
 
-# extra 'echo' for vertical padding after console.usr
+# additional 'echo' for vertical padding after console.usr
+
 echo
 	
 console.separate
