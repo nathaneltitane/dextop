@@ -62,29 +62,29 @@ Once the Android applications are installed on your device, open Termux and past
 
 Dextop setup options are:
 
-`-t | --termux: setup Termux environment only           - VNC setup not included.                  `
+`-t | --termux: setup Termux environment only           - VNC setup not included.`
 
-`-p | --proot:  setup Proot environment in Termux shell - VNC setup included.           [ Default ]`
+`-p | --proot:  setup Proot environment in Termux shell - VNC setup included.                       [ Default ]`
 
 Proot container install options are:
 
-`-i, --i3wm             \t I3WM setup: install i3 window manager and utilities.         [ Default ]`
+`-i, --i3wm     I3WM setup: install i3 window manager and utilities.                                [ Default ]`
 
 
-`-e, --ede              \t EDE setup: install E desktop environment and utilities.`
+`-e, --ede      EDE setup: install E desktop environment and utilities.`
 
-`-k, --kde              \t KDE5 setup: install K desktop environment and utilities.`
+`-k, --kde      KDE5 setup: install K desktop environment and utilities.`
 
-`-x, --xfce             \t XFCE4 setup: install XFCE desktop environment and utilities.`
+`-x, --xfce     XFCE4 setup: install XFCE desktop environment and utilities.`
 
-`-n, --none             \t No DE setup: console access to environment and utilities.`
+`-n, --none     No DE setup: console access to environment and utilities.`
 
 
-`-b | --base:   download and install base distribution image only.                                 `
+`-b | --base:   Base setup: download and install base distribution image only.                                 `
 
-`-f | --full:   download and install full desktop environment, utilities and themes.               `
+`-f | --full:   Full setup: download and install full desktop environment, utilities and themes.               `
 
-`-l | --lite:   download and install lite desktop environment and utilities.            [ Default ]`
+`-l | --lite:   Lite setup: download and install lite desktop environment and utilities.            [ Default ]`
 
 
 By selecting the 'none' option, Dextop automatically sets up minimal defaults to a 'base' install.
