@@ -71,8 +71,7 @@ binaries_list=(
 	vnc-environment
 	vnc-pass
 	vnc-setup
-	vnc-start
-	vnc-stop
+	vnc-session
 	vnc-utilities
 )
 

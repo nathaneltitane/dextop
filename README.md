@@ -130,7 +130,7 @@ To access your newly created proot container:
 ### The fun begins:
 
 When logging into the proot container for the first time, you need to start the vnc server manually:
-Type `'vnc-start'` and follow the prompt to select the appropriate device resolution settings for the Android device or external monitor.
+Type `'vnc-session -o'` and follow the prompt to select the appropriate device resolution settings for the Android device or external monitor.
 
 
 The next login will automatically launch the session for you using the settings you've chosen previously:
@@ -138,8 +138,8 @@ The first login saves the selection under `"${HOME}"/.vnc/selection` and uses it
 
 Logging out by pressing Ctrl+D or by typing `'logout'` or `'exit'``will automatically stop the vnc session and exit the proot container back to the Termux shell.
 
-To stop the vnc server and halt the display output, type `'vnc-stop'`.
-To start the vnc server and restart the display output, type `'vnc-start'`.
+To stop the vnc server and halt the display output, type `'vnc-session -x'`.
+To start the vnc server and restart the display output, type `'vnc-session -o'`.
 
 ### Reports:
 

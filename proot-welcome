@@ -75,7 +75,7 @@ then
 	echo
 else
 	console.wrn "This is your first login:"
-	console.wrn "Run 'vnc-start' to launch session [ ${SESSION_NAME} ]."
+	console.wrn "Run 'vnc-session -o' to launch session [ ${SESSION_NAME} ]."
 	echo
 fi
 

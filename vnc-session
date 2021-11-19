@@ -18,11 +18,22 @@ version="11-14-2021"
 while (($#))
 do
 	case "${1}" in
+		-o|--start)
+			option="start"
+		;;
+
+		-x|--stop)
+			option="stop"
+		;;
+		
 		-h|--help)
 			echo
 			echo -e "Usage: ${script} [OPTION]"
 			echo
 			echo -e "Options:"
+			echo
+			echo -e "-o, --start \t Start vnc session server."
+			echo -e "-x, --stop \t Stop vnc session server."
 			echo
 			echo -e "-h, --help \t Show help and usage information."
 			echo
@@ -50,7 +61,7 @@ done
 
 # prompt #
 
-console.script "Starting display [ ${script%-*} ]"
+console.script "Session display [ ${script%-*} ]"
 echo
 
 # variables #
@@ -274,129 +285,156 @@ vnc_resolutions () {
 	printf '\n'
 }
 
-# handle selections display
-
-if [ -f /home/"${USER}"/.vnc/selection ]
-then
-	# hide if selection file is present
-
-	vnc_resolutions > /dev/null
-else
-	# show if selection file is not present
+vnc_stop () {
+	unset "${command}"
 	
-	vnc_resolutions
-fi
+	command+="vncserver"
+	command+=" -kill"
+	command+=" -clean :* &"
 
-# values #
+	console.silence "exec ${command}"
 
-values_list=(
-	selection
-)
+	console.progress "Killing display server..."
+	echo
 
-# handle user input for values_list
+	# clean display server runtime files
 
-console_rtn=()
+	rm -rf "${TMPDIR}"/.X*
+}
 
-if [ -f /home/"${USER}"/.vnc/selection ]
+if [ "${option}" = "start" ]
 then
-	selection=$(cat /home/"$USER"/.vnc/selection)
-else
-	console.input ${values_list[@]}
-fi
-
-eval ${console_rtn[@]}
-
-# check selection input against selection list
-
-while true
-do
-	# range #
-
-	if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]]
+	# handle selections display
+	
+	if [ -f /home/"${USER}"/.vnc/selection ]
 	then
-		echo
-		console.err "Invalid selection:"
-		console.wrn "Select geometry ranging from [ 1 - ${number} ]"
-		console.wrn "or input [c]ustom properties."
-		echo
-
-		console.ipt "Selection:"
-		
-		read selection
-		echo
+		# hide if selection file is present
+	
+		vnc_resolutions > /dev/null
 	else
-		break
+		# show if selection file is not present
+		
+		vnc_resolutions
 	fi
-
-	# custom #
-
-	if [[ "${selection}" != "c" ]]
+	
+	# values #
+	
+	values_list=(
+		selection
+	)
+	
+	# handle user input for values_list
+	
+	console_rtn=()
+	
+	if [ -f /home/"${USER}"/.vnc/selection ]
 	then
-		echo
-		console.err "Invalid selection:"
-		console.wrn "Input [c]ustom properties"
-		console.wrn "or select geometry ranging from [ 1 - ${number} ]."
-		echo
-
-		console.ipt "Selection:"
-		
-		read selection
-		echo
+		selection=$(cat /home/"$USER"/.vnc/selection)
 	else
-		selection=custom
-
-		break
+		console.input ${values_list[@]}
 	fi
-
-done
-
-# handle numerical selection
-
-unset resolution
-
-if [[ "${selection}" =~ ^[0-9]+$ ]]
-then
-	i=$((${selection}))
-	i=$(($i*3))
-
-	format="${resolutions[$i-3]}"
-	width="${resolutions[$i-2]}"
-	height="${resolutions[$i-1]}"
-	resolution="${width}x${height}"
-
-	GEOMETRY="${resolution}"
+	
+	eval ${console_rtn[@]}
+	
+	# check selection input against selection list
+	
+	while true
+	do
+		# range #
+	
+		if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]]
+		then
+			echo
+			console.err "Invalid selection:"
+			console.wrn "Select geometry ranging from [ 1 - ${number} ]"
+			console.wrn "or input [c]ustom properties."
+			echo
+	
+			console.ipt "Selection:"
+			
+			read selection
+			echo
+		else
+			break
+		fi
+	
+		# custom #
+	
+		if [[ "${selection}" != "c" ]]
+		then
+			echo
+			console.err "Invalid selection:"
+			console.wrn "Input [c]ustom properties"
+			console.wrn "or select geometry ranging from [ 1 - ${number} ]."
+			echo
+	
+			console.ipt "Selection:"
+			
+			read selection
+			echo
+		else
+			selection=custom
+	
+			break
+		fi
+	
+	done
+	
+	# handle numerical selection
+	
+	unset resolution
+	
+	if [[ "${selection}" =~ ^[0-9]+$ ]]
+	then
+		i=$((${selection}))
+		i=$(($i*3))
+	
+		format="${resolutions[$i-3]}"
+		width="${resolutions[$i-2]}"
+		height="${resolutions[$i-1]}"
+		resolution="${width}x${height}"
+	
+		GEOMETRY="${resolution}"
+	fi
+	
+	# handle custom selection
+	
+	if [[ "${selection}" = "custom" ]]
+	then
+		console.inf "Setting custom properties."
+		echo
+	
+		console.ipt "Geometry WIDTH in pixels:"
+		
+		read width
+		echo
+	
+		console.ipt "Geometry HEIGHT in pixels:"
+		
+		read height
+		echo
+	
+		console.ipt "Port NUMBER (e.g. 1):"
+		
+		read custom_port
+		echo
+	
+		format="Custom"
+		custom_resolution="${width}x${height}"
+	
+		DISPLAY=":${custom_port}"
+		GEOMETRY="${custom_resolution}"
+		PORT="590${DISPLAY:1}"
+	fi
+	
+	# start vnc session
+	
+	vnc_start
 fi
 
-# handle custom selection
-
-if [[ "${selection}" = "custom" ]]
+if [ "${option}" = "stop" ]
 then
-	console.inf "Setting custom properties."
-	echo
+	# stop vnc session
 
-	console.ipt "Geometry WIDTH in pixels:"
-	
-	read width
-	echo
-
-	console.ipt "Geometry HEIGHT in pixels:"
-	
-	read height
-	echo
-
-	console.ipt "Port NUMBER (e.g. 1):"
-	
-	read custom_port
-	echo
-
-	format="Custom"
-	custom_resolution="${width}x${height}"
-
-	DISPLAY=":${custom_port}"
-	GEOMETRY="${custom_resolution}"
-	PORT="590${DISPLAY:1}"
+	vnc_stop
 fi
-
-# start vnc display
-
-vnc_start
