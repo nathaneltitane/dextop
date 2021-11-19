@@ -71,13 +71,9 @@ then
 	console.inf "Storage is made accessible through proot container."
 	echo
 
-	console.usr "Select 'Allow' when prompted to proceed."
+	console.ins "Select 'Allow' when prompted to proceed."
 	echo
-	
-	# additional 'echo' for vertical padding after console.usr
-	
-	echo
-		
+
 	console.separate
 
 	# storage permissions dialog

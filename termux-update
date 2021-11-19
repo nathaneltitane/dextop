@@ -82,13 +82,9 @@ console.inf "Backing up Termux: https://wiki.termux.com/wiki/Backing_up_Termux"
 console.inf "Installing Termux: https://wiki.termux.com/wiki/installation"
 echo
 
-console.usr "Select 'Package Installer' when prompted to proceed."
+console.ins "Select 'Package Installer' when prompted to proceed."
 echo
 
-# additional 'echo' for vertical padding after console.usr
-
-echo
-	
 console.separate
 
 # process update
