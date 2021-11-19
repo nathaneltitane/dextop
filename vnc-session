@@ -286,17 +286,14 @@ vnc_resolutions () {
 }
 
 vnc_stop () {
-	unset "${command}"
-	
-	command+="vncserver"
-	command+=" -kill"
-	command+=" -clean :* &"
-
-	console.silence "exec ${command}"
+	console.silence "
+		vncserver		\
+			-kill		\
+			-clean		:*" &
 
 	console.progress "Killing display server..."
 	echo
-
+	
 	# clean display server runtime files
 
 	rm -rf "${TMPDIR}"/.X*
