@@ -107,10 +107,16 @@ console.download https://yt-dl.org/downloads/latest																			"${ROOT_DI
 [ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/i3					"${ROOT_DIRECTORY}"/home/"${USER}"/.config/i3			config
 [ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/i3status			"${ROOT_DIRECTORY}"/home/"${USER}"/.config/i3status		config
 
+# ranger #
+
+[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/i3status			"${ROOT_DIRECTORY}"/home/"${USER}"/.config/ranger		rc.conf
+
  # dmenu #
 
 [ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-change-background
 [ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-exit-session
 [ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-i3-shortcuts
 [ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-open-stl
+[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-open-file-manager
 [ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-show-shortcuts
+
