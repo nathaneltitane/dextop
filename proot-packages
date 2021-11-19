@@ -121,9 +121,6 @@ i3wm_list=(
 	i3
 	i3lock
 	i3status
-)
-
-suckless_list=(
 	suckless-tools
 	feh
 	stterm
@@ -131,10 +128,22 @@ suckless_list=(
 	ranger
 )
 
+i3wm_fonts_list=(
+)
+
+i3wm_addons_list=(
+)
+
 ede_list=(
 	enlightenment
 	eterm
 	ephoto
+)
+
+ede_fonts_list=(
+)
+
+ede_addons_list=(
 )
 
 kde_list=(
@@ -288,6 +297,11 @@ base_list=(
 	${vnc_list[@]}
 )
 
+full_list=(
+	${base_list[@]}
+	${themes_list[@]}
+)
+
 # initialize desktop environment list
 
 desktop_environment_list=()
@@ -298,25 +312,40 @@ install_list=()
 
 # options #
 
-# desktops
+# desktop
 
 # i3wm #
+
 if [[ "${desktop_option}" = "i3wm" ]]
 then
 	desktop_environment_list=(
 		${i3wm_list[@]}
-		${suckless_list[@]}
 	)
+	
+	if [[ "${install_option}" = "full" ]]
+	then
+		desktop_environment_list+=(
+			${i3wm_addons_list[@]}
+		)
+	fi
 fi
 
 
-# enlightenment
+# ede
 
 if [[ "${desktop_option}" = "ede" ]]
 then
 	desktop_environment_list=(
 		${ede_list[@]}
 	)
+	
+	if [[ "${install_option}" = "full" ]]
+	then
+		desktop_environment_list+=(
+			${ede_addons_list[@]}
+		)
+	fi
+
 fi
 
 # kde
@@ -357,14 +386,22 @@ fi
 
 # install
 
+# base
+
+if [[ "${install_option}" = "base" ]]
+then
+	install_list+=(
+		${base_list[@]}
+	)
+fi
+
 # full
 
 if [[ "${install_option}" = "full" ]]
 then
 	install_list+=(
-		${base_list[@]}
+		${full_list[@]}
 		${desktop_environment_list[@]}
-		${themes_list[@]}
 	)
 fi
 
@@ -378,19 +415,11 @@ then
 	)
 fi
 
-# base
-
-if [[ "${install_option}" = "base" ]]
-then
-	install_list+=(
-		${base_list[@]}
-	)
-fi
-
 # install #
 
 console.install ${install_list[@]}
 
-# fix dpkg lock and errors #
+# fix dpkg lock and errors
+# remove all post-install logs that trigger completion errors
 
 rm -rf /var/lib/dpkg/info/*.postinst

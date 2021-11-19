@@ -6,7 +6,7 @@ Dextop turns your modern Android device into a full workstation in a matter of m
 
 Comparison in between Dextop and other projects:
 
-- It provides you with an installation of Ubuntu 20.04 (LTS) base distribution: stable, popular and user-friendly knowledge bases.
+- It provides you with a default installation of Ubuntu 20.04 (LTS) base distribution: stable, popular and user-friendly knowledge bases.
 - It expands the installed base image to run just like a normal PC installation.
 - It creates a user profile for secure access and a home directory for you to work in.
 - It installs all the necessary applications and utilities to provide you with the right experience.
@@ -47,8 +47,8 @@ Services backend and other advanced features that require access to restricted c
 
 ### Software requirements:
 
-- [Termux](https://f-droid.org/en/packages/com.termux/ "Termux by Fredrik Fornwall")             via F-Droid - the Google Play Store version is deprecated since November 2020
-- [Termux API](https://f-droid.org/en/packages/com.termux.api/ "Termux API by Fredrik Fornwall") via F-Droid - the Google Play Store version is deprecated since November 2020
+- [Termux](https://f-droid.org/en/packages/com.termux/ "Termux by Fredrik Fornwall")             via F-Droid - Google Play Store updates are deprecated since November 2020
+- [Termux API](https://f-droid.org/en/packages/com.termux.api/ "Termux API by Fredrik Fornwall") via F-Droid - Google Play Store updates are deprecated since November 2020
 - A VNC viewer application with full screen or immersive capabillities for a better experience such as:
    - [Remotix](https://play.google.com/store/apps/details?id=com.nulana.android.remotix "Remotix Remote Desktop by Nulana")
    - [VNC Viewer ](https://play.google.com/store/apps/details?id=com.realvnc.viewer.android "VNC Viewer by RealVNC Ltd.")
@@ -68,27 +68,27 @@ Dextop setup options are:
 
 Proot container install options are:
 
-`-i, --i3wm             \t I3WM setup: install i3 window manager and utilities.``
+`-i, --i3wm             \t I3WM setup: install i3 window manager and utilities.         [ Default ]`
 
 
-`-e, --ede              \t EDE setup: install E desktop environment and utilities.``
+`-e, --ede              \t EDE setup: install E desktop environment and utilities.`
 
-`-k, --kde              \t KDE5 setup: install K desktop environment and utilities.      [ Default ]`
+`-k, --kde              \t KDE5 setup: install K desktop environment and utilities.`
 
-`-x, --xfce             \t XFCE4 setup: install XFCE desktop environment and utilities.``
+`-x, --xfce             \t XFCE4 setup: install XFCE desktop environment and utilities.`
+
+`-n, --none             \t No DE setup: console access to environment and utilities.`
 
 
-`-n, --none             \t No DE setup: console access to environment and utilities.``
+`-b | --base:   download and install base distribution image only.                                 `
 
 `-f | --full:   download and install full desktop environment, utilities and themes.               `
 
 `-l | --lite:   download and install lite desktop environment and utilities.            [ Default ]`
 
-`-b | --base:   download and install base distribution image only.                                 `
 
-
-By selecting the 'none' option, Dextop setup automatically defaults to a 'base' install.
-This option is great for users who would like to either experiment or setup their own desktop environment or window manager.
+By selecting the 'none' option, Dextop automatically sets up minimal defaults to a 'base' install.
+The 'none' option is great for users who would like to experiment or setup their own desktop environment/window manager and preferences.
 
 ### Process:
 
@@ -102,16 +102,15 @@ The rest of the setup is fully automated and should run its course until the pro
 
 - Dextop setup:
    - Termux setup:
-      - Set up configurations,utilities, package dependencies and shell requirements
+      - Set up configurations, utilities, package dependencies and shell requirements
    - Proot setup:
       - Set up configurations, utilities, package dependencies and shell requirements
       - Set up proot container directories
       - Download, unpack and prepare base system image for use
       - Gather user information for successful setup
          - Initialize setup from within Termux
-         - Enter blank proot container as 'root'
-         - Expand system image for normal use
          - Login as root in newly created proot container
+         - Expand system image for normal use
          - Finalize setup from within proot container
    - VNC setup:
       - Set up configurations, utilities and shell requirements
@@ -119,7 +118,11 @@ The rest of the setup is fully automated and should run its course until the pro
 
 ### Customization:
 
-Use and edit 'dextop' prior to starting the setup to customize your list of installed applications, libraries, frameworks, utilities and other third party package locations.
+Use and edit 'user-packages' prior to starting the setup to customize your list of installed applications, libraries, frameworks, utilities and other third party package locations.
+
+**You can modify any of the other scripts AT YOUR OWN RISK!**
+**Any modification of the Dextop setup routine scripts implies you are fully aware of potential breakage and the consequences of doing so.**
+**No bug report that stems from such action will be acknowledged and closed immediately!**
 
 ### Usage:
 

@@ -134,7 +134,7 @@ echo
 # set defaults
 
 [ -z "${dextop_option}" ]														&& dextop_option="proot"
-[ -z "${desktop_option}" ]														&& desktop_option="kde"
+[ -z "${desktop_option}" ]														&& desktop_option="i3wm"
 [ -z "${install_option}" ]														&& install_option="lite"
 
 # export variables
