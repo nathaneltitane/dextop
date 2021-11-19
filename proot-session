@@ -234,6 +234,7 @@ PAGER="less"
 
 [ -f "${ROOT_DIRECTORY}"/usr/bin/i3 ]											&& SESSION_NAME="I3WM"
 
+[ "${desktop_option}" = "i3wm" ]												&& SESSION="i3wm"
 [ "${desktop_option}" = "i3wm" ]												&& SESSION_LOADER="i3"
 
 
@@ -241,6 +242,7 @@ PAGER="less"
 
 [ -f "${ROOT_DIRECTORY}"/usr/bin/enlightenment ]								&& SESSION_NAME="EDE"
 
+[ "${desktop_option}" = "i3wm" ]												&& SESSION="ede"
 [ "${desktop_option}" = "ede" ]													&& SESSION_LOADER="enlightenment"
 
 # kde #
