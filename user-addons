@@ -109,7 +109,7 @@ console.download https://yt-dl.org/downloads/latest																			"${ROOT_DI
 
 # ranger #
 
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/i3status			"${ROOT_DIRECTORY}"/home/"${USER}"/.config/ranger		rc.conf
+[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/ranger			"${ROOT_DIRECTORY}"/home/"${USER}"/.config/ranger		rc.conf
 
  # dmenu #
 

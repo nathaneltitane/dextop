@@ -237,12 +237,16 @@ PAGER="less"
 [ "${desktop_option}" = "i3wm" ]												&& SESSION="i3wm"
 [ "${desktop_option}" = "i3wm" ]												&& SESSION_LOADER="i3"
 
+[ "${desktop_option}" = "i3wm" ]												&& BROWSER="surf"
+[ "${desktop_option}" = "i3wm" ]												&& EMULATOR="st"
+[ "${desktop_option}" = "i3wm" ]												&& RUNNER="dmenu"
+[ "${desktop_option}" = "i3wm" ]												&& VISUAL="nano"
 
 # enlightenment #
 
 [ -f "${ROOT_DIRECTORY}"/usr/bin/enlightenment ]								&& SESSION_NAME="EDE"
 
-[ "${desktop_option}" = "i3wm" ]												&& SESSION="ede"
+[ "${desktop_option}" = "ede" ]													&& SESSION="ede"
 [ "${desktop_option}" = "ede" ]													&& SESSION_LOADER="enlightenment"
 
 # kde #
