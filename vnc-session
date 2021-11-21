@@ -300,9 +300,8 @@ vnc_stop () {
 }
 
 vnc_list () {
-	console.fwd "Listing servers..."
-	echo
-
+	# get values from 'vncserver -list'
+	
 	read vnc_display vnc_port vnc_process vnc_server <<< $(echo $(vncserver -list | tail -n 1))
 
 	if [[ "${vnc_process}" = ˆ[0-9]+$ ]]
@@ -319,6 +318,9 @@ vnc_list () {
 		console.wrn "No active servers detected."
 		echo
 	fi
+	
+	console.fwd "Listing servers..."
+	echo
 
 	console.inf "Display" "${vnc_display}" "-"
 	console.inf "Port"    "${vnc_port}"    "-"
