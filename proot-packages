@@ -123,9 +123,12 @@ i3wm_list=(
 	i3status
 	suckless-tools
 	feh
+	file
 	stterm
 	surf
 	ranger
+	w3m
+	w3m-img
 )
 
 i3wm_fonts_list=(
