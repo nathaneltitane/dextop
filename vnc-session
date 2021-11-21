@@ -307,6 +307,15 @@ vnc_list () {
 
 	if [[ "${vnc_process}" = ˆ[0-9]+$ ]]
 	then
+		# set values for list output
+
+		empty="N/A"
+
+		vnc_display="${empty}"
+		vnc_port="${empty}"
+		vnc_process="${empty}"
+		vnc_server="${empty}"
+
 		console.wrn "No active servers detected."
 		echo
 	else
