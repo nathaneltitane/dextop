@@ -77,48 +77,7 @@ PORT="590${DISPLAY:1}"
 [ -f /etc/os-release ] && . /etc/os-release
 
 # functions #
-
-vnc_start () {
-	console.fwd "Starting display server [ ${format} // ${GEOMETRY} // ${PORT} ]..."
-	echo
-
-	# 'vncserver' uses $DISPLAY instead of $PORT
-
-	unset "${command}"
-
-	command+="vncserver"
-	command+=" -IdleTimeout 0"
-	command+=" -SecurityTypes none"
-	command+=" -localhost yes"
-	command+=" -depth 32"
-	command+=" -cleanstale"
-	command+=" -name $NAME // Dextop"
-	command+=" -geometry ${GEOMETRY} ${DISPLAY}"
-	[ "${desktop_option}" = "i3wm" ] && command+=" -xstartup /usr/bin/i3"                 || :
-	[ "${desktop_option}" = "ede" ]  && command+=" -xstartup /usr/bin/enlightenment"      || :
-	[ "${desktop_option}" = "kde" ]  && command+=" -xstartup /home/${USER}/.vnc/xstartup" || :
-	[ "${desktop_option}" = "xfce" ] && command+=" -xstartup /home/${USER}/.vnc/xstartup" || :
-
-	console.silence "exec ${command}"
-
-	# make selection available for automatic start:
-	# verify user id - do not write selection when 'root' user is logged in
-
-	if [[ $(id -u) -ne 0 ]]
-	then
-		# integer check: do not write non numerical values to file
-
-		if [[ "${selection}" =~ ˆ[0-9]+$ ]]
-		then
-			echo "${selection}" > /home/"${USER}"/.vnc/selection
-		fi
-	fi
-
-	# am start							\
-	#	-a andoird.intent.action.VIEW	\
-	#	-d vnc://${LOCALHOST}:${PORT}	\
-	#	-S application/activity"
-	
+vnc_intent () {
 	# explicit VNC viewer application to kill:
 	# used when vncserver is stopped or restarted using vnc:// intent
 	# when launched via the activity manager [ 'am start -d {URI} -S {ACTIVITY}' ]
@@ -135,10 +94,53 @@ vnc_start () {
 
 	# start android vnc intent and set to view session with supported application
 
-	console.silence "
-				am start							\
-					-a android.intent.action.VIEW	\
-					-d vnc://${LOCALHOST}:${PORT}"
+	unset "${intent_command}"
+	
+	intent_command+="am start"
+	intent_command+=" -a android.intent.action.VIEW"
+	intent_command+=" -d vnc://${LOCALHOST}:${PORT}"
+	
+	console.silence "exec ${intent_command}"
+}
+
+
+vnc_start () {
+	console.fwd "Starting display server [ ${format} // ${GEOMETRY} // ${PORT} ]..."
+	echo
+
+	# 'vncserver' uses $DISPLAY instead of $PORT
+
+	unset "${command_start}"
+
+	command_start+="vncserver"
+	command_start+=" -IdleTimeout 0"
+	command_start+=" -SecurityTypes none"
+	command_start+=" -localhost yes"
+	command_start+=" -depth 32"
+	command_start+=" -cleanstale"
+	command_start+=" -name $NAME // Dextop"
+	command_start+=" -geometry ${GEOMETRY} ${DISPLAY}"
+	[ "${desktop_option}" = "i3wm" ] && command_start+=" -xstartup /usr/bin/i3"                 || :
+	[ "${desktop_option}" = "ede" ]  && command_start+=" -xstartup /usr/bin/enlightenment"      || :
+	[ "${desktop_option}" = "kde" ]  && command_start+=" -xstartup /home/${USER}/.vnc/xstartup" || :
+	[ "${desktop_option}" = "xfce" ] && command_start+=" -xstartup /home/${USER}/.vnc/xstartup" || :
+
+	console.silence "exec ${command_start}"
+
+	# make selection available for automatic start:
+	# verify user id - do not write selection when 'root' user is logged in
+
+	if [[ $(id -u) -ne 0 ]]
+	then
+		# integer check: do not write non numerical values to file
+
+		if [[ "${selection}" =~ ˆ[0-9]+$ ]]
+		then
+			echo "${selection}" > /home/"${USER}"/.vnc/selection
+		fi
+	fi
+	
+	vnc_intent
 }
 
 vnc_resolutions () {
@@ -286,11 +288,14 @@ vnc_resolutions () {
 }
 
 vnc_stop () {
-	console.silence "
-		vncserver		\
-			-kill		\
-			-clean		:*" &
+	unset "${command_stop}"
+	
+	command_stop+="vncserver"
+	command_stop+=" -kill"
+	command_stop+=" -clean :*"
 
+	console.silence "exec ${command_stop}" &
+	
 	console.progress "Killing display server..."
 	echo
 
@@ -337,7 +342,7 @@ then
 	then
 		# hide if selection file is present
 	
-		vnc_resolutions > /dev/null
+		vnc_resolutions
 	else
 		# show if selection file is not present
 		
