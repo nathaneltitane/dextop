@@ -98,42 +98,45 @@ room_number=""
 work_number=""
 home_number=""
 
-# user #
+# functions #
+
+add_user () {
+	# silent configuration:
+	# set --gecos and --disabled-password for fully silent execution
+	
+	adduser																					\
+		--gecos "${full_name},${room_number},${work_number},${home_number},${user_email}"	\
+		--shell "${SHELL}"																	\
+		--disabled-password "${user_name}"
+	
+}
+
+add_password () {
+	# use 'chpasswd' to append user password to account for fully silent execution
+	
+	chpasswd <<< "${user_name}:${user_password}"
+}
+
+# create user acount
 
 console.fwd "Creating account..."
 echo
 
 # generate user entry
 
-echo -e "${user_password}\n${user_password}\n" | adduser "${user_name}" --gecos "${full_name},${room_number},${work_number},${home_number},${user_email}" --shell "${SHELL}"
-
-# useradd -m -p "${user_password}" -s "${SHELL}" "${user_name}"
+add_user > /dev/null
 
 console.fwd "Setting password..."
 echo
 
-users_list=(
-	root
-	"${user_name}"
-)
+# generate password credential for user entry
 
-for users in ${users_list[@]}
-do
-	# clear # any default passwords present in /etc/passwd from image setup
-
-	passwd -d "${user_name}"
-
-	# add password to user account
-
-	echo -e "${user_password}\n${user_password}\n" | passwd "${user_name}"
-done
+add_password > /dev/null
 
 # get IDs
 
 uid="$(id -u ${user_name})"
 gid="$(id -g ${user_name})"
-
-# home #
 
 console.fwd "Setting up home directory..."
 echo
