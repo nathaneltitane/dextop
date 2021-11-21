@@ -72,7 +72,6 @@ administration_list=(
 )
 
 display_list=(
-	dbus-x11
 	x11-apps
 	x11-common
 	x11-session-utils
@@ -92,10 +91,6 @@ locales_list=(
 	keyboard-configuration
 	locales
 	locales-all
-)
-
-packaging_list=(
-	software-properties-common
 )
 
 security_list=(
@@ -293,8 +288,6 @@ base_list=(
 	${administration_list[@]}
 	${display_list[@]}
 	${documentation_list}
-	${locales_list[@]}
-	${packaging_list[@]}
 	${security_list[@]}
 	${utilities_list[@]}
 	${vnc_list[@]}
