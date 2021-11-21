@@ -103,6 +103,7 @@ console.download https://yt-dl.org/downloads/latest																			"${ROOT_DI
 
 [ "${SESSION}" = "i3wm" ] && console.directory "${ROOT_DIRECTORY}"/home/"${USER}"/.config i3
 [ "${SESSION}" = "i3wm" ] && console.directory "${ROOT_DIRECTORY}"/home/"${USER}"/.config i3status
+[ "${SESSION}" = "i3wm" ] && console.directory "${ROOT_DIRECTORY}"/home/"${USER}"/.config ranger
 
 [ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/i3					"${ROOT_DIRECTORY}"/home/"${USER}"/.config/i3			config
 [ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/i3status			"${ROOT_DIRECTORY}"/home/"${USER}"/.config/i3status		config
