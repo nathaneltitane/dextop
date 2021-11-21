@@ -59,7 +59,7 @@ echo
 
 # unminimize system image
 
-yes | unminimize &
+console.silence "yes | unminimize" &
 
 console.progress "Expanding..."
 echo
