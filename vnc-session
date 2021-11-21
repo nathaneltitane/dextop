@@ -318,13 +318,13 @@ vnc_list () {
 
 		console.wrn "No active servers detected."
 		echo
-	else
-		console.inf "Display" "${vnc_display}" "-"
-		console.inf "Port"    "${vnc_port}"    "-"
-		console.inf "Process" "${vnc_process}" "-"
-		console.inf "Server"  "${vnc_server}"  "-"
-		echo
 	fi
+
+	console.inf "Display" "${vnc_display}" "-"
+	console.inf "Port"    "${vnc_port}"    "-"
+	console.inf "Process" "${vnc_process}" "-"
+	console.inf "Server"  "${vnc_server}"  "-"
+	echo
 }
 
 if [ "${option}" = "start" ]
