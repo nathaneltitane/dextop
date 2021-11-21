@@ -123,6 +123,8 @@ console.fwd "Creating account..."
 echo
 
 # generate user entry
+# use /dev/null redirection:
+# adduser prevents stdout error redirect - cannot use 'console.silence'
 
 add_user > /dev/null
 
@@ -130,6 +132,8 @@ console.fwd "Setting password..."
 echo
 
 # generate password credential for user entry
+# use /dev/null redirection:
+# chpasswd prevents stdout error redirect - cannot use 'console.silence'
 
 add_password > /dev/null
 
