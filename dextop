@@ -282,6 +282,12 @@ then
 	)
 
 	console.delete ${remove_list[@]}
+	
+	# remove sensitive information from dextop file
+	
+	sed -i						\
+		-e '/user_email/d'		\
+		-e '/user_password/d'	"${BINARIES_DIRECTORY}"/dextop
 
 	# exit shell after setup
 
