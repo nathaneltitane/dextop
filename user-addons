@@ -114,9 +114,12 @@ console.download https://yt-dl.org/downloads/latest																			"${ROOT_DI
  # dmenu #
 
 [ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-change-background
+[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-confirm
 [ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-exit-session
 [ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-i3-shortcuts
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-open-stl
+[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-open-directory
+[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-open-file
 [ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-open-file-manager
+[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-open-manual
 [ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-show-shortcuts
 
