@@ -90,7 +90,7 @@ then
 
 	# storage permissions dialog
 
-	storage_intent
+	storage_intent > /dev/null
 
 	console.countdown "Continuing in" 3
 	echo
