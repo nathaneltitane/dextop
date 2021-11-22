@@ -118,7 +118,7 @@ do
 
 	if [ "${installed_version}" != "${archive_version}" ]
 	then
-		console.inf "Application version has been updated [ "${package}" // ${archive_version} ]."
+		console.wrn "Application version has been updated [ "${package}" // ${archive_version} ]."
 		echo
 
 		# request update permission
@@ -162,7 +162,7 @@ do
 	else
 		if [ "${installed_version}" == "${archive_version}" ]
 		then
-			console.inf "Application version is up to date [ "${package}" // ${archive_version} ]."
+			console.scs "Application version is up to date [ "${package}" // ${archive_version} ]."
 			echo
 
 			console.fwd "Continuing..."
