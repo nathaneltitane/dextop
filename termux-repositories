@@ -56,7 +56,7 @@ echo
 # variables #
 
 repositories_list=(
-	"deb https://grimler.se/game-packages-24 games stable"
+	"deb https://grimler.se/game-packages-24 game stable"
 	"deb https://grimler.se/termux-root-packages-24 root stable"
 	"deb https://grimler.se/science-packages-24 science stable"
 	"deb https://grimler.se/unstable-packages unstable main"
@@ -103,7 +103,9 @@ IFS=''
 
 # update lists
 
-console.fwd "Forcing refresh..."
+console.log "pkg update" &
+
+console.progress "Forcing refresh..."
 echo
 
 # update packages list
