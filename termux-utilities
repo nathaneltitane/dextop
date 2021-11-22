@@ -66,7 +66,6 @@ curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && . "${BINARIES
 # values #
 
 binaries_list=(
-	termux-addons
 	termux-bookmarks
 	termux-checkpoint
 	termux-clean

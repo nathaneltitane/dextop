@@ -120,7 +120,6 @@ i3wm_list=(
 	feh
 	file
 	stterm
-	surf
 	ranger
 	w3m
 	w3m-img
@@ -317,7 +316,7 @@ then
 	desktop_environment_list=(
 		${i3wm_list[@]}
 	)
-	
+
 	if [[ "${install_option}" = "full" ]]
 	then
 		desktop_environment_list+=(
@@ -326,7 +325,6 @@ then
 	fi
 fi
 
-
 # ede
 
 if [[ "${desktop_option}" = "ede" ]]
@@ -334,7 +332,7 @@ then
 	desktop_environment_list=(
 		${ede_list[@]}
 	)
-	
+
 	if [[ "${install_option}" = "full" ]]
 	then
 		desktop_environment_list+=(
@@ -353,7 +351,7 @@ then
 		${kde_fonts_list[@]}
 		${kde_themes_list[@]}
 	)
-	
+
 	if [[ "${install_option}" = "full" ]]
 	then
 		desktop_environment_list+=(
@@ -371,13 +369,44 @@ then
 		${xfce_fonts_list[@]}
 		${xfce_themes_list[@]}
 	)
-	
+
 	if [[ "${install_option}" = "full" ]]
 	then
 		desktop_environment_list+=(
 			${xfce_addons_list[@]}
 		)
 	fi
+fi
+
+# install
+
+# base
+
+if [[ "${install_option}" = "base" ]]
+then
+	install_list+=(
+		${base_list[@]}
+	)
+fi
+
+# full
+
+if [[ "${install_option}" = "full" ]]
+then
+	install_list+=(
+		${full_list[@]}
+		${desktop_environment_list[@]}
+	)
+fi
+
+# lite
+
+if [[ "${install_option}" = "lite" ]]
+then
+	install_list+=(
+		${base_list[@]}
+		${desktop_environment_list[@]}
+	)
 fi
 
 # install

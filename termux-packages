@@ -123,19 +123,123 @@ utilities_list=(
 	wget
 	)
 
-# initialize install list
+i3wm_list=(
+	i3
+	i3status
+	dmenu
+	feh
+	file
+	st
+	ranger
+	w3m
+	w3m-img
+)
 
-install_list=()
+i3wm_fonts_list=(
+)
 
-# populate install list
+i3wm_addons_list=(
+)
 
-install_list=(
+xfce_list=(
+	xfce4
+	xfce4-appfinder
+	xfce4-panel
+	xfce4-session
+	xfce4-settings
+	xfce4-taskmanager
+	xfce4-terminal
+	thunar
+	ristretto
+)
+
+xfce_fonts_list=(
+)
+
+xfce_themes_list=(
+)
+
+xfce_addons_list=(
+	xfce4-calculator-plugin
+	xfce4-clipman-plugin
+	xfce4-datetime-plugin
+	xfce4-mailwatch-plugin
+	xfce4-whiskermenu-plugin
+)
+
+termux_list=(
 	${development_list[@]}
 	${libraries_list[@]}
 	${multimedia_list[@]}
 	${termux_list[@]}
 	${utilities_list[@]}
 )
+
+proot_list=(
+	${libraries_list[@]}
+	${termux_list[@]}
+	${utilities_list[@]}
+)
+
+# initialize desktop environment list
+
+desktop_environment_list=()
+
+# initialize install list
+
+install_list=()
+
+# options #
+
+# dextop
+
+# termux #
+
+if [[ "${dextop_option}" = "termux" ]]
+then
+	install_list+=(
+		${termux_list[@]}
+	)
+fi
+
+# proot #
+
+if [[ "${dextop_option}" = "proot" ]]
+then
+	install_list+=(
+		${proot_list[@]}
+	)
+fi
+
+# desktop
+
+if [[ "${desktop_option}" = "i3wm" ]]
+then
+	desktop_environment_list+=(
+		${i3wm_list[@]}
+	)
+	
+	if [[ "${install_option}" = "full" ]]
+	then
+		desktop_environment_list+=(
+			${i3wm_addons_list[@]}
+		)
+	fi
+fi
+
+if [[ "${desktop_option}" = "xfce" ]]
+then
+	desktop_environment_list+=(
+		${xfce_list[@]}
+	)
+	
+	if [[ "${install_option}" = "full" ]]
+	then
+		desktop_environment_list+=(
+			${xfce_addons_list[@]}
+		)
+	fi
+fi
 
 # install #
 
