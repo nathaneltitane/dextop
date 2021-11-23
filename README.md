@@ -145,7 +145,7 @@ To stop the vnc server and halt the display output, type `'vnc-session -x'`.
 To start the vnc server and restart the display output, type `'vnc-session -o'`.
 
 ### Execution and setup structure:
-`
+```
 dextop
 ├── termux-utilities
 │   └── termux-setup
@@ -202,7 +202,7 @@ dextop
             ├── user-addons
             ├── user-checkpoint
             └── user-clean
-`
+```
 
 ### Reports:
 
