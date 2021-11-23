@@ -128,7 +128,7 @@ Use and edit 'user-packages' prior to starting the setup to customize your list 
 
 To access your newly created proot container:
 
-`'proot-session -u <username> | -a <application> | <option>'` to start your session, run a specific application or setup session options on load.
+`proot-session -u <username> | -a <application> | <option>'` to start your session, run a specific application or setup session options on load.
 
 ### The fun begins:
 
@@ -143,6 +143,66 @@ Logging out by pressing Ctrl+D or by typing `'logout'` or `'exit'``will automati
 
 To stop the vnc server and halt the display output, type `'vnc-session -x'`.
 To start the vnc server and restart the display output, type `'vnc-session -o'`.
+
+### Execution and setup structure:
+`
+dextop
+├── termux-utilities
+│   └── termux-setup
+│       ├── termux-update
+│       ├── termux-properties
+│       ├── termux-storage
+│       ├── termux-bookmarks
+│       ├── termux-shell
+│       ├── termux-silent
+│       ├── termux-welcome
+│       ├── termux-repositories
+│       ├── termux-packages
+│       ├── termux-links
+│       ├── termux-checkpoint
+│       └── termux-clean
+├── proot-utilities
+│   └── proot-setup
+│       ├── proot-architecture
+│       ├── proot-information
+│       ├── proot-distribution
+│       ├── proot-image
+│       ├── proot-groups
+│       ├── proot-environment
+│       ├── proot-network
+│       ├── proot-preload
+│       ├── proot-initialize
+│       ├── proot-checkpoint
+│       └── proot-session
+│           └── [ PROOT LOGIN - ROOT ]
+│               ├── proot-bookmarks
+│               ├── proot-shell
+│               ├── proot-silent
+│               ├── proot-welcome
+│               ├── proot-expand
+│               ├── proot-repositories
+│               ├── proot-packages
+│               ├── proot-links
+│               └── proot-clean
+└── vnc-utilities
+│   └── vnc-setup
+│       ├── vnc-environment
+│       ├── vnc-checkpoint
+│       └── vnc-clean
+│
+└── [ PROOT LOGIN - USER ]
+    │   └── proot-compositing
+    │   └── proot-keyboard
+    │   └── proot-locales
+    │   └── proot-timezones
+    └── user-utilities
+        └── user-setup
+        user-locales
+        user-timezones
+            ├── user-addons
+            ├── user-checkpoint
+            └── user-clean
+`
 
 ### Reports:
 
