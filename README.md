@@ -47,8 +47,11 @@ Services backend and other advanced features that require access to restricted c
 
 ### Software requirements:
 
-- [Termux](https://f-droid.org/en/packages/com.termux/ "Termux by Fredrik Fornwall")             via F-Droid - Google Play Store updates are deprecated since November 2020
-- [Termux API](https://f-droid.org/en/packages/com.termux.api/ "Termux API by Fredrik Fornwall") via F-Droid - Google Play Store updates are deprecated since November 2020
+**Termux application downloads are to be made via F-Droid:**
+**Google Play Store updates are deprecated since November 2020**
+
+- [Termux](https://f-droid.org/en/packages/com.termux/ "Termux by Fredrik Fornwall")
+- [Termux API](https://f-droid.org/en/packages/com.termux.api/ "Termux API by Fredrik Fornwall")
 - A VNC viewer application with full screen or immersive capabillities for a better experience such as:
    - [Remotix](https://play.google.com/store/apps/details?id=com.nulana.android.remotix "Remotix Remote Desktop by Nulana")
    - [VNC Viewer ](https://play.google.com/store/apps/details?id=com.realvnc.viewer.android "VNC Viewer by RealVNC Ltd.")
