@@ -50,77 +50,83 @@ done
 
 # prompt #
 
-console.script "Downloading additional utilities [ ${script%-*} ]"
+console.script "Downloading additional utilities and configurations [ ${script%-*} ]"
 echo
+
+# variables #
+
+# set defaults
+
+[ "${dextop_option}" = "termux" ] && HOME_DIRECTORY="${HOME}"
+[ "${dextop_option}" = "proot" ] && HOME_DIRECTORY="${ROOT_DIRECTORY}/home/${USER}"
 
 # bash aliases
 
-console.directory "${ROOT_DIRECTORY}"/home/"${USER}" .bash-aliases
+console.directory "${HOME_DIRECTORY}" .bash-aliases
 
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		apt
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		command
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		copy
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		count
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		directory
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		duplicate
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		git
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		grep
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		kill
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		list
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		nano
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		ping
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		sudo
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		shortcuts
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		system
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		usage
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-aliases		where
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${HOME_DIRECTORY}"/.bash-aliases		apt
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${HOME_DIRECTORY}"/.bash-aliases		command
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${HOME_DIRECTORY}"/.bash-aliases		copy
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${HOME_DIRECTORY}"/.bash-aliases		count
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${HOME_DIRECTORY}"/.bash-aliases		directory
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${HOME_DIRECTORY}"/.bash-aliases		duplicate
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${HOME_DIRECTORY}"/.bash-aliases		git
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${HOME_DIRECTORY}"/.bash-aliases		grep
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${HOME_DIRECTORY}"/.bash-aliases		kill
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${HOME_DIRECTORY}"/.bash-aliases		list
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${HOME_DIRECTORY}"/.bash-aliases		nano
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${HOME_DIRECTORY}"/.bash-aliases		ping
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${HOME_DIRECTORY}"/.bash-aliases		sudo
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${HOME_DIRECTORY}"/.bash-aliases		shortcuts
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${HOME_DIRECTORY}"/.bash-aliases		system
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${HOME_DIRECTORY}"/.bash-aliases		usage
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases										"${HOME_DIRECTORY}"/.bash-aliases		where
 
 # bash functions
 
-console.directory "${ROOT_DIRECTORY}"/home/"${USER}" .bash-functions
+console.directory "${HOME_DIRECTORY}" .bash-functions
 
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-functions		address
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-functions		extract
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-functions		record
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-functions		speed
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-functions		sprunge
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-functions		weather
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions										"${ROOT_DIRECTORY}"/home/"${USER}"/.bash-functions		youtube
-
-# leocad
-
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main												"${ROOT_DIRECTORY}"/usr/bin								leocad-build
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main												"${ROOT_DIRECTORY}"/usr/bin								leocad-configuration
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main												"${ROOT_DIRECTORY}"/usr/bin								leocad-download
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main												"${ROOT_DIRECTORY}"/usr/bin								leocad-launcher
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main												"${ROOT_DIRECTORY}"/usr/bin								leocad-position
-
-# youtube-dl
-
-console.download https://yt-dl.org/downloads/latest																			"${ROOT_DIRECTORY}"/usr/bin								youtube-dl
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions										"${HOME_DIRECTORY}"/.bash-functions		address
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions										"${HOME_DIRECTORY}"/.bash-functions		extract
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions										"${HOME_DIRECTORY}"/.bash-functions		record
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions										"${HOME_DIRECTORY}"/.bash-functions		speed
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions										"${HOME_DIRECTORY}"/.bash-functions		sprunge
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions										"${HOME_DIRECTORY}"/.bash-functions		weather
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions										"${HOME_DIRECTORY}"/.bash-functions		youtube
 
 # i3wm #
 
-[ "${SESSION}" = "i3wm" ] && console.directory "${ROOT_DIRECTORY}"/home/"${USER}"/.config i3
-[ "${SESSION}" = "i3wm" ] && console.directory "${ROOT_DIRECTORY}"/home/"${USER}"/.config i3status
-[ "${SESSION}" = "i3wm" ] && console.directory "${ROOT_DIRECTORY}"/home/"${USER}"/.config ranger
+[ "${SESSION}" = "i3wm" ] && console.directory "${HOME_DIRECTORY}"/.config i3
+[ "${SESSION}" = "i3wm" ] && console.directory "${HOME_DIRECTORY}"/.config i3status
+[ "${SESSION}" = "i3wm" ] && console.directory "${HOME_DIRECTORY}"/.config ranger
 
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/i3					"${ROOT_DIRECTORY}"/home/"${USER}"/.config/i3			config
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/i3status			"${ROOT_DIRECTORY}"/home/"${USER}"/.config/i3status		config
+[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/i3					"${HOME_DIRECTORY}"/.config/i3			config
+[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/i3status			"${HOME_DIRECTORY}"/.config/i3status	config
 
 # ranger #
 
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/ranger				"${ROOT_DIRECTORY}"/home/"${USER}"/.config/ranger		rc.conf
+[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/ranger				"${HOME_DIRECTORY}"/.config/ranger		rc.conf
 
  # dmenu #
 
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-change-background
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-confirm
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-exit-session
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-i3-shortcuts
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-open-directory
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-open-file
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-open-file-manager
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-open-manual
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${ROOT_DIRECTORY}"/usr/bin								dmenu-show-shortcuts
+[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-change-background
+[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-confirm
+[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-exit-session
+[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-i3-shortcuts
+[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-open-directory
+[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-open-file
+[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-open-file-manager
+[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-open-manual
+[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-show-shortcuts
 
+# leocad
+
+[ "${dextop_option}" = "proot" ] && console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main			"${BINARIES_DIRECTORY}"					leocad-build
+[ "${dextop_option}" = "proot" ] && console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main			"${BINARIES_DIRECTORY}"					leocad-configuration
+[ "${dextop_option}" = "proot" ] && console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main			"${BINARIES_DIRECTORY}"					leocad-download
+[ "${dextop_option}" = "proot" ] && console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main			"${BINARIES_DIRECTORY}"					leocad-launcher
+[ "${dextop_option}" = "proot" ] && console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main			"${BINARIES_DIRECTORY}"					leocad-position
+
+# youtube-dl
+
+console.download https://yt-dl.org/downloads/latest																			"${BINARIES_DIRECTORY}"					youtube-dl
