@@ -57,9 +57,6 @@ echo
 
 # set defaults
 
-[ "${dextop_option}" = "termux" ] && HOME_DIRECTORY="${HOME}"
-[ "${dextop_option}" = "proot" ] && HOME_DIRECTORY="${ROOT_DIRECTORY}/home/${USER}"
-
 # bash aliases
 
 console.directory "${HOME_DIRECTORY}" .bash-aliases

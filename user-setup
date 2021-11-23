@@ -54,11 +54,16 @@ console.script "Starting setup [ ${script%-*} ]"
 
 # variables #
 
+[ "${dextop_option}" = "termux" ]												&& HOME_DIRECTORY="${HOME}"
+[ "${dextop_option}" = "proot" ]												&& HOME_DIRECTORY="${ROOT_DIRECTORY}/home/${USER}"
+
 # set defaults
 
 # export variables
 
 echo '# user #'																	>> "${PREFIX}"/bin/dextop
+
+echo 'export HOME_DIRECTORY="${HOME_DIRECTORY}'									>> "${PREFIX}"/bin/dextop
 
 # clear #
 
