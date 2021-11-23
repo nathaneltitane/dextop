@@ -81,7 +81,6 @@ setup_list=(
 	termux-shell
 	termux-silent
 	termux-welcome
-	termux-addons
 	termux-repositories
 	termux-packages
 	termux-links
