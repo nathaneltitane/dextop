@@ -200,8 +200,6 @@ then
 	then
 		# termux #
 
-		console.directory "${HOME}" .termux
-
 		files_list+=(
 			termux
 			termux-browser
@@ -217,6 +215,8 @@ then
 		console.download get.trmnl.me/termux "${PREFIX}"/bin ${files_list[@]}
 
 		console.link "${PREFIX}"/bin "${HOME}"/.termux termux.properties
+
+		console.link "${PREFIX}"/bin "${HOME}"/.termux colors.properties
 
 		termux-reload-settings
 
