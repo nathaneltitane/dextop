@@ -61,33 +61,39 @@ Services backend and other advanced features that require access to restricted c
 
 Once the Android applications are installed on your device, open Termux and paste or type:
 
-`curl -sL run.dxtp.app > dextop && bash dextop | <option>`
+```
+curl -sL run.dxtp.app > dextop && bash dextop | <option>
+```
 
 Dextop setup options are:
 
-`-t | --termux: setup Termux environment only           - VNC setup not included.`
+```
+-t | --termux: setup Termux environment only           - VNC setup not included.`
 
-`-p | --proot:  setup Proot environment in Termux shell - VNC setup included.                       [ Default ]`
+-p | --proot:  setup Proot environment in Termux shell - VNC setup included.                       [ Default ]
+```
 
 Proot container install options are:
 
-`-i, --i3wm     I3WM setup: install i3 window manager and utilities.                                [ Default ]`
+```
+-i, --i3wm     I3WM setup: install i3 window manager and utilities.                                [ Default ]
 
 
-`-e, --ede      EDE setup: install E desktop environment and utilities.`
+-e, --ede      EDE setup: install E desktop environment and utilities.`
 
-`-k, --kde      KDE5 setup: install K desktop environment and utilities.`
+-k, --kde      KDE5 setup: install K desktop environment and utilities.`
 
-`-x, --xfce     XFCE4 setup: install XFCE desktop environment and utilities.`
+-x, --xfce     XFCE4 setup: install XFCE desktop environment and utilities.`
 
-`-n, --none     No DE setup: console access to environment and utilities.`
+-n, --none     No DE setup: console access to environment and utilities.`
 
 
-`-b | --base:   Base setup: download and install base distribution image only.                                 `
+-b | --base:   Base setup: download and install base distribution image only.                                 
 
-`-f | --full:   Full setup: download and install full desktop environment, utilities and themes.               `
+-f | --full:   Full setup: download and install full desktop environment, utilities and themes.               
 
-`-l | --lite:   Lite setup: download and install lite desktop environment and utilities.            [ Default ]`
+-l | --lite:   Lite setup: download and install lite desktop environment and utilities.            [ Default ]
+```
 
 
 By selecting the 'none' option, Dextop automatically sets up minimal defaults to a 'base' install.
@@ -131,23 +137,24 @@ Use and edit 'user-packages' prior to starting the setup to customize your list 
 
 To access your newly created proot container:
 
-`proot-session -u <username> | -a <application> | <option>'` to start your session, run a specific application or setup session options on load.
+```proot-session -u <username> | -a <application> | <option>'``` to start your session, run a specific application or setup session options on load.
 
 ### The fun begins:
 
 When logging into the proot container for the first time, you need to start the vnc server manually:
-Type `'vnc-session -o'` and follow the prompt to select the appropriate device resolution settings for the Android device or external monitor.
+Type ```'vnc-session -o'``` and follow the prompt to select the appropriate device resolution settings for the Android device or external monitor.
 
 
 The next login will automatically launch the session for you using the settings you've chosen previously:
-The first login saves the selection under `"${HOME}"/.vnc/selection` and uses it to start the VNC server and viewer automatically for your convenience!
+The first login saves the selection under ```"${HOME}"/.vnc/selection``` and uses it to start the VNC server and viewer automatically for your convenience!
 
-Logging out by pressing Ctrl+D or by typing `'logout'` or `'exit'``will automatically stop the vnc session and exit the proot container back to the Termux shell.
+Logging out by pressing Ctrl+D or by typing ```'logout'``` or ```'exit'``` will automatically stop the vnc session and exit the proot container back to the Termux shell.
 
-To stop the vnc server and halt the display output, type `'vnc-session -x'`.
-To start the vnc server and restart the display output, type `'vnc-session -o'`.
+To stop the vnc server and halt the display output, type ```'vnc-session -x'```.
+To start the vnc server and restart the display output, type ```'vnc-session -o'```.
 
 ### Execution and setup structure:
+
 ```
 dextop
 ├── termux-utilities
@@ -209,5 +216,5 @@ dextop
 
 ### Reports:
 
-All setup dialogs, prompts, commands and binary execution outputs have been set to redirect to the Termux `'/var/log'` directory to keep output messages to a minimum.
-Should you suspect any issues or errors, please provide a copy of the files located under the Termux `'/var/log'` directory when submitting a bug report.
+All setup dialogs, prompts, commands and binary execution outputs have been set to redirect to the Termux ```'/var/log'``` directory to keep output messages to a minimum.
+Should you suspect any issues or errors, please provide a copy of the files located under the Termux ```'/var/log'``` directory when submitting a bug report.
