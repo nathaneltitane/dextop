@@ -200,6 +200,7 @@ then
 
 	setup_list+=(
 		termux-setup
+		vnc-setup
 	)
 fi
 
