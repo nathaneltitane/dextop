@@ -93,7 +93,7 @@ multimedia_list=(
 	
 )
 
-termux_list=(
+termux_extensions_list=(
 	termux-am
 	termux-api
 	termux-apt-repo
@@ -171,13 +171,13 @@ termux_list=(
 	${development_list[@]}
 	${libraries_list[@]}
 	${multimedia_list[@]}
-	${termux_list[@]}
+	${termux_extensions_list[@]}
 	${utilities_list[@]}
 )
 
 proot_list=(
 	${libraries_list[@]}
-	${termux_list[@]}
+	${termux_extensions_list[@]}
 	${utilities_list[@]}
 )
 
@@ -213,32 +213,39 @@ fi
 
 # desktop
 
-if [[ "${desktop_option}" = "i3wm" ]]
+if [[ "${dextop_option}" = "termux" ]]
 then
-	desktop_environment_list+=(
-		${i3wm_list[@]}
-	)
-	
-	if [[ "${install_option}" = "full" ]]
+	if [[ "${desktop_option}" = "i3wm" ]]
 	then
 		desktop_environment_list+=(
-			${i3wm_addons_list[@]}
+			${i3wm_list[@]}
 		)
+		
+		if [[ "${install_option}" = "full" ]]
+		then
+			desktop_environment_list+=(
+				${i3wm_addons_list[@]}
+			)
+		fi
 	fi
-fi
-
-if [[ "${desktop_option}" = "xfce" ]]
-then
-	desktop_environment_list+=(
-		${xfce_list[@]}
-	)
 	
-	if [[ "${install_option}" = "full" ]]
+	if [[ "${desktop_option}" = "xfce" ]]
 	then
 		desktop_environment_list+=(
-			${xfce_addons_list[@]}
+			${xfce_list[@]}
 		)
+		
+		if [[ "${install_option}" = "full" ]]
+		then
+			desktop_environment_list+=(
+				${xfce_addons_list[@]}
+			)
+		fi
 	fi
+	
+	install_list+=(
+		${desktop_environment_list[@]}
+	)
 fi
 
 # install #
