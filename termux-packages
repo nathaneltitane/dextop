@@ -77,7 +77,6 @@ multimedia_list=(
 termux_extensions_list=(
 	termux-am
 	termux-api
-	termux-apt-repo
 	termux-auth
 	termux-create-package
 	termux-elf-cleaner
@@ -86,6 +85,15 @@ termux_extensions_list=(
 	termux-licenses
 	termux-services
 	termux-tools
+)
+
+termux_repositories_list=(
+	game-repo
+	root-repo
+	science-repo
+	termux-apt-repo
+	unstable-repo
+	x11-repo
 )
 
 utilities_list=(
@@ -155,12 +163,14 @@ xfce_addons_list=(
 termux_list=(
 	${multimedia_list[@]}
 	${termux_extensions_list[@]}
+	${termux_repositories_list[@]}
 	${utilities_list[@]}
 	${vnc_list[@]}
 )
 
 proot_list=(
 	${termux_extensions_list[@]}
+	${termux_repositories_list[@]}
 	${utilities_list[@]}
 )
 
