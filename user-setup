@@ -63,7 +63,7 @@ console.script "Starting setup [ ${script%-*} ]"
 
 echo '# user #'																	>> "${PREFIX}"/bin/dextop
 
-echo 'export HOME_DIRECTORY="${HOME_DIRECTORY}'									>> "${PREFIX}"/bin/dextop
+echo 'export HOME_DIRECTORY="${HOME_DIRECTORY}"'								>> "${PREFIX}"/bin/dextop
 
 # clear #
 
