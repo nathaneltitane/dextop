@@ -67,11 +67,14 @@ console.upgrade
 
 # values #
 
+documentation_list=(
+	man
+)
+
 multimedia_list=(
 	ffmpeg
 	flac
 	gstreamer
-	
 )
 
 termux_extensions_list=(

@@ -74,7 +74,6 @@ do
 			echo -e "-b, --base             \t Base setup: download and install base distribution image only."
 			echo
 			echo -e "-f, --full             \t Full setup: download and install full desktop environment and utilities."
-			echo -e "-l, --lite             \t Lite setup: download and install lite desktop environment and utilities."
 			echo
 			echo -e "-h, --help             \t Show help and usage information."
 			echo

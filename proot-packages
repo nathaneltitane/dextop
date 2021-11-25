@@ -123,6 +123,9 @@ i3wm_list=(
 i3wm_fonts_list=(
 )
 
+ede_themes_list=(
+)
+
 i3wm_addons_list=(
 )
 
@@ -133,6 +136,9 @@ ede_list=(
 )
 
 ede_fonts_list=(
+)
+
+ede_themes_list=(
 )
 
 ede_addons_list=(
@@ -169,7 +175,7 @@ kde_fonts_list=(
 	fonts-noto-unhinted
 )
 
-kde_themes_ist=(
+kde_themes_list=(
 	breeze-cursor-theme
 	breeze-icon-theme
 	breeze-gtk-theme
@@ -278,23 +284,21 @@ xfce_addons_list=(
 	xfce4-xkb-plugin
 )
 
-base_list=(
-	${administration_list[@]}
-	${display_list[@]}
-	${documentation_list}
-	${locales_list}
-	${security_list[@]}
-	${utilities_list[@]}
-	${vnc_list[@]}
-)
-
 # initialize desktop environment list
 
 desktop_environment_list=()
 
 # initialize install list
 
-install_list=()
+install_list=(
+	${administration_list[@]}
+	${display_list[@]}
+	${documentation_list[@]}
+	${locales_list[@]}
+	${security_list[@]}
+	${utilities_list[@]}
+	${vnc_list[@]}
+)
 
 # options #
 
@@ -327,6 +331,8 @@ then
 	if [[ "${install_option}" = "full" ]]
 	then
 		desktop_environment_list+=(
+			${i3wm_fonts_list[@]}
+			${i3wm_themes_list[@]}
 			${i3wm_addons_list[@]}
 		)
 	fi
@@ -343,6 +349,8 @@ then
 	if [[ "${install_option}" = "full" ]]
 	then
 		desktop_environment_list+=(
+			${ede_fonts_list[@]}
+			${ede_themes_list[@]}
 			${ede_addons_list[@]}
 		)
 	fi
@@ -362,6 +370,8 @@ then
 	if [[ "${install_option}" = "full" ]]
 	then
 		desktop_environment_list+=(
+			${kde_fonts_list[@]}
+			${kde_themes_list[@]}
 			${kde_addons_list[@]}
 		)
 	fi
@@ -373,13 +383,14 @@ if [[ "${desktop_option}" = "xfce" ]]
 then
 	desktop_environment_list=(
 		${xfce_list[@]}
-		${xfce_fonts_list[@]}
-		${xfce_themes_list[@]}
+
 	)
 
 	if [[ "${install_option}" = "full" ]]
 	then
 		desktop_environment_list+=(
+			${xfce_fonts_list[@]}
+			${xfce_themes_list[@]}
 			${xfce_addons_list[@]}
 		)
 	fi
@@ -387,67 +398,9 @@ fi
 
 # install
 
-# base
-
-if [[ "${install_option}" = "base" ]]
-then
-	install_list+=(
-		${base_list[@]}
-	)
-fi
-
-# full
-
-if [[ "${install_option}" = "full" ]]
-then
-	install_list+=(
-		${full_list[@]}
-		${desktop_environment_list[@]}
-	)
-fi
-
-# lite
-
-if [[ "${install_option}" = "lite" ]]
-then
-	install_list+=(
-		${base_list[@]}
-		${desktop_environment_list[@]}
-	)
-fi
-
-# install
-
-# base
-
-if [[ "${install_option}" = "base" ]]
-then
-	install_list+=(
-		${base_list[@]}
-	)
-fi
-
-# full
-
-if [[ "${install_option}" = "full" ]]
-then
-	install_list+=(
-		${full_list[@]}
-		${desktop_environment_list[@]}
-	)
-fi
-
-# lite
-
-if [[ "${install_option}" = "lite" ]]
-then
-	install_list+=(
-		${base_list[@]}
-		${desktop_environment_list[@]}
-	)
-fi
-
-# install #
+install_list+=(
+	${desktop_environment_list[@]}
+)
 
 console.install ${install_list[@]}
 
