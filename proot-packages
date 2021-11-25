@@ -107,11 +107,6 @@ vnc_list=(
 	tigervnc-standalone-server
 )
 
-themes_list=(
-	arc-theme
-	tango-icon-theme
-)
-
 i3wm_list=(
 	i3
 	i3lock
@@ -293,11 +288,6 @@ base_list=(
 	${vnc_list[@]}
 )
 
-full_list=(
-	${base_list[@]}
-	${themes_list[@]}
-)
-
 # initialize desktop environment list
 
 desktop_environment_list=()
@@ -309,6 +299,22 @@ install_list=()
 # options #
 
 # desktop
+
+# none #
+
+if [[ "${desktop_option}" = "none" ]]
+then
+	desktop_environment_list=(
+
+	)
+
+	if [[ "${install_option}" = "full" ]]
+	then
+		desktop_environment_list+=(
+
+		)
+	fi
+fi
 
 # i3wm #
 

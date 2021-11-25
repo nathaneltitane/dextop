@@ -67,25 +67,6 @@ console.upgrade
 
 # values #
 
-development_list=(
-	git
-	hub
-	python
-)
-
-libraries_list=(
-	libandroid-glob
-	libandroid-glob-static
-	libandroid-shmem
-	libandroid-shmem-static
-	libandroid-spawn
-	libandroid-spawn-static
-	libandroid-support
-	libandroid-support-static
-	libandroid-wordexp
-	libandroid-wordexp-static
-)
-
 multimedia_list=(
 	ffmpeg
 	flac
@@ -172,8 +153,6 @@ xfce_addons_list=(
 )
 
 termux_list=(
-	${development_list[@]}
-	${libraries_list[@]}
 	${multimedia_list[@]}
 	${termux_extensions_list[@]}
 	${utilities_list[@]}
@@ -181,7 +160,6 @@ termux_list=(
 )
 
 proot_list=(
-	${libraries_list[@]}
 	${termux_extensions_list[@]}
 	${utilities_list[@]}
 )
@@ -218,38 +196,92 @@ fi
 
 # desktop
 
+# none #
+
+if [[ "${desktop_option}" = "none" ]]
+then
+	desktop_environment_list=(
+
+	)
+
+	if [[ "${install_option}" = "full" ]]
+	then
+		desktop_environment_list+=(
+
+		)
+	fi
+fi
+
+# i3wm #
+
+if [[ "${desktop_option}" = "i3wm" ]]
+then
+	desktop_environment_list=(
+		${i3wm_list[@]}
+	)
+
+	if [[ "${install_option}" = "full" ]]
+	then
+		desktop_environment_list+=(
+			${i3wm_addons_list[@]}
+		)
+	fi
+fi
+
+# xfce #
+
+if [[ "${desktop_option}" = "xfce" ]]
+then
+	desktop_environment_list=(
+		${xfce_list[@]}
+		${xfce_fonts_list[@]}
+		${xfce_themes_list[@]}
+	)
+
+	if [[ "${install_option}" = "full" ]]
+	then
+		desktop_environment_list+=(
+			${xfce_addons_list[@]}
+		)
+	fi
+fi
+
+# termux
+
+if [[ "${install_option}" = "termux" ]]
+then
+	install_list+=(
+		${base_list[@]}
+	)
+fi
+
+# proot
+
+if [[ "${install_option}" = "proot" ]]
+then
+	install_list+=(
+		${full_list[@]}
+		${desktop_environment_list[@]}
+	)
+fi
+
+# dextop
+
+# termux #
+
 if [[ "${dextop_option}" = "termux" ]]
 then
-	if [[ "${desktop_option}" = "i3wm" ]]
-	then
-		desktop_environment_list+=(
-			${i3wm_list[@]}
-		)
-		
-		if [[ "${install_option}" = "full" ]]
-		then
-			desktop_environment_list+=(
-				${i3wm_addons_list[@]}
-			)
-		fi
-	fi
-	
-	if [[ "${desktop_option}" = "xfce" ]]
-	then
-		desktop_environment_list+=(
-			${xfce_list[@]}
-		)
-		
-		if [[ "${install_option}" = "full" ]]
-		then
-			desktop_environment_list+=(
-				${xfce_addons_list[@]}
-			)
-		fi
-	fi
-	
 	install_list+=(
 		${desktop_environment_list[@]}
+	)
+fi
+
+# proot #
+
+if [[ "${dextop_option}" = "proot" ]]
+then
+	install_list+=(
+
 	)
 fi
 
