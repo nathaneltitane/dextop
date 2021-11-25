@@ -343,8 +343,8 @@ command+=" --bind=/storage"
 command+=" --bind=/sys"
 command+=" --bind=/system"
 command+=" --bind=/vendor"
-[ -d "${PREFIX%/*}"/storage/external ] && command+=" --bind=${PREFIX%/*}/storage/external:/media/External" || :
-[ -d "${PREFIX%/*}"/storage/internal ] && command+=" --bind=${PREFIX%/*}/storage/internal:/media/Internal" || :
+[ -d "${PREFIX%/*}"/storage/external ] && command+=" --bind=${PREFIX%/*}/storage/external:/media/external" || :
+[ -d "${PREFIX%/*}"/storage/internal ] && command+=" --bind=${PREFIX%/*}/storage/internal:/media/internal" || :
 command+=" env -i"
 command+=" ANDROID_ART_ROOT=${ANDROID_ART_ROOT}"
 command+=" ANDROID_DATA=${ANDROID_DATA}"
