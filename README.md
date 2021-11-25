@@ -86,8 +86,6 @@ Proot container install options are:
 
 `-b | --base:   Base setup: download and install base distribution image only.                                 `
 
-`-f | --full:   Full setup: download and install full desktop environment, utilities and themes.               `
-
 `-l | --lite:   Lite setup: download and install lite desktop environment and utilities.            [ Default ]`
 
 

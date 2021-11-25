@@ -57,6 +57,12 @@ echo
 
 # set defaults
 
+# failsafe:
+# if no desktop environment or window manager is selected
+# revert to console session and install base utilities only
+
+[[ "${install_option}" = base ]]												&& desktop_option="none"
+
 # update packages list
 
 console.update
@@ -309,13 +315,11 @@ install_list=(
 if [[ "${desktop_option}" = "none" ]]
 then
 	desktop_environment_list=(
-
 	)
 
 	if [[ "${install_option}" = "full" ]]
 	then
 		desktop_environment_list+=(
-
 		)
 	fi
 fi
@@ -398,12 +402,9 @@ fi
 
 # install
 
-if [[ "${dextop_option}" = "proot" ]]
-then
-	install_list+=(
-		${desktop_environment_list[@]}
-	)
-fi
+install_list+=(
+	${desktop_environment_list[@]}
+)
 
 console.install ${install_list[@]}
 

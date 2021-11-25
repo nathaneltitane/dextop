@@ -220,13 +220,11 @@ fi
 if [[ "${desktop_option}" = "none" ]]
 then
 	desktop_environment_list=(
-
 	)
 
 	if [[ "${install_option}" = "full" ]]
 	then
 		desktop_environment_list+=(
-
 		)
 	fi
 fi
