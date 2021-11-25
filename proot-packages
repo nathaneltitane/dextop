@@ -398,9 +398,12 @@ fi
 
 # install
 
-install_list+=(
-	${desktop_environment_list[@]}
-)
+if [[ "${dextop_option}" = "proot" ]]
+then
+	install_list+=(
+		${desktop_environment_list[@]}
+	)
+fi
 
 console.install ${install_list[@]}
 

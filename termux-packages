@@ -134,6 +134,9 @@ i3wm_list=(
 i3wm_fonts_list=(
 )
 
+i3wm_themes_list=(
+)
+
 i3wm_addons_list=(
 )
 
@@ -164,6 +167,7 @@ xfce_addons_list=(
 )
 
 termux_list=(
+	${documentation_list[@]}
 	${multimedia_list[@]}
 	${termux_extensions_list[@]}
 	${termux_repositories_list[@]}
@@ -207,6 +211,8 @@ then
 	)
 fi
 
+# options #
+
 # desktop
 
 # none #
@@ -236,51 +242,33 @@ then
 	if [[ "${install_option}" = "full" ]]
 	then
 		desktop_environment_list+=(
+			${i3wm_fonts_list[@]}
+			${i3wm_themes_list[@]}
 			${i3wm_addons_list[@]}
 		)
 	fi
 fi
 
-# xfce #
+# xfce
 
 if [[ "${desktop_option}" = "xfce" ]]
 then
 	desktop_environment_list=(
 		${xfce_list[@]}
-		${xfce_fonts_list[@]}
-		${xfce_themes_list[@]}
+
 	)
 
 	if [[ "${install_option}" = "full" ]]
 	then
 		desktop_environment_list+=(
+			${xfce_fonts_list[@]}
+			${xfce_themes_list[@]}
 			${xfce_addons_list[@]}
 		)
 	fi
 fi
 
-# termux
-
-if [[ "${install_option}" = "termux" ]]
-then
-	install_list+=(
-		${base_list[@]}
-	)
-fi
-
-# proot
-
-if [[ "${install_option}" = "proot" ]]
-then
-	install_list+=(
-		${full_list[@]}
-		${desktop_environment_list[@]}
-	)
-fi
-
-# dextop
-
-# termux #
+# install
 
 if [[ "${dextop_option}" = "termux" ]]
 then
@@ -288,16 +276,5 @@ then
 		${desktop_environment_list[@]}
 	)
 fi
-
-# proot #
-
-if [[ "${dextop_option}" = "proot" ]]
-then
-	install_list+=(
-
-	)
-fi
-
-# install #
 
 console.install ${install_list[@]}
