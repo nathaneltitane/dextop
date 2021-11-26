@@ -132,8 +132,13 @@ echo
 
 # set defaults
 
-[ -z "${desktop_option}" ]														&& desktop_option="kde"
-[ -z "${install_option}" ]														&& install_option="lite"
+HOME_DIRECTORY="${ROOT_DIRECTORY}"/home/"${user_name}"
+
+# export variables
+
+echo '# proot #'																>> "${PREFIX}"/bin/dextop
+
+echo "export HOME_DIRECTORY=${HOME_DIRECTORY}"									>> "${PREFIX}"/bin/dextop
 
 # clear #
 

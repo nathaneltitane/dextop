@@ -161,7 +161,7 @@ directories_list=(
 
 # create home directory
 
-console.directory "${ROOT_DIRECTORY}"/home/"${user_name}" ${directories_list[@]}
+console.directory "${HOME_DIRECTORY}" ${directories_list[@]}
 
 # runtime #
 

@@ -59,6 +59,6 @@ echo
 
 # silence login messages
 
-cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.hushlogin
+cat << 'FILE' ->> "${HOME_DIRECTORY}"/.hushlogin
 
 FILE

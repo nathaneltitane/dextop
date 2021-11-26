@@ -59,15 +59,15 @@ echo
 
 # remove default properties directory
 
-[ -d "${HOME}"/.termux ] && rm -rf "${HOME}"/.termux
+[ -d "${HOME_DIRECTORY}"/.termux ] && rm -rf "${HOME_DIRECTORY}"/.termux
 
 # create properties directory
 
-console.directory "${HOME}" .termux
+console.directory "${HOME_DIRECTORY}" .termux
 
 # write properties
 
-cat << FILE ->> "${HOME}"/.termux/termux.properties
+cat << FILE ->> "${HOME_DIRECTORY}"/.termux/termux.properties
 
 # use black for drawer and dialogs - Android 9.0+ default
 

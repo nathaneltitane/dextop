@@ -71,7 +71,7 @@ storage_intent () {
 
 # verify termux storage directory existence
 
-if [ ! -d "${HOME}"/storage ]
+if [ ! -d "${HOME_DIRECTORY}"/storage ]
 then
 	# does not exist:
 	# enable storage permissions: requires user touch input
@@ -99,7 +99,7 @@ else
 	# exists:
 	# proceed with setup
 
-	console.scs "Storage directory detected [ "${HOME}" ]."
+	console.scs "Storage directory detected [ "${HOME_DIRECTORY}" ]."
 	echo
 
 	console.fwd "Continuing..."
@@ -111,7 +111,7 @@ echo
 
 # remove termux storage setup defaults
 
-rm -rf "${HOME}"/storage
+rm -rf "${HOME_DIRECTORY}"/storage
 
 # handle storage mount location
 

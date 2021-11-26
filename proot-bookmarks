@@ -59,20 +59,20 @@ echo
 
 # write bookmarks
 
-cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bookmarks
+cat << 'FILE' ->> "${HOME_DIRECTORY}"/.bookmarks
 file:///media/Internal
 FILE
 
 if [ -d /media/External ]
 then
-	cat <<- 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.bookmarks
+	cat <<- 'FILE' ->> "${HOME_DIRECTORY}"/.bookmarks
 	file:///media/External
 	FILE
 fi
 
 # create bookmarks directory
 
-console.directory "${ROOT_DIRECTORY}"/home/"${user_name}" .config/gtk-3.0
+console.directory "${HOME_DIRECTORY}" .config/gtk-3.0
 
-ln -s -f "${ROOT_DIRECTORY}"/home/"${user_name}"/.bookmarks "${ROOT_DIRECTORY}"/home/"${user_name}"/.gtk-bookmarks
-ln -s -f "${ROOT_DIRECTORY}"/home/"${user_name}"/.bookmarks "${ROOT_DIRECTORY}"/home/"${user_name}"/.config/gtk-3.0/bookmarks
+ln -s -f "${HOME_DIRECTORY}"/.bookmarks "${HOME_DIRECTORY}"/.gtk-bookmarks
+ln -s -f "${HOME_DIRECTORY}"/.bookmarks "${HOME_DIRECTORY}"/.config/gtk-3.0/bookmarks

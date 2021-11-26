@@ -59,7 +59,7 @@ echo
 
 # .bash_aliases
 
-cat << 'FILE' -> "${HOME}"/.bash_aliases
+cat << 'FILE' -> "${HOME_DIRECTORY}"/.bash_aliases
 
 if [ -d "${HOME}"/.bash-aliases ]
 then
@@ -72,7 +72,7 @@ FILE
 
 # .bash functions
 
-cat << 'FILE' -> "${HOME}"/.bash_functions
+cat << 'FILE' -> "${HOME_DIRECTORY}"/.bash_functions
 
 if [ -d "${HOME}"/.bash-functions ]
 then
@@ -85,13 +85,13 @@ FILE
 
 # .bash_logout
 
-cat << 'FILE' -> "${HOME}"/.bash_logout
+cat << 'FILE' -> "${HOME_DIRECTORY}"/.bash_logout
 
 FILE
 
 # .bashrc
 
-cat << 'FILE' -> "${HOME}"/.bashrc
+cat << 'FILE' -> "${HOME_DIRECTORY}"/.bashrc
 
 # check for interactive session
 
@@ -186,7 +186,7 @@ FILE
 
 # .profile
 
-cat << 'FILE' -> "${HOME}"/.profile
+cat << 'FILE' -> "${HOME_DIRECTORY}"/.profile
 
 # bashrc
 

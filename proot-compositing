@@ -65,7 +65,7 @@ then
 
 	if [ "${SESSION}" = "kde" ]
 	then
-		cat <<- 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.config/kwinrc
+		cat <<- 'FILE' ->> "${HOME_DIRECTORY}"/.config/kwinrc
 		[Compositing]
 		Backend=XRender
 		Enabled=false
@@ -108,7 +108,7 @@ then
 		ButtonsOnRight=IAX
 		FILE
 
-		cat <<- 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.config/breezerc
+		cat <<- 'FILE' ->> "${HOME_DIRECTORY}"/.config/breezerc
 		[Common]
 		ShadowSize=ShadowNone
 		

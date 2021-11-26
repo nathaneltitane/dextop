@@ -221,7 +221,7 @@ done
 
 # write configuration
 
-cat << 'FILE' ->> "${ROOT_DIRECTORY}"/home/"${user_name}"/.profile
+cat << 'FILE' ->> "${HOME_DIRECTORY}"/.profile
 
 # dextop configuration #
 

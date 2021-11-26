@@ -76,7 +76,7 @@ eval ${console_rtn[@]}
 console.fwd "Setting password..."
 echo
 
-echo "$vnc_password" | vncpasswd -f > "${ROOT_DIRECTORY}"/home/"${user_name}"/.vnc/passwd
+echo "$vnc_password" | vncpasswd -f > "${HOME_DIRECTORY}"/.vnc/passwd
 
 console.scs "Password changed."
 echo
