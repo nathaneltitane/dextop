@@ -71,7 +71,6 @@ Dextop setup options are:
 
 Proot container install options are:
 
-
 `-i, --i3wm     I3WM setup: install i3 window manager and utilities.                                [ Default ]`
 
 
@@ -84,11 +83,9 @@ Proot container install options are:
 `-n, --none     No DE setup: console access to environment and utilities.`
 
 
-`-b | --base:   Base setup: download and install base distribution image only.                                 `
+`-b | --base    Base setup: download and install base distribution image only.                                 `
 
-`-l | --lite:   Lite setup: download and install lite desktop environment and utilities.            [ Default ]`
-
-
+`-f, --full     Full setup: download and install full desktop environment and utilities.            [ Default ]`
 
 By selecting the 'none' option, Dextop automatically sets up minimal defaults to a 'base' install.
 The 'none' option is great for users who would like to experiment or setup their own desktop environment/window manager and preferences.
