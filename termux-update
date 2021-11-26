@@ -147,7 +147,7 @@ do
 			# continue without application update
 
 			console.wrn "Proceeding without update."
-			console.err "Setup process may encounter errors."
+			console.wrn "Setup process may encounter errors."
 			echo
 
 			console.inf "1 - Follow wiki pages stated above to correct issues."
