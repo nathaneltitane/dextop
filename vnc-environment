@@ -92,9 +92,12 @@ then
 	"${RUNNER}" -d &
 fi
 
-if [ ! -z $(pgrep -f "${SESSION}") ]
+if [ "${SESSION}" = "KDE" ] || [ "${SESSION}" = "xfce" ]
 then
-	proot-compositing
+	if [ ! -z $(pgrep -f "${SESSION}") ]
+	then
+		proot-compositing
+	fi
 fi
 FILE
 
