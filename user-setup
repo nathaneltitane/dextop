@@ -94,7 +94,7 @@ else
 		
 		# setup user packages
 		
-		sudo "${BINARIES_DIRECTORY}"/user-packages
+		sudo /data/data/com.termux/files/usr/bin/user-packages
 fi
 
 # setup #
