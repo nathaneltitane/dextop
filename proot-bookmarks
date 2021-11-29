@@ -60,19 +60,22 @@ echo
 # write bookmarks
 
 cat << 'FILE' ->> "${HOME_DIRECTORY}"/.bookmarks
-file:///media/Internal
+file:///media/internal Internal
 FILE
 
-if [ -d /media/External ]
+if [ -d /media/external ]
 then
 	cat <<- 'FILE' ->> "${HOME_DIRECTORY}"/.bookmarks
-	file:///media/External
+	file:///media/external External
 	FILE
 fi
 
-# create bookmarks directory
+# link bookmarks
 
-console.directory "${HOME_DIRECTORY}" .config/gtk-3.0
-
-ln -s -f "${HOME_DIRECTORY}"/.bookmarks "${HOME_DIRECTORY}"/.gtk-bookmarks
-ln -s -f "${HOME_DIRECTORY}"/.bookmarks "${HOME_DIRECTORY}"/.config/gtk-3.0/bookmarks
+if [ "${SESSION}" = "kde" ] || [ "${SESSION}" = "xfce" ]
+then
+	console.directory "${HOME_DIRECTORY}" .config/gtk-3.0
+	
+	ln -s -f "${HOME_DIRECTORY}"/.bookmarks "${HOME_DIRECTORY}"/.gtk-bookmarks
+	ln -s -f "${HOME_DIRECTORY}"/.bookmarks "${HOME_DIRECTORY}"/.config/gtk-3.0/bookmarks
+fi
