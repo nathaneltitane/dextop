@@ -62,6 +62,7 @@ echo
 binaries_list=(
 	curl
 	nano
+	ps
 	top
 	wget
 )
