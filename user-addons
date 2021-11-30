@@ -111,6 +111,7 @@ console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/fu
 [ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-confirm
 [ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-exit-session
 [ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-i3-shortcuts
+[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-kill-process
 [ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-open-directory
 [ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-open-file
 [ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-open-file-manager
