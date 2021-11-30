@@ -84,8 +84,8 @@ console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/al
 console.directory "${HOME_DIRECTORY}" .bash-functions
 
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions										"${HOME_DIRECTORY}"/.bash-functions		address
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions										"${HOME_DIRECTORY}"/.bash-functions		audio
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions										"${HOME_DIRECTORY}"/.bash-functions		extract
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions										"${HOME_DIRECTORY}"/.bash-functions		flac-to-mp3
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions										"${HOME_DIRECTORY}"/.bash-functions		record
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions										"${HOME_DIRECTORY}"/.bash-functions		speed
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions										"${HOME_DIRECTORY}"/.bash-functions		sprunge
