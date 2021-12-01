@@ -55,8 +55,13 @@ echo
 
 # variables #
 
+command_expand="/usr/local/sbin/unminimize"
+
 # set defaults
 
 # unminimize system image
 
-console.expand
+console.silence "yes | ${command_expand}" &
+
+console.progress "Expanding..."
+echo
