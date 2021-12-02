@@ -371,6 +371,7 @@ image_unpack () {
 			tar 										\
 				--extract								\
 					--file="${1}"						\
+					--exclude='boot'					\
 					--exclude='dev'						\
 					--exclude='proc'					\
 					--exclude='sys'						\
