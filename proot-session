@@ -391,6 +391,7 @@ command+=" XAUTHORITY=${XDG_RUNTIME_DIR}/.Xauthority"
 [ "${SESSION}" = "kde" ] && command+=" QT_AUTO_SCREEN_SCALE_FACTOR=0"
 [ "${SESSION}" = "kde" ] && command+=" QT_SCALE_FACTOR=1"
 [ "${SESSION}" = "kde" ] && command+=" QT_X11_NO_MITSHM=1"
+[ "${SESSION}" = "kde" ] && command+=" QT_GRAPHICSSYSTEM=native"
 command+=" ${SHELL} --login"
 
 # execute proot
