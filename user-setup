@@ -85,9 +85,9 @@ then
 		user-checkpoint
 	)
 else
-	setup_list=(
+	setup_list+=(
 		user-clean
-		)
+	)
 		
 		# setup packages:
 		# keep outside of array to run as root
