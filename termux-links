@@ -63,6 +63,21 @@ binaries_list=(
 	htop
 )
 
+directories_list=(
+	bin
+	etc
+	lib
+	opt
+	tmp
+)
+
 # link binaries
 
 ln -s -f "${BINARIES_DIRECTORY}"/top "${BINARIES_DIRECTORY}"/htop
+
+# link directories
+
+for directory in ${directories_list[@]}
+do
+	ln -s -f "${PREFIX}"/"${directory}" "${MAIN_DIRECTORY}"/"${directory}"
+done
