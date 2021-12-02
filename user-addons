@@ -118,6 +118,11 @@ console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/fu
 [ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-open-manual
 [ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-show-shortcuts
 
+# xfce #
+
+[ "${SESSION}" = "xfce" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/xfconf			"${BINARIES_DIRECTORY}"					xfconf-read
+[ "${SESSION}" = "xfce" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/xfconf			"${BINARIES_DIRECTORY}"					xfconf-write
+
 # leocad
 
 [ "${dextop_option}" = "proot" ] && console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main			"${BINARIES_DIRECTORY}"					leocad-build
