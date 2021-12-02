@@ -378,6 +378,10 @@ image_unpack () {
 					--exclude='system' 2> /dev/null		|| :
 }
 
+# add debian options
+
+# debootstrap --arch=ARCH stable debian-stable http://ftp.debian.org/debian/ # ARCH is arm64 for aarch64, etc.
+
 # run setup
 
 if [[ ! -d "${IMAGE_DIRECTORY}" ]]
