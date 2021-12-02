@@ -226,7 +226,7 @@ cat << 'FILE' ->> "${HOME_DIRECTORY}"/.profile
 # dextop configuration #
 
 # download / install / configure packages and scripts for user session:
-# use 'user-packages' and 'user-utilities' to customize setup
+# use 'user-packages' and 'user-addons' to customize setup
 
 if [ ! -f "${BINARIES_DIRECTORY}"/dextop-configuration-complete ]
 then
