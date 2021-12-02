@@ -72,8 +72,14 @@ console.clear
 
 # in order of execution
 
-setup_list=(
-	proot-compositing
+if [ "${SESSION}" = "kde" ] || [ "${SESSION}" = "xfce" ]
+then
+	setup_list+=(
+		proot-compositing
+	)
+fi
+
+setup_list+=(
 	proot-keyboard
 	proot-locales
 	proot-timezones
