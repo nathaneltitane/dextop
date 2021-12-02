@@ -290,3 +290,5 @@ else
 	console.inf "Consult setup logs at '"${PREFIX}"/var/log/' for details."
 	echo
 fi
+
+# test
