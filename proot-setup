@@ -127,13 +127,7 @@ echo
 
 # set defaults
 
-HOME_DIRECTORY="${ROOT_DIRECTORY}"/home/"${user_name}"
-
 # export variables
-
-echo '# proot #'																>> "${PREFIX}"/bin/dextop
-
-echo "export HOME_DIRECTORY=${HOME_DIRECTORY}"									>> "${PREFIX}"/bin/dextop
 
 # clear #
 

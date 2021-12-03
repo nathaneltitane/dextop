@@ -380,10 +380,6 @@ image_unpack () {
 					--exclude='system' 2> /dev/null		|| :
 }
 
-# add debian options
-
-# debootstrap --arch=ARCH stable debian-stable http://ftp.debian.org/debian/ # ARCH is arm64 for aarch64, etc.
-
 # run setup
 
 if [[ ! -d "${IMAGE_DIRECTORY}" ]]
@@ -513,11 +509,6 @@ case "${DISTRIBUTION_NAME}" in
 		iso_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${DISTRIBUTION_VERSION}/release"
 		iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${iso_architecture}.tar.gz"
 	;;
-
-	fedora)
-		# iso_url="http://download.fedoraproject.org/pub/fedora/linux/releases/35/Container/armhfp/images/"
-		# iso_archive="Fedora-Container-Base-35-1.2.armhfp.tar.xz"
-	;;
 esac
 
 # download image and unpack deployment
@@ -525,3 +516,15 @@ esac
 console.download "${iso_url}" "${ISO_DIRECTORY}" "${iso_archive}"
 
 image_unpack "${ISO_DIRECTORY}/${iso_archive}"
+
+# export variables
+
+if [ ! -f "${BINARIES_DIRECTORY}"/proot-setup-complete ]
+then
+	echo '# image #'															>> "${PREFIX}"/bin/dextop
+
+	echo "export HOME_DIRECTORY=${ROOT_DIRECTORY}"/home/"${user_name}"			>> "${PREFIX}"/bin/dextop
+
+else
+	:
+fi
