@@ -176,18 +176,13 @@ IFS=''
 
 # export variables
 
-if [ ! -f "${BINARIES_DIRECTORY}"/proot-setup-complete ]
-then
-	echo '# distribution #'														>> "${PREFIX}"/bin/dextop
+echo '# distribution #'														>> "${PREFIX}"/bin/dextop
 
-	echo "export DISTRIBUTION_NAME=${distribution_name}"						>> "${PREFIX}"/bin/dextop
-	echo "export DISTRIBUTION_RELEASE=${distribution_release}"					>> "${PREFIX}"/bin/dextop
-	echo "export DISTRIBUTION_VERSION=${distribution_version}"					>> "${PREFIX}"/bin/dextop
+echo "export DISTRIBUTION_NAME=${distribution_name}"						>> "${PREFIX}"/bin/dextop
+echo "export DISTRIBUTION_RELEASE=${distribution_release}"					>> "${PREFIX}"/bin/dextop
+echo "export DISTRIBUTION_VERSION=${distribution_version}"					>> "${PREFIX}"/bin/dextop
 
-	echo '# proot #'															>> "${PREFIX}"/bin/dextop
+echo '# proot #'															>> "${PREFIX}"/bin/dextop
 
-	echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'	>> "${PREFIX}"/bin/dextop
-	echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'			>> "${PREFIX}"/bin/dextop
-else
-	:
-fi
+echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'	>> "${PREFIX}"/bin/dextop
+echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'			>> "${PREFIX}"/bin/dextop

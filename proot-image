@@ -519,12 +519,6 @@ image_unpack "${ISO_DIRECTORY}/${iso_archive}"
 
 # export variables
 
-if [ ! -f "${BINARIES_DIRECTORY}"/proot-setup-complete ]
-then
-	echo '# image #'															>> "${PREFIX}"/bin/dextop
+echo '# image #'															>> "${PREFIX}"/bin/dextop
 
-	echo "export HOME_DIRECTORY=${ROOT_DIRECTORY}"/home/"${user_name}"			>> "${PREFIX}"/bin/dextop
-
-else
-	:
-fi
+echo "export HOME_DIRECTORY=${ROOT_DIRECTORY}"/home/"${user_name}"			>> "${PREFIX}"/bin/dextop
