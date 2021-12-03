@@ -81,27 +81,18 @@ if [ ! -f "${BINARIES_DIRECTORY}"/user-checkpoint-complete ]
 then
 	setup_list+=(
 		user-utilities
+		user-setup
 		user-addons
 		user-checkpoint
-	)
-else
-	setup_list+=(
 		user-clean
 	)
-		
-		# setup packages:
-		# keep outside of array to run as root
-		
-		# setup user packages
-		
-		sudo /data/data/com.termux/files/usr/bin/user-packages
 fi
 
 # setup #
 
 for setup in ${setup_list[@]}
 do
-	"${BINARIES_DIRECTORY}"/"${setup}"
+	console.container "${BINARIES_DIRECTORY}"/"${setup}"
 	
 	console.clear
 done

@@ -202,6 +202,7 @@ then
 		termux-setup
 		proot-setup
 		vnc-setup
+		user-setup
 	)
 fi
 
@@ -233,10 +234,6 @@ then
 	# run configuration utilities
 
 	"${BINARIES_DIRECTORY}"/proot-configuration
-
-	# run user setup
-
-	"${BINARIES_DIRECTORY}"/user-setup
 
 	# confirm uninterrupted configuration
 
@@ -290,5 +287,3 @@ else
 	console.inf "Consult setup logs at '"${PREFIX}"/var/log/' for details."
 	echo
 fi
-
-# test

@@ -78,7 +78,6 @@ binaries_list=(
 	proot-groups
 	proot-image
 	proot-information
-	proot-initialize
 	proot-keyboard
 	proot-links
 	proot-locales
