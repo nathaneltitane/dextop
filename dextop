@@ -184,36 +184,20 @@ setup_list=()
 
 if [[ "${dextop_option}" = "termux" ]]
 then
-	# populate setup list
+	bash "${BINARIES_DIRECTORY}"/termux-setup
+	bash "${BINARIES_DIRECTORY}"/vnc-setup
 
-	setup_list+=(
-		termux-setup
-		vnc-setup
-	)
 fi
 
 # proot
 
 if [[ "${dextop_option}" = "proot" ]]
 then
-	# populate setup list
-
-	setup_list+=(
-		termux-setup
-		proot-setup
-		vnc-setup
-		user-setup
-	)
+	bash "${BINARIES_DIRECTORY}"/termux-setup
+	bash "${BINARIES_DIRECTORY}"/proot-setup
+	bash "${BINARIES_DIRECTORY}"/vnc-setup
+	bash "${BINARIES_DIRECTORY}"/user-setup
 fi
-
-# setup #
-
-for setup in ${setup_list[@]}
-do
-	"${BINARIES_DIRECTORY}"/"${setup}"
-
-	console.clear
-done
 
 # source variables:
 # get additional setup values

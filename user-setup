@@ -80,7 +80,6 @@ console.clear
 if [ ! -f "${BINARIES_DIRECTORY}"/user-checkpoint-complete ]
 then
 	bash "${BINARIES_DIRECTORY}"/user-utilities
-	bash "${BINARIES_DIRECTORY}"/user-setup
 	bash "${BINARIES_DIRECTORY}"/user-addons
 	bash "${BINARIES_DIRECTORY}"/user-checkpoint
 	bash "${BINARIES_DIRECTORY}"/user-clean

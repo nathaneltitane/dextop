@@ -189,7 +189,7 @@ dextop
 │       ├── vnc-environment
 │       ├── vnc-checkpoint
 │       └── vnc-clean
-├── p user-utilities
+├── p user-utilitiesusertilities
 │   └── user-setup
 │       ├── user-addons
 │       ├── user-checkpoint
