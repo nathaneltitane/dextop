@@ -72,18 +72,14 @@ console.clear
 
 # in order of execution
 
-setup_list=(
-	vnc-utilities
-	vnc-environment
-	vnc-checkpoint
-	vnc-clean
-)
+if [ ! -f "${BINARIES_DIRECTORY}"/vnc-checkpoint-complete ]
+then
+	bash "${BINARIES_DIRECTORY}"/vnc-utilities
+	bash "${BINARIES_DIRECTORY}"/vnc-environment
+	bash "${BINARIES_DIRECTORY}"/vnc-checkpoint
+	bash "${BINARIES_DIRECTORY}"/vnc-clean
+fi
 
-# setup #
+# confirm uninterrupted setup
 
-for setup in ${setup_list[@]}
-do
-	"${BINARIES_DIRECTORY}"/"${setup}"
-	
-	console.clear
-done
+echo "yes" > "${BINARIES_DIRECTORY}"/vnc-setup-complete

@@ -79,23 +79,13 @@ console.clear
 
 if [ ! -f "${BINARIES_DIRECTORY}"/user-checkpoint-complete ]
 then
-	setup_list+=(
-		user-utilities
-		user-setup
-		user-addons
-		user-checkpoint
-		user-clean
-	)
+	bash "${BINARIES_DIRECTORY}"/user-utilities
+	bash "${BINARIES_DIRECTORY}"/user-setup
+	bash "${BINARIES_DIRECTORY}"/user-addons
+	bash "${BINARIES_DIRECTORY}"/user-checkpoint
+	bash "${BINARIES_DIRECTORY}"/user-clean
+
 fi
-
-# setup #
-
-for setup in ${setup_list[@]}
-do
-	console.container "${BINARIES_DIRECTORY}"/"${setup}"
-	
-	console.clear
-done
 
 # confirm uninterrupted setup
 

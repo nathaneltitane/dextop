@@ -76,27 +76,16 @@ console.clear
 
 # in order of execution
 
-setup_list=(
-	termux-utilities
-	termux-update
-	termux-properties
-	termux-storage
-	termux-bookmarks
-	termux-shell
-	termux-silent
-	termux-welcome
-	termux-repositories
-	termux-packages
-	termux-links
-	termux-checkpoint
-	termux-clean
-)
-
-# setup #
-
-for setup in ${setup_list[@]}
-do
-	"${BINARIES_DIRECTORY}"/"${setup}"
-	
-	console.clear
-done
+bash "${BINARIES_DIRECTORY}"/termux-utilities
+bash "${BINARIES_DIRECTORY}"/termux-update
+bash "${BINARIES_DIRECTORY}"/termux-properties
+bash "${BINARIES_DIRECTORY}"/termux-storage
+bash "${BINARIES_DIRECTORY}"/termux-bookmarks
+bash "${BINARIES_DIRECTORY}"/termux-shell
+bash "${BINARIES_DIRECTORY}"/termux-silent
+bash "${BINARIES_DIRECTORY}"/termux-welcome
+bash "${BINARIES_DIRECTORY}"/termux-repositories
+bash "${BINARIES_DIRECTORY}"/termux-packages
+bash "${BINARIES_DIRECTORY}"/termux-links
+bash "${BINARIES_DIRECTORY}"/termux-checkpoint
+bash "${BINARIES_DIRECTORY}"/termux-clean

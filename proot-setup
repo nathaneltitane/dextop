@@ -151,39 +151,32 @@ setup_list=()
 
 if [ ! -f "${BINARIES_DIRECTORY}"/proot-checkpoint-complete ]
 then
-	"${BINARIES_DIRECTORY}"/proot-utilities
-	"${BINARIES_DIRECTORY}"/proot-architecture
-	"${BINARIES_DIRECTORY}"/proot-information
-	"${BINARIES_DIRECTORY}"/proot-distribution
-	"${BINARIES_DIRECTORY}"/proot-image
-	"${BINARIES_DIRECTORY}"/proot-groups
-	"${BINARIES_DIRECTORY}"/proot-environment
-	"${BINARIES_DIRECTORY}"/proot-network
-	"${BINARIES_DIRECTORY}"/proot-preload
-	
-	# setup user:
-	# keep outside of array to pass and handle arguments
-	
-	# setup proot user
-	
-	console.wait 2 && console.container "${BINARIES_DIRECTORY}"/proot-user "${user_name}"
-	
-	# setup proot superuser privilege
-	
-	console.wait 2 && console.container "${BINARIES_DIRECTORY}"/proot-superuser "${user_name}"
-	
-	"${BINARIES_DIRECTORY}"/proot-bookmarks
-	"${BINARIES_DIRECTORY}"/proot-shell
-	"${BINARIES_DIRECTORY}"/proot-silent
-	"${BINARIES_DIRECTORY}"/proot-welcome
-	
+	bash "${BINARIES_DIRECTORY}"/proot-utilities
+	bash "${BINARIES_DIRECTORY}"/proot-architecture
+	bash "${BINARIES_DIRECTORY}"/proot-information
+	bash "${BINARIES_DIRECTORY}"/proot-distribution
+	bash "${BINARIES_DIRECTORY}"/proot-image
+	bash "${BINARIES_DIRECTORY}"/proot-groups
+	bash "${BINARIES_DIRECTORY}"/proot-environment
+	bash "${BINARIES_DIRECTORY}"/proot-network
+	bash "${BINARIES_DIRECTORY}"/proot-preload
+
+	console.container "${BINARIES_DIRECTORY}"/proot-user "${user_name}"
+
+	console.container "${BINARIES_DIRECTORY}"/proot-superuser "${user_name}"
+
+	bash "${BINARIES_DIRECTORY}"/proot-bookmarks
+	bash "${BINARIES_DIRECTORY}"/proot-shell
+	bash "${BINARIES_DIRECTORY}"/proot-silent
+	bash "${BINARIES_DIRECTORY}"/proot-welcome
+
 	console.container "${BINARIES_DIRECTORY}"/proot-expand
 	console.container "${BINARIES_DIRECTORY}"/proot-repositories
 	console.container "${BINARIES_DIRECTORY}"/proot-packages
 
-	"${BINARIES_DIRECTORY}"/proot-links
-	"${BINARIES_DIRECTORY}"/proot-checkpoint
-	"${BINARIES_DIRECTORY}"/proot-clean
+	bash "${BINARIES_DIRECTORY}"/proot-links
+	bash "${BINARIES_DIRECTORY}"/proot-checkpoint
+	bash "${BINARIES_DIRECTORY}"/proot-clean
 fi
 
 # confirm uninterrupted setup
