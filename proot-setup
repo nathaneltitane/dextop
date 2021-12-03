@@ -166,13 +166,6 @@ then
 		proot-preload
 		proot-initialize
 		proot-checkpoint
-		proot-session
-	)
-else
-	# inside of proot container:
-	# finish container setup
-
-	setup_list+=(
 		proot-bookmarks
 		proot-shell
 		proot-silent
@@ -182,6 +175,12 @@ else
 		proot-packages
 		proot-links
 		proot-clean
+	)
+	# inside of proot container:
+	# finish container setup
+
+	setup_list+=(
+
 	)
 	
 	# setup user:

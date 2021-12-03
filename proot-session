@@ -90,14 +90,6 @@ echo
 
 # variables #
 
-# user
-
-# assume termux-exec is present - unset LD_PRELOAD
-
-unset LD_PRELOAD
-
-# user verification
-
 # verify user existence:
 # loop through proot /etc/passwd and make sure 'user' exists
 # and corresponds to 'username' then source environment variables from file
@@ -221,6 +213,7 @@ DISPLAY=":1"
 LANG="C.UTF-8"
 LOCALHOST="127.0.0.1"
 SHELL="/usr/bin/bash"
+TERM="xterm-256-color"
 TMPDIR="/tmp"
 
 EDITOR="nano"
@@ -289,7 +282,7 @@ PAGER="less"
 [ -z "${PAGER}" ]																&& PAGER="${PAGER}"
 [ -z "${RUNNER}" ]																&& RUNNER="${RUNNER}"
 [ -z "${SHELL}" ]																&& SHELL="${SHELL}"
-[ -z "${TERMINAL}" ]															&& TERMINAL="${TERM-xterm-256-color}"
+[ -z "${TERMINAL}" ]															&& TERMINAL="${TERM}"
 [ -z "${VISUAL}" ]																&& VISUAL="${VISUAL}"
 
 # verify application argument
@@ -317,6 +310,10 @@ fi
 # clear #
 
 console.clear
+
+# assume termux-exec is present - unset LD_PRELOAD
+
+unset LD_PRELOAD
 
 # setup proot command arguments
 
