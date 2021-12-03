@@ -153,9 +153,9 @@ then
 	bash "${BINARIES_DIRECTORY}"/proot-network
 	bash "${BINARIES_DIRECTORY}"/proot-preload
 
-	console.container "${BINARIES_DIRECTORY}"/proot-user "${user_name}"
+	console.wait 2 && console.container "${BINARIES_DIRECTORY}"/proot-user "${user_name}"
 
-	console.container "${BINARIES_DIRECTORY}"/proot-superuser "${user_name}"
+	console.wait 2 && console.container "${BINARIES_DIRECTORY}"/proot-superuser "${user_name}"
 
 	bash "${BINARIES_DIRECTORY}"/proot-bookmarks
 	bash "${BINARIES_DIRECTORY}"/proot-shell

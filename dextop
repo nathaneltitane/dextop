@@ -118,6 +118,8 @@ echo
 console.script "Initializing setup [ ${script%-*} ]"
 echo
 
+bash -c 'pkg install proot debootstrap' >> /dev/null 2>&1
+
 # variables #
 
 # set defaults
