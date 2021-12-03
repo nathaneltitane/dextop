@@ -1,0 +1,131 @@
+run_proot_cmd() {
+		if [ -z "${distro_name-}" ]; then
+				msg
+				msg "${BRED}Error: called run_proot_cmd() but \${distro_name} is not set. Possible cause: using run_proot_cmd() outside of distro_setup()?${RST}"
+				msg
+				return 1
+		fi
+
+		if [ -z "${DISTRO_ARCH-}" ]; then
+				msg
+				msg "${BRED}Error: called run_proot_cmd() but \${DISTRO_ARCH} is not set.${RST}"
+				msg
+				return 1
+		fi
+
+		local qemu_arg=""
+		if [ "$DISTRO_ARCH" != "$DEVICE_CPU_ARCH" ]; then
+				local qemu_bin_path=""
+
+				# If CPU and host OS are 64bit, we can run 32bit guest OS without emulation.
+				# Everything else requires emulator (QEMU).
+				case "$DISTRO_ARCH" in
+						aarch64) qemu_bin_path="/data/data/com.termux/files/usr/bin/qemu-aarch64";;
+						arm)
+								if [ "$DEVICE_CPU_ARCH" != "aarch64" ]; then
+										qemu_bin_path="/data/data/com.termux/files/usr/bin/qemu-arm"
+								fi
+								;;
+						i686)
+								if [ "$DEVICE_CPU_ARCH" != "x86_64" ]; then
+										qemu_bin_path="/data/data/com.termux/files/usr/bin/qemu-i386"
+								fi
+								;;
+						x86_64) qemu_bin_path="/data/data/com.termux/files/usr/bin/qemu-x86_64";;
+						*)
+								msg
+								msg "${BRED}Error: DISTRO_ARCH has unknown value '$DISTRO_ARCH'. Valid values are: aarch64, arm, i686, x86_64."
+								msg
+								return 1
+						;;
+				esac
+
+				if [ -n "$qemu_bin_path" ]; then
+						if [ -x "$qemu_bin_path" ]; then
+								qemu_arg="-q ${qemu_bin_path}"
+						else
+								local qemu_user_pkg=""
+								case "$DISTRO_ARCH" in
+										aarch64) qemu_user_pkg="qemu-user-aarch64";;
+										arm) qemu_user_pkg="qemu-user-arm";;
+										i686) qemu_user_pkg="qemu-user-i386";;
+										x86_64) qemu_user_pkg="qemu-user-x86-64";;
+										*) qemu_user_pkg="qemu-user-${DISTRO_ARCH}";;
+								esac
+								msg
+								msg "${BRED}Error: package '${qemu_user_pkg}' is not installed.${RST}"
+								msg
+								return 1
+						fi
+				fi
+		fi
+
+		if [ -n "$qemu_arg" ]; then
+				if [ -d "/apex" ]; then
+						qemu_arg="${qemu_arg} --bind=/apex"
+				fi
+				if [ -e "/linkerconfig/ld.config.txt" ]; then
+						qemu_arg="${qemu_arg} --bind=/linkerconfig/ld.config.txt"
+				fi
+				qemu_arg="${qemu_arg} --bind=/data/data/com.termux/files/usr"
+				qemu_arg="${qemu_arg} --bind=/system"
+				qemu_arg="${qemu_arg} --bind=/vendor"
+				if [ -f "/plat_property_contexts" ]; then
+						qemu_arg="${qemu_arg} --bind=/plat_property_contexts"
+				fi
+				if [ -f "/property_contexts" ]; then
+						qemu_arg="${qemu_arg} --bind=/property_contexts"
+				fi
+		fi
+
+		proot \
+				$qemu_arg -L \
+				--kernel-release=5.4.0-faked \
+				--link2symlink \
+				--kill-on-exit \
+				--rootfs="${INSTALLED_ROOTFS_DIR}/${distro_name}" \
+				--root-id \
+				--cwd=/root \
+				--bind=/dev \
+				--bind="/dev/urandom:/dev/random" \
+				--bind=/proc \
+				--bind="/proc/self/fd:/dev/fd" \
+				--bind="/proc/self/fd/0:/dev/stdin" \
+				--bind="/proc/self/fd/1:/dev/stdout" \
+				--bind="/proc/self/fd/2:/dev/stderr" \
+				--bind=/sys \
+				--bind="${INSTALLED_ROOTFS_DIR}/${distro_name}/proc/.loadavg:/proc/loadavg" \
+				--bind="${INSTALLED_ROOTFS_DIR}/${distro_name}/proc/.stat:/proc/stat" \
+				--bind="${INSTALLED_ROOTFS_DIR}/${distro_name}/proc/.uptime:/proc/uptime" \
+				--bind="${INSTALLED_ROOTFS_DIR}/${distro_name}/proc/.version:/proc/version" \
+				--bind="${INSTALLED_ROOTFS_DIR}/${distro_name}/proc/.vmstat:/proc/vmstat" \
+				/usr/bin/env -i \
+						"HOME=/root" \
+						"LANG=C.UTF-8" \
+						"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" \
+						"TERM=$TERM" \
+						"TMPDIR=/tmp" \
+						"$@"
+}
+
+
+
+
+
+######################
+
+console.container () {
+	proot																			\
+		--link2symlink																\
+		--root-id																	\
+		--rootfs=${IMAGE_DIRECTORY}/${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}		\
+		--pwd=/root																	\
+			-b /dev																	\
+			-b /sys																	\
+			-b /proc																\
+			/usr/bin/env -i															\
+				HOME=/root															\
+				TERM="xterm-256color"												\
+				PATH=/bin:/usr/bin:/sbin:/usr/sbin									\
+				"$@"
+}

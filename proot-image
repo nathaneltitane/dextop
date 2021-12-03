@@ -370,6 +370,8 @@ image_unpack () {
 		--link2symlink									\
 			tar 										\
 				--extract								\
+				--delay-directory-restore				\
+				--preserve-permissions
 					--file="${1}"						\
 					--exclude='boot'					\
 					--exclude='dev'						\

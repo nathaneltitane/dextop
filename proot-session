@@ -191,7 +191,7 @@ done < "${ROOT_DIRECTORY}"/etc/passwd
 # set path:
 # in order of retreival
 
-unset "${PATH}"
+PATH=""
 
 # proot container
 
@@ -209,8 +209,8 @@ unset "${PATH}"
 
 # android subsystem
 
-[ -d "${ROOT_DIRECTORY}"/system/sbin ]											&& PATH+="/system/sbin:"
-[ -d "${ROOT_DIRECTORY}"/system/bin ]											&& PATH+="/system/bin:"
+[ -d /system/sbin ]																&& PATH+="/system/sbin:"
+[ -d /system/bin ]																&& PATH+="/system/bin:"
 
 PATH="${PATH}"
 
@@ -289,7 +289,7 @@ PAGER="less"
 [ -z "${PAGER}" ]																&& PAGER="${PAGER}"
 [ -z "${RUNNER}" ]																&& RUNNER="${RUNNER}"
 [ -z "${SHELL}" ]																&& SHELL="${SHELL}"
-[ -z "${TERMINAL}" ]															&& TERMINAL="${TERM}"
+[ -z "${TERMINAL}" ]															&& TERMINAL="${TERM-xterm-256-color}"
 [ -z "${VISUAL}" ]																&& VISUAL="${VISUAL}"
 
 # verify application argument
@@ -328,12 +328,16 @@ command+=" --link2symlink"
 command+=" --rootfs=${ROOT_DIRECTORY}"
 command+=" --change-id=${USER_ID}:${GROUP_ID}"
 command+=" --pwd=${HOME}"
-command+=" --bind=/apex"
+[ -d /apex ]                           && command+=" --bind=/apex"
+[ -d "${PREFIX%/*}"/storage/external ] && command+=" --bind=${PREFIX%/*}/storage/external:/media/external"
+[ -d "${PREFIX%/*}"/storage/internal ] && command+=" --bind=${PREFIX%/*}/storage/internal:/media/internal"
+[ -e "/linkerconfig/ld.config.txt" ]   && command+=" --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt"
+[ -f "/plat_property_contexts" ]       && command+=" --bind=/plat_property_contexts:/plat_property_contexts"
+[ -f "/property_contexts" ]            && command+=" --bind=/property_contexts:/property_contexts"
 command+=" --bind=/data"
 command+=" --bind=/dev"
 command+=" --bind=/dev/urandom:/dev/urandom"
 command+=" --bind=${PREFIX%/*}/home:/home/termux"
-command+=" --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt"
 command+=" --bind=/proc"
 command+=" --bind=/proc/self/fd:/dev/fd"
 command+=" --bind=/proc/self/fd/0:/dev/stdin"
@@ -343,8 +347,6 @@ command+=" --bind=/storage"
 command+=" --bind=/sys"
 command+=" --bind=/system"
 command+=" --bind=/vendor"
-[ -d "${PREFIX%/*}"/storage/external ] && command+=" --bind=${PREFIX%/*}/storage/external:/media/external" || :
-[ -d "${PREFIX%/*}"/storage/internal ] && command+=" --bind=${PREFIX%/*}/storage/internal:/media/internal" || :
 command+=" env -i"
 command+=" ANDROID_ART_ROOT=${ANDROID_ART_ROOT}"
 command+=" ANDROID_DATA=${ANDROID_DATA}"
