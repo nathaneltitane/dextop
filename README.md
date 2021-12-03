@@ -1,4 +1,6 @@
 # Linux on Android -  Termux // Dextop // Ubuntu
+
+Version: 12-03-2021
  
 ![termux dextop](https://github.com/nathaneltitane/dextop/blob/master/dextop.png?raw=true)
 
@@ -109,7 +111,6 @@ The rest of the setup is fully automated and should run its course until the pro
       - Download, unpack and prepare base system image for use
       - Gather user information for successful setup
          - Initialize setup from within Termux
-         - Login as root in newly created proot container
          - Expand system image for normal use
          - Finalize setup from within proot container
    - VNC setup:
@@ -174,35 +175,31 @@ dextop
 │       ├── proot-preload
 │       ├── proot-initialize
 │       ├── proot-checkpoint
-│       └── proot-session
-│           └── [ PROOT LOGIN - ROOT ]
-│               ├── proot-bookmarks
-│               ├── proot-shell
-│               ├── proot-silent
-│               ├── proot-welcome
-│               ├── proot-expand
-│               ├── proot-repositories
-│               ├── proot-packages
-│               ├── proot-links
-│               └── proot-clean
+│       ├── proot-bookmarks
+│       ├── proot-shell
+│       ├── proot-silent
+│       ├── proot-welcome
+│       ├── proot-expand
+│       ├── proot-repositories
+│       ├── proot-packages
+│       ├── proot-links
+│       └── proot-clean
 └── vnc-utilities
 │   └── vnc-setup
 │       ├── vnc-environment
 │       ├── vnc-checkpoint
 │       └── vnc-clean
-│
+├── p user-utilities
+│   └── user-setup
+│       ├── user-addons
+│       ├── user-checkpoint
+│       └── user-clean
 └── [ PROOT LOGIN - USER ]
-    │   └── proot-compositing
-    │   └── proot-keyboard
-    │   └── proot-locales
-    │   └── proot-timezones
-    └── user-utilities
-        └── user-setup
-        user-locales
-        user-timezones
-            ├── user-addons
-            ├── user-checkpoint
-            └── user-clean
+        └── proot-compositing
+        └── proot-keyboard
+        └── proot-locales
+        └── proot-timezones
+
 ```
 
 ### Reports:
