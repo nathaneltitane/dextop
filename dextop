@@ -108,14 +108,12 @@ done
 
 console.clear
 
-# message #
-
-console.title "Linux on Android" "Termux // Dextop // Ubuntu" "${version}"
-echo
-
 # prompt #
 
 console.script "Initializing setup [ ${script%-*} ]"
+echo
+
+console.fwd "Please wait..."
 echo
 
 bash -c 'pkg install proot debootstrap' >> /dev/null 2>&1
