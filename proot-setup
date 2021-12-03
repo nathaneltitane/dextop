@@ -151,30 +151,15 @@ setup_list=()
 
 if [ ! -f "${BINARIES_DIRECTORY}"/proot-checkpoint-complete ]
 then
-	# outside of proot container:
-	# prepare container
-
-	setup_list+=(
-		proot-utilities
-		proot-architecture
-		proot-information
-		proot-distribution
-		proot-image
-		proot-groups
-		proot-environment
-		proot-network
-		proot-preload
-		proot-bookmarks
-		proot-shell
-		proot-silent
-		proot-welcome
-		proot-expand
-		proot-repositories
-		proot-packages
-		proot-links
-		proot-checkpoint
-		proot-clean
-	)
+	"${BINARIES_DIRECTORY}"/proot-utilities
+	"${BINARIES_DIRECTORY}"/proot-architecture
+	"${BINARIES_DIRECTORY}"/proot-information
+	"${BINARIES_DIRECTORY}"/proot-distribution
+	"${BINARIES_DIRECTORY}"/proot-image
+	"${BINARIES_DIRECTORY}"/proot-groups
+	"${BINARIES_DIRECTORY}"/proot-environment
+	"${BINARIES_DIRECTORY}"/proot-network
+	"${BINARIES_DIRECTORY}"/proot-preload
 	
 	# setup user:
 	# keep outside of array to pass and handle arguments
@@ -186,16 +171,20 @@ then
 	# setup proot superuser privilege
 	
 	console.wait 2 && console.container "${BINARIES_DIRECTORY}"/proot-superuser "${user_name}"
-fi
-
-# setup #
-
-for setup in ${setup_list[@]}
-do
-	console.container "${BINARIES_DIRECTORY}"/"${setup}"
 	
-	console.clear
-done
+	"${BINARIES_DIRECTORY}"/proot-bookmarks
+	"${BINARIES_DIRECTORY}"/proot-shell
+	"${BINARIES_DIRECTORY}"/proot-silent
+	"${BINARIES_DIRECTORY}"/proot-welcome
+	
+	console.container "${BINARIES_DIRECTORY}"/proot-expand
+	console.container "${BINARIES_DIRECTORY}"/proot-repositories
+	console.container "${BINARIES_DIRECTORY}"/proot-packages
+
+	"${BINARIES_DIRECTORY}"/proot-links
+	"${BINARIES_DIRECTORY}"/proot-checkpoint
+	"${BINARIES_DIRECTORY}"/proot-clean
+fi
 
 # confirm uninterrupted setup
 

@@ -371,7 +371,7 @@ image_unpack () {
 			tar 										\
 				--extract								\
 				--delay-directory-restore				\
-				--preserve-permissions
+				--preserve-permissions					\
 					--file="${1}"						\
 					--exclude='boot'					\
 					--exclude='dev'						\

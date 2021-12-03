@@ -73,6 +73,6 @@ for binary in ${binaries_list[@]}
 do
 	if [ -f "${BINARIES_DIRECTORY}"/"${binary}" ]
 	then
-		ln -s -f "${BINARIES_DIRECTORY}"/"$binary" /usr/bin/"${binary}"
+		ln -s -f "${BINARIES_DIRECTORY}"/"${binary}" "${ROOT_DIRECTORY}"/usr/bin/"${binary}"
 	fi
 done
