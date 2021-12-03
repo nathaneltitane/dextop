@@ -226,8 +226,8 @@ cat << 'FILE' ->> "${HOME_DIRECTORY}"/.profile
 
 # dextop configuration #
 
-# download / install / configure packages and scripts for user session:
-# use 'user-packages' and 'user-addons' to customize setup
+# configure system for user session:
+# keyboard / locales /timezones
 
 if [ ! -f "${BINARIES_DIRECTORY}"/dextop-configuration-complete ]
 then
