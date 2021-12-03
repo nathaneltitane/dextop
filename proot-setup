@@ -139,8 +139,6 @@ console.clear
 
 # setup #
 
-setup_list=()
-
 # in order of execution
 
 if [ ! -f "${BINARIES_DIRECTORY}"/proot-checkpoint-complete ]
