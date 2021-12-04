@@ -96,7 +96,7 @@ do
 
 	console.wait 2
 
-	console.inf "Checking for package update [ ${package} ]"
+	console.inf "Checking for package update" "[ ${package} ]"
 	echo
 
 	archive=$(curl -sL "${packages_url}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
@@ -150,8 +150,8 @@ do
 			console.wrn "Setup process may encounter errors."
 			echo
 
-			console.inf "1 - Follow wiki pages stated above to correct issues."
-			console.inf "2 - Restart setup on a fresh Termux installation to proceed."
+			console.num "1" "Follow wiki pages stated above to correct issues."
+			console.num "2" "Restart setup on a fresh Termux installation to proceed."
 			echo
 
 			console.countdown 3 "Continuing" "[ ${script} ]"
