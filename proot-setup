@@ -129,6 +129,10 @@ echo
 
 # export variables
 
+echo '# setup #'																>> "${PREFIX}"/bin/dextop
+
+echo "export HOME_DIRECTORY=${ROOT_DIRECTORY}"/home/"${user_name}"				>> "${PREFIX}"/bin/dextop
+
 # clear #
 
 console.clear
@@ -138,33 +142,6 @@ console.clear
 [ -f "${PREFIX}"/bin/dextop ] && . "${PREFIX}"/bin/dextop
 
 # setup #
-
-# container #
-
-container_setup () {
-	# use 'proot' to drive container setup without login:
-	# keep static environment values for proper setup
-	
-	# assume termux-exec is present - unset LD_PRELOAD
-	
-	unset LD_PRELOAD
-
-	proot													\
-		--kill-on-exit										\
-		--link2symlink										\
-		--change-id=0:0										\
-		--rootfs="${IMAGE_DIRECTORY}"/"${LOAD_DIRECTORY}"	\
-		--pwd=/data/data/com.termux/files/usr/bin								\
-		--bind=/data										\
-		--bind=/dev											\
-		--bind=/sys											\
-		--bind=/proc										\
-		env -i										\
-			BINARIES_DIRECTORY=/data/data/com.termux/files/usr/bin				\
-			HOME="/root"									\
-			PATH="/bin:/sbin:/usr/bin:/usr/sbin/data/data/com.termux/files/usr/bin"			\
-			"${@}"
-}
 
 # in order of execution
 
@@ -179,21 +156,21 @@ then
 	bash "${BINARIES_DIRECTORY}"/proot-environment
 	bash "${BINARIES_DIRECTORY}"/proot-network
 	bash "${BINARIES_DIRECTORY}"/proot-preload
-
-	console.wait 2 && container_setup "${BINARIES_DIRECTORY}"/proot-user "${user_name}"
-
-	console.wait 2 && container_setup "${BINARIES_DIRECTORY}"/proot-superuser "${user_name}"
+	bash "${BINARIES_DIRECTORY}"/proot-startup
+	bash "${BINARIES_DIRECTORY}"/proot-checkpoint
+	bash "${BINARIES_DIRECTORY}"/proot-session
+else
+	bash "${BINARIES_DIRECTORY}"/proot-user      "${user_name}"
+	bash "${BINARIES_DIRECTORY}"/proot-superuser "${user_name}"
 
 	bash "${BINARIES_DIRECTORY}"/proot-shell
 	bash "${BINARIES_DIRECTORY}"/proot-silent
 	bash "${BINARIES_DIRECTORY}"/proot-welcome
 
-	container_setup "${BINARIES_DIRECTORY}"/proot-expand
-	container_setup "${BINARIES_DIRECTORY}"/proot-repositories
-	container_setup "${BINARIES_DIRECTORY}"/proot-packages
-
+	bash "${BINARIES_DIRECTORY}"/proot-expand
+	bash "${BINARIES_DIRECTORY}"/proot-repositories
+	bash "${BINARIES_DIRECTORY}"/proot-packages
 	bash "${BINARIES_DIRECTORY}"/proot-links
-	bash "${BINARIES_DIRECTORY}"/proot-checkpoint
 	bash "${BINARIES_DIRECTORY}"/proot-clean
 fi
 

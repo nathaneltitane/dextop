@@ -228,5 +228,5 @@ shell_files_list=(
 
 for shell_file in ${shell_files_list[@]}
 do
-	cp "${HOME_DIRECTORY}"/"${shell_file}" /root/"${shell_file}"
+	cp "${HOME_DIRECTORY}"/"${shell_file}" "${ROOT_HOME_DIRECTORY}"/"${shell_file}"
 done

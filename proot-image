@@ -516,9 +516,3 @@ esac
 console.download "${iso_url}" "${ISO_DIRECTORY}" "${iso_archive}"
 
 image_unpack "${ISO_DIRECTORY}/${iso_archive}"
-
-# export variables
-
-echo '# image #'															>> "${PREFIX}"/bin/dextop
-
-echo "export HOME_DIRECTORY=${ROOT_DIRECTORY}"/home/"${user_name}"			>> "${PREFIX}"/bin/dextop
