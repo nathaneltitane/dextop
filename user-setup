@@ -79,13 +79,13 @@ console.clear
 
 if [ ! -f "${BINARIES_DIRECTORY}"/user-checkpoint-complete ]
 then
-	bash "${BINARIES_DIRECTORY}"/proot-session
+	"${BINARIES_DIRECTORY}"/proot-session
 	
-	bash "${BINARIES_DIRECTORY}"/user-utilities
-	bash "${BINARIES_DIRECTORY}"/user-packages
-	bash "${BINARIES_DIRECTORY}"/user-addons
-	bash "${BINARIES_DIRECTORY}"/user-checkpoint
-	bash "${BINARIES_DIRECTORY}"/user-clean
+	"${BINARIES_DIRECTORY}"/user-utilities
+	"${BINARIES_DIRECTORY}"/user-packages
+	"${BINARIES_DIRECTORY}"/user-addons
+	"${BINARIES_DIRECTORY}"/user-checkpoint
+	"${BINARIES_DIRECTORY}"/user-clean
 fi
 
 # confirm uninterrupted setup

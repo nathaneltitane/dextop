@@ -180,18 +180,18 @@ console.clear
 
 if [[ "${dextop_option}" = "termux" ]]
 then
-	bash "${BINARIES_DIRECTORY}"/termux-setup
-	bash "${BINARIES_DIRECTORY}"/vnc-setup
+	"${BINARIES_DIRECTORY}"/termux-setup
+	"${BINARIES_DIRECTORY}"/vnc-setup
 fi
 
 # proot
 
 if [[ "${dextop_option}" = "proot" ]]
 then
-	bash "${BINARIES_DIRECTORY}"/termux-setup
-	bash "${BINARIES_DIRECTORY}"/proot-setup
-	bash "${BINARIES_DIRECTORY}"/user-setup
-	bash "${BINARIES_DIRECTORY}"/vnc-setup
+	"${BINARIES_DIRECTORY}"/termux-setup
+	"${BINARIES_DIRECTORY}"/proot-setup
+	"${BINARIES_DIRECTORY}"/user-setup
+	"${BINARIES_DIRECTORY}"/vnc-setup
 fi
 
 # source variables:

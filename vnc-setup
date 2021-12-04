@@ -74,10 +74,10 @@ console.clear
 
 if [ ! -f "${BINARIES_DIRECTORY}"/vnc-checkpoint-complete ]
 then
-	bash "${BINARIES_DIRECTORY}"/vnc-utilities
-	bash "${BINARIES_DIRECTORY}"/vnc-environment
-	bash "${BINARIES_DIRECTORY}"/vnc-checkpoint
-	bash "${BINARIES_DIRECTORY}"/vnc-clean
+	"${BINARIES_DIRECTORY}"/vnc-utilities
+	"${BINARIES_DIRECTORY}"/vnc-environment
+	"${BINARIES_DIRECTORY}"/vnc-checkpoint
+	"${BINARIES_DIRECTORY}"/vnc-clean
 fi
 
 # confirm uninterrupted setup

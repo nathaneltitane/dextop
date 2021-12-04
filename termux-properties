@@ -57,6 +57,19 @@ echo
 
 # set defaults
 
+# functions #
+
+reload_settings () {
+	unset "${reload_command}"
+	
+	reload_command+="am broadcast"
+	reload_command+=" --user 0"
+	reload_command+=" -a com.termux.app.reload_style"
+	reload_command+=" com.termux"
+	
+	console.silence "exec ${reload_command}"
+}
+
 # remove default properties directory
 
 [ -d "${HOME_DIRECTORY}"/.termux ] && rm -rf "${HOME_DIRECTORY}"/.termux
@@ -108,3 +121,7 @@ extra-keys = [																	\
 	['TAB', 'CTRL', 'ALT', 'LEFT', 'DOWN', 'RIGHT', 'PGDN', '-', 'RETURN'	]	\
 																				]
 FILE
+
+# reload settings
+
+reload_settings

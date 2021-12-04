@@ -77,18 +77,18 @@ console.clear
 # in order of execution
 if [ ! -f "${BINARIES_DIRECTORY}"/termux-checkpoint-complete ]
 then
-	bash "${BINARIES_DIRECTORY}"/termux-utilities
-	bash "${BINARIES_DIRECTORY}"/termux-update
-	bash "${BINARIES_DIRECTORY}"/termux-properties
-	bash "${BINARIES_DIRECTORY}"/termux-storage
-	bash "${BINARIES_DIRECTORY}"/termux-shell
-	bash "${BINARIES_DIRECTORY}"/termux-silent
-	bash "${BINARIES_DIRECTORY}"/termux-welcome
-	bash "${BINARIES_DIRECTORY}"/termux-repositories
-	bash "${BINARIES_DIRECTORY}"/termux-packages
-	bash "${BINARIES_DIRECTORY}"/termux-links
-	bash "${BINARIES_DIRECTORY}"/termux-checkpoint
-	bash "${BINARIES_DIRECTORY}"/termux-clean
+	"${BINARIES_DIRECTORY}"/termux-utilities
+	"${BINARIES_DIRECTORY}"/termux-update
+	"${BINARIES_DIRECTORY}"/termux-properties
+	"${BINARIES_DIRECTORY}"/termux-storage
+	"${BINARIES_DIRECTORY}"/termux-shell
+	"${BINARIES_DIRECTORY}"/termux-silent
+	"${BINARIES_DIRECTORY}"/termux-welcome
+	"${BINARIES_DIRECTORY}"/termux-repositories
+	"${BINARIES_DIRECTORY}"/termux-packages
+	"${BINARIES_DIRECTORY}"/termux-links
+	"${BINARIES_DIRECTORY}"/termux-checkpoint
+	"${BINARIES_DIRECTORY}"/termux-clean
 fi
 
 # confirm uninterrupted setup
