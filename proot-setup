@@ -129,6 +129,16 @@ echo
 
 # export variables
 
+# clear #
+
+console.clear
+
+# source variables
+
+[ -f "${PREFIX}"/bin/dextop ] && . "${PREFIX}"/bin/dextop
+
+# setup #
+
 # container #
 
 container_setup () {
@@ -139,52 +149,21 @@ container_setup () {
 	
 	unset LD_PRELOAD
 
-	command+="proot"
-	command+=" --kill-on-exit"
-	command+=" --link2symlink"
-	command+=" --rootfs=${ROOT_DIRECTORY}"
-	command+=" --root-id"
-	command+=" --pwd=/root"
-	[ -d /apex ]                           && command+=" --bind=/apex"
-	[ -d "${PREFIX%/*}"/storage/external ] && command+=" --bind=${PREFIX%/*}/storage/external:/media/external"
-	[ -d "${PREFIX%/*}"/storage/internal ] && command+=" --bind=${PREFIX%/*}/storage/internal:/media/internal"
-	[ -e "/linkerconfig/ld.config.txt" ]   && command+=" --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt"
-	[ -f "/plat_property_contexts" ]       && command+=" --bind=/plat_property_contexts:/plat_property_contexts"
-	[ -f "/property_contexts" ]            && command+=" --bind=/property_contexts:/property_contexts"
-	command+=" --bind=/data"
-	command+=" --bind=/dev"
-	command+=" --bind=/dev/urandom:/dev/urandom"
-	command+=" --bind=/proc"
-	command+=" --bind=/proc/self/fd:/dev/fd"
-	command+=" --bind=/proc/self/fd/0:/dev/stdin"
-	command+=" --bind=/proc/self/fd/1:/dev/stdout"
-	command+=" --bind=/proc/self/fd/2:/dev/stderr"
-	command+=" --bind=/storage"
-	command+=" --bind=/sys"
-	command+=" --bind=/system"
-	command+=" --bind=/vendor"
-	command+=" env -i"
-	command+=" HOME=/root"
-	command+=" LANG=C.UTF-8"
-	command+=" PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data/data/com.termux/files/usr/bin"
-	command+=" TERM=${TERM}"
-	command+=" TMPDIR=/tmp"
-	command+=" ${@}"
-	
-	# execute proot
-	
-	exec ${command}
+	proot													\
+		--link2symlink										\
+		--root-id											\
+		--rootfs="${IMAGE_DIRECTORY}"/"${LOAD_DIRECTORY}"	\
+		--pwd=/root											\
+		--bind=/data										\
+		--bind=/dev											\
+		--bind=/sys											\
+		--bind=/proc										\
+		/usr/bin/env -i										\
+			BINARIES_DIRECTORY="${PREFIX}"/bin				\
+			HOME="/root"									\
+			PATH="/bin:/sbin:/usr/bin:/usr/sbin"			\
+			"${@}"
 }
-
-# clear #
-
-console.clear
-
-# source variables
-
-[ -f "${PREFIX}"/bin/dextop ] && . "${PREFIX}"/bin/dextop
-
-# setup #
 
 # in order of execution
 
