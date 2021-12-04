@@ -51,6 +51,7 @@ done
 # prompt #
 
 console.script "Setting up ${script#*-}"
+echo
 
 # variables #
 
@@ -71,4 +72,3 @@ echo
 console.inf "Launch session or application: 'proot-session -u <username> | -a <application>'"
 echo
 FILE
-
