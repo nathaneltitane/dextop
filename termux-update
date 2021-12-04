@@ -118,7 +118,7 @@ do
 
 	if [ "${installed_version}" != "${archive_version}" ]
 	then
-		console.wrn "Application version has been updated [ "${package}" // ${archive_version} ]."
+		console.wrn "Package version has been updated" "[ ${package} // ${archive_version} ]."
 		echo
 
 		# request update permission
@@ -154,7 +154,7 @@ do
 			console.inf "2 - Restart setup on a fresh Termux installation to proceed."
 			echo
 
-			console.countdown 3 "Continuing" "[ ${script} ]" "+"
+			console.countdown 3 "Continuing" "[ ${script} ]"
 			echo
 		fi
 
@@ -162,7 +162,7 @@ do
 	else
 		if [ "${installed_version}" == "${archive_version}" ]
 		then
-			console.scs "Application version is up to date [ "${package}" // ${archive_version} ]."
+			console.scs "Package version is up to date" "[ ${package} // ${archive_version} ]"
 			echo
 
 			console.fwd "Continuing..."
