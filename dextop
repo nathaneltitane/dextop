@@ -110,7 +110,7 @@ console.clear
 
 # prompt #
 
-console.script "Initializing setup"
+console.script "Setting up ${script#*-}"
 echo
 
 console.fwd "Please wait..."

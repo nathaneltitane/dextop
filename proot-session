@@ -85,7 +85,7 @@ done
 
 # prompt #
 
-console.script "Logging in"
+console.script "Setting up ${script#*-}"
 echo
 
 # variables #

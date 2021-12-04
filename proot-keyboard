@@ -50,7 +50,7 @@ done
 
 # prompt #
 
-console.script "Configuring keyboard"
+console.script "Setting up ${script#*-}"
 echo
 
 # variables #

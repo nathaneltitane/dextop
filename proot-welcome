@@ -50,7 +50,7 @@ done
 
 # prompt #
 
-console.script "Writing login greeter"
+console.script "Setting up ${script#*-}"
 
 # variables #
 

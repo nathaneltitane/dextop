@@ -50,7 +50,7 @@ done
 
 # prompt #
 
-console.script "Expanding system image"
+console.script "Setting up ${script#*-}"
 echo
 
 # variables #

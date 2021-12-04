@@ -50,7 +50,7 @@ done
 
 # prompt #
 
-console.script "Setting up storage"
+console.script "Setting up ${script#*-}"
 echo
 
 # variables #

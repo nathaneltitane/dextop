@@ -50,7 +50,7 @@ done
 
 # prompt #
 
-console.script "Disabling compositing"
+console.script "Setting up ${script#*-}"
 echo
 
 # variables #

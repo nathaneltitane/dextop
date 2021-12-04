@@ -120,7 +120,7 @@ done
 
 # prompt #
 
-console.script "Starting setup"
+console.script "Setting up ${script#*-}"
 echo
 
 # variables #

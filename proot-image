@@ -50,7 +50,7 @@ done
 
 # prompt #
 
-console.script "Initializing deployment setup"
+console.script "Setting up ${script#*-}"
 echo
 
 # variables #

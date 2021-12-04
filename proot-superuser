@@ -85,7 +85,7 @@ done
 
 # prompt #
 
-console.script "Generating superuser account"
+console.script "Setting up ${script#*-}"
 echo
 
 # variables #
