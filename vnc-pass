@@ -50,7 +50,7 @@ done
 
 # prompt #
 
-console.script "Setting up password [ ${script%-*} ]"
+console.script "Setting up password"
 echo
 
 # variables #

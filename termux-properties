@@ -50,7 +50,7 @@ done
 
 # prompt #
 
-console.script "Setting up properties [ ${script%-*} ]"
+console.script "Setting up properties"
 echo
 
 # variables #

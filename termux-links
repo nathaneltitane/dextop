@@ -50,7 +50,7 @@ done
 
 # prompt #
 
-console.script "Linking binaries [ ${script%-*} ]"
+console.script "Linking binaries"
 echo
 
 # variables #

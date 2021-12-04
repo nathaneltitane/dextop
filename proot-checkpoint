@@ -50,7 +50,7 @@ done
 
 # prompt #
 
-console.script "Verifying setup checkpoint [ ${script%-*} ]"
+console.script "Verifying setup checkpoint"
 echo
 
 # variables #

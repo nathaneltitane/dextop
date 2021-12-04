@@ -50,7 +50,7 @@ done
 
 # prompt #
 
-console.script "Setting up shell [ ${script%-*} ]"
+console.script "Setting up shell"
 echo
 
 # variables #

@@ -61,7 +61,7 @@ done
 
 # prompt #
 
-console.script "Session display [ ${script%-*} ]"
+console.script "Session display"
 echo
 
 # variables #

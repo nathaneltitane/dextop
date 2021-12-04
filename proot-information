@@ -50,7 +50,7 @@ done
 
 # prompt #
 
-console.script "Gathering setup information [ ${script%-*} ]"
+console.script "Gathering setup information"
 echo
 
 # variables #
@@ -58,6 +58,7 @@ echo
 # set defaults
 
 # get user information
+
 console.inf "This information will be used to set up the user account."
 echo
 

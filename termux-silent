@@ -50,7 +50,7 @@ done
 
 # prompt #
 
-console.script "Silencing login prompt [ ${script%-*} ]"
+console.script "Silencing login prompt"
 echo
 
 # variables #

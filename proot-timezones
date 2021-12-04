@@ -50,7 +50,7 @@ done
 
 # prompt #
 
-console.script "Configuring timezones [ ${script%-*} ]"
+console.script "Configuring timezones"
 echo
 
 # variables #

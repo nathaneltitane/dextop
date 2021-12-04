@@ -50,7 +50,7 @@ done
 
 # prompt #
 
-console.script "Setting up distribution and version [ ${script%-*} ]"
+console.script "Setting up distribution and version"
 echo
 
 # variables #

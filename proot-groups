@@ -50,7 +50,7 @@ done
 
 # prompt #
 
-console.script "Transferring unregistered group IDs [ ${script%-*} ]"
+console.script "Transferring unregistered group IDs"
 echo
 
 # variables #

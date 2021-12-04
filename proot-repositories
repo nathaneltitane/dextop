@@ -50,7 +50,7 @@ done
 
 # prompt
 
-console.script "Setting up repositories [ ${script%-*} ]"
+console.script "Setting up repositories"
 echo
 
 # variables #

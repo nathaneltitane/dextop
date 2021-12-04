@@ -50,7 +50,7 @@ done
 
 # prompt #
 
-console.script "Configuring network [ ${script%-*} ]"
+console.script "Configuring network"
 echo
 
 # variables #

@@ -85,7 +85,7 @@ done
 
 # prompt #
 
-console.script "Generating user account [ ${script%-*} ]"
+console.script "Generating user account"
 echo
 
 # variables #
