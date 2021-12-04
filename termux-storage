@@ -92,14 +92,14 @@ then
 
 	storage_intent > /dev/null
 
-	console.countdown 3 "Continuing" "[ ${script} ]" "+"
+	console.countdown 3 "Continuing" "[ ${script} ]"
 	echo
 
 else
 	# exists:
 	# proceed with setup
 
-	console.scs "Storage directory detected [ "${HOME_DIRECTORY}" ]."
+	console.scs "Storage directory detected" "[ "${HOME_DIRECTORY}" ]."
 	echo
 
 	console.fwd "Continuing..."
