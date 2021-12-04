@@ -131,7 +131,7 @@ echo
 
 # container #
 
-conatiner_setup () {
+container_setup () {
 	# use 'proot' to drive container setup without login:
 	# keep static environment values for proper setup
 	
@@ -139,21 +139,40 @@ conatiner_setup () {
 	
 	unset LD_PRELOAD
 
-	proot																					\
-		--link2symlink																		\
-		--root-id																			\
-		--rootfs="${ROOT_DIRECTORY}"														\
-		--pwd=/root																			\
-		--bind=/data																		\
-		--bind=/dev																			\
-		--bind=/sys																			\
-		--bind=/proc																		\
-			env -i																			\
-				BINARIES_DIRECTORY="/data/data/com.termux/files/usr/bin"					\
-				HOME="/root"																\
-				TERM="xterm-256color"														\
-				PATH="/bin:/sbin:/usr/bin:/usr/sbin:/data/data/com.termux/files/usr/bin"	\
-				"${@}"
+	command+="proot"
+	command+=" --kill-on-exit"
+	command+=" --link2symlink"
+	command+=" --rootf-id"
+	command+=" --pwd=/root"
+	[ -d /apex ]                           && command+=" --bind=/apex"
+	[ -d "${PREFIX%/*}"/storage/external ] && command+=" --bind=${PREFIX%/*}/storage/external:/media/external"
+	[ -d "${PREFIX%/*}"/storage/internal ] && command+=" --bind=${PREFIX%/*}/storage/internal:/media/internal"
+	[ -e "/linkerconfig/ld.config.txt" ]   && command+=" --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt"
+	[ -f "/plat_property_contexts" ]       && command+=" --bind=/plat_property_contexts:/plat_property_contexts"
+	[ -f "/property_contexts" ]            && command+=" --bind=/property_contexts:/property_contexts"
+	command+=" --bind=/data"
+	command+=" --bind=/dev"
+	command+=" --bind=/dev/urandom:/dev/urandom"
+	command+=" --bind=/proc"
+	command+=" --bind=/proc/self/fd:/dev/fd"
+	command+=" --bind=/proc/self/fd/0:/dev/stdin"
+	command+=" --bind=/proc/self/fd/1:/dev/stdout"
+	command+=" --bind=/proc/self/fd/2:/dev/stderr"
+	command+=" --bind=/storage"
+	command+=" --bind=/sys"
+	command+=" --bind=/system"
+	command+=" --bind=/vendor"
+	command+=" env -i"
+	command+=" HOME=/root"
+	command+=" LANG=C.UTF-8"
+	command+=" PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data/data/com.termux/files/usr/bin"
+	command+=" TERM=${$TERM}"
+	command+=" TMPDIR=/tmp"
+	command+=" ${@}"
+	
+	# execute proot
+	
+	exec ${command}
 }
 
 # clear #
@@ -180,17 +199,17 @@ then
 	bash "${BINARIES_DIRECTORY}"/proot-network
 	bash "${BINARIES_DIRECTORY}"/proot-preload
 
-	console.wait 2 && conatiner_setup "${BINARIES_DIRECTORY}"/proot-user "${user_name}"
+	console.wait 2 && container_setup "${BINARIES_DIRECTORY}"/proot-user "${user_name}"
 
-	console.wait 2 && conatiner_setup "${BINARIES_DIRECTORY}"/proot-superuser "${user_name}"
+	console.wait 2 && container_setup "${BINARIES_DIRECTORY}"/proot-superuser "${user_name}"
 
 	bash "${BINARIES_DIRECTORY}"/proot-shell
 	bash "${BINARIES_DIRECTORY}"/proot-silent
 	bash "${BINARIES_DIRECTORY}"/proot-welcome
 
-	conatiner_setup "${BINARIES_DIRECTORY}"/proot-expand
-	conatiner_setup "${BINARIES_DIRECTORY}"/proot-repositories
-	conatiner_setup "${BINARIES_DIRECTORY}"/proot-packages
+	container_setup "${BINARIES_DIRECTORY}"/proot-expand
+	container_setup "${BINARIES_DIRECTORY}"/proot-repositories
+	container_setup "${BINARIES_DIRECTORY}"/proot-packages
 
 	bash "${BINARIES_DIRECTORY}"/proot-links
 	bash "${BINARIES_DIRECTORY}"/proot-checkpoint
