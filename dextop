@@ -116,7 +116,7 @@ echo
 console.fwd "Please wait..."
 echo
 
-bash -c 'pkg install proot debootstrap' >> /dev/null 2>&1
+bash -c 'yes | pkg install proot debootstrap' >> /dev/null 2>&1
 
 # variables #
 
