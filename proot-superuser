@@ -118,6 +118,21 @@ console.install ${install_list[@]}
 
 # create superuser entry for user
 
+if [ -z "${user_name}" ]
+then
+	information_list=(
+		user_name
+	)
+
+	# handle user input for information_list
+	
+	console_rtn=()
+	
+	console.input ${information_list[@]}
+	
+	eval ${console_rtn[@]}
+fi
+
 console.fwd "Setting superuser privileges [ '${user_name}' ]..."
 echo
 
