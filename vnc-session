@@ -106,7 +106,10 @@ vnc_intent () {
 
 
 vnc_start () {
-	console.fwd "Starting display server [ ${format} // ${GEOMETRY} // ${PORT} ]..."
+	console.fwd "Starting display server..."
+	echo
+	
+	conaole.inf "Display server" "[ ${format} // ${GEOMETRY} // ${PORT} ]"
 	echo
 
 	# 'vncserver' uses $DISPLAY instead of $PORT
@@ -333,10 +336,10 @@ vnc_list () {
 		vnc_server="${empty}"
 	fi
 
-	console.inf "Display" "${vnc_display}" "-"
-	console.inf "Port"    "${vnc_port}"    "-"
-	console.inf "Process" "${vnc_process}" "-"
-	console.inf "Server"  "${vnc_server}"  "-"
+	console.inf "Display" "[ ${vnc_display} ]" "-"
+	console.inf "Port"    "[ ${vnc_port} ]"    "-"
+	console.inf "Process" "[ ${vnc_process} ]" "-"
+	console.inf "Server"  "[ ${vnc_server} ]"  "-"
 	echo
 }
 
