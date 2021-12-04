@@ -213,7 +213,6 @@ DISPLAY=":1"
 LANG="C.UTF-8"
 LOCALHOST="127.0.0.1"
 SHELL="/usr/bin/bash"
-TERM="xterm-256-color"
 TMPDIR="/tmp"
 
 EDITOR="nano"
