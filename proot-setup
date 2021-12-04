@@ -167,7 +167,7 @@ container_setup () {
 	command+=" HOME=/root"
 	command+=" LANG=C.UTF-8"
 	command+=" PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data/data/com.termux/files/usr/bin"
-	command+=" TERM=${$TERM}"
+	command+=" TERM=${TERM}"
 	command+=" TMPDIR=/tmp"
 	command+=" ${@}"
 	
