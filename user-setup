@@ -79,6 +79,8 @@ console.clear
 
 if [ ! -f "${BINARIES_DIRECTORY}"/user-checkpoint-complete ]
 then
+	"${BINARIES_DIRECTORY}"/user-startup
+
 	"${BINARIES_DIRECTORY}"/proot-session
 	
 	"${BINARIES_DIRECTORY}"/user-utilities

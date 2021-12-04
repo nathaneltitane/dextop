@@ -71,6 +71,7 @@ binaries_list=(
 	user-clean
 	user-packages
 	user-setup
+	user-startup
 	user-utilities
 )
 

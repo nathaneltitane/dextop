@@ -67,9 +67,9 @@ echo
 
 cat << 'FILE' ->> "${ROOT_HOME_DIRECTORY}"/.profile
 
-# proot startup #
+# user startup #
 
-if [ ! -f "${BINARIES_DIRECTORY}"/proot-startup-complete ]
+if [ ! -f "${BINARIES_DIRECTORY}"/user-startup-complete ]
 then
 	# dependencies #
 	
@@ -78,11 +78,11 @@ then
 	
 	# continue proot setup
 	
-	"${BINARIES_DIRECTORY}"/proot-setup
+	"${BINARIES_DIRECTORY}"/user-setup
 
 	# confirm uninterrupted setup
 	
-	echo "yes" > "${BINARIES_DIRECTORY}"/proot-startup-complete
+	echo "yes" > "${BINARIES_DIRECTORY}"/user-startup-complete
 	
 	# clear #
 	
