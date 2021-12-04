@@ -442,20 +442,20 @@ then
 	
 	if [[ "${selection}" = "custom" ]]
 	then
-		console.inf "Setting custom properties."
+		console.fwd "Setting custom properties...."
 		echo
 	
-		console.ipt "Geometry WIDTH in pixels:"
+		console.ipt "WIDTH" "[ pixels ]"
 		
 		read width
 		echo
 	
-		console.ipt "Geometry HEIGHT in pixels:"
+		console.ipt "HEIGHT" "[ pixels ]"
 		
 		read height
 		echo
 	
-		console.ipt "Port NUMBER (e.g. 1):"
+		console.ipt "PORT NUMBER" "[ e.g. 1 ]"
 		
 		read custom_port
 		echo
