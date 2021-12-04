@@ -94,8 +94,6 @@ then
 	echo
 	
 	exit
-else
-	:
 fi
 
 # user setup #
@@ -125,7 +123,5 @@ then
 	echo
 	
 	exit
-else
-	:
 fi
 FILE

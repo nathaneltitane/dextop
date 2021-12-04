@@ -94,34 +94,34 @@ console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/fu
 
 # i3wm #
 
-[ "${SESSION}" = "i3wm" ] && console.directory "${HOME_DIRECTORY}"/.config i3
-[ "${SESSION}" = "i3wm" ] && console.directory "${HOME_DIRECTORY}"/.config i3status
-[ "${SESSION}" = "i3wm" ] && console.directory "${HOME_DIRECTORY}"/.config ranger
+[ "${desktop_option}" = "i3wm" ] && console.directory "${HOME_DIRECTORY}"/.config i3
+[ "${desktop_option}" = "i3wm" ] && console.directory "${HOME_DIRECTORY}"/.config i3status
+[ "${desktop_option}" = "i3wm" ] && console.directory "${HOME_DIRECTORY}"/.config ranger
 
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/i3					"${HOME_DIRECTORY}"/.config/i3			config
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/i3status			"${HOME_DIRECTORY}"/.config/i3status	config
+[ "${desktop_option}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/i3			"${HOME_DIRECTORY}"/.config/i3			config
+[ "${desktop_option}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/i3status	"${HOME_DIRECTORY}"/.config/i3status	config
 
 # ranger #
 
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/ranger				"${HOME_DIRECTORY}"/.config/ranger		rc.conf
+[ "${desktop_option}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/ranger		"${HOME_DIRECTORY}"/.config/ranger		rc.conf
 
  # dmenu #
 
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-change-background
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-confirm
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-exit-session
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-i3-shortcuts
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-kill-process
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-open-directory
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-open-file
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-open-file-manager
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-open-manual
-[ "${SESSION}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-show-shortcuts
+[ "${desktop_option}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu		"${BINARIES_DIRECTORY}"					dmenu-change-background
+[ "${desktop_option}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu		"${BINARIES_DIRECTORY}"					dmenu-confirm
+[ "${desktop_option}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu		"${BINARIES_DIRECTORY}"					dmenu-exit-session
+[ "${desktop_option}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu		"${BINARIES_DIRECTORY}"					dmenu-i3-shortcuts
+[ "${desktop_option}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu		"${BINARIES_DIRECTORY}"					dmenu-kill-process
+[ "${desktop_option}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu		"${BINARIES_DIRECTORY}"					dmenu-open-directory
+[ "${desktop_option}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu		"${BINARIES_DIRECTORY}"					dmenu-open-file
+[ "${desktop_option}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu		"${BINARIES_DIRECTORY}"					dmenu-open-file-manager
+[ "${desktop_option}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu		"${BINARIES_DIRECTORY}"					dmenu-open-manual
+[ "${desktop_option}" = "i3wm" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu		"${BINARIES_DIRECTORY}"					dmenu-show-shortcuts
 
 # xfce #
 
-[ "${SESSION}" = "xfce" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/xfconf			"${BINARIES_DIRECTORY}"					xfconf-read
-[ "${SESSION}" = "xfce" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/xfconf			"${BINARIES_DIRECTORY}"					xfconf-write
+[ "${desktop_option}" = "xfce" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/xfconf	"${BINARIES_DIRECTORY}"					xfconf-read
+[ "${desktop_option}" = "xfce" ] && console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/xfconf	"${BINARIES_DIRECTORY}"					xfconf-write
 
 # leocad
 
