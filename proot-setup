@@ -156,6 +156,7 @@ then
 	"${BINARIES_DIRECTORY}"/proot-environment
 	"${BINARIES_DIRECTORY}"/proot-network
 	"${BINARIES_DIRECTORY}"/proot-preload
+	"${BINARIES_DIRECTORY}"/proot-checkpoint
 	
 	"${BINARIES_DIRECTORY}"/proot-startup
 	"${BINARIES_DIRECTORY}"/proot-session
@@ -171,8 +172,6 @@ else
 	"${BINARIES_DIRECTORY}"/proot-repositories
 	"${BINARIES_DIRECTORY}"/proot-packages
 	"${BINARIES_DIRECTORY}"/proot-links
-	"${BINARIES_DIRECTORY}"/proot-checkpoint
-	
 	"${BINARIES_DIRECTORY}"/proot-clean
 fi
 
