@@ -150,18 +150,19 @@ container_setup () {
 	unset LD_PRELOAD
 
 	proot													\
+		--kill-on-exit										\
 		--link2symlink										\
-		--root-id											\
+		--change-id=0:0										\
 		--rootfs="${IMAGE_DIRECTORY}"/"${LOAD_DIRECTORY}"	\
-		--pwd=/root											\
+		--pwd=/data/data/com.termux/files/usr/bin								\
 		--bind=/data										\
 		--bind=/dev											\
 		--bind=/sys											\
 		--bind=/proc										\
-		/usr/bin/env -i										\
-			BINARIES_DIRECTORY="${PREFIX}"/bin				\
+		env -i										\
+			BINARIES_DIRECTORY=/data/data/com.termux/files/usr/bin				\
 			HOME="/root"									\
-			PATH="/bin:/sbin:/usr/bin:/usr/sbin"			\
+			PATH="/bin:/sbin:/usr/bin:/usr/sbin/data/data/com.termux/files/usr/bin"			\
 			"${@}"
 }
 
