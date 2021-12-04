@@ -92,7 +92,7 @@ then
 
 	storage_intent > /dev/null
 
-	console.countdown "Continuing in" 3
+	console.countdown 3 "Continuing" "[ ${script} ]" "+"
 	echo
 
 else

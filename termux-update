@@ -154,7 +154,7 @@ do
 			console.inf "2 - Restart setup on a fresh Termux installation to proceed."
 			echo
 
-			console.countdown "Continuing in" 3
+			console.countdown 3 "Continuing" "[ ${script} ]" "+"
 			echo
 		fi
 

@@ -256,7 +256,7 @@ then
 
 	# exit shell after setup
 
-	console.countdown "Closing in" 3 
+	console.countdown 3 "Closing" "[ ${script} ]" "+"
 
 	kill -9 $(pgrep -f "${SHELL}")
 else
