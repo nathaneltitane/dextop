@@ -81,7 +81,6 @@ then
 	bash "${BINARIES_DIRECTORY}"/termux-update
 	bash "${BINARIES_DIRECTORY}"/termux-properties
 	bash "${BINARIES_DIRECTORY}"/termux-storage
-	bash "${BINARIES_DIRECTORY}"/termux-bookmarks
 	bash "${BINARIES_DIRECTORY}"/termux-shell
 	bash "${BINARIES_DIRECTORY}"/termux-silent
 	bash "${BINARIES_DIRECTORY}"/termux-welcome

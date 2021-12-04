@@ -157,7 +157,6 @@ then
 
 	console.wait 2 && console.container "${BINARIES_DIRECTORY}"/proot-superuser "${user_name}"
 
-	bash "${BINARIES_DIRECTORY}"/proot-bookmarks
 	bash "${BINARIES_DIRECTORY}"/proot-shell
 	bash "${BINARIES_DIRECTORY}"/proot-silent
 	bash "${BINARIES_DIRECTORY}"/proot-welcome

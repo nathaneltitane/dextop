@@ -154,7 +154,6 @@ dextop
 │       ├── termux-update
 │       ├── termux-properties
 │       ├── termux-storage
-│       ├── termux-bookmarks
 │       ├── termux-shell
 │       ├── termux-silent
 │       ├── termux-welcome
@@ -175,7 +174,6 @@ dextop
 │       ├── proot-preload
 │       ├── proot-initialize
 │       ├── proot-checkpoint
-│       ├── proot-bookmarks
 │       ├── proot-shell
 │       ├── proot-silent
 │       ├── proot-welcome
