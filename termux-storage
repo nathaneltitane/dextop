@@ -143,7 +143,7 @@ uuid="${external_storage/\/storage\//}"
 
 if [ ! -z "${external_storage}" ]
 then
-	console.scs "Storage media detected [ ${uuid} ]."
+	console.scs "Storage media detected" "[ ${uuid} ]"
 	echo
 
 	if [ ! -f "${MAIN_DIRECTORY}"/storage/external ]
@@ -151,7 +151,9 @@ then
 		ln -s -f /storage/"${uuid}" "${MAIN_DIRECTORY}"/storage/external
 	fi
 else
-	console.err "No storage media detected."
+	uuid="N/A"
+
+	console.err "No storage media detected" "[ ${uuid} ]"
 	echo
 
 	console.fwd "Continuing..."
