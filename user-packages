@@ -95,7 +95,7 @@ install_list=()
 
 # populate install list
 
-install_list=(
+install_list+=(
 	${applications_list[@]}
 	${development_list_list[@]}
 	${multimedia_list_list[@]}
