@@ -296,6 +296,10 @@ desktop_environment_list=()
 
 # initialize install list
 
+install_list=()
+
+# populate install list
+
 install_list=(
 	${administration_list[@]}
 	${display_list[@]}

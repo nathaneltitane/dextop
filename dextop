@@ -174,10 +174,6 @@ console.download get.dxtp.app "${BINARIES_DIRECTORY}" ${utilities_list[@]}
 
 console.clear
 
-# initialize setup list
-
-setup_list=()
-
 # options #
 
 # termux
@@ -186,7 +182,6 @@ if [[ "${dextop_option}" = "termux" ]]
 then
 	bash "${BINARIES_DIRECTORY}"/termux-setup
 	bash "${BINARIES_DIRECTORY}"/vnc-setup
-
 fi
 
 # proot
@@ -195,8 +190,8 @@ if [[ "${dextop_option}" = "proot" ]]
 then
 	bash "${BINARIES_DIRECTORY}"/termux-setup
 	bash "${BINARIES_DIRECTORY}"/proot-setup
-	bash "${BINARIES_DIRECTORY}"/vnc-setup
 	bash "${BINARIES_DIRECTORY}"/user-setup
+	bash "${BINARIES_DIRECTORY}"/vnc-setup
 fi
 
 # source variables:
