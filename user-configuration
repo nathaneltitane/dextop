@@ -11,7 +11,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version #
 
-version="12-03-2021"
+version="11-18-2021"
 
 # usage #
 
@@ -59,25 +59,18 @@ echo
 
 # export variables
 
-echo "# ${script} #"															>> "${PREFIX}"/bin/dextop
-
 # source variables
 
-curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && . "${BINARIES_DIRECTORY}"/console
+[ -f "${PREFIX}"/bin/dextop ] && . "${PREFIX}"/bin/dextop
 
-# values #
+# configuration #
 
-binaries_list=(
-	user-addons
-	user-checkpoint
-	user-configuration
-	user-clean
-	user-packages
-	user-setup
-	user-startup
-	user-utilities
-)
+cat << 'FILE' ->> "${HOME_DIRECTORY}"/.profile
 
-# download #
+# dextop configuration #
 
-console.download get.dxtp.app "${BINARIES_DIRECTORY}" ${binaries_list[@]}
+# configure system for user session:
+# keyboard / locales /timezones
+
+"${BINARIES_DIRECTORY}"/proot-configuration
+FILE

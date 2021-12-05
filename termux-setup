@@ -77,7 +77,8 @@ console.clear
 # in order of execution
 if [ ! -f "${BINARIES_DIRECTORY}"/termux-checkpoint-complete ]
 then
-	"${BINARIES_DIRECTORY}"/termux-utilities
+	[ "${package_option}" = "update"] && "${BINARIES_DIRECTORY}"/termux-update
+	
 	"${BINARIES_DIRECTORY}"/termux-properties
 	"${BINARIES_DIRECTORY}"/termux-storage
 	"${BINARIES_DIRECTORY}"/termux-shell
