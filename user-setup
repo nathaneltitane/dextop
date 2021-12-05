@@ -85,7 +85,7 @@ then
 	"${BINARIES_DIRECTORY}"/user-startup
 
 	"${BINARIES_DIRECTORY}"/proot-session
-	
+else
 	"${BINARIES_DIRECTORY}"/user-packages
 	"${BINARIES_DIRECTORY}"/user-addons
 	"${BINARIES_DIRECTORY}"/user-clean
