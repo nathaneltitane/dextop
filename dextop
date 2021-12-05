@@ -116,6 +116,8 @@ echo
 console.fwd "Please wait..."
 echo
 
+bash -c 'yes | pkg update' >> /dev/null 2>&1
+bash -c 'yes | pkg upgrade' >> /dev/null 2>&1
 bash -c 'yes | pkg install proot debootstrap' >> /dev/null 2>&1
 
 # variables #
