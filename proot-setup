@@ -148,7 +148,6 @@ console.clear
 
 if [ ! -f "${BINARIES_DIRECTORY}"/proot-checkpoint-complete ]
 then
-	"${BINARIES_DIRECTORY}"/proot-utilities
 	"${BINARIES_DIRECTORY}"/proot-architecture
 	"${BINARIES_DIRECTORY}"/proot-information
 	"${BINARIES_DIRECTORY}"/proot-distribution

@@ -75,6 +75,8 @@ do
 			echo
 			echo -e "-f, --full             \t Full setup: download and install full desktop environment and utilities."
 			echo
+			echo -e "-u, --update           \t Package update: check/download/install Termux and Termux API package updates."
+			echo
 			echo -e "-h, --help             \t Show help and usage information."
 			echo
 			echo -e "'${script}' [ Version ${version} ]"
@@ -162,10 +164,10 @@ utilities_list=(
 	termux-setup
 	proot-utilities
 	proot-setup
-	vnc-utilities
-	vnc-setup
 	user-utilities
 	user-setup
+	vnc-utilities
+	vnc-setup
 )
 
 # download #

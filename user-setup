@@ -79,7 +79,6 @@ console.clear
 
 if [ ! -f "${BINARIES_DIRECTORY}"/user-checkpoint-complete ]
 then
-	"${BINARIES_DIRECTORY}"/user-utilities
 	"${BINARIES_DIRECTORY}"/user-checkpoint
 	
 	"${BINARIES_DIRECTORY}"/user-startup

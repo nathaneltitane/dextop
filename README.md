@@ -73,26 +73,29 @@ Dextop setup options are:
 
 Proot container install options are:
 
-`-i, --i3wm     I3WM setup: install i3 window manager and utilities.                                [ Default ]`
+`-i, --i3wm      I3WM setup: install i3 window manager and utilities.                                [ Default ]`
 
 
-`-e, --ede      EDE setup: install E desktop environment and utilities.`
+`-e, --ede       EDE setup: install E desktop environment and utilities.`
 
-`-k, --kde      KDE5 setup: install K desktop environment and utilities.`
+`-k, --kde       KDE5 setup: install K desktop environment and utilities.`
 
-`-x, --xfce     XFCE4 setup: install XFCE desktop environment and utilities.`
+`-x, --xfce      XFCE4 setup: install XFCE desktop environment and utilities.`
 
-`-n, --none     No DE setup: console access to environment and utilities.`
+`-n, --none      No DE setup: console access to environment and utilities.`
 
 
-`-b | --base    Base setup: download and install base distribution image only.                                 `
+`-b | --base     Base setup: download and install base distribution image only.                                 `
 
-`-f, --full     Full setup: download and install full desktop environment and utilities.            [ Default ]`
+`-f, --full      Full setup: download and install full desktop environment and utilities.            [ Default ]`
+
+`-u, --update    Package update: check/download/install Termux and Termux API package updates.`
+
 
 By selecting the 'none' option, Dextop automatically sets up minimal defaults to a 'base' install.
 The 'none' option is great for users who would like to experiment or setup their own desktop environment/window manager and preferences.
 
-### Process:
+### Process summary:
 
 **Be attentive!**
 
@@ -104,18 +107,57 @@ The rest of the setup is fully automated and should run its course until the pro
 
 - Dextop setup:
    - Termux setup:
-      - Set up configurations, utilities, package dependencies and shell requirements
+      - Set up Termux (com.termux) and Termux API (com.termux.api) package update [ Optional ]
+      - Set up Termux properties
+      - Set up Termux storage access
+      - Set up Termux shell configurations
+      - Set up Termux silent login
+      - Set up Termux login welcome message
+      - Set up Termux package repositories
+      - Set up Termux required packages
+      - Set up Termux directory, file and utility links
+      - Mark Termux setup checkpoint
+      - Clean up Termux setup
    - Proot setup:
-      - Set up configurations, utilities, package dependencies and shell requirements
-      - Set up proot container directories
-      - Download, unpack and prepare base system image for use
-      - Gather user information for successful setup
-         - Initialize setup from within Termux
-         - Expand system image for normal use
-         - Finalize setup from within proot container
-   - VNC setup:
-      - Set up configurations, utilities and shell requirements
-- Dextop setup exits to force reload all changes and greet you with your freshly installed dextop setup once Termux is reopened.
+      - Check device architecture
+      - Gather setup information
+      - Select distribution type and version
+      - Set up distribution image and container
+      - Set up dangling group IDs into container
+      - Set up container environemnt
+      - Set up container network connectivity
+      - Set up container library preload
+      - Mark Proot setup checkpoint
+      - Set up container setup completion routine
+      - PROOT LOGIN - 'root'
+         - Set up container user account
+         - Set up container user's superuser privileges
+         - Set up container shell configurations
+         - Set up container silent login
+         - Set up container login welcome message
+         - Set up container image expansion
+         - Set up container package repositories
+         - Set up container required packages
+         - Set up container directory, file and utility links
+         - Clean up container setup
+      - User setup:
+         - Mark user setup checkpoint
+         - Set up user setup completion routine
+         - PROOT LOGIN - 'root'
+            - Set up user configuration routine
+            - Set up user required packages
+            - Set up user addons (directories, files and utilities)
+            - Clean up user setup
+      - VNC setup:
+         - Set up vnc environment
+         - Mark vnc setup checkpoint
+         - Clean vnc setup
+
+- PROOT LOGIN - 'user'
+   - Set up user configuration routine
+      - Configure keyboard
+      - Configure locales
+      - Configure timezones
 
 ### Customization:
 
@@ -151,7 +193,7 @@ To start the vnc server and restart the display output, type `'vnc-session -o'`.
 dextop
 ├── termux-utilities
 │   └── termux-setup
-│       ├── termux-update
+│       ├── [ termux-update ]
 │       ├── termux-properties
 │       ├── termux-storage
 │       ├── termux-shell
@@ -172,27 +214,36 @@ dextop
 │       ├── proot-environment
 │       ├── proot-network
 │       ├── proot-preload
-│       ├── proot-initialize
 │       ├── proot-checkpoint
-│       ├── proot-shell
-│       ├── proot-silent
-│       ├── proot-welcome
-│       ├── proot-expand
-│       ├── proot-repositories
-│       ├── proot-packages
-│       ├── proot-links
-│       └── proot-clean
-└── vnc-utilities
-│   └── vnc-setup
-│       ├── vnc-environment
-│       ├── vnc-checkpoint
-│       └── vnc-clean
-└── vnc-utilities
+│       ├── proot-startup
+│       └── [ PROOT LOGIN - ROOT ]
+│           ├── proot-user
+│           ├── proot-superuser
+│           ├── proot-shell
+│           ├── proot-silent
+│           ├── proot-welcome
+│           ├── proot-expand
+│           ├── proot-repositories
+│           ├── proot-packages
+│           ├── proot-links
+│           └── proot-clean
+└── user-utilities
 │   └── user-setup
-│       ├── user-addons
 │       ├── user-checkpoint
-│       └── user-clean
-└── [ PROOT LOGIN - USER ]
+│       ├── user-startup
+│       └── [ PROOT LOGIN - ROOT ]
+│           ├── user-configuration
+│           ├── user-packages
+│           ├── user-addons
+│           └── user-clean
+└── vnc-utilities
+    └── vnc-setup
+        ├── vnc-environment
+        ├── vnc-checkpoint
+        └── vnc-clean
+
+[ PROOT LOGIN - USER ]
+    └── user-configuration
         └── proot-keyboard
         └── proot-locales
         └── proot-timezones
