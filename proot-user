@@ -103,17 +103,21 @@ home_number=""
 add_user () {
 	# silent configuration:
 	# set --gecos and --disabled-password for fully silent execution
-	
-	adduser																					\
-		--gecos "${full_name},${room_number},${work_number},${home_number},${user_email}"	\
-		--shell "${SHELL}"																	\
+
+	adduser					\
+		--gecos "			\
+			${full_name},	\
+			${room_number},	\
+			${work_number},	\
+			${home_number},	\
+			${user_email}"	\
+		--shell "${SHELL}"	\
 		--disabled-password "${user_name}"
-	
 }
 
 add_password () {
-	# use 'chpasswd' to append user password to account for fully silent execution
-
+	# silent configuration:
+	# use 'chpasswd' to append user password to account
 
 	chpasswd <<< "${user_name}:${user_password}"
 }

@@ -59,16 +59,17 @@ echo
 
 # set hostname
 
-console.fwd "Setting up [ hostname ]..."
+console.fwd "Setting up" "[ hostname ]"
 echo
 
 cat << FILE -> "${ROOT_DIRECTORY}"/etc/hostname 
 "${hostname}"
+
 FILE
 
 # set hosts
 
-console.fwd "Setting up [ hosts ]..."
+console.fwd "Setting up" "[ hosts ]"
 echo
 
 cat << FILE -> "${ROOT_DIRECTORY}"/etc/hosts
@@ -93,11 +94,12 @@ FILE
 
 # set nameserver
 
-console.fwd "Setting up [ nameserver ]..."
+console.fwd "Setting up" "[ nameserver ]"
 echo
 
 cat << 'FILE' -> "${ROOT_DIRECTORY}"/etc/resolv.conf
 nameserver 1.1.1.1
 nameserver 1.0.0.1
+
 FILE
 
