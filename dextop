@@ -129,6 +129,7 @@ bash -c 'yes | pkg install proot debootstrap' >> /dev/null 2>&1
 
 # export variables
 
+echo "# ${script} #"															>> "${PREFIX}"/bin/dextop
 
 echo 'export MAIN_DIRECTORY="${PREFIX%/*}"'										>> "${PREFIX}"/bin/dextop
 echo 'export BINARIES_DIRECTORY="${PREFIX}"/bin'								>> "${PREFIX}"/bin/dextop

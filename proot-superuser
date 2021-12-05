@@ -133,7 +133,7 @@ then
 	eval ${console_rtn[@]}
 fi
 
-console.fwd "Setting superuser privileges [ '${user_name}' ]..."
+console.wrn "Setting superuser privileges" "[ '${user_name}' ]"
 echo
 
 # set superuser privilege
