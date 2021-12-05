@@ -67,7 +67,19 @@ cat << FILE -> "${HOME_DIRECTORY}"/.vnc/passwd
 
 FILE
 
-# write user vnc startup file
+# write user vnc startup files
+
+cat << 'FILE' -> "${HOME_DIRECTORY}"/.vnc/startup
+#!/bin/bash
+
+if [ -f "${HOME}"/.vnc/selection ]
+then
+	echo $(cat "${HOME}"/.vnc/selection) | vnc-session -o
+else
+	vnc-session -o
+fi
+
+FILE
 
 cat << 'FILE' -> "${HOME_DIRECTORY}"/.vnc/xstartup
 #!/bin/bash
@@ -97,22 +109,17 @@ FILE
 # append automatic vnc session stop on shell logout
 
 cat << 'FILE' ->> "${HOME_DIRECTORY}"/.bash_logout
-
 # automatic vnc session stop on shell logout
 
 vnc-session -x
+
 FILE
 
 # append automatic vnc session start from selection value
 
 cat << 'FILE' ->> "${HOME_DIRECTORY}"/.profile
-
 # automatic vnc session start on shell login
 
-if [ -f "${HOME}"/.vnc/selection ]
-then
-	echo $(cat "${HOME}"/.vnc/selection) | vnc-session -o
-else
-	vnc-session -o
-fi
+[ -f "${HOME}"/.vnc/vnc-startup ] && "${HOME}"/.vnc/startup
+
 FILE

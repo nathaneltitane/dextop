@@ -68,6 +68,7 @@ echo
 cat << 'FILE' ->> "${HOME_DIRECTORY}"/.profile
 
 # user configuration #
+
 if [ ! -f "${BINARIES_DIRECTORY}"/user-configuration-complete ]
 then
 	# configure system for user session:
