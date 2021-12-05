@@ -68,6 +68,7 @@ console.upgrade
 # values #
 
 applications_list=(
+	doublecmd-qt
 	freecad
 	leocad
 	povray
