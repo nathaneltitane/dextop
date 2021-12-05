@@ -214,7 +214,7 @@ if [ -f "${BINARIES_DIRECTORY}"/dextop-checkpoint-complete ]
 then
 	# message #
 
-	console.scs "Setup complete" "[ ${script} }"
+	console.scs "Setup complete" "[ ${script} ]"
 	echo
 
 	console.fwd "Removing setup files..."
@@ -240,7 +240,7 @@ then
 
 	kill -9 $(pgrep -f "${SHELL}")
 else
-	console.err "Setup errors were encountered" "[ ${script} }"
+	console.err "Setup errors were encountered" "[ ${script} ]"
 	echo
 	
 	console.inf "Consult setup logs for details." "[ ${PREFIX}/var/log/ ]"
