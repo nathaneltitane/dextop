@@ -141,6 +141,7 @@ echo
 
 unset distribution_version
 
+# integer check:
 # handle numerical selection
 
 if [[ "${selection}" =~ ^[0-9]+$ ]]
