@@ -63,7 +63,7 @@ if [ -f "${BINARIES_DIRECTORY}"/user-checkpoint-complete ]
 then
 	# message #
 
-	console.scs "Setup complete"
+	console.scs "Setup complete" "${script}"
 	echo
 	
 	console.fwd "Removing setup files..."
@@ -77,7 +77,7 @@ then
 	console.delete ${remove_list[@]}
 	
 else
-	console.err "Setup errors were encountered"
+	console.err "Setup errors were encountered" "${script}"
 	echo
 	
 	console.inf "Consult setup logs at '"${PREFIX}"/var/log/' for details."
