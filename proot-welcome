@@ -66,12 +66,12 @@ cat << 'FILE' ->> "${HOME_DIRECTORY}"/.profile
 . /data/data/com.termux/files/usr/bin/console
 . /data/data/com.termux/files/usr/bin/dextop
 
-console.fwd "Welcome to Dextop [ Ubuntu ]"
+console.fwd "Welcome to Dextop" "[ ${DISTRIBUTION_NAME} ]"
 echo
 
 if [ -f "${HOME}"/.vnc/selection ]
 then
-	console.inf "You have already logged in - vnc selection has been saved:"
+	console.inf "You have already logged in - vnc selection has been saved."
 	console.inf "Automatic session launch on shell login is enabled."
 	echo
 else
