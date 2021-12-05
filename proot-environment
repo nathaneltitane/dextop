@@ -81,8 +81,6 @@ PATH=""
 [ -d /system/sbin ]																&& PATH+="/system/sbin:"
 [ -d /system/bin ]																&& PATH+="/system/bin:"
 
-PATH="${PATH}"
-
 # environment #
 
 cat << "FILE" -> "${ROOT_DIRECTORY}"/etc/environment
