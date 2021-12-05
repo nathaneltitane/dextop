@@ -58,7 +58,7 @@ console.script "Setting up ${script#*-}"
 
 # export variables
 
-echo '# vnc #'														>> "${PREFIX}"/bin/dextop
+echo "# ${script} #"															>> "${PREFIX}"/bin/dextop
 
 # clear #
 

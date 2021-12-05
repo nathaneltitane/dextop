@@ -69,7 +69,6 @@ binaries_list=(
 	proot-architecture
 	proot-checkpoint
 	proot-clean
-	proot-compositing
 	proot-configuration
 	proot-distribution
 	proot-environment

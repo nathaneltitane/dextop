@@ -58,7 +58,7 @@ console.script "Setting up ${script#*-}"
 
 # export variables
 
-echo '# configuration #'														>> "${PREFIX}"/bin/dextop
+echo "# ${script} #"															>> "${PREFIX}"/bin/dextop
 
 # clear #
 
@@ -72,24 +72,13 @@ console.clear
 
 # in order of execution
 
-if [ "${SESSION}" = "kde" ] || [ "${SESSION}" = "xfce" ]
+if [ ! -f "${BINARIES_DIRECTORY}"/proot-configuration-complete ]
 then
-	setup_list+=(
-		proot-compositing
-	)
+	"${BINARIES_DIRECTORY}"/proot-keyboard
+	"${BINARIES_DIRECTORY}"/proot-locales
+	"${BINARIES_DIRECTORY}"/proot-timezones
 fi
 
-setup_list+=(
-	proot-keyboard
-	proot-locales
-	proot-timezones
-)
+# confirm uninterrupted configuration
 
-# setup #
-
-for setup in ${setup_list[@]}
-do
-	"${BINARIES_DIRECTORY}"/"${setup}"
-	
-	console.clear
-done
+echo "yes" > "${BINARIES_DIRECTORY}"/proot-configuration-complete

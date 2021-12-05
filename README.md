@@ -193,7 +193,6 @@ dextop
 │       ├── user-checkpoint
 │       └── user-clean
 └── [ PROOT LOGIN - USER ]
-        └── proot-compositing
         └── proot-keyboard
         └── proot-locales
         └── proot-timezones

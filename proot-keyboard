@@ -68,6 +68,4 @@ then
 	# confirm uninterrupted configuration
 	
 	echo "yes" > "${BINARIES_DIRECTORY}"/proot-keyboard-complete
-else
-	:
 fi

@@ -61,7 +61,7 @@ console.script "Setting up ${script#*-}"
 
 # export variables
 
-echo '# user #'																	>> "${PREFIX}"/bin/dextop
+echo "# ${script} #"															>> "${PREFIX}"/bin/dextop
 
 echo 'export HOME_DIRECTORY="${HOME_DIRECTORY}"'								>> "${PREFIX}"/bin/dextop
 

@@ -92,13 +92,6 @@ then
 	"${RUNNER}" -d &
 fi
 
-if [ "${SESSION}" = "KDE" ] || [ "${SESSION}" = "xfce" ]
-then
-	if [ ! -z $(pgrep -f "${SESSION}") ]
-	then
-		proot-compositing
-	fi
-fi
 FILE
 
 # append automatic vnc session stop on shell logout

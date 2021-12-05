@@ -86,7 +86,7 @@ eval ${console_rtn[@]}
 
 # export variables
 
-echo '# information #'															>> "${PREFIX}"/bin/dextop
+echo "# ${script} #"															>> "${PREFIX}"/bin/dextop
 
 echo "export first_name=${first_name}"											>> "${PREFIX}"/bin/dextop
 echo "export last_name=${last_name}"											>> "${PREFIX}"/bin/dextop

@@ -112,6 +112,6 @@ fi
 
 # export variables
 
-echo '# architecture #'															>> "${PREFIX}"/bin/dextop
+echo "# ${script} #"															>> "${PREFIX}"/bin/dextop
 
 echo "export iso_architecture=${img_architecture}"								>> "${PREFIX}"/bin/dextop

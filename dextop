@@ -127,11 +127,6 @@ bash -c 'yes | pkg install proot debootstrap' >> /dev/null 2>&1
 
 # export variables
 
-echo '# variables #'															>> "${PREFIX}"/bin/dextop
-
-echo "export version=${version}"												>> "${PREFIX}"/bin/dextop
-
-echo '# dextop #'																>> "${PREFIX}"/bin/dextop
 
 echo 'export MAIN_DIRECTORY="${PREFIX%/*}"'										>> "${PREFIX}"/bin/dextop
 echo 'export BINARIES_DIRECTORY="${PREFIX}"/bin'								>> "${PREFIX}"/bin/dextop
@@ -143,8 +138,7 @@ echo 'export IMAGE_DIRECTORY="${MAIN_DIRECTORY}"/img'							>> "${PREFIX}"/bin/d
 echo 'export ISO_DIRECTORY="${MAIN_DIRECTORY}"/iso'								>> "${PREFIX}"/bin/dextop
 echo 'export MOUNT_DIRECTORY="${MAIN_DIRECTORY}"/mnt'							>> "${PREFIX}"/bin/dextop
 
-echo '# options #'																>> "${PREFIX}"/bin/dextop
-
+echo "export version=${version}"												>> "${PREFIX}"/bin/dextop
 echo "export dextop_option=${dextop_option}"									>> "${PREFIX}"/bin/dextop
 echo "export desktop_option=${desktop_option}"									>> "${PREFIX}"/bin/dextop
 echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/dextop
@@ -208,25 +202,8 @@ cat << 'FILE' ->> "${HOME_DIRECTORY}"/.profile
 # configure system for user session:
 # keyboard / locales /timezones
 
-if [ ! -f "${BINARIES_DIRECTORY}"/dextop-configuration-complete ]
-then
-	# run configuration utilities
-
-	"${BINARIES_DIRECTORY}"/proot-configuration
-
-	# confirm uninterrupted configuration
-
-	echo "yes" > "${BINARIES_DIRECTORY}"/dextop-configuration-complete
-else
-	:
-fi
+"${BINARIES_DIRECTORY}"/proot-configuration
 FILE
-
-# checkpoint #
-
-# confirm uninterrupted configuration
-
-echo "yes" > "${BINARIES_DIRECTORY}"/dextop-checkpoint-complete
 
 # cleanup #
 

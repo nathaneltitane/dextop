@@ -59,6 +59,8 @@ echo
 
 # export variables
 
+echo "# ${script} #"															>> "${PREFIX}"/bin/dextop
+
 # source variables
 
 curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && . "${BINARIES_DIRECTORY}"/console

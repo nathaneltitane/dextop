@@ -59,6 +59,9 @@ echo
 
 # export variables
 
+echo "# ${script} #"															>> "${PREFIX}"/bin/dextop
+
+
 # source variables
 
 [ -f "${PREFIX}"/bin/dextop ] && . "${PREFIX}"/bin/dextop

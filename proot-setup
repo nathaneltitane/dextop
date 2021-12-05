@@ -129,7 +129,7 @@ echo
 
 # export variables
 
-echo '# setup #'																>> "${PREFIX}"/bin/dextop
+echo "# ${script} #"															>> "${PREFIX}"/bin/dextop
 
 echo "export HOME_DIRECTORY=${ROOT_DIRECTORY}"/home/"${user_name}"				>> "${PREFIX}"/bin/dextop
 
@@ -159,6 +159,7 @@ then
 	"${BINARIES_DIRECTORY}"/proot-checkpoint
 	
 	"${BINARIES_DIRECTORY}"/proot-startup
+	
 	"${BINARIES_DIRECTORY}"/proot-session
 else
 	"${BINARIES_DIRECTORY}"/proot-user											"${user_name}"
