@@ -67,10 +67,16 @@ echo
 
 cat << 'FILE' ->> "${HOME_DIRECTORY}"/.profile
 
-# dextop configuration #
-
-# configure system for user session:
-# keyboard / locales /timezones
-
-"${BINARIES_DIRECTORY}"/proot-configuration
+# user configuration #
+if [ ! -f "${BINARIES_DIRECTORY}"/user-configuration-complete ]
+then
+	# configure system for user session:
+	# keyboard / locales /timezones
+	
+	"${BINARIES_DIRECTORY}"/proot-configuration
+	
+	# confirm uninterrupted configuration
+	
+	echo "yes" > "${BINARIES_DIRECTORY}"/user-configuration-complete
+fi
 FILE
