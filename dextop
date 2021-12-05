@@ -203,6 +203,10 @@ fi
 
 [ -f "${PREFIX}"/bin/dextop ] && . "${PREFIX}"/bin/dextop
 
+# checkpoint #
+
+echo "yes" > "${BINARIES_DIRECTORY}"/dextop-checkpoint-complete
+
 # cleanup #
 
 if [ -f "${BINARIES_DIRECTORY}"/dextop-checkpoint-complete ]

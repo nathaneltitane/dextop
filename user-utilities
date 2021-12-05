@@ -68,7 +68,7 @@ curl -sL get.cnsl.app/console > "${BINARIES_DIRECTORY}"/console && . "${BINARIES
 # values #
 
 binaries_list=(
-	user-addons
+	user-additions
 	user-checkpoint
 	user-configuration
 	user-clean

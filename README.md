@@ -167,7 +167,7 @@ The rest of the setup is fully automated and should run its course until the pro
 
 ### Customization:
 
-Use and edit 'user-packages' and/or 'user-addons' prior to starting the setup to customize your list of installed applications, libraries, frameworks, utilities and other third party package locations.
+Use and edit 'user-packages' and/or 'user-additions' prior to starting the setup to customize your list of installed applications, libraries, frameworks, utilities and other third party package locations.
 
 **You can modify any of the other scripts AT YOUR OWN RISK!**
 **Any modification of the Dextop setup routine scripts implies you are fully aware of potential breakage and the consequences of doing so:**
@@ -240,7 +240,7 @@ dextop
 │       └── [ PROOT LOGIN - ROOT ]
 │           ├── user-configuration
 │           ├── user-packages
-│           ├── user-addons
+│           ├── user-additions
 │           └── user-clean
 └── vnc-utilities
     └── vnc-setup
