@@ -110,6 +110,10 @@ do
 
 done
 
+# cleanup #
+
+
+
 # clear #
 
 console.clear
@@ -206,42 +210,3 @@ fi
 # checkpoint #
 
 echo "yes" > "${BINARIES_DIRECTORY}"/dextop-checkpoint-complete
-
-# cleanup #
-
-if [ -f "${BINARIES_DIRECTORY}"/dextop-checkpoint-complete ]
-then
-	# message #
-
-	console.scs "Setup complete" "[ ${script} ]"
-	echo
-
-	console.fwd "Removing setup files..."
-	echo
-
-	# remove setup files
-
-	remove_list=(
-		"${HOME}/dextop"
-	)
-
-	console.delete ${remove_list[@]}
-	
-	# remove sensitive information from dextop file
-	
-	sed -i						\
-		-e '/user_email/d'		\
-		-e '/user_password/d'	"${BINARIES_DIRECTORY}"/dextop
-
-	# exit shell after setup
-
-	console.countdown 3 "Closing" "[ ${script} ]"
-
-	kill -9 $(pgrep -f "${SHELL}")
-else
-	console.err "Setup errors were encountered" "[ ${script} ]"
-	echo
-	
-	console.inf "Consult setup logs for details." "[ ${PREFIX}/var/log/ ]"
-	echo
-fi

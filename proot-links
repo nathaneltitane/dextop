@@ -61,7 +61,10 @@ echo
 
 binaries_list=(
 	curl
+	kill
 	nano
+	pgrep
+	pkill
 	ps
 	top
 	wget
