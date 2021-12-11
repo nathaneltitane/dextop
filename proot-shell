@@ -170,7 +170,7 @@ if [[ $(id -u -n) = "root" ]]
 then
 	PS1+="${red}${USER}"
 
-elif [[ $(id -u -n) = "termux" && $(ps -A | grep -i proot) ]]
+elif [[ $(id -u -n) = "termux" ]] && [[ $(ps -A | grep -i proot) ]]
 then
 	PS1+="${magenta}${USER}"
 else

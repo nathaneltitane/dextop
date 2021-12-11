@@ -210,13 +210,12 @@ PATH="${PATH}"
 
 COLORTERM="truecolor"
 DISPLAY=":1"
+EDITOR="nano"
 LANG="C.UTF-8"
 LOCALHOST="127.0.0.1"
+PAGER="less"
 SHELL="/usr/bin/bash"
 TMPDIR="/tmp"
-
-EDITOR="nano"
-PAGER="less"
 
 # base
 
@@ -291,7 +290,7 @@ then
 	console.scs "Valid application name [ ${APPLICATION} ]."
 	echo
 	
-	if [[ ! -f "${ROOT_DIRECTORY}"/usr/bin/"${APPLICATION}" ]]
+	if [ ! -f "${ROOT_DIRECTORY}"/usr/bin/"${APPLICATION}" ]
 	then
 		console.err "Invalid application name [ ${APPLICATION} ]."
 		echo
@@ -324,16 +323,16 @@ command+=" --link2symlink"
 command+=" --rootfs=${ROOT_DIRECTORY}"
 command+=" --change-id=${USER_ID}:${GROUP_ID}"
 command+=" --pwd=${HOME}"
-[ -d /apex ]                           && command+=" --bind=/apex"
+[ -d "/apex" ]                         && command+=" --bind=/apex"
 [ -d "${PREFIX%/*}"/storage/external ] && command+=" --bind=${PREFIX%/*}/storage/external:/media/external"
 [ -d "${PREFIX%/*}"/storage/internal ] && command+=" --bind=${PREFIX%/*}/storage/internal:/media/internal"
 [ -e "/linkerconfig/ld.config.txt" ]   && command+=" --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt"
 [ -f "/plat_property_contexts" ]       && command+=" --bind=/plat_property_contexts:/plat_property_contexts"
 [ -f "/property_contexts" ]            && command+=" --bind=/property_contexts:/property_contexts"
+[ "${USER}" = "termux" ]               && command+=" --bind=${PREFIX%/*}/home:/home/${USER}"
 command+=" --bind=/data"
 command+=" --bind=/dev"
 command+=" --bind=/dev/urandom:/dev/urandom"
-command+=" --bind=${PREFIX%/*}/home:/home/termux"
 command+=" --bind=/proc"
 command+=" --bind=/proc/self/fd:/dev/fd"
 command+=" --bind=/proc/self/fd/0:/dev/stdin"
