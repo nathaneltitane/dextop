@@ -63,7 +63,7 @@ echo
 #	"deb https://grimler.se/x11-packages x11 main"
 #)
 
-# set defaults
+# defaults #
 
 # create sources directory
 

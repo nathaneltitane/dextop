@@ -57,7 +57,7 @@ echo
 
 PORT="590${DISPLAY:1}"
 
-# set defaults
+# defaults #
 
 # /etc/os-release: source distribution codename variables (e.g. $NAME)
 

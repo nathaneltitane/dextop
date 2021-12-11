@@ -54,7 +54,7 @@ console.script "Setting up ${script#*-}"
 
 # variables #
 
-# set defaults
+# defaults #
 
 # export variables
 

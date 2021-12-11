@@ -75,7 +75,7 @@ img_architectures=(
 	amd64
 )
 
-# set defaults
+# defaults #
 
 # test processor architecture string
 

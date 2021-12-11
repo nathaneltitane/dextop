@@ -55,7 +55,7 @@ echo
 
 # variables #
 
-# set defaults
+# defaults #
 
 [ -z "${distribution_name}" ]													&& distribution_name="ubuntu"
 [ -z "${distribution_version}" ]												&& distribution_version="20.04.3"

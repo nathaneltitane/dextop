@@ -94,7 +94,7 @@ full_name="${first_name} ${last_name}"
 
 sudo_id=$(cat /etc/group | grep sudo | cut -d : -f 3)
 
-# set defaults
+# defaults #
 
 # set 'sudo' GID (27) if 'sudo' group is not setup
 

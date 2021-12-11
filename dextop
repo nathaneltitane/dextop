@@ -132,7 +132,7 @@ bash -c 'yes | pkg install proot debootstrap' >> /dev/null 2>&1
 
 # variables #
 
-# set defaults
+# defaults #
 
 [ -z "${dextop_option}" ]														&& dextop_option="proot"
 [ -z "${desktop_option}" ]														&& desktop_option="i3wm"

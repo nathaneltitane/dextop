@@ -269,7 +269,7 @@ PAGER="less"
 [ "${desktop_option}" = "xfce" ]												&& RUNNER="xfce4-appfinder"
 [ "${desktop_option}" = "xfce" ]												&& VISUAL="mousepad"
 
-# set defaults
+# defaults #
 
 [ -z "${MOUNT_DIRECTORY}" ]														&& MOUNT_DIRECTORY="${PREFIX%/*}/mnt"
 [ -z "${ROOT_DIRECTORY}" ]														&& ROOT_DIRECTORY="${PREFIX%/*}/img"

@@ -55,7 +55,7 @@ echo
 
 # variables #
 
-# set defaults
+# defaults #
 
 # failsafe:
 # if no desktop environment or window manager is selected

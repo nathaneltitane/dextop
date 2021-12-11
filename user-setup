@@ -57,7 +57,7 @@ console.script "Setting up ${script#*-}"
 [ "${dextop_option}" = "termux" ]												&& HOME_DIRECTORY="${HOME}"
 [ "${dextop_option}" = "proot" ]												&& HOME_DIRECTORY="${ROOT_DIRECTORY}/home/${USER}"
 
-# set defaults
+# defaults #
 
 # export variables
 

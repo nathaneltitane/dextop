@@ -57,7 +57,7 @@ echo
 
 command_expand="/usr/local/sbin/unminimize"
 
-# set defaults
+# defaults #
 
 # unminimize system image
 
