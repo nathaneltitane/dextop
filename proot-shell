@@ -164,10 +164,27 @@ reset="\001$(tput sgr 0)\002"
 
 unset PS1
 
-[[ $(id -u) = 0 ]] && PS1+="${reset}[ "				|| PS1+="${reset}[ "
-[[ $(id -u) = 0 ]] && PS1+="${red}${USER}"			|| PS1+="${green}${USER}"
-[[ $(id -u) = 0 ]] && PS1+="${reset} ]"				|| PS1+="${reset} ]"
-[[ $(id -u) = 0 ]] && PS1+="${white} >_ # ${reset}"	|| PS1+="${white} >_ $ ${reset}"
+PS1+="${reset}[ "
+
+if [[ $(id -u -n) = "root" ]]
+then
+	PS1+="${red}${USER}"
+
+elif [[ $(id -u -n) = "termux" && $(ps -A | grep -i proot) ]]
+then
+	PS1+="${magenta}${USER}"
+else
+	PS1+="${green}${USER}"
+fi
+
+PS1+="${reset} ]"
+
+if [[ $(id -u -n) = "root" ]]
+then
+	PS1+="${white} >_ # ${reset}"
+else
+	PS1+="${white} >_ $ ${reset}"
+fi
 
 # bash aliases
 
