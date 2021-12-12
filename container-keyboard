@@ -59,13 +59,13 @@ echo
 
 # configure
 
-if [ ! -f "${BINARIES_DIRECTORY}"/proot-locales-complete ]
+if [ ! -f "${BINARIES_DIRECTORY}"/container-keyboard-complete ]
 then
-	# configure locales setup
+	# configure keyboard setup
 	
-	sudo dpkg-reconfigure locales
+	sudo dpkg-reconfigure keyboard-configuration
 	
 	# confirm uninterrupted configuration
 	
-	echo "yes" > "${BINARIES_DIRECTORY}"/proot-locales-complete
+	echo "yes" > "${BINARIES_DIRECTORY}"/container-keyboard-complete
 fi

@@ -64,13 +64,8 @@ Once the Android applications are installed on your device, open Termux and past
 
 `curl -sL run.dxtp.app > dextop && bash dextop | <option>``
 
-Dextop setup options are:
 
-`-t | --termux: setup Termux environment only           - VNC setup not included.`
-
-`-p | --proot:  setup Proot environment in Termux shell - VNC setup included.                       [ Default ]`
-
-Proot container install options are:
+Container install options are:
 
 `-i, --i3wm      I3WM setup: install i3 window manager and utilities.                                [ Default ]`
 
@@ -102,7 +97,7 @@ Dextop now automatically detects and processes any external media mounts and add
 You can press 'Allow' any time during the setup to grant this permission.
 
 User information and distribution preferences are captured to set up the container's user profiles and home directories:
-The rest of the setup is fully automated and should run its course until the proot container is ready for you to use.
+The rest of the setup is fully automated and should run its course until the container is ready for you to use.
 
 ### Setup breakdown:
 
@@ -119,7 +114,7 @@ The rest of the setup is fully automated and should run its course until the pro
       - Set up Termux directory, file and utility links
       - Mark Termux setup checkpoint
       - Clean up Termux setup
-   - Proot setup:
+   - Container setup:
       - Check device architecture
       - Gather setup information
       - Select distribution type and version
@@ -130,7 +125,7 @@ The rest of the setup is fully automated and should run its course until the pro
       - Set up container library preload
       - Mark Proot setup checkpoint
       - Set up container setup completion routine
-      - PROOT LOGIN - 'root'
+      - CONTAINER LOGIN - 'root'
          - Set up container user account
          - Set up container user's superuser privileges
          - Set up container shell configurations
@@ -154,7 +149,7 @@ The rest of the setup is fully automated and should run its course until the pro
          - Mark vnc setup checkpoint
          - Clean vnc setup
 
-- PROOT LOGIN - 'user'
+- CONTAINER LOGIN - 'user'
    - Set up user configuration routine
       - Configure keyboard
       - Configure locales
@@ -170,13 +165,13 @@ Use and edit 'user-packages' prior to starting the setup to customize your list 
 
 ### Usage:
 
-To access your newly created proot container:
+To access your newly created container:
 
-`proot-session -u <username> | -a <application> | <option>'` to start your session, run a specific application or setup session options on load.
+`container-session -u <username> | -a <application> | <option>'` to start your session, run a specific application or setup session options on load.
 
 ### The fun begins:
 
-When logging into the proot container for the first time, a one-time configuration runs on your first login to set up your keyboard, locales and timezone preferences.
+When logging into the container for the first time, a one-time configuration runs on your first login to set up your keyboard, locales and timezone preferences.
 
 The vnc session manager requires you to select your preferred display resolution for the best display experience.
 
@@ -186,48 +181,7 @@ To start the vnc server and restart the display output, type `'vnc-session -o'`.
 The next login will automatically launch the session for you using the settings you've chosen previously:
 The first login saves the selection under `"${HOME}"/.vnc/selection` and uses it to start the VNC server and viewer automatically for your convenience!
 
-Logging out by pressing Ctrl+D or by typing `'logout'` or `'exit'` will automatically stop the vnc session and exit the proot container back to the Termux shell.
-
-### Setup and execution structure:
-
-```
-dextop
-├── termux-utilities
-│       ├── [ termux-update ]
-│       ├── termux-properties
-│       ├── termux-storage
-│       ├── termux-repositories
-│       ├── termux-packages
-│       ├── termux-links
-│       ├── termux-checkpoint
-│       ├── proot-architecture
-│       ├── proot-information
-│       ├── proot-distribution
-│       ├── proot-image
-│       ├── proot-groups
-│       ├── proot-environment
-│       ├── proot-network
-│       ├── proot-preload
-│       ├── proot-checkpoint
-│       └── [ PROOT LOGIN - ROOT ]
-│           ├── proot-user
-│           ├── proot-superuser
-│           ├── proot-shell
-│           ├── proot-expand
-│           ├── proot-repositories
-│           ├── proot-packages
-│           ├── proot-links
-│       ├── user-checkpoint
-│       └── [ PROOT LOGIN - ROOT ]
-│           ├── user-packages
-        ├── vnc-checkpoint
-
-[ PROOT LOGIN - USER ]
-        └── proot-keyboard
-        └── proot-locales
-        └── proot-timezones
-
-```
+Logging out by pressing Ctrl+D or by typing `'logout'` or `'exit'` will automatically stop the vnc session and exit the container back to the Termux shell.
 
 ### Reports:
 

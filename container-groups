@@ -55,13 +55,48 @@ echo
 
 # variables #
 
-command_expand=$( find "${ROOT_DIRECTORY}" -type f -iname unminimize)
-
 # defaults #
 
-# unminimize system image
+# functions #
 
-console.silence "yes | ${command_expand}" &
+# set IFS
 
-console.progress "Expanding..."
-echo
+IFS=' '
+
+# read android system IDs
+
+read uid gid groups <<< $(id)
+
+uid=${uid/uid=}
+gid=${gid/gid=}
+groups=${groups/groups=}
+
+# set IFS
+
+IFS=','
+
+# parse existing groups
+
+read -r -a groups_list <<< "${groups}"
+
+for line in "${groups_list[@]}"
+do
+	line=${line/(/ }
+	line=${line/)}
+
+	# set IFS
+
+	IFS=' '
+
+	# transfer unregistered IDs
+
+	read group_number group_name <<< ${line}
+
+	[ -f "${ROOT_DIRECTORY}"/etc/group ]   && echo "${group_name}:x:${group_number}:" >> "${ROOT_DIRECTORY}"/etc/group
+	[ -f "${ROOT_DIRECTORY}"/etc/gshadow ] && echo "${group_name}:x:${group_number}:" >> "${ROOT_DIRECTORY}"/etc/gshadow
+
+done
+
+# reset IFS
+
+IFS=''

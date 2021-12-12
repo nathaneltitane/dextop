@@ -59,13 +59,13 @@ echo
 
 # configure
 
-if [ ! -f "${BINARIES_DIRECTORY}"/proot-keyboard-complete ]
+if [ ! -f "${BINARIES_DIRECTORY}"/container-timezones-complete ]
 then
-	# configure keyboard setup
+	# configure timezones setup
 	
-	sudo dpkg-reconfigure keyboard-configuration
+	sudo dpkg-reconfigure tzdata
 	
 	# confirm uninterrupted configuration
 	
-	echo "yes" > "${BINARIES_DIRECTORY}"/proot-keyboard-complete
+	echo "yes" > "${BINARIES_DIRECTORY}"/container-timezones-complete
 fi

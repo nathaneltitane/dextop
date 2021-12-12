@@ -57,6 +57,8 @@ echo
 
 # defaults #
 
+# functions #
+
 # set nameserver
 
 cat << "FILE" -> "${ROOT_DIRECTORY}"/etc/hostname

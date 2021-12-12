@@ -38,7 +38,7 @@ do
 		;;
 
 		-u|--update)
-			package_option="update"
+			install_option="update"
 		;;
 
 		-h|--help)
@@ -105,32 +105,27 @@ echo
 
 # functions #
 
-
 # export variables
 
-echo "# ${script} #"															>> "${PREFIX}"/bin/dextop
+echo "# ${script} #"															>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 
-echo 'export MAIN_DIRECTORY="${PREFIX%/*}"'										>> "${PREFIX}"/bin/dextop
-echo 'export BINARIES_DIRECTORY="${PREFIX}"/bin'								>> "${PREFIX}"/bin/dextop
-echo 'export CONFIGURATIONS_DIRECTORY="${PREFIX}"/etc'							>> "${PREFIX}"/bin/dextop
-echo 'export LIBRARIES_DIRECTORY="${PREFIX}"/lib'								>> "${PREFIX}"/bin/dextop
-echo 'export SOURCES_DIRECTORY="${PREFIX}"/etc/apt'								>> "${PREFIX}"/bin/dextop
-echo 'export BACKUP_DIRECTORY="${MAIN_DIRECTORY}"/bkp'							>> "${PREFIX}"/bin/dextop
-echo 'export IMAGE_DIRECTORY="${MAIN_DIRECTORY}"/img'							>> "${PREFIX}"/bin/dextop
-echo 'export ISO_DIRECTORY="${MAIN_DIRECTORY}"/iso'								>> "${PREFIX}"/bin/dextop
-echo 'export MOUNT_DIRECTORY="${MAIN_DIRECTORY}"/mnt'							>> "${PREFIX}"/bin/dextop
+echo 'export MAIN_DIRECTORY="${PREFIX%/*}"'										>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo 'export BINARIES_DIRECTORY="${PREFIX}"/bin'								>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo 'export CONFIGURATIONS_DIRECTORY="${PREFIX}"/etc'							>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo 'export LIBRARIES_DIRECTORY="${PREFIX}"/lib'								>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo 'export SOURCES_DIRECTORY="${PREFIX}"/etc/apt'								>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo 'export BACKUP_DIRECTORY="${MAIN_DIRECTORY}"/bkp'							>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo 'export IMAGE_DIRECTORY="${MAIN_DIRECTORY}"/img'							>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo 'export ISO_DIRECTORY="${MAIN_DIRECTORY}"/iso'								>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo 'export MOUNT_DIRECTORY="${MAIN_DIRECTORY}"/mnt'							>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 
-echo "export version=${version}"												>> "${PREFIX}"/bin/dextop
-echo "export desktop_option=${desktop_option}"									>> "${PREFIX}"/bin/dextop
-echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/dextop
-echo "export package_option=${package_option}"									>> "${PREFIX}"/bin/dextop
-echo "export user_option=${user_option}"										>> "${PREFIX}"/bin/dextop
+echo "export version=${version}"												>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo "export desktop_option=${desktop_option}"									>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 
-# source variables
-
-[ -f "${PREFIX}"/bin/dextop ] && . "${PREFIX}"/bin/dextop
-
-# run failsafe utilities install
+# run failsafe package install:
+# termux package servers are sometimes unresponsive or badly authenticated
 
 console.fwd "Please wait..."
 echo
@@ -149,27 +144,26 @@ console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-repositories
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-storage
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-update
 
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-architecture
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-distribution
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-environment
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-expand
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-groups
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-hostname
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-hosts
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-image
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-information
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-keyboard
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-links
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-locales
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-nameserver
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-packages
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-preload
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-repositories
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-session
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-shell
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-superuser
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-timezones
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-user
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-distribution
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-environment
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-expand
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-groups
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-hostname
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-hosts
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-image
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-information
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-keyboard
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-links
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-locales
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-nameserver
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-packages
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-preload
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-repositories
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-session
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-shell
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-superuser
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-timezones
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-user
 
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	user-packages
 
@@ -182,9 +176,10 @@ console.clear
 
 # in order of execution
 
+[ "${install_option}" = "update" ] && "${BINARIES_DIRECTORY}"/termux-update
+
 if [ ! -f "${BINARIES_DIRECTORY}"/termux-checkpoint-complete ]
 then
-	"${BINARIES_DIRECTORY}"/termux-update
 	"${BINARIES_DIRECTORY}"/termux-properties
 	"${BINARIES_DIRECTORY}"/termux-storage
 	"${BINARIES_DIRECTORY}"/termux-repositories
@@ -199,44 +194,43 @@ fi
 
 echo "yes" > "${BINARIES_DIRECTORY}"/termux-setup-complete
 
-if [ ! -f "${BINARIES_DIRECTORY}"/proot-checkpoint-complete ]
+if [ ! -f "${BINARIES_DIRECTORY}"/container-checkpoint-complete ]
 then
-	"${BINARIES_DIRECTORY}"/proot-architecture
-	"${BINARIES_DIRECTORY}"/proot-information
-	"${BINARIES_DIRECTORY}"/proot-distribution
-	"${BINARIES_DIRECTORY}"/proot-image
-	"${BINARIES_DIRECTORY}"/proot-groups
-	"${BINARIES_DIRECTORY}"/proot-environment
-	"${BINARIES_DIRECTORY}"/proot-hostname
-	"${BINARIES_DIRECTORY}"/proot-hosts
-	"${BINARIES_DIRECTORY}"/proot-nameserver
-	"${BINARIES_DIRECTORY}"/proot-preload
+	"${BINARIES_DIRECTORY}"/container-information
+	"${BINARIES_DIRECTORY}"/container-distribution
+	"${BINARIES_DIRECTORY}"/container-image
+	"${BINARIES_DIRECTORY}"/container-groups
+	"${BINARIES_DIRECTORY}"/container-environment
+	"${BINARIES_DIRECTORY}"/container-hostname
+	"${BINARIES_DIRECTORY}"/container-hosts
+	"${BINARIES_DIRECTORY}"/container-nameserver
+	"${BINARIES_DIRECTORY}"/container-preload
 
-	echo "yes" > "${BINARIES_DIRECTORY}"/proot-checkpoint-complete
+	echo "yes" > "${BINARIES_DIRECTORY}"/container-checkpoint-complete
 
-	"${BINARIES_DIRECTORY}"/proot-session
+	"${BINARIES_DIRECTORY}"/container-session
 else
-	"${BINARIES_DIRECTORY}"/proot-user											"${user_name}"
-	"${BINARIES_DIRECTORY}"/proot-superuser										"${user_name}"
+	"${BINARIES_DIRECTORY}"/container-user											"${user_name}"
+	"${BINARIES_DIRECTORY}"/container-superuser										"${user_name}"
 
-	"${BINARIES_DIRECTORY}"/proot-shell
+	"${BINARIES_DIRECTORY}"/container-shell
 
-	"${BINARIES_DIRECTORY}"/proot-expand
-	"${BINARIES_DIRECTORY}"/proot-repositories
-	"${BINARIES_DIRECTORY}"/proot-packages
-	"${BINARIES_DIRECTORY}"/proot-links
+	"${BINARIES_DIRECTORY}"/container-expand
+	"${BINARIES_DIRECTORY}"/container-repositories
+	"${BINARIES_DIRECTORY}"/container-packages
+	"${BINARIES_DIRECTORY}"/container-links
 fi
 
 # confirm uninterrupted setup
 
-echo "yes" > "${BINARIES_DIRECTORY}"/proot-setup-complete
+echo "yes" > "${BINARIES_DIRECTORY}"/container-setup-complete
 
 if [ ! -f "${BINARIES_DIRECTORY}"/user-checkpoint-complete ]
 then
 
 	echo "yes" > "${BINARIES_DIRECTORY}"/user-checkpoint-complete
 
-	"${BINARIES_DIRECTORY}"/proot-session
+	"${BINARIES_DIRECTORY}"/container-session
 else
 	"${BINARIES_DIRECTORY}"/user-packages
 fi

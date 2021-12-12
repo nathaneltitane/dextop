@@ -59,13 +59,13 @@ echo
 
 # configure
 
-if [ ! -f "${BINARIES_DIRECTORY}"/proot-timezones-complete ]
+if [ ! -f "${BINARIES_DIRECTORY}"/container-locales-complete ]
 then
-	# configure timezones setup
+	# configure locales setup
 	
-	sudo dpkg-reconfigure tzdata
+	sudo dpkg-reconfigure locales
 	
 	# confirm uninterrupted configuration
 	
-	echo "yes" > "${BINARIES_DIRECTORY}"/proot-timezones-complete
+	echo "yes" > "${BINARIES_DIRECTORY}"/container-locales-complete
 fi

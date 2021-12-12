@@ -171,12 +171,12 @@ IFS=''
 
 # export variables
 
-echo "# ${script} #"															>> "${PREFIX}"/bin/dextop
+echo "# ${script} #"															>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 
-echo "export DISTRIBUTION_NAME=${distribution_name}"							>> "${PREFIX}"/bin/dextop
-echo "export DISTRIBUTION_RELEASE=${distribution_release}"						>> "${PREFIX}"/bin/dextop
-echo "export DISTRIBUTION_VERSION=${distribution_version}"						>> "${PREFIX}"/bin/dextop
+echo "export DISTRIBUTION_NAME=${distribution_name}"							>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo "export DISTRIBUTION_RELEASE=${distribution_release}"						>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo "export DISTRIBUTION_VERSION=${distribution_version}"						>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 
-echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'		>> "${PREFIX}"/bin/dextop
-echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'				>> "${PREFIX}"/bin/dextop
-echo 'export ROOT_HOME_DIRECTORY="${ROOT_DIRECTORY}/root"'						>> "${PREFIX}"/bin/dextop
+echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'		>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'				>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo 'export ROOT_HOME_DIRECTORY="${ROOT_DIRECTORY}/root"'						>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop

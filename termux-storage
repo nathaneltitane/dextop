@@ -80,7 +80,7 @@ then
 	console.wrn "Internal and external storage locations are made available."
 	echo
 
-	console.inf "Storage is made accessible through proot container."
+	console.inf "Storage is made accessible through container."
 	echo
 
 	console.ins "Select 'Allow' when prompted to proceed."

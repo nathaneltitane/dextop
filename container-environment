@@ -62,7 +62,7 @@ echo
 
 PATH=""
 
-# proot container
+# container
 
 [ -d "${ROOT_DIRECTORY}"/usr/local/sbin ]										&& PATH+="/usr/local/sbin:"
 [ -d "${ROOT_DIRECTORY}"/usr/local/bin ]										&& PATH+="/usr/local/bin:"
@@ -85,11 +85,4 @@ PATH=""
 
 cat << "FILE" -> "${ROOT_DIRECTORY}"/etc/environment
 PATH="${PATH}"
-
 FILE
-
-# export variables
-
-echo "# ${script} #"															>> "${PREFIX}"/bin/dextop
-
-echo "export iso_architecture=${img_architecture}"								>> "${PREFIX}"/bin/dextop

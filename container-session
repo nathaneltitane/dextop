@@ -91,7 +91,7 @@ echo
 # variables #
 
 # verify user existence:
-# loop through proot /etc/passwd and make sure 'user' exists
+# loop through container's /etc/passwd and make sure 'user' exists
 # and corresponds to 'username' then source environment variables from file
 # default to 'root' if 'username' is invalid, not specified or does not exist
 
@@ -174,9 +174,9 @@ do
 	
 done < "${ROOT_DIRECTORY}"/etc/passwd
 
-# system
+# system #
 
-# explicit proot setup defaults:
+# explicit 'proot' command setup defaults:
 # used to specify the desktop session:
 # login format / environment /pathnv'
 
@@ -185,7 +185,7 @@ done < "${ROOT_DIRECTORY}"/etc/passwd
 
 PATH=""
 
-# proot container
+# container
 
 [ -d "${ROOT_DIRECTORY}"/usr/local/sbin ]										&& PATH+="/usr/local/sbin:"
 [ -d "${ROOT_DIRECTORY}"/usr/local/bin ]										&& PATH+="/usr/local/bin:"
@@ -266,21 +266,21 @@ TMPDIR="/tmp"
 
 if [ ! -z "${APPLICATION}" ]
 then
-	console.scs "Valid application name [ ${APPLICATION} ]."
+	console.scs "Valid application name" "[ ${APPLICATION} ]"
 	echo
 	
 	if [ ! -f "${ROOT_DIRECTORY}"/usr/bin/"${APPLICATION}" ]
 	then
-		console.err "Invalid application name [ ${APPLICATION} ]."
+		console.err "Invalid application name" "[ ${APPLICATION} ]"
 		echo
 		
 		unset "${APPLICATION}"
 	fi
 
-	console.fwd "Starting application [ ${SESSION_NAME} // ${USER} // ${APPLICATION} ]..."
+	console.fwd "Starting application" "[ ${SESSION_NAME} // ${USER} // ${APPLICATION} ]"
 	echo
 else
-	console.fwd "Starting session [ ${SESSION_NAME} // ${USER} ]..."
+	console.fwd "Starting session" "[ ${SESSION_NAME} // ${USER} ]"
 	echo
 fi
 
@@ -292,7 +292,7 @@ console.clear
 
 unset LD_PRELOAD
 
-# setup proot command arguments
+# setup 'proot' command arguments
 
 unset "${command}"
 
@@ -366,6 +366,6 @@ command+=" XDG_CONFIG_DIRS=/etc/xdg"
 command+=" XAUTHORITY=${XDG_RUNTIME_DIR}/.Xauthority"
 command+=" ${SHELL} --login"
 
-# execute proot
+# execute 'proot'
 
 exec ${command}

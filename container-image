@@ -62,6 +62,43 @@ echo
 
 # functions #
 
+image_architecture () {
+	# test processor architecture string
+
+	print_architecture="$(uname -m)"
+
+	for i in ${!cpu_architectures[@]}
+	do
+		if [[ "$print_architecture" == "${cpu_architectures[i]}" ]]
+		then
+			img_architecture=${img_architectures[i]}
+
+			console.scs "Valid architecture" "[ ${img_architecture} ]"
+			echo
+
+			break
+		fi
+	done
+
+	# test image architecture string
+	
+	if [ -z "$img_architecture" ]
+	then
+		img_architecture="N/A"
+
+		console.wrn "Unknown architecture" "[ ${img_architecture} ]"
+		echo
+
+		console.fwd "Aborting..."
+		echo
+
+		console.stp "Exiting."
+		echo
+
+		exit 1
+	fi
+}
+
 image_directories () {
 	# populate required directories and structure
 
@@ -357,7 +394,7 @@ image_unpack () {
 	# proot -l tar -xzf "${1}" -X "${2}" || :
 
 	# exclude archive directories: dev | proc | sys | system
-	# 'proot-session' will bind and mount those device directories to proot
+	# 'container-session' will bind those device directories to the container
 
 	ROOT_DIRECTORY="${ROOT_DIRECTORY}"
 
@@ -501,6 +538,10 @@ else
 		fi
 	fi
 fi
+
+# verify architecture
+
+image_architecture
 
 # handle distribution name and version
 
