@@ -113,6 +113,16 @@ vnc_list=(
 	tigervnc-standalone-server
 )
 
+user_list=(
+	doublecmd-qt
+	freecad
+	fstl
+	leocad
+	povray
+	puddletag
+	youtube-dl
+)
+
 i3wm_list=(
 	i3
 	i3lock
@@ -220,6 +230,7 @@ install_list=(
 	${security_list[@]}
 	${utilities_list[@]}
 	${vnc_list[@]}
+	${user_list[@]}
 )
 
 # options #

@@ -57,20 +57,18 @@ echo
 
 # defaults #
 
-console.directory"${HOME_DIRECTORY}" Desktop
-console.directory"${HOME_DIRECTORY}" Documents
-console.directory"${HOME_DIRECTORY}" Downloads
-console.directory"${HOME_DIRECTORY}" Music
-console.directory"${HOME_DIRECTORY}" Pictures
-console.directory"${HOME_DIRECTORY}" Public
-console.directory"${HOME_DIRECTORY}" Templates
-console.directory"${HOME_DIRECTORY}" Videos
+# home #
 
-# create home directory
+console.directory "${HOME_DIRECTORY}" Desktop
+console.directory "${HOME_DIRECTORY}" Documents
+console.directory "${HOME_DIRECTORY}" Downloads
+console.directory "${HOME_DIRECTORY}" Music
+console.directory "${HOME_DIRECTORY}" Pictures
+console.directory "${HOME_DIRECTORY}" Public
+console.directory "${HOME_DIRECTORY}" Templates
+console.directory "${HOME_DIRECTORY}" Videos
 
-console.directory "${HOME_DIRECTORY}" ${directories_list[@]}
-
-# bash
+# bash #
 
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"						.bash_aliases
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"						.bash_functions
@@ -79,7 +77,7 @@ console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/al
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"						.hushlogin
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"						.profile
 
-# bash aliases
+# bash aliases #
 
 console.directory "${HOME_DIRECTORY}" .bash-aliases
 
@@ -101,7 +99,7 @@ console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/al
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		usage
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		where
 
-# bash functions
+# bash functions #
 
 console.directory "${HOME_DIRECTORY}" .bash-functions
 
@@ -114,7 +112,7 @@ console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/fu
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME_DIRECTORY}"/.bash-functions		weather
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME_DIRECTORY}"/.bash-functions		youtube
 
-# vnc
+# vnc #
 
 console.directory "${HOME_DIRECTORY}"/.vnc
 
@@ -151,7 +149,7 @@ console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dm
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/xfconf		"${BINARIES_DIRECTORY}"					xfconf-read
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/xfconf		"${BINARIES_DIRECTORY}"					xfconf-write
 
-# leocad
+# leocad #
 
 console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				"${BINARIES_DIRECTORY}"					leocad-build
 console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				"${BINARIES_DIRECTORY}"					leocad-configuration
@@ -159,6 +157,6 @@ console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main			
 console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				"${BINARIES_DIRECTORY}"					leocad-launcher
 console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				"${BINARIES_DIRECTORY}"					leocad-position
 
-# youtube-dl
+# youtube-dl #
 
 console.download https://yt-dl.org/downloads/latest											"${BINARIES_DIRECTORY}"					youtube-dl

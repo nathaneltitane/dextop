@@ -25,7 +25,11 @@ do
 		-x|--stop)
 			option="stop"
 		;;
-		
+
+		-p|--pass)
+			option="password"
+		;;
+
 		-h|--help)
 			echo
 			echo -e "Usage: ${script} [OPTION]"
@@ -34,6 +38,8 @@ do
 			echo
 			echo -e "-o, --start \t Start vnc session server."
 			echo -e "-x, --stop \t Stop vnc session server."
+			echo
+			echo -e "-p, --pass \t Generate vnc session password."
 			echo
 			echo -e "-h, --help \t Show help and usage information."
 			echo
@@ -353,6 +359,33 @@ vnc_list () {
 	echo
 }
 
+vnc_pass () {
+
+	# values #
+
+	values_list=(
+		vnc_password
+	)
+
+	# handle user input for values_list
+
+	console_rtn=()
+
+	console.input ${values_list[@]}
+
+	eval ${console_rtn[@]}
+
+	# hash password  using 'vncpasswd' and store it
+
+	console.fwd "Setting password..."
+	echo
+
+	echo "$vnc_password" | vncpasswd -f > "${HOME_DIRECTORY}"/.vnc/passwd
+
+	console.scs "Password changed."
+	echo
+}
+
 if [ "${option}" = "start" ]
 then
 	# handle selections display
@@ -482,6 +515,13 @@ then
 	# start vnc session
 	
 	vnc_start
+fi
+
+if [ "${option}" = "password" ]
+then
+	# generate password
+
+	vnc_pass
 fi
 
 if [ "${option}" = "stop" ]

@@ -24,7 +24,7 @@ Choose between i3WM or XFCE4 to get your work done or keep the base install for 
 
 Compositing should be disabled under XFCE4 to optimize resource usage and prevent display tearing and other glitches.
 Turning compositing off allows for the best possible performance and experience in accordance to current Android system and security limitations:
-This is required due to the Android user-space runtime policy and limited hardware access: there is no graphics hardware acceleration available - the container graphics are emulated and run using LLVM.
+This is required due to the Android user space runtime policy and limited hardware access: there is no graphics hardware acceleration available - the container graphics are emulated and run using LLVM.
 
 ### Power users be warned:
 
@@ -157,7 +157,7 @@ The rest of the setup is fully automated and should run its course until the con
 
 ### Customization:
 
-Use and edit 'user-packages' prior to starting the setup to customize your list of installed applications, libraries, frameworks, utilities and other third party package locations.
+Edit the  'user_list' array in the 'container-packages' file prior to starting the setup to customize your list of installed applications, libraries, frameworks, utilities and other third party package locations.
 
 **You can modify any of the other scripts AT YOUR OWN RISK!**
 **Any modification of the Dextop setup routine scripts implies you are fully aware of potential breakage and the consequences of doing so:**

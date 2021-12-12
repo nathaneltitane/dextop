@@ -37,10 +37,6 @@ do
 			install_option="full"
 		;;
 
-		-u|--update)
-			install_option="update"
-		;;
-
 		-h|--help)
 			echo
 			echo -e "USAGE:"
@@ -122,7 +118,6 @@ echo 'export MOUNT_DIRECTORY="${MAIN_DIRECTORY}"/mnt'							>> "${PREFIX}"/bin/d
 echo "export version=${version}"												>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 echo "export desktop_option=${desktop_option}"									>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 
 # run failsafe package install:
 # termux package servers are sometimes unresponsive or badly authenticated
@@ -165,9 +160,6 @@ console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-superuser
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-timezones
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-user
 
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	user-packages
-
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	vnc-pass
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	vnc-session
 
 # clear #
@@ -176,10 +168,9 @@ console.clear
 
 # in order of execution
 
-[ "${install_option}" = "update" ] && "${BINARIES_DIRECTORY}"/termux-update
-
 if [ ! -f "${BINARIES_DIRECTORY}"/termux-checkpoint-complete ]
 then
+"${BINARIES_DIRECTORY}"/termux-update
 	"${BINARIES_DIRECTORY}"/termux-properties
 	"${BINARIES_DIRECTORY}"/termux-storage
 	"${BINARIES_DIRECTORY}"/termux-repositories
@@ -187,12 +178,12 @@ then
 	"${BINARIES_DIRECTORY}"/termux-links
 	"${BINARIES_DIRECTORY}"/termux-additions
 
-	echo "yes" > "${BINARIES_DIRECTORY}"/termux-checkpoint-complete
+	touch "${BINARIES_DIRECTORY}"/termux-checkpoint-complete
 fi
 
 # confirm uninterrupted setup
 
-echo "yes" > "${BINARIES_DIRECTORY}"/termux-setup-complete
+	touch "${BINARIES_DIRECTORY}"/termux-setup-complete
 
 if [ ! -f "${BINARIES_DIRECTORY}"/container-checkpoint-complete ]
 then
@@ -206,7 +197,7 @@ then
 	"${BINARIES_DIRECTORY}"/container-nameserver
 	"${BINARIES_DIRECTORY}"/container-preload
 
-	echo "yes" > "${BINARIES_DIRECTORY}"/container-checkpoint-complete
+	touch "${BINARIES_DIRECTORY}"/container-checkpoint-complete
 
 	"${BINARIES_DIRECTORY}"/container-session
 else
@@ -223,32 +214,4 @@ fi
 
 # confirm uninterrupted setup
 
-echo "yes" > "${BINARIES_DIRECTORY}"/container-setup-complete
-
-if [ ! -f "${BINARIES_DIRECTORY}"/user-checkpoint-complete ]
-then
-
-	echo "yes" > "${BINARIES_DIRECTORY}"/user-checkpoint-complete
-
-	"${BINARIES_DIRECTORY}"/container-session
-else
-	"${BINARIES_DIRECTORY}"/user-packages
-fi
-
-# confirm uninterrupted setup
-
-echo "yes" > "${BINARIES_DIRECTORY}"/user-setup-complete
-
-if [ ! -f "${BINARIES_DIRECTORY}"/vnc-checkpoint-complete ]
-then
-
-	echo "yes" > "${BINARIES_DIRECTORY}"/vnc-checkpoint-complete
-fi
-
-# confirm uninterrupted setup
-
-echo "yes" > "${BINARIES_DIRECTORY}"/vnc-setup-complete
-
-# checkpoint #
-
-echo "yes" > "${BINARIES_DIRECTORY}"/dextop-checkpoint-complete
+	touch "${BINARIES_DIRECTORY}"/container-setup-complete
