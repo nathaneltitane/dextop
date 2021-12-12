@@ -184,27 +184,6 @@ add_password > /dev/null
 uid="$(id -u ${user_name})"
 gid="$(id -g ${user_name})"
 
-console.fwd "Setting up home directory..."
-echo
-
-# populate directory list:
-# use standard home directories
-
-directories_list=(
-	Desktop
-	Documents
-	Downloads
-	Music
-	Pictures
-	Public
-	Templates
-	Videos
-)
-
-# create home directory
-
-console.directory "${HOME_DIRECTORY}" ${directories_list[@]}
-
 # runtime #
 
 console.fwd "Setting up runtime directory..."

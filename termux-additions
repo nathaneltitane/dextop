@@ -1,0 +1,164 @@
+#!/bin/bash
+
+# dependencies #
+
+. /data/data/com.termux/files/usr/bin/console
+. /data/data/com.termux/files/usr/bin/dextop
+
+# script #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="12-03-2021"
+
+# usage #
+
+while (($#))
+do
+	case "${1}" in
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-h, --help \t Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version ${version} ]"
+			echo
+
+			exit
+		;;
+
+		*)
+			echo
+			echo "Usage: ${script} [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+		;;
+		
+	esac
+
+	shift
+done
+
+# prompt #
+
+console.script "Setting up ${script#*-}"
+echo
+
+# variables #
+
+# defaults #
+
+console.directory"${HOME_DIRECTORY}" Desktop
+console.directory"${HOME_DIRECTORY}" Documents
+console.directory"${HOME_DIRECTORY}" Downloads
+console.directory"${HOME_DIRECTORY}" Music
+console.directory"${HOME_DIRECTORY}" Pictures
+console.directory"${HOME_DIRECTORY}" Public
+console.directory"${HOME_DIRECTORY}" Templates
+console.directory"${HOME_DIRECTORY}" Videos
+
+# create home directory
+
+console.directory "${HOME_DIRECTORY}" ${directories_list[@]}
+
+# bash
+
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"						.bash_aliases
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"						.bash_functions
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"						.bash_logout
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"						.bashrc
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"						.hushlogin
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"						.profile
+
+# bash aliases
+
+console.directory "${HOME_DIRECTORY}" .bash-aliases
+
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		apt
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		command
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		copy
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		count
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		directory
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		duplicate
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		git
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		grep
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		kill
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		list
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		nano
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		ping
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		sudo
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		shortcuts
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		system
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		usage
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		where
+
+# bash functions
+
+console.directory "${HOME_DIRECTORY}" .bash-functions
+
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME_DIRECTORY}"/.bash-functions		address
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME_DIRECTORY}"/.bash-functions		audio
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME_DIRECTORY}"/.bash-functions		extract
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME_DIRECTORY}"/.bash-functions		record
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME_DIRECTORY}"/.bash-functions		speed
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME_DIRECTORY}"/.bash-functions		sprunge
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME_DIRECTORY}"/.bash-functions		weather
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME_DIRECTORY}"/.bash-functions		youtube
+
+# vnc
+
+console.directory "${HOME_DIRECTORY}"/.vnc
+
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/vnc			"${HOME_DIRECTORY}"/.vnc				passwd
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/vnc			"${HOME_DIRECTORY}"/.vnc				xstartup
+
+# i3wm #
+
+console.directory "${HOME_DIRECTORY}"/.config i3
+console.directory "${HOME_DIRECTORY}"/.config i3status
+console.directory "${HOME_DIRECTORY}"/.config ranger
+
+console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/i3				"${HOME_DIRECTORY}"/.config/i3			config
+console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/i3status		"${HOME_DIRECTORY}"/.config/i3status	config
+
+# ranger #
+
+console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/ranger			"${HOME_DIRECTORY}"/.config/ranger		rc.conf
+
+ # dmenu #
+
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-change-background
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-confirm
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-exit-session
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-i3-shortcuts
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-open-directory
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-open-file
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-open-file-manager
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-open-manual
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-show-shortcuts
+
+# xfce #
+
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/xfconf		"${BINARIES_DIRECTORY}"					xfconf-read
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/xfconf		"${BINARIES_DIRECTORY}"					xfconf-write
+
+# leocad
+
+console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				"${BINARIES_DIRECTORY}"					leocad-build
+console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				"${BINARIES_DIRECTORY}"					leocad-configuration
+console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				"${BINARIES_DIRECTORY}"					leocad-download
+console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				"${BINARIES_DIRECTORY}"					leocad-launcher
+console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				"${BINARIES_DIRECTORY}"					leocad-position
+
+# youtube-dl
+
+console.download https://yt-dl.org/downloads/latest											"${BINARIES_DIRECTORY}"					youtube-dl

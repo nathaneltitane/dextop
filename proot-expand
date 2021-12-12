@@ -55,7 +55,7 @@ echo
 
 # variables #
 
-command_expand="/usr/local/sbin/unminimize"
+command_expand=$( find "${ROOT_DIRECTORY}" -type f -iname unminimize)
 
 # defaults #
 

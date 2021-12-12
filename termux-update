@@ -55,12 +55,12 @@ echo
 
 # variables #
 
-
-
 packages_url="https://f-droid.org/en/packages"
 repository_url="https://f-droid.org/repo"
 
-# packages #
+# defaults #
+
+# packages
 
 packages_list=(
 	com.termux

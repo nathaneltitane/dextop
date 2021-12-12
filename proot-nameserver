@@ -57,29 +57,10 @@ echo
 
 # defaults #
 
-# initialize cleanup: find setup completion flag
+# set nameserver
 
-if [ -f "${BINARIES_DIRECTORY}"/termux-checkpoint-complete ]
-then
-	# message #
+cat << 'FILE' -> "${ROOT_DIRECTORY}"/etc/resolv.conf
+nameserver 1.1.1.1
+nameserver 1.0.0.1
+FILE
 
-	console.scs "Setup complete" "[ ${script} ]"
-	echo
-	
-	console.fwd "Removing setup files..."
-	echo
-
-	# remove setup files
-
-	remove_list=(
-	)
-
-	console.delete ${remove_list[@]}
-
-else
-	console.err "Setup errors were encountered" "[ ${script} ]"
-	echo
-	
-	console.inf "Consult setup logs for details." "[ ${PREFIX}/var/log/ ]"
-	echo
-fi

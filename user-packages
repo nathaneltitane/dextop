@@ -76,18 +76,14 @@ applications_list=(
 )
 
 development_list=(
-	git
-	hub
-	python
 )
 
 multimedia_list=(
-	ffmpeg
+	youtube-dl
 )
 
 utilities_list=(
 	fstl
-	youtube-dl
 )
 
 # initialize install list

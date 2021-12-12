@@ -51,34 +51,29 @@ done
 # prompt #
 
 console.script "Setting up ${script#*-}"
+echo
 
 # variables #
 
 # defaults #
 
-# export variables
+# set hosts
 
-echo "# ${script} #"															>> "${PREFIX}"/bin/dextop
+cat << FILE -> "${ROOT_DIRECTORY}"/etc/hosts
+# IPv4 #
 
-# clear #
+127.0.0.1	localhost.localdomain
+127.0.0.1	localhost
 
-console.clear
+# IPv6 #
 
-# source variables
-
-[ -f "${PREFIX}"/bin/dextop ] && . "${PREFIX}"/bin/dextop
-
-# setup #
-
-# in order of execution
-
-if [ ! -f "${BINARIES_DIRECTORY}"/vnc-checkpoint-complete ]
-then
-	"${BINARIES_DIRECTORY}"/vnc-environment
-	"${BINARIES_DIRECTORY}"/vnc-checkpoint
-	"${BINARIES_DIRECTORY}"/vnc-clean
-fi
-
-# confirm uninterrupted setup
-
-echo "yes" > "${BINARIES_DIRECTORY}"/vnc-setup-complete
+::1			localhost.localdomain
+::1			localhost
+::1			ip6-localhost
+::1			ip6-loopbak
+fe00::0		ip6-localnet
+fe00::0		ip6-mcastprefix
+ff02::1		ip6-allnodes
+ff02::2		ip6-allrouters
+ff02::3		ip6-allhosts
+FILE

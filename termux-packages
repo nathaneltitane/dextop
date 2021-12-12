@@ -77,7 +77,7 @@ multimedia_list=(
 	gstreamer
 )
 
-termux_extensions_list=(
+extensions_list=(
 	termux-am
 	termux-api
 	termux-auth
@@ -90,7 +90,7 @@ termux_extensions_list=(
 	termux-tools
 )
 
-termux_repositories_list=(
+repositories_list=(
 	game-repo
 	root-repo
 	science-repo
@@ -167,21 +167,6 @@ xfce_addons_list=(
 	xfce4-whiskermenu-plugin
 )
 
-termux_list=(
-	${documentation_list[@]}
-	${multimedia_list[@]}
-	${termux_extensions_list[@]}
-	${termux_repositories_list[@]}
-	${utilities_list[@]}
-	${vnc_list[@]}
-)
-
-proot_list=(
-	${termux_extensions_list[@]}
-	${termux_repositories_list[@]}
-	${utilities_list[@]}
-)
-
 # initialize desktop environment list
 
 desktop_environment_list=()
@@ -192,35 +177,11 @@ install_list=()
 
 # options #
 
-# dextop
-
-# termux #
-
-if [[ "${dextop_option}" = "termux" ]]
-then
-	install_list+=(
-		${termux_list[@]}
-	)
-fi
-
-# proot #
-
-if [[ "${dextop_option}" = "proot" ]]
-then
-	install_list+=(
-		${proot_list[@]}
-	)
-fi
-
-# options #
-
-# desktop
-
 # none #
 
 if [[ "${desktop_option}" = "none" ]]
 then
-	desktop_environment_list=(
+	desktop_environment_list+=(
 	)
 
 	if [[ "${install_option}" = "full" ]]
@@ -234,7 +195,7 @@ fi
 
 if [[ "${desktop_option}" = "i3wm" ]]
 then
-	desktop_environment_list=(
+	desktop_environment_list+=(
 		${i3wm_list[@]}
 	)
 
@@ -252,7 +213,7 @@ fi
 
 if [[ "${desktop_option}" = "xfce" ]]
 then
-	desktop_environment_list=(
+	desktop_environment_list+=(
 		${xfce_list[@]}
 
 	)
@@ -267,13 +228,15 @@ then
 	fi
 fi
 
+install_list+=(
+	${documentation_list[@]}
+	${multimedia_list[@]}
+	${extensions_list[@]}
+	${repositories_list[@]}
+	${utilities_list[@]}
+	${vnc_list[@]}
+	${desktop_environment_list[@]}
+)
 # install
-
-if [[ "${dextop_option}" = "termux" ]]
-then
-	install_list+=(
-		${desktop_environment_list[@]}
-	)
-fi
 
 console.install ${install_list[@]}

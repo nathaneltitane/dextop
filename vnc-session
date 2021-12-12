@@ -72,7 +72,8 @@ PORT="590${DISPLAY:1}"
 
 # export variables
 
-# /etc/os-release: source distribution codename variables (e.g. $NAME)
+# /etc/os-release:
+# source distribution codename variables (e.g. $NAME)
 
 [ -f /etc/os-release ] && . /etc/os-release
 
@@ -338,10 +339,10 @@ vnc_list () {
 		vnc_server="${empty}"
 	fi
 
-	console.inf "Display" "[ ${vnc_display} ]" "-"
-	console.inf "Port"    "[ ${vnc_port} ]"    "-"
-	console.inf "Process" "[ ${vnc_process} ]" "-"
-	console.inf "Server"  "[ ${vnc_server} ]"  "-"
+	console.inf "Display" "[ ${vnc_display} ]"
+	console.inf "Port"    "[ ${vnc_port} ]"
+	console.inf "Process" "[ ${vnc_process} ]"
+	console.inf "Server"  "[ ${vnc_server} ]"
 	echo
 }
 

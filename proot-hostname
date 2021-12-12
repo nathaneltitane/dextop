@@ -18,7 +18,7 @@ version="12-03-2021"
 while (($#))
 do
 	case "${1}" in
-		 -h|--help)
+		-h|--help)
 			echo
 			echo -e "Usage: ${script} [OPTION]"
 			echo
@@ -57,6 +57,8 @@ echo
 
 # defaults #
 
-# confirm uninterrupted setup
+# set nameserver
 
-echo "yes" > "${BINARIES_DIRECTORY}"/proot-checkpoint-complete
+cat << "FILE" -> "${ROOT_DIRECTORY}"/etc/hostname
+${HOSTNAME}
+FILE

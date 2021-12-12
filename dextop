@@ -17,14 +17,6 @@ version="12-03-2021"
 while (($#))
 do
 	case "${1}" in
-		-t|--termux)
-			dextop_option="termux"
-		;;
-		
-		-p|--proot)
-			dextop_option="proot"
-		;;
-		
 		-i|--i3wm)
 			desktop_option="i3wm"
 		;;
@@ -53,16 +45,17 @@ do
 			install_option="full"
 		;;
 		
-		-u|--update)
+		-u|--user)
+			user_option="termux"
+		;;
+		
+		-p|--update)
 			package_option="update"
 		;;
 
 		-h|--help)
 			echo
 			echo -e "USAGE:"
-			echo
-			echo -e "-t, --termux           \t Setup Termux environment only - VNC setup not included."
-			echo -e "-p, --proot            \t Setup Proot environment - VNC setup included."
 			echo
 			echo -e "-i, --i3wm             \t I3WM setup: install i3 window manager and utilities."
 			echo
@@ -75,7 +68,7 @@ do
 			echo
 			echo -e "-f, --full             \t Full setup: download and install full desktop environment and utilities."
 			echo
-			echo -e "-u, --update           \t Package update: check/download/install Termux and Termux API package updates."
+			echo -e "-p, --update           \t Package update: check/download/install Termux and Termux API package updates."
 			echo
 			echo -e "-h, --help             \t Show help and usage information."
 			echo
@@ -110,10 +103,6 @@ do
 
 done
 
-# cleanup #
-
-
-
 # clear #
 
 console.clear
@@ -126,15 +115,14 @@ echo
 console.fwd "Please wait..."
 echo
 
-bash -c 'yes | pkg update' >> /dev/null 2>&1
-bash -c 'yes | pkg upgrade' >> /dev/null 2>&1
-bash -c 'yes | pkg install proot debootstrap' >> /dev/null 2>&1
+bash -c 'yes | pkg update'														>> /dev/null 2>&1
+bash -c 'yes | pkg upgrade'														>> /dev/null 2>&1
+bash -c 'yes | pkg install proot debootstrap'									>> /dev/null 2>&1
 
 # variables #
 
 # defaults #
 
-[ -z "${dextop_option}" ]														&& dextop_option="proot"
 [ -z "${desktop_option}" ]														&& desktop_option="i3wm"
 
 # export variables
@@ -152,60 +140,130 @@ echo 'export ISO_DIRECTORY="${MAIN_DIRECTORY}"/iso'								>> "${PREFIX}"/bin/de
 echo 'export MOUNT_DIRECTORY="${MAIN_DIRECTORY}"/mnt'							>> "${PREFIX}"/bin/dextop
 
 echo "export version=${version}"												>> "${PREFIX}"/bin/dextop
-echo "export dextop_option=${dextop_option}"									>> "${PREFIX}"/bin/dextop
 echo "export desktop_option=${desktop_option}"									>> "${PREFIX}"/bin/dextop
 echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/dextop
 echo "export package_option=${package_option}"									>> "${PREFIX}"/bin/dextop
+echo "export user_option=${user_option}"										>> "${PREFIX}"/bin/dextop
 
 # source variables
 
 [ -f "${PREFIX}"/bin/dextop ] && . "${PREFIX}"/bin/dextop
 
-# values #
+# download utilities
 
-utilities_list=(
-	termux-utilities
-	termux-setup
-	proot-utilities
-	proot-setup
-	user-utilities
-	user-setup
-	vnc-utilities
-	vnc-setup
-)
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-additions
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-links
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-packages
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-properties
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-repositories
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-storage
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-update
 
-# download #
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-architecture
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-distribution
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-environment
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-expand
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-groups
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-hostname
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-hosts
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-image
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-information
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-keyboard
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-links
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-locales
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-nameserver
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-packages
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-preload
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-repositories
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-session
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-shell
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-superuser
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-timezones
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	proot-user
 
-console.download get.dxtp.app "${BINARIES_DIRECTORY}" ${utilities_list[@]}
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	user-packages
+
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	vnc-pass
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	vnc-session
 
 # clear #
 
 console.clear
 
-# options #
+# in order of execution
 
-# termux
-
-if [[ "${dextop_option}" = "termux" ]]
+if [ ! -f "${BINARIES_DIRECTORY}"/termux-checkpoint-complete ]
 then
-	"${BINARIES_DIRECTORY}"/termux-setup
-	"${BINARIES_DIRECTORY}"/vnc-setup
+	"${BINARIES_DIRECTORY}"/termux-update
+	"${BINARIES_DIRECTORY}"/termux-properties
+	"${BINARIES_DIRECTORY}"/termux-storage
+	"${BINARIES_DIRECTORY}"/termux-repositories
+	"${BINARIES_DIRECTORY}"/termux-packages
+	"${BINARIES_DIRECTORY}"/termux-links
+	"${BINARIES_DIRECTORY}"/termux-additions
+
+	echo "yes" > "${BINARIES_DIRECTORY}"/termux-checkpoint-complete
 fi
 
-# proot
+# confirm uninterrupted setup
 
-if [[ "${dextop_option}" = "proot" ]]
+echo "yes" > "${BINARIES_DIRECTORY}"/termux-setup-complete
+
+if [ ! -f "${BINARIES_DIRECTORY}"/proot-checkpoint-complete ]
 then
-	"${BINARIES_DIRECTORY}"/termux-setup
-	"${BINARIES_DIRECTORY}"/proot-setup
-	"${BINARIES_DIRECTORY}"/user-setup
-	"${BINARIES_DIRECTORY}"/vnc-setup
+	"${BINARIES_DIRECTORY}"/proot-architecture
+	"${BINARIES_DIRECTORY}"/proot-information
+	"${BINARIES_DIRECTORY}"/proot-distribution
+	"${BINARIES_DIRECTORY}"/proot-image
+	"${BINARIES_DIRECTORY}"/proot-groups
+	"${BINARIES_DIRECTORY}"/proot-environment
+	"${BINARIES_DIRECTORY}"/proot-hostname
+	"${BINARIES_DIRECTORY}"/proot-hosts
+	"${BINARIES_DIRECTORY}"/proot-nameserver
+	"${BINARIES_DIRECTORY}"/proot-preload
+
+	echo "yes" > "${BINARIES_DIRECTORY}"/proot-checkpoint-complete
+
+	"${BINARIES_DIRECTORY}"/proot-session
+else
+	"${BINARIES_DIRECTORY}"/proot-user											"${user_name}"
+	"${BINARIES_DIRECTORY}"/proot-superuser										"${user_name}"
+
+	"${BINARIES_DIRECTORY}"/proot-shell
+
+	"${BINARIES_DIRECTORY}"/proot-expand
+	"${BINARIES_DIRECTORY}"/proot-repositories
+	"${BINARIES_DIRECTORY}"/proot-packages
+	"${BINARIES_DIRECTORY}"/proot-links
 fi
 
-# source variables:
-# get additional setup values
+# confirm uninterrupted setup
 
-[ -f "${PREFIX}"/bin/dextop ] && . "${PREFIX}"/bin/dextop
+echo "yes" > "${BINARIES_DIRECTORY}"/proot-setup-complete
+
+if [ ! -f "${BINARIES_DIRECTORY}"/user-checkpoint-complete ]
+then
+
+	echo "yes" > "${BINARIES_DIRECTORY}"/user-checkpoint-complete
+
+	"${BINARIES_DIRECTORY}"/proot-session
+else
+	"${BINARIES_DIRECTORY}"/user-packages
+fi
+
+# confirm uninterrupted setup
+
+echo "yes" > "${BINARIES_DIRECTORY}"/user-setup-complete
+
+if [ ! -f "${BINARIES_DIRECTORY}"/vnc-checkpoint-complete ]
+then
+
+	echo "yes" > "${BINARIES_DIRECTORY}"/vnc-checkpoint-complete
+fi
+
+# confirm uninterrupted setup
+
+echo "yes" > "${BINARIES_DIRECTORY}"/vnc-setup-complete
 
 # checkpoint #
 

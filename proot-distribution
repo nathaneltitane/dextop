@@ -55,11 +55,10 @@ echo
 
 # variables #
 
-PORT="590${DISPLAY:1}"
-
 # defaults #
 
-# /etc/os-release: source distribution codename variables (e.g. $NAME)
+# /etc/os-release:
+# source distribution codename variables (e.g. $NAME)
 
 [ -f /etc/os-release ] && . /etc/os-release
 

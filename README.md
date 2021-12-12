@@ -167,7 +167,7 @@ The rest of the setup is fully automated and should run its course until the pro
 
 ### Customization:
 
-Use and edit 'user-packages' and/or 'user-additions' prior to starting the setup to customize your list of installed applications, libraries, frameworks, utilities and other third party package locations.
+Use and edit 'user-packages' prior to starting the setup to customize your list of installed applications, libraries, frameworks, utilities and other third party package locations.
 
 **You can modify any of the other scripts AT YOUR OWN RISK!**
 **Any modification of the Dextop setup routine scripts implies you are fully aware of potential breakage and the consequences of doing so:**
@@ -198,20 +198,13 @@ Logging out by pressing Ctrl+D or by typing `'logout'` or `'exit'` will automati
 ```
 dextop
 ├── termux-utilities
-│   └── termux-setup
 │       ├── [ termux-update ]
 │       ├── termux-properties
 │       ├── termux-storage
-│       ├── termux-shell
-│       ├── termux-silent
-│       ├── termux-welcome
 │       ├── termux-repositories
 │       ├── termux-packages
 │       ├── termux-links
 │       ├── termux-checkpoint
-│       └── termux-clean
-├── proot-utilities
-│   └── proot-setup
 │       ├── proot-architecture
 │       ├── proot-information
 │       ├── proot-distribution
@@ -221,35 +214,20 @@ dextop
 │       ├── proot-network
 │       ├── proot-preload
 │       ├── proot-checkpoint
-│       ├── proot-startup
 │       └── [ PROOT LOGIN - ROOT ]
 │           ├── proot-user
 │           ├── proot-superuser
 │           ├── proot-shell
-│           ├── proot-silent
-│           ├── proot-welcome
 │           ├── proot-expand
 │           ├── proot-repositories
 │           ├── proot-packages
 │           ├── proot-links
-│           └── proot-clean
-└── user-utilities
-│   └── user-setup
 │       ├── user-checkpoint
-│       ├── user-startup
 │       └── [ PROOT LOGIN - ROOT ]
-│           ├── user-configuration
 │           ├── user-packages
-│           ├── user-additions
-│           └── user-clean
-└── vnc-utilities
-    └── vnc-setup
-        ├── vnc-environment
         ├── vnc-checkpoint
-        └── vnc-clean
 
 [ PROOT LOGIN - USER ]
-    └── user-configuration
         └── proot-keyboard
         └── proot-locales
         └── proot-timezones
