@@ -18,11 +18,11 @@ Comparison in between Dextop and other projects:
 - It uses [console](https://github.com/nathaneltitane/console), a custom shell parser to handle the setup, colorize prompts and provide the user with an elegant, comprehensive and user-friendly experience.
 
 Dextop is very quick and efficient:
-Choose between i3WM, Enlightenment, KDE5 or XFCE4 to get your work done or keep the base install for command line interface and programming workflows.
+Choose between i3WM or XFCE4 to get your work done or keep the base install for command line interface and programming workflows.
 
 ### Note:
 
-Compositing should be disabled under KDE5 and XFCE4to optimize resource usage and prevent display tearing and other glitches.
+Compositing should be disabled under XFCE4 to optimize resource usage and prevent display tearing and other glitches.
 Turning compositing off allows for the best possible performance and experience in accordance to current Android system and security limitations:
 This is required due to the Android user-space runtime policy and limited hardware access: there is no graphics hardware acceleration available - the container graphics are emulated and run using LLVM.
 
@@ -73,11 +73,6 @@ Dextop setup options are:
 Proot container install options are:
 
 `-i, --i3wm      I3WM setup: install i3 window manager and utilities.                                [ Default ]`
-
-
-`-e, --ede       EDE setup: install E desktop environment and utilities.`
-
-`-k, --kde       KDE5 setup: install K desktop environment and utilities.`
 
 `-x, --xfce      XFCE4 setup: install XFCE desktop environment and utilities.`
 

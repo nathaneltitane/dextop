@@ -233,27 +233,6 @@ TMPDIR="/tmp"
 [ "${desktop_option}" = "i3wm" ]												&& RUNNER="dmenu"
 [ "${desktop_option}" = "i3wm" ]												&& VISUAL="nano"
 
-# enlightenment #
-
-[ -f "${ROOT_DIRECTORY}"/usr/bin/enlightenment ]								&& SESSION_NAME="EDE"
-
-[ "${desktop_option}" = "ede" ]													&& SESSION="ede"
-[ "${desktop_option}" = "ede" ]													&& SESSION_LOADER="enlightenment"
-
-# kde #
-
-[ -f "${ROOT_DIRECTORY}"/usr/bin/kwin ]											&& SESSION_NAME="KDE"
-
-[ "${desktop_option}" = "kde" ]													&& SESSION="kde"
-[ "${desktop_option}" = "kde" ]													&& SESSION_LOADER="plasmashell"
-[ "${desktop_option}" = "kde" ]													&& SETTINGS_MANAGER="systemsettings5"
-[ "${desktop_option}" = "kde" ]													&& WINDOW_MANAGER="kwin"
-
-[ "${desktop_option}" = "kde" ]													&& BROWSER="konqueror"
-[ "${desktop_option}" = "kde" ]													&& EMULATOR="konsole"
-[ "${desktop_option}" = "kde" ]													&& RUNNER="krunner"
-[ "${desktop_option}" = "kde" ]													&& VISUAL="kate"
-
 # xfce #
 
 [ -f "${ROOT_DIRECTORY}"/usr/bin/xfwm4 ]										&& SESSION_NAME="XFCE"
@@ -329,7 +308,7 @@ command+=" --pwd=${HOME}"
 [ -e "/linkerconfig/ld.config.txt" ]   && command+=" --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt"
 [ -f "/plat_property_contexts" ]       && command+=" --bind=/plat_property_contexts:/plat_property_contexts"
 [ -f "/property_contexts" ]            && command+=" --bind=/property_contexts:/property_contexts"
-[ "${USER}" = "termux" ]               && command+=" --bind=${PREFIX%/*}/home:/home/${USER}"
+command+=" --bind=${PREFIX%/*}/home:/home/${USER}"
 command+=" --bind=/data"
 command+=" --bind=/dev"
 command+=" --bind=/dev/urandom:/dev/urandom"
@@ -385,10 +364,6 @@ command+=" XDG_DATA_HOME=${HOME}/.local/share"
 command+=" XDG_DATA_DIRS=/usr/local/share:/usr/share"
 command+=" XDG_CONFIG_DIRS=/etc/xdg"
 command+=" XAUTHORITY=${XDG_RUNTIME_DIR}/.Xauthority"
-[ "${SESSION}" = "kde" ] && command+=" QT_AUTO_SCREEN_SCALE_FACTOR=0"
-[ "${SESSION}" = "kde" ] && command+=" QT_SCALE_FACTOR=1"
-[ "${SESSION}" = "kde" ] && command+=" QT_X11_NO_MITSHM=1"
-[ "${SESSION}" = "kde" ] && command+=" QT_GRAPHICSSYSTEM=native"
 command+=" ${SHELL} --login"
 
 # execute proot

@@ -103,19 +103,6 @@ sudo_id=$(cat /etc/group | grep sudo | cut -d : -f 3)
 # verify that 'sudo' is installed:
 # required for the presence of /etc/sudoers file
 
-console.wrn "'sudo' not present or installed on system:"
-console.wrn "This utility must be run with 'sudo' installed on the system."
-echo
-
-console.fwd "Installing..."
-echo
-
-install_list=(
-	sudo
-)
-
-console.install ${install_list[@]}
-
 # create superuser entry for user
 
 if [ -z "${user_name}" ]

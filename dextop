@@ -20,14 +20,6 @@ do
 		-i|--i3wm)
 			desktop_option="i3wm"
 		;;
-		
-		-e|--ede)
-			desktop_option="ede"
-		;;
-
-		-k|--kde)
-			desktop_option="kde"
-		;;
 
 		-x|--xfce)
 			desktop_option="xfce"
@@ -44,12 +36,8 @@ do
 		-f|--full)
 			install_option="full"
 		;;
-		
-		-u|--user)
-			user_option="termux"
-		;;
-		
-		-p|--update)
+
+		-u|--update)
 			package_option="update"
 		;;
 
@@ -58,17 +46,14 @@ do
 			echo -e "USAGE:"
 			echo
 			echo -e "-i, --i3wm             \t I3WM setup: install i3 window manager and utilities."
-			echo
-			echo -e "-e, --ede              \t EDE setup: install E desktop environment and utilities."
-			echo -e "-k, --kde              \t KDE5 setup: install K desktop environment and utilities."
 			echo -e "-x, --xfce             \t XFCE4 setup: install XFCE desktop environment and utilities."
 			echo -e "-n, --none             \t No DE setup: console access to environment and utilities."
 			echo
-			echo -e "-b, --base             \t Base setup: download and install base distribution image only."
+			echo -e "-b, --base             \t Base setup: download and install distribution image only."
 			echo
 			echo -e "-f, --full             \t Full setup: download and install full desktop environment and utilities."
 			echo
-			echo -e "-p, --update           \t Package update: check/download/install Termux and Termux API package updates."
+			echo -e "-u, --update           \t Package update: check/download/install Termux and Termux API package updates."
 			echo
 			echo -e "-h, --help             \t Show help and usage information."
 			echo
@@ -112,18 +97,14 @@ console.clear
 console.script "Setting up ${script#*-}"
 echo
 
-console.fwd "Please wait..."
-echo
-
-bash -c 'yes | pkg update'														>> /dev/null 2>&1
-bash -c 'yes | pkg upgrade'														>> /dev/null 2>&1
-bash -c 'yes | pkg install proot debootstrap'									>> /dev/null 2>&1
-
 # variables #
 
 # defaults #
 
 [ -z "${desktop_option}" ]														&& desktop_option="i3wm"
+
+# functions #
+
 
 # export variables
 
@@ -148,6 +129,15 @@ echo "export user_option=${user_option}"										>> "${PREFIX}"/bin/dextop
 # source variables
 
 [ -f "${PREFIX}"/bin/dextop ] && . "${PREFIX}"/bin/dextop
+
+# run failsafe utilities install
+
+console.fwd "Please wait..."
+echo
+
+bash -c 'yes | pkg update'														>> /dev/null 2>&1
+bash -c 'yes | pkg upgrade'														>> /dev/null 2>&1
+bash -c 'yes | pkg install proot debootstrap'									>> /dev/null 2>&1
 
 # download utilities
 
