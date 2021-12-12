@@ -66,18 +66,21 @@ echo
 
 # variables #
 
-PORT="590${DISPLAY:1}"
+[ -z "${DISPLAY}" ]  && DISPLAY=":1"
+[ -z "${LOCALHOST}"] && LOCALHOST="127.0.0.1"
+
+DISPLAY_NUMBER="${DISPLAY/:/}"
+
+PORT="590${DISPLAY_NUMBER}"
 
 # defaults #
-
-[ -z "${LOCALHOST}" ] && LOCALHOST="127.0.0.1"
 
 # export variables
 
 # /etc/os-release:
 # source distribution codename variables (e.g. $NAME)
 
-[ -f /etc/os-release ] && . /etc/os-release || NAME= "Termux"
+[ -f /etc/os-release ] && . /etc/os-release || NAME="Termux"
 
 # functions #
 
@@ -107,7 +110,6 @@ vnc_intent () {
 	console.silence "exec ${intent_command}"
 }
 
-
 vnc_start () {
 	console.fwd "Starting display server..."
 	echo
@@ -122,14 +124,12 @@ vnc_start () {
 	command_start+="vncserver"
 	command_start+=" -IdleTimeout 0"
 	command_start+=" -SecurityTypes none"
-	command_start+=" -localhost yes"
+	[ $(ps -A | grep -i proot) ] && command_start+=" -localhost yes" || command_start+=" -localhost"
 	command_start+=" -depth 32"
-	command_start+=" -cleanstale"
-	command_start+=" -name ${NAME}' // 'Dextop"
+	command_start+=" -name ${NAME}-Dextop"
 	command_start+=" -geometry ${GEOMETRY}"
-	[ "${desktop_option}" = "i3wm" ] && command_start+=" -xstartup $(command -v i3)" || command_start+=" -xstartup $(command -v i3)"
+	command_start+=" -xstartup $(command -v i3)"
 	[ "${desktop_option}" = "xfce" ] && command_start+=" -xstartup /home/${USER}/.vnc/xstartup"
-	command_start+=" ${LOCALHOST}"
 	command_start+=" ${DISPLAY}"
 
 	console.silence "exec ${command_start}"
@@ -315,8 +315,15 @@ vnc_stop () {
 
 vnc_list () {
 	# get values from 'vncserver -list'
-	
-	read vnc_display vnc_port vnc_process vnc_server <<< $(echo $(vncserver -list | tail -n 1))
+
+	vnc_port="${PORT}"
+
+	if [[ $(ps -A | grep -i proot) ]]
+	then
+		read vnc_display _ vnc_process _ <<< $(vncserver -list | tail -n 1)
+	else
+		read vnc_display vnc_process <<< $(vncserver -list | tail -n 1)
+	fi
 
 	# integer check:
 	# set values for list output
@@ -329,23 +336,20 @@ vnc_list () {
 		vnc_display="${vnc_display}"
 		vnc_port="${vnc_port}"
 		vnc_process="${vnc_process}"
-		vnc_server="${vnc_server}"
 	else
 		console.wrn "No active servers detected."
 		echo
-		
+
 		empty="N/A"
 
 		vnc_display="${empty}"
 		vnc_port="${empty}"
 		vnc_process="${empty}"
-		vnc_server="${empty}"
 	fi
 
 	console.inf "Display" "[ ${vnc_display} ]"
 	console.inf "Port"    "[ ${vnc_port} ]"
 	console.inf "Process" "[ ${vnc_process} ]"
-	console.inf "Server"  "[ ${vnc_server} ]"
 	echo
 }
 
