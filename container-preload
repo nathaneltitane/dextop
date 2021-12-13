@@ -55,10 +55,11 @@ echo
 
 # variables #
 
+preload_location=$(find "${ROOT_DIRECTORY}" -type f -iname libgcc_s.so.1)
+preload_library="${preload_location/$ROOT_DIRECTORY/}"
+
 # defaults #
 
 # set preload
 
-cat << 'FILE' -> "${ROOT_DIRECTORY}"/etc/ld.so.preload
-/lib/aarch64-linux-gnu/libgcc_s.so.1
-FILE
+echo "${preload_library}"														> "${ROOT_DIRECTORY}"/etc/ld.so.preload
