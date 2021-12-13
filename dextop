@@ -98,6 +98,7 @@ echo
 # defaults #
 
 [ -z "${desktop_option}" ]														&& desktop_option="i3wm"
+[ -z "${user_name}" ]															&& user_name="termux"
 
 # functions #
 
@@ -105,11 +106,16 @@ echo
 
 echo "# ${script} #"															>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 
+echo 'export DISPLAY=":1"'														>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo 'export DISPLAY_NUMBER="${DISPLAY/:/}"'									>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo 'export PORT="590${DISPLAY_NUMBER}"'										>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+
 echo 'export MAIN_DIRECTORY="${PREFIX%/*}"'										>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 echo 'export BINARIES_DIRECTORY="${PREFIX}"/bin'								>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 echo 'export CONFIGURATIONS_DIRECTORY="${PREFIX}"/etc'							>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo 'export LIBRARIES_DIRECTORY="${PREFIX}"/lib'								>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 echo 'export SOURCES_DIRECTORY="${PREFIX}"/etc/apt'								>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo 'export HOME_DIRECTORY="${PREFIX%/*}"/home'								>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo 'export LIBRARIES_DIRECTORY="${PREFIX}"/lib'								>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 echo 'export BACKUP_DIRECTORY="${MAIN_DIRECTORY}"/bkp'							>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 echo 'export IMAGE_DIRECTORY="${MAIN_DIRECTORY}"/img'							>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 echo 'export ISO_DIRECTORY="${MAIN_DIRECTORY}"/iso'								>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
@@ -149,16 +155,12 @@ console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-hostname
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-hosts
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-image
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-information
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-keyboard
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-links
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-locales
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-nameserver
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-packages
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-preload
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-repositories
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-session
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-superuser
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-timezones
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-user
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-vnc
 
@@ -181,7 +183,7 @@ fi
 
 # confirm uninterrupted setup
 
-	touch "${BINARIES_DIRECTORY}"/termux-setup-complete
+touch "${BINARIES_DIRECTORY}"/termux-setup-complete
 
 if [ ! -f "${BINARIES_DIRECTORY}"/container-checkpoint-complete ]
 then
@@ -198,8 +200,7 @@ then
 
 	"${BINARIES_DIRECTORY}"/container-session
 else
-	"${BINARIES_DIRECTORY}"/container-user											"${user_name}"
-	"${BINARIES_DIRECTORY}"/container-superuser										"${user_name}"
+	"${BINARIES_DIRECTORY}"/container-user										"${user_name}"
 
 	"${BINARIES_DIRECTORY}"/container-expand
 	"${BINARIES_DIRECTORY}"/container-repositories
@@ -209,4 +210,4 @@ fi
 
 # confirm uninterrupted setup
 
-	touch "${BINARIES_DIRECTORY}"/container-setup-complete
+touch "${BINARIES_DIRECTORY}"/container-setup-complete
