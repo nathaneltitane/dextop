@@ -141,10 +141,24 @@ console.log "pkg update" &
 console.progress "Forcing refresh..."
 echo
 
+# fix directory structure
+
+directories_list=(
+	bin
+	etc
+	lib
+	opt
+	tmp
+)
+
+for directory in ${directories_list[@]}
+do
+	ln -s -f "${PREFIX}"/"${directory}" "${MAIN_DIRECTORY}"/"${directory}"
+done
+
 # download utilities
 
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-additions
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-links
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-packages
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-storage
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-update
@@ -154,7 +168,6 @@ console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-expand
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-groups
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-image
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-information
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-links
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-network
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-packages
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-preload
@@ -174,7 +187,6 @@ then
 	"${BINARIES_DIRECTORY}"/termux-update
 	"${BINARIES_DIRECTORY}"/termux-storage
 	"${BINARIES_DIRECTORY}"/termux-packages
-	"${BINARIES_DIRECTORY}"/termux-links
 	"${BINARIES_DIRECTORY}"/termux-additions
 
 	touch "${BINARIES_DIRECTORY}"/termux-checkpoint-complete
@@ -191,13 +203,13 @@ then
 	"${BINARIES_DIRECTORY}"/container-groups
 	"${BINARIES_DIRECTORY}"/container-environment
 	"${BINARIES_DIRECTORY}"/container-network
+	"${BINARIES_DIRECTORY}"/container-nameserver
 	"${BINARIES_DIRECTORY}"/container-preload
 
-	console.container "${BINARIES_DIRECTORY}"/container-user
-	console.container "${BINARIES_DIRECTORY}"/container-expand
-	console.container "${BINARIES_DIRECTORY}"/container-repositories
-	console.container "${BINARIES_DIRECTORY}"/container-packages
-	console.container "${BINARIES_DIRECTORY}"/container-links
+	container_command "${BINARIES_DIRECTORY}"/container-user
+	container_command "${BINARIES_DIRECTORY}"/container-expand
+	container_command "${BINARIES_DIRECTORY}"/container-repositories
+	container_command "${BINARIES_DIRECTORY}"/container-packages
 
 	touch "${BINARIES_DIRECTORY}"/container-checkpoint-complete
 fi
