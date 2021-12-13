@@ -163,16 +163,13 @@ console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-packages
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-storage
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-update
 
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-environment
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-expand
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-groups
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-image
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-information
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-network
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-packages
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-preload
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-repositories
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-session
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-system
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-user
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-vnc
 
@@ -200,11 +197,7 @@ if [ ! -f "${BINARIES_DIRECTORY}"/container-checkpoint-complete ]
 then
 	"${BINARIES_DIRECTORY}"/container-information
 	"${BINARIES_DIRECTORY}"/container-image
-	"${BINARIES_DIRECTORY}"/container-groups
-	"${BINARIES_DIRECTORY}"/container-environment
-	"${BINARIES_DIRECTORY}"/container-network
-	"${BINARIES_DIRECTORY}"/container-nameserver
-	"${BINARIES_DIRECTORY}"/container-preload
+	"${BINARIES_DIRECTORY}"/container-system
 
 	container_command "${BINARIES_DIRECTORY}"/container-user
 	container_command "${BINARIES_DIRECTORY}"/container-expand

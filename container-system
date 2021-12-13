@@ -1,0 +1,186 @@
+#!/bin/bash
+
+# dependencies #
+
+. /data/data/com.termux/files/usr/bin/console
+. /data/data/com.termux/files/usr/bin/dextop
+
+# script #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="12-03-2021"
+
+# usage #
+
+while (($#))
+do
+	case "${1}" in
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-h, --help \t Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version ${version} ]"
+			echo
+
+			exit
+		;;
+
+		*)
+			echo
+			echo "Usage: ${script} [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+		;;
+		
+	esac
+
+	shift
+done
+
+# prompt #
+
+console.script "Setting up ${script#*-}"
+echo
+
+# variables #
+
+# defaults #
+
+# functions #
+
+add_environment () {
+	# generate environment '$PATH'
+
+	# set path:
+	# in order of retreival
+
+	PATH=""
+
+	# container
+
+	[ -d "${ROOT_DIRECTORY}"/usr/local/sbin ]										&& PATH+="/usr/local/sbin:"
+	[ -d "${ROOT_DIRECTORY}"/usr/local/bin ]										&& PATH+="/usr/local/bin:"
+	[ -d "${ROOT_DIRECTORY}"/usr/sbin ]												&& PATH+="/usr/sbin:"
+	[ -d "${ROOT_DIRECTORY}"/usr/sbin ]												&& PATH+="/usr/bin:"
+	[ -d "${ROOT_DIRECTORY}"/sbin ]													&& PATH+="/sbin:"
+	[ -d "${ROOT_DIRECTORY}"/bin ]													&& PATH+="/bin:"
+
+	# termux
+
+	[ -d "${PREFIX}"/sbin ]															&& PATH+="${PREFIX}/sbin:"
+	[ -d "${PREFIX}"/bin ]															&& PATH+="${PREFIX}/bin:"
+
+	# android
+
+	[ -d /system/sbin ]																&& PATH+="/system/sbin:"
+	[ -d /system/bin ]																&& PATH+="/system/bin:"
+
+	# set environment
+
+	echo "PATH=${PATH}"																> "${ROOT_DIRECTORY}"/etc/environment
+}
+
+add_groups () {
+	# register android groups to container
+
+	# set IFS
+
+	IFS=' '
+
+	# read android system IDs
+
+	read uid gid groups <<< $(id)
+
+	uid=${uid/uid=}
+	gid=${gid/gid=}
+	groups=${groups/groups=}
+
+	# set IFS
+
+	IFS=','
+
+	# parse existing groups
+
+	read -r -a groups_list <<< "${groups}"
+
+	for line in "${groups_list[@]}"
+	do
+		line=${line/(/ }
+		line=${line/)}
+
+		# set IFS
+
+		IFS=' '
+
+		# transfer unregistered IDs
+
+		read group_number group_name <<< ${line}
+
+		[ -f "${ROOT_DIRECTORY}"/etc/group ]   && echo "${group_name}:x:${group_number}:" >> "${ROOT_DIRECTORY}"/etc/group
+		[ -f "${ROOT_DIRECTORY}"/etc/gshadow ] && echo "${group_name}:x:${group_number}:" >> "${ROOT_DIRECTORY}"/etc/gshadow
+
+	done
+
+	# reset IFS
+
+	IFS=''
+}
+
+add_network () {
+	# generate network files
+
+	# hostname
+
+	echo '${HOSTNAME}'															> "${ROOT_DIRECTORY}"/etc/hostname
+
+	# hosts
+
+	echo '# IPv4 #'																>  "${ROOT_DIRECTORY}"/etc/hosts
+
+	echo '127.0.0.1	localhost.localdomain'										>> "${ROOT_DIRECTORY}"/etc/hosts
+	echo '127.0.0.1	localhost'													>> "${ROOT_DIRECTORY}"/etc/hosts
+
+	echo '# IPv6 #'																>> "${ROOT_DIRECTORY}"/etc/hosts
+
+	echo '::1			localhost.localdomain'									>> "${ROOT_DIRECTORY}"/etc/hosts
+	echo '::1			localhost'												>> "${ROOT_DIRECTORY}"/etc/hosts
+	echo '::1			ip6-localhost'											>> "${ROOT_DIRECTORY}"/etc/hosts
+	echo '::1			ip6-loopbak'											>> "${ROOT_DIRECTORY}"/etc/hosts
+	echo 'fe00::0		ip6-localnet'											>> "${ROOT_DIRECTORY}"/etc/hosts
+	echo 'fe00::0		ip6-mcastprefix'										>> "${ROOT_DIRECTORY}"/etc/hosts
+	echo 'ff02::1		ip6-allnodes'											>> "${ROOT_DIRECTORY}"/etc/hosts
+	echo 'ff02::2		ip6-allrouters'											>> "${ROOT_DIRECTORY}"/etc/hosts
+	echo 'ff02::3		ip6-allhosts'											>> "${ROOT_DIRECTORY}"/etc/hosts
+
+	# nameserver
+
+	echo 'nameserver 1.1.1.1'													>  "${ROOT_DIRECTORY}"/etc/resolv.conf
+	echo 'nameserver 1.0.0.1'													>> "${ROOT_DIRECTORY}"/etc/resolv.conf
+}
+
+add_preload () {
+	# generate libgcc/libc location and add to preload dynamic linker
+
+	preload_location=$(find "${ROOT_DIRECTORY}" -type f -iname libgcc_s.so.1)
+	preload_library="${preload_path/$ROOT_DIRECTORY/}"
+
+	# set preload
+
+	echo "${preload_library}"													> "${ROOT_DIRECTORY}"/etc/ld.so.preload
+}
+
+add_environment
+add_groups
+add_network
+add_preload

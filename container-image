@@ -653,9 +653,11 @@ case "${DISTRIBUTION_NAME}" in
 	;;
 esac
 
-# download image and unpack deployment
+# download image
 
 console.download "${iso_url}" "${ISO_DIRECTORY}" "${iso_archive}"
+
+# unpack image into container
 
 image_unpack "${ISO_DIRECTORY}/${iso_archive}"
 
