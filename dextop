@@ -102,7 +102,7 @@ echo
 
 # functions #
 
-proot_command () {
+container_command () {
 	# assume termux-exec is present - unset LD_PRELOAD
 
 	unset LD_PRELOAD
@@ -226,11 +226,11 @@ then
 	"${BINARIES_DIRECTORY}"/container-nameserver
 	"${BINARIES_DIRECTORY}"/container-preload
 
-	proot_command "${BINARIES_DIRECTORY}"/container-user "${user_name}"
-	proot_command "${BINARIES_DIRECTORY}"/container-expand
-	proot_command "${BINARIES_DIRECTORY}"/container-repositories
-	proot_command "${BINARIES_DIRECTORY}"/container-packages
-	proot_command "${BINARIES_DIRECTORY}"/container-links
+	container_command "${BINARIES_DIRECTORY}"/container-user
+	container_command "${BINARIES_DIRECTORY}"/container-expand
+	container_command "${BINARIES_DIRECTORY}"/container-repositories
+	container_command "${BINARIES_DIRECTORY}"/container-packages
+	container_command "${BINARIES_DIRECTORY}"/container-links
 
 	touch "${BINARIES_DIRECTORY}"/container-checkpoint-complete
 fi
