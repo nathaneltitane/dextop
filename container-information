@@ -57,6 +57,8 @@ echo
 
 # defaults #
 
+[ -z "${user_name}" ] && user_name="termux"
+
 # get user information
 
 console.inf "This information will be used to set up the user account."
@@ -68,8 +70,14 @@ echo
 
 # values #
 
-information_list=(
-	user_name
+if [ -z "${user_name}" ]
+then
+	information_list+=(
+		user_name
+	)
+fi
+
+information_list+=(
 	first_name
 	last_name
 	user_email
@@ -90,7 +98,7 @@ echo "# ${script} #"															>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bi
 
 echo "export first_name=${first_name}"											>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 echo "export last_name=${last_name}"											>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo "export full_name=${first_name} ${last_name}"								>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo "export full_name='${first_name} ${last_name}'"							>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 echo "export user_name=${user_name}"											>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 echo "export user_email=${user_email}"											>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 echo "export user_password=${user_password}"									>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop

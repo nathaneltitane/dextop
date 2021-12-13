@@ -71,12 +71,12 @@ PATH=""
 [ -d "${ROOT_DIRECTORY}"/sbin ]													&& PATH+="/sbin:"
 [ -d "${ROOT_DIRECTORY}"/bin ]													&& PATH+="/bin:"
 
-# termux shell
+# termux
 
 [ -d "${PREFIX}"/sbin ]															&& PATH+="${PREFIX}/sbin:"
 [ -d "${PREFIX}"/bin ]															&& PATH+="${PREFIX}/bin:"
 
-# android subsystem
+# android
 
 [ -d /system/sbin ]																&& PATH+="/system/sbin:"
 [ -d /system/bin ]																&& PATH+="/system/bin:"

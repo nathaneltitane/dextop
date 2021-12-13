@@ -157,12 +157,10 @@ console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-packages
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-preload
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-repositories
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-session
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-shell
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-superuser
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-timezones
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-user
-
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	vnc-session
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-vnc
 
 # clear #
 
@@ -202,8 +200,6 @@ then
 else
 	"${BINARIES_DIRECTORY}"/container-user											"${user_name}"
 	"${BINARIES_DIRECTORY}"/container-superuser										"${user_name}"
-
-	"${BINARIES_DIRECTORY}"/container-shell
 
 	"${BINARIES_DIRECTORY}"/container-expand
 	"${BINARIES_DIRECTORY}"/container-repositories
