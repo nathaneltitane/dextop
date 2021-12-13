@@ -57,6 +57,12 @@ echo
 
 # defaults #
 
+# termux #
+
+console.directory "${HOME_DIRECTORY}" .termux
+
+console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/termux		"${HOME_DIRECTORY}"/.termux				termux.properties
+
 # home #
 
 console.directory "${HOME_DIRECTORY}" Desktop
