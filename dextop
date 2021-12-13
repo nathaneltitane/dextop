@@ -124,6 +124,7 @@ echo 'export MOUNT_DIRECTORY="${MAIN_DIRECTORY}"/mnt'							>> "${PREFIX}"/bin/d
 echo "export version=${version}"												>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 echo "export desktop_option=${desktop_option}"									>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo "export user_name=${user_name}"											>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 
 # run failsafe package install:
 # termux package servers are sometimes unresponsive or badly authenticated
