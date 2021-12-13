@@ -100,8 +100,6 @@ add_user () {
 	console.fwd "Creating account..."
 	echo
 
-	full_name="${first_name} ${last_name}"
-
 	room_number=""
 	work_number=""
 	home_number=""
@@ -110,14 +108,9 @@ add_user () {
 	# silent configuration:
 	# set --gecos and --disabled-password for fully silent execution
 
-	adduser					\
-		--gecos "			\
-			${full_name},	\
-			${room_number},	\
-			${work_number},	\
-			${home_number},	\
-			${user_email}"	\
-		--shell "${SHELL}"	\
+	adduser																								\
+		--gecos "${first_name} ${last_name},${room_number},${work_number},${home_number},${user_email}"	\
+		--shell "${SHELL}"																				\
 		--disabled-password "${user_name}"
 }
 
