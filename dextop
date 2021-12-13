@@ -102,6 +102,35 @@ echo
 
 # functions #
 
+proot_command () {
+	# assume termux-exec is present - unset LD_PRELOAD
+
+	unset LD_PRELOAD
+
+	proot																		\
+	--kill-on-exit																\
+	--link2symlink																\
+	--rootfs="${ROOT_DIRECTORY}"												\
+	--change-id=0:0																\
+	--pwd=/root																	\
+	--bind=/apex																\
+	--bind=/data																\
+	--bind=/dev																	\
+	--bind="/dev/urandom:/dev/random"											\
+	--bind=/proc																\
+	--bind="/proc/self/fd:/dev/fd"												\
+	--bind="/proc/self/fd/0:/dev/stdin"											\
+	--bind="/proc/self/fd/1:/dev/stdout"										\
+	--bind="/proc/self/fd/2:/dev/stderr"										\
+	--bind=/storage																\
+	--bind=/sys																	\
+	--bind=/system																\
+	--bind=/vendor																\
+		/usr/bin/env -i															\
+		"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"		\
+	"${@}"
+}
+
 # export variables
 
 echo "# ${script} #"															>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
@@ -197,16 +226,13 @@ then
 	"${BINARIES_DIRECTORY}"/container-nameserver
 	"${BINARIES_DIRECTORY}"/container-preload
 
+	proot_command "${BINARIES_DIRECTORY}"/container-user "${user_name}"
+	proot_command "${BINARIES_DIRECTORY}"/container-expand
+	proot_command "${BINARIES_DIRECTORY}"/container-repositories
+	proot_command "${BINARIES_DIRECTORY}"/container-packages
+	proot_command "${BINARIES_DIRECTORY}"/container-links
+
 	touch "${BINARIES_DIRECTORY}"/container-checkpoint-complete
-
-	"${BINARIES_DIRECTORY}"/container-session
-else
-	"${BINARIES_DIRECTORY}"/container-user										"${user_name}"
-
-	"${BINARIES_DIRECTORY}"/container-expand
-	"${BINARIES_DIRECTORY}"/container-repositories
-	"${BINARIES_DIRECTORY}"/container-packages
-	"${BINARIES_DIRECTORY}"/container-links
 fi
 
 # confirm uninterrupted setup
