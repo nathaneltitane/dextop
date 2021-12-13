@@ -102,35 +102,6 @@ echo
 
 # functions #
 
-container_command () {
-	# assume termux-exec is present - unset LD_PRELOAD
-
-	unset LD_PRELOAD
-
-	proot																		\
-	--kill-on-exit																\
-	--link2symlink																\
-	--rootfs="${ROOT_DIRECTORY}"												\
-	--change-id=0:0																\
-	--pwd=/root																	\
-	--bind=/apex																\
-	--bind=/data																\
-	--bind=/dev																	\
-	--bind="/dev/urandom:/dev/random"											\
-	--bind=/proc																\
-	--bind="/proc/self/fd:/dev/fd"												\
-	--bind="/proc/self/fd/0:/dev/stdin"											\
-	--bind="/proc/self/fd/1:/dev/stdout"										\
-	--bind="/proc/self/fd/2:/dev/stderr"										\
-	--bind=/storage																\
-	--bind=/sys																	\
-	--bind=/system																\
-	--bind=/vendor																\
-		/usr/bin/env -i															\
-		"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"		\
-	"${@}"
-}
-
 # export variables
 
 echo "# ${script} #"															>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
@@ -222,11 +193,11 @@ then
 	"${BINARIES_DIRECTORY}"/container-network
 	"${BINARIES_DIRECTORY}"/container-preload
 
-	container_command "${BINARIES_DIRECTORY}"/container-user
-	container_command "${BINARIES_DIRECTORY}"/container-expand
-	container_command "${BINARIES_DIRECTORY}"/container-repositories
-	container_command "${BINARIES_DIRECTORY}"/container-packages
-	container_command "${BINARIES_DIRECTORY}"/container-links
+	console.container "${BINARIES_DIRECTORY}"/container-user
+	console.container "${BINARIES_DIRECTORY}"/container-expand
+	console.container "${BINARIES_DIRECTORY}"/container-repositories
+	console.container "${BINARIES_DIRECTORY}"/container-packages
+	console.container "${BINARIES_DIRECTORY}"/container-links
 
 	touch "${BINARIES_DIRECTORY}"/container-checkpoint-complete
 fi
