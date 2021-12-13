@@ -57,9 +57,6 @@ echo
 
 # defaults #
 
-[ -z "${distribution_name}" ]													&& distribution_name="ubuntu"
-[ -z "${distribution_version}" ]												&& distribution_version="20.04.3"
-
 # functions #
 
 image_architecture () {
@@ -97,6 +94,56 @@ image_architecture () {
 
 		exit 1
 	fi
+}
+
+image_version () {
+	console.msg "Select distribution version to setup."
+	echo
+
+	# list supported display resolutions
+
+	ubuntu_versions=(
+		ubuntu	20.04.3
+		ubuntu	20.10
+		ubuntu	21.04
+		ubuntu	21.10
+	)
+
+	versions=(
+		${ubuntu_versions[@]}
+	)
+
+	printf '\n'
+
+	# set padding for uniform output
+
+	pad_length=10
+
+	# continue list using array selection of suppported values
+
+	for (( i=0 ; i<${#versions[@]} ; i+=2 ))
+	do
+			name="${versions[$i]}"
+			version="${versions[$i+1]}"
+
+			number=$((($i/2) + 1))
+
+			if (( $i/2 >= 0 && $i/2 <= 8 ))
+			then
+					# handle number spacing for entries 1-9
+
+					printf '\t[  %s ] %s %s' ${number} ${name}
+			else
+					# handle number spacing for entries 10+
+
+					printf '\t[ %s ] %s %s' ${number} ${name}
+			fi
+
+			printf '%*s' $((pad_length - ${#name}))
+			printf '%s\n' ${version}
+	done
+
+	printf '\n'
 }
 
 image_directories () {
@@ -543,6 +590,61 @@ fi
 
 image_architecture
 
+# choose image version
+
+image_version
+
+# values #
+
+values_list=(
+	selection
+)
+
+# handle user input for values_list
+
+eval ${console_rtn[@]}
+
+console.ipt "Selection:"
+
+read selection
+echo
+
+unset distribution_version
+
+# integer check:
+# handle numerical selection
+
+if [[ "${selection}" =~ ^[0-9]+$ ]]
+then
+	i=$((${selection}))
+	i=$(($i*2))
+
+	version="${versions[i-1]}"
+	name="${versions[i-2]}"
+
+	distribution_name="${name}"
+	distribution_version="${version}"
+fi
+
+# handle distribution code markup
+
+# set IFS
+
+IFS='.'
+
+read code_year code_month code_revision <<< "${distribution_version}"
+
+if [ -z "${code_revision}" ]
+then
+	distribution_release="${distribution_version}"
+else
+	distribution_release="${distribution_version%.*}"
+fi
+
+# reset IFS
+
+IFS=''
+
 # handle distribution name and version
 
 case "${DISTRIBUTION_NAME}" in
@@ -557,3 +659,15 @@ esac
 console.download "${iso_url}" "${ISO_DIRECTORY}" "${iso_archive}"
 
 image_unpack "${ISO_DIRECTORY}/${iso_archive}"
+
+# export variables
+
+echo "# ${script} #"															>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+
+echo "export DISTRIBUTION_NAME=${distribution_name}"							>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo "export DISTRIBUTION_RELEASE=${distribution_release}"						>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo "export DISTRIBUTION_VERSION=${distribution_version}"						>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+
+echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'		>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'				>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo 'export ROOT_HOME_DIRECTORY="${ROOT_DIRECTORY}/root"'						>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
