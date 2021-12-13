@@ -181,12 +181,10 @@ console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-update
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-environment
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-expand
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-groups
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-hostname
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-hosts
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-image
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-information
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-links
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-nameserver
+console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-network
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-packages
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-preload
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-repositories
@@ -221,9 +219,7 @@ then
 	"${BINARIES_DIRECTORY}"/container-image
 	"${BINARIES_DIRECTORY}"/container-groups
 	"${BINARIES_DIRECTORY}"/container-environment
-	"${BINARIES_DIRECTORY}"/container-hostname
-	"${BINARIES_DIRECTORY}"/container-hosts
-	"${BINARIES_DIRECTORY}"/container-nameserver
+	"${BINARIES_DIRECTORY}"/container-network
 	"${BINARIES_DIRECTORY}"/container-preload
 
 	container_command "${BINARIES_DIRECTORY}"/container-user
