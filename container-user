@@ -95,6 +95,8 @@ echo
 # functions #
 
 add_user () {
+	# create 'user' account
+
 	console.fwd "Creating account..."
 	echo
 
@@ -120,6 +122,8 @@ add_user () {
 }
 
 add_superuser () {
+	# generate superuser privilege for 'user'
+
 	console.fwd "Generating superuser privilege..."
 	echo
 
@@ -150,6 +154,8 @@ add_superuser () {
 }
 
 add_password () {
+	# generate password for 'user'
+
 	console.fwd "Setting password..."
 	echo
 
@@ -161,6 +167,8 @@ add_password () {
 }
 
 add_runtime () {
+	# generate runtime directory structure for 'user'
+
 	console.fwd "Setting runtime..."
 	echo
 

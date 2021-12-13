@@ -78,7 +78,7 @@ image_architecture () {
 	done
 
 	# test image architecture string
-	
+
 	if [ -z "$img_architecture" ]
 	then
 		img_architecture="N/A"
@@ -296,7 +296,6 @@ image_restore () {
 
 	for archive_selection in $(find "${BACKUP_DIRECTORY}" -maxdepth 1 -type f -iname "*.tar.gz" ! -wholename "${BACKUP_DIRECTORY}")
 	do
-
 		archive_label="${archive_selection##*/}"
 
 		# set IFS
