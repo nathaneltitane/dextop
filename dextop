@@ -199,10 +199,10 @@ then
 	"${BINARIES_DIRECTORY}"/container-image
 	"${BINARIES_DIRECTORY}"/container-system
 
-	container_command "${BINARIES_DIRECTORY}"/container-user
-	container_command "${BINARIES_DIRECTORY}"/container-expand
-	container_command "${BINARIES_DIRECTORY}"/container-repositories
-	container_command "${BINARIES_DIRECTORY}"/container-packages
+	console.container "${BINARIES_DIRECTORY}"/container-user
+	console.container "${BINARIES_DIRECTORY}"/container-expand
+	console.container "${BINARIES_DIRECTORY}"/container-repositories
+	console.container "${BINARIES_DIRECTORY}"/container-packages
 
 	touch "${BINARIES_DIRECTORY}"/container-checkpoint-complete
 fi
