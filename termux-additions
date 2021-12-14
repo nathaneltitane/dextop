@@ -120,7 +120,7 @@ console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/fu
 
 # vnc #
 
-console.directory "${HOME_DIRECTORY}"/.vnc
+console.directory "${HOME_DIRECTORY}" .vnc
 
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/vnc			"${HOME_DIRECTORY}"/.vnc				passwd
 console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/vnc			"${HOME_DIRECTORY}"/.vnc				xstartup

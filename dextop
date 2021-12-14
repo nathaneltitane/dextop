@@ -106,7 +106,7 @@ container_command () {
 	# assume termux-exec is present - unset LD_PRELOAD
 
 	unset LD_PRELOAD
-	
+
 	# run as 'root' with default system parameters
 
 	proot																		\
