@@ -103,6 +103,8 @@ echo
 # functions #
 
 container_command () {
+	. "${PREFIX}"/bin/dextop
+	
 	# assume termux-exec is present - unset LD_PRELOAD
 
 	unset LD_PRELOAD
