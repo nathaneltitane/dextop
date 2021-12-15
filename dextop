@@ -233,10 +233,10 @@ then
 	"${BINARIES_DIRECTORY}"/container-image
 	"${BINARIES_DIRECTORY}"/container-system
 
-	container_command "${BINARIES_DIRECTORY}"/container-user
 	container_command "${BINARIES_DIRECTORY}"/container-expand
 	container_command "${BINARIES_DIRECTORY}"/container-repositories
 	container_command "${BINARIES_DIRECTORY}"/container-packages
+	container_command "${BINARIES_DIRECTORY}"/container-user
 
 	touch "${BINARIES_DIRECTORY}"/container-checkpoint-complete
 fi
