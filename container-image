@@ -62,7 +62,7 @@ echo
 image_architecture () {
 	#comaprae system architecture to available image architectures
 
-	cpu_architectures=(
+	processor_architectures=(
 		aarch64
 		arm
 		amd64
@@ -72,7 +72,7 @@ image_architecture () {
 
 	# list supported image architechtures
 
-	img_architectures=(
+	image_architectures=(
 		arm64
 		armhf
 		amd64
@@ -82,15 +82,15 @@ image_architecture () {
 
 	# test processor architecture string
 
-	print_architecture="$(uname -m)"
+	device_architecture="$(uname -m)"
 
-	for i in ${!cpu_architectures[@]}
+	for i in ${!processor_architectures[@]}
 	do
-		if [[ "$print_architecture" == "${cpu_architectures[i]}" ]]
+		if [[ "${device_architecture}" == "${processor_architectures[i]}" ]]
 		then
-			img_architecture=${img_architectures[i]}
+			image_architecture=${image_architectures[i]}
 
-			console.scs "Valid architecture" "[ ${img_architecture} ]"
+			console.scs "Valid architecture" "[ ${image_architecture} ]"
 			echo
 
 			break
@@ -99,11 +99,11 @@ image_architecture () {
 
 	# test image architecture string
 
-	if [ -z "$img_architecture" ]
+	if [ -z "$image_architecture" ]
 	then
-		img_architecture="N/A"
+		image_architecture="N/A"
 
-		console.wrn "Unknown architecture" "[ ${img_architecture} ]"
+		console.wrn "Unknown architecture" "[ ${image_architecture} ]"
 		echo
 
 		console.fwd "Aborting..."
@@ -669,7 +669,7 @@ IFS=''
 case "${DISTRIBUTION_NAME}" in
 	ubuntu)
 		iso_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${DISTRIBUTION_VERSION}/release"
-		iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${img_architecture}.tar.gz"
+		iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${image_architecture}.tar.gz"
 	;;
 esac
 

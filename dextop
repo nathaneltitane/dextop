@@ -107,7 +107,7 @@ container_command () {
 
 	# source latest paramaters and variables
 	
-	[-f "${PREFIX}"/bin/dextop ] && . "${PREFIX}"/bin/dextop
+	[ -f "${PREFIX}"/bin/dextop ] && . "${PREFIX}"/bin/dextop
 	
 	# assume termux-exec is present - unset LD_PRELOAD
 
