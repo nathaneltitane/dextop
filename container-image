@@ -60,6 +60,26 @@ echo
 # functions #
 
 image_architecture () {
+	#comaprae system architecture to available image architectures
+
+	cpu_architectures=(
+		aarch64
+		arm
+		amd64
+		i*86
+		x86_64
+	)
+
+	# list supported image architechtures
+
+	img_architectures=(
+		arm64
+		armhf
+		amd64
+		i386
+		amd64
+	)
+
 	# test processor architecture string
 
 	print_architecture="$(uname -m)"
