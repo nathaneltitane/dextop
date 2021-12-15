@@ -61,7 +61,7 @@ echo
 
 console.directory "${HOME_DIRECTORY}" .termux
 
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/termux		"${HOME_DIRECTORY}"/.termux				termux.properties
+console.download get.trmnl.me/termux											"${HOME_DIRECTORY}"/.termux				termux.properties
 
 # home #
 
@@ -76,54 +76,54 @@ console.directory "${HOME_DIRECTORY}" Videos
 
 # bash #
 
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"						.bash_aliases
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"						.bash_functions
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"						.bash_logout
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"						.bashrc
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"						.hushlogin
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"						.profile
+console.download get.trmnl.me/bash												"${HOME_DIRECTORY}"						.bash_aliases
+console.download get.trmnl.me/bash												"${HOME_DIRECTORY}"						.bash_functions
+console.download get.trmnl.me/bash												"${HOME_DIRECTORY}"						.bash_logout
+console.download get.trmnl.me/bash												"${HOME_DIRECTORY}"						.bashrc
+console.download get.trmnl.me/bash												"${HOME_DIRECTORY}"						.hushlogin
+console.download get.trmnl.me/bash												"${HOME_DIRECTORY}"						.profile
 
 # bash aliases #
 
 console.directory "${HOME_DIRECTORY}" .bash-aliases
 
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		apt
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		command
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		copy
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		count
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		directory
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		duplicate
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		git
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		grep
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		kill
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		list
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		nano
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		ping
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		sudo
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		shortcuts
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		system
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		usage
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/aliases		"${HOME_DIRECTORY}"/.bash-aliases		where
+console.download get.trmnl.me/aliases											"${HOME_DIRECTORY}"/.bash-aliases		apt
+console.download get.trmnl.me/aliases											"${HOME_DIRECTORY}"/.bash-aliases		command
+console.download get.trmnl.me/aliases											"${HOME_DIRECTORY}"/.bash-aliases		copy
+console.download get.trmnl.me/aliases											"${HOME_DIRECTORY}"/.bash-aliases		count
+console.download get.trmnl.me/aliases											"${HOME_DIRECTORY}"/.bash-aliases		directory
+console.download get.trmnl.me/aliases											"${HOME_DIRECTORY}"/.bash-aliases		duplicate
+console.download get.trmnl.me/aliases											"${HOME_DIRECTORY}"/.bash-aliases		git
+console.download get.trmnl.me/aliases											"${HOME_DIRECTORY}"/.bash-aliases		grep
+console.download get.trmnl.me/aliases											"${HOME_DIRECTORY}"/.bash-aliases		kill
+console.download get.trmnl.me/aliases											"${HOME_DIRECTORY}"/.bash-aliases		list
+console.download get.trmnl.me/aliases											"${HOME_DIRECTORY}"/.bash-aliases		nano
+console.download get.trmnl.me/aliases											"${HOME_DIRECTORY}"/.bash-aliases		ping
+console.download get.trmnl.me/aliases											"${HOME_DIRECTORY}"/.bash-aliases		sudo
+console.download get.trmnl.me/aliases											"${HOME_DIRECTORY}"/.bash-aliases		shortcuts
+console.download get.trmnl.me/aliases											"${HOME_DIRECTORY}"/.bash-aliases		system
+console.download get.trmnl.me/aliases											"${HOME_DIRECTORY}"/.bash-aliases		usage
+console.download get.trmnl.me/aliases											"${HOME_DIRECTORY}"/.bash-aliases		where
 
 # bash functions #
 
 console.directory "${HOME_DIRECTORY}" .bash-functions
 
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME_DIRECTORY}"/.bash-functions		address
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME_DIRECTORY}"/.bash-functions		audio
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME_DIRECTORY}"/.bash-functions		extract
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME_DIRECTORY}"/.bash-functions		record
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME_DIRECTORY}"/.bash-functions		speed
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME_DIRECTORY}"/.bash-functions		sprunge
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME_DIRECTORY}"/.bash-functions		weather
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/functions		"${HOME_DIRECTORY}"/.bash-functions		youtube
+console.download get.trmnl.me/functions											"${HOME_DIRECTORY}"/.bash-functions		address
+console.download get.trmnl.me/functions											"${HOME_DIRECTORY}"/.bash-functions		audio
+console.download get.trmnl.me/functions											"${HOME_DIRECTORY}"/.bash-functions		extract
+console.download get.trmnl.me/functions											"${HOME_DIRECTORY}"/.bash-functions		record
+console.download get.trmnl.me/functions											"${HOME_DIRECTORY}"/.bash-functions		speed
+console.download get.trmnl.me/functions											"${HOME_DIRECTORY}"/.bash-functions		sprunge
+console.download get.trmnl.me/functions											"${HOME_DIRECTORY}"/.bash-functions		weather
+console.download get.trmnl.me/functions											"${HOME_DIRECTORY}"/.bash-functions		youtube
 
 # vnc #
 
 console.directory "${HOME_DIRECTORY}" .vnc
 
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/vnc			"${HOME_DIRECTORY}"/.vnc				passwd
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/vnc			"${HOME_DIRECTORY}"/.vnc				xstartup
+console.download get.trmnl.me/vnc												"${HOME_DIRECTORY}"/.vnc				passwd
+console.download get.trmnl.me/vnc												"${HOME_DIRECTORY}"/.vnc				xstartup
 
 # i3wm #
 
@@ -131,38 +131,33 @@ console.directory "${HOME_DIRECTORY}"/.config i3
 console.directory "${HOME_DIRECTORY}"/.config i3status
 console.directory "${HOME_DIRECTORY}"/.config ranger
 
-console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/i3				"${HOME_DIRECTORY}"/.config/i3			config
-console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/i3status		"${HOME_DIRECTORY}"/.config/i3status	config
+console.download get.trmnl.me/i3wm/i3											"${HOME_DIRECTORY}"/.config/i3			config
+console.download get.trmnl.me/i3wm/i3status										"${HOME_DIRECTORY}"/.config/i3status	config
 
 # ranger #
 
-console.download https://raw.githubusercontent.com/nathaneltitane/i3wm/main/ranger			"${HOME_DIRECTORY}"/.config/ranger		rc.conf
+console.download get.trmnl.me/i3wm/ranger										"${HOME_DIRECTORY}"/.config/ranger		rc.conf
 
  # dmenu #
 
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-change-background
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-confirm
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-exit-session
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-i3-shortcuts
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-open-directory
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-open-file
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-open-file-manager
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-open-manual
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/dmenu			"${BINARIES_DIRECTORY}"					dmenu-show-shortcuts
-
-# xfce #
-
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/xfconf		"${BINARIES_DIRECTORY}"					xfconf-read
-console.download https://raw.githubusercontent.com/nathaneltitane/bash/master/xfconf		"${BINARIES_DIRECTORY}"					xfconf-write
+console.download get.trmnl.me/dmenu												"${BINARIES_DIRECTORY}"					dmenu-change-background
+console.download get.trmnl.me/dmenu												"${BINARIES_DIRECTORY}"					dmenu-confirm
+console.download get.trmnl.me/dmenu												"${BINARIES_DIRECTORY}"					dmenu-exit-session
+console.download get.trmnl.me/dmenu												"${BINARIES_DIRECTORY}"					dmenu-i3-shortcuts
+console.download get.trmnl.me/dmenu												"${BINARIES_DIRECTORY}"					dmenu-open-directory
+console.download get.trmnl.me/dmenu												"${BINARIES_DIRECTORY}"					dmenu-open-file
+console.download get.trmnl.me/dmenu												"${BINARIES_DIRECTORY}"					dmenu-open-file-manager
+console.download get.trmnl.me/dmenu												"${BINARIES_DIRECTORY}"					dmenu-open-manual
+console.download get.trmnl.me/dmenu												"${BINARIES_DIRECTORY}"					dmenu-show-shortcuts
 
 # leocad #
 
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				"${BINARIES_DIRECTORY}"					leocad-build
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				"${BINARIES_DIRECTORY}"					leocad-configuration
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				"${BINARIES_DIRECTORY}"					leocad-download
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				"${BINARIES_DIRECTORY}"					leocad-launcher
-console.download https://raw.githubusercontent.com/nathaneltitane/leocad/main				"${BINARIES_DIRECTORY}"					leocad-position
+console.download get.trmnl.me/leocad											"${BINARIES_DIRECTORY}"					leocad-build
+console.download get.trmnl.me/leocad											"${BINARIES_DIRECTORY}"					leocad-configuration
+console.download get.trmnl.me/leocad											"${BINARIES_DIRECTORY}"					leocad-download
+console.download get.trmnl.me/leocad											"${BINARIES_DIRECTORY}"					leocad-launcher
+console.download get.trmnl.me/leocad											"${BINARIES_DIRECTORY}"					leocad-position
 
 # youtube-dl #
 
-console.download https://yt-dl.org/downloads/latest											"${BINARIES_DIRECTORY}"					youtube-dl
+console.download https://yt-dl.org/downloads/latest								"${BINARIES_DIRECTORY}"					youtube-dl
