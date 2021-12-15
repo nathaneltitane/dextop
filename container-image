@@ -90,30 +90,39 @@ image_architecture () {
 		then
 			image_architecture=${image_architectures[i]}
 
-			console.scs "Valid architecture" "[ ${image_architecture} ]"
+			console.scs "Supported architecture" "[ ${image_architecture} ]"
 			echo
 
 			break
+		else
+			console.wrn "Unsupported architecture" "[ ${image_architecture} ]"
+			echo
+
+			console.fwd "Aborting..."
+			echo
+
+			console.stp "Exiting."
+			echo
+
+			exit 1
+		fi
+
+		if [ -z "${device_architecture}" ] || [ -z "${image_architecture}" ]
+		then
+			image_architecture="N/A"
+
+			console.err "Unknown architecture" "[ ${image_architecture} ]"
+			echo
+
+			console.fwd "Aborting..."
+			echo
+
+			console.stp "Exiting."
+			echo
+
+			exit 1
 		fi
 	done
-
-	# test image architecture string
-
-	if [ -z "$image_architecture" ]
-	then
-		image_architecture="N/A"
-
-		console.wrn "Unknown architecture" "[ ${image_architecture} ]"
-		echo
-
-		console.fwd "Aborting..."
-		echo
-
-		console.stp "Exiting."
-		echo
-
-		exit 1
-	fi
 }
 
 image_version () {
