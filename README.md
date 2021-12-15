@@ -67,18 +67,18 @@ Once the Android applications are installed on your device, open Termux and past
 
 Container install options are:
 
-`-i | --i3wm      I3WM setup: install i3 window manager and utilities.                                [ Default ]`
+`-i, --i3wm      I3WM setup: install i3 window manager and utilities.                                [ Default ]`
 
-`-x | --xfce      XFCE4 setup: install XFCE desktop environment and utilities.`
+`-x, --xfce      XFCE4 setup: install XFCE desktop environment and utilities.`
 
-`-n | --none      No DE setup: console access to environment and utilities.`
+`-n, --none      No DE setup: console access to environment and utilities.`
 
 
-`-b | --base      Base setup: download and install base distribution image only.                                 `
+`-b, --base      Base setup: download and install base distribution image only.                                 `
 
-`-f | --full      Full setup: download and install full desktop environment and utilities.            [ Default ]`
+`-f, --full      Full setup: download and install full desktop environment and utilities.            [ Default ]`
 
-`-u | --update    Package update: check/download/install Termux and Termux API package updates.`
+`-u, --update    Package update: check/download/install Termux and Termux API package updates.`
 
 
 By selecting the 'none' option, Dextop automatically sets up minimal defaults to a 'base' install.
