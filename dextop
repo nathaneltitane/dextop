@@ -2,7 +2,7 @@
 
 # dependencies #
 
-[ -z "${PREFIX}"/bin/console ] && curl -sL get.trmnl.me/console/console > "${PREFIX}"/bin/console && . "${PREFIX}"/bin/console
+curl -sL get.trmnl.me/console/console > "${PREFIX}"/bin/console && . "${PREFIX}"/bin/console
 
 # script #
 
