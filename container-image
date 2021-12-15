@@ -669,7 +669,7 @@ IFS=''
 case "${DISTRIBUTION_NAME}" in
 	ubuntu)
 		iso_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${DISTRIBUTION_VERSION}/release"
-		iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${iso_architecture}.tar.gz"
+		iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${img_architecture}.tar.gz"
 	;;
 esac
 
