@@ -103,7 +103,11 @@ echo
 # functions #
 
 container_command () {
-	. "${PREFIX}"/bin/dextop
+	# run container commands without session login
+
+	# source latest paramaters and variables
+	
+	[-f "${PREFIX}"/bin/dextop ] && . "${PREFIX}"/bin/dextop
 	
 	# assume termux-exec is present - unset LD_PRELOAD
 
@@ -207,40 +211,18 @@ console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-system
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-user
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-vnc
 
-# clear #
-
-console.clear
-
 # in order of execution
 
-if [ ! -f "${BINARIES_DIRECTORY}"/termux-checkpoint-complete ]
-then
-	"${BINARIES_DIRECTORY}"/termux-update
-	"${BINARIES_DIRECTORY}"/termux-storage
-	"${BINARIES_DIRECTORY}"/termux-packages
-	"${BINARIES_DIRECTORY}"/termux-additions
+"${BINARIES_DIRECTORY}"/termux-update
+"${BINARIES_DIRECTORY}"/termux-storage
+"${BINARIES_DIRECTORY}"/termux-packages
+"${BINARIES_DIRECTORY}"/termux-additions
 
-	touch "${BINARIES_DIRECTORY}"/termux-checkpoint-complete
-fi
+"${BINARIES_DIRECTORY}"/container-information
+"${BINARIES_DIRECTORY}"/container-image
+"${BINARIES_DIRECTORY}"/container-system
 
-# confirm uninterrupted setup
-
-touch "${BINARIES_DIRECTORY}"/termux-setup-complete
-
-if [ ! -f "${BINARIES_DIRECTORY}"/container-checkpoint-complete ]
-then
-	"${BINARIES_DIRECTORY}"/container-information
-	"${BINARIES_DIRECTORY}"/container-image
-	"${BINARIES_DIRECTORY}"/container-system
-
-	container_command "${BINARIES_DIRECTORY}"/container-expand
-	container_command "${BINARIES_DIRECTORY}"/container-repositories
-	container_command "${BINARIES_DIRECTORY}"/container-packages
-	container_command "${BINARIES_DIRECTORY}"/container-user
-
-	touch "${BINARIES_DIRECTORY}"/container-checkpoint-complete
-fi
-
-# confirm uninterrupted setup
-
-touch "${BINARIES_DIRECTORY}"/container-setup-complete
+container_command "${BINARIES_DIRECTORY}"/container-expand
+container_command "${BINARIES_DIRECTORY}"/container-repositories
+container_command "${BINARIES_DIRECTORY}"/container-packages
+container_command "${BINARIES_DIRECTORY}"/container-user
