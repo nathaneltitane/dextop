@@ -99,65 +99,9 @@ You can press 'Allow' any time during the setup to grant this permission.
 User information and distribution preferences are captured to set up the container's user profiles and home directories:
 The rest of the setup is fully automated and should run its course until the container is ready for you to use.
 
-### Setup breakdown:
-
-- Dextop setup:
-   - Termux setup:
-      - Set up Termux (com.termux) and Termux API (com.termux.api) package update [ Optional ]
-      - Set up Termux properties
-      - Set up Termux storage access
-      - Set up Termux shell configurations
-      - Set up Termux silent login
-      - Set up Termux login welcome message
-      - Set up Termux package repositories
-      - Set up Termux required packages
-      - Set up Termux directory, file and utility links
-      - Mark Termux setup checkpoint
-      - Clean up Termux setup
-   - Container setup:
-      - Check device architecture
-      - Gather setup information
-      - Select distribution type and version
-      - Set up distribution image and container
-      - Set up dangling group IDs into container
-      - Set up container environemnt
-      - Set up container network connectivity
-      - Set up container library preload
-      - Mark Proot setup checkpoint
-      - Set up container setup completion routine
-      - CONTAINER LOGIN - 'root'
-         - Set up container user account
-         - Set up container user's superuser privileges
-         - Set up container shell configurations
-         - Set up container silent login
-         - Set up container login welcome message
-         - Set up container image expansion
-         - Set up container package repositories
-         - Set up container required packages
-         - Set up container directory, file and utility links
-         - Clean up container setup
-      - User setup:
-         - Mark user setup checkpoint
-         - Set up user setup completion routine
-         - PROOT LOGIN - 'root'
-            - Set up user configuration routine
-            - Set up user required packages
-            - Set up user addons (directories, files and utilities)
-            - Clean up user setup
-      - VNC setup:
-         - Set up vnc environment
-         - Mark vnc setup checkpoint
-         - Clean vnc setup
-
-- CONTAINER LOGIN - 'user'
-   - Set up user configuration routine
-      - Configure keyboard
-      - Configure locales
-      - Configure timezones
-
 ### Customization:
 
-Edit the  'user_list' array in the 'container-packages' file prior to starting the setup to customize your list of installed applications, libraries, frameworks, utilities and other third party package locations.
+Edit the  'user_list' array in the 'container-packages' file prior to starting the setup to customize your list of installed applications, libraries and utilities.
 
 **You can modify any of the other scripts AT YOUR OWN RISK!**
 **Any modification of the Dextop setup routine scripts implies you are fully aware of potential breakage and the consequences of doing so:**
