@@ -558,7 +558,7 @@ else
 
 		console.wrn "No existing deployment found."
 		echo
-		
+
 		image_directories
 
 		console.fwd "Proceeding..."
@@ -584,7 +584,7 @@ else
 
 					console.inf "No existing archives found."
 					echo
-					
+
 					console.fwd "Proceeding..."
 					echo
 				else
@@ -650,7 +650,7 @@ else
 										else
 											console.err "Unable to deploy system image with current set of options."
 											echo
-											
+
 											console.fwd "Aborting..."
 											echo
 
