@@ -122,7 +122,7 @@ add_user () {
 }
 
 add_superuser () {
-	# generate superuser privilege for 'user'
+	# generate 'user' superuser privilege
 
 	console.fwd "Generating superuser privilege..."
 	echo
@@ -140,6 +140,8 @@ add_superuser () {
 
 	console.directory "${ROOT_DIRECTORY}" /etc/sudoers.d
 
+	console.file "${ROOT_DIRECTORY}"/etc/sudoers.d "${user_name}"
+
 	# set superuser privilege password override
 
 	echo "${user_name} ALL=(ALL) NOPASSWD: ALL" > "${ROOT_DIRECTORY}"/etc/sudoers.d/"${user_name}"
@@ -154,12 +156,12 @@ add_superuser () {
 }
 
 add_password () {
-	# generate password for 'user'
+	# generate 'user' password
 
 	console.fwd "Setting password..."
 	echo
 
-	# generate password credential for user entry
+	# generate password credential for 'user' entry
 	# silent configuration:
 	# use 'chpasswd' to append user password to account
 
@@ -167,7 +169,7 @@ add_password () {
 }
 
 add_runtime () {
-	# generate runtime directory structure for 'user'
+	# generate 'user' runtime directory structure
 
 	console.fwd "Setting runtime..."
 	echo

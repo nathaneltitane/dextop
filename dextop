@@ -224,7 +224,7 @@ then
 		"${BINARIES_DIRECTORY}"/termux-packages
 		"${BINARIES_DIRECTORY}"/termux-additions
 
-		touch "${BINARIES_DIRECTORY}"/termux-checkpoint-complete
+		console.file "${BINARIES_DIRECTORY}" termux-checkpoint-complete
 	fi
 
 	# container
@@ -240,8 +240,8 @@ then
 		container_command "${BINARIES_DIRECTORY}"/container-packages
 		container_command "${BINARIES_DIRECTORY}"/container-user
 
-		touch "${BINARIES_DIRECTORY}"/container-checkpoint-complete
+		console.file "${BINARIES_DIRECTORY}" container-checkpoint-complete
 	fi
 
-	touch "${BINARIES_DIRECTORY}"/dextop-checkpoint-complete
+	console.file "${BINARIES_DIRECTORY}" dextop-checkpoint-complete
 fi
