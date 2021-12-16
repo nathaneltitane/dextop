@@ -72,7 +72,7 @@ image_architecture () {
 
 	# list supported image architechtures
 
-	img_architectures=(
+	image_architectures=(
 		arm64
 		armhf
 		amd64
@@ -88,9 +88,9 @@ image_architecture () {
 	do
 		if [[ "$print_architecture" == "${cpu_architectures[i]}" ]]
 		then
-			i_architecture=${img_architectures[i]}
+			i_architecture=${image_architectures[i]}
 
-			console.scs "Valid architecture" "[ ${img_architecture} ]"
+			console.scs "Valid architecture" "[ ${image_architecture} ]"
 			echo
 
 			break
@@ -99,11 +99,11 @@ image_architecture () {
 
 	# test image architecture string
 
-	if [ -z "$img_architecture" ]
+	if [ -z "$image_architecture" ]
 	then
-		img_architecture="N/A"
+		image_architecture="N/A"
 
-		console.wrn "Unknown architecture" "[ ${img_architecture} ]"
+		console.wrn "Unknown architecture" "[ ${image_architecture} ]"
 		echo
 
 		console.fwd "Aborting..."
@@ -164,6 +164,57 @@ image_version () {
 	done
 
 	printf '\n'
+
+	# values #
+
+	values_list=(
+		selection
+	)
+
+	# handle user input for values_list
+
+	eval ${console_rtn[@]}
+
+	console.ipt "Selection:"
+
+	read selection
+	echo
+
+	unset distribution_version
+
+	# integer check:
+	# handle numerical selection
+
+	if [[ "${selection}" =~ ^[0-9]+$ ]]
+	then
+		i=$((${selection}))
+		i=$(($i*2))
+
+		version="${versions[i-1]}"
+		name="${versions[i-2]}"
+
+		distribution_name="${name}"
+		distribution_version="${version}"
+	fi
+
+	# handle distribution code markup
+
+	# set IFS
+
+	IFS='.'
+
+	read code_year code_month code_revision <<< "${distribution_version}"
+	
+	if [ -z "${code_revision}" ]
+	then
+		distribution_release="${distribution_version}"
+	else
+		distribution_release="${distribution_version%.*}"
+	fi
+
+	# reset IFS
+
+	IFS=''
 }
 
 image_directories () {
@@ -613,63 +664,12 @@ image_architecture
 
 image_version
 
-# values #
-
-values_list=(
-	selection
-)
-
-# handle user input for values_list
-
-eval ${console_rtn[@]}
-
-console.ipt "Selection:"
-
-read selection
-echo
-
-unset distribution_version
-
-# integer check:
-# handle numerical selection
-
-if [[ "${selection}" =~ ^[0-9]+$ ]]
-then
-	i=$((${selection}))
-	i=$(($i*2))
-
-	version="${versions[i-1]}"
-	name="${versions[i-2]}"
-
-	distribution_name="${name}"
-	distribution_version="${version}"
-fi
-
-# handle distribution code markup
-
-# set IFS
-
-IFS='.'
-
-read code_year code_month code_revision <<< "${distribution_version}"
-
-if [ -z "${code_revision}" ]
-then
-	distribution_release="${distribution_version}"
-else
-	distribution_release="${distribution_version%.*}"
-fi
-
-# reset IFS
-
-IFS=''
-
 # handle distribution name and version
 
 case "${DISTRIBUTION_NAME}" in
 	ubuntu)
 		iso_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${DISTRIBUTION_VERSION}/release"
-		iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${img_architecture}.tar.gz"
+		iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${image_architecture}.tar.gz"
 	;;
 esac
 
