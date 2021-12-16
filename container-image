@@ -82,24 +82,35 @@ image_architecture () {
 
 	# test processor architecture string
 
-	print_architecture="$(uname -m)"
+	device_architecture="$(uname -m)"
 
 	for i in ${!cpu_architectures[@]}
 	do
-		if [[ "$print_architecture" == "${cpu_architectures[i]}" ]]
+		if [[ "${device_architecture}" == "${cpu_architectures[i]}" ]]
 		then
-			i_architecture=${image_architectures[i]}
+			image_architecture=${image_architectures[i]}
 
-			console.scs "Valid architecture" "[ ${image_architecture} ]"
+			console.scs "Supported architecture" "[ ${image_architecture} ]"
 			echo
 
 			break
+		else
+			console.wrn "Unsupported architecture" "[ ${image_architecture} ]"
+			echo
+
+			console.fwd "Aborting..."
+			echo
+
+			console.stp "Exiting."
+			echo
+
+			exit 1
 		fi
 	done
 
 	# test image architecture string
 
-	if [ -z "$image_architecture" ]
+	if [ -z "$image_architecture" ] || [ -z "${device_architecture}" ]
 	then
 		image_architecture="N/A"
 
@@ -119,7 +130,7 @@ image_architecture () {
 image_version () {
 	console.msg "Select distribution version to setup."
 	echo
-
+x
 	# list supported display resolutions
 
 	ubuntu_versions=(
@@ -664,7 +675,19 @@ image_architecture
 
 image_version
 
-# handle distribution name and version
+# export variables
+
+echo "# ${script} #"															>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+
+echo "export DISTRIBUTION_NAME=${distribution_name}"							>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo "export DISTRIBUTION_RELEASE=${distribution_release}"						>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo "export DISTRIBUTION_VERSION=${distribution_version}"						>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+
+echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'		>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'				>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo 'export ROOT_HOME_DIRECTORY="${ROOT_DIRECTORY}/root"'						>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+
+# handle distribution url
 
 case "${DISTRIBUTION_NAME}" in
 	ubuntu)
@@ -680,15 +703,3 @@ console.download "${iso_url}" "${ISO_DIRECTORY}" "${iso_archive}"
 # unpack image into container
 
 image_unpack "${ISO_DIRECTORY}/${iso_archive}"
-
-# export variables
-
-echo "# ${script} #"															>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-
-echo "export DISTRIBUTION_NAME=${distribution_name}"							>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo "export DISTRIBUTION_RELEASE=${distribution_release}"						>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo "export DISTRIBUTION_VERSION=${distribution_version}"						>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-
-echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'		>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'				>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo 'export ROOT_HOME_DIRECTORY="${ROOT_DIRECTORY}/root"'						>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
