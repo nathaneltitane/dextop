@@ -173,6 +173,69 @@ image_version () {
 	done
 
 	printf '\n'
+
+	# values #
+
+	values_list=(
+		selection
+	)
+
+	# handle user input for values_list
+
+	eval ${console_rtn[@]}
+	
+	console.ipt "Selection:"
+
+	read selection
+	echo
+
+	unset distribution_version
+
+	# integer check:
+	# handle numerical selection
+
+	if [[ "${selection}" =~ ^[0-9]+$ ]]
+	then
+		i=$((${selection}))
+		i=$(($i*2))
+
+		version="${versions[i-1]}"
+		name="${versions[i-2]}"
+
+		distribution_name="${name}"
+		distribution_version="${version}"
+	fi
+
+	# handle distribution code markup
+
+	# set IFS
+	
+	IFS='.'
+
+	read code_year code_month code_revision <<< "${distribution_version}"
+
+	if [ -z "${code_revision}" ]
+	then
+		distribution_release="${distribution_version}"
+	else
+		distribution_release="${distribution_version%.*}"
+	fi
+
+	# reset IFS
+
+	IFS=''
+
+	# export variables
+
+	echo "# ${script} #"														>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+
+	echo "export DISTRIBUTION_NAME=${distribution_name}"						>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+	echo "export DISTRIBUTION_RELEASE=${distribution_release}"					>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+	echo "export DISTRIBUTION_VERSION=${distribution_version}"					>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+
+	echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'	>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+	echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'			>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+	echo 'export ROOT_HOME_DIRECTORY="${ROOT_DIRECTORY}/root"'					>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 }
 
 image_directories () {
@@ -622,57 +685,6 @@ image_architecture
 
 image_version
 
-# values #
-
-values_list=(
-	selection
-)
-
-# handle user input for values_list
-
-eval ${console_rtn[@]}
-
-console.ipt "Selection:"
-
-read selection
-echo
-
-unset distribution_version
-
-# integer check:
-# handle numerical selection
-
-if [[ "${selection}" =~ ^[0-9]+$ ]]
-then
-	i=$((${selection}))
-	i=$(($i*2))
-
-	version="${versions[i-1]}"
-	name="${versions[i-2]}"
-
-	distribution_name="${name}"
-	distribution_version="${version}"
-fi
-
-# handle distribution code markup
-
-# set IFS
-
-IFS='.'
-
-read code_year code_month code_revision <<< "${distribution_version}"
-
-if [ -z "${code_revision}" ]
-then
-	distribution_release="${distribution_version}"
-else
-	distribution_release="${distribution_version%.*}"
-fi
-
-# reset IFS
-
-IFS=''
-
 # handle distribution name and version
 
 case "${DISTRIBUTION_NAME}" in
@@ -689,15 +701,3 @@ console.download "${iso_url}" "${ISO_DIRECTORY}" "${iso_archive}"
 # unpack image into container
 
 image_unpack "${ISO_DIRECTORY}/${iso_archive}"
-
-# export variables
-
-echo "# ${script} #"															>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-
-echo "export DISTRIBUTION_NAME=${distribution_name}"							>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo "export DISTRIBUTION_RELEASE=${distribution_release}"						>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo "export DISTRIBUTION_VERSION=${distribution_version}"						>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-
-echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'		>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'				>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo 'export ROOT_HOME_DIRECTORY="${ROOT_DIRECTORY}/root"'						>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
