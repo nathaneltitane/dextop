@@ -1,0 +1,703 @@
+#!/bin/bash
+
+# dependencies #
+
+. /data/data/com.termux/files/usr/bin/console
+. /data/data/com.termux/files/usr/bin/dextop
+
+# script #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="12-03-2021"
+
+# usage #
+
+while (($#))
+do
+	case "${1}" in
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-h, --help \t Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version ${version} ]"
+			echo
+
+			exit
+		;;
+
+		*)
+			echo
+			echo "Usage: ${script} [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+		;;
+		
+	esac
+
+	shift
+done
+
+# prompt #
+
+console.script "Setting up ${script#*-}"
+echo
+
+# variables #
+
+# defaults #
+
+# functions #
+
+image_architecture () {
+	#comaprae system architecture to available image architectures
+
+	processor_architectures=(
+		aarch64
+		arm
+		amd64
+		i*86
+		x86_64
+	)
+
+	# list supported image architechtures
+
+	image_architectures=(
+		arm64
+		armhf
+		amd64
+		i386
+		amd64
+	)
+
+	# test processor architecture string
+
+	device_architecture="$(uname -m)"
+
+	for i in ${!processor_architectures[@]}
+	do
+		if [[ "${device_architecture}" == "${processor_architectures[i]}" ]]
+		then
+			image_architecture=${image_architectures[i]}
+
+			console.scs "Supported architecture" "[ ${image_architecture} ]"
+			echo
+
+			break
+		else
+			console.wrn "Unsupported architecture" "[ ${image_architecture} ]"
+			echo
+
+			console.fwd "Aborting..."
+			echo
+
+			console.stp "Exiting."
+			echo
+
+			exit 1
+		fi
+
+		if [ -z "${device_architecture}" ] || [ -z "${image_architecture}" ]
+		then
+			image_architecture="N/A"
+
+			console.err "Unknown architecture" "[ ${image_architecture} ]"
+			echo
+
+			console.fwd "Aborting..."
+			echo
+
+			console.stp "Exiting."
+			echo
+
+			exit 1
+		fi
+	done
+}
+
+image_version () {
+	console.msg "Select distribution version to setup."
+	echo
+
+	# list supported display resolutions
+
+	ubuntu_versions=(
+		ubuntu	20.04.3
+		ubuntu	20.10
+		ubuntu	21.04
+		ubuntu	21.10
+	)
+
+	versions=(
+		${ubuntu_versions[@]}
+	)
+
+	printf '\n'
+
+	# set padding for uniform output
+
+	pad_length=10
+
+	# continue list using array selection of suppported values
+
+	for (( i=0 ; i<${#versions[@]} ; i+=2 ))
+	do
+			name="${versions[$i]}"
+			version="${versions[$i+1]}"
+
+			number=$((($i/2) + 1))
+
+			if (( $i/2 >= 0 && $i/2 <= 8 ))
+			then
+					# handle number spacing for entries 1-9
+
+					printf '\t[  %s ] %s %s' ${number} ${name}
+			else
+					# handle number spacing for entries 10+
+
+					printf '\t[ %s ] %s %s' ${number} ${name}
+			fi
+
+			printf '%*s' $((pad_length - ${#name}))
+			printf '%s\n' ${version}
+	done
+
+	printf '\n'
+}
+
+image_directories () {
+	# populate required directories and structure
+
+	console.fwd "Creating required deployment directories..."
+	echo
+
+	directories_list=(
+		"${BACKUP_DIRECTORY}"
+		"${IMAGE_DIRECTORY}"
+		"${ISO_DIRECTORY}"
+		"${MOUNT_DIRECTORY}"
+		"${ROOT_DIRECTORY}"
+	)
+
+	console.directory "/" ${directories_list[@]}
+}
+
+image_archive () {
+	# archive previous deployments to backup directory
+
+	# set IFS
+
+	IFS=$'\n'
+
+	deployments_list=()
+
+	for deployment in $(find "${IMAGE_DIRECTORY}" -maxdepth 2 -type d ! -wholename "${IMAGE_DIRECTORY}")
+	do
+		distribution_path="${deployment%/*}"
+		distribution_name="$(basename ${distribution_path})"
+
+		release_path="${deployment##*/}"
+		release_name="$(basename ${release_path})"
+
+		deployment="${distribution_name}/${release_name}"
+
+		# filter out parent directory
+
+		if [[ "${deployment}" = *img* ]]
+		then
+			:
+		else
+			deployments_list+=("${deployment}")
+		fi
+	done
+
+	# reset IFS
+
+	IFS=''
+
+	console.inf "Number of deployments found: ${#deployments_list[@]}"
+	echo
+
+	console.ipt "Select deployment to archive:"
+	echo
+
+	printf '\n'
+
+	# print numbered list for selection
+
+	for (( i=0 ; i<${#deployments_list[@]} ; i++ ))
+	do
+		number=$(($i + 1))
+
+		if (( $i >= 0 && $i <=8 ))
+		then
+			# handle number spacing for entries 1-9
+
+			printf '\t[  %s ] %s \n' ${number} ${deployments_list[i]}
+		else
+			# handle number spacing for entries 10+
+
+			printf '\t[ %s ] %s \n' ${number} ${deployments_list[i]}
+		fi
+	done
+
+	printf '\n'
+
+	# values #
+
+	values_list=(
+		selection
+	)
+
+	# handle user input for values_list
+
+	console_rtn=()
+
+	console.input ${values_list[@]}
+
+	eval ${console_rtn[@]}
+
+	# verify selection input against selection list
+
+	while true
+	do
+		# range #
+
+		if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]]
+		then
+			echo
+			console.err "Invalid selection:"
+			console.wrn "Select a number ranging from [ 1 - ${number} ]"
+			echo
+
+			console.ipt "Selection:"
+			
+			read selection
+			echo
+		else
+			# handle numerical selection
+
+			i=$((${selection} - 1))
+
+			deployment=${deployments_list[i]}
+
+			# define archiving variables
+
+			ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${deployment}"
+
+			console.fwd "Archiving [ ${deployment} ]... "
+			echo
+
+			break
+		fi
+	done
+
+	# archive routine
+
+	tar												\
+		--create									\
+		--verbose									\
+		--gzip										\
+		--preserve-permissions						\
+			--file="${BACKUP_DIRECTORY}/${1}"		\
+			--exclude="${ROOT_DIRECTORY}/${1}"		\
+			--one-file-system "${ROOT_DIRECTORY}"	|| :
+}
+
+image_restore () {
+	# restore backed up deployment to image directory
+
+	# set IFS
+
+	IFS=$'\n'
+
+	archives_list=()
+
+	for archive_selection in $(find "${BACKUP_DIRECTORY}" -maxdepth 1 -type f -iname "*.tar.gz" ! -wholename "${BACKUP_DIRECTORY}")
+	do
+		archive_label="${archive_selection##*/}"
+
+		# set IFS
+
+		IFS='-'
+
+		read archive_distribution archive_release month day year hour minute second archive_tail <<< "${archive_label}"
+
+		# reset IFS
+
+		IFS=''
+
+		archives_list+=("${archive_label}")
+	done
+
+	console.inf "Number of archives found: ${#archives_list[@]}"
+	echo
+
+	console.ipt "Select archive to restore:"
+	echo
+
+	printf '\n'
+
+	# print numbered list for selection
+
+	for (( i=0 ; i<${#archives_list[@]} ; i++ ))
+	do
+		archives_directory="${archives_list[$i]}"
+
+		number=$(($i + 1))
+
+		if (( $i >= 0 && $i <=8 ))
+		then
+			# handle number spacing for entries 1-9
+
+			printf '\t[  %s ] %s\n' ${number} ${archives_list[i]}
+		else
+			# handle number spacing for entries 10+
+
+			printf '\t[ %s ] %s\n' ${number} ${archives_list[i]}
+		fi
+	done
+
+	printf '\n'
+
+	# values #
+
+	values_list=(
+		selection
+	)
+
+	# handle user input for values_list
+
+	console_rtn=()
+
+	console.input ${values_list[@]}
+
+	eval ${console_rtn[@]}
+
+	# verify selection input against selection list
+
+	while true
+	do
+		# range #
+
+		if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]]
+		then
+			echo
+			console.err "Invalid selection:"
+			console.wrn "Select a number ranging from [ 1 - ${number} ]"
+			echo
+
+			console.ipt "Selection:"
+			
+			read selection
+			echo
+		else
+		# handle numerical selection
+
+			i=$((${selection}))
+
+			archive=${deployments_list[i]}
+			archive_stamp="${month}-${day}-${year}-${hour}-${minute}-${second}"
+
+			deployment="${archive_distribution}/${archive_release}"
+
+			# define archiving variables
+
+			ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${deployment}"
+
+			console.fwd "Restoring [ ${deployment} // ${archive_stamp} ]... "
+			echo
+
+			break
+		fi
+	done
+
+	exit
+
+	console.inf "Extracting deployment archive [ $[archive_selection ]."
+	echo
+
+	# restore routine
+
+	tar												\
+		--extract									\
+			--file="${archive_selection}"			\
+			--directory="/"
+}
+
+image_wipe () {
+	# wipe image directory contents
+
+	console.inf "Wiping previous deployments."
+	echo
+
+	rm -rf "${IMAGE_DIRECTORY}"/*
+}
+
+image_rename () {
+	# rename same distribution/release directory contents
+
+	console.inf "Moving existing deployments."
+
+	for directory in $(find "${IMAGE_DIRECTORY}" -maxdepth 2 -type d ! -wholename "${IMAGE_DIRECTORY}")
+	do
+		directories_list+=("${directory}")
+	done
+
+	for deployment in ${directories_list[@]}
+	do
+		if [[ "${deployment}" == "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}" ]]
+		then
+			mv "${deployment}" "${deployment}-${stamp}"
+		fi
+	done
+}
+
+image_unpack () {
+	# shorthand
+
+	# proot -l tar -xzf "${1}" -X "${2}" || :
+
+	# exclude archive directories: dev | proc | sys | system
+	# 'container-session' will bind those device directories to the container
+
+	ROOT_DIRECTORY="${ROOT_DIRECTORY}"
+
+	console.inf "Extracting new deployment."
+	echo
+
+	cd "${ROOT_DIRECTORY}" || exit 1
+
+	proot												\
+		--link2symlink									\
+			tar 										\
+				--extract								\
+				--delay-directory-restore				\
+				--preserve-permissions					\
+					--file="${1}"						\
+					--exclude='boot'					\
+					--exclude='dev'						\
+					--exclude='proc'					\
+					--exclude='sys'						\
+					--exclude='system' 2> /dev/null		|| :
+}
+
+# run setup
+
+if [[ ! -d "${IMAGE_DIRECTORY}" ]]
+then
+	image_directories
+else
+	if [[ -z "$(ls ${IMAGE_DIRECTORY})" ]]
+	then
+		console.wrn "Image directory clean [ ${IMAGE_DIRECTORY} ]."
+		echo
+
+		console.wrn "No existing deployment found."
+		echo
+		
+		image_directories
+
+		console.fwd "Proceeding..."
+		echo
+	else
+		if [[ ! -z "$(ls ${IMAGE_DIRECTORY})" ]]
+		then
+			console.ask "Archive deployments?"
+
+			read reply
+			echo
+
+			if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+			then
+				image_archive "${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-${stamp}-backup.tar.gz"
+
+				unset reply
+			else
+				if [[ -z "$(ls ${BACKUP_DIRECTORY})" ]]
+				then
+					console.wrn "Backup directory clean [ ${BACKUP_DIRECTORY} ]."
+					echo
+
+					console.inf "No existing archives found."
+					echo
+					
+					console.fwd "Proceeding..."
+					echo
+				else
+					if [[ ! -z "$(ls ${BACKUP_DIRECTORY})" ]]
+					then
+						console.ask "Restore deployments?"
+
+						read reply
+						echo
+
+						if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+						then
+							image_restore
+
+							unset reply
+						else
+							if [[ ! -z "$(ls ${IMAGE_DIRECTORY})" ]] && [[ "${LOAD_DIRECTORY}" == "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}" ]]
+							then
+								console.wrn "Image directory contains previous deployments."
+								echo
+
+								console.err "Deployment matches setup settings [ ${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE} ]"
+								echo
+
+								console.ask "Archive matching deployment?"
+
+								read reply
+								echo
+
+								if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+								then
+									image_archive "${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup-${stamp}.tar.gz"
+
+									unset reply
+								else
+									console.err "Cannot deploy over existing image with same configuration."
+									echo
+
+									console.ask "Wipe image directory?"
+									echo
+
+									read reply
+									echo
+
+									if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+									then
+										image_wipe
+
+										unset reply
+									else
+										console.err "Cannot deploy over existing image with same configuration."
+										echo
+
+										console.ask "Rename deployment directory?"
+										echo
+
+										read reply
+										echo
+
+										if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+										then
+											image_rename
+										else
+											console.err "Unable to deploy system image with current set of options."
+											echo
+											
+											console.fwd "Aborting..."
+											echo
+
+											exit 1
+										fi
+									fi
+								fi
+							fi
+						fi
+					fi
+				fi
+			fi
+		fi
+	fi
+fi
+
+# verify architecture
+
+image_architecture
+
+# choose image version
+
+image_version
+
+# values #
+
+values_list=(
+	selection
+)
+
+# handle user input for values_list
+
+eval ${console_rtn[@]}
+
+console.ipt "Selection:"
+
+read selection
+echo
+
+unset distribution_version
+
+# integer check:
+# handle numerical selection
+
+if [[ "${selection}" =~ ^[0-9]+$ ]]
+then
+	i=$((${selection}))
+	i=$(($i*2))
+
+	version="${versions[i-1]}"
+	name="${versions[i-2]}"
+
+	distribution_name="${name}"
+	distribution_version="${version}"
+fi
+
+# handle distribution code markup
+
+# set IFS
+
+IFS='.'
+
+read code_year code_month code_revision <<< "${distribution_version}"
+
+if [ -z "${code_revision}" ]
+then
+	distribution_release="${distribution_version}"
+else
+	distribution_release="${distribution_version%.*}"
+fi
+
+# reset IFS
+
+IFS=''
+
+# handle distribution name and version
+
+case "${DISTRIBUTION_NAME}" in
+	ubuntu)
+		iso_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${DISTRIBUTION_VERSION}/release"
+		iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${image_architecture}.tar.gz"
+	;;
+esac
+
+# download image
+
+console.download "${iso_url}" "${ISO_DIRECTORY}" "${iso_archive}"
+
+# unpack image into container
+
+image_unpack "${ISO_DIRECTORY}/${iso_archive}"
+
+# export variables
+
+echo "# ${script} #"															>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+
+echo "export DISTRIBUTION_NAME=${distribution_name}"							>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo "export DISTRIBUTION_RELEASE=${distribution_release}"						>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo "export DISTRIBUTION_VERSION=${distribution_version}"						>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+
+echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'		>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'				>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo 'export ROOT_HOME_DIRECTORY="${ROOT_DIRECTORY}/root"'						>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
