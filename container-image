@@ -62,7 +62,7 @@ echo
 image_architecture () {
 	#comaprae system architecture to available image architectures
 
-	processor_architectures=(
+	cpu_architectures=(
 		aarch64
 		arm
 		amd64
@@ -72,7 +72,7 @@ image_architecture () {
 
 	# list supported image architechtures
 
-	image_architectures=(
+	img_architectures=(
 		arm64
 		armhf
 		amd64
@@ -82,47 +82,38 @@ image_architecture () {
 
 	# test processor architecture string
 
-	device_architecture="$(uname -m)"
+	print_architecture="$(uname -m)"
 
-	for i in ${!processor_architectures[@]}
+	for i in ${!cpu_architectures[@]}
 	do
-		if [[ "${device_architecture}" == "${processor_architectures[i]}" ]]
+		if [[ "$print_architecture" == "${cpu_architectures[i]}" ]]
 		then
-			image_architecture=${image_architectures[i]}
+			i_architecture=${img_architectures[i]}
 
-			console.scs "Supported architecture" "[ ${image_architecture} ]"
+			console.scs "Valid architecture" "[ ${img_architecture} ]"
 			echo
 
 			break
-		else
-			console.wrn "Unsupported architecture" "[ ${image_architecture} ]"
-			echo
-
-			console.fwd "Aborting..."
-			echo
-
-			console.stp "Exiting."
-			echo
-
-			exit 1
-		fi
-
-		if [ -z "${device_architecture}" ] || [ -z "${image_architecture}" ]
-		then
-			image_architecture="N/A"
-
-			console.err "Unknown architecture" "[ ${image_architecture} ]"
-			echo
-
-			console.fwd "Aborting..."
-			echo
-
-			console.stp "Exiting."
-			echo
-
-			exit 1
 		fi
 	done
+
+	# test image architecture string
+
+	if [ -z "$img_architecture" ]
+	then
+		img_architecture="N/A"
+
+		console.wrn "Unknown architecture" "[ ${img_architecture} ]"
+		echo
+
+		console.fwd "Aborting..."
+		echo
+
+		console.stp "Exiting."
+		echo
+
+		exit 1
+	fi
 }
 
 image_version () {
@@ -678,7 +669,7 @@ IFS=''
 case "${DISTRIBUTION_NAME}" in
 	ubuntu)
 		iso_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${DISTRIBUTION_VERSION}/release"
-		iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${image_architecture}.tar.gz"
+		iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${img_architecture}.tar.gz"
 	;;
 esac
 
