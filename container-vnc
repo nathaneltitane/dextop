@@ -76,8 +76,8 @@ echo
 
 [ -z "${DISPLAY}" ]			&& DISPLAY=":1"
 [ -z "${DISPLAY_NUMBER}" ]  && DISPLAY_NUMBER="${DISPLAY/:/}"
-[ -z "${PORT}" ]			&& PORT="590${DISPLAY_NUMBER}"
 [ -z "${LOCALHOST}"]		&& LOCALHOST="127.0.0.1"
+[ -z "${PORT}" ]			&& PORT="590${DISPLAY_NUMBER}"
 
 # export variables
 
