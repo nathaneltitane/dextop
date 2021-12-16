@@ -128,10 +128,12 @@ image_architecture () {
 }
 
 image_version () {
+	# list distributions for setup
+
 	console.msg "Select distribution version to setup."
 	echo
-x
-	# list supported display resolutions
+
+	# list supported distribution versions
 
 	ubuntu_versions=(
 		ubuntu	20.04.3
@@ -226,6 +228,18 @@ x
 	# reset IFS
 
 	IFS=''
+
+	# export variables
+
+	echo "# ${script} #"														>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+
+	echo "export DISTRIBUTION_NAME=${distribution_name}"						>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+	echo "export DISTRIBUTION_RELEASE=${distribution_release}"					>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+	echo "export DISTRIBUTION_VERSION=${distribution_version}"					>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+
+	echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'	>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+	echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'			>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+	echo 'export ROOT_HOME_DIRECTORY="${ROOT_DIRECTORY}/root"'					>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
 }
 
 image_directories () {
@@ -278,7 +292,7 @@ image_archive () {
 
 	IFS=''
 
-	console.inf "Number of deployments found: ${#deployments_list[@]}"
+	console.inf "Number of deployments found" "[ ${#deployments_list[@]} ]"
 	echo
 
 	console.ipt "Select deployment to archive:"
@@ -334,7 +348,7 @@ image_archive () {
 			echo
 
 			console.ipt "Selection:"
-			
+
 			read selection
 			echo
 		else
@@ -455,6 +469,7 @@ image_restore () {
 			read selection
 			echo
 		else
+
 		# handle numerical selection
 
 			i=$((${selection}))
@@ -516,6 +531,22 @@ image_rename () {
 	done
 }
 
+
+image_download () {
+	# generate links and download distribution image
+
+	# handle distribution url
+
+	case "${DISTRIBUTION_NAME}" in
+		ubuntu)
+			iso_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${DISTRIBUTION_VERSION}/release"
+			iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${image_architecture}.tar.gz"
+		;;
+	esac
+
+	console.download "${iso_url}" "${ISO_DIRECTORY}" "${iso_archive}"
+}
+
 image_unpack () {
 	# shorthand
 
@@ -537,7 +568,7 @@ image_unpack () {
 				--extract								\
 				--delay-directory-restore				\
 				--preserve-permissions					\
-					--file="${1}"						\
+					--file="${@}"						\
 					--exclude='boot'					\
 					--exclude='dev'						\
 					--exclude='proc'					\
@@ -547,98 +578,84 @@ image_unpack () {
 
 # run setup
 
-if [[ ! -d "${IMAGE_DIRECTORY}" ]]
-then
-	image_directories
-else
-	if [[ -z "$(ls ${IMAGE_DIRECTORY})" ]]
+image_check () {
+	# look for previous deployments
+
+	if [[ -d "${IMAGE_DIRECTORY}" ]]
 	then
-		console.wrn "Image directory clean [ ${IMAGE_DIRECTORY} ]."
-		echo
-
-		console.wrn "No existing deployment found."
-		echo
-
-		image_directories
-
-		console.fwd "Proceeding..."
-		echo
-	else
-		if [[ ! -z "$(ls ${IMAGE_DIRECTORY})" ]]
+		if [[ -z "$(ls ${IMAGE_DIRECTORY})" ]]
 		then
-			console.ask "Archive deployments?"
-
-			read reply
+			console.wrn "Image directory clean [ ${IMAGE_DIRECTORY} ]."
 			echo
 
-			if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+			console.wrn "No existing deployment found."
+			echo
+
+			image_directories
+
+			console.fwd "Proceeding..."
+			echo
+		else
+			if [[ ! -z "$(ls ${IMAGE_DIRECTORY})" ]]
 			then
-				image_archive "${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-${stamp}-backup.tar.gz"
+				console.ask "Archive deployments?"
 
-				unset reply
-			else
-				if [[ -z "$(ls ${BACKUP_DIRECTORY})" ]]
+				read reply
+				echo
+
+				if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 				then
-					console.wrn "Backup directory clean [ ${BACKUP_DIRECTORY} ]."
-					echo
+					image_archive "${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-${stamp}-backup.tar.gz"
 
-					console.inf "No existing archives found."
-					echo
-
-					console.fwd "Proceeding..."
-					echo
+					unset reply
 				else
-					if [[ ! -z "$(ls ${BACKUP_DIRECTORY})" ]]
+					if [[ -z "$(ls ${BACKUP_DIRECTORY})" ]]
 					then
-						console.ask "Restore deployments?"
-
-						read reply
+						console.wrn "Backup directory clean [ ${BACKUP_DIRECTORY} ]."
 						echo
 
-						if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+						console.inf "No existing archives found."
+						echo
+
+						console.fwd "Proceeding..."
+						echo
+					else
+						if [[ ! -z "$(ls ${BACKUP_DIRECTORY})" ]]
 						then
-							image_restore
+							console.ask "Restore deployments?"
 
-							unset reply
-						else
-							if [[ ! -z "$(ls ${IMAGE_DIRECTORY})" ]] && [[ "${LOAD_DIRECTORY}" == "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}" ]]
+							read reply
+							echo
+
+							if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 							then
-								console.wrn "Image directory contains previous deployments."
-								echo
+								image_restore
 
-								console.err "Deployment matches setup settings [ ${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE} ]"
-								echo
-
-								console.ask "Archive matching deployment?"
-
-								read reply
-								echo
-
-								if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+								unset reply
+							else
+								if [[ ! -z "$(ls ${IMAGE_DIRECTORY})" ]] && [[ "${LOAD_DIRECTORY}" == "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}" ]]
 								then
-									image_archive "${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup-${stamp}.tar.gz"
-
-									unset reply
-								else
-									console.err "Cannot deploy over existing image with same configuration."
+									console.wrn "Image directory contains previous deployments."
 									echo
 
-									console.ask "Wipe image directory?"
+									console.err "Deployment matches setup settings [ ${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE} ]"
 									echo
+
+									console.ask "Archive matching deployment?"
 
 									read reply
 									echo
 
 									if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 									then
-										image_wipe
+										image_archive "${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup-${stamp}.tar.gz"
 
 										unset reply
 									else
 										console.err "Cannot deploy over existing image with same configuration."
 										echo
 
-										console.ask "Rename deployment directory?"
+										console.ask "Wipe image directory?"
 										echo
 
 										read reply
@@ -646,15 +663,31 @@ else
 
 										if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 										then
-											image_rename
+											image_wipe
+
+											unset reply
 										else
-											console.err "Unable to deploy system image with current set of options."
+											console.err "Cannot deploy over existing image with same configuration."
 											echo
 
-											console.fwd "Aborting..."
+											console.ask "Rename deployment directory?"
 											echo
 
-											exit 1
+											read reply
+											echo
+
+											if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+											then
+												image_rename
+											else
+												console.err "Unable to deploy system image with current set of options."
+												echo
+
+												console.fwd "Aborting..."
+												echo
+
+												exit 1
+											fi
 										fi
 									fi
 								fi
@@ -665,7 +698,7 @@ else
 			fi
 		fi
 	fi
-fi
+}
 
 # verify architecture
 
@@ -675,30 +708,17 @@ image_architecture
 
 image_version
 
-# export variables
+# create directories
 
-echo "# ${script} #"															>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+image_directories
 
-echo "export DISTRIBUTION_NAME=${distribution_name}"							>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo "export DISTRIBUTION_RELEASE=${distribution_release}"						>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo "export DISTRIBUTION_VERSION=${distribution_version}"						>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+# handle existing images
 
-echo 'export LOAD_DIRECTORY="${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}"'		>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo 'export ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${LOAD_DIRECTORY}"'				>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo 'export ROOT_HOME_DIRECTORY="${ROOT_DIRECTORY}/root"'						>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-
-# handle distribution url
-
-case "${DISTRIBUTION_NAME}" in
-	ubuntu)
-		iso_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${DISTRIBUTION_VERSION}/release"
-		iso_archive="ubuntu-base-${DISTRIBUTION_VERSION}-base-${image_architecture}.tar.gz"
-	;;
-esac
+image_check
 
 # download image
 
-console.download "${iso_url}" "${ISO_DIRECTORY}" "${iso_archive}"
+image_download
 
 # unpack image into container
 

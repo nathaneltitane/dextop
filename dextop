@@ -213,16 +213,35 @@ console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-vnc
 
 # in order of execution
 
-"${BINARIES_DIRECTORY}"/termux-update
-"${BINARIES_DIRECTORY}"/termux-storage
-"${BINARIES_DIRECTORY}"/termux-packages
-"${BINARIES_DIRECTORY}"/termux-additions
+if [ ! -f "${BINARIES_DIRECTORY}"/dextop-checkpoint-complete ]
+then
+	# termux
 
-"${BINARIES_DIRECTORY}"/container-information
-"${BINARIES_DIRECTORY}"/container-image
-"${BINARIES_DIRECTORY}"/container-system
+	if [ ! -f "${BINARIES_DIRECTORY}"/termux-checkpoint-complete ]
+	then
+		"${BINARIES_DIRECTORY}"/termux-update
+		"${BINARIES_DIRECTORY}"/termux-storage
+		"${BINARIES_DIRECTORY}"/termux-packages
+		"${BINARIES_DIRECTORY}"/termux-additions
 
-container_command "${BINARIES_DIRECTORY}"/container-expand
-container_command "${BINARIES_DIRECTORY}"/container-repositories
-container_command "${BINARIES_DIRECTORY}"/container-packages
-container_command "${BINARIES_DIRECTORY}"/container-user
+		touch "${BINARIES_DIRECTORY}"/termux-checkpoint-complete
+	fi
+
+	# container
+
+	if [ ! -f "${BINARIES_DIRECTORY}"/container-checkpoint-complete ]
+	then
+		"${BINARIES_DIRECTORY}"/container-information
+		"${BINARIES_DIRECTORY}"/container-image
+		"${BINARIES_DIRECTORY}"/container-system
+
+		container_command "${BINARIES_DIRECTORY}"/container-expand
+		container_command "${BINARIES_DIRECTORY}"/container-repositories
+		container_command "${BINARIES_DIRECTORY}"/container-packages
+		container_command "${BINARIES_DIRECTORY}"/container-user
+
+		touch "${BINARIES_DIRECTORY}"/container-checkpoint-complete
+	fi
+
+	touch "${BINARIES_DIRECTORY}"/dextop-checkpoint-complete
+fi
