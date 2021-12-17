@@ -362,7 +362,7 @@ image_archive () {
 
 			ROOT_DIRECTORY="${IMAGE_DIRECTORY}/${deployment}"
 
-			console.fwd "Archiving [ ${deployment} ]... "
+			console.fwd "Archiving" "[ ${deployment} ]"
 			echo
 
 			break
