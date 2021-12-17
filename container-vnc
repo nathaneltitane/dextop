@@ -76,7 +76,7 @@ echo
 
 [ -z "${DISPLAY}" ]			&& DISPLAY=":1"
 [ -z "${DISPLAY_NUMBER}" ]  && DISPLAY_NUMBER="${DISPLAY/:/}"
-[ -z "${LOCALHOST}"]		&& LOCALHOST="127.0.0.1"
+[ -z "${LOCALHOST}" ]		&& LOCALHOST="127.0.0.1"
 [ -z "${PORT}" ]			&& PORT="590${DISPLAY_NUMBER}"
 
 # export variables
@@ -128,7 +128,7 @@ vnc_start () {
 	command_start+="vncserver"
 	command_start+=" -IdleTimeout 0"
 	command_start+=" -SecurityTypes none"
-	[ $(ps -A | grep -i proot) ] && command_start+=" -localhost yes" || command_start+=" -localhost"
+	[[ $(ps -A | grep -i proot) ]] && command_start+=" -localhost yes" || command_start+=" -localhost"
 	command_start+=" -depth 32"
 	command_start+=" -name ${NAME}-Dextop"
 	command_start+=" -geometry ${GEOMETRY}"
