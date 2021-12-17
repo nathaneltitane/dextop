@@ -578,14 +578,14 @@ image_unpack () {
 
 # run setup
 
-image_check () {
-	# look for previous deployments
+image_deployments () {
+	# look for existing deployments
 
 	if [[ -d "${IMAGE_DIRECTORY}" ]]
 	then
 		if [[ -z "$(ls ${IMAGE_DIRECTORY})" ]]
 		then
-			console.wrn "Image directory clean [ ${IMAGE_DIRECTORY} ]."
+			console.wrn "Image directory clean" "[ ${IMAGE_DIRECTORY} ]"
 			echo
 
 			console.wrn "No existing deployment found."
@@ -595,107 +595,133 @@ image_check () {
 
 			console.fwd "Proceeding..."
 			echo
-		else
-			if [[ ! -z "$(ls ${IMAGE_DIRECTORY})" ]]
-			then
-				console.ask "Archive deployments?"
+		fi
 
+		if [[ ! -z "$(ls ${IMAGE_DIRECTORY})" ]]
+		then
+			console.wrn "Image directory not clean" "[ ${IMAGE_DIRECTORY} ]"
+			echo
+
+			console.wrn "Existing deployment(s) found."
+			echo
+
+			console.ask "Archive deployment(s)?"
+
+			read reply
+			echo
+
+			if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+			then
+				image_archive "${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-${stamp}-backup.tar.gz"
+
+				unset reply
+
+			elif [[ "${reply}" = [nN] ]] || [[ "${reply}" = [nN][oO] ]]
+			then
+				console.ask "Rename deployment(s)?"
 				read reply
 				echo
-
+				
 				if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 				then
 					image_archive "${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-${stamp}-backup.tar.gz"
-
 					unset reply
-				else
-					if [[ -z "$(ls ${BACKUP_DIRECTORY})" ]]
+				
+				elif [[ "${reply}" = [nN] ]] || [[ "${reply}" = [nN][oO] ]]
+				then
+					console.ask "Wipe image directory?"
+					echo
+
+					read reply
+					echo
+
+					if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 					then
-						console.wrn "Backup directory clean [ ${BACKUP_DIRECTORY} ]."
-						echo
+						image_wipe
 
-						console.inf "No existing archives found."
-						echo
+						unset reply
 
-						console.fwd "Proceeding..."
-						echo
-					else
-						if [[ ! -z "$(ls ${BACKUP_DIRECTORY})" ]]
+					elif [[ "${reply}" = [nN] ]] || [[ "${reply}" = [nN][oO] ]]
+					then
+						if [[ ! -z "$(ls ${IMAGE_DIRECTORY})" ]] && [[ "${LOAD_DIRECTORY}" == "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}" ]]
 						then
-							console.ask "Restore deployments?"
+							console.wrn "Image directory contains previous deployments."
+							echo
+
+							console.err "Deployment matches setup settings" "[ ${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE} ]"
+							echo
+							
+							console.err "Cannot deploy over existing image with same configuration."
+							echo
+
+							console.ask "Rename deployment directory?"
+							echo
 
 							read reply
 							echo
 
 							if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 							then
-								image_restore
+								image_rename
 
-								unset reply
-							else
-								if [[ ! -z "$(ls ${IMAGE_DIRECTORY})" ]] && [[ "${LOAD_DIRECTORY}" == "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}" ]]
-								then
-									console.wrn "Image directory contains previous deployments."
-									echo
+							unset reply
 
-									console.err "Deployment matches setup settings [ ${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE} ]"
-									echo
+							elif [[ "${reply}" = [nN] ]] || [[ "${reply}" = [nN][oO] ]]
+							then
+								console.err "Unable to deploy system image with current set of options."
+								echo
 
-									console.ask "Archive matching deployment?"
+								console.fwd "Aborting..."
+								echo
 
-									read reply
-									echo
-
-									if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
-									then
-										image_archive "${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-backup-${stamp}.tar.gz"
-
-										unset reply
-									else
-										console.err "Cannot deploy over existing image with same configuration."
-										echo
-
-										console.ask "Wipe image directory?"
-										echo
-
-										read reply
-										echo
-
-										if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
-										then
-											image_wipe
-
-											unset reply
-										else
-											console.err "Cannot deploy over existing image with same configuration."
-											echo
-
-											console.ask "Rename deployment directory?"
-											echo
-
-											read reply
-											echo
-
-											if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
-											then
-												image_rename
-											else
-												console.err "Unable to deploy system image with current set of options."
-												echo
-
-												console.fwd "Aborting..."
-												echo
-
-												exit 1
-											fi
-										fi
-									fi
-								fi
+								exit 1
 							fi
 						fi
 					fi
 				fi
 			fi
+		fi
+	fi
+}
+
+image_archives () {
+	# look for existing archives
+
+	if [[ -z "$(ls ${BACKUP_DIRECTORY})" ]]
+	then
+		console.wrn "Backup directory clean" "[ ${BACKUP_DIRECTORY} ]"
+		echo
+
+		console.inf "No existing archives found."
+		echo
+
+		console.fwd "Proceeding..."
+		echo
+	fi
+
+	if [[ ! -z "$(ls ${BACKUP_DIRECTORY})" ]]
+	then
+		console.wrn "Backup directory not clean" "[ ${BACKUP_DIRECTORY} ]"
+		echo
+
+		console.wrn "Existing archive(s) found."
+		echo
+
+		console.ask "Restore deployment(s)?"
+
+		read reply
+		echo
+
+		if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+		then
+			image_restore
+
+			unset reply
+
+		elif [[ "${reply}" = [nN] ]] || [[ "${reply}" = [nN][oO] ]]
+		then
+			console.fwd "Continuing..."
+			echo
 		fi
 	fi
 }
