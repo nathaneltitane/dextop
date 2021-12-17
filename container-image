@@ -619,6 +619,7 @@ image_deployments () {
 			elif [[ "${reply}" = [nN] ]] || [[ "${reply}" = [nN][oO] ]]
 			then
 				console.ask "Rename deployment(s)?"
+
 				read reply
 				echo
 
@@ -664,7 +665,7 @@ image_deployments () {
 							then
 								image_rename
 
-							unset reply
+								unset reply
 
 							elif [[ "${reply}" = [nN] ]] || [[ "${reply}" = [nN][oO] ]]
 							then
