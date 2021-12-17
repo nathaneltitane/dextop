@@ -576,8 +576,6 @@ image_unpack () {
 					--exclude='system' 2> /dev/null		|| :
 }
 
-# run setup
-
 image_deployments () {
 	# look for existing deployments
 
@@ -727,6 +725,8 @@ image_archives () {
 	fi
 }
 
+# run setup
+
 # verify architecture
 
 image_architecture
@@ -739,9 +739,13 @@ image_version
 
 image_directories
 
-# handle existing images
+# handle existing image deployments
 
-# image_check
+image_deployments
+
+# handle existing image archives
+
+image_archives
 
 # download image
 
