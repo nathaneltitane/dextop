@@ -621,12 +621,12 @@ image_deployments () {
 				console.ask "Rename deployment(s)?"
 				read reply
 				echo
-				
+
 				if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 				then
 					image_archive "${DISTRIBUTION_NAME}-${DISTRIBUTION_RELEASE}-${stamp}-backup.tar.gz"
 					unset reply
-				
+
 				elif [[ "${reply}" = [nN] ]] || [[ "${reply}" = [nN][oO] ]]
 				then
 					console.ask "Wipe image directory?"
