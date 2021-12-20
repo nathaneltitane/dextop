@@ -207,7 +207,6 @@ console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-update
 
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-expand
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-image
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-information
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-packages
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-repositories
 console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-session
@@ -239,7 +238,6 @@ then
 
 	if [ ! -f "${BINARIES_DIRECTORY}"/container-checkpoint-complete ]
 	then
-		"${BINARIES_DIRECTORY}"/container-information
 		"${BINARIES_DIRECTORY}"/container-image
 		"${BINARIES_DIRECTORY}"/container-system
 
