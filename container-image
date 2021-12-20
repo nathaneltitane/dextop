@@ -739,14 +739,6 @@ image_version
 
 image_directories
 
-# handle existing image deployments
-
-image_deployments
-
-# handle existing image archives
-
-image_archives
-
 # download image
 
 image_download
