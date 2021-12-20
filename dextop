@@ -36,6 +36,10 @@ do
 		-f|--full)
 			install_option="full"
 		;;
+		
+			-u|--update)
+				install_option="update"
+			;;
 
 		-h|--help)
 			echo
@@ -219,7 +223,11 @@ then
 
 	if [ ! -f "${BINARIES_DIRECTORY}"/termux-checkpoint-complete ]
 	then
-		"${BINARIES_DIRECTORY}"/termux-update
+		if [ "${install_option}" = "update" ]
+		then
+			"${BINARIES_DIRECTORY}"/termux-update
+		fi
+
 		"${BINARIES_DIRECTORY}"/termux-storage
 		"${BINARIES_DIRECTORY}"/termux-packages
 		"${BINARIES_DIRECTORY}"/termux-additions
