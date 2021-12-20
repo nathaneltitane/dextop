@@ -232,50 +232,15 @@ add_runtime () {
 
 # create user account and relevant permission sets
 
-# values #
-
-if [ -z "${user_name}" ]
-then
-	information_list=(
-		user_name
-		first_name
-		last_name
-		user_email
-	)
-
-	# handle user input for information_list
-
-	console_rtn=()
-
-	console.input ${information_list[@]}
-
-	eval ${console_rtn[@]}
-fi
+add_information
 
 # use /dev/null redirection:
-# adduser prevents stdout error redirect - cannot use 'console.silence'
+# 'adduser' prevents stdout error redirect - cannot use 'console.silence'
 
 add_user > /dev/null
 
-# values #
-
-if [ -z "${user_password}" ]
-then
-	information_list=(
-		user_password
-	)
-
-	# handle user input for information_list
-
-	console_rtn=()
-
-	console.input ${information_list[@]}
-
-	eval ${console_rtn[@]}
-fi
-
 # use /dev/null redirection:
-# chpasswd prevents stdout error redirect - cannot use 'console.silence'
+# 'chpasswd' prevents stdout error redirect - cannot use 'console.silence'
 
 add_password > /dev/null
 
