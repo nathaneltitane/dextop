@@ -201,19 +201,26 @@ done
 
 # download utilities
 
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-additions
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-packages
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-storage
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	termux-update
+utilities_list+=(
+	termux-additions
+	termux-packages
+	termux-storage
+	termux-update
+	
+	container-expand
+	container-image
+	container-packages
+	container-repositories
+	container-session
+	container-system
+	container-user
+	container-vnc
+)
 
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-expand
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-image
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-packages
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-repositories
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-session
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-system
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-user
-console.download get.dxtp.app "${BINARIES_DIRECTORY}"	container-vnc
+for utility in ${utilities_list[@]}
+do
+	console.download get.dxtp.app "${BINARIES_DIRECTORY}" "${utility}"
+done
 
 # in order of execution
 

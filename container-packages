@@ -61,7 +61,7 @@ echo
 # if no desktop environment or window manager is selected
 # revert to console session and install base utilities only
 
-[[ "${install_option}" = base ]]												&& desktop_option="none"
+[ "${install_option}" = base ] && desktop_option="none"
 
 # update packages list
 
