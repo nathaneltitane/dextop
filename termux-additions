@@ -155,7 +155,6 @@ console.download get.trmnl.me/dmenu												"${BINARIES_DIRECTORY}"					dmenu
 console.download get.trmnl.me/leocad											"${BINARIES_DIRECTORY}"					leocad-build
 console.download get.trmnl.me/leocad											"${BINARIES_DIRECTORY}"					leocad-configuration
 console.download get.trmnl.me/leocad											"${BINARIES_DIRECTORY}"					leocad-download
-console.download get.trmnl.me/leocad											"${BINARIES_DIRECTORY}"					leocad-launcher
 console.download get.trmnl.me/leocad											"${BINARIES_DIRECTORY}"					leocad-position
 
 # youtube-dl #
