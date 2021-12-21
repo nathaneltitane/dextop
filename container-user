@@ -171,17 +171,15 @@ add_superuser () {
 
 	# generate sudoers directory
 
-	console.directory "${ROOT_DIRECTORY}" /etc/sudoers.d
-
-	console.file "${ROOT_DIRECTORY}"/etc/sudoers.d "${user_name}"
+	console.directory  /etc/sudoers.d
 
 	# set superuser privilege password override
 
-	echo "${user_name} ALL=(ALL) NOPASSWD: ALL" > "${ROOT_DIRECTORY}"/etc/sudoers.d/"${user_name}"
+	echo "${user_name} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/"${user_name}"
 
 	# fix superuser privilege runtime errors
 
-	echo "Set disable_coredump false" >> "${ROOT_DIRECTORY}"/etc/sudo.conf
+	echo "Set disable_coredump false" >> /etc/sudo.conf
 
 	# fix ownership on superuser privilege password override
 
