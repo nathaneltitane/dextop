@@ -55,7 +55,7 @@ echo
 
 # variables #
 
-command_expand=$(find "${ROOT_DIRECTORY}" -type f -iname unminimize)
+command_expand=$(command -v unminimize)
 
 # defaults #
 
