@@ -78,7 +78,7 @@ Container install options are:
 
 `-f, --full      Full setup: download and install full desktop environment and utilities.            [ Default ]`
 
-`-u, --update    Package update: check/download/install Termux and Termux API package updates.`
+`-p, --update    Package update: check/download/install Termux and Termux API package updates.`
 
 
 By selecting the 'none' option, Dextop automatically sets up minimal defaults to a 'base' install.

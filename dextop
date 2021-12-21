@@ -36,10 +36,10 @@ do
 		-f|--full)
 			install_option="full"
 		;;
-		
-			-u|--update)
-				install_option="update"
-			;;
+
+		-p|--update)
+			install_option="update"
+		;;
 
 		-h|--help)
 			echo
@@ -53,7 +53,7 @@ do
 			echo
 			echo -e "-f, --full             \t Full setup: download and install full desktop environment and utilities."
 			echo
-			echo -e "-u, --update           \t Package update: check/download/install Termux and Termux API package updates."
+			echo -e "-p, --update           \t Package update: check/download/install Termux and Termux API package updates."
 			echo
 			echo -e "-h, --help             \t Show help and usage information."
 			echo
@@ -101,15 +101,14 @@ echo
 
 # defaults #
 
-[ -z "${desktop_option}" ]														&& desktop_option="i3wm"
-[ -z "${user_name}" ]															&& user_name="termux"
+[ -z "${desktop_option}" ] && desktop_option="i3wm"
 
 # functions #
 
 container_command () {
 	# run container commands without session login
 
-	# source latest paramaters and variables
+	# update variables
 
 	. "${PREFIX}"/bin/dextop
 
@@ -146,27 +145,29 @@ container_command () {
 
 # export variables
 
-echo "# ${script} #"															>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo "# ${script} #"															>> "${PREFIX}"/bin/dextop
 
-echo 'export DISPLAY=":1"'														>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo 'export DISPLAY_NUMBER="${DISPLAY/:/}"'									>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo 'export PORT="590${DISPLAY_NUMBER}"'										>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo 'export DISPLAY=":1"'														>> "${PREFIX}"/bin/dextop
+echo 'export DISPLAY_NUMBER="${DISPLAY/:/}"'									>> "${PREFIX}"/bin/dextop
+echo 'export PORT="590${DISPLAY_NUMBER}"'										>> "${PREFIX}"/bin/dextop
 
-echo 'export MAIN_DIRECTORY="${PREFIX%/*}"'										>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo 'export BINARIES_DIRECTORY="${PREFIX}"/bin'								>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo 'export CONFIGURATIONS_DIRECTORY="${PREFIX}"/etc'							>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo 'export SOURCES_DIRECTORY="${PREFIX}"/etc/apt'								>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo 'export HOME_DIRECTORY="${PREFIX%/*}"/home'								>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo 'export LIBRARIES_DIRECTORY="${PREFIX}"/lib'								>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo 'export BACKUP_DIRECTORY="${MAIN_DIRECTORY}"/bkp'							>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo 'export IMAGE_DIRECTORY="${MAIN_DIRECTORY}"/img'							>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo 'export ISO_DIRECTORY="${MAIN_DIRECTORY}"/iso'								>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo 'export MOUNT_DIRECTORY="${MAIN_DIRECTORY}"/mnt'							>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo 'export MAIN_DIRECTORY="${PREFIX%/*}"'										>> "${PREFIX}"/bin/dextop
+echo 'export BINARIES_DIRECTORY="${PREFIX}"/bin'								>> "${PREFIX}"/bin/dextop
+echo 'export CONFIGURATIONS_DIRECTORY="${PREFIX}"/etc'							>> "${PREFIX}"/bin/dextop
+echo 'export SOURCES_DIRECTORY="${PREFIX}"/etc/apt'								>> "${PREFIX}"/bin/dextop
+echo 'export HOME_DIRECTORY="${PREFIX%/*}"/home'								>> "${PREFIX}"/bin/dextop
+echo 'export LIBRARIES_DIRECTORY="${PREFIX}"/lib'								>> "${PREFIX}"/bin/dextop
+echo 'export BACKUP_DIRECTORY="${MAIN_DIRECTORY}"/bkp'							>> "${PREFIX}"/bin/dextop
+echo 'export IMAGE_DIRECTORY="${MAIN_DIRECTORY}"/img'							>> "${PREFIX}"/bin/dextop
+echo 'export ISO_DIRECTORY="${MAIN_DIRECTORY}"/iso'								>> "${PREFIX}"/bin/dextop
+echo 'export MOUNT_DIRECTORY="${MAIN_DIRECTORY}"/mnt'							>> "${PREFIX}"/bin/dextop
 
-echo "export version=${version}"												>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo "export desktop_option=${desktop_option}"									>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
-echo "export user_name=${user_name}"											>> "${PREFIX}"/bin/dextop && . "${PREFIX}"/bin/dextop
+echo "export desktop_option=${desktop_option}"									>> "${PREFIX}"/bin/dextop
+echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/dextop
+
+# update variables
+
+. "${PREFIX}"/bin/dextop
 
 # run failsafe package install:
 # termux package servers are sometimes unresponsive or badly authenticated
