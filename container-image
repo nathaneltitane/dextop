@@ -566,18 +566,18 @@ image_unpack () {
 
 	cd "${ROOT_DIRECTORY}" || exit 1
 
-	proot												\
-		--link2symlink									\
-			tar 										\
-				--extract								\
-				--delay-directory-restore				\
-				--preserve-permissions					\
-					--file="${@}"						\
-					--exclude='boot'					\
-					--exclude='dev'						\
-					--exclude='proc'					\
-					--exclude='sys'						\
-					--exclude='system' 2> /dev/null		|| :
+	proot													\
+		--link2symlink										\
+			tar 											\
+				--extract									\
+				--delay-directory-restore					\
+				--preserve-permissions						\
+					--file="${@}"							\
+						--exclude='boot'					\
+						--exclude='dev'						\
+						--exclude='proc'					\
+						--exclude='sys'						\
+						--exclude='system' 2> /dev/null		|| :
 }
 
 image_deployments () {
