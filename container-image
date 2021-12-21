@@ -598,7 +598,7 @@ image_deployments () {
 			echo
 		fi
 
-		if [[ ! -z $(find "${IMAGE_DIRECTORY}" ! -wholename "${IMAGE_DIRECTORY}") ]]
+		if [[ ! -z "$(ls ${IMAGE_DIRECTORY})" ]] && [[ "${LOAD_DIRECTORY}" != "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}" ]]
 		then
 			console.wrn "Image directory not clean" "[ ${IMAGE_DIRECTORY} ]"
 			echo
@@ -701,7 +701,7 @@ image_archives () {
 		echo
 	fi
 
-	if [[ ! -z $(find "${BACKUP_DIRECTORY}" ! -wholename "${BACKUP_DIRECTORY}") ]]
+	if [[ ! -z $(ls "${BACKUP_DIRECTORY}") ]]
 	then
 		console.wrn "Backup directory not clean" "[ ${BACKUP_DIRECTORY} ]"
 		echo
@@ -738,6 +738,10 @@ image_architecture
 
 image_version
 
+# create directories
+
+image_directories
+
 # handle existing image deployments
 
 image_deployments
@@ -745,10 +749,6 @@ image_deployments
 # handle existing image archives
 
 image_archives
-
-# create directories
-
-image_directories
 
 # download image
 
