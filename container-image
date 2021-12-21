@@ -552,8 +552,7 @@ image_download () {
 }
 
 image_unpack () {
-	# shorthand
-
+	# shorthand:
 	# proot -l tar -xzf "${1}" -X "${2}" || :
 
 	# exclude archive directories: dev | proc | sys | system
