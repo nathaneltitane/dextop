@@ -599,7 +599,7 @@ image_deployments () {
 			echo
 		fi
 
-		if [[ ! -z $(ls ${IMAGE_DIRECTORY}/*) ]]
+		if [[ ! -z $(find "${IMAGE_DIRECTORY}" ! -wholename "${IMAGE_DIRECTORY}") ]]
 		then
 			console.wrn "Image directory not clean" "[ ${IMAGE_DIRECTORY} ]"
 			echo
@@ -702,7 +702,7 @@ image_archives () {
 		echo
 	fi
 
-	if [[ ! -z $(ls ${BACKUP_DIRECTORY}/*) ]]
+	if [[ ! -z $(find "${BACKUP_DIRECTORY}" ! -wholename "${BACKUP_DIRECTORY}") ]]
 	then
 		console.wrn "Backup directory not clean" "[ ${BACKUP_DIRECTORY} ]"
 		echo
