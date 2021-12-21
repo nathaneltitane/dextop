@@ -584,7 +584,7 @@ image_deployments () {
 
 	if [[ -d "${IMAGE_DIRECTORY}" ]]
 	then
-		if [[ -z "$(ls ${IMAGE_DIRECTORY})" ]]
+		if [[ ! -n $(ls "${IMAGE_DIRECTORY}"/*/*) ]]
 		then
 			console.wrn "Image directory clean" "[ ${IMAGE_DIRECTORY} ]"
 			echo
@@ -598,7 +598,7 @@ image_deployments () {
 			echo
 		fi
 
-		if [[ ! -z "$(ls ${IMAGE_DIRECTORY})" ]] && [[ "${LOAD_DIRECTORY}" != "${DISTRIBUTION_NAME}/${DISTRIBUTION_RELEASE}" ]]
+		if [[ -n $(ls "${IMAGE_DIRECTORY}"/*/*) ]]
 		then
 			console.wrn "Image directory not clean" "[ ${IMAGE_DIRECTORY} ]"
 			echo
@@ -689,19 +689,22 @@ image_deployments () {
 image_archives () {
 	# look for existing archives
 
-	if [[ -z "$(ls ${BACKUP_DIRECTORY})" ]]
+	if [[ -d "$(ls ${BACKUP_DIRECTORY})" ]]
 	then
-		console.wrn "Backup directory clean" "[ ${BACKUP_DIRECTORY} ]"
-		echo
+		if [[ ! -n $(ls "${BACKUP_DIRECTORY}"/*) ]]
+		then
+			console.wrn "Backup directory clean" "[ ${BACKUP_DIRECTORY} ]"
+			echo
 
-		console.inf "No existing archives found."
-		echo
+			console.inf "No existing archives found."
+			echo
 
-		console.fwd "Proceeding..."
-		echo
+			console.fwd "Proceeding..."
+			echo
+		fi
 	fi
 
-	if [[ ! -z $(ls "${BACKUP_DIRECTORY}") ]]
+	if [[ -n $(ls "${BACKUP_DIRECTORY}") ]]
 	then
 		console.wrn "Backup directory not clean" "[ ${BACKUP_DIRECTORY} ]"
 		echo
