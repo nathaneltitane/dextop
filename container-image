@@ -592,8 +592,6 @@ image_deployments () {
 			console.wrn "No existing deployment found."
 			echo
 
-			image_directories
-
 			console.fwd "Proceeding..."
 			echo
 		fi
