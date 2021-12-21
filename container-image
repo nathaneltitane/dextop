@@ -249,7 +249,7 @@ image_version () {
 image_directories () {
 	# populate required directories and structure
 
-	console.fwd "Creating required deployment directories..."
+	console.fwd "Generating deployment directory structure..."
 	echo
 
 	directories_list=(
@@ -376,7 +376,7 @@ image_archive () {
 	# archive routine
 
 	tar												\
-		--create									\
+		--generate									\
 		--verbose									\
 		--gzip										\
 		--preserve-permissions						\
@@ -741,7 +741,7 @@ image_architecture
 
 image_version
 
-# create directories
+# generate directories
 
 image_directories
 

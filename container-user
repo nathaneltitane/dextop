@@ -135,9 +135,9 @@ add_information () {
 }
 
 add_user () {
-	# create 'user' account
+	# generate 'user' account
 
-	console.fwd "Creating account..."
+	console.fwd "generating account..."
 	echo
 
 	room_number=""
@@ -169,7 +169,7 @@ add_superuser () {
 
 	usermod -a -G "${sudo_id}" "${user_name}"
 
-	# create sudoers directory
+	# generate sudoers directory
 
 	console.directory "${ROOT_DIRECTORY}" /etc/sudoers.d
 
@@ -212,7 +212,7 @@ add_runtime () {
 	user_uid="$(id -u ${user_name})"
 	user_gid="$(id -g ${user_name})"
 
-	# create runtime directory
+	# generate runtime directory
 
 	console.directory /run/user "${user_uid}"
 	console.directory /run/user "${user_name}"
@@ -228,7 +228,7 @@ add_runtime () {
 	chown "${user_uid}":"${user_gid}" -R /run/user/"${user_name}"
 }
 
-# create user account and relevant permission sets
+# generate user account and relevant permission sets
 
 add_information
 

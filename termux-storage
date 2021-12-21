@@ -117,13 +117,13 @@ rm -rf "${HOME_DIRECTORY}"/storage
 
 [ -d "${MAIN_DIRECTORY}"/storage ] && rm -rf "${MAIN_DIRECTORY}"/storage
 
-# create storage directory
+# generate storage directory
 
 console.directory "${MAIN_DIRECTORY}" storage
 
-# create symbolic links
+# generate symbolic links
 
-console.fwd "Creating links..."
+console.fwd "generating links..."
 echo
 
 # internal storage

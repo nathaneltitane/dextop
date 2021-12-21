@@ -10,7 +10,7 @@ Comparison in between Dextop and other projects:
 
 - It provides you with a selection of the Ubuntu distribution base images: stable, popular and user-friendly knowledge bases.
 - It expands the installed base image to run just like a normal PC installation.
-- It creates a user profile for secure access and a home directory for you to work in.
+- It generates a user profile for secure access and a home directory for you to work in.
 - It installs all the necessary applications and utilities to provide you with the right experience.
 - It sets up your internal (and external, when available) storage media for flexible, system-wide access.
 - It handles all the technical intricacies related to a container (chroot/proot) installation so that you do not have to bother with them and get right to work.
@@ -109,7 +109,7 @@ Edit the  'user_list' array in the 'container-packages' file prior to starting t
 
 ### Usage:
 
-To access your newly created container:
+To access your newly generated container:
 
 `container-session -u <username> | -a <application> | <option>'` to start your session, run a specific application or setup session options on load.
 

@@ -81,7 +81,7 @@ extensions_list=(
 	termux-am
 	termux-api
 	termux-auth
-	termux-create-package
+	termux-generate-package
 	termux-elf-cleaner
 	termux-exec
 	termux-keyring
