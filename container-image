@@ -738,10 +738,6 @@ image_architecture
 
 image_version
 
-# create directories
-
-image_directories
-
 # handle existing image deployments
 
 image_deployments
@@ -749,6 +745,10 @@ image_deployments
 # handle existing image archives
 
 image_archives
+
+# create directories
+
+image_directories
 
 # download image
 
