@@ -130,7 +130,7 @@ do
 
 		break
 	fi
-	
+
 	if [[ "${login_option}" == "root" ]]
 	then
 		console.wrn "Logging in [ '${USERNAME}' ]."
@@ -140,7 +140,7 @@ do
 
 		break
 	fi
-	
+
 	if [[ "${USERNAME}" == "${USER}" ]]
 	then
 		console.scs "Valid user name [ '${USERNAME}' ]."
@@ -158,7 +158,7 @@ do
 		console.err "Invalid user name - Defaulting [ '${USERNAME}' ]."
 		echo
 	fi
-	
+
 	# specify login defaults
 	
 	if [[ -z "${USERNAME}" ]] ||  [[ "${login_option}" == "root" ]] || [[ "${entry}" == "${last_entry}" ]]
@@ -171,7 +171,7 @@ do
 		SESSION_NAME="CONSOLE"
 		SHELL="/usr/bin/bash"
 	fi
-	
+
 done < "${CONTAINER_DIRECTORY}"/etc/passwd
 
 # system #
@@ -187,12 +187,12 @@ PATH=""
 
 # container
 
-[ -d "${CONTAINER_DIRECTORY}"/usr/local/sbin ]										&& PATH+="/usr/local/sbin:"
-[ -d "${CONTAINER_DIRECTORY}"/usr/local/bin ]										&& PATH+="/usr/local/bin:"
-[ -d "${CONTAINER_DIRECTORY}"/usr/sbin ]												&& PATH+="/usr/sbin:"
-[ -d "${CONTAINER_DIRECTORY}"/usr/sbin ]												&& PATH+="/usr/bin:"
-[ -d "${CONTAINER_DIRECTORY}"/sbin ]													&& PATH+="/sbin:"
-[ -d "${CONTAINER_DIRECTORY}"/bin ]													&& PATH+="/bin:"
+[ -d "${CONTAINER_DIRECTORY}"/usr/local/sbin ]									&& PATH+="/usr/local/sbin:"
+[ -d "${CONTAINER_DIRECTORY}"/usr/local/bin ]									&& PATH+="/usr/local/bin:"
+[ -d "${CONTAINER_DIRECTORY}"/usr/sbin ]										&& PATH+="/usr/sbin:"
+[ -d "${CONTAINER_DIRECTORY}"/usr/sbin ]										&& PATH+="/usr/bin:"
+[ -d "${CONTAINER_DIRECTORY}"/sbin ]											&& PATH+="/sbin:"
+[ -d "${CONTAINER_DIRECTORY}"/bin ]												&& PATH+="/bin:"
 
 # termux
 
@@ -224,7 +224,7 @@ TMPDIR="/tmp"
 
 # i3 #
 
-[ -f "${CONTAINER_DIRECTORY}"/usr/bin/i3 ]											&& SESSION_NAME="I3WM"
+[ -f "${CONTAINER_DIRECTORY}"/usr/bin/i3 ]										&& SESSION_NAME="I3WM"
 
 [ "${desktop_option}" = "i3wm" ]												&& SESSION="i3wm"
 [ "${desktop_option}" = "i3wm" ]												&& SESSION_LOADER="i3"
@@ -236,7 +236,7 @@ TMPDIR="/tmp"
 
 # xfce #
 
-[ -f "${CONTAINER_DIRECTORY}"/usr/bin/xfwm4 ]										&& SESSION_NAME="XFCE"
+[ -f "${CONTAINER_DIRECTORY}"/usr/bin/xfwm4 ]									&& SESSION_NAME="XFCE"
 
 [ "${desktop_option}" = "xfce" ]												&& SESSION="xfce"
 [ "${desktop_option}" = "xfce" ]												&& SESSION_LOADER="xfce4-session"
@@ -251,7 +251,7 @@ TMPDIR="/tmp"
 # defaults #
 
 [ -z "${MOUNT_DIRECTORY}" ]														&& MOUNT_DIRECTORY="${PREFIX%/*}/mnt"
-[ -z "${CONTAINER_DIRECTORY}" ]														&& CONTAINER_DIRECTORY="${PREFIX%/*}/img"
+[ -z "${CONTAINER_DIRECTORY}" ]													&& CONTAINER_DIRECTORY="${PREFIX%/*}/img"
 
 [ -z "${BROWSER}" ]																&& BROWSER="${BROWSER}"
 [ -z "${COLORTERM}" ]															&& COLORTERM="${COLORTERM}"
@@ -295,84 +295,84 @@ unset LD_PRELOAD
 
 # setup 'proot' command arguments
 
-unset "${command}"
+unset "${session_command}"
 
-command+="proot"
-command+=" --kill-on-exit"
-command+=" --link2symlink"
-command+=" --rootfs=${CONTAINER_DIRECTORY}"
-command+=" --change-id=${USER_ID}:${GROUP_ID}"
-command+=" --pwd=${HOME}"
-[ -d "/apex" ]                         && command+=" --bind=/apex"
-[ -d "/data" ]                         && command+=" --bind=/data"
-[ -d "/dev" ]                          && command+=" --bind=/dev"
-[ -e "/dev/urandom" ]                  && command+=" --bind=/dev/urandom:/dev/random"
-[ -e "/linkerconfig/ld.config.txt" ]   && command+=" --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt"
-[ -f "/plat_property_contexts" ]       && command+=" --bind=/plat_property_contexts:/plat_property_contexts"
-[ -f "/property_contexts" ]            && command+=" --bind=/property_contexts:/property_contexts"
-[ -d "/proc" ]                         && command+=" --bind=/proc"
-[ -d "/proc/self/fd" ]                 && command+=" --bind=/proc/self/fd:/dev/fd"
-[ -e "/proc/self/fd/0" ]               && command+=" --bind=/proc/self/fd/0:/dev/stdin"
-[ -e "/proc/self/fd/1" ]               && command+=" --bind=/proc/self/fd/1:/dev/stdout"
-[ -e "/proc/self/fd/2" ]               && command+=" --bind=/proc/self/fd/2:/dev/stderr"
-[ -d "/storage" ]                      && command+=" --bind=/storage"
-[ -d "/sys" ]                          && command+=" --bind=/sys"
-[ -d "/system" ]                       && command+=" --bind=/system"
-[ -d "/vendor" ]                       && command+=" --bind=/vendor"
-[ -d "${PREFIX%/*}"/home ]             && command+=" --bind=${PREFIX%/*}/home:/home/${USER}"
-[ -d "${PREFIX%/*}"/storage/external ] && command+=" --bind=${PREFIX%/*}/storage/external:/media/external"
-[ -d "${PREFIX%/*}"/storage/internal ] && command+=" --bind=${PREFIX%/*}/storage/internal:/media/internal"
-[ -x "${PREFIX%/*}"/usr/bin/htop ]     && command+=" --bind="${PREFIX%/*}"/usr/bin/top:/usr/bin/htop"
-[ -x "${PREFIX%/*}"/usr/bin/kill ]     && command+=" --bind="${PREFIX%/*}"/usr/bin/kill:/usr/bin/kill"
-[ -x "${PREFIX%/*}"/usr/bin/pgrep ]    && command+=" --bind="${PREFIX%/*}"/usr/bin/pgrep:/usr/bin/pgrep"
-[ -x "${PREFIX%/*}"/usr/bin/pkill ]    && command+=" --bind="${PREFIX%/*}"/usr/bin/pkill:/usr/bin/pkill"
-[ -x "${PREFIX%/*}"/usr/bin/ps ]       && command+=" --bind="${PREFIX%/*}"/usr/bin/ps:/usr/bin/ps"
-[ -x "${PREFIX%/*}"/usr/bin/top ]      && command+=" --bind="${PREFIX%/*}"/usr/bin/top:/usr/bin/top"
-command+=" env -i"
-command+=" ANDROID_ART_ROOT=${ANDROID_ART_ROOT}"
-command+=" ANDROID_DATA=${ANDROID_DATA}"
-command+=" ANDROID_I18N_ROOT=${ANDROID_I18N_ROOT}"
-command+=" ANDROID_ROOT=${ANDROID_ROOT}"
-command+=" ANDROID_RUNTIME_ROOT=${ANDROID_RUNTIME_ROOT}"
-command+=" ANDROID_TZDATA_ROOT=${ANDROID_TZDATA_ROOT}"
-command+=" BOOTCLASSPATH=${BOOTCLASSPATH}"
-command+=" DEX2OATBOOTCLASSPATH=${DEX2OATBOOTCLASSPATH}"
-command+=" PREFIX=${PREFIX}"
-command+=" MAIN_DIRECTORY=${PREFIX%/*}"
-command+=" BINARIES_DIRECTORY=${PREFIX}/bin"
-command+=" LIBRARIES_DIRECTORY=${PREFIX}/lib"
-command+=" CONTAINER_DIRECTORY=${CONTAINER_DIRECTORY}"
-command+=" MOUNT_DIRECTORY=${MOUNT_DIRECTORY}"
-command+=" SESSION=${SESSION}"
-command+=" SESSION_NAME=${SESSION_NAME}"
-command+=" SESSION_LOADER=${SESSION_LOADER}"
-command+=" SETTINGS_MANAGER=${SETTINGS_MANAGER}"
-command+=" WINDOW_MANAGER=${WINDOW_MANAGER}"
-command+=" APPLICATION=${APPLICATION}"
-command+=" BROWSER=${BROWSER}"
-command+=" EDITOR=${EDITOR}"
-command+=" PAGER=${PAGER}"
-command+=" RUNNER=${RUNNER}"
-command+=" VISUAL=${VISUAL}"
-command+=" COLORTERM=${COLORTERM}"
-command+=" DISPLAY=${DISPLAY}"
-command+=" HOME=${HOME}"
-command+=" LANG=${LANG}"
-command+=" LOCALHOST=${LOCALHOST}"
-command+=" PATH=${PATH}"
-command+=" SHELL=${SHELL}"
-command+=" TERM=${TERMINAL}"
-command+=" TMPDIR=${TMPDIR}"
-command+=" USER=${USER}"
-command+=" XDG_RUNTIME_DIR=/run/user/${USER_ID}"
-command+=" XDG_CACHE_HOME=${HOME}/.cache"
-command+=" XDG_CONFIG_HOME=${HOME}/.config"
-command+=" XDG_DATA_HOME=${HOME}/.local/share"
-command+=" XDG_DATA_DIRS=/usr/local/share:/usr/share"
-command+=" XDG_CONFIG_DIRS=/etc/xdg"
-command+=" XAUTHORITY=${XDG_RUNTIME_DIR}/.Xauthority"
-command+=" ${SHELL} --login"
+session_command+="proot"
+session_command+=" --kill-on-exit"
+session_command+=" --link2symlink"
+session_command+=" --rootfs=${CONTAINER_DIRECTORY}"
+session_command+=" --change-id=${USER_ID}:${GROUP_ID}"
+session_command+=" --pwd=${HOME}"
+[ -d "/apex" ]                         && session_command+=" --bind=/apex"
+[ -d "/data" ]                         && session_command+=" --bind=/data"
+[ -d "/dev" ]                          && session_command+=" --bind=/dev"
+[ -e "/dev/urandom" ]                  && session_command+=" --bind=/dev/urandom:/dev/random"
+[ -e "/linkerconfig/ld.config.txt" ]   && session_command+=" --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt"
+[ -f "/plat_property_contexts" ]       && session_command+=" --bind=/plat_property_contexts:/plat_property_contexts"
+[ -f "/property_contexts" ]            && session_command+=" --bind=/property_contexts:/property_contexts"
+[ -d "/proc" ]                         && session_command+=" --bind=/proc"
+[ -d "/proc/self/fd" ]                 && session_command+=" --bind=/proc/self/fd:/dev/fd"
+[ -e "/proc/self/fd/0" ]               && session_command+=" --bind=/proc/self/fd/0:/dev/stdin"
+[ -e "/proc/self/fd/1" ]               && session_command+=" --bind=/proc/self/fd/1:/dev/stdout"
+[ -e "/proc/self/fd/2" ]               && session_command+=" --bind=/proc/self/fd/2:/dev/stderr"
+[ -d "/storage" ]                      && session_command+=" --bind=/storage"
+[ -d "/sys" ]                          && session_command+=" --bind=/sys"
+[ -d "/system" ]                       && session_command+=" --bind=/system"
+[ -d "/vendor" ]                       && session_command+=" --bind=/vendor"
+[ -d "${PREFIX%/*}"/home ]             && session_command+=" --bind=${PREFIX%/*}/home:/home/${USER}"
+[ -d "${PREFIX%/*}"/storage/external ] && session_command+=" --bind=${PREFIX%/*}/storage/external:/media/external"
+[ -d "${PREFIX%/*}"/storage/internal ] && session_command+=" --bind=${PREFIX%/*}/storage/internal:/media/internal"
+[ -x "${PREFIX%/*}"/usr/bin/htop ]     && session_command+=" --bind="${PREFIX%/*}"/usr/bin/top:/usr/bin/htop"
+[ -x "${PREFIX%/*}"/usr/bin/kill ]     && session_command+=" --bind="${PREFIX%/*}"/usr/bin/kill:/usr/bin/kill"
+[ -x "${PREFIX%/*}"/usr/bin/pgrep ]    && session_command+=" --bind="${PREFIX%/*}"/usr/bin/pgrep:/usr/bin/pgrep"
+[ -x "${PREFIX%/*}"/usr/bin/pkill ]    && session_command+=" --bind="${PREFIX%/*}"/usr/bin/pkill:/usr/bin/pkill"
+[ -x "${PREFIX%/*}"/usr/bin/ps ]       && session_command+=" --bind="${PREFIX%/*}"/usr/bin/ps:/usr/bin/ps"
+[ -x "${PREFIX%/*}"/usr/bin/top ]      && session_command+=" --bind="${PREFIX%/*}"/usr/bin/top:/usr/bin/top"
+session_command+=" env -i"
+session_command+=" ANDROID_ART_ROOT=${ANDROID_ART_ROOT}"
+session_command+=" ANDROID_DATA=${ANDROID_DATA}"
+session_command+=" ANDROID_I18N_ROOT=${ANDROID_I18N_ROOT}"
+session_command+=" ANDROID_ROOT=${ANDROID_ROOT}"
+session_command+=" ANDROID_RUNTIME_ROOT=${ANDROID_RUNTIME_ROOT}"
+session_command+=" ANDROID_TZDATA_ROOT=${ANDROID_TZDATA_ROOT}"
+session_command+=" BOOTCLASSPATH=${BOOTCLASSPATH}"
+session_command+=" DEX2OATBOOTCLASSPATH=${DEX2OATBOOTCLASSPATH}"
+session_command+=" PREFIX=${PREFIX}"
+session_command+=" MAIN_DIRECTORY=${PREFIX%/*}"
+session_command+=" BINARIES_DIRECTORY=${PREFIX}/bin"
+session_command+=" LIBRARIES_DIRECTORY=${PREFIX}/lib"
+session_command+=" CONTAINER_DIRECTORY=${CONTAINER_DIRECTORY}"
+session_command+=" MOUNT_DIRECTORY=${MOUNT_DIRECTORY}"
+session_command+=" SESSION=${SESSION}"
+session_command+=" SESSION_NAME=${SESSION_NAME}"
+session_command+=" SESSION_LOADER=${SESSION_LOADER}"
+session_command+=" SETTINGS_MANAGER=${SETTINGS_MANAGER}"
+session_command+=" WINDOW_MANAGER=${WINDOW_MANAGER}"
+session_command+=" APPLICATION=${APPLICATION}"
+session_command+=" BROWSER=${BROWSER}"
+session_command+=" EDITOR=${EDITOR}"
+session_command+=" PAGER=${PAGER}"
+session_command+=" RUNNER=${RUNNER}"
+session_command+=" VISUAL=${VISUAL}"
+session_command+=" COLORTERM=${COLORTERM}"
+session_command+=" DISPLAY=${DISPLAY}"
+session_command+=" HOME=${HOME}"
+session_command+=" LANG=${LANG}"
+session_command+=" LOCALHOST=${LOCALHOST}"
+session_command+=" PATH=${PATH}"
+session_command+=" SHELL=${SHELL}"
+session_command+=" TERM=${TERMINAL}"
+session_command+=" TMPDIR=${TMPDIR}"
+session_command+=" USER=${USER}"
+session_command+=" XDG_RUNTIME_DIR=/run/user/${USER_ID}"
+session_command+=" XDG_CACHE_HOME=${HOME}/.cache"
+session_command+=" XDG_CONFIG_HOME=${HOME}/.config"
+session_command+=" XDG_DATA_HOME=${HOME}/.local/share"
+session_command+=" XDG_DATA_DIRS=/usr/local/share:/usr/share"
+session_command+=" XDG_CONFIG_DIRS=/etc/xdg"
+session_command+=" XAUTHORITY=${XDG_RUNTIME_DIR}/.Xauthority"
+session_command+=" ${SHELL} --login"
 
 # execute 'proot'
 
-exec ${command}
+exec ${session_command}
