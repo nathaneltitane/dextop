@@ -2,7 +2,7 @@
 
 # dependencies #
 
-. /data/data/com.termux/files/usr/bin/console
+. "${PREFIX}"/bin/console
 
 # script #
 
@@ -110,7 +110,7 @@ vnc_intent () {
 
 	# start android vnc intent and set to view session with supported application
 
-	unset "${intent_command}"
+	unset intent_command
 
 	intent_command+="am start"
 	intent_command+=" -a android.intent.action.VIEW"
@@ -128,7 +128,7 @@ vnc_start () {
 
 	# 'vncserver' uses $DISPLAY instead of $PORT
 
-	unset "${command_start}"
+	unset command_start
 
 	command_start+="vncserver"
 	command_start+=" -IdleTimeout 0"
@@ -264,7 +264,7 @@ vnc_geometry () {
 		${tablets[@]}
 	)
 
-	resolutions=(
+	geometries=(
 		${monitors[@]}
 		${devices[@]}
 	)
@@ -279,9 +279,9 @@ vnc_geometry () {
 
 	for (( i=0 ; i<${#resolutions[@]} ; i+=3 ))
 	do
-		format="${resolutions[$i]}"
-		width="${resolutions[$i+1]}"
-		height="${resolutions[$i+2]}"
+		format="${geometries[$i]}"
+		width="${geometries[$i+1]}"
+		height="${geometries[$i+2]}"
 		geometry="${width}x${height}"
 
 		number=$((($i/3) + 1))
@@ -298,20 +298,20 @@ vnc_geometry () {
 		fi
 
 		printf '%*s' $((pad_length - ${#format}))
-		printf '%s\n' ${resolution}
+		printf '%s\n' ${geometry}
 	done
 
 	printf '\n'
 }
 
 vnc_stop () {
-	unset "${command_stop}"
-	
+	unset command_stop
+
 	command_stop+="vncserver"
 	command_stop+=" -kill ${DISPLAY}"
 
 	console.silence "exec ${command_stop}" &
-	
+
 	console.progress "Killing display server..."
 	echo
 
@@ -467,7 +467,7 @@ then
 
 	done
 
-	unset resolution
+	unset geometry
 
 	# integer check:
 	# handle numerical selection
@@ -477,9 +477,9 @@ then
 		i=$((${selection}))
 		i=$(($i*3))
 
-		format="${resolutions[$i-3]}"
-		width="${resolutions[$i-2]}"
-		height="${resolutions[$i-1]}"
+		format="${geometries[$i-3]}"
+		width="${geometries[$i-2]}"
+		height="${geometries[$i-1]}"
 		geometry="${width}x${height}"
 
 	fi

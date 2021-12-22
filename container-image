@@ -2,7 +2,7 @@
 
 # dependencies #
 
-. /data/data/com.termux/files/usr/bin/console
+. "${PREFIX}"/bin/console
 
 # script #
 
