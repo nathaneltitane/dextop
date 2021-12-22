@@ -31,7 +31,7 @@ do
 			echo
 			echo -e "-u, --username \t Specify 'user' for session login."
 			echo
-			echo -e "-h, --help \t Show help and usage information."
+			echo -e "-h, --help     \t Show help and usage information."
 			echo
 			echo -e "'${script}' [ Version ${version} ]"
 			echo
@@ -158,12 +158,12 @@ PATH=""
 
 # container
 
-[ -d "${PREFIX}"/cnt/usr/local/sbin ]									&& PATH+="/usr/local/sbin:"
-[ -d "${PREFIX}"/cnt/usr/local/bin ]									&& PATH+="/usr/local/bin:"
-[ -d "${PREFIX}"/cnt/usr/sbin ]										&& PATH+="/usr/sbin:"
-[ -d "${PREFIX}"/cnt/usr/sbin ]										&& PATH+="/usr/bin:"
-[ -d "${PREFIX}"/cnt/sbin ]											&& PATH+="/sbin:"
-[ -d "${PREFIX}"/cnt/bin ]												&& PATH+="/bin:"
+[ -d "${PREFIX}"/cnt/usr/local/sbin ]											&& PATH+="/usr/local/sbin:"
+[ -d "${PREFIX}"/cnt/usr/local/bin ]											&& PATH+="/usr/local/bin:"
+[ -d "${PREFIX}"/cnt/usr/sbin ]													&& PATH+="/usr/sbin:"
+[ -d "${PREFIX}"/cnt/usr/sbin ]													&& PATH+="/usr/bin:"
+[ -d "${PREFIX}"/cnt/sbin ]														&& PATH+="/sbin:"
+[ -d "${PREFIX}"/cnt/bin ]														&& PATH+="/bin:"
 
 # termux
 
@@ -191,28 +191,28 @@ SHELL="/bin/bash"
 
 # i3 #
 
-[ -f "${PREFIX}"/cnt/usr/bin/i3 ]										&& SESSION_NAME="I3WM"
+[ -f "${PREFIX}"/cnt/usr/bin/i3 ]												&& SESSION_NAME="I3WM"
 
-[ -f "${PREFIX}"/cnt/usr/bin/i3 ]										&& SESSION="i3wm"
-[ -f "${PREFIX}"/cnt/usr/bin/i3 ]										&& SESSION_LOADER="i3"
-[ -f "${PREFIX}"/cnt/usr/bin/i3 ]										&& BROWSER="surf"
-[ -f "${PREFIX}"/cnt/usr/bin/i3 ]										&& EMULATOR="st"
-[ -f "${PREFIX}"/cnt/usr/bin/i3 ]										&& RUNNER="dmenu"
-[ -f "${PREFIX}"/cnt/usr/bin/i3 ]										&& VISUAL="nano"
+[ -f "${PREFIX}"/cnt/usr/bin/i3 ]												&& SESSION="i3wm"
+[ -f "${PREFIX}"/cnt/usr/bin/i3 ]												&& SESSION_LOADER="i3"
+[ -f "${PREFIX}"/cnt/usr/bin/i3 ]												&& BROWSER="surf"
+[ -f "${PREFIX}"/cnt/usr/bin/i3 ]												&& EMULATOR="st"
+[ -f "${PREFIX}"/cnt/usr/bin/i3 ]												&& RUNNER="dmenu"
+[ -f "${PREFIX}"/cnt/usr/bin/i3 ]												&& VISUAL="nano"
 
 # xfce #
 
-[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]									&& SESSION_NAME="XFCE"
+[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]											&& SESSION_NAME="XFCE"
 
-[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]									&& SESSION="xfce"
-[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]									&& SESSION_LOADER="xfce4-session"
-[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]									&& SETTINGS_MANAGER="xfsettingsd"
-[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]									&& WINDOW_MANAGER="xfwm4"
+[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]											&& SESSION="xfce"
+[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]											&& SESSION_LOADER="xfce4-session"
+[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]											&& SETTINGS_MANAGER="xfsettingsd"
+[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]											&& WINDOW_MANAGER="xfwm4"
 
-[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]									&& BROWSER="midori"
-[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]									&& EMULATOR="xfce4-terminal"
-[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]									&& RUNNER="xfce4-appfinder"
-[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]									&& VISUAL="mousepad"
+[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]											&& BROWSER="midori"
+[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]											&& EMULATOR="xfce4-terminal"
+[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]											&& RUNNER="xfce4-appfinder"
+[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]											&& VISUAL="mousepad"
 
 # defaults #
 
