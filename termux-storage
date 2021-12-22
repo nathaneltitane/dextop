@@ -77,7 +77,7 @@ echo
 
 # remove termux storage setup defaults
 
-rm -rf "${HOME}"/storage
+[ -d "${HOME}"/storage ] && rm -rf "${HOME}"/storage
 
 # handle storage mount location
 

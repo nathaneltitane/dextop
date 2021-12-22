@@ -36,12 +36,9 @@ directories_list+=(
 	storage
 )
 
-for directory in ${directories_list}
-do
-	console.directory "${PREFIX}" "${directory}"
-done
+console.directory "${PREFIX}" "${directory}"
 
-directories_lit=()
+directories_list=()
 
 # add home directories
 
@@ -56,10 +53,7 @@ directories_list+=(
 	Videos
 )
 
-for directory in ${directories_list}
-do
-	console.directory "${HOME}" "${directory}"
-done
+console.directory "${HOME}" "${directory}"
 
 directories_list=()
 
@@ -83,6 +77,8 @@ for directory in ${directories_list[@]}
 do
 	ln -s -f "${PREFIX}"/"${directory}" "${PREFIX%/*}"/"${directory}"
 done
+
+directories_list=()
 
 # cleanup temporary build files
 
