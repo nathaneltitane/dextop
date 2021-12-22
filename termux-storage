@@ -65,14 +65,14 @@ else
 	# exists:
 	# proceed with setup
 
-	console.scs "Storage directory detected" "[ "${HOME}" ]."
+	console.scs "Storage directory detected" "[ "${HOME}" ]"
 	echo
 
 	console.fwd "Continuing..."
 	echo
 fi
 
-console.fwd "Setting up storage directories..."
+console.fwd "Setting up storage..."
 echo
 
 # remove termux storage setup defaults
@@ -83,19 +83,16 @@ rm -rf "${HOME}"/storage
 
 [ -d "${PREFIX}"/storage ] && rm -rf "${PREFIX}"/storage
 
-# generate storage directory
-
-console.directory "${PREFIX}" storage
-
 # generate symbolic links
 
-console.fwd "generating links..."
+console.fwd "Linking..."
 echo
 
 # internal storage
 
 if [ ! -f "${PREFIX}"/storage/internal ]
 then
+	ln -s -f /storage/emulated/0 "${PREFIX}"/media/internal
 	ln -s -f /storage/emulated/0 "${PREFIX}"/storage/internal
 fi
 
@@ -112,9 +109,14 @@ then
 	console.scs "Storage media detected" "[ ${uuid} ]"
 	echo
 
+	if [ ! -f "${PREFIX}"/media/external ]
+	then
+		ln -s -f /storage/"${uuid}" "${PREFIX}"/media/external
+	fi
+
 	if [ ! -f "${PREFIX}"/storage/external ]
 	then
-		ln -s -f /storage/"${uuid}" "${PREFIX}"/storage/external
+		ln -s -f /storage/"${uuid}" "${PREFIX}"/media/external
 	fi
 else
 	uuid="N/A"

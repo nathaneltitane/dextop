@@ -25,6 +25,24 @@ echo
 
 # functions #
 
+# add system directories
+
+directories_list+=(
+	bkp
+	cnt
+	img
+	mnt
+	media
+	storage
+)
+
+for directory in ${directories_list}
+do
+	console.directory "${PREFIX}" "${directory}"
+done
+
+directories_lit=()
+
 # add home directories
 
 directories_list+=(
@@ -45,22 +63,6 @@ done
 
 directories_list=()
 
-# add system directories
-
-directories_list+=(
-	bkp
-	cnt
-	img
-	mnt
-)
-
-for directory in ${directories_list}
-do
-	console.directory "${PREFIX}" "${directory}"
-done
-
-directories_lit=()
-
 # fix directory structure
 
 directories_list+=(
@@ -73,9 +75,15 @@ directories_list+=(
 	mnt
 	opt
 	tmp
+	media
+	storage
 )
 
 for directory in ${directories_list[@]}
 do
 	ln -s -f "${PREFIX}"/"${directory}" "${PREFIX%/*}"/"${directory}"
 done
+
+# cleanup temporary build files
+
+[ -f "${PREFIX%/*}"/rList ] && rm -rf "${PREFIX%/*}"/rList
