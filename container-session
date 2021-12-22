@@ -182,11 +182,8 @@ PATH="${PATH}"
 COLORTERM="truecolor"
 DISPLAY=":1"
 DISPLAY_NUMBER="${DISPLAY/:/}"
-EDITOR="nano"
-HOME="/home/${USER}"
 LANG="C.UTF-8"
 LOCALHOST="127.0.0.1"
-PAGER="less"
 SHELL="/bin/bash"
 
 # i3 #
@@ -195,10 +192,8 @@ SHELL="/bin/bash"
 
 [ -f "${PREFIX}"/cnt/usr/bin/i3 ]												&& SESSION="i3wm"
 [ -f "${PREFIX}"/cnt/usr/bin/i3 ]												&& SESSION_LOADER="i3"
-[ -f "${PREFIX}"/cnt/usr/bin/i3 ]												&& BROWSER="surf"
-[ -f "${PREFIX}"/cnt/usr/bin/i3 ]												&& EMULATOR="st"
-[ -f "${PREFIX}"/cnt/usr/bin/i3 ]												&& RUNNER="dmenu"
-[ -f "${PREFIX}"/cnt/usr/bin/i3 ]												&& VISUAL="nano"
+[ -f "${PREFIX}"/cnt/usr/bin/i3 ]												&& SETTINGS_MANAGER=""
+[ -f "${PREFIX}"/cnt/usr/bin/i3 ]												&& WINDOW_MANAGER="i3"
 
 # xfce #
 
@@ -209,21 +204,8 @@ SHELL="/bin/bash"
 [ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]											&& SETTINGS_MANAGER="xfsettingsd"
 [ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]											&& WINDOW_MANAGER="xfwm4"
 
-[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]											&& BROWSER="midori"
-[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]											&& EMULATOR="xfce4-terminal"
-[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]											&& RUNNER="xfce4-appfinder"
-[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]											&& VISUAL="mousepad"
 
 # defaults #
-
-[ -z "${BROWSER}" ]																&& BROWSER="${BROWSER}"
-[ -z "${COLORTERM}" ]															&& COLORTERM="${COLORTERM}"
-[ -z "${SESSION}" ]																&& SESSION="${SESSION}"
-[ -z "${EDITOR}" ]																&& EDITOR="${EDITOR}"
-[ -z "${PAGER}" ]																&& PAGER="${PAGER}"
-[ -z "${RUNNER}" ]																&& RUNNER="${RUNNER}"
-[ -z "${SHELL}" ]																&& SHELL="${SHELL}"
-[ -z "${VISUAL}" ]																&& VISUAL="${VISUAL}"
 
 # assume termux-exec is present - unset LD_PRELOAD
 
@@ -279,11 +261,6 @@ session_command+=" SESSION_NAME=${SESSION_NAME}"
 session_command+=" SESSION_LOADER=${SESSION_LOADER}"
 session_command+=" SETTINGS_MANAGER=${SETTINGS_MANAGER}"
 session_command+=" WINDOW_MANAGER=${WINDOW_MANAGER}"
-session_command+=" BROWSER=${BROWSER}"
-session_command+=" EDITOR=${EDITOR}"
-session_command+=" PAGER=${PAGER}"
-session_command+=" RUNNER=${RUNNER}"
-session_command+=" VISUAL=${VISUAL}"
 session_command+=" COLORTERM=${COLORTERM}"
 session_command+=" DISPLAY=${DISPLAY}"
 session_command+=" HOME=${HOME}"
@@ -301,7 +278,7 @@ session_command+=" XDG_CONFIG_HOME=${HOME}/.config"
 session_command+=" XDG_DATA_HOME=${HOME}/.local/share"
 session_command+=" XDG_STATE_HOME=${HOME}/.local/state"
 session_command+=" XDG_DATA_DIRS=/usr/local/share:/usr/share"
-session_command+=" XAUTHORITY=${XDG_RUNTIME_DIR}/.Xauthority"
+session_command+=" XAUTHORITY=${XDG_RUNTIME_DIR}/Xauthority"
 session_command+=" ${SHELL} --login"
 
 # load container
