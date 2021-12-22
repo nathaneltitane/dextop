@@ -200,22 +200,6 @@ image_version () {
 	export distribution_version="${distribution_version}"
 }
 
-image_directories () {
-	# populate required directories and structure
-
-	console.fwd "Generating deployment directory structure..."
-	echo
-
-	directories_list=(
-		"${PREFIX}"/bkp
-		"${PREFIX}"/cnt
-		"${PREFIX}"/img
-		"${PREFIX}"/mnt
-	)
-
-	console.directory "/" ${directories_list[@]}
-}
-
 image_download () {
 	# generate links and download distribution image
 
@@ -266,10 +250,6 @@ image_architecture
 # choose image version
 
 image_version
-
-# generate directories
-
-image_directories
 
 # download image
 

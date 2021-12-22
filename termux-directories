@@ -1,0 +1,81 @@
+#!/bin/bash
+
+# dependencies #
+
+. /data/data/com.termux/files/usr/bin/console
+
+# script #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="12-22-2021"
+
+# usage #
+
+# prompt #
+
+console.script "Setting up ${script#*-}"
+echo
+
+# variables #
+
+# defaults #
+
+# functions #
+
+# add home directories
+
+directories_list+=(
+	Desktop
+	Documents
+	Downloads
+	Music
+	Pictures
+	Public
+	Templates
+	Videos
+)
+
+for directory in ${directories_list}
+do
+	console.directory "${HOME}" "${directory}"
+done
+
+directories_list=()
+
+# add system directories
+
+directories_list+=(
+	bkp
+	cnt
+	img
+	mnt
+)
+
+for directory in ${directories_list}
+do
+	console.directory "${PREFIX}"  "${directory}"
+done
+
+directories_lit=()
+
+# fix directory structure
+
+directories_list+=(
+	bin
+	bkp
+	cnt
+	img
+	etc
+	lib
+	mnt
+	opt
+	tmp
+)
+
+for directory in ${directories_list[@]}
+do
+	ln -s -f "${PREFIX}"/"${directory}" "${PREFIX%/*}"/"${directory}"
+done

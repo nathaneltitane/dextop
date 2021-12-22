@@ -140,6 +140,7 @@ bash -c 'yes | pkg update'														>> /dev/null 2>&1
 
 utilities_list+=(
 	termux-additions
+	termux-directories
 	termux-packages
 	termux-storage
 	termux-update
@@ -167,6 +168,7 @@ then
 	if [ ! -f "${PREFIX}"/bin/termux-checkpoint-complete ]
 	then
 		"${PREFIX}"/bin/termux-update
+		"${PREFIX}"/bin/termux-directories
 		"${PREFIX}"/bin/termux-storage
 		"${PREFIX}"/bin/termux-packages
 		"${PREFIX}"/bin/termux-additions

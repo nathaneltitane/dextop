@@ -31,14 +31,7 @@ console.download get.trmnl.me/termux											"${HOME}"/.termux			termux.proper
 
 # home #
 
-console.directory "${HOME}" Desktop
-console.directory "${HOME}" Documents
-console.directory "${HOME}" Downloads
-console.directory "${HOME}" Music
-console.directory "${HOME}" Pictures
-console.directory "${HOME}" Public
-console.directory "${HOME}" Templates
-console.directory "${HOME}" Videos
+
 
 # bash #
 
@@ -126,3 +119,7 @@ console.download get.trmnl.me/leocad											"${PREFIX}"/bin					leocad-positi
 # youtube-dl #
 
 console.download https://yt-dl.org/downloads/latest								"${PREFIX}"/bin					youtube-dl
+
+# xdg #
+
+console.download get.trmnl.me/xdg												"${home}"/.config				user-dirs.dirs
