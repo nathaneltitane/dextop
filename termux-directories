@@ -56,7 +56,7 @@ directories_list+=(
 
 for directory in ${directories_list}
 do
-	console.directory "${PREFIX}"  "${directory}"
+	console.directory "${PREFIX}" "${directory}"
 done
 
 directories_lit=()
