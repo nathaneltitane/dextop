@@ -92,8 +92,6 @@ export option="${option}"
 container_command () {
 	# run container commands without session login
 
-	PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-
 	# assume 'termux-exec' is installed
 
 	unset LD_PRELOAD
@@ -120,7 +118,8 @@ container_command () {
 	--bind="/system:/system"													\
 	--bind="/vendor:/vendor"													\
 		/usr/bin/env -i															\
-		"PATH=${PATH}"															\
+		"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"		\
+		"PREFIX=/data/data/com.termux/files/usr"								\
 		"TERM=${TERM}"															\
 	"${@}"
 }

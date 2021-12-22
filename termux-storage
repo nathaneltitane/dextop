@@ -75,28 +75,38 @@ fi
 console.fwd "Setting up storage..."
 echo
 
-# remove termux storage setup defaults
+# handle storage mount locations
 
-[ -d "${HOME}"/storage ] && rm -rf "${HOME}"/storage
+# /home
 
-# handle storage mount location
+[ -d "${HOME}"/storage ]   && rm -rf "${HOME}"/storage
 
-[ -d "${PREFIX}"/storage ] && rm -rf "${PREFIX}"/storage
+# /media
+
+[ -d "${PREFIX}"/media ]   && rm -rf "${PREFIX}"/media/*
+
+# /storage
+
+[ -d "${PREFIX}"/storage ] && rm -rf "${PREFIX}"/storage/*
 
 # generate symbolic links
 
 console.fwd "Linking..."
 echo
 
-# internal storage
+# link internal storage
+
+if [ ! -f "${PREFIX}"/media/internal ]
+then
+	ln -s -f /storage/emulated/0 "${PREFIX}"/media/internal
+fi
 
 if [ ! -f "${PREFIX}"/storage/internal ]
 then
-	ln -s -f /storage/emulated/0 "${PREFIX}"/media/internal
 	ln -s -f /storage/emulated/0 "${PREFIX}"/storage/internal
 fi
 
-# external storage
+# link external storage
 
 # use /proc/mounts to detect mounted media:
 # circumvents /storage access issues and DAC policy (Android 11+)
@@ -116,7 +126,7 @@ then
 
 	if [ ! -f "${PREFIX}"/storage/external ]
 	then
-		ln -s -f /storage/"${uuid}" "${PREFIX}"/media/external
+		ln -s -f /storage/"${uuid}" "${PREFIX}"/storage/external
 	fi
 else
 	uuid="N/A"
