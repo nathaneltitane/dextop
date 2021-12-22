@@ -92,7 +92,9 @@ export option="${option}"
 container_command () {
 	# run container commands without session login
 
-	# assume termux-exec is present - unset LD_PRELOAD
+	PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+	# assume 'termux-exec' is installed
 
 	unset LD_PRELOAD
 
@@ -103,22 +105,22 @@ container_command () {
 	--link2symlink																\
 	--rootfs="${PREFIX}"/cnt													\
 	--change-id=0:0																\
-	--pwd=/root																	\
-	--bind=/apex																\
-	--bind=/data																\
-	--bind=/dev																	\
+	--pwd="/root"																\
+	--bind="/apex:/apex"														\
+	--bind="/data:/data"														\
+	--bind="/dev:/dev"															\
 	--bind="/dev/urandom:/dev/random"											\
-	--bind=/proc																\
+	--bind="/proc:/proc"														\
 	--bind="/proc/self/fd:/dev/fd"												\
 	--bind="/proc/self/fd/0:/dev/stdin"											\
 	--bind="/proc/self/fd/1:/dev/stdout"										\
 	--bind="/proc/self/fd/2:/dev/stderr"										\
-	--bind=/storage																\
-	--bind=/sys																	\
-	--bind=/system																\
-	--bind=/vendor																\
+	--bind="/storage:/storage"													\
+	--bind="/sys:/sys"															\
+	--bind="/system:/system"													\
+	--bind="/vendor:/vendor"													\
 		/usr/bin/env -i															\
-		"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"		\
+		"PATH=${PATH}"															\
 		"TERM=${TERM}"															\
 	"${@}"
 }

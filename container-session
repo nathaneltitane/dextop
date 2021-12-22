@@ -199,7 +199,7 @@ SHELL="/bin/bash"
 console.fwd "Starting session" "[ ${session_name} // ${user_name} ]"
 echo
 
-# assume termux-exec is present - unset LD_PRELOAD
+# assume 'termux-exec' is installed
 
 unset LD_PRELOAD
 
