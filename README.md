@@ -67,11 +67,11 @@ Once the Android applications are installed on your device, open Termux and past
 
 Container install options are:
 
-`-i, --i3wm      I3WM setup: install i3 window manager and utilities.                                [ Default ]`
+`-i, --i3wm    I3WM setup: install i3 window manager and utilities.                                [ Default ]`
 
-`-x, --xfce      XFCE4 setup: install XFCE desktop environment and utilities.`
+`-x, --xfce    XFCE4 setup: install XFCE desktop environment and utilities.`
 
-`-n, --none      No DE setup: console access to environment and utilities.`
+`-n, --none    No DE setup: console access to environment and utilities.`
 
 
 The 'none' option is great for users who would like to experiment or setup their own window manager/desktop environment, utilities and preferences.

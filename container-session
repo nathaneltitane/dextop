@@ -25,14 +25,14 @@ do
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} | [USERNAME]"
+			echo -e "Usage: ${script} | [User Name]"
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-r, --root \t\t Specify 'root' as user for session login."
-			echo -e "-u, --username \t Specify 'user' for session login."
+			echo -e "-r, --root        Specify 'root' as user for session login."
+			echo -e "-u, --username    Specify 'user' for session login."
 			echo
-			echo -e "-h, --help \t Show help and usage information."
+			echo -e "-h, --help        Show help and usage information."
 			echo
 			echo -e "'${script}' [ Version ${version} ]"
 			echo
@@ -49,7 +49,7 @@ do
 
 		*)
 			echo
-			echo -e "Usage: ${script} | [USERNAME]"
+			echo -e "Usage: ${script} | [User Name]"
 			echo
 			echo -e "${script}: Unknown option '${1}'"
 			echo -e "Type './${script} --help' for help and usage information."

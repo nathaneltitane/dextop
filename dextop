@@ -33,11 +33,11 @@ do
 			echo
 			echo -e "USAGE:"
 			echo
-			echo -e "-i, --i3wm             \t I3WM setup: install i3 window manager and utilities."
-			echo -e "-x, --xfce             \t XFCE4 setup: install XFCE desktop environment and utilities."
-			echo -e "-n, --none             \t No DE setup: console access to environment and utilities."
+			echo -e "-i, --i3wm    I3WM setup: install i3 window manager and utilities."
+			echo -e "-x, --xfce    XFCE4 setup: install XFCE desktop environment and utilities."
+			echo -e "-n, --none    No DE setup: console access to environment and utilities."
 			echo
-			echo -e "-h, --help             \t Show help and usage information."
+			echo -e "-h, --help    Show help and usage information."
 			echo
 			echo -e "'${script}' [ Version ${version} ]"
 			echo
