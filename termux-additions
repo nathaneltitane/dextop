@@ -27,62 +27,69 @@ echo
 
 console.directory "${HOME}" .termux
 
-console.download get.trmnl.me/termux											"${HOME}"/.termux			termux.properties
-
-# home #
-
-
+console.download get.trmnl.me/termux "${HOME}"/.termux termux.properties
 
 # bash #
 
-console.download get.trmnl.me/bash												"${HOME}"					.bash_aliases
-console.download get.trmnl.me/bash												"${HOME}"					.bash_functions
-console.download get.trmnl.me/bash												"${HOME}"					.bash_logout
-console.download get.trmnl.me/bash												"${HOME}"					.bashrc
-console.download get.trmnl.me/bash												"${HOME}"					.hushlogin
-console.download get.trmnl.me/bash												"${HOME}"					.profile
+files_list+=(
+	.bash_aliases
+	.bash_functions
+	.bash_logout
+	.bashrc
+	.hushlogin
+	.profile
+)
+
+console.download get.trmnl.me/bash "${HOME}" ${files_list[@]}
+
+files_list=()
 
 # bash aliases #
 
 console.directory "${HOME}" .bash-aliases
 
-console.download get.trmnl.me/aliases											"${HOME}"/.bash-aliases		apt
-console.download get.trmnl.me/aliases											"${HOME}"/.bash-aliases		command
-console.download get.trmnl.me/aliases											"${HOME}"/.bash-aliases		copy
-console.download get.trmnl.me/aliases											"${HOME}"/.bash-aliases		count
-console.download get.trmnl.me/aliases											"${HOME}"/.bash-aliases		directory
-console.download get.trmnl.me/aliases											"${HOME}"/.bash-aliases		duplicate
-console.download get.trmnl.me/aliases											"${HOME}"/.bash-aliases		git
-console.download get.trmnl.me/aliases											"${HOME}"/.bash-aliases		grep
-console.download get.trmnl.me/aliases											"${HOME}"/.bash-aliases		kill
-console.download get.trmnl.me/aliases											"${HOME}"/.bash-aliases		list
-console.download get.trmnl.me/aliases											"${HOME}"/.bash-aliases		nano
-console.download get.trmnl.me/aliases											"${HOME}"/.bash-aliases		ping
-console.download get.trmnl.me/aliases											"${HOME}"/.bash-aliases		sudo
-console.download get.trmnl.me/aliases											"${HOME}"/.bash-aliases		shortcuts
-console.download get.trmnl.me/aliases											"${HOME}"/.bash-aliases		system
-console.download get.trmnl.me/aliases											"${HOME}"/.bash-aliases		usage
-console.download get.trmnl.me/aliases											"${HOME}"/.bash-aliases		where
+files_list+=(
+	apt
+	command
+	copy
+	count
+	directory
+	duplicate
+	git
+	grep
+	kill
+	list
+	nano
+	ping
+	sudo
+	shortcuts
+	system
+	usage
+	where
+)
+
+console.download get.trmnl.me/aliases "${HOME}"/.bash-aliases ${files_list[@]}
+
+files_list=()
 
 # bash functions #
 
 console.directory "${HOME}" .bash-functions
 
-console.download get.trmnl.me/functions											"${HOME}"/.bash-functions	address
-console.download get.trmnl.me/functions											"${HOME}"/.bash-functions	audio
-console.download get.trmnl.me/functions											"${HOME}"/.bash-functions	extract
-console.download get.trmnl.me/functions											"${HOME}"/.bash-functions	record
-console.download get.trmnl.me/functions											"${HOME}"/.bash-functions	speed
-console.download get.trmnl.me/functions											"${HOME}"/.bash-functions	sprunge
-console.download get.trmnl.me/functions											"${HOME}"/.bash-functions	weather
-console.download get.trmnl.me/functions											"${HOME}"/.bash-functions	youtube
+files_list+=(
+	address
+	audio
+	extract
+	record
+	speed
+	sprunge
+	weather
+	youtube
+)
 
-# vnc #
+console.download get.trmnl.me/functions "${HOME}"/.bash-functions ${files_list[@]}
 
-console.directory "${HOME}" .vnc
-
-console.download get.trmnl.me/vnc												"${HOME}"/.vnc				passwd
-console.download get.trmnl.me/vnc												"${HOME}"/.vnc				xstartup
+files_list=()
 
 # i3wm #
 
@@ -99,27 +106,35 @@ console.download get.trmnl.me/i3wm/ranger										"${HOME}"/.config/ranger	rc.c
 
  # dmenu #
 
-console.download get.trmnl.me/dmenu												"${PREFIX}"/bin					dmenu-change-background
-console.download get.trmnl.me/dmenu												"${PREFIX}"/bin					dmenu-confirm
-console.download get.trmnl.me/dmenu												"${PREFIX}"/bin					dmenu-exit-session
-console.download get.trmnl.me/dmenu												"${PREFIX}"/bin					dmenu-i3-shortcuts
-console.download get.trmnl.me/dmenu												"${PREFIX}"/bin					dmenu-open-directory
-console.download get.trmnl.me/dmenu												"${PREFIX}"/bin					dmenu-open-file
-console.download get.trmnl.me/dmenu												"${PREFIX}"/bin					dmenu-open-file-manager
-console.download get.trmnl.me/dmenu												"${PREFIX}"/bin					dmenu-open-manual
-console.download get.trmnl.me/dmenu												"${PREFIX}"/bin					dmenu-show-shortcuts
+files_list+=(
+	dmenu-change-background
+	dmenu-confirm
+	dmenu-exit-session
+	dmenu-i3-shortcuts
+	dmenu-open-directory
+	dmenu-open-file
+	dmenu-open-file-manager
+	dmenu-open-manual
+	dmenu-show-shortcuts
+)
+
+console.download get.trmnl.me/dmenu "${PREFIX}"/bin ${files_list[@]}
+
+files_list=()
 
 # leocad #
 
-console.download get.trmnl.me/leocad											"${PREFIX}"/bin					leocad-build
-console.download get.trmnl.me/leocad											"${PREFIX}"/bin					leocad-configuration
-console.download get.trmnl.me/leocad											"${PREFIX}"/bin					leocad-download
-console.download get.trmnl.me/leocad											"${PREFIX}"/bin					leocad-position
+files_list+=()
+	leocad-build
+	leocad-configuration
+	leocad-download
+	leocad-position
+)
+
+console.download get.trmnl.me/leocad "${PREFIX}"/bin ${files_list[@]}
+
+files_list=()
 
 # youtube-dl #
 
-console.download https://yt-dl.org/downloads/latest								"${PREFIX}"/bin					youtube-dl
-
-# xdg #
-
-console.download get.trmnl.me/xdg												"${home}"/.config				user-dirs.dirs
+console.download https://yt-dl.org/downloads/latest "${PREFIX}"/bin youtube-dl
