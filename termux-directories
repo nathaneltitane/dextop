@@ -36,7 +36,7 @@ directories_list+=(
 	storage
 )
 
-console.directory "${PREFIX}" "${directory}"
+console.directory "${PREFIX}" ${directories_list[@]}
 
 directories_list=()
 
@@ -53,7 +53,7 @@ directories_list+=(
 	Videos
 )
 
-console.directory "${HOME}" "${directory}"
+console.directory "${HOME}" ${directories_list[@]}
 
 directories_list=()
 
@@ -73,13 +73,10 @@ directories_list+=(
 	storage
 )
 
-for directory in ${directories_list[@]}
-do
-	ln -s -f "${PREFIX}"/"${directory}" "${PREFIX%/*}"/"${directory}"
-done
+console.link "${PREFIX}" "${PREFIX%/*}" ${directories_list[@]}
 
 directories_list=()
 
 # cleanup temporary build files
 
-[ -f "${PREFIX%/*}"/rList ] && rm -rf "${PREFIX%/*}"/rList
+console.delete "${PREFIX%/*}" rList

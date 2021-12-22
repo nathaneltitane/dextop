@@ -154,10 +154,7 @@ utilities_list+=(
 	container-vnc
 )
 
-for utility in ${utilities_list[@]}
-do
-	console.download get.dxtp.app "${PREFIX}"/bin "${utility}"
-done
+console.download get.dxtp.app "${PREFIX}"/bin ${utilities_list[@]}
 
 # in order of execution
 
