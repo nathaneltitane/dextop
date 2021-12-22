@@ -3,7 +3,6 @@
 # dependencies #
 
 . /data/data/com.termux/files/usr/bin/console
-. /data/data/com.termux/files/usr/bin/dextop
 
 # script #
 
@@ -40,12 +39,12 @@ do
 			exit
 		;;
 
-			"")
-				# handle empty argument:
-				# use default values specified in script
+		"")
+			# handle empty argument:
+			# use default values specified in script
 
-				:
-			;;
+			:
+		;;
 
 		*)
 			echo
@@ -75,7 +74,7 @@ echo
 # and corresponds to 'username' then source environment variables from file
 # default to 'root' if 'username' is invalid, not specified or does not exist
 
-last_entry="$(tail -n 1 "${CONTAINER_DIRECTORY}"/etc/passwd)"
+last_entry="$(tail -n 1 "${PREFIX}"/cnt/etc/passwd)"
 
 # authentication #
 
@@ -144,7 +143,7 @@ do
 		SHELL="/bin/bash"
 	fi
 
-done < "${CONTAINER_DIRECTORY}"/etc/passwd
+done < "${PREFIX}"/cnt/etc/passwd
 
 # system #
 
@@ -159,12 +158,12 @@ PATH=""
 
 # container
 
-[ -d "${CONTAINER_DIRECTORY}"/usr/local/sbin ]									&& PATH+="/usr/local/sbin:"
-[ -d "${CONTAINER_DIRECTORY}"/usr/local/bin ]									&& PATH+="/usr/local/bin:"
-[ -d "${CONTAINER_DIRECTORY}"/usr/sbin ]										&& PATH+="/usr/sbin:"
-[ -d "${CONTAINER_DIRECTORY}"/usr/sbin ]										&& PATH+="/usr/bin:"
-[ -d "${CONTAINER_DIRECTORY}"/sbin ]											&& PATH+="/sbin:"
-[ -d "${CONTAINER_DIRECTORY}"/bin ]												&& PATH+="/bin:"
+[ -d "${PREFIX}"/cnt/usr/local/sbin ]									&& PATH+="/usr/local/sbin:"
+[ -d "${PREFIX}"/cnt/usr/local/bin ]									&& PATH+="/usr/local/bin:"
+[ -d "${PREFIX}"/cnt/usr/sbin ]										&& PATH+="/usr/sbin:"
+[ -d "${PREFIX}"/cnt/usr/sbin ]										&& PATH+="/usr/bin:"
+[ -d "${PREFIX}"/cnt/sbin ]											&& PATH+="/sbin:"
+[ -d "${PREFIX}"/cnt/bin ]												&& PATH+="/bin:"
 
 # termux
 
@@ -190,39 +189,32 @@ LOCALHOST="127.0.0.1"
 PAGER="less"
 SHELL="/bin/bash"
 
-# base
-
-[ "${DESKTOP_OPTION}" = "none" ]												&& SESSION_NAME="CONSOLE"
-
 # i3 #
 
-[ -f "${CONTAINER_DIRECTORY}"/usr/bin/i3 ]										&& SESSION_NAME="I3WM"
+[ -f "${PREFIX}"/cnt/usr/bin/i3 ]										&& SESSION_NAME="I3WM"
 
-[ -f "${CONTAINER_DIRECTORY}"/usr/bin/i3 ]										&& SESSION="i3wm"
-[ -f "${CONTAINER_DIRECTORY}"/usr/bin/i3 ]										&& SESSION_LOADER="i3"
-[ -f "${CONTAINER_DIRECTORY}"/usr/bin/i3 ]										&& BROWSER="surf"
-[ -f "${CONTAINER_DIRECTORY}"/usr/bin/i3 ]										&& EMULATOR="st"
-[ -f "${CONTAINER_DIRECTORY}"/usr/bin/i3 ]										&& RUNNER="dmenu"
-[ -f "${CONTAINER_DIRECTORY}"/usr/bin/i3 ]										&& VISUAL="nano"
+[ -f "${PREFIX}"/cnt/usr/bin/i3 ]										&& SESSION="i3wm"
+[ -f "${PREFIX}"/cnt/usr/bin/i3 ]										&& SESSION_LOADER="i3"
+[ -f "${PREFIX}"/cnt/usr/bin/i3 ]										&& BROWSER="surf"
+[ -f "${PREFIX}"/cnt/usr/bin/i3 ]										&& EMULATOR="st"
+[ -f "${PREFIX}"/cnt/usr/bin/i3 ]										&& RUNNER="dmenu"
+[ -f "${PREFIX}"/cnt/usr/bin/i3 ]										&& VISUAL="nano"
 
 # xfce #
 
-[ -f "${CONTAINER_DIRECTORY}"/usr/bin/xfwm4 ]									&& SESSION_NAME="XFCE"
+[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]									&& SESSION_NAME="XFCE"
 
-[ -f "${CONTAINER_DIRECTORY}"/usr/bin/xfwm4 ]									&& SESSION="xfce"
-[ -f "${CONTAINER_DIRECTORY}"/usr/bin/xfwm4 ]									&& SESSION_LOADER="xfce4-session"
-[ -f "${CONTAINER_DIRECTORY}"/usr/bin/xfwm4 ]									&& SETTINGS_MANAGER="xfsettingsd"
-[ -f "${CONTAINER_DIRECTORY}"/usr/bin/xfwm4 ]									&& WINDOW_MANAGER="xfwm4"
+[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]									&& SESSION="xfce"
+[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]									&& SESSION_LOADER="xfce4-session"
+[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]									&& SETTINGS_MANAGER="xfsettingsd"
+[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]									&& WINDOW_MANAGER="xfwm4"
 
-[ -f "${CONTAINER_DIRECTORY}"/usr/bin/xfwm4 ]									&& BROWSER="midori"
-[ -f "${CONTAINER_DIRECTORY}"/usr/bin/xfwm4 ]									&& EMULATOR="xfce4-terminal"
-[ -f "${CONTAINER_DIRECTORY}"/usr/bin/xfwm4 ]									&& RUNNER="xfce4-appfinder"
-[ -f "${CONTAINER_DIRECTORY}"/usr/bin/xfwm4 ]									&& VISUAL="mousepad"
+[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]									&& BROWSER="midori"
+[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]									&& EMULATOR="xfce4-terminal"
+[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]									&& RUNNER="xfce4-appfinder"
+[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]									&& VISUAL="mousepad"
 
 # defaults #
-
-[ -z "${MOUNT_DIRECTORY}" ]														&& MOUNT_DIRECTORY="${PREFIX%/*}/mnt"
-[ -z "${CONTAINER_DIRECTORY}" ]													&& CONTAINER_DIRECTORY="${PREFIX%/*}/cnt"
 
 [ -z "${BROWSER}" ]																&& BROWSER="${BROWSER}"
 [ -z "${COLORTERM}" ]															&& COLORTERM="${COLORTERM}"
@@ -244,7 +236,7 @@ unset "${session_command}"
 session_command+="proot"
 session_command+=" --kill-on-exit"
 session_command+=" --link2symlink"
-session_command+=" --rootfs=${CONTAINER_DIRECTORY}"
+session_command+=" --rootfs=${"${PREFIX}"/cnt}"
 session_command+=" --change-id=${USER_ID}:${GROUP_ID}"
 session_command+=" --pwd=${HOME}"
 [ -d "/apex" ]                         && session_command+=" --bind=/apex"
@@ -282,11 +274,6 @@ session_command+=" ANDROID_TZDATA_ROOT=${ANDROID_TZDATA_ROOT}"
 session_command+=" BOOTCLASSPATH=${BOOTCLASSPATH}"
 session_command+=" DEX2OATBOOTCLASSPATH=${DEX2OATBOOTCLASSPATH}"
 session_command+=" PREFIX=${PREFIX}"
-session_command+=" MAIN_DIRECTORY=${PREFIX%/*}"
-session_command+=" BINARIES_DIRECTORY=${PREFIX}/bin"
-session_command+=" LIBRARIES_DIRECTORY=${PREFIX}/lib"
-session_command+=" CONTAINER_DIRECTORY=${CONTAINER_DIRECTORY}"
-session_command+=" MOUNT_DIRECTORY=${MOUNT_DIRECTORY}"
 session_command+=" SESSION=${SESSION}"
 session_command+=" SESSION_NAME=${SESSION_NAME}"
 session_command+=" SESSION_LOADER=${SESSION_LOADER}"

@@ -3,7 +3,6 @@
 # dependencies #
 
 . /data/data/com.termux/files/usr/bin/console
-. /data/data/com.termux/files/usr/bin/dextop
 
 # script #
 
@@ -14,39 +13,6 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 version="12-03-2021"
 
 # usage #
-
-while (($#))
-do
-	case "${1}" in
-		-h|--help)
-			echo
-			echo -e "Usage: ${script} [OPTION]"
-			echo
-			echo -e "Options:"
-			echo
-			echo -e "-h, --help \t Show help and usage information."
-			echo
-			echo -e "'${script}' [ Version ${version} ]"
-			echo
-
-			exit
-		;;
-
-		*)
-			echo
-			echo "Usage: ${script} [OPTION]"
-			echo
-			echo -e "${script}: Unknown option '${1}'"
-			echo -e "Type './${script} --help' for help and usage information."
-			echo
-
-			exit 1
-		;;
-		
-	esac
-
-	shift
-done
 
 # prompt #
 
@@ -241,10 +207,10 @@ image_directories () {
 	echo
 
 	directories_list=(
-		"${BACKUP_DIRECTORY}"
-		"${CONTAINER_DIRECTORY}"
-		"${IMAGE_DIRECTORY}"
-		"${MOUNT_DIRECTORY}"
+		"${PREFIX}"/bkp
+		"${PREFIX}"/cnt
+		"${PREFIX}"/img
+		"${PREFIX}"/mnt
 	)
 
 	console.directory "/" ${directories_list[@]}
@@ -262,7 +228,7 @@ image_download () {
 		;;
 	esac
 
-	console.download "${image_url}" "${IMAGE_DIRECTORY}" "${image_archive}"
+	console.download "${image_url}" "${PREFIX}"/img "${image_archive}"
 }
 
 image_unpack () {
@@ -275,7 +241,7 @@ image_unpack () {
 	console.inf "Extracting new deployment."
 	echo
 
-	cd "${CONTAINER_DIRECTORY}" || exit 1
+	cd "${PREFIX}"/cnt || exit 1
 
 	proot															\
 		--link2symlink												\
@@ -283,7 +249,7 @@ image_unpack () {
 				--extract											\
 				--delay-directory-restore							\
 				--preserve-permissions								\
-					--file="${IMAGE_DIRECTORY}/${image_archive}"	\
+					--file="${PREFIX}/img/${image_archive}"			\
 						--exclude='boot'							\
 						--exclude='dev'								\
 						--exclude='proc'							\

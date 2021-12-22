@@ -3,7 +3,6 @@
 # dependencies #
 
 . /data/data/com.termux/files/usr/bin/console
-. /data/data/com.termux/files/usr/bin/dextop
 
 # script #
 
@@ -14,39 +13,6 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 version="12-03-2021"
 
 # usage #
-
-while (($#))
-do
-	case "${1}" in
-		-h|--help)
-			echo
-			echo -e "Usage: ${script} [OPTION]"
-			echo
-			echo -e "Options:"
-			echo
-			echo -e "-h, --help \t Show help and usage information."
-			echo
-			echo -e "'${script}' [ Version ${version} ]"
-			echo
-
-			exit
-		;;
-
-		*)
-			echo
-			echo "Usage: ${script} [OPTION]"
-			echo
-			echo -e "${script}: Unknown option '${1}'"
-			echo -e "Type './${script} --help' for help and usage information."
-			echo
-
-			exit 1
-		;;
-		
-	esac
-
-	shift
-done
 
 # prompt #
 
@@ -71,7 +37,7 @@ storage_intent () {
 
 # verify termux storage directory existence
 
-if [ ! -d "${HOME_DIRECTORY}"/storage ]
+if [ ! -d "${HOME}"/storage ]
 then
 	# does not exist:
 	# enable storage permissions: requires user touch input
@@ -99,7 +65,7 @@ else
 	# exists:
 	# proceed with setup
 
-	console.scs "Storage directory detected" "[ "${HOME_DIRECTORY}" ]."
+	console.scs "Storage directory detected" "[ "${HOME}" ]."
 	echo
 
 	console.fwd "Continuing..."
@@ -111,15 +77,15 @@ echo
 
 # remove termux storage setup defaults
 
-rm -rf "${HOME_DIRECTORY}"/storage
+rm -rf "${HOME}"/storage
 
 # handle storage mount location
 
-[ -d "${MAIN_DIRECTORY}"/storage ] && rm -rf "${MAIN_DIRECTORY}"/storage
+[ -d "${PREFIX}"/storage ] && rm -rf "${PREFIX}"/storage
 
 # generate storage directory
 
-console.directory "${MAIN_DIRECTORY}" storage
+console.directory "${PREFIX}" storage
 
 # generate symbolic links
 
@@ -128,9 +94,9 @@ echo
 
 # internal storage
 
-if [ ! -f "${MAIN_DIRECTORY}"/storage/internal ]
+if [ ! -f "${PREFIX}"/storage/internal ]
 then
-	ln -s -f /storage/emulated/0 "${MAIN_DIRECTORY}"/storage/internal
+	ln -s -f /storage/emulated/0 "${PREFIX}"/storage/internal
 fi
 
 # external storage
@@ -146,9 +112,9 @@ then
 	console.scs "Storage media detected" "[ ${uuid} ]"
 	echo
 
-	if [ ! -f "${MAIN_DIRECTORY}"/storage/external ]
+	if [ ! -f "${PREFIX}"/storage/external ]
 	then
-		ln -s -f /storage/"${uuid}" "${MAIN_DIRECTORY}"/storage/external
+		ln -s -f /storage/"${uuid}" "${PREFIX}"/storage/external
 	fi
 else
 	uuid="N/A"

@@ -3,7 +3,6 @@
 # dependencies #
 
 . /data/data/com.termux/files/usr/bin/console
-. /data/data/com.termux/files/usr/bin/dextop
 
 # script #
 
@@ -14,39 +13,6 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 version="12-03-2021"
 
 # usage #
-
-while (($#))
-do
-	case "${1}" in
-		 -h|--help)
-			echo
-			echo -e "Usage: ${script} [OPTION]"
-			echo
-			echo -e "Options:"
-			echo
-			echo -e "-h, --help \t Show help and usage information."
-			echo
-			echo -e "'${script}' [ Version ${version} ]"
-			echo
-
-			exit
-		;;
-
-		*)
-			echo
-			echo "Usage: ${script} [OPTION]"
-			echo
-			echo -e "${script}: Unknown option '${1}'"
-			echo -e "Type './${script} --help' for help and usage information."
-			echo
-
-			exit 1
-		;;
-		
-	esac
-
-	shift
-done
 
 # prompt #
 

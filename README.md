@@ -74,14 +74,6 @@ Container install options are:
 `-n, --none      No DE setup: console access to environment and utilities.`
 
 
-`-b, --base      Base setup: download and install base distribution image only.                                 `
-
-`-f, --full      Full setup: download and install full desktop environment and utilities.            [ Default ]`
-
-`-p, --update    Package update: check/download/install Termux and Termux API package updates.`
-
-
-By selecting the 'none' option, Dextop automatically sets up minimal defaults to a 'base' install.
 The 'none' option is great for users who would like to experiment or setup their own window manager/desktop environment, utilities and preferences.
 
 The 'update' option runs a Termux package check and lets you update both Termux (com.termux) and Termux API (com.termux.api) via direct download from F-Droid when available.

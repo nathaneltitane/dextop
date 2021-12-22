@@ -3,7 +3,6 @@
 # dependencies #
 
 . /data/data/com.termux/files/usr/bin/console
-. /data/data/com.termux/files/usr/bin/dextop
 
 # script #
 
@@ -38,7 +37,6 @@ do
 			echo
 			echo -e "-o, --start \t Start vnc session server."
 			echo -e "-x, --stop \t Stop vnc session server."
-			echo
 			echo -e "-p, --pass \t Generate vnc session password."
 			echo
 			echo -e "-h, --help \t Show help and usage information."
@@ -47,6 +45,13 @@ do
 			echo
 
 			exit
+		;;
+
+		"")
+			# handle empty argument:
+			# use default values specified in script
+
+			:
 		;;
 
 		*)
@@ -118,7 +123,7 @@ vnc_start () {
 	console.fwd "Starting display server..."
 	echo
 
-	console.inf "Display server" "[ ${format} // ${GEOMETRY} // ${PORT} ]"
+	console.inf "Display server" "[ ${format} // ${geometry} // ${PORT} ]"
 	echo
 
 	# 'vncserver' uses $DISPLAY instead of $PORT
@@ -129,8 +134,8 @@ vnc_start () {
 	command_start+=" -IdleTimeout 0"
 	command_start+=" -SecurityTypes none"
 	command_start+=" -depth 32"
-	command_start+=" -name ${NAME}-Dextop"
-	command_start+=" -geometry ${GEOMETRY}"
+	command_start+=" -name ${NAME}"
+	command_start+=" -geometry ${geometry}"
 	[[ $(ps -A | grep -i proot) ]] && command_start+=" -localhost yes" || command_start+=" -localhost"
 	[[ -f $(command -v i3) ]]      && command_start+=" -xstartup $(command -v i3)"
 	[[ -f $(command -v xfwm4) ]]   && command_start+=" -xstartup $(command -v xfce4-session)"
@@ -155,7 +160,7 @@ vnc_start () {
 	vnc_intent
 }
 
-vnc_resolutions () {
+vnc_geometry () {
 	console.msg "Select geometry to start the display server"
 	console.msg "or input [c]ustom properties:"
 	echo
@@ -277,7 +282,7 @@ vnc_resolutions () {
 		format="${resolutions[$i]}"
 		width="${resolutions[$i+1]}"
 		height="${resolutions[$i+2]}"
-		resolution="${width}x${height}"
+		geometry="${width}x${height}"
 
 		number=$((($i/3) + 1))
 
@@ -378,7 +383,7 @@ vnc_pass () {
 	console.fwd "Setting password..."
 	echo
 
-	echo "$vnc_password" | vncpasswd -f > "${HOME_DIRECTORY}"/.vnc/passwd
+	echo "$vnc_password" | vncpasswd -f > "${HOME}"/.vnc/passwd
 
 	console.scs "Password changed."
 	echo
@@ -392,11 +397,11 @@ then
 	then
 		# hide if selection file is present
 
-		vnc_resolutions
+		vnc_geometry
 	else
 		# show if selection file is not present
 
-		vnc_resolutions
+		vnc_geometry
 	fi
 
 	# values #
@@ -475,9 +480,8 @@ then
 		format="${resolutions[$i-3]}"
 		width="${resolutions[$i-2]}"
 		height="${resolutions[$i-1]}"
-		resolution="${width}x${height}"
+		geometry="${width}x${height}"
 
-		GEOMETRY="${resolution}"
 	fi
 
 	# handle custom selection
@@ -497,18 +501,17 @@ then
 		read height
 		echo
 
-		console.ipt "PORT NUMBER" "[ e.g. 1 ]"
+		console.ipt "DISPLAY" "[ e.g. 1 ]"
 
-		read custom_port
+		read display
 		echo
 
 		format="Custom"
-		custom_resolution="${width}x${height}"
+		geometry="${width}x${height}"
 
-		DISPLAY=":${custom_port}"
+		DISPLAY=":${display}"
 		DISPLAY_NUMBER="${DISPLAY/:/}"
 		PORT="590${DISPLAY_NUMBER}"
-		GEOMETRY="${custom_resolution}"
 	fi
 
 	# start vnc session

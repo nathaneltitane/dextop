@@ -18,27 +18,15 @@ while (($#))
 do
 	case "${1}" in
 		-i|--i3wm)
-			DESKTOP_OPTION="i3wm"
+			option="i3wm"
 		;;
 
 		-x|--xfce)
-			DESKTOP_OPTION="xfce"
+			option="xfce"
 		;;
-		
+
 		-n|--none)
-			DESKTOP_OPTION="none"
-		;;
-		
-		-b|--base)
-			INSTALL_OPTION="base"
-		;;
-
-		-f|--full)
-			INSTALL_OPTION="full"
-		;;
-
-		-p|--update)
-			INSTALL_OPTION="update"
+			option="none"
 		;;
 
 		-h|--help)
@@ -48,12 +36,6 @@ do
 			echo -e "-i, --i3wm             \t I3WM setup: install i3 window manager and utilities."
 			echo -e "-x, --xfce             \t XFCE4 setup: install XFCE desktop environment and utilities."
 			echo -e "-n, --none             \t No DE setup: console access to environment and utilities."
-			echo
-			echo -e "-b, --base             \t Base setup: download and install distribution image only."
-			echo
-			echo -e "-f, --full             \t Full setup: download and install full desktop environment and utilities."
-			echo
-			echo -e "-p, --update           \t Package update: check/download/install Termux and Termux API package updates."
 			echo
 			echo -e "-h, --help             \t Show help and usage information."
 			echo
@@ -99,18 +81,14 @@ echo
 
 # variables #
 
-# defaults #
+export option="${option}"
 
-[ -z "${DESKTOP_OPTION}" ] && DESKTOP_OPTION="i3wm"
+# defaults #
 
 # functions #
 
 container_command () {
 	# run container commands without session login
-
-	# update variables
-
-	. "${PREFIX}"/bin/dextop
 
 	# assume termux-exec is present - unset LD_PRELOAD
 
@@ -121,7 +99,7 @@ container_command () {
 	proot																		\
 	--kill-on-exit																\
 	--link2symlink																\
-	--rootfs="${CONTAINER_DIRECTORY}"											\
+	--rootfs="${PREFIX}"/cnt													\
 	--change-id=0:0																\
 	--pwd=/root																	\
 	--bind=/apex																\
@@ -143,32 +121,6 @@ container_command () {
 	"${@}"
 }
 
-# export variables
-
-echo "# ${script} #"															>> "${PREFIX}"/bin/dextop
-
-echo 'export DISPLAY=":1"'														>> "${PREFIX}"/bin/dextop
-echo 'export DISPLAY_NUMBER="${DISPLAY/:/}"'									>> "${PREFIX}"/bin/dextop
-echo 'export PORT="590${DISPLAY_NUMBER}"'										>> "${PREFIX}"/bin/dextop
-
-echo 'export MAIN_DIRECTORY="${PREFIX%/*}"'										>> "${PREFIX}"/bin/dextop
-echo 'export BINARIES_DIRECTORY="${PREFIX}"/bin'								>> "${PREFIX}"/bin/dextop
-echo 'export CONFIGURATIONS_DIRECTORY="${PREFIX}"/etc'							>> "${PREFIX}"/bin/dextop
-echo 'export SOURCES_DIRECTORY="${PREFIX}"/etc/apt'								>> "${PREFIX}"/bin/dextop
-echo 'export HOME_DIRECTORY="${PREFIX%/*}"/home'								>> "${PREFIX}"/bin/dextop
-echo 'export LIBRARIES_DIRECTORY="${PREFIX}"/lib'								>> "${PREFIX}"/bin/dextop
-echo 'export BACKUP_DIRECTORY="${MAIN_DIRECTORY}"/bkp'							>> "${PREFIX}"/bin/dextop
-echo 'export CONTAINER_DIRECTORY="${MAIN_DIRECTORY}"/cnt'						>> "${PREFIX}"/bin/dextop
-echo 'export IMAGE_DIRECTORY="${MAIN_DIRECTORY}"/img'							>> "${PREFIX}"/bin/dextop
-echo 'export MOUNT_DIRECTORY="${MAIN_DIRECTORY}"/mnt'							>> "${PREFIX}"/bin/dextop
-
-echo "export DESKTOP_OPTION=${desktop_option}"									>> "${PREFIX}"/bin/dextop
-echo "export INSTALL_OPTION=${install_option}"									>> "${PREFIX}"/bin/dextop
-
-# update variables
-
-. "${PREFIX}"/bin/dextop
-
 # run failsafe package install:
 # termux package servers are sometimes unresponsive or badly authenticated
 
@@ -178,26 +130,7 @@ echo
 bash -c 'yes | pkg update'														>> /dev/null 2>&1
 bash -c 'yes | pkg upgrade'														>> /dev/null 2>&1
 bash -c 'yes | pkg install proot debootstrap'									>> /dev/null 2>&1
-
-console.log "pkg update" &
-
-console.progress "Forcing refresh..."
-echo
-
-# fix directory structure
-
-directories_list=(
-	bin
-	etc
-	lib
-	opt
-	tmp
-)
-
-for directory in ${directories_list[@]}
-do
-	ln -s -f "${PREFIX}"/"${directory}" "${MAIN_DIRECTORY}"/"${directory}"
-done
+bash -c 'yes | pkg update'														>> /dev/null 2>&1
 
 # download utilities
 
@@ -206,7 +139,6 @@ utilities_list+=(
 	termux-packages
 	termux-storage
 	termux-update
-	
 	container-expand
 	container-image
 	container-packages
@@ -219,43 +151,39 @@ utilities_list+=(
 
 for utility in ${utilities_list[@]}
 do
-	console.download get.dxtp.app "${BINARIES_DIRECTORY}" "${utility}"
+	console.download get.dxtp.app "${PREFIX}"/bin "${utility}"
 done
 
 # in order of execution
 
-if [ ! -f "${BINARIES_DIRECTORY}"/dextop-checkpoint-complete ]
+if [ ! -f "${PREFIX}"/bin/dextop-checkpoint-complete ]
 then
 	# termux
 
-	if [ ! -f "${BINARIES_DIRECTORY}"/termux-checkpoint-complete ]
+	if [ ! -f "${PREFIX}"/bin/termux-checkpoint-complete ]
 	then
-		if [ "${INSTALL_OPTION}" = "update" ]
-		then
-			"${BINARIES_DIRECTORY}"/termux-update
-		fi
+		"${PREFIX}"/bin/termux-update
+		"${PREFIX}"/bin/termux-storage
+		"${PREFIX}"/bin/termux-packages
+		"${PREFIX}"/bin/termux-additions
 
-		"${BINARIES_DIRECTORY}"/termux-storage
-		"${BINARIES_DIRECTORY}"/termux-packages
-		"${BINARIES_DIRECTORY}"/termux-additions
-
-		console.file "${BINARIES_DIRECTORY}" termux-checkpoint-complete
+		console.file "${PREFIX}"/bin termux-checkpoint-complete
 	fi
 
 	# container
 
-	if [ ! -f "${BINARIES_DIRECTORY}"/container-checkpoint-complete ]
+	if [ ! -f "${PREFIX}"/bin/container-checkpoint-complete ]
 	then
-		"${BINARIES_DIRECTORY}"/container-image
-		"${BINARIES_DIRECTORY}"/container-system
+		"${PREFIX}"/bin/container-image
+		"${PREFIX}"/bin/container-system
 
-		container_command "${BINARIES_DIRECTORY}"/container-expand
-		container_command "${BINARIES_DIRECTORY}"/container-repositories
-		container_command "${BINARIES_DIRECTORY}"/container-packages
-		container_command "${BINARIES_DIRECTORY}"/container-user
+		container_command "${PREFIX}"/bin/container-expand
+		container_command "${PREFIX}"/bin/container-repositories
+		container_command "${PREFIX}"/bin/container-packages
+		container_command "${PREFIX}"/bin/container-user
 
-		console.file "${BINARIES_DIRECTORY}" container-checkpoint-complete
+		console.file "${PREFIX}"/bin container-checkpoint-complete
 	fi
 
-	console.file "${BINARIES_DIRECTORY}" dextop-checkpoint-complete
+	console.file "${PREFIX}"/bin dextop-checkpoint-complete
 fi

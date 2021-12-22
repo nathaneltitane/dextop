@@ -3,7 +3,6 @@
 # dependencies #
 
 . /data/data/com.termux/files/usr/bin/console
-. /data/data/com.termux/files/usr/bin/dextop
 
 # script #
 
@@ -14,39 +13,6 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 version="12-03-2021"
 
 # usage #
-
-while (($#))
-do
-	case "${1}" in
-		-h|--help)
-			echo
-			echo -e "Usage: ${script} [OPTION]"
-			echo
-			echo -e "Options:"
-			echo
-			echo -e "-h, --help \t Show help and usage information."
-			echo
-			echo -e "'${script}' [ Version ${version} ]"
-			echo
-
-			exit
-		;;
-
-		*)
-			echo
-			echo "Usage: ${script} [OPTION]"
-			echo
-			echo -e "${script}: Unknown option '${1}'"
-			echo -e "Type './${script} --help' for help and usage information."
-			echo
-
-			exit 1
-		;;
-		
-	esac
-
-	shift
-done
 
 # prompt #
 
@@ -69,12 +35,12 @@ add_environment () {
 
 	# container
 
-	[ -d "${CONTAINER_DIRECTORY}"/usr/local/sbin ]								&& PATH+="/usr/local/sbin:"
-	[ -d "${CONTAINER_DIRECTORY}"/usr/local/bin ]								&& PATH+="/usr/local/bin:"
-	[ -d "${CONTAINER_DIRECTORY}"/usr/sbin ]									&& PATH+="/usr/sbin:"
-	[ -d "${CONTAINER_DIRECTORY}"/usr/sbin ]									&& PATH+="/usr/bin:"
-	[ -d "${CONTAINER_DIRECTORY}"/sbin ]										&& PATH+="/sbin:"
-	[ -d "${CONTAINER_DIRECTORY}"/bin ]											&& PATH+="/bin:"
+	[ -d "${PREFIX}"/cnt/usr/local/sbin ]								&& PATH+="/usr/local/sbin:"
+	[ -d "${PREFIX}"/cnt/usr/local/bin ]								&& PATH+="/usr/local/bin:"
+	[ -d "${PREFIX}"/cnt/usr/sbin ]									&& PATH+="/usr/sbin:"
+	[ -d "${PREFIX}"/cnt/usr/sbin ]									&& PATH+="/usr/bin:"
+	[ -d "${PREFIX}"/cnt/sbin ]										&& PATH+="/sbin:"
+	[ -d "${PREFIX}"/cnt/bin ]											&& PATH+="/bin:"
 
 	# termux
 
@@ -88,7 +54,7 @@ add_environment () {
 
 	# set environment
 
-	echo "PATH=${PATH}"															> "${CONTAINER_DIRECTORY}"/etc/environment
+	echo "PATH=${PATH}"															> "${PREFIX}"/cnt/etc/environment
 }
 
 add_groups () {
@@ -127,8 +93,8 @@ add_groups () {
 
 		read group_number group_name <<< ${line}
 
-		[ -f "${CONTAINER_DIRECTORY}"/etc/group ]   && echo "${group_name}:x:${group_number}:" >> "${CONTAINER_DIRECTORY}"/etc/group
-		[ -f "${CONTAINER_DIRECTORY}"/etc/gshadow ] && echo "${group_name}:x:${group_number}:" >> "${CONTAINER_DIRECTORY}"/etc/gshadow
+		[ -f "${PREFIX}"/cnt/etc/group ]   && echo "${group_name}:x:${group_number}:" >> "${PREFIX}"/cnt/etc/group
+		[ -f "${PREFIX}"/cnt/etc/gshadow ] && echo "${group_name}:x:${group_number}:" >> "${PREFIX}"/cnt/etc/gshadow
 
 	done
 
@@ -142,42 +108,42 @@ add_network () {
 
 	# hostname
 
-	echo '${HOSTNAME}'															> "${CONTAINER_DIRECTORY}"/etc/hostname
+	echo '${HOSTNAME}'															> "${PREFIX}"/cnt/etc/hostname
 
 	# hosts
 
-	echo '# IPv4 #'																>  "${CONTAINER_DIRECTORY}"/etc/hosts
+	echo '# IPv4 #'																>  "${PREFIX}"/cnt/etc/hosts
 
-	echo '127.0.0.1	localhost.localdomain'										>> "${CONTAINER_DIRECTORY}"/etc/hosts
-	echo '127.0.0.1	localhost'													>> "${CONTAINER_DIRECTORY}"/etc/hosts
+	echo '127.0.0.1	localhost.localdomain'										>> "${PREFIX}"/cnt/etc/hosts
+	echo '127.0.0.1	localhost'													>> "${PREFIX}"/cnt/etc/hosts
 
-	echo '# IPv6 #'																>> "${CONTAINER_DIRECTORY}"/etc/hosts
+	echo '# IPv6 #'																>> "${PREFIX}"/cnt/etc/hosts
 
-	echo '::1			localhost.localdomain'									>> "${CONTAINER_DIRECTORY}"/etc/hosts
-	echo '::1			localhost'												>> "${CONTAINER_DIRECTORY}"/etc/hosts
-	echo '::1			ip6-localhost'											>> "${CONTAINER_DIRECTORY}"/etc/hosts
-	echo '::1			ip6-loopbak'											>> "${CONTAINER_DIRECTORY}"/etc/hosts
-	echo 'fe00::0		ip6-localnet'											>> "${CONTAINER_DIRECTORY}"/etc/hosts
-	echo 'fe00::0		ip6-mcastprefix'										>> "${CONTAINER_DIRECTORY}"/etc/hosts
-	echo 'ff02::1		ip6-allnodes'											>> "${CONTAINER_DIRECTORY}"/etc/hosts
-	echo 'ff02::2		ip6-allrouters'											>> "${CONTAINER_DIRECTORY}"/etc/hosts
-	echo 'ff02::3		ip6-allhosts'											>> "${CONTAINER_DIRECTORY}"/etc/hosts
+	echo '::1			localhost.localdomain'									>> "${PREFIX}"/cnt/etc/hosts
+	echo '::1			localhost'												>> "${PREFIX}"/cnt/etc/hosts
+	echo '::1			ip6-localhost'											>> "${PREFIX}"/cnt/etc/hosts
+	echo '::1			ip6-loopbak'											>> "${PREFIX}"/cnt/etc/hosts
+	echo 'fe00::0		ip6-localnet'											>> "${PREFIX}"/cnt/etc/hosts
+	echo 'fe00::0		ip6-mcastprefix'										>> "${PREFIX}"/cnt/etc/hosts
+	echo 'ff02::1		ip6-allnodes'											>> "${PREFIX}"/cnt/etc/hosts
+	echo 'ff02::2		ip6-allrouters'											>> "${PREFIX}"/cnt/etc/hosts
+	echo 'ff02::3		ip6-allhosts'											>> "${PREFIX}"/cnt/etc/hosts
 
 	# nameserver
 
-	echo 'nameserver 1.1.1.1'													>  "${CONTAINER_DIRECTORY}"/etc/resolv.conf
-	echo 'nameserver 1.0.0.1'													>> "${CONTAINER_DIRECTORY}"/etc/resolv.conf
+	echo 'nameserver 1.1.1.1'													>  "${PREFIX}"/cnt/etc/resolv.conf
+	echo 'nameserver 1.0.0.1'													>> "${PREFIX}"/cnt/etc/resolv.conf
 }
 
 add_preload () {
 	# generate libgcc/libc location and add to preload dynamic linker
 
-	preload_location=$(find "${CONTAINER_DIRECTORY}" -type f -iname libgcc_s.so.1)
-	preload_library="${preload_path/$CONTAINER_DIRECTORY/}"
+	preload_location=$(find "${PREFIX}"/cnt -type f -iname libgcc_s.so.1)
+	preload_library="${preload_path/$"${PREFIX}"/cnt/}"
 
 	# set preload
 
-	echo "${preload_library}"													> "${CONTAINER_DIRECTORY}"/etc/ld.so.preload
+	echo "${preload_library}"													> "${PREFIX}"/cnt/etc/ld.so.preload
 }
 
 # generate environment variables
