@@ -179,12 +179,12 @@ install_list=()
 
 # none #
 
-if [[ "${desktop_option}" = "none" ]]
+if [[ "${DESKTOP_OPTION}" = "none" ]]
 then
 	desktop_environment_list+=(
 	)
 
-	if [[ "${install_option}" = "full" ]]
+	if [[ "${INSTALL_OPTION}" = "full" ]]
 	then
 		desktop_environment_list+=(
 		)
@@ -193,13 +193,13 @@ fi
 
 # i3wm #
 
-if [[ "${desktop_option}" = "i3wm" ]]
+if [[ "${DESKTOP_OPTION}" = "i3wm" ]]
 then
 	desktop_environment_list+=(
 		${i3wm_list[@]}
 	)
 
-	if [[ "${install_option}" = "full" ]]
+	if [[ "${INSTALL_OPTION}" = "full" ]]
 	then
 		desktop_environment_list+=(
 			${i3wm_fonts_list[@]}
@@ -211,14 +211,14 @@ fi
 
 # xfce
 
-if [[ "${desktop_option}" = "xfce" ]]
+if [[ "${DESKTOP_OPTION}" = "xfce" ]]
 then
 	desktop_environment_list+=(
 		${xfce_list[@]}
 
 	)
 
-	if [[ "${install_option}" = "full" ]]
+	if [[ "${INSTALL_OPTION}" = "full" ]]
 	then
 		desktop_environment_list+=(
 			${xfce_fonts_list[@]}

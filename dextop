@@ -18,27 +18,27 @@ while (($#))
 do
 	case "${1}" in
 		-i|--i3wm)
-			desktop_option="i3wm"
+			DESKTOP_OPTION="i3wm"
 		;;
 
 		-x|--xfce)
-			desktop_option="xfce"
+			DESKTOP_OPTION="xfce"
 		;;
 		
 		-n|--none)
-			desktop_option="none"
+			DESKTOP_OPTION="none"
 		;;
 		
 		-b|--base)
-			install_option="base"
+			INSTALL_OPTION="base"
 		;;
 
 		-f|--full)
-			install_option="full"
+			INSTALL_OPTION="full"
 		;;
 
 		-p|--update)
-			install_option="update"
+			INSTALL_OPTION="update"
 		;;
 
 		-h|--help)
@@ -101,7 +101,7 @@ echo
 
 # defaults #
 
-[ -z "${desktop_option}" ] && desktop_option="i3wm"
+[ -z "${DESKTOP_OPTION}" ] && DESKTOP_OPTION="i3wm"
 
 # functions #
 
@@ -121,7 +121,7 @@ container_command () {
 	proot																		\
 	--kill-on-exit																\
 	--link2symlink																\
-	--rootfs="${CONTAINER_DIRECTORY}"												\
+	--rootfs="${CONTAINER_DIRECTORY}"											\
 	--change-id=0:0																\
 	--pwd=/root																	\
 	--bind=/apex																\
@@ -162,8 +162,8 @@ echo 'export CONTAINER_DIRECTORY="${MAIN_DIRECTORY}"/cnt'						>> "${PREFIX}"/bi
 echo 'export IMAGE_DIRECTORY="${MAIN_DIRECTORY}"/img'							>> "${PREFIX}"/bin/dextop
 echo 'export MOUNT_DIRECTORY="${MAIN_DIRECTORY}"/mnt'							>> "${PREFIX}"/bin/dextop
 
-echo "export desktop_option=${desktop_option}"									>> "${PREFIX}"/bin/dextop
-echo "export install_option=${install_option}"									>> "${PREFIX}"/bin/dextop
+echo "export DESKTOP_OPTION=${desktop_option}"									>> "${PREFIX}"/bin/dextop
+echo "export INSTALL_OPTION=${install_option}"									>> "${PREFIX}"/bin/dextop
 
 # update variables
 
@@ -230,7 +230,7 @@ then
 
 	if [ ! -f "${BINARIES_DIRECTORY}"/termux-checkpoint-complete ]
 	then
-		if [ "${install_option}" = "update" ]
+		if [ "${INSTALL_OPTION}" = "update" ]
 		then
 			"${BINARIES_DIRECTORY}"/termux-update
 		fi

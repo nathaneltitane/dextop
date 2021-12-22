@@ -18,39 +18,19 @@ version="12-03-2021"
 while (($#))
 do
 	case "${1}" in
-		-r|--root)
-			USERNAME="root"
-
-			login_option="root"
-
-			shift
-		;;
-			
 		-u|--username)
-			USERNAME="${2}"
-
-			login_option="user"
-
-			shift
-		;;
-
-		-a|--application)
-			APPLICATION="${2}"
-
-			login_option="application"
+			user_name="${2}"
 
 			shift
 		;;
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} | [USERNAME] | [APPLICATION] | [OPTION]"
+			echo -e "Usage: ${script} | [USER] | [OPTION]"
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-r, --root \t\t Specify 'root' as user for session login."
 			echo -e "-u, --username \t Specify 'user' for session login."
-			echo -e "-a, --application \t Specify application to start on session login."
 			echo
 			echo -e "-h, --help \t Show help and usage information."
 			echo
@@ -69,7 +49,7 @@ do
 
 		*)
 			echo
-			echo -e "Usage: ${script} | [USERNAME] | [APPLICATION] | [OPTION]"
+			echo -e "Usage: ${script} | [USER] | [OPTION]"
 			echo
 			echo -e "${script}: Unknown option '${1}'"
 			echo -e "Type './${script} --help' for help and usage information."
@@ -114,62 +94,54 @@ do
 
 	# reset IFS
 
-	IFS=' '
+	IFS=''
 
 	# messages:
 	# verify login options and parameters
-	
-	if [[ -z "${USERNAME}" ]]
+
+	if [[ -z "${user_name}" ]]
 	then
-		USERNAME="root"
-		
-		console.wrn "No user name - Defaulting [ '${USERNAME}' ]."
+		user_name="root"
+
+		console.wrn "No user name - Defaulting" "[ '${user_name}' ]"
 		echo
 
-		# break out of loop - empty "${USERNAME}" - default to 'root'
+		# break out of loop - empty "${user_name}" - default to 'root'
 
 		break
 	fi
 
-	if [[ "${login_option}" == "root" ]]
+	if [[ "${user_name}" == "${USER}" ]]
 	then
-		console.wrn "Logging in [ '${USERNAME}' ]."
+		user_name="${USER}"
+
+		console.scs "Valid user name" "[ '${user_name}' ]"
 		echo
 
-		# break out of loop - login as 'root'
-
-		break
-	fi
-
-	if [[ "${USERNAME}" == "${USER}" ]]
-	then
-		console.scs "Valid user name [ '${USERNAME}' ]."
-		echo
-
-		# break out of loop - matching "${USERNAME}"
+		# break out of loop - matching "${user_name}"
 
 		break
 	fi
 
 	if [[ "${entry}" == "${last_entry}" ]]
 	then
-		USERNAME="root"
-	
-		console.err "Invalid user name - Defaulting [ '${USERNAME}' ]."
+		user_name="root"
+
+		console.err "Invalid user name - Defaulting" "[ '${user_name}' ]"
 		echo
 	fi
 
 	# specify login defaults
-	
-	if [[ -z "${USERNAME}" ]] ||  [[ "${login_option}" == "root" ]] || [[ "${entry}" == "${last_entry}" ]]
+
+	if [[ -z "${user_name}" ]] || [[ "${entry}" == "${last_entry}" ]]
 	then
 		USER="root"
 		USER_ID=0
 		GROUP_ID=0
-		FULL_NAME="root"
+		FULL_NAME="System Administrator"
 		HOME="/root"
 		SESSION_NAME="CONSOLE"
-		SHELL="/usr/bin/bash"
+		SHELL="/bin/bash"
 	fi
 
 done < "${CONTAINER_DIRECTORY}"/etc/passwd
@@ -210,48 +182,47 @@ PATH="${PATH}"
 
 COLORTERM="truecolor"
 DISPLAY=":1"
+DISPLAY_NUMBER="${DISPLAY/:/}"
 EDITOR="nano"
 HOME="/home/${USER}"
 LANG="C.UTF-8"
 LOCALHOST="127.0.0.1"
 PAGER="less"
-SHELL="/usr/bin/bash"
-TMPDIR="/tmp"
+SHELL="/bin/bash"
 
 # base
 
-[ "${desktop_option}" = "none" ]												&& SESSION_NAME="CONSOLE"
+[ "${DESKTOP_OPTION}" = "none" ]												&& SESSION_NAME="CONSOLE"
 
 # i3 #
 
 [ -f "${CONTAINER_DIRECTORY}"/usr/bin/i3 ]										&& SESSION_NAME="I3WM"
 
-[ "${desktop_option}" = "i3wm" ]												&& SESSION="i3wm"
-[ "${desktop_option}" = "i3wm" ]												&& SESSION_LOADER="i3"
-
-[ "${desktop_option}" = "i3wm" ]												&& BROWSER="surf"
-[ "${desktop_option}" = "i3wm" ]												&& EMULATOR="st"
-[ "${desktop_option}" = "i3wm" ]												&& RUNNER="dmenu"
-[ "${desktop_option}" = "i3wm" ]												&& VISUAL="nano"
+[ -f "${CONTAINER_DIRECTORY}"/usr/bin/i3 ]										&& SESSION="i3wm"
+[ -f "${CONTAINER_DIRECTORY}"/usr/bin/i3 ]										&& SESSION_LOADER="i3"
+[ -f "${CONTAINER_DIRECTORY}"/usr/bin/i3 ]										&& BROWSER="surf"
+[ -f "${CONTAINER_DIRECTORY}"/usr/bin/i3 ]										&& EMULATOR="st"
+[ -f "${CONTAINER_DIRECTORY}"/usr/bin/i3 ]										&& RUNNER="dmenu"
+[ -f "${CONTAINER_DIRECTORY}"/usr/bin/i3 ]										&& VISUAL="nano"
 
 # xfce #
 
 [ -f "${CONTAINER_DIRECTORY}"/usr/bin/xfwm4 ]									&& SESSION_NAME="XFCE"
 
-[ "${desktop_option}" = "xfce" ]												&& SESSION="xfce"
-[ "${desktop_option}" = "xfce" ]												&& SESSION_LOADER="xfce4-session"
-[ "${desktop_option}" = "xfce" ]												&& SETTINGS_MANAGER="xfsettingsd"
-[ "${desktop_option}" = "xfce" ]												&& WINDOW_MANAGER="xfwm4"
+[ -f "${CONTAINER_DIRECTORY}"/usr/bin/xfwm4 ]									&& SESSION="xfce"
+[ -f "${CONTAINER_DIRECTORY}"/usr/bin/xfwm4 ]									&& SESSION_LOADER="xfce4-session"
+[ -f "${CONTAINER_DIRECTORY}"/usr/bin/xfwm4 ]									&& SETTINGS_MANAGER="xfsettingsd"
+[ -f "${CONTAINER_DIRECTORY}"/usr/bin/xfwm4 ]									&& WINDOW_MANAGER="xfwm4"
 
-[ "${desktop_option}" = "xfce" ]												&& BROWSER="midori"
-[ "${desktop_option}" = "xfce" ]												&& EMULATOR="xfce4-terminal"
-[ "${desktop_option}" = "xfce" ]												&& RUNNER="xfce4-appfinder"
-[ "${desktop_option}" = "xfce" ]												&& VISUAL="mousepad"
+[ -f "${CONTAINER_DIRECTORY}"/usr/bin/xfwm4 ]									&& BROWSER="midori"
+[ -f "${CONTAINER_DIRECTORY}"/usr/bin/xfwm4 ]									&& EMULATOR="xfce4-terminal"
+[ -f "${CONTAINER_DIRECTORY}"/usr/bin/xfwm4 ]									&& RUNNER="xfce4-appfinder"
+[ -f "${CONTAINER_DIRECTORY}"/usr/bin/xfwm4 ]									&& VISUAL="mousepad"
 
 # defaults #
 
 [ -z "${MOUNT_DIRECTORY}" ]														&& MOUNT_DIRECTORY="${PREFIX%/*}/mnt"
-[ -z "${CONTAINER_DIRECTORY}" ]													&& CONTAINER_DIRECTORY="${PREFIX%/*}/img"
+[ -z "${CONTAINER_DIRECTORY}" ]													&& CONTAINER_DIRECTORY="${PREFIX%/*}/cnt"
 
 [ -z "${BROWSER}" ]																&& BROWSER="${BROWSER}"
 [ -z "${COLORTERM}" ]															&& COLORTERM="${COLORTERM}"
@@ -260,34 +231,7 @@ TMPDIR="/tmp"
 [ -z "${PAGER}" ]																&& PAGER="${PAGER}"
 [ -z "${RUNNER}" ]																&& RUNNER="${RUNNER}"
 [ -z "${SHELL}" ]																&& SHELL="${SHELL}"
-[ -z "${TERMINAL}" ]															&& TERMINAL="${TERM}"
 [ -z "${VISUAL}" ]																&& VISUAL="${VISUAL}"
-
-# verify application argument
-
-if [ ! -z "${APPLICATION}" ]
-then
-	console.scs "Valid application name" "[ ${APPLICATION} ]"
-	echo
-	
-	if [ ! -f "${CONTAINER_DIRECTORY}"/usr/bin/"${APPLICATION}" ]
-	then
-		console.err "Invalid application name" "[ ${APPLICATION} ]"
-		echo
-		
-		unset "${APPLICATION}"
-	fi
-
-	console.fwd "Starting application" "[ ${SESSION_NAME} // ${USER} // ${APPLICATION} ]"
-	echo
-else
-	console.fwd "Starting session" "[ ${SESSION_NAME} // ${USER} ]"
-	echo
-fi
-
-# clear #
-
-console.clear
 
 # assume termux-exec is present - unset LD_PRELOAD
 
@@ -348,7 +292,6 @@ session_command+=" SESSION_NAME=${SESSION_NAME}"
 session_command+=" SESSION_LOADER=${SESSION_LOADER}"
 session_command+=" SETTINGS_MANAGER=${SETTINGS_MANAGER}"
 session_command+=" WINDOW_MANAGER=${WINDOW_MANAGER}"
-session_command+=" APPLICATION=${APPLICATION}"
 session_command+=" BROWSER=${BROWSER}"
 session_command+=" EDITOR=${EDITOR}"
 session_command+=" PAGER=${PAGER}"
@@ -361,7 +304,7 @@ session_command+=" LANG=${LANG}"
 session_command+=" LOCALHOST=${LOCALHOST}"
 session_command+=" PATH=${PATH}"
 session_command+=" SHELL=${SHELL}"
-session_command+=" TERM=${TERMINAL}"
+session_command+=" TERM=${TERM}"
 session_command+=" TMPDIR=${TMPDIR}"
 session_command+=" USER=${USER}"
 session_command+=" XDG_RUNTIME_DIR=/run/user/${USER_ID}"
@@ -373,6 +316,9 @@ session_command+=" XDG_CONFIG_DIRS=/etc/xdg"
 session_command+=" XAUTHORITY=${XDG_RUNTIME_DIR}/.Xauthority"
 session_command+=" ${SHELL} --login"
 
-# execute 'proot'
+# load container
+
+console.fwd "Starting session" "[ ${SESSION_NAME} // ${USER} ]"
+echo
 
 exec ${session_command}

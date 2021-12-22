@@ -275,20 +275,20 @@ image_unpack () {
 	console.inf "Extracting new deployment."
 	echo
 
-	cd "${IMAGE_DIRECTORY}" || exit 1
+	cd "${CONTAINER_DIRECTORY}" || exit 1
 
-	proot													\
-		--link2symlink										\
-			tar 											\
-				--extract									\
-				--delay-directory-restore					\
-				--preserve-permissions						\
-					--file="${@}"							\
-						--exclude='boot'					\
-						--exclude='dev'						\
-						--exclude='proc'					\
-						--exclude='sys'						\
-						--exclude='system' 2> /dev/null		|| :
+	proot															\
+		--link2symlink												\
+			tar 													\
+				--extract											\
+				--delay-directory-restore							\
+				--preserve-permissions								\
+					--file="${IMAGE_DIRECTORY}/${image_archive}"	\
+						--exclude='boot'							\
+						--exclude='dev'								\
+						--exclude='proc'							\
+						--exclude='sys'								\
+						--exclude='system' 2> /dev/null
 }
 
 # run setup
@@ -311,4 +311,4 @@ image_download
 
 # unpack image into container
 
-image_unpack "${ARCHIVE_DIRECTORY}/${image_archive}"
+image_unpack

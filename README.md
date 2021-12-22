@@ -111,7 +111,7 @@ Edit the  'user_list' array in the 'container-packages' file prior to starting t
 
 To access your newly generated container:
 
-`container-session -u <username> | -a <application> | <option>'` to start your session, run a specific application or setup session options on load.
+`container-session -u <username> | <option>'` to start your session or setup session options on load.
 
 ### The fun begins:
 
