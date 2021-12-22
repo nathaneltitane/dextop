@@ -136,10 +136,9 @@ add_network () {
 }
 
 add_preload () {
-	# generate libgcc/libc location and add to preload dynamic linker
+	# generate libgcc/libc location and add to dynamic linker for preload
 
-	preload_location=$(find "${PREFIX}"/cnt -type f -iname libgcc_s.so.1)
-	preload_library="${preload_path/$"${PREFIX}"/cnt/}"
+	preload_library=$(find "${PREFIX}"/cnt -type f -iname libgcc_s.so.1)
 
 	# set preload
 
