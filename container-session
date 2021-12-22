@@ -10,7 +10,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version #
 
-version="12-22-2021"
+version="12-03-2021"
 
 # usage #
 
@@ -25,13 +25,14 @@ do
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} | [USER] | [OPTION]"
+			echo -e "Usage: ${script} | [USERNAME]"
 			echo
 			echo -e "Options:"
 			echo
+			echo -e "-r, --root \t\t Specify 'root' as user for session login."
 			echo -e "-u, --username \t Specify 'user' for session login."
 			echo
-			echo -e "-h, --help     \t Show help and usage information."
+			echo -e "-h, --help \t Show help and usage information."
 			echo
 			echo -e "'${script}' [ Version ${version} ]"
 			echo
@@ -39,16 +40,16 @@ do
 			exit
 		;;
 
-		"")
-			# handle empty argument:
-			# use default values specified in script
+			"")
+				# handle empty argument:
+				# use default values specified in script
 
-			:
-		;;
+				:
+			;;
 
 		*)
 			echo
-			echo -e "Usage: ${script} | [USER] | [OPTION]"
+			echo -e "Usage: ${script} | [USERNAME]"
 			echo
 			echo -e "${script}: Unknown option '${1}'"
 			echo -e "Type './${script} --help' for help and usage information."
@@ -93,11 +94,11 @@ do
 
 	# reset IFS
 
-	IFS=''
+	IFS=' '
 
 	# messages:
 	# verify login options and parameters
-
+	
 	if [[ -z "${user_name}" ]]
 	then
 		user_name="root"
@@ -137,9 +138,9 @@ do
 		USER="root"
 		USER_ID=0
 		GROUP_ID=0
-		FULL_NAME="System Administrator"
+		FULL_NAME="root"
 		HOME="/root"
-		SESSION_NAME="CONSOLE"
+		session_name="CONSOLE"
 		SHELL="/bin/bash"
 	fi
 
@@ -181,31 +182,22 @@ PATH="${PATH}"
 
 COLORTERM="truecolor"
 DISPLAY=":1"
-DISPLAY_NUMBER="${DISPLAY/:/}"
 LANG="C.UTF-8"
 LOCALHOST="127.0.0.1"
 SHELL="/bin/bash"
 
 # i3 #
 
-[ -f "${PREFIX}"/cnt/usr/bin/i3 ]												&& SESSION_NAME="I3WM"
-
-[ -f "${PREFIX}"/cnt/usr/bin/i3 ]												&& SESSION="i3wm"
-[ -f "${PREFIX}"/cnt/usr/bin/i3 ]												&& SESSION_LOADER="i3"
-[ -f "${PREFIX}"/cnt/usr/bin/i3 ]												&& SETTINGS_MANAGER=""
-[ -f "${PREFIX}"/cnt/usr/bin/i3 ]												&& WINDOW_MANAGER="i3"
+[ -f "${PREFIX}"/cnt/usr/bin/i3 ] && session_name="I3WM" || session_name="CONSOLE"
 
 # xfce #
 
-[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]											&& SESSION_NAME="XFCE"
-
-[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]											&& SESSION="xfce"
-[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]											&& SESSION_LOADER="xfce4-session"
-[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]											&& SETTINGS_MANAGER="xfsettingsd"
-[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ]											&& WINDOW_MANAGER="xfwm4"
-
+[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ] && session_name="XFCE" || session_name="CONSOLE"
 
 # defaults #
+
+console.fwd "Starting session" "[ ${session_name} // ${user_name} ]"
+echo
 
 # assume termux-exec is present - unset LD_PRELOAD
 
@@ -213,7 +205,7 @@ unset LD_PRELOAD
 
 # setup 'proot' command arguments
 
-unset "${session_command}"
+unset session_command
 
 session_command+="proot"
 session_command+=" --kill-on-exit"
@@ -221,22 +213,22 @@ session_command+=" --link2symlink"
 session_command+=" --rootfs=${PREFIX}/cnt"
 session_command+=" --change-id=${USER_ID}:${GROUP_ID}"
 session_command+=" --pwd=${HOME}"
-[ -d "/apex" ]                       && session_command+=" --bind=/apex"
-[ -d "/data" ]                       && session_command+=" --bind=/data"
-[ -d "/dev" ]                        && session_command+=" --bind=/dev"
+[ -d "/apex" ]                       && session_command+=" --bind=/apex:/apex"
+[ -d "/data" ]                       && session_command+=" --bind=/data:/data"
+[ -d "/dev" ]                        && session_command+=" --bind=/dev:/dev"
 [ -e "/dev/urandom" ]                && session_command+=" --bind=/dev/urandom:/dev/random"
 [ -e "/linkerconfig/ld.config.txt" ] && session_command+=" --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt"
 [ -f "/plat_property_contexts" ]     && session_command+=" --bind=/plat_property_contexts:/plat_property_contexts"
 [ -f "/property_contexts" ]          && session_command+=" --bind=/property_contexts:/property_contexts"
-[ -d "/proc" ]                       && session_command+=" --bind=/proc"
+[ -d "/proc" ]                       && session_command+=" --bind=/proc:/proc"
 [ -d "/proc/self/fd" ]               && session_command+=" --bind=/proc/self/fd:/dev/fd"
 [ -e "/proc/self/fd/0" ]             && session_command+=" --bind=/proc/self/fd/0:/dev/stdin"
 [ -e "/proc/self/fd/1" ]             && session_command+=" --bind=/proc/self/fd/1:/dev/stdout"
 [ -e "/proc/self/fd/2" ]             && session_command+=" --bind=/proc/self/fd/2:/dev/stderr"
-[ -d "/storage" ]                    && session_command+=" --bind=/storage"
-[ -d "/sys" ]                        && session_command+=" --bind=/sys"
-[ -d "/system" ]                     && session_command+=" --bind=/system"
-[ -d "/vendor" ]                     && session_command+=" --bind=/vendor"
+[ -d "/storage" ]                    && session_command+=" --bind=/storage:/storage"
+[ -d "/sys" ]                        && session_command+=" --bind=/sys:/sys"
+[ -d "/system" ]                     && session_command+=" --bind=/system:/system"
+[ -d "/vendor" ]                     && session_command+=" --bind=/vendor:/vendor"
 [ -d "${PREFIX%/*}"/home ]           && session_command+=" --bind=${PREFIX%/*}/home:/home/${USER}"
 [ -d "${PREFIX}"/storage/external ]  && session_command+=" --bind=${PREFIX}/storage/external:/media/external"
 [ -d "${PREFIX}"/storage/internal ]  && session_command+=" --bind=${PREFIX}/storage/internal:/media/internal"
@@ -256,11 +248,6 @@ session_command+=" ANDROID_TZDATA_ROOT=${ANDROID_TZDATA_ROOT}"
 session_command+=" BOOTCLASSPATH=${BOOTCLASSPATH}"
 session_command+=" DEX2OATBOOTCLASSPATH=${DEX2OATBOOTCLASSPATH}"
 session_command+=" PREFIX=${PREFIX}"
-session_command+=" SESSION=${SESSION}"
-session_command+=" SESSION_NAME=${SESSION_NAME}"
-session_command+=" SESSION_LOADER=${SESSION_LOADER}"
-session_command+=" SETTINGS_MANAGER=${SETTINGS_MANAGER}"
-session_command+=" WINDOW_MANAGER=${WINDOW_MANAGER}"
 session_command+=" COLORTERM=${COLORTERM}"
 session_command+=" DISPLAY=${DISPLAY}"
 session_command+=" HOME=${HOME}"
@@ -281,9 +268,6 @@ session_command+=" XDG_DATA_DIRS=/usr/local/share:/usr/share"
 session_command+=" XAUTHORITY=${XDG_RUNTIME_DIR}/Xauthority"
 session_command+=" ${SHELL} --login"
 
-# load container
-
-console.fwd "Starting session" "[ ${SESSION_NAME} // ${USER} ]"
-echo
+# execute 'proot'
 
 exec ${session_command}

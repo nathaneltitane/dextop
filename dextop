@@ -85,6 +85,8 @@ export option="${option}"
 
 # defaults #
 
+[ -z "${option}" ] && option="i3wm" && export option="${option}"
+
 # functions #
 
 container_command () {
