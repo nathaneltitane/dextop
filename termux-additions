@@ -124,7 +124,7 @@ files_list=()
 
 # leocad #
 
-files_list+=()
+files_list+=(
 	leocad-build
 	leocad-configuration
 	leocad-download
