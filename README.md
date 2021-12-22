@@ -1,16 +1,17 @@
 # Linux on Android -  Termux // Dextop // Ubuntu
 
-Version: 12-03-2021
+Version: 12-22-2021
  
 ![termux dextop](https://github.com/nathaneltitane/dextop/blob/master/dextop.png?raw=true)
 
-Dextop turns your modern Android device into a full workstation in a matter of minutes without all the hassle of technical know-how or having to dig through the internet to get it to work: Dextop is easy and user friendly.
+Dextop turns your modern Android device into a full workstation in a matter of minutes!
+No hassle or deep technical know-how required: Dextop is easy and user friendly.
 
 Comparison in between Dextop and other projects:
 
 - It provides you with a selection of the Ubuntu distribution base images: stable, popular and user-friendly knowledge bases.
 - It expands the installed base image to run just like a normal PC installation.
-- It generates a user profile for secure access and a home directory for you to work in.
+- It generates an actual user profile and prepares a functional home directory for you to work in, esily and securely.
 - It installs all the necessary applications and utilities to provide you with the right experience.
 - It sets up your internal (and external, when available) storage media for flexible, system-wide access.
 - It handles all the technical intricacies related to a container (chroot/proot) installation so that you do not have to bother with them and get right to work.
@@ -18,24 +19,27 @@ Comparison in between Dextop and other projects:
 - It uses [console](https://github.com/nathaneltitane/console), a custom shell parser to handle the setup, colorize prompts and provide the user with an elegant, comprehensive and user-friendly experience.
 
 Dextop is very quick and efficient:
-Choose between i3WM or XFCE4 to get your work done or keep the base install for command line interface and programming workflows.
+Choose between a lean i3WM or complete XFCE4 setup to get your work done, or keep the base install for command line interface and programming workflows.
 
 ### Note:
 
-Compositing should be disabled under XFCE4 to optimize resource usage and prevent display tearing and other glitches.
+Compositing should be disabled with XFCE4 to optimize resource usage and prevent display tearing and other glitches.
 Turning compositing off allows for the best possible performance and experience in accordance to current Android system and security limitations:
 This is required due to the Android user space runtime policy and limited hardware access: there is no graphics hardware acceleration available - the container graphics are emulated and run using LLVM.
 
 ### Power users be warned:
 
-- Dextop does not install or configure sound output or advanced mail services!
 - Dextop does not root your device!
 - Dextop does not load any services or backends!
-- Dextop only loads applications as needed to keep a minimal footprint!
+- Dextop does not install or configure sound output or advanced mail services!
+
+Dextop only loads applications as needed to keep a minimal footprint!
 
 Dextop is made, tested and optimized to run in tandem with Samsung's Dex: music, mail and web browsing should preferably be taken care of using native Android applications that are readily installed and configured on your device.
 
-Services backend and other advanced features that require access to restricted core system directories will fail: you must root your device to remove those limitations and gain access to all system directories.
+Services, hardware probes and other advanced features that require access to restricted core system directories will not function: you must root your device to remove those limitations and gain access to all system directories.
+
+Dextop links the modified utilities that have been patched under Termux for some limited access to whatever the Android user space runtime policy permits (htop, kill, pgrep, pkill, ps, top).
 
 ### Hardware requirements:
 
@@ -47,6 +51,8 @@ Services backend and other advanced features that require access to restricted c
 - Internet connectivity (wifi or other: for setup, updates and additional package downloads)
 
 ### Software requirements:
+
+Install the following:
 
 **Termux application downloads are to be made via F-Droid:**
 **Google Play Store updates are deprecated since November 2020**
@@ -62,7 +68,7 @@ Services backend and other advanced features that require access to restricted c
 
 Once the Android applications are installed on your device, open Termux and paste or type:
 
-`curl -sL run.dxtp.app > dextop && bash dextop | <option>``
+`curl -s -L run.dxtp.app > dextop && bash dextop``
 
 
 Container install options are:
@@ -76,28 +82,27 @@ Container install options are:
 
 The 'none' option is great for users who would like to experiment or setup their own window manager/desktop environment, utilities and preferences.
 
-The 'update' option runs a Termux package check and lets you update both Termux (com.termux) and Termux API (com.termux.api) via direct download from F-Droid when available.
-
 ### Process summary:
 
 **Be attentive!**
 
 Dextop now automatically detects and processes any external media mounts and adds them to your container.
 
+** User information and distribution preferences are captured throughout the setup process to set up the container's user profile, home directory and other preferences.**
+
 **User input is still required to give Termux storage access permissions and this can only be done through user interaction. There are no workarounds.**
 
-You can press 'Allow' any time during the setup to grant this permission.
+You should press 'Allow' when prompted during the setup to grant this permission.
 
-User information and distribution preferences are captured to set up the container's user profiles and home directories:
-The rest of the setup is fully automated and should run its course until the container is ready for you to use.
+Most of the setup process is fully automated and should run its course until the container is ready for you to use.
 
 ### Customization:
 
-Edit the  'user_list' array in the 'container-packages' file prior to starting the setup to customize your list of installed applications, libraries and utilities.
+Edit the  'user_list' array in the 'container-packages' script prior to starting the setup to customize the list of installed applications, libraries and utilities.
 
 **You can modify any of the other scripts AT YOUR OWN RISK!**
 **Any modification of the Dextop setup routine scripts implies you are fully aware of potential breakage and the consequences of doing so:**
-**No bug report that stems from such action will be acknowledged and closed immediately!**
+**No bug report that stems from such action will be acknowledged and will be closed immediately!**
 
 ### Usage:
 
