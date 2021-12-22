@@ -69,26 +69,26 @@ add_environment () {
 
 	# container
 
-	[ -d "${ROOT_DIRECTORY}"/usr/local/sbin ]										&& PATH+="/usr/local/sbin:"
-	[ -d "${ROOT_DIRECTORY}"/usr/local/bin ]										&& PATH+="/usr/local/bin:"
-	[ -d "${ROOT_DIRECTORY}"/usr/sbin ]												&& PATH+="/usr/sbin:"
-	[ -d "${ROOT_DIRECTORY}"/usr/sbin ]												&& PATH+="/usr/bin:"
-	[ -d "${ROOT_DIRECTORY}"/sbin ]													&& PATH+="/sbin:"
-	[ -d "${ROOT_DIRECTORY}"/bin ]													&& PATH+="/bin:"
+	[ -d "${CONTAINER_DIRECTORY}"/usr/local/sbin ]								&& PATH+="/usr/local/sbin:"
+	[ -d "${CONTAINER_DIRECTORY}"/usr/local/bin ]								&& PATH+="/usr/local/bin:"
+	[ -d "${CONTAINER_DIRECTORY}"/usr/sbin ]									&& PATH+="/usr/sbin:"
+	[ -d "${CONTAINER_DIRECTORY}"/usr/sbin ]									&& PATH+="/usr/bin:"
+	[ -d "${CONTAINER_DIRECTORY}"/sbin ]										&& PATH+="/sbin:"
+	[ -d "${CONTAINER_DIRECTORY}"/bin ]											&& PATH+="/bin:"
 
 	# termux
 
-	[ -d "${PREFIX}"/sbin ]															&& PATH+="${PREFIX}/sbin:"
-	[ -d "${PREFIX}"/bin ]															&& PATH+="${PREFIX}/bin:"
+	[ -d "${PREFIX}"/sbin ]														&& PATH+="${PREFIX}/sbin:"
+	[ -d "${PREFIX}"/bin ]														&& PATH+="${PREFIX}/bin:"
 
 	# android
 
-	[ -d /system/sbin ]																&& PATH+="/system/sbin:"
-	[ -d /system/bin ]																&& PATH+="/system/bin:"
+	[ -d /system/sbin ]															&& PATH+="/system/sbin:"
+	[ -d /system/bin ]															&& PATH+="/system/bin:"
 
 	# set environment
 
-	echo "PATH=${PATH}"																> "${ROOT_DIRECTORY}"/etc/environment
+	echo "PATH=${PATH}"															> "${CONTAINER_DIRECTORY}"/etc/environment
 }
 
 add_groups () {
@@ -127,8 +127,8 @@ add_groups () {
 
 		read group_number group_name <<< ${line}
 
-		[ -f "${ROOT_DIRECTORY}"/etc/group ]   && echo "${group_name}:x:${group_number}:" >> "${ROOT_DIRECTORY}"/etc/group
-		[ -f "${ROOT_DIRECTORY}"/etc/gshadow ] && echo "${group_name}:x:${group_number}:" >> "${ROOT_DIRECTORY}"/etc/gshadow
+		[ -f "${CONTAINER_DIRECTORY}"/etc/group ]   && echo "${group_name}:x:${group_number}:" >> "${CONTAINER_DIRECTORY}"/etc/group
+		[ -f "${CONTAINER_DIRECTORY}"/etc/gshadow ] && echo "${group_name}:x:${group_number}:" >> "${CONTAINER_DIRECTORY}"/etc/gshadow
 
 	done
 
@@ -142,45 +142,56 @@ add_network () {
 
 	# hostname
 
-	echo '${HOSTNAME}'															> "${ROOT_DIRECTORY}"/etc/hostname
+	echo '${HOSTNAME}'															> "${CONTAINER_DIRECTORY}"/etc/hostname
 
 	# hosts
 
-	echo '# IPv4 #'																>  "${ROOT_DIRECTORY}"/etc/hosts
+	echo '# IPv4 #'																>  "${CONTAINER_DIRECTORY}"/etc/hosts
 
-	echo '127.0.0.1	localhost.localdomain'										>> "${ROOT_DIRECTORY}"/etc/hosts
-	echo '127.0.0.1	localhost'													>> "${ROOT_DIRECTORY}"/etc/hosts
+	echo '127.0.0.1	localhost.localdomain'										>> "${CONTAINER_DIRECTORY}"/etc/hosts
+	echo '127.0.0.1	localhost'													>> "${CONTAINER_DIRECTORY}"/etc/hosts
 
-	echo '# IPv6 #'																>> "${ROOT_DIRECTORY}"/etc/hosts
+	echo '# IPv6 #'																>> "${CONTAINER_DIRECTORY}"/etc/hosts
 
-	echo '::1			localhost.localdomain'									>> "${ROOT_DIRECTORY}"/etc/hosts
-	echo '::1			localhost'												>> "${ROOT_DIRECTORY}"/etc/hosts
-	echo '::1			ip6-localhost'											>> "${ROOT_DIRECTORY}"/etc/hosts
-	echo '::1			ip6-loopbak'											>> "${ROOT_DIRECTORY}"/etc/hosts
-	echo 'fe00::0		ip6-localnet'											>> "${ROOT_DIRECTORY}"/etc/hosts
-	echo 'fe00::0		ip6-mcastprefix'										>> "${ROOT_DIRECTORY}"/etc/hosts
-	echo 'ff02::1		ip6-allnodes'											>> "${ROOT_DIRECTORY}"/etc/hosts
-	echo 'ff02::2		ip6-allrouters'											>> "${ROOT_DIRECTORY}"/etc/hosts
-	echo 'ff02::3		ip6-allhosts'											>> "${ROOT_DIRECTORY}"/etc/hosts
+	echo '::1			localhost.localdomain'									>> "${CONTAINER_DIRECTORY}"/etc/hosts
+	echo '::1			localhost'												>> "${CONTAINER_DIRECTORY}"/etc/hosts
+	echo '::1			ip6-localhost'											>> "${CONTAINER_DIRECTORY}"/etc/hosts
+	echo '::1			ip6-loopbak'											>> "${CONTAINER_DIRECTORY}"/etc/hosts
+	echo 'fe00::0		ip6-localnet'											>> "${CONTAINER_DIRECTORY}"/etc/hosts
+	echo 'fe00::0		ip6-mcastprefix'										>> "${CONTAINER_DIRECTORY}"/etc/hosts
+	echo 'ff02::1		ip6-allnodes'											>> "${CONTAINER_DIRECTORY}"/etc/hosts
+	echo 'ff02::2		ip6-allrouters'											>> "${CONTAINER_DIRECTORY}"/etc/hosts
+	echo 'ff02::3		ip6-allhosts'											>> "${CONTAINER_DIRECTORY}"/etc/hosts
 
 	# nameserver
 
-	echo 'nameserver 1.1.1.1'													>  "${ROOT_DIRECTORY}"/etc/resolv.conf
-	echo 'nameserver 1.0.0.1'													>> "${ROOT_DIRECTORY}"/etc/resolv.conf
+	echo 'nameserver 1.1.1.1'													>  "${CONTAINER_DIRECTORY}"/etc/resolv.conf
+	echo 'nameserver 1.0.0.1'													>> "${CONTAINER_DIRECTORY}"/etc/resolv.conf
 }
 
 add_preload () {
 	# generate libgcc/libc location and add to preload dynamic linker
 
-	preload_location=$(find "${ROOT_DIRECTORY}" -type f -iname libgcc_s.so.1)
-	preload_library="${preload_path/$ROOT_DIRECTORY/}"
+	preload_location=$(find "${CONTAINER_DIRECTORY}" -type f -iname libgcc_s.so.1)
+	preload_library="${preload_path/$CONTAINER_DIRECTORY/}"
 
 	# set preload
 
-	echo "${preload_library}"													> "${ROOT_DIRECTORY}"/etc/ld.so.preload
+	echo "${preload_library}"													> "${CONTAINER_DIRECTORY}"/etc/ld.so.preload
 }
 
+# generate environment variables
+
 add_environment
+
+# generate missing groups
+
 add_groups
+
+# generate network
+
 add_network
+
+# generate preload entries
+
 add_preload

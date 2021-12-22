@@ -121,7 +121,7 @@ container_command () {
 	proot																		\
 	--kill-on-exit																\
 	--link2symlink																\
-	--rootfs="${ROOT_DIRECTORY}"												\
+	--rootfs="${CONTAINER_DIRECTORY}"												\
 	--change-id=0:0																\
 	--pwd=/root																	\
 	--bind=/apex																\
@@ -158,8 +158,8 @@ echo 'export SOURCES_DIRECTORY="${PREFIX}"/etc/apt'								>> "${PREFIX}"/bin/de
 echo 'export HOME_DIRECTORY="${PREFIX%/*}"/home'								>> "${PREFIX}"/bin/dextop
 echo 'export LIBRARIES_DIRECTORY="${PREFIX}"/lib'								>> "${PREFIX}"/bin/dextop
 echo 'export BACKUP_DIRECTORY="${MAIN_DIRECTORY}"/bkp'							>> "${PREFIX}"/bin/dextop
+echo 'export CONTAINER_DIRECTORY="${MAIN_DIRECTORY}"/cnt'						>> "${PREFIX}"/bin/dextop
 echo 'export IMAGE_DIRECTORY="${MAIN_DIRECTORY}"/img'							>> "${PREFIX}"/bin/dextop
-echo 'export ISO_DIRECTORY="${MAIN_DIRECTORY}"/iso'								>> "${PREFIX}"/bin/dextop
 echo 'export MOUNT_DIRECTORY="${MAIN_DIRECTORY}"/mnt'							>> "${PREFIX}"/bin/dextop
 
 echo "export desktop_option=${desktop_option}"									>> "${PREFIX}"/bin/dextop

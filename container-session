@@ -95,7 +95,7 @@ echo
 # and corresponds to 'username' then source environment variables from file
 # default to 'root' if 'username' is invalid, not specified or does not exist
 
-last_entry="$(tail -n 1 "${ROOT_DIRECTORY}"/etc/passwd)"
+last_entry="$(tail -n 1 "${CONTAINER_DIRECTORY}"/etc/passwd)"
 
 # authentication #
 
@@ -172,7 +172,7 @@ do
 		SHELL="/usr/bin/bash"
 	fi
 	
-done < "${ROOT_DIRECTORY}"/etc/passwd
+done < "${CONTAINER_DIRECTORY}"/etc/passwd
 
 # system #
 
@@ -187,12 +187,12 @@ PATH=""
 
 # container
 
-[ -d "${ROOT_DIRECTORY}"/usr/local/sbin ]										&& PATH+="/usr/local/sbin:"
-[ -d "${ROOT_DIRECTORY}"/usr/local/bin ]										&& PATH+="/usr/local/bin:"
-[ -d "${ROOT_DIRECTORY}"/usr/sbin ]												&& PATH+="/usr/sbin:"
-[ -d "${ROOT_DIRECTORY}"/usr/sbin ]												&& PATH+="/usr/bin:"
-[ -d "${ROOT_DIRECTORY}"/sbin ]													&& PATH+="/sbin:"
-[ -d "${ROOT_DIRECTORY}"/bin ]													&& PATH+="/bin:"
+[ -d "${CONTAINER_DIRECTORY}"/usr/local/sbin ]										&& PATH+="/usr/local/sbin:"
+[ -d "${CONTAINER_DIRECTORY}"/usr/local/bin ]										&& PATH+="/usr/local/bin:"
+[ -d "${CONTAINER_DIRECTORY}"/usr/sbin ]												&& PATH+="/usr/sbin:"
+[ -d "${CONTAINER_DIRECTORY}"/usr/sbin ]												&& PATH+="/usr/bin:"
+[ -d "${CONTAINER_DIRECTORY}"/sbin ]													&& PATH+="/sbin:"
+[ -d "${CONTAINER_DIRECTORY}"/bin ]													&& PATH+="/bin:"
 
 # termux
 
@@ -224,7 +224,7 @@ TMPDIR="/tmp"
 
 # i3 #
 
-[ -f "${ROOT_DIRECTORY}"/usr/bin/i3 ]											&& SESSION_NAME="I3WM"
+[ -f "${CONTAINER_DIRECTORY}"/usr/bin/i3 ]											&& SESSION_NAME="I3WM"
 
 [ "${desktop_option}" = "i3wm" ]												&& SESSION="i3wm"
 [ "${desktop_option}" = "i3wm" ]												&& SESSION_LOADER="i3"
@@ -236,7 +236,7 @@ TMPDIR="/tmp"
 
 # xfce #
 
-[ -f "${ROOT_DIRECTORY}"/usr/bin/xfwm4 ]										&& SESSION_NAME="XFCE"
+[ -f "${CONTAINER_DIRECTORY}"/usr/bin/xfwm4 ]										&& SESSION_NAME="XFCE"
 
 [ "${desktop_option}" = "xfce" ]												&& SESSION="xfce"
 [ "${desktop_option}" = "xfce" ]												&& SESSION_LOADER="xfce4-session"
@@ -251,7 +251,7 @@ TMPDIR="/tmp"
 # defaults #
 
 [ -z "${MOUNT_DIRECTORY}" ]														&& MOUNT_DIRECTORY="${PREFIX%/*}/mnt"
-[ -z "${ROOT_DIRECTORY}" ]														&& ROOT_DIRECTORY="${PREFIX%/*}/img"
+[ -z "${CONTAINER_DIRECTORY}" ]														&& CONTAINER_DIRECTORY="${PREFIX%/*}/img"
 
 [ -z "${BROWSER}" ]																&& BROWSER="${BROWSER}"
 [ -z "${COLORTERM}" ]															&& COLORTERM="${COLORTERM}"
@@ -270,7 +270,7 @@ then
 	console.scs "Valid application name" "[ ${APPLICATION} ]"
 	echo
 	
-	if [ ! -f "${ROOT_DIRECTORY}"/usr/bin/"${APPLICATION}" ]
+	if [ ! -f "${CONTAINER_DIRECTORY}"/usr/bin/"${APPLICATION}" ]
 	then
 		console.err "Invalid application name" "[ ${APPLICATION} ]"
 		echo
@@ -300,7 +300,7 @@ unset "${command}"
 command+="proot"
 command+=" --kill-on-exit"
 command+=" --link2symlink"
-command+=" --rootfs=${ROOT_DIRECTORY}"
+command+=" --rootfs=${CONTAINER_DIRECTORY}"
 command+=" --change-id=${USER_ID}:${GROUP_ID}"
 command+=" --pwd=${HOME}"
 [ -d "/apex" ]                         && command+=" --bind=/apex"
@@ -341,7 +341,7 @@ command+=" PREFIX=${PREFIX}"
 command+=" MAIN_DIRECTORY=${PREFIX%/*}"
 command+=" BINARIES_DIRECTORY=${PREFIX}/bin"
 command+=" LIBRARIES_DIRECTORY=${PREFIX}/lib"
-command+=" ROOT_DIRECTORY=${ROOT_DIRECTORY}"
+command+=" CONTAINER_DIRECTORY=${CONTAINER_DIRECTORY}"
 command+=" MOUNT_DIRECTORY=${MOUNT_DIRECTORY}"
 command+=" SESSION=${SESSION}"
 command+=" SESSION_NAME=${SESSION_NAME}"
