@@ -67,8 +67,8 @@ directories_list+=(
 	bin
 	bkp
 	cnt
-	img
 	etc
+	img
 	lib
 	mnt
 	opt
