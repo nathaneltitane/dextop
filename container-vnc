@@ -79,17 +79,10 @@ echo
 
 # defaults #
 
-[ -z "${DISPLAY}" ]			&& DISPLAY=":1"
+[ -z "${DISPLAY}" ]         && DISPLAY=":1"
 [ -z "${DISPLAY_NUMBER}" ]  && DISPLAY_NUMBER="${DISPLAY/:/}"
-[ -z "${LOCALHOST}" ]		&& LOCALHOST="127.0.0.1"
-[ -z "${PORT}" ]			&& PORT="590${DISPLAY_NUMBER}"
-
-# export variables
-
-# /etc/os-release:
-# source distribution codename variables (e.g. $NAME)
-
-[ -f /etc/os-release ] && . /etc/os-release || NAME="Termux"
+[ -z "${LOCALHOST}" ]       && LOCALHOST="127.0.0.1"
+[ -z "${PORT}" ]            && PORT="590${DISPLAY_NUMBER}"
 
 # functions #
 
@@ -120,6 +113,11 @@ vnc_intent () {
 }
 
 vnc_start () {
+	depth="32"
+
+	security="none"
+	timeout="0"
+
 	console.fwd "Starting display server..."
 	echo
 
@@ -131,14 +129,14 @@ vnc_start () {
 	unset command_start
 
 	command_start+="vncserver"
-	command_start+=" -IdleTimeout 0"
-	command_start+=" -SecurityTypes none"
-	command_start+=" -depth 32"
-	command_start+=" -name ${NAME}"
-	command_start+=" -geometry ${geometry}"
+	[[ $(command -v i3) ]]         && command_start+=" -xstartup $(echo $(command -v i3))"
+	[[ $(command -v xfwm4) ]]      && command_start+=" -xstartup $(echo $(command -v xfce4-session))"
 	[[ $(ps -A | grep -i proot) ]] && command_start+=" -localhost yes" || command_start+=" -localhost"
-	[[ -f $(command -v i3) ]]      && command_start+=" -xstartup $(command -v i3)"
-	[[ -f $(command -v xfwm4) ]]   && command_start+=" -xstartup $(command -v xfce4-session)"
+	command_start+=" -SecurityTypes ${security}"
+	command_start+=" -IdleTimeout ${timeout}"
+	command_start+=" -depth ${depth}"
+	command_start+=" -geometry ${geometry}"
+	command_start+=" -name ${name}"
 	command_start+=" ${DISPLAY}"
 
 	console.silence "exec ${command_start}"
@@ -277,7 +275,7 @@ vnc_geometry () {
 
 	# continue list using array selection of suppported values
 
-	for (( i=0 ; i<${#resolutions[@]} ; i+=3 ))
+	for (( i=0 ; i<${#geometries[@]} ; i+=3 ))
 	do
 		format="${geometries[$i]}"
 		width="${geometries[$i+1]}"
