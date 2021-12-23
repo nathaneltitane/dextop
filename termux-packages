@@ -145,7 +145,7 @@ install_list=()
 
 # i3wm #
 
-if [[ "${option}" = "i3wm" ]]
+if [[ $(cat "${PREFIX}"/bin/dextop) = "i3wm" ]]
 then
 	desktop_environment_list+=(
 		${i3wm_list[@]}
@@ -157,7 +157,7 @@ fi
 
 # xfce
 
-if [[ "${option}" = "xfce" ]]
+if [[ $(cat "${PREFIX}"/bin/dextop) = "xfce" ]]
 then
 	desktop_environment_list+=(
 		${xfce_list[@]}
@@ -169,7 +169,7 @@ fi
 
 # none
 
-if [[ "${option}" = "none" ]]
+if [[ $(cat "${PREFIX}"/bin/dextop) = "none" ]]
 then
 	desktop_environment_list=()
 fi

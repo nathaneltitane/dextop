@@ -85,7 +85,7 @@ export option="${option}"
 
 # defaults #
 
-[ -z "${option}" ] && option="i3wm" && export option="${option}"
+[ -z "${option}" ] && option="i3wm" && echo "${option}" > "${PREFIX}"/bin/dextop
 
 # functions #
 
