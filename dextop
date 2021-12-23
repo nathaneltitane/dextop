@@ -89,6 +89,12 @@ export option="${option}"
 
 # functions #
 
+clean () {
+	rm -rf "${script}"
+}
+
+trap 'clean' EXIT
+
 container_command () {
 	# run container commands without session login
 
@@ -189,3 +195,5 @@ then
 
 	console.file "${PREFIX}"/bin dextop-checkpoint-complete
 fi
+
+console.result dextop-checkpoint-complete "${script}"
