@@ -151,7 +151,7 @@ vnc_start () {
 
 		if [[ "${selection}" =~ ^[0-9]+$ ]]
 		then
-			echo "${selection}" > /home/"${USER}"/.vnc/selection
+			echo "${selection}" > "${HOME}"/.vnc/selection
 		fi
 	fi
 
@@ -288,11 +288,11 @@ vnc_geometry () {
 		then
 			# handle number spacing for entries 1-9
 
-			printf '\t[  %s ] %s' ${number} ${format}
+			printf '      [  %s ] %s' ${number} ${format}
 		else
 			# handle number spacing for entries 10+
 
-			printf '\t[ %s ] %s' ${number} ${format}
+			printf '      [ %s ] %s' ${number} ${format}
 		fi
 
 		printf '%*s' $((pad_length - ${#format}))
@@ -391,7 +391,7 @@ if [ "${option}" = "start" ]
 then
 	# handle selections display
 	
-	if [ -f /home/"${USER}"/.vnc/selection ]
+	if [ -f "${HOME}"/.vnc/selection ]
 	then
 		# hide if selection file is present
 
@@ -412,7 +412,7 @@ then
 
 	console_rtn=()
 
-	if [ -f /home/"${USER}"/.vnc/selection ]
+	if [ -f "${HOME}"/.vnc/selection ]
 	then
 		selection=$(cat /home/"$USER"/.vnc/selection)
 	else
