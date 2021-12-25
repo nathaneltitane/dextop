@@ -35,26 +35,30 @@ add_environment () {
 
 	# container
 
-	[ -d "${PREFIX}"/cnt/usr/local/sbin ]								&& PATH+="/usr/local/sbin:"
-	[ -d "${PREFIX}"/cnt/usr/local/bin ]								&& PATH+="/usr/local/bin:"
-	[ -d "${PREFIX}"/cnt/usr/sbin ]									&& PATH+="/usr/sbin:"
-	[ -d "${PREFIX}"/cnt/usr/sbin ]									&& PATH+="/usr/bin:"
-	[ -d "${PREFIX}"/cnt/sbin ]										&& PATH+="/sbin:"
-	[ -d "${PREFIX}"/cnt/bin ]											&& PATH+="/bin:"
+	[ -d "${PREFIX}"/cnt/usr/local/sbin ]			&& PATH+="/usr/local/sbin:"
+	[ -d "${PREFIX}"/cnt/usr/local/bin ]			&& PATH+="/usr/local/bin:"
+	[ -d "${PREFIX}"/cnt/usr/sbin ]					&& PATH+="/usr/sbin:"
+	[ -d "${PREFIX}"/cnt/usr/sbin ]					&& PATH+="/usr/bin:"
+	[ -d "${PREFIX}"/cnt/sbin ]						&& PATH+="/sbin:"
+	[ -d "${PREFIX}"/cnt/bin ]						&& PATH+="/bin:"
 
 	# termux
 
-	[ -d "${PREFIX}"/sbin ]														&& PATH+="${PREFIX}/sbin:"
-	[ -d "${PREFIX}"/bin ]														&& PATH+="${PREFIX}/bin:"
+	[ -d "${PREFIX}"/sbin ]							&& PATH+="${PREFIX}/sbin:"
+	[ -d "${PREFIX}"/bin ]							&& PATH+="${PREFIX}/bin:"
 
 	# android
 
-	[ -d /system/sbin ]															&& PATH+="/system/sbin:"
-	[ -d /system/bin ]															&& PATH+="/system/bin:"
+	[ -d /system/sbin ]								&& PATH+="/system/sbin:"
+	[ -d /system/bin ]								&& PATH+="/system/bin:"
 
 	# set environment
 
-"PATH=${PATH}"															> "${PREFIX}"/cnt/etc/environment
+	PATH="${PATH}"
+
+	cat <<- FILE > "${PREFIX}"/cnt/etc/environment
+	PATH=${PATH}
+	FILE
 }
 
 add_groups () {
@@ -144,11 +148,11 @@ add_network () {
 add_preload () {
 	# generate libgcc/libc location and add to dynamic linker for preload
 
-	preload_library=$(find "${PREFIX}"/cnt -type f -iname libgcc_s.so.1)
+	preload_library=$(find "${PREFIX}"/cnt/usr/lib -type f -iname "libgcc_s.so.1")
 
 	# set preload
 
-	cat <<- "FILE" > "${PREFIX}"/cnt/etc/ld.so.preload
+	cat <<- FILE > "${PREFIX}"/cnt/etc/ld.so.preload
 	${preload_library}
 	FILE
 }
