@@ -92,7 +92,6 @@ i3wm_list=(
 	dmenu
 	feh
 	file
-	st
 	ranger
 	w3m
 	w3m-img

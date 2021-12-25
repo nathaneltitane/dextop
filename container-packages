@@ -90,7 +90,6 @@ i3wm_list=(
 	suckless-tools
 	feh
 	file
-	stterm
 	ranger
 	w3m
 	w3m-img
