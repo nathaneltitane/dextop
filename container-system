@@ -149,7 +149,7 @@ add_preload () {
 	# set preload
 
 	cat <<- "FILE" > "${PREFIX}"/cnt/etc/ld.so.preload
-	"${preload_library}"
+	${preload_library}
 	FILE
 }
 
