@@ -204,6 +204,7 @@ then
 
 	console.download get.trmnl.me/termux "${HOME}"/.termux termux.properties
 	console.download get.trmnl.me/termux "${PREFIX}"/bin termux
+	console.download get.trmnl.me/termux "${PREFIX}"/bin termux-bar
 
 	# bash #
 
