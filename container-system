@@ -54,7 +54,7 @@ add_environment () {
 
 	# set environment
 
-	echo "PATH=${PATH}"															> "${PREFIX}"/cnt/etc/environment
+"PATH=${PATH}"															> "${PREFIX}"/cnt/etc/environment
 }
 
 add_groups () {
@@ -108,31 +108,37 @@ add_network () {
 
 	# hostname
 
-	echo '${HOSTNAME}'															> "${PREFIX}"/cnt/etc/hostname
+	cat <<- 'FILE' > "${PREFIX}"/cnt/etc/hostname
+	${HOSTNAME}
+	FILE
 
 	# hosts
 
-	echo '# IPv4 #'																>  "${PREFIX}"/cnt/etc/hosts
+	cat <<- 'FILE' > "${PREFIX}"/cnt/etc/hosts
+	# IPv4 #
 
-	echo '127.0.0.1	localhost.localdomain'										>> "${PREFIX}"/cnt/etc/hosts
-	echo '127.0.0.1	localhost'													>> "${PREFIX}"/cnt/etc/hosts
+	127.0.0.1	localhost.localdomain
+	127.0.0.1	localhost
 
-	echo '# IPv6 #'																>> "${PREFIX}"/cnt/etc/hosts
+	# IPv6 #
 
-	echo '::1			localhost.localdomain'									>> "${PREFIX}"/cnt/etc/hosts
-	echo '::1			localhost'												>> "${PREFIX}"/cnt/etc/hosts
-	echo '::1			ip6-localhost'											>> "${PREFIX}"/cnt/etc/hosts
-	echo '::1			ip6-loopbak'											>> "${PREFIX}"/cnt/etc/hosts
-	echo 'fe00::0		ip6-localnet'											>> "${PREFIX}"/cnt/etc/hosts
-	echo 'fe00::0		ip6-mcastprefix'										>> "${PREFIX}"/cnt/etc/hosts
-	echo 'ff02::1		ip6-allnodes'											>> "${PREFIX}"/cnt/etc/hosts
-	echo 'ff02::2		ip6-allrouters'											>> "${PREFIX}"/cnt/etc/hosts
-	echo 'ff02::3		ip6-allhosts'											>> "${PREFIX}"/cnt/etc/hosts
+	::1			localhost.localdomain
+	::1			localhost
+	::1			ip6-localhost
+	::1			ip6-loopbak
+	fe00::0		ip6-localnet
+	fe00::0		ip6-mcastprefix
+	ff02::1		ip6-allnodes
+	ff02::2		ip6-allrouters
+	ff02::3		ip6-allhosts
+	FILE
 
 	# nameserver
 
-	echo 'nameserver 1.1.1.1'													>  "${PREFIX}"/cnt/etc/resolv.conf
-	echo 'nameserver 1.0.0.1'													>> "${PREFIX}"/cnt/etc/resolv.conf
+	cat <<- 'FILE' > "${PREFIX}"/cnt/etc/resolv.conf
+	nameserver 1.1.1.1
+	nameserver 1.0.0.1
+	FILE
 }
 
 add_preload () {
@@ -142,7 +148,9 @@ add_preload () {
 
 	# set preload
 
-	echo "${preload_library}"													> "${PREFIX}"/cnt/etc/ld.so.preload
+	cat <<- "FILE" > "${PREFIX}"/cnt/etc/ld.so.preload
+	"${preload_library}"
+	FILE
 }
 
 # generate environment variables
