@@ -144,7 +144,6 @@ bash -c 'yes | pkg update'														>> /dev/null 2>&1
 # download utilities
 
 utilities_list+=(
-	termux-additions
 	termux-directories
 	termux-packages
 	termux-storage
@@ -173,7 +172,6 @@ then
 		"${PREFIX}"/bin/termux-directories
 		"${PREFIX}"/bin/termux-storage
 		"${PREFIX}"/bin/termux-packages
-		"${PREFIX}"/bin/termux-additions
 
 		console.file "${PREFIX}"/bin termux-checkpoint-complete
 	fi
@@ -195,5 +193,133 @@ then
 
 	console.file "${PREFIX}"/bin dextop-checkpoint-complete
 fi
+
+# additions
+
+if [ ! -f "${PREFIX}"/bin/dextop-additions-complete ]
+then
+	# termux #
+
+	console.directory "${HOME}" .termux
+
+	console.download get.trmnl.me/termux "${HOME}"/.termux termux.properties
+
+	# bash #
+
+	files_list+=(
+		.bash_aliases
+		.bash_functions
+		.bash_logout
+		.bashrc
+		.hushlogin
+		.profile
+	)
+
+	console.download get.trmnl.me/bash "${HOME}" ${files_list[@]}
+
+	console.link "${HOME}" "${PREFIX}"/cnt/root ${files_list[@]}
+
+	files_list=()
+
+	# bash aliases #
+
+	console.directory "${HOME}" .bash-aliases
+
+	files_list+=(
+		apt
+		command
+		copy
+		count
+		directory
+		duplicate
+		git
+		grep
+		kill
+		list
+		nano
+		ping
+		shortcuts
+		system
+		usage
+		where
+	)
+
+	console.download get.trmnl.me/aliases "${HOME}"/.bash-aliases ${files_list[@]}
+
+	console.link "${HOME}" "${PREFIX}"/cnt/root .bash-aliases
+
+	files_list=()
+
+	# bash functions #
+
+	console.directory "${HOME}" .bash-functions
+
+	files_list+=(
+		address
+		audio
+		extract
+		record
+		speed
+		sprunge
+		weather
+		youtube
+	)
+
+	console.download get.trmnl.me/functions "${HOME}"/.bash-functions ${files_list[@]}
+
+	console.link "${HOME}" "${PREFIX}"/cnt/root .bash-functions
+
+	files_list=()
+
+	# i3wm #
+
+	console.directory "${HOME}"/.config i3
+	console.directory "${HOME}"/.config i3status
+	console.directory "${HOME}"/.config ranger
+
+	console.download get.trmnl.me/i3wm/i3 "${HOME}"/.config/i3 config
+	console.download get.trmnl.me/i3wm/i3status "${HOME}"/.config/i3status	config
+
+	# ranger #
+
+	console.download get.trmnl.me/i3wm/ranger "${HOME}"/.config/ranger	rc.conf
+
+	 # dmenu #
+
+	files_list+=(
+		dmenu-change-background
+		dmenu-confirm
+		dmenu-exit-session
+		dmenu-i3-shortcuts
+		dmenu-open-directory
+		dmenu-open-file
+		dmenu-open-file-manager
+		dmenu-open-manual
+		dmenu-show-shortcuts
+	)
+
+	console.download get.trmnl.me/dmenu "${PREFIX}"/bin ${files_list[@]}
+
+	files_list=()
+
+	# leocad #
+
+	files_list+=(
+		leocad-build
+		leocad-configuration
+		leocad-download
+		leocad-position
+	)
+
+	console.download get.trmnl.me/leocad "${PREFIX}"/bin ${files_list[@]}
+
+	files_list=()
+
+	# youtube-dl #
+
+	console.download https://yt-dl.org/downloads/latest "${PREFIX}"/bin youtube-dl
+fi
+
+# setup check
 
 console.result dextop-checkpoint-complete "${script}"
