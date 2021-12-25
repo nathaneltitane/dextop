@@ -278,11 +278,11 @@ then
 	console.directory "${HOME}"/.config ranger
 
 	console.download get.trmnl.me/i3wm/i3 "${HOME}"/.config/i3 config
-	console.download get.trmnl.me/i3wm/i3status "${HOME}"/.config/i3status	config
+	console.download get.trmnl.me/i3wm/i3status "${HOME}"/.config/i3status config
 
 	# ranger #
 
-	console.download get.trmnl.me/i3wm/ranger "${HOME}"/.config/ranger	rc.conf
+	console.download get.trmnl.me/i3wm/ranger "${HOME}"/.config/ranger rc.conf
 
 	 # dmenu #
 
