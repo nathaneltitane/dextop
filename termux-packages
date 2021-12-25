@@ -78,7 +78,6 @@ utilities_list=(
 	lzip
 	p7zip
 	rsync
-	tsu
 	wget
 )
 
