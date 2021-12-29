@@ -84,6 +84,8 @@ echo
 [ -z "${LOCALHOST}" ]       && LOCALHOST="127.0.0.1"
 [ -z "${PORT}" ]            && PORT="590${DISPLAY_NUMBER}"
 
+[ -f /etc/os-release ] && . /etc/os-release && name="${NAMEˆ}" || name=Ubuntu
+
 # functions #
 
 vnc_intent () {
