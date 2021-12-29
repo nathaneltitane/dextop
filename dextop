@@ -232,18 +232,18 @@ then
 	console.directory "${HOME}" .bash-aliases
 
 	files_list+=(
-		apt
 		command
 		copy
 		count
 		directory
 		duplicate
+		edit
 		git
 		grep
 		kill
 		list
-		nano
-		ping
+		lookup
+		packages
 		shortcuts
 		system
 		usage
