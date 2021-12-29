@@ -240,12 +240,12 @@ then
 		edit
 		git
 		grep
-		kill
 		list
 		lookup
 		packages
 		shortcuts
 		system
+		terminate
 		usage
 		where
 	)
@@ -265,6 +265,7 @@ then
 		audio
 		extract
 		record
+		size
 		speed
 		sprunge
 		weather
@@ -324,6 +325,8 @@ then
 	# youtube-dl #
 
 	console.download https://yt-dl.org/downloads/latest "${PREFIX}"/bin youtube-dl
+
+	console.file "${PREFIX}"/bin dextop-additions-complete
 fi
 
 # setup check
