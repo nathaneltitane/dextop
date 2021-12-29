@@ -486,7 +486,7 @@ then
 
 	if [[ "${selection}" = "custom" ]]
 	then
-		console.fwd "Setting custom properties...."
+		console.fwd "Setting properties" "[ Custom ]"
 		echo
 
 		console.ipt "WIDTH" "[ pixels ]"
