@@ -235,15 +235,13 @@ then
 		command
 		copy
 		count
-		directory
 		duplicate
 		edit
 		git
 		grep
 		list
-		lookup
 		packages
-		shortcuts
+		sonar
 		system
 		terminate
 		usage
@@ -263,10 +261,11 @@ then
 	files_list+=(
 		address
 		audio
+		colors
+		directory
 		extract
 		record
 		size
-		speed
 		sprunge
 		weather
 		youtube
