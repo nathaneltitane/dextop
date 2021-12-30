@@ -64,7 +64,7 @@ do
 
 			exit 1
 		;;
-		
+
 	esac
 
 	shift
@@ -341,7 +341,7 @@ vnc_list () {
 	then
 		console.fwd "Listing servers..."
 		echo
-		
+
 		vnc_display="${vnc_display}"
 		vnc_port="${vnc_port}"
 		vnc_process="${vnc_process}"
@@ -392,7 +392,7 @@ vnc_pass () {
 if [ "${option}" = "start" ]
 then
 	# handle selections display
-	
+
 	if [ -f "${HOME}"/.vnc/selection ]
 	then
 		# hide if selection file is present
@@ -416,7 +416,7 @@ then
 
 	if [ -f "${HOME}"/.vnc/selection ]
 	then
-		selection=$(cat /home/"$USER"/.vnc/selection)
+		selection=$(cat "${HOME}"/.vnc/selection)
 	else
 		console.input ${values_list[@]}
 	fi
