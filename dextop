@@ -203,9 +203,20 @@ then
 	console.directory "${HOME}" .termux
 
 	console.download get.trmnl.me/termux "${HOME}"/.termux termux.properties
-	console.download get.trmnl.me/termux "${PREFIX}"/bin termux
-	console.download get.trmnl.me/termux "${PREFIX}"/bin termux-bar
-	console.download get.trmnl.me/termux "${PREFIX}"/bin termux-browser
+
+	files_list+=(
+		termux
+		termux-browser
+		termux-chrome
+		termux-email
+		termux-gmail
+		termux-information
+		termux-message
+	)
+
+	console.download get.trmnl.me/termux "${PREFIX}"/bin ${files_list[@]}
+
+	files_list=()
 
 	# bash #
 
