@@ -58,6 +58,7 @@ add_environment () {
 
 	cat <<- FILE > "${PREFIX}"/cnt/etc/environment
 	PATH=${PATH}
+	PREFIX=${PREFIX}
 	FILE
 }
 
