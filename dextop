@@ -30,7 +30,6 @@ do
 			echo
 			echo -e "USAGE:"
 			echo
-			echo -e "-i, --i3wm    I3WM setup: install i3 window manager and utilities."
 			echo -e "-x, --xfce    XFCE4 setup: install XFCE desktop environment and utilities."
 			echo -e "-n, --none    No DE setup: console access to environment and utilities."
 			echo
@@ -203,20 +202,9 @@ then
 	console.directory "${HOME}" .termux
 
 	console.download get.trmnl.me/termux "${HOME}"/.termux termux.properties
-
-	files_list+=(
-		termux
-		termux-browser
-		termux-chrome
-		termux-email
-		termux-gmail
-		termux-information
-		termux-message
-	)
-
-	console.download get.trmnl.me/termux "${PREFIX}"/bin ${files_list[@]}
-
-	files_list=()
+	console.download get.trmnl.me/termux "${PREFIX}"/bin termux
+	console.download get.trmnl.me/termux "${PREFIX}"/bin termux-bar
+	console.download get.trmnl.me/termux "${PREFIX}"/bin termux-browser
 
 	# bash #
 
@@ -249,7 +237,6 @@ then
 		grep
 		list
 		packages
-		remove
 		sonar
 		system
 		terminate
@@ -302,68 +289,6 @@ then
 	# youtube-dl #
 
 	console.download https://yt-dl.org/downloads/latest "${PREFIX}"/bin youtube-dl
-
-	# icons #
-
-	files_list+=(
-		Humanity
-		Humanity-Dark
-		LoginIcons
-		ubuntu-mono-dark
-		ubuntu-mono-light
-		nuoveXT2
-	)
-
-	console.delete "${PREFIX}"/share/icons ${files_list[@]}
-	console.delete "${PREFIX}"/cnt/usr/share/icons ${files_list[@]}
-
-	files_list=()
-
-	files_list+=(
-		elementary-xfce
-		elementary-xfce-dark
-		elementary-xfce-darker
-		elementary-xfce-darkest
-	)
-
-	console.copy "${PREFIX}"/cnt/usr/share/icons "${PREFIX}"/share/icons ${files_list[@]}
-
-	files_list=()
-
-	# themes #
-
-	files_list+=(
-		Bright
-		Daloa
-		Emacs
-		Kokodi
-		Moheli
-		nuoveXT2
-		Raleigh
-		Retro
-		Smoke
-		ZOMG-PONIES!
-	)
-
-	console.delete "${PREFIX}"/share/themes ${files_list[@]}
-	console.delete "${PREFIX}"/cnt/usr/share/themes ${files_list[@]}
-
-	files_list=()
-
-	files_list+=(
-		Blackbird
-		Bluebird
-		Greybird
-		Greybird-accessibility
-		Greybird-bright
-		Greybird-compact
-		Greybird-dark
-		Greybird-dark-accessibility
-	)
-
-	console.copy "${PREFIX}"/cnt/usr/share/themes "${PREFIX}"/share/themes ${files_list[@]}
-
-	files_list=()
 
 	console.file "${PREFIX}"/bin dextop-additions-complete
 fi
