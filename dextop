@@ -306,23 +306,38 @@ then
 	# themes #
 
 	files_list+=(
+		Bright
 		Daloa
 		Emacs
 		Kokodi
 		Moheli
+		nuoveXT2
 		Raleigh
 		Retro
 		Smoke
 		ZOMG-PONIES!
 	)
 
+	console.delete "${PREFIX}"/share/icons ${files_list[@]}
 	console.delete "${PREFIX}"/share/themes ${files_list[@]}
 	console.delete "${PREFIX}"/cnt/usr/share/themes ${files_list[@]}
 
 	files_list=()
 
+	files_list+=(
+		Blackbird
+		Bluebird
+		Greybird
+		Greybird-accessibility
+		Greybird-bright
+		Greybird-compact
+		Greybird-dark
+		Greybird-dark-accessibility
+	)
 
+	console.copy "${PREFIX}"/cnt/usr/share/themes "${PREFIX}"/share/themes ${files_list[@]}
 
+	files_list=()
 
 	console.file "${PREFIX}"/bin dextop-additions-complete
 fi
