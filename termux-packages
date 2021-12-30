@@ -41,6 +41,10 @@ multimedia_list=(
 	ffmpeg
 	flac
 	gstreamer
+	gst-plugins-good
+	gst-plugins-bad
+	gst-plugins-ugly
+	gst-plugins-base
 )
 
 extensions_list=(
