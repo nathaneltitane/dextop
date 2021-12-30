@@ -16,7 +16,8 @@ version="12-03-2021"
 
 while (($#))
 do
-	case "${1}" in
+	case "${1}"
+	in
 		-u|--username)
 			user_name="${2}"
 
@@ -57,7 +58,7 @@ do
 
 			exit 1
 		;;
-		
+
 	esac
 
 	shift
@@ -98,7 +99,7 @@ do
 
 	# messages:
 	# verify login options and parameters
-	
+
 	if [[ -z "${user_name}" ]]
 	then
 		user_name="root"

@@ -49,7 +49,8 @@ fi
 
 while (($#))
 do
-	case "${4}" in
+	case "${4}"
+	in
 		-h|--help)
 			echo
 			echo -e "Usage: ${script} | [First Name] [Last Name] | [OPTION]"
@@ -81,7 +82,7 @@ do
 
 			exit 1
 		;;
-		
+
 	esac
 
 	shift

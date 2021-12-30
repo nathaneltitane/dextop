@@ -183,7 +183,7 @@ image_version () {
 	IFS='.'
 
 	read code_year code_month code_revision <<< "${distribution_version}"
-	
+
 	if [ -z "${code_revision}" ]
 	then
 		distribution_release="${distribution_version}"
@@ -227,17 +227,17 @@ image_unpack () {
 
 	cd "${PREFIX}"/cnt || exit 1
 
-	proot															\
-		--link2symlink												\
-			tar 													\
-				--extract											\
-				--delay-directory-restore							\
-				--preserve-permissions								\
-					--file="${PREFIX}/img/${image_archive}"			\
-						--exclude='boot'							\
-						--exclude='dev'								\
-						--exclude='proc'							\
-						--exclude='sys'								\
+	proot														\
+		--link2symlink											\
+			tar 												\
+				--extract										\
+				--delay-directory-restore						\
+				--preserve-permissions							\
+					--file="${PREFIX}/img/${image_archive}"		\
+						--exclude='boot'						\
+						--exclude='dev'							\
+						--exclude='proc'						\
+						--exclude='sys'							\
 						--exclude='system' 2> /dev/null
 }
 

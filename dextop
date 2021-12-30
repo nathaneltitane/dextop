@@ -16,7 +16,8 @@ version="12-22-2021"
 
 while (($#))
 do
-	case "${1}" in
+	case "${1}"
+	in
 		-i|--i3wm)
 			option="i3wm"
 		;;
