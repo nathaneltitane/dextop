@@ -85,26 +85,6 @@ vnc_list=(
 	tigervnc
 )
 
-i3wm_list=(
-	i3
-	i3status
-	dmenu
-	feh
-	file
-	ranger
-	w3m
-	w3m-img
-)
-
-i3wm_fonts_list=(
-)
-
-i3wm_themes_list=(
-)
-
-i3wm_addons_list=(
-)
-
 xfce_list=(
 	xfce4
 	xfce4-appfinder
@@ -140,18 +120,6 @@ desktop_environment_list=()
 install_list=()
 
 # options #
-
-# i3wm #
-
-if [[ $(cat "${PREFIX}"/bin/dextop) = "i3wm" ]]
-then
-	desktop_environment_list+=(
-		${i3wm_list[@]}
-		${i3wm_fonts_list[@]}
-		${i3wm_themes_list[@]}
-		${i3wm_addons_list[@]}
-	)
-fi
 
 # xfce
 

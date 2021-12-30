@@ -74,31 +74,9 @@ vnc_list=(
 )
 
 user_list=(
-	doublecmd-qt
 	leocad
 	povray
 	puddletag
-)
-
-i3wm_list=(
-	i3
-	i3lock
-	i3status
-	suckless-tools
-	feh
-	file
-	ranger
-	w3m
-	w3m-img
-)
-
-i3wm_fonts_list=(
-)
-
-ede_themes_list=(
-)
-
-i3wm_addons_list=(
 )
 
 xfce_list=(
@@ -178,21 +156,7 @@ install_list=()
 
 # populate install list
 
-
-
 # options #
-
-# i3wm #
-
-if [[ $(cat "${PREFIX}"/bin/dextop) = "i3wm" ]]
-then
-	desktop_environment_list+=(
-		${i3wm_list[@]}
-		${i3wm_fonts_list[@]}
-		${i3wm_themes_list[@]}
-		${i3wm_addons_list[@]}
-	)
-fi
 
 # xfce
 

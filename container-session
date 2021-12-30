@@ -187,10 +187,6 @@ LANG="C.UTF-8"
 LOCALHOST="127.0.0.1"
 SHELL="/bin/bash"
 
-# i3 #
-
-[ -f "${PREFIX}"/cnt/usr/bin/i3 ] && session_name="I3WM" || session_name="CONSOLE"
-
 # xfce #
 
 [ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ] && session_name="XFCE" || session_name="CONSOLE"

@@ -18,10 +18,6 @@ while (($#))
 do
 	case "${1}"
 	in
-		-i|--i3wm)
-			option="i3wm"
-		;;
-
 		-x|--xfce)
 			option="xfce"
 		;;
@@ -34,7 +30,6 @@ do
 			echo
 			echo -e "USAGE:"
 			echo
-			echo -e "-i, --i3wm    I3WM setup: install i3 window manager and utilities."
 			echo -e "-x, --xfce    XFCE4 setup: install XFCE desktop environment and utilities."
 			echo -e "-n, --none    No DE setup: console access to environment and utilities."
 			echo
@@ -86,7 +81,7 @@ export option="${option}"
 
 # defaults #
 
-[ -z "${option}" ] && option="i3wm" && echo "${option}" > "${PREFIX}"/bin/dextop
+[ -z "${option}" ] && option="xfce" && echo "${option}" > "${PREFIX}"/bin/dextop
 
 # functions #
 

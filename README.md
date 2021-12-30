@@ -1,7 +1,7 @@
 # Linux on Android -  Termux // Dextop // Ubuntu
 
 Version: 12-22-2021
- 
+
 ![termux dextop](https://github.com/nathaneltitane/dextop/blob/master/dextop.png?raw=true)
 
 Dextop turns your modern Android device into a full workstation in a matter of minutes!
@@ -19,7 +19,7 @@ Comparison in between Dextop and other projects:
 - It uses [console](https://github.com/nathaneltitane/console), a custom shell parser to handle the setup, colorize prompts and provide the user with an elegant, comprehensive and user-friendly experience.
 
 Dextop is very quick and efficient:
-Choose between a lean i3WM or complete XFCE4 setup to get your work done, or keep the base install for command line interface and programming workflows.
+Choose between a complete XFCE4 setup to get your work done, or keep the base install for command line interface and programming workflows.
 
 ### Note:
 
@@ -73,9 +73,7 @@ Once the Android applications are installed on your device, open Termux and past
 
 Container install options are:
 
-`-i, --i3wm    I3WM setup: install i3 window manager and utilities.            [ Default ]`
-
-`-x, --xfce    XFCE4 setup: install XFCE desktop environment and utilities.`
+`-x, --xfce    XFCE4 setup: install XFCE desktop environment and utilities.    [ Default ]`
 
 `-n, --none    No DE setup: console access to environment and utilities.`
 
