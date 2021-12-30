@@ -67,6 +67,8 @@ repositories_list=(
 
 utilities_list=(
 	debootstrap
+	git
+	hub
 	htop
 	ncurses
 	ncurses-utils
