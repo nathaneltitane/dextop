@@ -92,12 +92,14 @@ xfce_list=(
 	xfce4-goodies
 	xfce4-notifyd
 	xfce4-panel
+	xfce4-screensaver
 	xfce4-screenshooter
 	xfce4-session
 	xfce4-settings
 	xfce4-taskmanager
 	xfce4-terminal
 	thunar
+	thunar-archive-plugin
 	ristretto
 )
 

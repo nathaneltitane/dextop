@@ -95,9 +95,6 @@ xfce_list=(
 	xfce4-terminal
 	thunar
 	thunar-archive-plugin
-	thunar-media-tags-plugin
-	mousepad
-	midori
 	ristretto
 )
 
