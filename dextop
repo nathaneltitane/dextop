@@ -303,6 +303,27 @@ then
 
 	console.download https://yt-dl.org/downloads/latest "${PREFIX}"/bin youtube-dl
 
+	# themes #
+
+	files_list+=(
+		Daloa
+		Emacs
+		Kokodi
+		Moheli
+		Raleigh
+		Retro
+		Smoke
+		ZOMG-PONIES!
+	)
+
+	console.delete "${PREFIX}"/share/themes ${files_list[@]}
+	console.delete "${PREFIX}"/cnt/usr/share/themes ${files_list[@]}
+
+	files_list=()
+
+
+
+
 	console.file "${PREFIX}"/bin dextop-additions-complete
 fi
 
