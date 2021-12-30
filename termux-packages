@@ -88,7 +88,11 @@ vnc_list=(
 xfce_list=(
 	xfce4
 	xfce4-appfinder
+	xfce4-dict
+	xfce4-goodies
+	xfce4-notifyd
 	xfce4-panel
+	xfce4-screenshooter
 	xfce4-session
 	xfce4-settings
 	xfce4-taskmanager
@@ -107,7 +111,13 @@ xfce_addons_list=(
 	xfce4-calculator-plugin
 	xfce4-clipman-plugin
 	xfce4-datetime-plugin
+	xfce4-eyes-plugin
 	xfce4-mailwatch-plugin
+	xfce4-netload-plugin
+	xfce4-notes-plugin
+	xfce4-places-plugin
+	xfce4-timer-plugin
+	xfce4-wavelan-plugin
 	xfce4-whiskermenu-plugin
 )
 
