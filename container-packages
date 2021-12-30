@@ -75,12 +75,9 @@ vnc_list=(
 
 user_list=(
 	doublecmd-qt
-	freecad
-	fstl
 	leocad
 	povray
 	puddletag
-	youtube-dl
 )
 
 i3wm_list=(

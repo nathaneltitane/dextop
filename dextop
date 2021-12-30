@@ -277,6 +277,12 @@ then
 
 	files_list=()
 
+	# doublecommander #
+
+	console.directory "${HOME}"/.config doublecmd
+
+	console.download get.trmnl.me/i3wm/i3 "${HOME}"/.config/doublecmd doublecmd.xml
+
 	# i3wm #
 
 	console.directory "${HOME}"/.config i3
