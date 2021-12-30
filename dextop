@@ -303,6 +303,33 @@ then
 
 	console.download https://yt-dl.org/downloads/latest "${PREFIX}"/bin youtube-dl
 
+	# icons #
+
+	files_list+=(
+		Humanity
+		Humanity-Dark
+		LoginIcons
+		ubuntu-mono-dark
+		ubuntu-mono-light
+		nuoveXT2
+	)
+
+	console.delete "${PREFIX}"/share/icons ${files_list[@]}
+	console.delete "${PREFIX}"/cnt/usr/share/icons ${files_list[@]}
+
+	files_list=()
+
+	files_list+=(
+		elementary-xfce
+		elementary-xfce-dark
+		elementary-xfce-darker
+		elementary-xfce-darkest
+	)
+
+	console.copy "${PREFIX}"/cnt/usr/share/icons "${PREFIX}"/share/icons ${files_list[@]}
+
+	files_list=()
+
 	# themes #
 
 	files_list+=(
@@ -318,7 +345,6 @@ then
 		ZOMG-PONIES!
 	)
 
-	console.delete "${PREFIX}"/share/icons ${files_list[@]}
 	console.delete "${PREFIX}"/share/themes ${files_list[@]}
 	console.delete "${PREFIX}"/cnt/usr/share/themes ${files_list[@]}
 
