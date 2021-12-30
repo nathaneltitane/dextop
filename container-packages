@@ -65,7 +65,6 @@ security_list=(
 )
 
 utilities_list=(
-	command-not-found
 )
 
 vnc_list=(
@@ -84,7 +83,6 @@ xfce_list=(
 	xfce4-appfinder
 	xfce4-clipman
 	xfce4-dict
-	xfce4-notes
 	xfce4-notifyd
 	xfce4-panel
 	xfce4-screensaver

@@ -189,7 +189,7 @@ SHELL="/bin/bash"
 
 # xfce #
 
-[ -f "${PREFIX}"/cnt/usr/bin/xfwm4 ] && session_name="XFCE" || session_name="CONSOLE"
+[[ $(cat "${PREFIX}"/bin/dextop) = xfce ]] && session_name="XFCE" || session_name="CONSOLE"
 
 # defaults #
 
