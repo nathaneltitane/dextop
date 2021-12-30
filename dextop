@@ -238,6 +238,7 @@ then
 		grep
 		list
 		packages
+		remove
 		sonar
 		system
 		terminate
