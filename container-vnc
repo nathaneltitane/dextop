@@ -132,7 +132,7 @@ vnc_start () {
 	unset command_start
 
 	command_start+="vncserver"
-	[[ $(command -v xfwm4) ]]      && command_start+=" -xstartup $(echo $(command -v xfce4-session))"
+	[[ $(command -v xfce4-session) ]]      && command_start+=" -xstartup $(echo $(command -v xfce4-session))"
 	[[ $(ps -A | grep -i proot) ]] && command_start+=" -localhost yes" || command_start+=" -localhost"
 	command_start+=" -SecurityTypes ${security}"
 	command_start+=" -IdleTimeout ${timeout}"
