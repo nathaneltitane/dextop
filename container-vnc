@@ -30,6 +30,10 @@ do
 			option="password"
 		;;
 
+		-n|--new)
+			option="new"
+		;;
+
 		-h|--help)
 			echo
 			echo -e "Usage: ${script} [OPTION]"
@@ -39,6 +43,8 @@ do
 			echo -e "-o, --start \t Start vnc session server."
 			echo -e "-x, --stop \t Stop vnc session server."
 			echo -e "-p, --pass \t Generate vnc session password."
+			echo
+			echo -e "-n, --new \t Generate new vnc session selection."
 			echo
 			echo -e "-h, --help \t Show help and usage information."
 			echo
@@ -85,7 +91,7 @@ echo
 [ -z "${LOCALHOST}" ]       && LOCALHOST="127.0.0.1"
 [ -z "${PORT}" ]            && PORT="590${DISPLAY_NUMBER}"
 
-[ -f /etc/os-release ] && . /etc/os-release && name="${NAMEˆ}" || name=Ubuntu
+[ -f /etc/os-release ] && . /etc/os-release && name="${NAME}" || name=Ubuntu
 
 # functions #
 
@@ -113,51 +119,6 @@ vnc_intent () {
 	intent_command+=" -d vnc://${LOCALHOST}:${PORT}"
 
 	console.silence "exec ${intent_command}"
-}
-
-vnc_start () {
-	depth="32"
-
-	security="none"
-	timeout="0"
-
-	console.fwd "Starting display server..."
-	echo
-
-	console.inf "Display server" "[ ${format} // ${geometry} // ${PORT} ]"
-	echo
-
-	# 'vncserver' uses $DISPLAY instead of $PORT
-
-	unset command_start
-
-	command_start+="vncserver"
-	[[ $(cat "${PREFIX}"/bin/dextop) = xfce ]] && command_start+=" -xstartup $(echo $(command -v xfce4-session))"
-	[[ $(ps -A | grep -i proot) ]] && command_start+=" -localhost yes" || command_start+=" -localhost"
-	command_start+=" -SecurityTypes ${security}"
-	command_start+=" -IdleTimeout ${timeout}"
-	command_start+=" -depth ${depth}"
-	command_start+=" -geometry ${geometry}"
-	command_start+=" -name ${name}"
-	command_start+=" ${DISPLAY}"
-
-	console.silence "exec ${command_start}"
-
-	# make selection available for automatic start:
-	# verify user id - do not write selection when 'root' user is logged in
-
-	if [[ $(id -u) -ne 0 ]]
-	then
-		# integer check:
-		# do not write non numerical values to file
-
-		if [[ "${selection}" =~ ^[0-9]+$ ]]
-		then
-			echo "${selection}" > "${HOME}"/.vnc/selection
-		fi
-	fi
-
-	vnc_intent
 }
 
 vnc_geometry () {
@@ -304,6 +265,51 @@ vnc_geometry () {
 	printf '\n'
 }
 
+vnc_start () {
+	depth="32"
+
+	security="none"
+	timeout="0"
+
+	console.fwd "Starting display server..."
+	echo
+
+	console.inf "Display server" "[ ${format} // ${geometry} // ${PORT} ]"
+	echo
+
+	# 'vncserver' uses $DISPLAY instead of $PORT
+
+	unset command_start
+
+	command_start+="vncserver"
+	[[ $(cat "${PREFIX}"/bin/dextop) = xfce ]] && command_start+=" -xstartup $(echo $(command -v startxfce4))"
+	[[ $(ps -A | grep -i proot) ]] && command_start+=" -localhost yes" || command_start+=" -localhost"
+	command_start+=" -SecurityTypes ${security}"
+	command_start+=" -IdleTimeout ${timeout}"
+	command_start+=" -depth ${depth}"
+	command_start+=" -geometry ${geometry}"
+	command_start+=" -name ${name}"
+	command_start+=" ${DISPLAY}"
+
+	console.silence "exec ${command_start}"
+
+	# make selection available for automatic start:
+	# verify user id - do not write selection when 'root' user is logged in
+
+	if [[ $(id -u) -ne 0 ]]
+	then
+		# integer check:
+		# do not write non numerical values to file
+
+		if [[ "${selection}" =~ ^[0-9]+$ ]]
+		then
+			echo "${selection}" > "${HOME}"/.vnc/selection
+		fi
+	fi
+
+	vnc_intent
+}
+
 vnc_stop () {
 	unset command_stop
 
@@ -319,7 +325,7 @@ vnc_stop () {
 
 	rm -rf "${HOME}"/.vnc/*.log
 	rm -rf "${HOME}"/.vnc/*.pid
-	rm -rf "${TMPDIR}"/.X*
+	rm -rf /tmp/.X*
 }
 
 vnc_list () {
@@ -389,21 +395,7 @@ vnc_pass () {
 	echo
 }
 
-if [ "${option}" = "start" ]
-then
-	# handle selections display
-
-	if [ -f "${HOME}"/.vnc/selection ]
-	then
-		# hide if selection file is present
-
-		vnc_geometry
-	else
-		# show if selection file is not present
-
-		vnc_geometry
-	fi
-
+vnc_handle () {
 	# values #
 
 	values_list=(
@@ -513,10 +505,35 @@ then
 		DISPLAY_NUMBER="${DISPLAY/:/}"
 		PORT="590${DISPLAY_NUMBER}"
 	fi
+}
+
+if [ "${option}" = "start" ]
+then
+	# handle selections display
+
+	if [ -f "${HOME}"/.vnc/selection ]
+	then
+		# hide if selection file is present
+
+		vnc_geometry > /dev/null 2>&1
+	else
+		# show if selection file is not present
+
+		vnc_geometry
+	fi
+
+	vnc_handle
 
 	# start vnc session
 
 	vnc_start
+fi
+
+if [ "${option}" = "stop" ]
+then
+	# stop vnc session
+
+	vnc_stop
 fi
 
 if [ "${option}" = "password" ]
@@ -526,11 +543,24 @@ then
 	vnc_pass
 fi
 
-if [ "${option}" = "stop" ]
+if [ "${option}" = "new" ]
 then
-	# stop vnc session
+	# handle selections display
 
-	vnc_stop
+	if [ -f "${HOME}"/.vnc/selection ]
+	then
+		# remove  if selection file is present
+
+		rm -rf  "${HOME}"/.vnc/selection
+
+		vnc_geometry
+	fi
+
+	vnc_handle
+
+	# start vnc session
+
+	vnc_start
 fi
 
 # list vnc session
