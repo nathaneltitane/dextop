@@ -96,6 +96,9 @@ echo
 # functions #
 
 vnc_intent () {
+	console.fwd "Opening display..."
+	echo
+
 	# explicit VNC viewer application to kill:
 	# used when vncserver is stopped or restarted using vnc:// intent
 	# when launched via the activity manager [ 'am start -d {URI} -S {ACTIVITY}' ]
@@ -266,16 +269,13 @@ vnc_geometry () {
 }
 
 vnc_start () {
+	console.fwd "Starting display server..."
+	echo
+
 	depth="32"
 
 	security="none"
 	timeout="0"
-
-	console.fwd "Starting display server..."
-	echo
-
-	console.inf "Display server" "[ ${format} // ${geometry} // ${PORT} ]"
-	echo
 
 	# 'vncserver' uses $DISPLAY instead of $PORT
 
@@ -311,15 +311,15 @@ vnc_start () {
 }
 
 vnc_stop () {
+	console.progress "Killing display server..."
+	echo
+
 	unset command_stop
 
 	command_stop+="vncserver"
 	command_stop+=" -kill ${DISPLAY}"
 
 	console.silence "exec ${command_stop}" &
-
-	console.progress "Killing display server..."
-	echo
 
 	# clean display server runtime files
 
@@ -357,14 +357,19 @@ vnc_list () {
 
 		empty="N/A"
 
+		geometry="${empty}"
+		format="${empty}"
+
 		vnc_display="${empty}"
 		vnc_port="${empty}"
 		vnc_process="${empty}"
 	fi
 
-	console.inf "Display" "[ ${vnc_display} ]"
-	console.inf "Port"    "[ ${vnc_port} ]"
-	console.inf "Process" "[ ${vnc_process} ]"
+	console.inf "Geometry" "[ ${geometry} ]"
+	console.inf "Format"   "[ ${format} ]"
+	console.inf "Display"  "[ ${vnc_display} ]"
+	console.inf "Port"     "[ ${vnc_port} ]"
+	console.inf "Process"  "[ ${vnc_process} ]"
 	echo
 }
 
@@ -480,7 +485,7 @@ vnc_handle () {
 
 	if [[ "${selection}" = "custom" ]]
 	then
-		console.fwd "Setting custom properties...."
+		console.fwd "Setting custom properties..."
 		echo
 
 		console.ipt "WIDTH" "[ pixels ]"
