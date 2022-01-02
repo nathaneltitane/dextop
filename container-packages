@@ -161,8 +161,10 @@ then
 		${xfce_list[@]}
 		${xfce_fonts_list[@]}
 		${xfce_themes_list[@]}
-		${xfce_addons_list[@]}
 	)
+
+	#	${xfce_addons_list[@]}
+
 fi
 
 # none
