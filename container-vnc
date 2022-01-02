@@ -311,15 +311,15 @@ vnc_start () {
 }
 
 vnc_stop () {
-	console.progress "Killing display server..."
-	echo
-
 	unset command_stop
 
 	command_stop+="vncserver"
 	command_stop+=" -kill ${DISPLAY}"
 
 	console.silence "exec ${command_stop}" &
+
+	console.progress "Killing display server..."
+	echo
 
 	# clean display server runtime files
 
