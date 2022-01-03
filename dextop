@@ -244,14 +244,22 @@ then
 		count
 		duplicate
 		edit
+		filter
 		git
 		grep
+		header
 		list
+		memory
+		mounts
 		packages
+		permissions
+		ports
+		remove
 		sonar
 		system
 		terminate
 		usage
+		wget
 		where
 	)
 
