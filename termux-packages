@@ -33,21 +33,11 @@ console.upgrade
 
 # values #
 
+display_list=(
+)
+
 documentation_list=(
 	man
-)
-
-fonts_list=(
-)
-
-multimedia_list=(
-	ffmpeg
-	flac
-	gstreamer
-	gst-plugins-good
-	gst-plugins-bad
-	gst-plugins-ugly
-	gst-plugins-base
 )
 
 extensions_list=(
@@ -63,6 +53,19 @@ extensions_list=(
 	termux-tools
 )
 
+fonts_list=(
+)
+
+multimedia_list=(
+	ffmpeg
+	flac
+	gstreamer
+	gst-plugins-good
+	gst-plugins-bad
+	gst-plugins-ugly
+	gst-plugins-base
+)
+
 repositories_list=(
 	game-repo
 	root-repo
@@ -71,6 +74,10 @@ repositories_list=(
 	unstable-repo
 	x11-repo
 )
+
+security_list=(
+)
+
 
 utilities_list=(
 	debootstrap
@@ -164,10 +171,13 @@ fi
 # install
 
 install_list+=(
+	${display_list[@]}
 	${documentation_list[@]}
-	${multimedia_list[@]}
 	${extensions_list[@]}
+	${fonts_list[@]}
+	${multimedia_list[@]}
 	${repositories_list[@]}
+	${security_list[@]}
 	${utilities_list[@]}
 	${vnc_list[@]}
 	${desktop_environment_list[@]}

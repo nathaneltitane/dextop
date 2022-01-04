@@ -33,10 +33,6 @@ console.upgrade
 
 # values #
 
-administration_list=(
-	sudo
-)
-
 display_list=(
 	x11-apps
 	x11-common
@@ -53,13 +49,16 @@ documentation_list=(
 	man-db
 )
 
+extensions_list=(
+)
+
 fonts_list=(
 )
 
-locales_list=(
-	keyboard-configuration
-	locales
-	locales-all
+multimedia_list=(
+)
+
+repositories_list=(
 )
 
 security_list=(
@@ -68,6 +67,7 @@ security_list=(
 )
 
 utilities_list=(
+	sudo
 )
 
 vnc_list=(
@@ -173,10 +173,12 @@ fi
 # install
 
 install_list+=(
-	${administration_list[@]}
 	${display_list[@]}
 	${documentation_list[@]}
-	${locales_list[@]}
+	${extensions_list[@]}
+	${fonts_list[@]}
+	${multimedia_list[@]}
+	${repositories_list[@]}
 	${security_list[@]}
 	${utilities_list[@]}
 	${vnc_list[@]}
