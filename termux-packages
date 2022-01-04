@@ -149,7 +149,6 @@ then
 	)
 
 	#	${xfce_addons_list[@]}
-
 fi
 
 # none
