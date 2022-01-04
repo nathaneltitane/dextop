@@ -201,8 +201,6 @@ then
 
 	console.directory "${HOME}" .termux
 
-	console.download get.trmnl.me/termux "${HOME}"/.termux termux.properties
-
 	files_list+=(
 		termux
 		termux-browser
@@ -211,9 +209,12 @@ then
 		termux-gmail
 		termux-information
 		termux-message
+		termux.properties
 	)
 
 	console.download get.trmnl.me/termux "${PREFIX}"/bin ${files_list[@]}
+
+	console.link "${PREFIX}"/bin "${HOME}"/.termux termux.properties
 
 	files_list=()
 
@@ -231,19 +232,6 @@ then
 	console.download get.trmnl.me/bash "${HOME}" ${files_list[@]}
 
 	console.link "${HOME}" "${PREFIX}"/cnt/root ${files_list[@]}
-
-	files_list=()
-
-	# leocad #
-
-	files_list+=(
-		leocad-build
-		leocad-configuration
-		leocad-download
-		leocad-position
-	)
-
-	console.download get.trmnl.me/leocad "${PREFIX}"/bin ${files_list[@]}
 
 	files_list=()
 
