@@ -72,12 +72,6 @@ vnc_list=(
 	tigervnc-standalone-server
 )
 
-user_list=(
-	leocad
-	povray
-	puddletag
-)
-
 xfce_list=(
 	xfce4
 	xfce4-appfinder
@@ -184,13 +178,7 @@ install_list+=(
 	${security_list[@]}
 	${utilities_list[@]}
 	${vnc_list[@]}
-	${user_list[@]}
 	${desktop_environment_list[@]}
 )
 
 console.install ${install_list[@]}
-
-# fix dpkg lock and errors:
-# remove all post-install logs that trigger errors
-
-rm -rf /var/lib/dpkg/info/*.postinst

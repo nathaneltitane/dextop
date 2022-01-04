@@ -172,8 +172,3 @@ install_list+=(
 )
 
 console.install ${install_list[@]}
-
-# fix dpkg lock and errors:
-# remove all post-install logs that trigger errors
-
-rm -rf "${PREFIX}"/var/lib/dpkg/info/*.postinst
