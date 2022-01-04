@@ -234,64 +234,6 @@ then
 
 	files_list=()
 
-	# bash aliases #
-
-	console.directory "${HOME}" .bash-aliases
-
-	files_list+=(
-		command
-		copy
-		count
-		duplicate
-		edit
-		filter
-		git
-		grep
-		header
-		list
-		memory
-		mounts
-		packages
-		permissions
-		ports
-		remove
-		sonar
-		system
-		terminate
-		usage
-		wget
-		where
-	)
-
-	console.download get.trmnl.me/aliases "${HOME}"/.bash-aliases ${files_list[@]}
-
-	console.link "${HOME}" "${PREFIX}"/cnt/root .bash-aliases
-
-	files_list=()
-
-	# bash functions #
-
-	console.directory "${HOME}" .bash-functions
-
-	files_list+=(
-		address
-		audio
-		colors
-		directory
-		extract
-		record
-		size
-		sprunge
-		weather
-		youtube
-	)
-
-	console.download get.trmnl.me/functions "${HOME}"/.bash-functions ${files_list[@]}
-
-	console.link "${HOME}" "${PREFIX}"/cnt/root .bash-functions
-
-	files_list=()
-
 	# leocad #
 
 	files_list+=(
@@ -304,10 +246,6 @@ then
 	console.download get.trmnl.me/leocad "${PREFIX}"/bin ${files_list[@]}
 
 	files_list=()
-
-	# youtube-dl #
-
-	console.download https://yt-dl.org/downloads/latest "${PREFIX}"/bin youtube-dl
 
 	console.file "${PREFIX}"/bin dextop-additions-complete
 fi
