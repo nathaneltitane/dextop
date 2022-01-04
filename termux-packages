@@ -37,6 +37,9 @@ documentation_list=(
 	man
 )
 
+fonts_list=(
+)
+
 multimedia_list=(
 	ffmpeg
 	flac

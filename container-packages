@@ -53,6 +53,9 @@ documentation_list=(
 	man-db
 )
 
+fonts_list=(
+)
+
 locales_list=(
 	keyboard-configuration
 	locales
