@@ -53,6 +53,7 @@ extensions_list=(
 )
 
 fonts_list=(
+	fonts-takao
 )
 
 multimedia_list=(
