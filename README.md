@@ -86,7 +86,7 @@ The 'none' option is great for users who would like to experiment or setup their
 
 Dextop now automatically detects and processes any external media mounts and adds them to your container.
 
-** User information and distribution preferences are captured throughout the setup process to set up the container's user profile, home directory and other preferences.**
+**User information and distribution preferences are captured throughout the setup process to set up the container's user profile, home directory and other preferences.**
 
 **User input is still required to give Termux storage access permissions and this can only be done through user interaction. There are no workarounds.**
 
@@ -95,8 +95,6 @@ You should press 'Allow' when prompted during the setup to grant this permission
 Most of the setup process is fully automated and should run its course until the container is ready for you to use.
 
 ### Customization:
-
-Edit the  'user_list' array in the 'container-packages' script prior to starting the setup to customize the list of installed applications, libraries and utilities.
 
 **You can modify any of the other scripts AT YOUR OWN RISK!**
 **Any modification of the Dextop setup routine scripts implies you are fully aware of potential breakage and the consequences of doing so:**
