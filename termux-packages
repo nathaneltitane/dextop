@@ -78,7 +78,6 @@ repositories_list=(
 security_list=(
 )
 
-
 utilities_list=(
 	debootstrap
 	git
