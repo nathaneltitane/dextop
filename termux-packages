@@ -137,14 +137,6 @@ xfce_addons_list=(
 	xfce4-whiskermenu-plugin
 )
 
-# initialize desktop environment list
-
-desktop_environment_list=()
-
-# initialize install list
-
-install_list=()
-
 # options #
 
 # xfce
@@ -167,7 +159,7 @@ then
 	desktop_environment_list=()
 fi
 
-# install
+# install #
 
 install_list+=(
 	${display_list[@]}
