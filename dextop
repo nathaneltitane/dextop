@@ -174,6 +174,51 @@ then
 
 		console.file "${PREFIX}"/bin termux-checkpoint-complete
 	fi
+	
+	# additions
+
+	if [ ! -f "${PREFIX}"/bin/termux-additions-complete ]
+	then
+		# termux #
+
+		console.directory "${HOME}" .termux
+
+		files_list+=(
+			termux
+			termux-browser
+			termux-chrome
+			termux-email
+			termux-gmail
+			termux-information
+			termux-message
+			termux.properties
+		)
+
+		console.download get.trmnl.me/termux "${PREFIX}"/bin ${files_list[@]}
+
+		console.link "${PREFIX}"/bin "${HOME}"/.termux termux.properties
+
+		files_list=()
+
+		# bash #
+
+		files_list+=(
+			.bash_aliases
+			.bash_functions
+			.bash_logout
+			.bashrc
+			.hushlogin
+			.profile
+		)
+
+		console.download get.trmnl.me/bash "${HOME}" ${files_list[@]}
+
+		console.link "${HOME}" "${PREFIX}"/cnt/root ${files_list[@]}
+
+		files_list=()
+
+		console.file "${PREFIX}"/bin termux-additions-complete
+	fi
 
 	# container
 
@@ -191,51 +236,6 @@ then
 	fi
 
 	console.file "${PREFIX}"/bin dextop-checkpoint-complete
-fi
-
-# additions
-
-if [ ! -f "${PREFIX}"/bin/dextop-additions-complete ]
-then
-	# termux #
-
-	console.directory "${HOME}" .termux
-
-	files_list+=(
-		termux
-		termux-browser
-		termux-chrome
-		termux-email
-		termux-gmail
-		termux-information
-		termux-message
-		termux.properties
-	)
-
-	console.download get.trmnl.me/termux "${PREFIX}"/bin ${files_list[@]}
-
-	console.link "${PREFIX}"/bin "${HOME}"/.termux termux.properties
-
-	files_list=()
-
-	# bash #
-
-	files_list+=(
-		.bash_aliases
-		.bash_functions
-		.bash_logout
-		.bashrc
-		.hushlogin
-		.profile
-	)
-
-	console.download get.trmnl.me/bash "${HOME}" ${files_list[@]}
-
-	console.link "${HOME}" "${PREFIX}"/cnt/root ${files_list[@]}
-
-	files_list=()
-
-	console.file "${PREFIX}"/bin dextop-additions-complete
 fi
 
 # setup check

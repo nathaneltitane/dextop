@@ -112,8 +112,6 @@ image_version () {
 		${ubuntu_versions[@]}
 	)
 
-	printf '\n'
-
 	# set padding for uniform output
 
 	pad_length=10
