@@ -101,6 +101,11 @@ xfce_themes_list=(
 	bluebird-gtk-theme
 	greybird-gtk-theme
 	elementary-xfce-icon-theme
+	adwaita-icon-theme
+	adwaita-icon-theme-full
+	gnome-themes-standard
+	gnome-themes-extra
+	gnome-themes-extra-data
 )
 
 xfce_addons_list=(

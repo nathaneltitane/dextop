@@ -236,6 +236,49 @@ then
 		console.file "${PREFIX}"/bin container-checkpoint-complete
 	fi
 
+	# icons
+
+	files_list+=(
+		Adwaita
+		HighContrast
+		default
+		elementary-xfce
+		elementary-xfce-dark
+		elementary-xfce-darker
+		elementary-xfce-darkest
+		hicolor
+		ubuntu-mono-dark
+		ubuntu-mono-light
+	)
+
+	console.copy $PREFIX/cnt/usr/share/icons $PREFIX/share/icons ${files_list[@]}
+
+	files_list=()
+
+	# themes
+
+	files_list+=(
+		Adwaita
+		Adwaita-dark
+		Blackbird
+		Bluebird
+		Default
+		Default-hdpi
+		Default-xhdpi
+		Greybird
+		Greybird-accessibility
+		Greybird-bright
+		Greybird-compact
+		Greybird-dark
+		Greybird-dark-accessibility
+		HighContrast
+	)
+
+	console.copy $PREFIX/cnt/usr/share/themes $PREFIX/share/themes ${files_list[@]}
+
+	files_list=()
+
+
 	console.file "${PREFIX}"/bin dextop-checkpoint-complete
 fi
 
