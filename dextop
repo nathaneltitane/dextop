@@ -240,6 +240,8 @@ then
 
 	if [ ! -f "${PREFIX}"/bin/bookmarks-checkpoint-complete ]
 	then
+		console.directory "${HOME}"/.config/gtk-3.0
+
 		[ -d "${PREFIX}"/media/external ] && echo 'file:///data/data/com.termux/files/media/external External' >  "${HOME}"/.config/gtk-3.0/bookmarks
 		[ -d "${PREFIX}"/media/internal ] && echo 'file:///data/data/com.termux/files/media/internal Internal' >> "${HOME}"/.config/gtk-3.0/bookmarks
 		[ -d "${PREFIX}"/cnt ]            && echo 'file:///data/data/com.termux/files/cnt Container'           >> "${HOME}"/.config/gtk-3.0/bookmarks
