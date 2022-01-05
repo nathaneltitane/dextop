@@ -263,9 +263,12 @@ then
 		Tango
 	)
 
+	console.copy "${PREFIX}"/cnt/usr/share/icons "${PREFIX}"/share/icons ${files_list[@]}
+
 	console.keep "${PREFIX}"/cnt/usr/share/icons ${files_list[@]}
 
-	console.copy "${PREFIX}"/cnt/usr/share/icons "${PREFIX}"/share/icons ${files_list[@]}
+	console.keep "${PREFIX}"/share/icons ${files_list[@]}
+
 
 	files_list=()
 
@@ -288,9 +291,12 @@ then
 		HighContrast
 	)
 
+	console.copy "${PREFIX}"/cnt/usr/share/themes "${PREFIX}"/share/themes ${files_list[@]}
+
 	console.keep "${PREFIX}"/cnt/usr/share/themes ${files_list[@]}
 
-	console.copy "${PREFIX}"/cnt/usr/share/themes "${PREFIX}"/share/themes ${files_list[@]}
+	console.keep "${PREFIX}"/share/themes ${files_list[@]}
+
 
 	files_list=()
 
