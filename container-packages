@@ -106,6 +106,9 @@ xfce_themes_list=(
 	gnome-themes-standard
 	gnome-themes-extra
 	gnome-themes-extra-data
+	tango-icon-theme
+	tango-icon-theme-common
+	tango-icon-theme-extras
 )
 
 xfce_addons_list=(
