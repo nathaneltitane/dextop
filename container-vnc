@@ -233,8 +233,6 @@ vnc_geometry () {
 		${devices[@]}
 	)
 
-	printf '\n'
-
 	# set padding for uniform output
 
 	pad_length=10
