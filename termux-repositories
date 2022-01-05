@@ -1,0 +1,75 @@
+#!/bin/bash
+
+# dependencies #
+
+. "${PREFIX}"/bin/console
+
+# script #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="12-22-2021"
+
+# usage #
+
+# prompt #
+
+console.script "Setting up ${script#*-}"
+echo
+
+# variables #
+
+# defaults #
+
+ repositories_list=(
+	"deb https://grimler.se/game-packages-24 game stable"
+	"deb https://grimler.se/termux-root-packages-24 root stable"
+	"deb https://grimler.se/science-packages-24 science stable"
+	"deb https://grimler.se/unstable-packages unstable main"
+	"deb https://grimler.se/x11-packages x11 main"
+)
+
+# create sources directory
+
+console.directory "${SOURCES_DIRECTORY}" sources.list.d
+
+# override main source list file
+
+echo "deb https://grimler.se/termux-packages-24 stable main" > "${PREFIX}"/etc/apt/sources.list
+
+# write sources list files
+
+# set IFS
+
+IFS=$'\n'
+
+# setup repositories
+
+ while read line
+ do
+	for repository in ${repositories_list[@]}
+	do
+		# set file name
+
+		source_name=$(echo ${repository} | cut -d ' ' -f 3)
+		source_file="${source_name}.list"
+
+		# write file
+
+		echo "${repository}" > "${PREFIX}"/etc/apt/sources.list.d/"${source_file}"
+	done
+
+ done <<< ${repositories_list[@]}
+
+# reset IFS
+
+ IFS=''
+
+# update lists
+
+console.log "pkg update" &
+
+console.progress "Forcing refresh..."
+echo

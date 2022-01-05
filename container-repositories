@@ -29,3 +29,10 @@ sed -i									\
 	-e 's/ˆ\# deb-src/deb-src/g'		\
 	-e '/ˆ\#.*/d'						\
 	-e '/ˆ$/d'							/etc/apt/sources.list
+
+# update lists
+
+console.log "apt update" &
+
+console.progress "Forcing refresh..."
+echo

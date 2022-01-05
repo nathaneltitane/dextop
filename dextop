@@ -170,11 +170,12 @@ then
 		"${PREFIX}"/bin/termux-update
 		"${PREFIX}"/bin/termux-directories
 		"${PREFIX}"/bin/termux-storage
+		"${PREFIX}"/bin/termux-repositories
 		"${PREFIX}"/bin/termux-packages
 
 		console.file "${PREFIX}"/bin termux-checkpoint-complete
 	fi
-	
+
 	# additions
 
 	if [ ! -f "${PREFIX}"/bin/termux-additions-complete ]
