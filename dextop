@@ -176,6 +176,21 @@ then
 		console.file "${PREFIX}"/bin termux-checkpoint-complete
 	fi
 
+	# container
+
+	if [ ! -f "${PREFIX}"/bin/container-checkpoint-complete ]
+	then
+		"${PREFIX}"/bin/container-image
+		"${PREFIX}"/bin/container-system
+
+		container_command "${PREFIX}"/bin/container-expand
+		container_command "${PREFIX}"/bin/container-repositories
+		container_command "${PREFIX}"/bin/container-packages
+		container_command "${PREFIX}"/bin/container-user
+
+		console.file "${PREFIX}"/bin container-checkpoint-complete
+	fi
+
 	# additions
 
 	if [ ! -f "${PREFIX}"/bin/termux-additions-complete ]
@@ -219,21 +234,6 @@ then
 		files_list=()
 
 		console.file "${PREFIX}"/bin termux-additions-complete
-	fi
-
-	# container
-
-	if [ ! -f "${PREFIX}"/bin/container-checkpoint-complete ]
-	then
-		"${PREFIX}"/bin/container-image
-		"${PREFIX}"/bin/container-system
-
-		container_command "${PREFIX}"/bin/container-expand
-		container_command "${PREFIX}"/bin/container-repositories
-		container_command "${PREFIX}"/bin/container-packages
-		container_command "${PREFIX}"/bin/container-user
-
-		console.file "${PREFIX}"/bin container-checkpoint-complete
 	fi
 
 	# bookmarks
