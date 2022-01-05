@@ -145,6 +145,7 @@ done
 utilities_list+=(
 	termux-directories
 	termux-packages
+	termux-repositories
 	termux-storage
 	termux-update
 	container-expand
