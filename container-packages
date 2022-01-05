@@ -46,7 +46,6 @@ display_list=(
 
 documentation_list=(
 	man
-	man-db
 )
 
 extensions_list=(
