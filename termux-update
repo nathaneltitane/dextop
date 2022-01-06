@@ -55,16 +55,11 @@ packages_list=(
 
 for package in ${packages_list[@]}
 do
-	console.fwd "Verifying..."
-	echo
-
-	console.wait 2
-
 	console.inf "Checking for package update" "[ ${package} ]"
 	echo
 
-	archive=$(curl -sL "${packages_url}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
-	archive_version=$(echo "${archive}" | cut -d '_' -f 2 | sed 's/\..*//g')
+	archive_check=$(curl -s -L "${packages_url}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
+	archive_version=$(echo "${archive_check}" | cut -d '_' -f 2 | sed 's/\..*//g')
 	archive_url="${repository_url}/${archive}"
 
 	if [ "${package}" = "com.termux" ]
