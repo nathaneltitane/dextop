@@ -46,86 +46,100 @@ echo
 
 console.separate
 
-# process update
+console.ask "Check for updates?"
 
-packages_list=(
-	com.termux
-	com.termux.api
-	)
+read reply
+echo
 
-for package in ${packages_list[@]}
-do
-	console.inf "Checking for package update" "[ ${package} ]"
-	echo
+if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+then
+	# process update
 
-	archive_check=$(curl -s -L "${packages_url}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
-	archive_version=$(echo "${archive_check}" | cut -d '_' -f 2 | sed 's/\..*//g')
-	archive_url="${repository_url}/${archive}"
+	packages_list=(
+		com.termux
+		com.termux.api
+		)
 
-	if [ "${package}" = "com.termux" ]
-	then
-		# com.termux apk
-
-		installed_version=$(echo "${TERMUX_VERSION}" | cut -d '.' -f 2)
-	else
-		# com.termux.api apk
-
-		installed_version=$(echo "${TERMUX_API_VERSION}" | cut -d '.' -f 2)
-	fi
-
-	# pplication version is deprecated
-
-	if [ "${installed_version}" != "${archive_version}" ]
-	then
-		console.wrn "Package version has been updated" "[ ${package} // ${archive_version} ]."
+	for package in ${packages_list[@]}
+	do
+		console.inf "Checking for package update" "[ ${package} ]"
 		echo
 
-		# request update permission
+		archive=$(curl -sL "${packages_url}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
+		archive_version=$(echo "${archive}" | cut -d '_' -f 2 | sed 's/\..*//g')
+		archive_url="${repository_url}/${archive}"
 
-		console.ask "Update package?"
-
-		read reply
+		console.fwd "Verifying..."
 		echo
 
-		if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+		if [ "${package}" = "com.termux" ]
 		then
-			console.inf "Dowloading updates."
-			echo
+			# com.termux apk
 
-			# download
-
-			console.download "${repository_url}" "${PWD}" ${archive}
-
-			# update
-
-			xdg-open "${archive}"
-
-			console.fwd "Updating..."
-			echo
+			installed_version=$(echo "${TERMUX_VERSION}" | cut -d '.' -f 2)
 		else
-			# continue without application update
+			# com.termux.api apk
 
-			console.wrn "Proceeding without update."
-			console.wrn "Setup process may encounter errors."
-			echo
-
-			console.num "1" "Follow wiki pages stated above to correct issues."
-			console.num "2" "Restart setup on a fresh Termux installation to proceed."
-			echo
-
-			console.countdown 3 "Continuing" "[ ${script} ]"
-			echo
+			installed_version=$(echo "${TERMUX_API_VERSION}" | cut -d '.' -f 2)
 		fi
 
-		# termux application version is up to date
-	else
-		if [ "${installed_version}" == "${archive_version}" ]
+		# pplication version is deprecated
+
+		if [ "${installed_version}" != "${archive_version}" ]
 		then
-			console.scs "Package version is up to date" "[ ${package} // ${archive_version} ]"
+			console.wrn "Package version has been updated" "[ ${package} // ${archive_version} ]."
 			echo
 
-			console.fwd "Continuing..."
+			# request update permission
+
+			console.ask "Update package?"
+
+			read reply
 			echo
+
+			if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+			then
+				console.inf "Dowloading updates."
+				echo
+
+				# download
+
+				console.download "${repository_url}" "${PWD}" ${archive}
+
+				# update
+
+				xdg-open "${archive}"
+
+				console.fwd "Updating..."
+				echo
+			else
+				# continue without application update
+
+				console.wrn "Proceeding without update."
+				console.wrn "Setup process may encounter errors."
+				echo
+
+				console.num "1" "Follow wiki pages stated above to correct issues."
+				console.num "2" "Restart setup on a fresh Termux installation to proceed."
+				echo
+
+				console.countdown 3 "Continuing" "[ ${script} ]"
+				echo
+			fi
+
+			# termux application version is up to date
+		else
+			if [ "${installed_version}" == "${archive_version}" ]
+			then
+				console.scs "Package version is up to date" "[ ${package} // ${archive_version} ]"
+				echo
+
+				console.fwd "Continuing..."
+				echo
+			fi
 		fi
-	fi
-done
+	done
+else
+	console.countdown 3 "Continuing" "[ ${script} ]"
+	echo
+fi
