@@ -28,8 +28,6 @@ repository_url="https://f-droid.org/repo"
 
 # functions #
 
-# functions #
-
 clean () {
 	rm -rf "${PREFIX}"/tmp/*.apk
 }
