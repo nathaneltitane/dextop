@@ -23,23 +23,23 @@ echo
 
 # defaults #
 
- repositories_list=(
+# override main source list file
+
+echo "deb https://grimler.se/termux-packages-24 stable main" > "${PREFIX}"/etc/apt/sources.list
+
+# create sources directory
+
+console.directory "${PREFIX}"/etc/apt/ sources.list.d
+
+# write sources list files
+
+repositories_list=(
 	"deb https://grimler.se/game-packages-24 game stable"
 	"deb https://grimler.se/termux-root-packages-24 root stable"
 	"deb https://grimler.se/science-packages-24 science stable"
 	"deb https://grimler.se/unstable-packages unstable main"
 	"deb https://grimler.se/x11-packages x11 main"
 )
-
-# create sources directory
-
-console.directory "${PREFIX}"/etc/apt/ sources.list.d
-
-# override main source list file
-
-echo "deb https://grimler.se/termux-packages-24 stable main" > "${PREFIX}"/etc/apt/sources.list
-
-# write sources list files
 
 # set IFS
 
