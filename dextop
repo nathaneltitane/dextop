@@ -120,7 +120,7 @@ container_command () {
 	--bind="/system:/system"													\
 	--bind="/vendor:/vendor"													\
 		/usr/bin/env -i															\
-		"LANG=C.UTF-8"
+		"LANG=C.UTF-8"															\
 		"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"		\
 		"PREFIX=/data/data/com.termux/files/usr"								\
 		"TERM=${TERM}"															\
