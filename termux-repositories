@@ -33,7 +33,7 @@ echo
 
 # create sources directory
 
-console.directory "${SOURCES_DIRECTORY}" sources.list.d
+console.directory "${PREFIX}"/etc/apt/ sources.list.d
 
 # override main source list file
 
