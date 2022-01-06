@@ -1,6 +1,4 @@
-# Linux on Android -  Termux // Dextop // Ubuntu
-
-Version: 12-22-2021
+## Linux on Android - Termux // Dextop // Ubuntu [ Version // 01-06-2022 ]
 
 ![dextop](https://github.com/nathaneltitane/dextop/blob/master/dextop.png)
 
