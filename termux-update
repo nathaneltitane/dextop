@@ -26,6 +26,16 @@ repository_url="https://f-droid.org/repo"
 
 # defaults #
 
+# functions #
+
+# functions #
+
+clean () {
+	rm -rf "${archive}"
+}
+
+trap 'clean' EXIT
+
 # notice
 
 console.err "Google Play Store updates deprecated since November 2020:"
