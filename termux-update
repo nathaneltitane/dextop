@@ -31,10 +31,22 @@ repository_url="https://f-droid.org/repo"
 # functions #
 
 clean () {
-	rm -rf "${archive}"
+	rm -rf "${PREFIX}"/tmp/*.apk
 }
 
 trap 'clean' EXIT
+
+open_intent () {
+	unset open_command
+
+	open_command+="am broadcast"
+	open_command+=" --user 0"
+	open_command+=" -a android.intent.action.VIEW"
+	open_command+=" -n com.termux/com.termux.app.TermuxOpenReceiver"
+	open_command+=" -d ${@}"
+
+	exec ${open_command} > /dev/null 2>&1
+}
 
 # notice
 
@@ -114,11 +126,11 @@ then
 
 				# download
 
-				console.download "${repository_url}" "${PWD}" ${archive}
+				console.download "${repository_url}" "${PREFIX}"/tmp ${archive}
 
 				# update
 
-				xdg-open "${archive}"
+				open_intent "${PREFIX}"/tmp/"${archive}"
 
 				console.fwd "Updating..."
 				echo
