@@ -106,7 +106,6 @@ xfce_list=(
 	xfce4-dict
 	xfce4-notifyd
 	xfce4-panel
-	xfce4-screensaver
 	xfce4-screenshooter
 	xfce4-session
 	xfce4-settings
