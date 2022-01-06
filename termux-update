@@ -105,7 +105,7 @@ then
 			installed_version=$(echo "${TERMUX_API_VERSION}" | cut -d '.' -f 2)
 		fi
 
-		# pplication version is deprecated
+		# application version is deprecated
 
 		if [ "${installed_version}" != "${archive_version}" ]
 		then
