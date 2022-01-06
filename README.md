@@ -2,7 +2,7 @@
 
 Version: 12-22-2021
 
-![termux dextop](https://github.com/nathaneltitane/dextop/blob/master/dextop.png?raw=true)
+![termux dextop](https://github.com/nathaneltitane/dextop/blob/master/dextop.svg?raw=true)
 
 Dextop turns your modern Android device into a full workstation in a matter of minutes!
 No hassle or deep technical know-how required: Dextop is easy and user friendly.
