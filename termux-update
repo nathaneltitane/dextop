@@ -92,14 +92,14 @@ then
 
 			# request update permission
 
-			console.ask "Update package?"
+			console.ask "Update?"
 
 			read reply
 			echo
 
 			if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 			then
-				console.inf "Dowloading updates."
+				console.inf "Dowloading update."
 				echo
 
 				# download
