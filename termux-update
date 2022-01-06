@@ -38,7 +38,7 @@ trap 'clean' EXIT
 
 # notice
 
-console.err "Google Play Store updates deprecated since November 2020:"
+console.err "Google Play Store updates deprecated since November 2020!"
 echo
 
 console.wrn "Back up and uninstall the Google Play Store version of Termux."
