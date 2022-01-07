@@ -13,7 +13,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
-   sodipodi:docname="dextop-black.svg">
+   sodipodi:docname="dextop-aubergine.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -78,7 +78,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -87,12 +87,12 @@
      inkscape:groupmode="layer"
      id="layer1">
     <path
-       style="fill:none;stroke:#000000;stroke-width:25.4;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke"
+       style="fill:none;stroke:#753390;stroke-width:25.4;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke;stroke-opacity:1"
        d="m 104.42225,414.25524 v 46.74662 l 83.25559,47.51737 83.25558,-47.51718 83.25561,47.51718 83.25538,-47.51718 V 365.9677 l 83.25539,-47.51697 1.9e-4,-95.03436 -83.25558,-47.51718 V 80.864821 l -83.2556,-47.517374 -83.25559,47.517179 -83.25556,-47.517179 -83.2556,47.517179 v 95.034354 l -83.255392,47.51719 v 95.03435 l 83.255582,47.51718 h 2e-5 l 83.25537,-47.51718 v -95.03435 l 83.25559,-47.51719 83.25559,47.51719 v 95.03435 l -83.25559,47.51718 -41.62779,-23.75859"
        id="path997"
        sodipodi:nodetypes="ccccccccccccccccccccccccccc" />
     <ellipse
-       style="fill:#000000;stroke:none;stroke-width:25.4;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke"
+       style="fill:#753390;stroke:none;stroke-width:25.4;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke;fill-opacity:1"
        id="circle999"
        cx="270.93335"
        cy="270.93335"
