@@ -41,7 +41,7 @@ Dextop links the modified utilities that have been patched under Termux for some
 
 ### Hardware requirements:
 
-- Modern Android device (running Android 7.0+: this is a Termux limitation)
+- Modern Android device (Android 7.0+: Termux limitation)
 - Mouse (bluetooth or other)
 - Keyboard (bluetooth or other)
 - Power source (for extended work periods and performance requirements: Samsung Dex limitation)
