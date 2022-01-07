@@ -4,7 +4,7 @@
 
 [[ Dextop Project Page ]](https://github.com/nathaneltitane/dextop)
 
-Dextop turns your modern Android device into a full workstation in a matter of minutes!
+Dextop turns your modern Android device into a complete Linux-based distribution workstation in a matter of minutes!
 No hassle or deep technical know-how required: Dextop is easy and user friendly.
 
 Comparison in between Dextop and other projects:
