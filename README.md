@@ -1,6 +1,6 @@
 ### Dextop [ Version // 01-06-2022 ]
 
-![dextop](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop-black.svg)
+![dextop](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop.svg)
 
 [[ Dextop Project Page ]](https://github.com/nathaneltitane/dextop)
 
