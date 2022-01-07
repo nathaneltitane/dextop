@@ -66,7 +66,7 @@ Install the following:
 
 Once the Android applications are installed on your device, open Termux and paste or type:
 
-`curl -s -L run.dxtp.app > dextop && bash dextop``
+`curl -s -L run.dxtp.app > dextop && bash dextop`
 
 
 Container install options are:
