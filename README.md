@@ -1,6 +1,6 @@
 ## Linux on Android - Termux // Dextop // Ubuntu [ Version // 01-06-2022 ]
 
-<p align="center"><img alt="dextop" src=https://github.com/nathaneltitane/dextop/blob/master/dextop.png></p>
+![dextop](https://github.com/nathaneltitane/dextop/blob/master/dextop.svg)
 
 Dextop turns your modern Android device into a full workstation in a matter of minutes!
 No hassle or deep technical know-how required: Dextop is easy and user friendly.
