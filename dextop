@@ -279,6 +279,10 @@ then
 	files_list+=(
 		Adwaita
 		Adwaita-dark
+		Arc
+		Arc-Dark
+		Arc-Darker
+		Arc-Lighter
 		Blackbird
 		Bluebird
 		Default

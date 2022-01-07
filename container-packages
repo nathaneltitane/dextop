@@ -96,6 +96,7 @@ xfce_fonts_list=(
 )
 
 xfce_themes_list=(
+	arc-theme
 	blackbird-gtk-theme
 	bluebird-gtk-theme
 	greybird-gtk-theme
