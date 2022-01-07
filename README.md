@@ -9,7 +9,7 @@ Comparison in between Dextop and other projects:
 
 - It provides you with a selection of the Ubuntu distribution base images: stable, popular and user-friendly knowledge bases.
 - It expands the installed base image to run just like a normal PC installation.
-- It generates an actual user profile and prepares a functional home directory for you to work in, esily and securely.
+- It generates an actual user profile and prepares a functional home directory for you to work in, easily and securely.
 - It installs all the necessary applications and utilities to provide you with the right experience.
 - It sets up your internal (and external, when available) storage media for flexible, system-wide access.
 - It handles all the technical intricacies related to a container (chroot/proot) installation so that you do not have to bother with them and get right to work.
