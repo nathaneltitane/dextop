@@ -255,7 +255,6 @@ then
 
 	files_list+=(
 		Adwaita
-		HighContrast
 		default
 		elementary-xfce
 		elementary-xfce-dark
