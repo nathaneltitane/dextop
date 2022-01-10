@@ -120,6 +120,7 @@ xfce_fonts_list=(
 )
 
 xfce_themes_list=(
+	papirus-icon-theme
 )
 
 xfce_addons_list=(

@@ -255,13 +255,9 @@ then
 
 	files_list+=(
 		Adwaita
-		default
-		elementary-xfce
-		elementary-xfce-dark
-		elementary-xfce-darker
-		elementary-xfce-darkest
-		hicolor
-		Tango
+		Papirus
+		Papirus-Dark
+		Papirus-Light
 	)
 
 	console.copy "${PREFIX}"/cnt/usr/share/icons "${PREFIX}"/share/icons ${files_list[@]}
@@ -276,24 +272,10 @@ then
 	# themes
 
 	files_list+=(
-		Adwaita
-		Adwaita-dark
 		Arc
 		Arc-Dark
 		Arc-Darker
 		Arc-Lighter
-		Blackbird
-		Bluebird
-		Default
-		Default-hdpi
-		Default-xhdpi
-		Greybird
-		Greybird-accessibility
-		Greybird-bright
-		Greybird-compact
-		Greybird-dark
-		Greybird-dark-accessibility
-		HighContrast
 	)
 
 	console.copy "${PREFIX}"/cnt/usr/share/themes "${PREFIX}"/share/themes ${files_list[@]}
@@ -302,9 +284,35 @@ then
 
 	console.keep "${PREFIX}"/share/themes ${files_list[@]}
 
+	files_list=()
+
+	# backgrounds
+
+	files_list=(
+		dextop-aubergine.svg
+		dextop-black.svg
+		dextop-blue.svg
+		dextop-canary.svg
+		dextop-coral.svg
+		dextop-graphite.svg
+		dextop-grey.svg
+		dextop-lilac.svg
+		dextop-powder.svg
+		dextop-silver.svg
+		dextop-sky.svg
+		dextop-sunflower.svg
+		dextop-white.svg
+	)
+
+	console.download get.trmnl.me/dextop "${HOME}"/.dextop ${files_list[@]}
+
+	console.link "${HOME}"/.dextop "${PREFIX}"/cnt/usr/share/backgrounds/dextop ${files_list[@]}
+
+	console.link "${HOME}"/.dextop "${PREFIX}"/share/backgrounds/dextop ${files_list[@]}
 
 	files_list=()
 
+	# checkpoint
 
 	console.file "${PREFIX}"/bin dextop-checkpoint-complete
 fi
