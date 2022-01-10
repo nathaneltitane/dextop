@@ -304,11 +304,7 @@ then
 		dextop-white.svg
 	)
 
-	console.download get.trmnl.me/dextop "${HOME}"/.dextop ${files_list[@]}
-
-	console.link "${HOME}"/.dextop "${PREFIX}"/cnt/usr/share/backgrounds/dextop ${files_list[@]}
-
-	console.link "${HOME}"/.dextop "${PREFIX}"/share/backgrounds/dextop ${files_list[@]}
+	console.download get.trmnl.me/dextop "${HOME}"/Backgrounds ${files_list[@]}
 
 	files_list=()
 
