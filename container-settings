@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# variables
+
+edge_value="50"
+font_size="10"
+font="Sans"
+monospace_font="Monospace"
+icon_theme="Papirus-Dark"
+window_theme="Arc-Darker"
+
 # reset panel settings
 
 xfconf-query -r -R -v -c 'xfce4-panel' -p /panels
@@ -24,12 +33,12 @@ settings_list=(
 	xfconf-query --create -c 'xsettings' -p '/Gtk/CursorThemeSize' -t int -s '0'
 	xfconf-query --create -c 'xsettings' -p '/Gtk/DecorationLayout' -t string -s 'menu'
 	xfconf-query --create -c 'xsettings' -p '/Gtk/DialogsUseHeader' -t bool -s 'true'
-	xfconf-query --create -c 'xsettings' -p '/Gtk/FontName' -t string -s 'Sans'
+	xfconf-query --create -c 'xsettings' -p '/Gtk/FontName' -t string -s ${font} ${font_size}
 	xfconf-query --create -c 'xsettings' -p '/Gtk/IconSizes' -t string -s ''
 	xfconf-query --create -c 'xsettings' -p '/Gtk/KeyThemeName' -t string -s ''
 	xfconf-query --create -c 'xsettings' -p '/Gtk/MenuBarAccel' -t string -s 'F10'
 	xfconf-query --create -c 'xsettings' -p '/Gtk/MenuImages' -t bool -s 'true'
-	xfconf-query --create -c 'xsettings' -p '/Gtk/MonospaceFontName' -t string -s 'Monospace'
+	xfconf-query --create -c 'xsettings' -p '/Gtk/MonospaceFontName' -t string -s ${monospace_font} ${font_size}
 	xfconf-query --create -c 'xsettings' -p '/Gtk/TitlebarMiddleClick' -t string -s 'lower'
 	xfconf-query --create -c 'xsettings' -p '/Gtk/ToolbarIconSize' -t int -s '3'
 	xfconf-query --create -c 'xsettings' -p '/Gtk/ToolbarStyle' -t string -s 'icons'
@@ -40,9 +49,9 @@ settings_list=(
 	xfconf-query --create -c 'xsettings' -p '/Net/DoubleClickTime' -t int -s '400'
 	xfconf-query --create -c 'xsettings' -p '/Net/EnableEventSounds' -t bool -s 'false'
 	xfconf-query --create -c 'xsettings' -p '/Net/EnableInputFeedbackSounds' -t bool -s 'false'
-	xfconf-query --create -c 'xsettings' -p '/Net/IconThemeName' -t string -s 'Papirus-Dark'
+	xfconf-query --create -c 'xsettings' -p '/Net/IconThemeName' -t string -s ${icon_theme}
 	xfconf-query --create -c 'xsettings' -p '/Net/SoundThemeName' -t string -s 'default'
-	xfconf-query --create -c 'xsettings' -p '/Net/ThemeName' -t string -s 'Arc-Darker'
+	xfconf-query --create -c 'xsettings' -p '/Net/ThemeName' -t string -s ${window_theme}
 	xfconf-query --create -c 'xsettings' -p '/Xft/Antialias' -t string -s '-1'
 	xfconf-query --create -c 'xsettings' -p '/Xft/HintStyle' -t string -s 'hintnone'
 	xfconf-query --create -c 'xsettings' -p '/Xft/Hinting' -t string -s '-1'
@@ -119,13 +128,14 @@ settings_list=(
 	xfconf-query --create -c 'xfce4-desktop' -p '/desktop-icons/file-icons/show-home' -t bool -s 'false'
 	xfconf-query --create -c 'xfce4-desktop' -p '/desktop-icons/file-icons/show-removable' -t bool -s 'false'
 	xfconf-query --create -c 'xfce4-desktop' -p '/desktop-icons/file-icons/show-trash' -t bool -s 'false'
+	xfconf-query --create -c 'xfce4-desktop' -p '/desktop-icons/font-size' -t double -s '10.0'
 	xfconf-query --create -c 'xfce4-desktop' -p '/desktop-icons/gravity' -t int -s '4'
 	xfconf-query --create -c 'xfce4-desktop' -p '/desktop-icons/icon-size' -t int -s '32'
 	xfconf-query --create -c 'xfce4-desktop' -p '/desktop-icons/show-hidden-files' -t bool -s 'false'
 	xfconf-query --create -c 'xfce4-desktop' -p '/desktop-icons/show-thumbnails' -t bool -s 'false'
 	xfconf-query --create -c 'xfce4-desktop' -p '/desktop-icons/show-tooltips' -t bool -s 'false'
 	xfconf-query --create -c 'xfce4-desktop' -p '/desktop-icons/style' -t int -s '1'
-	xfconf-query --create -c 'xfce4-desktop' -p '/desktop-icons/use-custom-font-size' -t bool -s 'false'
+	xfconf-query --create -c 'xfce4-desktop' -p '/desktop-icons/use-custom-font-size' -t bool -s 'true'
 	xfconf-query --create -c 'xfce4-desktop' -p '/windowlist-menu/show-sticky-once' -t bool -s 'true'
 	xfconf-query --create -c 'xfce4-desktop' -p '/windowlist-menu/show-submenus' -t bool -s 'true'
 	xfconf-query --create -c 'xfce4-keyboard-shortcuts' -p '/commands/custom/<Alt>F2/startup-notify' -t bool -s 'true'
@@ -209,7 +219,7 @@ settings_list=(
 	xfconf-query --create -c 'xfce4-panel' -p '/panels' -t int -s '1' -a
 	xfconf-query --create -c 'xfce4-panel' -p '/panels/dark-mode' -t bool -s 'false'
 	xfconf-query --create -c 'xfce4-panel' -p '/panels/panel-1/autohide-behavior' -t int -s '1'
-	xfconf-query --create -c 'xfce4-panel' -p '/panels/panel-1/plugin-ids' -t int -s '1' -t int -s '2' -t int -s '3' -t int -s '4' -t int -s '5' -a
+	xfconf-query --create -c 'xfce4-panel' -p '/panels/panel-1/plugin-ids' -t int -s '1' -t int -s '2' -t int -s '3' -t int -s '4' -t int -s '5' -t int -s '6' -t int -s '7' -t int -s '8'-a
 	xfconf-query --create -c 'xfce4-panel' -p '/panels/panel-1/position' -t string -s 'p=9;x=0;y=0'
 	xfconf-query --create -c 'xfce4-panel' -p '/panels/panel-1/position-locked' -t bool -s 'true'
 	xfconf-query --create -c 'xfce4-panel' -p '/panels/panel-1/popdown-speed' -t int -s '0'
@@ -223,6 +233,16 @@ settings_list=(
 	xfconf-query --create -c 'xfce4-panel' -p '/plugins/plugin-4/style' -t int -s '0'
 	xfconf-query --create -c 'xfce4-panel' -p '/plugins/plugin-5' -t string -s 'pager'
 	xfconf-query --create -c 'xfce4-panel' -p '/plugins/plugin-5/rows' -t int -s '1'
+	xfconf-query --create -c 'xfce4-panel' -p '/plugins/plugin-6' -t string -s 'separator'
+	xfconf-query --create -c 'xfce4-panel' -p '/plugins/plugin-6/style' -t int -s '0'
+	xfconf-query --create -c 'xfce4-panel' -p '/plugins/plugin-7' -t string -s 'systray'
+	xfconf-query --create -c 'xfce4-panel' -p '/plugins/plugin-7/hide-new-items' -t bool -s 'false'
+	xfconf-query --create -c 'xfce4-panel' -p '/plugins/plugin-7/icon-size' -t int -s '0'
+	xfconf-query --create -c 'xfce4-panel' -p '/plugins/plugin-7/known-legacy-items' -t string -s 'task manager' -a
+	xfconf-query --create -c 'xfce4-panel' -p '/plugins/plugin-7/single-row' -t bool -s 'true'
+	xfconf-query --create -c 'xfce4-panel' -p '/plugins/plugin-7/square-icons' -t bool -s 'true'
+	xfconf-query --create -c 'xfce4-panel' -p '/plugins/plugin-8' -t string -s 'separator'
+	xfconf-query --create -c 'xfce4-panel' -p '/plugins/plugin-8/style' -t int -s '0'
 	xfconf-query --create -c 'xfwm4' -p '/general/activate_action' -t string -s 'switch'
 	xfconf-query --create -c 'xfwm4' -p '/general/borderless_maximize' -t bool -s 'true'
 	xfconf-query --create -c 'xfwm4' -p '/general/box_move' -t bool -s 'false'
@@ -261,7 +281,7 @@ settings_list=(
 	xfconf-query --create -c 'xfwm4' -p '/general/prevent_focus_stealing' -t bool -s 'false'
 	xfconf-query --create -c 'xfwm4' -p '/general/raise_delay' -t int -s '250'
 	xfconf-query --create -c 'xfwm4' -p '/general/raise_on_click' -t bool -s 'true'
-	xfconf-query --create -c 'xfwm4' -p '/general/raise_on_focus' -t bool -s 'false'
+	xfconf-query --create -c 'xfwm4' -p '/general/raise_on_focus' -t bool -s 'true'
 	xfconf-query --create -c 'xfwm4' -p '/general/raise_with_any_button' -t bool -s 'true'
 	xfconf-query --create -c 'xfwm4' -p '/general/repeat_urgent_blink' -t bool -s 'false'
 	xfconf-query --create -c 'xfwm4' -p '/general/resize_opacity' -t int -s '100'
@@ -278,11 +298,11 @@ settings_list=(
 	xfconf-query --create -c 'xfwm4' -p '/general/snap_resist' -t bool -s 'false'
 	xfconf-query --create -c 'xfwm4' -p '/general/snap_to_border' -t bool -s 'true'
 	xfconf-query --create -c 'xfwm4' -p '/general/snap_to_windows' -t bool -s 'true'
-	xfconf-query --create -c 'xfwm4' -p '/general/snap_width' -t int -s '10'
-	xfconf-query --create -c 'xfwm4' -p '/general/theme' -t string -s 'Arc-Darker'
+	xfconf-query --create -c 'xfwm4' -p '/general/snap_width' -t int -s ${edge_value}
+	xfconf-query --create -c 'xfwm4' -p '/general/theme' -t string -s ${window_theme}
 	xfconf-query --create -c 'xfwm4' -p '/general/tile_on_move' -t bool -s 'true'
 	xfconf-query --create -c 'xfwm4' -p '/general/title_alignment' -t string -s 'center'
-	xfconf-query --create -c 'xfwm4' -p '/general/title_font' -t string -s 'Sans'
+	xfconf-query --create -c 'xfwm4' -p '/general/title_font' -t string -s ${font} ${font_size}
 	xfconf-query --create -c 'xfwm4' -p '/general/title_horizontal_offset' -t int -s '0'
 	xfconf-query --create -c 'xfwm4' -p '/general/title_shadow_active' -t bool -s 'false'
 	xfconf-query --create -c 'xfwm4' -p '/general/title_shadow_inactive' -t bool -s 'false'
@@ -298,13 +318,20 @@ settings_list=(
 	xfconf-query --create -c 'xfwm4' -p '/general/workspace_names' -t string -s 'Workspace 01' -t string -s 'Workspace 02' -t string -s 'Workspace 03' -t string -s 'Workspace 04' -t string -s 'Workspace 05' -t string -s 'Workspace 06' -t string -s 'Workspace 07' -t string -s 'Workspace 08' -t string -s 'Workspace 09'
 	xfconf-query --create -c 'xfwm4' -p '/general/wrap_cycle' -t bool -s 'false'
 	xfconf-query --create -c 'xfwm4' -p '/general/wrap_layout' -t bool -s 'false'
-	xfconf-query --create -c 'xfwm4' -p '/general/wrap_resistance' -t int -s '10'
+	xfconf-query --create -c 'xfwm4' -p '/general/wrap_resistance' -t int -s ${edge_value}
 	xfconf-query --create -c 'xfwm4' -p '/general/wrap_windows' -t bool -s 'false'
 	xfconf-query --create -c 'xfwm4' -p '/general/wrap_workspaces' -t bool -s 'false'
 	xfconf-query --create -c 'xfwm4' -p '/general/zoom_desktop' -t bool -s 'false'
 	xfconf-query --create -c 'xfwm4' -p '/general/zoom_pointer' -t bool -s 'false'
+	xfconf-query --create -c 'xfce4-taskmanager' -p '/show-status-icon' -t bool -s 'true'
 	xfconf-query --create -c 'xfce4-taskmanager' -p '/window-height' -t int -s '600'
 	xfconf-query --create -c 'xfce4-taskmanager' -p '/window-width' -t int -s '600'
+	xfconf-query --create -c 'xfce4-taskmanager' -p '/interface/handle-position' -t int -s '100'
+	xfconf-query --create -c 'xfce4-taskmanager' -p '/interface/more-precision' -t bool -s 'false'
+	xfconf-query --create -c 'xfce4-taskmanager' -p '/interface/more-process-tree' -t bool -s 'true'
+	xfconf-query --create -c 'xfce4-taskmanager' -p '/interface/refresh-rate' -t int -s '500'
+	xfconf-query --create -c 'xfce4-taskmanager' -p '/interface/show-all-processes' -t bool -s 'true'
+
 )
 
 for setting in settings_list
