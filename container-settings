@@ -208,6 +208,7 @@ settings_list=(
 	xfconf-query --create -c 'xfce4-panel' -p '/configver' -t int -s '2'
 	xfconf-query --create -c 'xfce4-panel' -p '/panels' -t int -s '1' -a
 	xfconf-query --create -c 'xfce4-panel' -p '/panels/dark-mode' -t bool -s 'false'
+	xfconf-query --create -c 'xfce4-panel' -p '/panels/panel-1/autohide-behavior' -t int -s '1'
 	xfconf-query --create -c 'xfce4-panel' -p '/panels/panel-1/plugin-ids' -t int -s '1' -t int -s '2' -t int -s '3' -t int -s '4' -t int -s '5' -a
 	xfconf-query --create -c 'xfce4-panel' -p '/panels/panel-1/position' -t string -s 'p=6;x=128;y=21'
 	xfconf-query --create -c 'xfce4-panel' -p '/panels/panel-1/position-locked' -t bool -s 'true'
