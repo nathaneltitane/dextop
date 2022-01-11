@@ -2,17 +2,54 @@
 
 # variables
 
+color="#2f343f"
+
 edge_value="50"
+
 font_size="10"
-font="Sans"
+regular_font="Sans"
 monospace_font="Monospace"
+
 icon_theme="Papirus-Dark"
 window_theme="Arc-Darker"
 
+# translate color:
+# hexadecimal  to rgba integer range
+
+read hex <<< "${color}"
+
+[[ ${hex:0:1} = "#" ]] && hex=${hex:1:6}
+
+# translate hexadecimal  value
+
+r=$((16#${hex:0:2}))
+g=$((16#${hex:2:2}))
+b=$((16#${hex:4:2}))
+
+# calculate float-point integer value
+
+r_int=$(( 1000000 * $r / 256 ))
+g_int=$(( 1000000 * $g / 256 ))
+b_int=$(( 1000000 * $b / 256 ))
+
+a_int=$(( 256 / 256 ))
+
+# assign rgba gamut
+
+r=0.${r_int}
+g=0.${g_int}
+b=0.${b_int}
+
+a=${a_int}.000000
+
 # reset panel settings
 
-xfconf-query -r -R -v -c 'xfce4-panel'    -p /panels
-xfconf-query -r -R -v -c 'xfce4-panel'    -p /plugins
+for property in ${properties_list[@]}
+do
+	xfconf-query -r -R -v -c 'xfce4-panel'-p ${property}
+done
+
+# values
 
 settings_list=(
 	xfconf-query --create -c 'xfce4-notifyd'               -p '/log-level' -t int -s '0'
@@ -33,7 +70,7 @@ settings_list=(
 	xfconf-query --create -c 'xsettings'                   -p '/Gtk/CursorThemeSize' -t int -s '0'
 	xfconf-query --create -c 'xsettings'                   -p '/Gtk/DecorationLayout' -t string -s 'menu'
 	xfconf-query --create -c 'xsettings'                   -p '/Gtk/DialogsUseHeader' -t bool -s 'true'
-	xfconf-query --create -c 'xsettings'                   -p '/Gtk/FontName' -t string -s ${font} ${font_size}
+	xfconf-query --create -c 'xsettings'                   -p '/Gtk/FontName' -t string -s ${regular_font} ${font_size}
 	xfconf-query --create -c 'xsettings'                   -p '/Gtk/IconSizes' -t string -s ''
 	xfconf-query --create -c 'xsettings'                   -p '/Gtk/KeyThemeName' -t string -s ''
 	xfconf-query --create -c 'xsettings'                   -p '/Gtk/MenuBarAccel' -t string -s 'F10'
@@ -104,24 +141,24 @@ settings_list=(
 	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace8/color-style' -t int -s '1'
 	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace8/image-style' -t int -s '1'
 	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace8/last-image' -t string -s '/data/data/com.termux/files/home/Backgrounds/dextop-white.svg'
-	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace0/rgba1' -t double -s '0.184314' -t double -s '0.203922' -t double -s '0.247059' -t double -s '1.000000' # #2f343f
-	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace1/rgba1' -t double -s '0.184314' -t double -s '0.203922' -t double -s '0.247059' -t double -s '1.000000' # #2f343f
-	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace2/rgba1' -t double -s '0.184314' -t double -s '0.203922' -t double -s '0.247059' -t double -s '1.000000' # #2f343f
-	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace3/rgba1' -t double -s '0.184314' -t double -s '0.203922' -t double -s '0.247059' -t double -s '1.000000' # #2f343f
-	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace4/rgba1' -t double -s '0.184314' -t double -s '0.203922' -t double -s '0.247059' -t double -s '1.000000' # #2f343f
-	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace5/rgba1' -t double -s '0.184314' -t double -s '0.203922' -t double -s '0.247059' -t double -s '1.000000' # #2f343f
-	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace6/rgba1' -t double -s '0.184314' -t double -s '0.203922' -t double -s '0.247059' -t double -s '1.000000' # #2f343f
-	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace7/rgba1' -t double -s '0.184314' -t double -s '0.203922' -t double -s '0.247059' -t double -s '1.000000' # #2f343f
-	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace8/rgba1' -t double -s '0.184314' -t double -s '0.203922' -t double -s '0.247059' -t double -s '1.000000' # #2f343f
-	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace0/rgba2' -t double -s '0.184314' -t double -s '0.203922' -t double -s '0.247059' -t double -s '1.000000' # #2f343f
-	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace1/rgba2' -t double -s '0.184314' -t double -s '0.203922' -t double -s '0.247059' -t double -s '1.000000' # #2f343f
-	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace2/rgba2' -t double -s '0.184314' -t double -s '0.203922' -t double -s '0.247059' -t double -s '1.000000' # #2f343f
-	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace3/rgba2' -t double -s '0.184314' -t double -s '0.203922' -t double -s '0.247059' -t double -s '1.000000' # #2f343f
-	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace4/rgba2' -t double -s '0.184314' -t double -s '0.203922' -t double -s '0.247059' -t double -s '1.000000' # #2f343f
-	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace5/rgba2' -t double -s '0.184314' -t double -s '0.203922' -t double -s '0.247059' -t double -s '1.000000' # #2f343f
-	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace6/rgba2' -t double -s '0.184314' -t double -s '0.203922' -t double -s '0.247059' -t double -s '1.000000' # #2f343f
-	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace7/rgba2' -t double -s '0.184314' -t double -s '0.203922' -t double -s '0.247059' -t double -s '1.000000' # #2f343f
-	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace8/rgba2' -t double -s '0.184314' -t double -s '0.203922' -t double -s '0.247059' -t double -s '1.000000' # #2f343f
+	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace0/rgba1' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace1/rgba1' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace2/rgba1' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace3/rgba1' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace4/rgba1' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace5/rgba1' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace6/rgba1' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace7/rgba1' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace8/rgba1' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace0/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace1/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace2/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace3/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace4/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace5/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace6/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace7/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorVNC-0/workspace8/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
 	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/single-workspace-mode' -t bool -s 'true'
 	xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/single-workspace-number' -t int -s '0'
 	xfconf-query --create -c 'xfce4-desktop'               -p '/desktop-icons/file-icons/show-filesystem' -t bool -s 'false'
@@ -302,7 +339,7 @@ settings_list=(
 	xfconf-query --create -c 'xfwm4'                       -p '/general/theme' -t string -s ${window_theme}
 	xfconf-query --create -c 'xfwm4'                       -p '/general/tile_on_move' -t bool -s 'true'
 	xfconf-query --create -c 'xfwm4'                       -p '/general/title_alignment' -t string -s 'center'
-	xfconf-query --create -c 'xfwm4'                       -p '/general/title_font' -t string -s ${font} ${font_size}
+	xfconf-query --create -c 'xfwm4'                       -p '/general/title_font' -t string -s ${regular_font} ${font_size}
 	xfconf-query --create -c 'xfwm4'                       -p '/general/title_horizontal_offset' -t int -s '0'
 	xfconf-query --create -c 'xfwm4'                       -p '/general/title_shadow_active' -t bool -s 'false'
 	xfconf-query --create -c 'xfwm4'                       -p '/general/title_shadow_inactive' -t bool -s 'false'
