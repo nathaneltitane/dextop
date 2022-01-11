@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# reset panel settings
+
+xfconf-query -r -R -v -c 'xfce4-panel' -p /panels
+xfconf-query -r -R -v -c 'xfce4-panel' -p /plugins
+
 settings_list=(
 	xfconf-query --create -c 'xfce4-notifyd' -p '/log-level' -t int -s '0'
 	xfconf-query --create -c 'xfce4-notifyd' -p '/log-level-apps' -t int -s '0'
@@ -200,6 +205,22 @@ settings_list=(
 	xfconf-query --create -c 'xfce4-keyboard-shortcuts' -p '/xfwm4/custom/Up' -t string -s 'up_key'
 	xfconf-query --create -c 'xfce4-keyboard-shortcuts' -p '/xfwm4/custom/override' -t bool -s 'true'
 	xfconf-query --create -c 'xfce4-keyboard-shortcuts' -p '/providers' -t string -s 'xfwm4' -t string -s 'commands'
+	xfconf-query --create -c 'xfce4-panel' -p '/configver' -t int -s '2'
+	xfconf-query --create -c 'xfce4-panel' -p '/panels' -t int -s '1' -a
+	xfconf-query --create -c 'xfce4-panel' -p '/panels/dark-mode' -t bool -s 'false'
+	xfconf-query --create -c 'xfce4-panel' -p '/panels/panel-1/plugin-ids' -t int -s '1' -t int -s '2' -t int -s '3' -t int -s '4' -t int -s '5' -a
+	xfconf-query --create -c 'xfce4-panel' -p '/panels/panel-1/position' -t string -s 'p=6;x=128;y=21'
+	xfconf-query --create -c 'xfce4-panel' -p '/panels/panel-1/position-locked' -t bool -s 'true'
+	xfconf-query --create -c 'xfce4-panel' -p '/panels/panel-1/size' -t int -s '41'
+	xfconf-query --create -c 'xfce4-panel' -p '/plugins/plugin-1' -t string -s 'showdesktop'
+	xfconf-query --create -c 'xfce4-panel' -p '/plugins/plugin-2' -t string -s 'separator'
+	xfconf-query --create -c 'xfce4-panel' -p '/plugins/plugin-2/style' -t int -s '0'
+	xfconf-query --create -c 'xfce4-panel' -p '/plugins/plugin-3' -t string -s 'directorymenu'
+	xfconf-query --create -c 'xfce4-panel' -p '/plugins/plugin-3/base-directory' -t string -s '/data/data/com.termux/files/home'
+	xfconf-query --create -c 'xfce4-panel' -p '/plugins/plugin-4' -t string -s 'separator'
+	xfconf-query --create -c 'xfce4-panel' -p '/plugins/plugin-4/style' -t int -s '0'
+	xfconf-query --create -c 'xfce4-panel' -p '/plugins/plugin-5' -t string -s 'pager'
+	xfconf-query --create -c 'xfce4-panel' -p '/plugins/plugin-5/rows' -t int -s '1'
 	xfconf-query --create -c 'xfwm4' -p '/general/activate_action' -t string -s 'switch'
 	xfconf-query --create -c 'xfwm4' -p '/general/borderless_maximize' -t bool -s 'true'
 	xfconf-query --create -c 'xfwm4' -p '/general/box_move' -t bool -s 'false'
