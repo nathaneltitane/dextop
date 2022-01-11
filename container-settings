@@ -49,7 +49,7 @@ do
 	xfconf-query -r -R -v -c 'xfce4-panel'-p ${property}
 done
 
-# values
+# settings
 
 settings_list=(
 	xfconf-query --create -c 'xfce4-notifyd'               -p '/log-level' -t int -s '0'
@@ -178,12 +178,12 @@ settings_list=(
 	xfconf-query --create -c 'xfce4-keyboard-shortcuts'    -p '/commands/custom/<Alt>F2/startup-notify' -t bool -s 'true'
 	xfconf-query --create -c 'xfce4-keyboard-shortcuts'    -p '/commands/custom/<Alt>F3/startup-notify' -t bool -s 'true'
 	xfconf-query --create -c 'xfce4-keyboard-shortcuts'    -p '/commands/custom/<Alt>space' -t string -s 'xfce4-appfinder --collapsed'
-	xfconf-query --create -c 'xfce4-keyboard-shortcuts'    -p '/commands/custom/<Primary><Alt>c' -t string -s '/data/data/com.termux/files/usr/bin/xfce4-find-cursor'
-	xfconf-query --create -c 'xfce4-keyboard-shortcuts'    -p '/commands/custom/<Primary><Alt>e' -t string -s '/data/data/com.termux/files/usr/bin/termux-email'
+	xfconf-query --create -c 'xfce4-keyboard-shortcuts'    -p '/commands/custom/<Primary><Alt>c' -t string -s 'xfce4-find-cursor'
+	xfconf-query --create -c 'xfce4-keyboard-shortcuts'    -p '/commands/custom/<Primary><Alt>e' -t string -s 'termux-email'
 	xfconf-query --create -c 'xfce4-keyboard-shortcuts'    -p '/commands/custom/<Primary><Alt>f' -t string -s 'thunar'
-	xfconf-query --create -c 'xfce4-keyboard-shortcuts'    -p '/commands/custom/<Primary><Alt>m' -t string -s '/data/data/com.termux/files/usr/bin/xfce4-settings-manager'
-	xfconf-query --create -c 'xfce4-keyboard-shortcuts'    -p '/commands/custom/<Primary><Alt>s' -t string -s '/data/data/com.termux/files/usr/bin/xfce4-taskmanager'
-	xfconf-query --create -c 'xfce4-keyboard-shortcuts'    -p '/commands/custom/<Primary><Alt>t' -t string -s '/data/data/com.termux/files/usr/bin/xfce4-terminal'
+	xfconf-query --create -c 'xfce4-keyboard-shortcuts'    -p '/commands/custom/<Primary><Alt>m' -t string -s 'xfce4-settings-manager'
+	xfconf-query --create -c 'xfce4-keyboard-shortcuts'    -p '/commands/custom/<Primary><Alt>s' -t string -s 'xfce4-taskmanager'
+	xfconf-query --create -c 'xfce4-keyboard-shortcuts'    -p '/commands/custom/<Primary><Alt>t' -t string -s 'xfce4-terminal'
 	xfconf-query --create -c 'xfce4-keyboard-shortcuts'    -p '/commands/custom/<Primary>grave' -t string -s 'xfdesktop --menu'
 	xfconf-query --create -c 'xfce4-keyboard-shortcuts'    -p '/commands/custom/<Super>r/startup-notify' -t bool -s 'true'
 	xfconf-query --create -c 'xfce4-keyboard-shortcuts'    -p '/commands/custom/override' -t bool -s 'true'
