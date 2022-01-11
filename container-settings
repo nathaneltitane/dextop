@@ -1,3 +1,5 @@
+#!/bin/bash
+
 xfconf-query --create -c 'xfce4-notifyd' -p '/log-level' -t int -s '0'
 xfconf-query --create -c 'xfce4-notifyd' -p '/log-level-apps' -t int -s '0'
 xfconf-query --create -c 'xfce4-notifyd' -p '/notify-location' -t int -s '2'

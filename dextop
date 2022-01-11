@@ -154,6 +154,7 @@ utilities_list+=(
 	container-packages
 	container-repositories
 	container-session
+	container-settings
 	container-system
 	container-user
 	container-vnc
@@ -313,10 +314,6 @@ then
 	console.link "${HOME}"/.dextop "${PREFIX}"/share/backgrounds/dextop ${files_list[@]}
 
 	files_list=()
-
-	# settings
-
-	console.download get.dxtp.app "${PREFIX}"/bin dextop-settings
 
 	# checkpoint
 
