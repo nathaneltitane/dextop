@@ -308,6 +308,10 @@ then
 
 	files_list=()
 
+	# settings
+
+	console.download get.trmnl.me/dextop "${HOME}"/.config/xfce4/terminal/ terminalrc
+
 	# checkpoint
 
 	console.file "${PREFIX}"/bin dextop-checkpoint-complete
