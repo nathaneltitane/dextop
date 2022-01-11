@@ -90,6 +90,7 @@ xfce_list=(
 	thunar
 	thunar-archive-plugin
 	ristretto
+	tumbler
 )
 
 xfce_fonts_list=(
