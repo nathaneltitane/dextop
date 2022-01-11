@@ -306,13 +306,17 @@ then
 		dextop-white.svg
 	)
 
-	console.download get.trmnl.me/dextop "${HOME}"/Backgrounds ${files_list[@]}
+	console.download get.dxtp.app "${HOME}"/.dextop ${files_list[@]}
+
+	console.link "${HOME}"/.dextop "${PREFIX}"/cnt/usr/share/backgrounds/dextop ${files_list[@]}
+
+	console.link "${HOME}"/.dextop "${PREFIX}"/share/backgrounds/dextop ${files_list[@]}
 
 	files_list=()
 
 	# settings
 
-	console.download get.trmnl.me/dextop "${HOME}"/.config/xfce4/terminal/ terminalrc
+	console.download get.dxtp.app "${PREFIX}"/bin dextop-settings
 
 	# checkpoint
 
