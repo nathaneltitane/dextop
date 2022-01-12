@@ -111,6 +111,7 @@ xfconf-query --create -c 'xsettings'                   -p '/Xft/HintStyle' -t st
 xfconf-query --create -c 'xsettings'                   -p '/Xft/Hinting' -t string -s '-1'
 xfconf-query --create -c 'xsettings'                   -p '/Xft/RGBA' -t string -s 'none'
 xfconf-query --create -c 'thunar'                      -p '/default-view' -t string -s 'ThunarDetailsView'
+xfconf-query --create -c 'thunar'                      -p '/hidden-bookmarks' -t string -s 'file:///' -a
 xfconf-query --create -c 'thunar'                      -p '/last-details-view-column-widths' -t string -s '50,50,136,50,50,50,50,50,616,50,50,72,50,281'
 xfconf-query --create -c 'thunar'                      -p '/last-details-view-zoom-level' -t string -s 'THUNAR_ZOOM_LEVEL_50_PERCENT'
 xfconf-query --create -c 'thunar'                      -p '/last-icon-view-zoom-level' -t string -s 'THUNAR_ZOOM_LEVEL_100_PERCENT'
