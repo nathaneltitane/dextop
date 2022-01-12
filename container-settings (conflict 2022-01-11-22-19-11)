@@ -45,8 +45,8 @@ a=${a_int}.000000
 # reset panel settings
 
 properties_list=(
-	/panel
-	/plugins
+	"/panel"
+	"/plugins"
 )
 
 for property in ${properties_list[@]}

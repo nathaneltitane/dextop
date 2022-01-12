@@ -297,8 +297,10 @@ vnc_start () {
 	# make selection available for automatic start:
 	# verify user id - do not write selection when 'root' user is logged in
 
-	if [[ $(id -u) -ne 0 ]]
+	if [[ $(id -u -n) = "root" ]]
 	then
+		:
+	else
 		# integer check:
 		# do not write non numerical values to file
 
@@ -569,6 +571,14 @@ then
 	# start vnc session
 
 	vnc_start
+fi
+
+# first run:
+# generate password file
+
+if [ ! -f "${HOME}"/.vnc/passwd ]
+then
+	vnc_passs
 fi
 
 # list vnc session
