@@ -284,13 +284,13 @@ vnc_start () {
 	unset command_start
 
 	command_start+="vncserver"
-	[[ $(cat "${PREFIX}"/bin/dextop) = xfce ]] && command_start+=" -xstartup $(echo $(command -v startxfce4))"
-	#[[ $(ps -A | grep -i proot) ]] && command_start+=" -localhost yes" || command_start+=" -localhost"
+	command_start+=" -xstartup  $(echo $(command -v startxfce4 &))"
 	command_start+=" -SecurityTypes ${security}"
 	command_start+=" -IdleTimeout ${timeout}"
 	command_start+=" -depth ${depth}"
 	command_start+=" -geometry ${geometry}"
 	command_start+=" -desktop ${name}"
+	command_start+=" -nolock"
 	command_start+=" ${DISPLAY}"
 
 	console.silence "exec ${command_start}"
