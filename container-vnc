@@ -290,6 +290,7 @@ vnc_start () {
 	command_start+=" -rfbauth ${HOME}/.vnc/passwd"
 	command_start+=" -rfbwait 5000"
 	command_start+=" -depth ${depth}"
+	command_start+=" -pixelformat RGB888"
 	command_start+=" -geometry ${geometry}"
 	command_start+=" -desktop ${name}"
 	command_start+=" -nolock"
