@@ -42,7 +42,7 @@ b=0.${b_int}
 
 a=${a_int}.000000
 
-# reset panel settings
+# reset 'xfce4-panel' settings
 
 pkill -9 xfce4-panel
 
@@ -56,7 +56,7 @@ do
 	xfconf-query -r -R -v -c 'xfce4-panel' -p ${property}
 done
 
-# settings
+# set 'xfce4-session' settings
 
 xfconf-query --create -c 'xfce4-notifyd'               -p '/log-level' -t int -s '0'
 xfconf-query --create -c 'xfce4-notifyd'               -p '/log-level-apps' -t int -s '0'
@@ -381,3 +381,44 @@ xfconf-query --create -c 'xfce4-taskmanager'           -p '/interface/more-preci
 xfconf-query --create -c 'xfce4-taskmanager'           -p '/interface/more-process-tree' -t bool -s 'true'
 xfconf-query --create -c 'xfce4-taskmanager'           -p '/interface/refresh-rate' -t int -s '500'
 xfconf-query --create -c 'xfce4-taskmanager'           -p '/interface/show-all-processes' -t bool -s 'true'
+
+# set 'xfce4-terminal' settings
+
+pkill -9 xfce4-terminal
+
+cat <- 'FILE' >> "${HOME}"/.config/xfce4/terminal/terminalrc
+[Configuration]
+MiscAlwaysShowTabs=FALSE
+MiscBell=FALSE
+MiscBellUrgent=FALSE
+MiscBordersDefault=TRUE
+MiscCursorBlinks=FALSE
+MiscCursorShape=TERMINAL_CURSOR_SHAPE_BLOCK
+MiscDefaultGeometry=80x24
+MiscInheritGeometry=FALSE
+MiscMenubarDefault=FALSE
+MiscMouseAutohide=FALSE
+MiscMouseWheelZoom=TRUE
+MiscToolbarDefault=FALSE
+MiscConfirmClose=TRUE
+MiscCycleTabs=TRUE
+MiscTabCloseButtons=TRUE
+MiscTabCloseMiddleClick=TRUE
+MiscTabPosition=GTK_POS_TOP
+MiscHighlightUrls=TRUE
+MiscMiddleClickOpensUri=FALSE
+MiscCopyOnSelect=TRUE
+MiscShowRelaunchDialog=TRUE
+MiscRewrapOnResize=TRUE
+MiscUseShiftArrowsToScroll=FALSE
+MiscSlimTabs=FALSE
+MiscNewTabAdjacent=FALSE
+MiscSearchDialogOpacity=100
+MiscShowUnsafePasteDialog=FALSE
+MiscRightClickAction=TERMINAL_RIGHT_CLICK_ACTION_CONTEXT_MENU
+FontName=Monospace 10
+ScrollingBar=TERMINAL_SCROLLBAR_NONE
+ColorForeground=#ececefeff1f1
+ColorBackground=#2f2f34343f3f
+ColorPalette=rgb(38,50,56);rgb(255,152,0);rgb(139,195,74);rgb(255,193,7);rgb(3,169,244);rgb(233,30,99);rgb(0,150,136);rgb(207,216,220);rgb(55,71,79);rgb(255,167,77);rgb(156,204,101);rgb(255,160,0);rgb(129,212,250);rgb(173,20,87);rgb(38,166,154);rgb(236,239,241)
+FILE
