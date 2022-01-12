@@ -273,8 +273,7 @@ vnc_start () {
 	echo
 
 	depth="32"
-
-	security="VncAuth"
+	security="none"
 	timeout="0"
 
 	# Note:
