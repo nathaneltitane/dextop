@@ -275,15 +275,16 @@ vnc_start () {
 	depth="32"
 	security="none"
 	timeout="0"
+	xstartup="$(echo $(command -v startxfce4 &))"
 
-	# Note:
+	# Notes:
 	# 'vncserver' uses $DISPLAY instead of $PORT
 	# use 'Xvnc' to ensure proper parameter application
 
 	unset command_start
 
 	command_start+="vncserver"
-	command_start+=" -xstartup  $(echo $(command -v startxfce4 &))"
+	command_start+=" -xstartup ${xstartup}"
 	command_start+=" -SecurityTypes ${security}"
 	command_start+=" -IdleTimeout ${timeout}"
 	command_start+=" -depth ${depth}"
@@ -571,14 +572,6 @@ then
 	# start vnc session
 
 	vnc_start
-fi
-
-# first run:
-# generate password file
-
-if [ ! -f "${HOME}"/.vnc/passwd ]
-then
-	vnc_passs
 fi
 
 # list vnc session
