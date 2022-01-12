@@ -56,6 +56,10 @@ done
 
 # set 'xfce4-session' settings
 
+xfconf-query --create -c 'xfce4-screensaver'           -p '/saver/enabled' -t bool -s 'false'
+xfconf-query --create -c 'xfce4-screensaver'           -p '/saver/fullscreen-inhibit' -t bool -s 'false'
+xfconf-query --create -c 'xfce4-screensaver'           -p '/saver/idle-activation/enabled' -t bool -s 'false'
+xfconf-query --create -c 'xfce4-screensaver'           -p '/saver/mode' -t int -s '0'
 xfconf-query --create -c 'xfce4-notifyd'               -p '/log-level' -t int -s '0'
 xfconf-query --create -c 'xfce4-notifyd'               -p '/log-level-apps' -t int -s '0'
 xfconf-query --create -c 'xfce4-notifyd'               -p '/notify-location' -t int -s '2'
