@@ -288,6 +288,7 @@ vnc_start () {
 	command_start+=" -IdleTimeout ${timeout}"
 	command_start+=" -auth ${HOME}/.Xauthority"
 	command_start+=" -rfbauth ${HOME}/.vnc/passwd"
+	command_start+=" -rfbwait 5000"
 	command_start+=" -depth ${depth}"
 	command_start+=" -geometry ${geometry}"
 	command_start+=" -desktop ${name}"
