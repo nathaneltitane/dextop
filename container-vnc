@@ -91,6 +91,8 @@ echo
 [ -z "${LOCALHOST}" ]       && LOCALHOST="127.0.0.1"
 [ -z "${PORT}" ]            && PORT="590${DISPLAY_NUMBER}"
 
+export DISPLAY="${DISPLAY}"
+
 [ -f /etc/os-release ] && . /etc/os-release && name="${NAME}" || name=Ubuntu
 
 # functions #
@@ -321,9 +323,11 @@ vnc_stop () {
 
 	# clean display server runtime files
 
+	rm -rf "${HOME}"/.Xauthority
 	rm -rf "${HOME}"/.vnc/*.log
 	rm -rf "${HOME}"/.vnc/*.pid
-	rm -rf /tmp/.X*
+	rm -rf "${TMPDIR}"/.X*-lock*
+	rm -rf "${TMP}"/.X*-lock*
 }
 
 vnc_list () {

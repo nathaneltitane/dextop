@@ -380,5 +380,6 @@ settings_list=(
 
 for setting in settings_list
 do
-	dbus-launch ${value}
+	#dbus-launch ${value}
+	${value}
 done
