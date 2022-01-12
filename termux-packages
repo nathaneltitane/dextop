@@ -183,6 +183,7 @@ purge_list=(
 	gigolo*
 	leafpad*
 	parole*
+	xfce4*plugin
 )
 
 console.purge ${purge_list[@]}

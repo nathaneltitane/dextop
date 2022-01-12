@@ -186,3 +186,14 @@ install_list+=(
 )
 
 console.install ${install_list[@]}
+
+# purge #
+
+purge_list=(
+	gigolo*
+	leafpad*
+	parole*
+	xfce4*plugin
+)
+
+console.purge ${purge_list[@]}
