@@ -304,8 +304,6 @@ then
 
 	if [ ! -f "${PREFIX}"/bin/backgrounds-checkpoint-complete ]
 	then
-
-
 		files_list=(
 			dextop-aubergine.svg
 			dextop-black.svg
