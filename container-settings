@@ -44,8 +44,6 @@ a=${a_int}.000000
 
 # reset 'xfce4-panel' settings
 
-pkill -9 xfce4-panel
-
 properties_list=(
 	'/panels'
 	'/plugins'
@@ -384,8 +382,6 @@ xfconf-query --create -c 'xfce4-taskmanager'           -p '/interface/show-all-p
 
 # set 'xfce4-terminal' settings
 
-pkill -9 xfce4-terminal
-
 mkdir -p "${HOME}"/.config/xfce4/terminal
 
 cat << 'FILE' > "${HOME}"/.config/xfce4/terminal/terminalrc
@@ -424,3 +420,15 @@ ColorForeground=#ececefeff1f1
 ColorBackground=#2f2f34343f3f
 ColorPalette=rgb(38,50,56);rgb(255,152,0);rgb(139,195,74);rgb(255,193,7);rgb(3,169,244);rgb(233,30,99);rgb(0,150,136);rgb(207,216,220);rgb(55,71,79);rgb(255,167,77);rgb(156,204,101);rgb(255,160,0);rgb(129,212,250);rgb(173,20,87);rgb(38,166,154);rgb(236,239,241)
 FILE
+
+# restart applications and modules
+
+applications_list=(
+	xfce4-panel
+	xfce4-terminal
+)
+
+for application in ${applications_list[@]}
+do
+	pkill -9 "${application}"
+done
