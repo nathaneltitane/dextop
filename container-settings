@@ -92,7 +92,7 @@ xfconf-query --create -c 'xsettings'                   -p '/Gtk/IconSizes' -t st
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/KeyThemeName' -t string -s ''
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/MenuBarAccel' -t string -s 'F10'
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/MenuImages' -t bool -s 'true'
-xfconf-query --create -c 'xsettings'                   -p '/Gtk/MonospaceFontName' -t string -s ${monospace_font} ${font_size}
+xfconf-query --create -c 'xsettings'                   -p '/Gtk/MonospaceFontName' -t string -s "${monospace_font} ${font_size}"
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/TitlebarMiddleClick' -t string -s 'lower'
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/ToolbarIconSize' -t int -s '3'
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/ToolbarStyle' -t string -s 'icons'
