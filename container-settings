@@ -386,7 +386,9 @@ xfconf-query --create -c 'xfce4-taskmanager'           -p '/interface/show-all-p
 
 pkill -9 xfce4-terminal
 
-cat <- 'FILE' >> "${HOME}"/.config/xfce4/terminal/terminalrc
+mkdir -p "${HOME}"/.config/xfce4/terminal
+
+cat << 'FILE' > "${HOME}"/.config/xfce4/terminal/terminalrc
 [Configuration]
 MiscAlwaysShowTabs=FALSE
 MiscBell=FALSE
