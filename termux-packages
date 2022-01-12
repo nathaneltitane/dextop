@@ -181,6 +181,7 @@ console.install ${install_list[@]}
 
 purge_list=(
 	gigolo*
+	gtkhash*
 	leafpad*
 	parole*
 	xfce4*plugin
