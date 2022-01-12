@@ -44,6 +44,11 @@ a=${a_int}.000000
 
 # reset panel settings
 
+properties_list=(
+	"/panel"
+	"/plugins"
+)
+
 for property in ${properties_list[@]}
 do
 	xfconf-query -r -R -v -c 'xfce4-panel'-p ${property}
@@ -378,8 +383,7 @@ settings_list=(
 
 )
 
-for setting in settings_list
+for setting in ${settings_list[@]}
 do
-	#dbus-launch ${value}
 	${value}
 done
