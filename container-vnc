@@ -274,7 +274,7 @@ vnc_start () {
 
 	depth="32"
 
-	security="none"
+	security="VncAuth"
 	timeout="0"
 
 	# Note:
@@ -287,6 +287,8 @@ vnc_start () {
 	command_start+=" -xstartup  $(echo $(command -v startxfce4 &))"
 	command_start+=" -SecurityTypes ${security}"
 	command_start+=" -IdleTimeout ${timeout}"
+	command_start+=" -auth ${HOME}/.Xauthority"
+	command_start+=" -rfbauth ${HOME}/.vnc/passwd"
 	command_start+=" -depth ${depth}"
 	command_start+=" -geometry ${geometry}"
 	command_start+=" -desktop ${name}"
