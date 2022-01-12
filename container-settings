@@ -56,6 +56,10 @@ done
 
 # set 'xfce4-session' settings
 
+xfconf-query --create -c 'xfce4-screensaver'           -p '/lock/enabled' -t bool -s 'false'
+xfconf-query --create -c 'xfce4-screensaver'           -p '/lock/saver-activation/enabled' -t bool -s 'false'
+xfconf-query --create -c 'xfce4-screensaver'           -p '/lock/status-messages/enabled' -t bool -s 'false'
+xfconf-query --create -c 'xfce4-screensaver'           -p '/lock/user-switching/enabled' -t bool -s 'false'
 xfconf-query --create -c 'xfce4-screensaver'           -p '/saver/enabled' -t bool -s 'false'
 xfconf-query --create -c 'xfce4-screensaver'           -p '/saver/fullscreen-inhibit' -t bool -s 'false'
 xfconf-query --create -c 'xfce4-screensaver'           -p '/saver/idle-activation/enabled' -t bool -s 'false'
