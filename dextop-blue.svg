@@ -80,13 +80,6 @@
        d="m 55.033346,204.31176 v 22.45489 l 40.216685,22.82511 40.216689,-22.82502 40.21669,22.82502 40.21658,-22.82502 v -45.65003 l 40.21659,-22.82492 9e-5,-45.65004 -40.21668,-22.825024 V 44.166687 L 175.6833,21.341577 135.46662,44.166595 95.24994,21.341577 55.033253,44.166595 V 89.816634 L 14.816665,112.64165 v 45.65004 l 40.216681,22.82502 h 9e-6 L 95.24993,158.29169 v -45.65004 l 40.2167,-22.825016 40.21668,22.825016 v 45.65004 l -40.21668,22.82502 -20.10834,-11.41251"
        id="path997"
        sodipodi:nodetypes="ccccccccccccccccccccccccccc" />
-    <ellipse
-       style="fill:#00aade;fill-opacity:1;stroke:none;stroke-width:12.7;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke"
-       id="circle999"
-       cx="135.46667"
-       cy="135.46667"
-       rx="16.55442"
-       ry="16.267954" />
     <rect
        style="fill:#000000;stroke:none;stroke-width:12.7;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke"
        id="rect1981"
@@ -171,5 +164,11 @@
        height="16.933334"
        x="237.06667"
        y="279.40002" />
+    <circle
+       style="fill:#00aade;stroke:none;stroke-width:12.7;stroke-linecap:round;paint-order:markers fill stroke"
+       id="path846"
+       cx="135.46667"
+       cy="135.46667"
+       r="16.933334" />
   </g>
 </svg>
