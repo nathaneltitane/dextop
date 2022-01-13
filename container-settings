@@ -87,7 +87,7 @@ xfconf-query --create -c 'xsettings'                   -p '/Gtk/CursorThemeName'
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/CursorThemeSize' -t int -s '0'
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/DecorationLayout' -t string -s 'menu'
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/DialogsUseHeader' -t bool -s 'true'
-xfconf-query --create -c 'xsettings'                   -p '/Gtk/FontName' -t string -s ${regular_font} ${font_size}
+xfconf-query --create -c 'xsettings'                   -p '/Gtk/FontName' -t string -s "${regular_font} ${font_size}"
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/IconSizes' -t string -s ''
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/KeyThemeName' -t string -s ''
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/MenuBarAccel' -t string -s 'F10'
@@ -359,7 +359,7 @@ xfconf-query --create -c 'xfwm4'                       -p '/general/snap_width' 
 xfconf-query --create -c 'xfwm4'                       -p '/general/theme' -t string -s ${window_theme}
 xfconf-query --create -c 'xfwm4'                       -p '/general/tile_on_move' -t bool -s 'true'
 xfconf-query --create -c 'xfwm4'                       -p '/general/title_alignment' -t string -s 'center'
-xfconf-query --create -c 'xfwm4'                       -p '/general/title_font' -t string -s ${regular_font} ${font_size}
+xfconf-query --create -c 'xfwm4'                       -p '/general/title_font' -t string -s "${regular_font} ${font_size}"
 xfconf-query --create -c 'xfwm4'                       -p '/general/title_horizontal_offset' -t int -s '0'
 xfconf-query --create -c 'xfwm4'                       -p '/general/title_shadow_active' -t bool -s 'false'
 xfconf-query --create -c 'xfwm4'                       -p '/general/title_shadow_inactive' -t bool -s 'false'
