@@ -218,6 +218,8 @@ then
 
 		console.link "${PREFIX}"/bin "${HOME}"/.termux termux.properties
 
+		termux-reload-settings
+
 		files_list=()
 
 		# bash #
