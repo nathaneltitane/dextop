@@ -87,6 +87,8 @@ xfce_list=(
 	xfce4-settings
 	xfce4-taskmanager
 	xfce4-terminal
+	gigolo
+	parole
 	thunar
 	thunar-archive-plugin
 	ristretto
@@ -187,13 +189,21 @@ install_list+=(
 
 console.install ${install_list[@]}
 
+# reinstall
+
+reinstall_list=(
+	xfce*
+	xfce4*
+	thunar*
+)
+
+console.reinstall ${reinstall_list[@]}
+
 # purge #
 
 purge_list=(
-	gigolo*
 	gtkhash*
 	leafpad*
-	parole*
 	xfce4*plugin
 )
 
