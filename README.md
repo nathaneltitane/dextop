@@ -18,6 +18,8 @@ Comparison in between Dextop and other projects:
 - It is configured as a transient container system: it talks to Android via the Termux shell to access Android and launch relevant viewers and applications for you.
 - It uses [console](https://github.com/nathaneltitane/console), a custom shell parser to handle the setup, colorize prompts and provide the user with an elegant, comprehensive and user-friendly experience.
 
+![dextop-session](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop-session.png)
+
 Dextop is very quick and efficient:
 Choose between a complete XFCE4 setup to get your work done, or keep the base install for command line interface and programming workflows.
 
