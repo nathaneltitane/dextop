@@ -87,6 +87,7 @@ xfce_list=(
 	xfce4-settings
 	xfce4-taskmanager
 	xfce4-terminal
+	galculator
 	gigolo
 	parole
 	thunar
@@ -204,7 +205,6 @@ console.reinstall ${reinstall_list[@]}
 purge_list=(
 	gtkhash*
 	leafpad*
-	xfce4*plugin
 )
 
 console.purge ${purge_list[@]}
