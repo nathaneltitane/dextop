@@ -211,6 +211,7 @@ then
 			termux-information
 			termux-message
 			termux.properties
+			colors.properties
 		)
 
 		console.download get.trmnl.me/termux "${PREFIX}"/bin ${files_list[@]}
