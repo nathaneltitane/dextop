@@ -259,7 +259,7 @@ then
 
 	if [ ! -f "${PREFIX}"/bin/icons-checkpoint-complete ]
 	then
-		# Papirus
+		# papirus icon theme
 
 		console.download https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/archive ${HOME} master.tar.gz
 
@@ -288,11 +288,10 @@ then
 
 		rm -rf "${HOME}"/*.tar.gz
 
+		# system icon themes
+
 		files_list+=(
 			Adwaita
-			Papirus
-			Papirus-Dark
-			Papirus-Light
 			default
 			hicolor
 		)
