@@ -182,7 +182,6 @@ console.install ${install_list[@]}
 # reinstall
 
 reinstall_list=(
-	xfce*
 	xfce4*
 	thunar*
 )
