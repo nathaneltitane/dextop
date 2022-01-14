@@ -259,6 +259,35 @@ then
 
 	if [ ! -f "${PREFIX}"/bin/icons-checkpoint-complete ]
 	then
+		# Papirus
+
+		console.download https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/archive ${HOME} master.tar.gz
+
+		themes_list=(
+			Papirus-Dark
+			Papirus-Light
+			Papirus
+		)
+
+		for theme in ${themes_list[@]}
+		do
+			cd "${HOME}"
+
+			tar																		\
+				--extract															\
+				--file="${HOME}"/master.tar.gz papirus-icon-theme-master/"${theme}"	\
+				--directory="${HOME}"
+		done
+
+		mv "${HOME}"/papirus-icon-theme* "${HOME}"/.icons
+
+		for theme in ${themes_list[@]}
+		do
+			gtk-update-icon-cache -q "${HOME}"/.icons/"${theme}"
+		done
+
+		rm -rf "${HOME}"/*.tar.gz
+
 		files_list+=(
 			Adwaita
 			Papirus
@@ -267,8 +296,6 @@ then
 			default
 			hicolor
 		)
-
-		console.copy "${PREFIX}"/cnt/usr/share/icons "${PREFIX}"/share/icons ${files_list[@]}
 
 		console.keep "${PREFIX}"/cnt/usr/share/icons ${files_list[@]}
 
