@@ -101,7 +101,6 @@ xfce_fonts_list=(
 
 xfce_themes_list=(
 	arc-theme
-	papirus-icon-theme
 	adwaita-icon-theme
 	adwaita-icon-theme-full
 #	blackbird-gtk-theme
