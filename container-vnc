@@ -601,6 +601,10 @@ then
 	vnc_start
 fi
 
+# destroy lock files
+
+vnc_clean
+
 # list vnc session
 
 vnc_list
