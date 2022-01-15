@@ -284,7 +284,7 @@ then
 			gtk-update-icon-cache -q "${HOME}"/.icons/"${theme}"
 		done
 
-		rm -rf "${HOME}"/*.tar.gz
+		rm -rf "${HOME}"/archive
 
 		# system icon themes
 

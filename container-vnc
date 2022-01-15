@@ -97,6 +97,36 @@ export DISPLAY="${DISPLAY}"
 
 # functions #
 
+vnc_clean () {
+	directories_list=(
+		"${HOME}"
+		"${TMPDIR}"
+		"${TMP}"
+	)
+
+	files_list=(
+		localhost*log
+		localhost*pid
+		.Xauthority
+		.X*unix
+		.X*lock
+	)
+
+	for directory in ${directories_list[@]}
+	do
+		if [ -d "${directory}" ]
+		then
+			for file in ${files_list[@]}
+			do
+				find "${directory}"		\
+					-type f 			\
+					-iname "${file}"	\
+					-delete
+			done
+		fi
+	done
+}
+
 vnc_intent () {
 	console.fwd "Opening display..."
 	echo
@@ -269,6 +299,8 @@ vnc_geometry () {
 }
 
 vnc_start () {
+	vnc_clean
+
 	console.fwd "Starting display server..."
 	echo
 
@@ -327,11 +359,7 @@ vnc_stop () {
 
 	# clean display server runtime files
 
-	rm -rf "${HOME}"/.Xauthority
-	rm -rf "${HOME}"/.vnc/*.log
-	rm -rf "${HOME}"/.vnc/*.pid
-	rm -rf "${TMPDIR}"/.X*-lock*
-	rm -rf "${TMP}"/.X*-lock*
+	vnc_clean
 }
 
 vnc_list () {
