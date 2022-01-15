@@ -586,6 +586,13 @@ then
 	vnc_pass
 fi
 
+if [ "${option}" = "clean" ]
+then
+	# remove lock files and session handlers
+
+	vnc_clean
+fi
+
 if [ "${option}" = "new" ]
 then
 	# handle selections display
