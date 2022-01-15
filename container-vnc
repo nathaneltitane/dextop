@@ -94,6 +94,7 @@ echo
 [ -z "${DISPLAY}" ]         && DISPLAY=":1"
 [ -z "${DISPLAY_NUMBER}" ]  && DISPLAY_NUMBER="${DISPLAY/:/}"
 [ -z "${LOCALHOST}" ]       && LOCALHOST="127.0.0.1"
+[ -z "${ADDRESS}" ]         && ADDRESS="${LOCALHOST}"
 [ -z "${PORT}" ]            && PORT="590${DISPLAY_NUMBER}"
 
 export DISPLAY="${DISPLAY}"
@@ -103,32 +104,12 @@ export DISPLAY="${DISPLAY}"
 # functions #
 
 vnc_clean () {
-	directories_list=(
-		"${HOME}"
-		"${TMPDIR}"
-	)
-
-	files_list=(
-		localhost*log
-		localhost*pid
-		.Xauthority
-		.X*unix
-		.X*lock
-	)
-
-	for directory in ${directories_list[@]}
-	do
-		if [ -d "${directory}" ]
-		then
-			for file in ${files_list[@]}
-			do
-				find "${directory}"		\
-					-type f 			\
-					-iname "${file}"	\
-					-delete
-			done
-		fi
-	done
+	[ -d "${HOME}" ]   && rm -rf "${HOME}"/.ICE*
+	[ -d "${HOME}" ]   && rm -rf "${HOME}"/.X1*
+	[ -d "${HOME}" ]   && rm -rf "${HOME}"/.Xauth*
+	[ -d "${TMPDIR}" ] && rm -rf "${TMPDIR}"/.ICE*
+	[ -d "${TMPDIR}" ] && rm -rf "${TMPDIR}"/.X1*
+	[ -d "${TMPDIR}" ] && rm -rf "${TMPDIR}"/.Xauth*
 }
 
 vnc_geometry () {
@@ -289,7 +270,7 @@ vnc_intent () {
 
 	# start android vnc intent and force-stop existing activity
 
-	# console.silence "am start -a android.intent.action.VIEW -d vnc://${LOCALHOST}:${PORT} -S ${VNC}"
+	# console.silence "am start -a android.intent.action.VIEW -d vnc://${ADDRESS}:${PORT} -S ${VNC}"
 
 	# start android vnc intent and set to view session with supported application
 
@@ -297,14 +278,12 @@ vnc_intent () {
 
 	intent_command+="am start"
 	intent_command+=" -a android.intent.action.VIEW"
-	intent_command+=" -d vnc://${LOCALHOST}:${PORT}"
+	intent_command+=" -d vnc://${ADDRESS}:${PORT}"
 
 	console.silence "exec ${intent_command}"
 }
 
 vnc_start () {
-	vnc_clean
-
 	console.fwd "Starting display server..."
 	echo
 
