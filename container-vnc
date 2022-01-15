@@ -101,7 +101,6 @@ vnc_clean () {
 	directories_list=(
 		"${HOME}"
 		"${TMPDIR}"
-		"${TMP}"
 	)
 
 	files_list=(
