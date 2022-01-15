@@ -30,6 +30,10 @@ do
 			option="password"
 		;;
 
+		-c|--clean)
+			option="clean"
+		;;
+
 		-n|--new)
 			option="new"
 		;;
@@ -40,13 +44,14 @@ do
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-o, --start \t Start vnc session server."
-			echo -e "-x, --stop \t Stop vnc session server."
-			echo -e "-p, --pass \t Generate vnc session password."
+			echo -e "-o, --start    Start vnc session server."
+			echo -e "-x, --stop     Stop vnc session server."
+			echo -e "-p, --pass     Generate vnc session password."
 			echo
-			echo -e "-n, --new \t Generate new vnc session selection."
+			echo -e "-c, --clean    Generate new vnc session selection."
+			echo -e "-n, --new      Generate new vnc session selection."
 			echo
-			echo -e "-h, --help \t Show help and usage information."
+			echo -e "-h, --help     Show help and usage information."
 			echo
 			echo -e "'${script}' [ Version ${version} ]"
 			echo
@@ -124,35 +129,6 @@ vnc_clean () {
 			done
 		fi
 	done
-}
-
-vnc_intent () {
-	console.fwd "Opening display..."
-	echo
-
-	# explicit VNC viewer application to kill:
-	# used when vncserver is stopped or restarted using vnc:// intent
-	# when launched via the activity manager [ 'am start -d {URI} -S {ACTIVITY}' ]
-
-	# reference vnc session activity for known applications:
-
-	# FreebVNC: com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity
-	# RealVNC:  com.realvnc.viewer.android/.app.DesktopActivity
-	# Remotix:  com.nulana.android.remotix/.Viewer
-
-	# start android vnc intent and force-stop existing activity
-
-	# console.silence "am start -a android.intent.action.VIEW -d vnc://${LOCALHOST}:${PORT} -S ${VNC}"
-
-	# start android vnc intent and set to view session with supported application
-
-	unset intent_command
-
-	intent_command+="am start"
-	intent_command+=" -a android.intent.action.VIEW"
-	intent_command+=" -d vnc://${LOCALHOST}:${PORT}"
-
-	console.silence "exec ${intent_command}"
 }
 
 vnc_geometry () {
@@ -295,6 +271,35 @@ vnc_geometry () {
 	done
 
 	printf '\n'
+}
+
+vnc_intent () {
+	console.fwd "Opening display..."
+	echo
+
+	# explicit VNC viewer application to kill:
+	# used when vncserver is stopped or restarted using vnc:// intent
+	# when launched via the activity manager [ 'am start -d {URI} -S {ACTIVITY}' ]
+
+	# reference vnc session activity for known applications:
+
+	# FreebVNC: com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity
+	# RealVNC:  com.realvnc.viewer.android/.app.DesktopActivity
+	# Remotix:  com.nulana.android.remotix/.Viewer
+
+	# start android vnc intent and force-stop existing activity
+
+	# console.silence "am start -a android.intent.action.VIEW -d vnc://${LOCALHOST}:${PORT} -S ${VNC}"
+
+	# start android vnc intent and set to view session with supported application
+
+	unset intent_command
+
+	intent_command+="am start"
+	intent_command+=" -a android.intent.action.VIEW"
+	intent_command+=" -d vnc://${LOCALHOST}:${PORT}"
+
+	console.silence "exec ${intent_command}"
 }
 
 vnc_start () {
@@ -601,9 +606,6 @@ then
 	vnc_start
 fi
 
-# destroy lock files
-
-vnc_clean
 
 # list vnc session
 
