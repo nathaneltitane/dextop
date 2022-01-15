@@ -246,11 +246,9 @@ then
 
 	if [ ! -f "${PREFIX}"/bin/bookmarks-checkpoint-complete ]
 	then
-		console.directory "${HOME}" .config/gtk-3.0
-
-		[ -d "${PREFIX}"/media/external ] && echo 'file:///data/data/com.termux/files/media/external External' >> "${HOME}"/.config/gtk-3.0/bookmarks
-		[ -d "${PREFIX}"/media/internal ] && echo 'file:///data/data/com.termux/files/media/internal Internal' >> "${HOME}"/.config/gtk-3.0/bookmarks
-		[ -d "${PREFIX}"/cnt ]            && echo 'file:///data/data/com.termux/files/cnt Container'           >> "${HOME}"/.config/gtk-3.0/bookmarks
+		[ -d "${PREFIX}"/cnt ]            && console.write 'file:///data/data/com.termux/files/cnt Container'           "${HOME}"/.config/gtk-3.0 bookmarks
+		[ -d "${PREFIX}"/media/external ] && console.write 'file:///data/data/com.termux/files/media/external External' "${HOME}"/.config/gtk-3.0 bookmarks
+		[ -d "${PREFIX}"/media/internal ] && console.write 'file:///data/data/com.termux/files/media/internal Internal' "${HOME}"/.config/gtk-3.0 bookmarks
 
 		console.file "${PREFIX}"/bin/bookmarks-checkpoint-complete
 	fi
@@ -261,7 +259,7 @@ then
 	then
 		# papirus icon theme
 
-		console.download https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/archive ${HOME} master.tar.gz
+		console.download https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/archive "${HOME}" archive
 
 		themes_list=(
 			Papirus-Dark
@@ -275,7 +273,7 @@ then
 
 			tar																		\
 				--extract															\
-				--file="${HOME}"/master.tar.gz papirus-icon-theme-master/"${theme}"	\
+				--file="${HOME}"/archive papirus-icon-theme-master/"${theme}"		\
 				--directory="${HOME}"
 		done
 
