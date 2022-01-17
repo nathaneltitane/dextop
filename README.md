@@ -1,4 +1,4 @@
-### Dextop [ Version // 01-06-2022 ]
+### Dextop [ Version // 01-17-2022 ]
 
 ![dextop](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop.svg)
 
@@ -84,9 +84,9 @@ The 'none' option is great for users who would like to experiment or setup their
 
 **Be attentive!**
 
-Dextop now automatically detects and processes any external media mounts and adds them to your container.
+**User information and distribution preferences are captured throughout the setup process to set up the container's user profile, home directory and other parameters.**
 
-**User information and distribution preferences are captured throughout the setup process to set up the container's user profile, home directory and other preferences.**
+Dextop automatically detects and processes any external media mounts and adds them to your container.
 
 **User input is still required to give Termux storage access permissions and this can only be done through user interaction. There are no workarounds!**
 
