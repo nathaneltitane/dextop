@@ -39,7 +39,7 @@ Dextop only loads applications as needed to keep a minimal footprint!
 
 Dextop is made, tested and optimized to run in tandem with Samsung's Dex: music, mail and web browsing should preferably be taken care of using native Android applications that are readily installed and configured on your device.
 
-Services, hardware probes and other advanced features that require access to restricted core system directories will not function: you must root your device to remove those limitations and gain access to all system directories.
+Services, hardware probes and other advanced features that require access to restricted core system directories will not function: you must root your device to remove those limitations and gain full access to all system devices.
 
 Dextop links the modified utilities that have been patched under Termux for some limited access to whatever the Android user space runtime policy permits (htop, kill, pgrep, pkill, ps, top).
 
@@ -72,13 +72,11 @@ Once the Android applications are installed on your device, open Termux and past
 
 `curl -s -L run.dxtp.app > dextop && bash dextop`
 
-
 Container install options are:
 
 `-x, --xfce    XFCE4 setup: install XFCE desktop environment and utilities.    [ Default ]`
 
 `-n, --none    No DE setup: console access to environment and utilities.`
-
 
 The 'none' option is great for users who would like to experiment or setup their own window manager/desktop environment, utilities and preferences.
 
