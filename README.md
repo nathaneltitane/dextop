@@ -90,7 +90,7 @@ Dextop now automatically detects and processes any external media mounts and add
 
 **User information and distribution preferences are captured throughout the setup process to set up the container's user profile, home directory and other preferences.**
 
-**User input is still required to give Termux storage access permissions and this can only be done through user interaction. There are no workarounds.**
+**User input is still required to give Termux storage access permissions and this can only be done through user interaction. There are no workarounds!**
 
 You should press 'Allow' when prompted during the setup to grant this permission.
 
@@ -114,8 +114,8 @@ When logging into the container for the first time, a one-time configuration run
 
 The vnc session manager requires you to select your preferred display resolution for the best display experience.
 
-To stop the vnc server and halt the display output, type `'container-vnc -x'`.
-To start the vnc server and restart the display output, type `'container-vnc -o'`.
+To stop the vnc server and halt the display output, type `'container-session -x'`.
+To start the vnc server and restart the display output, type `'container-session -o'`.
 
 The next login will automatically launch the session for you using the settings you've chosen previously:
 The first login saves the selection under `"${HOME}"/.vnc/selection` and uses it to start the VNC server and viewer automatically for your convenience!
