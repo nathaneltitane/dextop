@@ -108,8 +108,14 @@ image_version () {
 		ubuntu	21.10
 	)
 
+	fedora_versions=(
+		fedora	35
+		fedora	36
+	)
+
 	versions=(
 		${ubuntu_versions[@]}
+		${fedora_versions[@]}
 	)
 
 	# set padding for uniform output
