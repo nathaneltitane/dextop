@@ -157,7 +157,6 @@ utilities_list+=(
 	container-settings
 	container-system
 	container-user
-	container-vnc
 )
 
 console.download get.dxtp.app "${PREFIX}"/bin ${utilities_list[@]}
