@@ -259,7 +259,7 @@ then
 	then
 		# papirus icon theme
 
-		console.download https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/archive "${HOME}" archive
+		console.download https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/archive/master/master.tar.gz "${HOME}" archive
 
 		themes_list=(
 			Papirus-Dark
