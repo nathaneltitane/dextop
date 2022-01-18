@@ -302,7 +302,7 @@ image_extract () {
 
 	if [ "${distribution_name}" = ubuntu ]
 	then
-		core_extract "${PREFIX}"/img/"${image_image_file}" "${PREFIX}"/cnt
+		core_extract "${PREFIX}"/img/"${image_file}" "${PREFIX}"/cnt
 	fi
 }
 
