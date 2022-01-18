@@ -101,6 +101,11 @@ image_version () {
 
 	# list supported distribution versions
 
+	fedora_versions=(
+		fedora	34
+		fedora	35
+	)
+
 	ubuntu_versions=(
 		ubuntu	20.04.3
 		ubuntu	20.10
@@ -108,14 +113,9 @@ image_version () {
 		ubuntu	21.10
 	)
 
-	fedora_versions=(
-		fedora	34
-		fedora	35
-	)
-
 	versions=(
-		${ubuntu_versions[@]}
 		${fedora_versions[@]}
+		${ubuntu_versions[@]}
 	)
 
 	# set padding for uniform output
@@ -230,37 +230,33 @@ image_download () {
 	console.download "${image_url}"/"${image_archive}" "${PREFIX}"/img "${image_name}"
 }
 
-image_unpack () {
+image_extract () {
 	# exclude archive directories: dev | proc | sys | system
 	# 'container-session' will bind those device directories to the container
 
-	console.inf "Extracting new deployment."
+	console.wrn "Extracting new deployment." "[ ${image_name} ]"
 	echo
 
+#	unset command_unpack
 
-	console.wrn "Unpacking" "[ ${image_name} ]"
-	echo
+#	[ "${distribution_name}" = ubuntu ] && command_unpack+="proot"
+#	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --link2symlink"
+#	                                       command_unpack+=" tar"
+#	                                       command_unpack+=" --extract"
+#	                                       command_unpack+=" --delay-directory-restore"
+#	                                       command_unpack+=" --preserve-permissions"
+#	                                       command_unpack+=" --file=${PREFIX}/img/${image_name}"
+#	[ "${distribution_name}" = fedora ] && command_unpack+=" --strip-components=1"
+#	[ "${distribution_name}" = fedora ] && command_unpack+=" --exclude='json'"
+#	[ "${distribution_name}" = fedora ] && command_unpack+=" --exclude='VERSION'"
+#	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='boot'"
+#	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='dev'"
+#	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='proc'"
+#	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='sys'"
+#	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='system'"
+#				                           command_unpack+=" --directory=${PREFIX}/cnt/test"
 
-	unset command_unpack
-
-	[ "${distribution_name}" = ubuntu ] && command_unpack+="proot"
-	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --link2symlink"
-	                                       command_unpack+=" tar"
-	                                       command_unpack+=" --extract"
-	                                       command_unpack+=" --delay-directory-restore"
-	                                       command_unpack+=" --preserve-permissions"
-	                                       command_unpack+=" --file=${PREFIX}/img/${image_name}"
-	[ "${distribution_name}" = fedora ] && command_unpack+=" --strip-components=1"
-	[ "${distribution_name}" = fedora ] && command_unpack+=" --exclude='json'"
-	[ "${distribution_name}" = fedora ] && command_unpack+=" --exclude='VERSION'"
-	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='boot'"
-	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='dev'"
-	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='proc'"
-	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='sys'"
-	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='system'"
-				                           command_unpack+=" --directory=${PREFIX}/cnt/test"
-
-	exec "${command_unpack}"
+#	exec "${command_unpack}"
 
 	if [ "${distribution_name}" = ubuntu ]
 	then
@@ -322,6 +318,6 @@ image_version
 
 image_download
 
-# unpack image into container
+# extract image into container
 
-image_unpack
+image_extract
