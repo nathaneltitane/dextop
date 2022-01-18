@@ -237,8 +237,8 @@ add_runtime () {
 
 	# generate runtime directory
 
-	console.directory "${PREFIX}"/cnt//run/user "${user_uid}"
-	console.directory "${PREFIX}"/cnt//run/user "${user_name}"
+	console.directory "${PREFIX}"/cnt/run/user "${user_uid}"
+	console.directory "${PREFIX}"/cnt/run/user "${user_name}"
 
 	# set runtime directory permissions
 
@@ -247,8 +247,8 @@ add_runtime () {
 
 	# set runtime directory ownership
 
-	chown "${user_uid}":"${user_gid}" -R "${PREFIX}"/cnt//run/user/"${user_uid}"
-	chown "${user_uid}":"${user_gid}" -R "${PREFIX}"/cnt//run/user/"${user_name}"
+	chown "${user_uid}":"${user_gid}" -R "${PREFIX}"/cnt/run/user/"${user_uid}"
+	chown "${user_uid}":"${user_gid}" -R "${PREFIX}"/cnt/run/user/"${user_name}"
 }
 
 # generate user account and relevant permission sets
