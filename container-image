@@ -244,11 +244,11 @@ image_unpack () {
 
 	[ "${distribution_name}" = ubuntu ] && command_unpack+="${PREFIX}/bin/proot"
 	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --link2symlink"
-				command_unpack+=" ${PREFIX}/bin/tar"
-				command_unpack+=" --extract"
-				command_unpack+=" --delay-directory-restore"
-				command_unpack+=" --preserve-permissions"
-				command_unpack+=" --file=${PREFIX}/img/${image_name}"
+	                                       command_unpack+=" ${PREFIX}/bin/tar"
+	                                       command_unpack+=" --extract"
+	                                       command_unpack+=" --delay-directory-restore"
+	                                       command_unpack+=" --preserve-permissions"
+	                                       command_unpack+=" --file=${PREFIX}/img/${image_name}"
 	[ "${distribution_name}" = fedora ] && command_unpack+=" --strip-components=1"
 	[ "${distribution_name}" = fedora ] && command_unpack+=" --exclude='json'"
 	[ "${distribution_name}" = fedora ] && command_unpack+=" --exclude='VERSION'"
@@ -257,7 +257,7 @@ image_unpack () {
 	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='proc'"
 	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='sys'"
 	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='system'"
-				command_unpack+=" --directory=${PREFIX}/cnt/test"
+				                           command_unpack+=" --directory=${PREFIX}/cnt/test"
 
 	exec ${command_unpack}
 
