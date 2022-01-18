@@ -294,7 +294,6 @@ image_extract () {
 		container_extract "${PREFIX}"/img/"${image_name}" "${PREFIX}"/img
 
 		core_extract "${PREFIX}"/cnt/layer.tar "${PREFIX}"/cnt
-
 	fi
 
 	if [ "${distribution_name}" = ubuntu ]
