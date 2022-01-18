@@ -196,7 +196,7 @@ add_superuser () {
 
 	sed -i '/sudo.*/d' "${PREFIX}"/cnt/etc/group
 
-	echo "/sudo:x:${sudo_id}:$/${user_name}" "${PREFIX}"/cnt/etc/group
+	echo "sudo:x:${sudo_id}:${user_name}" >> "${PREFIX}"/cnt/etc/group
 
 	# generate sudoers directory
 
