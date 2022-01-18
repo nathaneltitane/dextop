@@ -46,7 +46,7 @@ image_version () {
 	)
 
 	versions=(
-		${fedora_versions[@]}
+	#	${fedora_versions[@]}
 		${ubuntu_versions[@]}
 	)
 
