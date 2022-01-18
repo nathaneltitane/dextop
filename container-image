@@ -214,9 +214,31 @@ image_download () {
 			image_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${distribution_version}/release"
 			image_archive="ubuntu-base-${distribution_version}-base-${image_architecture}.tar.gz"
 		;;
+		fedora)
+			image_url="https://download.fedoraproject.org/pub/fedora/linux/releases/${distribution_version}/Container/${image_architecture}/images"
+			image_archive="Fedora-Container-Base-${distribution_version}-1.2.${image_architecture}.tar.xz"
+		;;
 	esac
 
 	console.download "${image_url}" "${PREFIX}"/img "${image_archive}"
+}
+
+image_extract () {
+	# exclude archive directories: dev | proc | sys | system
+	# 'container-session' will bind those device directories to the container
+
+	tar 												\
+		--extract										\
+		--delay-directory-restore						\
+		--preserve-permissions							\
+			--file="${PREFIX}/img/${image_archive}"		\
+					--exclude='json'					\
+					--exclude='boot'					\
+					--exclude='dev'						\
+					--exclude='proc'					\
+					--exclude='sys'						\
+					--exclude='system' 2> /dev/null		\
+					--directory="${PREFIX}"/cnt
 }
 
 image_unpack () {
@@ -229,19 +251,14 @@ image_unpack () {
 	console.inf "Extracting new deployment."
 	echo
 
-	proot														\
-		--link2symlink											\
-			tar 												\
-				--extract										\
-				--delay-directory-restore						\
-				--preserve-permissions							\
-					--file="${PREFIX}/img/${image_archive}"		\
-						--exclude='boot'						\
-						--exclude='dev'							\
-						--exclude='proc'						\
-						--exclude='sys'							\
-						--exclude='system' 2> /dev/null			\
-							--directory="${PREFIX}"/cnt
+	proot					\
+		--link2symlink		\
+			image_extract
+
+
+	if [ -f "${PREFIX}"/cnt/layer.tar ]
+	then
+
 }
 
 # run setup
