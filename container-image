@@ -289,17 +289,17 @@ image_extract () {
 	console.wrn "Extracting new deployment." "[ ${image_name} ]"
 	echo
 
-	if [ "${distribution_name}" = ubuntu ]
-	then
-		core_extract "${PREFIX}"/img/"${image_name}" "${PREFIX}"/cnt
-	fi
-
 	if [ "${distribution_name}" = fedora ]
 	then
 		container_extract "${PREFIX}"/img/"${image_name}" "${PREFIX}"/img
 
 		core_extract "${PREFIX}"/cnt/layer.tar "${PREFIX}"/cnt
 
+	fi
+
+	if [ "${distribution_name}" = ubuntu ]
+	then
+		core_extract "${PREFIX}"/img/"${image_name}" "${PREFIX}"/cnt
 	fi
 }
 
