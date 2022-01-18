@@ -156,10 +156,10 @@ image_architecture () {
 	then
 		image_architectures=(
 		aarch64
-		armhf
-		amd64
-		i386
-		amd64
+		armhfp
+		x86_64
+		x86_64
+		x86_64
 		)
 	fi
 
