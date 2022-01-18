@@ -233,10 +233,6 @@ image_download () {
 	console.download "${image_url}"/"${image_archive}" "${PREFIX}"/img "${image_name}"
 }
 
-image_extract () {
-echo test
-}
-
 image_unpack () {
 	# exclude archive directories: dev | proc | sys | system
 	# 'container-session' will bind those device directories to the container
@@ -259,7 +255,7 @@ image_unpack () {
 							--exclude='proc'					\
 							--exclude='sys'						\
 							--exclude='system' 					\
-							--directory="${PREFIX}"/cnt/testfedora
+								--directory="${PREFIX}"/cnt
 }
 
 # run setup
