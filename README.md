@@ -104,7 +104,7 @@ Most of the setup process is fully automated and should run its course until the
 
 To access your newly generated container:
 
-`container-session -u <username> | <option>'` to start your session or setup session options on load.
+`'container-session -u <username>'` to start your session or setup session options on load.
 
 ### The fun begins:
 
