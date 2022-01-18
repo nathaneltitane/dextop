@@ -140,7 +140,7 @@ image_version () {
 }
 
 image_architecture () {
-	#comapare system architecture to available image architectures
+	#compare system architecture to available image architectures
 
 	cpu_architectures=(
 		aarch64
