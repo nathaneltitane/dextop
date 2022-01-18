@@ -149,7 +149,7 @@ utilities_list+=(
 	termux-repositories
 	termux-storage
 	termux-update
-	container-expand
+	container-expansion
 	container-image
 	container-packages
 	container-repositories
@@ -185,7 +185,7 @@ then
 		"${PREFIX}"/bin/container-image
 		"${PREFIX}"/bin/container-system
 
-		container_command "${PREFIX}"/bin/container-expand
+		container_command "${PREFIX}"/bin/container-expansion
 		container_command "${PREFIX}"/bin/container-repositories
 		container_command "${PREFIX}"/bin/container-packages
 		container_command "${PREFIX}"/bin/container-user
