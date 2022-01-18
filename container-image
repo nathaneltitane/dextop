@@ -234,52 +234,58 @@ image_extract () {
 	# exclude archive directories: dev | proc | sys | system
 	# 'container-session' will bind those device directories to the container
 
-	console.wrn "Extracting new deployment." "[ ${image_name} ]"
-	echo
+	core_extract () {
+		# core/minimal system images
 
-	if [ "${distribution_name}" = ubuntu ]
-	then
 		proot														\
 			--link2symlink											\
 				tar 												\
 					--extract										\
 					--delay-directory-restore						\
 					--preserve-permissions							\
-						--file="${PREFIX}"/img/"${image_name}"		\
+						--file="${1}"								\
 								--exclude='boot'					\
 								--exclude='dev'						\
 								--exclude='proc'					\
 								--exclude='sys'						\
 								--exclude='system' 					\
-									--directory="${PREFIX}"/cnt
+									--directory="${2}"
+
+	}
+
+	container_extract () {
+		# cloud container/docker images
+
+		tar 												\
+			--extract										\
+			--delay-directory-restore						\
+			--preserve-permissions							\
+				--file="${1}"								\
+						--strip-components='1'				\
+						--exclude='VERSION'					\
+						--exclude='json'					\
+						--exclude='boot'					\
+						--exclude='dev'						\
+						--exclude='proc'					\
+						--exclude='sys'						\
+						--exclude='system' 					\
+							--directory="${2}"
+	}
+
+	console.wrn "Extracting new deployment." "[ ${image_name} ]"
+	echo
+
+	if [ "${distribution_name}" = ubuntu ]
+	then
+		core_extract "${PREFIX}"/img/"${image_name}" "${PREFIX}"/cnt
 	fi
 
 	if [ "${distribution_name}" = fedora ]
 	then
-		archives_list=(
-			"${PREFIX}"/img/"${image_name}"
-			"${PREFIX}"/cnt/layer.tar
-		)
+		container_extract "${PREFIX}"/img/"${image_name}" "${PREFIX}"/img
 
-		for archive in ${archives_list[@]}
-		do
-			tar 												\
-				--extract										\
-				--delay-directory-restore						\
-				--preserve-permissions							\
-					--file="${archive}"							\
-							--strip-components=1				\
-							--exclude='VERSION'					\
-							--exclude='json'					\
-							--exclude='boot'					\
-							--exclude='dev'						\
-							--exclude='proc'					\
-							--exclude='sys'						\
-							--exclude='system' 					\
-								--directory="${PREFIX}"/cnt
-		done
+		core_extract "${PREFIX}"/cnt/layer.tar "${PREFIX}"/cnt
 
-		rm -rf "${PREFIX}"/cnt/layer.tar
 	fi
 }
 
