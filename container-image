@@ -102,13 +102,13 @@ image_version () {
 	# list supported distribution versions
 
 	fedora_versions=(
+		fedora	33
 		fedora	34
 		fedora	35
 	)
 
 	ubuntu_versions=(
 		ubuntu	20.04.3
-		ubuntu	20.10
 		ubuntu	21.04
 		ubuntu	21.10
 	)
