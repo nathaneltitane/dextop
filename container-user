@@ -25,7 +25,7 @@ fi
 
 if [[ $# -eq 0 ]]
 then
-	user_name="${termux}"
+	user_name="termux"
 fi
 
 if [[ $# -eq 1 ]]
@@ -234,8 +234,6 @@ add_runtime () {
 	console.fwd "Setting runtime..."
 	echo
 
-	# get user id and group
-
 	user_uid="$(id -u ${user_name})"
 	user_gid="$(id -g ${user_name})"
 
@@ -264,12 +262,12 @@ add_runtime () {
 
 # add_user_interactive > /dev/null
 
-add_user_non_interactive
-
 # use /dev/null redirection:
 # 'chpasswd' prevents stdout error redirect - cannot use 'console.silence'
 
-add_password > /dev/null
+# add_password > /dev/null
+
+add_user_non_interactive
 
 add_superuser
 
