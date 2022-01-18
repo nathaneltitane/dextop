@@ -237,44 +237,75 @@ image_unpack () {
 	console.inf "Extracting new deployment."
 	echo
 
-	unset command_unpack
 
 	console.wrn "Unpacking" "[ ${image_name} ]"
 	echo
 
-	[ "${distribution_name}" = ubuntu ] && command_unpack+="${PREFIX}/bin/proot"
-	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --link2symlink"
-	                                       command_unpack+=" ${PREFIX}/bin/tar"
-	                                       command_unpack+=" --extract"
-	                                       command_unpack+=" --delay-directory-restore"
-	                                       command_unpack+=" --preserve-permissions"
-	                                       command_unpack+=" --file=${PREFIX}/img/${image_name}"
-	[ "${distribution_name}" = fedora ] && command_unpack+=" --strip-components=1"
-	[ "${distribution_name}" = fedora ] && command_unpack+=" --exclude='json'"
-	[ "${distribution_name}" = fedora ] && command_unpack+=" --exclude='VERSION'"
-	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='boot'"
-	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='dev'"
-	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='proc'"
-	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='sys'"
-	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='system'"
-				                           command_unpack+=" --directory=${PREFIX}/cnt/test"
+#	unset command_unpack
 
-	exec ${command_unpack}
+#	[ "${distribution_name}" = ubuntu ] && command_unpack+="${PREFIX}/bin/proot"
+#	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --link2symlink"
+#	                                       command_unpack+=" ${PREFIX}/bin/tar"
+#	                                       command_unpack+=" --extract"
+#	                                       command_unpack+=" --delay-directory-restore"
+#	                                       command_unpack+=" --preserve-permissions"
+#	                                       command_unpack+=" --file=${PREFIX}/img/${image_name}"
+#	[ "${distribution_name}" = fedora ] && command_unpack+=" --strip-components=1"
+#	[ "${distribution_name}" = fedora ] && command_unpack+=" --exclude='json'"
+#	[ "${distribution_name}" = fedora ] && command_unpack+=" --exclude='VERSION'"
+#	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='boot'"
+#	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='dev'"
+#	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='proc'"
+#	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='sys'"
+#	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='system'"
+#				                           command_unpack+=" --directory=${PREFIX}/cnt/test"
 
-#	proot														\
-#		--link2symlink											\
-#			tar 												\
-#				--extract										\
-#				--delay-directory-restore						\
-#				--preserve-permissions							\
-#					--file="${PREFIX}/img/${image_name}"		\
-#							--exclude='json'					\
-#							--exclude='boot'					\
-#							--exclude='dev'						\
-#							--exclude='proc'					\
-#							--exclude='sys'						\
-#							--exclude='system' 					\
-#								--directory="${PREFIX}"/cnt/test
+#	exec ${command_unpack}
+
+if [ "${distribution_name}" = ubuntu ]
+then
+	proot														\
+		--link2symlink											\
+			tar 												\
+				--extract										\
+				--delay-directory-restore						\
+				--preserve-permissions							\
+					--file="${PREFIX}/img/${image_name}"		\
+							--exclude='boot'					\
+							--exclude='dev'						\
+							--exclude='proc'					\
+							--exclude='sys'						\
+							--exclude='system' 					\
+								--directory="${PREFIX}"/cnt/test
+fi
+
+if [ "${distribution_name}" = fedora ]
+then
+	archives_list=(
+		"${PREFIX}"/img/"${image_name}"
+		"${PREFIX}"/cnt/test/layer.tar
+	)
+
+	for archive in ${archives_list[@]}
+	do
+		tar 												\
+			--extract										\
+			--delay-directory-restore						\
+			--preserve-permissions							\
+				--file="${archive}"							\
+						--strip-components=1				\
+						--exclude='VERSION'					\
+						--exclude='json'					\
+						--exclude='boot'					\
+						--exclude='dev'						\
+						--exclude='proc'					\
+						--exclude='sys'						\
+						--exclude='system' 					\
+							--directory="${PREFIX}"/cnt/test
+	done
+
+	rm -rf "${PREFIX}"/cnt/test/layer.tar
+fi
 
 }
 
