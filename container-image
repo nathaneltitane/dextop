@@ -240,8 +240,6 @@ image_unpack () {
 	console.inf "Extracting new deployment."
 	echo
 
-	unset command_unpack
-
 	proot														\
 		--link2symlink											\
 			tar 												\
