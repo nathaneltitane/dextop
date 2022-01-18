@@ -26,7 +26,7 @@ echo
 # functions #
 
 image_architecture () {
-	#comaprae system architecture to available image architectures
+	#comapare system architecture to available image architectures
 
 	cpu_architectures=(
 		aarch64
@@ -180,24 +180,27 @@ image_version () {
 		distribution_version="${version}"
 	fi
 
-	# handle distribution code markup
-
-	# set IFS
-
-	IFS='.'
-
-	read code_year code_month code_revision <<< "${distribution_version}"
-
-	if [ -z "${code_revision}" ]
+	if [ "${distribution_version}" = ubuntu ]
 	then
-		distribution_release="${distribution_version}"
-	else
-		distribution_release="${distribution_version%.*}"
+		# handle distribution code markup
+
+		# set IFS
+
+		IFS='.'
+
+		read code_year code_month code_revision <<< "${distribution_version}"
+
+		if [ -z "${code_revision}" ]
+		then
+			distribution_release="${distribution_version}"
+		else
+			distribution_release="${distribution_version%.*}"
+		fi
+
+		# reset IFS
+
+		IFS=''
 	fi
-
-	# reset IFS
-
-	IFS=''
 
 	export distribution_name="${distribution_name}"
 	export distribution_release="${distribution_release}"
@@ -209,19 +212,25 @@ image_download () {
 
 	# handle distribution url
 
-	case "${distribution_name}" in
+	case "${distribution_name}"
+	in
 		ubuntu)
 			image_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${distribution_version}/release"
 			image_archive="ubuntu-base-${distribution_version}-base-${image_architecture}.tar.gz"
+
 		;;
 
 		fedora)
-			image_url="https://download.fedoraproject.org/pub/fedora/linux/releases/${distribution_version}/Container/${image_architecture}/images"
-			image_archive="Fedora-Container-Base-${distribution_version}-1.2.${image_architecture}.tar.xz"
+			image_url="https://download.fedoraproject.org/pub/fedora/linux/releases/${distribution_version}/Container/aarch64/images"
+			image_archive="Fedora-Container-Base-${distribution_version}-1.2.aarch64.tar.xz"
+		;;
+
+		*)
+			image_name="${distribution_name}-${distribution_version}.tar.gz"
 		;;
 	esac
 
-	console.download "${image_url}" "${PREFIX}"/img "${image_archive}"
+	console.download "${image_url}"/"${image_archive}" "${PREFIX}"/img "${image_name}"
 }
 
 image_extract () {
@@ -229,23 +238,21 @@ echo test
 }
 
 image_unpack () {
-	# shorthand:
-	# proot -l tar -xzf "${1}" -X "${2}" || :
-
 	# exclude archive directories: dev | proc | sys | system
 	# 'container-session' will bind those device directories to the container
 
 	console.inf "Extracting new deployment."
 	echo
 
-#	proot														\
-#		--link2symlink											\
+	unset command_unpack
 
+	proot														\
+		--link2symlink											\
 			tar 												\
 				--extract										\
 				--delay-directory-restore						\
 				--preserve-permissions							\
-					--file="${PREFIX}/img/${image_archive}"		\
+					--file="${PREFIX}/img/${image_name}"		\
 							--exclude='json'					\
 							--exclude='boot'					\
 							--exclude='dev'						\
