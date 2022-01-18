@@ -190,9 +190,7 @@ add_superuser () {
 		sudo_id="27"
 	fi
 
-	# /etc/group:
-	# group_name:x:group_number:user_name
-	# usermod -a -G sudo "${user_name}"
+	# add 'user' to 'sudo' group
 
 	sed -i '/sudo.*/d' "${PREFIX}"/cnt/etc/group
 
