@@ -243,9 +243,9 @@ image_unpack () {
 
 	unset command_unpack
 
-	[ "${distribution_name}" = ubuntu ] && command_unpack+="${PREFIX}/bin/proot"
+	[ "${distribution_name}" = ubuntu ] && command_unpack+="proot"
 	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --link2symlink"
-	                                       command_unpack+=" ${PREFIX}/bin/tar"
+	                                       command_unpack+=" tar"
 	                                       command_unpack+=" --extract"
 	                                       command_unpack+=" --delay-directory-restore"
 	                                       command_unpack+=" --preserve-permissions"
