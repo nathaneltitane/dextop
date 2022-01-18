@@ -286,7 +286,7 @@ image_extract () {
 
 	}
 
-	console.wrn "Extracting new deployment." "[ ${image_name} ]"
+	console.wrn "Extracting new deployment." "[ ${image_name} // ${image_architecture} ]"
 	echo
 
 	if [ "${distribution_name}" = fedora ]
