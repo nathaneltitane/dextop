@@ -237,27 +237,6 @@ image_extract () {
 	console.wrn "Extracting new deployment." "[ ${image_name} ]"
 	echo
 
-#	unset command_unpack
-
-#	[ "${distribution_name}" = ubuntu ] && command_unpack+="proot"
-#	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --link2symlink"
-#	                                       command_unpack+=" tar"
-#	                                       command_unpack+=" --extract"
-#	                                       command_unpack+=" --delay-directory-restore"
-#	                                       command_unpack+=" --preserve-permissions"
-#	                                       command_unpack+=" --file=${PREFIX}/img/${image_name}"
-#	[ "${distribution_name}" = fedora ] && command_unpack+=" --strip-components=1"
-#	[ "${distribution_name}" = fedora ] && command_unpack+=" --exclude='json'"
-#	[ "${distribution_name}" = fedora ] && command_unpack+=" --exclude='VERSION'"
-#	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='boot'"
-#	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='dev'"
-#	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='proc'"
-#	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='sys'"
-#	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='system'"
-#				                           command_unpack+=" --directory=${PREFIX}/cnt/test"
-
-#	exec "${command_unpack}"
-
 	if [ "${distribution_name}" = ubuntu ]
 	then
 		proot														\
@@ -266,20 +245,20 @@ image_extract () {
 					--extract										\
 					--delay-directory-restore						\
 					--preserve-permissions							\
-						--file="${PREFIX}/img/${image_name}"		\
+						--file="${PREFIX}"/img/"${image_name}"		\
 								--exclude='boot'					\
 								--exclude='dev'						\
 								--exclude='proc'					\
 								--exclude='sys'						\
 								--exclude='system' 					\
-									--directory="${PREFIX}"/cnt/test
+									--directory="${PREFIX}"/cnt
 	fi
 
 	if [ "${distribution_name}" = fedora ]
 	then
 		archives_list=(
 			"${PREFIX}"/img/"${image_name}"
-			"${PREFIX}"/cnt/test/layer.tar
+			"${PREFIX}"/cnt/layer.tar
 		)
 
 		for archive in ${archives_list[@]}
@@ -297,10 +276,10 @@ image_extract () {
 							--exclude='proc'					\
 							--exclude='sys'						\
 							--exclude='system' 					\
-								--directory="${PREFIX}"/cnt/test
+								--directory="${PREFIX}"/cnt
 		done
 
-		rm -rf "${PREFIX}"/cnt/test/layer.tar
+		rm -rf "${PREFIX}"/cnt/layer.tar
 	fi
 }
 
