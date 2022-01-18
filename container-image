@@ -237,18 +237,18 @@ image_extract () {
 	core_extract () {
 		# core/minimal system images
 
-		proot														\
-			--link2symlink											\
-				tar 												\
-					--extract										\
-					--delay-directory-restore						\
-					--preserve-permissions							\
-						--file="${1}"								\
-								--exclude='boot'					\
-								--exclude='dev'						\
-								--exclude='proc'					\
-								--exclude='sys'						\
-								--exclude='system' 					\
+		proot											\
+			--link2symlink								\
+				tar 									\
+					--extract							\
+					--delay-directory-restore			\
+					--preserve-permissions				\
+						--file="${1}"					\
+								--exclude='boot'		\
+								--exclude='dev'			\
+								--exclude='proc'		\
+								--exclude='sys'			\
+								--exclude='system'		\
 									--directory="${2}"
 
 	}
@@ -256,19 +256,19 @@ image_extract () {
 	container_extract () {
 		# cloud container/docker images
 
-		tar 												\
-			--extract										\
-			--delay-directory-restore						\
-			--preserve-permissions							\
-				--file="${1}"								\
-						--strip-components='1'				\
-						--exclude='VERSION'					\
-						--exclude='json'					\
-						--exclude='boot'					\
-						--exclude='dev'						\
-						--exclude='proc'					\
-						--exclude='sys'						\
-						--exclude='system' 					\
+		tar 									\
+			--extract							\
+			--delay-directory-restore			\
+			--preserve-permissions				\
+				--file="${1}"					\
+						--strip-components='1'	\
+						--exclude='VERSION'		\
+						--exclude='json'		\
+						--exclude='boot'		\
+						--exclude='dev'			\
+						--exclude='proc'		\
+						--exclude='sys'			\
+						--exclude='system' 		\
 							--directory="${2}"
 	}
 
