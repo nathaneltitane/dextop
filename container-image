@@ -231,17 +231,19 @@ image_download () {
 		fedora)
 			image_url="https://download.fedoraproject.org/pub/fedora/linux/releases/${distribution_version}/Container/${image_architecture}/images"
 			image_archive="Fedora-Container-Base-${distribution_version}-1.2.${image_architecture}.tar.xz"
-			image_name="${distribution_name}-${distribution_version}.tar.gz"
+			image_name="${distribution_name}-${distribution_version}"
+			image_file="${image_name}.tar.gz"
 		;;
 
 		ubuntu)
 			image_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${distribution_version}/release"
 			image_archive="ubuntu-base-${distribution_version}-base-${image_architecture}.tar.gz"
-			image_name="${distribution_name}-${distribution_version}.tar.gz"
+			image_name="${distribution_name}-${distribution_version}"
+			image_file="${image_name}.tar.gz"
 		;;
 	esac
 
-	console.download "${image_url}"/"${image_archive}" "${PREFIX}"/img "${image_name}"
+	console.download "${image_url}"/"${image_archive}" "${PREFIX}"/img "${image_file}"
 }
 
 image_extract () {
@@ -286,19 +288,21 @@ image_extract () {
 
 	}
 
-	console.wrn "Extracting new deployment" "[ ${image_name} // ${image_architecture} ]"
+	console.wrn "Extracting new deployment" "[ ${image_file} // ${image_architecture} ]"
 	echo
 
 	if [ "${distribution_name}" = fedora ]
 	then
-		container_extract "${PREFIX}"/img/"${image_name}" "${PREFIX}"/img
+		container_extract "${PREFIX}"/img/"${image_file}" "${PREFIX}"/img
 
-		core_extract "${PREFIX}"/cnt/layer.tar "${PREFIX}"/cnt
+		mv "${PREFIX}"/img/layer.tar "${PREFIX}"/img/"${image_name}.tar"
+
+		core_extract "${PREFIX}"/img/"${image_name}.tar" "${PREFIX}"/cnt
 	fi
 
 	if [ "${distribution_name}" = ubuntu ]
 	then
-		core_extract "${PREFIX}"/img/"${image_name}" "${PREFIX}"/cnt
+		core_extract "${PREFIX}"/img/"${image_image_file}" "${PREFIX}"/cnt
 	fi
 }
 
