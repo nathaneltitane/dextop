@@ -180,10 +180,10 @@ image_version () {
 		distribution_version="${version}"
 	fi
 
+	# handle distribution code markup
+
 	if [ "${distribution_version}" = ubuntu ]
 	then
-		# handle distribution code markup
-
 		# set IFS
 
 		IFS='.'
