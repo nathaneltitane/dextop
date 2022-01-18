@@ -295,5 +295,3 @@ image_download
 # unpack image into container
 
 image_unpack
-
-ls -ld ${PREFIX}/cnt/test/*
