@@ -134,24 +134,47 @@ add_information () {
 	eval ${console_rtn[@]}
 }
 
-add_user () {
-	# generate 'user' account
+add_user_interactive () {
+	# generate 'user' account:
+	# interactive setup
 
-	console.fwd "generating account..."
+	console.fwd "Generating account..."
 	echo
 
 	room_number=""
 	work_number=""
 	home_number=""
 
+	gecos+="${first_name} ${last_name},"
+	gecos+="${room_number},"
+	gecos+="${work_number},"
+	gecos+="${home_number},"
+	gecos+="${user_email}"
+
 	# generate user entry
 	# silent configuration:
 	# set --gecos and --disabled-password for fully silent execution
 
-	adduser																								\
-		--gecos "${first_name} ${last_name},${room_number},${work_number},${home_number},${user_email}"	\
-		--shell "${SHELL}"																				\
+	adduser					\
+		--gecos "${gecos}"	\
+		--shell "${SHELL}"	\
 		--disabled-password "${user_name}"
+}
+
+add_user_non_interactive () {
+	# generate 'user account:
+	# automated setup
+
+	console.fwd "Generating account..."
+	echo
+
+	user_name="termux"
+	user_id="1000"
+	group_id="1000"
+	gecos="Dextop"
+	home="/home/${user_name}"
+
+	echo  "${user_name}:x:${user_id}:${group_id}:${gecos}:${home}:${SHELL}" >> ${PREFIX}/cnt/etc/passwd
 }
 
 add_superuser () {
@@ -160,30 +183,36 @@ add_superuser () {
 	console.fwd "Generating superuser privilege..."
 	echo
 
-	sudo_id=$(cat /etc/group | grep sudo | cut -d : -f 3)
-
-	[ -z "${sudo_id}" ] && sudo_id=27
+	if [[ $(cat /etc/group | grep sudo) ]]
+	then
+		sudo_id=$(cat /etc/group | grep sudo | cut -d ':' -f 3)
+	else
+		sudo_id="27"
+	fi
 
 	# /etc/group:
 	# group_name:x:group_number:user_name
+	# usermod -a -G sudo "${user_name}"
 
-	usermod -a -G "${sudo_id}" "${user_name}"
+	sed -i '/sudo.*/d' "${PREFIX}"/cnt/etc/group
+
+	echo "/sudo:x:${sudo_id}:$/${user_name}" "${PREFIX}"/cnt/etc/group
 
 	# generate sudoers directory
 
-	console.directory  /etc/sudoers.d
+	console.directory  "${PREFIX}"/cnt/etcsudoers.d
 
 	# set superuser privilege password override
 
-	echo "${user_name} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/"${user_name}"
+	echo "${user_name} ALL=(ALL) NOPASSWD: ALL" > "${PREFIX}"/cnt/etc/sudoers.d/"${user_name}"
 
 	# fix superuser privilege runtime errors
 
-	echo "Set disable_coredump false" >> /etc/sudo.conf
+	echo "Set disable_coredump false" >> "${PREFIX}"/cnt/etc/sudo.conf
 
 	# fix ownership on superuser privilege password override
 
-	chmod 0440 /etc/sudoers.d/"${user_name}"
+	chmod 0440 "${PREFIX}"/cnt/etc/sudoers.d/"${user_name}"
 }
 
 add_password () {
@@ -212,8 +241,8 @@ add_runtime () {
 
 	# generate runtime directory
 
-	console.directory /run/user "${user_uid}"
-	console.directory /run/user "${user_name}"
+	console.directory "${PREFIX}"/cnt//run/user "${user_uid}"
+	console.directory "${PREFIX}"/cnt//run/user "${user_name}"
 
 	# set runtime directory permissions
 
@@ -222,18 +251,20 @@ add_runtime () {
 
 	# set runtime directory ownership
 
-	chown "${user_uid}":"${user_gid}" -R /run/user/"${user_uid}"
-	chown "${user_uid}":"${user_gid}" -R /run/user/"${user_name}"
+	chown "${user_uid}":"${user_gid}" -R "${PREFIX}"/cnt//run/user/"${user_uid}"
+	chown "${user_uid}":"${user_gid}" -R "${PREFIX}"/cnt//run/user/"${user_name}"
 }
 
 # generate user account and relevant permission sets
 
-add_information
+# add_information
 
 # use /dev/null redirection:
 # 'adduser' prevents stdout error redirect - cannot use 'console.silence'
 
-add_user > /dev/null
+# add_user_interactive > /dev/null
+
+add_user_non_interactive
 
 # use /dev/null redirection:
 # 'chpasswd' prevents stdout error redirect - cannot use 'console.silence'
