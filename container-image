@@ -248,25 +248,6 @@ image_extract () {
 	# exclude archive directories: dev | proc | sys | system
 	# 'container-session' will bind those device directories to the container
 
-	core_extract () {
-		# core/minimal system images
-
-		proot											\
-			--link2symlink								\
-				tar 									\
-					--extract							\
-					--delay-directory-restore			\
-					--preserve-permissions				\
-						--file="${1}"					\
-								--exclude='boot'		\
-								--exclude='dev'			\
-								--exclude='proc'		\
-								--exclude='sys'			\
-								--exclude='system'		\
-									--directory="${2}"
-
-	}
-
 	container_extract () {
 		# cloud container/docker images
 
@@ -284,6 +265,25 @@ image_extract () {
 						--exclude='sys'			\
 						--exclude='system' 		\
 							--directory="${2}"
+	}
+
+	core_extract () {
+		# core/minimal system images
+
+		proot											\
+			--link2symlink								\
+				tar 									\
+					--extract							\
+					--delay-directory-restore			\
+					--preserve-permissions				\
+						--file="${1}"					\
+								--exclude='boot'		\
+								--exclude='dev'			\
+								--exclude='proc'		\
+								--exclude='sys'			\
+								--exclude='system'		\
+									--directory="${2}"
+
 	}
 
 	console.wrn "Extracting new deployment." "[ ${image_name} ]"
