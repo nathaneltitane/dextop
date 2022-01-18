@@ -109,8 +109,8 @@ image_version () {
 	)
 
 	fedora_versions=(
+		fedora	34
 		fedora	35
-		fedora	36
 	)
 
 	versions=(
@@ -182,7 +182,7 @@ image_version () {
 
 	# handle distribution code markup
 
-	if [ "${distribution_version}" = ubuntu ]
+	if [ "${distribution_name}" = ubuntu ]
 	then
 		# set IFS
 
@@ -217,15 +217,12 @@ image_download () {
 		ubuntu)
 			image_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${distribution_version}/release"
 			image_archive="ubuntu-base-${distribution_version}-base-${image_architecture}.tar.gz"
-
+			image_name="${distribution_name}-${distribution_version}.tar.gz"
 		;;
 
 		fedora)
 			image_url="https://download.fedoraproject.org/pub/fedora/linux/releases/${distribution_version}/Container/aarch64/images"
 			image_archive="Fedora-Container-Base-${distribution_version}-1.2.aarch64.tar.xz"
-		;;
-
-		*)
 			image_name="${distribution_name}-${distribution_version}.tar.gz"
 		;;
 	esac
@@ -240,20 +237,45 @@ image_unpack () {
 	console.inf "Extracting new deployment."
 	echo
 
-	proot														\
-		--link2symlink											\
-			tar 												\
-				--extract										\
-				--delay-directory-restore						\
-				--preserve-permissions							\
-					--file="${PREFIX}/img/${image_name}"		\
-							--exclude='json'					\
-							--exclude='boot'					\
-							--exclude='dev'						\
-							--exclude='proc'					\
-							--exclude='sys'						\
-							--exclude='system' 					\
-								--directory="${PREFIX}"/cnt
+	unset command_unpack
+
+	console.wrn "Unpacking" "[ ${image_name} ]"
+	echo
+
+	[ "${distribution_name}" = ubuntu ] && command_unpack+="${PREFIX}/bin/proot"
+	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --link2symlink"
+				command_unpack+=" ${PREFIX}/bin/tar"
+				command_unpack+=" --extract"
+				command_unpack+=" --delay-directory-restore"
+				command_unpack+=" --preserve-permissions"
+				command_unpack+=" --file=${PREFIX}/img/${image_name}"
+	[ "${distribution_name}" = fedora ] && command_unpack+=" --strip-components=1"
+	[ "${distribution_name}" = fedora ] && command_unpack+=" --exclude='json'"
+	[ "${distribution_name}" = fedora ] && command_unpack+=" --exclude='VERSION'"
+	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='boot'"
+	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='dev'"
+	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='proc'"
+	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='sys'"
+	[ "${distribution_name}" = ubuntu ] && command_unpack+=" --exclude='system'"
+				command_unpack+=" --directory=${PREFIX}/cnt/test"
+
+	exec ${command_unpack}
+
+#	proot														\
+#		--link2symlink											\
+#			tar 												\
+#				--extract										\
+#				--delay-directory-restore						\
+#				--preserve-permissions							\
+#					--file="${PREFIX}/img/${image_name}"		\
+#							--exclude='json'					\
+#							--exclude='boot'					\
+#							--exclude='dev'						\
+#							--exclude='proc'					\
+#							--exclude='sys'						\
+#							--exclude='system' 					\
+#								--directory="${PREFIX}"/cnt/test
+
 }
 
 # run setup
@@ -273,3 +295,5 @@ image_download
 # unpack image into container
 
 image_unpack
+
+ls -ld ${PREFIX}/cnt/test/*
