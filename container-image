@@ -25,74 +25,6 @@ echo
 
 # functions #
 
-image_architecture () {
-	#comapare system architecture to available image architectures
-
-	cpu_architectures=(
-		aarch64
-		arm
-		amd64
-		i*86
-		x86_64
-	)
-
-	# list supported image architechtures
-
-	image_architectures=(
-		arm64
-		armhf
-		amd64
-		i386
-		amd64
-	)
-
-	# test processor architecture string
-
-	device_architecture="$(uname -m)"
-
-	for i in ${!cpu_architectures[@]}
-	do
-		if [[ "${device_architecture}" == "${cpu_architectures[i]}" ]]
-		then
-			image_architecture=${image_architectures[i]}
-
-			console.scs "Supported architecture" "[ ${image_architecture} ]"
-			echo
-
-			break
-		else
-			console.wrn "Unsupported architecture" "[ ${image_architecture} ]"
-			echo
-
-			console.fwd "Aborting..."
-			echo
-
-			console.stp "Exiting."
-			echo
-
-			exit 1
-		fi
-	done
-
-	# test image architecture string
-
-	if [ -z "$image_architecture" ] || [ -z "${device_architecture}" ]
-	then
-		image_architecture="N/A"
-
-		console.wrn "Unknown architecture" "[ ${image_architecture} ]"
-		echo
-
-		console.fwd "Aborting..."
-		echo
-
-		console.stp "Exiting."
-		echo
-
-		exit 1
-	fi
-}
-
 image_version () {
 	# list distributions for setup
 
@@ -207,6 +139,88 @@ image_version () {
 	export distribution_version="${distribution_version}"
 }
 
+image_architecture () {
+	#comapare system architecture to available image architectures
+
+	cpu_architectures=(
+		aarch64
+		arm
+		amd64
+		i*86
+		x86_64
+	)
+
+	# list supported image architechtures
+
+	if [ "${distribution_name}" = fedora ]
+	then
+		image_architectures=(
+		aarch64
+		armhf
+		amd64
+		i386
+		amd64
+		)
+	fi
+
+	if [ "${distribution_name}" = ubuntu ]
+	then
+		image_architectures=(
+		arm64
+		armhf
+		amd64
+		i386
+		amd64
+		)
+	fi
+
+	# test processor architecture string
+
+	device_architecture="$(uname -m)"
+
+	for i in ${!cpu_architectures[@]}
+	do
+		if [[ "${device_architecture}" == "${cpu_architectures[i]}" ]]
+		then
+			image_architecture=${image_architectures[i]}
+
+			console.scs "Supported architecture" "[ ${image_architecture} ]"
+			echo
+
+			break
+		else
+			console.wrn "Unsupported architecture" "[ ${image_architecture} ]"
+			echo
+
+			console.fwd "Aborting..."
+			echo
+
+			console.stp "Exiting."
+			echo
+
+			exit 1
+		fi
+	done
+
+	# test image architecture string
+
+	if [ -z "$image_architecture" ] || [ -z "${device_architecture}" ]
+	then
+		image_architecture="N/A"
+
+		console.wrn "Unknown architecture" "[ ${image_architecture} ]"
+		echo
+
+		console.fwd "Aborting..."
+		echo
+
+		console.stp "Exiting."
+		echo
+
+		exit 1
+	fi
+}
+
 image_download () {
 	# generate links and download distribution image
 
@@ -214,15 +228,15 @@ image_download () {
 
 	case "${distribution_name}"
 	in
-		ubuntu)
-			image_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${distribution_version}/release"
-			image_archive="ubuntu-base-${distribution_version}-base-${image_architecture}.tar.gz"
+		fedora)
+			image_url="https://download.fedoraproject.org/pub/fedora/linux/releases/${distribution_version}/Container/${image_architecture}/images"
+			image_archive="Fedora-Container-Base-${distribution_version}-1.2.${image_architecture}.tar.xz"
 			image_name="${distribution_name}-${distribution_version}.tar.gz"
 		;;
 
-		fedora)
-			image_url="https://download.fedoraproject.org/pub/fedora/linux/releases/${distribution_version}/Container/aarch64/images"
-			image_archive="Fedora-Container-Base-${distribution_version}-1.2.aarch64.tar.xz"
+		ubuntu)
+			image_url="http://cdimage.ubuntu.com/ubuntu-base/releases/${distribution_version}/release"
+			image_archive="ubuntu-base-${distribution_version}-base-${image_architecture}.tar.gz"
 			image_name="${distribution_name}-${distribution_version}.tar.gz"
 		;;
 	esac
@@ -291,13 +305,13 @@ image_extract () {
 
 # run setup
 
-# verify architecture
-
-image_architecture
-
 # choose image version
 
 image_version
+
+# verify architecture
+
+image_architecture
 
 # download image
 
