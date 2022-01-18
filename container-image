@@ -229,8 +229,6 @@ image_unpack () {
 	console.inf "Extracting new deployment."
 	echo
 
-	cd "${PREFIX}"/cnt || exit 1
-
 	proot														\
 		--link2symlink											\
 			tar 												\
@@ -242,7 +240,8 @@ image_unpack () {
 						--exclude='dev'							\
 						--exclude='proc'						\
 						--exclude='sys'							\
-						--exclude='system' 2> /dev/null
+						--exclude='system' 2> /dev/null			\
+							--directory="${PREFIX}"/cnt
 }
 
 # run setup
