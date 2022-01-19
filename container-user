@@ -132,6 +132,9 @@ add_user_interactive () {
 	# silent configuration:
 	# set --gecos and --disabled-password for fully silent execution
 
+	console.wrn "Creating user" "[ ${user_name} ]"
+	echo
+
 	adduser					\
 		--gecos "${gecos}"	\
 		--shell "${SHELL}"	\
@@ -152,6 +155,9 @@ add_user () {
 	group_id="1000"
 	gecos="Dextop"
 	home="/home/${user_name}"
+
+	console.wrn "Creating user" "[ ${user_name} ]"
+	echo
 
 	echo  "${user_name}:x:${user_id}:${group_id}:${gecos}:${home}:${SHELL}" >> ${PREFIX}/cnt/etc/passwd
 }
