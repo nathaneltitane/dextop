@@ -849,7 +849,7 @@ then
 				--warning												\
 					--width="200"										\
 					--window-icon="${HOME}/.dextop/dextop-white.svg"	\
-					--text="Application '${application}' not found." 2> /dev/null &
+					--text="Application '${application}' not found." s2> /dev/null &
 		fi
 	fi
 fi
