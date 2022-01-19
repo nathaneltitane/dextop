@@ -1,4 +1,4 @@
-### Dextop [ Version // 01-17-2022 ]
+### Dextop [ Version // 01-18-2022 ]
 
 ![dextop](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop.svg)
 

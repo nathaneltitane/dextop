@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# dependencies #
+
+. "${PREFIX}"/bin/console
+
+# script #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="01-18-2022"
+
 # variables
 
 color="#2f343f"
