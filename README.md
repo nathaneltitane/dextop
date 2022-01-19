@@ -1,6 +1,6 @@
-![dextop](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop.svg)
-
 ![Android](https://img.shields.io/badge/Android-7.0+-2f343f.svg?style=for-the-badge) ![Dex](https://img.shields.io/badge/Dex-4.0-2f343f.svg?style=for-the-badge)
+
+![dextop](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop.svg)
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QG58TMRHNSZAU)
 
