@@ -842,6 +842,15 @@ then
 	else
 		console.err "Application not found" "[ "${application}" ]"
 		echo
+
+		if [[ $(command -v zenity) ]]
+		then
+			zenity			 											\
+				--warning												\
+					--width="200"										\
+					--window-icon="${HOME}/.dextop/dextop-white.svg"	\
+					--text="Application '${application}' not found."
+		fi
 	fi
 fi
 
