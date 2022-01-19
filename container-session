@@ -38,6 +38,13 @@ do
 			option="new"
 		;;
 
+		-a|--application)
+			option="application"
+			application="${2}"
+
+			shift
+		;;
+
 		-u|--username)
 			option="username"
 			user_name="${2}"
@@ -51,16 +58,18 @@ do
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-o, --start       Start vnc session server."
-			echo -e "-x, --stop        Stop vnc session server."
-			echo -e "-p, --password    Generate vnc session password."
+			echo -e "-o, --start          Start vnc session server."
+			echo -e "-x, --stop           Stop vnc session server."
+			echo -e "-p, --password       Generate vnc session password."
 			echo
-			echo -e "-c, --clean       Generate new vnc session selection."
-			echo -e "-n, --new         Generate new vnc session selection."
+			echo -e "-c, --clean          Generate new vnc session selection."
+			echo -e "-n, --new            Generate new vnc session selection."
 			echo
-			echo -e "-u, --username    Specify 'user' for session login."
+			echo -e "-a, --application    Start application on session login."
 			echo
-			echo -e "-h, --help        Show help and usage information."
+			echo -e "-u, --username       Specify 'user' for session login."
+			echo
+			echo -e "-h, --help           Show help and usage information."
 			echo
 			echo -e "'${script}' [ Version // ${version} ]"
 			echo
@@ -804,6 +813,36 @@ then
 	# start vnc session
 
 	vnc_start
+fi
+
+if [ "${option}" = "application" ]
+then
+	# handle selections display
+
+	if [ -f "${HOME}"/.vnc/selection ]
+	then
+		# hide if selection file is present
+
+		vnc_geometry > /dev/null 2>&1
+	else
+		# show if selection file is not present
+
+		vnc_geometry
+	fi
+
+	vnc_handle
+
+	# start vnc session
+
+	vnc_start
+
+	if [[ $(command -v "${application}") ]]
+	then
+		${application} &
+	else
+		console.err "Application not found" "[ "${application}" ]"
+		echo
+	fi
 fi
 
 if [ "${option}" = "username" ]
