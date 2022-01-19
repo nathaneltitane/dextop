@@ -41,13 +41,13 @@ do
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} [User Name] | [First Name] [Last Name] | [OPTION]"
+			echo -e "Usage: ${script} [OPTION]"
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-i, --information    Start vnc session server."
-			echo -e "-p, --password       Generate vnc session password."
-			echo -e "-u, --username       Stop vnc session server."
+			echo -e "-i, --information    Gather setup information."
+			echo -e "-p, --password       Set or change user password."
+			echo -e "-u, --username       Setup user account."
 
 			echo
 			echo -e "-h, --help \t Show help and usage information."
@@ -67,7 +67,7 @@ do
 
 		*)
 			echo
-			echo -e "Usage: ${script} [User Name] | [First Name] [Last Name] | [OPTION]"
+			echo -e "Usage: ${script} [OPTION]"
 			echo
 			echo -e "${script}: Unknown option '${1}'"
 			echo -e "Type './${script} --help' for help and usage information."
