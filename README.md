@@ -4,6 +4,8 @@
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QG58TMRHNSZAU)
 
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 01-18-2022 ]
+
 Welcome to Dextop!
 
 Dextop turns your modern Android device into a complete Linux-based distribution workstation in a matter of minutes!
