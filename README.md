@@ -1,10 +1,12 @@
-### [[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 01-18-2022 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 01-18-2022 ]
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QG58TMRHNSZAU)
 
 ![dextop](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop.svg)
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QG58TMRHNSZAU)
+
+Welcome to Dextop!
 
 Dextop turns your modern Android device into a complete Linux-based distribution workstation in a matter of minutes!
 No hassle or deep technical know-how required: **Dextop is easy and user friendly.**
