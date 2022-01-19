@@ -1,10 +1,10 @@
 ### Dextop [ Version // 01-18-2022 ]
 
-![dextop](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop.svg)
-
 [[ Dextop Project Page ]](https://github.com/nathaneltitane/dextop)
 
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QG58TMRHNSZAU)
+![dextop](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop.svg)
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QG58TMRHNSZAU)
 
 Dextop turns your modern Android device into a complete Linux-based distribution workstation in a matter of minutes!
 No hassle or deep technical know-how required: **Dextop is easy and user friendly.**
@@ -126,3 +126,5 @@ Logging out by pressing Ctrl+D or by typing `'logout'` or `'exit'` will automati
 
 All setup dialogs, prompts, commands and binary execution outputs have been set to redirect to the Termux `'/var/log'` directory to keep output messages to a minimum.
 Should you suspect any issues or errors, please provide a copy of the files located under the Termux `'/var/log'` directory when submitting a bug report.
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QG58TMRHNSZAU)
