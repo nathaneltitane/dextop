@@ -326,7 +326,7 @@ then
 
 	# backgrounds
 
-	if [ ! -f "${PREFIX}"/bin/dextop-backgrounds-checkpoint ]
+	if [ ! -f "${HOME}"/.dextop/dextop-backgrounds-checkpoint ]
 	then
 		files_list=(
 			dextop-aubergine.svg
@@ -357,7 +357,7 @@ then
 
 	# update
 
-	if [ ! -f "${PREFIX}"/bin/dextop-update-checkpoint ]
+	if [ ! -f "${HOME}"/.dextop/dextop-update-checkpoint ]
 	then
 		console.write update "${HOME}"/.dextop dextop-update
 
@@ -366,7 +366,7 @@ then
 
 	# move setup
 
-	if [ ! -f "${PREFIX}"/bin/dextop-move-checkpoint ]
+	if [ ! -f "${HOME}"/.dextop/dextop-move-checkpoint ]
 	then
 		mv "${HOME}"/dextop "${HOME}"/.dextop/dextop
 
