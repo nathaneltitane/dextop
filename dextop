@@ -135,10 +135,10 @@ echo
 
 while [[ -z $(command -v proot) ]]
 do
-	bash -c 'yes | pkg update'									>> /dev/null 2>&1
-	bash -c 'yes | pkg upgrade'									>> /dev/null 2>&1
-	bash -c 'yes | pkg install proot'							>> /dev/null 2>&1
-	bash -c 'yes | pkg update'									>> /dev/null 2>&1
+	bash -c 'yes | apt-get update'									>> /dev/null 2>&1
+	bash -c 'yes | apt-get upgrade'									>> /dev/null 2>&1
+	bash -c 'yes | apt-get install proot'							>> /dev/null 2>&1
+	bash -c 'yes | apt-get update'									>> /dev/null 2>&1
 done
 
 # download utilities
@@ -363,3 +363,7 @@ fi
 # setup check
 
 console.result dextop-checkpoint-complete "${script}"
+
+# source session files
+
+. "${HOME}"/.profile
