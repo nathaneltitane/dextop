@@ -12,6 +12,10 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 version="01-18-2022"
 
+# usage #
+
+# prompt #
+
 # variables
 
 # defaults #
