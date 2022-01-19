@@ -76,7 +76,7 @@ properties_list=(
 
 for property in ${properties_list[@]}
 do
-	xfconf-query -r -R -v -c 'xfce4-panel' -p ${property}
+	xfconf-query -r -R -v -c 'xfce4-panel' -p "${property}"
 done
 
 # set 'xfce4-session' settings
