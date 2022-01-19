@@ -188,21 +188,3 @@ install_list+=(
 )
 
 console.install ${install_list[@]}
-
-# reinstall
-
-reinstall_list=(
-	xfce4*
-	thunar*
-)
-
-console.reinstall ${reinstall_list[@]}
-
-# purge #
-
-purge_list=(
-	gtkhash*
-	leafpad*
-)
-
-console.purge ${purge_list[@]}

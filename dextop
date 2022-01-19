@@ -215,7 +215,13 @@ then
 
 		files_list=()
 
-		# bash #
+		console.file "${HOME}"/.dextop dextop-additions-checkpoint
+	fi
+
+	# shell
+
+	if [ ! -f "${HOME}"/.dextop/dextop-shell-checkpoint ]
+	then
 
 		files_list+=(
 			.bash_aliases
@@ -232,7 +238,7 @@ then
 
 		files_list=()
 
-		console.file "${HOME}"/.dextop dextop-additions-checkpoint
+		console.file "${HOME}"/.dextop dextop-shell-checkpoint
 	fi
 
 	# bookmarks
@@ -370,7 +376,6 @@ then
 	# checkpoint
 
 	console.file "${HOME}"/.dextop dextop-setup-checkpoint
-
 fi
 
 # setup check
