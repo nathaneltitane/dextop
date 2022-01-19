@@ -14,6 +14,8 @@ version="01-18-2022"
 
 # variables
 
+# defaults #
+
 color="#2f343f"
 
 edge_value="50"
