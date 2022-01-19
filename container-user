@@ -25,16 +25,16 @@ do
 			shift
 		;;
 
-		-p|--password)
-			option="password"
-			user_password="${2}"
+		-u|--username)
+			option="username"
+			user_name="${2}"
 
 			shift
 		;;
 
-		-u|--username)
-			option="username"
-			user_name="${2}"
+		-p|--password)
+			option="password"
+			user_password="${2}"
 
 			shift
 		;;
@@ -46,11 +46,10 @@ do
 			echo -e "Options:"
 			echo
 			echo -e "-i, --information    Gather setup information."
-			echo -e "-p, --password       Set or change user password."
 			echo -e "-u, --username       Setup user account."
-
+			echo -e "-p, --password       Set or change user password."
 			echo
-			echo -e "-h, --help \t Show help and usage information."
+			echo -e "-h, --help           Show help and usage information."
 			echo
 			echo -e "'${script}' [ Version ${version} ]"
 			echo

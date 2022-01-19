@@ -47,7 +47,7 @@ do
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} | [User Name]"
+			echo -e "Usage: ${script} -u [User Name] | [OPTION]"
 			echo
 			echo -e "Options:"
 			echo
@@ -77,7 +77,7 @@ do
 
 		*)
 			echo
-			echo -e "Usage: ${script} | [User Name]"
+			echo -e "Usage: ${script} -u [User Name] | [OPTION]"
 			echo
 			echo -e "${script}: Unknown option '${1}'"
 			echo -e "Type './${script} --help' for help and usage information."
