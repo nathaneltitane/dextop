@@ -382,6 +382,6 @@ fi
 
 console.result dextop-setup-checkpoint "${script}"
 
-# start session
+# session start
 
 [ -f "${HOME}"/.profile ] && . "${HOME}"/.profile
