@@ -51,7 +51,7 @@ do
 			echo
 			echo -e "-h, --help           Show help and usage information."
 			echo
-			echo -e "'${script}' [ Version ${version} ]"
+			echo -e "'${script}' [ Version // ${version} ]"
 			echo
 
 			exit
