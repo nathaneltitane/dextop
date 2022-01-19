@@ -1,8 +1,4 @@
-[![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QG58TMRHNSZAU)
-
 ![dextop](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop.svg)
-
-[![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QG58TMRHNSZAU)
 
 [[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 01-18-2022 ]
 
@@ -131,4 +127,4 @@ Should you suspect any issues or errors, please provide a copy of those files  w
 
 [[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 01-18-2022 ]
 
-[![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QG58TMRHNSZAU)
+Enjoying Dextop? Buy me a coffee to show your appreciation! [![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QG58TMRHNSZAU)
