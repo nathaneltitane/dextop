@@ -20,6 +20,9 @@ do
 	in
 		-i|--information)
 			option="information"
+			user_name="${2}"
+
+			shift
 		;;
 
 		-p|--password)
@@ -41,6 +44,11 @@ do
 			echo -e "Usage: ${script} [User Name] | [First Name] [Last Name] | [OPTION]"
 			echo
 			echo -e "Options:"
+			echo
+			echo -e "-i, --information    Start vnc session server."
+			echo -e "-p, --password       Generate vnc session password."
+			echo -e "-u, --username       Stop vnc session server."
+
 			echo
 			echo -e "-h, --help \t Show help and usage information."
 			echo
@@ -233,6 +241,12 @@ then
 	[ -z "${user_password}" ] && information_list+=(user_password)
 
 	add_information
+
+	export user_name="${user_name}"
+	export first_name="${first_name}"
+	export last_name="${last_name}"
+	export user_email="${user_email}"
+	export user_password="${user_password}"
 fi
 
 if [ "${option}" = "password" ]
