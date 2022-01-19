@@ -108,7 +108,7 @@ echo
 
 export DISPLAY="${DISPLAY}"
 
-[ -f /etc/os-release ] && . /etc/os-release && name="${NAME}" || name=Ubuntu
+[ -f /etc/os-release ] && . /etc/os-release && name="${NAME}"
 
 # functions #
 
