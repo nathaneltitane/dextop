@@ -2,7 +2,7 @@
 
 # dependencies #
 
-curl -sL get.trmnl.me/console/console > "${PREFIX}"/bin/console && . "${PREFIX}"/bin/console
+[ ! -f "${PREFIX}"/bin/console ] && curl -sL get.trmnl.me/console/console > "${PREFIX}"/bin/console && . "${PREFIX}"/bin/console
 
 # script #
 
@@ -22,18 +22,18 @@ do
 			option="xfce"
 		;;
 
-		-n|--none)
-			option="none"
+		-c|--console)
+			option="console"
 		;;
 
 		-h|--help)
 			echo
 			echo -e "USAGE:"
 			echo
-			echo -e "-x, --xfce    XFCE4 setup: install XFCE desktop environment and utilities."
-			echo -e "-n, --none    No DE setup: console access to environment and utilities."
+			echo -e "-x, --xfce       XFCE4 setup: install XFCE desktop environment and utilities."
+			echo -e "-c, --console    No DE setup: console access to environment and utilities."
 			echo
-			echo -e "-h, --help    Show help and usage information."
+			echo -e "-h, --help       Show help and usage information."
 			echo
 			echo -e "'${script}' [ Version // ${version} ]"
 			echo
@@ -84,12 +84,6 @@ export option="${option}"
 [ -z "${option}" ] && option="xfce" && echo "${option}" > "${PREFIX}"/bin/dextop
 
 # functions #
-
-clean () {
-	rm -rf "${script}"
-}
-
-trap 'clean' EXIT
 
 container_command () {
 	# run container commands without session login
@@ -163,11 +157,11 @@ console.download get.dxtp.app "${PREFIX}"/bin ${utilities_list[@]}
 
 # in order of execution
 
-if [ ! -f "${PREFIX}"/bin/dextop-checkpoint-complete ]
+if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
 then
 	# termux
 
-	if [ ! -f "${PREFIX}"/bin/termux-checkpoint-complete ]
+	if [ ! -f "${HOME}"/.dextop/dextop-termux-checkpoint ]
 	then
 		"${PREFIX}"/bin/termux-update
 		"${PREFIX}"/bin/termux-directories
@@ -175,12 +169,12 @@ then
 		"${PREFIX}"/bin/termux-repositories
 		"${PREFIX}"/bin/termux-packages
 
-		console.file "${PREFIX}"/bin termux-checkpoint-complete
+		console.file "${HOME}"/.dextop dextop-termux-checkpoint
 	fi
 
 	# container
 
-	if [ ! -f "${PREFIX}"/bin/container-checkpoint-complete ]
+	if [ ! -f "${HOME}"/.dextop/dextop-container-checkpoint ]
 	then
 		"${PREFIX}"/bin/container-image
 		"${PREFIX}"/bin/container-system
@@ -190,12 +184,12 @@ then
 		container_command "${PREFIX}"/bin/container-packages
 		container_command "${PREFIX}"/bin/container-user
 
-		console.file "${PREFIX}"/bin container-checkpoint-complete
+		console.file "${HOME}"/.dextop dextop-container-checkpoint
 	fi
 
 	# additions
 
-	if [ ! -f "${PREFIX}"/bin/termux-additions-complete ]
+	if [ ! -f "${HOME}"/.dextop/dextop-additions-checkpoint ]
 	then
 		# termux #
 
@@ -238,23 +232,23 @@ then
 
 		files_list=()
 
-		console.file "${PREFIX}"/bin termux-additions-complete
+		console.file "${HOME}"/.dextop dextop-additions-checkpoint
 	fi
 
 	# bookmarks
 
-	if [ ! -f "${PREFIX}"/bin/bookmarks-checkpoint-complete ]
+	if [ ! -f "${HOME}"/.dextop/dextop-bookmarks-checkpoint ]
 	then
 		[ -d "${PREFIX}"/cnt ]            && console.write 'file:///data/data/com.termux/files/cnt Container'           "${HOME}"/.config/gtk-3.0 bookmarks
 		[ -d "${PREFIX}"/media/external ] && console.write 'file:///data/data/com.termux/files/media/external External' "${HOME}"/.config/gtk-3.0 bookmarks
 		[ -d "${PREFIX}"/media/internal ] && console.write 'file:///data/data/com.termux/files/media/internal Internal' "${HOME}"/.config/gtk-3.0 bookmarks
 
-		console.file "${PREFIX}"/bin/bookmarks-checkpoint-complete
+		console.file "${HOME}"/.dextop dextop-bookmarks-checkpoint
 	fi
 
 	# icons
 
-	if [ ! -f "${PREFIX}"/bin/icons-checkpoint-complete ]
+	if [ ! -f "${HOME}"/.dextop/dextop-icons-checkpoint ]
 	then
 		# papirus icon theme
 
@@ -299,12 +293,12 @@ then
 
 		files_list=()
 
-		console.file "${PREFIX}"/bin icons-additions-complete
+		console.file "${HOME}"/.dextop dextop-icons-checkpoint
 	fi
 
 	# themes
 
-	if [ ! -f "${PREFIX}"/bin/themes-checkpoint-complete ]
+	if [ ! -f "${HOME}"/.dextop/dextop-themes-checkpoint ]
 	then
 		files_list+=(
 			Arc
@@ -321,12 +315,12 @@ then
 
 		files_list=()
 
-		console.file "${PREFIX}"/bin themes-additions-complete
+		console.file "${HOME}"/.dextop dextop-themes-checkpoint
 	fi
 
 	# backgrounds
 
-	if [ ! -f "${PREFIX}"/bin/backgrounds-checkpoint-complete ]
+	if [ ! -f "${PREFIX}"/bin/dextop-backgrounds-checkpoint ]
 	then
 		files_list=(
 			dextop-aubergine.svg
@@ -352,12 +346,31 @@ then
 
 		files_list=()
 
-		console.file "${PREFIX}"/bin backgrounds-additions-complete
+		console.file "${HOME}"/.dextop dextop-backgrounds-checkpoint
+	fi
+
+	# update
+
+	if [ ! -f "${PREFIX}"/bin/dextop-update-checkpoint ]
+	then
+		console.write update "${HOME}"/.dextop dextop-update
+
+		console.file "${HOME}"/.dextop dextop-update-checkpoint
+	fi
+
+	# move setup
+
+	if [ ! -f "${PREFIX}"/bin/dextop-move-checkpoint ]
+	then
+		mv "${HOME}"/dextop "${HOME}"/.dextop/dextop
+
+		console.file "${HOME}"/.dextop dextop-move-checkpoint
 	fi
 
 	# checkpoint
 
-	console.file "${PREFIX}"/bin dextop-checkpoint-complete
+	console.file "${HOME}"/.dextop dextop-setup-checkpoint
+
 fi
 
 # setup check

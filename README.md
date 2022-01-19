@@ -74,13 +74,15 @@ Once the Android applications are installed on your device, open Termux and past
 
 Container install options are:
 
-`-x, --xfce    XFCE4 setup: install XFCE desktop environment and utilities.    [ Default ]`
+`-x, --xfce       XFCE4 setup: install XFCE desktop environment and utilities.    [ Default ]`
 
-`-n, --none    No DE setup: console access to environment and utilities.`
+`-c, --console    No DE setup: console access to environment and utilities.`
 
-The 'none' option is great for users who would like to experiment or setup their own window manager/desktop environment, utilities and preferences.
+The 'console' option is great for users who would like to experiment or setup their own window manager/desktop environment, utilities and preferences.
 
 ### Process summary:
+
+Most of the setup process is fully automated and should run its course until the container is ready for you to use.
 
 **Be attentive!**
 
@@ -91,8 +93,6 @@ Dextop automatically detects and processes any external media mounts and adds th
 **User input is still required to give Termux storage access permissions and this can only be done through user interaction. There are no workarounds!**
 
 You should press 'Allow' when prompted during the setup to grant this permission.
-
-Most of the setup process is fully automated and should run its course until the container is ready for you to use.
 
 ### Customization:
 

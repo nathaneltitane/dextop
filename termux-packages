@@ -170,7 +170,7 @@ fi
 
 # none
 
-if [[ $(cat "${PREFIX}"/bin/dextop) = "none" ]]
+if [[ $(cat "${PREFIX}"/bin/dextop) = "console" ]]
 then
 	desktop_environment_list=()
 fi
