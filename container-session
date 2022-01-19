@@ -26,7 +26,7 @@ do
 			option="stop"
 		;;
 
-		-p|--pass)
+		-p|--password)
 			option="password"
 		;;
 

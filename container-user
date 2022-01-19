@@ -14,46 +14,31 @@ version="01-17-2022"
 
 # usage #
 
-if [[ $# -gt 3 ]]
-then
-	echo
-	echo -e "Usage: ${script} [User Name] | [First Name] [Last Name] | [OPTION]"
-	echo
-
-	exit 1
-fi
-
-if [[ $# -eq 0 ]]
-then
-	user_name="termux"
-fi
-
-if [[ $# -eq 1 ]]
-then
-	user_name="${1}"
-fi
-
-if [[ $# -eq 2 ]]
-then
-	first_name="${1}"
-	last_name="${2}"
-	user_name="${first_name,,}"
-fi
-
-if [[ $# -eq 3 ]]
-then
-	user_name="${1}"
-	first_name="${2}"
-	last_name="${3}"
-fi
-
 while (($#))
 do
-	case "${4}"
+	case "${1}"
 	in
+		-i|--information)
+			option="information"
+		;;
+
+		-p|--password)
+			option="password"
+			user_password="${2}"
+
+			shift
+		;;
+
+		-u|--username)
+			option="username"
+			user_name="${2}"
+
+			shift
+		;;
+
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} | [First Name] [Last Name] | [OPTION]"
+			echo -e "Usage: ${script} [User Name] | [First Name] [Last Name] | [OPTION]"
 			echo
 			echo -e "Options:"
 			echo
@@ -74,7 +59,7 @@ do
 
 		*)
 			echo
-			echo -e "Usage: ${script} | [First Name] [Last Name] | [OPTION]"
+			echo -e "Usage: ${script} [User Name] | [First Name] [Last Name] | [OPTION]"
 			echo
 			echo -e "${script}: Unknown option '${1}'"
 			echo -e "Type './${script} --help' for help and usage information."
@@ -108,22 +93,6 @@ add_information () {
 	console.wrn "Information is required to set up your environment:"
 	console.wrn "Fields cannot be empty."
 	echo
-
-	# values #
-
-	if [ -z "${user_name}" ]
-	then
-		information_list+=(
-			user_name
-		)
-	fi
-
-	information_list+=(
-		first_name
-		last_name
-		user_email
-		user_password
-	)
 
 	# handle user input for information_list
 
@@ -161,14 +130,16 @@ add_user_interactive () {
 		--disabled-password "${user_name}"
 }
 
-add_user_non_interactive () {
+add_user () {
 	# generate 'user account:
 	# automated setup
+
+	[ -z "${user_name}" ] && user_name="termux"
 
 	console.fwd "Generating account..."
 	echo
 
-	user_name="termux"
+	user_name="${user_name}"
 	user_id="1000"
 	group_id="1000"
 	gecos="Dextop"
@@ -220,6 +191,7 @@ add_password () {
 	echo
 
 	# generate password credential for 'user' entry
+
 	# silent configuration:
 	# use 'chpasswd' to append user password to account
 
@@ -251,21 +223,53 @@ add_runtime () {
 	chown "${user_uid}":"${user_gid}" -R "${PREFIX}"/cnt/run/user/"${user_name}"
 }
 
-# generate user account and relevant permission sets
 
-# add_information
+if [ "${option}" = "information" ]
+then
+	[ -z "${user_name}" ]     && information_list+=(user_name)
+	[ -z "${first_name}" ]    && information_list+=(first_name)
+	[ -z "${last_name}" ]     && information_list+=(last_name)
+	[ -z "${user_email}" ]    && information_list+=(user_email)
+	[ -z "${user_password}" ] && information_list+=(user_password)
 
-# use /dev/null redirection:
-# 'adduser' prevents stdout error redirect - cannot use 'console.silence'
+	add_information
+fi
 
-# add_user_interactive > /dev/null
+if [ "${option}" = "password" ]
+then
+	[ -z "${user_password}" ] && information_list+=(user_password)
 
-# use /dev/null redirection:
-# 'chpasswd' prevents stdout error redirect - cannot use 'console.silence'
+	add_information
 
-# add_password > /dev/null
+	# use /dev/null redirection:
+	# 'chpasswd' prevents stdout error redirect - cannot use 'console.silence'
 
-add_user_non_interactive
+	add_password > /dev/null
+fi
+
+if [ "${option}" = "username" ]
+then
+	[ -z "${user_name}" ]     && information_list+=(user_name)
+	[ -z "${first_name}" ]    && information_list+=(first_name)
+	[ -z "${last_name}" ]     && information_list+=(last_name)
+	[ -z "${user_email}" ]    && information_list+=(user_email)
+	[ -z "${user_password}" ] && information_list+=(user_password)
+
+	add_information
+
+	# use /dev/null redirection:
+	# 'adduser' prevents stdout error redirect - cannot use 'console.silence'
+
+	add_user_interactive > /dev/null
+
+	add_superuser
+
+	add_runtime
+fi
+
+# generate 'user' account automatically
+
+add_user
 
 add_superuser
 
