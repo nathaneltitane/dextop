@@ -239,9 +239,9 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-bookmarks-checkpoint ]
 	then
-		[ -d "${PREFIX}"/cnt ]            && console.write 'file:///data/data/com.termux/files/cnt Container'           "${HOME}"/.config/gtk-3.0 bookmarks
-		[ -d "${PREFIX}"/media/external ] && console.write 'file:///data/data/com.termux/files/media/external External' "${HOME}"/.config/gtk-3.0 bookmarks
-		[ -d "${PREFIX}"/media/internal ] && console.write 'file:///data/data/com.termux/files/media/internal Internal' "${HOME}"/.config/gtk-3.0 bookmarks
+		[ -d "${PREFIX}"/cnt ]            && console.write 'file:///data/data/com.termux/files/cnt            Container' "${HOME}"/.config/gtk-3.0 bookmarks
+		[ -d "${PREFIX}"/media/external ] && console.write 'file:///data/data/com.termux/files/media/external External'  "${HOME}"/.config/gtk-3.0 bookmarks
+		[ -d "${PREFIX}"/media/internal ] && console.write 'file:///data/data/com.termux/files/media/internal Internal'  "${HOME}"/.config/gtk-3.0 bookmarks
 
 		console.file "${HOME}"/.dextop dextop-bookmarks-checkpoint
 	fi
