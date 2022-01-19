@@ -264,10 +264,10 @@ then
 		do
 			cd "${HOME}"
 
-			tar																		\
-				--extract															\
-				--file="${HOME}"/archive papirus-icon-theme-master/"${theme}"		\
-				--directory="${HOME}"
+			tar																	\
+				--extract														\
+				--file="${HOME}"/archive papirus-icon-theme-master/"${theme}"	\
+					--directory="${HOME}"
 		done
 
 		mv "${HOME}"/papirus-icon-theme* "${HOME}"/.icons
@@ -375,8 +375,8 @@ fi
 
 # setup check
 
-console.result dextop-checkpoint-complete "${script}"
+console.result dextop-setup-checkpoint "${script}"
 
-# source session files
+# start session
 
-. "${HOME}"/.profile
+[ -f "${HOME}"/.profile ] && . "${HOME}"/.profile
