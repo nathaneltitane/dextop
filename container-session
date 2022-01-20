@@ -718,7 +718,7 @@ container_environment () {
 
 	COLORTERM="truecolor"
 	LANG="C.UTF-8"
-	ROOTFS="${PREFIX}"/cnt
+	ROOT="${PREFIX}"/cnt
 	SHELL="/bin/bash"
 }
 
@@ -741,7 +741,7 @@ container_session () {
 	session_command+="proot"
 	session_command+=" --kill-on-exit"
 	session_command+=" --link2symlink"
-	session_command+=" --rootfs=${ROOTFS}"
+	session_command+=" --rootfs=${ROOT}"
 	session_command+=" --change-id=${USER_ID}:${GROUP_ID}"
 	session_command+=" --pwd=${HOME}"
 	[ -d "/apex" ]                                && session_command+=" --bind=/apex:/apex"
