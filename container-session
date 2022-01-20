@@ -348,7 +348,7 @@ vnc_load () {
 }
 
 vnc_start () {
-		# handle selections display
+	# handle selections display
 
 	if [ -f "${HOME}"/.vnc/selection ]
 	then
@@ -357,6 +357,24 @@ vnc_start () {
 		vnc_geometry > /dev/null 2>&1
 	else
 		# show if selection file is not present
+
+		vnc_geometry
+	fi
+
+	vnc_handle
+
+	# start vnc session
+
+	vnc_load
+}
+vnc_new () {
+	# handle selections display
+
+	if [ -f "${HOME}"/.vnc/selection ]
+	then
+		# remove  if selection file is present
+
+		rm -rf  "${HOME}"/.vnc/selection
 
 		vnc_geometry
 	fi
@@ -565,6 +583,27 @@ vnc_handle () {
 		DISPLAY=":${display}"
 		DISPLAY_NUMBER="${DISPLAY/:/}"
 		PORT="590${DISPLAY_NUMBER}"
+	fi
+}
+
+application_handle () {
+	# handle application launch
+
+	if [[ $(command -v "${application}") ]]
+	then
+		${application} &
+	else
+		console.err "Application not found" "[ "${application}" ]"
+		echo
+
+		if [[ $(command -v zenity) ]]
+		then
+			zenity			 											\
+				--warning												\
+					--width="200"										\
+					--window-icon="${HOME}/.dextop/dextop-white.svg"	\
+					--text="Application '${application}' not found." 2> /dev/null &
+		fi
 	fi
 }
 
@@ -784,9 +823,9 @@ container_session () {
 
 if [ "${option}" = "start" ]
 then
-		# start vnc session
+	# start vnc session
 
-		vnc_start
+	vnc_start
 fi
 
 if [ "${option}" = "stop" ]
@@ -812,61 +851,16 @@ fi
 
 if [ "${option}" = "new" ]
 then
-	# handle selections display
+	# start vnc session with new selection
 
-	if [ -f "${HOME}"/.vnc/selection ]
-	then
-		# remove  if selection file is present
-
-		rm -rf  "${HOME}"/.vnc/selection
-
-		vnc_geometry
-	fi
-
-	vnc_handle
-
-	# start vnc session
-
-	vnc_load
+	vnc_new
 fi
 
 if [ "${option}" = "application" ]
 then
-	# handle selections display
+	# validate and start application
 
-	if [ -f "${HOME}"/.vnc/selection ]
-	then
-		# hide if selection file is present
-
-		vnc_geometry > /dev/null 2>&1
-	else
-		# show if selection file is not present
-
-		vnc_geometry
-	fi
-
-	vnc_handle
-
-	# start vnc session
-
-	vnc_load
-
-	if [[ $(command -v "${application}") ]]
-	then
-		${application} &
-	else
-		console.err "Application not found" "[ "${application}" ]"
-		echo
-
-		if [[ $(command -v zenity) ]]
-		then
-			zenity			 											\
-				--warning												\
-					--width="200"										\
-					--window-icon="${HOME}/.dextop/dextop-white.svg"	\
-					--text="Application '${application}' not found." 2> /dev/null &
-		fi
-	fi
+	application_handle
 fi
 
 if [ "${option}" = "username" ]
