@@ -723,11 +723,9 @@ container_environment () {
 }
 
 container_session () {
-	# xfce #
+	# session settings
 
 	[[ $(cat "${PREFIX}"/bin/dextop) = xfce ]] && session_name="XFCE" || session_name="CONSOLE"
-
-	# defaults #
 
 	console.fwd "Starting session" "[ ${session_name} // ${user_name} ]"
 	echo
