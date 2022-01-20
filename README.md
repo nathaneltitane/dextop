@@ -128,6 +128,12 @@ Automatic utility updates on login can be enabled as follows:
 
 `'echo update >> ${HOME}/.dextop/dextop-update'`
 
+Dextop will automatically fetch all relevant utilities and replace them withthe up-to-date versions.
+
+Automatic utility updates on login can be disabled as follows:
+
+`'echo '' > ${HOME}/.dextop/dextop-update'`
+
 ### Reports:
 
 All setup dialogs, prompts, commands and binary execution outputs have been set to redirect to the `'${PREFIX}/var/log'` directory to keep output messages to a minimum.
