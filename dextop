@@ -242,7 +242,7 @@ then
 			.profile
 		)
 
-		console.download get.trmnl.me/bash "${HOME}" ${files_list[@]}
+		console.download get.trmnl.me/shell "${HOME}" ${files_list[@]}
 
 		console.link "${HOME}" "${PREFIX}"/cnt/root ${files_list[@]}
 
