@@ -26,12 +26,18 @@ do
 			option="console"
 		;;
 
+		-u|--update)
+			option="update"
+		;;
+
 		-h|--help)
 			echo
 			echo -e "USAGE:"
 			echo
 			echo -e "-x, --xfce       XFCE4 setup: install XFCE desktop environment and utilities."
 			echo -e "-c, --console    No DE setup: console access to environment and utilities."
+			echo
+			echo -e "-u, --update     Update Termux application packages. [ F-Droid ]"
 			echo
 			echo -e "-h, --help       Show help and usage information."
 			echo
@@ -163,7 +169,11 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-termux-checkpoint ]
 	then
-		"${PREFIX}"/bin/termux-update
+		if [ "${option}" = "update" ]
+		then
+			"${PREFIX}"/bin/termux-update
+		fi
+
 		"${PREFIX}"/bin/termux-directories
 		"${PREFIX}"/bin/termux-storage
 		"${PREFIX}"/bin/termux-repositories
