@@ -723,14 +723,6 @@ container_environment () {
 }
 
 container_session () {
-	# validate username
-
-	container_user
-
-	# set environemnt
-
-	container_environment
-
 	# xfce #
 
 	[[ $(cat "${PREFIX}"/bin/dextop) = xfce ]] && session_name="XFCE" || session_name="CONSOLE"
@@ -866,6 +858,16 @@ fi
 
 if [ "${option}" = "username" ]
 then
+	# validate username
+
+	container_user
+
+	# set environemnt
+
+	container_environment
+
+	# start container session
+
 	container_session
 fi
 
