@@ -282,13 +282,13 @@ then
 
 	add_information
 
-	add_user_interactive
+	# generate 'user' account: interactive
 
+	add_user_interactive
 else
-	# generate 'user' account automatically
+	# generate 'user' account: noninteractive
 
 	add_user_noninteractive
-
 fi
 
 add_password
