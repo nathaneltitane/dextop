@@ -301,7 +301,7 @@ vnc_intent () {
 	console.silence "exec ${intent_command}"
 }
 
-vnc_start () {
+vnc_load () {
 	console.fwd "Starting display server..."
 	echo
 
@@ -345,6 +345,27 @@ vnc_start () {
 	fi
 
 	vnc_intent
+}
+
+vnc_start () {
+		# handle selections display
+
+	if [ -f "${HOME}"/.vnc/selection ]
+	then
+		# hide if selection file is present
+
+		vnc_geometry > /dev/null 2>&1
+	else
+		# show if selection file is not present
+
+		vnc_geometry
+	fi
+
+	vnc_handle
+
+	# start vnc session
+
+	vnc_load
 }
 
 vnc_stop () {
@@ -625,14 +646,8 @@ container_user () {
 	done < "${PREFIX}"/cnt/etc/passwd
 }
 
-container_session () {
-	container_user
-
-	# system #
-
-	# explicit 'proot' command setup defaults:
-	# used to specify the desktop session:
-	# login format / environment /pathnv'
+container_environment () {
+	# generate container environement
 
 	# set path:
 	# in order of retreival
@@ -663,10 +678,18 @@ container_session () {
 	# set environment
 
 	COLORTERM="truecolor"
-	DISPLAY=":1"
 	LANG="C.UTF-8"
-	LOCALHOST="127.0.0.1"
 	SHELL="/bin/bash"
+}
+
+container_session () {
+	# validate username
+
+	container_user
+
+	# set environemnt
+
+	container_environment
 
 	# xfce #
 
@@ -761,24 +784,9 @@ container_session () {
 
 if [ "${option}" = "start" ]
 then
-	# handle selections display
+		# start vnc session
 
-	if [ -f "${HOME}"/.vnc/selection ]
-	then
-		# hide if selection file is present
-
-		vnc_geometry > /dev/null 2>&1
-	else
-		# show if selection file is not present
-
-		vnc_geometry
-	fi
-
-	vnc_handle
-
-	# start vnc session
-
-	vnc_start
+		vnc_start
 fi
 
 if [ "${option}" = "stop" ]
@@ -819,7 +827,7 @@ then
 
 	# start vnc session
 
-	vnc_start
+	vnc_load
 fi
 
 if [ "${option}" = "application" ]
@@ -841,7 +849,7 @@ then
 
 	# start vnc session
 
-	vnc_start
+	vnc_load
 
 	if [[ $(command -v "${application}") ]]
 	then
