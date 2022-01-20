@@ -91,6 +91,12 @@ echo
 
 # functions #
 
+generate_password () {
+	# generate random password
+
+	echo $(cat /dev/urandom | tr -d -c 'a-zA-Z0-9' | fold -w ${1:-32} | head -n $(echo $((RANDOM % 10 + 1))) | tail -n 1)
+	}
+
 add_information () {
 	# get 'user' information
 
@@ -134,20 +140,24 @@ add_user_interactive () {
 	console.wrn "Creating user" "[ ${user_name} ]"
 	echo
 
+	# use /dev/null redirection:
+	# 'adduser' prevents stdout error redirect - cannot use 'console.silence'
+
 	adduser					\
 		--gecos "${gecos}"	\
 		--shell "${SHELL}"	\
-		--disabled-password "${user_name}"
+		--disabled-password "${user_name}" > /dev/null
 }
 
-add_user () {
+add_user_noninteractive () {
 	# generate 'user account:
 	# automated setup
 
-	[ -z "${user_name}" ] && user_name="termux"
-
 	console.fwd "Generating account..."
 	echo
+
+	[ -z "${user_name}" ]     && user_name="termux"
+	[ -z "${user_password}" ] && user_password=$(generate_password)
 
 	user_name="${user_name}"
 	user_id="1000"
@@ -236,7 +246,6 @@ add_runtime () {
 	chown "${user_uid}":"${user_gid}" -R "${PREFIX}"/cnt/run/user/"${user_name}"
 }
 
-
 if [ "${option}" = "information" ]
 then
 	[ -z "${user_name}" ]     && information_list+=(user_name)
@@ -260,10 +269,7 @@ then
 
 	add_information
 
-	# use /dev/null redirection:
-	# 'chpasswd' prevents stdout error redirect - cannot use 'console.silence'
-
-	add_password > /dev/null
+	add_password
 fi
 
 if [ "${option}" = "username" ]
@@ -276,19 +282,16 @@ then
 
 	add_information
 
-	# use /dev/null redirection:
-	# 'adduser' prevents stdout error redirect - cannot use 'console.silence'
+	add_user_interactive
 
-	add_user_interactive > /dev/null
+else
+	# generate 'user' account automatically
 
-	add_superuser
+	add_user_noninteractive
 
-	add_runtime
 fi
 
-# generate 'user' account automatically
-
-add_user
+add_password
 
 add_superuser
 
