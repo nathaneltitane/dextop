@@ -122,6 +122,12 @@ The first login saves the selection under `"${HOME}"/.vnc/selection` and uses it
 
 Logging out by pressing Ctrl+D or by typing `'logout'` or `'exit'` will automatically stop the vnc session and exit the container back to the Termux shell.
 
+### Utility updates:
+
+Automatic utility updates on login can be enabled as follows:
+
+`'echo update >> ${HOME}/.dextop/dextop-update'`
+
 ### Reports:
 
 All setup dialogs, prompts, commands and binary execution outputs have been set to redirect to the `'${PREFIX}/var/log'` directory to keep output messages to a minimum.

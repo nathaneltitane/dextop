@@ -369,7 +369,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-update-checkpoint ]
 	then
-		console.write update "${HOME}"/.dextop dextop-update
+		console.file "${HOME}"/.dextop dextop-update
 
 		console.file "${HOME}"/.dextop dextop-update-checkpoint
 	fi
