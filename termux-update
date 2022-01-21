@@ -2,7 +2,12 @@
 
 # dependencies #
 
-. "${PREFIX}"/bin/console
+if [ ! -f "${PREFIX}"/bin/console ]
+then
+	curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console
+
+	. "${PREFIX}"/bin/console
+fi
 
 # script #
 
@@ -85,7 +90,7 @@ then
 		console.inf "Checking for package update" "[ ${package} ]"
 		echo
 
-		archive=$(curl -sL "${packages_url}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
+		archive=$(curl -s -L "${packages_url}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
 		archive_version=$(echo "${archive}" | cut -d '_' -f 2 | sed 's/\..*//g')
 		archive_url="${repository_url}/${archive}"
 
