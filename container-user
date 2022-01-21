@@ -91,13 +91,13 @@ echo
 
 # functions #
 
-generate_password () {
+user_password_generate () {
 	# generate random password
 
 	echo $(cat /dev/urandom | tr -d -c 'a-zA-Z0-9' | fold -w ${1:-32} | head -n $(echo $((RANDOM % 10 + 1))) | tail -n 1)
 	}
 
-add_information () {
+user_information () {
 	# get 'user' information
 
 	console.inf "This information will be used to set up the user account."
@@ -116,7 +116,7 @@ add_information () {
 	eval ${console_rtn[@]}
 }
 
-add_user_interactive () {
+user_interactive () {
 	# generate 'user' account:
 	# interactive setup
 
@@ -149,7 +149,7 @@ add_user_interactive () {
 		--disabled-password "${user_name}" > /dev/null
 }
 
-add_user_noninteractive () {
+user_noninteractive () {
 	# generate 'user account:
 	# automated setup
 
@@ -171,7 +171,7 @@ add_user_noninteractive () {
 	echo  "${user_name}:x:${user_id}:${group_id}:${gecos}:${home}:${SHELL}" >> ${PREFIX}/cnt/etc/passwd
 }
 
-add_superuser () {
+user_superuser () {
 	# generate 'user' superuser privilege
 
 	console.fwd "Generating superuser privilege..."
@@ -189,25 +189,25 @@ add_superuser () {
 	sed -i '/sudo.*/d' "${PREFIX}"/cnt/etc/group
 
 	echo "sudo:x:${sudo_id}:${user_name}" >> "${PREFIX}"/cnt/etc/group
+}
 
-	# generate sudoers directory
+user_superuser_override () {
+	# set 'user' superuser privilege password override
 
-	console.directory  "${PREFIX}"/cnt/etcsudoers.d
+	# set password override
 
-	# set superuser privilege password override
-
-	echo "${user_name} ALL=(ALL) NOPASSWD: ALL" > "${PREFIX}"/cnt/etc/sudoers.d/"${user_name}"
+	console.write "${user_name} ALL=(ALL) NOPASSWD: ALL" "${PREFIX}"/cnt/etc/sudoers.d "${user_name}"
 
 	# fix superuser privilege runtime errors
 
-	echo "Set disable_coredump false" >> "${PREFIX}"/cnt/etc/sudo.conf
+	console.write "Set disable_coredump false" "${PREFIX}"/cnt/etc sudo.conf
 
-	# fix ownership on superuser privilege password override
+	# set ownership on password override
 
 	chmod 0440 "${PREFIX}"/cnt/etc/sudoers.d/"${user_name}"
 }
 
-add_password () {
+user_password () {
 	# generate 'user' password
 
 	console.fwd "Setting password..."
@@ -221,7 +221,7 @@ add_password () {
 	chpasswd <<< "${user_name}:${user_password}"
 }
 
-add_runtime () {
+user_runtime () {
 	# generate 'user' runtime directory structure
 
 	console.fwd "Setting runtime..."
@@ -254,7 +254,7 @@ then
 	[ -z "${user_email}" ]    && information_list+=(user_email)
 	[ -z "${user_password}" ] && information_list+=(user_password)
 
-	add_information
+	user_information
 
 	export user_name="${user_name}"
 	export first_name="${first_name}"
@@ -267,9 +267,9 @@ if [ "${option}" = "password" ]
 then
 	[ -z "${user_password}" ] && information_list+=(user_password)
 
-	add_information
+	user_information
 
-	add_password
+	user_password
 fi
 
 if [ "${option}" = "username" ]
@@ -280,19 +280,21 @@ then
 	[ -z "${user_email}" ]    && information_list+=(user_email)
 	[ -z "${user_password}" ] && information_list+=(user_password)
 
-	add_information
+	user_information
 
 	# generate 'user' account: interactive
 
-	add_user_interactive
+	user_interactive
 else
 	# generate 'user' account: noninteractive
 
-	add_user_noninteractive
+	user_noninteractive
 fi
 
-add_password
+user_password
 
-add_superuser
+user_superuser
 
-add_runtime
+user_superuser_override
+
+user_runtime
