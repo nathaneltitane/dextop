@@ -21,10 +21,16 @@ do
 		-i|--image)
 			option="image"
 			distribution_name="${2}"
-			shift
-			distribution_version="${3}"
 
 			shift
+
+			distribution_version="${2}"
+
+			shift
+		;;
+
+		-s|--selection)
+			option="selection"
 		;;
 
 		-h|--help)
@@ -75,120 +81,126 @@ echo
 
 # defaults #
 
+[ -z "${distribution_name}" ] && distribution_name="ubuntu"
+[ -z "${distribution_version}" ] && distribution_version="21.10"
+
 # functions #
 
 image_version () {
 	# list distributions for setup
 
-	console.msg "Select distribution version to setup."
-	echo
+	if [ -z "${distribution_name}" ] || [ -z "${distribution_version}" ]
+	then
+		console.msg "Select distribution version to setup."
+		echo
 
-	# list supported distribution versions
+		# list supported distribution versions
 
-	fedora_versions=(
-		fedora	33
-		fedora	34
-		fedora	35
-	)
+		fedora_versions=(
+			fedora	33
+			fedora	34
+			fedora	35
+		)
 
-	ubuntu_versions=(
-		ubuntu	20.04.3
-		ubuntu	21.04
-		ubuntu	21.10
-	)
+		ubuntu_versions=(
+			ubuntu	20.04.3
+			ubuntu	21.04
+			ubuntu	21.10
+		)
 
-	versions=(
-	#	${fedora_versions[@]}
-		${ubuntu_versions[@]}
-	)
+		versions=(
+		#	${fedora_versions[@]}
+			${ubuntu_versions[@]}
+		)
 
-	# set padding for uniform output
+		# set padding for uniform output
 
-	pad_length=10
+		pad_length=10
 
-	# continue list using array selection of suppported values
+		# continue list using array selection of suppported values
 
-	for (( i=0 ; i<${#versions[@]} ; i+=2 ))
-	do
-		name="${versions[$i]}"
-		version="${versions[$i+1]}"
+		for (( i=0 ; i<${#versions[@]} ; i+=2 ))
+		do
+			name="${versions[$i]}"
+			version="${versions[$i+1]}"
 
-		number=$((($i/2) + 1))
+			number=$((($i/2) + 1))
 
-		if (( $i/2 >= 0 && $i/2 <= 8 ))
+			if (( $i/2 >= 0 && $i/2 <= 8 ))
+			then
+					# handle number spacing for entries 1-9
+
+					printf '      [  %s ] %s %s' ${number} ${name}
+			else
+					# handle number spacing for entries 10+
+
+					printf '      [ %s ] %s %s' ${number} ${name}
+			fi
+
+			printf '%*s' $((pad_length - ${#name}))
+			printf '%s\n' ${version}
+		done
+
+		printf '\n'
+
+		# values #
+
+		values_list=(
+			selection
+		)
+
+		# handle user input for values_list
+
+		eval ${console_rtn[@]}
+
+		console.ipt "Selection:"
+
+		read selection
+		echo
+
+		unset distribution_version
+
+		# integer check:
+		# handle numerical selection
+
+		if [[ "${selection}" =~ ^[0-9]+$ ]]
 		then
-				# handle number spacing for entries 1-9
+			i=$((${selection}))
+			i=$(($i*2))
 
-				printf '      [  %s ] %s %s' ${number} ${name}
-		else
-				# handle number spacing for entries 10+
+			version="${versions[i-1]}"
+			name="${versions[i-2]}"
 
-				printf '      [ %s ] %s %s' ${number} ${name}
+			distribution_name="${name}"
+			distribution_version="${version}"
 		fi
 
-		printf '%*s' $((pad_length - ${#name}))
-		printf '%s\n' ${version}
-	done
+		# handle distribution code markup
 
-	printf '\n'
-
-	# values #
-
-	values_list=(
-		selection
-	)
-
-	# handle user input for values_list
-
-	eval ${console_rtn[@]}
-
-	console.ipt "Selection:"
-
-	read selection
-	echo
-
-	unset distribution_version
-
-	# integer check:
-	# handle numerical selection
-
-	if [[ "${selection}" =~ ^[0-9]+$ ]]
-	then
-		i=$((${selection}))
-		i=$(($i*2))
-
-		version="${versions[i-1]}"
-		name="${versions[i-2]}"
-
-		distribution_name="${name}"
-		distribution_version="${version}"
-	fi
-
-	# handle distribution code markup
-
-	if [ "${distribution_name}" = ubuntu ]
-	then
-		# set IFS
-
-		IFS='.'
-
-		read code_year code_month code_revision <<< "${distribution_version}"
-
-		if [ -z "${code_revision}" ]
+		if [ "${distribution_name}" = ubuntu ]
 		then
-			distribution_release="${distribution_version}"
-		else
-			distribution_release="${distribution_version%.*}"
+			# set IFS
+
+			IFS='.'
+
+			read code_year code_month code_revision <<< "${distribution_version}"
+
+			if [ -z "${code_revision}" ]
+			then
+				distribution_release="${distribution_version}"
+			else
+				distribution_release="${distribution_version%.*}"
+			fi
+
+			# reset IFS
+
+			IFS=''
 		fi
 
-		# reset IFS
-
-		IFS=''
+		export distribution_name="${distribution_name}"
+		export distribution_release="${distribution_release}"
+		export distribution_version="${distribution_version}"
 	fi
-
-	export distribution_name="${distribution_name}"
-	export distribution_release="${distribution_release}"
-	export distribution_version="${distribution_version}"
 }
 
 image_architecture () {
@@ -363,24 +375,29 @@ image_extract () {
 image_handle () {
 	# set container image name and version
 
-	#~ unset distribution_name
-	#~ unset distribution_version
-
 	case "${distribution_name}"
 	in
 		[uU][bB][uU][nN][tT][uU])
 			distribution_name="${distribution_name,,}"
 
-			console.scs "Supported distribution"
+			console.scs "Supported distribution name."
 			echo
 		;;
 
 		[fF][eE][dD][oO][rR][aA])
 			distribution_name="${distribution_name,,}"
 
-			console.scs "Supported distribution"
+			console.scs "Supported distribution name."
 			echo
 		;;
+
+		"")
+			distribution_name="ubuntu"
+
+			console.err "Empty distribution name."
+			echo
+		;;
+
 
 		*)
 			distribution_name="ubuntu"
@@ -397,17 +414,33 @@ image_handle () {
 	then
 		case "${distribution_version}"
 		in
-			20*04*)
-				distribution_version=20.04.3
+			20*04|20*04*)
+				distribution_version="20.04.3"
+
+				console.scs "Supported distribution version."
+				echo
 			;;
 
-			21*04*)
+			21*04|21*04*)
 				distribution_version=21.04
+
+				console.scs "Supported distribution version."
+				echo
 			;;
 
-			20*10*)
+			21*10|20*10*)
 				distribution_version=21.10
+
+				console.scs "Supported distribution version."
+				echo
 			 ;;
+
+			"")
+				distribution_version=21.10
+
+				console.err "Empty distribution version."
+				echo
+			;;
 
 			 *)
 				distribution_version=21.10
@@ -417,6 +450,7 @@ image_handle () {
 
 				console.wrn "Defaulting" "[ ${distribution_version} ]"
 				echo
+			;;
 		esac
 	fi
 
@@ -424,17 +458,25 @@ image_handle () {
 	then
 		case "${distribution_version}"
 		in
-			33*)
+			33)
 				distribution_version=33
 			;;
 
-			34*)
+			34)
 				distribution_version=34
 			;;
 
-			35*)
+			35)
 				distribution_version=35
 			 ;;
+
+			 "")
+				distribution_version=35
+
+				console.err "Empty distribution version."
+				echo
+			;;
+
 
 			 *)
 				distribution_version=35
@@ -444,6 +486,7 @@ image_handle () {
 
 				console.wrn "Defaulting" "[ ${distribution_version} ]"
 				echo
+			;;
 		esac
 	fi
 }
@@ -453,15 +496,17 @@ then
 	# validate distribution name and version
 
 	image_handle
-
 fi
 
-#~ if [ "${option}" = "image" ]
-#~ then
-	#~ # select image version
+if [ "${option}" = "selection" ]
+then
+	unset distribution_name
+	unset distribution_version
 
-	#~ image_version
-#~ fi
+	# select image version
+
+	image_version
+fi
 
 # verify architecture
 
