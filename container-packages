@@ -1,190 +1,193 @@
-#!/bin/bash
+#~ #!/bin/bash
 
-# dependencies #
+#~ # dependencies #
 
-. "${PREFIX}"/bin/console
+#~ . "${PREFIX}"/bin/console
 
-# script #
+#~ # script #
 
-script=$(basename -- "${BASH_SOURCE[0]}")
+#~ script=$(basename -- "${BASH_SOURCE[0]}")
 
-# version #
+#~ # version #
 
-version="01-20-2022"
+#~ version="01-20-2022"
 
-# usage #
+#~ # usage #
 
-# prompt #
+#~ # prompt #
 
-console.script "Setting up ${script#*-}"
-echo
+#~ console.script "Setting up ${script#*-}"
+#~ echo
 
-# variables #
+#~ # variables #
 
-# defaults #
+#~ # defaults #
 
-# update packages list
+#~ # update packages list
 
-console.update
+#~ console.update
 
-# upgrade installed packages
+#~ # upgrade installed packages
 
-console.upgrade
+#~ console.upgrade
 
-# values #
+#~ # values #
 
-display_list=(
-	x11-apps
-	x11-common
-	x11-session-utils
-	x11-touchscreen-calibrator
-	x11-utils
-	x11-xfs-utils
-	x11-xkb-utils
-	x11-xserver-utils
-)
+#~ display_list=(
+	#~ x11-apps
+	#~ x11-common
+	#~ x11-session-utils
+	#~ x11-touchscreen-calibrator
+	#~ x11-utils
+	#~ x11-xfs-utils
+	#~ x11-xkb-utils
+	#~ x11-xserver-utils
+#~ )
 
-documentation_list=(
-	man
-)
+#~ documentation_list=(
+	#~ man
+#~ )
 
-extensions_list=(
-)
+#~ extensions_list=(
+#~ )
 
-fonts_list=(
-	fonts-takao
-)
+#~ fonts_list=(
+	#~ fonts-takao
+#~ )
 
-multimedia_list=(
-)
+#~ multimedia_list=(
+#~ pulseaudio
+#~ )
 
-repositories_list=(
-)
+#~ repositories_list=(
+#~ )
 
-security_list=(
-	ca-certificates
-	openssl
-)
+#~ security_list=(
+	#~ ca-certificates
+	#~ openssl
+#~ )
 
-utilities_list=(
-	sudo
-)
+#~ utilities_list=(
+	#~ sudo
+#~ )
 
-vnc_list=(
-	tigervnc-common
-	tigervnc-standalone-server
-)
+#~ vnc_list=(
+	#~ tigervnc-common
+	#~ tigervnc-standalone-server
+#~ )
 
-xfce_list=(
-	xfce4
-	xfce4-appfinder
-	xfce4-clipman
-	xfce4-dict
-	xfce4-notifyd
-	xfce4-panel
-	xfce4-screenshooter
-	xfce4-session
-	xfce4-settings
-	xfce4-taskmanager
-	xfce4-terminal
-	galculator
-	gigolo
-	parole
-	thunar
-	thunar-archive-plugin
-	ristretto
-	tumbler
-)
+#~ xfce_list=(
+	#~ xfce4
+	#~ xfce4-appfinder
+	#~ xfce4-clipman
+	#~ xfce4-dict
+	#~ xfce4-notifyd
+	#~ xfce4-panel
+	#~ xfce4-screenshooter
+	#~ xfce4-session
+	#~ xfce4-settings
+	#~ xfce4-taskmanager
+	#~ xfce4-terminal
+	#~ galculator
+	#~ gigolo
+	#~ parole
+	#~ thunar
+	#~ thunar-archive-plugin
+	#~ ristretto
+	#~ tumbler
+#~ )
 
-xfce_fonts_list=(
-)
+#~ xfce_fonts_list=(
+#~ )
 
-xfce_themes_list=(
-	arc-theme
-	adwaita-icon-theme
-	adwaita-icon-theme-full
-#	blackbird-gtk-theme
-#	bluebird-gtk-theme
-#	greybird-gtk-theme
-#	elementary-xfce-icon-theme
-#	gnome-themes-standard
-#	gnome-themes-extra
-#	gnome-themes-extra-data
-#	tango-icon-theme
-#	tango-icon-theme-common
-#	tango-icon-theme-extras
-)
+#~ xfce_themes_list=(
+	#~ arc-theme
+	#~ adwaita-icon-theme
+	#~ adwaita-icon-theme-full
+#~ #	blackbird-gtk-theme
+#~ #	bluebird-gtk-theme
+#~ #	greybird-gtk-theme
+#~ #	elementary-xfce-icon-theme
+#~ #	gnome-themes-standard
+#~ #	gnome-themes-extra
+#~ #	gnome-themes-extra-data
+#~ #	tango-icon-theme
+#~ #	tango-icon-theme-common
+#~ #	tango-icon-theme-extras
+#~ )
 
-xfce_addons_list=(
-	xfce4-appmenu-plugin
-	xfce4-battery-plugin
-	xfce4-clipman-plugin
-	xfce4-cpufreq-plugin
-	xfce4-cpugraph-plugin
-	xfce4-datetime-plugin
-	xfce4-diskperf-plugin
-	xfce4-equake-plugin
-	xfce4-eyes-plugin
-	xfce4-fsguard-plugin
-	xfce4-genmon-plugin
-	xfce4-indicator-plugin
-	xfce4-mailwatch-plugin
-	xfce4-mount-plugin
-	xfce4-mpc-plugin
-	xfce4-netload-plugin
-	xfce4-notes-plugin
-	xfce4-panel-profiles
-	xfce4-places-plugin
-	xfce4-sensors-plugin
-	xfce4-smartbookmark-plugin
-	xfce4-sntray-plugin
-	xfce4-sntray-plugin-common
-	xfce4-statusnotifier-plugin
-	xfce4-systemload-plugin
-	xfce4-time-out-plugin
-	xfce4-timer-plugin
-	xfce4-verve-plugin
-	xfce4-wavelan-plugin
-	xfce4-weather-plugin
-	xfce4-whiskermenu-plugin
-	xfce4-xkb-plugin
-)
+#~ xfce_addons_list=(
+	#~ xfce4-appmenu-plugin
+	#~ xfce4-battery-plugin
+	#~ xfce4-clipman-plugin
+	#~ xfce4-cpufreq-plugin
+	#~ xfce4-cpugraph-plugin
+	#~ xfce4-datetime-plugin
+	#~ xfce4-diskperf-plugin
+	#~ xfce4-equake-plugin
+	#~ xfce4-eyes-plugin
+	#~ xfce4-fsguard-plugin
+	#~ xfce4-genmon-plugin
+	#~ xfce4-indicator-plugin
+	#~ xfce4-mailwatch-plugin
+	#~ xfce4-mount-plugin
+	#~ xfce4-mpc-plugin
+	#~ xfce4-netload-plugin
+	#~ xfce4-notes-plugin
+	#~ xfce4-panel-profiles
+	#~ xfce4-places-plugin
+	#~ xfce4-sensors-plugin
+	#~ xfce4-smartbookmark-plugin
+	#~ xfce4-sntray-plugin
+	#~ xfce4-sntray-plugin-common
+	#~ xfce4-statusnotifier-plugin
+	#~ xfce4-systemload-plugin
+	#~ xfce4-time-out-plugin
+	#~ xfce4-timer-plugin
+	#~ xfce4-verve-plugin
+	#~ xfce4-wavelan-plugin
+	#~ xfce4-weather-plugin
+	#~ xfce4-whiskermenu-plugin
+	#~ xfce4-xkb-plugin
+#~ )
 
-# options #
+#~ # options #
 
-# xfce
+#~ # xfce
 
-if [[ $(cat "${PREFIX}"/bin/dextop) = "xfce" ]]
-then
-	desktop_environment_list+=(
-		${xfce_list[@]}
-		${xfce_fonts_list[@]}
-		${xfce_themes_list[@]}
-	)
+#~ if [[ $(cat "${PREFIX}"/bin/dextop) = "xfce" ]]
+#~ then
+	#~ desktop_environment_list+=(
+		#~ ${xfce_list[@]}
+		#~ ${xfce_fonts_list[@]}
+		#~ ${xfce_themes_list[@]}
+	#~ )
 
-	#	${xfce_addons_list[@]}
-fi
+	#~ #	${xfce_addons_list[@]}
+#~ fi
 
-# none
+#~ # none
 
-if [[ $(cat "${PREFIX}"/bin/dextop) = "console" ]]
-then
-	desktop_environment_list=()
-fi
+#~ if [[ $(cat "${PREFIX}"/bin/dextop) = "console" ]]
+#~ then
+	#~ desktop_environment_list=()
+#~ fi
 
-# install #
+#~ # install #
 
-install_list+=(
-	${display_list[@]}
-	${documentation_list[@]}
-	${extensions_list[@]}
-	${fonts_list[@]}
-	${multimedia_list[@]}
-	${repositories_list[@]}
-	${security_list[@]}
-	${utilities_list[@]}
-	${vnc_list[@]}
-	${desktop_environment_list[@]}
-)
+#~ install_list+=(
+	#~ ${display_list[@]}
+	#~ ${documentation_list[@]}
+	#~ ${extensions_list[@]}
+	#~ ${fonts_list[@]}
+	#~ ${multimedia_list[@]}
+	#~ ${repositories_list[@]}
+	#~ ${security_list[@]}
+	#~ ${utilities_list[@]}
+	#~ ${vnc_list[@]}
+	#~ ${desktop_environment_list[@]}
+#~ )
 
-console.install ${install_list[@]}
+#~ console.install ${install_list[@]}
+
+apt-get install sudo xfce4* tigervnc*

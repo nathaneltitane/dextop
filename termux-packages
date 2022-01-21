@@ -64,6 +64,7 @@ multimedia_list=(
 	gst-plugins-bad
 	gst-plugins-ugly
 	gst-plugins-base
+	pulseaudio
 )
 
 repositories_list=(
