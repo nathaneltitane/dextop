@@ -649,7 +649,7 @@ image_architecture
 
 image_download
 
-# extract image into container
+# extract image into container directory
 
 image_extract
 

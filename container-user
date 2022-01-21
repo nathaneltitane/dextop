@@ -208,7 +208,7 @@ user_superuser_override () {
 }
 
 user_password () {
-	# generate 'user' password
+	# set 'user' password
 
 	console.fwd "Setting password..."
 	echo
@@ -291,10 +291,18 @@ else
 	user_noninteractive
 fi
 
+# set 'user' password
+
 user_password
+
+# generate 'user' superuser privilege
 
 user_superuser
 
+# set 'user 'superuser password override
+
 user_superuser_override
+
+# generate 'user' runtime directory structure
 
 user_runtime
