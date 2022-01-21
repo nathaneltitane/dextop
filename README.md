@@ -2,7 +2,7 @@
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QG58TMRHNSZAU)
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 01-20-2022 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 01-21-2022 ]
 
 Welcome to Dextop!
 
@@ -139,7 +139,7 @@ Automatic utility updates on login can be disabled as follows:
 All setup dialogs, prompts, commands and binary execution outputs have been set to redirect to the `'${PREFIX}/var/log'` directory to keep output messages to a minimum.
 Should you suspect any issues or errors, please provide a copy of those files  when submitting a bug report.
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 01-20-2022 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 01-21-2022 ]
 
 ### Enjoying Dextop? Buy me a coffee to show your appreciation!
 
