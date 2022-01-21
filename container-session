@@ -678,8 +678,10 @@ container_user () {
 			GROUP_ID=0
 			FULL_NAME="root"
 			HOME="/root"
-			session_name="CONSOLE"
 			SHELL="/bin/bash"
+
+			session_name="CONSOLE"
+
 		fi
 
 	done < "${PREFIX}"/cnt/etc/passwd
