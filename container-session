@@ -653,9 +653,9 @@ container_user () {
 
 		if [[ -z "${user_name}" ]]
 		then
-			user_name="root"
+			USER="root"
 
-			console.wrn "No user name - Defaulting" "[ '${user_name}' ]"
+			console.wrn "No user name - Defaulting" "[ '${USER}' ]"
 			echo
 
 			# break out of loop - empty "${user_name}" - default to 'root'
@@ -665,9 +665,9 @@ container_user () {
 
 		if [[ "${user_name}" == "${USER}" ]]
 		then
-			user_name="${USER}"
+			USER="${USER}"
 
-			console.scs "Valid user name" "[ '${user_name}' ]"
+			console.scs "Valid user name" "[ '${USER}' ]"
 			echo
 
 			# break out of loop - matching "${user_name}"
@@ -677,9 +677,9 @@ container_user () {
 
 		if [[ "${entry}" == "${last_entry}" ]]
 		then
-			user_name="root"
+			USER="root"
 
-			console.err "Invalid user name - Defaulting" "[ '${user_name}' ]"
+			console.err "Invalid user name - Defaulting" "[ '${USER}' ]"
 			echo
 		fi
 
@@ -690,9 +690,13 @@ container_user () {
 			USER="root"
 			USER_ID=0
 			GROUP_ID=0
-			FULL_NAME="root"
-			HOME="/root"
-			SHELL="/bin/bash"
+
+			if [ -d "${ROOT}"/root ]
+			then
+				HOME="/root"
+			else
+				HOME="/"
+			fi
 
 			session_name="CONSOLE"
 
