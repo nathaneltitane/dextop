@@ -762,7 +762,14 @@ container_root () {
 container_session () {
 	# session settings
 
-	[[ $(cat "${PREFIX}"/bin/dextop) = xfce ]] && session_name="XFCE" || session_name="CONSOLE"
+	if [[ $(cat "${PREFIX}"/bin/dextop) = xfce ]]
+	then
+		session_name="XFCE"
+	else
+		session_name="CONSOLE"
+	fi
+
+	user_name="${USER}"
 
 	console.fwd "Starting session" "[ ${session_name} // ${user_name} ]"
 	echo
