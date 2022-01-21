@@ -132,6 +132,15 @@ container_command () {
 	"${@}"
 }
 
+settings_intent () {
+		settings_command+="am broadcast"
+		settings_command+=" --user 0settings_command+="
+		settings_command+=" -a com.termux.app.reload_style"
+		settings_command+=" com.termux"
+
+		console.silence "exec ${settings_command}"
+	}
+
 # run failsafe package install:
 # termux package servers are sometimes unresponsive or badly authenticated
 
@@ -231,7 +240,7 @@ then
 
 		console.link "${PREFIX}"/bin "${HOME}"/.termux colors.properties
 
-		termux-reload-settings
+		settings_intent
 
 		files_list=()
 
