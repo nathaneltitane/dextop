@@ -133,12 +133,14 @@ container_command () {
 }
 
 settings_intent () {
-		settings_command+="am broadcast"
-		settings_command+=" --user 0settings_command+="
-		settings_command+=" -a com.termux.app.reload_style"
-		settings_command+=" com.termux"
+	unset storage_command
 
-		console.silence "exec ${settings_command}"
+	settings_command+="am broadcast"
+	settings_command+=" --user 0settings_command+="
+	settings_command+=" -a com.termux.app.reload_style"
+	settings_command+=" com.termux"
+
+	console.silence "exec ${settings_command}"
 	}
 
 # run failsafe package install:
