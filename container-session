@@ -52,14 +52,6 @@ do
 			shift
 		;;
 
-		-r|--rootfs)
-			option="root"
-			root_filesystem="${2}"
-
-			shift
-		;;
-
-
 		-h|--help)
 			echo
 			echo -e "Usage: ${script} -u [User Name] | -a [Application] | [OPTION]"
@@ -122,8 +114,6 @@ echo
 [ -z "${LOCALHOST}" ]       && LOCALHOST="127.0.0.1"
 [ -z "${ADDRESS}" ]         && ADDRESS="${LOCALHOST}"
 [ -z "${PORT}" ]            && PORT="590${DISPLAY_NUMBER}"
-
-[ -z "${ROOT}" ]            && ROOT="${ROOT}"
 
 export DISPLAY="${DISPLAY}"
 
@@ -623,7 +613,7 @@ container_user () {
 	# and corresponds to 'username' then source environment variables from file
 	# default to 'root' if 'username' is invalid, not specified or does not exist
 
-	last_entry="$(tail -n 1 "${ROOT}"/etc/passwd)"
+	last_entry="$(tail -n 1 "${PREFIX}"/cnt/etc/passwd)"
 
 	# authentication #
 
@@ -688,13 +678,11 @@ container_user () {
 			GROUP_ID=0
 			FULL_NAME="root"
 			HOME="/root"
-			SHELL="/bin/bash"
-
 			session_name="CONSOLE"
-
+			SHELL="/bin/bash"
 		fi
 
-	done < "${ROOT}"/etc/passwd
+	done < "${PREFIX}"/cnt/etc/passwd
 }
 
 container_environment () {
@@ -707,12 +695,12 @@ container_environment () {
 
 	# container
 
-	[ -d "${ROOT}"/usr/local/sbin ]											&& PATH+="/usr/local/sbin:"
-	[ -d "${ROOT}"/usr/local/bin ]											&& PATH+="/usr/local/bin:"
-	[ -d "${ROOT}"/usr/sbin ]													&& PATH+="/usr/sbin:"
-	[ -d "${ROOT}"/usr/sbin ]													&& PATH+="/usr/bin:"
-	[ -d "${ROOT}"/sbin ]														&& PATH+="/sbin:"
-	[ -d "${ROOT}"/bin ]														&& PATH+="/bin:"
+	[ -d "${PREFIX}"/cnt/usr/local/sbin ]											&& PATH+="/usr/local/sbin:"
+	[ -d "${PREFIX}"/cnt/usr/local/bin ]											&& PATH+="/usr/local/bin:"
+	[ -d "${PREFIX}"/cnt/usr/sbin ]													&& PATH+="/usr/sbin:"
+	[ -d "${PREFIX}"/cnt/usr/sbin ]													&& PATH+="/usr/bin:"
+	[ -d "${PREFIX}"/cnt/sbin ]														&& PATH+="/sbin:"
+	[ -d "${PREFIX}"/cnt/bin ]														&& PATH+="/bin:"
 
 	# termux
 
@@ -730,6 +718,7 @@ container_environment () {
 
 	COLORTERM="truecolor"
 	LANG="C.UTF-8"
+	ROOT="${PREFIX}"/cnt
 	SHELL="/bin/bash"
 }
 
@@ -867,29 +856,6 @@ fi
 
 if [ "${option}" = "username" ]
 then
-	# validate username
-
-	container_user
-
-	# set environemnt
-
-	container_environment
-
-	# start container session
-
-	container_session
-fi
-
-if [ "${option}" = "rootfs" ]
-then
-	if [ -d "${ROOT}"/"${root_filesystem}" ]
-	then
-		ROOT="${ROOT}"/"${root_filesystem}"
-	else
-		echo "not found - defaulting"
-		ROOT="${ROOT}"
-	fi
-
 	# validate username
 
 	container_user
