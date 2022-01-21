@@ -35,11 +35,12 @@ do
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script}  [OPTION]"
+			echo -e "Usage: ${script} -i <distribution_name> <distribution_version> | [OPTION]"
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-i, --image    Start vnc session server."
+			echo -e "-i, --image        Input distribution name and version."
+			echo -e "-s, --selection    Show setup selection options."
 			echo
 			echo -e "-h, --help     Show help and usage information."
 			echo
@@ -58,7 +59,7 @@ do
 
 		*)
 			echo
-			echo -e "Usage: ${script} [OPTION]"
+			echo -e "Usage: ${script} -i <distribution_name> <distribution_version> | [OPTION]"
 			echo
 			echo -e "${script}: Unknown option '${1}'"
 			echo -e "Type './${script} --help' for help and usage information."
