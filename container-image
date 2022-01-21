@@ -14,6 +14,57 @@ version="01-20-2022"
 
 # usage #
 
+while (($#))
+do
+	case "${1}"
+	in
+		-i|--image)
+			option="image"
+			distribution_name="${2}"
+			distribution_version="${3}"
+
+			shift
+		;;
+
+		-h|--help)
+			echo
+			echo -e "Usage: ${script}  [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-i, --image    Start vnc session server."
+			echo
+			echo -e "-h, --help     Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version // ${version} ]"
+			echo
+
+			exit
+		;;
+
+			"")
+				# handle empty argument:
+				# use default values specified in script
+
+				:
+			;;
+
+		*)
+			echo
+			echo -e "Usage: ${script} -u [User Name] | -a [Application] | [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+		;;
+
+	esac
+
+	shift
+done
+
 # prompt #
 
 console.script "Setting up ${script#*-}"
@@ -22,6 +73,9 @@ echo
 # variables #
 
 # defaults #
+
+[ -z "${distribution_name}" ]    && distribution_name="ubuntu"
+[ -z "${distribution_version}" ] && distribution_version="21.10"
 
 # functions #
 
@@ -297,14 +351,104 @@ image_extract () {
 
 		mv "${PREFIX}"/img/layer.tar "${PREFIX}"/img/"${image_name}.tar"
 
-		core_extract "${PREFIX}"/img/"${image_name}.tar" "${PREFIX}"/cnt
+		core_extract "${PREFIX}"/img/"${image_name}.tar" "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
 	fi
 
 	if [ "${distribution_name}" = ubuntu ]
 	then
-		core_extract "${PREFIX}"/img/"${image_file}" "${PREFIX}"/cnt
+		core_extract "${PREFIX}"/img/"${image_file}" "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
 	fi
 }
+
+image_handle () {
+	# set container image name and version
+
+	unset distribution_name
+	unset distribution_version
+
+	case "${distribution_name}"
+	in
+		[uU][bB][uU][nN][tT][uU])
+			distribution_name="${distribution_name,,}"
+
+			console.scs "Supported distribution"
+			echo
+		;;
+
+		[fF][eE][dD][oO][rR][aA])
+			distribution_name="${distribution_name,,}"
+
+			console.scs "Supported distribution"
+			echo
+		;;
+
+		*)
+			distribution_name="ubuntu"
+
+			console.err "Unsupported distribution - Defaulting"
+			echo
+		;;
+	esac
+
+	if [ "${distribution_name}" = "ubuntu" ]
+	then
+		case "${distribution_version}"
+		in
+			20.04|20.04*)
+				distribution_version=20.04.3
+			;;
+
+			21.04|21.04*)
+				distribution_version=21.04
+			;;
+
+			21.10|20.10*)
+				distribution_version=21.10
+			 ;;
+
+			 *)
+				distribution_version=21.10
+
+				console.err "Unsupported distribution version"
+				echo
+
+				console.wrn "Defaulting" "[ ${distribution_version} ]"
+				echo
+		esac
+	fi
+
+	if [ "${distribution_name}" = "fedora" ]
+	then
+		case "${distribution_version}"
+		in
+			33*)
+				distribution_version=33
+			;;
+
+			34*)
+				distribution_version=34
+			;;
+
+			35*)
+				distribution_version=35
+			 ;;
+
+			 *)
+				distribution_version=35
+
+				console.err "Unsupported distribution version"
+				echo
+
+				console.wrn "Defaulting" "[ ${distribution_version} ]"
+				echo
+		esac
+	fi
+
+}
+if [ "${option}" = "image" ]
+then
+	image_handle
+fi
 
 # run setup
 

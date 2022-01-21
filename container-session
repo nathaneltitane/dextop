@@ -747,7 +747,6 @@ container_root () {
 
 		console.inf "Loading" "[ ${ROOT} ]"
 		echo
-
 	else
 		ROOT="${PREFIX}"/cnt
 
