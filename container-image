@@ -502,12 +502,12 @@ image_environment () {
 
 	# container
 
-	[ -d "${ROOT}"/usr/local/sbin ] && PATH+="/usr/local/sbin:"
-	[ -d "${ROOT}"/usr/local/bin ]  && PATH+="/usr/local/bin:"
-	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/sbin:"
-	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/bin:"
-	[ -d "${ROOT}"/sbin ]           && PATH+="/sbin:"
-	[ -d "${ROOT}"/bin ]            && PATH+="/bin:"
+	[ -d "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/usr/local/sbin ] && PATH+="/usr/local/sbin:"
+	[ -d "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/usr/local/bin ]  && PATH+="/usr/local/bin:"
+	[ -d "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/usr/sbin ]       && PATH+="/usr/sbin:"
+	[ -d "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/usr/sbin ]       && PATH+="/usr/bin:"
+	[ -d "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/sbin ]           && PATH+="/sbin:"
+	[ -d "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/bin ]            && PATH+="/bin:"
 
 	# termux
 
@@ -523,7 +523,7 @@ image_environment () {
 
 	PATH="${PATH}"
 
-	cat <<- FILE > "${ROOT}"/etc/environment
+	cat <<- FILE > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/environment
 	PATH=${PATH}
 	PREFIX=${PREFIX}
 	FILE
@@ -565,8 +565,8 @@ image_groups () {
 
 		read group_number group_name <<< ${line}
 
-		[ -f "${ROOT}"/etc/group ]   && echo "${group_name}:x:${group_number}:" >> "${ROOT}"/etc/group
-		[ -f "${ROOT}"/etc/gshadow ] && echo "${group_name}:x:${group_number}:" >> "${ROOT}"/etc/gshadow
+		[ -f "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/group ]   && echo "${group_name}:x:${group_number}:" >> "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/group
+		[ -f "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/gshadow ] && echo "${group_name}:x:${group_number}:" >> "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/gshadow
 
 	done
 
@@ -580,13 +580,13 @@ image_network () {
 
 	# hostname
 
-	cat <<- 'FILE' > "${ROOT}"/etc/hostname
+	cat <<- 'FILE' > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/hostname
 	${HOSTNAME}
 	FILE
 
 	# hosts
 
-	cat <<- 'FILE' > "${ROOT}"/etc/hosts
+	cat <<- 'FILE' > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/hosts
 	# IPv4 #
 
 	127.0.0.1	localhost.localdomain
@@ -607,7 +607,7 @@ image_network () {
 
 	# nameserver
 
-	cat <<- 'FILE' > "${ROOT}"/etc/resolv.conf
+	cat <<- 'FILE' > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/resolv.conf
 	nameserver 1.1.1.1
 	nameserver 1.0.0.1
 	FILE
@@ -615,11 +615,11 @@ image_network () {
 image_preload () {
 	# generate libgcc/libc location and add to dynamic linker for preload
 
-	preload_library=$(find "${ROOT}"/usr/lib -type f -iname "libgcc_s.so.1")
+	preload_library=$(find "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/usr/lib -type f -iname "libgcc_s.so.1")
 
 	# set preload
 
-	cat <<- FILE > "${ROOT}"/etc/ld.so.preload
+	cat <<- FILE > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/ld.so.preload
 	${preload_library}
 	FILE
 }
