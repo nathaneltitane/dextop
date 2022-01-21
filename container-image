@@ -75,9 +75,6 @@ echo
 
 # defaults #
 
-#[ -z "${distribution_name}" ]    && distribution_name="ubuntu"
-#[ -z "${distribution_version}" ] && distribution_version="21.10"
-
 # functions #
 
 image_version () {
@@ -366,8 +363,8 @@ image_extract () {
 image_handle () {
 	# set container image name and version
 
-	unset distribution_name
-	unset distribution_version
+	#~ unset distribution_name
+	#~ unset distribution_version
 
 	case "${distribution_name}"
 	in
@@ -400,15 +397,15 @@ image_handle () {
 	then
 		case "${distribution_version}"
 		in
-			"20.04"|"20.04*")
+			20*04*)
 				distribution_version=20.04.3
 			;;
 
-			"21.04"|"21.04*")
+			21*04*)
 				distribution_version=21.04
 			;;
 
-			"21.10"|"20.10*")
+			20*10*)
 				distribution_version=21.10
 			 ;;
 
@@ -453,14 +450,18 @@ image_handle () {
 
 if [ "${option}" = "image" ]
 then
+	# validate distribution name and version
+
 	image_handle
-else
-	image_version
+
 fi
 
-# run setup
+#~ if [ "${option}" = "image" ]
+#~ then
+	#~ # select image version
 
-# choose image version
+	#~ image_version
+#~ fi
 
 # verify architecture
 
