@@ -2,7 +2,7 @@
 
 # dependencies #
 
-[ ! -f "${PREFIX}"/bin/console ] && curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console && . "${PREFIX}"/bin/console
+. "${PREFIX}"/bin/console
 
 # script #
 
@@ -21,6 +21,7 @@ do
 		-i|--image)
 			option="image"
 			distribution_name="${2}"
+			shift
 			distribution_version="${3}"
 
 			shift
@@ -51,7 +52,7 @@ do
 
 		*)
 			echo
-			echo -e "Usage: ${script} -u [User Name] | -a [Application] | [OPTION]"
+			echo -e "Usage: ${script} [OPTION]"
 			echo
 			echo -e "${script}: Unknown option '${1}'"
 			echo -e "Type './${script} --help' for help and usage information."
@@ -345,6 +346,8 @@ image_extract () {
 	console.wrn "Extracting new deployment" "[ ${image_file} // ${image_architecture} ]"
 	echo
 
+	console.directory "${PREFIX}"/cnt "${distribution_name}"/"${distribution_version}"
+
 	if [ "${distribution_name}" = fedora ]
 	then
 		container_extract "${PREFIX}"/img/"${image_file}" "${PREFIX}"/img
@@ -385,7 +388,10 @@ image_handle () {
 		*)
 			distribution_name="ubuntu"
 
-			console.err "Unsupported distribution - Defaulting"
+			console.err "Unsupported distribution name."
+			echo
+
+			console.wrn "Defaulting" "[ ${distribution_name} ]"
 			echo
 		;;
 	esac
@@ -394,22 +400,22 @@ image_handle () {
 	then
 		case "${distribution_version}"
 		in
-			20.04|20.04*)
+			"20.04"|"20.04*")
 				distribution_version=20.04.3
 			;;
 
-			21.04|21.04*)
+			"21.04"|"21.04*")
 				distribution_version=21.04
 			;;
 
-			21.10|20.10*)
+			"21.10"|"20.10*")
 				distribution_version=21.10
 			 ;;
 
 			 *)
 				distribution_version=21.10
 
-				console.err "Unsupported distribution version"
+				console.err "Unsupported distribution version."
 				echo
 
 				console.wrn "Defaulting" "[ ${distribution_version} ]"
@@ -443,8 +449,8 @@ image_handle () {
 				echo
 		esac
 	fi
-
 }
+
 if [ "${option}" = "image" ]
 then
 	image_handle
@@ -454,7 +460,7 @@ fi
 
 # choose image version
 
-image_version
+# image_version
 
 # verify architecture
 
