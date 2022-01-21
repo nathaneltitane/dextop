@@ -492,6 +492,138 @@ image_handle () {
 	fi
 }
 
+image_environment () {
+	# generate environment '$PATH'
+
+	# set path:
+	# in order of retreival
+
+	PATH=""
+
+	# container
+
+	[ -d "${ROOT}"/usr/local/sbin ] && PATH+="/usr/local/sbin:"
+	[ -d "${ROOT}"/usr/local/bin ]  && PATH+="/usr/local/bin:"
+	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/sbin:"
+	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/bin:"
+	[ -d "${ROOT}"/sbin ]           && PATH+="/sbin:"
+	[ -d "${ROOT}"/bin ]            && PATH+="/bin:"
+
+	# termux
+
+	[ -d "${PREFIX}"/sbin ]               && PATH+="${PREFIX}/sbin:"
+	[ -d "${PREFIX}"/bin ]                && PATH+="${PREFIX}/bin:"
+
+	# android
+
+	[ -d /system/sbin ]                   && PATH+="/system/sbin:"
+	[ -d /system/bin ]                    && PATH+="/system/bin:"
+
+	# set environment
+
+	PATH="${PATH}"
+
+	cat <<- FILE > "${ROOT}"/etc/environment
+	PATH=${PATH}
+	PREFIX=${PREFIX}
+	FILE
+}
+
+image_groups () {
+	# register android groups to container
+
+	# set IFS
+
+	IFS=' '
+
+	# read android system IDs
+
+	read uid gid groups <<< $(id)
+
+	uid=${uid/uid=}
+	gid=${gid/gid=}
+	groups=${groups/groups=}
+
+	# set IFS
+
+	IFS=','
+
+	# parse existing groups
+
+	read -r -a groups_list <<< "${groups}"
+
+	for line in "${groups_list[@]}"
+	do
+		line=${line/(/ }
+		line=${line/)}
+
+		# set IFS
+
+		IFS=' '
+
+		# transfer unregistered IDs
+
+		read group_number group_name <<< ${line}
+
+		[ -f "${ROOT}"/etc/group ]   && echo "${group_name}:x:${group_number}:" >> "${ROOT}"/etc/group
+		[ -f "${ROOT}"/etc/gshadow ] && echo "${group_name}:x:${group_number}:" >> "${ROOT}"/etc/gshadow
+
+	done
+
+	# reset IFS
+
+	IFS=''
+}
+
+image_network () {
+	# generate network files
+
+	# hostname
+
+	cat <<- 'FILE' > "${ROOT}"/etc/hostname
+	${HOSTNAME}
+	FILE
+
+	# hosts
+
+	cat <<- 'FILE' > "${ROOT}"/etc/hosts
+	# IPv4 #
+
+	127.0.0.1	localhost.localdomain
+	127.0.0.1	localhost
+
+	# IPv6 #
+
+	::1			localhost.localdomain
+	::1			localhost
+	::1			ip6-localhost
+	::1			ip6-loopbak
+	fe00::0		ip6-localnet
+	fe00::0		ip6-mcastprefix
+	ff02::1		ip6-allnodes
+	ff02::2		ip6-allrouters
+	ff02::3		ip6-allhosts
+	FILE
+
+	# nameserver
+
+	cat <<- 'FILE' > "${ROOT}"/etc/resolv.conf
+	nameserver 1.1.1.1
+	nameserver 1.0.0.1
+	FILE
+}
+image_preload () {
+	# generate libgcc/libc location and add to dynamic linker for preload
+
+	preload_library=$(find "${ROOT}"/usr/lib -type f -iname "libgcc_s.so.1")
+
+	# set preload
+
+	cat <<- FILE > "${ROOT}"/etc/ld.so.preload
+	${preload_library}
+	FILE
+}
+
 if [ "${option}" = "image" ]
 then
 	# validate distribution name and version
@@ -520,3 +652,19 @@ image_download
 # extract image into container
 
 image_extract
+
+# generate environment variables
+
+image_environment
+
+# generate missing groups
+
+image_groups
+
+# generate network
+
+image_network
+
+# generate preload entries
+
+image_preload
