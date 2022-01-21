@@ -75,8 +75,8 @@ echo
 
 # defaults #
 
-[ -z "${distribution_name}" ]    && distribution_name="ubuntu"
-[ -z "${distribution_version}" ] && distribution_version="21.10"
+#[ -z "${distribution_name}" ]    && distribution_name="ubuntu"
+#[ -z "${distribution_version}" ] && distribution_version="21.10"
 
 # functions #
 
@@ -321,7 +321,7 @@ image_extract () {
 						--exclude='proc'		\
 						--exclude='sys'			\
 						--exclude='system' 		\
-							--directory="${2}" > /dev/null
+							--directory="${2}" 2> /dev/null
 	}
 
 	core_extract () {
@@ -339,7 +339,7 @@ image_extract () {
 								--exclude='proc'		\
 								--exclude='sys'			\
 								--exclude='system'		\
-									--directory="${2}" > /dev/null
+									--directory="${2}" 2> /dev/null
 
 	}
 
@@ -454,13 +454,13 @@ image_handle () {
 if [ "${option}" = "image" ]
 then
 	image_handle
+else
+	image_version
 fi
 
 # run setup
 
 # choose image version
-
-# image_version
 
 # verify architecture
 
