@@ -151,13 +151,13 @@ user_interactive () {
 
 user_noninteractive () {
 	# generate 'user account:
-	# automated setup
+	# noninteractive setup
 
 	console.fwd "Generating account..."
 	echo
 
 	[ -z "${user_name}" ]     && user_name="termux"
-	[ -z "${user_password}" ] && user_password=$(generate_password)
+	[ -z "${user_password}" ] && user_password=$(user_password_generate)
 
 	user_name="${user_name}"
 	user_id="1000"
@@ -202,7 +202,8 @@ user_superuser_override () {
 
 	console.write "Set disable_coredump false" "${PREFIX}"/cnt/etc sudo.conf
 
-	# set ownership on password override
+	# reset password override ownership:
+	# fixes 'sudo' errors
 
 	chmod 0440 "${PREFIX}"/cnt/etc/sudoers.d/"${user_name}"
 }
