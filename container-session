@@ -2,12 +2,7 @@
 
 # dependencies #
 
-if [ ! -f "${PREFIX}"/bin/console ]
-then
-	curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console
-
-	. "${PREFIX}"/bin/console
-fi
+[ ! -f "${PREFIX}"/bin/console ] && curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console && . "${PREFIX}"/bin/console
 
 # script #
 
@@ -466,12 +461,12 @@ vnc_list () {
 	echo
 }
 
-vnc_pass () {
+vnc_password () {
 
 	# values #
 
 	values_list=(
-		vnc_password
+		vnc_passwordword
 	)
 
 	# handle user input for values_list
@@ -487,7 +482,7 @@ vnc_pass () {
 	console.fwd "Setting password..."
 	echo
 
-	echo "$vnc_password" | vncpasswd -f > "${HOME}"/.vnc/passwd
+	echo "$vnc_passwordword" | vncpasswd -f > "${HOME}"/.vnc/passwd
 
 	console.scs "Password changed."
 	echo
@@ -879,7 +874,7 @@ if [ "${option}" = "password" ]
 then
 	# generate password
 
-	vnc_pass
+	vnc_password
 fi
 
 if [ "${option}" = "clean" ]
