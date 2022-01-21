@@ -160,7 +160,7 @@ fi
 
 #~ # xfce
 
-#~ if [[ $(cat "${PREFIX}"/bin/dextop) = "xfce" ]]
+#~ if [[ $(cat "${HOME}"/.dextop/dextop-option) = "xfce" ]]
 #~ then
 	#~ desktop_environment_list+=(
 		#~ ${xfce_list[@]}
@@ -173,7 +173,7 @@ fi
 
 #~ # none
 
-#~ if [[ $(cat "${PREFIX}"/bin/dextop) = "console" ]]
+#~ if [[ $(cat "${HOME}"/.dextop/dextop-option) = "console" ]]
 #~ then
 	#~ desktop_environment_list=()
 #~ fi

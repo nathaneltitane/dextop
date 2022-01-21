@@ -97,7 +97,7 @@ export option="${option}"
 
 # defaults #
 
-[ -z "${option}" ] && option="xfce" && echo "${option}" > "${PREFIX}"/bin/dextop
+[ -z "${option}" ] && option="xfce" && echo "${option}" > "${HOME}"/.dextop/dextop-option
 
 # functions #
 
