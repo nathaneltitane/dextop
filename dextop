@@ -160,7 +160,6 @@ utilities_list+=(
 	container-repositories
 	container-session
 	container-settings
-	container-system
 	container-user
 )
 
@@ -187,13 +186,19 @@ then
 		console.file "${HOME}"/.dextop dextop-termux-checkpoint
 	fi
 
+	# image
+
+	if [ ! -f "${HOME}"/.dextop/dextop-image-checkpoint ]
+	then
+		"${PREFIX}"/bin/container-image
+
+		console.file "${HOME}"/.dextop dextop-image-checkpoint
+	fi
+
 	# container
 
 	if [ ! -f "${HOME}"/.dextop/dextop-container-checkpoint ]
 	then
-		"${PREFIX}"/bin/container-image
-		"${PREFIX}"/bin/container-system
-
 		container_command "${PREFIX}"/bin/container-expansion
 		container_command "${PREFIX}"/bin/container-repositories
 		container_command "${PREFIX}"/bin/container-packages

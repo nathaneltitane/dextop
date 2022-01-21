@@ -35,7 +35,7 @@ do
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} -i <distribution_name> <distribution_version> | [OPTION]"
+			echo -e "Usage: ${script} -i [Distribution Name] [Distribution Version] | [OPTION]"
 			echo
 			echo -e "Options:"
 			echo
@@ -59,7 +59,7 @@ do
 
 		*)
 			echo
-			echo -e "Usage: ${script} -i <distribution_name> <distribution_version> | [OPTION]"
+			echo -e "Usage: ${script} -i [Distribution Name] [Distribution Version] | [OPTION]"
 			echo
 			echo -e "${script}: Unknown option '${1}'"
 			echo -e "Type './${script} --help' for help and usage information."
