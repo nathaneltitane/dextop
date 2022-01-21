@@ -52,6 +52,13 @@ do
 			shift
 		;;
 
+		-r|--root)
+			option="root"
+			root_filesystem="${2}"
+
+			shift
+		;;
+
 		-h|--help)
 			echo
 			echo -e "Usage: ${script} -u [User Name] | -a [Application] | [OPTION]"
@@ -65,9 +72,11 @@ do
 			echo -e "-c, --clean          Generate new vnc session selection."
 			echo -e "-n, --new            Generate new vnc session selection."
 			echo
-			echo -e "-a, --application    Start application on session login."
+			echo -e "-a, --application    Start application to start on session login."
 			echo
-			echo -e "-u, --username       Specify 'user' for session login."
+			echo -e "-u, --username       Specify user name for session login."
+			echo
+			echo -e "-r, --root           Specify root filesystem directory."
 			echo
 			echo -e "-h, --help           Show help and usage information."
 			echo
@@ -117,7 +126,12 @@ echo
 
 export DISPLAY="${DISPLAY}"
 
-[ -f /etc/os-release ] && . /etc/os-release && name="${NAME}"
+[ -z "${COLORTERM}" ]       && COLORTERM="truecolor"
+[ -z "${LANG}" ]            && LANG="C.UTF-8"
+[ -z "${ROOT}" ]            && ROOT="${PREFIX}/cnt"
+[ -z "${SHELL}" ]           && SHELL="/bin/bash"
+
+[ -f /etc/os-release ]      && . /etc/os-release && name="${NAME}"
 
 # functions #
 
@@ -613,7 +627,7 @@ container_user () {
 	# and corresponds to 'username' then source environment variables from file
 	# default to 'root' if 'username' is invalid, not specified or does not exist
 
-	last_entry="$(tail -n 1 "${PREFIX}"/cnt/etc/passwd)"
+	last_entry="$(tail -n 1 "${ROOT}"/etc/passwd)"
 
 	# authentication #
 
@@ -684,7 +698,7 @@ container_user () {
 
 		fi
 
-	done < "${PREFIX}"/cnt/etc/passwd
+	done < "${ROOT}"/etc/passwd
 }
 
 container_environment () {
@@ -697,31 +711,48 @@ container_environment () {
 
 	# container
 
-	[ -d "${PREFIX}"/cnt/usr/local/sbin ]											&& PATH+="/usr/local/sbin:"
-	[ -d "${PREFIX}"/cnt/usr/local/bin ]											&& PATH+="/usr/local/bin:"
-	[ -d "${PREFIX}"/cnt/usr/sbin ]													&& PATH+="/usr/sbin:"
-	[ -d "${PREFIX}"/cnt/usr/sbin ]													&& PATH+="/usr/bin:"
-	[ -d "${PREFIX}"/cnt/sbin ]														&& PATH+="/sbin:"
-	[ -d "${PREFIX}"/cnt/bin ]														&& PATH+="/bin:"
+	[ -d "${ROOT}"/usr/local/sbin ] && PATH+="/usr/local/sbin:"
+	[ -d "${ROOT}"/usr/local/bin ]  && PATH+="/usr/local/bin:"
+	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/sbin:"
+	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/bin:"
+	[ -d "${ROOT}"/sbin ]           && PATH+="/sbin:"
+	[ -d "${ROOT}"/bin ]            && PATH+="/bin:"
 
 	# termux
 
-	[ -d "${PREFIX}"/sbin ]															&& PATH+="${PREFIX}/sbin:"
-	[ -d "${PREFIX}"/bin ]															&& PATH+="${PREFIX}/bin:"
+	[ -d "${PREFIX}"/sbin ]         && PATH+="${PREFIX}/sbin:"
+	[ -d "${PREFIX}"/bin ]          && PATH+="${PREFIX}/bin:"
 
 	# android
 
-	[ -d /system/sbin ]																&& PATH+="/system/sbin:"
-	[ -d /system/bin ]																&& PATH+="/system/bin:"
+	[ -d /system/sbin ]             && PATH+="/system/sbin:"
+	[ -d /system/bin ]              && PATH+="/system/bin:"
 
 	PATH="${PATH}"
+}
 
-	# set environment
+container_root () {
+	# set container root directory
 
-	COLORTERM="truecolor"
-	LANG="C.UTF-8"
-	ROOT="${PREFIX}"/cnt
-	SHELL="/bin/bash"
+	if [ -d "${root_filesystem}" ]
+	then
+		ROOT="${root_filesystem}"
+
+		console.scs "Container location found"
+		echo
+
+		console.inf "Loading" "[ ${ROOT} ]"
+		echo
+
+	else
+		ROOT="${PREFIX}"/cnt
+
+		console.err "Container location not found"
+		echo
+
+		console.wrn "Defaulting" "[ ${ROOT} ]"
+		echo
+	fi
 }
 
 container_session () {
@@ -858,6 +889,25 @@ fi
 
 if [ "${option}" = "username" ]
 then
+	# validate username
+
+	container_user
+
+	# set environemnt
+
+	container_environment
+
+	# start container session
+
+	container_session
+fi
+
+if [ "${option}" = "root" ]
+then
+	# validate root filesystem
+
+	container_root
+
 	# validate username
 
 	container_user
