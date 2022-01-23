@@ -98,10 +98,6 @@ ROOT=$(find ${PREFIX}/cnt -maxdepth 2 -mindepth 0 -type d | grep -i -E 'ubuntu|f
 container_setup () {
 	# run container setup commands through 'proot'
 
-	USER_ID="0"
-	GROUP_ID="0"
-	HOME="/root"
-
 	# assume 'termux-exec' is installed
 
 	unset LD_PRELOAD
@@ -114,8 +110,8 @@ container_setup () {
 	container_command+=" --kill-on-exit"
 	container_command+=" --link2symlink"
 	container_command+=" --rootfs=${ROOT}"
-	container_command+=" --change-id=${USER_ID}:${GROUP_ID}"
-	container_command+=" --pwd=${HOME}"
+	container_command+=" --change-id=0:0"
+	container_command+=" --pwd=/root"
 	container_command+=" --bind=/apex:/apex"
 	container_command+=" --bind=/data:/data"
 	container_command+=" --bind=/dev:/dev"
@@ -129,9 +125,11 @@ container_setup () {
 	container_command+=" --bind=/sys:/sys"
 	container_command+=" --bind=/system:/system"
 	container_command+=" --bind=/vendor:/vendor"
+	container_command+=" --bind=/data/data/com.termux/files/home:/root"
 	container_command+=" /usr/bin/env -i"
 	container_command+=" PREFIX=/data/data/com.termux/files/usr"
 	container_command+=" PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/bin:"
+	container_command+=" HOME=/root"
 	container_command+=" LANG=C.UTF-8"
 	container_command+=" TERM=${TERM}"
 	container_command+=" ${@}"
