@@ -96,7 +96,7 @@ ROOT=$(find "${PREFIX}"/cnt -maxdepth 2 -type d | tail -n 1)
 # functions #
 
 container_setup () {
-	# run container commands without session login
+	# run container setup commands through 'proot'
 
 	USER_ID="0"
 	GROUP_ID="0"
