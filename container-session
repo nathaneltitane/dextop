@@ -678,6 +678,8 @@ container_root () {
 		done
 
 		printf '\n'
+
+		container_handle
 	fi
 }
 
@@ -1003,10 +1005,6 @@ then
 
 	container_root
 
-	# handle container selectiion
-
-	container_handle
-
 	# set environemnt
 
 	container_environment
@@ -1029,11 +1027,6 @@ then
 	# validate root filesystem
 
 	container_root
-
-	# handle container selectiion
-
-	container_handle
-
 
 	# set environemnt
 
