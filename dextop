@@ -96,6 +96,8 @@ export option="${option}"
 container_command () {
 	# run container commands without session login
 
+	ROOT=$(find $PREFIX/cnt -maxdepth 2 | tail -n 1)
+
 	# assume 'termux-exec' is installed
 
 	unset LD_PRELOAD
@@ -105,7 +107,7 @@ container_command () {
 	proot																		\
 	--kill-on-exit																\
 	--link2symlink																\
-	--rootfs="${PREFIX}"/cnt													\
+	--rootfs="${ROOT}"															\
 	--change-id=0:0																\
 	--pwd="/root"																\
 	--bind="/apex:/apex"														\
@@ -154,29 +156,34 @@ do
 	bash -c 'yes | apt-get update'        >> /dev/null 2>&1
 done
 
-# download utilities
-
-utilities_list+=(
-	termux-directories
-	termux-packages
-	termux-repositories
-	termux-storage
-	termux-update
-	container-expansion
-	container-image
-	container-packages
-	container-repositories
-	container-session
-	container-settings
-	container-user
-)
-
-console.download get.dxtp.app "${PREFIX}"/bin ${utilities_list[@]}
-
 # in order of execution
 
 if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
 then
+	#  utilities
+
+	if [ ! -f "${HOME}"/.dextop/dextop-utilities-checkpoint ]
+	then
+		utilities_list+=(
+			termux-directories
+			termux-packages
+			termux-repositories
+			termux-storage
+			termux-update
+			container-expansion
+			container-image
+			container-packages
+			container-repositories
+			container-session
+			container-settings
+			container-user
+		)
+
+		console.download get.dxtp.app "${PREFIX}"/bin ${utilities_list[@]}
+
+		console.file "${HOME}"/.dextop dextop-utilities-checkpoint
+	fi
+
 	# termux
 
 	if [ ! -f "${HOME}"/.dextop/dextop-termux-checkpoint ]
