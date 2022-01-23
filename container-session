@@ -519,7 +519,9 @@ vnc_handle () {
 		then
 			echo
 			console.err "Invalid selection:"
-			console.wrn "Select geometry ranging from [ 1 - ${number} ]"
+			echo
+
+			console.wrn "Select geometry [ 1 - ${number} ]"
 			console.wrn "or input [c]ustom properties."
 			echo
 
@@ -537,8 +539,10 @@ vnc_handle () {
 		then
 			echo
 			console.err "Invalid selection:"
+			echo
+
 			console.wrn "Input [c]ustom properties"
-			console.wrn "or select geometry ranging from [ 1 - ${number} ]."
+			console.wrn "or select geometry  [ 1 - ${number} ]."
 			echo
 
 			console.ipt "Selection:"
@@ -705,18 +709,27 @@ container_handle () {
 
 	# check selection input against selection list
 
-	# integer check:
-	# handle numerical selection
 
-	while [[ ! "${selection}" =~ ^[0-9]+$ ]]
+	while true
 	do
-		console.err "Invalid selection - Try again"
-		echo
+		# range #
 
-		console.ipt "Selection:"
+		if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]]
+		then
+			echo
+			console.err "Invalid selection:"
+			echo
 
-		read selection
-		echo
+			console.wrn "Select container [ 1 - ${number} ]"
+			echo
+
+			console.ipt "Selection:"
+
+			read selection
+			echo
+		else
+			break
+		fi
 	done
 
 	distribution_name="${name}"
