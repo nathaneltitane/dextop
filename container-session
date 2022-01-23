@@ -467,7 +467,7 @@ vnc_password () {
 	# values #
 
 	values_list=(
-		vnc_passwordword
+		vnc_password
 	)
 
 	# handle user input for values_list
@@ -483,7 +483,7 @@ vnc_password () {
 	console.fwd "Setting password..."
 	echo
 
-	echo "$vnc_passwordword" | vncpasswd -f > "${HOME}"/.vnc/passwd
+	echo "$vnc_password" | vncpasswd -f > "${HOME}"/.vnc/passwd
 
 	console.scs "Password changed."
 	echo
@@ -737,9 +737,9 @@ container_environment () {
 }
 
 container_root () {
-			# set container root directory
+	# set container root directory
 
-# parse container directories
+	# parse container directories
 
 	ROOT=("${PREFIX}"/cnt/*/*)
 
@@ -750,38 +750,115 @@ container_root () {
 
 	if [[ ${#ROOT[@]} -ge 2 ]]
 	then
-		container_directory=("${PREFIX}"/cnt/*/*)
-
-		for directory in ${container_directory[@]}
+		for distribution in "${PREFIX}"/cnt/*
 		do
-			distribution_name=$(basename $(dirname $directory))
+			for version in "${distribution}"/*
+			do
+				distribution_name=$(basename $distribution)
 
-			distribution_version=$(basename $directory)
+				distribution_version=$(basename $version)
 
-			echo "$distribution_name $distribution_version"
+				containers+=($distribution_name $distribution_version)
+			done
 		done
+
+		# set padding for uniform output
+
+		pad_length=10
+
+		# continue list using array selection of suppported values
+
+		for (( i=0 ; i<${#containers[@]} ; i+=2 ))
+		do
+			name="${containers[$i]}"
+			version="${containers[$i+1]}"
+			container="${name} ${version}"
+
+			number=$((($i/2) + 1))
+
+			if (( $i/2 >= 0 && $i/2 <= 8 ))
+			then
+				# handle number spacing for entries 1-9
+
+				printf '      [  %s ] %s ' ${number} ${name}
+			else
+				# handle number spacing for entries 10+
+
+				printf '      [ %s ] %s ' ${number} ${name}
+			fi
+
+			printf '%*s' $((pad_length - ${#name}))
+			printf '%s\n' ${version}
+		done
+
+		printf '\n'
 	fi
 
+}
+
+container_handle () {
+	# values #
+
+	values_list=(
+		selection
+	)
+
+	# handle user input for values_list
+
+	console_rtn=()
+
+	if [ -f "${HOME}"/.dextop/selection ]
+	then
+		selection=$(cat "${HOME}"/.dextop/selection)
+	else
+		console.input ${values_list[@]}
+	fi
+
+	eval ${console_rtn[@]}
+
+	# check selection input against selection list
+
+	# integer check:
+	# handle numerical selection
+
+	if [[ "${selection}" =~ ^[0-9]+$ ]]
+	then
+		i=$((${selection}))
+		i=$(($i*2))
+
+		distribution_name="${geometries[$i-2]}"
+		distribution_version="${geometries[$i-1]}"
+	else
+		console.err "Invalid selection - Try again"
+		echo
+
+		read selection
+	fi
+
+	ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
+}
+
+container_input () {
 	if [ "${option}" = "root"]
 	then
-	#~ if [ -d "${root_filesystem}" ]
-	#~ then
-		#~ ROOT="${root_filesystem}"
+		if [ -d "${root_filesystem}" ]
+		then
+			ROOT="${root_filesystem}"
 
-		#~ console.scs "Container location found"
-		#~ echo
+			console.scs "Container location found"
+			echo
 
-		#~ console.inf "Loading" "[ ${ROOT} ]"
-		#~ echo
-	#~ else
-		#~ ROOT="${PREFIX}"/cnt
+			console.inf "Loading" "[ ${ROOT} ]"
+			echo
+		else
+			console.err "Container location not found"
+			echo
 
-		#~ console.err "Container location not found"
-		#~ echo
+			console.ipt "Select one of the following containers:"
+			echo
 
-		#~ console.wrn "Defaulting" "[ ${ROOT} ]"
-		#~ echo
-	#~ fi
+			container_handle
+		fi
 	fi
 }
 
@@ -929,6 +1006,7 @@ then
 	# validate root filesystem
 
 	container_root
+	container_handle
 
 	# validate username
 
