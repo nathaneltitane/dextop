@@ -622,120 +622,6 @@ application_handle () {
 	fi
 }
 
-container_user () {
-	# verify user existence:
-	# loop through container's /etc/passwd and make sure 'user' exists
-	# and corresponds to 'username' then source environment variables from file
-	# default to 'root' if 'username' is invalid, not specified or does not exist
-
-	last_entry="$(tail -n 1 "${ROOT}"/etc/passwd)"
-
-	# authentication #
-
-	console.fwd "Authenticating..."
-	echo
-
-	while read -r entry
-	do
-		IFS=':'
-
-		read USER _ USER_ID GROUP_ID GECOS HOME SHELL <<< "${entry}"
-
-		IFS=','
-
-		read FULL_NAME ROOM_NUMBER WORK_PHONE HOME_PHONE USER_EMAIL <<< "${GECOS}"
-
-		# reset IFS
-
-		IFS=' '
-
-		# messages:
-		# verify login options and parameters
-
-		if [[ -z "${user_name}" ]]
-		then
-			USER="root"
-
-			console.wrn "No user name - Defaulting" "[ '${USER}' ]"
-			echo
-
-			# break out of loop - empty "${user_name}" - default to 'root'
-
-			break
-		fi
-
-		if [[ "${user_name}" == "${USER}" ]]
-		then
-			USER="${USER}"
-
-			console.scs "Valid user name" "[ '${USER}' ]"
-			echo
-
-			# break out of loop - matching "${user_name}"
-
-			break
-		fi
-
-		if [[ "${entry}" == "${last_entry}" ]]
-		then
-			USER="root"
-
-			console.err "Invalid user name - Defaulting" "[ '${USER}' ]"
-			echo
-		fi
-
-		# specify login defaults
-
-		if [[ -z "${user_name}" ]] || [[ "${entry}" == "${last_entry}" ]]
-		then
-			USER="root"
-			USER_ID=0
-			GROUP_ID=0
-
-			if [ -d "${ROOT}"/root ]
-			then
-				HOME="/root"
-			else
-				HOME="/"
-			fi
-
-			session_name="CONSOLE"
-
-		fi
-
-	done < "${ROOT}"/etc/passwd
-}
-
-container_environment () {
-	# generate container environement
-
-	# set path:
-	# in order of retreival
-
-	PATH=""
-
-	# container
-
-	[ -d "${ROOT}"/usr/local/sbin ] && PATH+="/usr/local/sbin:"
-	[ -d "${ROOT}"/usr/local/bin ]  && PATH+="/usr/local/bin:"
-	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/sbin:"
-	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/bin:"
-	[ -d "${ROOT}"/sbin ]           && PATH+="/sbin:"
-	[ -d "${ROOT}"/bin ]            && PATH+="/bin:"
-
-	# termux
-
-	[ -d "${PREFIX}"/sbin ]         && PATH+="${PREFIX}/sbin:"
-	[ -d "${PREFIX}"/bin ]          && PATH+="${PREFIX}/bin:"
-
-	# android
-
-	[ -d /system/sbin ]             && PATH+="/system/sbin:"
-	[ -d /system/bin ]              && PATH+="/system/bin:"
-
-	PATH="${PATH}"
-}
-
 container_root () {
 	# set container root directory
 
@@ -822,19 +708,19 @@ container_handle () {
 
 	if [[ "${selection}" =~ ^[0-9]+$ ]]
 	then
-		i=$((${selection}))
-		i=$(($i*2))
-
-		distribution_name="${geometries[$i-2]}"
-		distribution_version="${geometries[$i-1]}"
-	else
 		console.err "Invalid selection - Try again"
 		echo
 
-		read selection
-	fi
+		console.ipt "Selection:"
 
-	ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
+		read selection
+		echo
+	else
+		distribution_name="${name}"
+		distribution_version="${version}"
+
+		ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
+	fi
 }
 
 container_input () {
@@ -856,6 +742,120 @@ container_input () {
 
 		container_handle
 	fi
+}
+
+container_environment () {
+	# generate container environement
+
+	# set path:
+	# in order of retreival
+
+	PATH=""
+
+	# container
+
+	[ -d "${ROOT}"/usr/local/sbin ] && PATH+="/usr/local/sbin:"
+	[ -d "${ROOT}"/usr/local/bin ]  && PATH+="/usr/local/bin:"
+	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/sbin:"
+	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/bin:"
+	[ -d "${ROOT}"/sbin ]           && PATH+="/sbin:"
+	[ -d "${ROOT}"/bin ]            && PATH+="/bin:"
+
+	# termux
+
+	[ -d "${PREFIX}"/sbin ]         && PATH+="${PREFIX}/sbin:"
+	[ -d "${PREFIX}"/bin ]          && PATH+="${PREFIX}/bin:"
+
+	# android
+
+	[ -d /system/sbin ]             && PATH+="/system/sbin:"
+	[ -d /system/bin ]              && PATH+="/system/bin:"
+
+	PATH="${PATH}"
+}
+
+container_user () {
+	# verify user existence:
+	# loop through container's /etc/passwd and make sure 'user' exists
+	# and corresponds to 'username' then source environment variables from file
+	# default to 'root' if 'username' is invalid, not specified or does not exist
+
+	last_entry="$(tail -n 1 "${ROOT}"/etc/passwd)"
+
+	# authentication #
+
+	console.fwd "Authenticating..."
+	echo
+
+	while read -r entry
+	do
+		IFS=':'
+
+		read USER _ USER_ID GROUP_ID GECOS HOME SHELL <<< "${entry}"
+
+		IFS=','
+
+		read FULL_NAME ROOM_NUMBER WORK_PHONE HOME_PHONE USER_EMAIL <<< "${GECOS}"
+
+		# reset IFS
+
+		IFS=' '
+
+		# messages:
+		# verify login options and parameters
+
+		if [[ -z "${user_name}" ]]
+		then
+			USER="root"
+
+			console.wrn "No user name - Defaulting" "[ '${USER}' ]"
+			echo
+
+			# break out of loop - empty "${user_name}" - default to 'root'
+
+			break
+		fi
+
+		if [[ "${user_name}" == "${USER}" ]]
+		then
+			USER="${USER}"
+
+			console.scs "Valid user name" "[ '${USER}' ]"
+			echo
+
+			# break out of loop - matching "${user_name}"
+
+			break
+		fi
+
+		if [[ "${entry}" == "${last_entry}" ]]
+		then
+			USER="root"
+
+			console.err "Invalid user name - Defaulting" "[ '${USER}' ]"
+			echo
+		fi
+
+		# specify login defaults
+
+		if [[ -z "${user_name}" ]] || [[ "${entry}" == "${last_entry}" ]]
+		then
+			USER="root"
+			USER_ID=0
+			GROUP_ID=0
+
+			if [ -d "${ROOT}"/root ]
+			then
+				HOME="/root"
+			else
+				HOME="/"
+			fi
+
+			session_name="CONSOLE"
+
+		fi
+
+	done < "${ROOT}"/etc/passwd
 }
 
 container_session () {
@@ -1007,13 +1007,13 @@ then
 
 	container_handle
 
-	# validate username
-
-	container_user
-
 	# set environemnt
 
 	container_environment
+
+	# validate username
+
+	container_user
 
 	# start container session
 
@@ -1034,13 +1034,14 @@ then
 
 	container_handle
 
-	# validate username
-
-	container_user
 
 	# set environemnt
 
 	container_environment
+
+	# validate username
+
+	container_user
 
 	# start container session
 
