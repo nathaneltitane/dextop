@@ -130,7 +130,6 @@ export DISPLAY="${DISPLAY}"
 
 [ -z "${COLORTERM}" ]       && COLORTERM="truecolor"
 [ -z "${LANG}" ]            && LANG="C.UTF-8"
-[ -z "${ROOT}" ]            && ROOT="${PREFIX}/cnt"
 [ -z "${SHELL}" ]           && SHELL="/bin/bash"
 
 [ -f /etc/os-release ]      && . /etc/os-release && name="${NAME}"
@@ -738,25 +737,51 @@ container_environment () {
 }
 
 container_root () {
-	# set container root directory
+			# set container root directory
 
-	if [ -d "${root_filesystem}" ]
+# parse container directories
+
+	ROOT=("${PREFIX}"/cnt/*/*)
+
+	if [[ ${#ROOT[@]} -eq 1 ]]
 	then
-		ROOT="${root_filesystem}"
+		ROOT=("${PREFIX}"/cnt/*/*)
+	fi
 
-		console.scs "Container location found"
-		echo
+	if [[ ${#ROOT[@]} -ge 2 ]]
+	then
+		container_directory=("${PREFIX}"/cnt/*/*)
 
-		console.inf "Loading" "[ ${ROOT} ]"
-		echo
-	else
-		ROOT="${PREFIX}"/cnt
+		for directory in ${container_directory[@]}
+		do
+			distribution_name=$(basename $(dirname $directory))
 
-		console.err "Container location not found"
-		echo
+			distribution_version=$(basename $directory)
 
-		console.wrn "Defaulting" "[ ${ROOT} ]"
-		echo
+			echo "$distribution_name $distribution_version"
+		done
+	fi
+
+	if [ "${option}" = "root"]
+	then
+	#~ if [ -d "${root_filesystem}" ]
+	#~ then
+		#~ ROOT="${root_filesystem}"
+
+		#~ console.scs "Container location found"
+		#~ echo
+
+		#~ console.inf "Loading" "[ ${ROOT} ]"
+		#~ echo
+	#~ else
+		#~ ROOT="${PREFIX}"/cnt
+
+		#~ console.err "Container location not found"
+		#~ echo
+
+		#~ console.wrn "Defaulting" "[ ${ROOT} ]"
+		#~ echo
+	#~ fi
 	fi
 }
 
@@ -901,6 +926,10 @@ fi
 
 if [ "${option}" = "username" ]
 then
+	# validate root filesystem
+
+	container_root
+
 	# validate username
 
 	container_user
