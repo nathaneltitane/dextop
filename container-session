@@ -854,7 +854,7 @@ container_session () {
 
 	# execute 'proot'
 
-	exec ${session_command}
+	${session_command}
 }
 
 if [ "${option}" = "start" ]
