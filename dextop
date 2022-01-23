@@ -87,7 +87,7 @@ echo
 
 export option="${option}"
 
-ROOT=$(find "${PREFIX}"/cnt -maxdepth 2 | tail -n 1)
+ROOT=$(find "${PREFIX}"/cnt -maxdepth 2 -type d | tail -n 1)
 
 # defaults #
 
