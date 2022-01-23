@@ -382,6 +382,7 @@ vnc_start () {
 
 	vnc_load
 }
+
 vnc_new () {
 	# handle selections display
 
@@ -463,7 +464,6 @@ vnc_list () {
 }
 
 vnc_password () {
-
 	# values #
 
 	values_list=(
