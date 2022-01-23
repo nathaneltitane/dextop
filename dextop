@@ -87,6 +87,8 @@ echo
 
 export option="${option}"
 
+ROOT=$(find "${PREFIX}"/cnt -maxdepth 2 | tail -n 1)
+
 # defaults #
 
 [ -z "${option}" ] && option="xfce" && console.write "${option}" "${HOME}"/.dextop dextop-option
@@ -96,7 +98,6 @@ export option="${option}"
 container_setup () {
 	# run container commands without session login
 
-	ROOT=$(find "${PREFIX}"/cnt -maxdepth 2 | tail -n 1)
 	USER_ID="0"
 	GROUP_ID="0"
 	HOME="/root"
@@ -276,7 +277,7 @@ then
 
 		console.download get.trmnl.me/shell "${HOME}" ${files_list[@]}
 
-		console.link "${HOME}" "${PREFIX}"/cnt/root ${files_list[@]}
+		console.link "${HOME}" "${ROOT}"/root ${files_list[@]}
 
 		files_list=()
 
@@ -335,7 +336,7 @@ then
 			hicolor
 		)
 
-		console.keep "${PREFIX}"/cnt/usr/share/icons ${files_list[@]}
+		console.keep "${ROOT}"/usr/share/icons ${files_list[@]}
 
 		console.keep "${PREFIX}"/share/icons ${files_list[@]}
 
@@ -355,9 +356,9 @@ then
 			Arc-Lighter
 		)
 
-		console.copy "${PREFIX}"/cnt/usr/share/themes "${PREFIX}"/share/themes ${files_list[@]}
+		console.copy "${ROOT}"/usr/share/themes "${PREFIX}"/share/themes ${files_list[@]}
 
-		console.keep "${PREFIX}"/cnt/usr/share/themes ${files_list[@]}
+		console.keep "${ROOT}"/usr/share/themes ${files_list[@]}
 
 		console.keep "${PREFIX}"/share/themes ${files_list[@]}
 
@@ -388,7 +389,7 @@ then
 
 		console.download get.dxtp.app "${HOME}"/.dextop ${files_list[@]}
 
-		console.link "${HOME}"/.dextop "${PREFIX}"/cnt/usr/share/backgrounds/dextop ${files_list[@]}
+		console.link "${HOME}"/.dextop "${ROOT}"/usr/share/backgrounds/dextop ${files_list[@]}
 
 		console.link "${HOME}"/.dextop "${PREFIX}"/share/backgrounds/dextop ${files_list[@]}
 
