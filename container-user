@@ -170,7 +170,7 @@ user_noninteractive () {
 	console.wrn "Creating user" "[ ${user_name} ]"
 	echo
 
-	echo  "${user_name}:x:${user_id}:${group_id}:${gecos}:${home}:${SHELL}" >> ${PREFIX}/cnt/etc/passwd
+	echo  "${user_name}:x:${user_id}:${group_id}:${gecos}:${home}:${SHELL}" >> /etc/passwd
 }
 
 user_superuser () {
@@ -188,9 +188,9 @@ user_superuser () {
 
 	# add 'user' to 'sudo' group
 
-	sed -i '/sudo.*/d' "${PREFIX}"/cnt/etc/group
+	sed -i '/sudo.*/d' /etc/group
 
-	echo "sudo:x:${sudo_id}:${user_name}" >> "${PREFIX}"/cnt/etc/group
+	echo "sudo:x:${sudo_id}:${user_name}" >> /etc/group
 }
 
 user_superuser_override () {
@@ -198,16 +198,16 @@ user_superuser_override () {
 
 	# set password override
 
-	console.write "${user_name} ALL=(ALL) NOPASSWD: ALL" "${PREFIX}"/cnt/etc/sudoers.d "${user_name}"
+	console.write "${user_name} ALL=(ALL) NOPASSWD: ALL" /etc/sudoers.d "${user_name}"
 
 	# fix superuser privilege runtime errors
 
-	console.write "Set disable_coredump false" "${PREFIX}"/cnt/etc sudo.conf
+	console.write "Set disable_coredump false" /etc sudo.conf
 
 	# reset password override ownership:
 	# fixes 'sudo' errors
 
-	chmod 0440 "${PREFIX}"/cnt/etc/sudoers.d/"${user_name}"
+	chmod 0440 /etc/sudoers.d/"${user_name}"
 }
 
 user_password () {
@@ -235,8 +235,8 @@ user_runtime () {
 
 	# generate runtime directory
 
-	console.directory "${PREFIX}"/cnt/run/user "${user_uid}"
-	console.directory "${PREFIX}"/cnt/run/user "${user_name}"
+	console.directory /run/user "${user_uid}"
+	console.directory /run/user "${user_name}"
 
 	# set runtime directory permissions
 
@@ -245,8 +245,8 @@ user_runtime () {
 
 	# set runtime directory ownership
 
-	chown "${user_uid}":"${user_gid}" -R "${PREFIX}"/cnt/run/user/"${user_uid}"
-	chown "${user_uid}":"${user_gid}" -R "${PREFIX}"/cnt/run/user/"${user_name}"
+	chown "${user_uid}":"${user_gid}" -R /run/user/"${user_uid}"
+	chown "${user_uid}":"${user_gid}" -R /run/user/"${user_name}"
 }
 
 if [ "${option}" = "information" ]
