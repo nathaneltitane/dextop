@@ -793,7 +793,6 @@ container_root () {
 
 		printf '\n'
 	fi
-
 }
 
 container_handle () {
@@ -839,26 +838,23 @@ container_handle () {
 }
 
 container_input () {
-	if [ "${option}" = "root"]
+	if [ -d "${root_filesystem}" ]
 	then
-		if [ -d "${root_filesystem}" ]
-		then
-			ROOT="${root_filesystem}"
+		ROOT="${root_filesystem}"
 
-			console.scs "Container location found"
-			echo
+		console.scs "Container location found"
+		echo
 
-			console.inf "Loading" "[ ${ROOT} ]"
-			echo
-		else
-			console.err "Container location not found"
-			echo
+		console.inf "Loading" "[ ${ROOT} ]"
+		echo
+	else
+		console.err "Container location not found"
+		echo
 
-			console.ipt "Select one of the following containers:"
-			echo
+		console.ipt "Select one of the following containers:"
+		echo
 
-			container_handle
-		fi
+		container_handle
 	fi
 }
 
@@ -1006,6 +1002,9 @@ then
 	# validate root filesystem
 
 	container_root
+
+	# handle container selectiion
+
 	container_handle
 
 	# validate username
@@ -1023,9 +1022,17 @@ fi
 
 if [ "${option}" = "root" ]
 then
+	# handle manual container location input
+
+	container_input
+
 	# validate root filesystem
 
 	container_root
+
+	# handle container selectiion
+
+	container_handle
 
 	# validate username
 
