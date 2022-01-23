@@ -2,12 +2,9 @@
 
 # dependencies #
 
-if [ ! -f "${PREFIX}"/bin/console ]
-then
-	curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console
+[[ -z $(command -v console) ]] && curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console
 
-	[ ! -f "${PREFIX}"/bin/console ] && curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console && . "${PREFIX}"/bin/console
-fi
+. "${PREFIX}"/bin/console
 
 # script #
 
@@ -92,7 +89,7 @@ export option="${option}"
 
 # defaults #
 
-[ -z "${option}" ] && option="xfce" && echo "${option}" > "${HOME}"/.dextop/dextop-option
+[ -z "${option}" ] && option="xfce" && console.write "${option}" "${HOME}"/.dextop dextop-option
 
 # functions #
 
