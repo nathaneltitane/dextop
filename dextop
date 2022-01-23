@@ -89,7 +89,7 @@ export option="${option}"
 
 # defaults #
 
-[ -z "${option}" ] && option="xfce" && console.flag "${option}" "${HOME}"/.dextop dextop-option
+[ -z "${option}" ] && option="xfce" && console.write "${option}" "${HOME}"/.dextop dextop-option
 
 # functions #
 
@@ -174,7 +174,6 @@ then
 	if [ ! -f "${HOME}"/.dextop/dextop-utilities-checkpoint ]
 	then
 		utilities_list+=(
-			termux-directories
 			termux-packages
 			termux-repositories
 			termux-storage
