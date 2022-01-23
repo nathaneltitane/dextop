@@ -139,10 +139,12 @@ container_setup () {
 }
 
 settings_intent () {
-	unset storage_command
+	# reload termux settings
+
+	unset settings_command
 
 	settings_command+="am broadcast"
-	settings_command+=" --user 0settings_command+="
+	settings_command+=" --user 0"
 	settings_command+=" -a com.termux.app.reload_style"
 	settings_command+=" com.termux"
 
@@ -189,6 +191,65 @@ then
 		console.download get.dxtp.app "${PREFIX}"/bin ${utilities_list[@]}
 
 		console.file "${HOME}"/.dextop dextop-utilities-checkpoint
+	fi
+
+	# directories
+
+	if [ ! -f "${HOME}"/.dextop/dextop-directories-checkpoint ]
+	then
+		# add system directories
+
+		directories_list+=(
+			bkp
+			cnt
+			img
+			mnt
+			media
+			storage
+		)
+
+		console.directory "${PREFIX}" ${directories_list[@]}
+
+		directories_list=()
+
+		# add home directories
+
+		directories_list+=(
+			Desktop
+			Documents
+			Downloads
+			Music
+			Pictures
+			Public
+			Templates
+			Videos
+		)
+
+		console.directory "${HOME}" ${directories_list[@]}
+
+		directories_list=()
+
+		# generate root directory structure
+
+		directories_list+=(
+			bin
+			bkp
+			cnt
+			etc
+			img
+			lib
+			mnt
+			opt
+			tmp
+			media
+			storage
+		)
+
+		console.link "${PREFIX}" "${PREFIX%/*}" ${directories_list[@]}
+
+		directories_list=()
+
+		console.file "${HOME}"/.dextop dextop-directories-checkpoint
 	fi
 
 	# termux
