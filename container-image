@@ -526,8 +526,8 @@ image_environment () {
 	PATH="${PATH}"
 
 	cat <<- FILE > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/environment
-	PATH=${PATH}
 	PREFIX=${PREFIX}
+	PATH=${PATH}
 	FILE
 }
 
