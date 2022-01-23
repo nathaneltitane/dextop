@@ -706,8 +706,8 @@ container_handle () {
 	# integer check:
 	# handle numerical selection
 
-	if [[ "${selection}" =~ ^[0-9]+$ ]]
-	then
+	while [[ ! "${selection}" =~ ^[0-9]+$ ]]
+	do
 		console.err "Invalid selection - Try again"
 		echo
 
@@ -715,12 +715,12 @@ container_handle () {
 
 		read selection
 		echo
-	else
-		distribution_name="${name}"
-		distribution_version="${version}"
+	done
 
-		ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
-	fi
+	distribution_name="${name}"
+	distribution_version="${version}"
+
+	ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
 }
 
 container_input () {
