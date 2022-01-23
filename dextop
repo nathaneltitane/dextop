@@ -96,7 +96,7 @@ export option="${option}"
 container_command () {
 	# run container commands without session login
 
-	ROOT=$(find $PREFIX/cnt -maxdepth 2 | tail -n 1)
+	ROOT=$(find "${PREFIX}"/cnt -maxdepth 2 | tail -n 1)
 
 	# assume 'termux-exec' is installed
 
@@ -104,30 +104,30 @@ container_command () {
 
 	# run as 'root' with default system parameters
 
-	proot																		\
-	--kill-on-exit																\
-	--link2symlink																\
-	--rootfs="${ROOT}"															\
-	--change-id=0:0																\
-	--pwd="/root"																\
-	--bind="/apex:/apex"														\
-	--bind="/data:/data"														\
-	--bind="/dev:/dev"															\
-	--bind="/dev/urandom:/dev/random"											\
-	--bind="/proc:/proc"														\
-	--bind="/proc/self/fd:/dev/fd"												\
-	--bind="/proc/self/fd/0:/dev/stdin"											\
-	--bind="/proc/self/fd/1:/dev/stdout"										\
-	--bind="/proc/self/fd/2:/dev/stderr"										\
-	--bind="/storage:/storage"													\
-	--bind="/sys:/sys"															\
-	--bind="/system:/system"													\
-	--bind="/vendor:/vendor"													\
-		/usr/bin/env -i															\
-		"LANG=C.UTF-8"															\
-		"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"		\
-		"PREFIX=/data/data/com.termux/files/usr"								\
-		"TERM=${TERM}"															\
+	proot																					\
+	--kill-on-exit																			\
+	--link2symlink																			\
+	--rootfs="${ROOT}"																		\
+	--change-id=0:0																			\
+	--pwd="/root"																			\
+	--bind="/apex:/apex"																	\
+	--bind="/data:/data"																	\
+	--bind="/dev:/dev"																		\
+	--bind="/dev/urandom:/dev/random"														\
+	--bind="/proc:/proc"																	\
+	--bind="/proc/self/fd:/dev/fd"															\
+	--bind="/proc/self/fd/0:/dev/stdin"														\
+	--bind="/proc/self/fd/1:/dev/stdout"													\
+	--bind="/proc/self/fd/2:/dev/stderr"													\
+	--bind="/storage:/storage"																\
+	--bind="/sys:/sys"																		\
+	--bind="/system:/system"																\
+	--bind="/vendor:/vendor"																\
+		/usr/bin/env -i																		\
+		"PREFIX=/data/data/com.termux/files/usr"											\
+		"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/bin:"	\
+		"LANG=C.UTF-8"																		\
+		"TERM=${TERM}"																		\
 	"${@}"
 }
 
