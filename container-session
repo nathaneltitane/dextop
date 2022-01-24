@@ -796,8 +796,8 @@ container_environment () {
 
 container_user () {
 	# verify user existence:
-	# loop through container's /etc/passwd and make sure 'user' exists
-	# and corresponds to 'username' then source environment variables from file
+	# loop through container's /etc/passwd file and make sure 'user' exists
+	# source environment variables when 'user' corresponds to 'username'
 	# default to 'root' if 'username' is invalid, not specified or does not exist
 
 	last_entry="$(tail -n 1 "${ROOT}"/etc/passwd)"
@@ -821,7 +821,6 @@ container_user () {
 
 		IFS=' '
 
-		# messages:
 		# verify login options and parameters
 
 		if [[ -z "${user_name}" ]]
