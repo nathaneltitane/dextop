@@ -362,6 +362,122 @@ vnc_load () {
 	vnc_intent
 }
 
+vnc_handle () {
+	# values #
+
+	values_list=(
+		selection
+	)
+
+	# handle user input for values_list
+
+	console_rtn=()
+
+	if [ -f "${HOME}"/.vnc/selection ]
+	then
+		selection=$(cat "${HOME}"/.vnc/selection)
+	else
+		console.input ${values_list[@]}
+	fi
+
+	eval ${console_rtn[@]}
+
+	# check selection input against selection list
+
+	while true
+	do
+		# range #
+
+		if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]] || [[ ! "${selection}" =~ ^[0-9]+$ ]]
+		then
+			echo
+			console.err "Invalid selection:"
+			echo
+
+			console.wrn "Select geometry [ 1 - ${number} ]"
+			console.wrn "or input [c]ustom properties."
+			echo
+
+			console.ipt "Selection:"
+
+			read selection
+			echo
+		else
+			break
+		fi
+
+		# custom #
+
+		if [[ "${selection}" != "c" ]]
+		then
+			echo
+			console.err "Invalid selection:"
+			echo
+
+			console.wrn "Input [c]ustom properties"
+			console.wrn "or select geometry  [ 1 - ${number} ]."
+			echo
+
+			console.ipt "Selection:"
+
+			read selection
+			echo
+		else
+			selection=custom
+
+			break
+		fi
+
+	done
+
+	unset geometry
+
+	# integer check:
+	# handle numerical selection
+
+	if [[ "${selection}" =~ ^[0-9]+$ ]]
+	then
+		i=$((${selection}))
+		i=$(($i*3))
+
+		format="${geometries[$i-3]}"
+		width="${geometries[$i-2]}"
+		height="${geometries[$i-1]}"
+		geometry="${width}x${height}"
+
+	fi
+
+	# handle custom selection
+
+	if [[ "${selection}" = "custom" ]]
+	then
+		console.fwd "Setting custom properties..."
+		echo
+
+		console.ipt "WIDTH" "[ pixels ]"
+
+		read width
+		echo
+
+		console.ipt "HEIGHT" "[ pixels ]"
+
+		read height
+		echo
+
+		console.ipt "DISPLAY" "[ e.g. 1 ]"
+
+		read display
+		echo
+
+		format="Custom"
+		geometry="${width}x${height}"
+
+		DISPLAY=":${display}"
+		DISPLAY_NUMBER="${DISPLAY/:/}"
+		PORT="590${DISPLAY_NUMBER}"
+	fi
+}
+
 vnc_start () {
 	# handle selections display
 
@@ -376,6 +492,8 @@ vnc_start () {
 		vnc_geometry
 	fi
 
+	# handle vnc selections
+
 	vnc_handle
 
 	# start vnc session
@@ -388,12 +506,16 @@ vnc_new () {
 
 	if [ -f "${HOME}"/.vnc/selection ]
 	then
-		# remove  if selection file is present
+		# remove if selection file is present
 
 		rm -rf  "${HOME}"/.vnc/selection
-
-		vnc_geometry
 	fi
+
+	# show display format selections
+
+	vnc_geometry
+
+	# handle vnc selections
 
 	vnc_handle
 
@@ -487,122 +609,6 @@ vnc_password () {
 
 	console.scs "Password changed."
 	echo
-}
-
-vnc_handle () {
-	# values #
-
-	values_list=(
-		selection
-	)
-
-	# handle user input for values_list
-
-	console_rtn=()
-
-	if [ -f "${HOME}"/.vnc/selection ]
-	then
-		selection=$(cat "${HOME}"/.vnc/selection)
-	else
-		console.input ${values_list[@]}
-	fi
-
-	eval ${console_rtn[@]}
-
-	# check selection input against selection list
-
-	while true
-	do
-		# range #
-
-		if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]]
-		then
-			echo
-			console.err "Invalid selection:"
-			echo
-
-			console.wrn "Select geometry [ 1 - ${number} ]"
-			console.wrn "or input [c]ustom properties."
-			echo
-
-			console.ipt "Selection:"
-
-			read selection
-			echo
-		else
-			break
-		fi
-
-		# custom #
-
-		if [[ "${selection}" != "c" ]]
-		then
-			echo
-			console.err "Invalid selection:"
-			echo
-
-			console.wrn "Input [c]ustom properties"
-			console.wrn "or select geometry  [ 1 - ${number} ]."
-			echo
-
-			console.ipt "Selection:"
-
-			read selection
-			echo
-		else
-			selection=custom
-
-			break
-		fi
-
-	done
-
-	unset geometry
-
-	# integer check:
-	# handle numerical selection
-
-	if [[ "${selection}" =~ ^[0-9]+$ ]]
-	then
-		i=$((${selection}))
-		i=$(($i*3))
-
-		format="${geometries[$i-3]}"
-		width="${geometries[$i-2]}"
-		height="${geometries[$i-1]}"
-		geometry="${width}x${height}"
-
-	fi
-
-	# handle custom selection
-
-	if [[ "${selection}" = "custom" ]]
-	then
-		console.fwd "Setting custom properties..."
-		echo
-
-		console.ipt "WIDTH" "[ pixels ]"
-
-		read width
-		echo
-
-		console.ipt "HEIGHT" "[ pixels ]"
-
-		read height
-		echo
-
-		console.ipt "DISPLAY" "[ e.g. 1 ]"
-
-		read display
-		echo
-
-		format="Custom"
-		geometry="${width}x${height}"
-
-		DISPLAY=":${display}"
-		DISPLAY_NUMBER="${DISPLAY/:/}"
-		PORT="590${DISPLAY_NUMBER}"
-	fi
 }
 
 application_handle () {
@@ -709,12 +715,11 @@ container_handle () {
 
 	# check selection input against selection list
 
-
 	while true
 	do
 		# range #
 
-		if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]]
+		if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]] || [[ ! "${selection}" =~ ^[0-9]+$ ]]
 		then
 			echo
 			console.err "Invalid selection:"
@@ -856,8 +861,8 @@ container_user () {
 		if [[ -z "${user_name}" ]] || [[ "${entry}" == "${last_entry}" ]]
 		then
 			USER="root"
-			USER_ID=0
-			GROUP_ID=0
+			USER_ID="0"
+			GROUP_ID="0"
 
 			if [ -d "${ROOT}"/root ]
 			then
@@ -874,7 +879,7 @@ container_user () {
 }
 
 container_session () {
-	# session settings
+	# set session settings
 
 	if [[ $(cat "${HOME}"/.dextop/dextop-option) = xfce ]]
 	then
