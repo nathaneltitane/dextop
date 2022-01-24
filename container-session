@@ -364,17 +364,17 @@ vnc_handle () {
 		console.fwd "Setting custom properties..."
 		echo
 
-		console.ipt "WIDTH" "[ pixels ]"
+		console.ipt "Set width" "[ pixels ]"
 
 		read width
 		echo
 
-		console.ipt "HEIGHT" "[ pixels ]"
+		console.ipt "Set height" "[ pixels ]"
 
 		read height
 		echo
 
-		console.ipt "DISPLAY" "[ e.g. 1 ]"
+		console.ipt "Set display number" "[ e.g. 1 ]"
 
 		read display
 		echo
