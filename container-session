@@ -287,6 +287,107 @@ vnc_geometry () {
 	printf '\n'
 }
 
+vnc_handle () {
+	# values #
+
+	values_list=(
+		selection
+	)
+
+	# handle user input for values_list
+
+	console_rtn=()
+
+	if [ -f "${HOME}"/.vnc/selection ]
+	then
+		selection=$(cat "${HOME}"/.vnc/selection)
+	else
+		console.input ${values_list[@]}
+	fi
+
+	eval ${console_rtn[@]}
+
+	# check selection input against selection list
+
+	while true
+	do
+		# range check:
+		# selection input must be in provided range and an integer
+
+		if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]] || [[ ! "${selection}" =~ ^[0-9]+$ ]]
+		then
+			echo
+			console.err "Invalid selection:"
+			echo
+
+			console.wrn "Select geometry [ 1 - ${number} ]"
+			console.wrn "or input [c]ustom properties."
+			echo
+
+			console.ipt "Selection:"
+
+			read selection
+			echo
+		else
+			break
+		fi
+
+		if [[ "${selection}" = [cC] ]]
+		then
+			selection=custom
+
+			break
+		fi
+	done
+
+	unset geometry
+
+	# integer check:
+	# handle numerical selection
+
+	if [[ "${selection}" =~ ^[0-9]+$ ]]
+	then
+		i=$((${selection}))
+		i=$(($i*3))
+
+		format="${geometries[$i-3]}"
+		width="${geometries[$i-2]}"
+		height="${geometries[$i-1]}"
+		geometry="${width}x${height}"
+
+	fi
+
+	# handle custom selection
+
+	if [[ "${selection}" = "custom" ]]
+	then
+		console.fwd "Setting custom properties..."
+		echo
+
+		console.ipt "WIDTH" "[ pixels ]"
+
+		read width
+		echo
+
+		console.ipt "HEIGHT" "[ pixels ]"
+
+		read height
+		echo
+
+		console.ipt "DISPLAY" "[ e.g. 1 ]"
+
+		read display
+		echo
+
+		format="Custom"
+		geometry="${width}x${height}"
+
+		DISPLAY=":${display}"
+		DISPLAY_NUMBER="${DISPLAY/:/}"
+		PORT="590${DISPLAY_NUMBER}"
+	fi
+}
+
 vnc_intent () {
 	console.fwd "Opening display..."
 	echo
@@ -360,122 +461,6 @@ vnc_load () {
 	fi
 
 	vnc_intent
-}
-
-vnc_handle () {
-	# values #
-
-	values_list=(
-		selection
-	)
-
-	# handle user input for values_list
-
-	console_rtn=()
-
-	if [ -f "${HOME}"/.vnc/selection ]
-	then
-		selection=$(cat "${HOME}"/.vnc/selection)
-	else
-		console.input ${values_list[@]}
-	fi
-
-	eval ${console_rtn[@]}
-
-	# check selection input against selection list
-
-	while true
-	do
-		# range #
-
-		if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]] || [[ ! "${selection}" =~ ^[0-9]+$ ]]
-		then
-			echo
-			console.err "Invalid selection:"
-			echo
-
-			console.wrn "Select geometry [ 1 - ${number} ]"
-			console.wrn "or input [c]ustom properties."
-			echo
-
-			console.ipt "Selection:"
-
-			read selection
-			echo
-		else
-			break
-		fi
-
-		# custom #
-
-		if [[ "${selection}" != "c" ]]
-		then
-			echo
-			console.err "Invalid selection:"
-			echo
-
-			console.wrn "Input [c]ustom properties"
-			console.wrn "or select geometry  [ 1 - ${number} ]."
-			echo
-
-			console.ipt "Selection:"
-
-			read selection
-			echo
-		else
-			selection=custom
-
-			break
-		fi
-
-	done
-
-	unset geometry
-
-	# integer check:
-	# handle numerical selection
-
-	if [[ "${selection}" =~ ^[0-9]+$ ]]
-	then
-		i=$((${selection}))
-		i=$(($i*3))
-
-		format="${geometries[$i-3]}"
-		width="${geometries[$i-2]}"
-		height="${geometries[$i-1]}"
-		geometry="${width}x${height}"
-
-	fi
-
-	# handle custom selection
-
-	if [[ "${selection}" = "custom" ]]
-	then
-		console.fwd "Setting custom properties..."
-		echo
-
-		console.ipt "WIDTH" "[ pixels ]"
-
-		read width
-		echo
-
-		console.ipt "HEIGHT" "[ pixels ]"
-
-		read height
-		echo
-
-		console.ipt "DISPLAY" "[ e.g. 1 ]"
-
-		read display
-		echo
-
-		format="Custom"
-		geometry="${width}x${height}"
-
-		DISPLAY=":${display}"
-		DISPLAY_NUMBER="${DISPLAY/:/}"
-		PORT="590${DISPLAY_NUMBER}"
-	fi
 }
 
 vnc_start () {
@@ -635,14 +620,17 @@ application_handle () {
 container_root () {
 	# set container root directory
 
-	# parse container directories
-
 	ROOT=("${PREFIX}"/cnt/*/*)
+
+	# single container
 
 	if [[ ${#ROOT[@]} -eq 1 ]]
 	then
 		ROOT=("${PREFIX}"/cnt/*/*)
 	fi
+
+	# multiple containers:
+	# parse container directories
 
 	if [[ ${#ROOT[@]} -ge 2 ]]
 	then
@@ -717,7 +705,8 @@ container_handle () {
 
 	while true
 	do
-		# range #
+		# range check:
+		# selection input must be in provided range and an integer
 
 		if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]] || [[ ! "${selection}" =~ ^[0-9]+$ ]]
 		then
