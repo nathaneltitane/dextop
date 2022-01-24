@@ -96,7 +96,7 @@ export option="${option}"
 container_setup () {
 	# run container setup commands through 'proot'
 
-	ROOT=$(find ${PREFIX}/cnt -maxdepth 2 -mindepth 0 -type d | grep -i -E 'ubuntu|fedora' | tail -n 1)
+	ROOT=(${PREFIX}/cnt/*/*)
 
 	export ROOT="${ROOT}"
 
@@ -157,13 +157,7 @@ settings_intent () {
 console.fwd "Please wait..."
 echo
 
-while [[ -z $(command -v proot) ]]
-do
-	bash -c 'yes | apt-get update'        >> /dev/null 2>&1
-	bash -c 'yes | apt-get upgrade'       >> /dev/null 2>&1
-	bash -c 'yes | apt-get install proot' >> /dev/null 2>&1
-	bash -c 'yes | apt-get update'        >> /dev/null 2>&1
-done
+console.failsafe proot
 
 # in order of execution
 
@@ -260,7 +254,6 @@ then
 			"${PREFIX}"/bin/termux-update
 		fi
 
-		"${PREFIX}"/bin/termux-directories
 		"${PREFIX}"/bin/termux-storage
 		"${PREFIX}"/bin/termux-repositories
 		"${PREFIX}"/bin/termux-packages
