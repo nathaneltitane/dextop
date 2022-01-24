@@ -155,10 +155,10 @@ settings_intent () {
 # run failsafe package install:
 # termux package servers are sometimes unresponsive or badly authenticated
 
+console.failsafe proot &
+
 console.fwd "Please wait..."
 echo
-
-console.failsafe proot
 
 # in order of execution
 
