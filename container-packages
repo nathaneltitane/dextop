@@ -58,7 +58,6 @@ fonts_list=(
 )
 
 multimedia_list=(
-pulseaudio
 )
 
 repositories_list=(
