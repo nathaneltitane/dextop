@@ -191,3 +191,12 @@ install_list+=(
 )
 
 console.install ${install_list[@]}
+
+# purge
+
+purge_list=(
+	ibus
+)
+
+console.purge ${purge_list[@]}
+
