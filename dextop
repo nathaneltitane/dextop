@@ -353,7 +353,7 @@ then
 	then
 		# papirus icon theme
 
-		console.download https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/archive/master/master.tar.gz "${HOME}" archive
+		console.download https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/archive/master/master.tar.gz "${HOME}" papirus
 
 		themes_list=(
 			Papirus-Dark
@@ -367,7 +367,7 @@ then
 
 			tar																	\
 				--extract														\
-				--file="${HOME}"/archive papirus-icon-theme-master/"${theme}"	\
+				--file="${HOME}"/papirus papirus-icon-theme-master/"${theme}"	\
 					--directory="${HOME}"
 		done
 
@@ -378,7 +378,7 @@ then
 			gtk-update-icon-cache -q "${HOME}"/.icons/"${theme}"
 		done
 
-		rm -rf "${HOME}"/archive
+		rm -rf "${HOME}"/papirus
 
 		# system icon themes
 
