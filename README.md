@@ -35,7 +35,7 @@ This is required due to the Android user space runtime policy and limited hardwa
 
 - Dextop does not root your device!
 - Dextop does not load any services or backends!
-- Dextop does not install or configure advanced system services!
+- Dextop does not install or configure audio or advanced system services!
 
 Dextop only loads applications as needed to keep a minimal footprint!
 
