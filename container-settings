@@ -83,6 +83,10 @@ done
 
 # set 'xfce4-session' settings
 
+xfconf-query --create -c 'parole'                      -p '/parole/plugins' -t string -s 'tray-icon.so;parole-notify.so;parole-mpris2.so'
+xfconf-query --create -c 'parole'                      -p '/plugins/tray/minimize-to-tray' -t bool -s 'true'
+xfconf-query --create -c 'parole'                      -p '/plugins/tray/remember-quit-action' -t bool -s 'true'
+xfconf-query --create -c 'parole'                      -p '/subtitles/font' -t string -s 'Sans 20'
 xfconf-query --create -c 'xfce4-screensaver'           -p '/lock/enabled' -t bool -s 'false'
 xfconf-query --create -c 'xfce4-screensaver'           -p '/lock/saver-activation/enabled' -t bool -s 'false'
 xfconf-query --create -c 'xfce4-screensaver'           -p '/lock/status-messages/enabled' -t bool -s 'false'
