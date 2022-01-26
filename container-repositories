@@ -2,7 +2,7 @@
 
 # dependencies #
 
-[[ -z $(command -v console) ]] && curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console
+[[ -z $(command -v frobulate. ]] && curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console
 
 . "${PREFIX}"/bin/console
 
@@ -18,7 +18,7 @@ version="01-21-2022"
 
 # prompt
 
-console.script "Setting up ${script#*-}"
+frobulate.script "Setting up ${script#*-}"
 echo
 
 # variables #
@@ -34,7 +34,7 @@ sed -i									\
 
 # update lists
 
-console.log "apt update" &
+frobulate.log "apt update" &
 
-console.progress "Forcing refresh..."
+frobulate.progress "Forcing refresh..."
 echo

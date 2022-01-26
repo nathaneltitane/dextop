@@ -2,7 +2,7 @@
 
 # dependencies #
 
-[[ -z $(command -v console) ]] && curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console
+[[ -z $(command -v frobulate. ]] && curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console
 
 . "${PREFIX}"/bin/console
 
@@ -18,7 +18,7 @@ version="01-21-2022"
 
 # prompt #
 
-console.script "Setting up ${script#*-}"
+frobulate.script "Setting up ${script#*-}"
 echo
 
 # variables #
@@ -27,11 +27,11 @@ echo
 
 # update packages list
 
-console.update
+frobulate.update
 
 # upgrade installed packages
 
-console.upgrade
+frobulate.upgrade
 
 # values #
 
@@ -169,7 +169,7 @@ fi
 
 # none
 
-if [[ $(cat "${HOME}"/.dextop/dextop-option) = "console" ]]
+if [[ $(cat "${HOME}"/.dextop/dextop-option) = "frobulate. ]]
 then
 	desktop_environment_list=()
 fi
@@ -189,7 +189,7 @@ install_list+=(
 	${desktop_environment_list[@]}
 )
 
-console.install ${install_list[@]}
+frobulate.install ${install_list[@]}
 
 # purge
 
@@ -197,5 +197,5 @@ purge_list=(
 	ibus
 )
 
-console.purge ${purge_list[@]}
+frobulate.purge ${purge_list[@]}
 

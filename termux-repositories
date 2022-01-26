@@ -2,7 +2,7 @@
 
 # dependencies #
 
-[[ -z $(command -v console) ]] && curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console
+[[ -z $(command -v frobulate. ]] && curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console
 
 . "${PREFIX}"/bin/console
 
@@ -18,7 +18,7 @@ version="01-21-2022"
 
 # prompt #
 
-console.script "Setting up ${script#*-}"
+frobulate.script "Setting up ${script#*-}"
 echo
 
 # variables #
@@ -31,7 +31,7 @@ echo "deb https://grimler.se/termux-packages-24 stable main" > "${PREFIX}"/etc/a
 
 # create sources directory
 
-console.directory "${PREFIX}"/etc/apt/ sources.list.d
+frobulate.directory "${PREFIX}"/etc/apt/ sources.list.d
 
 # write sources list files
 
@@ -71,7 +71,7 @@ IFS=$'\n'
 
 # update lists
 
-console.log "pkg update" &
+frobulate.log "pkg update" &
 
-console.progress "Forcing refresh..."
+frobulate.progress "Forcing refresh..."
 echo

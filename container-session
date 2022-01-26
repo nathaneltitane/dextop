@@ -2,7 +2,7 @@
 
 # dependencies #
 
-[[ -z $(command -v console) ]] && curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console
+[[ -z $(command -v frobulate. ]] && curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console
 
 . "${PREFIX}"/bin/console
 
@@ -113,7 +113,7 @@ done
 
 # prompt #
 
-console.script "Setting up ${script#*-}"
+frobulate.script "Setting up ${script#*-}"
 echo
 
 # variables #
@@ -146,8 +146,8 @@ vnc_clean () {
 }
 
 vnc_geometry () {
-	console.msg "Select geometry to start the display server"
-	console.msg "or input [c]ustom properties:"
+	frobulate.msg "Select geometry to start the display server"
+	frobulate.msg "or input [c]ustom properties:"
 	echo
 
 	# list supported display resolutions
@@ -296,16 +296,16 @@ vnc_handle () {
 
 	# handle user input for values_list
 
-	console_rtn=()
+	frobulate.rtn=()
 
 	if [ -f "${HOME}"/.vnc/selection ]
 	then
 		selection=$(cat "${HOME}"/.vnc/selection)
 	else
-		console.input ${values_list[@]}
+		frobulate.input ${values_list[@]}
 	fi
 
-	eval ${console_rtn[@]}
+	eval ${frobulate.rtn[@]}
 
 	# check selection input against selection list
 
@@ -317,14 +317,14 @@ vnc_handle () {
 		if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]] || [[ ! "${selection}" =~ ^[0-9]+$ ]]
 		then
 			echo
-			console.err "Invalid selection:"
+			frobulate.err "Invalid selection:"
 			echo
 
-			console.wrn "Select geometry [ 1 - ${number} ]"
-			console.wrn "or input [c]ustom properties."
+			frobulate.wrn "Select geometry [ 1 - ${number} ]"
+			frobulate.wrn "or input [c]ustom properties."
 			echo
 
-			console.ipt "Selection:"
+			frobulate.ipt "Selection:"
 
 			read selection
 			echo
@@ -361,20 +361,20 @@ vnc_handle () {
 
 	if [[ "${selection}" = "custom" ]]
 	then
-		console.fwd "Setting custom properties..."
+		frobulate.fwd "Setting custom properties..."
 		echo
 
-		console.ipt "Set width" "[ pixels ]"
+		frobulate.ipt "Set width" "[ pixels ]"
 
 		read width
 		echo
 
-		console.ipt "Set height" "[ pixels ]"
+		frobulate.ipt "Set height" "[ pixels ]"
 
 		read height
 		echo
 
-		console.ipt "Set display number" "[ e.g. 1 ]"
+		frobulate.ipt "Set display number" "[ e.g. 1 ]"
 
 		read display
 		echo
@@ -389,7 +389,7 @@ vnc_handle () {
 }
 
 vnc_intent () {
-	console.fwd "Opening display..."
+	frobulate.fwd "Opening display..."
 	echo
 
 	# explicit VNC viewer application to kill:
@@ -404,7 +404,7 @@ vnc_intent () {
 
 	# start android vnc intent and force-stop existing activity
 
-	# console.silence "am start -a android.intent.action.VIEW -d vnc://${ADDRESS}:${PORT} -S ${VNC}"
+	# frobulate.silence "am start -a android.intent.action.VIEW -d vnc://${ADDRESS}:${PORT} -S ${VNC}"
 
 	# start android vnc intent and set to view session with supported application
 
@@ -414,11 +414,11 @@ vnc_intent () {
 	intent_command+=" -a android.intent.action.VIEW"
 	intent_command+=" -d vnc://${ADDRESS}:${PORT}"
 
-	console.silence "exec ${intent_command}"
+	frobulate.silence "exec ${intent_command}"
 }
 
 vnc_load () {
-	console.fwd "Starting display server..."
+	frobulate.fwd "Starting display server..."
 	echo
 
 	depth="32"
@@ -442,7 +442,7 @@ vnc_load () {
 	command_start+=" -nolock"
 	command_start+=" ${DISPLAY}"
 
-	console.silence "exec ${command_start}"
+	frobulate.silence "exec ${command_start}"
 
 	# make selection available for automatic start:
 	# verify user id - do not write selection when 'root' user is logged in
@@ -515,9 +515,9 @@ vnc_stop () {
 	command_stop+="vncserver"
 	command_stop+=" -kill ${DISPLAY}"
 
-	console.silence "exec ${command_stop}" &
+	frobulate.silence "exec ${command_stop}" &
 
-	console.progress "Killing display server..."
+	frobulate.progress "Killing display server..."
 	echo
 
 	# clean display server runtime files
@@ -542,14 +542,14 @@ vnc_list () {
 
 	if [[ "${vnc_process}" =~ ^[0-9]+$ ]]
 	then
-		console.fwd "Listing servers..."
+		frobulate.fwd "Listing servers..."
 		echo
 
 		vnc_display="${vnc_display}"
 		vnc_port="${vnc_port}"
 		vnc_process="${vnc_process}"
 	else
-		console.wrn "No active servers detected."
+		frobulate.wrn "No active servers detected."
 		echo
 
 		empty="N/A"
@@ -562,11 +562,11 @@ vnc_list () {
 		vnc_process="${empty}"
 	fi
 
-	console.inf "Geometry" "[ ${geometry} ]"
-	console.inf "Format"   "[ ${format} ]"
-	console.inf "Display"  "[ ${vnc_display} ]"
-	console.inf "Port"     "[ ${vnc_port} ]"
-	console.inf "Process"  "[ ${vnc_process} ]"
+	frobulate.inf "Geometry" "[ ${geometry} ]"
+	frobulate.inf "Format"   "[ ${format} ]"
+	frobulate.inf "Display"  "[ ${vnc_display} ]"
+	frobulate.inf "Port"     "[ ${vnc_port} ]"
+	frobulate.inf "Process"  "[ ${vnc_process} ]"
 	echo
 }
 
@@ -579,20 +579,20 @@ vnc_password () {
 
 	# handle user input for values_list
 
-	console_rtn=()
+	frobulate.rtn=()
 
-	console.input ${values_list[@]}
+	frobulate.input ${values_list[@]}
 
-	eval ${console_rtn[@]}
+	eval ${frobulate.rtn[@]}
 
 	# hash password  using 'vncpasswd' and store it
 
-	console.fwd "Setting password..."
+	frobulate.fwd "Setting password..."
 	echo
 
 	echo "$vnc_password" | vncpasswd -f > "${HOME}"/.vnc/passwd
 
-	console.scs "Password changed."
+	frobulate.scs "Password changed."
 	echo
 }
 
@@ -603,7 +603,7 @@ application_handle () {
 	then
 		${application} &
 	else
-		console.err "Application not found" "[ "${application}" ]"
+		frobulate.err "Application not found" "[ "${application}" ]"
 		echo
 
 		if [[ $(command -v zenity) ]]
@@ -690,16 +690,16 @@ container_handle () {
 
 	# handle user input for values_list
 
-	console_rtn=()
+	frobulate.rtn=()
 
 	if [ -f "${HOME}"/.dextop/selection ]
 	then
 		selection=$(cat "${HOME}"/.dextop/selection)
 	else
-		console.input ${values_list[@]}
+		frobulate.input ${values_list[@]}
 	fi
 
-	eval ${console_rtn[@]}
+	eval ${frobulate.rtn[@]}
 
 	# check selection input against selection list
 
@@ -711,13 +711,13 @@ container_handle () {
 		if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]] || [[ ! "${selection}" =~ ^[0-9]+$ ]]
 		then
 			echo
-			console.err "Invalid selection:"
+			frobulate.err "Invalid selection:"
 			echo
 
-			console.wrn "Select container [ 1 - ${number} ]"
+			frobulate.wrn "Select container [ 1 - ${number} ]"
 			echo
 
-			console.ipt "Selection:"
+			frobulate.ipt "Selection:"
 
 			read selection
 			echo
@@ -737,16 +737,16 @@ container_input () {
 	then
 		ROOT="${root_filesystem}"
 
-		console.scs "Container location found"
+		frobulate.scs "Container location found"
 		echo
 
-		console.inf "Loading" "[ ${ROOT} ]"
+		frobulate.inf "Loading" "[ ${ROOT} ]"
 		echo
 	else
-		console.err "Container location not found"
+		frobulate.err "Container location not found"
 		echo
 
-		console.ipt "Select one of the following containers:"
+		frobulate.ipt "Select one of the following containers:"
 		echo
 
 		container_handle
@@ -793,7 +793,7 @@ container_user () {
 
 	# authentication #
 
-	console.fwd "Authenticating..."
+	frobulate.fwd "Authenticating..."
 	echo
 
 	while read -r entry
@@ -816,7 +816,7 @@ container_user () {
 		then
 			USER="root"
 
-			console.wrn "No user name - Defaulting" "[ '${USER}' ]"
+			frobulate.wrn "No user name - Defaulting" "[ '${USER}' ]"
 			echo
 
 			# break out of loop - empty "${user_name}" - default to 'root'
@@ -828,7 +828,7 @@ container_user () {
 		then
 			USER="${USER}"
 
-			console.scs "Valid user name" "[ '${USER}' ]"
+			frobulate.scs "Valid user name" "[ '${USER}' ]"
 			echo
 
 			# break out of loop - matching "${user_name}"
@@ -840,7 +840,7 @@ container_user () {
 		then
 			USER="root"
 
-			console.err "Invalid user name - Defaulting" "[ '${USER}' ]"
+			frobulate.err "Invalid user name - Defaulting" "[ '${USER}' ]"
 			echo
 		fi
 
@@ -878,7 +878,7 @@ container_session () {
 
 	user_name="${USER}"
 
-	console.fwd "Starting session" "[ ${session_name} // ${user_name} ]"
+	frobulate.fwd "Starting session" "[ ${session_name} // ${user_name} ]"
 	echo
 
 	# assume 'termux-exec' is installed

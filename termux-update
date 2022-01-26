@@ -2,7 +2,7 @@
 
 # dependencies #
 
-[[ -z $(command -v console) ]] && curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console
+[[ -z $(command -v frobulate. ]] && curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console
 
 . "${PREFIX}"/bin/console
 
@@ -18,7 +18,7 @@ version="01-21-2022"
 
 # prompt #
 
-console.script "Setting up ${script#*-}"
+frobulate.script "Setting up ${script#*-}"
 echo
 
 # variables #
@@ -50,25 +50,25 @@ open_intent () {
 
 # notice
 
-console.err "Google Play Store updates deprecated since November 2020!"
+frobulate.err "Google Play Store updates deprecated since November 2020!"
 echo
 
-console.wrn "Back up and uninstall the Google Play Store version of Termux."
+frobulate.wrn "Back up and uninstall the Google Play Store version of Termux."
 echo
 
-console.msg "Visit the following wiki pages on how to proceed:"
+frobulate.msg "Visit the following wiki pages on how to proceed:"
 echo
 
-console.inf "Backing up Termux: https://wiki.termux.com/wiki/Backing_up_Termux"
-console.inf "Installing Termux: https://wiki.termux.com/wiki/installation"
+frobulate.inf "Backing up Termux: https://wiki.termux.com/wiki/Backing_up_Termux"
+frobulate.inf "Installing Termux: https://wiki.termux.com/wiki/installation"
 echo
 
-console.ins "Select 'Package Installer' when prompted to proceed."
+frobulate.ins "Select 'Package Installer' when prompted to proceed."
 echo
 
-console.separate
+frobulate.separate
 
-console.ask "Check for updates?"
+frobulate.ask "Check for updates?"
 
 read reply
 echo
@@ -84,14 +84,14 @@ then
 
 	for package in ${packages_list[@]}
 	do
-		console.inf "Checking for package update" "[ ${package} ]"
+		frobulate.inf "Checking for package update" "[ ${package} ]"
 		echo
 
 		archive=$(curl -s -L "${packages_url}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
 		archive_version=$(echo "${archive}" | cut -d '_' -f 2 | sed 's/\..*//g')
 		archive_url="${repository_url}/${archive}"
 
-		console.fwd "Verifying..."
+		frobulate.fwd "Verifying..."
 		echo
 
 		if [ "${package}" = "com.termux" ]
@@ -109,43 +109,43 @@ then
 
 		if [ "${installed_version}" != "${archive_version}" ]
 		then
-			console.wrn "Package version has been updated" "[ ${package} // ${archive_version} ]."
+			frobulate.wrn "Package version has been updated" "[ ${package} // ${archive_version} ]."
 			echo
 
 			# request update permission
 
-			console.ask "Update?"
+			frobulate.ask "Update?"
 
 			read reply
 			echo
 
 			if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 			then
-				console.inf "Dowloading update."
+				frobulate.inf "Dowloading update."
 				echo
 
 				# download
 
-				console.download "${repository_url}" "${PREFIX}"/tmp ${archive}
+				frobulate.download "${repository_url}" "${PREFIX}"/tmp ${archive}
 
 				# update
 
 				open_intent "${PREFIX}"/tmp/"${archive}"
 
-				console.fwd "Updating..."
+				frobulate.fwd "Updating..."
 				echo
 			else
 				# continue without application update
 
-				console.wrn "Proceeding without update."
-				console.wrn "Setup process may encounter errors."
+				frobulate.wrn "Proceeding without update."
+				frobulate.wrn "Setup process may encounter errors."
 				echo
 
-				console.num "1" "Follow wiki pages stated above to correct issues."
-				console.num "2" "Restart setup on a fresh Termux installation to proceed."
+				frobulate.num "1" "Follow wiki pages stated above to correct issues."
+				frobulate.num "2" "Restart setup on a fresh Termux installation to proceed."
 				echo
 
-				console.countdown 3 "Continuing" "[ ${script} ]"
+				frobulate.countdown 3 "Continuing" "[ ${script} ]"
 				echo
 			fi
 
@@ -153,15 +153,15 @@ then
 		else
 			if [ "${installed_version}" == "${archive_version}" ]
 			then
-				console.scs "Package version is up to date" "[ ${package} // ${archive_version} ]"
+				frobulate.scs "Package version is up to date" "[ ${package} // ${archive_version} ]"
 				echo
 
-				console.fwd "Continuing..."
+				frobulate.fwd "Continuing..."
 				echo
 			fi
 		fi
 	done
 else
-	console.countdown 3 "Continuing" "[ ${script} ]"
+	frobulate.countdown 3 "Continuing" "[ ${script} ]"
 	echo
 fi

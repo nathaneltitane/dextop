@@ -2,7 +2,7 @@
 
 # dependencies #
 
-[[ -z $(command -v console) ]] && curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console
+[[ -z $(command -v frobulate. ]] && curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console
 
 . "${PREFIX}"/bin/console
 
@@ -77,7 +77,7 @@ done
 
 # prompt #
 
-console.script "Setting up ${script#*-}"
+frobulate.script "Setting up ${script#*-}"
 echo
 
 # variables #
@@ -94,7 +94,7 @@ image_version () {
 
 	if [ -z "${distribution_name}" ] || [ -z "${distribution_version}" ]
 	then
-		console.msg "Select distribution version to setup."
+		frobulate.msg "Select distribution version to setup."
 		echo
 
 		# list supported distribution versions
@@ -154,9 +154,9 @@ image_version () {
 
 		# handle user input for values_list
 
-		eval ${console_rtn[@]}
+		eval ${frobulate.rtn[@]}
 
-		console.ipt "Selection:"
+		frobulate.ipt "Selection:"
 
 		read selection
 		echo
@@ -251,18 +251,18 @@ image_architecture () {
 		then
 			image_architecture=${image_architectures[i]}
 
-			console.scs "Supported architecture" "[ ${image_architecture} ]"
+			frobulate.scs "Supported architecture" "[ ${image_architecture} ]"
 			echo
 
 			break
 		else
-			console.wrn "Unsupported architecture" "[ ${image_architecture} ]"
+			frobulate.wrn "Unsupported architecture" "[ ${image_architecture} ]"
 			echo
 
-			console.fwd "Aborting..."
+			frobulate.fwd "Aborting..."
 			echo
 
-			console.stp "Exiting."
+			frobulate.stp "Exiting."
 			echo
 
 			exit 1
@@ -275,13 +275,13 @@ image_architecture () {
 	then
 		image_architecture="N/A"
 
-		console.wrn "Unknown architecture" "[ ${image_architecture} ]"
+		frobulate.wrn "Unknown architecture" "[ ${image_architecture} ]"
 		echo
 
-		console.fwd "Aborting..."
+		frobulate.fwd "Aborting..."
 		echo
 
-		console.stp "Exiting."
+		frobulate.stp "Exiting."
 		echo
 
 		exit 1
@@ -310,7 +310,7 @@ image_download () {
 		;;
 	esac
 
-	console.download "${image_url}"/"${image_archive}" "${PREFIX}"/img "${image_file}"
+	frobulate.download "${image_url}"/"${image_archive}" "${PREFIX}"/img "${image_file}"
 }
 
 image_extract () {
@@ -355,10 +355,10 @@ image_extract () {
 
 	}
 
-	console.wrn "Extracting new deployment" "[ ${image_file} // ${image_architecture} ]"
+	frobulate.wrn "Extracting new deployment" "[ ${image_file} // ${image_architecture} ]"
 	echo
 
-	console.directory "${PREFIX}"/cnt "${distribution_name}"/"${distribution_version}"
+	frobulate.directory "${PREFIX}"/cnt "${distribution_name}"/"${distribution_version}"
 
 	if [ "${distribution_name}" = fedora ]
 	then
@@ -383,21 +383,21 @@ image_handle () {
 		[uU][bB][uU][nN][tT][uU])
 			distribution_name="${distribution_name,,}"
 
-			console.scs "Supported distribution name."
+			frobulate.scs "Supported distribution name."
 			echo
 		;;
 
 		[fF][eE][dD][oO][rR][aA])
 			distribution_name="${distribution_name,,}"
 
-			console.scs "Supported distribution name."
+			frobulate.scs "Supported distribution name."
 			echo
 		;;
 
 		"")
 			distribution_name="ubuntu"
 
-			console.err "Empty distribution name."
+			frobulate.err "Empty distribution name."
 			echo
 		;;
 
@@ -405,10 +405,10 @@ image_handle () {
 		*)
 			distribution_name="ubuntu"
 
-			console.err "Unsupported distribution name."
+			frobulate.err "Unsupported distribution name."
 			echo
 
-			console.wrn "Defaulting" "[ ${distribution_name} ]"
+			frobulate.wrn "Defaulting" "[ ${distribution_name} ]"
 			echo
 		;;
 	esac
@@ -420,38 +420,38 @@ image_handle () {
 			20*04|20*04*)
 				distribution_version="20.04.3"
 
-				console.scs "Supported distribution version."
+				frobulate.scs "Supported distribution version."
 				echo
 			;;
 
 			21*04|21*04*)
 				distribution_version=21.04
 
-				console.scs "Supported distribution version."
+				frobulate.scs "Supported distribution version."
 				echo
 			;;
 
 			21*10|20*10*)
 				distribution_version=21.10
 
-				console.scs "Supported distribution version."
+				frobulate.scs "Supported distribution version."
 				echo
 			 ;;
 
 			"")
 				distribution_version=21.10
 
-				console.err "Empty distribution version."
+				frobulate.err "Empty distribution version."
 				echo
 			;;
 
 			 *)
 				distribution_version=21.10
 
-				console.err "Unsupported distribution version."
+				frobulate.err "Unsupported distribution version."
 				echo
 
-				console.wrn "Defaulting" "[ ${distribution_version} ]"
+				frobulate.wrn "Defaulting" "[ ${distribution_version} ]"
 				echo
 			;;
 		esac
@@ -476,7 +476,7 @@ image_handle () {
 			 "")
 				distribution_version=35
 
-				console.err "Empty distribution version."
+				frobulate.err "Empty distribution version."
 				echo
 			;;
 
@@ -484,10 +484,10 @@ image_handle () {
 			 *)
 				distribution_version=35
 
-				console.err "Unsupported distribution version"
+				frobulate.err "Unsupported distribution version"
 				echo
 
-				console.wrn "Defaulting" "[ ${distribution_version} ]"
+				frobulate.wrn "Defaulting" "[ ${distribution_version} ]"
 				echo
 			;;
 		esac

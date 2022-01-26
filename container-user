@@ -2,7 +2,7 @@
 
 # dependencies #
 
-[[ -z $(command -v console) ]] && curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console
+[[ -z $(command -v frobulate. ]] && curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console
 
 . "${PREFIX}"/bin/console
 
@@ -84,7 +84,7 @@ done
 
 # prompt #
 
-console.script "Setting up ${script#*-}"
+frobulate.script "Setting up ${script#*-}"
 echo
 
 # variables #
@@ -102,27 +102,27 @@ user_password_generate () {
 user_information () {
 	# get 'user' information
 
-	console.inf "This information will be used to set up the user account."
+	frobulate.inf "This information will be used to set up the user account."
 	echo
 
-	console.wrn "Information is required to set up your environment:"
-	console.wrn "Fields cannot be empty."
+	frobulate.wrn "Information is required to set up your environment:"
+	frobulate.wrn "Fields cannot be empty."
 	echo
 
 	# handle user input for information_list
 
-	console_rtn=()
+	frobulate.rtn=()
 
-	console.input ${information_list[@]}
+	frobulate.input ${information_list[@]}
 
-	eval ${console_rtn[@]}
+	eval ${frobulate.rtn[@]}
 }
 
 user_interactive () {
 	# generate 'user' account:
 	# interactive setup
 
-	console.fwd "Generating account..."
+	frobulate.fwd "Generating account..."
 	echo
 
 	room_number=""
@@ -139,11 +139,11 @@ user_interactive () {
 	# silent configuration:
 	# set --gecos and --disabled-password for fully silent execution
 
-	console.wrn "Creating user" "[ ${user_name} ]"
+	frobulate.wrn "Creating user" "[ ${user_name} ]"
 	echo
 
 	# use /dev/null redirection:
-	# 'adduser' prevents stdout error redirect - cannot use 'console.silence'
+	# 'adduser' prevents stdout error redirect - cannot use 'frobulate.silence'
 
 	adduser					\
 		--gecos "${gecos}"	\
@@ -155,7 +155,7 @@ user_noninteractive () {
 	# generate 'user account:
 	# noninteractive setup
 
-	console.fwd "Generating account..."
+	frobulate.fwd "Generating account..."
 	echo
 
 	[ -z "${user_name}" ]     && user_name="termux"
@@ -167,7 +167,7 @@ user_noninteractive () {
 	gecos="Dextop"
 	home="/home/${user_name}"
 
-	console.wrn "Creating user" "[ ${user_name} ]"
+	frobulate.wrn "Creating user" "[ ${user_name} ]"
 	echo
 
 	echo  "${user_name}:x:${user_id}:${group_id}:${gecos}:${home}:${SHELL}" >> /etc/passwd
@@ -176,7 +176,7 @@ user_noninteractive () {
 user_superuser () {
 	# generate 'user' superuser privilege
 
-	console.fwd "Generating superuser privilege..."
+	frobulate.fwd "Generating superuser privilege..."
 	echo
 
 	if [[ $(cat /etc/group | grep sudo) ]]
@@ -198,11 +198,11 @@ user_superuser_override () {
 
 	# set password override
 
-	console.write "${user_name} ALL=(ALL) NOPASSWD: ALL" /etc/sudoers.d "${user_name}"
+	frobulate.write "${user_name} ALL=(ALL) NOPASSWD: ALL" /etc/sudoers.d "${user_name}"
 
 	# fix superuser privilege runtime errors
 
-	console.write "Set disable_coredump false" /etc sudo.conf
+	frobulate.write "Set disable_coredump false" /etc sudo.conf
 
 	# reset password override ownership:
 	# fixes 'sudo' errors
@@ -213,7 +213,7 @@ user_superuser_override () {
 user_password () {
 	# set 'user' password
 
-	console.fwd "Setting password..."
+	frobulate.fwd "Setting password..."
 	echo
 
 	# generate password credential for 'user' entry
@@ -227,7 +227,7 @@ user_password () {
 user_runtime () {
 	# generate 'user' runtime directory structure
 
-	console.fwd "Setting runtime..."
+	frobulate.fwd "Setting runtime..."
 	echo
 
 	user_uid="$(id -u ${user_name})"
@@ -235,8 +235,8 @@ user_runtime () {
 
 	# generate runtime directory
 
-	console.directory /run/user "${user_uid}"
-	console.directory /run/user "${user_name}"
+	frobulate.directory /run/user "${user_uid}"
+	frobulate.directory /run/user "${user_name}"
 
 	# set runtime directory permissions
 

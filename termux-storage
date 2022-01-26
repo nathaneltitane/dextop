@@ -2,7 +2,7 @@
 
 # dependencies #
 
-[[ -z $(command -v console) ]] && curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console
+[[ -z $(command -v frobulate. ]] && curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console
 
 . "${PREFIX}"/bin/console
 
@@ -18,7 +18,7 @@ version="01-21-2022"
 
 # prompt #
 
-console.script "Setting up ${script#*-}"
+frobulate.script "Setting up ${script#*-}"
 echo
 
 # variables #
@@ -34,7 +34,7 @@ storage_intent () {
 		storage_command+=" -e com.termux.app.reload_style storage"
 		storage_command+=" -a com.termux.app.reload_style com.termux"
 
-		console.silence "exec ${storage_command}"
+		frobulate.silence "exec ${storage_command}"
 }
 
 # verify termux storage directory existence
@@ -44,37 +44,37 @@ then
 	# does not exist:
 	# enable storage permissions: requires user touch input
 
-	console.wrn "User permission required to access storage on this device:"
-	console.wrn "Internal and external storage locations are made available."
+	frobulate.wrn "User permission required to access storage on this device:"
+	frobulate.wrn "Internal and external storage locations are made available."
 	echo
 
-	console.inf "Storage is made accessible through container."
+	frobulate.inf "Storage is made accessible through container."
 	echo
 
-	console.ins "Select 'Allow' when prompted to proceed."
+	frobulate.ins "Select 'Allow' when prompted to proceed."
 	echo
 
-	console.separate
+	frobulate.separate
 
 	# storage permissions dialog
 
 	storage_intent > /dev/null
 
-	console.countdown 3 "Continuing" "[ ${script} ]"
+	frobulate.countdown 3 "Continuing" "[ ${script} ]"
 	echo
 
 else
 	# exists:
 	# proceed with setup
 
-	console.scs "Storage directory detected" "[ "${HOME}" ]"
+	frobulate.scs "Storage directory detected" "[ "${HOME}" ]"
 	echo
 
-	console.fwd "Continuing..."
+	frobulate.fwd "Continuing..."
 	echo
 fi
 
-console.fwd "Setting up storage..."
+frobulate.fwd "Setting up storage..."
 echo
 
 # handle storage mount locations
@@ -95,7 +95,7 @@ echo
 
 # link internal storage
 
-console.fwd "Linking..."
+frobulate.fwd "Linking..."
 echo
 
 if [ ! -f "${PREFIX}"/media/internal ]
@@ -118,7 +118,7 @@ uuid="${external_storage/\/storage\//}"
 
 if [ ! -z "${external_storage}" ]
 then
-	console.scs "Storage media detected" "[ ${uuid} ]"
+	frobulate.scs "Storage media detected" "[ ${uuid} ]"
 	echo
 
 	if [ ! -f "${PREFIX}"/media/external ]
@@ -133,9 +133,9 @@ then
 else
 	uuid="N/A"
 
-	console.err "No storage media detected" "[ ${uuid} ]"
+	frobulate.err "No storage media detected" "[ ${uuid} ]"
 	echo
 
-	console.fwd "Continuing..."
+	frobulate.fwd "Continuing..."
 	echo
 fi
