@@ -297,15 +297,15 @@ then
 			termux-gmail
 			termux-information
 			termux-message
-			termux.properties
-			colors.properties
+			termux-properties
+			termux-colors
 		)
 
 		frobulate.download get.trmnl.me/termux "${PREFIX}"/bin ${files_list[@]}
 
-		frobulate.link "${PREFIX}"/bin "${HOME}"/.termux termux.properties
+		ln -s -f "${PREFIX}"/bin/termux-properties "${HOME}"/.termux/termux.properties
 
-		frobulate.link "${PREFIX}"/bin "${HOME}"/.termux colors.properties
+		ln -s -f "${PREFIX}"/bin/termux-colors "${HOME}"/.termux/ colors.properties
 
 		settings_intent
 
