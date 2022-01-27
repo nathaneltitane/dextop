@@ -4,7 +4,7 @@
 
 [[ -z $(command -v frobulator) ]] && curl -s -L get.frbltr.app > "${PREFIX}"/bin/frobulator
 
-. "${PREFIX}"/bin/console
+. "${PREFIX}"/bin/frobulator
 
 # script #
 
