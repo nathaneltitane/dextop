@@ -2,7 +2,7 @@
 
 # dependencies #
 
-curl -s -L get.trmnl.me/frobulate.console > "${PREFIX}"/bin/console
+curl -s -L get.frbltr.app > "${PREFIX}"/bin/frobulator
 
 . "${PREFIX}"/bin/console
 
