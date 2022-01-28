@@ -298,7 +298,7 @@ then
 			termux-colors
 		)
 
-		frobulate.download get.trmnl.me/termux "${PREFIX}"/bin ${files_list[@]}
+		frobulate.download get.trmnl.me "${PREFIX}"/bin ${files_list[@]}
 
 		ln -s -f "${PREFIX}"/bin/termux-properties "${HOME}"/.termux/termux.properties
 
@@ -317,17 +317,20 @@ then
 	then
 
 		files_list+=(
-			.bash_aliases
-			.bash_functions
-			.bash_logout
-			.bashrc
-			.hushlogin
-			.profile
+			bash-aliases
+			bash-functions
+			bash-logout
+			bash-configuration
+			bash-profile
 		)
 
-		frobulate.download get.trmnl.me/shell "${HOME}" ${files_list[@]}
+		frobulate.download get.trmnl.me "${HOME}" ${files_list[@]}
 
-		frobulate.link "${HOME}" "${ROOT}"/root ${files_list[@]}
+		frobulate.link "${PREFIX}"/bin "${HOME}" ${files_list[@]}
+
+		frobulate.link "${PREFIX}"/bin "${ROOT}"/root ${files_list[@]}
+
+		console.write '' "${HOME}" .hushlogin
 
 		files_list=()
 
