@@ -2,7 +2,10 @@
 
 # dependencies /////////////////////////////////////////////////////////////////
 
-[[ -z $(command -v frobulator) ]] && curl -s -L get.frbltr.app > "${PREFIX}"/bin/frobulator
+if [[ -z $(command -v frobulator) ]]
+then
+	curl -s -L get.frbltr.app > "${PREFIX}"/bin/frobulator
+fi
 
 . "${PREFIX}"/bin/frobulator
 
