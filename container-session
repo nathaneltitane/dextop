@@ -517,7 +517,7 @@ vnc_stop () {
 
 	frobulate.silence "exec ${command_stop}" &
 
-	frobulate.progress "Killing display server..."
+	frobulate.progress "Stopping display server..."
 	echo
 
 	# clean display server runtime files
