@@ -24,8 +24,8 @@ do
 			option="xfce"
 		;;
 
-		-c|--frobulate.
-			option="frobulate.
+		-c|--console
+			option="console"
 		;;
 
 		-u|--update)
@@ -37,7 +37,7 @@ do
 			echo -e "USAGE:"
 			echo
 			echo -e "-x, --xfce       Setup XFCE desktop environment and utilities."
-			echo -e "-c, --frobulate.   Setup Console access to environment and utilities."
+			echo -e "-c, --console    Setup Console access to environment and utilities."
 			echo
 			echo -e "-u, --update     Update Termux application packages. [ F-Droid ]"
 			echo

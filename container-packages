@@ -169,7 +169,7 @@ fi
 
 # none
 
-if [[ $(cat "${HOME}"/.dextop/dextop-option) = "frobulate. ]]
+if [[ $(cat "${HOME}"/.dextop/dextop-option) = "c" ]]
 then
 	desktop_environment_list=()
 fi
