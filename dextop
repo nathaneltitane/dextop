@@ -83,15 +83,15 @@ frobulate.clear
 frobulate.script "Setting up ${script#*-}"
 echo
 
-# variables #
+# variables ////////////////////////////////////////////////////////////////////
 
 export option="${option}"
 
-# defaults #
+# defaults /////////////////////////////////////////////////////////////////////
 
 [ -z "${option}" ] && option="xfce" && frobulate.write "${option}" "${HOME}"/.dextop dextop-option
 
-# functions #
+# functions ////////////////////////////////////////////////////////////////////
 
 container_setup () {
 	# run container setup commands through 'proot'

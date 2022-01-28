@@ -116,9 +116,9 @@ done
 frobulate.script "Setting up ${script#*-}"
 echo
 
-# variables #
+# variables ////////////////////////////////////////////////////////////////////
 
-# defaults #
+# defaults /////////////////////////////////////////////////////////////////////
 
 [ -z "${DISPLAY}" ]         && DISPLAY=":1"
 [ -z "${DISPLAY_NUMBER}" ]  && DISPLAY_NUMBER="${DISPLAY/:/}"
@@ -134,7 +134,7 @@ export DISPLAY="${DISPLAY}"
 
 [ -f /etc/os-release ]      && . /etc/os-release && name="${NAME}"
 
-# functions #
+# functions ////////////////////////////////////////////////////////////////////
 
 vnc_clean () {
 	[ -d "${HOME}" ]   && rm -rf "${HOME}"/.ICE*
