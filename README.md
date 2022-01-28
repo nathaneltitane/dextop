@@ -76,9 +76,11 @@ Once the Android applications are installed on your device, open Termux and past
 
 Container install options are:
 
-`-x, --xfce       XFCE4 setup: install XFCE desktop environment and utilities.    [ Default ]`
+`-x, --xfce       Setup XFCE desktop environment and utilities.    [ Default ]`
 
-`-c, --frobulate.   No DE setup: console access to environment and utilities.`
+`-c, --console    Setup Console access to environment and utilities.`
+
+`-u, --update     Update Termux application packages.               [ F-Droid ]`
 
 The 'frobulate. option is great for users who would like to experiment or setup their own window manager/desktop environment, utilities and preferences.
 
