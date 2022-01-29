@@ -146,7 +146,7 @@ settings_intent () {
 	settings_command+=" -a com.termux.app.reload_style"
 	settings_command+=" com.termux"
 
-	frobulate.silence "exec ${settings_command}"
+	frobulate.silence "${settings_command}"
 }
 
 # run failsafe package install:
