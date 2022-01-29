@@ -330,7 +330,7 @@ then
 
 		frobulator.link "${PREFIX}"/bin "${ROOT}"/root ${files_list[@]}
 
-		console.write '' "${HOME}" .hushlogin
+		frobulator.file "${HOME}" .hushlogin
 
 		files_list=()
 
