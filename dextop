@@ -300,9 +300,9 @@ then
 
 		frobulator.download get.trmnl.me "${PREFIX}"/bin ${files_list[@]}
 
-		ln -s -f "${PREFIX}"/bin/termux-properties "${HOME}"/.termux/termux.properties
+		frobulator.link "${PREFIX}"/bin "${HOME}"/.termux termux-properties termux.properties
 
-		ln -s -f "${PREFIX}"/bin/termux-colors "${HOME}"/.termux/ colors.properties
+		frobulator.link "${PREFIX}"/bin "${HOME}"/.termux termux-colors colors.properties
 
 		settings_intent
 
@@ -315,22 +315,37 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-shell-checkpoint ]
 	then
+		# user home
 
 		files_list+=(
 			bash-aliases
+			bash-configuration
 			bash-functions
 			bash-logout
-			bash-configuration
 			bash-profile
 		)
 
-		frobulator.download get.trmnl.me "${HOME}" ${files_list[@]}
+		frobulator.download get.trmnl.me "${PREFIX}"/bin ${files_list[@]}
 
-		frobulator.link "${PREFIX}"/bin "${HOME}" ${files_list[@]}
-
-		frobulator.link "${PREFIX}"/bin "${ROOT}"/root ${files_list[@]}
+		frobulator.link "${PREFIX}"/bin "${HOME}" bash-aliases       .bash_aliases
+		frobulator.link "${PREFIX}"/bin "${HOME}" bash-configuration .bashrc
+		frobulator.link "${PREFIX}"/bin "${HOME}" bash-functions     .bash_functions
+		frobulator.link "${PREFIX}"/bin "${HOME}" bash-login         .bash_login
+		frobulator.link "${PREFIX}"/bin "${HOME}" bash-logout        .bash_logout
+		frobulator.link "${PREFIX}"/bin "${HOME}" bash-profile       .bash_profile
 
 		frobulator.file "${HOME}" .hushlogin
+
+		# root home
+
+		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-aliases       .bash_aliases
+		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-configuration .bashrc
+		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-functions     .bash_functions
+		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-login         .bash_login
+		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-logout        .bash_logout
+		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-profile       .bash_profile
+
+		frobulator.file "${ROOT}"/root .hushlogin
 
 		files_list=()
 
@@ -342,9 +357,9 @@ then
 	if [ ! -f "${HOME}"/.dextop/dextop-bookmarks-checkpoint ]
 	then
 		directories_list=(
-		"${PREFIX}"/cnt
-		"${PREFIX}"/media/external
-		"${PREFIX}"/media/internal
+			"${PREFIX}"/cnt
+			"${PREFIX}"/media/external
+			"${PREFIX}"/media/internal
 		)
 
 		for directory in ${directories_list[@]}
@@ -354,6 +369,8 @@ then
 				frobulator.write "file://${directory}" "${HOME}"/.config/gtk-3.0 bookmarks
 			fi
 		done
+
+		directories_list=()
 
 		frobulator.file "${HOME}"/.dextop dextop-bookmarks-checkpoint
 	fi
@@ -381,16 +398,15 @@ then
 		do
 			cd "${HOME}"
 
-			tar																	\
-				--extract														\
-				--file="${HOME}"/papirus papirus-icon-theme-master/"${theme}"	\
-					--directory="${HOME}"
+			frobulator.extract "${HOME}"/papirus "${HOME}"
 		done
 
 		mv "${HOME}"/papirus-icon-theme* "${HOME}"/.icons
 
 		for theme in ${themes_list[@]}
 		do
+			frobulator.require gtk-update-icon-cache
+
 			gtk-update-icon-cache -q "${HOME}"/.icons/"${theme}"
 		done
 
