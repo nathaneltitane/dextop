@@ -24,7 +24,7 @@ do
 			option="xfce"
 		;;
 
-		-c|--console
+		-c|--console)
 			option="console"
 		;;
 
@@ -74,7 +74,7 @@ do
 
 done
 
-# clear #
+# clear ////////////////////////////////////////////////////////////////////////
 
 frobulator.clear
 
@@ -386,7 +386,7 @@ then
 		url+="PapirusDevelopmentTeam/"
 		url+="papirus-icon-theme/archive/master/master.tar.gz"
 
-		frobulator.download "${url}" "${HOME}" papirus
+		frobulator.download "${url}" "${HOME}" papirus.tar.gz
 
 		themes_list=(
 			Papirus-Dark
@@ -398,7 +398,7 @@ then
 		do
 			cd "${HOME}"
 
-			frobulator.extract "${HOME}"/papirus "${HOME}"
+			frobulator.extract "${HOME}"/papirus.tar.gz "${HOME}"
 		done
 
 		mv "${HOME}"/papirus-icon-theme* "${HOME}"/.icons
