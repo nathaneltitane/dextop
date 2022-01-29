@@ -341,20 +341,19 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-bookmarks-checkpoint ]
 	then
-		if [ -d "${PREFIX}"/cnt ]
-		then
-			frobulator.write "file://${PREFIX%/*}/cnt Container" "${HOME}"/.config/gtk-3.0 bookmarks
-		fi
+		directories_list=(
+		"${PREFIX}"/cnt
+		"${PREFIX}"/media/external
+		"${PREFIX}"/media/internal
+		)
 
-		if [ -d "${PREFIX}"/media/external ]
-		then
-			frobulator.write "file://${PREFIX%/*}/media/external External" "${HOME}"/.config/gtk-3.0 bookmarks
-		fi
-
-		if [ -d "${PREFIX}"/media/internal ]
-		then
-			frobulator.write "file://${PREFIX%/*}/media/internal Internal" "${HOME}"/.config/gtk-3.0 bookmarks
-		fi
+		for directory in ${directories_list[@]}
+		do
+			if [ -d "${directory}" ]
+			then
+				frobulator.write "file://${directory}" "${HOME}"/.config/gtk-3.0 bookmarks
+			fi
+		done
 
 		frobulator.file "${HOME}"/.dextop dextop-bookmarks-checkpoint
 	fi
