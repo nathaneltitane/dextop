@@ -343,17 +343,17 @@ then
 	then
 		if [ -d "${PREFIX}"/cnt ]
 		then
-			frobulator.write 'file:///data/data/com.termux/files/cnt Container' "${HOME}"/.config/gtk-3.0 bookmarks
+			frobulator.write "file://${PREFIX%/*}/cnt Container" "${HOME}"/.config/gtk-3.0 bookmarks
 		fi
 
 		if [ -d "${PREFIX}"/media/external ]
 		then
-			frobulator.write 'file:///data/data/com.termux/files/media/external External' "${HOME}"/.config/gtk-3.0 bookmarks
+			frobulator.write "file://${PREFIX%/*}/media/external External" "${HOME}"/.config/gtk-3.0 bookmarks
 		fi
 
 		if [ -d "${PREFIX}"/media/internal ]
 		then
-			frobulator.write 'file:///data/data/com.termux/files/media/internal Internal' "${HOME}"/.config/gtk-3.0 bookmarks
+			frobulator.write "file://${PREFIX%/*}/media/internal Internal" "${HOME}"/.config/gtk-3.0 bookmarks
 		fi
 
 		frobulator.file "${HOME}"/.dextop dextop-bookmarks-checkpoint
