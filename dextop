@@ -133,7 +133,7 @@ container_setup () {
 	container_command+=" TERM=${TERM}"
 	container_command+=" ${@}"
 
-	${container_command}
+	"${container_command}"
 }
 
 settings_intent () {
@@ -341,9 +341,20 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-bookmarks-checkpoint ]
 	then
-		[ -d "${PREFIX}"/cnt ]            && frobulate.write 'file:///data/data/com.termux/files/cnt Container'           "${HOME}"/.config/gtk-3.0 bookmarks
-		[ -d "${PREFIX}"/media/external ] && frobulate.write 'file:///data/data/com.termux/files/media/external External' "${HOME}"/.config/gtk-3.0 bookmarks
-		[ -d "${PREFIX}"/media/internal ] && frobulate.write 'file:///data/data/com.termux/files/media/internal Internal' "${HOME}"/.config/gtk-3.0 bookmarks
+		if [ -d "${PREFIX}"/cnt ]
+		then
+			frobulate.write 'file:///data/data/com.termux/files/cnt Container' "${HOME}"/.config/gtk-3.0 bookmarks
+		fi
+
+		if [ -d "${PREFIX}"/media/external ]
+		then
+			frobulate.write 'file:///data/data/com.termux/files/media/external External' "${HOME}"/.config/gtk-3.0 bookmarks
+		fi
+
+		if [ -d "${PREFIX}"/media/internal ]
+		then
+			frobulate.write 'file:///data/data/com.termux/files/media/internal Internal' "${HOME}"/.config/gtk-3.0 bookmarks
+		fi
 
 		frobulate.file "${HOME}"/.dextop dextop-bookmarks-checkpoint
 	fi
@@ -354,7 +365,12 @@ then
 	then
 		# papirus icon theme
 
-		frobulate.download https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/archive/master/master.tar.gz "${HOME}" papirus
+		url+="https://"
+		url+="github.com/"
+		url+="PapirusDevelopmentTeam/"
+		url+="papirus-icon-theme/archive/master/master.tar.gz"
+
+		frobulate.download "${url}" "${HOME}" papirus
 
 		themes_list=(
 			Papirus-Dark
