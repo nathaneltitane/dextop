@@ -21,7 +21,7 @@ version="01-21-2022"
 
 # prompt
 
-frobulate.script "Setting up ${script#*-}"
+frobulator.script "Setting up ${script#*-}"
 echo
 
 # variables ////////////////////////////////////////////////////////////////////
@@ -37,7 +37,7 @@ sed -i									\
 
 # update lists
 
-frobulate.log "apt update" &
+frobulator.log "apt update" &
 
-frobulate.progress "Forcing refresh..."
+frobulator.progress "Forcing refresh..."
 echo

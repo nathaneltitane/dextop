@@ -76,11 +76,11 @@ done
 
 # clear #
 
-frobulate.clear
+frobulator.clear
 
 # prompt ///////////////////////////////////////////////////////////////////////
 
-frobulate.script "Setting up ${script#*-}"
+frobulator.script "Setting up ${script#*-}"
 echo
 
 # variables ////////////////////////////////////////////////////////////////////
@@ -89,7 +89,7 @@ export option="${option}"
 
 # defaults /////////////////////////////////////////////////////////////////////
 
-[ -z "${option}" ] && option="xfce" && frobulate.write "${option}" "${HOME}"/.dextop dextop-option
+[ -z "${option}" ] && option="xfce" && frobulator.write "${option}" "${HOME}"/.dextop dextop-option
 
 # functions ////////////////////////////////////////////////////////////////////
 
@@ -146,15 +146,15 @@ settings_intent () {
 	settings_command+=" -a com.termux.app.reload_style"
 	settings_command+=" com.termux"
 
-	frobulate.silence "${settings_command}"
+	frobulator.silence "${settings_command}"
 }
 
 # run failsafe package install:
 # termux package servers are sometimes unresponsive or badly authenticated
 
-frobulate.failsafe proot &
+frobulator.failsafe proot &
 
-frobulate.fwd "Please wait..."
+frobulator.fwd "Please wait..."
 echo
 
 # in order of execution
@@ -179,9 +179,9 @@ then
 			container-user
 		)
 
-		frobulate.download get.dxtp.app "${PREFIX}"/bin ${utilities_list[@]}
+		frobulator.download get.dxtp.app "${PREFIX}"/bin ${utilities_list[@]}
 
-		frobulate.file "${HOME}"/.dextop dextop-utilities-checkpoint
+		frobulator.file "${HOME}"/.dextop dextop-utilities-checkpoint
 	fi
 
 	# directories
@@ -199,7 +199,7 @@ then
 			storage
 		)
 
-		frobulate.directory "${PREFIX}" ${directories_list[@]}
+		frobulator.directory "${PREFIX}" ${directories_list[@]}
 
 		directories_list=()
 
@@ -216,7 +216,7 @@ then
 			Videos
 		)
 
-		frobulate.directory "${HOME}" ${directories_list[@]}
+		frobulator.directory "${HOME}" ${directories_list[@]}
 
 		directories_list=()
 
@@ -236,11 +236,11 @@ then
 			storage
 		)
 
-		frobulate.link "${PREFIX}" "${PREFIX%/*}" ${directories_list[@]}
+		frobulator.link "${PREFIX}" "${PREFIX%/*}" ${directories_list[@]}
 
 		directories_list=()
 
-		frobulate.file "${HOME}"/.dextop dextop-directories-checkpoint
+		frobulator.file "${HOME}"/.dextop dextop-directories-checkpoint
 	fi
 
 	# termux
@@ -256,7 +256,7 @@ then
 		"${PREFIX}"/bin/termux-repositories
 		"${PREFIX}"/bin/termux-packages
 
-		frobulate.file "${HOME}"/.dextop dextop-termux-checkpoint
+		frobulator.file "${HOME}"/.dextop dextop-termux-checkpoint
 	fi
 
 	# image
@@ -265,7 +265,7 @@ then
 	then
 		"${PREFIX}"/bin/container-image
 
-		frobulate.file "${HOME}"/.dextop dextop-image-checkpoint
+		frobulator.file "${HOME}"/.dextop dextop-image-checkpoint
 	fi
 
 	# container
@@ -277,7 +277,7 @@ then
 		container_setup "${PREFIX}"/bin/container-packages
 		container_setup "${PREFIX}"/bin/container-user
 
-		frobulate.file "${HOME}"/.dextop dextop-container-checkpoint
+		frobulator.file "${HOME}"/.dextop dextop-container-checkpoint
 	fi
 
 	# additions
@@ -298,7 +298,7 @@ then
 			termux-colors
 		)
 
-		frobulate.download get.trmnl.me "${PREFIX}"/bin ${files_list[@]}
+		frobulator.download get.trmnl.me "${PREFIX}"/bin ${files_list[@]}
 
 		ln -s -f "${PREFIX}"/bin/termux-properties "${HOME}"/.termux/termux.properties
 
@@ -308,7 +308,7 @@ then
 
 		files_list=()
 
-		frobulate.file "${HOME}"/.dextop dextop-additions-checkpoint
+		frobulator.file "${HOME}"/.dextop dextop-additions-checkpoint
 	fi
 
 	# shell
@@ -324,17 +324,17 @@ then
 			bash-profile
 		)
 
-		frobulate.download get.trmnl.me "${HOME}" ${files_list[@]}
+		frobulator.download get.trmnl.me "${HOME}" ${files_list[@]}
 
-		frobulate.link "${PREFIX}"/bin "${HOME}" ${files_list[@]}
+		frobulator.link "${PREFIX}"/bin "${HOME}" ${files_list[@]}
 
-		frobulate.link "${PREFIX}"/bin "${ROOT}"/root ${files_list[@]}
+		frobulator.link "${PREFIX}"/bin "${ROOT}"/root ${files_list[@]}
 
 		console.write '' "${HOME}" .hushlogin
 
 		files_list=()
 
-		frobulate.file "${HOME}"/.dextop dextop-shell-checkpoint
+		frobulator.file "${HOME}"/.dextop dextop-shell-checkpoint
 	fi
 
 	# bookmarks
@@ -343,20 +343,20 @@ then
 	then
 		if [ -d "${PREFIX}"/cnt ]
 		then
-			frobulate.write 'file:///data/data/com.termux/files/cnt Container' "${HOME}"/.config/gtk-3.0 bookmarks
+			frobulator.write 'file:///data/data/com.termux/files/cnt Container' "${HOME}"/.config/gtk-3.0 bookmarks
 		fi
 
 		if [ -d "${PREFIX}"/media/external ]
 		then
-			frobulate.write 'file:///data/data/com.termux/files/media/external External' "${HOME}"/.config/gtk-3.0 bookmarks
+			frobulator.write 'file:///data/data/com.termux/files/media/external External' "${HOME}"/.config/gtk-3.0 bookmarks
 		fi
 
 		if [ -d "${PREFIX}"/media/internal ]
 		then
-			frobulate.write 'file:///data/data/com.termux/files/media/internal Internal' "${HOME}"/.config/gtk-3.0 bookmarks
+			frobulator.write 'file:///data/data/com.termux/files/media/internal Internal' "${HOME}"/.config/gtk-3.0 bookmarks
 		fi
 
-		frobulate.file "${HOME}"/.dextop dextop-bookmarks-checkpoint
+		frobulator.file "${HOME}"/.dextop dextop-bookmarks-checkpoint
 	fi
 
 	# icons
@@ -370,7 +370,7 @@ then
 		url+="PapirusDevelopmentTeam/"
 		url+="papirus-icon-theme/archive/master/master.tar.gz"
 
-		frobulate.download "${url}" "${HOME}" papirus
+		frobulator.download "${url}" "${HOME}" papirus
 
 		themes_list=(
 			Papirus-Dark
@@ -405,13 +405,13 @@ then
 			hicolor
 		)
 
-		frobulate.keep "${ROOT}"/usr/share/icons ${files_list[@]}
+		frobulator.keep "${ROOT}"/usr/share/icons ${files_list[@]}
 
-		frobulate.keep "${PREFIX}"/share/icons ${files_list[@]}
+		frobulator.keep "${PREFIX}"/share/icons ${files_list[@]}
 
 		files_list=()
 
-		frobulate.file "${HOME}"/.dextop dextop-icons-checkpoint
+		frobulator.file "${HOME}"/.dextop dextop-icons-checkpoint
 	fi
 
 	# themes
@@ -425,15 +425,15 @@ then
 			Arc-Lighter
 		)
 
-		frobulate.copy "${ROOT}"/usr/share/themes "${PREFIX}"/share/themes ${files_list[@]}
+		frobulator.copy "${ROOT}"/usr/share/themes "${PREFIX}"/share/themes ${files_list[@]}
 
-		frobulate.keep "${ROOT}"/usr/share/themes ${files_list[@]}
+		frobulator.keep "${ROOT}"/usr/share/themes ${files_list[@]}
 
-		frobulate.keep "${PREFIX}"/share/themes ${files_list[@]}
+		frobulator.keep "${PREFIX}"/share/themes ${files_list[@]}
 
 		files_list=()
 
-		frobulate.file "${HOME}"/.dextop dextop-themes-checkpoint
+		frobulator.file "${HOME}"/.dextop dextop-themes-checkpoint
 	fi
 
 	# backgrounds
@@ -456,24 +456,24 @@ then
 			dextop-white.svg
 		)
 
-		frobulate.download get.dxtp.app "${HOME}"/.dextop ${files_list[@]}
+		frobulator.download get.dxtp.app "${HOME}"/.dextop ${files_list[@]}
 
-		frobulate.link "${HOME}"/.dextop "${ROOT}"/usr/share/backgrounds/dextop ${files_list[@]}
+		frobulator.link "${HOME}"/.dextop "${ROOT}"/usr/share/backgrounds/dextop ${files_list[@]}
 
-		frobulate.link "${HOME}"/.dextop "${PREFIX}"/share/backgrounds/dextop ${files_list[@]}
+		frobulator.link "${HOME}"/.dextop "${PREFIX}"/share/backgrounds/dextop ${files_list[@]}
 
 		files_list=()
 
-		frobulate.file "${HOME}"/.dextop dextop-backgrounds-checkpoint
+		frobulator.file "${HOME}"/.dextop dextop-backgrounds-checkpoint
 	fi
 
 	# update
 
 	if [ ! -f "${HOME}"/.dextop/dextop-update-checkpoint ]
 	then
-		frobulate.file "${HOME}"/.dextop dextop-update
+		frobulator.file "${HOME}"/.dextop dextop-update
 
-		frobulate.file "${HOME}"/.dextop dextop-update-checkpoint
+		frobulator.file "${HOME}"/.dextop dextop-update-checkpoint
 	fi
 
 	# move setup
@@ -482,17 +482,17 @@ then
 	then
 		mv "${HOME}"/dextop "${HOME}"/.dextop/dextop
 
-		frobulate.file "${HOME}"/.dextop dextop-move-checkpoint
+		frobulator.file "${HOME}"/.dextop dextop-move-checkpoint
 	fi
 
 	# checkpoint
 
-	frobulate.file "${HOME}"/.dextop dextop-setup-checkpoint
+	frobulator.file "${HOME}"/.dextop dextop-setup-checkpoint
 fi
 
 # setup check
 
-frobulate.result dextop-setup-checkpoint "${script}"
+frobulator.result dextop-setup-checkpoint "${script}"
 
 # session start
 

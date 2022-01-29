@@ -21,7 +21,7 @@ version="01-21-2022"
 
 # prompt ///////////////////////////////////////////////////////////////////////
 
-frobulate.script "Setting up ${script#*-}"
+frobulator.script "Setting up ${script#*-}"
 echo
 
 # variables ////////////////////////////////////////////////////////////////////
@@ -48,30 +48,30 @@ open_intent () {
 	open_command+=" -n com.termux/com.termux.app.TermuxOpenReceiver"
 	open_command+=" -d ${@}"
 
-	frobulate.silence "${open_command}"
+	frobulator.silence "${open_command}"
 }
 
 # notice
 
-frobulate.err "Google Play Store updates deprecated since November 2020!"
+frobulator.err "Google Play Store updates deprecated since November 2020!"
 echo
 
-frobulate.wrn "Back up and uninstall the Google Play Store version of Termux."
+frobulator.wrn "Back up and uninstall the Google Play Store version of Termux."
 echo
 
-frobulate.msg "Visit the following wiki pages on how to proceed:"
+frobulator.msg "Visit the following wiki pages on how to proceed:"
 echo
 
-frobulate.inf "Backing up Termux: https://wiki.termux.com/wiki/Backing_up_Termux"
-frobulate.inf "Installing Termux: https://wiki.termux.com/wiki/installation"
+frobulator.inf "Backing up Termux: https://wiki.termux.com/wiki/Backing_up_Termux"
+frobulator.inf "Installing Termux: https://wiki.termux.com/wiki/installation"
 echo
 
-frobulate.ins "Select 'Package Installer' when prompted to proceed."
+frobulator.ins "Select 'Package Installer' when prompted to proceed."
 echo
 
-frobulate.separate
+frobulator.separate
 
-frobulate.ask "Check for updates?"
+frobulator.ask "Check for updates?"
 
 read reply
 echo
@@ -87,14 +87,14 @@ then
 
 	for package in ${packages_list[@]}
 	do
-		frobulate.inf "Checking for package update" "[ ${package} ]"
+		frobulator.inf "Checking for package update" "[ ${package} ]"
 		echo
 
 		archive=$(curl -s -L "${packages_url}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
 		archive_version=$(echo "${archive}" | cut -d '_' -f 2 | sed 's/\..*//g')
 		archive_url="${repository_url}/${archive}"
 
-		frobulate.fwd "Verifying..."
+		frobulator.fwd "Verifying..."
 		echo
 
 		if [ "${package}" = "com.termux" ]
@@ -112,43 +112,43 @@ then
 
 		if [ "${installed_version}" != "${archive_version}" ]
 		then
-			frobulate.wrn "Package version has been updated" "[ ${package} // ${archive_version} ]."
+			frobulator.wrn "Package version has been updated" "[ ${package} // ${archive_version} ]."
 			echo
 
 			# request update permission
 
-			frobulate.ask "Update?"
+			frobulator.ask "Update?"
 
 			read reply
 			echo
 
 			if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 			then
-				frobulate.inf "Dowloading update."
+				frobulator.inf "Dowloading update."
 				echo
 
 				# download
 
-				frobulate.download "${repository_url}" "${PREFIX}"/tmp ${archive}
+				frobulator.download "${repository_url}" "${PREFIX}"/tmp ${archive}
 
 				# update
 
 				open_intent "${PREFIX}"/tmp/"${archive}"
 
-				frobulate.fwd "Updating..."
+				frobulator.fwd "Updating..."
 				echo
 			else
 				# continue without application update
 
-				frobulate.wrn "Proceeding without update."
-				frobulate.wrn "Setup process may encounter errors."
+				frobulator.wrn "Proceeding without update."
+				frobulator.wrn "Setup process may encounter errors."
 				echo
 
-				frobulate.num "1" "Follow wiki pages stated above to correct issues."
-				frobulate.num "2" "Restart setup on a fresh Termux installation to proceed."
+				frobulator.num "1" "Follow wiki pages stated above to correct issues."
+				frobulator.num "2" "Restart setup on a fresh Termux installation to proceed."
 				echo
 
-				frobulate.countdown 3 "Continuing" "[ ${script} ]"
+				frobulator.countdown 3 "Continuing" "[ ${script} ]"
 				echo
 			fi
 
@@ -156,15 +156,15 @@ then
 		else
 			if [ "${installed_version}" == "${archive_version}" ]
 			then
-				frobulate.scs "Package version is up to date" "[ ${package} // ${archive_version} ]"
+				frobulator.scs "Package version is up to date" "[ ${package} // ${archive_version} ]"
 				echo
 
-				frobulate.fwd "Continuing..."
+				frobulator.fwd "Continuing..."
 				echo
 			fi
 		fi
 	done
 else
-	frobulate.countdown 3 "Continuing" "[ ${script} ]"
+	frobulator.countdown 3 "Continuing" "[ ${script} ]"
 	echo
 fi

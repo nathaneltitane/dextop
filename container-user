@@ -87,7 +87,7 @@ done
 
 # prompt ///////////////////////////////////////////////////////////////////////
 
-frobulate.script "Setting up ${script#*-}"
+frobulator.script "Setting up ${script#*-}"
 echo
 
 # variables ////////////////////////////////////////////////////////////////////
@@ -105,27 +105,27 @@ user_password_generate () {
 user_information () {
 	# get 'user' information
 
-	frobulate.inf "This information will be used to set up the user account."
+	frobulator.inf "This information will be used to set up the user account."
 	echo
 
-	frobulate.wrn "Information is required to set up your environment:"
-	frobulate.wrn "Fields cannot be empty."
+	frobulator.wrn "Information is required to set up your environment:"
+	frobulator.wrn "Fields cannot be empty."
 	echo
 
 	# handle user input for information_list
 
-	frobulate.rtn=()
+	frobulator.rtn=()
 
-	frobulate.input ${information_list[@]}
+	frobulator.input ${information_list[@]}
 
-	eval ${frobulate.rtn[@]}
+	eval ${frobulator.rtn[@]}
 }
 
 user_interactive () {
 	# generate 'user' account:
 	# interactive setup
 
-	frobulate.fwd "Generating account..."
+	frobulator.fwd "Generating account..."
 	echo
 
 	room_number=""
@@ -142,11 +142,11 @@ user_interactive () {
 	# silent configuration:
 	# set --gecos and --disabled-password for fully silent execution
 
-	frobulate.wrn "Creating user" "[ ${user_name} ]"
+	frobulator.wrn "Creating user" "[ ${user_name} ]"
 	echo
 
 	# use /dev/null redirection:
-	# 'adduser' prevents stdout error redirect - cannot use 'frobulate.silence'
+	# 'adduser' prevents stdout error redirect - cannot use 'frobulator.silence'
 
 	adduser					\
 		--gecos "${gecos}"	\
@@ -158,7 +158,7 @@ user_noninteractive () {
 	# generate 'user account:
 	# noninteractive setup
 
-	frobulate.fwd "Generating account..."
+	frobulator.fwd "Generating account..."
 	echo
 
 	[ -z "${user_name}" ]     && user_name="termux"
@@ -170,7 +170,7 @@ user_noninteractive () {
 	gecos="Dextop"
 	home="/home/${user_name}"
 
-	frobulate.wrn "Creating user" "[ ${user_name} ]"
+	frobulator.wrn "Creating user" "[ ${user_name} ]"
 	echo
 
 	echo  "${user_name}:x:${user_id}:${group_id}:${gecos}:${home}:${SHELL}" >> /etc/passwd
@@ -179,7 +179,7 @@ user_noninteractive () {
 user_superuser () {
 	# generate 'user' superuser privilege
 
-	frobulate.fwd "Generating superuser privilege..."
+	frobulator.fwd "Generating superuser privilege..."
 	echo
 
 	if [[ $(cat /etc/group | grep sudo) ]]
@@ -201,11 +201,11 @@ user_superuser_override () {
 
 	# set password override
 
-	frobulate.write "${user_name} ALL=(ALL) NOPASSWD: ALL" /etc/sudoers.d "${user_name}"
+	frobulator.write "${user_name} ALL=(ALL) NOPASSWD: ALL" /etc/sudoers.d "${user_name}"
 
 	# fix superuser privilege runtime errors
 
-	frobulate.write "Set disable_coredump false" /etc sudo.conf
+	frobulator.write "Set disable_coredump false" /etc sudo.conf
 
 	# reset password override ownership:
 	# fixes 'sudo' errors
@@ -216,7 +216,7 @@ user_superuser_override () {
 user_password () {
 	# set 'user' password
 
-	frobulate.fwd "Setting password..."
+	frobulator.fwd "Setting password..."
 	echo
 
 	# generate password credential for 'user' entry
@@ -230,7 +230,7 @@ user_password () {
 user_runtime () {
 	# generate 'user' runtime directory structure
 
-	frobulate.fwd "Setting runtime..."
+	frobulator.fwd "Setting runtime..."
 	echo
 
 	user_uid="$(id -u ${user_name})"
@@ -238,8 +238,8 @@ user_runtime () {
 
 	# generate runtime directory
 
-	frobulate.directory /run/user "${user_uid}"
-	frobulate.directory /run/user "${user_name}"
+	frobulator.directory /run/user "${user_uid}"
+	frobulator.directory /run/user "${user_name}"
 
 	# set runtime directory permissions
 

@@ -21,7 +21,7 @@ version="01-21-2022"
 
 # prompt ///////////////////////////////////////////////////////////////////////
 
-frobulate.script "Setting up ${script#*-}"
+frobulator.script "Setting up ${script#*-}"
 echo
 
 # variables ////////////////////////////////////////////////////////////////////
@@ -30,11 +30,11 @@ echo
 
 # update packages list
 
-frobulate.update
+frobulator.update
 
 # upgrade installed packages
 
-frobulate.upgrade
+frobulator.upgrade
 
 # values #
 
@@ -192,7 +192,7 @@ install_list+=(
 	${desktop_environment_list[@]}
 )
 
-frobulate.install ${install_list[@]}
+frobulator.install ${install_list[@]}
 
 # purge
 
@@ -200,5 +200,5 @@ purge_list=(
 	ibus
 )
 
-frobulate.purge ${purge_list[@]}
+frobulator.purge ${purge_list[@]}
 

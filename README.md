@@ -82,7 +82,7 @@ Container install options are:
 
 `-u, --update     Update Termux application packages.               [ F-Droid ]`
 
-The 'frobulate. option is great for users who would like to experiment or setup their own window manager/desktop environment, utilities and preferences.
+The 'console' option is great for users who would like to experiment or setup their own window manager/desktop environment, utilities and preferences.
 
 ### Process summary:
 

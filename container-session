@@ -116,7 +116,7 @@ done
 
 # prompt ///////////////////////////////////////////////////////////////////////
 
-frobulate.script "Setting up ${script#*-}"
+frobulator.script "Setting up ${script#*-}"
 echo
 
 # variables ////////////////////////////////////////////////////////////////////
@@ -149,8 +149,8 @@ vnc_clean () {
 }
 
 vnc_geometry () {
-	frobulate.msg "Select geometry to start the display server"
-	frobulate.msg "or input [c]ustom properties:"
+	frobulator.msg "Select geometry to start the display server"
+	frobulator.msg "or input [c]ustom properties:"
 	echo
 
 	# list supported display resolutions
@@ -299,16 +299,16 @@ vnc_handle () {
 
 	# handle user input for values_list
 
-	frobulate.rtn=()
+	frobulator.rtn=()
 
 	if [ -f "${HOME}"/.vnc/selection ]
 	then
 		selection=$(cat "${HOME}"/.vnc/selection)
 	else
-		frobulate.input ${values_list[@]}
+		frobulator.input ${values_list[@]}
 	fi
 
-	eval ${frobulate.rtn[@]}
+	eval ${frobulator.rtn[@]}
 
 	# check selection input against selection list
 
@@ -320,14 +320,14 @@ vnc_handle () {
 		if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]] || [[ ! "${selection}" =~ ^[0-9]+$ ]]
 		then
 			echo
-			frobulate.err "Invalid selection:"
+			frobulator.err "Invalid selection:"
 			echo
 
-			frobulate.wrn "Select geometry [ 1 - ${number} ]"
-			frobulate.wrn "or input [c]ustom properties."
+			frobulator.wrn "Select geometry [ 1 - ${number} ]"
+			frobulator.wrn "or input [c]ustom properties."
 			echo
 
-			frobulate.ipt "Selection:"
+			frobulator.ipt "Selection:"
 
 			read selection
 			echo
@@ -364,20 +364,20 @@ vnc_handle () {
 
 	if [[ "${selection}" = "custom" ]]
 	then
-		frobulate.fwd "Setting custom properties..."
+		frobulator.fwd "Setting custom properties..."
 		echo
 
-		frobulate.ipt "Set width" "[ pixels ]"
+		frobulator.ipt "Set width" "[ pixels ]"
 
 		read width
 		echo
 
-		frobulate.ipt "Set height" "[ pixels ]"
+		frobulator.ipt "Set height" "[ pixels ]"
 
 		read height
 		echo
 
-		frobulate.ipt "Set display number" "[ e.g. 1 ]"
+		frobulator.ipt "Set display number" "[ e.g. 1 ]"
 
 		read display
 		echo
@@ -392,7 +392,7 @@ vnc_handle () {
 }
 
 vnc_intent () {
-	frobulate.fwd "Opening display..."
+	frobulator.fwd "Opening display..."
 	echo
 
 	# explicit VNC viewer application to kill:
@@ -407,7 +407,7 @@ vnc_intent () {
 
 	# start android vnc intent and force-stop existing activity
 
-	# frobulate.silence "am start -a android.intent.action.VIEW -d vnc://${ADDRESS}:${PORT} -S ${VNC}"
+	# frobulator.silence "am start -a android.intent.action.VIEW -d vnc://${ADDRESS}:${PORT} -S ${VNC}"
 
 	# start android vnc intent and set to view session with supported application
 
@@ -417,11 +417,11 @@ vnc_intent () {
 	intent_command+=" -a android.intent.action.VIEW"
 	intent_command+=" -d vnc://${ADDRESS}:${PORT}"
 
-	frobulate.silence "${intent_command}"
+	frobulator.silence "${intent_command}"
 }
 
 vnc_load () {
-	frobulate.fwd "Starting display server..."
+	frobulator.fwd "Starting display server..."
 	echo
 
 	depth="32"
@@ -445,7 +445,7 @@ vnc_load () {
 	command_start+=" -nolock"
 	command_start+=" ${DISPLAY}"
 
-	frobulate.silence "exec ${command_start}"
+	frobulator.silence "exec ${command_start}"
 
 	# make selection available for automatic start:
 	# verify user id - do not write selection when 'root' user is logged in
@@ -518,9 +518,9 @@ vnc_stop () {
 	command_stop+="vncserver"
 	command_stop+=" -kill ${DISPLAY}"
 
-	frobulate.silence "exec ${command_stop}" &
+	frobulator.silence "exec ${command_stop}" &
 
-	frobulate.progress "Stopping display server..."
+	frobulator.progress "Stopping display server..."
 	echo
 
 	# clean display server runtime files
@@ -545,14 +545,14 @@ vnc_list () {
 
 	if [[ "${vnc_process}" =~ ^[0-9]+$ ]]
 	then
-		frobulate.fwd "Listing servers..."
+		frobulator.fwd "Listing servers..."
 		echo
 
 		vnc_display="${vnc_display}"
 		vnc_port="${vnc_port}"
 		vnc_process="${vnc_process}"
 	else
-		frobulate.wrn "No active servers detected."
+		frobulator.wrn "No active servers detected."
 		echo
 
 		empty="N/A"
@@ -565,11 +565,11 @@ vnc_list () {
 		vnc_process="${empty}"
 	fi
 
-	frobulate.inf "Geometry" "[ ${geometry} ]"
-	frobulate.inf "Format"   "[ ${format} ]"
-	frobulate.inf "Display"  "[ ${vnc_display} ]"
-	frobulate.inf "Port"     "[ ${vnc_port} ]"
-	frobulate.inf "Process"  "[ ${vnc_process} ]"
+	frobulator.inf "Geometry" "[ ${geometry} ]"
+	frobulator.inf "Format"   "[ ${format} ]"
+	frobulator.inf "Display"  "[ ${vnc_display} ]"
+	frobulator.inf "Port"     "[ ${vnc_port} ]"
+	frobulator.inf "Process"  "[ ${vnc_process} ]"
 	echo
 }
 
@@ -582,20 +582,20 @@ vnc_password () {
 
 	# handle user input for values_list
 
-	frobulate.rtn=()
+	frobulator.rtn=()
 
-	frobulate.input ${values_list[@]}
+	frobulator.input ${values_list[@]}
 
-	eval ${frobulate.rtn[@]}
+	eval ${frobulator.rtn[@]}
 
 	# hash password  using 'vncpasswd' and store it
 
-	frobulate.fwd "Setting password..."
+	frobulator.fwd "Setting password..."
 	echo
 
 	echo "$vnc_password" | vncpasswd -f > "${HOME}"/.vnc/passwd
 
-	frobulate.scs "Password changed."
+	frobulator.scs "Password changed."
 	echo
 }
 
@@ -606,7 +606,7 @@ application_handle () {
 	then
 		${application} &
 	else
-		frobulate.err "Application not found" "[ "${application}" ]"
+		frobulator.err "Application not found" "[ "${application}" ]"
 		echo
 
 		if [[ $(command -v zenity) ]]
@@ -693,16 +693,16 @@ container_handle () {
 
 	# handle user input for values_list
 
-	frobulate.rtn=()
+	frobulator.rtn=()
 
 	if [ -f "${HOME}"/.dextop/selection ]
 	then
 		selection=$(cat "${HOME}"/.dextop/selection)
 	else
-		frobulate.input ${values_list[@]}
+		frobulator.input ${values_list[@]}
 	fi
 
-	eval ${frobulate.rtn[@]}
+	eval ${frobulator.rtn[@]}
 
 	# check selection input against selection list
 
@@ -714,13 +714,13 @@ container_handle () {
 		if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]] || [[ ! "${selection}" =~ ^[0-9]+$ ]]
 		then
 			echo
-			frobulate.err "Invalid selection:"
+			frobulator.err "Invalid selection:"
 			echo
 
-			frobulate.wrn "Select container [ 1 - ${number} ]"
+			frobulator.wrn "Select container [ 1 - ${number} ]"
 			echo
 
-			frobulate.ipt "Selection:"
+			frobulator.ipt "Selection:"
 
 			read selection
 			echo
@@ -740,16 +740,16 @@ container_input () {
 	then
 		ROOT="${root_filesystem}"
 
-		frobulate.scs "Container location found"
+		frobulator.scs "Container location found"
 		echo
 
-		frobulate.inf "Loading" "[ ${ROOT} ]"
+		frobulator.inf "Loading" "[ ${ROOT} ]"
 		echo
 	else
-		frobulate.err "Container location not found"
+		frobulator.err "Container location not found"
 		echo
 
-		frobulate.ipt "Select one of the following containers:"
+		frobulator.ipt "Select one of the following containers:"
 		echo
 
 		container_handle
@@ -796,7 +796,7 @@ container_user () {
 
 	# authentication #
 
-	frobulate.fwd "Authenticating..."
+	frobulator.fwd "Authenticating..."
 	echo
 
 	while read -r entry
@@ -819,7 +819,7 @@ container_user () {
 		then
 			USER="root"
 
-			frobulate.wrn "No user name - Defaulting" "[ '${USER}' ]"
+			frobulator.wrn "No user name - Defaulting" "[ '${USER}' ]"
 			echo
 
 			# break out of loop - empty "${user_name}" - default to 'root'
@@ -831,7 +831,7 @@ container_user () {
 		then
 			USER="${USER}"
 
-			frobulate.scs "Valid user name" "[ '${USER}' ]"
+			frobulator.scs "Valid user name" "[ '${USER}' ]"
 			echo
 
 			# break out of loop - matching "${user_name}"
@@ -843,7 +843,7 @@ container_user () {
 		then
 			USER="root"
 
-			frobulate.err "Invalid user name - Defaulting" "[ '${USER}' ]"
+			frobulator.err "Invalid user name - Defaulting" "[ '${USER}' ]"
 			echo
 		fi
 
@@ -881,7 +881,7 @@ container_session () {
 
 	user_name="${USER}"
 
-	frobulate.fwd "Starting session" "[ ${session_name} // ${user_name} ]"
+	frobulator.fwd "Starting session" "[ ${session_name} // ${user_name} ]"
 	echo
 
 	# assume 'termux-exec' is installed

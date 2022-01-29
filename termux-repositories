@@ -21,7 +21,7 @@ version="01-21-2022"
 
 # prompt ///////////////////////////////////////////////////////////////////////
 
-frobulate.script "Setting up ${script#*-}"
+frobulator.script "Setting up ${script#*-}"
 echo
 
 # variables ////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ echo "deb https://grimler.se/termux-packages-24 stable main" > "${PREFIX}"/etc/a
 
 # create sources directory
 
-frobulate.directory "${PREFIX}"/etc/apt/ sources.list.d
+frobulator.directory "${PREFIX}"/etc/apt/ sources.list.d
 
 # write sources list files
 
@@ -73,7 +73,7 @@ IFS=$'\n'
 
 # update lists
 
-frobulate.log "pkg update" &
+frobulator.log "pkg update" &
 
-frobulate.progress "Forcing refresh..."
+frobulator.progress "Forcing refresh..."
 echo

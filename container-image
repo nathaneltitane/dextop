@@ -80,7 +80,7 @@ done
 
 # prompt ///////////////////////////////////////////////////////////////////////
 
-frobulate.script "Setting up ${script#*-}"
+frobulator.script "Setting up ${script#*-}"
 echo
 
 # variables ////////////////////////////////////////////////////////////////////
@@ -97,7 +97,7 @@ image_version () {
 
 	if [ -z "${distribution_name}" ] || [ -z "${distribution_version}" ]
 	then
-		frobulate.msg "Select distribution version to setup."
+		frobulator.msg "Select distribution version to setup."
 		echo
 
 		# list supported distribution versions
@@ -157,9 +157,9 @@ image_version () {
 
 		# handle user input for values_list
 
-		eval ${frobulate.rtn[@]}
+		eval ${frobulator.rtn[@]}
 
-		frobulate.ipt "Selection:"
+		frobulator.ipt "Selection:"
 
 		read selection
 		echo
@@ -254,18 +254,18 @@ image_architecture () {
 		then
 			image_architecture=${image_architectures[i]}
 
-			frobulate.scs "Supported architecture" "[ ${image_architecture} ]"
+			frobulator.scs "Supported architecture" "[ ${image_architecture} ]"
 			echo
 
 			break
 		else
-			frobulate.wrn "Unsupported architecture" "[ ${image_architecture} ]"
+			frobulator.wrn "Unsupported architecture" "[ ${image_architecture} ]"
 			echo
 
-			frobulate.fwd "Aborting..."
+			frobulator.fwd "Aborting..."
 			echo
 
-			frobulate.stp "Exiting."
+			frobulator.stp "Exiting."
 			echo
 
 			exit 1
@@ -278,13 +278,13 @@ image_architecture () {
 	then
 		image_architecture="N/A"
 
-		frobulate.wrn "Unknown architecture" "[ ${image_architecture} ]"
+		frobulator.wrn "Unknown architecture" "[ ${image_architecture} ]"
 		echo
 
-		frobulate.fwd "Aborting..."
+		frobulator.fwd "Aborting..."
 		echo
 
-		frobulate.stp "Exiting."
+		frobulator.stp "Exiting."
 		echo
 
 		exit 1
@@ -313,7 +313,7 @@ image_download () {
 		;;
 	esac
 
-	frobulate.download "${image_url}"/"${image_archive}" "${PREFIX}"/img "${image_file}"
+	frobulator.download "${image_url}"/"${image_archive}" "${PREFIX}"/img "${image_file}"
 }
 
 image_extract () {
@@ -358,10 +358,10 @@ image_extract () {
 
 	}
 
-	frobulate.wrn "Extracting new deployment" "[ ${image_file} // ${image_architecture} ]"
+	frobulator.wrn "Extracting new deployment" "[ ${image_file} // ${image_architecture} ]"
 	echo
 
-	frobulate.directory "${PREFIX}"/cnt "${distribution_name}"/"${distribution_version}"
+	frobulator.directory "${PREFIX}"/cnt "${distribution_name}"/"${distribution_version}"
 
 	if [ "${distribution_name}" = fedora ]
 	then
@@ -386,21 +386,21 @@ image_handle () {
 		[uU][bB][uU][nN][tT][uU])
 			distribution_name="${distribution_name,,}"
 
-			frobulate.scs "Supported distribution name."
+			frobulator.scs "Supported distribution name."
 			echo
 		;;
 
 		[fF][eE][dD][oO][rR][aA])
 			distribution_name="${distribution_name,,}"
 
-			frobulate.scs "Supported distribution name."
+			frobulator.scs "Supported distribution name."
 			echo
 		;;
 
 		"")
 			distribution_name="ubuntu"
 
-			frobulate.err "Empty distribution name."
+			frobulator.err "Empty distribution name."
 			echo
 		;;
 
@@ -408,10 +408,10 @@ image_handle () {
 		*)
 			distribution_name="ubuntu"
 
-			frobulate.err "Unsupported distribution name."
+			frobulator.err "Unsupported distribution name."
 			echo
 
-			frobulate.wrn "Defaulting" "[ ${distribution_name} ]"
+			frobulator.wrn "Defaulting" "[ ${distribution_name} ]"
 			echo
 		;;
 	esac
@@ -423,38 +423,38 @@ image_handle () {
 			20*04|20*04*)
 				distribution_version="20.04.3"
 
-				frobulate.scs "Supported distribution version."
+				frobulator.scs "Supported distribution version."
 				echo
 			;;
 
 			21*04|21*04*)
 				distribution_version=21.04
 
-				frobulate.scs "Supported distribution version."
+				frobulator.scs "Supported distribution version."
 				echo
 			;;
 
 			21*10|20*10*)
 				distribution_version=21.10
 
-				frobulate.scs "Supported distribution version."
+				frobulator.scs "Supported distribution version."
 				echo
 			 ;;
 
 			"")
 				distribution_version=21.10
 
-				frobulate.err "Empty distribution version."
+				frobulator.err "Empty distribution version."
 				echo
 			;;
 
 			 *)
 				distribution_version=21.10
 
-				frobulate.err "Unsupported distribution version."
+				frobulator.err "Unsupported distribution version."
 				echo
 
-				frobulate.wrn "Defaulting" "[ ${distribution_version} ]"
+				frobulator.wrn "Defaulting" "[ ${distribution_version} ]"
 				echo
 			;;
 		esac
@@ -479,7 +479,7 @@ image_handle () {
 			 "")
 				distribution_version=35
 
-				frobulate.err "Empty distribution version."
+				frobulator.err "Empty distribution version."
 				echo
 			;;
 
@@ -487,10 +487,10 @@ image_handle () {
 			 *)
 				distribution_version=35
 
-				frobulate.err "Unsupported distribution version"
+				frobulator.err "Unsupported distribution version"
 				echo
 
-				frobulate.wrn "Defaulting" "[ ${distribution_version} ]"
+				frobulator.wrn "Defaulting" "[ ${distribution_version} ]"
 				echo
 			;;
 		esac
