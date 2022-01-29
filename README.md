@@ -80,7 +80,7 @@ Container install options are:
 
 `-c, --console    Setup Console access to environment and utilities.`
 
-`-u, --update     Update Termux application packages.               [ F-Droid ]`
+`-u, --update     Update Termux application packages.              [ F-Droid ]`
 
 The 'console' option is great for users who would like to experiment or setup their own window manager/desktop environment, utilities and preferences.
 
