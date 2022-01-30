@@ -816,13 +816,13 @@ container_environment () {
 
 	# termux
 
-	[ -d "${PREFIX}"/sbin ]         && PATH+="${PREFIX}/sbin:"
-	[ -d "${PREFIX}"/bin ]          && PATH+="${PREFIX}/bin:"
+	[ -d "${PREFIX}"/sbin ] && PATH+="${PREFIX}/sbin:"
+	[ -d "${PREFIX}"/bin ]  && PATH+="${PREFIX}/bin:"
 
 	# android
 
-	[ -d /system/sbin ]             && PATH+="/system/sbin:"
-	[ -d /system/bin ]              && PATH+="/system/bin:"
+	[ -d /system/sbin ] && PATH+="/system/sbin:"
+	[ -d /system/bin ]  && PATH+="/system/bin:"
 
 	PATH="${PATH}"
 }

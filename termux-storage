@@ -84,15 +84,24 @@ echo
 
 # /home
 
-[ -d "${HOME}"/storage ]   && rm -rf "${HOME}"/storage
+if [ -d "${HOME}"/storage ]
+then
+	rm -rf "${HOME}"/storage
+fi
 
 # /media
 
-[ -d "${PREFIX}"/media ]   && rm -rf "${PREFIX}"/media/*
+if [ -d "${PREFIX}"/media ]
+then
+	rm -rf "${PREFIX}"/media/*
+fi
 
 # /storage
 
-[ -d "${PREFIX}"/storage ] && rm -rf "${PREFIX}"/storage/*
+if [ -d "${PREFIX}"/storage ]
+then
+	rm -rf "${PREFIX}"/storage/*
+fi
 
 # generate symbolic links
 
