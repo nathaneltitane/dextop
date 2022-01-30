@@ -89,7 +89,12 @@ export option="${option}"
 
 # defaults /////////////////////////////////////////////////////////////////////
 
-[ -z "${option}" ] && option="xfce" && frobulator.write "${option}" "${HOME}"/.dextop dextop-option
+if [ -z "${option}" ]
+then
+	option="xfce"
+
+	frobulator.write "${option}" "${HOME}"/.dextop dextop-option
+fi
 
 # functions ////////////////////////////////////////////////////////////////////
 
