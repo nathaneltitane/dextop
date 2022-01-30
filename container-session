@@ -174,12 +174,19 @@ fi
 # functions ////////////////////////////////////////////////////////////////////
 
 vnc_clean () {
-	[ -d "${HOME}" ]   && rm -rf "${HOME}"/.ICE*
-	[ -d "${HOME}" ]   && rm -rf "${HOME}"/.X1*
-	[ -d "${HOME}" ]   && rm -rf "${HOME}"/.Xauth*
-	[ -d "${TMPDIR}" ] && rm -rf "${TMPDIR}"/.ICE*
-	[ -d "${TMPDIR}" ] && rm -rf "${TMPDIR}"/.X1*
-	[ -d "${TMPDIR}" ] && rm -rf "${TMPDIR}"/.Xauth*
+	if [ -d "${HOME}" ]
+	then
+		rm -rf "${HOME}"/.ICE*
+		rm -rf "${HOME}"/.X1*
+		rm -rf "${HOME}"/.Xauth*
+	fi
+
+	if [ -d "${TMPDIR}" ]
+	then
+		rm -rf "${TMPDIR}"/.ICE*
+		rm -rf "${TMPDIR}"/.X1*
+		rm -rf "${TMPDIR}"/.Xauth*
+	fi
 }
 
 vnc_geometry () {
