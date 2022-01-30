@@ -87,8 +87,15 @@ echo
 
 # defaults /////////////////////////////////////////////////////////////////////
 
-[ -z "${distribution_name}" ] && distribution_name="ubuntu"
-[ -z "${distribution_version}" ] && distribution_version="21.10"
+if [ -z "${distribution_name}" ]
+then
+	distribution_name="ubuntu"
+fi
+
+if [ -z "${distribution_version}" ]
+then
+	distribution_version="21.10"
+fi
 
 # functions ////////////////////////////////////////////////////////////////////
 
@@ -516,13 +523,13 @@ image_environment () {
 
 	# termux
 
-	[ -d "${PREFIX}"/sbin ]               && PATH+="${PREFIX}/sbin:"
-	[ -d "${PREFIX}"/bin ]                && PATH+="${PREFIX}/bin:"
+	[ -d "${PREFIX}"/sbin ] && PATH+="${PREFIX}/sbin:"
+	[ -d "${PREFIX}"/bin ]  && PATH+="${PREFIX}/bin:"
 
 	# android
 
-	[ -d /system/sbin ]                   && PATH+="/system/sbin:"
-	[ -d /system/bin ]                    && PATH+="/system/bin:"
+	[ -d /system/sbin ] && PATH+="/system/sbin:"
+	[ -d /system/bin ]  && PATH+="/system/bin:"
 
 	# set environment
 
@@ -570,9 +577,15 @@ image_groups () {
 
 		read group_number group_name <<< ${line}
 
-		[ -f "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/group ]   && echo "${group_name}:x:${group_number}:" >> "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/group
-		[ -f "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/gshadow ] && echo "${group_name}:x:${group_number}:" >> "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/gshadow
+		if [ -f "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/group ]
+		then
+			echo "${group_name}:x:${group_number}:" >> "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/group
+		fi
 
+		if [ -f "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/gshadow ]
+		then
+			echo "${group_name}:x:${group_number}:" >> "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/gshadow
+		fi
 	done
 
 	# reset IFS
