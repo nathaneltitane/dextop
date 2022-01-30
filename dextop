@@ -327,12 +327,12 @@ then
 
 		frobulator.download get.trmnl.me "${PREFIX}"/bin ${files_list[@]}
 
-		frobulator.link "${PREFIX}"/bin "${HOME}" bash-aliases       .bash_aliases
-		frobulator.link "${PREFIX}"/bin "${HOME}" bash-configuration .bashrc
-		frobulator.link "${PREFIX}"/bin "${HOME}" bash-functions     .bash_functions
-		frobulator.link "${PREFIX}"/bin "${HOME}" bash-login         .bash_login
-		frobulator.link "${PREFIX}"/bin "${HOME}" bash-logout        .bash_logout
-		frobulator.link "${PREFIX}"/bin "${HOME}" bash-profile       .bash_profile
+		frobulator.link "${PREFIX}"/bin "${HOME}"      bash-aliases       .bash_aliases
+		frobulator.link "${PREFIX}"/bin "${HOME}"      bash-configuration .bashrc
+		frobulator.link "${PREFIX}"/bin "${HOME}"      bash-functions     .bash_functions
+		frobulator.link "${PREFIX}"/bin "${HOME}"      bash-login         .bash_login
+		frobulator.link "${PREFIX}"/bin "${HOME}"      bash-logout        .bash_logout
+		frobulator.link "${PREFIX}"/bin "${HOME}"      bash-profile       .bash_profile
 
 		frobulator.file "${HOME}" .hushlogin
 
