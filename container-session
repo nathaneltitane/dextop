@@ -872,10 +872,9 @@ container_user () {
 container_session () {
 	# set session settings
 
-	session_name="CONSOLE"
-
-	if [[ $(id -u -n) = "root" ]]
+	if [ "${HOME}" = "/	root" ]
 	then
+		session_name="CONSOLE"
 		:
 	else
 		if [[ $(cat "${HOME}"/.dextop/dextop-option) = "xfce" ]]
