@@ -353,7 +353,7 @@ then
 		frobulator.download get.trmnl.me "${PREFIX}"/bin ${files_list[@]}
 
 		frobulator.link "${PREFIX}"/bin "${HOME}"      bash-aliases       .bash_aliases
-		frobulator.link "${PREFIX}"/bin "${HOME}"      bash-configuration .bash_configuration
+		frobulator.link "${PREFIX}"/bin "${HOME}"      bash-configuration .bashrc
 		frobulator.link "${PREFIX}"/bin "${HOME}"      bash-functions     .bash_functions
 		frobulator.link "${PREFIX}"/bin "${HOME}"      bash-login         .bash_login
 		frobulator.link "${PREFIX}"/bin "${HOME}"      bash-logout        .bash_logout
@@ -364,7 +364,7 @@ then
 		# root home
 
 		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-aliases       .bash_aliases
-		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-configuration .bash_configuration
+		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-configuration .bashrc
 		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-functions     .bash_functions
 		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-login         .bash_login
 		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-logout        .bash_logout
@@ -411,7 +411,7 @@ then
 		url+="PapirusDevelopmentTeam/"
 		url+="papirus-icon-theme/archive/master/master.tar.gz"
 
-		frobulator.download "${url}" "${HOME}" papirus.tar.gz
+		frobulator.download "${url}" "${HOME}" papirus
 
 		themes_list=(
 			Papirus-Dark
@@ -422,6 +422,8 @@ then
 		for theme in ${themes_list[@]}
 		do
 			cd "${HOME}"
+
+			mv papiruz papirus.tar.gz
 
 			frobulator.extract "${HOME}"/papirus.tar.gz "${HOME}"
 		done

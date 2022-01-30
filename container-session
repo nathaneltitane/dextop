@@ -872,14 +872,17 @@ container_user () {
 container_session () {
 	# set session settings
 
-	if [[ $(cat "${HOME}"/.dextop/dextop-option) = "xfce" ]]
-	then
-		session_name="XFCE"
-	else
-		session_name="CONSOLE"
-	fi
+	session_name="CONSOLE"
 
-	user_name="${USER}"
+	if [[ $(id -u -n) = "root" ]]
+	then
+		:
+	else
+		if [[ $(cat "${HOME}"/.dextop/dextop-option) = "xfce" ]]
+		then
+			session_name="XFCE"
+		fi
+	fi
 
 	frobulator.fwd "Starting session" "[ ${session_name} // ${user_name} ]"
 	echo
