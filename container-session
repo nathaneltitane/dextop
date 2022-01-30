@@ -872,7 +872,7 @@ container_user () {
 container_session () {
 	# set session settings
 
-	if [[ $(cat "${HOME}"/.dextop/dextop-option) = xfce ]]
+	if [[ $(cat "${HOME}"/.dextop/dextop-option) = "xfce" ]]
 	then
 		session_name="XFCE"
 	else

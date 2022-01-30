@@ -271,8 +271,6 @@ then
 
 	# termux
 
-	if [ "${option}" = "termux" ]
-	then
 	if [ ! -f "${HOME}"/.dextop/dextop-termux-checkpoint ]
 	then
 		if [ "${option}" = "update" ]
@@ -310,7 +308,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-additions-checkpoint ]
 	then
-		# termux #
+		# termux
 
 		files_list+=(
 			termux
