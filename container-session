@@ -123,19 +123,53 @@ echo
 
 # defaults /////////////////////////////////////////////////////////////////////
 
-[ -z "${DISPLAY}" ]         && DISPLAY=":1"
-[ -z "${DISPLAY_NUMBER}" ]  && DISPLAY_NUMBER="${DISPLAY/:/}"
-[ -z "${LOCALHOST}" ]       && LOCALHOST="127.0.0.1"
-[ -z "${ADDRESS}" ]         && ADDRESS="${LOCALHOST}"
-[ -z "${PORT}" ]            && PORT="590${DISPLAY_NUMBER}"
+if [ -z "${DISPLAY}" ]
+then
+	DISPLAY=":1"
+fi
+
+if [ -z "${DISPLAY_NUMBER}" ]
+then
+	DISPLAY_NUMBER="${DISPLAY/:/}"
+fi
+
+if [ -z "${LOCALHOST}" ]
+then
+	LOCALHOST="127.0.0.1"
+fi
+
+if [ -z "${ADDRESS}" ]
+then
+	ADDRESS="${LOCALHOST}"
+fi
+
+if [ -z "${PORT}" ]
+then
+	PORT="590${DISPLAY_NUMBER}"
+fi
 
 export DISPLAY="${DISPLAY}"
 
-[ -z "${COLORTERM}" ]       && COLORTERM="truecolor"
-[ -z "${LANG}" ]            && LANG="C.UTF-8"
-[ -z "${SHELL}" ]           && SHELL="/bin/bash"
+if [ -z "${COLORTERM}" ]
+then
+	COLORTERM="truecolor"
+fi
+if [ -z "${LANG}" ]
+then
+	LANG="C.UTF-8"
+fi
 
-[ -f /etc/os-release ]      && . /etc/os-release && name="${NAME}"
+if [ -z "${SHELL}" ]
+then
+	SHELL="/bin/bash"
+fi
+
+if [ -f /etc/os-release ]
+then
+	. /etc/os-release
+
+	name="${NAME}"
+fi
 
 # functions ////////////////////////////////////////////////////////////////////
 
