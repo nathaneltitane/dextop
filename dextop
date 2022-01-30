@@ -271,6 +271,8 @@ then
 
 	# termux
 
+	if [ "${option}" = "termux" ]
+	then
 	if [ ! -f "${HOME}"/.dextop/dextop-termux-checkpoint ]
 	then
 		if [ "${option}" = "update" ]
@@ -285,7 +287,7 @@ then
 		frobulator.file "${HOME}"/.dextop dextop-termux-checkpoint
 	fi
 
-	# image
+	# container
 
 	if [ ! -f "${HOME}"/.dextop/dextop-image-checkpoint ]
 	then
@@ -293,8 +295,6 @@ then
 
 		frobulator.file "${HOME}"/.dextop dextop-image-checkpoint
 	fi
-
-	# container
 
 	if [ ! -f "${HOME}"/.dextop/dextop-container-checkpoint ]
 	then
