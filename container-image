@@ -157,7 +157,7 @@ image_version () {
 
 		# handle user input for values_list
 
-		eval ${frobulator.rtn[@]}
+		eval ${frobulator_rtn[@]}
 
 		frobulator.ipt "Selection:"
 

@@ -114,11 +114,11 @@ user_information () {
 
 	# handle user input for information_list
 
-	frobulator.rtn=()
+	frobulator_rtn=()
 
 	frobulator.input ${information_list[@]}
 
-	eval ${frobulator.rtn[@]}
+	eval ${frobulator_rtn[@]}
 }
 
 user_interactive () {
