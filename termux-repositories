@@ -73,7 +73,7 @@ IFS=$'\n'
 
 # update lists
 
-frobulator.log "apt update" &
+frobulator.log "apt-get update" &
 
 frobulator.progress "Forcing refresh..."
 echo
