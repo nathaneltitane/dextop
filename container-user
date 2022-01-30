@@ -116,7 +116,7 @@ user_information () {
 
 	frobulator_rtn=()
 
-	frobulator.input ${information_list[@]}
+	frobulator.input ${list[@]}
 
 	eval ${frobulator_rtn[@]}
 }
@@ -161,8 +161,15 @@ user_noninteractive () {
 	frobulator.fwd "Generating account..."
 	echo
 
-	[ -z "${user_name}" ]     && user_name="termux"
-	[ -z "${user_password}" ] && user_password=$(user_password_generate)
+	if [ -z "${user_name}" ]
+	then
+		user_name="termux"
+	fi
+
+	if [ -z "${user_password}" ]
+	then
+		user_password=$(user_password_generate)
+	fi
 
 	user_name="${user_name}"
 	user_id="1000"
@@ -254,11 +261,34 @@ user_runtime () {
 
 if [ "${option}" = "information" ]
 then
-	[ -z "${user_name}" ]     && information_list+=(user_name)
-	[ -z "${first_name}" ]    && information_list+=(first_name)
-	[ -z "${last_name}" ]     && information_list+=(last_name)
-	[ -z "${user_email}" ]    && information_list+=(user_email)
-	[ -z "${user_password}" ] && information_list+=(user_password)
+	if [ -z "${user_name}" ]
+	then
+		information_list+=(user_name)
+	fi
+
+	if [ -z "${first_name}" ]
+	then
+		information_list+=(first_name)
+	fi
+
+	if [ -z "${last_name}" ]
+	then
+		information_list+=(last_name)
+	fi
+
+	if [ -z "${user_email}" ]
+	then
+		information_list+=(user_email)
+	fi
+
+	if [ -z "${user_password}" ]
+	then
+		information_list+=(user_password)
+	fi
+
+	list=(
+		${information_list[@]}
+	)
 
 	user_information
 
@@ -271,7 +301,14 @@ fi
 
 if [ "${option}" = "password" ]
 then
-	[ -z "${user_password}" ] && information_list+=(user_password)
+	[ -z "${user_password}" ]
+	then
+		information_list+=(user_password)
+	fi
+
+	list=(
+		${information_list[@]}
+	)
 
 	user_information
 
@@ -280,11 +317,34 @@ fi
 
 if [ "${option}" = "username" ]
 then
-	[ -z "${user_name}" ]     && information_list+=(user_name)
-	[ -z "${first_name}" ]    && information_list+=(first_name)
-	[ -z "${last_name}" ]     && information_list+=(last_name)
-	[ -z "${user_email}" ]    && information_list+=(user_email)
-	[ -z "${user_password}" ] && information_list+=(user_password)
+	[ -z "${user_name}" ]
+	then
+		information_list+=(user_name)
+	fi
+
+	if [ -z "${first_name}" ]
+	then
+		information_list+=(first_name)
+	fi
+
+	if [ -z "${last_name}" ]
+	then
+		information_list+=(last_name)
+	fi
+
+	if [ -z "${user_email}" ]
+	then
+		information_list+=(user_email)
+	fi
+
+	if [ -z "${user_password}" ]
+	then
+		information_list+=(user_password)
+	fi
+
+	list=(
+		${information_list[@]}
+	)
 
 	user_information
 
