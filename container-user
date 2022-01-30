@@ -301,7 +301,7 @@ fi
 
 if [ "${option}" = "password" ]
 then
-	[ -z "${user_password}" ]
+	if [ -z "${user_password}" ]
 	then
 		information_list+=(user_password)
 	fi
@@ -317,7 +317,7 @@ fi
 
 if [ "${option}" = "username" ]
 then
-	[ -z "${user_name}" ]
+	if [ -z "${user_name}" ]
 	then
 		information_list+=(user_name)
 	fi
