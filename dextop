@@ -32,6 +32,10 @@ do
 			option="update"
 		;;
 
+		-t|--termux)
+			option="termux"
+		;;
+
 		-h|--help)
 			echo
 			echo -e "USAGE:"
@@ -40,6 +44,8 @@ do
 			echo -e "-c, --console    Setup Console access to environment and utilities."
 			echo
 			echo -e "-u, --update     Update Termux application packages. [ F-Droid ]"
+			echo
+			echo -e "-t, --termux     Setup Termux environment only."
 			echo
 			echo -e "-h, --help       Show help and usage information."
 			echo
@@ -168,21 +174,36 @@ if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
 then
 	#  utilities
 
+	termux_list=(
+		termux-packages
+		termux-repositories
+		termux-storage
+		termux-update
+	)
+
+	container_list=(
+		container-expansion
+		container-image
+		container-packages
+		container-repositories
+		container-session
+		container-settings
+		container-user
+	)
+
 	if [ ! -f "${HOME}"/.dextop/dextop-utilities-checkpoint ]
 	then
-		utilities_list+=(
-			termux-packages
-			termux-repositories
-			termux-storage
-			termux-update
-			container-expansion
-			container-image
-			container-packages
-			container-repositories
-			container-session
-			container-settings
-			container-user
-		)
+		if [ "${option}" = "termux" ]
+		then
+			utilities_list+=(
+				${termux_list[@]}
+			)
+		else
+			utilities_list+=(
+				${termux_list[@]}
+				${container_list[@]}
+			)
+		fi
 
 		frobulator.download get.dxtp.app "${PREFIX}"/bin ${utilities_list[@]}
 
