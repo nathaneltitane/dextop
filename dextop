@@ -392,26 +392,28 @@ then
 
 		frobulator.download "${url}" "${HOME}" papirus
 
+		mv papirus papirus.tar.gz
+
+		frobulator.extract "${HOME}"/papirus.tar.gz "${HOME}"
+
+		mv "${HOME}"/papirus-icon-theme* "${HOME}"/.icons
+
 		themes_list=(
 			Papirus-Dark
 			Papirus-Light
 			Papirus
 		)
 
-		mv papirus papirus.tar.gz
-
-		frobulator.extract "${HOME}"/papirus.tar.gz "${HOME}"
-
-		mv "${HOME}"/papirus-icon-theme/Papirus* "${HOME}"/.icons
+		frobulator.keep ${themes_list[@]}
 
 		for theme in ${themes_list[@]}
 		do
 			frobulator.require gtk-update-icon-cache
 
-			gtk-update-icon-cache -q "${HOME}"/.icons/"${theme}"
+			frobulator.log "gtk-update-icon-cache ${HOME}/.icons/${theme}"
 		done
 
-		rm -rf "${HOME}"/papirus
+		rm -rf "${HOME}"/papirus*
 
 		# system icon themes
 
