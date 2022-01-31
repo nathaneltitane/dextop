@@ -168,28 +168,20 @@ if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
 then
 	#  utilities
 
-	termux_list=(
-		termux-packages
-		termux-repositories
-		termux-storage
-		termux-update
-	)
-
-	container_list=(
-		container-expansion
-		container-image
-		container-packages
-		container-repositories
-		container-session
-		container-settings
-		container-user
-	)
-
 	if [ ! -f "${HOME}"/.dextop/dextop-utilities-checkpoint ]
 	then
 		utilities_list+=(
-			${termux_list[@]}
-			${container_list[@]}
+			termux-packages
+			termux-repositories
+			termux-storage
+			termux-update
+			container-expansion
+			container-image
+			container-packages
+			container-repositories
+			container-session
+			container-settings
+			container-user
 		)
 
 		frobulator.download get.dxtp.app "${PREFIX}"/bin ${utilities_list[@]}
