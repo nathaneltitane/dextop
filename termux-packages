@@ -93,6 +93,7 @@ utilities_list=(
 	ncurses
 	ncurses-utils
 	proot
+	ranger
 	zip
 	unzip
 	bzip2

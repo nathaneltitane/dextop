@@ -423,7 +423,7 @@ then
 		do
 			cd "${HOME}"
 
-			mv papiruz papirus.tar.gz
+			mv papirus papirus.tar.gz
 
 			frobulator.extract "${HOME}"/papirus.tar.gz "${HOME}"
 		done
