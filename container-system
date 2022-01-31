@@ -1,0 +1,175 @@
+#!/bin/bash
+
+# dependencies #
+
+[ ! -f "${PREFIX}"/bin/console ] && curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console && . "${PREFIX}"/bin/console
+
+# script #
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version #
+
+version="01-21-2022"
+
+# usage #
+
+# prompt #
+
+console.script "Setting up ${script#*-}"
+echo
+
+# variables #
+
+# defaults #
+
+# functions #
+
+add_environment () {
+	# generate environment '$PATH'
+
+	# set path:
+	# in order of retreival
+
+	PATH=""
+
+	# container
+
+	[ -d "${PREFIX}"/cnt/usr/local/sbin ]			&& PATH+="/usr/local/sbin:"
+	[ -d "${PREFIX}"/cnt/usr/local/bin ]			&& PATH+="/usr/local/bin:"
+	[ -d "${PREFIX}"/cnt/usr/sbin ]					&& PATH+="/usr/sbin:"
+	[ -d "${PREFIX}"/cnt/usr/sbin ]					&& PATH+="/usr/bin:"
+	[ -d "${PREFIX}"/cnt/sbin ]						&& PATH+="/sbin:"
+	[ -d "${PREFIX}"/cnt/bin ]						&& PATH+="/bin:"
+
+	# termux
+
+	[ -d "${PREFIX}"/sbin ]							&& PATH+="${PREFIX}/sbin:"
+	[ -d "${PREFIX}"/bin ]							&& PATH+="${PREFIX}/bin:"
+
+	# android
+
+	[ -d /system/sbin ]								&& PATH+="/system/sbin:"
+	[ -d /system/bin ]								&& PATH+="/system/bin:"
+
+	# set environment
+
+	PATH="${PATH}"
+
+	cat <<- FILE > "${PREFIX}"/cnt/etc/environment
+	PATH=${PATH}
+	PREFIX=${PREFIX}
+	FILE
+}
+
+add_groups () {
+	# register android groups to container
+
+	# set IFS
+
+	IFS=' '
+
+	# read android system IDs
+
+	read uid gid groups <<< $(id)
+
+	uid=${uid/uid=}
+	gid=${gid/gid=}
+	groups=${groups/groups=}
+
+	# set IFS
+
+	IFS=','
+
+	# parse existing groups
+
+	read -r -a groups_list <<< "${groups}"
+
+	for line in "${groups_list[@]}"
+	do
+		line=${line/(/ }
+		line=${line/)}
+
+		# set IFS
+
+		IFS=' '
+
+		# transfer unregistered IDs
+
+		read group_number group_name <<< ${line}
+
+		[ -f "${PREFIX}"/cnt/etc/group ]   && echo "${group_name}:x:${group_number}:" >> "${PREFIX}"/cnt/etc/group
+		[ -f "${PREFIX}"/cnt/etc/gshadow ] && echo "${group_name}:x:${group_number}:" >> "${PREFIX}"/cnt/etc/gshadow
+
+	done
+
+	# reset IFS
+
+	IFS=''
+}
+
+add_network () {
+	# generate network files
+
+	# hostname
+
+	cat <<- 'FILE' > "${PREFIX}"/cnt/etc/hostname
+	${HOSTNAME}
+	FILE
+
+	# hosts
+
+	cat <<- 'FILE' > "${PREFIX}"/cnt/etc/hosts
+	# IPv4 #
+
+	127.0.0.1	localhost.localdomain
+	127.0.0.1	localhost
+
+	# IPv6 #
+
+	::1			localhost.localdomain
+	::1			localhost
+	::1			ip6-localhost
+	::1			ip6-loopbak
+	fe00::0		ip6-localnet
+	fe00::0		ip6-mcastprefix
+	ff02::1		ip6-allnodes
+	ff02::2		ip6-allrouters
+	ff02::3		ip6-allhosts
+	FILE
+
+	# nameserver
+
+	cat <<- 'FILE' > "${PREFIX}"/cnt/etc/resolv.conf
+	nameserver 1.1.1.1
+	nameserver 1.0.0.1
+	FILE
+}
+
+add_preload () {
+	# generate libgcc/libc location and add to dynamic linker for preload
+
+	preload_library=$(find "${PREFIX}"/cnt/usr/lib -type f -iname "libgcc_s.so.1")
+
+	# set preload
+
+	cat <<- FILE > "${PREFIX}"/cnt/etc/ld.so.preload
+	${preload_library}
+	FILE
+}
+
+# generate environment variables
+
+add_environment
+
+# generate missing groups
+
+add_groups
+
+# generate network
+
+add_network
+
+# generate preload entries
+
+add_preload
