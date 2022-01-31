@@ -406,16 +406,11 @@ then
 			Papirus
 		)
 
-		for theme in ${themes_list[@]}
-		do
-			cd "${HOME}"
+		mv papirus papirus.tar.gz
 
-			mv papirus papirus.tar.gz
+		frobulator.extract "${HOME}"/papirus.tar.gz "${HOME}"
 
-			frobulator.extract "${HOME}"/papirus.tar.gz "${HOME}"
-		done
-
-		mv "${HOME}"/papirus-icon-theme* "${HOME}"/.icons
+		mv "${HOME}"/papirus-icon-theme/Papirus* "${HOME}"/.icons
 
 		for theme in ${themes_list[@]}
 		do
