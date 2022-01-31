@@ -59,6 +59,7 @@ add_environment () {
 	cat <<- FILE > "${PREFIX}"/cnt/etc/environment
 	PATH=${PATH}
 	PREFIX=${PREFIX}
+
 	FILE
 }
 
@@ -98,9 +99,15 @@ add_groups () {
 
 		read group_number group_name <<< ${line}
 
-		[ -f "${PREFIX}"/cnt/etc/group ]   && echo "${group_name}:x:${group_number}:" >> "${PREFIX}"/cnt/etc/group
-		[ -f "${PREFIX}"/cnt/etc/gshadow ] && echo "${group_name}:x:${group_number}:" >> "${PREFIX}"/cnt/etc/gshadow
+		if [ -f "${PREFIX}"/cnt/etc/group ]
+		then
+			echo "${group_name}:x:${group_number}:" >> "${PREFIX}"/cnt/etc/group
+		fi
 
+		if [ -f "${PREFIX}"/cnt/etc/gshadow ]
+		then
+			echo "${group_name}:x:${group_number}:" >> "${PREFIX}"/cnt/etc/gshadow
+		fi
 	done
 
 	# reset IFS
@@ -115,6 +122,7 @@ add_network () {
 
 	cat <<- 'FILE' > "${PREFIX}"/cnt/etc/hostname
 	${HOSTNAME}
+
 	FILE
 
 	# hosts
@@ -136,6 +144,7 @@ add_network () {
 	ff02::1		ip6-allnodes
 	ff02::2		ip6-allrouters
 	ff02::3		ip6-allhosts
+
 	FILE
 
 	# nameserver
@@ -143,6 +152,7 @@ add_network () {
 	cat <<- 'FILE' > "${PREFIX}"/cnt/etc/resolv.conf
 	nameserver 1.1.1.1
 	nameserver 1.0.0.1
+
 	FILE
 }
 
