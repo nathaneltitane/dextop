@@ -914,7 +914,7 @@ vnc_list () {
 
 	vnc_port="${PORT}"
 
-	if [[ $(piof proot) ]]
+	if [[ $(pidof proot) ]]
 	then
 		read vnc_display _ vnc_process _ <<< $(vncserver -list | tail -n 1)
 	else
