@@ -154,6 +154,7 @@ if [ -z "${COLORTERM}" ]
 then
 	COLORTERM="truecolor"
 fi
+
 if [ -z "${LANG}" ]
 then
 	LANG="C.UTF-8"
@@ -172,6 +173,351 @@ then
 fi
 
 # functions ////////////////////////////////////////////////////////////////////
+
+container_root () {
+	# set container root directory
+
+	ROOT=("${PREFIX}"/cnt/*/*)
+
+	# single container
+
+	if [[ ${#ROOT[@]} -eq 1 ]]
+	then
+		ROOT=("${PREFIX}"/cnt/*/*)
+	fi
+
+	# multiple containers:
+	# parse container directories
+
+	if [[ ${#ROOT[@]} -ge 2 ]]
+	then
+		for distribution in "${PREFIX}"/cnt/*
+		do
+			for version in "${distribution}"/*
+			do
+				distribution_name=$(basename $distribution)
+
+				distribution_version=$(basename $version)
+
+				containers+=($distribution_name $distribution_version)
+			done
+		done
+
+		# set padding for uniform output
+
+		pad_length=10
+
+		# continue list using array selection of suppported values
+
+		for (( i=0 ; i<${#containers[@]} ; i+=2 ))
+		do
+			name="${containers[$i]}"
+			version="${containers[$i+1]}"
+			container="${name} ${version}"
+
+			number=$((($i/2) + 1))
+
+			if (( $i/2 >= 0 && $i/2 <= 8 ))
+			then
+				# handle number spacing for entries 1-9
+
+				printf '      [  %s ] %s ' ${number} ${name}
+			else
+				# handle number spacing for entries 10+
+
+				printf '      [ %s ] %s ' ${number} ${name}
+			fi
+
+			printf '%*s' $((pad_length - ${#name}))
+			printf '%s\n' ${version}
+		done
+
+		printf '\n'
+
+		container_handle
+	fi
+}
+
+container_handle () {
+	# values #
+
+	values_list=(
+		selection
+	)
+
+	# handle user input for values_list
+
+	frobulator_rtn=()
+
+	if [ -f "${HOME}"/.dextop/selection ]
+	then
+		selection=$(cat "${HOME}"/.dextop/selection)
+	else
+		frobulator.input ${values_list[@]}
+	fi
+
+	eval ${frobulator_rtn[@]}
+
+	# check selection input against selection list
+
+	while true
+	do
+		# range check:
+		# selection input must be in provided range and an integer
+
+		if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]] || [[ ! "${selection}" =~ ^[0-9]+$ ]]
+		then
+			echo
+			frobulator.err "Invalid selection:"
+			echo
+
+			frobulator.wrn "Select container [ 1 - ${number} ]"
+			echo
+
+			frobulator.ipt "Selection:"
+
+			read selection
+			echo
+		else
+			break
+		fi
+	done
+
+	distribution_name="${name}"
+	distribution_version="${version}"
+
+	ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
+}
+
+container_input () {
+	if [ -d "${root_filesystem}" ]
+	then
+		ROOT="${root_filesystem}"
+
+		frobulator.scs "Container location found"
+		echo
+
+		frobulator.inf "Loading" "[ ${ROOT} ]"
+		echo
+	else
+		frobulator.err "Container location not found"
+		echo
+
+		frobulator.ipt "Select one of the following containers:"
+		echo
+
+		container_handle
+	fi
+}
+
+container_environment () {
+	# generate container environement
+
+	# set path:
+	# in order of retreival
+
+	PATH=""
+
+	# container
+
+	[ -d "${ROOT}"/usr/local/sbin ] && PATH+="/usr/local/sbin:"
+	[ -d "${ROOT}"/usr/local/bin ]  && PATH+="/usr/local/bin:"
+	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/sbin:"
+	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/bin:"
+	[ -d "${ROOT}"/sbin ]           && PATH+="/sbin:"
+	[ -d "${ROOT}"/bin ]            && PATH+="/bin:"
+
+	# termux
+
+	[ -d "${PREFIX}"/sbin ] && PATH+="${PREFIX}/sbin:"
+	[ -d "${PREFIX}"/bin ]  && PATH+="${PREFIX}/bin:"
+
+	# android
+
+	[ -d /system/sbin ] && PATH+="/system/sbin:"
+	[ -d /system/bin ]  && PATH+="/system/bin:"
+
+	PATH="${PATH}"
+}
+
+container_user () {
+	# verify user existence:
+	# loop through container's /etc/passwd file and make sure 'user' exists
+	# source environment variables when 'user' corresponds to 'username'
+	# default to 'root' if 'username' is invalid, not specified or does not exist
+
+	last_entry="$(tail -n 1 "${ROOT}"/etc/passwd)"
+
+	# authentication #
+
+	frobulator.fwd "Authenticating..."
+	echo
+
+	while read -r entry
+	do
+		IFS=':'
+
+		read USER _ USER_ID GROUP_ID GECOS HOME SHELL <<< "${entry}"
+
+		IFS=','
+
+		read FULL_NAME ROOM_NUMBER WORK_PHONE HOME_PHONE USER_EMAIL <<< "${GECOS}"
+
+		# reset IFS
+
+		IFS=' '
+
+		# verify login options and parameters
+
+		if [[ -z "${user_name}" ]]
+		then
+			USER="root"
+
+			frobulator.wrn "No user name - Defaulting" "[ '${USER}' ]"
+			echo
+
+			# break out of loop - empty "${user_name}" - default to 'root'
+
+			break
+		fi
+
+		if [[ "${user_name}" == "${USER}" ]]
+		then
+			USER="${USER}"
+
+			frobulator.scs "Valid user name" "[ '${USER}' ]"
+			echo
+
+			# break out of loop - matching "${user_name}"
+
+			break
+		fi
+
+		if [[ "${entry}" == "${last_entry}" ]]
+		then
+			USER="root"
+
+			frobulator.err "Invalid user name - Defaulting" "[ '${USER}' ]"
+			echo
+		fi
+
+		# specify login defaults
+
+		if [[ -z "${user_name}" ]] || [[ "${entry}" == "${last_entry}" ]]
+		then
+			USER="root"
+			USER_ID="0"
+			GROUP_ID="0"
+
+			if [ -d "${ROOT}"/root ]
+			then
+				HOME="/root"
+			else
+				HOME="/"
+			fi
+
+			session_name="CONSOLE"
+
+		fi
+
+	done < "${ROOT}"/etc/passwd
+}
+
+container_session () {
+	# set session settings
+
+	if [ "${HOME}" = "/	root" ]
+	then
+		session_name="CONSOLE"
+		:
+	else
+		if [[ $(cat "${HOME}"/.dextop/dextop-option) = "xfce" ]]
+		then
+			session_name="XFCE"
+		fi
+	fi
+
+	frobulator.fwd "Starting session" "[ ${session_name} // ${user_name} ]"
+	echo
+
+	# assume 'termux-exec' is installed
+
+	unset LD_PRELOAD
+
+	# setup 'proot' command arguments
+
+	unset session_command
+
+	session_command+="proot"
+	session_command+=" --kill-on-exit"
+	session_command+=" --link2symlink"
+	session_command+=" --rootfs=${ROOT}"
+	session_command+=" --change-id=${USER_ID}:${GROUP_ID}"
+	session_command+=" --pwd=${HOME}"
+	[ -d "/data" ]                                && session_command+=" --bind=/data:/data"
+	[ -d "/dev" ]                                 && session_command+=" --bind=/dev:/dev"
+	[ -e "/dev/urandom" ]                         && session_command+=" --bind=/dev/urandom:/dev/random"
+	[ -e "/linkerconfig/ld.config.txt" ]          && session_command+=" --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt"
+	[ -f "/plat_property_contexts" ]              && session_command+=" --bind=/plat_property_contexts:/plat_property_contexts"
+	[ -f "/property_contexts" ]                   && session_command+=" --bind=/property_contexts:/property_contexts"
+	[ -d "/proc" ]                                && session_command+=" --bind=/proc:/proc"
+	[ -d "/proc/self/fd" ]                        && session_command+=" --bind=/proc/self/fd:/dev/fd"
+	[ -e "/proc/self/fd/0" ]                      && session_command+=" --bind=/proc/self/fd/0:/dev/stdin"
+	[ -e "/proc/self/fd/1" ]                      && session_command+=" --bind=/proc/self/fd/1:/dev/stdout"
+	[ -e "/proc/self/fd/2" ]                      && session_command+=" --bind=/proc/self/fd/2:/dev/stderr"
+	[ -d "/sys" ]                                 && session_command+=" --bind=/sys:/sys"
+	[ -d "/system" ]                              && session_command+=" --bind=/system:/system"
+	[ -d "${PREFIX%/*}"/home ]                    && session_command+=" --bind=${PREFIX%/*}/home:/home/${USER}"
+	[ -d "${PREFIX}"/storage/external ]           && session_command+=" --bind=${PREFIX}/storage/external:/media/external"
+	[ -d "${PREFIX}"/storage/internal ]           && session_command+=" --bind=${PREFIX}/storage/internal:/media/internal"
+	[ -d "${PREFIX}"/storage/internal/Documents ] && session_command+=" --bind=${PREFIX}/storage/internal/Documents:/home/${USER}/Documents"
+	[ -d "${PREFIX}"/storage/internal/Downloads ] && session_command+=" --bind=${PREFIX}/storage/internal/Downloads:/home/${USER}/Documents"
+	[ -d "${PREFIX}"/storage/internal/Music ]     && session_command+=" --bind=${PREFIX}/storage/internal/Music:/home/${USER}/Music"
+	[ -d "${PREFIX}"/storage/internal/Pictures ]  && session_command+=" --bind=${PREFIX}/storage/internal/Pictures:/home/${USER}/Pictures"
+	[ -d "${PREFIX}"/storage/internal/Public ]    && session_command+=" --bind=${PREFIX}/storage/internal/Public:/home/${USER}/Public"
+	[ -d "${PREFIX}"/storage/internal/Templates ] && session_command+=" --bind=${PREFIX}/storage/internal/Templates:/home/${USER}/Templates"
+	[ -d "${PREFIX}"/storage/internal/Videos ]    && session_command+=" --bind=${PREFIX}/storage/internal/Videos:/home/${USER}/Videos"
+	[ -d "${PREFIX}"/tmp ]                        && session_command+=" --bind=${PREFIX}/tmp:/tmp"
+	[ -x "${PREFIX}"/bin/htop ]                   && session_command+=" --bind=${PREFIX}/bin/top:/usr/bin/htop"
+	[ -x "${PREFIX}"/bin/kill ]                   && session_command+=" --bind=${PREFIX}/bin/kill:/usr/bin/kill"
+	[ -x "${PREFIX}"/bin/pgrep ]                  && session_command+=" --bind=${PREFIX}/bin/pgrep:/usr/bin/pgrep"
+	[ -x "${PREFIX}"/bin/pkill ]                  && session_command+=" --bind=${PREFIX}/bin/pkill:/usr/bin/pkill"
+	[ -x "${PREFIX}"/bin/ps ]                     && session_command+=" --bind=${PREFIX}/bin/ps:/usr/bin/ps"
+	[ -x "${PREFIX}"/bin/top ]                    && session_command+=" --bind=${PREFIX}/bin/top:/usr/bin/top"
+	session_command+=" env -i"
+	session_command+=" ANDROID_ART_ROOT=${ANDROID_ART_ROOT}"
+	session_command+=" ANDROID_DATA=${ANDROID_DATA}"
+	session_command+=" ANDROID_I18N_ROOT=${ANDROID_I18N_ROOT}"
+	session_command+=" ANDROID_ROOT=${ANDROID_ROOT}"
+	session_command+=" ANDROID_RUNTIME_ROOT=${ANDROID_RUNTIME_ROOT}"
+	session_command+=" ANDROID_TZDATA_ROOT=${ANDROID_TZDATA_ROOT}"
+	session_command+=" BOOTCLASSPATH=${BOOTCLASSPATH}"
+	session_command+=" DEX2OATBOOTCLASSPATH=${DEX2OATBOOTCLASSPATH}"
+	session_command+=" PREFIX=${PREFIX}"
+	session_command+=" COLORTERM=${COLORTERM}"
+	session_command+=" DISPLAY=${DISPLAY}"
+	session_command+=" HOME=${HOME}"
+	session_command+=" LANG=${LANG}"
+	session_command+=" LOCALHOST=${LOCALHOST}"
+	session_command+=" PATH=${PATH}"
+	session_command+=" SHELL=${SHELL}"
+	session_command+=" TERM=${TERM}"
+	session_command+=" TMPDIR=${TMPDIR}"
+	session_command+=" USER=${USER}"
+	session_command+=" XDG_RUNTIME_DIR=/run/user/${USER_ID}"
+	session_command+=" XDG_CONFIG_DIRS=/etc/xdg"
+	session_command+=" XDG_CACHE_HOME=${HOME}/.cache"
+	session_command+=" XDG_CONFIG_HOME=${HOME}/.config"
+	session_command+=" XDG_DATA_HOME=${HOME}/.local/share"
+	session_command+=" XDG_STATE_HOME=${HOME}/.local/state"
+	session_command+=" XDG_DATA_DIRS=/usr/local/share:/usr/share"
+	session_command+=" XAUTHORITY=${XDG_RUNTIME_DIR}/Xauthority"
+	session_command+=" ${SHELL} --login"
+
+	# execute 'proot'
+
+	${session_command}
+}
 
 vnc_clean () {
 	if [ -d "${HOME}" ]
@@ -659,351 +1005,6 @@ application_handle () {
 					--text="Application '${application}' not found." 2> /dev/null &
 		fi
 	fi
-}
-
-container_root () {
-	# set container root directory
-
-	ROOT=("${PREFIX}"/cnt/*/*)
-
-	# single container
-
-	if [[ ${#ROOT[@]} -eq 1 ]]
-	then
-		ROOT=("${PREFIX}"/cnt/*/*)
-	fi
-
-	# multiple containers:
-	# parse container directories
-
-	if [[ ${#ROOT[@]} -ge 2 ]]
-	then
-		for distribution in "${PREFIX}"/cnt/*
-		do
-			for version in "${distribution}"/*
-			do
-				distribution_name=$(basename $distribution)
-
-				distribution_version=$(basename $version)
-
-				containers+=($distribution_name $distribution_version)
-			done
-		done
-
-		# set padding for uniform output
-
-		pad_length=10
-
-		# continue list using array selection of suppported values
-
-		for (( i=0 ; i<${#containers[@]} ; i+=2 ))
-		do
-			name="${containers[$i]}"
-			version="${containers[$i+1]}"
-			container="${name} ${version}"
-
-			number=$((($i/2) + 1))
-
-			if (( $i/2 >= 0 && $i/2 <= 8 ))
-			then
-				# handle number spacing for entries 1-9
-
-				printf '      [  %s ] %s ' ${number} ${name}
-			else
-				# handle number spacing for entries 10+
-
-				printf '      [ %s ] %s ' ${number} ${name}
-			fi
-
-			printf '%*s' $((pad_length - ${#name}))
-			printf '%s\n' ${version}
-		done
-
-		printf '\n'
-
-		container_handle
-	fi
-}
-
-container_handle () {
-	# values #
-
-	values_list=(
-		selection
-	)
-
-	# handle user input for values_list
-
-	frobulator_rtn=()
-
-	if [ -f "${HOME}"/.dextop/selection ]
-	then
-		selection=$(cat "${HOME}"/.dextop/selection)
-	else
-		frobulator.input ${values_list[@]}
-	fi
-
-	eval ${frobulator_rtn[@]}
-
-	# check selection input against selection list
-
-	while true
-	do
-		# range check:
-		# selection input must be in provided range and an integer
-
-		if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]] || [[ ! "${selection}" =~ ^[0-9]+$ ]]
-		then
-			echo
-			frobulator.err "Invalid selection:"
-			echo
-
-			frobulator.wrn "Select container [ 1 - ${number} ]"
-			echo
-
-			frobulator.ipt "Selection:"
-
-			read selection
-			echo
-		else
-			break
-		fi
-	done
-
-	distribution_name="${name}"
-	distribution_version="${version}"
-
-	ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
-}
-
-container_input () {
-	if [ -d "${root_filesystem}" ]
-	then
-		ROOT="${root_filesystem}"
-
-		frobulator.scs "Container location found"
-		echo
-
-		frobulator.inf "Loading" "[ ${ROOT} ]"
-		echo
-	else
-		frobulator.err "Container location not found"
-		echo
-
-		frobulator.ipt "Select one of the following containers:"
-		echo
-
-		container_handle
-	fi
-}
-
-container_environment () {
-	# generate container environement
-
-	# set path:
-	# in order of retreival
-
-	PATH=""
-
-	# container
-
-	[ -d "${ROOT}"/usr/local/sbin ] && PATH+="/usr/local/sbin:"
-	[ -d "${ROOT}"/usr/local/bin ]  && PATH+="/usr/local/bin:"
-	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/sbin:"
-	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/bin:"
-	[ -d "${ROOT}"/sbin ]           && PATH+="/sbin:"
-	[ -d "${ROOT}"/bin ]            && PATH+="/bin:"
-
-	# termux
-
-	[ -d "${PREFIX}"/sbin ] && PATH+="${PREFIX}/sbin:"
-	[ -d "${PREFIX}"/bin ]  && PATH+="${PREFIX}/bin:"
-
-	# android
-
-	[ -d /system/sbin ] && PATH+="/system/sbin:"
-	[ -d /system/bin ]  && PATH+="/system/bin:"
-
-	PATH="${PATH}"
-}
-
-container_user () {
-	# verify user existence:
-	# loop through container's /etc/passwd file and make sure 'user' exists
-	# source environment variables when 'user' corresponds to 'username'
-	# default to 'root' if 'username' is invalid, not specified or does not exist
-
-	last_entry="$(tail -n 1 "${ROOT}"/etc/passwd)"
-
-	# authentication #
-
-	frobulator.fwd "Authenticating..."
-	echo
-
-	while read -r entry
-	do
-		IFS=':'
-
-		read USER _ USER_ID GROUP_ID GECOS HOME SHELL <<< "${entry}"
-
-		IFS=','
-
-		read FULL_NAME ROOM_NUMBER WORK_PHONE HOME_PHONE USER_EMAIL <<< "${GECOS}"
-
-		# reset IFS
-
-		IFS=' '
-
-		# verify login options and parameters
-
-		if [[ -z "${user_name}" ]]
-		then
-			USER="root"
-
-			frobulator.wrn "No user name - Defaulting" "[ '${USER}' ]"
-			echo
-
-			# break out of loop - empty "${user_name}" - default to 'root'
-
-			break
-		fi
-
-		if [[ "${user_name}" == "${USER}" ]]
-		then
-			USER="${USER}"
-
-			frobulator.scs "Valid user name" "[ '${USER}' ]"
-			echo
-
-			# break out of loop - matching "${user_name}"
-
-			break
-		fi
-
-		if [[ "${entry}" == "${last_entry}" ]]
-		then
-			USER="root"
-
-			frobulator.err "Invalid user name - Defaulting" "[ '${USER}' ]"
-			echo
-		fi
-
-		# specify login defaults
-
-		if [[ -z "${user_name}" ]] || [[ "${entry}" == "${last_entry}" ]]
-		then
-			USER="root"
-			USER_ID="0"
-			GROUP_ID="0"
-
-			if [ -d "${ROOT}"/root ]
-			then
-				HOME="/root"
-			else
-				HOME="/"
-			fi
-
-			session_name="CONSOLE"
-
-		fi
-
-	done < "${ROOT}"/etc/passwd
-}
-
-container_session () {
-	# set session settings
-
-	if [ "${HOME}" = "/	root" ]
-	then
-		session_name="CONSOLE"
-		:
-	else
-		if [[ $(cat "${HOME}"/.dextop/dextop-option) = "xfce" ]]
-		then
-			session_name="XFCE"
-		fi
-	fi
-
-	frobulator.fwd "Starting session" "[ ${session_name} // ${user_name} ]"
-	echo
-
-	# assume 'termux-exec' is installed
-
-	unset LD_PRELOAD
-
-	# setup 'proot' command arguments
-
-	unset session_command
-
-	session_command+="proot"
-	session_command+=" --kill-on-exit"
-	session_command+=" --link2symlink"
-	session_command+=" --rootfs=${ROOT}"
-	session_command+=" --change-id=${USER_ID}:${GROUP_ID}"
-	session_command+=" --pwd=${HOME}"
-	[ -d "/data" ]                                && session_command+=" --bind=/data:/data"
-	[ -d "/dev" ]                                 && session_command+=" --bind=/dev:/dev"
-	[ -e "/dev/urandom" ]                         && session_command+=" --bind=/dev/urandom:/dev/random"
-	[ -e "/linkerconfig/ld.config.txt" ]          && session_command+=" --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt"
-	[ -f "/plat_property_contexts" ]              && session_command+=" --bind=/plat_property_contexts:/plat_property_contexts"
-	[ -f "/property_contexts" ]                   && session_command+=" --bind=/property_contexts:/property_contexts"
-	[ -d "/proc" ]                                && session_command+=" --bind=/proc:/proc"
-	[ -d "/proc/self/fd" ]                        && session_command+=" --bind=/proc/self/fd:/dev/fd"
-	[ -e "/proc/self/fd/0" ]                      && session_command+=" --bind=/proc/self/fd/0:/dev/stdin"
-	[ -e "/proc/self/fd/1" ]                      && session_command+=" --bind=/proc/self/fd/1:/dev/stdout"
-	[ -e "/proc/self/fd/2" ]                      && session_command+=" --bind=/proc/self/fd/2:/dev/stderr"
-	[ -d "/sys" ]                                 && session_command+=" --bind=/sys:/sys"
-	[ -d "/system" ]                              && session_command+=" --bind=/system:/system"
-	[ -d "${PREFIX%/*}"/home ]                    && session_command+=" --bind=${PREFIX%/*}/home:/home/${USER}"
-	[ -d "${PREFIX}"/storage/external ]           && session_command+=" --bind=${PREFIX}/storage/external:/media/external"
-	[ -d "${PREFIX}"/storage/internal ]           && session_command+=" --bind=${PREFIX}/storage/internal:/media/internal"
-	[ -d "${PREFIX}"/storage/internal/Documents ] && session_command+=" --bind=${PREFIX}/storage/internal/Documents:/home/${USER}/Documents"
-	[ -d "${PREFIX}"/storage/internal/Downloads ] && session_command+=" --bind=${PREFIX}/storage/internal/Downloads:/home/${USER}/Documents"
-	[ -d "${PREFIX}"/storage/internal/Music ]     && session_command+=" --bind=${PREFIX}/storage/internal/Music:/home/${USER}/Music"
-	[ -d "${PREFIX}"/storage/internal/Pictures ]  && session_command+=" --bind=${PREFIX}/storage/internal/Pictures:/home/${USER}/Pictures"
-	[ -d "${PREFIX}"/storage/internal/Public ]    && session_command+=" --bind=${PREFIX}/storage/internal/Public:/home/${USER}/Public"
-	[ -d "${PREFIX}"/storage/internal/Templates ] && session_command+=" --bind=${PREFIX}/storage/internal/Templates:/home/${USER}/Templates"
-	[ -d "${PREFIX}"/storage/internal/Videos ]    && session_command+=" --bind=${PREFIX}/storage/internal/Videos:/home/${USER}/Videos"
-	[ -d "${PREFIX}"/tmp ]                        && session_command+=" --bind=${PREFIX}/tmp:/tmp"
-	[ -x "${PREFIX}"/bin/htop ]                   && session_command+=" --bind=${PREFIX}/bin/top:/usr/bin/htop"
-	[ -x "${PREFIX}"/bin/kill ]                   && session_command+=" --bind=${PREFIX}/bin/kill:/usr/bin/kill"
-	[ -x "${PREFIX}"/bin/pgrep ]                  && session_command+=" --bind=${PREFIX}/bin/pgrep:/usr/bin/pgrep"
-	[ -x "${PREFIX}"/bin/pkill ]                  && session_command+=" --bind=${PREFIX}/bin/pkill:/usr/bin/pkill"
-	[ -x "${PREFIX}"/bin/ps ]                     && session_command+=" --bind=${PREFIX}/bin/ps:/usr/bin/ps"
-	[ -x "${PREFIX}"/bin/top ]                    && session_command+=" --bind=${PREFIX}/bin/top:/usr/bin/top"
-	session_command+=" env -i"
-	session_command+=" ANDROID_ART_ROOT=${ANDROID_ART_ROOT}"
-	session_command+=" ANDROID_DATA=${ANDROID_DATA}"
-	session_command+=" ANDROID_I18N_ROOT=${ANDROID_I18N_ROOT}"
-	session_command+=" ANDROID_ROOT=${ANDROID_ROOT}"
-	session_command+=" ANDROID_RUNTIME_ROOT=${ANDROID_RUNTIME_ROOT}"
-	session_command+=" ANDROID_TZDATA_ROOT=${ANDROID_TZDATA_ROOT}"
-	session_command+=" BOOTCLASSPATH=${BOOTCLASSPATH}"
-	session_command+=" DEX2OATBOOTCLASSPATH=${DEX2OATBOOTCLASSPATH}"
-	session_command+=" PREFIX=${PREFIX}"
-	session_command+=" COLORTERM=${COLORTERM}"
-	session_command+=" DISPLAY=${DISPLAY}"
-	session_command+=" HOME=${HOME}"
-	session_command+=" LANG=${LANG}"
-	session_command+=" LOCALHOST=${LOCALHOST}"
-	session_command+=" PATH=${PATH}"
-	session_command+=" SHELL=${SHELL}"
-	session_command+=" TERM=${TERM}"
-	session_command+=" TMPDIR=${TMPDIR}"
-	session_command+=" USER=${USER}"
-	session_command+=" XDG_RUNTIME_DIR=/run/user/${USER_ID}"
-	session_command+=" XDG_CONFIG_DIRS=/etc/xdg"
-	session_command+=" XDG_CACHE_HOME=${HOME}/.cache"
-	session_command+=" XDG_CONFIG_HOME=${HOME}/.config"
-	session_command+=" XDG_DATA_HOME=${HOME}/.local/share"
-	session_command+=" XDG_STATE_HOME=${HOME}/.local/state"
-	session_command+=" XDG_DATA_DIRS=/usr/local/share:/usr/share"
-	session_command+=" XAUTHORITY=${XDG_RUNTIME_DIR}/Xauthority"
-	session_command+=" ${SHELL} --login"
-
-	# execute 'proot'
-
-	${session_command}
 }
 
 if [ "${option}" = "start" ]
