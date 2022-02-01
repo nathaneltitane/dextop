@@ -85,7 +85,6 @@ security_list=(
 
 utilities_list=(
 	android-tools
-	debootstrap
 	fakeroot
 	git
 	hub
