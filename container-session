@@ -478,12 +478,6 @@ container_session () {
 	[ -d "${PREFIX}"/storage/internal/Templates ] && session_command+=" --bind=${PREFIX}/storage/internal/Templates:/home/${USER}/Templates"
 	[ -d "${PREFIX}"/storage/internal/Videos ]    && session_command+=" --bind=${PREFIX}/storage/internal/Videos:/home/${USER}/Videos"
 	[ -d "${PREFIX}"/tmp ]                        && session_command+=" --bind=${PREFIX}/tmp:/tmp"
-	[ -x "${PREFIX}"/bin/htop ]                   && session_command+=" --bind=${PREFIX}/bin/top:/usr/bin/htop"
-	[ -x "${PREFIX}"/bin/kill ]                   && session_command+=" --bind=${PREFIX}/bin/kill:/usr/bin/kill"
-	[ -x "${PREFIX}"/bin/pgrep ]                  && session_command+=" --bind=${PREFIX}/bin/pgrep:/usr/bin/pgrep"
-	[ -x "${PREFIX}"/bin/pkill ]                  && session_command+=" --bind=${PREFIX}/bin/pkill:/usr/bin/pkill"
-	[ -x "${PREFIX}"/bin/ps ]                     && session_command+=" --bind=${PREFIX}/bin/ps:/usr/bin/ps"
-	[ -x "${PREFIX}"/bin/top ]                    && session_command+=" --bind=${PREFIX}/bin/top:/usr/bin/top"
 	session_command+=" env -i"
 	session_command+=" ANDROID_ART_ROOT=${ANDROID_ART_ROOT}"
 	session_command+=" ANDROID_DATA=${ANDROID_DATA}"
@@ -920,7 +914,7 @@ vnc_list () {
 
 	vnc_port="${PORT}"
 
-	if [[ $(ps -A | grep -i proot) ]]
+	if [[ $(piof proot) ]]
 	then
 		read vnc_display _ vnc_process _ <<< $(vncserver -list | tail -n 1)
 	else
