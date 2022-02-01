@@ -84,7 +84,6 @@ security_list=(
 )
 
 utilities_list=(
-	android-tools
 	fakeroot
 	git
 	hub
