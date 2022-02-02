@@ -460,18 +460,7 @@ then
 	if [ ! -f "${HOME}"/.dextop/dextop-backgrounds-checkpoint ]
 	then
 		files_list=(
-			dextop-aubergine.svg
 			dextop-black.svg
-			dextop-blue.svg
-			dextop-canary.svg
-			dextop-coral.svg
-			dextop-graphite.svg
-			dextop-grey.svg
-			dextop-lilac.svg
-			dextop-powder.svg
-			dextop-silver.svg
-			dextop-sky.svg
-			dextop-sunflower.svg
 			dextop-white.svg
 		)
 
