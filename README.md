@@ -136,6 +136,16 @@ Automatic utility updates on login can be disabled as follows:
 
 `'echo '' > ${HOME}/.dextop/dextop-update'`
 
+### Session logout:
+
+Automatic vnc display shutdown on terminal exit can be enabled as follows:
+
+`'echo logout >> ${HOME}/.dextop/dextop-logout'`
+
+Automatic vnc display shutdown on terminal exit  can be disabled as follows:
+
+`'echo '' > ${HOME}/.dextop/dextop-logout'`
+
 ### Reports:
 
 All setup dialogs, prompts, commands and binary execution outputs have been set to redirect to the `'${PREFIX}/var/log'` directory to keep output messages to a minimum.
