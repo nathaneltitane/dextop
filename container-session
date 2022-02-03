@@ -43,6 +43,10 @@ do
 			option="new"
 		;;
 
+		-v|--view)
+			option="view"
+		;;
+
 		-a|--application)
 			option="application"
 			application="${2}"
@@ -791,7 +795,7 @@ vnc_intent () {
 
 	# start android vnc intent and force-stop existing activity
 
-	# frobulator.silence "am start -a android.intent.action.VIEW -d vnc://${ADDRESS}:${PORT} -S ${VNC}"
+	# frobulator.silence "am start -a android.intent.action.VIEW -d vnc://${ADDRESS}:${PORT} -S ${vnc_application}"
 
 	# start android vnc intent and set to view session with supported application
 
@@ -800,6 +804,20 @@ vnc_intent () {
 	intent_command+="am start"
 	intent_command+=" -a android.intent.action.VIEW"
 	intent_command+=" -d vnc://${ADDRESS}:${PORT}"
+
+	frobulator.silence "${intent_command}"
+}
+
+vnc_view () {
+
+	vnc_application="com.nulana.android.remotix/.Viewer"
+
+	unset intent_command
+
+	intent_command+="am start"
+	intent_command+=" -a android.intent.action.VIEW"
+	intent_command+=" -d vnc://${ADDRESS}:${PORT}"
+	intent_command+=" -S ${vnc_application}"
 
 	frobulator.silence "${intent_command}"
 }
@@ -1037,6 +1055,14 @@ then
 	# start vnc session with new selection
 
 	vnc_new
+fi
+
+if [ "${option}" = "view" ]
+then
+	# reload vnc viewer application window:
+	# some activity launches are buggy
+
+	vnc_view
 fi
 
 if [ "${option}" = "application" ]
