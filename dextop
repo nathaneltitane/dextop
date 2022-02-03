@@ -478,6 +478,17 @@ then
 		frobulator.file "${HOME}"/.dextop dextop-backgrounds-checkpoint
 	fi
 
+	# login
+
+	if [ ! -f "${HOME}"/.dextop/dextop-login-checkpoint ]
+	then
+		frobulator.file "${HOME}"/.dextop dextop-login
+
+		frobulator.write login "${HOME}"/.dextop dextop-login
+
+		frobulator.file "${HOME}"/.dextop dextop-login-checkpoint
+	fi
+
 	# logout
 
 	if [ ! -f "${HOME}"/.dextop/dextop-logout-checkpoint ]
