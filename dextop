@@ -349,6 +349,7 @@ then
 
 		frobulator.link "${PREFIX}"/bin "${HOME}"      bash-aliases       .bash_aliases
 		frobulator.link "${PREFIX}"/bin "${HOME}"      bash-configuration .bashrc
+		frobulator.link "${PREFIX}"/bin "${HOME}"      bash-configuration .bash_configuration
 		frobulator.link "${PREFIX}"/bin "${HOME}"      bash-functions     .bash_functions
 		frobulator.link "${PREFIX}"/bin "${HOME}"      bash-login         .bash_login
 		frobulator.link "${PREFIX}"/bin "${HOME}"      bash-logout        .bash_logout
@@ -360,6 +361,7 @@ then
 
 		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-aliases       .bash_aliases
 		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-configuration .bashrc
+		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-configuration .bash_configuration
 		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-functions     .bash_functions
 		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-login         .bash_login
 		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-logout        .bash_logout
