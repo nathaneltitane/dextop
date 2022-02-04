@@ -481,7 +481,6 @@ then
 	if [ ! -f "${HOME}"/.dextop/dextop-backgrounds-checkpoint ]
 	then
 		files_list=(
-			dextop-black.svg
 			dextop.svg
 		)
 
