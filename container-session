@@ -957,9 +957,8 @@ vnc_list () {
 
 		empty="N/A"
 
-		geometry="${empty}"
-		format="${empty}"
-
+		vnc_format="${empty}"
+		vnc_geometry="${empty}"
 		vnc_display="${empty}"
 		vnc_process="${empty}"
 		vnc_port="${empty}"
