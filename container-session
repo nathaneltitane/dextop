@@ -976,17 +976,12 @@ vnc_list () {
 		vnc_port="${vnc_port}"
 	fi
 
-	if [[ $(pidof proot) ]]
-	then
-		:
-	else
-		frobulator.inf "Format"   "[ ${vnc_format} ]"
-		frobulator.inf "Geometry" "[ ${vnc_geometry} ]"
-		frobulator.inf "Display"  "[ ${vnc_display} ]"
-		frobulator.inf "Process"  "[ ${vnc_process} ]"
-		frobulator.inf "Port"     "[ ${vnc_port} ]"
-		echo
-	fi
+	frobulator.inf "Format"   "[ ${vnc_format} ]"
+	frobulator.inf "Geometry" "[ ${vnc_geometry} ]"
+	frobulator.inf "Display"  "[ ${vnc_display} ]"
+	frobulator.inf "Process"  "[ ${vnc_process} ]"
+	frobulator.inf "Port"     "[ ${vnc_port} ]"
+	echo
 }
 
 vnc_password () {
