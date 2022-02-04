@@ -933,16 +933,11 @@ vnc_stop () {
 }
 
 vnc_list () {
-	# get values from 'vncserver -list'
-
-	vnc_port="${PORT}"
-
 	if [[ $(pidof Xvnc) ]] && [[ $(pidof proot) ]]
 	then
 		:
 	else
 		vnc_format=$(cat "${HOME}"/.vnc/format)
-
 		vnc_geometry=$(cat "${HOME}"/.vnc/geometry)
 
 		if [[ $(pidof proot) ]]
@@ -951,6 +946,8 @@ vnc_list () {
 		else
 			read vnc_display vnc_process <<< $(vncserver -list | tail -n 1)
 		fi
+
+		vnc_port="${PORT}"
 	fi
 
 	if [[ -z $(pidof Xvnc) ]]
@@ -967,7 +964,7 @@ vnc_list () {
 		vnc_process="${empty}"
 		vnc_port="${empty}"
 	fi
-	
+
 	if [[ $(pidof Xvnc) ]]
 	then
 		frobulator.fwd "Listing servers..."
