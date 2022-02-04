@@ -482,7 +482,7 @@ then
 	then
 		files_list=(
 			dextop-black.svg
-			dextop-white.svg
+			dextop.svg
 		)
 
 		frobulator.download get.dxtp.app "${HOME}"/.dextop ${files_list[@]}

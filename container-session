@@ -1016,7 +1016,7 @@ application_handle () {
 			zenity			 											\
 				--warning												\
 					--width="200"										\
-					--window-icon="${HOME}/.dextop/dextop-white.svg"	\
+					--window-icon="${HOME}/.dextop/dextop.svg"	\
 					--text="Application '${application}' not found." 2> /dev/null &
 		fi
 	fi
