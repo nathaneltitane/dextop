@@ -310,7 +310,7 @@ xfconf-query --create -c 'xfce4-panel'                 -p '/configver' -t int -s
 xfconf-query --create -c 'xfce4-panel'                 -p '/panels' -t int -s '1' -a
 xfconf-query --create -c 'xfce4-panel'                 -p '/panels/dark-mode' -t bool -s 'false'
 xfconf-query --create -c 'xfce4-panel'                 -p '/panels/panel-1/autohide-behavior' -t int -s '1'
-xfconf-query --create -c 'xfce4-panel'                 -p '/panels/panel-1/plugin-ids' -t int -s '1' -t int -s '2' -t int -s '3' -t int -s '4' -t int -s '5' -t int -s '6' -t int -s '7' -t int -s '8' -a
+xfconf-query --create -c 'xfce4-panel'                 -p '/panels/panel-1/plugin-ids' -t int -s '1' -t int -s '2' -t int -s '3' -t int -s '4' -t int -s '5' -t int -s '6' -t int -s '7' -t int -s '8' -t int -s '9' -a
 xfconf-query --create -c 'xfce4-panel'                 -p '/panels/panel-1/position' -t string -s 'p=9;x=0;y=0'
 xfconf-query --create -c 'xfce4-panel'                 -p '/panels/panel-1/position-locked' -t bool -s 'true'
 xfconf-query --create -c 'xfce4-panel'                 -p '/panels/panel-1/popdown-speed' -t int -s '0'
@@ -334,6 +334,9 @@ xfconf-query --create -c 'xfce4-panel'                 -p '/plugins/plugin-7/sin
 xfconf-query --create -c 'xfce4-panel'                 -p '/plugins/plugin-7/square-icons' -t bool -s 'true'
 xfconf-query --create -c 'xfce4-panel'                 -p '/plugins/plugin-8' -t string -s 'separator'
 xfconf-query --create -c 'xfce4-panel'                 -p '/plugins/plugin-8/style' -t int -s '0'
+xfconf-query --create -c 'xfce4-panel'                 -p '/plugins/plugin-9' -t string -s 'pulseaudio'
+xfconf-query --create -c 'xfce4-panel'                 -p '/plugins/plugin-9/enable-keyboard-shortcuts' -t bool -s 'true'
+xfconf-query --create -c 'xfce4-panel'                 -p '/plugins/plugin-9/mpris-players' -t string -s 'parole'
 xfconf-query --create -c 'xfwm4'                       -p '/general/activate_action' -t string -s 'switch'
 xfconf-query --create -c 'xfwm4'                       -p '/general/borderless_maximize' -t bool -s 'true'
 xfconf-query --create -c 'xfwm4'                       -p '/general/box_move' -t bool -s 'false'
