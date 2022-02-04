@@ -862,6 +862,8 @@ vnc_load () {
 		if [[ "${selection}" =~ ^[0-9]+$ ]]
 		then
 			echo "${selection}" > "${HOME}"/.vnc/selection
+			echo "${format}"    > "${HOME}"/.vnc/format
+			echo "${geometry}"  > "${HOME}"/.vnc/geometry
 		fi
 	fi
 
