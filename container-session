@@ -981,8 +981,8 @@ vnc_list () {
 	then
 		:
 	else
-		frobulator.inf "Format"   "[ ${format} ]"
-		frobulator.inf "Geometry" "[ ${geometry} ]"
+		frobulator.inf "Format"   "[ ${vnc_format} ]"
+		frobulator.inf "Geometry" "[ ${vnc_geometry} ]"
 		frobulator.inf "Display"  "[ ${vnc_display} ]"
 		frobulator.inf "Process"  "[ ${vnc_process} ]"
 		frobulator.inf "Port"     "[ ${vnc_port} ]"
