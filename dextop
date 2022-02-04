@@ -87,6 +87,10 @@ echo
 
 export option="${option}"
 
+ROOT=(${PREFIX}/cnt/*/*)
+
+export ROOT="${ROOT}"
+
 # defaults /////////////////////////////////////////////////////////////////////
 
 if [ -z "${option}" ]
@@ -100,10 +104,6 @@ fi
 
 container_setup () {
 	# run container setup commands through 'proot'
-
-	ROOT=(${PREFIX}/cnt/*/*)
-
-	export ROOT="${ROOT}"
 
 	# assume 'termux-exec' is installed
 
