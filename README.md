@@ -108,7 +108,7 @@ You should press 'Allow' when prompted during the setup to grant this permission
 
 To access your newly generated container:
 
-`'container-session -u <username> | -a <application>'` to start your session directly or with an application on load.
+`'container-session -o | -u <username> | -a <application>'` to start your session directly or with an application on load.
 
 ### The fun begins:
 
