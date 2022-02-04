@@ -249,6 +249,38 @@ then
 		frobulator.file "${HOME}"/.dextop dextop-directories-checkpoint
 	fi
 
+	# additions
+
+	if [ ! -f "${HOME}"/.dextop/dextop-additions-checkpoint ]
+	then
+		# termux
+
+		files_list+=(
+			termux
+			termux-browser
+			termux-chrome
+			termux-email
+			termux-gmail
+			termux-information
+			termux-message
+			termux-colors
+			termux-font
+			termux-properties
+		)
+
+		frobulator.download get.trmnl.me "${PREFIX}"/bin ${files_list[@]}
+
+		frobulator.link "${PREFIX}"/bin "${HOME}"/.termux termux-colors     colors.properties
+		frobulator.link "${PREFIX}"/bin "${HOME}"/.termux termux-font       font.ttf
+		frobulator.link "${PREFIX}"/bin "${HOME}"/.termux termux-properties termux.properties
+
+		settings_intent
+
+		files_list=()
+
+		frobulator.file "${HOME}"/.dextop dextop-additions-checkpoint
+	fi
+
 	# termux
 
 	if [ ! -f "${HOME}"/.dextop/dextop-termux-checkpoint ]
@@ -282,38 +314,6 @@ then
 		container_setup "${PREFIX}"/bin/container-user
 
 		frobulator.file "${HOME}"/.dextop dextop-container-checkpoint
-	fi
-
-	# additions
-
-	if [ ! -f "${HOME}"/.dextop/dextop-additions-checkpoint ]
-	then
-		# termux
-
-		files_list+=(
-			termux
-			termux-browser
-			termux-chrome
-			termux-email
-			termux-gmail
-			termux-information
-			termux-message
-			termux-colors
-			termux-font
-			termux-properties
-		)
-
-		frobulator.download get.trmnl.me "${PREFIX}"/bin ${files_list[@]}
-
-		frobulator.link "${PREFIX}"/bin "${HOME}"/.termux termux-colors     colors.properties
-		frobulator.link "${PREFIX}"/bin "${HOME}"/.termux termux-font       font.ttf
-		frobulator.link "${PREFIX}"/bin "${HOME}"/.termux termux-properties termux.properties
-
-		settings_intent
-
-		files_list=()
-
-		frobulator.file "${HOME}"/.dextop dextop-additions-checkpoint
 	fi
 
 	# shell
