@@ -85,10 +85,6 @@ echo
 
 # variables ////////////////////////////////////////////////////////////////////
 
-ROOT=(${PREFIX}/cnt/*/*)
-
-export ROOT="${ROOT}"
-
 # defaults /////////////////////////////////////////////////////////////////////
 
 if [ -z "${option}" ]
@@ -99,6 +95,12 @@ then
 fi
 
 # functions ////////////////////////////////////////////////////////////////////
+
+container_root () {
+	ROOT=(${PREFIX}/cnt/*/*)
+
+	export ROOT="${ROOT}"
+}
 
 container_setup () {
 	# run container setup commands through 'proot'
@@ -301,6 +303,8 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-container-checkpoint ]
 	then
+		container_root
+
 		container_setup "${PREFIX}"/bin/container-expansion
 		container_setup "${PREFIX}"/bin/container-repositories
 		container_setup "${PREFIX}"/bin/container-packages
