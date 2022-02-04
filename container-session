@@ -947,15 +947,8 @@ vnc_list () {
 	# integer check:
 	# set values for list output
 
-	if [[ "${vnc_process}" =~ ^[0-9]+$ ]]
+	if [[ -z $(pidof Xvnc) ]]
 	then
-		frobulator.fwd "Listing servers..."
-		echo
-
-		vnc_display="${vnc_display}"
-		vnc_process="${vnc_process}"
-		vnc_port="${vnc_port}"
-	else
 		frobulator.wrn "No active servers detected."
 		echo
 
@@ -967,6 +960,21 @@ vnc_list () {
 		vnc_display="${empty}"
 		vnc_process="${empty}"
 		vnc_port="${empty}"
+	else
+		if [[ $(pidof Xvnc) ]]
+		then
+			if [[ "${vnc_process}" =~ ^[0-9]+$ ]]
+			then
+				frobulator.fwd "Listing servers..."
+				echo
+
+				vnc_format=$(cat "${HOME}/.vnc/format)
+				vnc_geometry=$(cat "${HOME}/.vnc/geometry)
+				vnc_display="${vnc_display}"
+				vnc_process="${vnc_process}"
+				vnc_port="${vnc_port}"
+			fi
+		fi
 	fi
 
 	if [[ $(pidof proot) ]]
