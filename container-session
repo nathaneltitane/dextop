@@ -937,13 +937,18 @@ vnc_list () {
 
 	vnc_port="${PORT}"
 
-	if [[ $(pidof proot) ]]
+	if [[ $(pidof Xvnc) ]]
 	then
-		read vnc_display _ vnc_process _ <<< $(vncserver -list | tail -n 1)
+		:
 	else
-		read vnc_display vnc_process <<< $(vncserver -list | tail -n 1)
+		if [[ $(pidof proot) ]]
+		then
+			read vnc_display _ vnc_process _ <<< $(vncserver -list | tail -n 1)
+		else
+			read vnc_display vnc_process <<< $(vncserver -list | tail -n 1)
+		fi
 	fi
-
+	
 	# integer check:
 	# set values for list output
 
