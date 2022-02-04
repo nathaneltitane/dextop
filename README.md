@@ -35,7 +35,7 @@ This is required due to the Android user space runtime policy and limited hardwa
 
 - Dextop does not root your device!
 - Dextop does not load any services or backends!
-- Dextop does not install or configure audio or advanced system services!
+- Dextop does not install or configure advanced system services!
 
 Dextop only loads applications as needed to keep a minimal footprint!
 
@@ -128,13 +128,28 @@ Logging out by pressing Ctrl+D or by typing `'logout'` or `'exit'` will automati
 
 Automatic utility updates on login can be enabled as follows:
 
-`'echo update >> ${HOME}/.dextop/dextop-update'`
+`'echo update > ${HOME}/.dextop/dextop-update'`
 
 Dextop will automatically fetch all relevant utilities and replace them withthe up-to-date versions.
 
 Automatic utility updates on login can be disabled as follows:
 
 `'echo '' > ${HOME}/.dextop/dextop-update'`
+
+### Audio:
+
+Audio playback is configured and supported through 'pulseaudio'.
+
+It is not recommended for use as it is very battery and cpu intensive:
+latency on playback may vary depending on your device's hardware specification and if running directly under the Termux shell or from within a container.
+
+Audio playback on login can be enabled as follows:
+
+`'echo audio > ${HOME}/.dextop/dextop-audio'`
+
+Audio playback can be disabled as follows:
+
+`'echo '' > ${HOME}/.dextop/dextop-audio'`
 
 ### Session logout:
 
