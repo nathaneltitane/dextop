@@ -524,6 +524,15 @@ then
 		frobulator.file "${HOME}"/.dextop dextop-update-checkpoint
 	fi
 
+	# audio
+
+	if [ ! -f "${HOME}"/.dextop/dextop-audio-checkpoint ]
+	then
+		frobulator.file "${HOME}"/.dextop dextop-audio
+
+		frobulator.file "${HOME}"/.dextop dextop-audio-checkpoint
+	fi
+
 	# move setup
 
 	if [ ! -f "${HOME}"/.dextop/dextop-move-checkpoint ]
