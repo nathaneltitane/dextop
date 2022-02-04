@@ -95,7 +95,7 @@ if [ -z "${option}" ]
 then
 	option="xfce"
 
-	echo "${option}" > "${HOME}"/.dextop/dextop-option
+	frobulator.flag "${option}" "${HOME}"/.dextop dextop-option
 fi
 
 # functions ////////////////////////////////////////////////////////////////////
