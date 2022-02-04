@@ -159,27 +159,11 @@ xfce_addons_list=(
 	xfce4-whiskermenu-plugin
 )
 
-# options #
-
-# xfce
-
-if [[ "${DEXTOP_OPTION}" = "xfce" ]]
-then
-	desktop_environment_list+=(
-		${xfce_list[@]}
-		${xfce_fonts_list[@]}
-		${xfce_themes_list[@]}
-	)
-
-	#	${xfce_addons_list[@]}
-fi
-
-# none
-
-if [[ "${DEXTOP_OPTION}" = "console" ]]
-then
-	desktop_environment_list=()
-fi
+desktop_environment_list+=(
+	${xfce_list[@]}
+	${xfce_fonts_list[@]}
+	${xfce_themes_list[@]}
+)
 
 # install #
 
