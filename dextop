@@ -20,13 +20,13 @@ while (($#))
 do
 	case "${1}"
 	in
-	#	-x|--xfce)
-	#		option="xfce"
-	#	;;
+		-x|--xfce)
+			option="xfce"
+		;;
 
-	#	-c|--console)
-	#		option="console"
-	#	;;
+		-c|--console)
+			option="console"
+		;;
 
 		-u|--update)
 			option="update"
@@ -36,9 +36,9 @@ do
 			echo
 			echo -e "USAGE:"
 			echo
-		#	echo -e "-x, --xfce       Setup XFCE desktop environment and utilities."
-		#	echo -e "-c, --console    Setup Console access to environment and utilities."
-		#	echo
+			echo -e "-x, --xfce       Setup XFCE desktop environment and utilities."
+			echo -e "-c, --console    Setup Console access to environment and utilities."
+			echo
 			echo -e "-u, --update     Update Termux application packages. [ F-Droid ]"
 			echo
 			echo -e "-h, --help       Show help and usage information."
@@ -95,7 +95,7 @@ if [ -z "${option}" ]
 then
 	option="xfce"
 
-	frobulator.write "${option}" "${HOME}"/.dextop dextop-option
+	echo "${option}" > "${HOME}"/.dextop/dextop-option
 fi
 
 # functions ////////////////////////////////////////////////////////////////////
