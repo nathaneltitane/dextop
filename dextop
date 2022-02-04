@@ -89,6 +89,8 @@ ROOT=(${PREFIX}/cnt/*/*)
 
 export ROOT="${ROOT}"
 
+export DEXTOP_OPTION="${option}"
+
 # defaults /////////////////////////////////////////////////////////////////////
 
 if [ -z "${option}" ]
