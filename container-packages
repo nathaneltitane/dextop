@@ -159,7 +159,7 @@ xfce_addons_list=(
 
 # xfce
 
-if [[ $(cat "${HOME}"/.dextop/dextop-option) = "xfce" ]]
+if [[ "${DEXTOP_OPTION}" = "xfce" ]]
 then
 	desktop_environment_list+=(
 		${xfce_list[@]}
@@ -172,7 +172,7 @@ fi
 
 # none
 
-if [[ $(cat "${HOME}"/.dextop/dextop-option) = "c" ]]
+if [[ "${DEXTOP_OPTION}" = "console" ]]
 then
 	desktop_environment_list=()
 fi
