@@ -408,10 +408,10 @@ then
 			Papirus
 		)
 
+		frobulator.keep "${HOME}"/.icons ${themes_list[@]}
+
 		for theme in ${themes_list[@]}
 		do
-			frobulator.keep "${HOME}"/.icons/"${theme}"
-
 			frobulator.require gtk-update-icon-cache
 
 			frobulator.log "gtk-update-icon-cache ${HOME}/.icons/${theme}"
