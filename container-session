@@ -871,26 +871,31 @@ vnc_load () {
 }
 
 vnc_start () {
-	# handle selections display
-
-	if [ -f "${HOME}"/.vnc/selection ]
+	if [[ $(pidof Xvnc) ]]
 	then
-		# hide if selection file is present
-
-		vnc_geometry > /dev/null 2>&1
+		:
 	else
-		# show if selection file is not present
+		# handle selections display
 
-		vnc_geometry
+		if [ -f "${HOME}"/.vnc/selection ]
+		then
+			# hide if selection file is present
+
+			vnc_geometry > /dev/null 2>&1
+		else
+			# show if selection file is not present
+
+			vnc_geometry
+		fi
+
+		# handle vnc selections
+
+		vnc_handle
+
+		# start vnc session
+
+		vnc_load
 	fi
-
-	# handle vnc selections
-
-	vnc_handle
-
-	# start vnc session
-
-	vnc_load
 }
 
 vnc_new () {
