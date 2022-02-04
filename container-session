@@ -951,8 +951,8 @@ vnc_list () {
 		echo
 
 		vnc_display="${vnc_display}"
-		vnc_port="${vnc_port}"
 		vnc_process="${vnc_process}"
+		vnc_port="${vnc_port}"
 	else
 		frobulator.wrn "No active servers detected."
 		echo
@@ -963,16 +963,21 @@ vnc_list () {
 		format="${empty}"
 
 		vnc_display="${empty}"
-		vnc_port="${empty}"
 		vnc_process="${empty}"
+		vnc_port="${empty}"
 	fi
 
-	frobulator.inf "Geometry" "[ ${geometry} ]"
-	frobulator.inf "Format"   "[ ${format} ]"
-	frobulator.inf "Display"  "[ ${vnc_display} ]"
-	frobulator.inf "Port"     "[ ${vnc_port} ]"
-	frobulator.inf "Process"  "[ ${vnc_process} ]"
-	echo
+	if [[ $(pidof proot) ]]
+	then
+		:
+	else
+		frobulator.inf "Format"   "[ ${format} ]"
+		frobulator.inf "Geometry" "[ ${geometry} ]"
+		frobulator.inf "Display"  "[ ${vnc_display} ]"
+		frobulator.inf "Process"  "[ ${vnc_process} ]"
+		frobulator.inf "Port"     "[ ${vnc_port} ]"
+		echo
+	fi
 }
 
 vnc_password () {
