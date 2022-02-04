@@ -937,7 +937,8 @@ vnc_list () {
 
 	vnc_port="${PORT}"
 
-	if [[ $(pidof Xvnc) ]]
+	if [[ $(pidof Xvnc) ]] && [[ $(pidof proot) ]]
+
 	then
 		:
 	else
