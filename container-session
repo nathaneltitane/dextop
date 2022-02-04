@@ -849,10 +849,6 @@ vnc_load () {
 
 	frobulator.silence "exec ${command_start}"
 
-	vnc_pid=$!
-
-	echo $vnc_pid
-
 	# make selection available for automatic start:
 	# verify user id - do not write selection when 'root' user is logged in
 
