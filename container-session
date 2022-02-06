@@ -829,7 +829,7 @@ vnc_framebuffer () {
 	command_framebuffer+=" -screen ${DISPLAY_NUMBER}"
 	command_framebuffer+=" ${geometry}x24"
 
-	${command_framebuffer} &
+	${command_framebuffer} & > /dev/null 2>&1
 #	frobulator.silence "exec ${command_framebuffer}"
 }
 
