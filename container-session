@@ -834,6 +834,8 @@ vnc_framebuffer () {
 	command_framebuffer+=" ${geometry}x24"
 
 	${command_framebuffer} > /dev/null 2>&1 &
+
+	x_pid=$!
 }
 
 vnc_desktop () {
@@ -946,6 +948,8 @@ vnc_new () {
 }
 
 vnc_stop () {
+	kill $x_pid
+
 	x11vnc -R stop > devnull 2>&1 &
 
 	frobulator.progress "Stopping display server..."
