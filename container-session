@@ -935,9 +935,10 @@ vnc_new () {
 }
 
 vnc_stop () {
-	x11vnc -R stop
-#	frobulator.progress "Stopping display server..."
-#	echo
+	x11vnc -R stop &
+
+	frobulator.progress "Stopping display server..."
+	echo
 
 	# clean display server runtime files
 
