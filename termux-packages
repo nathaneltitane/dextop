@@ -39,6 +39,7 @@ frobulator.upgrade
 # values #
 
 display_list=(
+	xorg-server-xvfb
 )
 
 documentation_list=(
@@ -103,7 +104,7 @@ utilities_list=(
 )
 
 vnc_list=(
-	tigervnc
+	x11vnc
 )
 
 xfce_list=(

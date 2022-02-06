@@ -47,6 +47,7 @@ display_list=(
 	x11-xfs-utils
 	x11-xkb-utils
 	x11-xserver-utils
+	xvfb
 )
 
 documentation_list=(
@@ -76,8 +77,7 @@ utilities_list=(
 )
 
 vnc_list=(
-	tigervnc-common
-	tigervnc-standalone-server
+	x11vnc
 )
 
 xfce_list=(
