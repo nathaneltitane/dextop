@@ -140,7 +140,7 @@ fi
 
 if [ -z "${DISPLAY}" ]
 then
-	DISPLAY=":1"
+	DISPLAY=":0"
 fi
 
 if [ -z "${DISPLAY_NUMBER}" ]
@@ -838,11 +838,6 @@ vnc_load () {
 	frobulator.fwd "Starting display server..."
 	echo
 
-	depth="32"
-	security="none"
-	timeout="0"
-	xstartup="$(echo $(command -v startxfce4 &))"
-
 	# Notes:
 	# 'vncserver' uses $DISPLAY instead of $PORT
 	# use 'x11vnc' to ensure proper parameter application
@@ -861,6 +856,7 @@ vnc_load () {
 	command_load+=" -noxrecord"
 
 	${command_load} > /dev/null 2>&1 &
+	#${command_load} &
 
 	# make selection available for automatic start:
 	# verify user id - do not write selection when 'root' user is logged in
