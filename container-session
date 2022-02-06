@@ -823,6 +823,9 @@ vnc_view () {
 }
 
 vnc_framebuffer () {
+	frobulator.fwd "Setting virtual framebuffer..."
+	echo
+
 	unset command_framebuffer
 
 	command_framebuffer+="Xvfb"
@@ -853,7 +856,11 @@ vnc_load () {
 
 	${command_load} > /dev/null 2>&1 &
 
-	xfce4-session &
+	unset command_xstartup
+
+	command_xstartup+="xfce4_session"
+
+	${command_xstartup} > /dev/null 2>&1 &
 
 	# make selection available for automatic start:
 	# verify user id - do not write selection when 'root' user is logged in
