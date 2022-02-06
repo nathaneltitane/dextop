@@ -830,7 +830,6 @@ vnc_framebuffer () {
 	command_framebuffer+=" ${geometry}x24"
 
 	${command_framebuffer} > /dev/null 2>&1 &
-#	frobulator.silence "exec ${command_framebuffer}"
 }
 
 vnc_load () {
@@ -850,29 +849,18 @@ vnc_load () {
 
 	unset command_load
 
-#	command_load+="vncserver"
-#	command_load+=" -xstartup ${xstartup}"
-#	command_load+=" -SecurityTypes ${security}"
-#	command_load+=" -IdleTimeout ${timeout}"
-#	command_load+=" -depth ${depth}"
-#	command_load+=" -geometry ${geometry}"
-#	command_load+=" -desktop ${name}"
-#	command_load+=" -nolock"
-#	command_load+=" ${DISPLAY}"
-
 	command_load+="x11vnc"
 	command_load+=" -display ${DISPLAY}"
 	command_load+=" -clip xinerama=${DISPLAY}"
-	command_load+=" -xkb"
-	command_load+=" -noxdamage"
-	command_load+=" -noxrecord"
-	command_load+=" -noxfixes"
-	command_load+=" -noshm"
-	command_load+=" -scale 1.00"
 	command_load+=" -rfbport ${PORT}"
+	command_load+=" -scale 1.00"
+	command_load+=" -xkb"
+	command_load+=" -noshm"
+	command_load+=" -noxdamage"
+	command_load+=" -noxfixes"
+	command_load+=" -noxrecord"
 
 	${command_load} > /dev/null 2>&1 &
-#	frobulator.silence "exec ${command_load}"
 
 	# make selection available for automatic start:
 	# verify user id - do not write selection when 'root' user is logged in
