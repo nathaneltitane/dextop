@@ -829,7 +829,7 @@ vnc_framebuffer () {
 	command_framebuffer+=" -screen ${DISPLAY_NUMBER}"
 	command_framebuffer+=" ${geometry}x24"
 
-	${command_framebuffer} & > /dev/null 2>&1
+	${command_framebuffer} > /dev/null 2>&1 &
 #	frobulator.silence "exec ${command_framebuffer}"
 }
 
@@ -871,7 +871,7 @@ vnc_load () {
 	command_load+=" -scale 1.00"
 	command_load+=" -rfbport ${PORT}"
 
-	${command_load} &
+	${command_load} > /dev/null 2>&1 &
 #	frobulator.silence "exec ${command_load}"
 
 	# make selection available for automatic start:
