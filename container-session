@@ -833,6 +833,8 @@ vnc_framebuffer () {
 }
 
 vnc_load () {
+	vnc_framebuffer
+
 	frobulator.fwd "Starting display server..."
 	echo
 
