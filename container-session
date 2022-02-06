@@ -935,13 +935,7 @@ vnc_new () {
 }
 
 vnc_stop () {
-	unset command_stop
-
-	command_stop+="x11vnc"
-	command_stop+=" -R stop"
-
-	"${command_stop}"
-
+	x11vnc -R stop
 #	frobulator.progress "Stopping display server..."
 #	echo
 
