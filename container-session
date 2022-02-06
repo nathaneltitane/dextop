@@ -992,7 +992,7 @@ vnc_list () {
 		vnc_port="${empty}"
 	fi
 
-	frobulator.wrn "X PID" "$x_pid"
+	frobulator.wrn "X PID" "${x_pid}"
 	frobulator.inf "Format"   "[ ${vnc_format} ]"
 	frobulator.inf "Geometry" "[ ${vnc_geometry} ]"
 	frobulator.inf "Display"  "[ ${vnc_display} ]"
