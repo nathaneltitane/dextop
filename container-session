@@ -834,8 +834,6 @@ vnc_framebuffer () {
 	command_framebuffer+=" ${geometry}x24"
 
 	${command_framebuffer} > /dev/null 2>&1 &
-
-	x_pid=$!
 }
 
 vnc_desktop () {
@@ -948,9 +946,15 @@ vnc_new () {
 }
 
 vnc_stop () {
-	pkill -9 $x_pid
+	if [[ $(pidof Xvfb) ]]
+	then
+		killall Xvfb
+	fi
 
-	x11vnc -R stop > devnull 2>&1 &
+	if [[ $(pidof x11vnc) ]]
+	then
+		x11vnc -R stop > devnull 2>&1 &
+	fi
 
 	frobulator.progress "Stopping display server..."
 	echo
@@ -992,7 +996,6 @@ vnc_list () {
 		vnc_port="${empty}"
 	fi
 
-	frobulator.wrn "X PID" "${x_pid}"
 	frobulator.inf "Format"   "[ ${vnc_format} ]"
 	frobulator.inf "Geometry" "[ ${vnc_geometry} ]"
 	frobulator.inf "Display"  "[ ${vnc_display} ]"
