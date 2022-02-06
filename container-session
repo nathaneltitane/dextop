@@ -419,7 +419,7 @@ container_user () {
 
 	done < "${ROOT}"/etc/passwd
 
-	if [ "${HOME}" = "/	root" ]
+	if [ "${HOME}" = "/root" ]
 	then
 		session_name="CONSOLE"
 
