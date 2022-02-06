@@ -400,6 +400,7 @@ container_user () {
 					session_name="N/A"
 				fi
 			fi
+		fi
 
 			frobulator.scs "Valid user name" "[ '${USER}' ]"
 			echo
