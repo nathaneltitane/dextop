@@ -824,7 +824,7 @@ vnc_view () {
 }
 
 vnc_framebuffer () {
-	frobulator.fwd "Setting virtual framebuffer..."
+	frobulator.fwd "Generating framebuffer..."
 	echo
 
 	unset command_framebuffer
@@ -866,7 +866,7 @@ vnc_load () {
 			echo "${geometry}"  > "${HOME}"/.vnc/geometry
 		fi
 	fi
-	
+
 	vnc_framebuffer
 
 	frobulator.fwd "Starting display server..."
@@ -946,18 +946,23 @@ vnc_new () {
 }
 
 vnc_stop () {
+	# handle and stop display processes
+
 	if [[ $(pidof Xvfb) ]]
 	then
-		killall Xvfb
+		killall Xvfb &
+
+		frobulator.progress "Stopping framebuffer..."
+		echo
 	fi
 
 	if [[ $(pidof x11vnc) ]]
 	then
 		x11vnc -R stop > devnull 2>&1 &
-	fi
 
-	frobulator.progress "Stopping display server..."
-	echo
+		frobulator.progress "Stopping display server..."
+		echo
+	fi
 
 	# clean display server runtime files
 
