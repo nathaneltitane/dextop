@@ -806,7 +806,7 @@ vnc_intent () {
 	intent_command+=" -a android.intent.action.VIEW"
 	intent_command+=" -d vnc://${ADDRESS}:${PORT}"
 
-	"${intent_command}" > /dev/null 2>&1
+	frobulator.silence "${intent_command}"
 }
 
 vnc_view () {
