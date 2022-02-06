@@ -389,12 +389,16 @@ container_user () {
 		then
 			USER="${USER}"
 
-			if [[ $(cat "${HOME}"/.dextop/dextop-option) = "xfce" ]]
+			if [[ "${USER}" = "root"]]
 			then
-				session_name="XFCE"
+				session_name="CONSOLE"
 			else
-				session_name="N/A"
-
+				if [[ $(cat "${HOME}"/.dextop/dextop-option) = "xfce" ]]
+				then
+					session_name="XFCE"
+				else
+					session_name="N/A"
+				fi
 			fi
 
 			frobulator.scs "Valid user name" "[ '${USER}' ]"
