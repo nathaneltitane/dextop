@@ -837,9 +837,14 @@ vnc_framebuffer () {
 }
 
 vnc_desktop () {
-	if [[ $(command -v xfce4-session) ]]
+	if [[ $(ppidof xfce4-session) ]]
 	then
-		xfce4-session &
+		:
+	else
+		if [[ $(command -v xfce4-session) ]]
+		then
+			xfce4-session &
+		fi
 	fi
 }
 
