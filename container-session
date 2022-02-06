@@ -948,7 +948,7 @@ vnc_new () {
 }
 
 vnc_stop () {
-	kill -9 $x_pid
+	pkill -9 $x_pid
 
 	x11vnc -R stop > devnull 2>&1 &
 
