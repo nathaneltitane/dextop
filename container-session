@@ -954,6 +954,7 @@ vnc_list () {
 	vnc_format=$(cat "${HOME}"/.vnc/format)
 	vnc_geometry=$(cat "${HOME}"/.vnc/geometry)
 	vnc_display=${DISPLAY}
+	vnc_process=$(pidof x11vnc)
 	vnc_port="${PORT}"
 
 	if [[ $(pidof x11vnc) ]]
