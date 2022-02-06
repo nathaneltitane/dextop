@@ -837,7 +837,7 @@ vnc_framebuffer () {
 }
 
 vnc_desktop () {
-	if [[ $(ppidof xfce4-session) ]]
+	if [[ $(pidof xfce4-session) ]]
 	then
 		:
 	else
@@ -849,6 +849,24 @@ vnc_desktop () {
 }
 
 vnc_load () {
+	# make selection available for automatic start:
+	# verify user id - do not write selection when 'root' user is logged in
+
+	if [[ $(id -u -n) = "root" ]]
+	then
+		:
+	else
+		# integer check:
+		# do not write non numerical values to file
+
+		if [[ "${selection}" =~ ^[0-9]+$ ]]
+		then
+			echo "${selection}" > "${HOME}"/.vnc/selection
+			echo "${format}"    > "${HOME}"/.vnc/format
+			echo "${geometry}"  > "${HOME}"/.vnc/geometry
+		fi
+	fi
+	
 	vnc_framebuffer
 
 	frobulator.fwd "Starting display server..."
@@ -871,23 +889,7 @@ vnc_load () {
 
 	${command_load} > /dev/null 2>&1 &
 
-	# make selection available for automatic start:
-	# verify user id - do not write selection when 'root' user is logged in
-
-	if [[ $(id -u -n) = "root" ]]
-	then
-		:
-	else
-		# integer check:
-		# do not write non numerical values to file
-
-		if [[ "${selection}" =~ ^[0-9]+$ ]]
-		then
-			echo "${selection}" > "${HOME}"/.vnc/selection
-			echo "${format}"    > "${HOME}"/.vnc/format
-			echo "${geometry}"  > "${HOME}"/.vnc/geometry
-		fi
-	fi
+	wait
 
 	vnc_desktop
 
