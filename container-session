@@ -940,7 +940,7 @@ vnc_stop () {
 	command_stop+="x11vnc"
 	command_stop+=" -R stop"
 
-	"${command_stop}" > /dev/null 2>&1 &
+	"${command_stop}" &
 
 	frobulator.progress "Stopping display server..."
 	echo
