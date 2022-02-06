@@ -838,10 +838,6 @@ vnc_load () {
 	frobulator.fwd "Starting display server..."
 	echo
 
-	# Notes:
-	# 'vncserver' uses $DISPLAY instead of $PORT
-	# use 'x11vnc' to ensure proper parameter application
-
 	unset command_load
 
 	command_load+="x11vnc"
@@ -856,7 +852,8 @@ vnc_load () {
 	command_load+=" -noxrecord"
 
 	${command_load} > /dev/null 2>&1 &
-	#${command_load} &
+
+	xfce4-session &
 
 	# make selection available for automatic start:
 	# verify user id - do not write selection when 'root' user is logged in
