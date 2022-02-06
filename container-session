@@ -937,6 +937,8 @@ vnc_stop () {
 
 	# clean display server runtime files
 
+	wait
+
 	vnc_clean
 }
 
