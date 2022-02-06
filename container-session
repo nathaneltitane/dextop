@@ -836,6 +836,13 @@ vnc_framebuffer () {
 	${command_framebuffer} > /dev/null 2>&1 &
 }
 
+vnc_desktop () {
+	if [[ $(command -v xfce4-session) ]]
+	then
+		xfce4-session &
+	fi
+}
+
 vnc_load () {
 	vnc_framebuffer
 
@@ -876,6 +883,8 @@ vnc_load () {
 			echo "${geometry}"  > "${HOME}"/.vnc/geometry
 		fi
 	fi
+
+	vnc_desktop
 
 	vnc_intent
 }
