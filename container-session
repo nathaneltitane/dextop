@@ -843,9 +843,9 @@ vnc_desktop () {
 	else
 		if [[ $(command -v xfce4-session) ]]
 		then
-			xfce4-session > /dev/null 2>&1 &
+			xfce4-session > /dev/null 2>&1
 
-			frobulator.progress "Loading desktop..."
+			frobulator.fwd "Loading desktop..."
 			echo
 		fi
 	fi
