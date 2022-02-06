@@ -377,6 +377,8 @@ container_user () {
 		then
 			USER="root"
 
+			session_name="CONSOLE"
+
 			frobulator.wrn "No user name - Defaulting" "[ '${USER}' ]"
 			echo
 
@@ -387,6 +389,14 @@ container_user () {
 		then
 			USER="${USER}"
 
+			if [[ $(cat "${HOME}"/.dextop/dextop-option) = "xfce" ]]
+			then
+				session_name="XFCE"
+			else
+				session_name="N/A"
+
+			fi
+
 			frobulator.scs "Valid user name" "[ '${USER}' ]"
 			echo
 
@@ -396,6 +406,8 @@ container_user () {
 		if [[ "${entry}" == "${last_entry}" ]]
 		then
 			USER="root"
+
+			session_name="CONSOLE"
 
 			frobulator.err "Invalid user name - Defaulting" "[ '${USER}' ]"
 			echo
@@ -415,22 +427,12 @@ container_user () {
 			else
 				HOME="/"
 			fi
+
+			session_name="CONSOLE"
+
 		fi
 
 	done < "${ROOT}"/etc/passwd
-
-	if [ "${HOME}" = "/root" ]
-	then
-		session_name="CONSOLE"
-
-		:
-	else
-		if [[ $(cat "${HOME}"/.dextop/dextop-option) = "xfce" ]]
-		then
-			session_name="XFCE"
-		fi
-	fi
-
 }
 
 container_session () {
