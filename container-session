@@ -953,17 +953,10 @@ vnc_stop () {
 vnc_list () {
 	vnc_format=$(cat "${HOME}"/.vnc/format)
 	vnc_geometry=$(cat "${HOME}"/.vnc/geometry)
-
-	if [[ $(pidof proot) ]]
-	then
-		read vnc_display _ vnc_process _ <<< $(vncserver -list | tail -n 1)
-	else
-		read vnc_display vnc_process <<< $(vncserver -list | tail -n 1)
-	fi
-
+	vnc_display=${DISPLAY}
 	vnc_port="${PORT}"
 
-	if [[ $(pidof x11vnc) ]] || [[ $(pidof Xtigervnc) ]]
+	if [[ $(pidof x11vnc) ]]
 	then
 		frobulator.fwd "Listing servers..."
 		echo
