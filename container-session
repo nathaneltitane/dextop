@@ -784,7 +784,7 @@ vnc_intent () {
 	echo
 
 	# explicit VNC viewer application to kill:
-	# used when vncserver is stopped or restarted using vnc:// intent
+	# used when vnc is stopped or restarted using vnc:// intent
 	# when launched via the activity manager [ 'am start -d {URI} -S {ACTIVITY}' ]
 
 	# reference vnc session activity for known applications:
@@ -937,8 +937,8 @@ vnc_new () {
 vnc_stop () {
 	unset command_stop
 
-	command_stop+="vncserver"
-	command_stop+=" -kill ${DISPLAY}"
+	command_stop+="x11vnc"
+	command_stop+=" stop"
 
 	frobulator.silence "exec ${command_stop}" &
 
