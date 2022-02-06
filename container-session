@@ -125,17 +125,6 @@ echo
 
 # variables ////////////////////////////////////////////////////////////////////
 
-if [ "${HOME}" = "/	root" ]
-then
-	session_name="CONSOLE"
-	:
-else
-	if [[ $(cat "${HOME}"/.dextop/dextop-option) = "xfce" ]]
-	then
-		session_name="XFCE"
-	fi
-fi
-
 # defaults /////////////////////////////////////////////////////////////////////
 
 if [ -z "${DISPLAY}" ]
@@ -391,8 +380,6 @@ container_user () {
 			frobulator.wrn "No user name - Defaulting" "[ '${USER}' ]"
 			echo
 
-			# break out of loop - empty "${user_name}" - default to 'root'
-
 			break
 		fi
 
@@ -402,8 +389,6 @@ container_user () {
 
 			frobulator.scs "Valid user name" "[ '${USER}' ]"
 			echo
-
-			# break out of loop - matching "${user_name}"
 
 			break
 		fi
@@ -430,12 +415,22 @@ container_user () {
 			else
 				HOME="/"
 			fi
-
-			session_name="CONSOLE"
-
 		fi
 
 	done < "${ROOT}"/etc/passwd
+
+	if [ "${HOME}" = "/	root" ]
+	then
+		session_name="CONSOLE"
+
+		:
+	else
+		if [[ $(cat "${HOME}"/.dextop/dextop-option) = "xfce" ]]
+		then
+			session_name="XFCE"
+		fi
+	fi
+
 }
 
 container_session () {
@@ -805,7 +800,7 @@ vnc_intent () {
 	intent_command+=" -a android.intent.action.VIEW"
 	intent_command+=" -d vnc://${ADDRESS}:${PORT}"
 
-	frobulator.silence "${intent_command}"
+	"${intent_command}" > /dev/null 2>&1
 }
 
 vnc_view () {
