@@ -822,6 +822,16 @@ vnc_view () {
 	frobulator.silence "${intent_command}"
 }
 
+vnc_framebuffer () {
+	unset command_framebuffer
+
+	command_framebuffer+="Xvfb"
+	command_framebuffer+=" -screen ${DISPLAY_NUMBER}"
+	command_framebuffer+=" ${geometry}x24"
+
+	frobulator.silence "exec ${command_framebuffer}"
+}
+
 vnc_load () {
 	frobulator.fwd "Starting display server..."
 	echo
@@ -837,15 +847,26 @@ vnc_load () {
 
 	unset command_start
 
-	command_start+="vncserver"
-	command_start+=" -xstartup ${xstartup}"
-	command_start+=" -SecurityTypes ${security}"
-	command_start+=" -IdleTimeout ${timeout}"
-	command_start+=" -depth ${depth}"
-	command_start+=" -geometry ${geometry}"
-	command_start+=" -desktop ${name}"
-	command_start+=" -nolock"
-	command_start+=" ${DISPLAY}"
+#	command_start+="vncserver"
+#	command_start+=" -xstartup ${xstartup}"
+#	command_start+=" -SecurityTypes ${security}"
+#	command_start+=" -IdleTimeout ${timeout}"
+#	command_start+=" -depth ${depth}"
+#	command_start+=" -geometry ${geometry}"
+#	command_start+=" -desktop ${name}"
+#	command_start+=" -nolock"
+#	command_start+=" ${DISPLAY}"
+
+	command_start+="x11vnc"
+	command_start+=" -display ${DISPLAY}"
+	command_start+=" -clip xinerama=${DISPLAY}"
+	command_start+=" -xkb"
+	command_start+=" -noxdamage"
+	command_start+=" -noxrecord"
+	command_start+=" -noxfixes"
+	command_start+=" -noshm"
+	command_start+=" -scale 1.00"
+	command_start+=" -rfbport ${PORT}"
 
 	frobulator.silence "exec ${command_start}"
 
