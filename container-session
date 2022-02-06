@@ -849,7 +849,7 @@ vnc_load () {
 	command_load+=" -rfbport ${PORT}"
 	command_load+=" -scale 1.00"
 	command_load+=" -xkb"
-	command_load+=" -nocursor"
+	command_load+=" -nocursorshape"
 	command_load+=" -noshm"
 	command_load+=" -noxdamage"
 	command_load+=" -noxfixes"
