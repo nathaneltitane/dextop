@@ -389,7 +389,7 @@ container_user () {
 		then
 			USER="${USER}"
 
-			if [[ "${USER}" = "root"]]
+			if [[ "${USER}" = "root" ]]
 			then
 				session_name="CONSOLE"
 			else
