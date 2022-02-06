@@ -889,8 +889,6 @@ vnc_load () {
 
 	${command_load} > /dev/null 2>&1 &
 
-	wait
-
 	vnc_desktop
 
 	vnc_intent
