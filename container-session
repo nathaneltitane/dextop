@@ -942,8 +942,8 @@ vnc_stop () {
 
 	"${command_stop}"
 
-	frobulator.progress "Stopping display server..."
-	echo
+#	frobulator.progress "Stopping display server..."
+#	echo
 
 	# clean display server runtime files
 
