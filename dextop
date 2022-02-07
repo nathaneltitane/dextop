@@ -110,6 +110,8 @@ container_setup () {
 		ROOT=("${PREFIX}"/bin/*/*)
 
 		export ROOT="${ROOT}"
+
+		return
 	fi
 
 	# run container setup commands through 'proot'
