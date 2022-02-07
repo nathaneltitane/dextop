@@ -643,14 +643,6 @@ image_preload () {
 	FILE
 }
 
-image_location () {
-	# reference default container setup location
-
-	ROOT=("${PREFIX}"/cnt/*/*)
-
-	export ROOT="${ROOT}"
-}
-
 if [ "${option}" = "image" ]
 then
 	# validate distribution name and version
@@ -695,6 +687,3 @@ image_network
 # generate preload entries
 
 image_preload
-
-# reference container directory
-image_location
