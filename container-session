@@ -897,7 +897,7 @@ vnc_load () {
 	# connection to x11vnc is very fast:
 	# wait fro process to settle before launching vnc viewer
 
-	sleep 0.5
+	sleep 1
 
 	vnc_intent
 }

@@ -1,6 +1,6 @@
 
-06/02/2022 19:03:21 ***************************************
-06/02/2022 19:03:21 *** XOpenDisplay failed (:0)
+06/02/2022 19:08:46 ***************************************
+06/02/2022 19:08:46 *** XOpenDisplay failed (:0)
 
 *** x11vnc was unable to open the X DISPLAY: ":0", it cannot continue.
 *** There may be "Xlib:" error messages above with details about the failure.
