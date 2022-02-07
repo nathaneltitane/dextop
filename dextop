@@ -103,6 +103,15 @@ fi
 # functions ////////////////////////////////////////////////////////////////////
 
 container_setup () {
+	# make container setup location known
+
+	if [ $# -eq 0 ]
+	then
+		ROOT=("${PREFIX}"/bin/*/*)
+
+		export ROOT="${ROOT}"
+	fi
+
 	# run container setup commands through 'proot'
 
 	# assume 'termux-exec' is installed
@@ -307,6 +316,8 @@ then
 
 		if [ ! -f "${HOME}"/.dextop/dextop-container-checkpoint ]
 		then
+			container_setup
+
 			container_setup "${PREFIX}"/bin/container-expansion
 			container_setup "${PREFIX}"/bin/container-repositories
 			container_setup "${PREFIX}"/bin/container-packages
