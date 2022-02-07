@@ -894,6 +894,8 @@ vnc_load () {
 
 	vnc_desktop
 
+	sleep 2
+
 	vnc_intent
 }
 
