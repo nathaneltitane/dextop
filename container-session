@@ -843,7 +843,7 @@ vnc_desktop () {
 	else
 		if [[ $(command -v xfce4-session) ]]
 		then
-			frobulator.silence "xfce4-session"
+			frobulator.log "xfce4-session &"
 		fi
 	fi
 
