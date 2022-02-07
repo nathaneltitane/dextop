@@ -648,7 +648,7 @@ image_location () {
 
 	ROOT=("${PREFIX}"/cnt/*/*)
 
-	export "${ROOT}"
+	export ROOT="${ROOT}"
 }
 
 if [ "${option}" = "image" ]
