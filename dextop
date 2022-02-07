@@ -449,10 +449,10 @@ then
 
 		frobulator.keep "${HOME}"/.icons ${themes_list[@]}
 
+		frobulator.require gtk-update-icon-cache
+
 		for theme in ${themes_list[@]}
 		do
-			frobulator.require gtk-update-icon-cache
-
 			frobulator.log "gtk-update-icon-cache ${HOME}/.icons/${theme}"
 		done
 
