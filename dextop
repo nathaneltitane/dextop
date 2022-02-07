@@ -300,7 +300,7 @@ then
 
 	# container
 
-	if [ "${option}" = "termux"]
+	if [[ "${option}" = "termux" ]]
 	then
 		:
 	else
