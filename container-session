@@ -988,7 +988,7 @@ vnc_list () {
 
 	if [[ $(pidof x11vnc) ]]
 	then
-		frobulator.fwd "Listing process details..."
+		frobulator.fwd "Listing session details..."
 		echo
 
 		vnc_format="${vnc_format}"
