@@ -28,6 +28,10 @@ do
 			option="console"
 		;;
 
+		-t|--termux)
+			option="termux"
+		;;
+
 		-u|--update)
 			option="update"
 		;;
@@ -38,6 +42,8 @@ do
 			echo
 			echo -e "-x, --xfce       Setup XFCE desktop environment and utilities."
 			echo -e "-c, --console    Setup Console access to environment and utilities."
+			echo
+			echo -e "-t, --termux     Setup Termux environmen and utilities."
 			echo
 			echo -e "-u, --update     Update Termux application packages. [ F-Droid ]"
 			echo
@@ -294,23 +300,28 @@ then
 
 	# container
 
-	if [ ! -f "${HOME}"/.dextop/dextop-image-checkpoint ]
+	if [ "${option}" = "termux"]
 	then
-		"${PREFIX}"/bin/container-image
+		:
+	else
+		if [ ! -f "${HOME}"/.dextop/dextop-image-checkpoint ]
+		then
+			"${PREFIX}"/bin/container-image
 
-		frobulator.file "${HOME}"/.dextop dextop-image-checkpoint
-	fi
+			frobulator.file "${HOME}"/.dextop dextop-image-checkpoint
+		fi
 
-	if [ ! -f "${HOME}"/.dextop/dextop-container-checkpoint ]
-	then
-		container_root
+		if [ ! -f "${HOME}"/.dextop/dextop-container-checkpoint ]
+		then
+			container_root
 
-		container_setup "${PREFIX}"/bin/container-expansion
-		container_setup "${PREFIX}"/bin/container-repositories
-		container_setup "${PREFIX}"/bin/container-packages
-		container_setup "${PREFIX}"/bin/container-user
+			container_setup "${PREFIX}"/bin/container-expansion
+			container_setup "${PREFIX}"/bin/container-repositories
+			container_setup "${PREFIX}"/bin/container-packages
+			container_setup "${PREFIX}"/bin/container-user
 
-		frobulator.file "${HOME}"/.dextop dextop-container-checkpoint
+			frobulator.file "${HOME}"/.dextop dextop-container-checkpoint
+		fi
 	fi
 
 	# additions
@@ -361,19 +372,24 @@ then
 
 		frobulator.file "${HOME}" .hushlogin
 
-		# root home
+		if [ "${option}" = "termux"]
+		then
+			:
+		else
+			# root home
 
-		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-aliases       .bash_aliases
-		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-configuration .bashrc
-		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-configuration .bash_configuration
-		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-functions     .bash_functions
-		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-login         .bash_login
-		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-logout        .bash_logout
-		frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-profile       .bash_profile
+			frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-aliases       .bash_aliases
+			frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-configuration .bashrc
+			frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-configuration .bash_configuration
+			frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-functions     .bash_functions
+			frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-login         .bash_login
+			frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-logout        .bash_logout
+			frobulator.link "${PREFIX}"/bin "${ROOT}"/root bash-profile       .bash_profile
 
-		frobulator.file "${ROOT}"/root .hushlogin
+			frobulator.file "${ROOT}"/root .hushlogin
 
-		files_list=()
+			files_list=()
+		fi
 
 		frobulator.file "${HOME}"/.dextop dextop-shell-checkpoint
 	fi
