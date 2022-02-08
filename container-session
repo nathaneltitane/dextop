@@ -314,6 +314,22 @@ container_input () {
 	fi
 }
 
+container_interface () {
+	# set session interface:
+	# represents installed DE or CONSOLE - N/A if undetermined
+
+	if [[ $(cat "${HOME}"/.dextop/dextop-option) = "xfce" ]]
+	then
+		session_name="XFCE"
+
+	elif [[ $(id -u -n) = "root" ]]
+	then
+		session_name="CONSOLE"
+	else
+		session_name="N/A"
+	fi
+}
+
 container_environment () {
 	# generate container environement
 
@@ -388,18 +404,6 @@ container_user () {
 		if [[ "${user_name}" == "${USER}" ]]
 		then
 			USER="${USER}"
-
-			if [[ "${USER}" = "root" ]]
-			then
-				session_name="CONSOLE"
-			else
-				if [[ $(cat "${HOME}"/.dextop/dextop-option) = "xfce" ]]
-				then
-					session_name="XFCE"
-				else
-					session_name="N/A"
-				fi
-			fi
 
 			frobulator.scs "Valid user name" "[ '${USER}' ]"
 			echo
@@ -836,7 +840,7 @@ vnc_framebuffer () {
 	${command_framebuffer} > /dev/null 2>&1 &
 }
 
-vnc_desktop () {
+vnc_interface () {
 	if [[ $(pidof xfce4-session) ]]
 	then
 		:
@@ -892,7 +896,7 @@ vnc_load () {
 
 	${command_load} > /dev/null 2>&1 &
 
-	vnc_desktop
+	vnc_interface
 
 	# connection to x11vnc is very fast:
 	# wait fro process to settle before launching vnc viewer
@@ -1120,6 +1124,10 @@ then
 
 	container_root
 
+	# designate interface
+
+	container_interface
+
 	# set environemnt
 
 	container_environment
@@ -1142,6 +1150,10 @@ then
 	# validate root filesystem
 
 	container_root
+
+	# designate interface
+
+	container_interface
 
 	# set environemnt
 
