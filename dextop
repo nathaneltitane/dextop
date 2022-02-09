@@ -192,7 +192,7 @@ then
 			termux-properties
 		)
 
-		frobulator.download get.trmnl.me "${PREFIX}"/bin ${files_list[@]}
+		frobulator.download get.trmx.app "${PREFIX}"/bin ${files_list[@]}
 
 		frobulator.link "${PREFIX}"/bin "${HOME}"/.termux termux-colors     colors.properties
 		frobulator.link "${PREFIX}"/bin "${HOME}"/.termux termux-font       font.ttf
@@ -343,7 +343,7 @@ then
 			termux-message
 		)
 
-		frobulator.download get.trmnl.me "${PREFIX}"/bin ${files_list[@]}
+		frobulator.download get.trmx.app "${PREFIX}"/bin ${files_list[@]}
 
 		files_list=()
 
