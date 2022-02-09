@@ -48,6 +48,7 @@ Dextop links the modified utilities that have been patched under Termux for some
 ### Hardware requirements:
 
 - Modern Android device (Android 7.0+: Termux limitation)
+- Approximately 4GB in free storage for symmetric setup (Termux and distribution container)
 - Mouse (bluetooth or other)
 - Keyboard (bluetooth or other)
 - Power source (for extended work periods and performance requirements: Samsung Dex limitation)
@@ -56,10 +57,10 @@ Dextop links the modified utilities that have been patched under Termux for some
 
 ### Software requirements:
 
-Install the following:
+Dextop uses the X11 virtual framebuffer 'xvfb' alongside the X11 VNC server 'x11vnc' to turn your Android device into a desktop workstation and let you access both the Termux and container side using a graphical interface.
+Think of the expreience as setting up a Virtual Machine on a normal computer and accessing it through the application's viewer.
 
-**Termux application downloads are to be made via F-Droid:**
-**Google Play Store updates are deprecated since November 2020**
+To proceed, install the following on your android device:
 
 - [Termux](https://f-droid.org/en/packages/com.termux/ "Termux by Fredrik Fornwall")
 - [Termux API](https://f-droid.org/en/packages/com.termux.api/ "Termux API by Fredrik Fornwall")
@@ -67,6 +68,9 @@ Install the following:
    - [Remotix](https://play.google.com/store/apps/details?id=com.nulana.android.remotix "Remotix Remote Desktop by Nulana")
    - [VNC Viewer ](https://play.google.com/store/apps/details?id=com.realvnc.viewer.android "VNC Viewer by RealVNC Ltd.")
    - [bVNC](https://play.google.com/store/apps/details?id=com.iiordanov.freebVNC "bVNC by Iordan Iordanov")
+
+**Termux application downloads are to be made via F-Droid:**
+**Google Play Store updates are deprecated since November 2020**
 
 ### Setting things up:
 
