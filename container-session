@@ -377,8 +377,6 @@ container_user () {
 		then
 			USER="root"
 
-			session_interface="CONSOLE"
-
 			frobulator.wrn "No user name - Defaulting" "[ '${USER}' ]"
 			echo
 
@@ -399,8 +397,6 @@ container_user () {
 		then
 			USER="root"
 
-			session_interface="CONSOLE"
-
 			frobulator.err "Invalid user name - Defaulting" "[ '${USER}' ]"
 			echo
 		fi
@@ -419,9 +415,6 @@ container_user () {
 			else
 				HOME="/"
 			fi
-
-			session_interface="CONSOLE"
-
 		fi
 
 	done < "${ROOT}"/etc/passwd
