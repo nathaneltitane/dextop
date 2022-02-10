@@ -314,22 +314,6 @@ container_input () {
 	fi
 }
 
-container_interface () {
-	# set session interface:
-	# represents installed DE or CONSOLE - N/A if undetermined
-
-	if [[ $(cat "${HOME}"/.dextop/dextop-option) = "xfce" ]]
-	then
-		session_name="XFCE"
-
-	elif [[ $(id -u -n) = "root" ]]
-	then
-		session_name="CONSOLE"
-	else
-		session_name="N/A"
-	fi
-}
-
 container_environment () {
 	# generate container environement
 
@@ -361,17 +345,17 @@ container_environment () {
 }
 
 container_user () {
+	# authentication
+
+	frobulator.fwd "Authenticating..."
+	echo
+
 	# verify user existence:
 	# loop through container's /etc/passwd file and make sure 'user' exists
 	# source environment variables when 'user' corresponds to 'username'
 	# default to 'root' if 'username' is invalid, not specified or does not exist
 
 	last_entry="$(tail -n 1 "${ROOT}"/etc/passwd)"
-
-	# authentication #
-
-	frobulator.fwd "Authenticating..."
-	echo
 
 	while read -r entry
 	do
@@ -393,7 +377,7 @@ container_user () {
 		then
 			USER="root"
 
-			session_name="CONSOLE"
+			session_interface="CONSOLE"
 
 			frobulator.wrn "No user name - Defaulting" "[ '${USER}' ]"
 			echo
@@ -415,7 +399,7 @@ container_user () {
 		then
 			USER="root"
 
-			session_name="CONSOLE"
+			session_interface="CONSOLE"
 
 			frobulator.err "Invalid user name - Defaulting" "[ '${USER}' ]"
 			echo
@@ -436,7 +420,7 @@ container_user () {
 				HOME="/"
 			fi
 
-			session_name="CONSOLE"
+			session_interface="CONSOLE"
 
 		fi
 
@@ -444,10 +428,7 @@ container_user () {
 }
 
 container_session () {
-	# set session settings
-
-	frobulator.fwd "Starting session" "[ ${session_name} // ${user_name} ]"
-	echo
+	# load session settings
 
 	# assume 'termux-exec' is installed
 
@@ -851,7 +832,7 @@ vnc_interface () {
 		fi
 	fi
 
-	frobulator.fwd "Loading desktop..."
+	frobulator.fwd "Loading desktop interface..."
 	echo
 }
 
@@ -1124,10 +1105,6 @@ then
 
 	container_root
 
-	# designate interface
-
-	container_interface
-
 	# set environemnt
 
 	container_environment
@@ -1150,10 +1127,6 @@ then
 	# validate root filesystem
 
 	container_root
-
-	# designate interface
-
-	container_interface
 
 	# set environemnt
 
