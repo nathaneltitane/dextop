@@ -107,7 +107,7 @@ container_setup () {
 
 	if [ $# -eq 0 ]
 	then
-		ROOT=("${PREFIX}"/bin/*/*)
+		ROOT=("${PREFIX}"/cnt/*/*)
 
 		export ROOT="${ROOT}"
 
@@ -305,7 +305,7 @@ then
 
 	# container
 
-	if [[ "${option}" = "termux" ]]
+	if [ "${option}" = "termux" ]
 	then
 		:
 	else
@@ -377,7 +377,7 @@ then
 
 		frobulator.file "${HOME}" .hushlogin
 
-		if [ "${option}" = "termux"]
+		if [ "${option}" = "termux" ]
 		then
 			:
 		else
