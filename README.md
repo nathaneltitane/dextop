@@ -6,7 +6,7 @@
 
 ---
 
-Welcome to Dextop!
+### Welcome to Dextop!
 
 Dextop turns your modern Android device into a complete Linux-based distribution workstation in a matter of minutes!
 No hassle or deep technical know-how required: **Dextop is easy and user friendly.**
