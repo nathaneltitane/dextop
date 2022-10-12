@@ -11,7 +11,7 @@
 Dextop turns your modern Android device into a complete Linux-based distribution workstation in a matter of minutes!
 No hassle or deep technical know-how required: **Dextop is easy and user friendly.**
 
-Comparison in between Dextop and other projects:
+Dextop vs. other similar projects:
 
 - It provides you with a selection of the Ubuntu distribution base images: stable, popular and user-friendly knowledge bases.
 - It expands the installed base image to run just like a normal PC installation.
