@@ -39,7 +39,7 @@ This is required due to the Android user space runtime policy and limited hardwa
 - Dextop does not load any services or backends!
 - Dextop does not install or configure advanced system services!
 
-Dextop only loads applications as needed to keep a minimal footprint!
+**Dextop only loads applications as needed to keep a minimal footprint!**
 
 Dextop is made, tested and optimized to run in tandem with Samsung's Dex: music, mail and web browsing should preferably be taken care of using native Android applications that are readily installed and configured on your device.
 
