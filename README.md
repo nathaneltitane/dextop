@@ -39,9 +39,10 @@ This is required due to the Android user space runtime policy and limited hardwa
 - Dextop does not load any services or backends!
 - Dextop does not install or configure advanced system services!
 
-**Dextop only loads applications as needed to keep a minimal footprint!**
+**Dextop only loads applications as needed: this helps keep a minimal footprint and your device running as smooth as possible!**
 
-Dextop is made, tested and optimized to run in tandem with Samsung's Dex: music, mail and web browsing should preferably be taken care of using native Android applications that are readily installed and configured on your device.
+Dextop was developed using Samsung Galaxy Note 20 Ultra and Samsung Galaxy Tab S7+. It has been tested and optimized to run in tandem with Samsung's Dex platform.
+Music, mail and web browsing activities should preferably be taken care of using native Android applications that are readily installed and configured on your device.
 
 Services, hardware probes and other advanced features that require access to restricted core system directories will not function: you must root your device to remove those limitations and gain full access to all system devices.
 
