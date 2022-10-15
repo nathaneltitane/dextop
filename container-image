@@ -119,6 +119,7 @@ image_version () {
 			ubuntu	20.04.3
 			ubuntu	21.04
 			ubuntu	21.10
+			ubuntu	22.04
 		)
 
 		versions=(
