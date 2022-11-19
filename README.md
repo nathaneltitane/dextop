@@ -119,7 +119,7 @@ You should press 'Allow' when prompted during the setup to grant this permission
 
 To access your newly generated container:
 
-`'container-session -o | -u <username> | -a <application>'` to start your session directly or with an application on load.
+`container-session -o | -u <username> | -a <application>` to start your session directly or with an application on load.
 
 ### The fun begins:
 
@@ -127,8 +127,8 @@ When logging into the container for the first time, a one-time configuration run
 
 The vnc session manager requires you to select your preferred display resolution for the best display experience.
 
-To stop the vnc server and halt the display output, type `'container-session -x'`.
-To start the vnc server and restart the display output, type `'container-session -o'`.
+To stop the vnc server and halt the display output, type `container-session -x`.
+To start the vnc server and restart the display output, type `container-session -o`.
 
 The next login will automatically launch the session for you using the settings you've chosen previously:
 The first login saves the selection under `"${HOME}"/.vnc/selection` and uses it to start the VNC server and viewer automatically for your convenience!
@@ -139,13 +139,13 @@ Logging out by pressing Ctrl+D or by typing `'logout'` or `'exit'` will automati
 
 Automatic utility updates on login can be enabled as follows:
 
-`'echo update > ${HOME}/.dextop/dextop-update'`
+`echo update > "${HOME}"/.dextop/dextop-update`
 
 Dextop will automatically fetch all relevant utilities and replace them withthe up-to-date versions.
 
 Automatic utility updates on login can be disabled as follows:
 
-`'echo '' > ${HOME}/.dextop/dextop-update'`
+`echo '' > "${HOME}"/.dextop/dextop-update`
 
 ### Audio:
 
@@ -156,21 +156,21 @@ latency on playback may vary depending on your device's hardware specification a
 
 Audio playback on login can be enabled as follows:
 
-`'echo audio > ${HOME}/.dextop/dextop-audio'`
+`echo audio > "${HOME}"/.dextop/dextop-audio`
 
 Audio playback can be disabled as follows:
 
-`'echo '' > ${HOME}/.dextop/dextop-audio'`
+`echo '' > "${HOME}"/.dextop/dextop-audio`
 
 ### Session logout:
 
 Automatic vnc display shutdown on terminal exit can be enabled as follows:
 
-`'echo logout >> ${HOME}/.dextop/dextop-logout'`
+`echo logout >> "${HOME}"/.dextop/dextop-logout`
 
 Automatic vnc display shutdown on terminal exit  can be disabled as follows:
 
-`'echo '' > ${HOME}/.dextop/dextop-logout'`
+`echo '' > "${HOME}"/.dextop/dextop-logout`
 
 ### Reports:
 
