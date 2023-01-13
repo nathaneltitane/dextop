@@ -51,8 +51,8 @@ IFS=$'\n'
 
 # setup repositories
 
- while read line
- do
+while read line
+do
 	for repository in ${repositories_list[@]}
 	do
 		# set file name
@@ -65,7 +65,7 @@ IFS=$'\n'
 		echo "${repository}" > "${PREFIX}"/etc/apt/sources.list.d/"${source_file}"
 	done
 
- done <<< ${repositories_list[@]}
+done <<< ${repositories_list[@]}
 
 # reset IFS
 
