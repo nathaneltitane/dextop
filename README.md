@@ -2,15 +2,14 @@
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/donate/?hosted_button_id=2WZT7PCW3XDX6)
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 10-22-2022 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 01-21-2023 ]
 
 ---
 
-### Welcome to Dextop!
+### Welcome to [Dextop](https://dextop.app)
 
 Dextop turns your modern Android device into a complete Linux-based distribution workstation in a matter of minutes!
 No hassle or deep technical know-how required: **Dextop is easy and user friendly.**
-
 
 ### What it does:
 
@@ -173,7 +172,11 @@ Automatic vnc display shutdown on terminal exit  can be disabled as follows:
 
 ### Repositories:
 
-Dextop uses [Frobulator](https://github.com/nathaneltitane/frobulator), a custom shell parser and function library to handle the setup, colorize prompts and provide the user with an elegant, comprehensive and user-friendly experience, all while streamlining the scripting process and making redundant code a thing of the past!
+[Frobulator](https://github.com/nathaneltitane/frobulator) to streamline the scripts and make redundant code a thing of the past.
+
+[Termux](https://github.com/termux/termux-app) as the android shell provider application to make Dextop interface with your device.
+
+[GNU/Bash](https://github.com/gitGNU/gnu_bash) as the shell environment on top of which the scripts function.
 
 ### Projects:
 
@@ -183,8 +186,13 @@ Dextop uses [Frobulator](https://github.com/nathaneltitane/frobulator), a custom
 
 [[ L²CU // Project Page ]](https://github.com/nathaneltitane/l2cu)
 
+[[ Lego // Linux // Project Page ]](https://github.com/nathaneltitane/legolinux)
+
+[[ Nathanel + Titane // Project Page ]](https://github.com/nathaneltitane/nathaneltitane)
+
 [[ Terminal // Project Page ]](https://github.com/nathaneltitane/terminal)
 
+[[ Termux // Project Page ]](https://github.com/nathaneltitane/termux)
 
 ### Reports:
 
@@ -197,7 +205,7 @@ Should you suspect any issues or errors, please provide a copy of those files  w
 
 ---
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 10-22-2022 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 01-21-2023 ]
 
 ### Enjoying Dextop? Buy me a coffee to show your appreciation!
 
