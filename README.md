@@ -11,7 +11,6 @@
 Dextop turns your modern Android device into a complete Linux-based distribution workstation in a matter of minutes!
 No hassle or deep technical know-how required: **Dextop is easy and user friendly.**
 
-Destop uses [Frobulator](https://github.com/nathaneltitane/frobulator), a custom shell parser and function library to handle the setup, colorize prompts and provide the user with an elegant, comprehensive and user-friendly experience, all while stremlining the scripting process and making redundant code a thing of the past!
 
 ### What it does:
 
@@ -171,6 +170,21 @@ Automatic vnc display shutdown on terminal exit can be enabled as follows:
 Automatic vnc display shutdown on terminal exit  can be disabled as follows:
 
 `echo '' > "${HOME}"/.dextop/dextop-logout`
+
+### Repositories:
+
+Dextop uses [Frobulator](https://github.com/nathaneltitane/frobulator), a custom shell parser and function library to handle the setup, colorize prompts and provide the user with an elegant, comprehensive and user-friendly experience, all while streamlining the scripting process and making redundant code a thing of the past!
+
+### Projects:
+
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop)
+
+[[Frobulator]](https://github.com/nathaneltitane/frobulator)
+
+[[ L²CU // Project Page ]](https://github.com/nathaneltitane/l2cu)
+
+[[ Terminal // Project Page ]](https://github.com/nathaneltitane/terminal)
+
 
 ### Reports:
 
