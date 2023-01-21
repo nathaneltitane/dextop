@@ -182,7 +182,7 @@ Automatic vnc display shutdown on terminal exit  can be disabled as follows:
 
 [[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop)
 
-[[Frobulator]](https://github.com/nathaneltitane/frobulator)
+[[ Frobulator ]](https://github.com/nathaneltitane/frobulator)
 
 [[ L²CU // Project Page ]](https://github.com/nathaneltitane/l2cu)
 
