@@ -251,7 +251,7 @@ container_handle () {
 
 	# handle user input for values_list
 
-	frobulator_rtn=()
+	frobulator_return=()
 
 	if [ -f "${HOME}"/.dextop/selection ]
 	then
@@ -260,7 +260,7 @@ container_handle () {
 		frobulator.input ${values_list[@]}
 	fi
 
-	eval ${frobulator_rtn[@]}
+	eval ${frobulator_return[@]}
 
 	# check selection input against selection list
 
@@ -666,7 +666,7 @@ vnc_handle () {
 
 	# handle user input for values_list
 
-	frobulator_rtn=()
+	frobulator_return=()
 
 	if [ -f "${HOME}"/.vnc/selection ]
 	then
@@ -675,7 +675,7 @@ vnc_handle () {
 		frobulator.input ${values_list[@]}
 	fi
 
-	eval ${frobulator_rtn[@]}
+	eval ${frobulator_return[@]}
 
 	# check selection input against selection list
 
@@ -1004,11 +1004,11 @@ vnc_password () {
 
 	# handle user input for values_list
 
-	frobulator_rtn=()
+	frobulator_return=()
 
 	frobulator.input ${values_list[@]}
 
-	eval ${frobulator_rtn[@]}
+	eval ${frobulator_return[@]}
 
 	# hash password  using 'vncpasswd' and store it
 
