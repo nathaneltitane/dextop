@@ -199,9 +199,15 @@ clear
 # run failsafe package update and upgrade:
 # prevents random 'libsssl' error
 
-yes | apt update > /dev/null 2>&1
+yes | apt update > /dev/null 2>&1 &
 
-yes | apt upgrade > /dev/null 2>&1
+frobulator.progress "Updating..."
+echo
+
+yes | apt upgrade > /dev/null 2>&1 &
+
+frobulator.progress "Upgrading..."
+echo
 
 # run failsafe package install:
 # termux package servers are sometimes unresponsive or badly authenticated
