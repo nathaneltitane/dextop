@@ -192,8 +192,12 @@ settings_intent () {
 	frobulator.silence "${settings_command}"
 }
 
-# run failsafe package install:
+# run failsafe update and package install:
 # termux package servers are sometimes unresponsive or badly authenticated
+
+frobulator.update
+
+frobulator.upgrade
 
 frobulator.failsafe proot &
 
