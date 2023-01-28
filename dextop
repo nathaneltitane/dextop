@@ -587,4 +587,4 @@ frobulator.result dextop-setup-checkpoint "${script}"
 
 # session start
 
-"${HOME}"/.local/bin/login
+"${PREFIX}"/bin/login
