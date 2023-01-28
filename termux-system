@@ -1,29 +1,55 @@
 #!/bin/bash
 
-# dependencies #
+# dependencies /////////////////////////////////////////////////////////////////
 
-[ ! -f "${PREFIX}"/bin/console ] && curl -s -L get.trmnl.me/console/console > "${PREFIX}"/bin/console && . "${PREFIX}"/bin/console
+if [[ -z $(command -v frobulator) ]]
+then
+	if [[ $(id -u -n) = "root" ]]
+	then
+		SUDO_HOME=/root
 
-# script #
+		USER="${SUDO_USER}"
+
+		HOME=/home/"${USER}"
+	fi
+
+	if [[ -z $(command -v curl) ]]
+	then
+		yes | apt-get install curl
+	fi
+
+	if [ ! -d "${HOME}"/.local/bin ]
+	then
+		mkdir -p "${HOME}"/.local/bin
+	fi
+
+	curl -s -L get.frbltr.app > "${HOME}"/.local/bin/frobulator
+
+	chmod +x "${HOME}"/.local/bin/frobulator
+fi
+
+. "${HOME}"/.local/bin/frobulator
+
+# script ///////////////////////////////////////////////////////////////////////
 
 script=$(basename -- "${BASH_SOURCE[0]}")
 
-# version #
+# version //////////////////////////////////////////////////////////////////////
 
 version="03-01-2022"
 
-# usage #
+# usage ////////////////////////////////////////////////////////////////////////
 
-# prompt #
+# prompt ///////////////////////////////////////////////////////////////////////
 
 console.script "Setting up ${script#*-}"
 echo
 
-# variables #
+# variables ////////////////////////////////////////////////////////////////////
 
-# defaults #
+# defaults /////////////////////////////////////////////////////////////////////
 
-# functions #
+# functions ////////////////////////////////////////////////////////////////////
 
 add_environment () {
 	# generate environment '$PATH'
