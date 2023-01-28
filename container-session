@@ -865,6 +865,11 @@ vnc_load () {
 
 		if [[ "${selection}" =~ ^[0-9]+$ ]]
 		then
+			if [ ! -d "${HOME}"/.vnc ]
+			then
+				mkdir -p "${HOME}"/.vnc
+			fi
+
 			echo "${selection}" > "${HOME}"/.vnc/selection
 			echo "${format}"    > "${HOME}"/.vnc/format
 			echo "${geometry}"  > "${HOME}"/.vnc/geometry
@@ -938,7 +943,7 @@ vnc_new () {
 	then
 		# remove if selection file is present
 
-		rm -rf  "${HOME}"/.vnc/selection
+		rm -r -f  "${HOME}"/.vnc/selection
 	fi
 
 	# show display format selections
