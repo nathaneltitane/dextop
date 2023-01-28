@@ -2,9 +2,35 @@
 
 # dependencies /////////////////////////////////////////////////////////////////
 
-curl -s -L get.frbltr.app > "${PREFIX}"/bin/frobulator
+# dependencies /////////////////////////////////////////////////////////////////
 
-. "${PREFIX}"/bin/frobulator
+if [[ -z $(command -v frobulator) ]]
+then
+	if [[ $(id -u -n) = "root" ]]
+	then
+		SUDO_HOME=/root
+
+		USER="${SUDO_USER}"
+
+		HOME=/home/"${USER}"
+	fi
+
+	if [[ -z $(command -v curl) ]]
+	then
+		yes | apt-get install curl
+	fi
+
+	if [ ! -d "${HOME}"/.local/bin ]
+	then
+		mkdir -p "${HOME}"/.local/bin
+	fi
+
+	curl -s -L get.frbltr.app > "${HOME}"/.local/bin/frobulator
+
+	chmod +x "${HOME}"/.local/bin/frobulator
+fi
+
+. "${HOME}"/.local/bin/frobulator
 
 # script ///////////////////////////////////////////////////////////////////////
 
@@ -192,11 +218,11 @@ then
 			termux-properties
 		)
 
-		frobulator.download get.trmx.app "${PREFIX}"/bin ${files_list[@]}
+		frobulator.download get.trmx.app "${HOME}"/.local/bin ${files_list[@]}
 
-		frobulator.link "${PREFIX}"/bin "${HOME}"/.termux termux-colors     colors.properties
-		frobulator.link "${PREFIX}"/bin "${HOME}"/.termux termux-font       font.ttf
-		frobulator.link "${PREFIX}"/bin "${HOME}"/.termux termux-properties termux.properties
+		frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-colors     colors.properties
+		frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-font       font.ttf
+		frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-properties termux.properties
 
 		settings_intent
 
@@ -223,7 +249,7 @@ then
 			container-user
 		)
 
-		frobulator.download get.dxtp.app "${PREFIX}"/bin ${utilities_list[@]}
+		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
 
 		frobulator.file "${HOME}"/.dextop dextop-utilities-checkpoint
 	fi
@@ -293,12 +319,12 @@ then
 	then
 		if [ "${option}" = "update" ]
 		then
-			"${PREFIX}"/bin/termux-update
+			"${HOME}"/.local/bin/termux-update
 		fi
 
-		"${PREFIX}"/bin/termux-storage
-		"${PREFIX}"/bin/termux-repositories
-		"${PREFIX}"/bin/termux-packages
+		"${HOME}"/.local/bin/termux-storage
+		"${HOME}"/.local/bin/termux-repositories
+		"${HOME}"/.local/bin/termux-packages
 
 		frobulator.file "${HOME}"/.dextop dextop-termux-checkpoint
 	fi
@@ -311,7 +337,7 @@ then
 	else
 		if [ ! -f "${HOME}"/.dextop/dextop-image-checkpoint ]
 		then
-			"${PREFIX}"/bin/container-image
+			"${HOME}"/.local/bin/container-image
 
 			frobulator.file "${HOME}"/.dextop dextop-image-checkpoint
 		fi
@@ -320,10 +346,10 @@ then
 		then
 			container_setup
 
-			container_setup "${PREFIX}"/bin/container-expansion
-			container_setup "${PREFIX}"/bin/container-repositories
-			container_setup "${PREFIX}"/bin/container-packages
-			container_setup "${PREFIX}"/bin/container-user
+			container_setup "${HOME}"/.local/bin/container-expansion
+			container_setup "${HOME}"/.local/bin/container-repositories
+			container_setup "${HOME}"/.local/bin/container-packages
+			container_setup "${HOME}"/.local/bin/container-user
 
 			frobulator.file "${HOME}"/.dextop dextop-container-checkpoint
 		fi
@@ -343,7 +369,7 @@ then
 			termux-message
 		)
 
-		frobulator.download get.trmx.app "${PREFIX}"/bin ${files_list[@]}
+		frobulator.download get.trmx.app "${HOME}"/.local/bin ${files_list[@]}
 
 		files_list=()
 
@@ -365,15 +391,15 @@ then
 			bash-profile
 		)
 
-		frobulator.download get.trmx.app "${PREFIX}"/bin ${files_list[@]}
+		frobulator.download get.trmx.app "${HOME}"/.local/bin ${files_list[@]}
 
-		frobulator.link "${PREFIX}"/bin "${HOME}"      termux-bash-aliases       .bash_aliases
-		frobulator.link "${PREFIX}"/bin "${HOME}"      termux-bash-configuration .bashrc
-		frobulator.link "${PREFIX}"/bin "${HOME}"      termux-bash-configuration .bash_configuration
-		frobulator.link "${PREFIX}"/bin "${HOME}"      termux-bash-functions     .bash_functions
-		frobulator.link "${PREFIX}"/bin "${HOME}"      termux-bash-login         .bash_login
-		frobulator.link "${PREFIX}"/bin "${HOME}"      termux-bash-logout        .bash_logout
-		frobulator.link "${PREFIX}"/bin "${HOME}"      termux-bash-profile       .bash_profile
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      termux-bash-aliases       .bash_aliases
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      termux-bash-configuration .bashrc
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      termux-bash-configuration .bash_configuration
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      termux-bash-functions     .bash_functions
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      termux-bash-login         .bash_login
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      termux-bash-logout        .bash_logout
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      termux-bash-profile       .bash_profile
 
 		frobulator.file "${HOME}" .hushlogin
 
@@ -383,13 +409,13 @@ then
 		else
 			# root home
 
-			frobulator.link "${PREFIX}"/bin "${ROOT}"/root termux-bash-aliases       .bash_aliases
-			frobulator.link "${PREFIX}"/bin "${ROOT}"/root termux-bash-configuration .bashrc
-			frobulator.link "${PREFIX}"/bin "${ROOT}"/root termux-bash-configuration .bash_configuration
-			frobulator.link "${PREFIX}"/bin "${ROOT}"/root termux-bash-functions     .bash_functions
-			frobulator.link "${PREFIX}"/bin "${ROOT}"/root termux-bash-login         .bash_login
-			frobulator.link "${PREFIX}"/bin "${ROOT}"/root termux-bash-logout        .bash_logout
-			frobulator.link "${PREFIX}"/bin "${ROOT}"/root termux-bash-profile       .bash_profile
+			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root termux-bash-aliases       .bash_aliases
+			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root termux-bash-configuration .bashrc
+			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root termux-bash-configuration .bash_configuration
+			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root termux-bash-functions     .bash_functions
+			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root termux-bash-login         .bash_login
+			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root termux-bash-logout        .bash_logout
+			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root termux-bash-profile       .bash_profile
 
 			frobulator.file "${ROOT}"/root .hushlogin
 
@@ -574,4 +600,4 @@ frobulator.result dextop-setup-checkpoint "${script}"
 
 # session start
 
-"${PREFIX}"/bin/login
+"${HOME}"/.local/bin/login
