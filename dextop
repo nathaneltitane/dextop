@@ -192,14 +192,16 @@ settings_intent () {
 	frobulator.silence "${settings_command}"
 }
 
+# failsafe
+
+clear
+
 # run failsafe package update and upgrade:
 # prevents random 'libsssl' error
 
 yes | apt update > /dev/null 2>&1
 
 yes | apt upgrade > /dev/null 2>&1
-
-clear
 
 # run failsafe package install:
 # termux package servers are sometimes unresponsive or badly authenticated
@@ -208,6 +210,8 @@ frobulator.failsafe proot &
 
 frobulator.fwd "Please wait..."
 echo
+
+clear
 
 # in order of execution
 

@@ -4,10 +4,31 @@
 
 if [[ -z $(command -v frobulator) ]]
 then
-	curl -s -L get.frbltr.app > "${PREFIX}"/bin/frobulator
+	if [[ $(id -u -n) = "root" ]]
+	then
+		SUDO_HOME=/root
+
+		USER="${SUDO_USER}"
+
+		HOME=/home/"${USER}"
+	fi
+
+	if [[ -z $(command -v curl) ]]
+	then
+		yes | apt-get install curl
+	fi
+
+	if [ ! -d "${HOME}"/.local/bin ]
+	then
+		mkdir -p "${HOME}"/.local/bin
+	fi
+
+	curl -s -L get.frbltr.app > "${HOME}"/.local/bin/frobulator
+
+	chmod +x "${HOME}"/.local/bin/frobulator
 fi
 
-. "${PREFIX}"/bin/frobulator
+. "${HOME}"/.local/bin/frobulator
 
 # script ///////////////////////////////////////////////////////////////////////
 
