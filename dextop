@@ -396,12 +396,12 @@ then
 		# user home
 
 		files_list+=(
-			bash-aliases
-			bash-configuration
-			bash-functions
-			bash-login
-			bash-logout
-			bash-profile
+			termux-bash-aliases
+			termux-bash-configuration
+			termux-bash-functions
+			termux-bash-login
+			termux-bash-logout
+			termux-bash-profile
 		)
 
 		frobulator.download get.trmx.app "${HOME}"/.local/bin ${files_list[@]}
