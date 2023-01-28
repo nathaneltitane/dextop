@@ -249,6 +249,8 @@ then
 
 		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
 
+		utilities_list=()
+
 		frobulator.file "${HOME}"/.dextop dextop-utilities-checkpoint
 	fi
 
@@ -480,7 +482,7 @@ then
 			frobulator.log "gtk-update-icon-cache ${HOME}/.icons/${theme}"
 		done
 
-		rm -rf "${HOME}"/papirus*
+		rm -r -f "${HOME}"/papirus*
 
 		# system icon themes
 
