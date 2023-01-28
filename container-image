@@ -137,10 +137,8 @@ image_version () {
 		)
 
 		ubuntu_versions=(
-			ubuntu	20.04.3
-			ubuntu	21.04
-			ubuntu	21.10
 			ubuntu	22.04
+			ubuntu	22.10
 		)
 
 		versions=(
@@ -449,36 +447,22 @@ image_handle () {
 	then
 		case "${distribution_version}"
 		in
-			20*04|20*04*)
-				distribution_version="20.04.3"
+			22*04|22*04*)
+				distribution_version="22.04.1"
 
 				frobulator.scs "Supported distribution version."
 				echo
 			;;
-
-			21*04|21*04*)
-				distribution_version=21.04
-
-				frobulator.scs "Supported distribution version."
-				echo
-			;;
-
-			21*10|20*10*)
-				distribution_version=21.10
-
-				frobulator.scs "Supported distribution version."
-				echo
-			 ;;
 
 			"")
-				distribution_version=21.10
+				distribution_version=22.10
 
 				frobulator.err "Empty distribution version."
 				echo
 			;;
 
 			 *)
-				distribution_version=21.10
+				distribution_version=22.10
 
 				frobulator.err "Unsupported distribution version."
 				echo
