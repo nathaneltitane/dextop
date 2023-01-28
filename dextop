@@ -406,13 +406,13 @@ then
 
 		frobulator.download get.trmx.app "${HOME}"/.local/bin ${files_list[@]}
 
-		frobulator.link "${HOME}"/.local/bin "${HOME}"      termux-bash-aliases       .bash_aliases
-		frobulator.link "${HOME}"/.local/bin "${HOME}"      termux-bash-configuration .bashrc
-		frobulator.link "${HOME}"/.local/bin "${HOME}"      termux-bash-configuration .bash_configuration
-		frobulator.link "${HOME}"/.local/bin "${HOME}"      termux-bash-functions     .bash_functions
-		frobulator.link "${HOME}"/.local/bin "${HOME}"      termux-bash-login         .bash_login
-		frobulator.link "${HOME}"/.local/bin "${HOME}"      termux-bash-logout        .bash_logout
-		frobulator.link "${HOME}"/.local/bin "${HOME}"      termux-bash-profile       .bash_profile
+		frobulator.link "${HOME}"/.local/bin "${HOME}"          termux-bash-aliases       .bash_aliases
+		frobulator.link "${HOME}"/.local/bin "${HOME}"          termux-bash-configuration .bashrc
+		frobulator.link "${HOME}"/.local/bin "${HOME}"          termux-bash-configuration .bash_configuration
+		frobulator.link "${HOME}"/.local/bin "${HOME}"          termux-bash-functions     .bash_functions
+		frobulator.link "${HOME}"/.local/bin "${HOME}"          termux-bash-login         .bash_login
+		frobulator.link "${HOME}"/.local/bin "${HOME}"          termux-bash-logout        .bash_logout
+		frobulator.link "${HOME}"/.local/bin "${HOME}"          termux-bash-profile       .bash_profile
 
 		frobulator.file "${HOME}" .hushlogin
 
