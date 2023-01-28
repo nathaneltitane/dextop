@@ -545,8 +545,10 @@ image_environment () {
 
 	# termux
 
-	[ -d "${PREFIX}"/sbin ] && PATH+="${PREFIX}/sbin:"
-	[ -d "${PREFIX}"/bin ]  && PATH+="${PREFIX}/bin:"
+	[ -d "${HOME}"/.local/bin ] && PATH+="${HOME}/.local/bin:"
+
+	[ -d "${PREFIX}"/sbin ]     && PATH+="${PREFIX}/sbin:"
+	[ -d "${PREFIX}"/bin ]      && PATH+="${PREFIX}/bin:"
 
 	# android
 
