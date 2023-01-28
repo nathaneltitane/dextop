@@ -83,6 +83,10 @@ extensions_list=(
 fonts_list=(
 )
 
+icon_themes_list=(
+	papirus-icon-theme
+)
+
 multimedia_list=(
 	ffmpeg
 	flac

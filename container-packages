@@ -82,6 +82,10 @@ fonts_list=(
 	fonts-takao
 )
 
+icon_themes_list=(
+	papirus-icon-theme
+)
+
 multimedia_list=(
 )
 
