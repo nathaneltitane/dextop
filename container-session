@@ -972,7 +972,7 @@ vnc_stop () {
 
 	if [[ $(pidof x11vnc) ]]
 	then
-		x11vnc -R stop > devnull 2>&1 &
+		x11vnc -R stop > /dev/null 2>&1 &
 
 		frobulator.progress "Stopping display server..."
 		echo
