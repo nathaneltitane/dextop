@@ -119,9 +119,9 @@ To access your newly generated container:
 
 `container-session -o | -u <username> | -a <application>` to start your session directly or with an application on load.
 
-To access the desktop environment installed directly under Termux, type `container-session -o`.
+To access the desktop environment installed directly under Termux, type `container-session -o`: it is recognizable by the green username prompt.
 
-To acess the linux distribution image you've selected, type `container-session -u termux` and then initialize the session with `container-session -o`.
+To acess the linux distribution image you've selected, type `container-session -u termux` and then initialize the session with `container-session -o`: it is recognizable by the fuschia username prompt.
 
 **The user 'termux' is the default username that is utilized during the automatic container setup.**
 
