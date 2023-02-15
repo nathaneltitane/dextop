@@ -2,7 +2,7 @@
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/donate/?hosted_button_id=2WZT7PCW3XDX6)
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 01-21-2023 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 02-15-2023 ]
 
 ---
 
@@ -119,6 +119,16 @@ To access your newly generated container:
 
 `container-session -o | -u <username> | -a <application>` to start your session directly or with an application on load.
 
+To access the desktop environment installed directly under Termux, type `container-session -o`.
+
+To acess the linux distribution image you've selected, type `container-session -u termux` and then initialize the session with `container-session -o`.
+
+**The user 'termux' is the default username that is utilized during the automatic container setup.**
+
+It is used to identify a default user under the Linux-based distribution image you've selected and can be edited.
+
+Other users can be added using the 'container-user' utility.
+
 ### The fun begins:
 
 When logging into the container for the first time, a one-time configuration runs on your first login to set up your keyboard, locales and timezone preferences.
@@ -205,7 +215,7 @@ Should you suspect any issues or errors, please provide a copy of those files  w
 
 ---
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 01-21-2023 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 02-15-2023 ]
 
 ### Enjoying Dextop? Buy me a coffee to show your appreciation!
 
