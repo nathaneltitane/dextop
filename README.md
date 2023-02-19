@@ -54,7 +54,7 @@ Dextop links the modified utilities that have been patched under Termux for some
 
 ### Hardware requirements:
 
-- Modern Android device (Android 7.0+: Termux limitation)
+- Modern Android device (Android 7.0+: Termux limitation - Avoid Android 11 when and if possible: [Phantom Process Killer](https://issuetracker.google.com/issues/205156966))
 - Approximately 4GB in free storage for symmetric setup (Termux and distribution container)
 - Mouse (bluetooth or other)
 - Keyboard (bluetooth or other)
@@ -65,7 +65,7 @@ Dextop links the modified utilities that have been patched under Termux for some
 ### Software requirements:
 
 Dextop uses the X11 virtual framebuffer 'xvfb' alongside the X11 VNC server 'x11vnc' to turn your Android device into a desktop workstation and let you access both the Termux and container side using a graphical interface.
-Think of the expreience as setting up a Virtual Machine on a normal computer and accessing it through the application's viewer.
+Think of the experience as setting up a Virtual Machine on a normal computer and accessing it through the application's viewer.
 
 To proceed, install the following on your android device:
 
