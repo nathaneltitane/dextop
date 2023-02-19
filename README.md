@@ -26,6 +26,7 @@ Dextop vs. other similar projects:
 ![dextop-session](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop-session.png)
 
 Dextop is very quick and efficient:
+
 Choose between a complete XFCE4 setup to get your work done, or keep the base install for command line interface and programming workflows.
 
 ### Note:
