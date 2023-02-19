@@ -31,7 +31,8 @@ Choose between a complete XFCE4 setup to get your work done, or keep the base in
 
 ### Note:
 
-Compositing should be disabled with XFCE4 to optimize resource usage and prevent display tearing and other glitches.
+**Compositing should be disabled with XFCE4 to optimize resource usage and prevent display tearing and other glitches.**
+
 Turning compositing off allows for the best possible performance and experience in accordance to current Android system and security limitations:
 This is required due to the Android user space runtime policy and limited hardware access: there is no graphics hardware acceleration available - the container graphics are emulated and run using LLVM.
 
