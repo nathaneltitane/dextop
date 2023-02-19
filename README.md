@@ -44,7 +44,7 @@ This is required due to the Android user space runtime policy and limited hardwa
 
 **Dextop only loads applications as needed: this helps keep a minimal footprint and your device running as smooth as possible!**
 
-Dextop was developed using Samsung Galaxy Note 20 Ultra and Samsung Galaxy Tab S7+. It has been tested and optimized to run in tandem with Samsung's Dex platform.
+Dextop was developed and tested using a Samsung Galaxy Note 20 Ultra and a Samsung Galaxy Tab S7+. It has been tested and optimized to run in tandem with Samsung's Dex platform.
 
 **Music, mail and web browsing activities should preferably be taken care of using native Android applications that are readily installed and configured on your device.**
 
