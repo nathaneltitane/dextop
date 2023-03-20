@@ -180,9 +180,9 @@ container_setup () {
 	container_command+=" --bind=/data/data/com.termux/files/home:/root"
 	container_command+=" /usr/bin/env -i"
 	container_command+=" HOME=/root"
+	container_command+=" LANG=C.UTF-8"
 	container_command+=" PREFIX=/data/data/com.termux/files/usr"
 	container_command+=" PATH=${HOME}/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/bin:"
-	container_command+=" LANG=C.UTF-8"
 	container_command+=" TERM=${TERM}"
 	container_command+=" ${@}"
 
