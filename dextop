@@ -197,37 +197,42 @@ settings_intent () {
 	frobulator.silence "${settings_command}"
 }
 
-# failsafe
-
-clear
-
-# run failsafe package update and upgrade:
-# prevents random 'libsssl' error
-
-yes | apt update > /dev/null 2>&1 &
-
-frobulator.progress "Updating..."
-echo
-
-yes | apt upgrade > /dev/null 2>&1 &
-
-frobulator.progress "Upgrading..."
-echo
-
-# run failsafe package install:
-# termux package servers are sometimes unresponsive or badly authenticated
-
-frobulator.failsafe proot &
-
-frobulator.fwd "Please wait..."
-echo
-
-clear
-
 # in order of execution
 
 if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
 then
+	if [ ! -f "${HOME}"/.dextop/dextop-failsafe-checkpoint ]
+	then
+		# failsafe
+
+		clear
+
+		# run failsafe package update and upgrade:
+		# prevents random 'libsssl' error
+
+		yes | apt update > /dev/null 2>&1 &
+
+		frobulator.progress "Updating..."
+		echo
+
+		yes | apt upgrade > /dev/null 2>&1 &
+
+		frobulator.progress "Upgrading..."
+		echo
+
+		# run failsafe package install:
+		# termux package servers are sometimes unresponsive or badly authenticated
+
+		frobulator.failsafe proot &
+
+		frobulator.fwd "Please wait..."
+		echo
+
+		frobulator.file "${HOME}"/.dextop dextop-failsafe-checkpoint
+
+		clear
+	fi
+
 	# preferences
 
 	if [ ! -f "${HOME}"/.dextop/dextop-preferences-checkpoint ]
@@ -297,6 +302,7 @@ then
 
 		directories_list=()
 
+		frobulator.file "${HOME}"/.dextop dextop-core-directories-checkpoint
 	fi
 
 	frobulator.wait 1
@@ -323,7 +329,7 @@ then
 
 		directories_list=()
 
-		frobulator.file "${HOME}"/.dextop dextop-directories-checkpoint
+		frobulator.file "${HOME}"/.dextop dextop-root-directories-checkpoint
 	fi
 
 	frobulator.wait 1
@@ -346,6 +352,8 @@ then
 		frobulator.directory "${HOME}" ${directories_list[@]}
 
 		directories_list=()
+
+		frobulator.file "${HOME}"/.dextop dextop-home-directories-checkpoint
 	fi
 
 	frobulator.wait 1
