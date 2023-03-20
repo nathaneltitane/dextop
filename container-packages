@@ -187,6 +187,13 @@ xfce_addons_list=(
 
 # options #
 
+# console
+
+if [[ $(cat "${HOME}"/.dextop/dextop-option) = "console" ]]
+then
+	desktop_environment_list=()
+fi
+
 # xfce
 
 if [[ $(cat "${HOME}"/.dextop/dextop-option) = "xfce" ]]
@@ -198,13 +205,6 @@ then
 	)
 
 	#	${xfce_addons_list[@]}
-fi
-
-# console
-
-if [[ $(cat "${HOME}"/.dextop/dextop-option) = "console" ]]
-then
-	desktop_environment_list=()
 fi
 
 # install #
