@@ -41,7 +41,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="01-28-2023"
+version="03-20-2023"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -280,7 +280,7 @@ then
 
 	# directories
 
-	if [ ! -f "${HOME}"/.dextop/dextop-directories-checkpoint ]
+	if [ ! -f "${HOME}"/.dextop/dextop-core-directories-checkpoint ]
 	then
 		# add system directories
 
@@ -297,23 +297,12 @@ then
 
 		directories_list=()
 
-		# add home directories
+	fi
 
-		directories_list+=(
-			Desktop
-			Documents
-			Downloads
-			Music
-			Pictures
-			Public
-			Templates
-			Videos
-		)
+	frobulator.wait 1
 
-		frobulator.directory "${HOME}" ${directories_list[@]}
-
-		directories_list=()
-
+	if [ ! -f "${HOME}"/.dextop/dextop-root-directories-checkpoint ]
+	then
 		# generate root directory structure
 
 		directories_list+=(
@@ -336,6 +325,30 @@ then
 
 		frobulator.file "${HOME}"/.dextop dextop-directories-checkpoint
 	fi
+
+	frobulator.wait 1
+
+	if [ ! -f "${HOME}"/.dextop/dextop-home-directories-checkpoint ]
+	then
+		# add home directories
+
+		directories_list+=(
+			Desktop
+			Documents
+			Downloads
+			Music
+			Pictures
+			Public
+			Templates
+			Videos
+		)
+
+		frobulator.directory "${HOME}" ${directories_list[@]}
+
+		directories_list=()
+	fi
+
+	frobulator.wait 1
 
 	# termux
 
