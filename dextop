@@ -129,6 +129,11 @@ then
 	frobulator.flag "${option}" "${HOME}"/.dextop dextop-option
 fi
 
+if [ -z "${ROOT}" ]
+then
+	ROOT=("${PREFIX}"/cnt/*/*)
+fi
+
 # functions ////////////////////////////////////////////////////////////////////
 
 container_setup () {
