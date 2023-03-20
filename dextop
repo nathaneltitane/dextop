@@ -305,7 +305,7 @@ then
 		frobulator.file "${HOME}"/.dextop dextop-core-directories-checkpoint
 	fi
 
-	frobulator.wait 1
+	frobulator.timeout 1
 
 	if [ ! -f "${HOME}"/.dextop/dextop-root-directories-checkpoint ]
 	then
@@ -332,7 +332,7 @@ then
 		frobulator.file "${HOME}"/.dextop dextop-root-directories-checkpoint
 	fi
 
-	frobulator.wait 1
+	frobulator.timeout 1
 
 	if [ ! -f "${HOME}"/.dextop/dextop-home-directories-checkpoint ]
 	then
@@ -356,7 +356,7 @@ then
 		frobulator.file "${HOME}"/.dextop dextop-home-directories-checkpoint
 	fi
 
-	frobulator.wait 1
+	frobulator.timeout 1
 
 	# termux
 
