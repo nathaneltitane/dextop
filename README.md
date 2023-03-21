@@ -8,7 +8,7 @@
 
 ### [ NOTICE // 03-21-2023 ]
 
-**Previous issues relative to linker configuration not being found or deprecated have been resolved - Dextop installation procedure has been reviewed and fixed!
+**Previous installation, configuration and general setup issues relative to linker configuration not being found or deprecated have been resolved - Dextop installation procedure has been reviewed and fixed!
 
 ### Welcome to [Dextop](https://dextop.app)
 
