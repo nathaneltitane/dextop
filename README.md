@@ -58,7 +58,7 @@ Dextop links the modified utilities that have been patched under Termux for some
 
 ### Hardware requirements:
 
-- Modern Android device (Android 7.0 or above: Termux limitation - Avoid Android 11 when and if possible: [Phantom Process Killer](https://issuetracker.google.com/issues/205156966))
+- Modern Android device with 64 bit ARM processor (Android 7.0 or above: Termux limitation - Avoid Android 11 when and if possible: [Phantom Process Killer](https://issuetracker.google.com/issues/205156966))
 - Approximately 4GB in free storage for symmetric setup (Termux and distribution container)
 - Mouse (bluetooth or other)
 - Keyboard (bluetooth or other)
