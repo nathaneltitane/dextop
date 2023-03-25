@@ -2,11 +2,11 @@
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/donate/?hosted_button_id=2WZT7PCW3XDX6)
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 03-21-2023 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 03-25-2023 ]
 
 ---
 
-### [ NOTICE // 03-21-2023 ]
+### [ NOTICE // 03-25-2023 ]
 
 **Previous installation, configuration and general setup issues relative to linker configuration not being found or deprecated have been resolved - Dextop installation procedure has been reviewed and fixed!**
 
@@ -221,7 +221,7 @@ Should you suspect any issues or errors, please provide a copy of those files  w
 
 ---
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 03-21-2023 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 03-25-2023 ]
 
 ### Enjoying Dextop? Buy me a coffee to show your appreciation!
 

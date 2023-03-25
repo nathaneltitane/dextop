@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="03-21-2023"
+version="03-25-2023"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -180,6 +180,50 @@ container_setup () {
 	${container_command}
 }
 
+architecture_check () {
+	# list supported processor architechtures
+
+	cpu_architectures=(
+		aarch64
+		arm
+		amd64
+		i*86
+		x86_64
+	)
+
+	# test processor architecture string
+
+	device_architecture="$(uname -m)"
+
+	for i in ${!cpu_architectures[@]}
+	do
+		if [[ "${device_architecture}" != "${cpu_architectures[i]}" ]]
+		then
+
+			frobulator.scs "Supported architecture" "[ ${image_architecture} ]"
+			echo
+
+			frobulator.fwd "Proceeding..."
+			echo
+
+			break
+		else
+			frobulator.wrn "Unsupported architecture" "[ ${image_architecture} ]"
+			echo
+
+			frobulator.fwd "Aborting..."
+			echo
+
+			frobulator.stp "Exiting."
+			echo
+
+			exit 1
+		fi
+	done
+
+	clear
+}
+
 settings_intent () {
 	# reload termux settings
 
@@ -193,37 +237,46 @@ settings_intent () {
 	frobulator.silence "${settings_command}"
 }
 
-# failsafe
+# architecture check ///////////////////////////////////////////////////////////
 
-clear
+frobulator.log "architecture_check"
 
-# run failsafe package update and upgrade:
-# prevents random 'libsssl' error
-
-yes | apt update > /dev/null 2>&1 &
-
-frobulator.progress "Updating..."
-echo
-
-yes | apt upgrade > /dev/null 2>&1 &
-
-frobulator.progress "Upgrading..."
-echo
-
-# run failsafe package install:
-# termux package servers are sometimes unresponsive or badly authenticated
-
-frobulator.failsafe proot &
-
-frobulator.fwd "Please wait..."
-echo
-
-clear
+# setup ////////////////////////////////////////////////////////////////////////
 
 # in order of execution
 
 if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
 then
+	if [ ! -f "${HOME}"/.dextop/dextop-failsafe-checkpoint ]
+	then
+		# failsafe
+
+		# run failsafe package update and upgrade:
+		# prevents random 'libsssl' error
+
+		yes | apt update > /dev/null 2>&1 &
+
+		frobulator.progress "Updating..."
+		echo
+
+		yes | apt upgrade > /dev/null 2>&1 &
+
+		frobulator.progress "Upgrading..."
+		echo
+
+		# run failsafe package install:
+		# termux package servers are sometimes unresponsive or badly authenticated
+
+		frobulator.failsafe proot &
+
+		frobulator.fwd "Please wait..."
+		echo
+
+		clear
+
+		frobulator.file "${HOME}"/.dextop dextop-failsafe-checkpoint
+	fi
+
 	# preferences
 
 	if [ ! -f "${HOME}"/.dextop/dextop-preferences-checkpoint ]
@@ -587,5 +640,7 @@ fi
 frobulator.result dextop-setup-checkpoint "${script}"
 
 # session start
+
+cd "${HOME}"
 
 "${PREFIX}"/bin/login
