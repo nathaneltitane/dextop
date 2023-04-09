@@ -99,7 +99,7 @@ do
 			echo -e "-x, --stop           Stop vnc session server."
 			echo -e "-p, --password       Generate vnc session password."
 			echo
-			echo -e "-c, --clean          Generate new vnc session selection."
+			echo -e "-c, --clean          Clean vnc session selection."
 			echo -e "-n, --new            Generate new vnc session selection."
 			echo
 			echo -e "-a, --application    Start application to start on session login."
