@@ -540,9 +540,7 @@ then
 					hicolor
 				)
 
-				frobulator.keep "${ROOT}"/usr/share/icons ${files_list[@]}
-
-				frobulator.keep "${PREFIX}"/share/icons ${files_list[@]}
+				frobulator.keep "${directory}" ${files_list[@]}
 
 				files_list=()
 			fi
@@ -557,6 +555,12 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-themes-checkpoint ]
 	then
+
+		if [ -d "${ROOT}"/usr/share/themes ]
+		then
+			frobulator.copy "${ROOT}"/usr/share/themes "${PREFIX}"/share/themes ${files_list[@]}
+		fi
+
 		directories_list=(
 			"${PREFIX}"/share/themes
 			"${ROOT}"/usr/share/themes
@@ -573,11 +577,7 @@ then
 					Arc-Lighter
 				)
 
-				frobulator.copy "${ROOT}"/usr/share/themes "${PREFIX}"/share/themes ${files_list[@]}
-
-				frobulator.keep "${ROOT}"/usr/share/themes ${files_list[@]}
-
-				frobulator.keep "${PREFIX}"/share/themes ${files_list[@]}
+				frobulator.keep "${directory}" ${files_list[@]}
 
 				files_list=()
 			fi
