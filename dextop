@@ -521,90 +521,95 @@ then
 		frobulator.file "${HOME}"/.dextop dextop-bookmarks-checkpoint
 	fi
 
-	# icons
-
-	if [ ! -f "${HOME}"/.dextop/dextop-icons-checkpoint ]
+	if [ "${option}" = "console" ]
 	then
-		directories_list=(
-			"${PREFIX}"/share/icons
-			"${ROOT}"/usr/share/icons
-		)
+		:
+	else
+		# backgrounds
 
-		for directory in ${directories_list[@]}
-		do
-			if [ -d "${directory}" ]
-			then
-				files_list+=(
-					Adwaita
-					default
-					hicolor
-				)
-
-				frobulator.keep "${directory}" ${files_list[@]}
-
-				files_list=()
-			fi
-		done
-
-		directories_list=()
-
-		frobulator.file "${HOME}"/.dextop dextop-icons-checkpoint
-	fi
-
-	# themes
-
-	if [ ! -f "${HOME}"/.dextop/dextop-themes-checkpoint ]
-	then
-
-		if [ -d "${ROOT}"/usr/share/themes ]
+		if [ ! -f "${HOME}"/.dextop/dextop-backgrounds-checkpoint ]
 		then
-			frobulator.copy "${ROOT}"/usr/share/themes "${PREFIX}"/share/themes ${files_list[@]}
+			files_list=(
+				dextop.svg
+			)
+
+			frobulator.download get.dxtp.app "${HOME}"/.dextop ${files_list[@]}
+
+			frobulator.link "${HOME}"/.dextop "${ROOT}"/usr/share/backgrounds/dextop ${files_list[@]}
+
+			frobulator.link "${HOME}"/.dextop "${PREFIX}"/share/backgrounds/dextop ${files_list[@]}
+
+			files_list=()
+
+			frobulator.file "${HOME}"/.dextop dextop-backgrounds-checkpoint
 		fi
 
-		directories_list=(
-			"${PREFIX}"/share/themes
-			"${ROOT}"/usr/share/themes
-		)
+		# icons
 
-		for directory in ${directories_list[@]}
-		do
-			if [ -d "${directory}" ]
+		if [ ! -f "${HOME}"/.dextop/dextop-icons-checkpoint ]
+		then
+			directories_list=(
+				"${PREFIX}"/share/icons
+				"${ROOT}"/usr/share/icons
+			)
+
+			for directory in ${directories_list[@]}
+			do
+				if [ -d "${directory}" ]
+				then
+					files_list+=(
+						Adwaita
+						default
+						hicolor
+					)
+
+					frobulator.keep "${directory}" ${files_list[@]}
+
+					files_list=()
+				fi
+			done
+
+			directories_list=()
+
+			frobulator.file "${HOME}"/.dextop dextop-icons-checkpoint
+		fi
+
+		# themes
+
+		if [ ! -f "${HOME}"/.dextop/dextop-themes-checkpoint ]
+		then
+
+			if [ -d "${ROOT}"/usr/share/themes ]
 			then
-				files_list+=(
-					Arc
-					Arc-Dark
-					Arc-Darker
-					Arc-Lighter
-				)
-
-				frobulator.keep "${directory}" ${files_list[@]}
-
-				files_list=()
+				frobulator.copy "${ROOT}"/usr/share/themes "${PREFIX}"/share/themes ${files_list[@]}
 			fi
-		done
 
-		directories_list=()
+			directories_list=(
+				"${PREFIX}"/share/themes
+				"${ROOT}"/usr/share/themes
+			)
 
-		frobulator.file "${HOME}"/.dextop dextop-themes-checkpoint
-	fi
+			for directory in ${directories_list[@]}
+			do
+				if [ -d "${directory}" ]
+				then
+					files_list+=(
+						Arc
+						Arc-Dark
+						Arc-Darker
+						Arc-Lighter
+					)
 
-	# backgrounds
+					frobulator.keep "${directory}" ${files_list[@]}
 
-	if [ ! -f "${HOME}"/.dextop/dextop-backgrounds-checkpoint ]
-	then
-		files_list=(
-			dextop.svg
-		)
+					files_list=()
+				fi
+			done
 
-		frobulator.download get.dxtp.app "${HOME}"/.dextop ${files_list[@]}
+			directories_list=()
 
-		frobulator.link "${HOME}"/.dextop "${ROOT}"/usr/share/backgrounds/dextop ${files_list[@]}
-
-		frobulator.link "${HOME}"/.dextop "${PREFIX}"/share/backgrounds/dextop ${files_list[@]}
-
-		files_list=()
-
-		frobulator.file "${HOME}"/.dextop dextop-backgrounds-checkpoint
+			frobulator.file "${HOME}"/.dextop dextop-themes-checkpoint
+		fi
 	fi
 
 	# login
