@@ -223,6 +223,7 @@ frobulator.install ${install_list[@]}
 
 purge_list=(
 	ibus
+	snap
 )
 
 frobulator.purge ${purge_list[@]}
