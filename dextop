@@ -578,6 +578,12 @@ then
 
 		if [ ! -f "${HOME}"/.dextop/dextop-themes-checkpoint ]
 		then
+			files_list+=(
+				Arc
+				Arc-Dark
+				Arc-Darker
+				Arc-Lighter
+			)
 
 			if [ -d "${ROOT}"/usr/share/themes ]
 			then
@@ -593,20 +599,15 @@ then
 			do
 				if [ -d "${directory}" ]
 				then
-					files_list+=(
-						Arc
-						Arc-Dark
-						Arc-Darker
-						Arc-Lighter
-					)
-
 					frobulator.keep "${directory}" ${files_list[@]}
 
-					files_list=()
+
 				fi
 			done
 
 			directories_list=()
+
+			files_list=()
 
 			frobulator.file "${HOME}"/.dextop dextop-themes-checkpoint
 		fi
