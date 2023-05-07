@@ -514,36 +514,6 @@ then
 			frobulator.file "${HOME}"/.dextop dextop-backgrounds-checkpoint
 		fi
 
-		# icons
-
-		if [ ! -f "${HOME}"/.dextop/dextop-icons-checkpoint ]
-		then
-			directories_list=(
-				"${PREFIX}"/share/icons
-				"${ROOT}"/usr/share/icons
-			)
-
-			for directory in ${directories_list[@]}
-			do
-				if [ -d "${directory}" ]
-				then
-					files_list+=(
-						Adwaita
-						default
-						hicolor
-					)
-
-					frobulator.keep "${directory}" ${files_list[@]}
-
-					files_list=()
-				fi
-			done
-
-			directories_list=()
-
-			frobulator.file "${HOME}"/.dextop dextop-icons-checkpoint
-		fi
-
 		# icon theme
 
 		if [ ! -f "${HOME}"/.dextop/dextop-icon-theme-checkpoint ]
