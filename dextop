@@ -514,7 +514,7 @@ then
 			frobulator.file "${HOME}"/.dextop dextop-backgrounds-checkpoint
 		fi
 
-		# icon theme
+		# icons
 
 		if [ ! -f "${HOME}"/.dextop/dextop-icon-theme-checkpoint ]
 		then
@@ -560,7 +560,7 @@ then
 			frobulator.file "${HOME}"/.dextop dextop-window-theme-checkpoint
 		fi
 
-		# window theme
+		# themes
 
 		if [ ! -f "${HOME}"/.dextop/dextop-window-theme-checkpoint ]
 		then
