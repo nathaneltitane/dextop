@@ -69,11 +69,17 @@ documentation_list=(
 
 extensions_list=(
 	termux-am
+	termux-am-socket
 	termux-api
+	termux-apt-repo
 	termux-auth
-	termux-generate-package
+	termux-create-package
 	termux-elf-cleaner
 	termux-exec
+	termux-gui-bash
+	termui-gui-c
+	termux-gui-package
+	termux-gui-pm
 	termux-keyring
 	termux-licenses
 	termux-services
