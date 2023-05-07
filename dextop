@@ -516,7 +516,7 @@ then
 
 		# icons
 
-		if [ ! -f "${HOME}"/.dextop/dextop-icon-theme-checkpoint ]
+		if [ ! -f "${HOME}"/.dextop/dextop-icons-checkpoint ]
 		then
 			frobulator.link "${PREFIX}"/usr/share/icons "${HOME}"/.icons
 
@@ -533,12 +533,12 @@ then
 
 			files_list=()
 
-			frobulator.file "${HOME}"/.dextop dextop-icons-theme-checkpoint
+			frobulator.file "${HOME}"/.dextop dextop-icons-checkpoint
 		fi
 
 		# themes
 
-		if [ ! -f "${HOME}"/.dextop/dextop-window-theme-checkpoint ]
+		if [ ! -f "${HOME}"/.dextop/dextop-themes-checkpoint ]
 		then
 			frobulator.link "${ROOT}"/usr/share/themes "${HOME}"/.themes
 
@@ -553,7 +553,7 @@ then
 
 			files_list=()
 
-			frobulator.file "${HOME}"/.dextop dextop-window-theme-checkpoint
+			frobulator.file "${HOME}"/.dextop dextop-themes-checkpoint
 		fi
 	fi
 
