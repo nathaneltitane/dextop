@@ -112,9 +112,6 @@ echo
 
 frobulator.failsafe proot &
 
-frobulator.fwd "Please wait..."
-echo
-
 frobulator.failsafe xserver-xorg-xvfb &
 
 frobulator.fwd "Please wait..."
