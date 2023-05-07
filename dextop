@@ -518,18 +518,7 @@ then
 
 		if [ ! -f "${HOME}"/.dextop/dextop-icon-theme-checkpoint ]
 		then
-			files_list+=(
-				Papirus
-				Papirus-Dark
-				Papirus-Light
-			)
-
-			if [ -d "${PREFIX}"/share/icons ]
-			then
-				frobulator.copy "${PREFIX}"/share/icons "${ROOT}"/usr/share/icons ${files_list[@]}
-			fi
-
-			files_list=()
+			frobulator.link "${PREFIX}"/usr/share/icons "${HOME}"/.icons
 
 			files_list+=(
 				Adwaita
@@ -540,30 +529,19 @@ then
 				hicolor
 			)
 
-			directories_list=(
-				"${PREFIX}"/share/themes
-				"${ROOT}"/usr/share/themes
-			)
-
-			for directory in ${directories_list[@]}
-			do
-				if [ -d "${directory}" ]
-				then
-					frobulator.keep "${directory}" ${files_list[@]}
-				fi
-			done
-
-			directories_list=()
+			frobulator.keep "${HOME}"/.icons ${files_list[@]}
 
 			files_list=()
 
-			frobulator.file "${HOME}"/.dextop dextop-window-theme-checkpoint
+			frobulator.file "${HOME}"/.dextop dextop-icons-theme-checkpoint
 		fi
 
 		# themes
 
 		if [ ! -f "${HOME}"/.dextop/dextop-window-theme-checkpoint ]
 		then
+			frobulator.link "${ROOT}"/usr/share/themes "${HOME}"/.themes
+
 			files_list+=(
 				Arc
 				Arc-Dark
@@ -571,25 +549,7 @@ then
 				Arc-Lighter
 			)
 
-			if [ -d "${ROOT}"/usr/share/themes ]
-			then
-				frobulator.copy "${ROOT}"/usr/share/themes "${PREFIX}"/share/themes ${files_list[@]}
-			fi
-
-			directories_list=(
-				"${PREFIX}"/share/themes
-				"${ROOT}"/usr/share/themes
-			)
-
-			for directory in ${directories_list[@]}
-			do
-				if [ -d "${directory}" ]
-				then
-					frobulator.keep "${directory}" ${files_list[@]}
-				fi
-			done
-
-			directories_list=()
+			frobulator.keep "${HOME}"/.themes ${files_list[@]}
 
 			files_list=()
 
