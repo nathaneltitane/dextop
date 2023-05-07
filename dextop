@@ -252,7 +252,7 @@ then
 		# failsafe
 
 		# run failsafe package update and upgrade:
-		# prevents random 'libsssl' error
+		# prevents random 'libssl' error
 
 		yes | apt update > /dev/null 2>&1 &
 
