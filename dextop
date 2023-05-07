@@ -247,36 +247,6 @@ frobulator.log "architecture_check"
 
 if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
 then
-	if [ ! -f "${HOME}"/.dextop/dextop-failsafe-checkpoint ]
-	then
-		# failsafe
-
-		# run failsafe package update and upgrade:
-		# prevents termux side random 'libssl' error
-
-		yes | apt update > /dev/null 2>&1 &
-
-		frobulator.progress "Updating..."
-		echo
-
-		yes | apt upgrade > /dev/null 2>&1 &
-
-		frobulator.progress "Upgrading..."
-		echo
-
-		# run failsafe package install:
-		# termux package servers are sometimes unresponsive or badly authenticated
-
-		frobulator.failsafe proot &
-
-		frobulator.fwd "Please wait..."
-		echo
-
-		clear
-
-		frobulator.file "${HOME}"/.dextop dextop-failsafe-checkpoint
-	fi
-
 	# preferences
 
 	if [ ! -f "${HOME}"/.dextop/dextop-preferences-checkpoint ]

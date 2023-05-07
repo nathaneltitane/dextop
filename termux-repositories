@@ -92,9 +92,35 @@ done <<< ${repositories_list[@]}
 
  IFS=''
 
-# update lists
+# failsafe
 
-frobulator.log "apt-get update" &
+# run failsafe package update and upgrade:
+# prevents termux side random 'libssl' error
 
-frobulator.progress "Forcing refresh..."
+yes | apt update > /dev/null 2>&1 &
+
+frobulator.progress "Updating..."
 echo
+
+yes | apt upgrade > /dev/null 2>&1 &
+
+frobulator.progress "Upgrading..."
+echo
+
+# run failsafe package install:
+# termux package servers are sometimes unresponsive or badly authenticated
+
+frobulator.failsafe proot &
+
+frobulator.fwd "Please wait..."
+echo
+
+frobulator.failsafe xserver-xorg-xvfb &
+
+frobulator.fwd "Please wait..."
+echo
+
+
+
+
+
