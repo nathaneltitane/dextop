@@ -252,7 +252,7 @@ then
 		# failsafe
 
 		# run failsafe package update and upgrade:
-		# prevents random 'libssl' error
+		# prevents termux side random 'libssl' error
 
 		yes | apt update > /dev/null 2>&1 &
 
