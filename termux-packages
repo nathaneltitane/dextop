@@ -162,7 +162,7 @@ xfce_fonts_list=(
 )
 
 xfce_themes_list=(
-	arc-theme
+#	arc-theme
 	adwaita-icon-theme
 	adwaita-icon-theme-full
 	papirus-icon-theme

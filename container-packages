@@ -133,7 +133,7 @@ xfce_themes_list=(
 	arc-theme
 	adwaita-icon-theme
 	adwaita-icon-theme-full
-	papirus-icon-theme
+#	papirus-icon-theme
 #	blackbird-gtk-theme
 #	bluebird-gtk-theme
 #	greybird-gtk-theme
