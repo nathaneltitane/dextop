@@ -117,6 +117,11 @@ echo
 
 # defaults /////////////////////////////////////////////////////////////////////
 
+if [ -z "${ROOT}" ]
+then
+	ROOT=("${PREFIX}"/cnt/*/*)
+fi
+
 if [ -z "${option}" ]
 then
 	option="xfce"
@@ -518,8 +523,6 @@ then
 
 		if [ ! -f "${HOME}"/.dextop/dextop-icons-checkpoint ]
 		then
-			frobulator.link "${PREFIX}"/usr/share "${HOME}" icons .icons
-
 			files_list+=(
 				Adwaita
 				Papirus
@@ -529,7 +532,9 @@ then
 				hicolor
 			)
 
-			frobulator.keep "${HOME}"/.icons ${files_list[@]}
+			frobulator.keep "${PREFIX}"/share/icons ${files_list[@]}
+
+			frobulator.link "${PREFIX}"/share "${HOME}" icons .icons
 
 			files_list=()
 
@@ -540,8 +545,6 @@ then
 
 		if [ ! -f "${HOME}"/.dextop/dextop-themes-checkpoint ]
 		then
-			frobulator.link "${ROOT}"/usr/share "${HOME}" themes .themes
-
 			files_list+=(
 				Arc
 				Arc-Dark
@@ -549,7 +552,9 @@ then
 				Arc-Lighter
 			)
 
-			frobulator.keep "${HOME}"/.themes ${files_list[@]}
+			frobulator.keep "${ROOT}"/usr/share/themes ${files_list[@]}
+
+			frobulator.link "${ROOT}"/usr/share "${HOME}" themes .themes
 
 			files_list=()
 
