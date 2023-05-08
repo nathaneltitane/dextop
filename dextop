@@ -478,9 +478,15 @@ then
 	if [ ! -f "${HOME}"/.dextop/dextop-bookmarks-checkpoint ]
 	then
 		directories_list=(
-			"${PREFIX}/cnt Container"
-			"${PREFIX}/media/external External"
-			"${PREFIX}/media/internal Internal"
+			"${PREFIX}"/cnt
+			"${PREFIX}"/media/external External
+			"${PREFIX}"/media/internal Internal
+		)
+
+		names_list=(
+			Container
+			External
+			Internal
 		)
 
 		for directory in ${directories_list[@]}
@@ -492,6 +498,8 @@ then
 		done
 
 		directories_list=()
+
+		names_list=()
 
 		frobulator.file "${HOME}"/.dextop dextop-bookmarks-checkpoint
 	fi
