@@ -119,6 +119,7 @@ xfce_list=(
 	xfce4-terminal
 	galculator
 	gigolo
+	mousepad
 	parole
 	thunar
 	thunar-archive-plugin
