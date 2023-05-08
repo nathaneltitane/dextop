@@ -478,9 +478,9 @@ then
 	if [ ! -f "${HOME}"/.dextop/dextop-bookmarks-checkpoint ]
 	then
 		directories_list=(
-			"${PREFIX}"/cnt
-			"${PREFIX}"/media/external
-			"${PREFIX}"/media/internal
+			"${PREFIX}/cnt Container"
+			"${PREFIX}/media/external External"
+			"${PREFIX}/media/internal Internal"
 		)
 
 		for directory in ${directories_list[@]}
