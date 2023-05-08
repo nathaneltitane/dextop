@@ -518,7 +518,7 @@ then
 
 		if [ ! -f "${HOME}"/.dextop/dextop-icons-checkpoint ]
 		then
-			frobulator.link "${PREFIX}"/usr/share/icons "${HOME}"/.icons
+			frobulator.link "${PREFIX}"/usr/share "${HOME}" icons .icons
 
 			files_list+=(
 				Adwaita
@@ -531,7 +531,7 @@ then
 
 			frobulator.keep "${HOME}"/.icons ${files_list[@]}
 
-			files_list=()
+			files_list=()1
 
 			frobulator.file "${HOME}"/.dextop dextop-icons-checkpoint
 		fi
@@ -540,7 +540,7 @@ then
 
 		if [ ! -f "${HOME}"/.dextop/dextop-themes-checkpoint ]
 		then
-			frobulator.link "${ROOT}"/usr/share/themes "${HOME}"/.themes
+			frobulator.link "${ROOT}"/usr/share "${HOME}" themes .themes
 
 			files_list+=(
 				Arc
