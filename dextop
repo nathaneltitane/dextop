@@ -531,7 +531,7 @@ then
 
 			frobulator.keep "${HOME}"/.icons ${files_list[@]}
 
-			files_list=()1
+			files_list=()
 
 			frobulator.file "${HOME}"/.dextop dextop-icons-checkpoint
 		fi
