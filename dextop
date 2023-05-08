@@ -496,6 +496,53 @@ then
 		frobulator.file "${HOME}"/.dextop dextop-bookmarks-checkpoint
 	fi
 
+	# login
+
+	if [ ! -f "${HOME}"/.dextop/dextop-login-checkpoint ]
+	then
+		frobulator.file "${HOME}"/.dextop dextop-login
+
+		frobulator.write login "${HOME}"/.dextop dextop-login
+
+		frobulator.file "${HOME}"/.dextop dextop-login-checkpoint
+	fi
+
+	# logout
+
+	if [ ! -f "${HOME}"/.dextop/dextop-logout-checkpoint ]
+	then
+		frobulator.file "${HOME}"/.dextop dextop-logout
+
+		frobulator.file "${HOME}"/.dextop dextop-logout-checkpoint
+	fi
+
+	# update
+
+	if [ ! -f "${HOME}"/.dextop/dextop-update-checkpoint ]
+	then
+		frobulator.file "${HOME}"/.dextop dextop-update
+
+		frobulator.file "${HOME}"/.dextop dextop-update-checkpoint
+	fi
+
+	# audio
+
+	if [ ! -f "${HOME}"/.dextop/dextop-audio-checkpoint ]
+	then
+		frobulator.file "${HOME}"/.dextop dextop-audio
+
+		frobulator.file "${HOME}"/.dextop dextop-audio-checkpoint
+	fi
+
+	# move setup
+
+	if [ ! -f "${HOME}"/.dextop/dextop-move-checkpoint ]
+	then
+		mv "${HOME}"/dextop "${HOME}"/.dextop/dextop
+
+		frobulator.file "${HOME}"/.dextop dextop-move-checkpoint
+	fi
+
 	if [ "${option}" = "console" ]
 	then
 		:
@@ -560,53 +607,6 @@ then
 
 			frobulator.file "${HOME}"/.dextop dextop-themes-checkpoint
 		fi
-	fi
-
-	# login
-
-	if [ ! -f "${HOME}"/.dextop/dextop-login-checkpoint ]
-	then
-		frobulator.file "${HOME}"/.dextop dextop-login
-
-		frobulator.write login "${HOME}"/.dextop dextop-login
-
-		frobulator.file "${HOME}"/.dextop dextop-login-checkpoint
-	fi
-
-	# logout
-
-	if [ ! -f "${HOME}"/.dextop/dextop-logout-checkpoint ]
-	then
-		frobulator.file "${HOME}"/.dextop dextop-logout
-
-		frobulator.file "${HOME}"/.dextop dextop-logout-checkpoint
-	fi
-
-	# update
-
-	if [ ! -f "${HOME}"/.dextop/dextop-update-checkpoint ]
-	then
-		frobulator.file "${HOME}"/.dextop dextop-update
-
-		frobulator.file "${HOME}"/.dextop dextop-update-checkpoint
-	fi
-
-	# audio
-
-	if [ ! -f "${HOME}"/.dextop/dextop-audio-checkpoint ]
-	then
-		frobulator.file "${HOME}"/.dextop dextop-audio
-
-		frobulator.file "${HOME}"/.dextop dextop-audio-checkpoint
-	fi
-
-	# move setup
-
-	if [ ! -f "${HOME}"/.dextop/dextop-move-checkpoint ]
-	then
-		mv "${HOME}"/dextop "${HOME}"/.dextop/dextop
-
-		frobulator.file "${HOME}"/.dextop dextop-move-checkpoint
 	fi
 
 	# checkpoint
