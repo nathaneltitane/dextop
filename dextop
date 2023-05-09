@@ -261,6 +261,7 @@ backup_intent () {
 	zip						\
 		--quiet 			\
 		--recurse-paths		\
+		--system-hidden		\
 							"${archive}"."${extension}" "${directory}"
 }
 
