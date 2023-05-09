@@ -56,6 +56,10 @@ do
 			option="termux"
 		;;
 
+		-b|--backup)
+			option="backup"
+		;;
+
 		-u|--update)
 			option="update"
 		;;
@@ -116,6 +120,8 @@ frobulator.script "Setting up ${script#*-}"
 echo
 
 # variables ////////////////////////////////////////////////////////////////////
+
+stamp=$(date +"%m-%d-%Y-%H-%M-%S")
 
 # defaults /////////////////////////////////////////////////////////////////////
 
@@ -244,6 +250,20 @@ settings_intent () {
 	frobulator.silence "${settings_command}"
 }
 
+configuration_backup () {
+	# backup home directory
+
+	extension="zip"
+
+	archive="${1}"
+	directory="${2}"
+
+	zip						\
+		--quiet 			\
+		--recurse-paths		\
+							"${archive}"."${extension}" "${directory}"
+}
+
 # architecture check ///////////////////////////////////////////////////////////
 
 frobulator.log "architecture_check"
@@ -254,6 +274,17 @@ frobulator.log "architecture_check"
 
 if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
 then
+	# backup
+
+	if [ ! -f "${HOME}"/.dextop/dextop-backup-checkpoint ]
+	then
+		configuration_backup dextop-backup-"${stamp}" "${HOME}" &
+
+		frobulator.progress "Backing up..."
+
+		frobulator.file "${HOME}"/.dextop dextop-backup-checkpoint
+	fi
+
 	# preferences
 
 	if [ ! -f "${HOME}"/.dextop/dextop-preferences-checkpoint ]
