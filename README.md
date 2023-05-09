@@ -15,7 +15,8 @@
 Dextop turns your modern Android device into a complete Linux-based distribution workstation in a matter of minutes!
 No hassle or deep technical know-how required: **Dextop is easy and user friendly.**
 
-Dextop was developed using a Samsung Galaxy Note 20 Ultra and a Samsung Galaxy Tab S7+. It has been tested and optimized to run in tandem with Samsung's Dex platform.
+Dextop was developed using a Samsung Galaxy Note 20 Ultra and a Samsung Galaxy Tab S7+.
+**It has been tested and optimized to run in tandem with Samsung's Dex platform.**
 
 ### Before you proceed:
 
