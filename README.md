@@ -17,6 +17,31 @@ No hassle or deep technical know-how required: **Dextop is easy and user friendl
 
 Dextop was developed using a Samsung Galaxy Note 20 Ultra and a Samsung Galaxy Tab S7+. It has been tested and optimized to run in tandem with Samsung's Dex platform.
 
+### Before you proceed:
+
+To run the way it does and transition seemlessly in between Termux and the container instance of your choice, Dextop is built a certain way, loads and links scripts, configuration files and utilities to enhance your Android-based workstation experience.
+
+It is highly recommended to install Dextop on a fresh Termux install to benefit from a clean slate and snappy experience, although you can always attempt setting it up on an already existing setup:
+
+**Backing up your existing setup by following the [Termux backup recommendations](https://wiki.termux.com/wiki/Backing_up_Termux) is a must as the Dextop project will not be held responsible for any overrides, file corruptions or deletions caused by the installation and configuration process.**
+
+A few other elements to note before proceeding:
+
+- Dextop installs certain core utilities to load and use a custom scripting library to make the overall command line interface more pleasant and informative
+- Dextop sets up all required items for it to function, aside from the container you choose, under your home directory
+- Dextop looks and behaves the way it does because it loads a specific set of Termux preferences and properties:
+  - colors.properties
+  - font.ttf
+  - termux.properties
+- Dextop is BASH-centric and loads its own set of BASH configurations:
+  - .bash_aliases
+  - .bashrc
+  - .bash_configuration
+  - .bash_functions
+  - .bash_login
+  - .bash_logout
+  - .bash_profile
+
 ### What it does:
 
 Dextop vs. other similar projects:
