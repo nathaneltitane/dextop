@@ -69,7 +69,9 @@ do
 			echo
 			echo -e "-t, --termux     Setup Termux environment and utilities."
 			echo
-			echo -e "-u, --update     Update Termux application packages. [ F-Droid ]"
+			echo -e "-b, --backup     Backup Termux user configuration files."
+			echo
+			echo -e "-u, --update     Update Termux application packages."
 			echo
 			echo -e "-h, --help       Show help and usage information."
 			echo
