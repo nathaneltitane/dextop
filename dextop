@@ -251,24 +251,9 @@ settings_intent () {
 }
 
 backup_intent () {
-	# backup routine
-
-	extension="zip"
-
-	archive="${1}"
-	directory="${2}"
-
-	zip						\
-		--quiet 			\
-		--recurse-paths		\
-		--system-hidden		\
-							"${archive}"."${extension}" "${directory}"
-}
-
-configuration_backup () {
 	# create backup archive of user home directory
 
-	backup_intent dextop-backup-"${stamp}" "${HOME}" &
+	frobulator.archive dextop-backup-"${stamp}" "${HOME}" &
 
 	frobulator.progress "Backing up..."
 }
@@ -283,7 +268,7 @@ frobulator.log "architecture_check"
 
 if [ "${option}" = "backup" ]
 then
-	configuration_backup
+	backup_intent
 fi
 
 if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
@@ -292,7 +277,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-backup-checkpoint ]
 	then
-		configuration_backup
+		backup_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-backup-checkpoint
 	fi
