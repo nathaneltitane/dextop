@@ -47,7 +47,7 @@ A few other elements to note before proceeding:
 
 ### What it does:
 
-Dextop vs. other similar projects:
+Dextop compared to other similar projects:
 
 - It provides you with a selection of the Ubuntu distribution base images: stable, popular and user-friendly knowledge bases.
 - It expands the installed base image to run just like a normal PC installation.
