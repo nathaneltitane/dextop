@@ -29,12 +29,12 @@ It is highly recommended to install Dextop on a fresh Termux instance or profile
 A few other elements to note before proceeding:
 
 - Dextop installs certain core utilities to load and use a custom scripting library to make the overall command line interface more pleasant and informative
-- Dextop sets up all required items for it to function, aside from the container you choose, under your home directory
+- Dextop sets up all required items for it to function, aside from the container you choose, under the home directory
 - Dextop looks and behaves the way it does because it loads/links a specific set of Termux preferences and properties:
   - colors.properties
   - font.ttf
   - termux.properties
-- Dextop is BASH-centric and loads/links its own set of BASH configurations:
+- Dextop is BASH-centric and loads/links its own set of BASH configurations and may not play well with other shell setups:
   - .bash_aliases
   - .bashrc
   - .bash_configuration
