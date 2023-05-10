@@ -34,7 +34,7 @@ A few other elements to note before proceeding:
   - colors.properties
   - font.ttf
   - termux.properties
-- Dextop is BASH-centric and and may not play well with other shell setups. It loads/links its own set of BASH configurations:
+- Dextop is BASH-centric and and may not play well with other shell setups and loads/links its own set of BASH configurations:
   - .bash_aliases
   - .bashrc
   - .bash_configuration
