@@ -20,7 +20,7 @@ Dextop was developed using a Samsung Galaxy Note 20 Ultra and a Samsung Galaxy T
 
 ### Before you proceed:
 
-To run the way it does and transition seemlessly in between Termux and the container instance of your choice, Dextop is built a certain way, loads and links scripts, configuration files and utilities to enhance your Android-based workstation experience.
+To run the way it does and transition seamlessly in between Termux and the container instance of your choice, Dextop is built a certain way, loads and links scripts, configuration files and utilities to enhance your Android-based workstation experience.
 
 It is highly recommended to install Dextop on a fresh Termux install to benefit from a clean slate and snappy experience, although you can always attempt deploying it on an already existing setup:
 
