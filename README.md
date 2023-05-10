@@ -43,7 +43,7 @@ A few other elements to note before proceeding:
   - .bash_logout
   - .bash_profile
 
-  ** All of the above files can be changed or customized to your linking and serve as a good base to start if you have no configurations or preferences already set.**
+** All of the above files can be changed or customized to your linking and serve as a good base to start if you have no configurations or preferences already set.**
 
 ### What it does:
 
