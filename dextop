@@ -44,12 +44,13 @@ while (($#))
 do
 	case "${1}"
 	in
-		-x|--xfce)
-			option="xfce"
-		;;
 
 		-c|--console)
-			option="console"
+			environment="console"
+		;;
+
+		-x|--xfce)
+			environment="xfce"
 		;;
 
 		-t|--termux)
@@ -72,8 +73,9 @@ do
 			echo
 			echo -e "USAGE:"
 			echo
-			echo -e "-x, --xfce       Setup XFCE desktop environment and utilities."
 			echo -e "-c, --console    Setup Console access to environment and utilities."
+			echo
+			echo -e "-x, --xfce       Setup XFCE desktop environment and utilities."
 			echo
 			echo -e "-t, --termux     Setup Termux environment and utilities only."
 			echo
@@ -136,11 +138,13 @@ then
 	ROOT=("${PREFIX}"/cnt/*/*)
 fi
 
-if [ -z "${option}" ]
+if [ -z "${environment}" ]
 then
-	option="xfce"
+	environment="xfce"
 
-	frobulator.flag "${option}" "${HOME}"/.dextop dextop-option
+	frobulator.flag "${environment}" "${HOME}"/.dextop dextop-environment
+
+	unset environment
 fi
 
 # functions ////////////////////////////////////////////////////////////////////
@@ -399,7 +403,7 @@ then
 
 	# termux
 
-	if [ "${option}" = "termux" ] || [ -z "${option}" ]
+	if [ "${option}" = "termux" ] || [ "${option}" = "xfce" ] || [ -z "${option}" ]
 	then
 		if [ "${option}" = "update" ]
 		then
@@ -423,7 +427,7 @@ then
 
 	# container
 
-	if [ "${option}" = "container" ] || [ -z "${option}" ]
+	if [ "${option}" = "container" ] || [ "${option}" = "xfce" ] || [ -z "${option}" ]
 	then
 
 		if [ ! -f "${HOME}"/.dextop/dextop-image-checkpoint ]
