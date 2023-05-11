@@ -78,7 +78,7 @@ This is required due to the Android user space runtime policy and limited hardwa
 
 Applications that require backend services (i.e.: Ubuntu Snap/snapd), standalone services, hardware probes and other advanced features that require access to restricted core system directories will not function: you must root your device to remove those limitations and gain full access to all system devices.
 
-`
+```
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
 │  Android OS                                        │   ▲    │
@@ -106,7 +106,7 @@ Applications that require backend services (i.e.: Ubuntu Snap/snapd), standalone
 │ └─────────────────────────────────────────────────────────┘ │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
-`
+```
 
 Dextop links the modified utilities that have been patched under Termux for some limited access to whatever the Android user space runtime policy permits (htop, kill, pgrep, pkill, ps, top).
 
