@@ -87,7 +87,7 @@ Applications that require backend services (i.e.: Ubuntu Snap/snapd), standalone
 │ │                                                │   │  │ │
 │ │ Termux Application                             ▼   │  │ │
 │ │                                                       │ │
-│ │ ┌───────────────┬──────────────────┬────────────────┐ │ │
+│ │ ┌───────────────┬────────────────┬──────────────────┐ │ │
 │ │ │               │                │                  │ │ │
 │ │ │ Termux System │ Home Directory │ Container System │ │ │
 │ │ │               │                │                  │ │ │
