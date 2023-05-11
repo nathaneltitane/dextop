@@ -56,6 +56,10 @@ do
 			option="termux"
 		;;
 
+		-n|--container)
+			option="container"
+		;;
+
 		-b|--backup)
 			option="backup"
 		;;
@@ -72,6 +76,8 @@ do
 			echo -e "-c, --console    Setup Console access to environment and utilities."
 			echo
 			echo -e "-t, --termux     Setup Termux environment and utilities only."
+			echo
+			echo -e "-n, --container  Setup Container environment and utilities only."
 			echo
 			echo -e "-b, --backup     Backup Termux user configuration files."
 			echo
@@ -391,35 +397,35 @@ then
 		frobulator.file "${HOME}"/.dextop dextop-directories-checkpoint
 	fi
 
-	# update
-
-	if [ "${option}" = "update" ]
-	then
-		if [ ! -f "${HOME}"/.dextop/dextop-update-checkpoint ]
-		then
-			"${HOME}"/.local/bin/termux-update
-
-			frobulator.file "${HOME}"/.dextop dextop-update-checkpoint
-		fi
-	fi
-
 	# termux
 
-	if [ ! -f "${HOME}"/.dextop/dextop-termux-checkpoint ]
+	if [ "${option}" = "termux" ] || [ -z "${option}" ]
 	then
-		"${HOME}"/.local/bin/termux-storage
-		"${HOME}"/.local/bin/termux-repositories
-		"${HOME}"/.local/bin/termux-packages
+		if [ "${option}" = "update" ]
+		then
+			if [ ! -f "${HOME}"/.dextop/dextop-update-checkpoint ]
+			then
+				"${HOME}"/.local/bin/termux-update
 
-		frobulator.file "${HOME}"/.dextop dextop-termux-checkpoint
+				frobulator.file "${HOME}"/.dextop dextop-update-checkpoint
+			fi
+		fi
+
+		if [ ! -f "${HOME}"/.dextop/dextop-termux-checkpoint ]
+		then
+			"${HOME}"/.local/bin/termux-storage
+			"${HOME}"/.local/bin/termux-repositories
+			"${HOME}"/.local/bin/termux-packages
+
+			frobulator.file "${HOME}"/.dextop dextop-termux-checkpoint
+		fi
 	fi
 
 	# container
 
-	if [ "${option}" = "termux" ]
+	if [ "${option}" = "container" ] || [ -z "${option}" ]
 	then
-		:
-	else
+
 		if [ ! -f "${HOME}"/.dextop/dextop-image-checkpoint ]
 		then
 			"${HOME}"/.local/bin/container-image
