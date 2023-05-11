@@ -402,7 +402,7 @@ then
 
 	# termux
 
-	if [ "${option}" = "termux" ] || [ "${option}" = "xfce" ] || [ -z "${option}" ]
+	if [ -z "${option}" ] || [ "${option}" = "termux" ] || [ "${option}" = "console" ] || [ "${option}" = "xfce" ]
 	then
 		if [ "${option}" = "update" ]
 		then
@@ -426,7 +426,7 @@ then
 
 	# container
 
-	if [ "${option}" = "container" ] || [ "${option}" = "xfce" ] || [ -z "${option}" ]
+	if [ -z "${option}" ] || [ "${option}" = "container" ] || [ "${option}" = "console" ] || [ "${option}" = "xfce" ]
 	then
 
 		if [ ! -f "${HOME}"/.dextop/dextop-image-checkpoint ]
@@ -529,23 +529,23 @@ then
 			"${PREFIX}"/media/internal
 		)
 
-		names_list=(
+		labels_list=(
 			Container
 			External
 			Internal
 		)
 
-		for directory in ${directories_list[@]}
+		for (( i=0 ; i<${#directories_list[@]} ; i++ ))
 		do
 			if [ -d "${directory}" ]
 			then
-				frobulator.write "file://${directory}" "${HOME}"/.config/gtk-3.0 bookmarks
+				frobulator.write "file://${directories_list[$i]} ${labels_list[$i]}" "${HOME}"/.config/gtk-3.0 bookmarks
 			fi
 		done
 
 		directories_list=()
 
-		names_list=()
+		labels_list=()
 
 		frobulator.file "${HOME}"/.dextop dextop-bookmarks-checkpoint
 	fi
