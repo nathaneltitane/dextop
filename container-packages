@@ -182,11 +182,18 @@ xfce_addons_list=(
 	xfce4-xkb-plugin
 )
 
-# options #
+# environment #
+
+# console
+
+if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "console" ]]
+then
+	desktop_environment_list=()
+fi
 
 # xfce
 
-if [[ $(cat "${HOME}"/.dextop/dextop-option) = "xfce" ]]
+if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "xfce" ]]
 then
 	desktop_environment_list+=(
 		${xfce_list[@]}
@@ -195,13 +202,6 @@ then
 	)
 
 	#	${xfce_addons_list[@]}
-fi
-
-# console
-
-if [[ $(cat "${HOME}"/.dextop/dextop-option) = "console" ]]
-then
-	desktop_environment_list=()
 fi
 
 # install #
