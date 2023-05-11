@@ -509,8 +509,8 @@ then
 	then
 		directories_list=(
 			"${PREFIX}"/cnt
-			"${PREFIX}"/media/external External
-			"${PREFIX}"/media/internal Internal
+			"${PREFIX}"/media/external
+			"${PREFIX}"/media/internal
 		)
 
 		names_list=(
