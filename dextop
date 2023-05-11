@@ -391,15 +391,22 @@ then
 		frobulator.file "${HOME}"/.dextop dextop-directories-checkpoint
 	fi
 
+	# update
+
+	if [ "${option}" = "update" ]
+	then
+		if [ ! -f "${HOME}"/.dextop/dextop-update-checkpoint ]
+		then
+			"${HOME}"/.local/bin/termux-update
+
+			frobulator.file "${HOME}"/.dextop dextop-update-checkpoint
+		fi
+	fi
+
 	# termux
 
 	if [ ! -f "${HOME}"/.dextop/dextop-termux-checkpoint ]
 	then
-		if [ "${option}" = "update" ]
-		then
-			"${HOME}"/.local/bin/termux-update
-		fi
-
 		"${HOME}"/.local/bin/termux-storage
 		"${HOME}"/.local/bin/termux-repositories
 		"${HOME}"/.local/bin/termux-packages
