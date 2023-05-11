@@ -71,7 +71,7 @@ do
 			echo -e "-x, --xfce       Setup XFCE desktop environment and utilities."
 			echo -e "-c, --console    Setup Console access to environment and utilities."
 			echo
-			echo -e "-t, --termux     Setup Termux environment and utilities."
+			echo -e "-t, --termux     Setup Termux environment and utilities only."
 			echo
 			echo -e "-b, --backup     Backup Termux user configuration files."
 			echo
