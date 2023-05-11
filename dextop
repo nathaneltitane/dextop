@@ -132,11 +132,6 @@ stamp=$(date +"%m-%d-%Y-%H-%M-%S")
 
 # defaults /////////////////////////////////////////////////////////////////////
 
-if [ -z "${ROOT}" ]
-then
-	ROOT=("${PREFIX}"/cnt/*/*)
-fi
-
 if [ -z "${environment}" ]
 then
 	environment="xfce"
@@ -144,6 +139,11 @@ then
 	frobulator.flag "${environment}" "${HOME}"/.dextop dextop-environment
 
 	unset environment
+fi
+
+if [ -z "${ROOT}" ]
+then
+	ROOT=("${PREFIX}"/cnt/*/*)
 fi
 
 # functions ////////////////////////////////////////////////////////////////////
