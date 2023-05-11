@@ -78,6 +78,12 @@ This is required due to the Android user space runtime policy and limited hardwa
 
 Applications that require backend services (i.e.: Ubuntu Snap/snapd), standalone services, hardware probes and other advanced features that require access to restricted core system directories will not function: you must root your device to remove those limitations and gain full access to all system devices.
 
+Dextop links the modified utilities that have been patched under Termux for some limited access to whatever the Android user space runtime policy permits (htop, kill, pgrep, pkill, ps, top).
+
+**Dextop only loads applications as needed: this helps keep a minimal footprint and your device running as smooth as possible!**
+
+**Music, mail and web browsing activities should preferably be taken care of using native Android applications that are readily installed and configured on your device.**
+
 ```
 ┌───────────────────────────────────────────────────────────┐
 │                                                           │
@@ -103,12 +109,6 @@ Applications that require backend services (i.e.: Ubuntu Snap/snapd), standalone
 │                                                           │
 └───────────────────────────────────────────────────────────┘
 ```
-
-Dextop links the modified utilities that have been patched under Termux for some limited access to whatever the Android user space runtime policy permits (htop, kill, pgrep, pkill, ps, top).
-
-**Dextop only loads applications as needed: this helps keep a minimal footprint and your device running as smooth as possible!**
-
-**Music, mail and web browsing activities should preferably be taken care of using native Android applications that are readily installed and configured on your device.**
 
 ### Hardware requirements:
 
