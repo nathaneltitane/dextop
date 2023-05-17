@@ -28,20 +28,20 @@ It is highly recommended to install Dextop on a fresh Termux instance or profile
 
 A few other elements to note before proceeding:
 
-- Dextop installs certain core utilities to load and use a custom scripting library to make the overall command line interface more pleasant and informative
+- Dextop installs certain core utilities to load and use a custom scripting library to make the overall command line interface more pleasant and informative:
+  - ~/.local/bin/frobulator
 - Dextop sets up all required items for it to function, aside from the container you choose, under the home directory
 - Dextop looks and behaves the way it does because it loads/links a specific set of Termux preferences and properties:
-  - ~/.termux/colors.properties
-  - ~/.termux/font.ttf
-  - ~/.termux/termux.properties
+  - ~/.termux/colors.properties    → ~/.local/bin/termux-colors
+  - ~/.termux/font.ttf             → ~/.local/bin/termux-font
+  - ~/.termux/termux.properties    → ~/.local/bin/termux-properties
 - Dextop is BASH-centric and and may not play well with other shell setups and loads/links its own set of BASH configurations:
-  - ~/.bashrc
-  - ~/.bash_aliases
-  - ~/.bash_configuration
-  - ~/.bash_functions
-  - ~/.bash_login
-  - ~/.bash_logout
-  - ~/.bash_profile
+  - ~/.bashrc            → ~/.local/bin/bash-configuration
+  - ~/.bash_aliases      → ~/.local/bin/bash-aliases
+  - ~/.bash_functions    → ~/.local/bin/bash-functions
+  - ~/.bash_login        → ~/.local/bin/bash-login
+  - ~/.bash_logout       → ~/.local/bin/bash-logout
+  - ~/.bash_profile      → ~/.local/bin/bash-profile
 
 **All of the above files can be changed or customized to your linking and serve as a good base to start if you have no configurations or preferences already set.**
 
