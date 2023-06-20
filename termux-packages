@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="05-09-2023"
+version="06-20-2023"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -84,6 +84,7 @@ extensions_list=(
 	termux-licenses
 	termux-services
 	termux-tools
+	termux-x11*
 )
 
 fonts_list=(
