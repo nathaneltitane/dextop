@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="05-09-2023"
+version="06-20-2023"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -101,89 +101,18 @@ if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 then
 	# process update
 
-	packages_list=(
-		com.termux
-		com.termux.api
-		)
+	packages_list+=(
+		termux-x11-shell-loader.apk
+		termux-x11.apk
+	)
 
 	for package in ${packages_list[@]}
 	do
-		frobulator.inf "Checking for package update" "[ ${package} ]"
-		echo
+		frobulator.download get.trmnl.me "${HOME}"/.local/apk ${package}
 
-		archive=$(curl -s -L "${packages_url}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
-		archive_version=$(echo "${archive}" | cut -d '_' -f 2 | sed 's/\..*//g')
-		archive_url="${repository_url}/${archive}"
+		open_intent "${package}"
 
-		frobulator.fwd "Verifying..."
-		echo
-
-		if [ "${package}" = "com.termux" ]
-		then
-			# com.termux apk
-
-			installed_version=$(echo "${TERMUX_VERSION}" | cut -d '.' -f 2)
-		else
-			# com.termux.api apk
-
-			installed_version=$(echo "${TERMUX_API_VERSION}" | cut -d '.' -f 2)
-		fi
-
-		# application version is deprecated
-
-		if [ "${installed_version}" != "${archive_version}" ]
-		then
-			frobulator.wrn "Package version has been updated" "[ ${package} // ${archive_version} ]."
-			echo
-
-			# request update permission
-
-			frobulator.ask "Update?"
-
-			read reply
-			echo
-
-			if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
-			then
-				frobulator.inf "Dowloading update."
-				echo
-
-				# download
-
-				frobulator.download "${repository_url}" "${PREFIX}"/tmp ${archive}
-
-				# update
-
-				open_intent "${PREFIX}"/tmp/"${archive}"
-
-				frobulator.fwd "Updating..."
-				echo
-			else
-				# continue without application update
-
-				frobulator.wrn "Proceeding without update."
-				frobulator.wrn "Setup process may encounter errors."
-				echo
-
-				frobulator.num "1" "Follow wiki pages stated above to correct issues."
-				frobulator.num "2" "Restart setup on a fresh Termux installation to proceed."
-				echo
-
-				frobulator.countdown 3 "Continuing" "[ ${script} ]"
-				echo
-			fi
-
-			# termux application version is up to date
-		else
-			if [ "${installed_version}" == "${archive_version}" ]
-			then
-				frobulator.scs "Package version is up to date" "[ ${package} // ${archive_version} ]"
-				echo
-
-				frobulator.fwd "Continuing..."
-				echo
-			fi
-		fi
+		wait
 	done
 else
 	frobulator.countdown 3 "Continuing" "[ ${script} ]"

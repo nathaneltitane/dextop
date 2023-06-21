@@ -104,7 +104,7 @@ then
 	packages_list=(
 		com.termux
 		com.termux.api
-		)
+	)
 
 	for package in ${packages_list[@]}
 	do
@@ -150,14 +150,14 @@ then
 
 				# download
 
-				frobulator.download "${repository_url}" "${PREFIX}"/tmp ${archive}
+				frobulator.download "${repository_url}" "${PREFIX}"/tmp "${archive}"
 
 				# update
 
-				open_intent "${PREFIX}"/tmp/"${archive}"
-
 				frobulator.fwd "Updating..."
 				echo
+
+				open_intent "${PREFIX}"/tmp/"${archive}"
 			else
 				# continue without application update
 
