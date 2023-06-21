@@ -2,13 +2,13 @@
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/donate/?hosted_button_id=2WZT7PCW3XDX6)
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 05-09-2023 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 06-20-2023 ]
 
 ---
 
-### [ NOTICE // 05-09-2023 ]
+### [ NOTICE // 06-20-2023 ]
 
-**Added automatic backup and backup options of user home directory!**
+**Added preliminary Termux:X11 support!**
 
 ### Welcome to [Dextop](https://dextop.app)
 
@@ -311,7 +311,7 @@ Should you suspect any issues or errors, please provide a copy of those files  w
 
 ---
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 05-09-2023 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 06-20-2023 ]
 
 ### Enjoying Dextop? Buy me a coffee to show your appreciation!
 
