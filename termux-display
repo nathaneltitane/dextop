@@ -71,9 +71,6 @@ open_intent () {
 
 # notice
 
-frobulator.err "Google Play Store updates deprecated since November 2020!"
-echo
-
 frobulator.wrn "Termux:X11 is still in early development."
 echo
 
