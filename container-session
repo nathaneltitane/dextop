@@ -101,6 +101,7 @@ do
 			echo
 			echo -e "-c, --clean          Clean vnc session selection."
 			echo -e "-n, --new            Generate new vnc session selection."
+			echo -e "-n, --view           Generate new vnc session selection."
 			echo
 			echo -e "-a, --application    Start application to start on session login."
 			echo
@@ -791,9 +792,10 @@ vnc_intent () {
 
 	# reference vnc session activity for known applications:
 
-	# FreebVNC: com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity
-	# RealVNC:  com.realvnc.viewer.android/.app.DesktopActivity
-	# Remotix:  com.nulana.android.remotix/.Viewer
+	# FreebVNC:      com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity
+	# RealVNC:       com.realvnc.viewer.android/.app.DesktopActivity
+	# Remotix:       com.nulana.android.remotix/.Viewer
+	# Termux:X11:    com.termux.../...
 
 	# start android vnc intent and force-stop existing activity
 
