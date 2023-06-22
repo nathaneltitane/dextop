@@ -101,7 +101,7 @@ do
 			echo
 			echo -e "-c, --clean          Clean vnc session selection."
 			echo -e "-n, --new            Generate new vnc session selection."
-			echo -e "-n, --view           Reload vnc viewer application window."
+			echo -e "-v, --view           Reload vnc viewer application window."
 			echo
 			echo -e "-a, --application    Start application to start on session login."
 			echo
