@@ -830,13 +830,13 @@ vnc_framebuffer () {
 	frobulator.fwd "Generating framebuffer..."
 	echo
 
-	unset command_framebuffer
+	unset framebuffer_command
 
-	command_framebuffer+="Xvfb"
-	command_framebuffer+=" -screen ${DISPLAY_NUMBER}"
-	command_framebuffer+=" ${geometry}x24"
+	framebuffer_command+="Xvfb"
+	framebuffer_command+=" -screen ${DISPLAY_NUMBER}"
+	framebuffer_command+=" ${geometry}x24"
 
-	${command_framebuffer} > /dev/null 2>&1 &
+	${framebuffer_command} > /dev/null 2>&1 &
 }
 
 vnc_interface () {
