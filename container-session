@@ -883,22 +883,22 @@ vnc_load () {
 	frobulator.fwd "Starting display server..."
 	echo
 
-	unset command_load
+	unset load_command
 
-	command_load+="x11vnc"
-	command_load+=" -display ${DISPLAY}"
-	command_load+=" -clip xinerama=${DISPLAY}"
-	command_load+=" -rfbport ${PORT}"
-	command_load+=" -scale 1.00"
-	command_load+=" -xkb"
-	command_load+=" -nocursor"
-	command_load+=" -nocursorshape"
-	command_load+=" -noshm"
-	command_load+=" -noxdamage"
-	command_load+=" -noxfixes"
-	command_load+=" -noxrecord"
+	load_command+="x11vnc"
+	load_command+=" -display ${DISPLAY}"
+	load_command+=" -clip xinerama=${DISPLAY}"
+	load_command+=" -rfbport ${PORT}"
+	load_command+=" -scale 1.00"
+	load_command+=" -xkb"
+	load_command+=" -nocursor"
+	load_command+=" -nocursorshape"
+	load_command+=" -noshm"
+	load_command+=" -noxdamage"
+	load_command+=" -noxfixes"
+	load_command+=" -noxrecord"
 
-	${command_load} > /dev/null 2>&1 &
+	${load_command} > /dev/null 2>&1 &
 
 	vnc_interface
 
