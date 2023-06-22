@@ -377,7 +377,7 @@ container_user () {
 	# verify user existence:
 	# loop through container's /etc/passwd file and make sure 'user' exists
 	# source environment variables when 'user' corresponds to 'username'
-	# default to 'root' if 'username' is invalid, not specified or does not exist
+	# default to 'root' if 'username' is invalid, is not specified or does not exist
 
 	last_entry="$(tail -n 1 "${ROOT}"/etc/passwd)"
 
