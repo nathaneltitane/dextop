@@ -523,7 +523,7 @@ container_session () {
 	${session_command}
 }
 
-vnc_clean () {
+display_clean () {
 	if [ -d "${HOME}" ]
 	then
 		rm -rf "${HOME}"/.ICE*
@@ -539,7 +539,7 @@ vnc_clean () {
 	fi
 }
 
-vnc_geometry () {
+display_geometry () {
 	frobulator.msg "Select geometry to start the display server"
 	frobulator.msg "or input [c]ustom properties:"
 	echo
@@ -681,7 +681,7 @@ vnc_geometry () {
 	printf '\n'
 }
 
-vnc_handle () {
+display_handle () {
 	# values #
 
 	values_list=(
@@ -782,7 +782,7 @@ vnc_handle () {
 	fi
 }
 
-vnc_intent () {
+display_intent () {
 	frobulator.fwd "Opening display..."
 	echo
 
@@ -799,7 +799,7 @@ vnc_intent () {
 
 	# start android vnc intent and force-stop existing activity
 
-	# frobulator.silence "am start -a android.intent.action.VIEW -d vnc://${ADDRESS}:${PORT} -S ${vnc_application}"
+	# frobulator.silence "am start -a android.intent.action.VIEW -d vnc://${ADDRESS}:${PORT} -S ${display_application}"
 
 	# start android vnc intent and set to view session with supported application
 
@@ -812,21 +812,21 @@ vnc_intent () {
 	frobulator.silence "${intent_command}"
 }
 
-vnc_view () {
+display_view () {
 
-	vnc_application="com.nulana.android.remotix/.Viewer"
+	display_application="com.nulana.android.remotix/.Viewer"
 
 	unset intent_command
 
 	intent_command+="am start"
 	intent_command+=" -a android.intent.action.VIEW"
 	intent_command+=" -d vnc://${ADDRESS}:${PORT}"
-	intent_command+=" -S ${vnc_application}"
+	intent_command+=" -S ${display_application}"
 
 	frobulator.silence "${intent_command}"
 }
 
-vnc_framebuffer () {
+display_framebuffer () {
 	frobulator.fwd "Generating framebuffer..."
 	echo
 
@@ -839,7 +839,7 @@ vnc_framebuffer () {
 	${framebuffer_command} > /dev/null 2>&1 &
 }
 
-vnc_interface () {
+display_interface () {
 	if [[ $(pidof xfce4-session) ]]
 	then
 		:
@@ -854,7 +854,7 @@ vnc_interface () {
 	echo
 }
 
-vnc_load () {
+display_load () {
 	# make selection available for automatic start:
 	# verify user id - do not write selection when 'root' user is logged in
 
@@ -878,7 +878,7 @@ vnc_load () {
 		fi
 	fi
 
-	vnc_framebuffer
+	display_framebuffer
 
 	frobulator.fwd "Starting display server..."
 	echo
@@ -900,17 +900,17 @@ vnc_load () {
 
 	${load_command} > /dev/null 2>&1 &
 
-	vnc_interface
+	display_interface
 
 	# connection to x11vnc is very fast:
 	# wait for process to settle before launching vnc viewer
 
 	sleep 1
 
-	vnc_intent
+	display_intent
 }
 
-vnc_start () {
+display_start () {
 	if [[ $(pidof x11vnc) ]]
 	then
 		:
@@ -921,24 +921,24 @@ vnc_start () {
 		then
 			# hide if selection file is present
 
-			vnc_geometry > /dev/null 2>&1
+			display_geometry > /dev/null 2>&1
 		else
 			# show if selection file is not present
 
-			vnc_geometry
+			display_geometry
 		fi
 
 		# handle vnc selections
 
-		vnc_handle
+		display_handle
 
 		# start vnc session
 
-		vnc_load
+		display_load
 	fi
 }
 
-vnc_new () {
+display_new () {
 	# handle selections display
 
 	if [ -f "${HOME}"/.vnc/selection ]
@@ -950,18 +950,18 @@ vnc_new () {
 
 	# show display format selections
 
-	vnc_geometry
+	display_geometry
 
 	# handle vnc selections
 
-	vnc_handle
+	display_handle
 
 	# start vnc session
 
-	vnc_load
+	display_load
 }
 
-vnc_stop () {
+display_stop () {
 	# handle and stop display processes
 
 	if [[ $(pidof Xvfb) ]]
@@ -984,52 +984,52 @@ vnc_stop () {
 
 	wait
 
-	vnc_clean
+	display_clean
 }
 
-vnc_list () {
-	vnc_format=$(cat "${HOME}"/.vnc/format)
-	vnc_geometry=$(cat "${HOME}"/.vnc/geometry)
-	vnc_display=${DISPLAY}
-	vnc_process=$(pidof x11vnc)
-	vnc_port="${PORT}"
+display_list () {
+	display_format=$(cat "${HOME}"/.vnc/format)
+	display_geometry=$(cat "${HOME}"/.vnc/geometry)
+	display_display=${DISPLAY}
+	display_process=$(pidof x11vnc)
+	display_port="${PORT}"
 
 	if [[ $(pidof x11vnc) ]]
 	then
 		frobulator.fwd "Listing session details..."
 		echo
 
-		vnc_format="${vnc_format}"
-		vnc_geometry="${vnc_geometry}"
-		vnc_display="${vnc_display}"
-		vnc_process="${vnc_process}"
-		vnc_port="${vnc_port}"
+		display_format="${display_format}"
+		display_geometry="${display_geometry}"
+		display_display="${display_display}"
+		display_process="${display_process}"
+		display_port="${display_port}"
 	else
 		frobulator.wrn "No active servers detected."
 		echo
 
 		empty="N/A"
 
-		vnc_format="${empty}"
-		vnc_geometry="${empty}"
-		vnc_display="${empty}"
-		vnc_process="${empty}"
-		vnc_port="${empty}"
+		display_format="${empty}"
+		display_geometry="${empty}"
+		display_display="${empty}"
+		display_process="${empty}"
+		display_port="${empty}"
 	fi
 
-	frobulator.inf "Format"   "[ ${vnc_format} ]"
-	frobulator.inf "Geometry" "[ ${vnc_geometry} ]"
-	frobulator.inf "Display"  "[ ${vnc_display} ]"
-	frobulator.inf "Process"  "[ ${vnc_process} ]"
-	frobulator.inf "Port"     "[ ${vnc_port} ]"
+	frobulator.inf "Format"   "[ ${display_format} ]"
+	frobulator.inf "Geometry" "[ ${display_geometry} ]"
+	frobulator.inf "Display"  "[ ${display_display} ]"
+	frobulator.inf "Process"  "[ ${display_process} ]"
+	frobulator.inf "Port"     "[ ${display_port} ]"
 	echo
 }
 
-vnc_password () {
+display_password () {
 	# values #
 
 	values_list=(
-		vnc_password
+		display_password
 	)
 
 	# handle user input for values_list
@@ -1045,7 +1045,7 @@ vnc_password () {
 	frobulator.fwd "Setting password..."
 	echo
 
-	echo "$vnc_password" | vncpasswd -f > "${HOME}"/.vnc/passwd
+	echo "$display_password" | vncpasswd -f > "${HOME}"/.vnc/passwd
 
 	frobulator.scs "Password changed."
 	echo
@@ -1076,35 +1076,35 @@ if [ "${option}" = "start" ]
 then
 	# start vnc session
 
-	vnc_start
+	display_start
 fi
 
 if [ "${option}" = "stop" ]
 then
 	# stop vnc session
 
-	vnc_stop
+	display_stop
 fi
 
 if [ "${option}" = "password" ]
 then
 	# generate password
 
-	vnc_password
+	display_password
 fi
 
 if [ "${option}" = "clean" ]
 then
 	# remove lock files and session handlers
 
-	vnc_clean
+	display_clean
 fi
 
 if [ "${option}" = "new" ]
 then
 	# start vnc session with new selection
 
-	vnc_new
+	display_new
 fi
 
 if [ "${option}" = "view" ]
@@ -1112,7 +1112,7 @@ then
 	# reload vnc viewer application window:
 	# some activity launches can be buggy
 
-	vnc_view
+	display_view
 fi
 
 if [ "${option}" = "application" ]
@@ -1166,4 +1166,4 @@ fi
 
 # list vnc session
 
-vnc_list
+display_list
