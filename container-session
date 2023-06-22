@@ -794,7 +794,6 @@ display_intent () {
 	# FreebVNC:      com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity
 	# RealVNC:       com.realvnc.viewer.android/.app.DesktopActivity
 	# Remotix:       com.nulana.android.remotix/.Viewer
-	# Termux:X11:    com.termux.../...
 
 	# start android vnc intent and force-stop existing activity
 
@@ -807,6 +806,15 @@ display_intent () {
 	intent_command+="am start"
 	intent_command+=" -a android.intent.action.VIEW"
 	intent_command+=" -d vnc://${ADDRESS}:${PORT}"
+
+	# reference x11 session activity for known applications:
+
+	# Termux:X11:    com.termux.x11/.MainActivity
+
+	# start termux:x11 intent
+
+#	intent_command+="am start"
+#	intent_command+="-n com.termux.x11/.MainActivity"
 
 	frobulator.silence "${intent_command}"
 }
