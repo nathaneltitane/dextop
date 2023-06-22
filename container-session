@@ -101,7 +101,7 @@ do
 			echo
 			echo -e "-c, --clean          Clean vnc session selection."
 			echo -e "-n, --new            Generate new vnc session selection."
-			echo -e "-n, --view           Generate new vnc session selection."
+			echo -e "-n, --view           Reload vnc viewer application window."
 			echo
 			echo -e "-a, --application    Start application to start on session login."
 			echo
@@ -1110,7 +1110,7 @@ fi
 if [ "${option}" = "view" ]
 then
 	# reload vnc viewer application window:
-	# some activity launches are buggy
+	# some activity launches can be buggy
 
 	vnc_view
 fi
