@@ -748,7 +748,6 @@ display_handle () {
 		width="${geometries[$i-2]}"
 		height="${geometries[$i-1]}"
 		geometry="${width}x${height}"
-
 	fi
 
 	# handle custom selection
