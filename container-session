@@ -828,15 +828,26 @@ display_intent () {
 }
 
 display_view () {
-
-	display_application="com.nulana.android.remotix/.Viewer"
+	frobulator.fwd "Reloading display..."
+	echo
 
 	unset intent_command
 
-	intent_command+="am start"
-	intent_command+=" -a android.intent.action.VIEW"
-	intent_command+=" -d vnc://${ADDRESS}:${PORT}"
-	intent_command+=" -S ${display_application}"
+	if [[ "${display}" = [vVnNcC] ]]
+	then
+		display_application="com.nulana.android.remotix/.Viewer"
+
+		intent_command+="am start"
+		intent_command+=" -a android.intent.action.VIEW"
+		intent_command+=" -d vnc://${ADDRESS}:${PORT}"
+		intent_command+=" -S ${display_application}"
+	fi
+
+	if [[ "${display}" = [xX11] ]]
+	then
+		intent_command+="am start"
+		intent_command+="-n com.termux.x11/.MainActivity"
+	fi
 
 	frobulator.silence "${intent_command}"
 }
