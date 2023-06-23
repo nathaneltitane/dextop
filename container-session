@@ -97,15 +97,15 @@ do
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-o, --start          Start display session server."
+			echo -e "-o, --start          Start display session server.                       [ vnc ] [ x11 ]"
 			echo -e "-x, --stop           Stop display session server."
-			echo -e "-p, --password       Generate vnc session password."
+			echo -e "-p, --password       Generate display session password."
 			echo
-			echo -e "-c, --clean          Clean vnc session selection."
-			echo -e "-n, --new            Generate new vnc session selection."
-			echo -e "-v, --view           Reload vnc viewer application window."
+			echo -e "-c, --clean          Clean display session geometry selection."
+			echo -e "-n, --new            Generate new display session geometry selection."
+			echo -e "-v, --view           Reload display viewer application window."
 			echo
-			echo -e "-a, --application    Start application to start on session login."
+			echo -e "-a, --application    Specify application to start on session login."
 			echo
 			echo -e "-u, --username       Specify user name for session login."
 			echo
