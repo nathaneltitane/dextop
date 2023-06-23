@@ -815,7 +815,7 @@ display_intent () {
 		# frobulator.silence "am start
 		#						-a android.intent.action.VIEW
 		#						-d vnc://${ADDRESS}:${PORT}
-		#						-S ${display_application}"
+		#						-S ${display_activity}"
 
 		intent_command+="am start"
 		intent_command+=" -a android.intent.action.VIEW"
@@ -827,7 +827,7 @@ display_intent () {
 		# start termux:x11 intent
 
 		intent_command+="am start"
-		intent_command+="-n com.termux.x11/.MainActivity"
+		intent_command+="-n ${termux_x11_activity}"
 	fi
 
 	# start android display viewer intent and set to view session with supported application
@@ -843,18 +843,18 @@ display_view () {
 
 	if [[ "${display}" = [vVnNcC] ]]
 	then
-		display_application="com.nulana.android.remotix/.Viewer"
+		display_activity="${remotix_vnc_activity}"
 
 		intent_command+="am start"
 		intent_command+=" -a android.intent.action.VIEW"
 		intent_command+=" -d vnc://${ADDRESS}:${PORT}"
-		intent_command+=" -S ${display_application}"
+		intent_command+=" -S ${display_activity}"
 	fi
 
 	if [[ "${display}" = [xX11] ]]
 	then
 		intent_command+="am start"
-		intent_command+="-n com.termux.x11/.MainActivity"
+		intent_command+="-n ${termux_x11_activity}"
 	fi
 
 	frobulator.silence "${intent_command}"
