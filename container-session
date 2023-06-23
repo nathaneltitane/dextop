@@ -1135,7 +1135,7 @@ then
 		frobulator.err "Unknown display server selection" "[ ${display} ]"
 		echo
 
-		frobulator.wrn "Display server options are 'VNC' or 'X11':"
+		frobulator.wrn "Available display server options" "[ 'vnc|VNC' / 'x11|X11' ]"
 		echo
 
 		frobulator.inf "Start session using available server options."
