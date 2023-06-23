@@ -149,6 +149,20 @@ echo
 
 # variables ////////////////////////////////////////////////////////////////////
 
+# reference vnc session activity for known applications:
+
+# FreebVNC:      com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity
+# RealVNC:       com.realvnc.viewer.android/.app.DesktopActivity
+# Remotix:       com.nulana.android.remotix/.Viewer
+
+# Termux:X11:    com.termux.x11/.MainActivity
+
+free_vnc_activity="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
+real_vnc_activity="com.realvnc.viewer.android/.app.DesktopActivity"
+remotix_vnc_activity="com.nulana.android.remotix/.Viewer"
+
+termux_x11_activity="com.termux.x11/.MainActivity"
+
 # defaults /////////////////////////////////////////////////////////////////////
 
 if [ -z "${DISPLAY}" ]
@@ -793,19 +807,15 @@ display_intent () {
 	then
 		# explicit VNC viewer application to kill:
 		# used when vnc is stopped or restarted using vnc:// intent
-		# when launched via the activity manager [ 'am start -d {URI} -S {ACTIVITY}' ]
-
-		# reference vnc session activity for known applications:
-
-		# FreebVNC:      com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity
-		# RealVNC:       com.realvnc.viewer.android/.app.DesktopActivity
-		# Remotix:       com.nulana.android.remotix/.Viewer
+		# when launched via the activity manager
+		# [ 'am start -d {URI} -S {ACTIVITY}' ]
 
 		# start android vnc intent and force-stop existing activity
 
-		# frobulator.silence "am start -a android.intent.action.VIEW -d vnc://${ADDRESS}:${PORT} -S ${display_application}"
-
-		# start android vnc intent and set to view session with supported application
+		# frobulator.silence "am start
+		#						-a android.intent.action.VIEW
+		#						-d vnc://${ADDRESS}:${PORT}
+		#						-S ${display_application}"
 
 		intent_command+="am start"
 		intent_command+=" -a android.intent.action.VIEW"
@@ -814,15 +824,13 @@ display_intent () {
 
 	if [[ "${display}" = [xX11] ]]
 	then
-		# reference x11 session activity for known applications:
-
-		# Termux:X11:    com.termux.x11/.MainActivity
-
 		# start termux:x11 intent
 
 		intent_command+="am start"
 		intent_command+="-n com.termux.x11/.MainActivity"
 	fi
+
+	# start android display viewer intent and set to view session with supported application
 
 	frobulator.silence "${intent_command}"
 }
