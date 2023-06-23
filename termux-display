@@ -85,7 +85,7 @@ echo
 
 frobulator.separate
 
-frobulator.ask "Install X11 display support?"
+frobulator.ask "Install android native X11 display support?"
 
 read reply
 echo
