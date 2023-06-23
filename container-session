@@ -1124,14 +1124,30 @@ application_handle () {
 
 if [ "${option}" = "start" ]
 then
-	# start vnc session
+	# check server type selection
 
-	display_start
+	if [[ "${display}" = [vVnNcC] ]] || [[ "${display}" = [xX11] ]]
+	then
+		# start display session
+
+		display_start
+	else
+		frobulator.err "Unknown display server selection" "[ ${display} ]"
+		echo
+
+		frobulator.wrn "Display server options are 'VNC' or 'X11':"
+		echo
+
+		frobulator.inf "Start session using available server options."
+		echo
+
+		exit 1
+	fi
 fi
 
 if [ "${option}" = "stop" ]
 then
-	# stop vnc session
+	# stop display session
 
 	display_stop
 fi
@@ -1159,7 +1175,7 @@ fi
 
 if [ "${option}" = "view" ]
 then
-	# reload vnc viewer application window:
+	# reload display viewer application window:
 	# some activity launches can be buggy
 
 	display_view
@@ -1167,7 +1183,7 @@ fi
 
 if [ "${option}" = "application" ]
 then
-	# validate and start application
+	# validate and start selected application
 
 	application_handle
 fi
