@@ -46,10 +46,12 @@ do
 	in
 		-o|--start)
 			option="start"
+			display="${2}"
 		;;
 
 		-x|--stop)
 			option="stop"
+			display="${2}"
 		;;
 
 		-p|--password)
@@ -95,8 +97,8 @@ do
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-o, --start          Start vnc session server."
-			echo -e "-x, --stop           Stop vnc session server."
+			echo -e "-o, --start          Start display session server."
+			echo -e "-x, --stop           Stop display session server."
 			echo -e "-p, --password       Generate vnc session password."
 			echo
 			echo -e "-c, --clean          Clean vnc session selection."
@@ -785,36 +787,42 @@ display_intent () {
 	frobulator.fwd "Opening display..."
 	echo
 
-	# explicit VNC viewer application to kill:
-	# used when vnc is stopped or restarted using vnc:// intent
-	# when launched via the activity manager [ 'am start -d {URI} -S {ACTIVITY}' ]
-
-	# reference vnc session activity for known applications:
-
-	# FreebVNC:      com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity
-	# RealVNC:       com.realvnc.viewer.android/.app.DesktopActivity
-	# Remotix:       com.nulana.android.remotix/.Viewer
-
-	# start android vnc intent and force-stop existing activity
-
-	# frobulator.silence "am start -a android.intent.action.VIEW -d vnc://${ADDRESS}:${PORT} -S ${display_application}"
-
-	# start android vnc intent and set to view session with supported application
-
 	unset intent_command
 
-	intent_command+="am start"
-	intent_command+=" -a android.intent.action.VIEW"
-	intent_command+=" -d vnc://${ADDRESS}:${PORT}"
+	if [[ "${display}" = [vVnNcC] ]]
+	then
+		# explicit VNC viewer application to kill:
+		# used when vnc is stopped or restarted using vnc:// intent
+		# when launched via the activity manager [ 'am start -d {URI} -S {ACTIVITY}' ]
 
-	# reference x11 session activity for known applications:
+		# reference vnc session activity for known applications:
 
-	# Termux:X11:    com.termux.x11/.MainActivity
+		# FreebVNC:      com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity
+		# RealVNC:       com.realvnc.viewer.android/.app.DesktopActivity
+		# Remotix:       com.nulana.android.remotix/.Viewer
 
-	# start termux:x11 intent
+		# start android vnc intent and force-stop existing activity
 
-#	intent_command+="am start"
-#	intent_command+="-n com.termux.x11/.MainActivity"
+		# frobulator.silence "am start -a android.intent.action.VIEW -d vnc://${ADDRESS}:${PORT} -S ${display_application}"
+
+		# start android vnc intent and set to view session with supported application
+
+		intent_command+="am start"
+		intent_command+=" -a android.intent.action.VIEW"
+		intent_command+=" -d vnc://${ADDRESS}:${PORT}"
+	fi
+
+	if [[ "${display}" = [xX11] ]]
+	then
+		# reference x11 session activity for known applications:
+
+		# Termux:X11:    com.termux.x11/.MainActivity
+
+		# start termux:x11 intent
+
+		intent_command+="am start"
+		intent_command+="-n com.termux.x11/.MainActivity"
+	fi
 
 	frobulator.silence "${intent_command}"
 }
@@ -892,18 +900,27 @@ display_load () {
 
 	unset load_command
 
-	load_command+="x11vnc"
-	load_command+=" -display ${DISPLAY}"
-	load_command+=" -clip xinerama=${DISPLAY}"
-	load_command+=" -rfbport ${PORT}"
-	load_command+=" -scale 1.00"
-	load_command+=" -xkb"
-	load_command+=" -nocursor"
-	load_command+=" -nocursorshape"
-	load_command+=" -noshm"
-	load_command+=" -noxdamage"
-	load_command+=" -noxfixes"
-	load_command+=" -noxrecord"
+	if [[ "${display}" = [vVnNcC] ]]
+	then
+		load_command+="x11vnc"
+		load_command+=" -display ${DISPLAY}"
+		load_command+=" -clip xinerama=${DISPLAY}"
+		load_command+=" -rfbport ${PORT}"
+		load_command+=" -scale 1.00"
+		load_command+=" -xkb"
+		load_command+=" -nocursor"
+		load_command+=" -nocursorshape"
+		load_command+=" -noshm"
+		load_command+=" -noxdamage"
+		load_command+=" -noxfixes"
+		load_command+=" -noxrecord"
+	fi
+
+	if [[ "${display}" = [xX11] ]]
+	then
+		load_command=+"termux-x11"
+		load_command=+" ${DISPLAY}"
+	fi
 
 	${load_command} > /dev/null 2>&1 &
 
