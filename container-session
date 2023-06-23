@@ -538,6 +538,7 @@ container_session () {
 
 	${session_command}
 }
+
 server_intent () {
 	unset load_command
 
