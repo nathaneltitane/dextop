@@ -1165,7 +1165,7 @@ fi
 
 if [ "${option}" = "clean" ]
 then
-	# remove lock files and session handlers
+	# remove lock and session handler files
 
 	display_clean
 fi
