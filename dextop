@@ -66,7 +66,7 @@ do
 
 		-u|--update)
 			option="update"
-			update_option="${2}"
+			update="${2}"
 
 			shift
 		;;
@@ -249,7 +249,7 @@ architecture_check () {
 	clear
 }
 
-settings_intent () {
+reload_intent () {
 	# reload termux settings
 
 	unset settings_command
@@ -270,6 +270,27 @@ backup_intent () {
 	frobulator.progress "Backing up..."
 }
 
+utilities_intent () {
+	utilities_list+=(
+		termux-packages
+		termux-repositories
+		termux-storage
+		termux-update
+		termux-display
+		container-expansion
+		container-image
+		container-packages
+		container-repositories
+		container-session
+		container-settings
+		container-user
+	)
+
+	frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
+
+	utilities_list=()
+}
+
 # architecture check ///////////////////////////////////////////////////////////
 
 frobulator.log "architecture_check"
@@ -283,17 +304,16 @@ then
 	backup_intent
 fi
 
+if [ "${option}" = "update" ]
+then
+	if [ "${update}" = [dD][eE][xX][tT][oO][pP] ]
+	then
+		utilities_intent
+	fi
+fi
+
 if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
 then
-	# backup
-
-	if [ ! -f "${HOME}"/.dextop/dextop-backup-checkpoint ]
-	then
-		backup_intent
-
-		frobulator.file "${HOME}"/.dextop dextop-backup-checkpoint
-	fi
-
 	# preferences
 
 	if [ ! -f "${HOME}"/.dextop/dextop-preferences-checkpoint ]
@@ -312,7 +332,7 @@ then
 		frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-font       font.ttf
 		frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-properties termux.properties
 
-		settings_intent
+		reload_intent
 
 		files_list=()
 
@@ -321,26 +341,9 @@ then
 
 	#  utilities
 
-	if [ ! -f "${HOME}"/.dextop/dextop-utilities-checkpoint ] || [[ "${option}" = "update" && "${update_option}" = [dDeExXtToopP] ]]
+	if [ ! -f "${HOME}"/.dextop/dextop-utilities-checkpoint ]
 	then
-		utilities_list+=(
-			termux-packages
-			termux-repositories
-			termux-storage
-			termux-update
-			termux-display
-			container-expansion
-			container-image
-			container-packages
-			container-repositories
-			container-session
-			container-settings
-			container-user
-		)
-
-		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
-
-		utilities_list=()
+		utilities_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-utilities-checkpoint
 	fi
@@ -406,15 +409,21 @@ then
 
 	# termux
 
-	if [ -z "${option}" ] || [ "${option}" = "termux" ] || [ "${option}" = "console" ] || [ "${option}" = "xfce" ]
+	if [ -z "${option}" ]          || \
+	   [ "${option}" = "termux" ]  || \
+	   [ "${option}" = "console" ] || \
+	   [ "${option}" = "xfce" ]
 	then
-		if [ "${option}" = "update" ] && [ "${update_option}" = [tTeErRmMuUxX] ]
+		if [ "${option}" = "update" ]
 		then
-			if [ ! -f "${HOME}"/.dextop/dextop-update-checkpoint ]
+			if [ "${update}" = [tT][eE][rR][mM][uU][xX] ]
 			then
-				"${HOME}"/.local/bin/termux-update
+				if [ ! -f "${HOME}"/.dextop/dextop-update-checkpoint ]
+				then
+					"${HOME}"/.local/bin/termux-update
 
-				frobulator.file "${HOME}"/.dextop dextop-update-checkpoint
+					frobulator.file "${HOME}"/.dextop dextop-update-checkpoint
+				fi
 			fi
 		fi
 
@@ -430,7 +439,10 @@ then
 
 	# container
 
-	if [ -z "${option}" ] || [ "${option}" = "container" ] || [ "${option}" = "console" ] || [ "${option}" = "xfce" ]
+	if [ -z "${option}" ]            || \
+	   [ "${option}" = "container" ] || \
+	   [ "${option}" = "console" ]   || \
+	   [ "${option}" = "xfce" ]
 	then
 
 		if [ ! -f "${HOME}"/.dextop/dextop-image-checkpoint ]
