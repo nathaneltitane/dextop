@@ -368,7 +368,7 @@ directories_intent () {
 }
 
 labels_intent () {
-	# generate file browser favorites directory labels
+	# generate file browser bookmark labels
 
 	directories_list=(
 		"${PREFIX}"/cnt
@@ -604,6 +604,8 @@ then
 			then
 				if [ ! -f "${HOME}"/.dextop/dextop-update-checkpoint ]
 				then
+					# run update
+
 					"${HOME}"/.local/bin/termux-update
 
 					frobulator.file "${HOME}"/.dextop dextop-update-checkpoint
@@ -613,6 +615,8 @@ then
 
 		if [ ! -f "${HOME}"/.dextop/dextop-termux-checkpoint ]
 		then
+			# run termux setup utilities
+
 			"${HOME}"/.local/bin/termux-storage
 			"${HOME}"/.local/bin/termux-repositories
 			"${HOME}"/.local/bin/termux-packages
@@ -638,6 +642,8 @@ then
 
 		if [ ! -f "${HOME}"/.dextop/dextop-container-checkpoint ]
 		then
+			# run container setup utilities
+
 			container_setup
 
 			container_setup "${HOME}"/.local/bin/container-expansion
@@ -653,6 +659,8 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-additions-checkpoint ]
 	then
+		# load additions
+
 		additions_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-additions-checkpoint
@@ -662,6 +670,8 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-shell-checkpoint ]
 	then
+		# load shell configurations
+
 		shell_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-shell-checkpoint
@@ -671,6 +681,8 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-bookmarks-checkpoint ]
 	then
+		# load bookmark labels
+
 		labels_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-bookmarks-checkpoint
