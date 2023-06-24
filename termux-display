@@ -101,7 +101,7 @@ then
 
 	for package in ${packages_list[@]}
 	do
-		frobulator.download get.trmx.app "${PREFIX}"/tmp ${package}
+		frobulator.download get.trmx.app "${PREFIX}"/tmp "${package}"
 
 		frobulator.fwd "Installing..."
 		echo
