@@ -2,13 +2,13 @@
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/donate/?hosted_button_id=2WZT7PCW3XDX6)
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 06-20-2023 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 06-24-2023 ]
 
 ---
 
-### [ NOTICE // 06-20-2023 ]
+### [ NOTICE // 06-24-2023 ]
 
-**Added preliminary Termux:X11 support!**
+**Added Termux:X11 display support and utilities update routine!**
 
 ### Welcome to [Dextop](https://dextop.app)
 
@@ -181,11 +181,11 @@ Once the Android applications are installed on your device, open Termux and past
 
 Container install options are:
 
-`-x, --xfce       Setup XFCE desktop environment and utilities.    [ Default ]`
+`-c, --console        Setup Console access to environment and utilities.`
 
-`-c, --console    Setup Console access to environment and utilities.`
+`-e, --environment    Setup desktop environment and utilities.              [ XFCE ] [ Default ]`
 
-`-u, --update     Update Termux application packages.              [ F-Droid ]`
+`-u, --update         Update application packages and utilities.            [ Dextop ] [ Termux ]`
 
 The 'console' option is great for users who would like to experiment or setup their own window manager/desktop environment, utilities and preferences.
 
@@ -311,7 +311,7 @@ Should you suspect any issues or errors, please provide a copy of those files  w
 
 ---
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 06-20-2023 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 06-24-2023 ]
 
 ### Enjoying Dextop? Buy me a coffee to show your appreciation!
 
