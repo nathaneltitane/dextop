@@ -229,15 +229,20 @@ Other users can be added using the 'container-user' utility.
 
 When logging into the container for the first time, a one-time configuration runs on your first login to set up your keyboard, locales and timezone preferences.
 
-The vnc session manager requires you to select your preferred display resolution for the best display experience.
+If using the vnc display server, the vnc session manager requires you to select your preferred display resolution for the best display experience:
 
-To stop the vnc server and halt the display output, type `container-session -x`.
-To start the vnc server and restart the display output, type `container-session -o`.
+Start the session using the vnc display server and restart the display output by typing `container-session -o vnc`.
+
+Stop the session using the vnc display server and halt the display output by typing `container-session -x`.
 
 The next login will automatically launch the session for you using the settings you've chosen previously:
 The first login saves the selection under `"${HOME}"/.vnc/selection` and uses it to start the VNC server and viewer automatically for your convenience!
 
-Logging out by pressing Ctrl+D or by typing `'logout'` or `'exit'` will automatically stop the vnc session and exit the container back to the Termux shell.
+If using the native X11 display server (termux-x11):
+
+Start the session using the X11 display server by typing `container-session -o x11`.
+
+Log out by pressing Ctrl+D or by typing `'logout'` or `'exit'`: the session will automatically stop the vnc server and exit the container back to the Termux shell.
 
 ### Utility updates:
 
