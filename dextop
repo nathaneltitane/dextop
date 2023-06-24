@@ -48,7 +48,7 @@ do
 			environment="console"
 		;;
 
-		-x|--xfce)
+		-e|--environment)
 			environment="xfce"
 		;;
 
@@ -72,19 +72,19 @@ do
 			echo
 			echo -e "USAGE:"
 			echo
-			echo -e "-c, --console      Setup Console access to environment and utilities."
+			echo -e "-c, --console        Setup Console access to environment and utilities."
 			echo
-			echo -e "-x, --xfce         Setup XFCE desktop environment and utilities."
+			echo -e "-e, --environment    Setup XFCE desktop environment and utilities."
 			echo
-			echo -e "-t, --termux       Setup Termux environment and utilities only."
+			echo -e "-t, --termux         Setup Termux environment and utilities only."
 			echo
-			echo -e "-n, --container    Setup Container environment and utilities only."
+			echo -e "-n, --container      Setup Container environment and utilities only."
 			echo
-			echo -e "-b, --backup       Backup Termux user configuration files."
+			echo -e "-b, --backup         Backup Termux user configuration files."
 			echo
-			echo -e "-u, --update       Update Termux application packages."
+			echo -e "-u, --update         Update Termux application packages."
 			echo
-			echo -e "-h, --help         Show help and usage information."
+			echo -e "-h, --help           Show help and usage information."
 			echo
 			echo -e "'${script}' [ Version // ${version} ]"
 			echo
