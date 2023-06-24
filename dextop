@@ -67,6 +67,8 @@ do
 		-u|--update)
 			option="update"
 			update_option="${2}"
+
+			shift
 		;;
 
 		-h|--help)

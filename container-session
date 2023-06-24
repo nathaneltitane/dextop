@@ -47,11 +47,15 @@ do
 		-o|--start)
 			option="start"
 			display="${2}"
+
+			shift
 		;;
 
 		-x|--stop)
 			option="stop"
 			display="${2}"
+
+			shift
 		;;
 
 		-p|--password)
