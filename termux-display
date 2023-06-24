@@ -116,7 +116,7 @@ then
 
 		wait
 	done
-else
-	frobulator.countdown 3 "Continuing" "[ ${script} ]"
-	echo
 fi
+
+frobulator.countdown 3 "Continuing" "[ ${script} ]"
+echo

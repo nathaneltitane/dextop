@@ -174,9 +174,6 @@ then
 				frobulator.num "1" "Follow wiki pages stated above to correct issues."
 				frobulator.num "2" "Restart setup on a fresh Termux installation to proceed."
 				echo
-
-				frobulator.countdown 3 "Continuing" "[ ${script} ]"
-				echo
 			fi
 
 			# termux application version is up to date
@@ -191,7 +188,7 @@ then
 			fi
 		fi
 	done
-else
-	frobulator.countdown 3 "Continuing" "[ ${script} ]"
-	echo
 fi
+
+frobulator.countdown 3 "Continuing" "[ ${script} ]"
+echo
