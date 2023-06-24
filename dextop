@@ -273,13 +273,13 @@ backup_intent () {
 settings_intent () {
 	# termux settings and properties
 
-	files_list+=(
+	settings_list+=(
 		termux-colors
 		termux-font
 		termux-properties
 	)
 
-	frobulator.download get.trmx.app "${HOME}"/.local/bin ${files_list[@]}
+	frobulator.download get.trmx.app "${HOME}"/.local/bin ${settings_list[@]}
 
 	frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-colors     colors.properties
 	frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-font       font.ttf
@@ -287,7 +287,7 @@ settings_intent () {
 
 	reload_intent
 
-	files_list=()
+	settings_list=()
 }
 
 utilities_intent () {
@@ -313,7 +313,63 @@ utilities_intent () {
 	utilities_list=()
 }
 
+directories_intent () {
+	# generate dextop required directories
+
+	directories_list+=(
+		bkp
+		cnt
+		img
+		mnt
+		media
+		storage
+	)
+
+	frobulator.directory "${PREFIX}" ${directories_list[@]}
+
+	directories_list=()
+
+	# generate home directory structure
+
+	directories_list+=(
+		Desktop
+		Documents
+		Downloads
+		Music
+		Pictures
+		Public
+		Templates
+		Videos
+	)
+
+	frobulator.directory "${HOME}" ${directories_list[@]}
+
+	directories_list=()
+
+	# generate root directory structure
+
+	directories_list+=(
+		bin
+		bkp
+		cnt
+		etc
+		img
+		lib
+		mnt
+		opt
+		tmp
+		media
+		storage
+	)
+
+	frobulator.link "${PREFIX}" "${PREFIX%/*}" ${directories_list[@]}
+
+	directories_list=()
+}
+
 labels_intent () {
+	# generate file browser favorites directory labels
+
 	directories_list=(
 		"${PREFIX}"/cnt
 		"${PREFIX}"/media/external
@@ -337,6 +393,73 @@ labels_intent () {
 	directories_list=()
 
 	labels_list=()
+}
+
+additions_intent () {
+	# load additions
+
+	additions_list+=(
+		termux
+		termux-browser
+		termux-chrome
+		termux-email
+		termux-gmail
+		termux-information
+		termux-message
+	)
+
+	frobulator.download get.trmx.app "${HOME}"/.local/bin ${additions_list[@]}
+
+	additions_list=()
+}
+
+shell_intent () {
+	# load shell files
+
+	shell_list+=(
+		bash-aliases
+		bash-configuration
+		bash-functions
+		bash-login
+		bash-logout
+		bash-profile
+	)
+
+	frobulator.download get.trmnl.me "${HOME}"/.local/bin ${shell_list[@]}
+
+	if [ -z "${option}" ] || [ "${option}" = "termux" ]
+	then
+		# link to user home
+
+		frobulator.link "${HOME}"/.local/bin "${HOME}"          bash-aliases       .bash_aliases
+		frobulator.link "${HOME}"/.local/bin "${HOME}"          bash-configuration .bashrc
+		frobulator.link "${HOME}"/.local/bin "${HOME}"          bash-configuration .bash_configuration
+		frobulator.link "${HOME}"/.local/bin "${HOME}"          bash-functions     .bash_functions
+		frobulator.link "${HOME}"/.local/bin "${HOME}"          bash-login         .bash_login
+		frobulator.link "${HOME}"/.local/bin "${HOME}"          bash-logout        .bash_logout
+		frobulator.link "${HOME}"/.local/bin "${HOME}"          bash-profile       .bash_profile
+
+		frobulator.file "${HOME}" .hushlogin
+	fi
+
+	if [ "${option}" = "termux" ]
+	then
+		:
+	else
+		# link to root home
+
+		frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-aliases       .bash_aliases
+		frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-configuration .bashrc
+		frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-configuration .bash_configuration
+		frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-functions     .bash_functions
+		frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-login         .bash_login
+		frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-logout        .bash_logout
+		frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-profile       .bash_profile
+
+		frobulator.file "${ROOT}"/root .hushlogin
+	fi
+
+	shell_list=()
 }
 
 # architecture check ///////////////////////////////////////////////////////////
@@ -366,6 +489,8 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-backup-checkpoint ]
 	then
+		# run backup
+
 		backup_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-backup-checkpoint
@@ -375,6 +500,8 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-preferences-checkpoint ]
 	then
+		# load settings
+
 		settings_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-preferences-checkpoint
@@ -384,6 +511,8 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-utilities-checkpoint ]
 	then
+		# load utilities
+
 		utilities_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-utilities-checkpoint
@@ -393,62 +522,14 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-directories-checkpoint ]
 	then
-		# add system directories
+		# generate directories
 
-		directories_list+=(
-			bkp
-			cnt
-			img
-			mnt
-			media
-			storage
-		)
-
-		frobulator.directory "${PREFIX}" ${directories_list[@]}
-
-		directories_list=()
-
-		# add home directories
-
-		directories_list+=(
-			Desktop
-			Documents
-			Downloads
-			Music
-			Pictures
-			Public
-			Templates
-			Videos
-		)
-
-		frobulator.directory "${HOME}" ${directories_list[@]}
-
-		directories_list=()
-
-		# generate root directory structure
-
-		directories_list+=(
-			bin
-			bkp
-			cnt
-			etc
-			img
-			lib
-			mnt
-			opt
-			tmp
-			media
-			storage
-		)
-
-		frobulator.link "${PREFIX}" "${PREFIX%/*}" ${directories_list[@]}
-
-		directories_list=()
+		directories_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-directories-checkpoint
 	fi
 
-	# termux
+	# termux ///////////////////////////////////////////////////////////////////
 
 	if [ -z "${option}" ]          || \
 	   [ "${option}" = "termux" ]  || \
@@ -478,7 +559,7 @@ then
 		fi
 	fi
 
-	# container
+	# container ////////////////////////////////////////////////////////////////
 
 	if [ -z "${option}" ]            || \
 	   [ "${option}" = "container" ] || \
@@ -510,19 +591,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-additions-checkpoint ]
 	then
-		files_list+=(
-			termux
-			termux-browser
-			termux-chrome
-			termux-email
-			termux-gmail
-			termux-information
-			termux-message
-		)
-
-		frobulator.download get.trmx.app "${HOME}"/.local/bin ${files_list[@]}
-
-		files_list=()
+		additions_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-additions-checkpoint
 	fi
@@ -531,47 +600,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-shell-checkpoint ]
 	then
-		# user home
-
-		files_list+=(
-			bash-aliases
-			bash-configuration
-			bash-functions
-			bash-login
-			bash-logout
-			bash-profile
-		)
-
-		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${files_list[@]}
-
-		frobulator.link "${HOME}"/.local/bin "${HOME}"          bash-aliases       .bash_aliases
-		frobulator.link "${HOME}"/.local/bin "${HOME}"          bash-configuration .bashrc
-		frobulator.link "${HOME}"/.local/bin "${HOME}"          bash-configuration .bash_configuration
-		frobulator.link "${HOME}"/.local/bin "${HOME}"          bash-functions     .bash_functions
-		frobulator.link "${HOME}"/.local/bin "${HOME}"          bash-login         .bash_login
-		frobulator.link "${HOME}"/.local/bin "${HOME}"          bash-logout        .bash_logout
-		frobulator.link "${HOME}"/.local/bin "${HOME}"          bash-profile       .bash_profile
-
-		frobulator.file "${HOME}" .hushlogin
-
-		if [ "${option}" = "termux" ]
-		then
-			:
-		else
-			# root home
-
-			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-aliases       .bash_aliases
-			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-configuration .bashrc
-			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-configuration .bash_configuration
-			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-functions     .bash_functions
-			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-login         .bash_login
-			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-logout        .bash_logout
-			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-profile       .bash_profile
-
-			frobulator.file "${ROOT}"/root .hushlogin
-
-			files_list=()
-		fi
+		shell_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-shell-checkpoint
 	fi
