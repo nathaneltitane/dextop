@@ -250,7 +250,7 @@ architecture_check () {
 }
 
 reload_intent () {
-	# reload termux settings
+	# termux settings reload
 
 	unset settings_command
 
@@ -263,14 +263,36 @@ reload_intent () {
 }
 
 backup_intent () {
-	# create backup archive of user home directory
+	# backup routine:
+	# create archive of user home directory
 
 	frobulator.archive dextop-backup-"${stamp}" "${HOME}" &
 
 	frobulator.progress "Backing up..."
 }
+settings_intent () {
+	# termux settings and properties
+
+	files_list+=(
+		termux-colors
+		termux-font
+		termux-properties
+	)
+
+	frobulator.download get.trmx.app "${HOME}"/.local/bin ${files_list[@]}
+
+	frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-colors     colors.properties
+	frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-font       font.ttf
+	frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-properties termux.properties
+
+	reload_intent
+
+	files_list=()
+}
 
 utilities_intent () {
+	# dextop utilities
+
 	utilities_list+=(
 		termux-packages
 		termux-repositories
@@ -289,6 +311,32 @@ utilities_intent () {
 	frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
 
 	utilities_list=()
+}
+
+labels_intent () {
+	directories_list=(
+		"${PREFIX}"/cnt
+		"${PREFIX}"/media/external
+		"${PREFIX}"/media/internal
+	)
+
+	labels_list=(
+		Container
+		External
+		Internal
+	)
+
+	for (( i=0 ; i<${#directories_list[@]} ; i++ ))
+	do
+		if [ -d "${directory}" ]
+		then
+			frobulator.write "file://${directories_list[$i]} ${labels_list[$i]}" "${HOME}"/.config/gtk-3.0 bookmarks
+		fi
+	done
+
+	directories_list=()
+
+	labels_list=()
 }
 
 # architecture check ///////////////////////////////////////////////////////////
@@ -314,27 +362,20 @@ fi
 
 if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
 then
+	# backup
+
+	if [ ! -f "${HOME}"/.dextop/dextop-backup-checkpoint ]
+	then
+		backup_intent
+
+		frobulator.file "${HOME}"/.dextop dextop-backup-checkpoint
+	fi
+
 	# preferences
 
 	if [ ! -f "${HOME}"/.dextop/dextop-preferences-checkpoint ]
 	then
-		# termux
-
-		files_list+=(
-			termux-colors
-			termux-font
-			termux-properties
-		)
-
-		frobulator.download get.trmx.app "${HOME}"/.local/bin ${files_list[@]}
-
-		frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-colors     colors.properties
-		frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-font       font.ttf
-		frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-properties termux.properties
-
-		reload_intent
-
-		files_list=()
+		settings_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-preferences-checkpoint
 	fi
@@ -539,29 +580,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-bookmarks-checkpoint ]
 	then
-		directories_list=(
-			"${PREFIX}"/cnt
-			"${PREFIX}"/media/external
-			"${PREFIX}"/media/internal
-		)
-
-		labels_list=(
-			Container
-			External
-			Internal
-		)
-
-		for (( i=0 ; i<${#directories_list[@]} ; i++ ))
-		do
-			if [ -d "${directory}" ]
-			then
-				frobulator.write "file://${directories_list[$i]} ${labels_list[$i]}" "${HOME}"/.config/gtk-3.0 bookmarks
-			fi
-		done
-
-		directories_list=()
-
-		labels_list=()
+		labels_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-bookmarks-checkpoint
 	fi
