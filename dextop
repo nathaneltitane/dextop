@@ -462,6 +462,68 @@ shell_intent () {
 	shell_list=()
 }
 
+backgrounds_intent () {
+	# load background(s)
+
+	backgrounds_list=(
+		dextop.svg
+	)
+
+	frobulator.download get.dxtp.app "${HOME}"/.dextop ${backgrounds_list[@]}
+
+	# link to backgrounds directories
+
+	frobulator.link "${HOME}"/.dextop "${ROOT}"/usr/share/backgrounds/dextop ${backgrounds_list[@]}
+
+	frobulator.link "${HOME}"/.dextop "${PREFIX}"/share/backgrounds/dextop ${backgrounds_list[@]}
+
+	backgrounds_list=()
+}
+
+icons_intent () {
+	# select icon themes
+
+	icons_list+=(
+		Adwaita
+		Papirus
+		Papirus-Dark
+		Papirus-Light
+		default
+		hicolor
+	)
+
+	# keep icons selections
+
+	frobulator.keep "${PREFIX}"/share/icons ${icons_list[@]}
+
+	icons_list=()
+
+	# link icons directories
+
+	frobulator.link "${PREFIX}"/share "${HOME}" icons .icons
+}
+
+themes_intent () {
+	# select themes
+
+	files_list+=(
+		Arc
+		Arc-Dark
+		Arc-Darker
+		Arc-Lighter
+	)
+
+	# keep themes selections
+
+	frobulator.keep "${ROOT}"/usr/share/themes ${files_list[@]}
+
+	files_list=()
+
+	# link themes directories
+
+	frobulator.link "${ROOT}"/usr/share "${HOME}" themes .themes
+}
+
 # architecture check ///////////////////////////////////////////////////////////
 
 frobulator.log "architecture_check"
@@ -669,17 +731,7 @@ then
 
 		if [ ! -f "${HOME}"/.dextop/dextop-backgrounds-checkpoint ]
 		then
-			files_list=(
-				dextop.svg
-			)
-
-			frobulator.download get.dxtp.app "${HOME}"/.dextop ${files_list[@]}
-
-			frobulator.link "${HOME}"/.dextop "${ROOT}"/usr/share/backgrounds/dextop ${files_list[@]}
-
-			frobulator.link "${HOME}"/.dextop "${PREFIX}"/share/backgrounds/dextop ${files_list[@]}
-
-			files_list=()
+			backgrounds_intent
 
 			frobulator.file "${HOME}"/.dextop dextop-backgrounds-checkpoint
 		fi
@@ -688,20 +740,7 @@ then
 
 		if [ ! -f "${HOME}"/.dextop/dextop-icons-checkpoint ]
 		then
-			files_list+=(
-				Adwaita
-				Papirus
-				Papirus-Dark
-				Papirus-Light
-				default
-				hicolor
-			)
-
-			frobulator.keep "${PREFIX}"/share/icons ${files_list[@]}
-
-			frobulator.link "${PREFIX}"/share "${HOME}" icons .icons
-
-			files_list=()
+			icons_intent
 
 			frobulator.file "${HOME}"/.dextop dextop-icons-checkpoint
 		fi
@@ -710,18 +749,7 @@ then
 
 		if [ ! -f "${HOME}"/.dextop/dextop-themes-checkpoint ]
 		then
-			files_list+=(
-				Arc
-				Arc-Dark
-				Arc-Darker
-				Arc-Lighter
-			)
-
-			frobulator.keep "${ROOT}"/usr/share/themes ${files_list[@]}
-
-			frobulator.link "${ROOT}"/usr/share "${HOME}" themes .themes
-
-			files_list=()
+			themes_intent
 
 			frobulator.file "${HOME}"/.dextop dextop-themes-checkpoint
 		fi
