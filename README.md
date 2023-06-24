@@ -213,7 +213,7 @@ You should press 'Allow' when prompted during the setup to grant this permission
 
 To access your newly generated container:
 
-`container-session -o | -u <username> | -a <application>` to start your session directly or with an application on load.
+`container-session -o <vnc> <x11> ] | -u <username> | -a <application>` to start your session directly or with an application on load.
 
 To access the desktop environment installed directly under Termux, type `container-session -o`: it is recognizable by the green username prompt.
 
@@ -263,6 +263,10 @@ As the project evolves, certain utilities may change either significantly or som
 To ensure Dextop runs as expected, manual updates can be run by downloading and executing the update routine from the latest dextop deployment script as follows:
 
 `curl -s -L run.dxtp.app > dextop && bash dextop -u dextop`
+
+### Display:
+
+
 
 ### Audio:
 
