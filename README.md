@@ -250,11 +250,19 @@ Automatic utility updates on login can be enabled as follows:
 
 `echo update > "${HOME}"/.dextop/dextop-update`
 
-Dextop will automatically fetch all relevant utilities and replace them withthe up-to-date versions.
+Dextop will automatically fetch all relevant utilities and replace them with the up-to-date versions.
 
 Automatic utility updates on login can be disabled as follows:
 
 `echo '' > "${HOME}"/.dextop/dextop-update`
+
+### General Dextop updates
+
+As the project evolves, certain utilities may change either significantly or some new utilities may be introduced into the Dextop ecosystem.
+
+To ensure Dextop runs as expected, manual updates can be run by downloading and executing the update routine from the latest dextop deployment script as follows:
+
+`curl -s -L run.dxtp.app > dextop && bash dextop -u dextop`
 
 ### Audio:
 
