@@ -546,7 +546,7 @@ container_session () {
 server_intent () {
 	unset load_command
 
-	if [[ "${display}" = [vVnNcC] ]]
+	if [ "${display}" = [vV][nN][cC] ]
 	then
 		load_command+="x11vnc"
 		load_command+=" -display ${DISPLAY}"
@@ -562,7 +562,7 @@ server_intent () {
 		load_command+=" -noxrecord"
 	fi
 
-	if [[ "${display}" = [xX11] ]]
+	if [ "${display}" = [xX][11] ]
 	then
 		load_command=+"termux-x11"
 		load_command=+" ${DISPLAY}"
@@ -835,7 +835,7 @@ display_intent () {
 
 	unset intent_command
 
-	if [[ "${display}" = [vVnNcC] ]]
+	if [ "${display}" = [vV][nN][cC] ]
 	then
 		# explicit VNC viewer application to kill:
 		# used when vnc is stopped or restarted using vnc:// intent
@@ -854,7 +854,7 @@ display_intent () {
 		intent_command+=" -d vnc://${ADDRESS}:${PORT}"
 	fi
 
-	if [[ "${display}" = [xX11] ]]
+	if [ "${display}" = [xX][11] ]
 	then
 		# start termux:x11 intent
 
@@ -873,7 +873,7 @@ display_view () {
 
 	unset intent_command
 
-	if [[ "${display}" = [vVnNcC] ]]
+	if [ "${display}" = [vV][nN][cC] ]
 	then
 		display_activity="${remotix_vnc_activity}"
 
@@ -883,7 +883,7 @@ display_view () {
 		intent_command+=" -S ${display_activity}"
 	fi
 
-	if [[ "${display}" = [xX11] ]]
+	if [ "${display}" = [xX][11] ]
 	then
 		intent_command+="am start"
 		intent_command+="-n ${termux_x11_activity}"
@@ -921,7 +921,7 @@ display_interface () {
 }
 
 display_load () {
-	if [[ "${display}" = [vVnNcC] ]]
+	if [ "${display}" = [vVnNcC] ]
 	then
 		# make selection available for automatic start:
 		# verify user id - do not write selection when 'root' user is logged in
@@ -1130,7 +1130,7 @@ if [ "${option}" = "start" ]
 then
 	# check server type selection
 
-	if [[ "${display}" = [vVnNcC] ]] || [[ "${display}" = [xX11] ]]
+	if [[ "${display}" = [vV][nN][cC] ]] || [[ "${display}" = [xX][11] ]]
 	then
 		# start display session
 
