@@ -66,6 +66,7 @@ do
 
 		-u|--update)
 			option="update"
+			update_option="${2}"
 		;;
 
 		-h|--help)
@@ -82,7 +83,7 @@ do
 			echo
 			echo -e "-b, --backup         Backup Termux user configuration files."
 			echo
-			echo -e "-u, --update         Update Termux application packages."
+			echo -e "-u, --update         Update application packages and utilities.            [ Dextop ] [ Termux ]"
 			echo
 			echo -e "-h, --help           Show help and usage information."
 			echo
@@ -318,7 +319,7 @@ then
 
 	#  utilities
 
-	if [ ! -f "${HOME}"/.dextop/dextop-utilities-checkpoint ]
+	if [ ! -f "${HOME}"/.dextop/dextop-utilities-checkpoint ] || [[ "${option}" = "update" && "${update_option}" = [dDeExXtToopP] ]]
 	then
 		utilities_list+=(
 			termux-packages
@@ -405,7 +406,7 @@ then
 
 	if [ -z "${option}" ] || [ "${option}" = "termux" ] || [ "${option}" = "console" ] || [ "${option}" = "xfce" ]
 	then
-		if [ "${option}" = "update" ]
+		if [ "${option}" = "update" ] && [ "${update_option}" = [tTeErRmMuUxX] ]
 		then
 			if [ ! -f "${HOME}"/.dextop/dextop-update-checkpoint ]
 			then
