@@ -55,7 +55,7 @@ clean () {
 	rm -rf "${PREFIX}"/tmp/*.apk
 }
 
-trap 'clean' EXIT
+# trap 'clean' EXIT
 
 open_intent () {
 	unset open_command
@@ -101,7 +101,7 @@ then
 
 	for package in ${packages_list[@]}
 	do
-		frobulator.download  "${PREFIX}"/tmp ${package}
+		frobulator.download get.trmx.app "${PREFIX}"/tmp ${package}
 
 		frobulator.fwd "Installing..."
 		echo
