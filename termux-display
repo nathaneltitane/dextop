@@ -107,6 +107,8 @@ then
 		echo
 
 		open_intent "${PREFIX}"/tmp/"${package}"
+
+		wait
 	done
 else
 	frobulator.countdown 3 "Continuing" "[ ${script} ]"
