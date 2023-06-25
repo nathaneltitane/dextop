@@ -271,7 +271,9 @@ As the project evolves, certain utilities may change either significantly or som
 
 To ensure Dextop runs as expected, manual updates can be run by downloading and executing the update routine from the latest dextop deployment script as follows:
 
-```curl -s -L run.dxtp.app > dextop && bash dextop -u dextop```
+```
+curl -s -L run.dxtp.app > dextop && bash dextop -u dextop
+```
 
 As part of the way Dextop can be configured to function, automatic utility updates on login can be enabled as follows:
 
