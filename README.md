@@ -225,7 +225,7 @@ It is used to identify a default user under the Linux-based distribution image y
 
 Other users can be added using the 'container-user' utility.
 
-### The fun begins:
+### Starting a session
 
 When logging into the container for the first time, a one-time configuration runs on your first login to set up your keyboard, locales and timezone preferences.
 
@@ -244,9 +244,16 @@ Start the session using the X11 display server by typing `container-session -o x
 
 Log out by pressing Ctrl+D or by typing `'logout'` or `'exit'`: the session will automatically stop the vnc server and exit the container back to the Termux shell.
 
-### Utility updates:
 
-Automatic utility updates on login can be enabled as follows:
+### Updates
+
+As the project evolves, certain utilities may change either significantly or some new utilities may be introduced into the Dextop ecosystem.
+
+To ensure Dextop runs as expected, manual updates can be run by downloading and executing the update routine from the latest dextop deployment script as follows:
+
+`curl -s -L run.dxtp.app > dextop && bash dextop -u dextop`
+
+As part of the way Dextop can be configured to function, automatic utility updates on login can be enabled as follows:
 
 `echo update > "${HOME}"/.dextop/dextop-update`
 
@@ -255,14 +262,6 @@ Dextop will automatically fetch all relevant utilities and replace them with the
 Automatic utility updates on login can be disabled as follows:
 
 `echo '' > "${HOME}"/.dextop/dextop-update`
-
-### General Dextop updates
-
-As the project evolves, certain utilities may change either significantly or some new utilities may be introduced into the Dextop ecosystem.
-
-To ensure Dextop runs as expected, manual updates can be run by downloading and executing the update routine from the latest dextop deployment script as follows:
-
-`curl -s -L run.dxtp.app > dextop && bash dextop -u dextop`
 
 ### Display:
 
