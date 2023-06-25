@@ -160,7 +160,7 @@ In either case, you can think of the experience as setting up a VM (virtual mach
 
 For the best possible experience, make sure to have:
 
-- A modern Android device with 64 bit ARM processor (Android 7.0 or above: Termux limitation - Avoid Android 11 when and if possible: [Phantom Process Killer](https://issuetracker.google.com/issues/205156966))
+- A modern Android device with 64 bit ARM processor (Android 7.0 or above: Termux limitation - Avoid Android 11/12/13 when and if possible: [Phantom Process Killer](https://issuetracker.google.com/issues/205156966))
 - Approximately 4GB in free storage on the device for symmetric setup (Termux and distribution container)
 - A mouse (bluetooth or other)
 - A keyboard (bluetooth or other)
