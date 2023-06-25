@@ -15,8 +15,7 @@
 Dextop turns your modern Android device into a complete Linux-based distribution workstation in a matter of minutes!
 No hassle or deep technical know-how required: **Dextop is easy and user friendly.**
 
-Dextop was developed using a Samsung Galaxy Note 20 Ultra and a Samsung Galaxy Tab S7+.
-**It has been tested and optimized to run in tandem with Samsung's Dex platform.**
+Dextop was developed using a Samsung Galaxy Note 20 Ultra, a Samsung Galaxy Tab S7+ and optimized to run within/alongside Samsung DeX.
 
 ### Before you proceed:
 
@@ -43,7 +42,18 @@ A few other elements to note before proceeding:
   - ~/.bash_logout       → ~/.local/bin/bash-logout
   - ~/.bash_profile      → ~/.local/bin/bash-profile
 
-**All of the above files can be changed or customized to your linking and serve as a good base to start if you have no configurations or preferences already set.**
+**All of the above files can be changed or customized and serve as a good base to start if there are no configurations or preferences already set.**
+
+### Environment:
+
+Dextop is very quick and efficient:
+
+Choose between a complete XFCE4 setup to get your work done, or keep the base install for command line interface and programming workflows.
+
+**Compositing is and should remain disabled with XFCE4 to optimize resource usage and prevent display tearing and other glitches.**
+
+Turning compositing off allows for the best possible performance and experience in accordance to current Android system and security limitations:
+This is required due to the Android user space runtime policy and limited hardware access: there is no graphics hardware acceleration available - the container graphics are emulated and run using LLVM.
 
 ### What it does:
 
@@ -59,18 +69,9 @@ Dextop compared to other similar projects:
 
 ![dextop-session](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop-session.png)
 
-Dextop is very quick and efficient:
+### What is doesn't:
 
-Choose between a complete XFCE4 setup to get your work done, or keep the base install for command line interface and programming workflows.
-
-### Note:
-
-**Compositing should be disabled with XFCE4 to optimize resource usage and prevent display tearing and other glitches.**
-
-Turning compositing off allows for the best possible performance and experience in accordance to current Android system and security limitations:
-This is required due to the Android user space runtime policy and limited hardware access: there is no graphics hardware acceleration available - the container graphics are emulated and run using LLVM.
-
-### Power users be warned:
+Power users be warned! As efficient and well rounded as it may be:
 
 - Dextop does not root your device!
 - Dextop does not load any services or backends!
@@ -145,23 +146,31 @@ Dextop links the modified utilities that have been patched under Termux for some
 │                                                                                                             │
 └─────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
+### Interface:
+
+Dextop offers two methods to turn your Android device into a desktop workstation and let you access both the Termux and container side using a graphical interface.
+
+The VNC method uses the X11 virtual framebuffer 'xvfb' alongside the X11 VNC server 'x11vnc' and forwards a display port within your device as 'localhost' to minimize latency and runs it using software emulated acceleration (LLVM).
+
+The X11 method uses a native display server application 'termux-x11' alongside the Termux:X11 android application package and forwards the display using your device's native resolution and DPI settings using your device' hardware platform (GPU).
+
+In either case, you can think of the experience as setting up a VM (virtual machine) on a typical laptop or desktop computer and accessing it through the a viewer.
 
 ### Hardware requirements:
 
-- Modern Android device with 64 bit ARM processor (Android 7.0 or above: Termux limitation - Avoid Android 11 when and if possible: [Phantom Process Killer](https://issuetracker.google.com/issues/205156966))
-- Approximately 4GB in free storage for symmetric setup (Termux and distribution container)
-- Mouse (bluetooth or other)
-- Keyboard (bluetooth or other)
-- Power source (for extended work periods and performance requirements: Samsung Dex limitation)
-- Monitor (highly recommended for phones and small devices)
-- Internet connectivity (wifi or other: for setup, updates and additional package downloads)
+For the best possible experience, make sure to have:
+
+- A modern Android device with 64 bit ARM processor (Android 7.0 or above: Termux limitation - Avoid Android 11 when and if possible: [Phantom Process Killer](https://issuetracker.google.com/issues/205156966))
+- Approximately 4GB in free storage on the device for symmetric setup (Termux and distribution container)
+- A mouse (bluetooth or other)
+- A keyboard (bluetooth or other)
+- A power source other than your battery (for extended work periods and performance requirements: Samsung DeX limitation)
+- A monitor (highly recommended for phones and small devices)
+- Medium to high speed internet connectivity (wifi or other: for setup, updates and additional package downloads)
 
 ### Software requirements:
 
-Dextop uses the X11 virtual framebuffer 'xvfb' alongside the X11 VNC server 'x11vnc' to turn your Android device into a desktop workstation and let you access both the Termux and container side using a graphical interface.
-Think of the experience as setting up a Virtual Machine on a normal computer and accessing it through the application's viewer.
-
-To proceed, install the following on your android device:
+To get Dextop set up, install the following packages on your android device:
 
 - [Termux](https://f-droid.org/en/packages/com.termux/ "Termux by Fredrik Fornwall")
 - [Termux API](https://f-droid.org/en/packages/com.termux.api/ "Termux API by Fredrik Fornwall")
@@ -173,7 +182,7 @@ To proceed, install the following on your android device:
 **Termux application downloads are to be made via F-Droid:**
 **Google Play Store updates are deprecated since November 2020**
 
-### Setting things up:
+### Setup:
 
 Once the Android applications are installed on your device, open Termux and paste or type:
 
@@ -188,6 +197,8 @@ Container install options are:
 `-u, --update         Update application packages and utilities.            [ Dextop ] [ Termux ]`
 
 The 'console' option is great for users who would like to experiment or setup their own window manager/desktop environment, utilities and preferences.
+
+The 'environemnt' option lets you specify the DE you would like to set up (work in progress). It defaults to XFCE4 for the base setup or when no argument is passed.
 
 ### Process summary:
 
