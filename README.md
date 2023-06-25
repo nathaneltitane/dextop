@@ -170,6 +170,8 @@ For the best possible experience, make sure to have:
 
 ### Software requirements:
 
+**Termux application downloads are to be made via F-Droid: Google Play Store updates are deprecated since November 2020**
+
 To get Dextop set up, install the following packages on your android device:
 
 - [Termux](https://f-droid.org/en/packages/com.termux/ "Termux by Fredrik Fornwall")
@@ -179,22 +181,27 @@ To get Dextop set up, install the following packages on your android device:
    - [VNC Viewer ](https://play.google.com/store/apps/details?id=com.realvnc.viewer.android "VNC Viewer by RealVNC Ltd.")
    - [bVNC](https://play.google.com/store/apps/details?id=com.iiordanov.freebVNC "bVNC by Iordan Iordanov")
 
-**Termux application downloads are to be made via F-Droid:**
-**Google Play Store updates are deprecated since November 2020**
+The 'Install Unknown apps' permission must be enabled for Termux:
+
+Enable this permission by navigating into Settings > Security and Privacy > Install unknown apps > Termux and toggling the switch on.
 
 ### Setup:
 
 Once the Android applications are installed on your device, open Termux and paste or type:
 
-`curl -s -L run.dxtp.app > dextop && bash dextop`
+```
+
+
+curl -s -L run.dxtp.app > dextop && bash dextop
+
+
+```
 
 Container install options are:
 
 `-c, --console        Setup Console access to environment and utilities.`
 
 `-e, --environment    Setup desktop environment and utilities.              [ XFCE ] [ Default ]`
-
-`-u, --update         Update application packages and utilities.            [ Dextop ] [ Termux ]`
 
 The 'console' option is great for users who would like to experiment or setup their own window manager/desktop environment, utilities and preferences.
 
@@ -208,11 +215,13 @@ Most of the setup process is fully automated and should run its course until the
 
 **User information and distribution preferences are captured throughout the setup process to set up the container's user profile, home directory and other parameters.**
 
-Dextop automatically detects and processes any external media mounts and adds them to your container.
+Dextop automatically detects and processes any external media mounts, adds them to your container and lables them in your file browser's bookmarks.
 
-**User input is still required to give Termux storage access permissions and this can only be done through user interaction. There are no workarounds!**
+**User input is still required to give Termux storage and installation access permissions when required and this can only be done through user interaction. There are no workarounds!**
 
-You should press 'Allow' when prompted during the setup to grant this permission.
+Storage:
+
+Press 'Allow' when prompted during the setup to grant the storage permission.
 
 ### Customization:
 
