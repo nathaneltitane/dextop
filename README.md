@@ -195,9 +195,13 @@ curl -s -L run.dxtp.app > dextop && bash dextop
 
 Container install options are:
 
-```-c, --console        Setup Console access to environment and utilities.```
+```
+-c, --console        Setup Console access to environment and utilities.
+```
 
-```-e, --environment    Setup desktop environment and utilities.              [ XFCE ] [ Default ]```
+```
+-e, --environment    Setup desktop environment and utilities.              [ XFCE ] [ Default ]
+```
 
 The 'console' option is great for users who would like to experiment or setup their own window manager/desktop environment, utilities and preferences.
 
