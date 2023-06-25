@@ -85,7 +85,7 @@ Dextop links the modified utilities that have been patched under Termux for some
 
 **Music, mail and web browsing activities should preferably be taken care of using native Android applications that are readily installed and configured on your device.**
 
-```
+`````````
 ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 │                                                                                                             │
 │ Device ///////////////////////////////////////////////////////////////////////////////////////////////////  │
@@ -145,7 +145,7 @@ Dextop links the modified utilities that have been patched under Termux for some
 │  └─────────────────────────────────────────────────────────────────────────────────┘  └──────────────────┘  │
 │                                                                                                             │
 └─────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-```
+`````````
 ### Interface:
 
 Dextop offers two methods to turn your Android device into a desktop workstation and let you access both the Termux and container side using a graphical interface.
@@ -195,9 +195,9 @@ curl -s -L run.dxtp.app > dextop && bash dextop
 
 Container install options are:
 
-`-c, --console        Setup Console access to environment and utilities.`
+```-c, --console        Setup Console access to environment and utilities.```
 
-`-e, --environment    Setup desktop environment and utilities.              [ XFCE ] [ Default ]`
+```-e, --environment    Setup desktop environment and utilities.              [ XFCE ] [ Default ]```
 
 The 'console' option is great for users who would like to experiment or setup their own window manager/desktop environment, utilities and preferences.
 
@@ -229,11 +229,11 @@ Press 'Allow' when prompted during the setup to grant the storage permission.
 
 To access your newly generated container:
 
-`container-session -o <vnc> <x11> ] | -u <username> | -a <application>` to start your session directly or with an application on load.
+```container-session -o <vnc> <x11> ] | -u <username> | -a <application>``` to start your session directly or with an application on load.
 
-To access the desktop environment installed directly under Termux, type `container-session -o`: it is recognizable by the green username prompt.
+To access the desktop environment installed directly under Termux, type ```container-session -o```: it is recognizable by the green username prompt.
 
-To acess the linux distribution image you've selected, type `container-session -u termux` and then initialize the session with `container-session -o`: it is recognizable by the fuschia username prompt.
+To acess the linux distribution image you've selected, type ```container-session -u termux``` and then initialize the session with ```container-session -o```: it is recognizable by the fuschia username prompt.
 
 **The user 'termux' is the default username that is utilized during the automatic container setup.**
 
@@ -247,18 +247,18 @@ When logging into the container for the first time, a one-time configuration run
 
 If using the vnc display server, the vnc session manager requires you to select your preferred display resolution for the best display experience:
 
-Start the session using the vnc display server and restart the display output by typing `container-session -o vnc`.
+Start the session using the vnc display server and restart the display output by typing ```container-session -o vnc```.
 
-Stop the session using the vnc display server and halt the display output by typing `container-session -x`.
+Stop the session using the vnc display server and halt the display output by typing ```container-session -x```.
 
 The next login will automatically launch the session for you using the settings you've chosen previously:
-The first login saves the selection under `"${HOME}"/.vnc/selection` and uses it to start the VNC server and viewer automatically for your convenience!
+The first login saves the selection under ```"${HOME}"/.vnc/selection``` and uses it to start the VNC server and viewer automatically for your convenience!
 
 If using the native X11 display server (termux-x11):
 
-Start the session using the X11 display server by typing `container-session -o x11`.
+Start the session using the X11 display server by typing ```container-session -o x11```.
 
-Log out by pressing Ctrl+D or by typing `'logout'` or `'exit'`: the session will automatically stop the vnc server and exit the container back to the Termux shell.
+Log out by pressing Ctrl+D or by typing ```'logout'``` or ```'exit'```: the session will automatically stop the vnc server and exit the container back to the Termux shell.
 
 
 ### Updates
@@ -267,17 +267,17 @@ As the project evolves, certain utilities may change either significantly or som
 
 To ensure Dextop runs as expected, manual updates can be run by downloading and executing the update routine from the latest dextop deployment script as follows:
 
-`curl -s -L run.dxtp.app > dextop && bash dextop -u dextop`
+```curl -s -L run.dxtp.app > dextop && bash dextop -u dextop```
 
 As part of the way Dextop can be configured to function, automatic utility updates on login can be enabled as follows:
 
-`echo update > "${HOME}"/.dextop/dextop-update`
+```echo update > "${HOME}"/.dextop/dextop-update```
 
 Dextop will automatically fetch all relevant utilities and replace them with the up-to-date versions.
 
 Automatic utility updates on login can be disabled as follows:
 
-`echo '' > "${HOME}"/.dextop/dextop-update`
+```echo '' > "${HOME}"/.dextop/dextop-update```
 
 ### Display:
 
@@ -292,21 +292,21 @@ latency on playback may vary depending on your device's hardware specification a
 
 Audio playback on login can be enabled as follows:
 
-`echo audio > "${HOME}"/.dextop/dextop-audio`
+```echo audio > "${HOME}"/.dextop/dextop-audio```
 
 Audio playback can be disabled as follows:
 
-`echo '' > "${HOME}"/.dextop/dextop-audio`
+```echo '' > "${HOME}"/.dextop/dextop-audio```
 
 ### Session logout:
 
 Automatic vnc display shutdown on terminal exit can be enabled as follows:
 
-`echo logout >> "${HOME}"/.dextop/dextop-logout`
+```echo logout >> "${HOME}"/.dextop/dextop-logout```
 
 Automatic vnc display shutdown on terminal exit  can be disabled as follows:
 
-`echo '' > "${HOME}"/.dextop/dextop-logout`
+```echo '' > "${HOME}"/.dextop/dextop-logout```
 
 ### Repositories:
 
@@ -338,7 +338,7 @@ Automatic vnc display shutdown on terminal exit  can be disabled as follows:
 
 Note:
 
-All setup dialogs, prompts, commands and binary execution outputs have been set to redirect to the `'${PREFIX}/var/log'` directory to keep output messages to a minimum.
+All setup dialogs, prompts, commands and binary execution outputs have been set to redirect to the ```'${PREFIX}/var/log'``` directory to keep output messages to a minimum.
 Should you suspect any issues or errors, please provide a copy of those files  when submitting a bug report.
 
 ---
