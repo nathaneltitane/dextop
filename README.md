@@ -42,7 +42,13 @@ A few other elements to note before proceeding:
   - ~/.bash_logout       → ~/.local/bin/bash-logout
   - ~/.bash_profile      → ~/.local/bin/bash-profile
 
+### Customization:
+
 **All of the above files can be changed or customized and serve as a good base to start if there are no configurations or preferences already set.**
+
+**You can modify any of the other scripts and utilities as well,  AT YOUR OWN RISK!**
+**Any modification of the Dextop setup routine scripts implies you are fully aware of potential breakage and the consequences of doing so:**
+**Any bug report that stems from such action will be acknowledged and will be closed immediately!**
 
 ### Environment:
 
@@ -150,7 +156,7 @@ Dextop links the modified utilities that have been patched under Termux for some
 
 ### Interface:
 
-Dextop offers two methods to turn your Android device into a desktop workstation and let you access both the Termux and container side using a graphical interface.
+Dextop offers two methods to turn an Android device into a desktop workstation and provide access to both the Termux and container side using a graphical interface.
 
 The VNC method uses the X11 virtual framebuffer 'xvfb' alongside the X11 VNC server 'x11vnc' and forwards a display port within your device as 'localhost' to minimize latency and runs it using software emulated acceleration (LLVM).
 
@@ -225,17 +231,13 @@ Storage:
 
 Press 'Allow' when prompted during the setup to grant the storage permission.
 
-### Customization:
 
-**You can modify any of the other scripts AT YOUR OWN RISK!**
-**Any modification of the Dextop setup routine scripts implies you are fully aware of potential breakage and the consequences of doing so:**
-**No bug report that stems from such action will be acknowledged and will be closed immediately!**
 
 ### Usage:
 
-To access your newly generated container:
+To access your newly generated container, start a session directly or with an application on session load :
 
-```container-session -o <vnc> <x11> ] | -u <username> | -a <application>``` to start your session directly or with an application on load.
+```container-session -o <vnc> <x11> ] | -u <username> | -a <application>``` to .
 
 To access the desktop environment installed directly under Termux, type ```container-session -o```: it is recognizable by the green username prompt.
 
