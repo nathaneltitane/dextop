@@ -213,31 +213,33 @@ Container install options are:
 
 The 'console' option is great for users who would like to experiment or setup their own window manager/desktop environment, utilities and preferences.
 
-The 'environemnt' option lets you specify the DE you would like to set up (work in progress). It defaults to XFCE4 for the base setup or when no argument is passed.
+The 'environemnt' option lets you specify the DE you would like to set up.
+
+It currently defaults to XFCE4 for the base setup or when no argument is passed (work in progress: more selections to come).
 
 ### Process summary:
-
-Most of the setup process is fully automated and should run its course until the container is ready for you to use.
 
 **Be attentive!**
 
 **User information and distribution preferences are captured throughout the setup process to set up the container's user profile, home directory and other parameters.**
 
-Dextop automatically detects and processes any external media mounts, adds them to your container and lables them in your file browser's bookmarks.
+Most of the setup process is fully automated and should run its course until the container is ready for you to use.
 
-**User input is still required to give Termux storage and installation access permissions when required and this can only be done through user interaction. There are no workarounds!**
+Dextop automatically detects and processes any external media mounts, adds them to your container and labels them in your file browser's [bookmarks file](https://www.freedesktop.org/wiki/Specifications/desktop-bookmark-spec/).
+
+**User input is still required to give Termux storage and installation access permissions when required and this can only be done through user interaction.**
+
+**There are no workarounds!**
 
 Storage:
 
 Press 'Allow' when prompted during the setup to grant the storage permission.
 
-
-
 ### Usage:
 
 To access your newly generated container, start a session directly or with an application on session load :
 
-```container-session -o <vnc> <x11> ] | -u <username> | -a <application>``` to .
+```container-session -o <display server> ] | -u <username> | -a <application>``` to .
 
 To access the desktop environment installed directly under Termux, type ```container-session -o```: it is recognizable by the green username prompt.
 
