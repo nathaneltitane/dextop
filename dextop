@@ -296,8 +296,8 @@ utilities_intent () {
 	utilities_list+=(
 		termux-packages
 		termux-repositories
-		termux-storage
 		termux-update
+		termux-storage
 		termux-display
 		container-expansion
 		container-image
