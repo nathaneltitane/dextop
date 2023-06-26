@@ -235,7 +235,13 @@ Storage:
 
 Press 'Allow' when prompted during the setup to grant the storage permission.
 
+Display:
+
+Press 'Install' when prompted during the setup to install the display server components.
+
 ### Usage:
+
+All utilities created for, loaded, and used by desktop contain a help argument. Please refer to the help dialogs before opening a bug report.
 
 To access your newly generated container, start a session directly or with an application on session load :
 
@@ -245,7 +251,7 @@ To access the desktop environment installed directly under Termux, type ```conta
 
 To acess the linux distribution image you've selected, type ```container-session -u termux``` and then initialize the session with ```container-session -o```: it is recognizable by the fuschia username prompt.
 
-**The user 'termux' is the default username that is utilized during the automatic container setup.**
+**User 'termux' is the default username that is utilized during the automatic container setup.**
 
 It is used to identify a default user under the Linux-based distribution image you've selected and can be edited.
 
@@ -269,7 +275,6 @@ If using the native X11 display server (termux-x11):
 Start the session using the X11 display server by typing ```container-session -o x11```.
 
 Log out by pressing Ctrl+D or by typing ```'logout'``` or ```'exit'```: the session will automatically stop the vnc server and exit the container back to the Termux shell.
-
 
 ### Updates
 
