@@ -57,14 +57,14 @@ This is required due to the Android user space runtime policy and limited hardwa
 
 ### What it does:
 
-Dextop compared to other similar projects:
+Dextop can be compared to other very similar projects, though:
 
 - It provides you with a selection of the Ubuntu distribution base images: stable, popular and user-friendly knowledge bases.
-- It expands the installed base image to run just like a normal PC installation.
-- It generates an actual user profile and prepares a functional home directory for you to work in, easily and securely.
+- It expands the installed base image to run **just like a normal PC installation**.
+- It **generates an actual user profile and prepares a functional home directory for you to work in**, easily and securely.
 - It installs all the necessary applications and utilities to provide you with the right experience.
 - It sets up your internal (and external, when available) storage media for flexible, system-wide access.
-- It handles all the technical intricacies related to a container (chroot/proot) installation so that you do not have to bother with them and get right to work.
+- It **handles all the technical intricacies related to a container installation** (chroot/proot) so that you do not have to bother with them and get right to work.
 - It is configured as a transient container system: it talks to Android via the Termux shell to access Android and launch relevant viewers and applications for you.
 
 ![dextop-session](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop-session.png)
