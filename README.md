@@ -243,38 +243,67 @@ Press 'Install' when prompted during the setup to install the display server com
 
 All utilities created for, loaded, and used by desktop contain a help argument. Please refer to the help dialogs before opening a bug report.
 
-To access your newly generated container, start a session directly or with an application on session load :
-
-```container-session -o <display server> ] | -u <username> | -a <application>``` to .
-
-To access the desktop environment installed directly under Termux, type ```container-session -o```: it is recognizable by the green username prompt.
-
-To acess the linux distribution image you've selected, type ```container-session -u termux``` and then initialize the session with ```container-session -o```: it is recognizable by the fuschia username prompt.
-
-**User 'termux' is the default username that is utilized during the automatic container setup.**
-
-It is used to identify a default user under the Linux-based distribution image you've selected and can be edited.
-
-Other users can be added using the 'container-user' utility.
-
 ### Starting a session
 
-When logging into the container for the first time, a one-time configuration runs on your first login to set up your keyboard, locales and timezone preferences.
+To start a session and access the newly generated container,  paste or type:
 
-If using the vnc display server, the vnc session manager requires you to select your preferred display resolution for the best display experience:
+```
+container-session -o <display server> | -u <username> | -a <application>
+```
 
-Start the session using the vnc display server and restart the display output by typing ```container-session -o vnc```.
+To access the desktop environment installed directly under Termux (recognizable by the green username prompt), paste or type:
 
-Stop the session using the vnc display server and halt the display output by typing ```container-session -x```.
+```
+container-session -o <display server>
+```
 
-The next login will automatically launch the session for you using the settings you've chosen previously:
-The first login saves the selection under ```"${HOME}"/.vnc/selection``` and uses it to start the VNC server and viewer automatically for your convenience!
+To acess the container housing distribution you've selected (recognizable by the fuschia username prompt), paste or type:
 
-If using the native X11 display server (termux-x11):
+```
+container-session -o <display server> -u termux
+```
 
-Start the session using the X11 display server by typing ```container-session -o x11```.
 
-Log out by pressing Ctrl+D or by typing ```'logout'``` or ```'exit'```: the session will automatically stop the vnc server and exit the container back to the Termux shell.
+
+To start the session using the vnc display server (x11vnc) and restart the display output, paste or type:
+
+```
+container-session -o vnc
+
+```
+
+If using the native X11 display server (termux-x11), paste or type:
+
+```container-session -o x11```.
+
+### Session notes
+
+**User 'termux' is the default username that is utilized during the automatic container setup.**
+It is used to identify a default user under the distribution image you've selected and can be edited after setup.
+Other users can be added by using the 'container-user' utility.
+
+When accessing the container for the very first time, a one-time configuration runs on login to set up your keyboard, locales and timezone preferences.
+
+If using the vnc display server (x11vnc), the vnc session manager requires you to select your preferred display resolution for the best display experience:
+The selection is saved under ```"${HOME}"/.vnc/selection``` and the login routine uses it to start the VNC server and viewer automatically for your convenience!
+
+The next login will automatically launch the session using the selection you've chosen previously. To override the selection, paste or type:
+
+```
+container-session -n vnc
+
+```
+
+
+### Stopping a session
+
+To stop the active session using the vnc display server by halting the vnc display server, paste or type:
+
+```
+container-session -x
+```
+
+To log out, press Ctrl+D or type ```'logout'``` or ```'exit'```: the session will automatically stop the vnc server and exit the container back to the Termux shell (recognizable by the green username prompt), or the Android home screen (depending on the shell level you were on).
 
 ### Updates
 
