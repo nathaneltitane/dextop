@@ -298,7 +298,6 @@ container-session -n vnc
 
 ```
 
-
 ### Stopping a session
 
 To stop the active session using the vnc display server by halting the vnc display server, paste or type:
