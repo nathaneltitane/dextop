@@ -180,7 +180,13 @@ For the best possible experience, make sure to have:
 
 ### Software requirements:
 
+Before you begin, please note that:
+
 **Termux application downloads are to be made via F-Droid: Google Play Store updates are deprecated since November 2020**
+
+**Android packages require that the 'Install Unknown apps' permission be enabled for the Termux application:**
+
+To enable this permission, navigate into Settings → Security and Privacy → Install unknown apps → Termux and toggling the switch on.
 
 To get Dextop set up, install the following packages on your android device:
 
@@ -190,10 +196,6 @@ To get Dextop set up, install the following packages on your android device:
    - [Remotix](https://play.google.com/store/apps/details?id=com.nulana.android.remotix "Remotix Remote Desktop by Nulana")
    - [VNC Viewer ](https://play.google.com/store/apps/details?id=com.realvnc.viewer.android "VNC Viewer by RealVNC Ltd.")
    - [bVNC](https://play.google.com/store/apps/details?id=com.iiordanov.freebVNC "bVNC by Iordan Iordanov")
-
-**Android packages require that the 'Install Unknown apps' permission be enabled for the Termux application:**
-
-To enable this permission, navigate into Settings → Security and Privacy → Install unknown apps → Termux and toggling the switch on.
 
 ### Setup:
 
