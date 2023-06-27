@@ -2,11 +2,11 @@
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/donate/?hosted_button_id=2WZT7PCW3XDX6)
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 06-24-2023 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 06-26-2023 ]
 
 ---
 
-### [ NOTICE // 06-24-2023 ]
+### [ NOTICE // 06-26-2023 ]
 
 **Added Termux:X11 display support and utilities update routine!**
 
@@ -391,7 +391,7 @@ Should you suspect any issues or errors, please provide a copy of those files  w
 
 ---
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 06-24-2023 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 06-26-2023 ]
 
 ### Enjoying Dextop? Buy me a coffee to show your appreciation!
 
