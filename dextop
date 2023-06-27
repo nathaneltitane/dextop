@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="06-20-2023"
+version="06-24-2023"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -77,7 +77,7 @@ do
 			echo
 			echo -e "-c, --console        Setup Console access to environment and utilities only."
 			echo
-			echo -e "-e, --environment    Setup desktop environment and utilities.                   [ XFCE ]"
+			echo -e "-e, --environment    Setup desktop environment and utilities.                   [ i3 ] [ XFCE ]"
 			echo
 			echo -e "-t, --termux         Setup Termux environment and utilities only."
 			echo
