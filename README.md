@@ -191,7 +191,7 @@ To get Dextop set up, install the following packages on your android device:
    - [VNC Viewer ](https://play.google.com/store/apps/details?id=com.realvnc.viewer.android "VNC Viewer by RealVNC Ltd.")
    - [bVNC](https://play.google.com/store/apps/details?id=com.iiordanov.freebVNC "bVNC by Iordan Iordanov")
 
-**Android packages require that the 'Install Unknown apps' permission must be enabled for Termux:**
+**Android packages require that the 'Install Unknown apps' permission be enabled for the Termux application:**
 
 To enable this permission, navigate into Settings → Security and Privacy → Install unknown apps → Termux and toggling the switch on.
 
