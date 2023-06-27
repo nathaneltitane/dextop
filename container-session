@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="06-23-2023"
+version="06-26-2023"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -166,6 +166,19 @@ real_vnc_activity="com.realvnc.viewer.android/.app.DesktopActivity"
 remotix_vnc_activity="com.nulana.android.remotix/.Viewer"
 
 termux_x11_activity="com.termux.x11/.MainActivity"
+
+if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "xfce" ]]
+then
+	session="xfce4-session"
+
+elif [[ $(cat "${HOME}"/.dextop/dextop-environment) = "kde" ]]
+then
+	session="plasma_session"
+
+elif [[ $(cat "${HOME}"/.dextop/dextop-environment) = "i3" ]]
+then
+	session="i3wm"
+fi
 
 # defaults /////////////////////////////////////////////////////////////////////
 
@@ -906,13 +919,13 @@ display_framebuffer () {
 }
 
 display_interface () {
-	if [[ $(pidof xfce4-session) ]]
+	if [[ $(pidof "${session}") ]]
 	then
 		:
 	else
-		if [[ $(command -v xfce4-session) ]]
+		if [[ $(command -v "${session}") ]]
 		then
-			frobulator.silence "xfce4-session &"
+			frobulator.silence ""${session}" &"
 		fi
 	fi
 
