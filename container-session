@@ -153,7 +153,7 @@ echo
 
 # variables ////////////////////////////////////////////////////////////////////
 
-# reference vnc session activity for known applications:
+# reference session viewer activity calls for known android applications:
 
 # FreebVNC:      com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity
 # RealVNC:       com.realvnc.viewer.android/.app.DesktopActivity
@@ -167,24 +167,21 @@ remotix_vnc_activity="com.nulana.android.remotix/.Viewer"
 
 termux_x11_activity="com.termux.x11/.MainActivity"
 
-if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "xfce" ]]
-then
-	session="xfce4-session"
-
-elif [[ $(cat "${HOME}"/.dextop/dextop-environment) = "kde" ]]
-then
-	session="plasma_session"
-
-elif [[ $(cat "${HOME}"/.dextop/dextop-environment) = "i3" ]]
-then
-	session="i3wm"
-fi
-
 # defaults /////////////////////////////////////////////////////////////////////
 
 if [ -z "${display}" ]
 then
 	display="x11"
+fi
+
+if [ -z "${environment}" ]
+then
+	environement="$(cat ${HOME}/.dextop/dextop-environemnt)"
+fi
+
+if [ -z "${session}" ]
+then
+	session="$(cat ${HOME}/.dextop/dextop-session)"
 fi
 
 if [ -z "${DISPLAY}" ]

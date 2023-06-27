@@ -49,7 +49,7 @@ do
 		;;
 
 		-e|--environment)
-			environment="xfce"
+			environment="${2}"
 		;;
 
 		-t|--termux)
@@ -142,6 +142,24 @@ then
 	frobulator.flag "${environment}" "${HOME}"/.dextop dextop-environment
 
 	unset environment
+fi
+
+if [ -z "${session}" ]
+then
+	if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "xfce" ]]
+	then
+		session="xfce4-session"
+
+	elif [[ $(cat "${HOME}"/.dextop/dextop-environment) = "kde" ]]
+	then
+		session="plasma_session"
+
+	elif [[ $(cat "${HOME}"/.dextop/dextop-environment) = "i3" ]]
+	then
+		session="i3wm"
+	fi
+
+	frobulator.flag "${session}" "${HOME}"/.dextop dextop-session
 fi
 
 if [ -z "${ROOT}" ]
