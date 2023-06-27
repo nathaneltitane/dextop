@@ -149,12 +149,9 @@ then
 	if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "xfce" ]]
 	then
 		session="xfce4-session"
+	fi
 
-	elif [[ $(cat "${HOME}"/.dextop/dextop-environment) = "kde" ]]
-	then
-		session="plasma_session"
-
-	elif [[ $(cat "${HOME}"/.dextop/dextop-environment) = "i3" ]]
+	if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "i3" ]]
 	then
 		session="i3wm"
 	fi

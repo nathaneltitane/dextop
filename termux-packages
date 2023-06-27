@@ -90,6 +90,16 @@ extensions_list=(
 fonts_list=(
 )
 
+i3_list=(
+	i3
+	i3status
+)
+
+i3_addons_list=(
+	dmenu
+	rofi
+)
+
 icon_themes_list=(
 	papirus-icon-theme
 )
@@ -201,6 +211,16 @@ xfce_addons_list=(
 if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "console" ]]
 then
 	desktop_environment_list=()
+fi
+
+# i3
+
+if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "i3" ]]
+then
+	desktop_environment_list+=(
+		${i3_list[@]}
+		${i3_addons_list[@]}
+	)
 fi
 
 # xfce
