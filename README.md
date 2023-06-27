@@ -87,9 +87,11 @@ Applications that require backend services (i.e.: Ubuntu Snap/snapd), standalone
 
 Dextop links the modified utilities that have been patched under Termux for some limited access to whatever the Android user space runtime policy permits (htop, kill, pgrep, pkill, ps, top).
 
+### Activities:
+
 **Dextop only loads applications as needed: this helps keep a minimal footprint and your device running as smooth as possible!**
 
-**Music, mail and web browsing activities should preferably be taken care of using native Android applications that are readily installed and configured on your device.**
+Music, mail, games and web browsing activities should preferably be taken care of using native Android applications that are readily installed and configured on your device.
 
 
 ```
@@ -162,7 +164,7 @@ The VNC method uses the X11 virtual framebuffer 'xvfb' alongside the X11 VNC ser
 
 The X11 method uses a native display server application 'termux-x11' alongside the Termux:X11 android application package and forwards the display using your device's native resolution and DPI settings using your device' hardware platform (GPU).
 
-In either case, you can think of the experience as setting up a VM (virtual machine) on a typical laptop or desktop computer and accessing it through the a viewer.
+In either case, you can think of the experience as setting up a VM (virtual machine) on a typical laptop or desktop computer and accessing it through a viewer.
 
 ### Hardware requirements:
 
