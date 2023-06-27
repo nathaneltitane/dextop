@@ -93,6 +93,16 @@ Dextop links the modified utilities that have been patched under Termux for some
 
 Music, mail, games and web browsing activities should preferably be taken care of using native Android applications that are readily installed and configured on your device.
 
+### Interface:
+
+Dextop offers two methods to turn an Android device into a desktop workstation and provide access to both the Termux and container side using a graphical interface.
+
+The VNC method uses the X11 virtual framebuffer 'xvfb' alongside the X11 VNC server 'x11vnc' and forwards a display port within your device as 'localhost' to minimize latency and runs it using software emulated acceleration (LLVM).
+
+The X11 method uses a native display server application 'termux-x11' alongside the Termux:X11 android application package and forwards the display using your device's native resolution and DPI settings using your device' hardware platform (GPU).
+
+In either case, you can think of the experience as setting up a VM (virtual machine) on a typical laptop or desktop computer and accessing it through a viewer.
+
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -155,16 +165,6 @@ Music, mail, games and web browsing activities should preferably be taken care o
 │                                                                                             │
 └─────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
-
-### Interface:
-
-Dextop offers two methods to turn an Android device into a desktop workstation and provide access to both the Termux and container side using a graphical interface.
-
-The VNC method uses the X11 virtual framebuffer 'xvfb' alongside the X11 VNC server 'x11vnc' and forwards a display port within your device as 'localhost' to minimize latency and runs it using software emulated acceleration (LLVM).
-
-The X11 method uses a native display server application 'termux-x11' alongside the Termux:X11 android application package and forwards the display using your device's native resolution and DPI settings using your device' hardware platform (GPU).
-
-In either case, you can think of the experience as setting up a VM (virtual machine) on a typical laptop or desktop computer and accessing it through a viewer.
 
 ### Hardware requirements:
 
