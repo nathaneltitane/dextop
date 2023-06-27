@@ -96,7 +96,6 @@ i3_list=(
 )
 
 i3_addons_list=(
-	dmenu
 	rofi
 )
 
