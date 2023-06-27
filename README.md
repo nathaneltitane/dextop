@@ -303,7 +303,9 @@ To stop the active session using the vnc display server by halting the vnc displ
 container-session -x
 ```
 
-To log out, press Ctrl+D or type ```'logout'``` or ```'exit'```: the session will automatically stop the vnc server and exit the container back to the Termux shell (recognizable by the green username prompt), or the Android home screen (depending on the shell level you were on).
+To log out, press Ctrl+D or type ```'logout'``` or ```'exit'```: the session will automatically stop the vnc server and exit:
+
+Depending on the shell level currently in use, the container exits back to the Termux shell (recognizable by the green username prompt), or to the Android home screen.
 
 ### Updates
 
