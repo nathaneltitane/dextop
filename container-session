@@ -176,7 +176,7 @@ fi
 
 if [ -z "${environment}" ]
 then
-	environement="$(cat ${HOME}/.dextop/dextop-environemnt)"
+	environement="$(cat ${HOME}/.dextop/dextop-environment)"
 fi
 
 if [ -z "${session}" ]
