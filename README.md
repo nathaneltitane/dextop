@@ -267,18 +267,17 @@ To acess the container housing distribution you've selected (recognizable by the
 container-session -o <display server> -u termux
 ```
 
-
-
 To start the session using the vnc display server (x11vnc) and restart the display output, paste or type:
 
 ```
 container-session -o vnc
-
 ```
 
 If using the native X11 display server (termux-x11), paste or type:
 
-```container-session -o x11```.
+```
+container-session -o x11
+```
 
 ### Session notes
 
@@ -295,7 +294,6 @@ The next login will automatically launch the session using the selection you've 
 
 ```
 container-session -n vnc
-
 ```
 
 ### Stopping a session
@@ -304,7 +302,6 @@ To stop the active session using the vnc display server by halting the vnc displ
 
 ```
 container-session -x
-
 ```
 
 To log out, press Ctrl+D or type ```'logout'``` or ```'exit'```: the session will automatically stop the vnc server and exit:
@@ -319,7 +316,6 @@ To ensure Dextop runs as expected, manual updates can be run by downloading and 
 
 ```
 curl -s -L run.dxtp.app > dextop && bash dextop -u dextop
-
 ```
 
 As part of the way Dextop can be configured to function, automatic utility updates on login can be enabled as follows:
