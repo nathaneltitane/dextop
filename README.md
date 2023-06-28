@@ -304,6 +304,7 @@ To stop the active session using the vnc display server by halting the vnc displ
 
 ```
 container-session -x
+
 ```
 
 To log out, press Ctrl+D or type ```'logout'``` or ```'exit'```: the session will automatically stop the vnc server and exit:
@@ -312,44 +313,47 @@ Depending on the shell level currently in use, the container exits back to the T
 
 ### Updates
 
-As the project evolves, certain utilities may change either significantly or some new utilities may be introduced into the Dextop ecosystem.
+As the project evolves, certain utilities may change, either slightly or significantly, or some new utilities may be introduced into the Dextop ecosystem.
 
 To ensure Dextop runs as expected, manual updates can be run by downloading and executing the update routine from the latest dextop deployment script as follows:
 
 ```
 curl -s -L run.dxtp.app > dextop && bash dextop -u dextop
+
 ```
 
 As part of the way Dextop can be configured to function, automatic utility updates on login can be enabled as follows:
 
-```echo update > "${HOME}"/.dextop/dextop-update```
+```
+echo update > "${HOME}"/.dextop/dextop-update
+```
 
 Dextop will automatically fetch all relevant utilities and replace them with the up-to-date versions.
 
 Automatic utility updates on login can be disabled as follows:
 
-```echo '' > "${HOME}"/.dextop/dextop-update```
-
-### Display:
-
-
+```
+echo '' > "${HOME}"/.dextop/dextop-update
+```
 
 ### Audio:
 
-Audio playback is configured and supported through 'pulseaudio'.
-
-It is not recommended for use as it is very battery and cpu intensive:
-latency on playback may vary depending on your device's hardware specification and if running directly under the Termux shell or from within a container.
+**Audio playback is configured and supported through 'pulseaudio, although it is not recommended for use as it can be process and cycle intensive on the device's battery and processor(s):**
+latency on playback may vary depending on the host device's hardware specification, and depending on if it is running directly under the Termux shell or from within a distribution container.
 
 Audio playback on login can be enabled as follows:
 
-```echo audio > "${HOME}"/.dextop/dextop-audio```
+```
+echo audio > "${HOME}"/.dextop/dextop-audio
+```
 
 Audio playback can be disabled as follows:
 
-```echo '' > "${HOME}"/.dextop/dextop-audio```
+```
+echo '' > "${HOME}"/.dextop/dextop-audio
+```
 
-### Session logout:
+### VNC termination:
 
 Automatic vnc display shutdown on terminal exit can be enabled as follows:
 
