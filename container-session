@@ -209,8 +209,6 @@ then
 	PORT="590${DISPLAY_NUMBER}"
 fi
 
-export DISPLAY="${DISPLAY}"
-
 if [ -z "${COLORTERM}" ]
 then
 	COLORTERM="truecolor"
@@ -559,6 +557,8 @@ container_session () {
 }
 
 server_intent () {
+	export DISPLAY="${DISPLAY}"
+
 	unset load_command
 
 	if [ "${display}" = [vV][nN][cC] ]
