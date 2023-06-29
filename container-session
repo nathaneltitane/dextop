@@ -909,16 +909,19 @@ display_view () {
 }
 
 display_framebuffer () {
-	frobulator.fwd "Generating framebuffer..."
-	echo
+	if [ "${display}" = [vV][nN][cC] ]
+	then
+		frobulator.fwd "Generating framebuffer..."
+		echo
 
-	unset framebuffer_command
+		unset framebuffer_command
 
-	framebuffer_command+="Xvfb"
-	framebuffer_command+=" -screen ${DISPLAY_NUMBER}"
-	framebuffer_command+=" ${geometry}x24"
+		framebuffer_command+="Xvfb"
+		framebuffer_command+=" -screen ${DISPLAY_NUMBER}"
+		framebuffer_command+=" ${geometry}x24"
 
-	${framebuffer_command} > /dev/null 2>&1 &
+		${framebuffer_command} > /dev/null 2>&1 &
+	fi
 }
 
 display_interface () {
@@ -1260,6 +1263,9 @@ then
 	container_session
 fi
 
-# list vnc session
+if [ "${display}" = [vV][nN][cC] ]
+then
+	# list vnc session
 
-display_list
+	display_list
+fi
