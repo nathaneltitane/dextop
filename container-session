@@ -101,7 +101,7 @@ do
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-o, --start          Start display session server.                       [ vnc ] [  [xX][1][1]1 ]"
+			echo -e "-o, --start          Start display session server.                       [ vnc ] [ x11 ]"
 			echo -e "-x, --stop           Stop display session server."
 			echo -e "-p, --password       Generate display session password."
 			echo
@@ -159,19 +159,19 @@ echo
 # RealVNC:       com.realvnc.viewer.android/.app.DesktopActivity
 # Remotix:       com.nulana.android.remotix/.Viewer
 
-# Termux: [xX][1][1]1:    com.termux. [xX][1][1]1/.MainActivity
+# Termux:x11:    com.termux.x11/.MainActivity
 
 free_vnc_activity="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
 real_vnc_activity="com.realvnc.viewer.android/.app.DesktopActivity"
 remotix_vnc_activity="com.nulana.android.remotix/.Viewer"
 
-termux_ [xX][1][1]1_activity="com.termux. [xX][1][1]1/.MainActivity"
+termux_x11_activity="com.termux.x11/.MainActivity"
 
 # defaults /////////////////////////////////////////////////////////////////////
 
 if [ -z "${display}" ]
 then
-	display=" [xX][1][1]1"
+	display="x11"
 fi
 
 if [ -z "${environment}" ]
@@ -563,7 +563,7 @@ server_intent () {
 
 	if [ "${display}" = [vV][nN][cC] ]
 	then
-		load_command+=" [xX][1][1]1vnc"
+		load_command+="x11vnc"
 		load_command+=" -display ${DISPLAY}"
 		load_command+=" -clip xinerama=${DISPLAY}"
 		load_command+=" -rfbport ${PORT}"
@@ -579,7 +579,7 @@ server_intent () {
 
 	if [ "${display}" = [xX][11] ]
 	then
-		load_command=+"termux- [xX][1][1]1"
+		load_command=+"termux-x11"
 		load_command=+" ${DISPLAY}"
 	fi
 
@@ -871,10 +871,10 @@ display_intent () {
 
 	if [ "${display}" = [xX][11] ]
 	then
-		# start termux: [xX][1][1]1 intent
+		# start termux:x11 intent
 
 		intent_command+="am start"
-		intent_command+="-n ${termux_ [xX][1][1]1_activity}"
+		intent_command+="-n ${termux_x11_activity}"
 	fi
 
 	# start android display viewer intent and set to view session with supported application
@@ -901,7 +901,7 @@ display_view () {
 	if [ "${display}" = [xX][11] ]
 	then
 		intent_command+="am start"
-		intent_command+="-n ${termux_ [xX][1][1]1_activity}"
+		intent_command+="-n ${termux_x11_activity}"
 	fi
 
 	frobulator.silence "${intent_command}"
@@ -936,7 +936,7 @@ display_interface () {
 }
 
 display_load () {
-	if [ "${display}" = [vVnNcC] ]
+	if [ "${display}" = [vV][nN][cC] ]
 	then
 		# make selection available for automatic start:
 		# verify user id - do not write selection when 'root' user is logged in
@@ -971,7 +971,7 @@ display_load () {
 
 	display_interface
 
-	# connection to  [xX][1][1]1vnc is very fast:
+	# connection to x11vnc is very fast:
 	# wait for process to settle before launching vnc viewer
 
 	sleep 1
@@ -980,7 +980,7 @@ display_load () {
 }
 
 display_start () {
-	if [[ $(pidof  [xX][1][1]1vnc) ]]
+	if [[ $(pidof x11vnc) ]]
 	then
 		:
 	else
@@ -1041,9 +1041,9 @@ display_stop () {
 		echo
 	fi
 
-	if [[ $(pidof  [xX][1][1]1vnc) ]]
+	if [[ $(pidof x11vnc) ]]
 	then
-		 [xX][1][1]1vnc -R stop > /dev/null 2>&1 &
+		x11vnc -R stop > /dev/null 2>&1 &
 
 		frobulator.progress "Stopping display server..."
 		echo
@@ -1060,10 +1060,10 @@ display_list () {
 	display_format=$(cat "${HOME}"/.vnc/format)
 	display_geometry=$(cat "${HOME}"/.vnc/geometry)
 	display_display=${DISPLAY}
-	display_process=$(pidof  [xX][1][1]1vnc)
+	display_process=$(pidof x11vnc)
 	display_port="${PORT}"
 
-	if [[ $(pidof  [xX][1][1]1vnc) ]]
+	if [[ $(pidof x11vnc) ]]
 	then
 		frobulator.fwd "Listing session details..."
 		echo
