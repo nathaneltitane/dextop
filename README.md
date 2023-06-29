@@ -310,29 +310,31 @@ To log out, press Ctrl+D or type ```'logout'``` or ```'exit'``` for the session 
 
 Depending on the shell level in use at the time the command is executed, the container exits back to the Termux shell (recognizable by the green username prompt), or to the Android home screen.
 
-### Updates:
+### Utilities:
 
-As the project evolves, certain utilities may change, either slightly or significantly, or some new utilities may be introduced into the Dextop ecosystem.
+As the project evolves, certain utilities may change, either slightly or significantly and some new utilities may be introduced into the Dextop ecosystem.
 
-For new installations:
+To ensure Dextop runs as expected, and wth the latest features in tow, proceed as follows:
 
-Simply run the normal setup routine and follow instructions as they appear (refer to the setup section).
+For new installations, run the normal setup routine and follow instructions as they appear (refer to the setup section).
 
-For existing installations:
+For existing installations, manual updates can be run by downloading and executing the update routine from the latest Dextop deployment script.
 
-To ensure Dextop runs as expected, manual updates can be run by downloading and executing the update routine from the latest Dextop deployment script as follows:
+To do so, paste or type:
 
 ```
 curl -s -L run.dxtp.app > dextop && bash dextop -u dextop
 ```
 
-Or as part of the way Dextop can be configured to function, automatic updates on login can be enabled as follows:
+To add Termux X11 server features, after running the main update routine as shown, run 'termux-display' and follow instructions as they appear.
+
+Once the latest version of Dextop is deployed, configuring it to fetch all the latest and relevant utilities is possiblewhen automatic updates on login are enabled.
+
+Automatic utility updates on login can be enabled as follows:
 
 ```
 echo update > "${HOME}"/.dextop/dextop-update
 ```
-
-Dextop will automatically fetch all relevant utilities and replace them with the up-to-date versions.
 
 Automatic utility updates on login can be disabled as follows:
 
