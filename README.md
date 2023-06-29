@@ -316,7 +316,11 @@ As the project evolves, certain utilities may change, either slightly or signifi
 
 To ensure Dextop runs as expected, and wth the latest features in tow, proceed as follows:
 
+---
+
 For new installations, run the normal setup routine and follow instructions as they appear (refer to the setup section).
+
+---
 
 For existing installations, manual updates can be run by downloading and executing the update routine from the latest Dextop deployment script.
 
@@ -326,7 +330,11 @@ To do so, paste or type:
 curl -s -L run.dxtp.app > dextop && bash dextop -u dextop
 ```
 
-To add Termux X11 server features, after running the main update routine as shown, run 'termux-display' and follow instructions as they appear.
+Still within the scope of existing installations, and after running the main update routine as shown, to add Termux X11 server features, run 'termux-packages' followed by 'termux-display' and follow instructions as they appear.
+
+The 'termux-display' utility is part of the newest deployment and sets up the required Android packages to interface with the 'termux-x11' package and provide you with a native display solution on your device, using the available DPI settings and hardware (if acceleration is enabled).
+
+---
 
 Once the latest version of Dextop is deployed, configuring it to fetch all the latest and relevant utilities is possiblewhen automatic updates on login are enabled.
 
