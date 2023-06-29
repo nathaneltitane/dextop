@@ -316,7 +316,7 @@ Depending on the shell level in use at the time the command is executed, the con
 
 As the project evolves, certain utilities may change, either slightly or significantly and some new utilities may be introduced into the Dextop ecosystem.
 
-To ensure Dextop runs as expected, and wth the latest features in tow, proceed as follows:
+To ensure Dextop runs as expected, and wth the latest features in tow, proceed as follows according to your setup.
 
 ---
 
@@ -332,7 +332,7 @@ To do so, paste or type:
 curl -s -L run.dxtp.app > dextop && bash dextop -u dextop
 ```
 
-Still within the scope of existing installations, and after running the main update routine as shown, to add Termux X11 server features, run 'termux-packages' followed by 'termux-display' and follow instructions as they appear.
+After running the main update routine as shown, to add Termux X11 server features, run 'termux-packages' followed by 'termux-display' and follow instructions as they appear.
 
 The 'termux-display' utility is part of the newest deployment and sets up the required Android packages to interface with the 'termux-x11' package and provide you with a native display solution on your device, using the available DPI settings and hardware (if acceleration is enabled).
 
