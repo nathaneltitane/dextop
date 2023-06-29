@@ -85,7 +85,7 @@ do
 			echo
 			echo -e "-b, --backup         Backup Termux user configuration files."
 			echo
-			echo -e "-u, --update         Update application packages and utilities.                 [ Dextop ] [ Termux ]"
+			echo -e "-u, --update         Update application packages and utilities.                 [ Dextop ] [ Utilities ] [ Termux ]"
 			echo
 			echo -e "-h, --help           Show help and usage information."
 			echo
