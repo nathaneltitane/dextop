@@ -332,6 +332,14 @@ To do so, paste or type:
 curl -s -L run.dxtp.app > dextop && bash dextop -u dextop
 ```
 
+to update the main dextop utility.
+
+To then update the utilities needed by Dextop, paste or type:
+
+```
+curl -s -L run.dxtp.app > dextop && bash dextop -u utilities
+```
+
 After running the main update routine as shown, to add Termux X11 server features, run 'termux-packages' followed by 'termux-display' and follow instructions as they appear.
 
 The 'termux-display' utility is part of the newest deployment and sets up the required Android packages to interface with the 'termux-x11' package and provide you with a native display solution on your device, using the available DPI settings and hardware (if acceleration is enabled).
