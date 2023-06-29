@@ -61,6 +61,7 @@ frobulator.upgrade
 
 display_list=(
 	xorg-server-xvfb
+	xwayland
 )
 
 documentation_list=(
