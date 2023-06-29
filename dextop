@@ -791,10 +791,6 @@ then
 	frobulator.file "${HOME}"/.dextop dextop-setup-checkpoint
 fi
 
-# setup check
-
-frobulator.result dextop-setup-checkpoint "${script}"
-
 # session start
 
 cd "${HOME}"
