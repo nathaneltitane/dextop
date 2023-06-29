@@ -153,7 +153,7 @@ then
 
 	if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "i3" ]]
 	then
-		session="i3wm"
+		session="i3"
 	fi
 
 	frobulator.flag "${session}" "${HOME}"/.dextop dextop-session

@@ -235,6 +235,8 @@ Dextop automatically detects and processes any external media mounts, adds them 
 
 **There are no workarounds!**
 
+---
+
 Storage:
 
 Press 'Allow' when prompted during the setup to grant the storage permission.
@@ -247,7 +249,7 @@ Press 'Install' when prompted during the setup to install the display server com
 
 All utilities created for, loaded, and used by desktop contain a help argument. Please refer to the help dialogs before opening a bug report.
 
-### Starting a session
+### Starting a session:
 
 To start a session and access the newly generated container,  paste or type:
 
@@ -279,7 +281,7 @@ If using the native X11 display server (termux-x11), paste or type:
 container-session -o x11
 ```
 
-### Session notes
+### Session notes:
 
 **User 'termux' is the default username that is utilized during the automatic container setup.**
 It is used to identify a default user under the distribution image you've selected and can be edited after setup.
@@ -296,7 +298,7 @@ The next login will automatically launch the session using the selection you've 
 container-session -n vnc
 ```
 
-### Stopping a session
+### Stopping a session:
 
 To stop the active session using the vnc display server by halting the vnc display server, paste or type:
 
@@ -308,7 +310,7 @@ To log out, press Ctrl+D or type ```'logout'``` or ```'exit'``` for the session 
 
 Depending on the shell level in use at the time the command is executed, the container exits back to the Termux shell (recognizable by the green username prompt), or to the Android home screen.
 
-### Updates
+### Updates:
 
 As the project evolves, certain utilities may change, either slightly or significantly, or some new utilities may be introduced into the Dextop ecosystem.
 
