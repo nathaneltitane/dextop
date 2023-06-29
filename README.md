@@ -245,6 +245,8 @@ Display:
 
 Press 'Install' when prompted during the setup to install the display server components.
 
+---
+
 ### Usage:
 
 All utilities created for, loaded, and used by desktop contain a help argument. Please refer to the help dialogs before opening a bug report.
