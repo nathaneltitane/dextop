@@ -283,12 +283,9 @@ backup_intent () {
 
 	backup_archive="dextop-backup-${stamp}"
 
-	frobulator.inf "Generating backup" "[ ${backup_archive} ]"
-
-	frobulator.archive "${backup_archive}" "${HOME}" &
-
-	frobulator.progress "Backing up..."
+	frobulator.archive "${backup_archive}" "${HOME}"
 }
+
 settings_intent () {
 	# termux settings and properties
 
@@ -310,26 +307,34 @@ settings_intent () {
 }
 
 utilities_intent () {
-	# dextop utilities
+	if [ "${update}" = [dD][eE][xX][tT][oO][pP] ]
+	then
+		curl -s -L run.dxtp.app > "${HOME}"/.local/bin/dextop
+	fi
 
-	utilities_list+=(
-		termux-packages
-		termux-repositories
-		termux-update
-		termux-storage
-		termux-display
-		container-expansion
-		container-image
-		container-packages
-		container-repositories
-		container-session
-		container-settings
-		container-user
-	)
+	if [ "${update}" = [uU][tT][iI][lL][iI][tT][iI][eE][sS] ]
+	then
+		# dextop utilities
 
-	frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
+		utilities_list+=(
+			termux-packages
+			termux-repositories
+			termux-update
+			termux-storage
+			termux-display
+			container-expansion
+			container-image
+			container-packages
+			container-repositories
+			container-session
+			container-settings
+			container-user
+		)
 
-	utilities_list=()
+		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
+
+		utilities_list=()
+	fi
 }
 
 directories_intent () {
@@ -551,15 +556,24 @@ frobulator.log "architecture_check"
 
 if [ "${option}" = "backup" ]
 then
-	backup_intent
+	frobulator.inf "Generating backup" "[ ${backup_archive} ]"
+	echo
+
+	backup_intent &
+
+	frobulator.progress "Backing up..."
+	echo
 fi
 
 if [ "${option}" = "update" ]
 then
-	if [ "${update}" = [dD][eE][xX][tT][oO][pP] ]
-	then
-		utilities_intent
-	fi
+	frobulator.inf "Updating" "[ ${update} ]"
+	echo
+
+	utilities_intent &
+
+	frobulator.progress "Updating..."
+	echo
 fi
 
 # setup ////////////////////////////////////////////////////////////////////////
@@ -749,7 +763,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-move-checkpoint ]
 	then
-		mv "${HOME}"/dextop "${HOME}"/.dextop/dextop
+		mv "${HOME}"/dextop "${HOME}"/.local/bin/dextop
 
 		frobulator.file "${HOME}"/.dextop dextop-move-checkpoint
 	fi
