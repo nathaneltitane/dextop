@@ -962,13 +962,19 @@ display_load () {
 			fi
 		fi
 
+		# start vnc display framebuffer
+
 		display_framebuffer
 	fi
 
 	frobulator.fwd "Starting display server..."
 	echo
 
+	# start display server
+
 	server_intent
+
+	# start interface / desktop environment / desktop session
 
 	display_interface
 
