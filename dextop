@@ -554,6 +554,14 @@ themes_intent () {
 	frobulator.link "${ROOT}"/usr/share "${HOME}" themes .themes
 }
 
+session_intent () {
+	# start session
+
+	cd "${HOME}"
+
+	"${PREFIX}"/bin/login
+}
+
 # architecture check ///////////////////////////////////////////////////////////
 
 frobulator.log "architecture_check"
@@ -821,7 +829,5 @@ if [ "${option}" = "update" ]
 then
 	:
 else
-	cd "${HOME}"
-
-	"${PREFIX}"/bin/login
+	session_intent
 fi
