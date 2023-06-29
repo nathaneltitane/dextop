@@ -251,7 +251,7 @@ All utilities created for, loaded, and used by desktop contain a help argument. 
 
 ### Starting a session:
 
-To start a session and access the newly generated container,  paste or type:
+To start a session and access the newly generated container, paste or type:
 
 ```
 container-session -o <display server> | -u <username> | -a <application>
@@ -314,13 +314,19 @@ Depending on the shell level in use at the time the command is executed, the con
 
 As the project evolves, certain utilities may change, either slightly or significantly, or some new utilities may be introduced into the Dextop ecosystem.
 
-To ensure Dextop runs as expected, manual updates can be run by downloading and executing the update routine from the latest dextop deployment script as follows:
+For new installations:
+
+Simply run the normal setup routine and follow instructions as they appear (refer to the setup section).
+
+For existing installations:
+
+To ensure Dextop runs as expected, manual updates can be run by downloading and executing the update routine from the latest Dextop deployment script as follows:
 
 ```
 curl -s -L run.dxtp.app > dextop && bash dextop -u dextop
 ```
 
-As part of the way Dextop can be configured to function, automatic utility updates on login can be enabled as follows:
+Or as part of the way Dextop can be configured to function, automatic updates on login can be enabled as follows:
 
 ```
 echo update > "${HOME}"/.dextop/dextop-update
@@ -357,7 +363,7 @@ Automatic vnc display shutdown on terminal exit can be enabled as follows:
 
 ```echo logout >> "${HOME}"/.dextop/dextop-logout```
 
-Automatic vnc display shutdown on terminal exit  can be disabled as follows:
+Automatic vnc display shutdown on terminal exit can be disabled as follows:
 
 ```echo '' > "${HOME}"/.dextop/dextop-logout```
 
@@ -392,7 +398,7 @@ Automatic vnc display shutdown on terminal exit  can be disabled as follows:
 Note:
 
 All setup dialogs, prompts, commands and binary execution outputs have been set to redirect to the ```'${PREFIX}/var/log'``` directory to keep output messages to a minimum.
-Should you suspect any issues or errors, please provide a copy of those files  when submitting a bug report.
+Should you suspect any issues or errors, please provide a copy of those files when submitting a bug report.
 
 ---
 
