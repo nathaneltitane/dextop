@@ -135,28 +135,34 @@ stamp=$(date +"%m-%d-%Y-%H-%M-%S")
 
 # defaults /////////////////////////////////////////////////////////////////////
 
-if [ -z "${environment}" ]
+if [ ! -f "${HOME}"/.dextop/dextop-environment ]
 then
-	environment="xfce"
+	if [ -z "${environment}" ]
+	then
+		environment="xfce"
 
-	frobulator.flag "${environment}" "${HOME}"/.dextop dextop-environment
+		frobulator.flag "${environment}" "${HOME}"/.dextop dextop-environment
 
-	unset environment
+		unset environment
+	fi
 fi
 
-if [ -z "${session}" ]
+if [ ! -f "${HOME}"/.dextop/dextop-session ]
 then
-	if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "xfce" ]]
+	if [ -z "${session}" ]
 	then
-		session="xfce4-session"
-	fi
+		if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "xfce" ]]
+		then
+			session="xfce4-session"
+		fi
 
-	if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "i3" ]]
-	then
-		session="i3"
-	fi
+		if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "i3" ]]
+		then
+			session="i3"
+		fi
 
-	frobulator.flag "${session}" "${HOME}"/.dextop dextop-session
+		frobulator.flag "${session}" "${HOME}"/.dextop dextop-session
+	fi
 fi
 
 if [ -z "${ROOT}" ]
