@@ -281,7 +281,11 @@ backup_intent () {
 	# backup routine:
 	# create archive of user home directory
 
-	frobulator.archive dextop-backup-"${stamp}" "${HOME}" &
+	backup_archive="dextop-backup-${stamp}"
+
+	frobulator.inf "Generating backup" "[ ${backup_archive} ]"
+
+	frobulator.archive "${backup_archive}" "${HOME}" &
 
 	frobulator.progress "Backing up..."
 }
