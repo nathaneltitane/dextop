@@ -577,7 +577,7 @@ server_intent () {
 		load_command+=" -noxrecord"
 	fi
 
-	if [ "${display}" = [xX][11] ]
+	if [ "${display}" =  [xX][1][1] ]
 	then
 		load_command=+"termux-x11"
 		load_command=+" ${DISPLAY}"
@@ -869,7 +869,7 @@ display_intent () {
 		intent_command+=" -d vnc://${ADDRESS}:${PORT}"
 	fi
 
-	if [ "${display}" = [xX][11] ]
+	if [ "${display}" =  [xX][1][1] ]
 	then
 		# start termux:x11 intent
 
@@ -898,7 +898,7 @@ display_view () {
 		intent_command+=" -S ${display_activity}"
 	fi
 
-	if [ "${display}" = [xX][11] ]
+	if [ "${display}" =  [xX][1][1] ]
 	then
 		intent_command+="am start"
 		intent_command+="-n ${termux_x11_activity}"
@@ -1145,7 +1145,7 @@ if [ "${option}" = "start" ]
 then
 	# check server type selection
 
-	if [[ "${display}" = [vV][nN][cC] ]] || [[ "${display}" = [xX][11] ]]
+	if [[ "${display}" = [vV][nN][cC] ]] || [[ "${display}" =  [xX][1][1] ]]
 	then
 		# start display session
 
