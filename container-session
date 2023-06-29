@@ -992,26 +992,26 @@ display_load () {
 display_start () {
 	if [ "${display}" = [vV][nN][cC] ]
 	then
-	if [[ $(pidof x11vnc) ]]
-	then
-		:
-	else
-		# handle selections display
-
-		if [ -f "${HOME}"/.vnc/selection ]
+		if [[ $(pidof x11vnc) ]]
 		then
-			# hide if selection file is present
-
-			display_geometry > /dev/null 2>&1
+			:
 		else
-			# show if selection file is not present
+			# handle selections display
 
-			display_geometry
-		fi
+			if [ -f "${HOME}"/.vnc/selection ]
+			then
+				# hide if selection file is present
 
-		# handle vnc selections
+				display_geometry > /dev/null 2>&1
+			else
+				# show if selection file is not present
 
-		display_handle
+				display_geometry
+			fi
+
+			# handle vnc selections
+
+			display_handle
 
 		fi
 	fi
@@ -1022,24 +1022,27 @@ display_start () {
 }
 
 display_new () {
-	# handle selections display
-
-	if [ -f "${HOME}"/.vnc/selection ]
+	if [ "${display}" = [vV][nN][cC] ]
 	then
-		# remove if selection file is present
+		# handle selections display
 
-		rm -r -f  "${HOME}"/.vnc/selection
+		if [ -f "${HOME}"/.vnc/selection ]
+		then
+			# remove if selection file is present
+
+			rm -r -f  "${HOME}"/.vnc/selection
+		fi
+
+		# show display format selections
+
+		display_geometry
+
+		# handle vnc selections
+
+		display_handle
 	fi
 
-	# show display format selections
-
-	display_geometry
-
-	# handle vnc selections
-
-	display_handle
-
-	# start vnc session
+	# start display session
 
 	display_load
 }
