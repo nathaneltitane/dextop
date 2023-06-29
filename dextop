@@ -817,6 +817,11 @@ frobulator.clear
 
 # session //////////////////////////////////////////////////////////////////////
 
-cd "${HOME}"
+if [ "${option}" = "update" ]
+then
+	:
+else
+	cd "${HOME}"
 
-"${PREFIX}"/bin/login
+	"${PREFIX}"/bin/login
+fi
