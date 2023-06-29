@@ -575,15 +575,16 @@ server_intent () {
 		load_command+=" -noxdamage"
 		load_command+=" -noxfixes"
 		load_command+=" -noxrecord"
+
+		${load_command} > /dev/null 2>&1 &
 	fi
 
 	if [ "${display}" =  [xX][1][1] ]
 	then
-		load_command=+"termux-x11"
-		load_command=+" ${DISPLAY}"
+		termux-x11 "${DISPLAY}" &
 	fi
 
-	${load_command} > /dev/null 2>&1 &
+
 }
 
 display_clean () {
@@ -927,7 +928,7 @@ display_interface () {
 	else
 		if [[ $(command -v "${session}") ]]
 		then
-			frobulator.silence ""${session}" &"
+			frobulator.silence "${session} &"
 		fi
 	fi
 
@@ -980,6 +981,8 @@ display_load () {
 }
 
 display_start () {
+	if [ "${display}" = [vV][nN][cC] ]
+	then
 	if [[ $(pidof x11vnc) ]]
 	then
 		:
@@ -1001,10 +1004,12 @@ display_start () {
 
 		display_handle
 
-		# start vnc session
-
-		display_load
+		fi
 	fi
+
+	# start display session
+
+	display_load
 }
 
 display_new () {
