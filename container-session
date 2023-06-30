@@ -231,6 +231,8 @@ then
 	name="${NAME}"
 fi
 
+export DISPLAY="${DISPLAY}"
+
 # functions ////////////////////////////////////////////////////////////////////
 
 container_root () {
@@ -557,8 +559,6 @@ container_session () {
 }
 
 server_intent () {
-	export DISPLAY="${DISPLAY}"
-
 	unset load_command
 
 	if [ "${display}" = [vV][nN][cC] ]
@@ -583,8 +583,6 @@ server_intent () {
 	then
 		termux-x11 "${DISPLAY}" &
 	fi
-
-
 }
 
 display_clean () {
