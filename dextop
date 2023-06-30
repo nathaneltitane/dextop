@@ -313,12 +313,12 @@ settings_intent () {
 }
 
 utilities_intent () {
-	if [ "${update}" = "dextop" ]
+	if [[ "${update}" = [dD][eE][xX][tT][oO][pP] ]]
 	then
 		curl -s -L run.dxtp.app > "${HOME}"/.local/bin/dextop
 	fi
 
-	if [ "${update}" = "utilities" ]
+	if [[ "${update}" = [uU][tT][iI][lL][iI][tT][iI][eE][sS] ]]
 	then
 		# dextop utilities
 
