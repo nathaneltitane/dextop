@@ -584,10 +584,10 @@ then
 	frobulator.inf "Updating" "[ ${update} ]"
 	echo
 
-	utilities_intent &
-
-	frobulator.progress "Updating..."
+	frobulator.fwd "Updating..."
 	echo
+
+	utilities_intent
 fi
 
 # setup ////////////////////////////////////////////////////////////////////////
