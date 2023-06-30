@@ -187,6 +187,8 @@ fi
 if [ -z "${DISPLAY}" ]
 then
 	DISPLAY=":0"
+
+	export DISPLAY="${DISPLAY}"
 fi
 
 if [ -z "${DISPLAY_NUMBER}" ]
@@ -230,8 +232,6 @@ then
 
 	name="${NAME}"
 fi
-
-export DISPLAY="${DISPLAY}"
 
 # functions ////////////////////////////////////////////////////////////////////
 
@@ -579,7 +579,7 @@ server_intent () {
 		${load_command} > /dev/null 2>&1 &
 	fi
 
-	if [ "${display}" =  [xX][1][1] ]
+	if [ "${display}" = [xX][1][1] ]
 	then
 		termux-x11 "${DISPLAY}" &
 	fi
@@ -589,14 +589,14 @@ display_clean () {
 	if [ -d "${HOME}" ]
 	then
 		rm -rf "${HOME}"/.ICE*
-		rm -rf "${HOME}"/. [xX][1][1]*
+		rm -rf "${HOME}"/.X11*
 		rm -rf "${HOME}"/.Xauth*
 	fi
 
 	if [ -d "${TMPDIR}" ]
 	then
 		rm -rf "${TMPDIR}"/.ICE*
-		rm -rf "${TMPDIR}"/. [xX][1][1]*
+		rm -rf "${TMPDIR}"/.X11*
 		rm -rf "${TMPDIR}"/.Xauth*
 	fi
 }
@@ -868,12 +868,11 @@ display_intent () {
 		intent_command+=" -d vnc://${ADDRESS}:${PORT}"
 	fi
 
-	if [ "${display}" =  [xX][1][1] ]
+	if [ "${display}" = [xX][1][1] ]
 	then
 		# start termux:x11 intent
 
-		intent_command+="am start"
-		intent_command+="-n ${termux_x11_activity}"
+		am start -n "${termux_x11_activity}"
 	fi
 
 	# start android display viewer intent and set to view session with supported application
@@ -897,7 +896,7 @@ display_view () {
 		intent_command+=" -S ${display_activity}"
 	fi
 
-	if [ "${display}" =  [xX][1][1] ]
+	if [ "${display}" = [xX][1][1] ]
 	then
 		intent_command+="am start"
 		intent_command+="-n ${termux_x11_activity}"
@@ -1160,7 +1159,7 @@ if [ "${option}" = "start" ]
 then
 	# check server type selection
 
-	if [[ "${display}" = [vV][nN][cC] ]] || [[ "${display}" =  [xX][1][1] ]]
+	if [[ "${display}" = [vV][nN][cC] ]] || [[ "${display}" = [xX][1][1] ]]
 	then
 		# start display session
 
