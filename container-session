@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="06-26-2023"
+version="06-29-2023"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -984,7 +984,7 @@ display_load () {
 
 	# start display server
 
-	server_intent
+	server_intent1
 
 	# connection to x11vnc is very fast:
 	# wait for process to settle before launching vnc viewer
