@@ -588,18 +588,21 @@ server_intent () {
 }
 
 display_clean () {
-	if [ -d "${HOME}" ]
+	if [ "${display}" = [vV][nN][cC] ]
 	then
-		rm -rf "${HOME}"/.ICE*
-		rm -rf "${HOME}"/.X11*
-		rm -rf "${HOME}"/.Xauth*
-	fi
+		if [ -d "${HOME}" ]
+		then
+			rm -rf "${HOME}"/.ICE*
+			rm -rf "${HOME}"/.X11*
+			rm -rf "${HOME}"/.Xauth*
+		fi
 
-	if [ -d "${TMPDIR}" ]
-	then
-		rm -rf "${TMPDIR}"/.ICE*
-		rm -rf "${TMPDIR}"/.X11*
-		rm -rf "${TMPDIR}"/.Xauth*
+		if [ -d "${TMPDIR}" ]
+		then
+			rm -rf "${TMPDIR}"/.ICE*
+			rm -rf "${TMPDIR}"/.X11*
+			rm -rf "${TMPDIR}"/.Xauth*
+		fi
 	fi
 }
 
