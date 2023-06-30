@@ -590,7 +590,7 @@ server_intent () {
 }
 
 display_clean () {
-	[if [ "${display}" = [vV][nN][cC] ]]
+	if [[ "${display}" = [vV][nN][cC] ]]
 	then
 		if [ -d "${HOME}" ]
 		then
@@ -854,7 +854,7 @@ display_intent () {
 	frobulator.fwd "Opening display..."
 	echo
 
-	[if [ "${display}" = [vV][nN][cC] ]]
+	if [[ "${display}" = [vV][nN][cC] ]]
 	then
 		# explicit VNC viewer application to kill:
 		# used when vnc is stopped or restarted using vnc:// intent
@@ -895,7 +895,7 @@ display_view () {
 
 
 
-	[if [ "${display}" = [vV][nN][cC] ]]
+	if [[ "${display}" = [vV][nN][cC] ]]
 	then
 		display_activity="${remotix_vnc_activity}"
 
@@ -918,7 +918,7 @@ display_view () {
 }
 
 display_framebuffer () {
-	[if [ "${display}" = [vV][nN][cC] ]]
+	if [[ "${display}" = [vV][nN][cC] ]]
 	then
 		frobulator.fwd "Generating framebuffer..."
 		echo
@@ -949,7 +949,7 @@ display_interface () {
 }
 
 display_load () {
-	[if [ "${display}" = [vV][nN][cC] ]]
+	if [[ "${display}" = [vV][nN][cC] ]]
 	then
 		# make selection available for automatic start:
 		# verify user id - do not write selection when 'root' user is logged in
@@ -999,7 +999,7 @@ display_load () {
 }
 
 display_start () {
-	[if [ "${display}" = [vV][nN][cC] ]]
+	if [[ "${display}" = [vV][nN][cC] ]]
 	then
 		if [[ $(pidof x11vnc) ]]
 		then
@@ -1031,7 +1031,7 @@ display_start () {
 }
 
 display_new () {
-	[if [ "${display}" = [vV][nN][cC] ]]
+	if [[ "${display}" = [vV][nN][cC] ]]
 	then
 		# handle selections display
 
@@ -1275,7 +1275,7 @@ then
 	container_session
 fi
 
-[if [ "${display}" = [vV][nN][cC] ]]
+if [[ "${display}" = [vV][nN][cC] ]]
 then
 	# list vnc session
 
