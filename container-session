@@ -992,10 +992,6 @@ display_load () {
 	sleep 1
 
 	display_intent
-
-	# start interface / desktop environment / desktop session
-
-	display_interface
 }
 
 display_start () {
@@ -1151,6 +1147,12 @@ application_handle () {
 
 	if [[ $(command -v "${application}") ]]
 	then
+		# start display session
+
+		display_start
+
+		# load application
+
 		${application} &
 	else
 		frobulator.err "Application not found" "[ "${application}" ]"
@@ -1176,6 +1178,11 @@ then
 		# start display session
 
 		display_start
+
+		# start interface / desktop environment / desktop session
+
+		display_interface
+
 	else
 		frobulator.err "Unknown display server selection" "[ ${display} ]"
 		echo
