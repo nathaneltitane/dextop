@@ -984,7 +984,7 @@ display_load () {
 
 	# start display server
 
-	server_intent1
+	server_intent
 
 	# connection to x11vnc is very fast:
 	# wait for process to settle before launching vnc viewer
