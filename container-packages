@@ -69,6 +69,7 @@ display_list=(
 	x11-xkb-utils
 	x11-xserver-utils
 	xvfb
+	xwayland
 )
 
 documentation_list=(
