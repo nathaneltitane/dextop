@@ -175,7 +175,7 @@ if [ -z "${display}" ]
 then
 	display="x11"
 fi
-
+1
 if [ -z "${environment}" ]
 then
 	environement="$(cat ${HOME}/.dextop/dextop-environment)"
@@ -189,8 +189,6 @@ fi
 if [ -z "${DISPLAY}" ]
 then
 	DISPLAY=":0"
-
-	export DISPLAY="${DISPLAY}"
 fi
 
 if [ -z "${DISPLAY_NUMBER}" ]
@@ -234,6 +232,10 @@ then
 
 	name="${NAME}"
 fi
+
+# exports //////////////////////////////////////////////////////////////////////
+
+export DISPLAY="${DISPLAY}"
 
 # functions ////////////////////////////////////////////////////////////////////
 
@@ -881,7 +883,7 @@ display_intent () {
 
 		# start termux:x11 intent
 
-		am start -n "${termux_x11_activity}" > /dev/null 2>&1
+		am start -n com.termux.x11/.MainActivity > /dev/null 2>&1
 	fi
 
 	# start android display viewer intent and set to view session with supported application
@@ -909,7 +911,7 @@ display_view () {
 	then
 		display_activity="${termux_x11_activity}"
 
-		am start -n "${display_activity}" > /dev/null 2>&1
+		am start -n com.termux.x11/.MainActivity > /dev/null 2>&1
 	fi
 }
 
