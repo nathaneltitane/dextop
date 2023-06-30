@@ -101,7 +101,9 @@ do
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-o, --start          Start display session server.                       [ vnc ] [ x11 ]"
+			echo -e "-o, --start          Start display session server."
+			echo -e "                     [ vnc ] [ x11 ]"
+			echo
 			echo -e "-x, --stop           Stop display session server."
 			echo -e "-p, --password       Generate display session password."
 			echo
@@ -870,9 +872,11 @@ display_intent () {
 
 	if [ "${display}" = [xX][1][1] ]
 	then
+		display_activity="${termux_x11_activity}"
+
 		# start termux:x11 intent
 
-		am start -n "${termux_x11_activity}"
+		am start -n "${termux_x11_activity}" > /dev/null 2>&1
 	fi
 
 	# start android display viewer intent and set to view session with supported application
@@ -898,8 +902,9 @@ display_view () {
 
 	if [ "${display}" = [xX][1][1] ]
 	then
-		intent_command+="am start"
-		intent_command+="-n ${termux_x11_activity}"
+		display_activity="${termux_x11_activity}"
+
+		am start -n "${display_activity}" > /dev/null 2>&1
 	fi
 
 	frobulator.silence "${intent_command}"
