@@ -871,6 +871,8 @@ display_intent () {
 		intent_command+="am start"
 		intent_command+=" -a android.intent.action.VIEW"
 		intent_command+=" -d vnc://${ADDRESS}:${PORT}"
+
+		frobulator.silence "${intent_command}"
 	fi
 
 	if [ "${display}" = [xX][1][1] ]
@@ -883,8 +885,6 @@ display_intent () {
 	fi
 
 	# start android display viewer intent and set to view session with supported application
-
-	frobulator.silence "${intent_command}"
 }
 
 display_view () {
@@ -901,6 +901,8 @@ display_view () {
 		intent_command+=" -a android.intent.action.VIEW"
 		intent_command+=" -d vnc://${ADDRESS}:${PORT}"
 		intent_command+=" -S ${display_activity}"
+
+		frobulator.silence "${intent_command}"
 	fi
 
 	if [ "${display}" = [xX][1][1] ]
@@ -909,8 +911,6 @@ display_view () {
 
 		am start -n "${display_activity}" > /dev/null 2>&1
 	fi
-
-	frobulator.silence "${intent_command}"
 }
 
 display_framebuffer () {
