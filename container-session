@@ -883,7 +883,7 @@ display_intent () {
 
 		# start termux:x11 intent
 
-		am start -n "${termux_x11_activity}" > /dev/null 2>&1
+		am start -n "${display_activity}" > /dev/null 2>&1
 	fi
 
 	# start android display viewer intent and set to view session with supported application
@@ -913,7 +913,7 @@ display_view () {
 	then
 		display_activity="${termux_x11_activity}"
 
-		am start -n "${termux_x11_activity}" > /dev/null 2>&1
+		am start -n "${display_activity}" > /dev/null 2>&1
 	fi
 }
 
@@ -986,16 +986,16 @@ display_load () {
 
 	server_intent
 
-	# start interface / desktop environment / desktop session
-
-	display_interface
-
 	# connection to x11vnc is very fast:
 	# wait for process to settle before launching vnc viewer
 
 	sleep 1
 
 	display_intent
+
+	# start interface / desktop environment / desktop session
+
+	display_interface
 }
 
 display_start () {
