@@ -175,7 +175,7 @@ if [ -z "${display}" ]
 then
 	display="x11"
 fi
-1
+
 if [ -z "${environment}" ]
 then
 	environement="$(cat ${HOME}/.dextop/dextop-environment)"
@@ -565,7 +565,7 @@ container_session () {
 server_intent () {
 	unset load_command
 
-	[if [ "${display}" = [vV][nN][cC] ]]
+	if [[ "${display}" = [vV][nN][cC] ]]
 	then
 		load_command+="x11vnc"
 		load_command+=" -display ${DISPLAY}"
