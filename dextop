@@ -591,23 +591,25 @@ if [ "${option}" = "update" ]
 then
 	if [ "${update}" = "utilities" ]
 	then
-		update="${update}"
-		intent="utilities_intent"
-	fi
-
-	if [ "${update}" = "shell" ]
-	then
-		update="${update}"
-		intent="utilities_intent"
-	fi
-
-			frobulator.inf "Updating" "[ ${update} ]"
+		frobulator.inf "Updating" "[ ${update} ]"
 		echo
 
 		frobulator.fwd "Updating..."
 		echo
 
-		"${intent}"
+		utilities_intent
+	fi
+
+	if [ "${update}" = "shell" ]
+	then
+		frobulator.inf "Updating" "[ ${update} ]"
+		echo
+
+		frobulator.fwd "Updating..."
+		echo
+
+		shell_intent
+	fi
 fi
 
 # setup ////////////////////////////////////////////////////////////////////////
