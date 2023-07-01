@@ -369,7 +369,7 @@ utility_intent () {
 		frobulator.err "Unknown utility name" "[ ${utility}]"
 		echo
 
-		frobulator.msg "Known upgradable utilities" "[ version // ${version} ]"
+		frobulator.wrn "Known upgradable utilities" "[ version // ${version} ]"
 		echo
 
 		IFS=$'\n'
@@ -379,6 +379,9 @@ utility_intent () {
 		echo
 
 		IFS=''
+
+		frobulator.inf "Review utility name spelling and try again."
+		echo
 
 		exit 1
 	fi
