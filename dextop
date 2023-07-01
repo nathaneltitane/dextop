@@ -354,6 +354,7 @@ utility_intent () {
 	then
 		frobulator.download get.dxtp.app "${HOME}"/.local/bin "${utility}"
 
+		exit 0
 	else
 		frobulator.err "Unknown utility name" "[ ${utility}]"
 		echo
