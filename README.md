@@ -206,16 +206,6 @@ Once the Android applications are installed on your device, open Termux and past
 curl -s -L run.dxtp.app > dextop && bash dextop
 ```
 
-Container install options are:
-
-```
--c, --console        Setup Console access to environment and utilities.
-```
-
-```
--e, --environment    Setup desktop environment and utilities.              [ XFCE ] [ Default ]
-```
-
 The 'console' option is great for users who would like to experiment or setup their own window manager/desktop environment, utilities and preferences.
 
 The 'environemnt' option lets you specify the DE you would like to set up.
@@ -344,6 +334,16 @@ curl -s -L run.dxtp.app > dextop && bash dextop -u utilities
 After running the main update routine as shown, to add Termux X11 server features, run 'termux-packages' followed by 'termux-display' and follow instructions as they appear.
 
 The 'termux-display' utility is part of the newest deployment and sets up the required Android packages to interface with the 'termux-x11' package and provide you with a native display solution on your device, using the available DPI settings and hardware (if acceleration is enabled).
+
+### Update issues:
+
+High latency internet connectivity or issues with accessing server content (GitHub) may cause some files to malfunction or go corrupt.
+
+If for whatever reason an update fails due to an error of because of deployment script corruption, paste or type:
+
+```
+curl -s -L run.dxtp.app > "${HOME}"/.local/bin/dextop && bash dextop -u utilities
+```
 
 ---
 
