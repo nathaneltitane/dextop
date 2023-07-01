@@ -1191,6 +1191,11 @@ display_password () {
 		frobulator.scs "Password changed."
 		echo
 	fi
+
+	if [[ "${display}" = [xX][1][1] ]]
+	then
+		:
+	fi
 }
 
 application_handle () {
