@@ -359,13 +359,13 @@ container_input () {
 	then
 		ROOT="${root_filesystem}"
 
-		frobulator.scs "Container location found"
+		frobulator.scs "Container location found."
 		echo
 
 		frobulator.inf "Loading" "[ ${ROOT} ]"
 		echo
 	else
-		frobulator.err "Container location not found"
+		frobulator.err "Container location not found."
 		echo
 
 		frobulator.ipt "Select one of the following containers:"
@@ -606,11 +606,15 @@ display_clean () {
 			rm -rf "${TMPDIR}"/.Xauth*
 		fi
 	fi
+
+	if [[ "${display}" = [xX][1][1] ]]
+	then
+		:
+	fi
 }
 
 display_geometry () {
-	frobulator.msg "Select geometry to start the display server"
-	frobulator.msg "or input [c]ustom properties:"
+	frobulator.msg "Select geometry or input [c]ustom properties:"
 	echo
 
 	# list supported display resolutions
@@ -851,7 +855,7 @@ display_handle () {
 }
 
 display_intent () {
-	frobulator.fwd "Opening display..."
+	frobulator.fwd "Generating display..."
 	echo
 
 	if [[ "${display}" = [vV][nN][cC] ]]
@@ -888,7 +892,7 @@ display_intent () {
 }
 
 display_view () {
-	frobulator.fwd "Reloading display..."
+	frobulator.fwd "Opening display..."
 	echo
 
 	if [[ "${display}" = [vV][nN][cC] ]]
