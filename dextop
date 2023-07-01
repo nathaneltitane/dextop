@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="06-29-2023"
+version="07-01-2023"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -92,6 +92,7 @@ do
 			echo
 			echo -e "                     [ Dextop ] [ Default ]"
 			echo -e "                     [ Utilities ]"
+			echo -e "                     [ Shell ]"
 			echo -e "                     [ Termux ]"
 			echo
 			echo -e "-h, --help           Show help and usage information."
@@ -160,7 +161,7 @@ then
 	then
 		if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "xfce" ]]
 		then
-			session="xfce4-session"
+			session="XFCE-session"
 		fi
 
 		if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "i3" ]]
@@ -588,13 +589,25 @@ fi
 
 if [ "${option}" = "update" ]
 then
-	frobulator.inf "Updating" "[ ${update} ]"
-	echo
+	if [ "${update}" = "utilities" ]
+	then
+		update="${update}"
+		intent="utilities_intent"
+	fi
 
-	frobulator.fwd "Updating..."
-	echo
+	if [ "${update}" = "shell" ]
+	then
+		update="${update}"
+		intent="utilities_intent"
+	fi
 
-	utilities_intent
+			frobulator.inf "Updating" "[ ${update} ]"
+		echo
+
+		frobulator.fwd "Updating..."
+		echo
+
+		"${intent}"
 fi
 
 # setup ////////////////////////////////////////////////////////////////////////

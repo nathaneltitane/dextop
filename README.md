@@ -2,13 +2,14 @@
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/donate/?hosted_button_id=2WZT7PCW3XDX6)
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 06-29-2023 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 07-01-2023 ]
 
 ---
 
-### [ NOTICE // 06-29-2023 ]
+### [ NOTICE // 07-01-2023 ]
 
-**Termux:X11 display support now fully integrated. Utilities update routine now distinguishes between main deployment script and dependant utilities update!**
+**Termux:X11 display support now fully integrated and registered as the default method.**
+**Utilities update routine now distinguishes between main deployment script and dependant utility and shell scripts update!**
 
 ### Welcome to [Dextop](https://dextop.app)
 
@@ -54,9 +55,9 @@ A few other elements to note before proceeding:
 
 Dextop is very quick and efficient:
 
-Choose between a complete XFCE4 setup to get your work done, or keep the base install for command line interface and programming workflows.
+Choose between a complete XFCE setup to get your work done, or keep the base install for command line interface and programming workflows.
 
-**Compositing is and should remain disabled with XFCE4 to optimize resource usage and prevent display tearing and other glitches.**
+**Compositing is and should remain disabled with XFCE to optimize resource usage and prevent display tearing and other glitches.**
 
 Turning compositing off allows for the best possible performance and experience in accordance to current Android system and security limitations:
 This is required due to the Android user space runtime policy and limited hardware access: there is no graphics hardware acceleration available - the container graphics are emulated and run using LLVM.
@@ -219,7 +220,7 @@ The 'console' option is great for users who would like to experiment or setup th
 
 The 'environemnt' option lets you specify the DE you would like to set up.
 
-It currently defaults to XFCE4 for the base setup or when no argument is passed (work in progress: more selections to come).
+It currently defaults to XFCE for the base setup or when no argument is passed (work in progress: more selections to come).
 
 ### Process summary:
 
@@ -422,7 +423,7 @@ Should you suspect any issues or errors, please provide a copy of those files wh
 
 ---
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 06-29-2023 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 07-01-2023 ]
 
 ### Enjoying Dextop? Buy me a coffee to show your appreciation!
 
