@@ -80,6 +80,11 @@ do
 
 		-h|--help)
 			echo
+			echo -e "Usage: ${script} -c | -e [Environment] | -t | -n | -b | -u [Update] [Name]"
+			echo
+			echo -e "Options:"
+			echo
+			echo
 			echo -e "USAGE:"
 			echo
 			echo -e "-c, --console        Setup Console access to environment and utilities only."
