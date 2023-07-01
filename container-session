@@ -885,15 +885,11 @@ display_intent () {
 
 		am start -n "${display_activity}" > /dev/null 2>&1
 	fi
-
-	# start android display viewer intent and set to view session with supported application
 }
 
 display_view () {
 	frobulator.fwd "Reloading display..."
 	echo
-
-
 
 	if [[ "${display}" = [vV][nN][cC] ]]
 	then
@@ -930,6 +926,11 @@ display_framebuffer () {
 		framebuffer_command+=" ${geometry}x24"
 
 		${framebuffer_command} > /dev/null 2>&1 &
+	fi
+
+	if [[ "${display}" = [xX][1][1] ]]
+	then
+		:
 	fi
 }
 
@@ -979,6 +980,11 @@ display_load () {
 		display_framebuffer
 	fi
 
+	if [[ "${display}" = [xX][1][1] ]]
+	then
+		:
+	fi
+
 	frobulator.fwd "Starting display server..."
 	echo
 
@@ -1021,6 +1027,11 @@ display_start () {
 		fi
 	fi
 
+	if [[ "${display}" = [xX][1][1] ]]
+	then
+		:
+	fi
+
 	# start display session
 
 	display_load
@@ -1047,99 +1058,123 @@ display_new () {
 		display_handle
 	fi
 
+	if [[ "${display}" = [xX][1][1] ]]
+	then
+		:
+	fi
+
 	# start display session
 
 	display_load
 }
 
 display_stop () {
-	# handle and stop display processes
-
-	if [[ $(pidof Xvfb) ]]
+	if [[ "${display}" = [vV][nN][cC] ]]
 	then
-		killall Xvfb &
+		# handle and stop display processes
 
-		frobulator.progress "Stopping framebuffer..."
-		echo
+		if [[ $(pidof Xvfb) ]]
+		then
+			killall Xvfb &
+
+			frobulator.progress "Stopping framebuffer..."
+			echo
+		fi
+
+		if [[ $(pidof x11vnc) ]]
+		then
+			x11vnc -R stop > /dev/null 2>&1 &
+
+			frobulator.progress "Stopping display server..."
+			echo
+		fi
+
+		# clean display server runtime files
+
+		wait
+
+		display_clean
 	fi
 
-	if [[ $(pidof x11vnc) ]]
+	if [[ "${display}" = [xX][1][1] ]]
 	then
-		x11vnc -R stop > /dev/null 2>&1 &
-
-		frobulator.progress "Stopping display server..."
-		echo
+		:
 	fi
-
-	# clean display server runtime files
-
-	wait
-
-	display_clean
 }
 
 display_list () {
-	display_format=$(cat "${HOME}"/.vnc/format)
-	display_geometry=$(cat "${HOME}"/.vnc/geometry)
-	display_display=${DISPLAY}
-	display_process=$(pidof x11vnc)
-	display_port="${PORT}"
-
-	if [[ $(pidof x11vnc) ]]
+	if [[ "${display}" = [vV][nN][cC] ]]
 	then
-		frobulator.fwd "Listing session details..."
+		display_format=$(cat "${HOME}"/.vnc/format)
+		display_geometry=$(cat "${HOME}"/.vnc/geometry)
+		display_display=${DISPLAY}
+		display_process=$(pidof x11vnc)
+		display_port="${PORT}"
+
+		if [[ $(pidof x11vnc) ]]
+		then
+			frobulator.fwd "Listing session details..."
+			echo
+
+			display_format="${display_format}"
+			display_geometry="${display_geometry}"
+			display_display="${display_display}"
+			display_process="${display_process}"
+			display_port="${display_port}"
+		else
+			frobulator.wrn "No active servers detected."
+			echo
+
+			empty="N/A"
+
+			display_format="${empty}"
+			display_geometry="${empty}"
+			display_display="${empty}"
+			display_process="${empty}"
+			display_port="${empty}"
+		fi
+
+		frobulator.inf "Format"   "[ ${display_format} ]"
+		frobulator.inf "Geometry" "[ ${display_geometry} ]"
+		frobulator.inf "Display"  "[ ${display_display} ]"
+		frobulator.inf "Process"  "[ ${display_process} ]"
+		frobulator.inf "Port"     "[ ${display_port} ]"
 		echo
-
-		display_format="${display_format}"
-		display_geometry="${display_geometry}"
-		display_display="${display_display}"
-		display_process="${display_process}"
-		display_port="${display_port}"
-	else
-		frobulator.wrn "No active servers detected."
-		echo
-
-		empty="N/A"
-
-		display_format="${empty}"
-		display_geometry="${empty}"
-		display_display="${empty}"
-		display_process="${empty}"
-		display_port="${empty}"
 	fi
 
-	frobulator.inf "Format"   "[ ${display_format} ]"
-	frobulator.inf "Geometry" "[ ${display_geometry} ]"
-	frobulator.inf "Display"  "[ ${display_display} ]"
-	frobulator.inf "Process"  "[ ${display_process} ]"
-	frobulator.inf "Port"     "[ ${display_port} ]"
-	echo
+	if [[ "${display}" = [xX][1][1] ]]
+	then
+		:
+	fi
 }
 
 display_password () {
-	# values #
+	if [[ "${display}" = [vV][nN][cC] ]]
+	then
+		# values #
 
-	values_list=(
-		display_password
-	)
+		values_list=(
+			display_password
+		)
 
-	# handle user input for values_list
+		# handle user input for values_list
 
-	frobulator_return=()
+		frobulator_return=()
 
-	frobulator.input ${values_list[@]}
+		frobulator.input ${values_list[@]}
 
-	eval ${frobulator_return[@]}
+		eval ${frobulator_return[@]}
 
-	# hash password  using 'vncpasswd' and store it
+		# hash password  using 'vncpasswd' and store it
 
-	frobulator.fwd "Setting password..."
-	echo
+		frobulator.fwd "Setting password..."
+		echo
 
-	echo "$display_password" | vncpasswd -f > "${HOME}"/.vnc/passwd
+		echo "$display_password" | vncpasswd -f > "${HOME}"/.vnc/passwd
 
-	frobulator.scs "Password changed."
-	echo
+		frobulator.scs "Password changed."
+		echo
+	fi
 }
 
 application_handle () {
@@ -1173,7 +1208,8 @@ if [ "${option}" = "start" ]
 then
 	# check server type selection
 
-	if [[ "${display}" = [vV][nN][cC] ]] || [[ "${display}" = [xX][1][1] ]]
+	if [[ "${display}" = [vV][nN][cC] ]] || \
+	   [[ "${display}" = [xX][1][1] ]]
 	then
 		# start display session
 
@@ -1282,9 +1318,5 @@ then
 	container_session
 fi
 
-if [[ "${display}" = [vV][nN][cC] ]]
-then
-	# list vnc session
+display_list
 
-	display_list
-fi
