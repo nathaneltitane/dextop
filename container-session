@@ -787,8 +787,7 @@ display_handle () {
 			frobulator.err "Invalid selection:"
 			echo
 
-			frobulator.wrn "Select geometry [ 1 - ${number} ]"
-			frobulator.wrn "or input [c]ustom properties."
+			frobulator.wrn "Select geometry [ 1 - ${number} ] or input [c]ustom properties."
 			echo
 
 			frobulator.ipt "Selection:"
@@ -989,10 +988,10 @@ display_load () {
 		:
 	fi
 
+	# start display server
+
 	frobulator.fwd "Starting display server..."
 	echo
-
-	# start display server
 
 	server_intent
 
@@ -1079,9 +1078,9 @@ display_stop () {
 
 		if [[ $(pidof Xvfb) ]]
 		then
-			killall Xvfb &
+			kill -9 $(pidof Xvfb) &
 
-			frobulator.progress "Stopping framebuffer..."
+			frobulator.progress "Stopping display framebuffer..."
 			echo
 		fi
 
@@ -1102,7 +1101,13 @@ display_stop () {
 
 	if [[ "${display}" = [xX][1][1] ]]
 	then
-		:
+		if [[ $(pidof app_process / com.termux.x11.Loader) ]]
+		then
+			kill -9 $(pidof app_process / com.termux.x11.Loader) &
+
+			frobulator.progress "Stopping display loader..."
+			echo
+		fi
 	fi
 }
 
