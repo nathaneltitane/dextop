@@ -1132,9 +1132,8 @@ display_list () {
 		display_display=${DISPLAY}
 		display_process=$(pidof "${display_server}")
 		display_port="default"
-	fi
 
-	if [[ $(pidof "${display_server}") ]]
+	elif [[ $(pidof "${display_server}") ]]
 	then
 		frobulator.fwd "Listing session details..."
 		echo
