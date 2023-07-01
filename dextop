@@ -68,6 +68,13 @@ do
 			option="update"
 			update="${2}"
 
+			if [ "${update}" = "utility" ]
+			then
+				utility="${3}"
+
+				shift
+			fi
+
 			shift
 		;;
 
@@ -91,6 +98,7 @@ do
 			echo -e "-u, --update         Update application packages and utilities."
 			echo
 			echo -e "                     [ Dextop ] [ Default ]"
+			echo -e "                     [ Utility ]"
 			echo -e "                     [ Utilities ]"
 			echo -e "                     [ Shell ]"
 			echo -e "                     [ Termux ]"
@@ -322,6 +330,46 @@ settings_intent () {
 
 dextop_intent () {
 	curl -s -L run.dxtp.app > "${HOME}"/.local/bin/dextop
+}
+
+utility_intent () {
+	# dextop utilities
+
+	utilities_list+=(
+		termux-packages
+		termux-repositories
+		termux-update
+		termux-storage
+		termux-display
+		container-expansion
+		container-image
+		container-packages
+		container-repositories
+		container-session
+		container-settings
+		container-user
+	)
+
+	if [[ ${utilities_list[@]} =~ "${utility}" ]]
+	then
+		frobulator.download get.dxtp.app "${HOME}"/.local/bin "${utility}"
+	else
+		frobulator.err "Unknown utility name" "[ ${utility}]"
+		echo
+
+		frobulator.msg "Known upgradable utilities are:"
+		echo
+
+		IFS=$'\n'
+
+		printf "      %s\n" ${utilities_list[@]}
+
+		IFS=''
+
+		exit 1
+	fi
+
+	utilities_list=()
 }
 
 utilities_intent () {
@@ -595,6 +643,18 @@ then
 		echo
 
 		dextop_intent
+	fi
+
+	if [[ "${update}" = [uU][tT][iI][lL][iI][tT][yY] ]]
+	then
+
+		frobulator.inf "Updating" "[ ${utility} ]"
+		echo
+
+		frobulator.fwd "Updating..."
+		echo
+
+		utility_intent
 	fi
 
 	if [[ "${update}" = [uU][tT][iI][lL][iI][tT][iI][eE][sS] ]]
