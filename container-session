@@ -1122,27 +1122,16 @@ display_list () {
 		display_display=${DISPLAY}
 		display_process=$(pidof "${display_server}")
 		display_port="${PORT}"
-	fi
 
-	if [[ "${display}" = [xX][1][1] ]]
+	elif [[ "${display}" = [xX][1][1] ]]
 	then
 		display_server="app_process / com.termux.x11.Loader"
+
 		display_format="native"
 		display_geometry="native"
 		display_display=${DISPLAY}
 		display_process=$(pidof "${display_server}")
 		display_port="default"
-
-	elif [[ $(pidof "${display_server}") ]]
-	then
-		frobulator.fwd "Listing session details..."
-		echo
-
-		display_format="${display_format}"
-		display_geometry="${display_geometry}"
-		display_display="${display_display}"
-		display_process="${display_process}"
-		display_port="${display_port}"
 	else
 		frobulator.wrn "No active servers detected."
 		echo
@@ -1154,6 +1143,18 @@ display_list () {
 		display_display="${empty}"
 		display_process="${empty}"
 		display_port="${empty}"
+	fi
+
+	if [[ $(pidof "${display_server}") ]]
+	then
+		frobulator.fwd "Listing session details..."
+		echo
+
+		display_format="${display_format}"
+		display_geometry="${display_geometry}"
+		display_display="${display_display}"
+		display_process="${display_process}"
+		display_port="${display_port}"
 	fi
 
 	frobulator.inf "Format"   "[ ${display_format} ]"
