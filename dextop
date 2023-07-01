@@ -376,6 +376,8 @@ utility_intent () {
 
 		printf "      %s\n" ${utilities_list[@]}
 
+		echo
+
 		IFS=''
 
 		exit 1
