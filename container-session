@@ -1120,7 +1120,7 @@ display_list () {
 		display_format=$(cat "${HOME}"/.vnc/format)
 		display_geometry=$(cat "${HOME}"/.vnc/geometry)
 		display_display=${DISPLAY}
-		display_process=$(pidof "${display_server}")
+		display_process=$(pidof $(echo "${display_server}"))
 		display_port="${PORT}"
 
 	elif [[ "${display}" = [xX][1][1] ]]
@@ -1130,7 +1130,7 @@ display_list () {
 		display_format="native"
 		display_geometry="native"
 		display_display=${DISPLAY}
-		display_process=$(pidof "${display_server}")
+		display_process=$(pidof $(echo "${display_server}"))
 		display_port="default"
 	else
 		frobulator.wrn "No active servers detected."
