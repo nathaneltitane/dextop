@@ -77,7 +77,10 @@ do
 			echo
 			echo -e "-c, --console        Setup Console access to environment and utilities only."
 			echo
-			echo -e "-e, --environment    Setup desktop environment and utilities.                   [ i3 ] [ XFCE ]"
+			echo -e "-e, --environment    Setup desktop environment and utilities."
+			echo
+			echo -e "                     [ i3 ]"
+			echo -e "                     [ xfce ] [ Default ]"
 			echo
 			echo -e "-t, --termux         Setup Termux environment and utilities only."
 			echo
@@ -85,7 +88,11 @@ do
 			echo
 			echo -e "-b, --backup         Backup Termux user configuration files."
 			echo
-			echo -e "-u, --update         Update application packages and utilities.                 [ Dextop ] [ Utilities ] [ Termux ]"
+			echo -e "-u, --update         Update application packages and utilities."
+			echo
+			echo -e "                     [ Dextop ] [ Default ]"
+			echo -e "                     [ Utilities ]"
+			echo -e "                     [ Termux ]"
 			echo
 			echo -e "-h, --help           Show help and usage information."
 			echo
