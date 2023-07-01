@@ -369,12 +369,12 @@ utility_intent () {
 		frobulator.err "Unknown utility name" "[ ${utility}]"
 		echo
 
-		frobulator.wrn "Known upgradable utilities" "[ version // ${version} ]"
+		frobulator.msg "Known upgradable utilities" "[ version // ${version} ]"
 		echo
 
 		IFS=$'\n'
 
-		printf "      %s\n" ${utilities_list[@]}
+		printf "[ > ] %s\n" ${utilities_list[@]}
 
 		echo
 
