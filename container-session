@@ -1114,47 +1114,54 @@ display_stop () {
 display_list () {
 	if [[ "${display}" = [vV][nN][cC] ]]
 	then
+		display_server="x11vnc"
+
 		display_format=$(cat "${HOME}"/.vnc/format)
 		display_geometry=$(cat "${HOME}"/.vnc/geometry)
 		display_display=${DISPLAY}
-		display_process=$(pidof x11vnc)
+		display_process=$(pidof "${display_server}")
 		display_port="${PORT}"
-
-		if [[ $(pidof x11vnc) ]]
-		then
-			frobulator.fwd "Listing session details..."
-			echo
-
-			display_format="${display_format}"
-			display_geometry="${display_geometry}"
-			display_display="${display_display}"
-			display_process="${display_process}"
-			display_port="${display_port}"
-		else
-			frobulator.wrn "No active servers detected."
-			echo
-
-			empty="N/A"
-
-			display_format="${empty}"
-			display_geometry="${empty}"
-			display_display="${empty}"
-			display_process="${empty}"
-			display_port="${empty}"
-		fi
-
-		frobulator.inf "Format"   "[ ${display_format} ]"
-		frobulator.inf "Geometry" "[ ${display_geometry} ]"
-		frobulator.inf "Display"  "[ ${display_display} ]"
-		frobulator.inf "Process"  "[ ${display_process} ]"
-		frobulator.inf "Port"     "[ ${display_port} ]"
-		echo
 	fi
 
 	if [[ "${display}" = [xX][1][1] ]]
 	then
-		:
+		display_server="app_process / com.termux.x11.Loader"
+		display_format="native"
+		display_geometry="native"
+		display_display=${DISPLAY}
+		display_process=$(pidof "${display_server}")
+		display_port="default"
 	fi
+
+	if [[ $(pidof "${display_server}") ]]
+	then
+		frobulator.fwd "Listing session details..."
+		echo
+
+		display_format="${display_format}"
+		display_geometry="${display_geometry}"
+		display_display="${display_display}"
+		display_process="${display_process}"
+		display_port="${display_port}"
+	else
+		frobulator.wrn "No active servers detected."
+		echo
+
+		empty="N/A"
+
+		display_format="${empty}"
+		display_geometry="${empty}"
+		display_display="${empty}"
+		display_process="${empty}"
+		display_port="${empty}"
+	fi
+
+	frobulator.inf "Format"   "[ ${display_format} ]"
+	frobulator.inf "Geometry" "[ ${display_geometry} ]"
+	frobulator.inf "Display"  "[ ${display_display} ]"
+	frobulator.inf "Process"  "[ ${display_process} ]"
+	frobulator.inf "Port"     "[ ${display_port} ]"
+	echo
 }
 
 display_password () {
