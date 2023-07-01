@@ -80,7 +80,7 @@ do
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} -c | -e [Environment] | -t | -n | -b | -u [Update] [Name]"
+			echo -e "Usage: ${script} -c | -e [Environment] | -t | -n | -b | -u [Update] [Name] | [OPTION]"
 			echo
 			echo -e "Options:"
 			echo
@@ -124,7 +124,7 @@ do
 
 		*)
 			echo
-			echo -e "Usage: ${script} | [OPTION]"
+			echo -e "Usage: ${script} -c | -e [Environment] | -t | -n | -b | -u [Update] [Name] | [OPTION]"
 			echo
 			echo -e "${script}: Unknown option '${1}'"
 			echo -e "Type './${script} --help' for help and usage information."

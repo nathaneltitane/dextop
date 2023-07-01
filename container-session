@@ -135,7 +135,7 @@ do
 
 		*)
 			echo
-			echo -e "Usage: ${script} -u [User Name] | -a [Application] | [OPTION]"
+			echo -e "Usage: ${script} -o [Display Server] | -u [User Name] | -a [Application] | -n [Selection] | [OPTION]"
 			echo
 			echo -e "${script}: Unknown option '${1}'"
 			echo -e "Type './${script} --help' for help and usage information."
