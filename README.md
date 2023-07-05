@@ -9,7 +9,7 @@
 ### [ NOTICE // 07-01-2023 ]
 
 - **Termux:X11 display support now fully integrated and registered as the default displaymethod.**
-- **Utilities update routine now distinguishes between main deployment script and dependant utility and shell scripts update!**
+- **Utilities update routine now distinguishes between main deployment script and dependant utilities versus shell scripts update!**
 - **Utilities can be updated in bulk or individually.**
 
 ### Welcome to [Dextop](https://dextop.app)
