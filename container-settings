@@ -57,7 +57,7 @@ monospace_font="Monospace"
 icon_theme="Papirus-Dark"
 window_theme="Arc-Darker"
 
-# functions
+# functions ////////////////////////////////////////////////////////////////////
 
 translate_color () {
 	# convert hexadecimal to rgba integer range
