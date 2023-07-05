@@ -172,20 +172,20 @@ then
 
 elif [[ "${option}" = [hH][aA][nN][dD][lL][eE] ]]
 then
-	if [[ "${handle_option}" = "email" ]]     || \
-	   [[ "${handle_option}" = "mail" ]]
+	if [[ "${handle_option}" = "email"     ]] || \
+	   [[ "${handle_option}" = "mail"      ]]
 	then
 		handle="${email}"
 
 	elif [[ "${handle_option}" = "browser" ]] || \
-		[[ "${handle_option}" = "link" ]]     || \
-		[[ "${handle_option}" = "web" ]]
+		[[ "${handle_option}" = "link"     ]] || \
+		[[ "${handle_option}" = "web"      ]]
 	then
 		handle="${link}"
 
 	elif [[ "${handle_option}" = "message" ]] || \
-	     [[ "${handle_option}" = "text" ]]    || \
-	     [[ "${handle_option}" = "sms" ]]
+	     [[ "${handle_option}" = "text"    ]] || \
+	     [[ "${handle_option}" = "sms"     ]]
 	then
 		handle="${message}"
 
