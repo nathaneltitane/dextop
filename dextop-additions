@@ -46,14 +46,14 @@ do
 	in
 		-a|--activity)
 			option="activity"
-			activity="${2}"
+			activity_option="${2}"
 
 			shift
 		;;
 
 		-n|--handle)
 			option="handle"
-			handle="${2}"
+			handle_option="${2}"
 
 			shift
 		;;
@@ -124,29 +124,77 @@ terminal="com.termux/com.termux.app.TermuxActivity"
 
 # handles
 
+email="mailto:"
 link="https:"
 message="sms:"
-email="mailto:"
 
 # functions ////////////////////////////////////////////////////////////////////
 
 activity_intent () {
+	activity="${1}"
+
 	am start							\
-		-n "${activity}" > /dev/null 2>&1
+		-n "${activity}"				> /dev/null 2>&1
 	}
 
 handle_intent () {
+	handle="${1}"
+
 	am start							\
 		-a android.intent.action.VIEW	\
-		-d "${handle}" > /dev/null 2>&1
+		-d "${handle}"					> /dev/null 2>&1
 }
 
-if [ "${option}" = "activity" ]
+if [[ "${option}" = [aA][cC][tT][iI][vV][iI][tT][yY] ]]
 then
-	activity_intent
-fi
+	if [[ "${activity_option}" = "google-chrome" ]] || \
+	   [[ "${activity_option}" = "chrome" ]]        ||
+	then
+		activity="${google_chrome}"
 
-if [ "${option}" = "handle" ]
+	elif [[ "${activity_option}" = "google-mail" ]] || \
+		[[ "${activity_option}" = "gmail" ]]        ||
+	then
+		activity="${google_mail}"
+
+	elif [[ "${activity_option}" = "terminal" ]]    ||
+	then
+		activity="${terminal}"
+
+	else
+		frobulator.err "Unrecognized activity option" "[ ${activity_option} ]"
+		echo
+
+		exit 1
+	fi
+
+	activity_intent "${activity}"
+
+elif [[ "${option}" = [hH][aA][nN][dD][lL][eE] ]]
 then
-	activity_handle
+	if [[ "${handle_option}" = "email" ]]     || \
+	   [[ "${handle_option}" = "mail" ]]      ||
+	then
+		handle="${email}"
+
+	elif [[ "${handle_option}" = "browser" ]] || \
+		[[ "${handle_option}" = "link" ]]     || \
+		[[ "${handle_option}" = "web" ]]      ||
+	then
+		handle="${link}"
+
+	elif [[ "${handle_option}" = "message" ]] || \
+	     [[ "${handle_option}" = "text" ]]    || \
+	     [[ "${handle_option}" = "sms" ]]     ||
+	then
+		handle="${message}"
+
+	else
+		frobulator.err "Unrecognized handle option" "[ ${handle_option} ]"
+		echo
+
+		exit 1
+	fi
+
+	activity_handle "${handle}"
 fi
