@@ -58,9 +58,17 @@ do
 			echo
 			echo -e "Options"
 			echo
-			echo -e "-a, --activity        Setup Console access to environment and utilities only."
+			echo -e "-a, --activity        Run native Android activities via Dextop environement defaults."
 			echo
-			echo -e "-n, --handle          Setup desktop environment and utilities."
+			echo -e "                     [ google-chrome ]"
+			echo -e "                     [ google-mail ]"
+			echo -e "                     [ terminal ]"
+			echo
+			echo -e "-n, --handle          Run desktop environment handles through native Android applications."
+			echo
+			echo -e "                     [ email ]   - mailto:"
+			echo -e "                     [ link ]    - https:"
+			echo -e "                     [ message ] - sms:"
 			echo
 			echo -e "-h, --help            Show help and usage information."
 			echo
@@ -102,22 +110,27 @@ echo
 
 # variables ////////////////////////////////////////////////////////////////////
 
-am start							\
-	-a android.intent.action.VIEW	\
-	-d "${handle}" > /dev/null 2>&1
-
-am start							\
-	-n "${activity}" > /dev/null 2>&1
+# activities
 
 google_chrome="com.android.chrome/com.google.android.apps.chrome.Main"
 google_mail="com.google.android.gm/.GmailActivity"
 terminal="com.termux/com.termux.app.TermuxActivity"
 
+# handles
+
 link="https:"
 message="sms:"
 email="mailto:"
 
+# functions ////////////////////////////////////////////////////////////////////
 
-a = activity
+activity_intent () {
+	am start							\
+		-n "${activity}" > /dev/null 2>&1
+	}
 
-h = handle
+	handle_intent () {
+	am start							\
+		-a android.intent.action.VIEW	\
+		-d "${handle}" > /dev/null 2>&1
+}
