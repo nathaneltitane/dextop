@@ -362,10 +362,7 @@ utility_intent () {
 	then
 		unset utility
 
-		for utility in ${utilities_list[@]}
-		do
-			frobulator.download get.dxtp.app "${HOME}"/.local/bin "${utility}"
-		done
+		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
 
 		exit 0
 	else
