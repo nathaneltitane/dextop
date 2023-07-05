@@ -474,7 +474,7 @@ labels_intent () {
 additions_intent () {
 	# load additions files
 
-	load_list+=(
+	additions_list+=(
 		dextop-additions
 	)
 
