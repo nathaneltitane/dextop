@@ -1,6 +1,106 @@
 #!/bin/bash
 
+# dependencies /////////////////////////////////////////////////////////////////
 
+if [[ -z $(command -v frobulator) ]]
+then
+	if [[ $(id -u -n) = "root" ]]
+	then
+		SUDO_HOME=/root
+
+		USER="${SUDO_USER}"
+
+		HOME=/home/"${USER}"
+	fi
+
+	if [[ -z $(command -v curl) ]]
+	then
+		yes | apt-get install curl
+	fi
+
+	if [ ! -d "${HOME}"/.local/bin ]
+	then
+		mkdir -p "${HOME}"/.local/bin
+	fi
+
+	curl -s -L get.frbltr.app > "${HOME}"/.local/bin/frobulator
+
+	chmod +x "${HOME}"/.local/bin/frobulator
+fi
+
+. "${HOME}"/.local/bin/frobulator
+
+# script ///////////////////////////////////////////////////////////////////////
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version //////////////////////////////////////////////////////////////////////
+
+version="06-29-2023"
+
+# usage ////////////////////////////////////////////////////////////////////////
+
+while (($#))
+do
+	case "${1}"
+	in
+		-a|--activity)
+			option="activity"
+		;;
+
+		-n|--handle)
+			option="handle"
+		;;
+
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} -a [Activity]| -n [Handle] | [OPTION]"
+			echo
+			echo -e "Options"
+			echo
+			echo -e "-a, --activity        Setup Console access to environment and utilities only."
+			echo
+			echo -e "-n, --handle          Setup desktop environment and utilities."
+			echo
+			echo -e "-h, --help            Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version // ${version} ]"
+			echo
+
+			exit
+		;;
+
+		"")
+			# handle empty argument:
+			# use default values specified in script
+
+			:
+		;;
+
+		*)
+			echo
+			echo -e "Usage: ${script} -a [Activity]| -n [Handle] | [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+
+		;;
+
+		esac
+
+	shift
+
+done
+
+# prompt ///////////////////////////////////////////////////////////////////////
+
+frobulator.script "Setting up ${script#*-}"
+echo
+
+# variables ////////////////////////////////////////////////////////////////////
 
 am start							\
 	-a android.intent.action.VIEW	\
@@ -14,6 +114,9 @@ google_mail="com.google.android.gm/.GmailActivity"
 terminal="com.termux/com.termux.app.TermuxActivity"
 
 link="https:"
+message="sms:"
+email="mailto:"
+
 
 a = activity
 
