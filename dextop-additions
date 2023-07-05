@@ -196,5 +196,5 @@ then
 		exit 1
 	fi
 
-	activity_handle "${handle}"
+	handle_intent "${handle}"
 fi
