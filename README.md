@@ -6,7 +6,7 @@
 
 ---
 
-### [ NOTICE // 07-03-2023 ]
+### [ NOTICE // 07-04-2023 ]
 
 - **Added 'dextop-additions' utility as a single, monolithic replacement to the separate activity manager instance scripts that handle Android activities through the Dextop container!**
 
