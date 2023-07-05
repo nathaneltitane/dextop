@@ -6,6 +6,10 @@
 
 ---
 
+### [ NOTICE // 07-03-2023 ]
+
+- **Added 'dextop-additions' utility as a single, monolithic replacement to the separate activity manager instance scripts that handle Android activities through the Dextop container!**
+
 ### [ NOTICE // 07-01-2023 ]
 
 - **Termux:X11 display support now fully integrated and registered as the default displaymethod.**
