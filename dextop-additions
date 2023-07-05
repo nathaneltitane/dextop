@@ -60,7 +60,7 @@ do
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} -a [Activity]| -n [Handle] | [OPTION]"
+			echo -e "Usage: ${script} -a [Activity] | -n [Handle] | [OPTION]"
 			echo
 			echo -e "Options"
 			echo
@@ -93,7 +93,7 @@ do
 
 		*)
 			echo
-			echo -e "Usage: ${script} -a [Activity]| -n [Handle] | [OPTION]"
+			echo -e "Usage: ${script} -a [Activity] | -n [Handle] | [OPTION]"
 			echo
 			echo -e "${script}: Unknown option '${1}'"
 			echo -e "Type './${script} --help' for help and usage information."
