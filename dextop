@@ -99,10 +99,11 @@ do
 			echo
 			echo -e "-u, --update         Update application packages and utilities."
 			echo
-			echo -e "                     [ Dextop ] [ Default ]"
-			echo -e "                     [ Utility ]"
-			echo -e "                     [ Shell ]"
-			echo -e "                     [ Termux ]"
+			echo -e "                     [ dextop ] [ Default ]"
+			echo -e "                     [ utility ]"
+			echo -e "                     [ additions ]"
+			echo -e "                     [ shell ]"
+			echo -e "                     [ termux ]"
 			echo
 			echo -e "-h, --help           Show help and usage information."
 			echo
@@ -334,7 +335,7 @@ dextop_intent () {
 }
 
 utility_intent () {
-	# dextop utilities
+	# load dextop utilities
 
 	utilities_list+=(
 		termux-packages
@@ -474,19 +475,13 @@ labels_intent () {
 }
 
 additions_intent () {
-	# load additions
+	# load additions files
 
-	additions_list+=(
-		termux
-		termux-browser
-		termux-chrome
-		termux-email
-		termux-gmail
-		termux-information
-		termux-message
+	load_list+=(
+		dextop-additions
 	)
 
-	frobulator.download get.trmx.app "${HOME}"/.local/bin ${additions_list[@]}
+	frobulator.download get.dxtp.app "${HOME}"/.local/bin ${additions_list[@]}
 
 	additions_list=()
 }
@@ -544,7 +539,10 @@ backgrounds_intent () {
 	# load background(s)
 
 	backgrounds_list=(
-		dextop.svg
+		dextop-black.svg
+		dextop-blue.svg
+		dextop-coral.svg
+		dextop-grey.svg
 	)
 
 	frobulator.download get.dxtp.app "${HOME}"/.dextop ${backgrounds_list[@]}
@@ -651,6 +649,17 @@ then
 		echo
 
 		utility_intent
+	fi
+
+	if [[ "${update}" = [aA][dD][dD][iI][tT][iI][oO][nN][sS] ]]
+	then
+		frobulator.inf "Updating" "[ ${update} ]"
+		echo
+
+		frobulator.fwd "Updating..."
+		echo
+
+		additions_intent
 	fi
 
 	if [[ "${update}" = [sS][hH][eE][lL][lL] ]]
