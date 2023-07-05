@@ -74,19 +74,19 @@ translate_color () {
 
 	# calculate float-point integer value
 
-	r_int=$(( 1000000 * $r / 256 ))
-	g_int=$(( 1000000 * $g / 256 ))
-	b_int=$(( 1000000 * $b / 256 ))
+	r_integer=$(( 1000000 * $r / 256 ))
+	g_integer=$(( 1000000 * $g / 256 ))
+	b_integer=$(( 1000000 * $b / 256 ))
 
-	a_int=$(( 256 / 256 ))
+	a_integer=$(( 256 / 256 ))
 
 	# assign rgba gamut
 
-	r=0.${r_int}
-	g=0.${g_int}
-	b=0.${b_int}
+	r=0.${r_integer}
+	g=0.${g_integer}
+	b=0.${b_integer}
 
-	a=${a_int}.000000
+	a=${a_integer}.000000
 }
 
 # translate color
