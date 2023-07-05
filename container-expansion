@@ -53,7 +53,7 @@ command_expand=$(command -v unminimize)
 
 # functions ////////////////////////////////////////////////////////////////////
 
-# unminimize system image
+# expand system image
 
 frobulator.silence "yes | ${command_expand}" &
 
