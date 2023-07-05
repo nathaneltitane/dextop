@@ -148,16 +148,16 @@ handle_intent () {
 if [[ "${option}" = [aA][cC][tT][iI][vV][iI][tT][yY] ]]
 then
 	if [[ "${activity_option}" = "google-chrome" ]] || \
-	   [[ "${activity_option}" = "chrome" ]]        ||
+	   [[ "${activity_option}" = "chrome" ]]
 	then
 		activity="${google_chrome}"
 
 	elif [[ "${activity_option}" = "google-mail" ]] || \
-		[[ "${activity_option}" = "gmail" ]]        ||
+		[[ "${activity_option}" = "gmail" ]]
 	then
 		activity="${google_mail}"
 
-	elif [[ "${activity_option}" = "terminal" ]]    ||
+	elif [[ "${activity_option}" = "terminal" ]]
 	then
 		activity="${terminal}"
 
@@ -173,19 +173,19 @@ then
 elif [[ "${option}" = [hH][aA][nN][dD][lL][eE] ]]
 then
 	if [[ "${handle_option}" = "email" ]]     || \
-	   [[ "${handle_option}" = "mail" ]]      ||
+	   [[ "${handle_option}" = "mail" ]]
 	then
 		handle="${email}"
 
 	elif [[ "${handle_option}" = "browser" ]] || \
 		[[ "${handle_option}" = "link" ]]     || \
-		[[ "${handle_option}" = "web" ]]      ||
+		[[ "${handle_option}" = "web" ]]
 	then
 		handle="${link}"
 
 	elif [[ "${handle_option}" = "message" ]] || \
 	     [[ "${handle_option}" = "text" ]]    || \
-	     [[ "${handle_option}" = "sms" ]]     ||
+	     [[ "${handle_option}" = "sms" ]]
 	then
 		handle="${message}"
 
