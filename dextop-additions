@@ -66,15 +66,15 @@ do
 			echo
 			echo -e "-a, --activity        Run native Android activities via Dextop environement defaults."
 			echo
-			echo -e "                     [ google-chrome ] | [ chrome ]"
-			echo -e "                     [ google-mail ] | [ gmail ]"
-			echo -e "                     [ terminal ]"
+			echo -e "                      [ google-chrome ] | [ chrome ]"
+			echo -e "                      [ google-mail ] | [ gmail ]"
+			echo -e "                      [ terminal ]"
 			echo
 			echo -e "-n, --handle          Run desktop environment handles through native Android applications."
 			echo
-			echo -e "                     [ email ]   | [ mail ]"
-			echo -e "                     [ browser ] | [ link ] | [ web ]"
-			echo -e "                     [ message ] | [ text ] | [ sms ]"
+			echo -e "                      [ email ]   | [ mail ]"
+			echo -e "                      [ browser ] | [ link ] | [ web ]"
+			echo -e "                      [ message ] | [ text ] | [ sms ]"
 			echo
 			echo -e "-h, --help            Show help and usage information."
 			echo
