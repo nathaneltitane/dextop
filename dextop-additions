@@ -148,16 +148,16 @@ handle_intent () {
 if [[ "${option}" = [aA][cC][tT][iI][vV][iI][tT][yY] ]]
 then
 	if [[ "${activity_option}" = "google-chrome" ]] || \
-	   [[ "${activity_option}" = "chrome" ]]
+	   [[ "${activity_option}" = "chrome"        ]]
 	then
 		activity="${google_chrome}"
 
 	elif [[ "${activity_option}" = "google-mail" ]] || \
-		[[ "${activity_option}" = "gmail" ]]
+		[[ "${activity_option}" = "gmail"        ]]
 	then
 		activity="${google_mail}"
 
-	elif [[ "${activity_option}" = "terminal" ]]
+	elif [[ "${activity_option}" = "terminal"    ]]
 	then
 		activity="${terminal}"
 
