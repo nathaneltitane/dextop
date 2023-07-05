@@ -1,0 +1,3 @@
+#!/bin/bash
+
+am start -n com.termux/com.termux.app.TermuxActivity > /dev/null 2>&1

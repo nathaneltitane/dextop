@@ -1,0 +1,3 @@
+#!/bin/bash
+
+am start -n com.google.android.gm/.GmailActivity
