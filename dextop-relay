@@ -1,0 +1,20 @@
+#!/bin/bash
+
+
+
+am start							\
+	-a android.intent.action.VIEW	\
+	-d "${handle}" > /dev/null 2>&1
+
+am start							\
+	-n "${activity}" > /dev/null 2>&1
+
+google_chrome="com.android.chrome/com.google.android.apps.chrome.Main"
+google_mail="com.google.android.gm/.GmailActivity"
+terminal="com.termux/com.termux.app.TermuxActivity"
+
+link="https:"
+
+a = activity
+
+h = handle

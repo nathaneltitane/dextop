@@ -1,3 +1,0 @@
-#!/bin/bash
-
-am start -n com.android.chrome/com.google.android.apps.chrome.Main

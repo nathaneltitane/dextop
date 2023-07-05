@@ -1,5 +1,0 @@
-#!/bin/bash
-
-am start							\
-	-a android.intent.action.VIEW	\
-	-d "mailto:" > /dev/null 2>&1
