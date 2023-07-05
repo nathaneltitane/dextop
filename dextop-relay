@@ -46,10 +46,16 @@ do
 	in
 		-a|--activity)
 			option="activity"
+			activity="${2}"
+
+			shift
 		;;
 
 		-n|--handle)
 			option="handle"
+			handle="${2}"
+
+			shift
 		;;
 
 		-h|--help)
@@ -129,8 +135,18 @@ activity_intent () {
 		-n "${activity}" > /dev/null 2>&1
 	}
 
-	handle_intent () {
+handle_intent () {
 	am start							\
 		-a android.intent.action.VIEW	\
 		-d "${handle}" > /dev/null 2>&1
 }
+
+if [ "${option}" = "activity" ]
+then
+	activity_intent
+fi
+
+if [ "${option}" = "handle" ]
+then
+	activity_handle
+fi
