@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="06-29-2023"
+version="07-05-2023"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -54,6 +54,7 @@ font_size="10"
 regular_font="Sans"
 monospace_font="Monospace"
 
+cursor_theme="Adwaita"
 icon_theme="Papirus-Dark"
 window_theme="Arc-Darker"
 
@@ -138,7 +139,7 @@ xfconf-query --create -c 'xsettings'                   -p '/Gdk/WindowScalingFac
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/ButtonImages' -t bool -s 'false'
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/CanChangeAccels' -t bool -s 'false'
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/ColorPalette' -t string -s 'rgb(38,50,56);rgb(255,152,0);rgb(139,195,74);rgb(255,193,7);rgb(3,169,244);rgb(233,30,99);rgb(0,150,136);rgb(207,216,220);rgb(55,71,79);rgb(255,167,77);rgb(156,204,101);rgb(255,160,0);rgb(129,212,250);rgb(173,20,87);rgb(38,166,154);rgb(236,239,241)'
-xfconf-query --create -c 'xsettings'                   -p '/Gtk/CursorThemeName' -t string -s ''
+xfconf-query --create -c 'xsettings'                   -p '/Gtk/CursorThemeName' -t string -s "${cursor_theme}"
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/CursorThemeSize' -t int -s '0'
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/DecorationLayout' -t string -s 'menu'
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/DialogsUseHeader' -t bool -s 'true'
