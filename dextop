@@ -317,6 +317,7 @@ settings_intent () {
 		termux-colors
 		termux-font
 		termux-properties
+		termux-reload-settings
 	)
 
 	frobulator.download get.trmx.app "${HOME}"/.local/bin ${settings_list[@]}
