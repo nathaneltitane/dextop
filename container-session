@@ -156,8 +156,6 @@ echo
 
 # variables ////////////////////////////////////////////////////////////////////
 
-# activities
-
 # reference session viewer activity calls for known android applications:
 
 # FreebVNC:      com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity
@@ -171,14 +169,6 @@ real_vnc_activity="com.realvnc.viewer.android/.app.DesktopActivity"
 remotix_vnc_activity="com.nulana.android.remotix/.Viewer"
 
 termux_x11_activity="com.termux.x11/.MainActivity"
-
-# servers
-
-vnc_loader="Xvfb"
-vnc_server="x11vnc"
-
-x11_loader="app_process / com.termux.x11.Loader"
-x11_server="termux-x11"
 
 # defaults /////////////////////////////////////////////////////////////////////
 
@@ -578,7 +568,7 @@ server_intent () {
 
 	if [[ "${display}" = [vV][nN][cC] ]]
 	then
-		load_command+="${vnc_server}"
+		load_command+="x11vnc"
 		load_command+=" -display ${DISPLAY}"
 		load_command+=" -clip xinerama=${DISPLAY}"
 		load_command+=" -rfbport ${PORT}"
@@ -596,10 +586,12 @@ server_intent () {
 
 	if [[ "${display}" = [xX][1][1] ]]
 	then
-		load_command+="${x11_server}"
-		load_command+=" ${DISPLAY}"
-
-		${load_command} &
+		if [[ $(pidof app_process / com.termux.x11.Loader) ]]
+		then
+			:
+		else
+			termux-x11 "${DISPLAY}" &
+		fi
 	fi
 }
 
@@ -938,7 +930,7 @@ display_framebuffer () {
 
 		unset framebuffer_command
 
-		framebuffer_command+="${vnc_loader}"
+		framebuffer_command+="Xvfb"
 		framebuffer_command+=" -screen ${DISPLAY_NUMBER}"
 		framebuffer_command+=" ${geometry}x24"
 
@@ -967,8 +959,6 @@ display_interface () {
 }
 
 display_load () {
-	# verify connection requirements
-
 	if [[ "${display}" = [vV][nN][cC] ]]
 	then
 		# make selection available for automatic start:
@@ -999,28 +989,17 @@ display_load () {
 		display_framebuffer
 	fi
 
-	if [[ "${display}" = [vV][nN][cC] ]] ||  \
-	   [[ "${display}" = [xX][1][1] ]]
+	if [[ "${display}" = [xX][1][1] ]]
 	then
-		if [[ $(pidof "${vnc_server}") ]] || \
-		   [[ $(pidof "${x11_loader}") ]]
-		then
-			frobulator.wrn "Active display server detected." "[ ${display} ]"
-			echo
-
-			frobulator.fwd "Switching..."
-			echo
-
-			:
-		else
-			# start display server
-
-			frobulator.fwd "Starting display server..."
-			echo
-
-			server_intent
-		fi
+		:
 	fi
+
+	# start display server
+
+	frobulator.fwd "Starting display server..."
+	echo
+
+	server_intent
 
 	# connection to x11vnc is very fast:
 	# wait for process to settle before launching vnc viewer
@@ -1033,7 +1012,7 @@ display_load () {
 display_start () {
 	if [[ "${display}" = [vV][nN][cC] ]]
 	then
-		if [[ $(pidof "${vnc_server}") ]]
+		if [[ $(pidof x11vnc) ]]
 		then
 			:
 		else
@@ -1103,23 +1082,17 @@ display_stop () {
 	then
 		# handle and stop display processes
 
-		if [[ $(pidof "${vnc_loader}") ]]
+		if [[ $(pidof Xvfb) ]]
 		then
-			kill -9 $(pidof "${vnc_loader}")  > /dev/null 2>&1 &
+			kill -9 $(pidof Xvfb)  > /dev/null 2>&1 &
 
 			frobulator.progress "Stopping display framebuffer..."
 			echo
 		fi
 
-		if [[ $(pidof "${vnc_server}") ]]
+		if [[ $(pidof x11vnc) ]]
 		then
-			unset stop_command
-
-			stop_command+="${vnc_server}"
-			stop_command+=" -R"
-			stop_command+=" stop"
-
-			${stop_command} > /dev/null 2>&1 &
+			x11vnc -R stop > /dev/null 2>&1 &
 
 			frobulator.progress "Stopping display server..."
 			echo
@@ -1134,9 +1107,9 @@ display_stop () {
 
 	if [[ "${display}" = [xX][1][1] ]]
 	then
-		if [[ $(pidof "${x11_loader}") ]]
+		if [[ $(pidof app_process / com.termux.x11.Loader) ]]
 		then
-			kill -9 $(pidof "${x11_loader}") > /dev/null 2>&1 &
+			kill -9 $(pidof app_process / com.termux.x11.Loader) > /dev/null 2>&1 &
 
 			frobulator.progress "Stopping display loader..."
 			echo
@@ -1147,7 +1120,7 @@ display_stop () {
 display_list () {
 	if [[ "${display}" = [vV][nN][cC] ]]
 	then
-		display_server="${vnc_server}"
+		display_server="x11vnc"
 
 		display_format=$(cat "${HOME}"/.vnc/format)
 		display_geometry=$(cat "${HOME}"/.vnc/geometry)
@@ -1158,7 +1131,7 @@ display_list () {
 
 	if [[ "${display}" = [xX][1][1] ]]
 	then
-		display_server="${x11_loader}"
+		display_server="app_process / com.termux.x11.Loader"
 
 		display_format="native"
 		display_geometry="native"
