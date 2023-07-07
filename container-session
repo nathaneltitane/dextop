@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="07-01-2023"
+version="07-06-2023"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -586,7 +586,12 @@ server_intent () {
 
 	if [[ "${display}" = [xX][1][1] ]]
 	then
-		termux-x11 "${DISPLAY}" &
+		if [[ $(pidof app_process / com.termux.x11.Loader) ]]
+		then
+			:
+		else
+			termux-x11 "${DISPLAY}" &
+		fi
 	fi
 }
 
