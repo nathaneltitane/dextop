@@ -1091,13 +1091,18 @@ display_stop () {
 
 			frobulator.progress "Stopping display framebuffer..."
 			echo
-		fi
 
-		if [[ $(pidof x11vnc) ]]
+		elif [[ $(pidof x11vnc) ]]
 		then
 			x11vnc -R stop > /dev/null 2>&1 &
 
 			frobulator.progress "Stopping display server..."
+			echo
+		else
+			frobulator.wrn "No active display server detected."
+			echo
+
+			frobulator.fwd "Exiting..."
 			echo
 		fi
 
@@ -1116,7 +1121,14 @@ display_stop () {
 
 			frobulator.progress "Stopping display loader..."
 			echo
+		else
+			frobulator.wrn "No active display server detected."
+			echo
+
+			frobulator.fwd "Exiting..."
+			echo
 		fi
+
 	fi
 }
 
