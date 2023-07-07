@@ -568,20 +568,25 @@ server_intent () {
 
 	if [[ "${display}" = [vV][nN][cC] ]]
 	then
-		load_command+="x11vnc"
-		load_command+=" -display ${DISPLAY}"
-		load_command+=" -clip xinerama=${DISPLAY}"
-		load_command+=" -rfbport ${PORT}"
-		load_command+=" -scale 1.00"
-		load_command+=" -xkb"
-		load_command+=" -nocursor"
-		load_command+=" -nocursorshape"
-		load_command+=" -noshm"
-		load_command+=" -noxdamage"
-		load_command+=" -noxfixes"
-		load_command+=" -noxrecord"
+			if [[ $(pidof x11vnc) ]]
+		then
+			:
+		else
+			load_command+="x11vnc"
+			load_command+=" -display ${DISPLAY}"
+			load_command+=" -clip xinerama=${DISPLAY}"
+			load_command+=" -rfbport ${PORT}"
+			load_command+=" -scale 1.00"
+			load_command+=" -xkb"
+			load_command+=" -nocursor"
+			load_command+=" -nocursorshape"
+			load_command+=" -noshm"
+			load_command+=" -noxdamage"
+			load_command+=" -noxfixes"
+			load_command+=" -noxrecord"
 
-		${load_command} > /dev/null 2>&1 &
+			${load_command} > /dev/null 2>&1 &
+		fi
 	fi
 
 	if [[ "${display}" = [xX][1][1] ]]
