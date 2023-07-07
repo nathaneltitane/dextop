@@ -1081,54 +1081,52 @@ display_new () {
 }
 
 display_stop () {
-	if [[ "${display}" = [vV][nN][cC] ]]
+	# look for corresponding server process:
+	# handle and stop display server and clean runtime files
+
+	# vnc
+
+	if [[ $(pidof Xvfb) ]]
 	then
-		# handle and stop display processes
+		kill -9 $(pidof Xvfb)  > /dev/null 2>&1 &
 
-		if [[ $(pidof Xvfb) ]]
-		then
-			kill -9 $(pidof Xvfb)  > /dev/null 2>&1 &
+		frobulator.progress "Stopping display framebuffer..."
+		echo
 
-			frobulator.progress "Stopping display framebuffer..."
-			echo
+	elif [[ $(pidof x11vnc) ]]
+	then
+		x11vnc -R stop > /dev/null 2>&1 &
 
-		elif [[ $(pidof x11vnc) ]]
-		then
-			x11vnc -R stop > /dev/null 2>&1 &
-
-			frobulator.progress "Stopping display server..."
-			echo
-		else
-			frobulator.wrn "No active display server detected."
-			echo
-
-			frobulator.fwd "Exiting..."
-			echo
-		fi
+		frobulator.progress "Stopping display server..."
+		echo
 
 		# clean display server runtime files
 
 		wait
 
 		display_clean
+	else
+		frobulator.wrn "No active display server detected."
+		echo
+
+		frobulator.fwd "Exiting..."
+		echo
 	fi
 
-	if [[ "${display}" = [xX][1][1] ]]
+	# x11
+
+	if [[ $(pidof app_process / com.termux.x11.Loader) ]]
 	then
-		if [[ $(pidof app_process / com.termux.x11.Loader) ]]
-		then
-			kill -9 $(pidof app_process / com.termux.x11.Loader) > /dev/null 2>&1 &
+		kill -9 $(pidof app_process / com.termux.x11.Loader) > /dev/null 2>&1 &
 
-			frobulator.progress "Stopping display loader..."
-			echo
-		else
-			frobulator.wrn "No active display server detected."
-			echo
+		frobulator.progress "Stopping display loader..."
+		echo
+	else
+		frobulator.wrn "No active display server detected."
+		echo
 
-			frobulator.fwd "Exiting..."
-			echo
-		fi
-
+		frobulator.fwd "Exiting..."
+		echo
 	fi
 }
 
