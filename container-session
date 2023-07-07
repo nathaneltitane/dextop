@@ -590,7 +590,10 @@ server_intent () {
 		then
 			:
 		else
-			termux-x11 "${DISPLAY}" &
+			load_command+="termux-x11"
+			load_command+=" ${DISPLAY}"
+
+			${load_command} > /dev/null 2>&1 &
 		fi
 	fi
 }
