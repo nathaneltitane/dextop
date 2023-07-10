@@ -106,7 +106,19 @@ Dextop links some of the modified utilities that have been patched under Termux 
 
 **Dextop only loads applications as needed: this helps keep a minimal footprint and your device running as smooth as possible!**
 
-Music, mail, games and web browsing activities should preferably be taken care of using native Android applications that are readily installed and configured on your device.
+Music, mail, web browsing and gaming activities should preferably be taken care of using native Android applications as they interface with the device's hardware and provide acceleration and other desirable features.
+
+For that purpose, setting up default applications via the use of 'dextop-additions' is highly recommended.
+
+'dextop-additions' handles activities:
+
+dextop-additions -a <activity>
+
+or takes care of mimetype handles:
+
+dextop-additions -n <handle>
+
+and thus transfers
 
 ### Interface:
 
