@@ -25,11 +25,17 @@ Dextop was developed using a Samsung Galaxy Note 20 Ultra, a Samsung Galaxy Tab 
 
 ### Before you proceed:
 
-To run the way it does and transition seamlessly in between Termux and the container instance of your choice, Dextop is built a certain way: it loads and links scripts, configuration files and utilities to enhance your Android-based workstation experience.
-
 It is highly recommended to install Dextop on a fresh Termux instance or profile to benefit from a clean slate and a snappy experience, although you can always attempt deploying it on an already existing setup.
 
+---
+
 **Backing up your existing setup by following the [Termux backup recommendations](https://wiki.termux.com/wiki/Backing_up_Termux) is a must as the Dextop project will not be held responsible for any overrides, file corruptions or deletions caused by the installation and configuration process - You Have Been Warned.**
+
+---
+
+### Contents
+
+To run the way it does and transition seamlessly in between Termux and the container instance of your choice, Dextop is built a certain way: it loads and links scripts, configuration files and utilities to enhance your Android-based workstation experience.
 
 A few other elements to note before proceeding:
 
@@ -383,13 +389,13 @@ Audio playback can be disabled as follows:
 echo '' > "${HOME}"/.dextop/dextop-audio
 ```
 
-### VNC termination:
+### Session / Display termination:
 
-Automatic vnc display shutdown on terminal exit can be enabled as follows:
+Automatic session and display shutdown on terminal exit can be enabled as follows:
 
 ```echo logout >> "${HOME}"/.dextop/dextop-logout```
 
-Automatic vnc display shutdown on terminal exit can be disabled as follows:
+Automatic session and display shutdown on terminal exit can be disabled as follows:
 
 ```echo '' > "${HOME}"/.dextop/dextop-logout```
 
