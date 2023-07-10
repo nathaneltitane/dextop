@@ -98,7 +98,7 @@ Power users be warned! As efficient and well rounded as it may be:
 
 Applications that require backend services (i.e.: Ubuntu Snap/snapd), standalone services, hardware probes and other advanced features that require access to restricted core system directories will not function: you must root your device to remove those limitations and gain full access to all system hardware and virtual devices.
 
-Dextop links the modified utilities that have been patched under Termux for some limited access to whatever the Android user space runtime policy permits (htop, kill, pgrep, pkill, ps, top).
+Dextop links some of the modified utilities that have been patched under Termux for an attempt at limited access to whatever the Android user space runtime policy permits (htop, kill, pgrep, pkill, ps, top).
 
 ### Activities:
 
