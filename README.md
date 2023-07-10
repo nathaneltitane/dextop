@@ -113,6 +113,8 @@ Dextop links some of the modified utilities that have been patched under Termux 
 
 Music, mail, web browsing and gaming activities should preferably be taken care of using native Android applications as they interface with the device's hardware and provide acceleration and other desirable features.
 
+![dextop-additions](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop-additions.png)
+
 For that purpose, setting up default applications via the use of 'dextop-additions' is highly recommended.
 
 'dextop-additions' handles activities:
