@@ -394,7 +394,7 @@ echo '' > "${HOME}"/.dextop/dextop-update
 
 **Audio playback is configured and supported through 'pulseaudio', although it is not recommended for use as it can be process and cycle intensive on the device's battery and processor(s).**
 
-General audio latency on playback and other such related parameters may vary depending on the host device's hardware specification, and depending on if it is running directly under the Termux shell or from within a distribution container.
+Audio latency on playback and other such related parameters may vary depending on the host device's hardware specification, and depending on if it is running directly under the Termux shell or from within a distribution container.
 
 Audio playback on login can be enabled as follows:
 
