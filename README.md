@@ -78,8 +78,8 @@ This is required due to the Android user space runtime policy and limited hardwa
 
 Dextop can be compared to other very similar projects, though:
 
-- It provides you with a selection of the Ubuntu distribution base images: stable, popular and user-friendly knowledge bases.
-- It expands the installed base image to run **just like a normal PC!**.
+- It provides you with a selection of the Ubuntu distribution base images: stable, popular and tons of user-friendly knowledge bases.
+- It expands the installed base image to run **just like a normal PC!**
 - It **generates an actual user profile and prepares a functional home directory for you to work in**, easily and securely.
 - It installs all the necessary applications and utilities to provide you with the right experience.
 - It sets up your internal (and external, when available) storage media for flexible, system-wide access.
