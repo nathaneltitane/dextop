@@ -6,6 +6,11 @@
 
 ---
 
+### [ NOTICE // 07-10-2023 ]
+
+- Added ReadMe specifics regarding the newly implemented 'dextop-additions' utility!
+- Fixed automatic session logout feature to look for Termux:X11 components!
+
 ### [ NOTICE // 07-04-2023 ]
 
 - **Added 'dextop-additions' utility as a single, monolithic replacement to the separate activity manager instance scripts that handle Android activities through the Dextop container!**
