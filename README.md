@@ -262,8 +262,6 @@ Dextop automatically detects and processes any external media mounts, adds them 
 
 **There are no workarounds!**
 
----
-
 **Storage:**
 
 Press 'Allow' when prompted during the setup to grant the storage permission.
@@ -271,8 +269,6 @@ Press 'Allow' when prompted during the setup to grant the storage permission.
 **Display:**
 
 Press 'Install' when prompted during the setup to install the display server components.
-
----
 
 ### Usage:
 
