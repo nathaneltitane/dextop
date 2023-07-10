@@ -427,6 +427,8 @@ Automatic session and display shutdown on terminal exit can be disabled as follo
 
 [Termux](https://github.com/termux/termux-app) as the android shell provider application to make Dextop interface with your device.
 
+[Termux:X11](https://github.com/termux/termux-x11) as the android native display server provider.
+
 [GNU/Bash](https://github.com/gitGNU/gnu_bash) as the shell environment on top of which the scripts function.
 
 ### Projects:
