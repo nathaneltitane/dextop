@@ -80,7 +80,7 @@ do
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} -c | -e [Environment] | -t | -n | -b | -u [Update] [Name] | [OPTION]"
+			echo -e "Usage: ${script} -c | -e [Environment] | -t | -n | -b | -u [Update Type] [Utility Name] | [OPTION]"
 			echo
 			echo -e "Options:"
 			echo
@@ -89,6 +89,7 @@ do
 			echo -e "-e, --environment    Setup desktop environment and utilities."
 			echo
 			echo -e "                     [ i3 ]"
+			echo -e "                     [ mate ]"
 			echo -e "                     [ xfce ] [ Default ]"
 			echo
 			echo -e "-t, --termux         Setup Termux environment and utilities only."
