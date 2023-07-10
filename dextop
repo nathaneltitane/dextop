@@ -361,8 +361,6 @@ utility_intent () {
 
 	elif [[ "${utility}" = "all" ]]
 	then
-		unset utility
-
 		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
 
 		exit 0
