@@ -23,21 +23,10 @@ No hassle or deep technical know-how required: **Dextop is easy and user friendl
 
 Dextop was developed using a Samsung Galaxy Note 20 Ultra, a Samsung Galaxy Tab S7+ and optimized to run within/alongside Samsung DeX.
 
-### Before you proceed:
-
-It is highly recommended to install Dextop on a fresh Termux instance or profile to benefit from a clean slate and a snappy experience, although you can always attempt deploying it on an already existing setup.
-
----
-
-**Backing up your existing setup by following the [Termux backup recommendations](https://wiki.termux.com/wiki/Backing_up_Termux) is a must as the Dextop project will not be held responsible for any overrides, file corruptions or deletions caused by the installation and configuration process - You Have Been Warned.**
-
----
-
 ### Contents
 
-To run the way it does and transition seamlessly in between Termux and the container instance of your choice, Dextop is built a certain way: it loads and links scripts, configuration files and utilities to enhance your Android-based workstation experience.
-
-A few other elements to note before proceeding:
+To run the way it does and transition seamlessly in between Termux and the container instance of your choice, Dextop is built a certain way:
+it loads and links scripts, configuration files and utilities to enhance your Android-based workstation experience
 
 - Dextop installs certain core utilities to load and use a custom scripting library to make the overall command line interface more pleasant and informative:
   - ~/.local/bin/frobulator
@@ -53,6 +42,18 @@ A few other elements to note before proceeding:
   - ~/.bash_login        → ~/.local/bin/bash-login
   - ~/.bash_logout       → ~/.local/bin/bash-logout
   - ~/.bash_profile      → ~/.local/bin/bash-profile
+
+### Before you proceed:
+
+It is highly recommended to install Dextop on a fresh Termux instance or profile to benefit from a clean slate and a snappy experience, although you can always attempt deploying it on an already existing setup.
+
+---
+
+**Backing up your existing setup by following the [Termux backup recommendations](https://wiki.termux.com/wiki/Backing_up_Termux) is a must as the Dextop project will not be held responsible for any overrides, file corruptions or deletions caused by the installation and configuration process - You Have Been Warned.**
+
+A backup routine has also been built that archives the user'S home directory before proceeding, regardless, to ensure some kind of safety.
+
+---
 
 ### Customization:
 
