@@ -345,11 +345,7 @@ As the project evolves, certain utilities may change, either slightly or signifi
 
 To ensure Dextop runs as expected, and wth the latest features in tow, proceed as follows according to your setup.
 
----
-
-For new installations, run the normal setup routine and follow instructions as they appear (refer to the setup section).
-
----
+**For new installations, run the normal setup routine and follow instructions as they appear (refer to the setup section).**
 
 For existing installations, manual updates can be run by downloading and executing the update routine from the latest Dextop deployment script.
 
@@ -381,8 +377,6 @@ If for whatever reason an update fails due to an error of because of deployment 
 curl -s -L run.dxtp.app > "${HOME}"/.local/bin/dextop && bash dextop -u utilities
 ```
 
----
-
 Once the latest version of Dextop is deployed, configuring it to fetch all the latest and relevant utilities is possiblewhen automatic updates on login are enabled.
 
 Automatic utility updates on login can be enabled as follows:
@@ -398,8 +392,9 @@ echo '' > "${HOME}"/.dextop/dextop-update
 ```
 ### Audio:
 
-**Audio playback is configured and supported through 'pulseaudio, although it is not recommended for use as it can be process and cycle intensive on the device's battery and processor(s):**
-latency on playback may vary depending on the host device's hardware specification, and depending on if it is running directly under the Termux shell or from within a distribution container.
+**Audio playback is configured and supported through 'pulseaudio', although it is not recommended for use as it can be process and cycle intensive on the device's battery and processor(s).**
+
+General audio latency on playback and other such related parameters may vary depending on the host device's hardware specification, and depending on if it is running directly under the Termux shell or from within a distribution container.
 
 Audio playback on login can be enabled as follows:
 
