@@ -204,7 +204,7 @@ In either case, you can think of the experience as setting up a VM (virtual mach
 
 For the best possible experience, make sure to have:
 
-- A modern Android device with 64 bit ARM processor (Android 7.0 or above: Termux limitation - Avoid Android 11/12/13 when and if possible: [Phantom Process Killer](https://issuetracker.google.com/issues/205156966))
+- A modern Android device with 64 bit ARM processor (Android 7.0 or above: Termux limitation - Avoid Android 11/12/13 when and if possible: read more regarding the [Phantom Process Killer](https://issuetracker.google.com/issues/205156966))
 - Approximately 4GB in free storage on the device for symmetric setup (Termux and distribution container)
 - A mouse (bluetooth or other)
 - A keyboard (bluetooth or other)
@@ -393,7 +393,6 @@ Automatic utility updates on login can be disabled as follows:
 ```
 echo '' > "${HOME}"/.dextop/dextop-update
 ```
-
 ### Audio:
 
 **Audio playback is configured and supported through 'pulseaudio, although it is not recommended for use as it can be process and cycle intensive on the device's battery and processor(s):**
@@ -410,7 +409,6 @@ Audio playback can be disabled as follows:
 ```
 echo '' > "${HOME}"/.dextop/dextop-audio
 ```
-
 ### Session / Display termination:
 
 Automatic session and display shutdown on terminal exit can be enabled as follows:
