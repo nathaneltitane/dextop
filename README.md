@@ -111,7 +111,7 @@ Dextop offers two methods to turn an Android device into a desktop workstation a
 
 The VNC method uses the X11 virtual framebuffer 'xvfb' alongside the X11 VNC server 'x11vnc' and forwards a display port within your device as 'localhost' to minimize latency and runs it using software emulated acceleration (LLVM).
 
-The X11 method uses a native display server application 'termux-x11' alongside the Termux:X11 android application package and forwards the display using your device's native resolution and DPI settings using your device' hardware platform (GPU).
+The X11 method uses a native display server application 'termux-x11' alongside the Termux:X11 android application package and forwards the display using your device's native resolution and DPI settings using your device's hardware graphics platform (GPU).
 
 In either case, you can think of the experience as setting up a VM (virtual machine) on a typical laptop or desktop computer and accessing it through a viewer.
 
