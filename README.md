@@ -123,7 +123,7 @@ or takes care of mimetype handles:
 
 dextop-additions -n <handle>
 
-and thus transfers
+and thus transfers the calls through the use of the Activity Manager and opens the relevant Android application for you to use.
 
 ### Interface:
 
