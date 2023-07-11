@@ -6,6 +6,10 @@
 
 ---
 
+### [ NOTICE // 07-11-2023 ]
+
+- Fixed automatic backup assertions,update flags and  session requirements!
+
 ### [ NOTICE // 07-10-2023 ]
 
 - Added ReadMe specifics regarding the newly implemented 'dextop-additions' utility!
