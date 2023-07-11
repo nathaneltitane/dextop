@@ -316,11 +316,11 @@ backup_intent () {
 		tar
 	)
 
-	for utility in ${list[@]}
+	for package in ${list[@]}
 	do
-		if [[ -z $(command -v "${utility}") ]]
+		if [[ -z $(command -v "${package}") ]]
 		then
-			yes | apt-get install "${utility}"
+			yes | apt-get install "${package}"
 		fi
 	done
 
