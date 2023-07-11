@@ -313,7 +313,7 @@ backup_intent () {
 	fi
 
 	backup_extension="tar.gz"
-	backup_archive="dextop-backup-${stamp}"
+	backup_archive="dextop-backup-${stamp}.${backup_extension}"
 	backup_directory="${HOME}"
 
 	frobulator.inf "Generating backup" "[ ${backup_archive} ]"
