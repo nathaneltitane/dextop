@@ -311,10 +311,21 @@ reload_intent () {
 }
 
 backup_intent () {
-	if [[ -z $(command -v tar) ]]
-	then
-		yes | apt-get install tar
-	fi
+	list+=(
+		gzip
+		tar
+	)
+
+	for utility in ${list[@]}
+	do
+		if [[ -z $(command -v "${utility}") ]]
+		then
+			yes | apt-get install "${utility}"
+		fi
+	done
+
+	list=()
+
 	backup_name="dextop-backup"
 	backup_extension="tar.gz"
 	backup_archive="${backup_name}-${stamp}.${backup_extension}"
