@@ -292,7 +292,8 @@ architecture_intent () {
 }
 
 reload_intent () {
-	# termux settings reload
+	# termux settings reload:
+	# refresh command line interface with newly loaded settings
 
 	unset settings_command
 
@@ -304,18 +305,31 @@ reload_intent () {
 	frobulator.silence "${settings_command}"
 }
 
-backup_intent () {
-	# backup routine:
-	# create archive of user home directory
+
+backup_setup () {
+	if [[ -z $(command -v tar) ]]
+	then
+		yes | apt-get install tar
+	fi
 
 	backup_extension="tar.gz"
 	backup_archive="dextop-backup-${stamp}"
 	backup_directory="${HOME}"
 
+	tar									\
+		--create						\
+		--gzip							\
+		--file="${backup_archive}"		"${backup_directory}" > /dev/null 2>&1
+}
+
+backup_intent () {
+	# backup routine:
+	# create archive of user home directory
+
 	frobulator.inf "Generating backup" "[ ${backup_archive} ]"
 	echo
 
-	frobulator.archive "${backup_archive}" "${backup_extension}" "${backup_directory}" &
+	backup_setup &
 
 	frobulator.progress "Backing up..." "[ ${backup_directory} ]"
 	echo
