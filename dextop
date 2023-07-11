@@ -186,6 +186,11 @@ then
 	fi
 fi
 
+if [ -z "${utility}" ]
+then
+	utility="all"
+fi
+
 if [ -z "${ROOT}" ]
 then
 	ROOT=("${PREFIX}"/cnt/*/*)
@@ -379,14 +384,6 @@ utility_intent () {
 
 	elif [[ "${utility}" = "all" ]]
 	then
-		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
-
-		exit 0
-
-	elif [[ "${utility}" = "" ]]
-	then
-		utility="all"
-
 		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
 
 		exit 0
