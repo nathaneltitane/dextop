@@ -316,18 +316,19 @@ backup_intent () {
 	then
 		yes | apt-get install tar
 	fi
-
+	backup_name="dextop-backup"
 	backup_extension="tar.gz"
-	backup_archive="dextop-backup-${stamp}.${backup_extension}"
+	backup_archive="${backup_name}-${stamp}.${backup_extension}"
 	backup_directory="${HOME}"
 
 	frobulator.inf "Generating backup" "[ ${backup_archive} ]"
 	echo
 
-	tar									\
-		--create						\
-		--gzip							\
-		--file="${backup_archive}"		"${backup_directory}" > /dev/null 2>&1 &
+	tar											\
+		--create								\
+		--gzip									\
+			--exclude="${backup_name}"*			\
+				--file="${backup_archive}"		"${backup_directory}" > /dev/null 2>&1 &
 
 	frobulator.progress "Backing up..." "[ ${backup_directory} ]"
 	echo
