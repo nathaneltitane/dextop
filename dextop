@@ -247,7 +247,7 @@ container_setup () {
 	${container_command}
 }
 
-architecture_check () {
+architecture_intent () {
 	# list supported processor architechtures
 
 	cpu_architectures=(
@@ -610,7 +610,7 @@ session_intent () {
 
 # architecture check ///////////////////////////////////////////////////////////
 
-frobulator.log "architecture_check"
+frobulator.log "architecture_intent"
 
 # options //////////////////////////////////////////////////////////////////////
 
