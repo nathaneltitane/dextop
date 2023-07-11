@@ -321,7 +321,7 @@ backup_intent () {
 	frobulator.inf "Generating backup" "[ ${backup_archive} ]"
 	echo
 
-	backup_intent &
+	backup_setup &
 
 	frobulator.progress "Backing up..." "[ ${backup_directory} ]"
 	echo
