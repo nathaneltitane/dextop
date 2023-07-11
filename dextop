@@ -304,7 +304,7 @@ reload_intent () {
 	frobulator.silence "${settings_command}"
 }
 
-backup_setup () {
+backup_intent () {
 	# backup routine:
 	# create archive of user home directory
 
@@ -312,16 +312,10 @@ backup_setup () {
 	backup_archive="dextop-backup-${stamp}"
 	backup_directory="${HOME}"
 
-	frobulator.archive "${backup_archive}" "${backup_extension}" "${backup_directory}"
-}
-
-backup_intent () {
-	# run backup
-
 	frobulator.inf "Generating backup" "[ ${backup_archive} ]"
 	echo
 
-	backup_setup &
+	frobulator.archive "${backup_archive}" "${backup_extension}" "${backup_directory}" &
 
 	frobulator.progress "Backing up..." "[ ${backup_directory} ]"
 	echo
