@@ -312,7 +312,10 @@ backup_intent () {
 	backup_archive="dextop-backup-${stamp}"
 	backup_directory="${HOME}"
 
-	frobulator.archive "${backup_archive}" "${backup_extension}" "${backup_directory}"
+	frobulator.archive "${backup_archive}" "${backup_extension}" "${backup_directory}" &
+
+	frobulator.progress "Backing up..." "[ ${backup_directory} ]"
+	echo
 }
 
 settings_intent () {
@@ -620,10 +623,7 @@ then
 	frobulator.inf "Generating backup" "[ ${backup_archive} ]"
 	echo
 
-	backup_intent &
-
-	frobulator.progress "Backing up..."
-	echo
+	backup_intent
 fi
 
 if [ "${option}" = "update" ]
