@@ -172,7 +172,7 @@ then
 	then
 		if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "xfce" ]]
 		then
-			session="XFCE-session"
+			session="xfce4-session"
 		fi
 
 		if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "i3" ]]
@@ -181,6 +181,8 @@ then
 		fi
 
 		frobulator.flag "${session}" "${HOME}"/.dextop dextop-session
+
+		unset session
 	fi
 fi
 
