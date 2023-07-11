@@ -703,7 +703,7 @@ then
 	then
 		# load utilities
 
-		utilities_intent
+		utility_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-utilities-checkpoint
 	fi
