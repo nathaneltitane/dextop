@@ -306,9 +306,10 @@ backup_intent () {
 	# backup routine:
 	# create archive of user home directory
 
+	archive_extension="tar.gz"
 	backup_archive="dextop-backup-${stamp}"
 
-	frobulator.archive "${backup_archive}" "${HOME}"
+	frobulator.archive "${backup_archive}.${archive_extension}" "${HOME}"
 }
 
 settings_intent () {
