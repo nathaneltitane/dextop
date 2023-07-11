@@ -315,6 +315,18 @@ backup_intent () {
 	frobulator.archive "${backup_archive}" "${backup_extension}" "${backup_directory}"
 }
 
+backup_routine () {
+	# run backup
+
+	frobulator.inf "Generating backup" "[ ${backup_archive} ]"
+	echo
+
+	backup_intent &
+
+	frobulator.progress "Backing up..." "[ ${backup_directory} ]"
+	echo
+}
+
 settings_intent () {
 	# termux settings and properties
 
@@ -617,13 +629,7 @@ frobulator.log "architecture_intent"
 
 if [ "${option}" = "backup" ]
 then
-	frobulator.inf "Generating backup" "[ ${backup_archive} ]"
-	echo
-
-	backup_intent  &
-
-	frobulator.progress "Backing up..." "[ ${backup_directory} ]"
-	echo
+	backup_routine
 fi
 
 if [ "${option}" = "update" ]
@@ -685,7 +691,7 @@ then
 	then
 		# run backup
 
-		backup_intent
+		backup_routine
 
 		frobulator.file "${HOME}"/.dextop dextop-backup-checkpoint
 	fi
