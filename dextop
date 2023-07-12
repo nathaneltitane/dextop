@@ -89,6 +89,7 @@ do
 			echo -e "-e, --environment    Setup desktop environment and utilities."
 			echo
 			echo -e "                     [ i3 ]"
+			echo -e "                     [ lxqt ]"
 			echo -e "                     [ xfce ] [ Default ]"
 			echo
 			echo -e "-t, --termux         Setup Termux environment and utilities only."
@@ -172,6 +173,11 @@ then
 		if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "i3" ]]
 		then
 			session="i3"
+		fi
+
+		if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "lxqt" ]]
+		then
+			session="lxqt-session"
 		fi
 
 		if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "xfce" ]]
