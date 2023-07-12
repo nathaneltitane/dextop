@@ -858,15 +858,6 @@ then
 		frobulator.file "${HOME}"/.dextop dextop-audio-checkpoint
 	fi
 
-	# move setup
-
-	if [ ! -f "${HOME}"/.dextop/dextop-move-checkpoint ]
-	then
-		mv "${HOME}"/dextop "${HOME}"/.local/bin/dextop
-
-		frobulator.file "${HOME}"/.dextop dextop-move-checkpoint
-	fi
-
 	# backgrounds
 
 	if [ ! -f "${HOME}"/.dextop/dextop-backgrounds-checkpoint ]
@@ -892,6 +883,15 @@ then
 		themes_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-themes-checkpoint
+	fi
+
+	# move setup
+
+	if [ ! -f "${HOME}"/.dextop/dextop-move-checkpoint ]
+	then
+		mv "${HOME}"/dextop "${HOME}"/.local/bin/dextop
+
+		frobulator.file "${HOME}"/.dextop dextop-move-checkpoint
 	fi
 
 	# checkpoint
