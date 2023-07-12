@@ -115,6 +115,8 @@ then
 		open_intent "${PREFIX}"/tmp/"${package}"
 
 		wait
+
+		sleep 5
 	done
 fi
 
