@@ -59,7 +59,7 @@ frobulator.upgrade
 
 # values #
 
-display_list=(
+display_list+=(
 	x11-apps
 	x11-common
 	x11-session-utils
@@ -72,50 +72,50 @@ display_list=(
 	xwayland
 )
 
-documentation_list=(
+documentation_list+=(
 	man
 )
 
-extensions_list=(
+extensions_list+=(
 )
 
-fonts_list=(
+fonts_list+=(
 	fonts-takao
 )
 
-i3_list=(
+i3_list+=(
 	i3
 	i3status
 )
 
-i3_addons_list=(
+i3_addons_list+=(
 	rofi
 )
 
-icon_themes_list=(
+icon_themes_list+=(
 	papirus-icon-theme
 )
 
-multimedia_list=(
+multimedia_list+=(
 )
 
-repositories_list=(
+repositories_list+=(
 )
 
-security_list=(
+security_list+=(
 	ca-certificates
 	openssl
 )
 
-utilities_list=(
+utilities_list+=(
 	sudo
 )
 
-vnc_list=(
+vnc_list+=(
 	x11vnc
 )
 
-xfce_list=(
+xfce_list+=(
 	xfce4
 	xfce4-appfinder
 	xfce4-clipman
@@ -137,10 +137,10 @@ xfce_list=(
 	tumbler
 )
 
-xfce_fonts_list=(
+xfce_fonts_list+=(
 )
 
-xfce_themes_list=(
+xfce_themes_list+=(
 	arc-theme
 	adwaita-icon-theme
 	adwaita-icon-theme-full
@@ -157,7 +157,7 @@ xfce_themes_list=(
 #	tango-icon-theme-extras
 )
 
-xfce_addons_list=(
+xfce_addons_list+=(
 	xfce4-appmenu-plugin
 	xfce4-battery-plugin
 	xfce4-clipman-plugin
@@ -198,7 +198,7 @@ xfce_addons_list=(
 
 if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "console" ]]
 then
-	desktop_environment_list=()
+	desktop_environment_list+=()
 fi
 
 # i3
@@ -243,7 +243,7 @@ frobulator.install ${install_list[@]}
 
 # purge
 
-purge_list=(
+purge_list+=(
 	ibus
 	snap
 )
