@@ -768,6 +768,7 @@ then
 		"${HOME}"/.local/bin/termux-storage
 		"${HOME}"/.local/bin/termux-repositories
 		"${HOME}"/.local/bin/termux-packages
+		"${HOME}"/.local/bin/termux-display
 
 		frobulator.file "${HOME}"/.dextop dextop-termux-checkpoint
 	fi
