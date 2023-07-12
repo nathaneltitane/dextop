@@ -867,36 +867,31 @@ then
 		frobulator.file "${HOME}"/.dextop dextop-move-checkpoint
 	fi
 
-	if [ "${option}" = "console" ]
+	# backgrounds
+
+	if [ ! -f "${HOME}"/.dextop/dextop-backgrounds-checkpoint ]
 	then
-		:
-	else
-		# backgrounds
+		backgrounds_intent
 
-		if [ ! -f "${HOME}"/.dextop/dextop-backgrounds-checkpoint ]
-		then
-			backgrounds_intent
+		frobulator.file "${HOME}"/.dextop dextop-backgrounds-checkpoint
+	fi
 
-			frobulator.file "${HOME}"/.dextop dextop-backgrounds-checkpoint
-		fi
+	# icons
 
-		# icons
+	if [ ! -f "${HOME}"/.dextop/dextop-icons-checkpoint ]
+	then
+		icons_intent
 
-		if [ ! -f "${HOME}"/.dextop/dextop-icons-checkpoint ]
-		then
-			icons_intent
+		frobulator.file "${HOME}"/.dextop dextop-icons-checkpoint
+	fi
 
-			frobulator.file "${HOME}"/.dextop dextop-icons-checkpoint
-		fi
+	# themes
 
-		# themes
+	if [ ! -f "${HOME}"/.dextop/dextop-themes-checkpoint ]
+	then
+		themes_intent
 
-		if [ ! -f "${HOME}"/.dextop/dextop-themes-checkpoint ]
-		then
-			themes_intent
-
-			frobulator.file "${HOME}"/.dextop dextop-themes-checkpoint
-		fi
+		frobulator.file "${HOME}"/.dextop dextop-themes-checkpoint
 	fi
 
 	# checkpoint
