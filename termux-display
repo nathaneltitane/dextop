@@ -118,5 +118,5 @@ then
 	done
 fi
 
-frobulator.countdown 3 "Continuing" "[ ${script} ]"
+frobulator.countdown 10 "Continuing" "[ ${script} ]"
 echo
