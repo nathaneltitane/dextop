@@ -104,27 +104,6 @@ icon_themes_list+=(
 	papirus-icon-theme
 )
 
-lxqt_list+=(
-	lximage-qt
-	lxqt-about
-	lxqt-archiver
-	lxqt-build-tools
-	lxqt-composer-settings
-	lxqt-config
-	lxqt-globalkeys
-	lxqt-notifications
-	lxqt-openssh-askpass
-	lxqt-panel
-	lxqt-qtplugin
-	lxqt-runner
-	lxqt-session
-	lxqt-themes
-	lxqt
-	lximage-qt
-	lxde-icon-themes
-	#lxappearance
-)
-
 multimedia_list+=(
 	ffmpeg
 	flac
@@ -241,15 +220,6 @@ then
 	desktop_environment_list+=(
 		${i3_list[@]}
 		${i3_addons_list[@]}
-	)
-fi
-
-# lxqt
-
-if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "xfce" ]]
-then
-	desktop_environment_list+=(
-		${LXQT_list[@]}
 	)
 fi
 

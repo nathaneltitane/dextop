@@ -89,7 +89,6 @@ do
 			echo -e "-e, --environment    Setup desktop environment and utilities."
 			echo
 			echo -e "                     [ i3 ]"
-			echo -e "                     [ lxqt ]"
 			echo -e "                     [ xfce ] [ Default ]"
 			echo
 			echo -e "-t, --termux         Setup Termux environment and utilities only."
