@@ -115,22 +115,7 @@ Dextop links some of the modified utilities that have been patched under Termux 
 
 **Dextop only loads applications as needed: this helps keep a minimal footprint and your device running as smooth as possible!**
 
-Music, mail, web browsing and gaming activities should preferably be taken care of using native Android applications as they interface with the device's hardware and provide acceleration and other desirable features.
-
-For that purpose, setting up default applications via the use of 'dextop-additions' is highly recommended, and by doing so, 'dextop-additions' transfers the calls through the use of the Activity Manager and opens the relevant Android application for you to use.
-
-
-'dextop-additions' handles activities:
-
-```
-dextop-additions -a <activity>
-```
-
-or takes care of mimetype handles:
-
-```
-dextop-additions -n <handle>
-```
+Music, mail, web browsing and gaming activities should preferably be taken care of using native Android applications as they interface with the device's hardware and provide acceleration and other desirable features. See additons.
 
 ![dextop-additions](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop-additions.png)
 
@@ -278,7 +263,7 @@ Press 'Install' when prompted during the setup to install the display server com
 
 All utilities created for, loaded, and used by desktop contain a help argument. Please refer to the help dialogs before opening a bug report.
 
-### Starting a session:
+### Session start:
 
 To start a session and access the newly generated container, paste or type:
 
@@ -327,7 +312,7 @@ The next login will automatically launch the session using the selection you've 
 container-session -n vnc
 ```
 
-### Stopping a session:
+### Session stop:
 
 To stop the active session using the vnc display server by halting the vnc display server, paste or type:
 
@@ -367,7 +352,7 @@ After running the main update routine as shown, to add Termux X11 server feature
 
 The 'termux-display' utility is part of the newest deployment and sets up the required Android packages to interface with the 'termux-x11' package and provide you with a native display solution on your device, using the available DPI settings and hardware (if acceleration is enabled).
 
-### Update issues:
+### Issues:
 
 High latency internet connectivity or issues with accessing server content (GitHub) may cause some files to malfunction or go corrupt.
 
@@ -390,6 +375,22 @@ Automatic utility updates on login can be disabled as follows:
 ```
 echo '' > "${HOME}"/.dextop/dextop-update
 ```
+# Additions:
+
+For the purpose of keeping the system load slim and light, setting up default applications via the use of 'dextop-additions' is highly recommended, and by doing so, 'dextop-additions' transfers mimetype requests for specific applications through the use of the Activity Manager and opens the relevant Android application for you to use.
+
+'dextop-additions' handles activities:
+
+```
+dextop-additions -a <activity>
+```
+
+or takes care of mimetype handles:
+
+```
+dextop-additions -n <handle>
+```
+
 ### Audio:
 
 **Audio playback is configured and supported through 'pulseaudio', although it is not recommended for use as it can be process and cycle intensive on the device's battery and processor(s).**
@@ -407,7 +408,7 @@ Audio playback can be disabled as follows:
 ```
 echo '' > "${HOME}"/.dextop/dextop-audio
 ```
-### Session / Display termination:
+### Termination:
 
 Automatic session and display shutdown on terminal exit can be enabled as follows:
 
