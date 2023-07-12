@@ -316,25 +316,12 @@ reload_intent () {
 }
 
 backup_intent () {
-	list+=(
-		gzip
-		tar
-	)
-
-	for package in ${list[@]}
-	do
-		if [[ -z $(command -v "${package}") ]]
-		then
-			yes | apt-get install "${package}"
-		fi
-	done
-
-	list=()
-
 	backup_name="dextop-backup"
 	backup_extension="tar.gz"
-	backup_archive="${backup_name}-${stamp}.${backup_extension}"
+
 	backup_directory="${HOME}"
+
+	backup_archive="${backup_name}-${stamp}.${backup_extension}"
 
 	frobulator.inf "Generating backup" "[ ${backup_archive} ]"
 	echo
