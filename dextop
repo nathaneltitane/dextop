@@ -186,6 +186,7 @@ then
 	fi
 fi
 
+
 if [ -z "${utility}" ]
 then
 	utility="all"
@@ -391,13 +392,9 @@ utility_intent () {
 	then
 		frobulator.download get.dxtp.app "${HOME}"/.local/bin "${utility}"
 
-		exit 0
-
 	elif [[ "${utility}" = "all" ]]
 	then
 		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
-
-		exit 0
 
 	else
 		frobulator.err "Unknown utility name" "[ ${utility}]"
@@ -749,36 +746,30 @@ then
 
 	# termux ///////////////////////////////////////////////////////////////////
 
-	if [ -z "${option}" ]          || \
-	   [ "${option}" = "termux" ]  || \
-	   [ "${option}" = "console" ] || \
-	   [ "${option}" = "xfce" ]
+	if [ "${option}" = "update" ]
 	then
-		if [ "${option}" = "update" ]
+		if [ "${update}" = [tT][eE][rR][mM][uU][xX] ]
 		then
-			if [ "${update}" = [tT][eE][rR][mM][uU][xX] ]
+			if [ ! -f "${HOME}"/.dextop/dextop-update-checkpoint ]
 			then
-				if [ ! -f "${HOME}"/.dextop/dextop-update-checkpoint ]
-				then
-					# run update
+				# run update
 
-					"${HOME}"/.local/bin/termux-update
+				"${HOME}"/.local/bin/termux-update
 
-					frobulator.file "${HOME}"/.dextop dextop-update-checkpoint
-				fi
+				frobulator.file "${HOME}"/.dextop dextop-update-checkpoint
 			fi
 		fi
+	fi
 
-		if [ ! -f "${HOME}"/.dextop/dextop-termux-checkpoint ]
-		then
-			# run termux setup utilities
+	if [ ! -f "${HOME}"/.dextop/dextop-termux-checkpoint ]
+	then
+		# run termux setup utilities
 
-			"${HOME}"/.local/bin/termux-storage
-			"${HOME}"/.local/bin/termux-repositories
-			"${HOME}"/.local/bin/termux-packages
+		"${HOME}"/.local/bin/termux-storage
+		"${HOME}"/.local/bin/termux-repositories
+		"${HOME}"/.local/bin/termux-packages
 
-			frobulator.file "${HOME}"/.dextop dextop-termux-checkpoint
-		fi
+		frobulator.file "${HOME}"/.dextop dextop-termux-checkpoint
 	fi
 
 	# container ////////////////////////////////////////////////////////////////
