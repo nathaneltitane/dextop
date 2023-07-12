@@ -774,32 +774,25 @@ then
 
 	# container ////////////////////////////////////////////////////////////////
 
-	if [ -z "${option}" ]            || \
-	   [ "${option}" = "container" ] || \
-	   [ "${option}" = "console" ]   || \
-	   [ "${option}" = "xfce" ]
+	if [ ! -f "${HOME}"/.dextop/dextop-image-checkpoint ]
 	then
+		"${HOME}"/.local/bin/container-image
 
-		if [ ! -f "${HOME}"/.dextop/dextop-image-checkpoint ]
-		then
-			"${HOME}"/.local/bin/container-image
+		frobulator.file "${HOME}"/.dextop dextop-image-checkpoint
+	fi
 
-			frobulator.file "${HOME}"/.dextop dextop-image-checkpoint
-		fi
+	if [ ! -f "${HOME}"/.dextop/dextop-container-checkpoint ]
+	then
+		# run container setup utilities
 
-		if [ ! -f "${HOME}"/.dextop/dextop-container-checkpoint ]
-		then
-			# run container setup utilities
+		container_setup
 
-			container_setup
+		container_setup "${HOME}"/.local/bin/container-expansion
+		container_setup "${HOME}"/.local/bin/container-repositories
+		container_setup "${HOME}"/.local/bin/container-packages
+		container_setup "${HOME}"/.local/bin/container-user
 
-			container_setup "${HOME}"/.local/bin/container-expansion
-			container_setup "${HOME}"/.local/bin/container-repositories
-			container_setup "${HOME}"/.local/bin/container-packages
-			container_setup "${HOME}"/.local/bin/container-user
-
-			frobulator.file "${HOME}"/.dextop dextop-container-checkpoint
-		fi
+		frobulator.file "${HOME}"/.dextop dextop-container-checkpoint
 	fi
 
 	# additions
