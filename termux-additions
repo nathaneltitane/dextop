@@ -96,7 +96,7 @@ echo
 if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 then
 	# process update
-S
+
 	packages_list+=(
 		termux-api
 		termux-gui
