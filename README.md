@@ -245,9 +245,17 @@ Dextop automatically detects and processes any external media mounts, adds them 
 
 Press 'Allow' when prompted during the setup to grant the storage permission.
 
-**Display:**
+**Additions:**
 
 Press 'Install' when prompted during the setup to install the display server components.
+
+### Additions:
+
+The 'termux-additions' utility is part of the newest deployment and sets up the required Android packages to interface with the main Termux application, including Termux API, Termux GUI and Termux:X11.
+
+These additions are fetched directly from their respective Termux project GitHub releases page: any previously installed version should be removed to not inherit any conflicting packaege signatures that may contribute to unexpected issues.
+
+The display server, Termux:X11 will interface with the required 'termux-x11' package and provides Dextop with a native display solution on the host device, using the available DPI settings and running it through the hardware platform (with possibility of acceleration when it is compiled and enabled).
 
 ### Usage:
 
@@ -313,14 +321,6 @@ container-session -x
 To log out, press Ctrl+D or type ```'logout'``` or ```'exit'``` for the session to immediately stop the vnc server and exit:
 
 Depending on the shell level in use at the time the command is executed, the container exits back to the Termux shell (recognizable by the green username prompt), or to the Android home screen.
-
-### Additions:
-
-The 'termux-additions' utility is part of the newest deployment and sets up the required Android packages to interface with the main Termux application, including Termux API, Termux GUI and Termux:X11.
-
-These additions are fetched directly from their respective Termux project GitHub releases page: any previously installed version should be removed to not inherit any conflicting packaege signatures that may contribute to unexpected issues.
-
-The display server, Termux:X11 will interface with the required 'termux-x11' package and provides Dextop with a native display solution on the host device, using the available DPI settings and running it through the hardware platform (with possibility of acceleration when it is compiled and enabled).
 
 ### Utilities:
 
