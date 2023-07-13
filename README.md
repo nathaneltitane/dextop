@@ -187,13 +187,13 @@ In either case, you can think of the experience as setting up a VM (virtual mach
 
 For the best possible experience, make sure to have:
 
-- A modern Android device with 64 bit ARM processor (Android 7.0 or above: Termux limitation - Avoid Android 11/12/13 when and if possible: read more regarding the [Phantom Process Killer](https://issuetracker.google.com/issues/205156966))
+- **A modern Android device equipped with a 64 bit ARM processor** (Android 7.0 or above: Termux limitation - Avoid Android 11/12/13 when and if possible: read more regarding the [Phantom Process Killer](https://issuetracker.google.com/issues/205156966))
+- **Medium to high speed internet connectivity** (wifi or other: for setup, updates and additional package downloads)
 - Approximately 4GB in free storage on the device for symmetric setup (Termux and distribution container)
 - A mouse (bluetooth or other)
 - A keyboard (bluetooth or other)
 - A power source other than your battery (for extended work periods and performance requirements: Samsung DeX limitation)
 - A monitor (highly recommended for phones and small devices)
-- Medium to high speed internet connectivity (wifi or other: for setup, updates and additional package downloads)
 
 ### Software requirements:
 
@@ -207,8 +207,7 @@ To enable this permission, navigate into Settings → Security and Privacy → I
 
 To get Dextop set up, install the following packages on your android device:
 
-- [Termux](https://f-droid.org/en/packages/com.termux/ "Termux by Fredrik Fornwall")
-- [Termux API](https://f-droid.org/en/packages/com.termux.api/ "Termux API by Fredrik Fornwall")
+- [Termux](https://github.com/termux/termux-app/releases/download/v0.118.0/termux-app_v0.118.0+github-debug_arm64-v8a.apk "Termux by Fredrik Fornwall")
 - A VNC viewer application with full screen or immersive capabillities for a better experience such as:
    - [Remotix](https://play.google.com/store/apps/details?id=com.nulana.android.remotix "Remotix Remote Desktop by Nulana")
    - [VNC Viewer ](https://play.google.com/store/apps/details?id=com.realvnc.viewer.android "VNC Viewer by RealVNC Ltd.")

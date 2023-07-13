@@ -121,5 +121,5 @@ then
 	packages_list=()
 fi
 
-frobulator.countdown 15 "Continuing" "[ ${script} ]"
+frobulator.countdown 25 "Continuing" "[ ${script} ]"
 echo
