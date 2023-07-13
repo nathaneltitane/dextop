@@ -555,7 +555,7 @@ shell_intent () {
 }
 
 backgrounds_intent () {
-	# load background(s)
+	# load backgrounds
 
 	backgrounds_list=(
 		dextop-black.svg
