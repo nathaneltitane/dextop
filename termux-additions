@@ -105,6 +105,7 @@ then
 		termux-gui
 		termux-x11-shell-loader.apk
 		termux-x11.apk
+		termux-styling.apk
 	)
 
 	for package in ${packages_list[@]}
