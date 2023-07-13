@@ -71,16 +71,13 @@ open_intent () {
 
 # notice
 
-frobulator.wrn "Termux:X11 is still in early development."
+frobulator.inf "This utility will set up Termux project additions"
 echo
 
-frobulator.msg "Visit the following page for more information and help:"
+frobulator.inf "These additions are fetched directly from their respective GitHub project release pages."
 echo
 
-frobulator.inf "https://github.com/termux/termux-x11"
-echo
-
-frobulator.wrn "'Install Unknown apps' permission must be enabled for Termux:"
+frobulator.wrn "'Install Unknown Apps' permission must be enabled for Termux:"
 echo
 
 frobulator.wrn "Enable under Settings > Security and Privacy > Install unknown apps > Termux"
@@ -99,7 +96,7 @@ echo
 if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 then
 	# process update
-
+S
 	packages_list+=(
 		termux-api
 		termux-gui
