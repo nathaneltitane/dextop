@@ -369,7 +369,7 @@ utility_intent () {
 		termux-repositories
 		termux-update
 		termux-storage
-		termux-display
+		termux-additions
 		container-expansion
 		container-image
 		container-packages
@@ -759,7 +759,7 @@ then
 		"${HOME}"/.local/bin/termux-storage
 		"${HOME}"/.local/bin/termux-repositories
 		"${HOME}"/.local/bin/termux-packages
-		"${HOME}"/.local/bin/termux-display
+		"${HOME}"/.local/bin/termux-additions
 
 		frobulator.file "${HOME}"/.dextop dextop-termux-checkpoint
 	fi

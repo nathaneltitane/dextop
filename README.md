@@ -8,16 +8,7 @@
 
 ### [ NOTICE // 07-11-2023 ]
 
-- Fixed automatic backup assertions,update flags and  session requirements!
-
-### [ NOTICE // 07-10-2023 ]
-
-- Added ReadMe specifics regarding the newly implemented 'dextop-additions' utility!
-- Fixed automatic session logout feature to look for Termux:X11 components!
-
-### [ NOTICE // 07-04-2023 ]
-
-- **Added 'dextop-additions' utility as a single, monolithic replacement to the separate activity manager instance scripts that handle Android activities through the Dextop container!**
+- Fixed automatic backup assertions, update flags and session requirements!
 
 ### [ NOTICE // 07-01-2023 ]
 
@@ -350,7 +341,7 @@ curl -s -L run.dxtp.app > dextop && bash dextop -u utilities
 
 After running the main update routine as shown, to add Termux X11 server features, run 'termux-packages' followed by 'termux-display' and follow instructions as they appear.
 
-The 'termux-display' utility is part of the newest deployment and sets up the required Android packages to interface with the 'termux-x11' package and provide you with a native display solution on your device, using the available DPI settings and hardware (if acceleration is enabled).
+The 'termux-additions' utility is part of the newest deployment and sets up the required Android packages to interface with the 'termux-x11' package and provide you with a native display solution on your device, using the available DPI settings and hardware (if acceleration is enabled).
 
 ### Issues:
 

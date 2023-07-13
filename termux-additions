@@ -91,7 +91,7 @@ echo
 
 frobulator.separate
 
-frobulator.ask "Install android native X11 display support?"
+frobulator.ask "Install Termux additons?"
 
 read reply
 echo
@@ -101,6 +101,8 @@ then
 	# process update
 
 	packages_list+=(
+		termux-api
+		termux-gui
 		termux-x11-shell-loader.apk
 		termux-x11.apk
 	)
