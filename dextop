@@ -756,10 +756,10 @@ then
 	then
 		# run termux setup utilities
 
+		"${HOME}"/.local/bin/termux-additions
 		"${HOME}"/.local/bin/termux-storage
 		"${HOME}"/.local/bin/termux-repositories
 		"${HOME}"/.local/bin/termux-packages
-		"${HOME}"/.local/bin/termux-additions
 
 		frobulator.file "${HOME}"/.dextop dextop-termux-checkpoint
 	fi
