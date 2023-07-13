@@ -319,9 +319,9 @@ Depending on the shell level in use at the time the command is executed, the con
 
 The 'termux-additions' utility is part of the newest deployment and sets up the required Android packages to interface with the main Termux application, including Termux API, Termux GUI and Termux:X11.
 
-These additions are fetched directly from the Termux project github: any previously installed version should be removed to not inherit any conflicting packaege signatures that may contribute to unexpected issues.
+These additions are fetched directly from their respective Termux project GitHub releases page: any previously installed version should be removed to not inherit any conflicting packaege signatures that may contribute to unexpected issues.
 
-The display server, Termux:X11 interfaces with the 'termux-x11' package and provides Dextop with a native display solution on the host device, using the available DPI settings and running it through the hardware platform (with possibility of acceleration when it is compiled and enabled).
+The display server, Termux:X11 will interface with the required 'termux-x11' package and provides Dextop with a native display solution on the host device, using the available DPI settings and running it through the hardware platform (with possibility of acceleration when it is compiled and enabled).
 
 ### Utilities:
 
