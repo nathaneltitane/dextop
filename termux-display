@@ -113,10 +113,10 @@ then
 		echo
 
 		open_intent "${PREFIX}"/tmp/"${package}"
-
-		wait
 	done
+
+	packages_list=()
 fi
 
-frobulator.countdown 10 "Continuing" "[ ${script} ]"
+frobulator.countdown 15 "Continuing" "[ ${script} ]"
 echo
