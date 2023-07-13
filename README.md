@@ -249,7 +249,7 @@ Press 'Allow' when prompted during the setup to grant the storage permission.
 
 Press 'Install' when prompted during the setup to install the display server components.
 
-### Additions:
+### Additional packages:
 
 The 'termux-additions' utility is part of the newest deployment and sets up the required Android packages to interface with the main Termux application, including Termux API, Termux GUI and Termux:X11.
 
