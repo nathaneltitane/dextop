@@ -98,8 +98,8 @@ then
 	# process update
 
 	packages_list+=(
-		termux-api
-		termux-gui
+		termux-api.apk
+		termux-gui.apk
 		termux-x11-shell-loader.apk
 		termux-x11.apk
 		termux-styling.apk
