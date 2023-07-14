@@ -731,14 +731,14 @@ then
 
 	# termux ///////////////////////////////////////////////////////////////////
 
+	# termux update
+
 	if [ "${option}" = "update" ]
 	then
 		if [ "${update}" = [tT][eE][rR][mM][uU][xX] ]
 		then
 			if [ ! -f "${HOME}"/.dextop/dextop-termux-update-checkpoint ]
 			then
-				# run update
-
 				"${HOME}"/.local/bin/termux-update
 
 				frobulator.file "${HOME}"/.dextop dextop-termux-update-checkpoint
