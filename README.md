@@ -6,9 +6,13 @@
 
 ---
 
+### [ NOTICE // 07-13-2023 ]
+
+- All setup issues debugged and fixed, streamlined assertions and default options!
+
 ### [ NOTICE // 07-11-2023 ]
 
-- Fixed automatic backup assertions, update flags and session requirements!
+- Fixed automatic backup assertions, updated option flags and session requirements!
 
 ### [ NOTICE // 07-01-2023 ]
 
