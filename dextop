@@ -336,7 +336,7 @@ backup_intent () {
 	echo
 }
 
-settings_intent () {
+preferences_intent () {
 	# termux settings and properties
 
 	settings_list+=(
@@ -702,7 +702,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-preferences-checkpoint ]
 	then
-		settings_intent
+		preferences_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-preferences-checkpoint
 	fi
