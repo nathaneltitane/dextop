@@ -941,6 +941,13 @@ then
 	frobulator.file "${HOME}"/.dextop dextop-setup-checkpoint
 fi
 
+# result ///////////////////////////////////////////////////////////////////////
+
+frobulator.result "${HOME}"/.dextop dextop-setup-checkpoint dextop-setup
+echo
+
+frobulator.timeout 5
+
 # clear ////////////////////////////////////////////////////////////////////////
 
 frobulator.clear
