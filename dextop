@@ -735,58 +735,114 @@ then
 	then
 		if [ "${update}" = [tT][eE][rR][mM][uU][xX] ]
 		then
-			if [ ! -f "${HOME}"/.dextop/dextop-update-checkpoint ]
+			if [ ! -f "${HOME}"/.dextop/dextop-termux-update-checkpoint ]
 			then
 				# run update
 
 				"${HOME}"/.local/bin/termux-update
 
-				frobulator.file "${HOME}"/.dextop dextop-update-checkpoint
+				frobulator.file "${HOME}"/.dextop dextop-termux-update-checkpoint
 			fi
 		fi
 	fi
 
-	if [ ! -f "${HOME}"/.dextop/dextop-termux-checkpoint ]
-	then
-		# run termux setup utilities
+	# termux additions
 
+	if [ ! -f "${HOME}"/.dextop/dextop-termux-additions-checkpoint ]
+	then
 		"${HOME}"/.local/bin/termux-additions
+
+		frobulator.file "${HOME}"/.dextop dextop-termux-additions-checkpoint
+	fi
+
+	# termux storage
+
+	if [ ! -f "${HOME}"/.dextop/dextop-termux-storage-checkpoint ]
+	then
 		"${HOME}"/.local/bin/termux-storage
+
+		frobulator.file "${HOME}"/.dextop dextop-termux-storage-checkpoint
+	fi
+
+	# termux repositories
+
+	if [ ! -f "${HOME}"/.dextop/dextop-termux-repositories-checkpoint ]
+	then
 		"${HOME}"/.local/bin/termux-repositories
+
+	frobulator.file "${HOME}"/.dextop dextop-termux-repositories-checkpoint
+	fi
+
+	# termux packages
+
+	if [ ! -f "${HOME}"/.dextop/dextop-termux-packages-checkpoint ]
+	then
 		"${HOME}"/.local/bin/termux-packages
 
-		frobulator.file "${HOME}"/.dextop dextop-termux-checkpoint
+		frobulator.file "${HOME}"/.dextop dextop-termux-packages-checkpoint
 	fi
 
 	# container ////////////////////////////////////////////////////////////////
 
-	if [ ! -f "${HOME}"/.dextop/dextop-image-checkpoint ]
+	# container image
+
+	if [ ! -f "${HOME}"/.dextop/container-image-checkpoint ]
 	then
 		"${HOME}"/.local/bin/container-image
 
-		frobulator.file "${HOME}"/.dextop dextop-image-checkpoint
+		frobulator.file "${HOME}"/.dextop container-image-checkpoint
 	fi
 
-	if [ ! -f "${HOME}"/.dextop/dextop-container-checkpoint ]
-	then
-		# run container setup utilities
+	# container expansion
 
+	if [ ! -f "${HOME}"/.dextop/dextop-container-expansion-checkpoint ]
+	then
 		container_setup
 
 		container_setup "${HOME}"/.local/bin/container-expansion
+
+		frobulator.file "${HOME}"/.dextop dextop-container-expansion-checkpoint
+	fi
+
+	# container repositories
+
+	if [ ! -f "${HOME}"/.dextop/dextop-container-repositories-checkpoint ]
+	then
+		container_setup
+
 		container_setup "${HOME}"/.local/bin/container-repositories
+
+		frobulator.file "${HOME}"/.dextop dextop-container-repositories-checkpoint
+	fi
+
+	# container packages
+
+	if [ ! -f "${HOME}"/.dextop/dextop-container-packages-checkpoint ]
+	then
+		container_setup
+
 		container_setup "${HOME}"/.local/bin/container-packages
+
+		frobulator.file "${HOME}"/.dextop dextop-container-packages-checkpoint
+	fi
+
+	# container user
+
+	if [ ! -f "${HOME}"/.dextop/dextop-container-user-checkpoint ]
+	then
+		container_setup
+
 		container_setup "${HOME}"/.local/bin/container-user
 
-		frobulator.file "${HOME}"/.dextop dextop-container-checkpoint
+		frobulator.file "${HOME}"/.dextop dextop-container-user-checkpoint
 	fi
+
+	# dextop ///////////////////////////////////////////////////////////////////
 
 	# additions
 
 	if [ ! -f "${HOME}"/.dextop/dextop-additions-checkpoint ]
 	then
-		# load additions
-
 		additions_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-additions-checkpoint
@@ -796,8 +852,6 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-shell-checkpoint ]
 	then
-		# load shell configurations
-
 		shell_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-shell-checkpoint
@@ -807,8 +861,6 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-bookmarks-checkpoint ]
 	then
-		# load bookmark labels
-
 		labels_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-bookmarks-checkpoint
@@ -879,7 +931,7 @@ then
 		frobulator.file "${HOME}"/.dextop dextop-themes-checkpoint
 	fi
 
-	# move setup
+	# setup move
 
 	if [ ! -f "${HOME}"/.dextop/dextop-move-checkpoint ]
 	then
