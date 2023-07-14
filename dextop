@@ -566,12 +566,6 @@ backgrounds_intent () {
 
 	frobulator.download get.dxtp.app "${HOME}"/.dextop ${backgrounds_list[@]}
 
-	# link to backgrounds directories
-
-	frobulator.link "${HOME}"/.dextop "${ROOT}"/usr/share/backgrounds/dextop ${backgrounds_list[@]}
-
-	frobulator.link "${HOME}"/.dextop "${PREFIX}"/share/backgrounds/dextop ${backgrounds_list[@]}
-
 	backgrounds_list=()
 }
 
