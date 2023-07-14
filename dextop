@@ -465,7 +465,7 @@ directories_intent () {
 	directories_list=()
 }
 
-labels_intent () {
+bookmarks_intent () {
 	# generate file browser bookmark labels
 
 	directories_list=(
@@ -685,12 +685,12 @@ fi
 
 if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
 then
+	# dextop ///////////////////////////////////////////////////////////////////
+
 	# backup
 
 	if [ ! -f "${HOME}"/.dextop/dextop-backup-checkpoint ]
 	then
-		# run backup
-
 		backup_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-backup-checkpoint
@@ -700,8 +700,6 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-preferences-checkpoint ]
 	then
-		# load settings
-
 		settings_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-preferences-checkpoint
@@ -711,8 +709,6 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-utilities-checkpoint ]
 	then
-		# load utilities
-
 		utility_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-utilities-checkpoint
@@ -722,11 +718,74 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-directories-checkpoint ]
 	then
-		# generate directories
-
 		directories_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-directories-checkpoint
+	fi
+
+	# additions
+
+	if [ ! -f "${HOME}"/.dextop/dextop-additions-checkpoint ]
+	then
+		additions_intent
+
+		frobulator.file "${HOME}"/.dextop dextop-additions-checkpoint
+	fi
+
+	# shell
+
+	if [ ! -f "${HOME}"/.dextop/dextop-shell-checkpoint ]
+	then
+		shell_intent
+
+		frobulator.file "${HOME}"/.dextop dextop-shell-checkpoint
+	fi
+
+	# backgrounds
+
+	if [ ! -f "${HOME}"/.dextop/dextop-backgrounds-checkpoint ]
+	then
+		backgrounds_intent
+
+		frobulator.file "${HOME}"/.dextop dextop-backgrounds-checkpoint
+	fi
+
+	# automatic login
+
+	if [ ! -f "${HOME}"/.dextop/dextop-login-checkpoint ]
+	then
+		frobulator.file "${HOME}"/.dextop dextop-login
+
+		frobulator.write login "${HOME}"/.dextop dextop-login
+
+		frobulator.file "${HOME}"/.dextop dextop-login-checkpoint
+	fi
+
+	# automatic logout
+
+	if [ ! -f "${HOME}"/.dextop/dextop-logout-checkpoint ]
+	then
+		frobulator.file "${HOME}"/.dextop dextop-logout
+
+		frobulator.file "${HOME}"/.dextop dextop-logout-checkpoint
+	fi
+
+	# automatic update
+
+	if [ ! -f "${HOME}"/.dextop/dextop-update-checkpoint ]
+	then
+		frobulator.file "${HOME}"/.dextop dextop-update
+
+		frobulator.file "${HOME}"/.dextop dextop-update-checkpoint
+	fi
+
+	# audio
+
+	if [ ! -f "${HOME}"/.dextop/dextop-audio-checkpoint ]
+	then
+		frobulator.file "${HOME}"/.dextop dextop-audio
+
+		frobulator.file "${HOME}"/.dextop dextop-audio-checkpoint
 	fi
 
 	# termux ///////////////////////////////////////////////////////////////////
@@ -839,78 +898,13 @@ then
 
 	# dextop ///////////////////////////////////////////////////////////////////
 
-	# additions
-
-	if [ ! -f "${HOME}"/.dextop/dextop-additions-checkpoint ]
-	then
-		additions_intent
-
-		frobulator.file "${HOME}"/.dextop dextop-additions-checkpoint
-	fi
-
-	# shell
-
-	if [ ! -f "${HOME}"/.dextop/dextop-shell-checkpoint ]
-	then
-		shell_intent
-
-		frobulator.file "${HOME}"/.dextop dextop-shell-checkpoint
-	fi
-
 	# bookmarks
 
 	if [ ! -f "${HOME}"/.dextop/dextop-bookmarks-checkpoint ]
 	then
-		labels_intent
+		bookmarks_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-bookmarks-checkpoint
-	fi
-
-	# login
-
-	if [ ! -f "${HOME}"/.dextop/dextop-login-checkpoint ]
-	then
-		frobulator.file "${HOME}"/.dextop dextop-login
-
-		frobulator.write login "${HOME}"/.dextop dextop-login
-
-		frobulator.file "${HOME}"/.dextop dextop-login-checkpoint
-	fi
-
-	# logout
-
-	if [ ! -f "${HOME}"/.dextop/dextop-logout-checkpoint ]
-	then
-		frobulator.file "${HOME}"/.dextop dextop-logout
-
-		frobulator.file "${HOME}"/.dextop dextop-logout-checkpoint
-	fi
-
-	# update
-
-	if [ ! -f "${HOME}"/.dextop/dextop-update-checkpoint ]
-	then
-		frobulator.file "${HOME}"/.dextop dextop-update
-
-		frobulator.file "${HOME}"/.dextop dextop-update-checkpoint
-	fi
-
-	# audio
-
-	if [ ! -f "${HOME}"/.dextop/dextop-audio-checkpoint ]
-	then
-		frobulator.file "${HOME}"/.dextop dextop-audio
-
-		frobulator.file "${HOME}"/.dextop dextop-audio-checkpoint
-	fi
-
-	# backgrounds
-
-	if [ ! -f "${HOME}"/.dextop/dextop-backgrounds-checkpoint ]
-	then
-		backgrounds_intent
-
-		frobulator.file "${HOME}"/.dextop dextop-backgrounds-checkpoint
 	fi
 
 	# icons
@@ -940,7 +934,7 @@ then
 		frobulator.file "${HOME}"/.dextop dextop-move-checkpoint
 	fi
 
-	# checkpoint
+	# setup checkpoint
 
 	frobulator.file "${HOME}"/.dextop dextop-setup-checkpoint
 fi
