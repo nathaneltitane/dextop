@@ -943,7 +943,7 @@ fi
 
 # result ///////////////////////////////////////////////////////////////////////
 
-frobulator.result "${HOME}"/.dextop dextop-setup-checkpoint dextop-setup
+frobulator.result "${HOME}"/.dextop dextop-setup-checkpoint "dextop setup"
 echo
 
 frobulator.timeout 5
