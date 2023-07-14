@@ -358,6 +358,8 @@ settings_intent () {
 }
 
 dextop_intent () {
+	# load dextop deployment script
+
 	curl -s -L run.dxtp.app > "${HOME}"/.local/bin/dextop
 }
 
@@ -466,7 +468,7 @@ directories_intent () {
 }
 
 bookmarks_intent () {
-	# generate file browser bookmark labels
+	# generate file browser bookmarks
 
 	directories_list=(
 		"${PREFIX}"/cnt
@@ -555,7 +557,7 @@ shell_intent () {
 }
 
 backgrounds_intent () {
-	# load backgrounds
+	# load background files
 
 	backgrounds_list=(
 		dextop-black.svg
@@ -581,13 +583,13 @@ icons_intent () {
 		hicolor
 	)
 
-	# keep icons selections
+	# keep icon theme selections
 
 	frobulator.keep "${PREFIX}"/share/icons ${icons_list[@]}
 
 	icons_list=()
 
-	# link icons directories
+	# link icons theme directories
 
 	frobulator.link "${PREFIX}"/share "${HOME}" icons .icons
 }
@@ -602,13 +604,13 @@ themes_intent () {
 		Arc-Lighter
 	)
 
-	# keep themes selections
+	# keep theme selections
 
 	frobulator.keep "${ROOT}"/usr/share/themes ${files_list[@]}
 
 	files_list=()
 
-	# link themes directories
+	# link theme directories
 
 	frobulator.link "${ROOT}"/usr/share "${HOME}" themes .themes
 }
