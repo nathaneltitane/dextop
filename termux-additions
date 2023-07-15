@@ -103,6 +103,7 @@ then
 		termux-x11-shell-loader.apk
 		termux-x11.apk
 		termux-styling.apk
+		termux-tasker.apk
 	)
 
 	for package in ${packages_list[@]}
