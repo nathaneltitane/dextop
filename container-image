@@ -363,7 +363,7 @@ image_extract () {
 						--exclude='proc'		\
 						--exclude='sys'			\
 						--exclude='system' 		\
-							--directory="${2}" 2> /dev/null
+							--directory="${2}"	2> /dev/null
 	}
 
 	core_extract () {
@@ -381,7 +381,7 @@ image_extract () {
 								--exclude='proc'		\
 								--exclude='sys'			\
 								--exclude='system'		\
-									--directory="${2}" 2> /dev/null
+									--directory="${2}"	2> /dev/null
 
 	}
 
