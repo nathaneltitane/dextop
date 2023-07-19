@@ -174,11 +174,6 @@ then
 			session="i3"
 		fi
 
-		if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "lxqt" ]]
-		then
-			session="lxqt-session"
-		fi
-
 		if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "xfce" ]]
 		then
 			session="xfce4-session"

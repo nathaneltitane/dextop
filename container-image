@@ -350,20 +350,20 @@ image_extract () {
 	container_extract () {
 		# cloud container/docker images
 
-		tar 									\
-			--extract							\
-			--delay-directory-restore			\
-			--preserve-permissions				\
-				--file="${1}"					\
-						--strip-components='1'	\
-						--exclude='VERSION'		\
-						--exclude='json'		\
-						--exclude='boot'		\
-						--exclude='dev'			\
-						--exclude='proc'		\
-						--exclude='sys'			\
-						--exclude='system' 		\
-							--directory="${2}"	2> /dev/null
+		tar 											\
+			--extract									\
+			--delay-directory-restore					\
+			--preserve-permissions						\
+				--file="${1}"							\
+						--strip-components='1'			\
+						--exclude='VERSION'				\
+						--exclude='json'				\
+						--exclude='boot'				\
+						--exclude='dev'					\
+						--exclude='proc'				\
+						--exclude='sys'					\
+						--exclude='system' 				\
+							--directory="${2}"			2> /dev/null
 	}
 
 	core_extract () {
