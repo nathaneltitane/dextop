@@ -193,7 +193,7 @@ fi
 
 if [ -z "${ROOT}" ]
 then
-	ROOT=$(find "${PREFIX}"/cnt/ -maxdepth 2 -type d | tail -n 1)
+	ROOT=("${PREFIX}"/cnt/*/*)
 fi
 
 # functions ////////////////////////////////////////////////////////////////////
@@ -203,7 +203,7 @@ container_setup () {
 
 	if [ $# -eq 0 ]
 	then
-		ROOT=$(find "${PREFIX}"/cnt/ -maxdepth 2 -type d | tail -n 1)
+		ROOT=("${PREFIX}"/cnt/*/*)
 
 		export ROOT="${ROOT}"
 
@@ -832,6 +832,15 @@ then
 		"${HOME}"/.local/bin/container-image
 
 		frobulator.file "${HOME}"/.dextop dextop-container-image-checkpoint
+	fi
+
+	# container initialization
+
+	if [ ! -f "${HOME}"/.dextop/dextop-container-initialization-checkpoint ]
+	then
+		container_setup
+
+		frobulator.file "${HOME}"/.dextop dextop-container-initialization-checkpoint
 	fi
 
 	# container expansion
