@@ -84,7 +84,7 @@ then
 
 	storage_intent
 
-	frobulator.countdown 3 "Continuing" "[ ${script} ]"
+	frobulator.countdown 5 "Continuing" "[ ${script} ]"
 	echo
 
 else
@@ -147,6 +147,7 @@ fi
 # circumvents /storage access issues and DAC policy (Android 11+)
 
 external_storage=$(cat /proc/mounts | sed -r '/[A0-Z9][-][A0-Z9]/!d' | grep "/storage" | cut -d ' ' -f 2)
+
 uuid="${external_storage/\/storage\//}"
 
 if [ ! -z "${external_storage}" ]
