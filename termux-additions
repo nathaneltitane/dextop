@@ -116,6 +116,7 @@ then
 		open_intent "${PREFIX}"/tmp/"${package}"
 
 		sleep 10
+	done
 
 	packages_list=()
 fi
