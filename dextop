@@ -762,8 +762,6 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-login-checkpoint ]
 	then
-		frobulator.file "${HOME}"/.dextop dextop-login
-
 		frobulator.write login "${HOME}"/.dextop dextop-login
 
 		frobulator.file "${HOME}"/.dextop dextop-login-checkpoint
@@ -822,7 +820,7 @@ then
 	then
 		"${HOME}"/.local/bin/termux-repositories
 
-	frobulator.file "${HOME}"/.dextop dextop-termux-repositories-checkpoint
+		frobulator.file "${HOME}"/.dextop dextop-termux-repositories-checkpoint
 	fi
 
 	# termux packages
