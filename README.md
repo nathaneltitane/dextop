@@ -2,23 +2,13 @@
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/donate/?hosted_button_id=2WZT7PCW3XDX6)
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 07-10-2023 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 07-19-2023 ]
 
 ---
 
-### [ NOTICE // 07-13-2023 ]
+### [ NOTICE // 07-19-2023 ]
 
-- All setup issues debugged and fixed, streamlined assertions and default options!
-
-### [ NOTICE // 07-11-2023 ]
-
-- Fixed automatic backup assertions, updated option flags and session requirements!
-
-### [ NOTICE // 07-01-2023 ]
-
-- **Termux:X11 display support now fully integrated and registered as the default display method.**
-- **Utilities update routine now distinguishes between main deployment script and dependant utilities versus shell scripts update!**
-- **Utilities can be updated in bulk or individually.**
+- All setup issues debugged and fixed, streamlined assertions and default options, fixed container ROOT assertion issues using conatiner setup initialization!
 
 ### Welcome to [Dextop](https://dextop.app)
 
@@ -449,7 +439,7 @@ Should you suspect any issues or errors, please provide a copy of those files wh
 
 ---
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 07-10-2023 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 07-19-2023 ]
 
 ### Enjoying Dextop? Buy me a coffee to show your appreciation!
 
