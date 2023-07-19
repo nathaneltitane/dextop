@@ -193,10 +193,7 @@ fi
 
 if [ -z "${ROOT}" ]
 then
-	if [ -d "${PREFIX}"/cnt ]
-	then
-		ROOT=$(find "${PREFIX}"/cnt/ -maxdepth 2 -type d | tail -n 1)
-	fi
+	ROOT=$(find "${PREFIX}"/cnt/ -maxdepth 2 -type d | tail -n 1)
 fi
 
 # functions ////////////////////////////////////////////////////////////////////
@@ -206,14 +203,11 @@ container_setup () {
 
 	if [ $# -eq 0 ]
 	then
-		if [ -d "${PREFIX}"/cnt ]
-		then
-			ROOT=$(find "${PREFIX}"/cnt/ -maxdepth 2 -type d | tail -n 1)
+		ROOT=$(find "${PREFIX}"/cnt/ -maxdepth 2 -type d | tail -n 1)
 
-			export ROOT="${ROOT}"
+		export ROOT="${ROOT}"
 
-			return
-		fi
+		return
 	fi
 
 	# run container setup commands through 'proot'
