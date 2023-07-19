@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="06-29-2023"
+version="07-19-2023"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -115,8 +115,7 @@ then
 
 		open_intent "${PREFIX}"/tmp/"${package}"
 
-		sleep 5
-	done
+		sleep 10
 
 	packages_list=()
 fi
