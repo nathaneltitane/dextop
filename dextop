@@ -193,7 +193,10 @@ fi
 
 if [ -z "${ROOT}" ]
 then
-	ROOT=$(find "${PREFIX}"/cnt/ -maxdepth 2 -type d | tail -n 1)
+	if [ -d "${PREFIX}"/cnt ]
+	then
+		ROOT=$(find "${PREFIX}"/cnt/ -maxdepth 2 -type d | tail -n 1)
+	fi
 fi
 
 # functions ////////////////////////////////////////////////////////////////////
@@ -203,11 +206,14 @@ container_setup () {
 
 	if [ $# -eq 0 ]
 	then
-		ROOT=$(find "${PREFIX}"/cnt/ -maxdepth 2 -type d | tail -n 1)
+		if [ -d "${PREFIX}"/cnt ]
+		then
+			ROOT=$(find "${PREFIX}"/cnt/ -maxdepth 2 -type d | tail -n 1)
 
-		export ROOT="${ROOT}"
+			export ROOT="${ROOT}"
 
-		return
+			return
+		fi
 	fi
 
 	# run container setup commands through 'proot'
@@ -740,15 +746,6 @@ then
 		frobulator.file "${HOME}"/.dextop dextop-additions-checkpoint
 	fi
 
-	# shell
-
-	if [ ! -f "${HOME}"/.dextop/dextop-shell-checkpoint ]
-	then
-		shell_intent
-
-		frobulator.file "${HOME}"/.dextop dextop-shell-checkpoint
-	fi
-
 	# backgrounds
 
 	if [ ! -f "${HOME}"/.dextop/dextop-backgrounds-checkpoint ]
@@ -880,6 +877,15 @@ then
 	fi
 
 	# dextop ///////////////////////////////////////////////////////////////////
+
+	# shell
+
+	if [ ! -f "${HOME}"/.dextop/dextop-shell-checkpoint ]
+	then
+		shell_intent
+
+		frobulator.file "${HOME}"/.dextop dextop-shell-checkpoint
+	fi
 
 	# bookmarks
 
