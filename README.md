@@ -47,7 +47,7 @@ It is highly recommended to install Dextop on a fresh Termux instance or profile
 
 **Backing up your existing setup by following the [Termux backup recommendations](https://wiki.termux.com/wiki/Backing_up_Termux) is a must as the Dextop project will not be held responsible for any overrides, file corruptions or deletions caused by the installation and configuration process - You Have Been Warned.**
 
-A backup routine has also been built that archives the user'ss home directory before proceeding, regardless, to ensure some kind of safety.
+A backup routine has also been built that archives the user's home directory before proceeding, regardless, to ensure some kind of safety.
 
 ---
 
