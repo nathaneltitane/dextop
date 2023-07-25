@@ -119,7 +119,7 @@ Setup currently defaults to XFCE for the base setup or when no argument is passe
 
 When using a Desktop Environment (DE):
 
-**By default, for XFCE, compositing is and should remain disabled with XFCE to optimize resource usage and prevent display tearing and other glitches.**
+**By default, XFCE compositing is (and should remain) disabled with XFCE to optimize resource usage and prevent display tearing and other glitches.**
 
 Turning compositing off allows for the best possible performance and experience in accordance to current Android system and security limitations:
 This is required due to the Android user space runtime policy and limited hardware access: there is no graphics hardware acceleration available - the container graphics are emulated and run using LLVM.
