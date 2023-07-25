@@ -37,6 +37,14 @@ it loads and links scripts, configuration files and utilities to enhance the And
   - ~/.bash_logout       → ~/.local/bin/bash-logout
   - ~/.bash_profile      → ~/.local/bin/bash-profile
 
+### Customization:
+
+**All of the above files can be changed or customized and serve as a good base to start if there are no configurations or preferences already set.**
+
+**All scripts and utilities can be edited or modified to benefit from a more customized experience and the Dextop project releases itself for any responibility regarding hardware failure or loss of data when doing so!**
+**Any modification of the Dextop setup routine, scripts or utilities implies the user is fully aware of potential hardware failure or breakage and/or loss of data, including the consequences of doing so:**
+**Any bug report that stems from such action will not be acknowledged and will be closed immediately!**
+
 ### Before proceeding:
 
 It is highly recommended to install Dextop on a fresh Termux instance or profile to benefit from a clean slate and a snappy experience, although you can always attempt deploying it on an already existing setup.
@@ -50,14 +58,6 @@ It is highly recommended to install Dextop on a fresh Termux instance or profile
 A backup routine has also been built that archives the user's home directory before proceeding, regardless, to ensure some kind of safety.
 
 ---
-
-### Customization:
-
-**All of the above files can be changed or customized and serve as a good base to start if there are no configurations or preferences already set.**
-
-**All scripts and utilities can be edited or modified to benefit from a more customized experience and the Dextop project releases itself for any responibility regarding hardware failure or loss of data when doing so!**
-**Any modification of the Dextop setup routine, scripts or utilities implies the user is fully aware of potential hardware failure or breakage and/or loss of data, including the consequences of doing so:**
-**Any bug report that stems from such action will not be acknowledged and will be closed immediately!**
 
 ### Environment:
 
