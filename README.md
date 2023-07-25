@@ -45,6 +45,10 @@ it loads and links scripts, configuration files and utilities to enhance the And
 **Any modification of the Dextop setup routine, scripts or utilities implies the user is fully aware of potential hardware failure or breakage and/or loss of data, including the consequences of doing so:**
 **Any bug report that stems from such action will not be acknowledged and will be closed immediately!**
 
+### Usage:
+
+All utilities created for, loaded, and used by Dextop contain a help argument. Please refer to the help dialogs while setting things up or before opening a bug report.
+
 ### Before proceeding:
 
 It is highly recommended to install Dextop on a fresh Termux instance or profile to benefit from a clean slate and a snappy experience, although you can always attempt deploying it on an already existing setup.
@@ -102,6 +106,12 @@ For the best possible experience, make sure to have:
 Dextop is very quick and efficient:
 
 Choose between a complete XFCE setup to get work done, or keep the base install for command line interface and programming workflows.
+
+The 'console' option is intended for users who would like to experiment with Dextop or setup their own window manager (WM)/desktop environment (DE), utilities and preferences.
+
+The 'environemnt' option lets the user specify the desktop environment (DE) to be set up and used.
+
+Setup currently defaults to XFCE for the base setup or when no argument is passed.
 
 When using a Desktop Environment (DE):
 
@@ -211,12 +221,6 @@ Once the Android applications are installed on the device, open Termux and paste
 curl -s -L run.dxtp.app > dextop && bash dextop
 ```
 
-The 'console' option is great for users who would like to experiment or setup their own window manager/desktop environment, utilities and preferences.
-
-The 'environemnt' option lets the user specify the desktop environment (DE) to be set up and used.
-
-Setup currently defaults to XFCE for the base setup or when no argument is passed.
-
 ### Process summary:
 
 **Be attentive!**
@@ -246,10 +250,6 @@ The 'termux-additions' utility is part of the newest deployment and sets up the 
 These additions are fetched directly from their respective Termux project GitHub releases page: any previously installed version should be removed to not inherit any conflicting packaege signatures that may contribute to unexpected issues.
 
 The display server, Termux:X11 will interface with the required 'termux-x11' package and provides Dextop with a native display solution on the host device, using the available DPI settings and running it through the hardware platform (with possibility of acceleration when it is compiled and enabled).
-
-### Usage:
-
-All utilities created for, loaded, and used by desktop contain a help argument. Please refer to the help dialogs before opening a bug report.
 
 ### Session start:
 
