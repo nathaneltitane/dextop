@@ -59,19 +59,6 @@ A backup routine has also been built that archives the user's home directory bef
 
 ---
 
-### Environment:
-
-Dextop is very quick and efficient:
-
-Choose between a complete XFCE setup to get work done, or keep the base install for command line interface and programming workflows.
-
-When using a Desktop Environment (DE):
-
-**By default, for XFCE, compositing is and should remain disabled with XFCE to optimize resource usage and prevent display tearing and other glitches.**
-
-Turning compositing off allows for the best possible performance and experience in accordance to current Android system and security limitations:
-This is required due to the Android user space runtime policy and limited hardware access: there is no graphics hardware acceleration available - the container graphics are emulated and run using LLVM.
-
 ### What it does:
 
 Dextop can be compared to other very similar projects, though:
@@ -97,6 +84,19 @@ Power users be warned! As efficient and well rounded as it may be:
 Applications that require backend services (i.e.: Ubuntu Snap/snapd), standalone services, hardware probes and other advanced features that require access to restricted core system directories will not function: the device must bee rooted to remove those limitations and gain full access to all system hardware and virtual devices.
 
 Dextop links some of the modified utilities that have been patched under Termux for an attempt at limited access to whatever the Android user space runtime policy permits (htop, kill, pgrep, pkill, ps, top).
+
+### Environment:
+
+Dextop is very quick and efficient:
+
+Choose between a complete XFCE setup to get work done, or keep the base install for command line interface and programming workflows.
+
+When using a Desktop Environment (DE):
+
+**By default, for XFCE, compositing is and should remain disabled with XFCE to optimize resource usage and prevent display tearing and other glitches.**
+
+Turning compositing off allows for the best possible performance and experience in accordance to current Android system and security limitations:
+This is required due to the Android user space runtime policy and limited hardware access: there is no graphics hardware acceleration available - the container graphics are emulated and run using LLVM.
 
 ### Activities:
 
