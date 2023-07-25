@@ -88,6 +88,11 @@ echo
 
 frobulator.separate
 
+frobulator.wrn "Selecting 'no' will only install Termux X11 packages for session display."
+echo
+
+frobulator.separate
+
 frobulator.ask "Install Termux additons?"
 
 read reply
@@ -95,8 +100,6 @@ echo
 
 if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 then
-	# process update
-
 	packages_list+=(
 		termux-api.apk
 		termux-gui.apk
@@ -106,20 +109,34 @@ then
 		termux-tasker.apk
 	)
 
-	for package in ${packages_list[@]}
-	do
-		frobulator.download get.trmx.app "${PREFIX}"/tmp "${package}"
+	frobulator.inf "Setting up all Termux additional packages."
+	echo
+else
+	packages_list+=(
+		termux-x11-shell-loader.apk
+		termux-x11.apk
+	)
 
-		frobulator.fwd "Installing..."
-		echo
-
-		open_intent "${PREFIX}"/tmp/"${package}"
-
-		sleep 10
-	done
-
-	packages_list=()
+	frobulator.inf "Setting up Termux X11 packages only."
+	echo
 fi
+
+frobulator.fwd "Installing..."
+echo
+
+for package in ${packages_list[@]}
+do
+	frobulator.download get.trmx.app "${PREFIX}"/tmp "${package}"
+
+	frobulator.inf "Installing" "[ '${package}' ]"
+	echo
+
+	open_intent "${PREFIX}"/tmp/"${package}"
+
+	sleep 10
+done
+
+packages_list=()
 
 frobulator.countdown 5 "Continuing" "[ ${script} ]"
 echo
