@@ -142,7 +142,6 @@ The X11 method uses a native display server application 'termux-x11' alongside t
 
 In either case, the experience is extremely similar to setting up a virtual machine (VM) on a typical laptop or desktop computer and accessing it through a viewer.
 
-
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────────────┐
 │                                                                                             │
