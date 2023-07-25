@@ -75,7 +75,7 @@ Dextop can be compared to other very similar projects, though:
 
 ### What is doesn't:
 
-Power users be warned! As efficient and well rounded as it may be:
+Power users be warned!
 
 - Dextop does not root the host device!
 - Dextop does not load any services or backends!
@@ -84,6 +84,18 @@ Power users be warned! As efficient and well rounded as it may be:
 Applications that require backend services (i.e.: Ubuntu Snap/snapd), standalone services, hardware probes and other advanced features that require access to restricted core system directories will not function: the device must bee rooted to remove those limitations and gain full access to all system hardware and virtual devices.
 
 Dextop links some of the modified utilities that have been patched under Termux for an attempt at limited access to whatever the Android user space runtime policy permits (htop, kill, pgrep, pkill, ps, top).
+
+### General requirements:
+
+For the best possible experience, make sure to have:
+
+- **A modern Android device equipped with a 64 bit ARM processor** (Android 7.0 or above: Termux limitation - Avoid Android 11/12/13 when and if possible: read more regarding the [Phantom Process Killer](https://issuetracker.google.com/issues/205156966))
+- **Medium to high speed internet connectivity** (wifi or other: for setup, updates and additional package downloads)
+- Approximately 4GB in free storage on the device for symmetric setup (Termux and distribution container)
+- A mouse (bluetooth or other)
+- A keyboard (bluetooth or other)
+- A power source other than the battery (for extended work periods and performance requirements: Samsung DeX limitation)
+- A monitor (highly recommended for phones and small devices)
 
 ### Environment:
 
@@ -179,21 +191,9 @@ In either case, the experience is extremely similar to setting up a virtual mach
 └─────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Hardware requirements:
+### Setup:
 
-For the best possible experience, make sure to have:
-
-- **A modern Android device equipped with a 64 bit ARM processor** (Android 7.0 or above: Termux limitation - Avoid Android 11/12/13 when and if possible: read more regarding the [Phantom Process Killer](https://issuetracker.google.com/issues/205156966))
-- **Medium to high speed internet connectivity** (wifi or other: for setup, updates and additional package downloads)
-- Approximately 4GB in free storage on the device for symmetric setup (Termux and distribution container)
-- A mouse (bluetooth or other)
-- A keyboard (bluetooth or other)
-- A power source other than the battery (for extended work periods and performance requirements: Samsung DeX limitation)
-- A monitor (highly recommended for phones and small devices)
-
-### Software requirements:
-
-Before beginning, please note that ** automated Android package installs require that the 'Install Unknown apps' permission be enabled for the Termux application:**
+Before beginning, please note that **automated Android package installs require that the 'Install Unknown apps' permission be enabled for the Termux application:**
 
 To enable this permission, navigate into Settings → Security and Privacy → Install unknown apps → Termux and toggling the switch on.
 
@@ -205,8 +205,6 @@ To get Dextop set up, install the following packages on the host Android device:
    - [VNC Viewer ](https://play.google.com/store/apps/details?id=com.realvnc.viewer.android "VNC Viewer by RealVNC Ltd.")
    - [bVNC](https://play.google.com/store/apps/details?id=com.iiordanov.freebVNC "bVNC by Iordan Iordanov")
 
-### Setup:
-
 Once the Android applications are installed on the device, open Termux and paste or type:
 
 ```
@@ -217,7 +215,7 @@ The 'console' option is great for users who would like to experiment or setup th
 
 The 'environemnt' option lets the user specify the desktop environment (DE) to be set up and used.
 
-It currently defaults to XFCE for the base setup or when no argument is passed (work in progress: more selections to come).
+Setup currently defaults to XFCE for the base setup or when no argument is passed.
 
 ### Process summary:
 
