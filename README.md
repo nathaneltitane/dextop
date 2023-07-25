@@ -15,8 +15,6 @@
 Dextop turns most modern Android devices into a complete Linux-based distribution workstation in a matter of minutes!
 No hassle or deep technical know-how required: **Dextop is easy and user friendly.**
 
-Dextop was developed using a Samsung Galaxy Note 20 Ultra, a Samsung Galaxy Tab S7+ and optimized to run within/alongside Samsung DeX.
-
 ### Contents
 
 To run the way it does and transition seamlessly in between Termux and the chosen container instance, Dextop is built a certain way:
@@ -48,6 +46,12 @@ it loads and links scripts, configuration files and utilities to enhance the And
 ### Usage:
 
 All utilities created for, loaded, and used by Dextop contain a help argument. Please refer to the help dialogs while setting things up or before opening a bug report.
+
+### Architecture:
+
+Dextop was developed using a Samsung Galaxy Note 20 Ultra, a Samsung Galaxy Tab S7+ and optimized to run within/alongside Samsung DeX.
+
+Given the devices Dextop was developped on and made for, the **ARM64 V8a** architecture is the base for all compiled objects, binaries, libraries, utilities and all other installed or required packages for the project and is the implied reference when stating 'modern android device'.
 
 ### Before proceeding:
 
