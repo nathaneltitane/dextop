@@ -65,7 +65,9 @@ Dextop is very quick and efficient:
 
 Choose between a complete XFCE setup to get work done, or keep the base install for command line interface and programming workflows.
 
-**Compositing is and should remain disabled with XFCE to optimize resource usage and prevent display tearing and other glitches.**
+When using a Desktop Environment (DE):
+
+**By default, for XFCE, compositing is and should remain disabled with XFCE to optimize resource usage and prevent display tearing and other glitches.**
 
 Turning compositing off allows for the best possible performance and experience in accordance to current Android system and security limitations:
 This is required due to the Android user space runtime policy and limited hardware access: there is no graphics hardware acceleration available - the container graphics are emulated and run using LLVM.
