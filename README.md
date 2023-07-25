@@ -109,20 +109,21 @@ For the best possible experience, make sure to have:
 
 Dextop is very quick and efficient:
 
-Choose between a complete XFCE setup to get work done, or keep the base install for command line interface and programming workflows.
+Choose between a complete XFCE setup to get work done, or keep the base install for command line interface and programming workflows:
 
 The 'console' option is intended for users who would like to experiment with Dextop or setup their own window manager (WM)/desktop environment (DE), utilities and preferences.
 
 The 'environemnt' option lets the user specify the desktop environment (DE) to be set up and used.
 
-Setup currently defaults to XFCE for the base setup or when no argument is passed.
+Setup currently defaults to XFCE (being the only complete and functional environment suite) for both the Termux and container sides, when no argument is passed to the 'dextop' deployment script.
 
-When using a Desktop Environment (DE):
+### Compositing:
 
 **By default, XFCE compositing is (and should remain) disabled with XFCE to optimize resource usage and prevent display tearing and other glitches.**
 
-Turning compositing off allows for the best possible performance and experience in accordance to current Android system and security limitations:
-This is required due to the Android user space runtime policy and limited hardware access: there is no graphics hardware acceleration available - the container graphics are emulated and run using LLVM.
+In general, and for other kinds of setup, turning compositing off allows for the best possible performance and experience in accordance to current Android system and security limitations.
+
+Such requirement is due to the Android user space runtime policy and limited hardware access: there is no graphics hardware acceleration available - the container graphics are emulated and run using LLVM.
 
 ### Activities:
 
