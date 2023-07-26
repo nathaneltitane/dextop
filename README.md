@@ -109,8 +109,8 @@ For the best possible experience, make sure to have:
 - Approximately 4GB in free storage on the device for symmetric setup (Termux and distribution container)
 - A mouse (bluetooth or other)
 - A keyboard (bluetooth or other)
-- A power source other than the battery (for extended work periods and performance requirements: Samsung DeX limitation)
-- A monitor (highly recommended for phones and small devices)
+- A power source (other than the battery, for extended work periods and performance requirements: Samsung DeX limitation)
+- A monitor (highly recommended for phones and low display density devices)
 
 ### Environment:
 
