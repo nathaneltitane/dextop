@@ -214,7 +214,7 @@ In either case, the experience is extremely similar to setting up a virtual mach
 
 ### Setup:
 
-Before beginning, please note that **automated Android package installation requires that the 'Install Unknown apps' permission be enabled for the Termux application and all other Termux companion applications:**
+Before beginning, please note that **automated Android package installation requires that the 'Install Unknown apps' permission be enabled for the Termux application itself and, if already installed, all other Termux companion applications:**
 
 To enable this permission, navigate into Settings → Security and Privacy → Install unknown apps → Termux[:Application] and toggling the switch on.
 

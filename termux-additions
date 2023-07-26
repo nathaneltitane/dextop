@@ -77,10 +77,10 @@ echo
 frobulator.inf "These additions are fetched directly from their respective GitHub project release pages."
 echo
 
-frobulator.wrn "'Install Unknown Apps' permission must be enabled for Termux to proceed."
+frobulator.wrn "'Install Unknown apps' permission be enabled for the Termuxand all other Termux companion applications:"
 echo
 
-frobulator.wrn "Enable under Settings > Security and Privacy > Install unknown apps > Termux"
+frobulator.wrn "Enable under Settings > Security and Privacy > Install unknown apps > Termux[:Application]"
 echo
 
 frobulator.ins "Select 'Package Installer' when prompted to proceed."
