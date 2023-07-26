@@ -116,7 +116,7 @@ For the best possible experience, make sure to have:
 
 Dextop is very quick and efficient:
 
-Choose between a complete XFCE setup to get work done, or keep the base install for command line interface and programming workflows:
+Users can choose in between a complete XFCE setup to get work done, or to keep the base install for command line interface and programming workflows:
 
 The 'console' option is intended for users who would like to experiment with Dextop or setup their own window manager (WM)/desktop environment (DE), utilities and preferences.
 
@@ -124,7 +124,7 @@ The 'environemnt' option lets the user specify the desktop environment (DE) to b
 
 Setup currently defaults to XFCE (being the only complete and functional environment suite) for both the Termux and container sides, when no argument is passed to the 'dextop' deployment script.
 
-### Compositing:
+### Performance:
 
 **By default, XFCE compositing is (and should remain) disabled with XFCE to optimize resource usage and prevent display tearing and other glitches.**
 
@@ -214,9 +214,9 @@ In either case, the experience is extremely similar to setting up a virtual mach
 
 ### Setup:
 
-Before beginning, please note that **automated Android package installs require that the 'Install Unknown apps' permission be enabled for the Termux application:**
+Before beginning, please note that **automated Android package installation requires that the 'Install Unknown apps' permission be enabled for the Termux application and all other Termux companion applications:**
 
-To enable this permission, navigate into Settings → Security and Privacy → Install unknown apps → Termux and toggling the switch on.
+To enable this permission, navigate into Settings → Security and Privacy → Install unknown apps → Termux[:Application] and toggling the switch on.
 
 To get Dextop set up, install the following packages on the host Android device:
 
