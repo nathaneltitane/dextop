@@ -40,7 +40,9 @@ it loads and links scripts, configuration files and utilities to enhance the And
 **All of the above files can be changed or customized and serve as a good base to start if there are no configurations or preferences already set.**
 
 **All other scripts and utilities can also be edited or modified to benefit from a more customized experience.**
+
 **The Dextop project releases itself for any responibility regarding hardware failure or loss of data when doing so!**
+
 **Any modification of the Dextop setup routine, scripts or utilities implies the user is fully aware of potential hardware failure or breakage and/or loss of data, including the consequences of doing so:**
 **Any bug report that stems from such action will not be acknowledged and will be closed immediately!**
 
