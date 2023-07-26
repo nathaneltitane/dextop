@@ -64,9 +64,13 @@ Given the devices Dextop was developped on and made for, the **ARM64 V8a** archi
 
 ### Back. It. Up.
 
-**Backing up your existing setup by following the [Termux backup recommendations](https://wiki.termux.com/wiki/Backing_up_Termux) is a must as the Dextop project will not be held responsible for any overrides, file corruptions or deletions caused by the installation and configuration process - You Have Been Warned.**
+**Backing up your existing setup by following the [Termux backup recommendations](https://wiki.termux.com/wiki/Backing_up_Termux) is a must.**
+
+**Final warning: the Dextop project will not be held responsible for any overrides, file corruptions or deletions caused by the installation and configuration process - You Have Been Warned.**
 
 A backup routine has also been built that archives the user's home directory before proceeding, regardless, to ensure some kind of safety.
+
+Once generated, it can be found under the user's home directory with the corresponding stamp as 'dextop-backup-MM-DD-YYY-HH-MM-SS.tar.gz'
 
 ---
 
