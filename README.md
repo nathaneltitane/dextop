@@ -17,12 +17,12 @@ No hassle or deep technical know-how required: **Dextop is easy and user friendl
 
 It is highly recommended to install Dextop on a fresh Termux instance or profile to benefit from a clean slate and a snappy experience, although deploying it on an already existing setup is also possible.
 
-All utilities created for, loaded, and used by Dextop contain a help argument. Please refer to the help dialogs while setting things up or before opening a bug report.
+All utilities created for, loaded, and used by Dextop contain a help argument: please refer to the help dialogs while setting things up or before opening a bug report.
 
 ### Contents
 
 To run the way it does and transition seamlessly in between Termux and the chosen container instance, Dextop is built a certain way:
-it loads and links scripts, configuration files and utilities to enhance the Android-based workstation experience
+it loads and links scripts, configuration files and utilities to enhance the Android-based workstation experience as follows:
 
 - Dextop installs certain core utilities to load and use a custom scripting library to make the overall command line interface more pleasant and informative:
   - ~/.local/bin/frobulator
@@ -56,9 +56,9 @@ it loads and links scripts, configuration files and utilities to enhance the And
 
 ### Architecture:
 
-Dextop was developed using a Samsung Galaxy Note 20 Ultra, a Samsung Galaxy Tab S7+ and optimized to run within/alongside Samsung DeX.
+Dextop was developed using a Samsung Galaxy Note 20 Ultra, a Samsung Galaxy Tab S7+ and optimized to run within/alongside Samsung's DeX.
 
-Given the devices Dextop was developped on and made for, the **ARM64 V8a** architecture is the base for all compiled objects, binaries, libraries, utilities and all other installed or required packages for the project and is the implied reference when stating 'modern android device'.
+Given the devices Dextop was developped on and made for, the **ARM64 V8a** architecture is the base for all compiled objects, binaries, libraries, utilities and all other installed or required packages for the project and is the implied architecture reference when stating 'modern android device'.
 
 ---
 
