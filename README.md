@@ -15,7 +15,7 @@
 Dextop turns most modern Android devices into a complete Linux distribution workstation in a matter of minutes!
 No hassle or deep technical know-how required: **Dextop is easy and user friendly.**
 
-It is highly recommended to install Dextop on a fresh Termux instance or profile to benefit from a clean slate and a snappy experience, although you can always attempt deploying it on an already existing setup.
+It is highly recommended to install Dextop on a fresh Termux instance or profile to benefit from a clean slate and a snappy experience, although deploying it on an already existing setup is also possible.
 
 All utilities created for, loaded, and used by Dextop contain a help argument. Please refer to the help dialogs while setting things up or before opening a bug report.
 
