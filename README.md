@@ -60,7 +60,7 @@ Dextop was developed using a Samsung Galaxy Note 20 Ultra, a Samsung Galaxy Tab 
 
 Given the devices Dextop was developped on and made for, the **ARM64 V8a** architecture is the base for all compiled objects, binaries, libraries, utilities and all other installed or required packages for the project and is the implied reference when stating 'modern android device'.
 
-### Before proceeding:
+### Installation:
 
 It is highly recommended to install Dextop on a fresh Termux instance or profile to benefit from a clean slate and a snappy experience, although you can always attempt deploying it on an already existing setup.
 
