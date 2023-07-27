@@ -115,7 +115,7 @@ fi
 
 if [ -z "${distribution_version}" ]
 then
-	distribution_version="22.10"
+	distribution_version="23.04"
 fi
 
 # functions ////////////////////////////////////////////////////////////////////
