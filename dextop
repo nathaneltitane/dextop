@@ -933,10 +933,13 @@ fi
 
 # result ///////////////////////////////////////////////////////////////////////
 
-frobulator.result "${HOME}"/.dextop dextop-setup-checkpoint "dextop setup"
-echo
+if [ -z "${option}" ]
+then
+	frobulator.result "${HOME}"/.dextop dextop-setup-checkpoint "dextop setup"
+	echo
 
-frobulator.timeout 5
+	frobulator.timeout 5
+fi
 
 # clear ////////////////////////////////////////////////////////////////////////
 
