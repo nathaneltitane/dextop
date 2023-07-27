@@ -2,9 +2,15 @@
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/donate/?hosted_button_id=2WZT7PCW3XDX6)
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 07-19-2023 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 07-27-2023 ]
 
 ---
+
+### [ NOTICE // 07-27-2023 ]
+
+- New default Ubuntu install now at version 23.04 (22.10 officially deprecated)
+- Decreased login time and system checks
+- Reinstated Dextop welcome prompt
 
 ### [ NOTICE // 07-19-2023 ]
 
@@ -450,7 +456,7 @@ Should you suspect any issues or errors, please provide a copy of those files wh
 
 ---
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 07-19-2023 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 07-27-2023 ]
 
 ### Enjoying Dextop? Buy me a coffee to show your appreciation!
 
