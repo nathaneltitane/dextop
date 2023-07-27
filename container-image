@@ -106,16 +106,20 @@ echo
 
 # variables ////////////////////////////////////////////////////////////////////
 
+distribution_name="ubuntu"
+
+distribution_version="23.04"
+
 # defaults /////////////////////////////////////////////////////////////////////
 
 if [ -z "${distribution_name}" ]
 then
-	distribution_name="ubuntu"
+	distribution_name="${distribution_name}"
 fi
 
 if [ -z "${distribution_version}" ]
 then
-	distribution_version="23.04"
+	distribution_version="${distribution_version}"
 fi
 
 # functions ////////////////////////////////////////////////////////////////////
@@ -471,7 +475,7 @@ image_handle () {
 			;;
 
 			"")
-				distribution_version=23.04
+				distribution_version="${distribution_version}"
 
 				frobulator.err "Distribution version not specified."
 				echo
@@ -481,7 +485,7 @@ image_handle () {
 			;;
 
 			 *)
-				distribution_version=23.04
+				distribution_version="${distribution_version}"
 
 				frobulator.err "Unsupported distribution version."
 				echo
