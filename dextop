@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="07-19-2023"
+version="07-27-2023"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -355,7 +355,7 @@ preferences_intent () {
 dextop_intent () {
 	# load dextop deployment script
 
-	curl -s -L run.dxtp.app > "${HOME}"/.local/bin/dextop
+	frobulator.download run.dxtp.app "${HOME}"/.local/bin dextop
 }
 
 utility_intent () {
