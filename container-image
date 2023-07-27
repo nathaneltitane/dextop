@@ -137,8 +137,10 @@ image_version () {
 		)
 
 		ubuntu_versions=(
+			ubuntu	18.04
+			ubuntu	20.04
 			ubuntu	22.04
-			ubuntu	22.10
+			ubuntu	23.04
 		)
 
 		versions=(
@@ -447,22 +449,39 @@ image_handle () {
 	then
 		case "${distribution_version}"
 		in
-			22*04|22*04*)
-				distribution_version="22.04.1"
+			18*04|18*04*)
+				distribution_version="18.04.5"
 
-				frobulator.scs "Supported distribution version."
+				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
+				echo
+			;;
+
+			20*04|20*04*)
+				distribution_version="20.04.5"
+
+				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
+				echo
+			;;
+
+			22*04|22*04*)
+				distribution_version="22.04.2"
+
+				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
 				echo
 			;;
 
 			"")
-				distribution_version=22.10
+				distribution_version=23.04
 
-				frobulator.err "Empty distribution version."
+				frobulator.err "Distribution version not specified."
+				echo
+
+				frobulator.wrn "Defaulting" "[ ${distribution_version} ]"
 				echo
 			;;
 
 			 *)
-				distribution_version=22.10
+				distribution_version=23.04
 
 				frobulator.err "Unsupported distribution version."
 				echo
@@ -492,7 +511,10 @@ image_handle () {
 			 "")
 				distribution_version=35
 
-				frobulator.err "Empty distribution version."
+				frobulator.err "Distribution version not specified."
+				echo
+
+				frobulator.wrn "Defaulting" "[ ${distribution_version} ]"
 				echo
 			;;
 
@@ -500,7 +522,7 @@ image_handle () {
 			 *)
 				distribution_version=35
 
-				frobulator.err "Unsupported distribution version"
+				frobulator.err "Unsupported distribution version."
 				echo
 
 				frobulator.wrn "Defaulting" "[ ${distribution_version} ]"
