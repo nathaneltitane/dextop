@@ -346,7 +346,7 @@ image_download () {
 		;;
 	esac
 
-	frobulator.download "${image_url}"/"${image_archive}" "${PREFIX}"/img "${image_file}"
+	frobulator.download "${image_url}" "${image_archive}" "${PREFIX}"/img "${image_file}"
 }
 
 image_extract () {
