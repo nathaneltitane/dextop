@@ -99,6 +99,7 @@ do
 			echo
 			echo -e "-u, --update         Update application packages and utilities."
 			echo
+			echo -e "                     [ all ]"
 			echo -e "                     [ dextop ] [ Default ]"
 			echo -e "                     [ utility ]"
 			echo -e "                     [ additions ]"
@@ -184,7 +185,6 @@ then
 		unset session
 	fi
 fi
-
 
 if [ -z "${utility}" ]
 then
@@ -631,6 +631,25 @@ fi
 
 if [ "${option}" = "update" ]
 then
+
+	if [[ "${update}" = [aA][lL][lL] ]]
+	then
+		frobulator.inf "Updating" "[ ${update} ]"
+		echo
+
+		frobulator.fwd "Updating..."
+		echo
+
+		dextop_intent
+
+		utility_intent
+
+		additions_intent
+
+		shell_intent
+
+		"${HOME}"/.local/bin/termux-update
+	fi
 
 	if [[ "${update}" = [dD][eE][xX][tT][oO][pP] ]]
 	then
