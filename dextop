@@ -385,7 +385,7 @@ utility_intent () {
 		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
 
 	else
-		frobulator.err "Unknown utility name" "[ ${utility}]"
+		frobulator.err "Unknown utility name" "[ ${utility} ]"
 		echo
 
 		frobulator.msg "Known upgradable utilities" "[ version // ${version} ]"
@@ -398,6 +398,9 @@ utility_intent () {
 		echo
 
 		IFS=''
+
+		frobulator.msg "Option: update all utilities using 'all' argument."
+		echo
 
 		frobulator.inf "Review utility name spelling and try again."
 		echo
