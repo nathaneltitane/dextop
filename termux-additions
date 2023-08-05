@@ -109,7 +109,7 @@ then
 	echo
 else
 	packages_list+=(
-		termux-x11-shell-loader.apk
+	#	termux-x11-shell-loader.apk
 		termux-x11.apk
 	)
 
