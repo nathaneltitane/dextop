@@ -57,5 +57,5 @@ command_expand=$(command -v unminimize)
 
 frobulator.silence "yes | ${command_expand}" &
 
-frobulator.progress expand
+frobulator.progress "Expanding..."
 echo

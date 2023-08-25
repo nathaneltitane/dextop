@@ -60,5 +60,5 @@ sed -i									\
 
 frobulator.log "apt update" &
 
-frobulator.progress refresh
+frobulator.progress "Forcing refresh..."
 echo
