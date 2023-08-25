@@ -71,8 +71,7 @@ open_intent () {
 
 # notice
 
-frobulator.inf "This utility sets up Termux project additions:"
-frobulator.nul "These additions are fetched directly from their respective GitHub project release pages."
+frobulator.inf "This utility sets up Termux project additions: These additions are fetched directly from their respective GitHub project release pages."
 echo
 
 frobulator.wrn "Enable the 'Install Unknown apps' permission for Termux and all other companion applications:"
