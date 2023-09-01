@@ -327,8 +327,7 @@ backup_intent () {
 			--exclude="${backup_name}"*			\
 				--file="${backup_archive}"		"${backup_directory}" > /dev/null 2>&1 &
 
-	frobulator.progress "Backing up..." "[ ${backup_directory} ]"
-	echo
+	frobulator.progress "archive" "[ ${backup_directory} ]"
 }
 
 preferences_intent () {

@@ -47,7 +47,7 @@ echo
 
 # variables ////////////////////////////////////////////////////////////////////
 
-command_expand=$(command -v unminimize)
+command_expand=$(yes | command -v unminimize)
 
 # defaults /////////////////////////////////////////////////////////////////////
 
@@ -55,7 +55,6 @@ command_expand=$(command -v unminimize)
 
 # expand system image
 
-frobulator.silence "yes | ${command_expand}" &
+frobulator.silence "${command_expand}" &
 
-frobulator.progress "Expanding..."
-echo
+frobulator.progress "expand"

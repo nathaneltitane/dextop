@@ -99,13 +99,11 @@ done <<< ${repositories_list[@]}
 
 yes | apt update > /dev/null 2>&1 &
 
-frobulator.progress "Updating..."
-echo
+frobulator.progress "update"
 
 yes | apt upgrade > /dev/null 2>&1 &
 
-frobulator.progress "Upgrading..."
-echo
+frobulator.progress "upgrade"
 
 # run failsafe package install:
 # termux package servers are sometimes unresponsive or badly authenticated
