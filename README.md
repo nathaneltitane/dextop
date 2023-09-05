@@ -1,7 +1,3 @@
-Unlock the full potential of your Android device by easily transforming it into a complete Linux distribution workstation in just minutes with Dextop!
-
-Experience the power of Linux without the need for deep technical expertise - Dextop is here to make it user-friendly and hassle-free for all.
-
 ![dextop](https://raw.githubusercontent.com/nathaneltitane/dextop/main/dextop.svg)
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/donate/?hosted_button_id=2WZT7PCW3XDX6)
@@ -9,16 +5,6 @@ Experience the power of Linux without the need for deep technical expertise - De
 [[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 07-27-2023 ]
 
 ---
-
-### [ NOTICE // 07-27-2023 ]
-
-- New default Ubuntu install now at version 23.04 (22.10 officially deprecated)
-- Decreased login time and system checks
-- Reinstated Dextop welcome prompt
-
-### [ NOTICE // 07-19-2023 ]
-
-- All setup issues debugged and fixed, streamlined assertions and default options, fixed container ROOT assertion issues using conatiner setup initialization!
 
 ### Welcome to [Dextop](https://dextop.app)
 
