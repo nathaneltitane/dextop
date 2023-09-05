@@ -131,6 +131,7 @@ message="sms:"
 # functions ////////////////////////////////////////////////////////////////////
 
 activity_intent () {
+
 	activity="${1}"
 
 	am start							\
@@ -138,6 +139,7 @@ activity_intent () {
 	}
 
 handle_intent () {
+
 	handle="${1}"
 
 	am start							\

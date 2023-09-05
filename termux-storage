@@ -52,6 +52,7 @@ echo
 # functions ////////////////////////////////////////////////////////////////////
 
 storage_intent () {
+
 	unset storage_command
 
 	storage_command+="am broadcast"

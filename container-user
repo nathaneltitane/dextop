@@ -118,12 +118,14 @@ echo
 # functions ////////////////////////////////////////////////////////////////////
 
 user_password_generate () {
+
 	# generate random password
 
 	echo $(cat /dev/urandom | tr -d -c 'a-zA-Z0-9' | fold -w ${1:-32} | head -n $(echo $((RANDOM % 10 + 1))) | tail -n 1)
 	}
 
 user_information () {
+
 	# get 'user' information
 
 	frobulator.inf "This information will be used to set up the user account."
@@ -143,6 +145,7 @@ user_information () {
 }
 
 user_interactive () {
+
 	# generate 'user' account:
 	# interactive setup
 
@@ -176,6 +179,7 @@ user_interactive () {
 }
 
 user_noninteractive () {
+
 	# generate 'user account:
 	# noninteractive setup
 
@@ -205,6 +209,7 @@ user_noninteractive () {
 }
 
 user_superuser () {
+
 	# generate 'user' superuser privilege
 
 	frobulator.fwd "Generating superuser privilege..."
@@ -225,6 +230,7 @@ user_superuser () {
 }
 
 user_superuser_override () {
+
 	# set 'user' superuser privilege password override
 
 	# set password override
@@ -242,6 +248,7 @@ user_superuser_override () {
 }
 
 user_password () {
+
 	# set 'user' password
 
 	frobulator.fwd "Setting password..."
@@ -256,6 +263,7 @@ user_password () {
 }
 
 user_runtime () {
+
 	# generate 'user' runtime directory structure
 
 	frobulator.fwd "Setting runtime..."

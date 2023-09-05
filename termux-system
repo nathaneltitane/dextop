@@ -52,6 +52,7 @@ echo
 # functions ////////////////////////////////////////////////////////////////////
 
 add_environment () {
+
 	# generate environment '$PATH'
 
 	# set path:
@@ -90,6 +91,7 @@ add_environment () {
 }
 
 add_groups () {
+
 	# register android groups to container
 
 	# set IFS
@@ -142,6 +144,7 @@ add_groups () {
 }
 
 add_network () {
+
 	# generate network files
 
 	# hostname
@@ -183,6 +186,7 @@ add_network () {
 }
 
 add_preload () {
+
 	# generate libgcc/libc location and add to dynamic linker for preload
 
 	preload_library=$(find "${PREFIX}"/cnt/usr/lib -type f -iname "libgcc_s.so.1")

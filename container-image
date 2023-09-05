@@ -125,6 +125,7 @@ fi
 # functions ////////////////////////////////////////////////////////////////////
 
 image_version () {
+
 	# list distributions for setup
 
 	if [ -z "${distribution_name}" ] || [ -z "${distribution_version}" ]
@@ -243,6 +244,7 @@ image_version () {
 }
 
 image_architecture () {
+
 	# compare processor architecture to available images architecture
 
 	cpu_architectures=(
@@ -325,6 +327,7 @@ image_architecture () {
 }
 
 image_download () {
+
 	# generate links and download distribution image
 
 	# handle distribution url
@@ -350,10 +353,12 @@ image_download () {
 }
 
 image_extract () {
+
 	# exclude archive directories: dev | proc | sys | system
 	# 'container-session' will bind those device directories to the container
 
 	container_extract () {
+
 		# cloud container/docker images
 
 		tar 											\
@@ -373,6 +378,7 @@ image_extract () {
 	}
 
 	core_extract () {
+
 		# core/minimal system images
 
 		proot											\
@@ -412,6 +418,7 @@ image_extract () {
 }
 
 image_handle () {
+
 	# set container image name and version
 
 	case "${distribution_name}"
@@ -537,6 +544,7 @@ image_handle () {
 }
 
 image_environment () {
+
 	# generate environment '$PATH'
 
 	# set path:
@@ -576,6 +584,7 @@ image_environment () {
 }
 
 image_groups () {
+
 	# register android groups to container
 
 	# set IFS
@@ -628,6 +637,7 @@ image_groups () {
 }
 
 image_network () {
+
 	# generate network files
 
 	# hostname
@@ -666,6 +676,7 @@ image_network () {
 }
 
 image_preload () {
+
 	# generate libgcc/libc location and add to dynamic linker for preload
 
 	preload_library=$(find "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/usr/lib -type f -iname "libgcc_s.so.1")

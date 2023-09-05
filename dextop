@@ -199,6 +199,7 @@ fi
 # functions ////////////////////////////////////////////////////////////////////
 
 container_setup () {
+
 	# make container setup location known
 
 	if [ $# -eq 0 ]
@@ -253,6 +254,7 @@ container_setup () {
 }
 
 architecture_intent () {
+
 	# list supported processor architechtures
 
 	cpu_architectures=(
@@ -297,6 +299,7 @@ architecture_intent () {
 }
 
 reload_intent () {
+
 	# termux settings reload:
 	# refresh command line interface with newly loaded settings
 
@@ -311,6 +314,7 @@ reload_intent () {
 }
 
 backup_intent () {
+
 	backup_name="dextop-backup"
 	backup_extension="tar.gz"
 
@@ -327,10 +331,11 @@ backup_intent () {
 			--exclude="${backup_name}"*			\
 				--file="${backup_archive}"		"${backup_directory}" > /dev/null 2>&1 &
 
-	frobulator.progress "archive" "[ ${backup_directory} ]"
+	frobulator.process "archive" "[ ${backup_directory} ]"
 }
 
 preferences_intent () {
+
 	# termux settings and properties
 
 	settings_list+=(
@@ -352,12 +357,14 @@ preferences_intent () {
 }
 
 dextop_intent () {
+
 	# load dextop deployment script
 
 	frobulator.download run.dxtp.app "${HOME}"/.local/bin dextop
 }
 
 utility_intent () {
+
 	# load dextop utilities
 
 	utilities_list+=(
@@ -411,6 +418,7 @@ utility_intent () {
 }
 
 directories_intent () {
+
 	# generate dextop required directories
 
 	directories_list+=(
@@ -465,6 +473,7 @@ directories_intent () {
 }
 
 bookmarks_intent () {
+
 	# generate file browser bookmarks
 
 	directories_list=(
@@ -493,6 +502,7 @@ bookmarks_intent () {
 }
 
 additions_intent () {
+
 	# load additions files
 
 	additions_list+=(
@@ -505,6 +515,7 @@ additions_intent () {
 }
 
 shell_intent () {
+
 	# load shell files
 
 	shell_list+=(
@@ -554,6 +565,7 @@ shell_intent () {
 }
 
 backgrounds_intent () {
+
 	# load background files
 
 	backgrounds_list=(
@@ -569,6 +581,7 @@ backgrounds_intent () {
 }
 
 icons_intent () {
+
 	# select icon themes
 
 	icons_list+=(
@@ -592,6 +605,7 @@ icons_intent () {
 }
 
 themes_intent () {
+
 	# select themes
 
 	files_list+=(
@@ -613,6 +627,7 @@ themes_intent () {
 }
 
 session_intent () {
+
 	# start session
 
 	cd "${HOME}"

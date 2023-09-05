@@ -55,12 +55,14 @@ repository_url="https://f-droid.org/repo"
 # functions ////////////////////////////////////////////////////////////////////
 
 clean () {
+
 	rm -rf "${PREFIX}"/tmp/*.apk
 }
 
 trap 'clean' EXIT
 
 open_intent () {
+
 	unset open_command
 
 	open_command+="am broadcast"

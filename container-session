@@ -241,6 +241,7 @@ export DISPLAY="${DISPLAY}"
 # functions ////////////////////////////////////////////////////////////////////
 
 container_root () {
+
 	# set container root directory
 
 	ROOT=("${PREFIX}"/cnt/*/*)
@@ -305,6 +306,7 @@ container_root () {
 }
 
 container_handle () {
+
 	# values #
 
 	values_list=(
@@ -356,6 +358,7 @@ container_handle () {
 }
 
 container_input () {
+
 	if [ -d "${root_filesystem}" ]
 	then
 		ROOT="${root_filesystem}"
@@ -377,6 +380,7 @@ container_input () {
 }
 
 container_environment () {
+
 	# generate container environement
 
 	# set path:
@@ -409,6 +413,7 @@ container_environment () {
 }
 
 container_user () {
+
 	# authentication
 
 	frobulator.fwd "Authenticating..."
@@ -485,6 +490,7 @@ container_user () {
 }
 
 container_session () {
+
 	# load session settings
 
 	# assume 'termux-exec' is installed
@@ -564,6 +570,7 @@ container_session () {
 }
 
 server_intent () {
+
 	unset load_command
 
 	if [[ "${display}" = [vV][nN][cC] ]]
@@ -598,6 +605,7 @@ server_intent () {
 }
 
 display_clean () {
+
 	if [[ "${display}" = [vV][nN][cC] ]]
 	then
 		if [ -d "${HOME}" ]
@@ -622,6 +630,7 @@ display_clean () {
 }
 
 display_geometry () {
+
 	frobulator.msg "Select geometry or input [c]ustom properties:"
 	echo
 
@@ -763,6 +772,7 @@ display_geometry () {
 }
 
 display_handle () {
+
 	# values #
 
 	values_list=(
@@ -862,6 +872,7 @@ display_handle () {
 }
 
 display_intent () {
+
 	frobulator.fwd "Generating display..."
 	echo
 
@@ -899,6 +910,7 @@ display_intent () {
 }
 
 display_view () {
+
 	frobulator.fwd "Opening display..."
 	echo
 
@@ -925,6 +937,7 @@ display_view () {
 }
 
 display_framebuffer () {
+
 	if [[ "${display}" = [vV][nN][cC] ]]
 	then
 		frobulator.fwd "Generating framebuffer..."
@@ -946,6 +959,7 @@ display_framebuffer () {
 }
 
 display_interface () {
+
 	if [[ $(pidof "${session}") ]]
 	then
 		:
@@ -961,6 +975,7 @@ display_interface () {
 }
 
 display_load () {
+
 	if [[ "${display}" = [vV][nN][cC] ]]
 	then
 		# make selection available for automatic start:
@@ -1012,6 +1027,7 @@ display_load () {
 }
 
 display_start () {
+
 	if [[ "${display}" = [vV][nN][cC] ]]
 	then
 		if [[ $(pidof x11vnc) ]]
@@ -1049,6 +1065,7 @@ display_start () {
 }
 
 display_new () {
+
 	if [[ "${display}" = [vV][nN][cC] ]]
 	then
 		# handle selections display
@@ -1080,6 +1097,7 @@ display_new () {
 }
 
 display_stop () {
+
 	# look for corresponding server process:
 	# handle and stop display server and clean runtime files
 
@@ -1089,7 +1107,7 @@ display_stop () {
 
 		kill -9 $(pidof Xvfb)  > /dev/null 2>&1 &
 
-		frobulator.progress "Stopping display framebuffer..."
+		frobulator.process "Stopping display framebuffer..."
 
 	elif [[ $(pidof x11vnc) ]]
 	then
@@ -1097,7 +1115,7 @@ display_stop () {
 
 		x11vnc -R stop > /dev/null 2>&1 &
 
-		frobulator.progress "Stopping display server..."
+		frobulator.process "Stopping display server..."
 
 		# clean display server runtime files
 
@@ -1111,7 +1129,7 @@ display_stop () {
 
 		kill -9 $(pidof app_process / com.termux.x11.Loader) > /dev/null 2>&1 &
 
-		frobulator.progress "Stopping display loader..."
+		frobulator.process "Stopping display loader..."
 
 	else
 		frobulator.wrn "No active display server detected."
@@ -1123,6 +1141,7 @@ display_stop () {
 }
 
 display_list () {
+
 	if [[ "${display}" = [vV][nN][cC] ]]
 	then
 		display_server="x11vnc"
@@ -1177,6 +1196,7 @@ display_list () {
 }
 
 display_password () {
+
 	if [[ "${display}" = [vV][nN][cC] ]]
 	then
 		# values #
@@ -1211,6 +1231,7 @@ display_password () {
 }
 
 application_handle () {
+
 	# handle application launch
 
 	if [[ $(command -v "${application}") ]]
