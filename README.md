@@ -1,3 +1,5 @@
+Unlock the full potential of your Android device by easily transforming it into a complete Linux distribution workstation in just minutes with Dextop! Experience the power of Linux without the need for deep technical expertise - Dextop is here to make it user-friendly and hassle-free for all.
+
 ![dextop](https://raw.githubusercontent.com/nathaneltitane/dextop/main/dextop.svg)
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/donate/?hosted_button_id=2WZT7PCW3XDX6)
