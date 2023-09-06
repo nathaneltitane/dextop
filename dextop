@@ -274,7 +274,7 @@ architecture_intent () {
 		if [[ "${device_architecture}" != "${cpu_architectures[i]}" ]]
 		then
 
-			frobulator.scs "Supported architecture" "[ ${image_architecture} ]"
+			frobulator.scs "Supported device architecture" "[ ${device_architecture} ]"
 			echo
 
 			frobulator.fwd "Proceeding..."
@@ -282,7 +282,7 @@ architecture_intent () {
 
 			break
 		else
-			frobulator.wrn "Unsupported architecture" "[ ${image_architecture} ]"
+			frobulator.wrn "Unsupported device architecture" "[ ${device_architecture} ]"
 			echo
 
 			frobulator.fwd "Aborting..."
