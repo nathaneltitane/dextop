@@ -293,17 +293,6 @@ image_architecture () {
 			echo
 
 			break
-		else
-			frobulator.wrn "Unsupported architecture" "[ ${image_architecture} ]"
-			echo
-
-			frobulator.fwd "Aborting..."
-			echo
-
-			frobulator.stp "Exiting."
-			echo
-
-			exit 1
 		fi
 	done
 
