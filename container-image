@@ -260,22 +260,22 @@ image_architecture () {
 	if [ "${distribution_name}" = fedora ]
 	then
 		image_architectures=(
-		aarch64
-		armhfp
-		x86_64
-		x86_64
-		x86_64
+			aarch64
+			armhfp
+			x86_64
+			x86_64
+			x86_64
 		)
 	fi
 
 	if [ "${distribution_name}" = ubuntu ]
 	then
 		image_architectures=(
-		arm64
-		armhf
-		amd64
-		i386
-		amd64
+			arm64
+			armhf
+			amd64
+			i386
+			amd64
 		)
 	fi
 
