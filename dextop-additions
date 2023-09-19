@@ -134,7 +134,7 @@ activity_intent () {
 	activity="${1}"
 
 	am start							\
-		-n "${activity}"				> /dev/null 2>&1
+		-n "${activity}"				> "${sink}" 2>&1
 	}
 
 handle_intent () {
@@ -143,7 +143,7 @@ handle_intent () {
 
 	am start							\
 		-a android.intent.action.VIEW	\
-		-d "${handle}"					> /dev/null 2>&1
+		-d "${handle}"					> "${sink}" 2>&1
 }
 
 if [[ "${option}" = [aA][cC][tT][iI][vV][iI][tT][yY] ]]
