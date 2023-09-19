@@ -1101,7 +1101,7 @@ display_stop () {
 
 		kill -9 $(pidof Xvfb)  > /dev/null 2>&1 &
 
-		frobulator.process "Stopping display framebuffer..."
+		frobulator.process "Stopping display framebuffer"
 
 	elif [[ $(pidof x11vnc) ]]
 	then
@@ -1109,7 +1109,7 @@ display_stop () {
 
 		x11vnc -R stop > /dev/null 2>&1 &
 
-		frobulator.process "Stopping display server..."
+		frobulator.process "Stopping display server"
 
 		# clean display server runtime files
 
@@ -1123,7 +1123,7 @@ display_stop () {
 
 		kill -9 $(pidof app_process / com.termux.x11.Loader) > /dev/null 2>&1 &
 
-		frobulator.process "Stopping display loader..."
+		frobulator.process "Stopping display loader"
 
 	else
 		frobulator.wrn "No active display server detected."
