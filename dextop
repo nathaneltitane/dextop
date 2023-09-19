@@ -328,7 +328,7 @@ backup_intent () {
 		--create								\
 		--gzip									\
 			--exclude="${backup_name}"*			\
-				--file="${backup_archive}"		"${backup_directory}" > /dev/null 2>&1 &
+				--file="${backup_archive}"		"${backup_directory}" > "${sink}" 2>&1 &
 
 	frobulator.process "archive" "[ ${backup_directory} ]"
 }
