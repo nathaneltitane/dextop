@@ -96,11 +96,11 @@ done <<< ${repositories_list[@]}
 # run failsafe package update and upgrade:
 # prevents termux side random 'libssl' error
 
-yes | apt update > /dev/null 2>&1 &
+yes | apt update > "${sink}" 2>&1 &
 
 frobulator.progress "update"
 
-yes | apt upgrade > /dev/null 2>&1 &
+yes | apt upgrade > "${sink}" 2>&1 &
 
 frobulator.progress "upgrade"
 
