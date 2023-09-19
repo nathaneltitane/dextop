@@ -586,7 +586,7 @@ server_intent () {
 		load_command+=" -noxfixes"
 		load_command+=" -noxrecord"
 
-		${load_command} > /dev/null 2>&1 &
+		${load_command} > "${sink}" 2>&1 &
 	fi
 
 	if [[ "${display}" = [xX][1][1] ]]
@@ -597,7 +597,7 @@ server_intent () {
 		else
 			load_command+="termux-x11"
 
-			${load_command} > /dev/null 2>&1 &
+			${load_command} > "${sink}" 2>&1 &
 		fi
 	fi
 }
@@ -899,7 +899,7 @@ display_intent () {
 
 		# start termux:x11 intent
 
-		am start -n "${display_activity}" > /dev/null 2>&1
+		am start -n "${display_activity}" > "${sink}" 2>&1
 	fi
 }
 
@@ -926,7 +926,7 @@ display_view () {
 	then
 		display_activity="${termux_x11_activity}"
 
-		am start -n "${display_activity}" > /dev/null 2>&1
+		am start -n "${display_activity}" > "${sink}" 2>&1
 	fi
 }
 
@@ -943,7 +943,7 @@ display_framebuffer () {
 		framebuffer_command+=" -screen ${DISPLAY_NUMBER}"
 		framebuffer_command+=" ${geometry}x24"
 
-		${framebuffer_command} > /dev/null 2>&1 &
+		${framebuffer_command} > "${sink}" 2>&1 &
 	fi
 
 	if [[ "${display}" = [xX][1][1] ]]
@@ -1034,7 +1034,7 @@ display_start () {
 			then
 				# hide if selection file is present
 
-				display_geometry > /dev/null 2>&1
+				display_geometry > "${sink}" 2>&1
 			else
 				# show if selection file is not present
 
@@ -1099,7 +1099,7 @@ display_stop () {
 	then
 		# framebuffer
 
-		kill -9 $(pidof Xvfb)  > /dev/null 2>&1 &
+		kill -9 $(pidof Xvfb)  > "${sink}" 2>&1 &
 
 		frobulator.process "Stopping display framebuffer"
 
@@ -1107,7 +1107,7 @@ display_stop () {
 	then
 		# vnc
 
-		x11vnc -R stop > /dev/null 2>&1 &
+		x11vnc -R stop > "${sink}" 2>&1 &
 
 		frobulator.process "Stopping display server"
 
@@ -1121,7 +1121,7 @@ display_stop () {
 	then
 		# x11
 
-		kill -9 $(pidof app_process / com.termux.x11.Loader) > /dev/null 2>&1 &
+		kill -9 $(pidof app_process / com.termux.x11.Loader) > "${sink}" 2>&1 &
 
 		frobulator.process "Stopping display loader"
 
@@ -1247,7 +1247,7 @@ application_handle () {
 				--warning												\
 					--width="200"										\
 					--window-icon="${HOME}/.dextop/dextop.svg"	\
-					--text="Application '${application}' not found." 2> /dev/null &
+					--text="Application '${application}' not found." 2> "${sink}" &
 		fi
 	fi
 }
