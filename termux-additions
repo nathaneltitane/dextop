@@ -92,8 +92,7 @@ frobulator.separate
 
 frobulator.ask "Install Termux additons?"
 
-read reply
-echo
+frobulator.read reply
 
 if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 then

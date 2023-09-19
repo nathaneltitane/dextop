@@ -194,8 +194,7 @@ image_version () {
 
 		frobulator.ipt "Selection:"
 
-		read selection
-		echo
+		frobulator.read selection
 
 		unset distribution_version
 

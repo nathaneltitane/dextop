@@ -343,8 +343,7 @@ container_handle () {
 
 			frobulator.ipt "Selection:"
 
-			read selection
-			echo
+			frobulator.read selection
 		else
 			break
 		fi
@@ -809,8 +808,7 @@ display_handle () {
 
 			frobulator.ipt "Selection:"
 
-			read selection
-			echo
+			frobulator.read selection
 		else
 			break
 		fi
@@ -848,18 +846,15 @@ display_handle () {
 
 		frobulator.ipt "Set width" "[ pixels ]"
 
-		read width
-		echo
+		frobulator.read width
 
 		frobulator.ipt "Set height" "[ pixels ]"
 
-		read height
-		echo
+		frobulator.read height
 
 		frobulator.ipt "Set display number" "[ e.g. 1 ]"
 
-		read display
-		echo
+		frobulator.read display
 
 		format="Custom"
 		geometry="${width}x${height}"

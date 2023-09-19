@@ -101,8 +101,7 @@ frobulator.separate
 
 frobulator.ask "Check for updates?"
 
-read reply
-echo
+frobulator.read reply
 
 if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 then
@@ -147,8 +146,7 @@ then
 
 			frobulator.ask "Update?"
 
-			read reply
-			echo
+			frobulator.read reply
 
 			if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
 			then
