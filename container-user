@@ -168,13 +168,13 @@ user_interactive () {
 	frobulator.wrn "Creating user" "[ ${user_name} ]"
 	echo
 
-	# use /dev/null redirection:
+	# use "${sink}" redirection:
 	# 'adduser' prevents stdout error redirect - cannot use 'frobulator.silence'
 
 	adduser					\
 		--gecos "${gecos}"	\
 		--shell "${SHELL}"	\
-		--disabled-password "${user_name}" > /dev/null
+		--disabled-password "${user_name}" > "${sink}"
 }
 
 user_noninteractive () {
