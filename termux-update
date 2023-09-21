@@ -55,7 +55,9 @@ repository_url="https://f-droid.org/repo"
 
 clean () {
 
-	rm -rf "${PREFIX}"/tmp/*.apk
+	rm					\
+		--recursive		\
+		--force			 "${PREFIX}"/tmp/*.apk
 }
 
 trap 'clean' EXIT

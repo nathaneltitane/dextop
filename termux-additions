@@ -52,7 +52,9 @@ frobulator.script "Setting up ${script#*-}"
 
 clean () {
 
-	rm -rf "${PREFIX}"/tmp/*.apk
+	rm					\
+		--recursive		\
+		--force			 "${PREFIX}"/tmp/*.apk
 }
 
 trap 'clean' EXIT

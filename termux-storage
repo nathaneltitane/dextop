@@ -107,21 +107,27 @@ echo
 
 if [ -d "${HOME}"/storage ]
 then
-	rm -rf "${HOME}"/storage
+	rm					\
+		--recursive		\
+		--force			 "${HOME}"/storage
 fi
 
 # /media
 
 if [ -d "${PREFIX}"/media ]
 then
-	rm -rf "${PREFIX}"/media/*
+	rm					\
+		--recursive		\
+		--force			 "${PREFIX}"/media/*
 fi
 
 # /storage
 
 if [ -d "${PREFIX}"/storage ]
 then
-	rm -rf "${PREFIX}"/storage/*
+	rm					\
+		--recursive		\
+		--force			 "${PREFIX}"/storage/*
 fi
 
 # generate symbolic links
