@@ -108,6 +108,7 @@ security_list+=(
 
 utilities_list+=(
 	sudo
+	ssh
 )
 
 vnc_list+=(
