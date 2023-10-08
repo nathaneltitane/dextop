@@ -132,6 +132,7 @@ utilities_list+=(
 	htop
 	ncurses
 	ncurses-utils
+	openssh
 	proot
 	ranger
 	zip
