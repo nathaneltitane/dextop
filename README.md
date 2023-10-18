@@ -66,7 +66,7 @@ Given the devices Dextop was developped on and made for, the **ARM64 V8a** archi
 
 A backup routine has also been built that archives the user's home directory before proceeding, regardless, to ensure some kind of safety.
 
-Once generated, it can be found under the user's home directory with the corresponding stamp as 'dextop-backup-MM-DD-YYY-HH-MM-SS.tar.gz'
+Once generated, it can be found under the user's home directory with the corresponding stamp as 'dextop-backup-MM-DD-YYYY-HH-MM-SS.tar.gz'
 
 ---
 
