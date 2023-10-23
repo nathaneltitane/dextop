@@ -192,4 +192,3 @@ then
 fi
 
 frobulator.countdown 3 "Continuing" "[ ${script} ]"
-echo
