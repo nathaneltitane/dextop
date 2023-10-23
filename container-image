@@ -144,9 +144,9 @@ image_version () {
 		# list supported distribution versions
 
 		debian_versions=(
-			debian	10	"buster"
-			debian	11	"bullseye"
-			debian	12	"bookworm"
+			debian	10	buster
+			debian	11	bullseye
+			debian	12	bookworm
 		)
 
 		fedora_versions=(
@@ -156,10 +156,10 @@ image_version () {
 		)
 
 		ubuntu_versions=(
-			ubuntu	18.04	"bionic beaver"
-			ubuntu	20.04	"focal fossa"
-			ubuntu	22.04	"jammy jellyfish"
-			ubuntu	23.04	"lunar lobster"
+			ubuntu	18.04	bionic
+			ubuntu	20.04	focal
+			ubuntu	22.04	jammy
+			ubuntu	23.04	lunar
 		)
 
 		versions=(
