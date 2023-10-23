@@ -203,13 +203,11 @@ failsafe_intent () {
 
 	frobulator.silence "apt update" &
 
-	frobulator.progress "Please wait..."
-	echo
+	frobulator.progress update
 
 	frobulator.silence "yes | apt upgrade" &
 
-	frobulator.progress "Upgrading..."
-	echo
+	frobulator.progress upgrade
 
 }
 
