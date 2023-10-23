@@ -201,9 +201,15 @@ failsafe_intent () {
 
 	# run repository update to prevent install failure
 
-	apt update
+	frobulator.silence "apt update" &
 
-	yes | apt upgrade
+	frobulator.progress "Please wait..."
+	echo
+
+	frobulator.silence "yes | apt upgrade" &
+
+	frobulator.progress "Upgrading..."
+	echo
 
 }
 
