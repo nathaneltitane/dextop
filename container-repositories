@@ -48,7 +48,7 @@ frobulator.script "Setting up ${script#*-}"
 
 # defaults /////////////////////////////////////////////////////////////////////
 
-# override main source list file
+# format sources list file
 
 if [ -f /etc/apt/sources.list ]
 then
@@ -57,9 +57,6 @@ then
 		-e '/ˆ\#.*/d'						\
 		-e '/ˆ$/d'							/etc/apt/sources.list
 fi
-
-
-
 
 # update lists
 
