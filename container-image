@@ -782,6 +782,26 @@ image_sources () {
 		deb-src http://deb.debian.org/${distribution_name}/                  ${distribution_codename}-updates    main non-free-firmware
 		FILE
 	fi
+
+	if [ "${distribution_name}" = "ubuntu" ]
+	then
+		cat <<- FILE > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/sources.list
+		deb http://archive.ubuntu.com/${distribution_name}/                  ${distribution_codename}            main restricted universe multiverse
+		deb-src http://archive.ubuntu.com/${distribution_name}/              ${distribution_codename}            main restricted universe multiverse
+
+		deb http://archive.ubuntu.com/${distribution_name}/                  ${distribution_codename}-security   main restricted universe multiverse
+		deb-src http://archive.ubuntu.com/${distribution_name}/              ${distribution_codename}-security   main restricted universe multiverse
+
+		deb http://archive.ubuntu.com/${distribution_name}/                  ${distribution_codename}-updates    main restricted universe multiverse
+		deb-src http://archive.ubuntu.com/${distribution_name}/              ${distribution_codename}-updates    main restricted universe multiverse
+
+		deb http://archive.ubuntu.com/${distribution_name}/                  ${distribution_codename}-backports  main restricted universe multiverse
+		deb-src http://archive.ubuntu.com/${distribution_name}/              ${distribution_codename}-backports  main restricted universe multiverse
+
+		deb http://archive.canonical.com/${distribution_name}/               ${distribution_codename}            partner
+		deb-src http://archive.canonical.com/${distribution_name}/           ${distribution_codename}            partner
+		FILE
+	fi
 }
 
 if [ "${option}" = "image" ]
