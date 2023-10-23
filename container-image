@@ -765,6 +765,25 @@ image_preload () {
 	FILE
 }
 
+image_sources () {
+
+	# generate sources file
+
+	if [ "${distribution_name}" = "debian" ]
+	then
+		cat <<- FILE > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/sources.list
+		deb http://deb.debian.org/${distribution_name}/                      ${distribution_codename}            main non-free-firmware
+		deb-src http://deb.debian.org/${distribution_name}/                  ${distribution_codename}            main non-free-firmware
+
+		deb http://security.debian.org/${distribution_name}-security/        ${distribution_codename}-security   main non-free-firmware
+		deb-src http://security.debian.org/${distribution_name}-security/    ${distribution_codename}-security   main non-free-firmware
+
+		deb http://deb.debian.org/${distribution_name}/                      ${distribution_codename}-updates    main non-free-firmware
+		deb-src http://deb.debian.org/${distribution_name}/                  ${distribution_codename}-updates    main non-free-firmware
+		FILE
+	fi
+}
+
 if [ "${option}" = "image" ]
 then
 	# validate distribution name and version

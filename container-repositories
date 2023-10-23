@@ -50,10 +50,16 @@ frobulator.script "Setting up ${script#*-}"
 
 # override main source list file
 
-sed -i									\
-	-e 's/ˆ\# deb-src/deb-src/g'		\
-	-e '/ˆ\#.*/d'						\
-	-e '/ˆ$/d'							/etc/apt/sources.list
+if [ -f /etc/apt/sources.list ]
+then
+	sed -i									\
+		-e 's/ˆ\# deb-src/deb-src/g'		\
+		-e '/ˆ\#.*/d'						\
+		-e '/ˆ$/d'							/etc/apt/sources.list
+fi
+
+
+
 
 # update lists
 
