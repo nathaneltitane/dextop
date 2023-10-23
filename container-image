@@ -109,6 +109,8 @@ distribution_name="debian"
 
 distribution_version="12"
 
+distribution_codename="bookworm"
+
 # defaults /////////////////////////////////////////////////////////////////////
 
 if [ -z "${distribution_name}" ]
@@ -121,14 +123,20 @@ then
 	distribution_version="${distribution_version}"
 fi
 
+if [ -z "${distribution_codename}" ]
+then
+	distribution_codename="${distribution_codename}"
+fi
+
 # functions ////////////////////////////////////////////////////////////////////
 
 image_version () {
 
 	# list distributions for setup
 
-	if [ -z "${distribution_name}"    ] || \
-	   [ -z "${distribution_version}" ]
+	if [ -z "${distribution_name}"     ] || \
+	   [ -z "${distribution_version}"  ] || \
+	   [ -z "${distribution_codename}" ]
 	then
 		frobulator.msg "Select distribution version to setup."
 		echo
