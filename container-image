@@ -105,9 +105,9 @@ frobulator.script "Setting up ${script#*-}"
 
 # variables ////////////////////////////////////////////////////////////////////
 
-distribution_name="ubuntu"
+distribution_name="debian"
 
-distribution_version="23.04"
+distribution_version="12"
 
 # defaults /////////////////////////////////////////////////////////////////////
 
@@ -134,6 +134,12 @@ image_version () {
 
 		# list supported distribution versions
 
+		debian_versions=(
+			debian	10	"buster"
+			debian	11	"bullseye"
+			debian	12	"bookworm"
+		)
+
 		fedora_versions=(
 			fedora	33
 			fedora	34
@@ -141,13 +147,14 @@ image_version () {
 		)
 
 		ubuntu_versions=(
-			ubuntu	18.04
-			ubuntu	20.04
-			ubuntu	22.04
-			ubuntu	23.04
+			ubuntu	18.04	"bionic beaver"
+			ubuntu	20.04	"focal fossa"
+			ubuntu	22.04	"jammy jellyfish"
+			ubuntu	23.04	"lunar lobster"
 		)
 
 		versions=(
+			${debian_versions[@]}
 		#	${fedora_versions[@]}
 			${ubuntu_versions[@]}
 		)
@@ -162,8 +169,9 @@ image_version () {
 		do
 			name="${versions[$i]}"
 			version="${versions[$i+1]}"
+			codename="${versions[$i+2]}"
 
-			number=$((($i/2) + 1))
+			number=$(( ( $i / 2 ) + 1 ))
 
 			if (( $i/2 >= 0 && $i/2 <= 8 ))
 			then
@@ -211,6 +219,7 @@ image_version () {
 
 			distribution_name="${name}"
 			distribution_version="${version}"
+			distribution_codename="${codename}"
 		fi
 
 		# handle distribution code markup
@@ -238,6 +247,7 @@ image_version () {
 		export distribution_name="${distribution_name}"
 		export distribution_release="${distribution_release}"
 		export distribution_version="${distribution_version}"
+		export distribution_codename="${distribution_codename}"
 	fi
 }
 
@@ -254,6 +264,17 @@ image_architecture () {
 	)
 
 	# list supported image architechtures
+
+	if [ "${distribution_name}" = debian ]
+	then
+		image_architectures=(
+			arm64v8
+			arm32v7
+			amd64
+			i386
+			amd64
+		)
+	fi
 
 	if [ "${distribution_name}" = fedora ]
 	then
@@ -321,6 +342,14 @@ image_download () {
 
 	case "${distribution_name}"
 	in
+		debian)
+
+			image_url="https://github.com/debuerreotype/docker-debian-artifacts/blob/dist-${image_architecture}/${distribution_codename}"
+			image_archive="rootfs.tar.xz"
+			image_name="${distribution_name}-${distribution_version}"
+			image_file="${image_name}.tar.xz"
+		;;
+
 		fedora)
 			image_url="https://download.fedoraproject.org/pub/fedora/linux/releases/${distribution_version}/Container/${image_architecture}/images"
 			image_archive="Fedora-Container-Base-${distribution_version}-1.2.${image_architecture}.tar.xz"
@@ -389,6 +418,11 @@ image_extract () {
 
 	frobulator.directory "${PREFIX}"/cnt "${distribution_name}"/"${distribution_version}"
 
+	if [ "${distribution_name}" = debian ]
+	then
+		core_extract "${PREFIX}"/img/"${image_file}" "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
+	fi
+
 	if [ "${distribution_name}" = fedora ]
 	then
 		container_extract "${PREFIX}"/img/"${image_file}" "${PREFIX}"/img
@@ -410,6 +444,13 @@ image_handle () {
 
 	case "${distribution_name}"
 	in
+		[dD][eE][bB][iI][aA][nN])
+			distribution_name="${distribution_name,,}"
+
+			frobulator.scs "Supported distribution name."
+			echo
+		;;
+
 		[uU][bB][uU][nN][tT][uU])
 			distribution_name="${distribution_name,,}"
 
@@ -425,7 +466,7 @@ image_handle () {
 		;;
 
 		"")
-			distribution_name="ubuntu"
+			distribution_name="debian"
 
 			frobulator.err "Empty distribution name."
 			echo
@@ -433,7 +474,7 @@ image_handle () {
 
 
 		*)
-			distribution_name="ubuntu"
+			distribution_name="debian"
 
 			frobulator.err "Unsupported distribution name."
 			echo
@@ -443,33 +484,24 @@ image_handle () {
 		;;
 	esac
 
-	if [ "${distribution_name}" = "ubuntu" ]
+	if [ "${distribution_name}" = "debian" ]
 	then
 		case "${distribution_version}"
 		in
-			18*04|18*04*)
-				distribution_version="18.04.5"
-
-				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
-				echo
+			10)
+				distribution_version=10
 			;;
 
-			20*04|20*04*)
-				distribution_version="20.04.5"
-
-				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
-				echo
+			11)
+				distribution_version=11
 			;;
 
-			22*04|22*04*)
-				distribution_version="22.04.2"
+			12)
+				distribution_version=12
+			 ;;
 
-				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
-				echo
-			;;
-
-			"")
-				distribution_version="${distribution_version}"
+			 "")
+				distribution_version=12
 
 				frobulator.err "Distribution version not specified."
 				echo
@@ -478,8 +510,9 @@ image_handle () {
 				echo
 			;;
 
+
 			 *)
-				distribution_version="${distribution_version}"
+				distribution_version=12
 
 				frobulator.err "Unsupported distribution version."
 				echo
@@ -519,6 +552,53 @@ image_handle () {
 
 			 *)
 				distribution_version=35
+
+				frobulator.err "Unsupported distribution version."
+				echo
+
+				frobulator.wrn "Defaulting" "[ ${distribution_version} ]"
+				echo
+			;;
+		esac
+	fi
+
+	if [ "${distribution_name}" = "ubuntu" ]
+	then
+		case "${distribution_version}"
+		in
+			18*04|18*04*)
+				distribution_version="18.04.5"
+
+				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
+				echo
+			;;
+
+			20*04|20*04*)
+				distribution_version="20.04.5"
+
+				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
+				echo
+			;;
+
+			22*04|22*04*)
+				distribution_version="22.04.2"
+
+				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
+				echo
+			;;
+
+			"")
+				distribution_version="${distribution_version}"
+
+				frobulator.err "Distribution version not specified."
+				echo
+
+				frobulator.wrn "Defaulting" "[ ${distribution_version} ]"
+				echo
+			;;
+
+			 *)
+				distribution_version="${distribution_version}"
 
 				frobulator.err "Unsupported distribution version."
 				echo
