@@ -127,7 +127,8 @@ image_version () {
 
 	# list distributions for setup
 
-	if [ -z "${distribution_name}" ] || [ -z "${distribution_version}" ]
+	if [ -z "${distribution_name}"    ] || \
+	   [ -z "${distribution_version}" ]
 	then
 		frobulator.msg "Select distribution version to setup."
 		echo
@@ -184,7 +185,7 @@ image_version () {
 				printf '      [ %s ] %s %s' ${number} ${name}
 			fi
 
-			printf '%*s' $((pad_length - ${#name}))
+			printf '%*s' $(( pad_length - ${#name} ))
 			printf '%s\n' ${version}
 		done
 
@@ -317,7 +318,8 @@ image_architecture () {
 
 	# test image architecture string
 
-	if [ -z "$image_architecture" ] || [ -z "${device_architecture}" ]
+	if [ -z "$image_architecture"    ] || \
+	   [ -z "${device_architecture}" ]
 	then
 		image_architecture="N/A"
 
