@@ -197,7 +197,19 @@ fi
 
 # functions ////////////////////////////////////////////////////////////////////
 
-container_setup () {
+failsafe_intent () {
+
+	frobulator.fwd "Please wait..."
+	echo
+
+	failsafe_command=$(yes | pkg update)
+
+	frobulator.log "${failsafe_command}" &
+
+	frobulator.progress "upgrade"
+}
+
+container_intent () {
 
 	# make container setup location known
 
@@ -730,6 +742,10 @@ if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
 then
 	# dextop ///////////////////////////////////////////////////////////////////
 
+	# failsafe
+
+	failsafe_intent
+
 	# backup
 
 	if [ ! -f "${HOME}"/.dextop/dextop-backup-checkpoint ]
@@ -873,7 +889,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-container-initialization-checkpoint ]
 	then
-		container_setup
+		container_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-container-initialization-checkpoint
 	fi
@@ -882,7 +898,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-container-expansion-checkpoint ]
 	then
-		container_setup "${HOME}"/.local/bin/container-expansion
+		container_intent "${HOME}"/.local/bin/container-expansion
 
 		frobulator.file "${HOME}"/.dextop dextop-container-expansion-checkpoint
 	fi
@@ -891,7 +907,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-container-repositories-checkpoint ]
 	then
-		container_setup "${HOME}"/.local/bin/container-repositories
+		container_intent "${HOME}"/.local/bin/container-repositories
 
 		frobulator.file "${HOME}"/.dextop dextop-container-repositories-checkpoint
 	fi
@@ -900,7 +916,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-container-packages-checkpoint ]
 	then
-		container_setup "${HOME}"/.local/bin/container-packages
+		container_intent "${HOME}"/.local/bin/container-packages
 
 		frobulator.file "${HOME}"/.dextop dextop-container-packages-checkpoint
 	fi
@@ -909,7 +925,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-container-user-checkpoint ]
 	then
-		container_setup "${HOME}"/.local/bin/container-user
+		container_intent "${HOME}"/.local/bin/container-user
 
 		frobulator.file "${HOME}"/.dextop dextop-container-user-checkpoint
 	fi
