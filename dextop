@@ -202,9 +202,9 @@ failsafe_intent () {
 	frobulator.fwd "Please wait..."
 	echo
 
-	failsafe_command=$(yes | pkg update)
+	frobulator.log "apt update"
 
-	frobulator.log "${failsafe_command}" &
+	frobulator.log "yes | apt upgrade" &
 
 	frobulator.progress "upgrade"
 }
@@ -230,34 +230,38 @@ container_intent () {
 
 	# run as 'root' with default system parameters
 
-	proot																											\
-		--kill-on-exit																								\
-		--link2symlink																								\
-		--rootfs="${ROOT}"																							\
-		--change-id=0:0																								\
-		--pwd=/root																									\
-		--bind=/apex:/apex																							\
-		--bind=/data:/data																							\
-		--bind=/dev:/dev																							\
-		--bind=/dev/urandom:/dev/random																				\
-		--bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt												\
-		--bind=/proc:/proc																							\
-		--bind=/proc/self/fd:/dev/fd																				\
-		--bind=/proc/self/fd/0:/dev/stdin																			\
-		--bind=/proc/self/fd/1:/dev/stdout																			\
-		--bind=/proc/self/fd/2:/dev/stderr																			\
-		--bind=/storage:/storage																					\
-		--bind=/sys:/sys																							\
-		--bind=/system:/system																						\
-		--bind=/vendor:/vendor																						\
-		--bind=/data/data/com.termux/files/home:/root																\
-			/usr/bin/env -i																							\
-			PREFIX=/data/data/com.termux/files/usr																	\
-			PATH="${HOME}"/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"${PREFIX}"/bin:	\
-			HOME=/root																								\
-			LANG=C.UTF-8																							\
-			TERM="${TERM}"																							\
-																													${@}
+	unset container_command
+
+	container_command+="proot"
+	container_command+=" --kill-on-exit"
+	container_command+=" --link2symlink"
+	container_command+=" --rootfs=${ROOT}"
+	container_command+=" --change-id=0:0"
+	container_command+=" --pwd=/root"
+	container_command+=" --bind=/apex:/apex"
+	container_command+=" --bind=/data:/data"
+	container_command+=" --bind=/dev:/dev"
+	container_command+=" --bind=/dev/urandom:/dev/random"
+	container_command+=" --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt"
+	container_command+=" --bind=/proc:/proc"
+	container_command+=" --bind=/proc/self/fd:/dev/fd"
+	container_command+=" --bind=/proc/self/fd/0:/dev/stdin"
+	container_command+=" --bind=/proc/self/fd/1:/dev/stdout"
+	container_command+=" --bind=/proc/self/fd/2:/dev/stderr"
+	container_command+=" --bind=/storage:/storage"
+	container_command+=" --bind=/sys:/sys"
+	container_command+=" --bind=/system:/system"
+	container_command+=" --bind=/vendor:/vendor"
+	container_command+=" --bind=/data/data/com.termux/files/home:/root"
+	container_command+=" /usr/bin/env -i"
+	container_command+=" PREFIX=/data/data/com.termux/files/usr"
+	container_command+=" PATH=${HOME}/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/bin:"
+	container_command+=" HOME=/root"
+	container_command+=" LANG=C.UTF-8"
+	container_command+=" TERM=${TERM}"
+	container_command+=" ${@}"
+
+	${container_command}
 }
 
 architecture_intent () {
