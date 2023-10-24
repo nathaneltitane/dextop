@@ -48,15 +48,18 @@ frobulator.script "Setting up ${script#*-}"
 
 # defaults /////////////////////////////////////////////////////////////////////
 
-# override main source list file
+if [ -f /etc/apt/sources.list ]
+then
+	# override main source list file
 
-sed -i									\
-	-e 's/ˆ\# deb-src/deb-src/g'		\
-	-e '/ˆ\#.*/d'						\
-	-e '/ˆ$/d'							/etc/apt/sources.list
+	sed -i									\
+		-e 's/ˆ\# deb-src/deb-src/g'		\
+		-e '/ˆ\#.*/d'						\
+		-e '/ˆ$/d'							/etc/apt/sources.list
 
-# update lists
+	# update lists
 
-frobulator.log "apt update" &
+	frobulator.log "apt update" &
 
-frobulator.progress "refresh"
+	frobulator.progress "refresh"
+fi
