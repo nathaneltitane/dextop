@@ -440,6 +440,8 @@ container_user () {
 
 		# verify login options and parameters
 
+		# no user name specified
+
 		if [[ -z "${user_name}" ]]
 		then
 			user_name="root"
@@ -464,6 +466,8 @@ container_user () {
 			break
 		fi
 
+		# valid user name found
+
 		if [[ "${user_name}" == "${USER}" ]]
 		then
 			USER="${user_name}"
@@ -479,6 +483,8 @@ container_user () {
 
 			break
 		fi
+
+		# user naem not found
 
 		if [[ "${entry}" == "${last_entry}" ]]
 		then
