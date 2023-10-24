@@ -186,6 +186,15 @@ then
 	session="$(cat ${HOME}/.dextop/dextop-session)"
 fi
 
+if [ -z "${username}" ]
+then
+	username="root"
+
+	user_name="${username}"
+	USER="${username}"
+fi
+
+
 if [ -z "${DISPLAY}" ]
 then
 	DISPLAY=":0"
