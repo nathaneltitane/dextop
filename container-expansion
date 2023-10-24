@@ -52,8 +52,11 @@ command_expand=$(yes | command -v unminimize)
 
 # functions ////////////////////////////////////////////////////////////////////
 
-# expand system image
+if [[ $(command -v unminimize) ]]
+then
+	# expand system image
 
-frobulator.silence "${command_expand}" &
+	frobulator.silence "${command_expand}" &
 
-frobulator.progress "expand"
+	frobulator.progress "expand"
+fi
