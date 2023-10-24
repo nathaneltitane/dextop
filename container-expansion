@@ -1,4 +1,4 @@
-unm#!/bin/bash
+#!/bin/bash
 
 # dependencies /////////////////////////////////////////////////////////////////
 
@@ -54,9 +54,6 @@ command_expand=$(yes | command -v unminimize)
 
 # expand system image
 
-if [[ $(command -v unminimize) ]]
-then
-	frobulator.silence "${command_expand}" &
+frobulator.silence "${command_expand}" &
 
-	frobulator.progress "expand"
-fi
+frobulator.progress "expand"

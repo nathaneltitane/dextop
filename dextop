@@ -197,32 +197,18 @@ fi
 
 # functions ////////////////////////////////////////////////////////////////////
 
-failsafe_intent () {
-
-	# run repository update to prevent install failure
-
-	frobulator.silence "apt update" &
-
-	frobulator.progress "update"
-
-	frobulator.silence "yes | apt upgrade" &
-
-	frobulator.progress "upgrade"
-
-}
-
-container_intent () {
+container_setup () {
 
 	# make container setup location known
 
-	# 	if [ $# -eq 0 ]
-	# 	then
-	# 		ROOT=("${PREFIX}"/cnt/*/*)
-	#
-	# 		export ROOT="${ROOT}"
-	#
-	# 		return
-	# 	fi
+	if [ $# -eq 0 ]
+	then
+		ROOT=("${PREFIX}"/cnt/*/*)
+
+		export ROOT="${ROOT}"
+
+		return
+	fi
 
 	# run container setup commands through 'proot'
 
@@ -386,6 +372,7 @@ utility_intent () {
 		termux-update
 		termux-storage
 		termux-additions
+		container-expansion
 		container-image
 		container-packages
 		container-repositories
@@ -743,10 +730,6 @@ if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
 then
 	# dextop ///////////////////////////////////////////////////////////////////
 
-	# failsafe
-
-	failsafe_intent
-
 	# backup
 
 	if [ ! -f "${HOME}"/.dextop/dextop-backup-checkpoint ]
@@ -890,7 +873,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-container-initialization-checkpoint ]
 	then
-		container_intent
+		container_setup
 
 		frobulator.file "${HOME}"/.dextop dextop-container-initialization-checkpoint
 	fi
@@ -899,7 +882,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-container-expansion-checkpoint ]
 	then
-		container_intent "${HOME}"/.local/bin/container-expansion
+		container_setup "${HOME}"/.local/bin/container-expansion
 
 		frobulator.file "${HOME}"/.dextop dextop-container-expansion-checkpoint
 	fi
@@ -908,7 +891,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-container-repositories-checkpoint ]
 	then
-		container_intent "${HOME}"/.local/bin/container-repositories
+		container_setup "${HOME}"/.local/bin/container-repositories
 
 		frobulator.file "${HOME}"/.dextop dextop-container-repositories-checkpoint
 	fi
@@ -917,7 +900,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-container-packages-checkpoint ]
 	then
-		container_intent "${HOME}"/.local/bin/container-packages
+		container_setup "${HOME}"/.local/bin/container-packages
 
 		frobulator.file "${HOME}"/.dextop dextop-container-packages-checkpoint
 	fi
@@ -926,7 +909,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-container-user-checkpoint ]
 	then
-		container_intent "${HOME}"/.local/bin/container-user
+		container_setup "${HOME}"/.local/bin/container-user
 
 		frobulator.file "${HOME}"/.dextop dextop-container-user-checkpoint
 	fi
