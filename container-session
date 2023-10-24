@@ -448,6 +448,9 @@ container_user () {
 			USER_ID="0"
 			GROUP_ID="0"
 
+			UID="${USER_ID}"
+			GID="${GROUP_ID}"
+
 			if [ -d "${ROOT}"/root ]
 			then
 				HOME="/root"
