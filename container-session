@@ -468,8 +468,14 @@ container_user () {
 		then
 			USER="${user_name}"
 
-			frobulator.scs "Valid user name - Accessing" "[ '${user_name}' ]"
-			echo
+			if [[ "${user_name}" == "root" ]]
+			then
+				frobulator.wrn "Valid user name - Superuser" "[ '${user_name}' ]"
+				echo
+			else
+				frobulator.scs "Valid user name - Accessing" "[ '${user_name}' ]"
+				echo
+			fi
 
 			break
 		fi
