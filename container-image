@@ -353,7 +353,6 @@ image_download () {
 	case "${distribution_name}"
 	in
 		debian)
-
 			image_url="https://github.com/debuerreotype/docker-debian-artifacts/raw/dist-${image_architecture}/${distribution_codename}"
 			image_archive="rootfs.tar.xz"
 			image_name="${distribution_name}-${distribution_version}"
