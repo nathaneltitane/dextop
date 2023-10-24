@@ -804,21 +804,6 @@ image_sources () {
 	fi
 }
 
-image_expand () {
-
-	command_expand=$(yes | command -v unminimize)
-
-	if [ "${distribution_name}" = "ubuntu" ]
-	then
-		if [[ $(command -v unminimize) ]]
-		then
-			frobulator.silence "${command_expand}" &
-
-			frobulator.progress "expand"
-		fi
-	fi
-}
-
 if [ "${option}" = "image" ]
 then
 	# validate distribution name and version

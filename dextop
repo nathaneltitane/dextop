@@ -895,6 +895,15 @@ then
 		frobulator.file "${HOME}"/.dextop dextop-container-initialization-checkpoint
 	fi
 
+	# container expansion
+
+	if [ ! -f "${HOME}"/.dextop/dextop-container-expansion-checkpoint ]
+	then
+		container_intent "${HOME}"/.local/bin/container-expansion
+
+		frobulator.file "${HOME}"/.dextop dextop-container-expansion-checkpoint
+	fi
+
 	# container repositories
 
 	if [ ! -f "${HOME}"/.dextop/dextop-container-repositories-checkpoint ]
