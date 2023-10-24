@@ -186,15 +186,6 @@ then
 	session="$(cat ${HOME}/.dextop/dextop-session)"
 fi
 
-if [ -z "${username}" ]
-then
-	username="root"
-
-	user_name="${username}"
-	USER="${username}"
-fi
-
-
 if [ -z "${DISPLAY}" ]
 then
 	DISPLAY=":0"
@@ -449,6 +440,16 @@ container_user () {
 
 		# verify login options and parameters
 
+		if [[ -z "${user_name}" ]]
+		then
+			USER="root"
+
+			frobulator.wrn "No user name - Defaulting" "[ '${USER}' ]"
+			echo
+
+			break
+		fi
+
 		if [[ "${user_name}" == "${USER}" ]]
 		then
 			USER="${USER}"
@@ -459,11 +460,17 @@ container_user () {
 			break
 		fi
 
+		if [[ "${entry}" == "${last_entry}" ]]
+		then
+			USER="root"
+
+			frobulator.err "Invalid user name - Defaulting" "[ '${USER}' ]"
+			echo
+		fi
+
 		# specify login defaults
 
-		if [[ "${username}" = "root"        ]] || \
-		   [[ -z "${user_name}"             ]] || \
-		   [[ "${entry}" == "${last_entry}" ]]
+		if [[ -z "${user_name}" ]] || [[ "${entry}" == "${last_entry}" ]]
 		then
 			USER="root"
 			USER_ID="0"
