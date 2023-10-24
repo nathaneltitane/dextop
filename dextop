@@ -386,7 +386,6 @@ utility_intent () {
 		termux-update
 		termux-storage
 		termux-additions
-		container-expansion
 		container-image
 		container-packages
 		container-repositories
@@ -894,15 +893,6 @@ then
 		container_intent
 
 		frobulator.file "${HOME}"/.dextop dextop-container-initialization-checkpoint
-	fi
-
-	# container expansion
-
-	if [ ! -f "${HOME}"/.dextop/dextop-container-expansion-checkpoint ]
-	then
-		container_intent "${HOME}"/.local/bin/container-expansion
-
-		frobulator.file "${HOME}"/.dextop dextop-container-expansion-checkpoint
 	fi
 
 	# container repositories
