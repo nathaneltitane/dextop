@@ -521,7 +521,7 @@ container_session () {
 	[ -d "/sys" ]                                 && session_command+=" --bind=/sys:/sys"
 	[ -d "/system" ]                              && session_command+=" --bind=/system:/system"
 	[ -d "/vendor" ]                              && session_command+=" --bind=/vendor:/vendor"
-	[ -d "${PREFIX%/*}"/home ]                    && session_command+=" --bind=${PREFIX%/*}/home:${HOME}" #
+	[ -d "${PREFIX%/*}"/home ]                    && session_command+=" --bind=${PREFIX%/*}/home:${HOME}"
 	[ -d "${PREFIX}"/storage/external ]           && session_command+=" --bind=${PREFIX}/storage/external:/media/external"
 	[ -d "${PREFIX}"/storage/internal ]           && session_command+=" --bind=${PREFIX}/storage/internal:/media/internal"
 	[ -d "${PREFIX}"/storage/internal/Documents ] && session_command+=" --bind=${PREFIX}/storage/internal/Documents:/home/${USER}/Documents"
