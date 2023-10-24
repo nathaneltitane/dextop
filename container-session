@@ -442,37 +442,8 @@ container_user () {
 
 		if [[ -z "${user_name}" ]]
 		then
-			USER="root"
+			user_name="root"
 
-			frobulator.wrn "No user name - Defaulting" "[ '${USER}' ]"
-			echo
-
-			break
-		fi
-
-		if [[ "${user_name}" == "${USER}" ]]
-		then
-			USER="${USER}"
-
-			frobulator.scs "Valid user name" "[ '${USER}' ]"
-			echo
-
-			break
-		fi
-
-		if [[ "${entry}" == "${last_entry}" ]]
-		then
-			USER="root"
-
-			frobulator.err "Invalid user name - Defaulting" "[ '${USER}' ]"
-			echo
-		fi
-
-		# specify login defaults
-
-		if [[ -z "${user_name}"             ]] || \
-		   [[ "${entry}" == "${last_entry}" ]]
-		then
 			USER="root"
 			USER_ID="0"
 			GROUP_ID="0"
@@ -483,6 +454,30 @@ container_user () {
 			else
 				HOME="/"
 			fi
+
+			frobulator.wrn "No user name - Defaulting" "[ '${user_name}' ]"
+			echo
+
+			break
+		fi
+
+		if [[ "${user_name}" == "${USER}" ]]
+		then
+			USER="${user_name}"
+
+			frobulator.scs "Valid user name - Accessing" "[ '${user_name}' ]"
+			echo
+
+			break
+		fi
+
+		if [[ "${entry}" == "${last_entry}" ]]
+		then
+
+			frobulator.err "Invalid user name - Aborting" "[ '${user_name}' ]"
+			echo
+
+			exit 1
 		fi
 
 	done < "${ROOT}"/etc/passwd
