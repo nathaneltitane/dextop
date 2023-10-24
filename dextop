@@ -253,7 +253,7 @@ container_intent () {
 	container_command+=" --bind=/system:/system"
 	container_command+=" --bind=/vendor:/vendor"
 	container_command+=" --bind=/data/data/com.termux/files/home:/root"
-	container_command+=" /usr/bin/env -i"
+	container_command+=" env -i"
 	container_command+=" PREFIX=/data/data/com.termux/files/usr"
 	container_command+=" PATH+=/usr/local/sbin:"
 	container_command+=" PATH+=/usr/local/bin:"
