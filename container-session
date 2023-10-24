@@ -440,16 +440,6 @@ container_user () {
 
 		# verify login options and parameters
 
-		if [[ -z "${user_name}" ]]
-		then
-			USER="root"
-
-			frobulator.wrn "No user name - Defaulting" "[ '${USER}' ]"
-			echo
-
-			break
-		fi
-
 		if [[ "${user_name}" == "${USER}" ]]
 		then
 			USER="${USER}"
@@ -460,17 +450,11 @@ container_user () {
 			break
 		fi
 
-		if [[ "${entry}" == "${last_entry}" ]]
-		then
-			USER="root"
-
-			frobulator.err "Invalid user name - Defaulting" "[ '${USER}' ]"
-			echo
-		fi
-
 		# specify login defaults
 
-		if [[ -z "${user_name}" ]] || [[ "${entry}" == "${last_entry}" ]]
+		if [[ "${username}" = "root"        ]] || \
+		   [[ -z "${user_name}"             ]] || \
+		   [[ "${entry}" == "${last_entry}" ]]
 		then
 			USER="root"
 			USER_ID="0"
@@ -521,7 +505,7 @@ container_session () {
 	[ -d "/sys" ]                                 && session_command+=" --bind=/sys:/sys"
 	[ -d "/system" ]                              && session_command+=" --bind=/system:/system"
 	[ -d "/vendor" ]                              && session_command+=" --bind=/vendor:/vendor"
-	[ -d "${PREFIX%/*}"/home ]                    && session_command+=" --bind=${PREFIX%/*}/home:/home/${USER}"
+	[ -d "${PREFIX%/*}"/home ]                    && session_command+=" --bind=${PREFIX%/*}/home:${HOME}"
 	[ -d "${PREFIX}"/storage/external ]           && session_command+=" --bind=${PREFIX}/storage/external:/media/external"
 	[ -d "${PREFIX}"/storage/internal ]           && session_command+=" --bind=${PREFIX}/storage/internal:/media/internal"
 	[ -d "${PREFIX}"/storage/internal/Documents ] && session_command+=" --bind=${PREFIX}/storage/internal/Documents:/home/${USER}/Documents"
