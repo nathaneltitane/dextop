@@ -202,9 +202,11 @@ failsafe_intent () {
 	frobulator.fwd "Please wait..."
 	echo
 
-	frobulator.log "apt update"
+	yes | apt update > "${sink}" 2>&1 &
 
-	frobulator.log "yes | apt upgrade" &
+	frobulator.progress "update"
+
+	yes | apt upgrade > "${sink}" 2>&1 &
 
 	frobulator.progress "upgrade"
 }
