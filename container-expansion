@@ -46,14 +46,14 @@ frobulator.script "Setting up ${script#*-}"
 
 # variables ////////////////////////////////////////////////////////////////////
 
-command_expand=$(yes | command -v unminimize)
-
 # defaults /////////////////////////////////////////////////////////////////////
 
 # functions ////////////////////////////////////////////////////////////////////
 
 if [[ $(command -v unminimize) ]]
 then
+	command_expand=$(yes | command -v unminimize)
+
 	# expand system image
 
 	frobulator.silence "${command_expand}" &
