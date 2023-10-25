@@ -105,7 +105,8 @@ frobulator.ask "Check for updates?"
 
 frobulator.read reply
 
-if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+if [[ "${reply}" = [yY]         ]] || \
+   [[ "${reply}" = [yY][eE][sS] ]]
 then
 	# process update
 
@@ -150,7 +151,8 @@ then
 
 			frobulator.read reply
 
-			if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+			if [[ "${reply}" = [yY]         ]] || \
+               [[ "${reply}" = [yY][eE][sS] ]]
 			then
 				frobulator.inf "Dowloading update."
 				echo

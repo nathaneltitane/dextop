@@ -96,7 +96,8 @@ frobulator.ask "Install Termux additons?"
 
 frobulator.read reply
 
-if [[ "${reply}" = [yY] ]] || [[ "${reply}" = [yY][eE][sS] ]]
+if [[ "${reply}" = [yY]         ]] || \
+   [[ "${reply}" = [yY][eE][sS] ]]
 then
 	packages_list+=(
 		termux-api.apk
