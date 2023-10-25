@@ -381,10 +381,6 @@ container_environment () {
 
 	# generate container environement
 
-	# make prefix path known
-
-	PREFIX="/data/data/com.termux/files/usr"
-
 	# set path:
 	# in order of retreival
 
