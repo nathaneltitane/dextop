@@ -65,3 +65,23 @@ then
 
 	frobulator.progress "refresh"
 fi
+
+# failsafe
+
+# run failsafe package update and upgrade
+
+yes | apt update > "${sink}" 2>&1 &
+
+frobulator.progress "update"
+
+yes | apt upgrade > "${sink}" 2>&1 &
+
+frobulator.progress "upgrade"
+
+# run failsafe package install:
+# prevents container side dependencies mismatch
+
+frobulator.failsafe curl &
+
+frobulator.fwd "Please wait..."
+echo
