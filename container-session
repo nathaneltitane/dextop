@@ -1268,7 +1268,7 @@ then
 	# check server type selection
 
 	if [[ "${display}" = [vV][nN][cC] ]] || \
-	   [[ "${display}" = [xX][1][1] ]]
+	   [[ "${display}" = [xX][1][1]   ]]
 	then
 		# start display session
 
