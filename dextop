@@ -257,6 +257,8 @@ container_intent () {
 		return
 	fi
 
+	# define root system default setup parameters
+
 	USER_ID="0"
 	GROUP_ID="0"
 
@@ -272,9 +274,11 @@ container_intent () {
 
 	unset LD_PRELOAD
 
-	# run as 'root' with default system parameters
+	# generate environement paths
 
 	environment_intent
+
+	# run as 'root' with default system parameters
 
 	proot																	\
 		--kill-on-exit														\
