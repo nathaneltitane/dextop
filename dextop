@@ -299,12 +299,12 @@ container_intent () {
 		--bind=/system:/system												\
 		--bind=/vendor:/vendor												\
 		--bind=/data/data/com.termux/files/home:"${ROOT_HOME}"				\
-		env -i																\
-			PREFIX="${PREFIX}"												\
-			PATH="${PATH}"													\
-			HOME="${ROOT_HOME}"												\
-			LANG="${LANG}"													\
-			TERM="${TERM}"													\
+			env -i															\
+				PREFIX="${PREFIX}"											\
+				PATH="${PATH}"												\
+				HOME="${ROOT_HOME}"											\
+				LANG="${LANG}"												\
+				TERM="${TERM}"												\
 																			${@}
 }
 
