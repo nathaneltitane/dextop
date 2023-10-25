@@ -220,8 +220,8 @@ image_version () {
 
 		if [[ "${selection}" =~ ^[0-9]+$ ]]
 		then
-			i=$((${selection}))
-			i=$(($i*2))
+			i=$(( ${selection} ))
+			i=$(( $i * 2 ))
 
 			version="${versions[i-1]}"
 			name="${versions[i-2]}"

@@ -70,9 +70,9 @@ translate_color () {
 
 	# translate hexadecimal  value
 
-	r=$((16#${hex:0:2}))
-	g=$((16#${hex:2:2}))
-	b=$((16#${hex:4:2}))
+	r=$(( 16#${hex:0:2} ))
+	g=$(( 16#${hex:2:2} ))
+	b=$(( 16#${hex:4:2} ))
 
 	# calculate float-point integer value
 

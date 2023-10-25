@@ -760,9 +760,9 @@ display_geometry () {
 		height="${geometries[$i+2]}"
 		geometry="${width}x${height}"
 
-		number=$((($i/3) + 1))
+		number=$(( ( $i / 3 ) + 1 ))
 
-		if (( $i/3 >= 0 && $i/3 <= 8 ))
+		if (( $i / 3 >= 0 && $i / 3 <= 8 ))
 		then
 			# handle number spacing for entries 1-9
 
@@ -773,7 +773,7 @@ display_geometry () {
 			printf '      [ %s ] %s' ${number} ${format}
 		fi
 
-		printf '%*s' $((pad_length - ${#format}))
+		printf '%*s' $(( pad_length - ${#format} ))
 		printf '%s\n' ${geometry}
 	done
 
@@ -839,8 +839,8 @@ display_handle () {
 
 	if [[ "${selection}" =~ ^[0-9]+$ ]]
 	then
-		i=$((${selection}))
-		i=$(($i*3))
+		i=$(( ${selection} ))
+		i=$(( $i * 3 ))
 
 		format="${geometries[$i-3]}"
 		width="${geometries[$i-2]}"
