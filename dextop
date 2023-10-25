@@ -215,6 +215,10 @@ environment_intent () {
 
 	# generate container environement
 
+	# make prefix path known
+
+	PREFIX="/data/data/com.termux/files/usr"
+
 	# set path:
 	# in order of retreival
 
@@ -263,8 +267,6 @@ container_intent () {
 	GROUP_ID="0"
 
 	ROOT_HOME="/root"
-
-	PREFIX="/data/data/com.termux/files/usr"
 
 	LANG="C.UTF-8"
 
