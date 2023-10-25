@@ -83,5 +83,5 @@ frobulator.progress "upgrade"
 
 frobulator.failsafe curl &
 
-frobulator.fwd "Please wait..."
+frobulator.stp "Please wait..."
 echo

@@ -199,7 +199,7 @@ fi
 
 failsafe_intent () {
 
-	frobulator.fwd "Please wait..."
+	frobulator.stp "Please wait..."
 	echo
 
 	yes | apt update > "${sink}" 2>&1 &
