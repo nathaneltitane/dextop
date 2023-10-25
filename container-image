@@ -404,7 +404,7 @@ image_extract () {
 
 	core_extract () {
 
-		# core/minimal system images
+		# core/minimal base images
 
 		proot											\
 			--link2symlink								\
