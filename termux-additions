@@ -137,4 +137,3 @@ done
 packages_list=()
 
 frobulator.countdown 5 "Continuing" "[ ${script} ]"
-echo

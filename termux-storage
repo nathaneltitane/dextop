@@ -85,7 +85,6 @@ then
 	storage_intent
 
 	frobulator.countdown 5 "Continuing" "[ ${script} ]"
-	echo
 
 else
 	# exists:
