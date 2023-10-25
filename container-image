@@ -814,6 +814,7 @@ if [ "${option}" = "selection" ]
 then
 	unset distribution_name
 	unset distribution_version
+	unset distribution_codename
 
 	# select image version
 
