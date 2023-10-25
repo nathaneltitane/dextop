@@ -115,7 +115,7 @@ else
 		termux-x11.apk
 	)
 
-	frobulator.inf "Setting up Termux X11 packages only."
+	frobulator.inf "Setting up Termux X11 package(s) only."
 	echo
 fi
 
