@@ -356,7 +356,7 @@ architecture_intent () {
 reload_intent () {
 
 	# termux settings reload:
-	# refresh command line interface with newly loaded settings
+	# update command line interface with dextop settings
 
 	unset settings_command
 
