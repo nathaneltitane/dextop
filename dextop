@@ -592,13 +592,13 @@ shell_intent () {
 	then
 		# link to user home
 
-		frobulator.link "${HOME}"/.local/bin "${HOME}"          bash-aliases       .bash_aliases
-		frobulator.link "${HOME}"/.local/bin "${HOME}"          bash-configuration .bashrc
-		frobulator.link "${HOME}"/.local/bin "${HOME}"          bash-configuration .bash_configuration
-		frobulator.link "${HOME}"/.local/bin "${HOME}"          bash-functions     .bash_functions
-		frobulator.link "${HOME}"/.local/bin "${HOME}"          bash-login         .bash_login
-		frobulator.link "${HOME}"/.local/bin "${HOME}"          bash-logout        .bash_logout
-		frobulator.link "${HOME}"/.local/bin "${HOME}"          bash-profile       .bash_profile
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-aliases       .bash_aliases
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-configuration .bashrc
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-configuration .bash_configuration
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-functions     .bash_functions
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-login         .bash_login
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-logout        .bash_logout
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-profile       .bash_profile
 
 		frobulator.file "${HOME}" .hushlogin
 	fi
