@@ -462,10 +462,10 @@ utility_intent () {
 
 		IFS=''
 
-		frobulator.msg "Option: update all utilities using 'all' argument."
+		frobulator.msg "Review utility name spelling and try again."
 		echo
 
-		frobulator.inf "Review utility name spelling and try again."
+		frobulator.inf "Update all known utilities using 'all' argument."
 		echo
 
 		exit 1
