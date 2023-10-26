@@ -451,12 +451,14 @@ utility_intent () {
 		frobulator.err "Unknown utility name" "[ '${utility}' ]"
 		echo
 
-		frobulator.msg "Listing known utilities" "[ version // ${version} ]"
+		frobulator.fwd "Listing known utilities..."
 		echo
+
+		frobulator.timeout
 
 		IFS=$'\n'
 
-		printf "[ > ] %s\n" ${utilities_list[@]}
+		printf "${marker_nul} %s\n" ${utilities_list[@]}
 
 		echo
 
