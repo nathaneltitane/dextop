@@ -332,7 +332,9 @@ container_handle () {
 		# range check:
 		# selection input must be in provided range and an integer
 
-		if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]] || [[ ! "${selection}" =~ ^[0-9]+$ ]]
+		if [[ "${selection}" -lt 1           ]] || \
+		   [[ "${selection}" -gt "${number}" ]] || \
+		   [[ ! "${selection}" =~ ^[0-9]+$   ]]
 		then
 			echo
 			frobulator.err "Invalid selection:"
@@ -808,7 +810,9 @@ display_handle () {
 		# range check:
 		# selection input must be in provided range and an integer
 
-		if [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]] || [[ ! "${selection}" =~ ^[0-9]+$ ]]
+		if [[ "${selection}" -lt 1           ]] || \
+		   [[ "${selection}" -gt "${number}" ]] || \
+		   [[ ! "${selection}" =~ ^[0-9]+$   ]]
 		then
 			echo
 			frobulator.err "Invalid selection:"

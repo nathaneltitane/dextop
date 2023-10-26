@@ -425,6 +425,7 @@ utility_intent () {
 	utilities_list+=(
 		termux-packages
 		termux-repositories
+		termux-failsafe
 		termux-update
 		termux-storage
 		termux-additions
@@ -432,6 +433,7 @@ utility_intent () {
 		container-image
 		container-packages
 		container-repositories
+		container-failsafe
 		container-session
 		container-settings
 		container-user

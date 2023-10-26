@@ -50,18 +50,16 @@ frobulator.script "Setting up ${script#*-}"
 
 # functions ////////////////////////////////////////////////////////////////////
 
-if [ -f /etc/apt/sources.list ]
-then
-	# format sources list file
+list=(
+	curl
+)
 
-	sed -i									\
-		-e 's/ˆ\# deb-src/deb-src/g'		\
-		-e '/ˆ\#.*/d'						\
-		-e '/ˆ$/d'							/etc/apt/sources.list
+# run failsafe package install:
+# prevents container side dependencies mismatch
 
-	# update lists
+frobulator.failsafe ${list[@]} &
 
-	frobulator.log "apt update" &
+frobulator.stp "Please wait..."
+echo
 
-	frobulator.progress "refresh"
-fi
+list=()
