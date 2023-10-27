@@ -75,6 +75,13 @@ do
 				shift
 			fi
 
+			if [ "${update}" = "shell" ]
+			then
+				shell="${3}"
+
+				shift
+			fi
+
 			shift
 		;;
 
