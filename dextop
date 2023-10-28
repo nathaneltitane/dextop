@@ -810,6 +810,18 @@ then
 		utility_intent
 	fi
 
+	if [[ "${update}" = [sS][hH][eE][lL][lL] ]]
+	then
+
+		frobulator.inf "Updating" "[ ${shell} ]"
+		echo
+
+		frobulator.fwd "Updating..."
+		echo
+
+		shell_intent
+	fi
+
 	if [[ "${update}" = [aA][dD][dD][iI][tT][iI][oO][nN][sS] ]]
 	then
 		frobulator.inf "Updating" "[ ${update} ]"
