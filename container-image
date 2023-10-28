@@ -673,6 +673,7 @@ image_groups () {
 
 	uid=${uid/uid=}
 	gid=${gid/gid=}
+
 	groups=${groups/groups=}
 
 	# set IFS
