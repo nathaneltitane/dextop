@@ -446,38 +446,48 @@ utility_intent () {
 		container-user
 	)
 
-	if [[ ${utilities_list[@]} =~ "${utility}" ]]
+	if [[ "${option}" = "update" ]]
 	then
-		frobulator.download get.dxtp.app "${HOME}"/.local/bin "${utility}"
+		if [[ ${utilities_list[@]} =~ "${utility}" ]]
+		then
+			frobulator.download get.dxtp.app "${HOME}"/.local/bin "${utility}"
 
-	elif [[ "${utility}" = "all" ]]
-	then
-		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
+		elif [[ "${utility}" = "all" ]]
+		then
+			frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
 
+		else
+			frobulator.err "Unknown utility name" "[ '${utility}' ]"
+			echo
+
+			frobulator.fwd "Listing known utilities..."
+			echo
+
+			frobulator.timeout
+
+			IFS=$'\n'
+
+			printf "${marker_nul} %s\n" ${utilities_list[@]}
+
+			echo
+
+			IFS=''
+
+			frobulator.msg "Review utility name spelling and try again."
+			echo
+
+			frobulator.inf "Update all known utilities using 'all' argument."
+			echo
+
+			exit 1
+		fi
+
+		frobulator.cpt "Complete" "[ Update // Utilities ]"
+		echo
+
+		exit
 	else
-		frobulator.err "Unknown utility name" "[ '${utility}' ]"
-		echo
-
-		frobulator.fwd "Listing known utilities..."
-		echo
-
-		frobulator.timeout
-
-		IFS=$'\n'
-
-		printf "${marker_nul} %s\n" ${utilities_list[@]}
-
-		echo
-
-		IFS=''
-
-		frobulator.msg "Review utility name spelling and try again."
-		echo
-
-		frobulator.inf "Update all known utilities using 'all' argument."
-		echo
-
-		exit 1
+		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
 	fi
 
 	utilities_list=()
@@ -593,41 +603,84 @@ shell_intent () {
 		bash-profile
 	)
 
-	frobulator.download get.trmnl.me "${HOME}"/.local/bin ${shell_list[@]}
-
-	if [ -z "${option}" ] || [ "${option}" = "termux" ]
+	if [[ "${option}" = "update" ]]
 	then
-		# link to user home
+		if [[ ${shell_list[@]} =~ "${shell}" ]]
+		then
+			frobulator.download get.trmnl.me "${HOME}"/.local/bin "${shell}"
 
-		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-aliases       .bash_aliases
-		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-configuration .bashrc
-		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-configuration .bash_configuration
-		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-functions     .bash_functions
-		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-login         .bash_login
-		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-logout        .bash_logout
-		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-profile       .bash_profile
+		elif [[ "${shell}" = "all" ]]
+		then
+			frobulator.download get.trmnl.me "${HOME}"/.local/bin ${shell_list[@]}
 
-		frobulator.file "${HOME}" .hushlogin
-	fi
+		else
+			frobulator.err "Unknown shell item name" "[ '${shell}' ]"
+			echo
 
-	if [ "${option}" = "termux" ]
-	then
-		:
+			frobulator.fwd "Listing known shell items..."
+			echo
+
+			frobulator.timeout
+
+			IFS=$'\n'
+
+			printf "${marker_nul} %s\n" ${shell_list[@]}
+
+			echo
+
+			IFS=''
+
+			frobulator.msg "Review shell item name spelling and try again."
+			echo
+
+			frobulator.inf "Update all known shell items using 'all' argument."
+			echo
+
+			exit 1
+		fi
+
+		frobulator.cpt "Complete" "[ Update // Shell ]"
+		echo
+
+		exit
 	else
-		# link to root home
+		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${shell_list[@]}
 
-		frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-aliases       .bash_aliases
-		frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-configuration .bashrc
-		frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-configuration .bash_configuration
-		frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-functions     .bash_functions
-		frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-login         .bash_login
-		frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-logout        .bash_logout
-		frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-profile       .bash_profile
+		if [ -z "${option}" ] || [ "${option}" = "termux" ]
+		then
+			# link to user home
 
-		frobulator.file "${ROOT}"/root .hushlogin
+			frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-aliases       .bash_aliases
+			frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-configuration .bashrc
+			frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-configuration .bash_configuration
+			frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-functions     .bash_functions
+			frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-login         .bash_login
+			frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-logout        .bash_logout
+			frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-profile       .bash_profile
+
+			frobulator.file "${HOME}" .hushlogin
+		fi
+
+		if [ "${option}" = "termux" ]
+		then
+			:
+		else
+			# link to root home
+
+			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-aliases       .bash_aliases
+			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-configuration .bashrc
+			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-configuration .bash_configuration
+			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-functions     .bash_functions
+			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-login         .bash_login
+			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-logout        .bash_logout
+			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-profile       .bash_profile
+
+			frobulator.file "${ROOT}"/root .hushlogin
+		fi
 	fi
 
 	shell_list=()
+
 }
 
 backgrounds_intent () {
@@ -777,7 +830,39 @@ then
 		echo
 
 		shell_intent
-	fi
+if [[ ${utilities_list[@]} =~ "${utility}" ]]
+	then
+		frobulator.download get.dxtp.app "${HOME}"/.local/bin "${utility}"
+
+	elif [[ "${utility}" = "all" ]]
+	then
+		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
+
+	else
+		frobulator.err "Unknown utility name" "[ '${utility}' ]"
+		echo
+
+		frobulator.fwd "Listing known utilities..."
+		echo
+
+		frobulator.timeout
+
+		IFS=$'\n'
+
+		printf "${marker_nul} %s\n" ${utilities_list[@]}
+
+		echo
+
+		IFS=''
+
+		frobulator.msg "Review utility name spelling and try again."
+		echo
+
+		frobulator.inf "Update all known utilities using 'all' argument."
+		echo
+
+		exit 1
+	fi	fi
 
 	if [[ "${update}" = [tT][eE][rR][mM][uU][xX] ]]
 	then
