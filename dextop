@@ -407,7 +407,7 @@ preferences_intent () {
 		termux-reload-settings
 	)
 
-	frobulator.download get.trmx.app "${HOME}"/.local/bin ${settings_list[@]}
+	frobulator.download get.trmnl.me "${HOME}"/.local/bin ${settings_list[@]}
 
 	frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-colors     colors.properties
 	frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-font       font.ttf

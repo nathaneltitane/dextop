@@ -125,7 +125,7 @@ echo
 
 for package in ${packages_list[@]}
 do
-	frobulator.download get.trmx.app "${PREFIX}"/tmp "${package}"
+	frobulator.download get.trmnl.me "${PREFIX}"/tmp "${package}"
 
 	frobulator.inf "Installing" "[ '${package}' ]"
 	echo
