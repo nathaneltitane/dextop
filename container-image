@@ -194,14 +194,13 @@ image_version () {
 			then
 				# handle number spacing for entries 1-9
 
-				printf '%s[  %s ] %s %s%s' "${marker_nul}" "${number}" "${name}" "${version}" "${indent}[ ${codename} ]"
+				echo "${marker_nul}" "[  ${number} ]" "${name}" "${version}" "${indent}[ ${codename} ]"
 			else
 				# handle number spacing for entries 10+
 
-				printf '%s[ %s ] %s %s%s' "${marker_nul}" "${number}" "${name}" "${version}" "${indent}[ ${codename} ]"
+				echo "${marker_nul}" "[ ${number} ]" "${name}" "${version}" "${indent}[ ${codename} ]"
 			fi
 
-			echo
 		done
 
 		echo
