@@ -174,30 +174,37 @@ image_version () {
 
 		# continue list using array selection of suppported values
 
-		for (( i=0 ; i<${#versions[@]} ; i+=2 ))
+		for (( i=0 ; i<${#versions[@]} ; i+=3 ))
 		do
+
+			number=$(( ( $i / 3 ) + 1 ))
+
 			name="${versions[$i]}"
 			version="${versions[$i+1]}"
 			codename="${versions[$i+2]}"
 
-			number=$(( ( $i / 2 ) + 1 ))
+			if [ ${#version} -le 2 ]
+			then
+				indent=$'\t\t'
+			else
+				indent=$'\t'
+			fi
 
-			if (( $i/2 >= 0 && $i/2 <= 8 ))
+			if (( $i/3 >= 0 && $i/3 <= 9 ))
 			then
 				# handle number spacing for entries 1-9
 
-				printf '      [  %s ] %s %s' ${number} ${name}
+				printf '%s[  %s ] %s %s%s' "${marker_nul}" "${number}" "${name}" "${version}" "${indent}[ ${codename} ]"
 			else
 				# handle number spacing for entries 10+
 
-				printf '      [ %s ] %s %s' ${number} ${name}
+				printf '%s[ %s ] %s %s%s' "${marker_nul}" "${number}" "${name}" "${version}" "${indent}[ ${codename} ]"
 			fi
 
-			printf '%*s' $(( pad_length - ${#name} ))
-			printf '%s\n' ${version}
+			echo
 		done
 
-		printf '\n'
+		echo
 
 		# values #
 
