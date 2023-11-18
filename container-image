@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="10-24-2023"
+version="11-18-2023"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -183,11 +183,11 @@ image_version () {
 			version="${versions[$i+1]}"
 			codename="${versions[$i+2]}"
 
+			indent="${marker_tab}"
+
 			if [ ${#version} -le 2 ]
 			then
-				indent=$'\t\t'
-			else
-				indent=$'\t'
+				indent+="${marker_tab}"
 			fi
 
 			if (( $i/3 >= 0 && $i/3 <= 9 ))
