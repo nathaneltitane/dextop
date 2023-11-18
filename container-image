@@ -194,12 +194,14 @@ image_version () {
 			then
 				# handle number spacing for entries 1-9
 
-				echo "${marker_nul}" "[  ${number} ]" "${name}" "${version}" "${indent}[ ${codename} ]"
+				number=" ${number}"
 			else
 				# handle number spacing for entries 10+
 
-				echo "${marker_nul}" "[ ${number} ]" "${name}" "${version}" "${indent}[ ${codename} ]"
+				number="${number}"
 			fi
+
+			echo "${marker_nul}" "[ ${number} ]" "${name}" "${version}" "${indent}" "[ ${codename} ]"
 
 		done
 
