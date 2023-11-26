@@ -2,12 +2,11 @@
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/donate/?hosted_button_id=2WZT7PCW3XDX6)
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 10-24-2023 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 11-26-2023 ]
 
 ---
 
-### NOTICE // 10-24-2023: Debian 12 'Bookworm' now the default option for Dextop container setup!
-
+### NOTICE // 11-26-2023: Update routine and readme updated with latest changes and granualar argument selections!
 ---
 
 ### Welcome to [Dextop](https://dextop.app)
@@ -472,7 +471,7 @@ Should you suspect any issues or errors, please provide a copy of those files wh
 
 ---
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 10-24-2023 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 11-26-2023 ]
 
 ### Enjoying Dextop? Buy me a coffee to show your appreciation!
 
