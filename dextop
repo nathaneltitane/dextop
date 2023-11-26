@@ -988,6 +988,15 @@ then
 		frobulator.file "${HOME}"/.dextop dextop-audio-checkpoint
 	fi
 
+	# ticker
+
+	if [ ! -f "${HOME}"/.dextop/dextop-ticker-checkpoint ]
+	then
+		frobulator.write 0 "${HOME}"/.dextop dextop-ticker
+
+		frobulator.file "${HOME}"/.dextop dextop-ticker-checkpoint
+	fi
+
 	# termux ///////////////////////////////////////////////////////////////////
 
 	# termux additions
