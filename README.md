@@ -365,6 +365,12 @@ All shell session and expeirence scripts can also be updated by typing or pastin
 curl -s -L run.dxtp.app > dextop && bash dextop -u shell
 ```
 
+To simplify the overall version update process, the user can also decide to update the main deployment script and all dependant utilities by typing or pasting:
+
+```
+curl -s -L run.dxtp.app > dextop && bash dextop -u all
+```
+
 ### Issues:
 
 High latency internet connectivity or issues with accessing server content (GitHub) may cause some files to malfunction or go corrupt.
