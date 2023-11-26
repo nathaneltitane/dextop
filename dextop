@@ -842,7 +842,9 @@ then
 		echo
 
 		shell_intent
-if [[ ${utilities_list[@]} =~ "${utility}" ]]
+	fi
+
+	if [[ ${utilities_list[@]} =~ "${utility}" ]]
 	then
 		frobulator.download get.dxtp.app "${HOME}"/.local/bin "${utility}"
 

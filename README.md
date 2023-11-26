@@ -325,7 +325,7 @@ To log out, press Ctrl+D or type ```'logout'``` or ```'exit'``` for the session 
 
 Depending on the shell level in use at the time the command is executed, the container exits back to the Termux shell (recognizable by the green username prompt), or to the Android home screen.
 
-### Utilities:
+### Updates:
 
 As the project evolves, certain utilities may change, either slightly or significantly and some new utilities may be introduced into the Dextop ecosystem.
 
@@ -335,18 +335,34 @@ To ensure Dextop runs as expected, and wth the latest features in tow, proceed a
 
 For existing installations, manual updates can be run by downloading and executing the update routine from the latest Dextop deployment script.
 
-To do so, paste or type:
+
+First, get the latest version of the Dextop deployment script. To do so, paste or type:
 
 ```
-curl -s -L run.dxtp.app > dextop && bash dextop -u dextop
+curl -s -L run.dxtp.app > "${HOME}"/.local/bin/dextop
 ```
 
-to update the main dextop utility.
+This step overwrites and updates the script with all the latest features required for the next steps.
 
-To then update the utilities needed by Dextop, paste or type:
+To then update the utilities needed or used by Dextop, paste or type:
 
 ```
-curl -s -L run.dxtp.app > dextop && bash dextop -u utilities
+curl -s -L run.dxtp.app > dextop && bash dextop -u utility all
+```
+
+One can also choose to update a specific utility by typing or pasting:
+
+```
+curl -s -L run.dxtp.app > dextop && bash dextop -u utility [Utility Name]
+```
+
+If for whatever reason the user is unsure of the utility name to call as an argument, the update routine automatically displays all available utility names on fail.
+
+All shell session and expeirence scripts can also be updated by typing or pasting:
+
+
+```
+curl -s -L run.dxtp.app > dextop && bash dextop -u shell
 ```
 
 ### Issues:
