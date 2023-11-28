@@ -77,7 +77,7 @@ Once generated, it can be found under the user's home directory with the corresp
 
 Dextop can be compared to other very similar projects, though:
 
-- It provides a selection of the Ubuntu distribution base images: stable, popular and have tons of user-friendly knowledge bases.
+- It provides a selection of the Ubuntu distribution base images: known to be stable, popular and has tons of user-friendly knowledge bases.
 - It expands the installed base image to run **just like a normal PC!**
 - It **generates an actual user profile and prepares a functional home directory for the user to work in**, easily and securely.
 - It installs all the necessary applications and utilities to provide the user with the right experience.
@@ -87,7 +87,7 @@ Dextop can be compared to other very similar projects, though:
 
 ![dextop-session](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop-session.png)
 
-### What is doesn't:
+### What it doesn't:
 
 Power users be warned!
 
