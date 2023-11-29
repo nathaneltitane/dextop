@@ -876,7 +876,7 @@ then
 		echo
 
 		exit 1
-	fi	fi
+	fi
 
 	if [[ "${update}" = [tT][eE][rR][mM][uU][xX] ]]
 	then
