@@ -95,7 +95,7 @@ Power users be warned!
 - Dextop does not load any services or backends!
 - Dextop does not install or configure advanced system services!
 
-Applications that require backend services (i.e.: Ubuntu Snap/snapd), standalone services, hardware probes and other advanced features that require access to restricted core system directories will not function: the device must bee rooted to remove those limitations and gain full access to all system hardware and virtual devices.
+Applications that require backend services (i.e.: Ubuntu Snap/snapd), standalone services, hardware probes and other advanced features that require access to restricted core system directories will not function: the device must be rooted to remove those limitations and gain full access to all system hardware and virtual devices.
 
 Dextop links some of the modified utilities that have been patched under Termux for an attempt at limited access to whatever the Android user space runtime policy permits (htop, kill, pgrep, pkill, ps, top).
 
