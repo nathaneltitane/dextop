@@ -374,7 +374,7 @@ curl -s -L run.dxtp.app > dextop && bash dextop -u all
 
 High latency internet connectivity or issues with accessing server content (GitHub) may cause some files to malfunction or go corrupt.
 
-If for whatever reason an update fails due to an error of because of deployment script corruption, paste or type:
+If for whatever reason an update fails due to an error because of deployment script corruption, paste or type:
 
 ```
 curl -s -L run.dxtp.app > "${HOME}"/.local/bin/dextop && bash dextop -u utilities
