@@ -349,7 +349,7 @@ To then update the utilities needed or used by Dextop, paste or type:
 curl -s -L run.dxtp.app > dextop && bash dextop -u utility all
 ```
 
-One can also choose to update a specific utility by typing or pasting:
+To update a specific utility, paste or type:
 
 ```
 curl -s -L run.dxtp.app > dextop && bash dextop -u utility [Utility Name]
@@ -357,20 +357,33 @@ curl -s -L run.dxtp.app > dextop && bash dextop -u utility [Utility Name]
 
 If for whatever reason the user is unsure of the utility name to call as an argument, the update routine automatically displays all available utility names on fail.
 
-All shell session and expeirence scripts can also be updated by typing or pasting:
-
+To update all shell session and experience scripts, paste or type:
 
 ```
 curl -s -L run.dxtp.app > dextop && bash dextop -u shell
 ```
 
-To simplify the overall version update process, the user can also decide to update the main deployment script and all dependant utilities by typing or pasting:
+To simplify the overall version update process, the user can also decide to update the main deployment script and all dependant utilities. To do so, paste or type:
 
 ```
-curl -s -L run.dxtp.app > dextop && bash dextop -u all
+curl -s -L run.dxtp.app > > "${HOME}"/.local/bin/dextop && bash dextop -u all
 ```
 
 ### Issues:
+
+If the initial setup succeeds but the user is unable to launch a session, or any random package appears to be missing when typing a command, spotty Termux package management issues are the cause: repository info seems spotty and pkg/apt fails to fetch or pull the requested package at the time of install.
+
+To reinitialize the Dextop setup checkpoints, without having to wipe the Termux session or instance, paste or type:
+
+```
+rm -rf "${HOME}/.dextop
+```
+
+To remedy potentially missing packages and random initialization failures, paste or type:
+
+```
+curl -s -L run.dxtp.app > dextop && bash dextop
+```
 
 High latency internet connectivity or issues with accessing server content (GitHub) may cause some files to malfunction or go corrupt.
 
