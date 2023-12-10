@@ -48,6 +48,19 @@ frobulator.script "Setting up ${script#*-}"
 
 # defaults /////////////////////////////////////////////////////////////////////
 
+# functions ////////////////////////////////////////////////////////////////////
+
+failsafe_install () {
+
+	frobulator.stp "Please wait..."
+	echo
+
+	yes | pkg install ${@} 2>&1 &
+
+	frobulator.progress "process"
+
+}
+
 # update packages list
 
 frobulator.update
@@ -250,5 +263,6 @@ install_list+=(
 	${vnc_list[@]}
 	${desktop_environment_list[@]}
 )
+
 
 frobulator.install ${install_list[@]}
