@@ -264,5 +264,11 @@ install_list+=(
 	${desktop_environment_list[@]}
 )
 
+# run failsafe install:
+# mitigate termux package management fetch issues
+
+failsafe_install ${install_list[@]}
+
+# run normal install
 
 frobulator.install ${install_list[@]}
