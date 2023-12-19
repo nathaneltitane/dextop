@@ -50,7 +50,7 @@ frobulator.script "Setting up ${script#*-}"
 
 # override main source list file
 
-echo "deb https://grimler.se/termux-packages-24 stable main" > "${PREFIX}"/etc/apt/sources.list
+# echo "deb https://grimler.se/termux-packages-24 stable main" > "${PREFIX}"/etc/apt/sources.list
 
 # create sources directory
 
