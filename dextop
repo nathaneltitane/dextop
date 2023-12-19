@@ -644,7 +644,10 @@ directories_intent () {
 		storage
 	)
 
-	frobulator.link "${PREFIX}" "${PREFIX%/*}" ${directories_list[@]}
+	for directory in ${directories_list[@]}
+	do
+        frobulator.link "${PREFIX}" "${PREFIX%/*}" "${directory}"
+    done
 
 	directories_list=()
 }
