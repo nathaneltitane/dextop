@@ -296,7 +296,6 @@ container_intent () {
 		--rootfs="${ROOT}"																								\
 		--change-id="${USER_ID}":"${GROUP_ID}"																			\
 		--pwd="${ROOT_HOME}"																							\
-		--bind=/data/data/com.termux/files/home:"${ROOT_HOME}"															\
 		[ -d "/apex" ]								&& --bind=/apex:/apex												\
 		[ -d "/data" ]								&& --bind=/data:/data												\
 		[ -d "/dev" ]								&& --bind=/dev:/dev													\
@@ -313,6 +312,7 @@ container_intent () {
 		[ -d "/sys" ]								&& --bind=/sys:/sys													\
 		[ -d "/system" ]							&& --bind=/system:/system											\
 		[ -d "/vendor" ]							&& --bind=/vendor:/vendor											\
+		[ -d "/data/data/com.termux/files/home" ]	&& -bind=/data/data/com.termux/files/home:"${ROOT_HOME}"			\
 			env -i																										\
 				PREFIX="${PREFIX}"																						\
 				PATH="${PATH}"																							\
