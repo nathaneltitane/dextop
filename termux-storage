@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="10-24-2023"
+version="12-22-2023"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -172,7 +172,7 @@ then
 else
 	uuid="N/A"
 
-	frobulator.err "No storage media detected" "[ ${uuid} ]"
+	frobulator.err "No additional storage media detected" "[ ${uuid} ]"
 	echo
 
 	frobulator.fwd "Continuing..."
