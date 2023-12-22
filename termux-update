@@ -99,8 +99,6 @@ echo
 frobulator.ins "Select 'Package Installer' when prompted to proceed."
 echo
 
-frobulator.separate
-
 frobulator.ask "Check for updates?"
 
 frobulator.read reply
