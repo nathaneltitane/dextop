@@ -128,6 +128,8 @@ security_list+=(
 )
 
 utilities_list+=(
+	apt
+	apt-file
 	fakeroot
 	git
 	hub
