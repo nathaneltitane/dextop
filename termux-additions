@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="10-24-2023"
+version="12-25-2023"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -87,11 +87,6 @@ echo
 
 frobulator.separate
 
-frobulator.wrn "Selecting 'no' will only install Termux X11 packages for session display."
-echo
-
-frobulator.separate
-
 frobulator.ask "Install Termux additons?"
 
 frobulator.read reply
@@ -110,14 +105,6 @@ then
 
 	frobulator.inf "Setting up all Termux additional packages."
 	echo
-else
-	packages_list+=(
-	#	termux-x11-shell-loader.apk
-		termux-x11.apk
-	)
-
-	frobulator.inf "Setting up Termux X11 package(s) only."
-	echo
 fi
 
 frobulator.fwd "Installing..."
@@ -127,12 +114,9 @@ for package in ${packages_list[@]}
 do
 	frobulator.download get.trmnl.me "${PREFIX}"/tmp "${package}"
 
-	frobulator.inf "Installing" "[ '${package}' ]"
-	echo
-
 	open_intent "${PREFIX}"/tmp/"${package}"
 
-	sleep 10
+	frobulator.countdown 10 "Installing" "[ ${package} ]"
 done
 
 packages_list=()
