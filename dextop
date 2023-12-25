@@ -158,6 +158,10 @@ frobulator.script "Setting up ${script#*-}"
 
 stamp=$(date +"%m-%d-%Y-%H-%M-%S")
 
+# assume 'termux-exec' is installed
+
+unset LD_PRELOAD
+
 # defaults /////////////////////////////////////////////////////////////////////
 
 if [ ! -f "${HOME}"/.dextop/dextop-environment ]
@@ -279,10 +283,6 @@ container_intent () {
 	LANG="C.UTF-8"
 
 	# run container setup commands through 'proot'
-
-	# assume 'termux-exec' is installed
-
-	unset LD_PRELOAD
 
 	# generate environement paths
 

@@ -856,7 +856,7 @@ image_network
 
 # generate preload entries
 
-# image_preload
+image_preload
 
 # generate sources entries
 
