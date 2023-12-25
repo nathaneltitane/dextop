@@ -237,6 +237,12 @@ fi
 
 export DISPLAY="${DISPLAY}"
 
+# variables ////////////////////////////////////////////////////////////////////
+
+# assume 'termux-exec' is installed
+
+unset LD_PRELOAD
+
 # functions ////////////////////////////////////////////////////////////////////
 
 container_root () {
@@ -503,10 +509,6 @@ container_user () {
 container_session () {
 
 	# load session settings
-
-	# assume 'termux-exec' is installed
-
-	unset LD_PRELOAD
 
 	# setup 'proot' command arguments
 
