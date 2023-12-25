@@ -105,10 +105,10 @@ then
 
 	frobulator.inf "Setting up all Termux additional packages."
 	echo
+	
+	frobulator.fwd "Installing..."
+	echo
 fi
-
-frobulator.fwd "Installing..."
-echo
 
 for package in ${packages_list[@]}
 do
