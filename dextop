@@ -274,7 +274,7 @@ container_intent () {
 	USER_ID="0"
 	GROUP_ID="0"
 
-	ROOT_HOME="/root"
+	ROOT_HOME="${ROOT}/root"
 
 	LANG="C.UTF-8"
 
