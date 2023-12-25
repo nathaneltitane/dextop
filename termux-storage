@@ -69,7 +69,7 @@ then
 	# enable storage permissions: requires user touch input
 
 	frobulator.wrn "User permission required to access storage on this device:"
-	frobulator.wrn "Internal and external storage locations are made available."
+	frobulator.nul "Internal and external storage locations are made available."
 	echo
 
 	frobulator.inf "Storage is made accessible through container."
