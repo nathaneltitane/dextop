@@ -274,7 +274,7 @@ container_intent () {
 	USER_ID="0"
 	GROUP_ID="0"
 
-	ROOT_HOME="${ROOT}/root"
+	ROOT_HOME="/root"
 
 	LANG="C.UTF-8"
 
@@ -312,7 +312,7 @@ container_intent () {
 		[ -d "/sys" ]								&& --bind=/sys:/sys													\
 		[ -d "/system" ]							&& --bind=/system:/system											\
 		[ -d "/vendor" ]							&& --bind=/vendor:/vendor											\
-		[ -d "/data/data/com.termux/files/home" ]	&& -bind=/data/data/com.termux/files/home:"${ROOT_HOME}"			\
+		[ -d "/data/data/com.termux/files/home" ]	&& --bind=/data/data/com.termux/files/home:"${ROOT_HOME}"			\
 			env -i																										\
 				PREFIX="${PREFIX}"																						\
 				PATH="${PATH}"																							\
