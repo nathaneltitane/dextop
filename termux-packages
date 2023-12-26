@@ -117,6 +117,7 @@ multimedia_list+=(
 
 repositories_list+=(
 	root-repo
+	tur-repo
 	x11-repo
 )
 
