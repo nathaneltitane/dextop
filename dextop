@@ -288,8 +288,6 @@ container_intent () {
 		[ -d "/dev" ]								&& --bind=/dev:/dev													\
 		[ -e "/dev/urandom" ]						&& --bind=/dev/urandom:/dev/random									\
 		[ -e "/linkerconfig/ld.config.txt" ]		&& --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt	\
-		[ -f "/plat_property_contexts" ]			&& --bind=/plat_property_contexts:/plat_property_contexts			\
-		[ -f "/property_contexts" ]					&& --bind=/property_contexts:/property_contexts						\
 		[ -d "/proc" ]								&& --bind=/proc:/proc												\
 		[ -d "/proc/self/fd" ]						&& --bind=/proc/self/fd:/dev/fd										\
 		[ -e "/proc/self/fd/0" ]					&& --bind=/proc/self/fd/0:/dev/stdin								\
