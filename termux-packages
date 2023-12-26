@@ -243,12 +243,12 @@ fi
 # install #
 
 install_list+=(
+	${repositories_list[@]}
 	${display_list[@]}
 	${documentation_list[@]}
 	${extensions_list[@]}
 	${fonts_list[@]}
 	${multimedia_list[@]}
-	${repositories_list[@]}
 	${security_list[@]}
 	${utilities_list[@]}
 	${vnc_list[@]}
