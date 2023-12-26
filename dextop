@@ -400,7 +400,7 @@ backup_intent () {
 			--exclude="${backup_name}"*			\
 				--file="${backup_archive}"		"${backup_directory}" > "${sink}" 2>&1 &
 
-	frobulator.process "archive" "[ ${backup_directory} ]"
+	frobulator.progress "archive" "[ ${backup_directory} ]"
 }
 
 preferences_intent () {
