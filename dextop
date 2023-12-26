@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="12-18-2023"
+version="12-26-2023"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -431,9 +431,6 @@ dextop_intent () {
 	# load dextop deployment script
 
 	frobulator.download run.dxtp.app "${HOME}"/.local/bin dextop
-
-	frobulator.cpt "Complete" "[ Update // Dextop ]"
-	echo
 }
 
 utility_intent () {
@@ -492,10 +489,6 @@ utility_intent () {
 
 			exit 1
 		fi
-
-		frobulator.cpt "Complete" "[ Update // Utilities ]"
-		echo
-
 	else
 		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
 	fi
@@ -551,9 +544,6 @@ shell_intent () {
 
 			exit 1
 		fi
-
-		frobulator.cpt "Complete" "[ Update // Shell ]"
-		echo
 
 	else
 		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${shell_list[@]}
@@ -693,9 +683,6 @@ additions_intent () {
 	frobulator.download get.dxtp.app "${HOME}"/.local/bin ${additions_list[@]}
 
 	additions_list=()
-
-	frobulator.cpt "Complete" "[ Update // Additions ]"
-	echo
 }
 
 backgrounds_intent () {
@@ -802,6 +789,9 @@ then
 		shell_intent
 
 		"${HOME}"/.local/bin/termux-update
+		
+		frobulator.cpt "Complete" "[ Update // All ]"
+		echo
 	fi
 
 	if [[ "${update}" = [dD][eE][xX][tT][oO][pP] ]]
@@ -813,6 +803,9 @@ then
 		echo
 
 		dextop_intent
+		
+		frobulator.cpt "Complete" "[ Update // Dextop ]"
+		echo
 	fi
 
 	if [[ "${update}" = [uU][tT][iI][lL][iI][tT][yY] ]]
@@ -825,6 +818,9 @@ then
 		echo
 
 		utility_intent
+		
+		frobulator.cpt "Complete" "[ Update // Utility ]"
+		echo
 	fi
 	
 	if [[ "${update}" = [pP][rR][eE][fF][eE][rR][eE][nN][cC][eE][sS] ]]
@@ -837,6 +833,9 @@ then
 		echo
 
 		preferences_intent
+
+		frobulator.cpt "Complete" "[ Update // Preferences ]"
+		echo
 	fi
 
 	if [[ "${update}" = [sS][hH][eE][lL][lL] ]]
@@ -849,6 +848,9 @@ then
 		echo
 
 		shell_intent
+		
+		frobulator.cpt "Complete" "[ Update // Shell ]"
+		echo
 	fi
 
 	if [[ "${update}" = [aA][dD][dD][iI][tT][iI][oO][nN][sS] ]]
@@ -860,17 +862,9 @@ then
 		echo
 
 		additions_intent
-	fi
 
-	if [[ "${update}" = [sS][hH][eE][lL][lL] ]]
-	then
-		frobulator.inf "Updating" "[ ${update} ]"
+		frobulator.cpt "Complete" "[ Update // Additions ]"
 		echo
-
-		frobulator.fwd "Updating..."
-		echo
-
-		shell_intent
 	fi
 
 	if [[ "${update}" = [tT][eE][rR][mM][uU][xX] ]]
@@ -882,6 +876,10 @@ then
 		echo
 
 		"${HOME}"/.local/bin/termux-update
+		
+		frobulator.cpt "Complete" "[ Update // Termux ]"
+		echo
+
 	fi
 
 	exit
