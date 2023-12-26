@@ -253,7 +253,7 @@ container_intent () {
 
 	if [ $# -eq 0 ]
 	then
-		ROOT=("${PREFIX}"/cnt/*/*)
+		ROOT=(/data/data/com.termux/files/usr/cnt/debian/12)
 
 		export ROOT="${ROOT}"
 
@@ -265,7 +265,7 @@ container_intent () {
 	USER_ID="0"
 	GROUP_ID="0"
 
-	ROOT_HOME="/root"
+	ROOT_HOME="/data/data/com.termux/files/usr/cnt/debian/12/root"
 
 	LANG="C.UTF-8"
 
