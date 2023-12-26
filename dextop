@@ -977,15 +977,6 @@ then
 
 	# termux ///////////////////////////////////////////////////////////////////
 
-	# termux failsafe
-
-	if [ ! -f "${HOME}"/.dextop/dextop-termux-failsafe-checkpoint ]
-	then
-		"${HOME}"/.local/bin/termux-failsafe
-
-		frobulator.file "${HOME}"/.dextop dextop-termux-failsafe-checkpoint
-	fi
-	
 	# termux additions
 
 	if [ ! -f "${HOME}"/.dextop/dextop-termux-additions-checkpoint ]
@@ -1004,6 +995,15 @@ then
 		frobulator.file "${HOME}"/.dextop dextop-termux-storage-checkpoint
 	fi
 
+	# termux failsafe
+
+	if [ ! -f "${HOME}"/.dextop/dextop-termux-failsafe-checkpoint ]
+	then
+		"${HOME}"/.local/bin/termux-failsafe
+
+		frobulator.file "${HOME}"/.dextop dextop-termux-failsafe-checkpoint
+	fi
+	
 	# termux packages
 
 	if [ ! -f "${HOME}"/.dextop/dextop-termux-packages-checkpoint ]
