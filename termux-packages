@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="10-24-2023"
+version="12-26-2023"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -116,11 +116,7 @@ multimedia_list+=(
 )
 
 repositories_list+=(
-	game-repo
 	root-repo
-	science-repo
-	termux-apt-repo
-	unstable-repo
 	x11-repo
 )
 
