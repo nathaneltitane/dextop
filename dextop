@@ -112,6 +112,7 @@ do
 			echo -e "                     [ additions ]"
 			echo -e "                     [ shell ]"
 			echo -e "                     [ termux ]"
+			echo -e "                     [ preferences ]"
 			echo
 			echo -e "-h, --help           Show help and usage information."
 			echo
@@ -790,6 +791,8 @@ then
 		frobulator.fwd "Updating..."
 		echo
 
+		preferences_intent
+		
 		dextop_intent
 
 		utility_intent
@@ -822,6 +825,18 @@ then
 		echo
 
 		utility_intent
+	fi
+	
+	if [[ "${update}" = [pP][rR][eE][fF][eE][rR][eE][nN][cC][eE][sS] ]]
+	then
+
+		frobulator.inf "Updating" "[ ${utility} ]"
+		echo
+
+		frobulator.fwd "Updating..."
+		echo
+
+		preferences_intent
 	fi
 
 	if [[ "${update}" = [sS][hH][eE][lL][lL] ]]
