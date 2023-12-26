@@ -87,11 +87,11 @@ frobulator.msg "Visit the following wiki pages on how to proceed:"
 echo
 
 frobulator.inf "Backing up Termux: https://wiki.termux.com/wiki/Backing_up_Termux"
-frobulator.inf "Installing Termux: https://wiki.termux.com/wiki/installation"
+frobulator.nul "Installing Termux: https://wiki.termux.com/wiki/installation"
 echo
 
-frobulator.wrn "'Install Unknown apps' permission must be enabled for Termux:"
-frobulator.nul "Enable under Settings > Security and Privacy > Install unknown apps > Termux"
+frobulator.wrn "Enable 'Install unknown apps' permission for Termux:"
+frobulator.nul "Settings > Security and Privacy > Install unknown apps > Termux"
 echo
 
 frobulator.ins "Select 'Package Installer' when prompted to proceed."
