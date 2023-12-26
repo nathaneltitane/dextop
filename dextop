@@ -894,7 +894,7 @@ then
 
 	# failsafe
 
-	failsafe_intent
+#	failsafe_intent
 
 	# backup
 
