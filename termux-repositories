@@ -60,8 +60,6 @@ frobulator.directory "${PREFIX}"/etc/apt/ sources.list.d
 
 repositories_list=(
 	"deb https://grimler.se/termux-root-packages-24 root stable"
-	"deb https://grimler.se/science-packages-24 science stable"
-	"deb https://grimler.se/unstable-packages unstable main"
 	"deb https://grimler.se/x11-packages x11 main"
 )
 
