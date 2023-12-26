@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="12-22-2023"
+version="12-26-2023"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -157,7 +157,7 @@ uuid="${external_storage/\/storage\//}"
 
 if [ ! -z "${external_storage}" ]
 then
-	frobulator.scs "Storage media detected" "[ ${uuid} ]"
+	frobulator.scs "Additional storage media detected" "[ ${uuid} ]"
 	echo
 
 	if [ ! -f "${PREFIX}"/media/external ]
