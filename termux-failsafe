@@ -52,7 +52,7 @@ frobulator.script "Setting up ${script#*-}"
 
 list=(
 	proot
-	termux-x11
+	termux-x11-nightly
 	xorg-server-xvfb
 )
 
