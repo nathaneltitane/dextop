@@ -102,17 +102,5 @@ yes | apt upgrade > "${sink}" 2>&1 &
 
 frobulator.progress "upgrade"
 
-# run failsafe package install:
-# termux package servers are sometimes unresponsive or badly authenticated
-
-frobulator.failsafe proot &
-
-frobulator.failsafe xorg-server-xvfb &
-
-frobulator.stp "Please wait..."
-echo
-
-
-
 
 
