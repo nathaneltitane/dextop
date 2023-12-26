@@ -426,7 +426,6 @@ utility_intent () {
 
 	utilities_list+=(
 		termux-packages
-		termux-repositories
 		termux-failsafe
 		termux-update
 		termux-storage
@@ -434,7 +433,6 @@ utility_intent () {
 		container-expansion
 		container-image
 		container-packages
-		container-repositories
 		container-failsafe
 		container-session
 		container-settings
@@ -997,15 +995,6 @@ then
 		frobulator.file "${HOME}"/.dextop dextop-termux-storage-checkpoint
 	fi
 
-	# termux repositories
-
-	if [ ! -f "${HOME}"/.dextop/dextop-termux-repositories-checkpoint ]
-	then
-		"${HOME}"/.local/bin/termux-repositories
-
-		frobulator.file "${HOME}"/.dextop dextop-termux-repositories-checkpoint
-	fi
-
 	# termux failsafe
 
 	if [ ! -f "${HOME}"/.dextop/dextop-termux-failsafe-checkpoint ]
@@ -1051,15 +1040,6 @@ then
 		container_intent "${HOME}"/.local/bin/container-expansion
 
 		frobulator.file "${HOME}"/.dextop dextop-container-expansion-checkpoint
-	fi
-
-	# container repositories
-
-	if [ ! -f "${HOME}"/.dextop/dextop-container-repositories-checkpoint ]
-	then
-		container_intent "${HOME}"/.local/bin/container-repositories
-
-		frobulator.file "${HOME}"/.dextop dextop-container-repositories-checkpoint
 	fi
 
 	# container failsafe
