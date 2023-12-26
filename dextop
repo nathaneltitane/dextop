@@ -214,20 +214,6 @@ fi
 
 # functions ////////////////////////////////////////////////////////////////////
 
-failsafe_intent () {
-
-	frobulator.stp "Please wait..."
-	echo
-
-	yes | apt update > "${sink}" 2>&1 &
-
-	frobulator.progress "update"
-
-	yes | apt upgrade > "${sink}" 2>&1 &
-
-	frobulator.progress "upgrade"
-}
-
 environment_intent () {
 
 	# generate container environement
@@ -891,10 +877,6 @@ fi
 if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
 then
 	# dextop ///////////////////////////////////////////////////////////////////
-
-	# failsafe
-
-#	failsafe_intent
 
 	# backup
 
