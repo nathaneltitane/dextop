@@ -58,10 +58,16 @@ then
 		-e 's/ˆ\# deb-src/deb-src/g'		\
 		-e '/ˆ\#.*/d'						\
 		-e '/ˆ$/d'							/etc/apt/sources.list
-
-	# update lists
-
-	frobulator.log "apt update" &
-
-	frobulator.progress "refresh"
 fi
+
+# update lists
+
+frobulator.log "apt update" &
+
+frobulator.progress "update"
+
+# upgrade base image
+
+frobulator.log "apt upgrade" &
+
+frobulator.progress "upgrade"

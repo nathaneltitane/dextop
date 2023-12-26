@@ -89,18 +89,9 @@ done <<< ${repositories_list[@]}
 
  IFS=''
 
-# failsafe
+frobulator.log "apt update" &
 
-# run failsafe package update and upgrade:
-# prevents termux side random 'libssl' error
-
-yes | apt update > "${sink}" 2>&1 &
-
-frobulator.progress "update"
-
-yes | apt upgrade > "${sink}" 2>&1 &
-
-frobulator.progress "upgrade"
+frobulator.progress "refresh"
 
 
 
