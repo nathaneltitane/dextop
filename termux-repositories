@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="10-24-2023"
+version="12-26-2023"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -89,9 +89,17 @@ done <<< ${repositories_list[@]}
 
  IFS=''
 
+# update lists
+
 frobulator.log "apt update" &
 
-frobulator.progress "refresh"
+frobulator.progress "update"
+
+# upgrade base image
+
+frobulator.log "apt upgrade" &
+
+frobulator.progress "upgrade"
 
 
 
