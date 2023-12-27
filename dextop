@@ -265,9 +265,15 @@ container_intent () {
 	USER_ID="0"
 	GROUP_ID="0"
 
+	ROOT_HOME="/root"
+
 	LANG="C.UTF-8"
 
 	# run container setup commands through 'proot'
+
+	# assume 'termux-exec' is installed
+
+	unset LD_PRELOAD
 
 	# generate environement paths
 
@@ -275,13 +281,34 @@ container_intent () {
 
 	# run as 'root' with default system parameters
 
-	proot										\
-		--rootfs="${ROOT}"						\
-		--bind=/data:/data						\
-		--bind=/dev:/dev						\
-		--bind=/proc:/proc						\
-		--bind=/system:/system					\
-												${@}
+	proot																	\
+		--kill-on-exit														\
+		--link2symlink														\
+		--rootfs="${ROOT}"													\
+		--change-id="${USER_ID}":"${GROUP_ID}"								\
+		--pwd="${ROOT_HOME}"												\
+		--bind=/apex:/apex													\
+		--bind=/data:/data													\
+		--bind=/dev:/dev													\
+		--bind=/dev/urandom:/dev/random										\
+		--bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt		\
+		--bind=/proc:/proc													\
+		--bind=/proc/self/fd:/dev/fd										\
+		--bind=/proc/self/fd/0:/dev/stdin									\
+		--bind=/proc/self/fd/1:/dev/stdout									\
+		--bind=/proc/self/fd/2:/dev/stderr									\
+		--bind=/storage:/storage											\
+		--bind=/sys:/sys													\
+		--bind=/system:/system												\
+		--bind=/vendor:/vendor												\
+		--bind=/data/data/com.termux/files/home:"${ROOT_HOME}"				\
+			env --ignore-environment										\
+				PREFIX="${PREFIX}"											\
+				PATH="${PATH}"												\
+				HOME="${ROOT_HOME}"											\
+				LANG="${LANG}"												\
+				TERM="${TERM}"												\
+																			${@}
 }
 
 architecture_intent () {
