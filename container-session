@@ -155,10 +155,6 @@ frobulator.script "Setting up ${script#*-}"
 
 # variables ////////////////////////////////////////////////////////////////////
 
-# assume 'termux-exec' is installed
-
-unset LD_PRELOAD
-
 # reference session viewer activity calls for known android applications:
 
 # FreebVNC:      com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity
