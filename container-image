@@ -641,16 +641,19 @@ image_environment () {
 	[ -d "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/usr/local/sbin ] && PATH+="/usr/local/sbin:"
 	[ -d "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/usr/local/bin ]  && PATH+="/usr/local/bin:"
 	[ -d "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/usr/sbin ]       && PATH+="/usr/sbin:"
-	[ -d "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/usr/sbin ]       && PATH+="/usr/bin:"
+	[ -d "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/usr/bin ]        && PATH+="/usr/bin:"
 	[ -d "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/sbin ]           && PATH+="/sbin:"
 	[ -d "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/bin ]            && PATH+="/bin:"
 
 	# termux
 
-	[ -d "${HOME}"/.local/bin ] && PATH+="${HOME}/.local/bin:"
+	[ -d "${HOME}"/.local/sbin ] && PATH+="${HOME}/.local/sbin:"
+	[ -d "${HOME}"/.local/bin ]  && PATH+="${HOME}/.local/bin:"
+	[ -d "${HOME}"/.sbin ]       && PATH+="${HOME}/.sbin:"
+	[ -d "${HOME}"/.bin ]        && PATH+="${HOME}/.bin:"
 
-	[ -d "${PREFIX}"/sbin ]     && PATH+="${PREFIX}/sbin:"
-	[ -d "${PREFIX}"/bin ]      && PATH+="${PREFIX}/bin:"
+	[ -d "${PREFIX}"/sbin ]      && PATH+="${PREFIX}/sbin:"
+	[ -d "${PREFIX}"/bin ]       && PATH+="${PREFIX}/bin:"
 
 	# android
 

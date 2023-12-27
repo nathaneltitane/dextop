@@ -243,21 +243,24 @@ environment_intent () {
 	[ -d "${ROOT}"/usr/local/sbin ] && PATH+="/usr/local/sbin:"
 	[ -d "${ROOT}"/usr/local/bin ]  && PATH+="/usr/local/bin:"
 	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/sbin:"
-	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/bin:"
+	[ -d "${ROOT}"/usr/bin ]        && PATH+="/usr/bin:"
 	[ -d "${ROOT}"/sbin ]           && PATH+="/sbin:"
 	[ -d "${ROOT}"/bin ]            && PATH+="/bin:"
 
 	# termux
 
-	[ -d "${HOME}"/.local/bin ]     && PATH+="${HOME}/.local/bin:"
+	[ -d "${HOME}"/.local/sbin ] && PATH+="${HOME}/.local/sbin:"
+	[ -d "${HOME}"/.local/bin ]  && PATH+="${HOME}/.local/bin:"
+	[ -d "${HOME}"/.sbin ]       && PATH+="${HOME}/.sbin:"
+	[ -d "${HOME}"/.bin ]        && PATH+="${HOME}/.bin:"
 
-	[ -d "${PREFIX}"/sbin ]         && PATH+="${PREFIX}/sbin:"
-	[ -d "${PREFIX}"/bin ]          && PATH+="${PREFIX}/bin:"
+	[ -d "${PREFIX}"/sbin ]      && PATH+="${PREFIX}/sbin:"
+	[ -d "${PREFIX}"/bin ]       && PATH+="${PREFIX}/bin:"
 
 	# android
 
-	[ -d /system/sbin ]             && PATH+="/system/sbin:"
-	[ -d /system/bin ]              && PATH+="/system/bin:"
+	[ -d /system/sbin ] && PATH+="/system/sbin:"
+	[ -d /system/bin ]  && PATH+="/system/bin:"
 
 	PATH="${PATH}"
 }
