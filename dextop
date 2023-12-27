@@ -159,10 +159,6 @@ frobulator.script "Setting up ${script#*-}"
 
 stamp=$(date +"%m-%d-%Y-%H-%M-%S")
 
-# assume 'termux-exec' is installed
-
-unset LD_PRELOAD
-
 # defaults /////////////////////////////////////////////////////////////////////
 
 if [ ! -f "${HOME}"/.dextop/dextop-environment ]
@@ -216,9 +212,16 @@ fi
 
 failsafe_intent () {
 
-	yes | pkg install root-repo
-	yes | pkg install x11-repo
-	yes | pkg update
+	frobulator.stp "Please wait..."
+	echo
+	
+	yes | pkg install root-repo > "${sink}" 2>&1 &
+	
+	yes | pkg install x11-repo 	> "${sink}" 2>&1 &
+	
+	yes | pkg update 			> "${sink}" 2>&1 &
+	
+	frobulator.progress "upgrade"
 
 }
 
