@@ -503,6 +503,10 @@ container_user () {
 container_session () {
 
 	# load session settings
+	
+	# assume 'termux-exec' is installed
+
+	unset LD_PRELOAD
 
 	# setup 'proot' command arguments
 
