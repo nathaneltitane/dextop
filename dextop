@@ -214,6 +214,14 @@ fi
 
 # functions ////////////////////////////////////////////////////////////////////
 
+failsafe_intent () {
+
+	yes | pkg install root-repo
+	yes | pkg install x11-repo
+	yes | pkg update
+
+}
+
 environment_intent () {
 
 	# generate container environement
@@ -878,6 +886,10 @@ if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
 then
 	# dextop ///////////////////////////////////////////////////////////////////
 
+	# failsafe
+	
+	failsafe_intent
+	
 	# backup
 
 	if [ ! -f "${HOME}"/.dextop/dextop-backup-checkpoint ]
