@@ -231,8 +231,10 @@ failsafe_intent () {
 
 environment_intent () {
 
-	# generate container environement
+	# generate environment '$PATH' variable
 
+	ROOT="${ROOT}"
+	
 	# set path:
 	# in order of retreival
 
