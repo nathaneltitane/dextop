@@ -219,13 +219,13 @@ failsafe_intent () {
 	frobulator.stp "Please wait..." "[ ${script#*-} // failsafe ]"
 	echo
 	
-			apt-get update 							>> "${log}" 2>&1
+	frobulator.log "apt-get update"
 
-			apt-get --assume-yes install root-repo	>> "${log}" 2>&1
-	
-			apt-get --assume-yes install x11-repo 	>> "${log}" 2>&1
-	
-	yes |	apt-get --assume-yes dist-upgrade		>> "${log}" 2>&1 &
+	frobulator.log "apt-get --assume-yes install root-repo"
+
+	frobulator.log "apt-get --assume-yes install x11-repo"
+
+	frobulator.log "yes |	apt-get --assume-yes dist-upgrade" &
 	
 	frobulator.progress "upgrade"
 
