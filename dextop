@@ -212,18 +212,16 @@ fi
 
 failsafe_intent () {
 
-	frobulator.stp "Please wait..."
+	frobulator.stp "Please wait..." "[ ${script#*-} // failsafe ]"
 	echo
 	
-	yes | apt update 			> "${sink}" 2>&1
+			apt-get update 							> "${sink}" 2>&1
 
-	yes | apt install root-repo > "${sink}" 2>&1
+			apt-get --assume-yes install root-repo	> "${sink}" 2>&1
 	
-	yes | apt install x11-repo 	> "${sink}" 2>&1
+			apt-get --assume-yes install x11-repo 	> "${sink}" 2>&1
 	
-	yes | apt update 			> "${sink}" 2>&1
-
-	yes | apt upgrade 			> "${sink}" 2>&1 &
+	yes |	apt-get --assume-yes dist-upgrade		> "${sink}" 2>&1 &
 	
 	frobulator.progress "upgrade"
 
