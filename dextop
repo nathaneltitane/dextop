@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="12-26-2023"
+version="12-27-2023"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -212,16 +212,20 @@ fi
 
 failsafe_intent () {
 
+	# run failsafe termux package and repository update:
+	# mitigate general deployment setup issues
+	# mitigate skipped packages on install
+
 	frobulator.stp "Please wait..." "[ ${script#*-} // failsafe ]"
 	echo
 	
-			apt-get update 							> "${sink}" 2>&1
+			apt-get update 							> "${log}" 2>&1
 
-			apt-get --assume-yes install root-repo	> "${sink}" 2>&1
+			apt-get --assume-yes install root-repo	> "${log}" 2>&1
 	
-			apt-get --assume-yes install x11-repo 	> "${sink}" 2>&1
+			apt-get --assume-yes install x11-repo 	> "${log}" 2>&1
 	
-	yes |	apt-get --assume-yes dist-upgrade		> "${sink}" 2>&1 &
+	yes |	apt-get --assume-yes dist-upgrade		> "${log}" 2>&1 &
 	
 	frobulator.progress "upgrade"
 
