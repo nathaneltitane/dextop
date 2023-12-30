@@ -141,6 +141,7 @@ utilities_list+=(
 	gzip
 	lzip
 	p7zip
+	pip
 	rsync
 	wget
 )
