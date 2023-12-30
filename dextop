@@ -313,7 +313,7 @@ container_intent () {
 		[ -d "/data" ]							&& --bind=/data:/data												\
 		[ -d "/dev" ]							&& --bind=/dev:/dev													\
 		[ -e "/dev/urandom" ]					&& --bind=/dev/urandom:/dev/random									\
-		[ -d "/linkerconfig" ]					&& --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt	\
+		[ -e "/linkerconfig/ld.config.txt" ]  	&& --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt	\
 		[ -d "/proc" ]							&& --bind=/proc:/proc												\
 		[ -d "/proc/self/fd" ]					&& --bind=/proc/self/fd:/dev/fd										\
 		[ -e "/proc/self/fd/0" ]				&& --bind=/proc/self/fd/0:/dev/stdin								\
