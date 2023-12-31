@@ -6,21 +6,21 @@ if [[ -z $(command -v frobulator) ]]
 then
 	if [[ $(id -u -n) = "root" ]]
 	then
-		SUDO_HOME=/root
+		 SUDO_HOME=/root
 
-		USER="${SUDO_USER}"
+		 USER="${SUDO_USER}"
 
-		HOME=/home/"${USER}"
+		 HOME=/home/"${USER}"
 	fi
 
 	if [[ -z $(command -v curl) ]]
 	then
-		yes | apt-get install curl
+		 yes | apt-get install curl
 	fi
 
 	if [ ! -d "${HOME}"/.local/bin ]
 	then
-		mkdir -p "${HOME}"/.local/bin
+		 mkdir -p "${HOME}"/.local/bin
 	fi
 
 	curl -s -L get.frbltr.app > "${HOME}"/.local/bin/frobulator
@@ -102,26 +102,25 @@ echo
 
 # handle storage mount locations
 
-# /home
+storage_locations_list=(
+	"${HOME}"/storage
+	"${PREFIX}"/media/*
+	"${PREFIX}"/storage/*
+)
 
-if [ -d "${HOME}"/storage ]
-then
-	frobulator.delete "${HOME}"/storage
-fi
+for storage_location in ${storage_locations_list}
+do
+	if [ -d "${storage_location}" ]
+	then
+		 frobulator.wrn "Existing link found" "[ ${storage_location} ]"
+		 echo
 
-# /media
+		 frobulator.fwd "Reinitializing..."
+		 echo
 
-if [ -d "${PREFIX}"/media ]
-then
-	frobulator.delete "${PREFIX}"/media/*
-fi
-
-# /storage
-
-if [ -d "${PREFIX}"/storage ]
-then
-	frobulator.delete "${PREFIX}"/storage/*
-fi
+		 frobulator.delete "${storage_location}"
+	fi
+done
 
 # generate symbolic links
 
@@ -132,12 +131,12 @@ echo
 
 if [ ! -f "${PREFIX}"/media/internal ]
 then
-	frobulator.link /storage/ "${PREFIX}"/media emulated/0 internal
+	frobulator.link /storage/emulated "${PREFIX}"/media 0 internal
 fi
 
 if [ ! -f "${PREFIX}"/storage/internal ]
 then
-	frobulator.link /storage/ "${PREFIX}"/storage emulated/0 internal
+	frobulator.link /storage/emulated "${PREFIX}"/storage 0 internal
 fi
 
 # link external storage
@@ -145,32 +144,61 @@ fi
 # use /proc/mounts to detect mounted media:
 # circumvent /storage access issues and DAC policy (Android 11+)
 
-storage_sdxx_uuid=$(cat /proc/mounts | sed -r '/[A0-Z9]{4}[-][A0-Z9]{4}/!d' | grep "/storage" | cut -d ' ' -f 2)
+commands_list=(
+	$(cat /proc/mounts | sed -r '/[A0-Z9]{4}[-][A0-Z9]{4}/!d' | grep '/storage' | cut -d ' ' -f 2)
+	$(cat /proc/mounts | sed -r '/[A0-Z9]{40}/!d' | grep '/storage' | cut -d ' ' -f 2)
+)
 
-storage_cros_uuid=$(cat /proc/mounts | sed -r '/[A0-Z9]{40}/!d' | grep "/storage" | cut -d ' ' -f 2)
+# set IFS
 
-uuid="${storage/\/storage\//}"
+IFS=$'\n'
 
-if [ ! -z "${external_storage}" ]
+for command in ${commands_list[@]}
+do
+	read -r -a mounts_list <<< ${command}
+
+	for mount_point in ${mounts_list[@]}
+	do
+		 storage_paths_list+=( "$mount_point" )
+	done
+done
+
+if [ -n "${#storage_paths_list[@]}" ]
 then
-	frobulator.scs "Additional storage media detected" "[ ${uuid} ]"
-	echo
+	for storage_path in ${storage_paths_list[@]}
+	do
+		uuid="${storage_path/\/storage\//}"
 
-	if [ ! -f "${PREFIX}"/media/external ]
-	then
-		frobulator.link /storage "${PREFIX}"/media "${uuid}" external
-	fi
+		if [ -f "${storage_path}"/.storage ]
+		then
+			label=$(cat ${storage_path}/.storage)
+		fi
 
-	if [ ! -f "${PREFIX}"/storage/external ]
-	then
-		frobulator.link /storage "${PREFIX}"/storage "${uuid}" external
-	fi
+		frobulator.scs "Storage media detected" "[ ${uuid} ]"
+		echo
+
+		if [ ! -f "${PREFIX}"/media/"${label}" ]
+		then
+			frobulator.link /storage "${PREFIX}"/media "${uuid}" "${label}"
+		fi
+
+		if [ ! -f "${PREFIX}"/media/"${label}" ]
+		then
+			frobulator.link /storage "${PREFIX}"/storage "${uuid}" "${label}"
+		fi
+
+	done
+
 else
 	uuid="N/A"
 
-	frobulator.err "No additional storage media detected" "[ ${uuid} ]"
+	frobulator.err "No storage media detected" "[ ${uuid} ]"
 	echo
 
 	frobulator.fwd "Continuing..."
 	echo
 fi
+
+# reset IFS
+
+IFS=''
