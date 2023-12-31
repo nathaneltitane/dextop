@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="12-26-2023"
+version="12-31-2023"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -106,27 +106,21 @@ echo
 
 if [ -d "${HOME}"/storage ]
 then
-	rm					\
-		--recursive		\
-		--force			 "${HOME}"/storage
+	frobulator.delete "${HOME}"/storage
 fi
 
 # /media
 
 if [ -d "${PREFIX}"/media ]
 then
-	rm					\
-		--recursive		\
-		--force			 "${PREFIX}"/media/*
+	frobulator.delete "${PREFIX}"/media/*
 fi
 
 # /storage
 
 if [ -d "${PREFIX}"/storage ]
 then
-	rm					\
-		--recursive		\
-		--force			 "${PREFIX}"/storage/*
+	frobulator.delete "${PREFIX}"/storage/*
 fi
 
 # generate symbolic links
@@ -138,12 +132,12 @@ echo
 
 if [ ! -f "${PREFIX}"/media/internal ]
 then
-	ln -s -f /storage/emulated/0 "${PREFIX}"/media/internal
+	frobulator.link /storage/ "${PREFIX}"/media emulated/0 internal
 fi
 
 if [ ! -f "${PREFIX}"/storage/internal ]
 then
-	ln -s -f /storage/emulated/0 "${PREFIX}"/storage/internal
+	frobulator.link /storage/ "${PREFIX}"/storage emulated/0 internal
 fi
 
 # link external storage
@@ -151,9 +145,11 @@ fi
 # use /proc/mounts to detect mounted media:
 # circumvent /storage access issues and DAC policy (Android 11+)
 
-external_storage=$(cat /proc/mounts | sed -r '/[A0-Z9][-][A0-Z9]/!d' | grep "/storage" | cut -d ' ' -f 2)
+storage_sdxx_uuid=$(cat /proc/mounts | sed -r '/[A0-Z9]{4}[-][A0-Z9]{4}/!d' | grep "/storage" | cut -d ' ' -f 2)
 
-uuid="${external_storage/\/storage\//}"
+storage_cros_uuid=$(cat /proc/mounts | sed -r '/[A0-Z9]{40}/!d' | grep "/storage" | cut -d ' ' -f 2)
+
+uuid="${storage/\/storage\//}"
 
 if [ ! -z "${external_storage}" ]
 then
@@ -162,12 +158,12 @@ then
 
 	if [ ! -f "${PREFIX}"/media/external ]
 	then
-		ln -s -f /storage/"${uuid}" "${PREFIX}"/media/external
+		frobulator.link /storage "${PREFIX}"/media "${uuid}" external
 	fi
 
 	if [ ! -f "${PREFIX}"/storage/external ]
 	then
-		ln -s -f /storage/"${uuid}" "${PREFIX}"/storage/external
+		frobulator.link /storage "${PREFIX}"/storage "${uuid}" external
 	fi
 else
 	uuid="N/A"
