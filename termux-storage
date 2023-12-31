@@ -102,25 +102,20 @@ echo
 
 # handle storage mount locations
 
-storage_locations_list=(
-	"${HOME}"/storage
-	"${PREFIX}"/media/*
-	"${PREFIX}"/storage/*
-)
+if [ -d "${HOME}"/storage ]
+then
+	frobulator.delete "${HOME}"/storage
+fi
 
-for storage_location in ${storage_locations_list}
-do
-	if [ -d "${storage_location}" ]
-	then
-		 frobulator.wrn "Existing link found" "[ ${storage_location} ]"
-		 echo
+if [ -d "${HOME}"/storage ]
+then
+	frobulator.delete "${PREFIX}"/media/*
+fi
 
-		 frobulator.fwd "Reinitializing..."
-		 echo
-
-		 frobulator.delete "${storage_location}"
-	fi
-done
+if [ -d "${HOME}"/storage ]
+then
+	frobulator.delete "${PREFIX}"/storage/*
+fi
 
 # generate symbolic links
 
