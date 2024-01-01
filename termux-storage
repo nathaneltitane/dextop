@@ -154,7 +154,7 @@ do
 
 	for storage_mount in ${storage_mounts_list[@]}
 	do
-		 storage_paths_list+=( "${storage_mount}" )
+		 storage_paths_list+=("${storage_mount}")
 	done
 done
 
