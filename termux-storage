@@ -162,32 +162,32 @@ if [ -n ${#storage_paths_list[@]} ]
 then
 	for storage_path in ${storage_paths_list[@]}
 	do
-		uuid="${storage_path/\/storage\//}"
+		storage_uuid="${storage_path/\/storage\//}"
 
 		if [ -f "${storage_path}"/.storage ]
 		then
-			label=$(cat ${storage_path}/.storage)
+			storage_label=$(cat ${storage_path}/.storage)
 		fi
 
-		frobulator.scs "Storage media detected" "[ ${uuid} ]"
+		frobulator.scs "Storage media detected" "[ ${storage_uuid} ]"
 		echo
 
-		if [ ! -f "${PREFIX}"/media/"${label}" ]
+		if [ ! -f "${PREFIX}"/media/"${storage_label}" ]
 		then
-			frobulator.link /storage "${PREFIX}"/media "${uuid}" "${label}"
+			frobulator.link /storage "${PREFIX}"/media "${storage_uuid}" "${storage_label}"
 		fi
 
-		if [ ! -f "${PREFIX}"/media/"${label}" ]
+		if [ ! -f "${PREFIX}"/media/"${storage_label}" ]
 		then
-			frobulator.link /storage "${PREFIX}"/storage "${uuid}" "${label}"
+			frobulator.link /storage "${PREFIX}"/storage "${storage_uuid}" "${storage_label}"
 		fi
 
 	done
 
 else
-	uuid="N/A"
+	storage_uuid="N/A"
 
-	frobulator.err "No storage media detected" "[ ${uuid} ]"
+	frobulator.err "No storage media detected" "[ ${storage_uuid} ]"
 	echo
 
 	frobulator.fwd "Continuing..."
