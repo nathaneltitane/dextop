@@ -6,7 +6,7 @@
 
 ---
 
-### NOTICE // 11-26-2023: Update routine and readme updated with latest changes and granualar argument selections!
+### NOTICE // 01-01-2024: Added extended UUID stoarge detection (ChromeOS/FydeOS + Android Subsystem for Linux storage mounts access)
 ---
 
 ### Welcome to [Dextop](https://dextop.app)
