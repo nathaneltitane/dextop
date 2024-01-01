@@ -158,7 +158,7 @@ do
 	done
 done
 
-if [ -n ${#storage_paths_list[@]} ]
+if [ -n "${#storage_paths_list[@]}" ]
 then
 	for storage_path in ${storage_paths_list[@]}
 	do
