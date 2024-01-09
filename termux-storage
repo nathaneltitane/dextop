@@ -104,17 +104,23 @@ echo
 
 if [ -d "${HOME}"/storage ]
 then
-	frobulator.delete "${HOME}"/storage
+    frobulator.delete "${HOME}"/storage
 fi
 
-if [ -d "${PREFIX}"/media/ ]
+if [ -d "${PREFIX}"/media ]
 then
-	frobulator.delete "${PREFIX}"/media/*
+	for item in "${PREFIX}"/media/*
+	do
+		frobulator.delete "${item}"
+	done
 fi
 
-if [ -d "${PREFIX}"/storage/ ]
+if [ -d "${PREFIX}"/storage ]
 then
-	frobulator.delete "${PREFIX}"/storage/*
+	for item in "${PREFIX}"/storage/*
+	do
+		frobulator.delete "${item}"
+	done
 fi
 
 # generate symbolic links
