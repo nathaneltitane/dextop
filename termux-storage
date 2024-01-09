@@ -107,12 +107,12 @@ then
 	frobulator.delete "${HOME}"/storage
 fi
 
-if [ -d "${HOME}"/storage ]
+if [ -d "${PREFIX}"/media/ ]
 then
 	frobulator.delete "${PREFIX}"/media/*
 fi
 
-if [ -d "${HOME}"/storage ]
+if [ -d "${PREFIX}"/storage/ ]
 then
 	frobulator.delete "${PREFIX}"/storage/*
 fi
