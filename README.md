@@ -241,7 +241,7 @@ To enable this permission, navigate into Settings → Security and Privacy → I
 To get Dextop set up, install the following packages on the host Android device:
 
 - [Termux](https://github.com/termux/termux-app/releases/download/v0.118.0/termux-app_v0.118.0+github-debug_arm64-v8a.apk "Termux by Fredrik Fornwall")
-- [Termux:X11](https://github.com/termux/termux-app/releases/download/v0.118.0/termux-app_v0.118.0+github-debug_arm64-v8a.apk "Termux by Fredrik Fornwall")
+- [Termux:X11](https://github.com/termux/termux-x11/releases/download/nightly/app-arm64-v8a-debug.apk "Termux:X11 by Twaik Yont")
 
 Optionally, a VNC viewer application with full screen or immersive capabillities can also be installed alongside Termux:X11, such as:
 
