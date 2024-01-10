@@ -134,25 +134,25 @@ open_intent () {
 
 # notice
 
-frobulator.err "Google Play Store updates deprecated since November 2020!"
+frobulator.err "Google Play Store updates and packages deprecated since November 2020!"
 echo
 
-frobulator.wrn "Back up and uninstall the Google Play Store version of Termux."
-echo
-
-frobulator.msg "Visit the following wiki pages on how to proceed:"
+frobulator.wrn "Back up Termux and uninstall the Google Play Store version of Termux."
+frobulator.nul "Visit the following wiki pages on how to proceed:"
 echo
 
 frobulator.inf "Backing up Termux: https://wiki.termux.com/wiki/Backing_up_Termux"
 frobulator.nul "Installing Termux: https://wiki.termux.com/wiki/installation"
 echo
 
-frobulator.wrn "Enable 'Install unknown apps' permission for Termux:"
+frobulator.msg "Enable 'Install unknown apps' permission for Termux:"
 frobulator.nul "Settings > Security and Privacy > Install unknown apps > Termux"
 echo
 
 frobulator.ins "Select 'Package Installer' when prompted to proceed."
 echo
+
+frobulator.separate
 
 frobulator.ask "Check for updates?"
 
