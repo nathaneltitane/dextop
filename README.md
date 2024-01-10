@@ -149,6 +149,8 @@ Dextop sets up the internal (and external, when available) storage media for fle
 
 The utility in charge of mounting and linking these entries for your convenience will first look for a ```.storage``` file at the root of each of those mounted paths: ***it is highly recommended, before starting the setup, to create those files and to append whatever sensible or recognizable label intended for those mounts.***
 
+![dextop-additions](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop-label.png)
+
 Example:
 
 /storage/emulated/0 is the default location for tha Android internal user memory (also known as the 'user data' and/or 'user home' location).
