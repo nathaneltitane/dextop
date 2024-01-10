@@ -6,7 +6,7 @@
 
 ---
 
-### NOTICE // 01-09-2024: Updated extended UUID stoarge detection (ChromeOS/FydeOS + Android Subsystem for Linux storage mounts access)
+### NOTICE // 01-09-2024: Updated extended UUID storage detection (Chrome OS/FydeOS + Android Subsystem for Linux storage mounts access)
 ---
 
 ### Welcome to [Dextop](https://dextop.app)
