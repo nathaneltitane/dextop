@@ -173,6 +173,15 @@ then
 		if [ -f "${storage_path}"/.storage ]
 		then
 			storage_label=$(cat ${storage_path}/.storage)
+		else
+			frobulator.wrn "No storage identifier found" "[ ${storage_uuid} ]"
+			echo
+			
+			frobulator.inf "Using mouts UUID for identification"
+			echo
+			
+			frobulator.fwd "Proceeding..."
+			echo
 		fi
 
 		frobulator.scs "Storage media detected" "[ ${storage_uuid} ]"
