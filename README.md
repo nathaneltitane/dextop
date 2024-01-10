@@ -154,7 +154,7 @@ Appending 'internal' to a .storage file for that directory via ```echo internal 
 
 ![dextop-additions](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop-storage.png)
 
-If not present, the utility will simply default to linking and making acessible those mounts under /storage and /media through their respective or default UUIDs.
+If not present, the utility will simply default to linking and making those mounts acessible under ```${PREFIX}/storage``` and ```${PREFIX}/media``` through their respective labels or default UUIDs.
 
 ### Interface:
 
