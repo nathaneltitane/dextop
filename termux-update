@@ -40,8 +40,57 @@ version="01-01-2024"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
-# add f-droid option
-# add github option
+while (($#))
+do
+	case "${1}"
+	in
+		-f|--fdroid)
+			option="fdroid"
+		;;
+
+		-g|--github)
+			option="github"
+		;;
+
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} -f | -g | [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-f, --fdroid   Use F-Droid as package update source."
+			echo -e "-g, --github   Use GitHub as package update source."
+			echo
+			echo -e "-h, --help     Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version // ${version} ]"
+			echo
+
+			exit
+		;;
+
+			"")
+				# handle empty argument:
+				# use default values specified in script
+
+				:
+			;;
+
+		*)
+			echo
+			echo -e "Usage: ${script} -f | -g | [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+		;;
+
+	esac
+
+	shift
+done
 
 # prompt ///////////////////////////////////////////////////////////////////////
 
