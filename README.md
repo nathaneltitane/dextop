@@ -152,6 +152,8 @@ Example:
 /storage/emulated/0 is the default location for tha Android internal user memory (also known as the 'user data' and/or 'user home' location).
 Appending 'internal' to a .storage file for that directory via ```echo internal > /storage/emulated/0/.storage``` will then result in having accessible mounts linked under ```${PREFIX}/storage``` and ```${PREFIX}/media``` as ```internal -> /storage/emulated/0```
 
+![dextop-additions](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop-storage.png)
+
 If not present, the utility will simply default to linking and making acessible those mounts under /storage and /media through their respective or default UUIDs.
 
 ### Interface:
