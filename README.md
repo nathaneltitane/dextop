@@ -2,11 +2,11 @@
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/donate/?hosted_button_id=2WZT7PCW3XDX6)
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 01-01-2024 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 01-09-2024 ]
 
 ---
 
-### NOTICE // 01-01-2024: Added extended UUID stoarge detection (ChromeOS/FydeOS + Android Subsystem for Linux storage mounts access)
+### NOTICE // 01-09-2024: Updated extended UUID stoarge detection (ChromeOS/FydeOS + Android Subsystem for Linux storage mounts access)
 ---
 
 ### Welcome to [Dextop](https://dextop.app)
@@ -140,6 +140,19 @@ Such requirement is due to the Android user space runtime policy and limited har
 Music, mail, web browsing and gaming activities should preferably be taken care of using native Android applications as they interface with the device's hardware and provide acceleration and other desirable features. See additons.
 
 ![dextop-additions](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop-additions.png)
+
+### Storage:
+
+Dextop sets up the internal (and external, when available) storage media for flexible, system-wide access. Storage detection is done through /proc/mounts by parsing the /storage directory's entries. Those entries, when present, are filtered agains a regular expression to identify additional external storage media such as SD cards, eternal drives or specific UUID mount patterns such as the ones delivered by Chrome OS based systems (i.e.: FydeOS).
+
+The utility in charge of mounting and linking these entries for your convenience will first look for a ```.storage``` file at the root of each of those mounted paths: ***it is highly recommended, before starting the setup, to create those files and to append whatever sensible or recognizable label intended for those mounts.***
+
+Example:
+
+/storage/emulated/0 is the default location for tha Android internal user memory (also known as the 'user data' and/or 'user home' location).
+Appending 'internal' to a .storage file for that directory via ```echo internal > /storage/emulated/0/.storage``` will then result in having accessible mounts linked under ```${PREFIX}/storage``` and ```${PREFIX}/media``` as ```internal -> /storage/emulated/0```
+
+If not present, the utility will simply default to linking and making acessible those mounts under /storage and /media through their respective or default UUIDs.
 
 ### Interface:
 
@@ -484,7 +497,7 @@ Should you suspect any issues or errors, please provide a copy of those files wh
 
 ---
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 01-01-2024 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 01-09-2024 ]
 
 ### Enjoying Dextop? Buy me a coffee to show your appreciation!
 
