@@ -107,21 +107,21 @@ then
     frobulator.delete "${HOME}"/storage
 fi
 
-if [ -d "${PREFIX}"/media ]
-then
-	for item in "${PREFIX}"/media/*
-	do
-		frobulator.delete "${item}"
-	done
-fi
+directories_list=(
+	"${PREFIX}"/media
+	"${PREFIX}"/storage
+)
 
-if [ -d "${PREFIX}"/storage ]
-then
-	for item in "${PREFIX}"/storage/*
-	do
-		frobulator.delete "${item}"
-	done
-fi
+for directory in ${directories_list[@]}
+do
+	if [ -d "${directory}" ]
+	then
+		for item in "${directory}"/*
+		do
+			frobulator.delete "${item}"
+		done
+	fi
+done
 
 # generate symbolic links
 
@@ -130,15 +130,15 @@ fi
 frobulator.fwd "Linking..."
 echo
 
-if [ ! -f "${PREFIX}"/media/internal ]
-then
-	frobulator.link /storage/emulated "${PREFIX}"/media 0 internal
-fi
+for directory in ${directories_list[@]}
+do
+	if [ ! -f "${directory}"/internal ]
+	then
+		frobulator.link /storage/emulated "${directory}" 0 internal
+	fi
+done
 
-if [ ! -f "${PREFIX}"/storage/internal ]
-then
-	frobulator.link /storage/emulated "${PREFIX}"/storage 0 internal
-fi
+directories_list=()
 
 # link external storage
 
