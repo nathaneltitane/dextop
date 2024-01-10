@@ -223,8 +223,8 @@ then
 			else
 				# continue without application update
 
-				frobulator.wrn "Proceeding without update."
-				frobulator.wrn "Setup process may encounter errors."
+				frobulator.wrn "Proceeding without update:"
+				frobulator.nul "Setup process may encounter errors."
 				echo
 
 				frobulator.num "1" "Follow wiki pages stated above to correct issues."
