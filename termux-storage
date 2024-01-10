@@ -130,13 +130,16 @@ done
 frobulator.fwd "Linking..."
 echo
 
-for directory in ${directories_list[@]}
-do
-	if [ ! -f "${directory}"/internal ]
-	then
-		frobulator.link /storage/emulated "${directory}" 0 internal
-	fi
-done
+if [ -d /storage/emulated/0 ]
+then
+	for directory in ${directories_list[@]}
+	do
+		if [ ! -f "${directory}"/internal ]
+		then
+			frobulator.link /storage/emulated "${directory}" 0 internal
+		fi
+	done
+fi
 
 directories_list=()
 
