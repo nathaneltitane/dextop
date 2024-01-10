@@ -55,7 +55,9 @@ it loads and links scripts, configuration files and utilities to enhance the And
 
 ### Architecture:
 
-Dextop was developed using a Samsung Galaxy Note 20 Ultra, a Samsung Galaxy Tab S7+ and optimized to run within/alongside Samsung's DeX.
+Dextop is developed using a Samsung Galaxy Note 20 Ultra, a Samsung Galaxy Tab S7+ and an Intel NUC running Chrome OS with ASL (Android subsystem for Linux) enabled.
+
+Dextop has been primarily optimized to run within/alongside Samsung's DeX, on mobile devices.
 
 Given the devices Dextop was developped on and made for, the **ARM64 V8a** architecture is the base for all compiled objects, binaries, libraries, utilities and all other installed or required packages for the project and is the implied architecture reference when stating 'modern android device'.
 
