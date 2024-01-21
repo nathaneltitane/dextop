@@ -98,8 +98,7 @@ frobulator.script "Setting up ${script#*-}"
 
 # variables ////////////////////////////////////////////////////////////////////
 
-packages_url="https://f-droid.org/en/packages"
-repository_url="https://f-droid.org/repo"
+
 
 # defaults /////////////////////////////////////////////////////////////////////
 
@@ -162,7 +161,7 @@ if [[ "${reply}" = [yY]         ]] || \
    [[ "${reply}" = [yY][eE][sS] ]]
 then
 	# process update
-
+	
 	packages_list=(
 		com.termux
 		com.termux.api
@@ -170,32 +169,54 @@ then
 
 	for package in ${packages_list[@]}
 	do
+		if [[ "${option}" = "fdroid" ]]
+		then
+			packages_url="https://f-droid.org/en/packages"
+			repository_url="https://f-droid.org/repo"
+			
+			archive=$(curl -s -L "${packages_url}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
+			archive_version=$(echo "${archive}" | cut -d '_' -f 2 | sed 's/\..*//g')
+			archive_url="${repository_url}/${archive}"
+		fi
+
+		if [[ "${option}" = "github.com" ]]
+		then
+			if [ "${package}" = "com.termux" ]
+			then
+				package_reference=termux-app
+				
+				installed_version=$(echo "${TERMUX_VERSION}" | cut -d '.' -f 2)
+			fi
+
+			if [ "${package}" = "com.termux.api" ]
+			then
+				package_reference=termux-api
+				
+				installed_version=$(echo "${TERMUX_API_VERSION}" | cut -d '.' -f 2)
+			fi
+			
+			release_url="https://api.github.com/repos/termux/termux-app/releases"
+			
+			release_version=$(curl -s "${release_url}" | jq -r 'first(.[].tag_name | select(test("^v[0-9]")))')
+			
+			release_number=$(release_version/v/)
+			
+			package_url="https://github.com/termux/${package_reference}/releases/download/${release_version}/${package_reference}_${release_version}"
+
+			# https://github.com/termux/termux-app/releases/download/v0.118.0/termux-app_v0.118.0+github-debug_arm64-v8a.apk
+		fi
+		
 		frobulator.inf "Checking for package update" "[ ${package} ]"
 		echo
 
-		archive=$(curl -s -L "${packages_url}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
-		archive_version=$(echo "${archive}" | cut -d '_' -f 2 | sed 's/\..*//g')
-		archive_url="${repository_url}/${archive}"
-
 		frobulator.fwd "Verifying..."
 		echo
-
-		if [ "${package}" = "com.termux" ]
-		then
-			# com.termux apk
-
-			installed_version=$(echo "${TERMUX_VERSION}" | cut -d '.' -f 2)
-		else
-			# com.termux.api apk
-
-			installed_version=$(echo "${TERMUX_API_VERSION}" | cut -d '.' -f 2)
-		fi
 
 		# application version is deprecated
 
 		if [ "${installed_version}" != "${archive_version}" ]
 		then
-			frobulator.wrn "Package version has been updated" "[ ${package} // ${archive_version} ]."
+			frobulator.wrn "Package update available" "[ ${package} // ${release_version} ]"
 			echo
 
 			# request update permission
@@ -207,7 +228,7 @@ then
 			if [[ "${reply}" = [yY]         ]] || \
                [[ "${reply}" = [yY][eE][sS] ]]
 			then
-				frobulator.inf "Dowloading update."
+				frobulator.inf "Dowloading update" "[ ${package} // ${release_version} ]"
 				echo
 
 				# download
