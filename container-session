@@ -228,7 +228,7 @@ fi
 
 if [ -z "${DISPLAY_DRIVER}" ]
 then
-	if [[ command -v virgl* ]]
+	if [[ $(command -v virgl*) ]]
 	then
 		DISPLAY_DRIVER="virpipe"
 	fi
