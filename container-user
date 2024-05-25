@@ -209,8 +209,6 @@ user_noninteractive () {
 
 user_superuser () {
 
-	frobulator.require sudo
-
 	# generate 'user' superuser privilege
 
 	frobulator.fwd "Generating superuser privilege..."
@@ -231,8 +229,6 @@ user_superuser () {
 }
 
 user_superuser_override () {
-
-	frobulator.require sudo
 
 	# set 'user' superuser privilege password override
 
