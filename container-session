@@ -193,7 +193,10 @@ fi
 
 if [ -z "${DISPLAY_DRIVER}" ]
 then
-	DISPLAY_DRIVER="virpipe"
+	if [[ "${PREFIX}"/bin/virgl* ]]
+	then
+		DISPLAY_DRIVER="virpipe"
+	fi
 fi
 
 if [ -z "${DISPLAY_NUMBER}" ]
@@ -241,6 +244,8 @@ fi
 # exports //////////////////////////////////////////////////////////////////////
 
 export DISPLAY="${DISPLAY}"
+
+export GALLIUM_DRIVER="${DISPLAY_DRIVER}"
 
 # functions ////////////////////////////////////////////////////////////////////
 
