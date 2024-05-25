@@ -57,7 +57,7 @@ yes | apt update > "${sink}" 2>&1 &
 
 frobulator.progress "update"
 
-yes | apt upgrade > "${sink}" 2>&1 &
+yes | apt dist-upgrade > "${sink}" 2>&1 &
 
 frobulator.progress "upgrade"
 
