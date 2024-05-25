@@ -61,6 +61,8 @@ frobulator.upgrade
 # values #
 
 display_list+=(
+	virglrenderer
+	virglrenderer-android
 	xorg-server-xvfb
 	xwayland
 )
