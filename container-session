@@ -191,6 +191,11 @@ then
 	DISPLAY=":0"
 fi
 
+if [ -z "${DISPLAY_DRIVER}" ]
+then
+	DISPLAY_DRIVER="virpipe"
+fi
+
 if [ -z "${DISPLAY_NUMBER}" ]
 then
 	DISPLAY_NUMBER="${DISPLAY/:/}"
@@ -606,6 +611,20 @@ server_intent () {
 
 	if [[ "${display}" = [xX][1][1] ]]
 	then
+
+		unset load_command
+
+		if [[ $(pidof virgl_test_server_android) ]]
+		then
+			:
+		else
+			load_command+="virgl_test_server_android"
+
+			${load_command} > "${sink}" 2>&1 &
+		fi
+
+		unset load_command
+
 		if [[ $(pidof app_process / com.termux.x11.Loader) ]]
 		then
 			:
