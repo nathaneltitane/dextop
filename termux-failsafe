@@ -53,11 +53,11 @@ frobulator.script "Setting up ${script#*-}"
 frobulator.stp "Please wait..."
 echo
 
-yes | apt update > "${sink}" 2>&1 &
+yes | apt update > "${sink}" &
 
 frobulator.progress "update"
 
-yes | apt upgrade > "${sink}" 2>&1 &
+yes | apt upgrade > "${sink}" &
 
 frobulator.progress "upgrade"
 	
