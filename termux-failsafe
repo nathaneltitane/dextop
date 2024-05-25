@@ -65,6 +65,8 @@ list=(
 	proot
 	termux-x11-nightly
 	xorg-server-xvfb
+	virglerenderer
+	virglrenderer-android
 )
 
 frobulator.failsafe ${list[@]} &
