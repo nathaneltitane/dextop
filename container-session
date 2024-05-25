@@ -234,6 +234,11 @@ then
 	fi
 fi
 
+if [ -z "${GALLIUM_DRIVER}" ]
+then
+	GALLIUM_DRIVER="${DISPLAY_DRIVER}"
+fi
+
 if [ -f /etc/os-release ]
 then
 	. /etc/os-release
@@ -568,6 +573,7 @@ container_session () {
 	session_command+=" PREFIX=${PREFIX}"
 	session_command+=" COLORTERM=${COLORTERM}"
 	session_command+=" DISPLAY=${DISPLAY}"
+	session_command+=" DISPLAY_DRIVER=${DISPLAY_DRIVER}"
 	session_command+=" HOME=${HOME}"
 	session_command+=" LANG=${LANG}"
 	session_command+=" LOCALHOST=${LOCALHOST}"
