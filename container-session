@@ -186,19 +186,6 @@ then
 	session="$(cat ${HOME}/.dextop/dextop-session)"
 fi
 
-if [ -z "${DISPLAY}" ]
-then
-	DISPLAY=":0"
-fi
-
-if [ -z "${DISPLAY_DRIVER}" ]
-then
-	if [[ "${PREFIX}"/bin/virgl* ]]
-	then
-		DISPLAY_DRIVER="virpipe"
-	fi
-fi
-
 if [ -z "${DISPLAY_NUMBER}" ]
 then
 	DISPLAY_NUMBER="${DISPLAY/:/}"
@@ -232,6 +219,19 @@ fi
 if [ -z "${SHELL}" ]
 then
 	SHELL="/bin/bash"
+fi
+
+if [ -z "${DISPLAY}" ]
+then
+	DISPLAY=":0"
+fi
+
+if [ -z "${DISPLAY_DRIVER}" ]
+then
+	if [[ command -v virgl* ]]
+	then
+		DISPLAY_DRIVER="virpipe"
+	fi
 fi
 
 if [ -f /etc/os-release ]
@@ -619,7 +619,7 @@ server_intent () {
 
 		unset load_command
 
-		if [[ $(pidof virgl_test_server_android) ]]
+		if [[ $(pidof virgl*) ]]
 		then
 			:
 		else
