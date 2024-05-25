@@ -640,7 +640,7 @@ server_intent () {
 		then
 			:
 		else
-			load_command+="termux-x11 ${DISPLAY} -ac"
+			load_command+="termux-x11"
 
 			${load_command} > "${sink}" 2>&1 &
 		fi
