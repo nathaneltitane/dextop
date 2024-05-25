@@ -218,7 +218,7 @@ failsafe_intent () {
 
 	frobulator.stp "Please wait..." "[ ${script#*-} // failsafe ]"
 	echo
-	
+
 	frobulator.log "apt-get update"
 
 	frobulator.log "apt-get --assume-yes install root-repo"
@@ -226,7 +226,7 @@ failsafe_intent () {
 	frobulator.log "apt-get --assume-yes install x11-repo"
 
 	frobulator.log "yes |	apt-get --assume-yes dist-upgrade" &
-	
+
 	frobulator.progress "upgrade"
 
 }
@@ -236,7 +236,7 @@ environment_intent () {
 	# generate environment '$PATH' variable
 
 	ROOT="${ROOT}"
-	
+
 	# set path:
 	# in order of retreival
 
@@ -788,7 +788,7 @@ then
 		echo
 
 		preferences_intent
-		
+
 		dextop_intent
 
 		utility_intent
@@ -798,7 +798,7 @@ then
 		shell_intent
 
 		"${HOME}"/.local/bin/termux-update
-		
+
 		frobulator.cpt "Complete" "[ Update // All ]"
 		echo
 	fi
@@ -812,7 +812,7 @@ then
 		echo
 
 		dextop_intent
-		
+
 		frobulator.cpt "Complete" "[ Update // Dextop ]"
 		echo
 	fi
@@ -827,11 +827,11 @@ then
 		echo
 
 		utility_intent
-		
+
 		frobulator.cpt "Complete" "[ Update // Utility ]"
 		echo
 	fi
-	
+
 	if [[ "${update}" = [pP][rR][eE][fF][eE][rR][eE][nN][cC][eE][sS] ]]
 	then
 
@@ -857,7 +857,7 @@ then
 		echo
 
 		shell_intent
-		
+
 		frobulator.cpt "Complete" "[ Update // Shell ]"
 		echo
 	fi
@@ -885,7 +885,7 @@ then
 		echo
 
 		"${HOME}"/.local/bin/termux-update
-		
+
 		frobulator.cpt "Complete" "[ Update // Termux ]"
 		echo
 
@@ -901,9 +901,9 @@ then
 	# dextop ///////////////////////////////////////////////////////////////////
 
 	# failsafe
-	
+
 	failsafe_intent
-	
+
 	# backup
 
 	if [ ! -f "${HOME}"/.dextop/dextop-backup-checkpoint ]
@@ -1031,7 +1031,7 @@ then
 
 		frobulator.file "${HOME}"/.dextop dextop-termux-failsafe-checkpoint
 	fi
-	
+
 	# termux packages
 
 	if [ ! -f "${HOME}"/.dextop/dextop-termux-packages-checkpoint ]
