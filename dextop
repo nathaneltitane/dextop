@@ -313,6 +313,10 @@ container_intent () {
 
 	# run as 'root' with default system parameters
 
+	# keep simplified 'proot' command:
+	# mitigate pass-through issues
+	# mitigate container setup issues
+
 	proot										\
 		--kill-on-exit							\
 		--link2symlink							\
