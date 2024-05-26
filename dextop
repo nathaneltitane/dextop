@@ -1052,15 +1052,6 @@ then
 		frobulator.file "${HOME}"/.dextop dextop-container-image-checkpoint
 	fi
 
-	# container initialization
-
-	if [ ! -f "${HOME}"/.dextop/dextop-container-initialization-checkpoint ]
-	then
-		container_intent
-
-		frobulator.file "${HOME}"/.dextop dextop-container-initialization-checkpoint
-	fi
-
 	# container expansion
 
 	if [ ! -f "${HOME}"/.dextop/dextop-container-expansion-checkpoint ]
@@ -1068,15 +1059,6 @@ then
 		container_intent "${HOME}"/.local/bin/container-expansion
 
 		frobulator.file "${HOME}"/.dextop dextop-container-expansion-checkpoint
-	fi
-
-	# container failsafe
-
-	if [ ! -f "${HOME}"/.dextop/dextop-container-failsafe-checkpoint ]
-	then
-		"${HOME}"/.local/bin/container-failsafe
-
-		frobulator.file "${HOME}"/.dextop dextop-container-failsafe-checkpoint
 	fi
 
 	# container packages
