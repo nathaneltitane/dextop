@@ -252,20 +252,7 @@ environment_intent () {
 
 	PATH=""
 
-	# android
 
-	[ -d /system/sbin ] && PATH+="/system/sbin:"
-	[ -d /system/bin ]  && PATH+="/system/bin:"
-
-	# termux
-
-	[ -d "${HOME}"/.local/sbin ] && PATH+="${HOME}/.local/sbin:"
-	[ -d "${HOME}"/.local/bin ]  && PATH+="${HOME}/.local/bin:"
-	[ -d "${HOME}"/.sbin ]       && PATH+="${HOME}/.sbin:"
-	[ -d "${HOME}"/.bin ]        && PATH+="${HOME}/.bin:"
-
-	[ -d "${PREFIX}"/sbin ]      && PATH+="${PREFIX}/sbin:"
-	[ -d "${PREFIX}"/bin ]       && PATH+="${PREFIX}/bin:"
 
 	# container
 
