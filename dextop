@@ -337,7 +337,6 @@ container_intent () {
 			env 																									\
 				--ignore-environment																				\
 					PREFIX="${PREFIX}"																				\
-					PATH="${PATH}"																					\
 					HOME="${ROOT_HOME}"																				\
 					LANG="${LANG}"																					\
 					TERM="${TERM}"																					\
