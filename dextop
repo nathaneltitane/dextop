@@ -318,7 +318,7 @@ container_intent () {
 
 	unset LD_PRELOAD
 
-	# generate environment paths
+	# generate environement paths
 
 	environment_intent
 
@@ -338,6 +338,10 @@ container_intent () {
 		--bind=/proc/self/fd/0:/dev/stdin									\
 		--bind=/proc/self/fd/1:/dev/stdout									\
 		--bind=/proc/self/fd/2:/dev/stderr									\
+		--bind=/storage:/storage											\
+		--bind=/sys:/sys													\
+		--bind=/system:/system												\
+		--bind=/vendor:/vendor												\
 		--bind=/data/data/com.termux/files/home:"${ROOT_HOME}"				\
 			env -i															\
 				PREFIX="${PREFIX}"											\
@@ -1076,6 +1080,15 @@ then
 		"${HOME}"/.local/bin/container-image
 
 		frobulator.file "${HOME}"/.dextop dextop-container-image-checkpoint
+	fi
+
+	# container initialization
+
+	if [ ! -f "${HOME}"/.dextop/dextop-container-initialization-checkpoint ]
+	then
+		container_intent
+
+		frobulator.file "${HOME}"/.dextop dextop-container-initialization-checkpoint
 	fi
 
 	# container expansion
