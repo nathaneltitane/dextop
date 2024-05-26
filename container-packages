@@ -50,6 +50,26 @@ frobulator.script "Setting up ${script#*-}"
 
 # defaults /////////////////////////////////////////////////////////////////////
 
+# functions ////////////////////////////////////////////////////////////////////
+
+failsafe_intent () {
+
+	# ref.: https://github.com/termux/termux-packages/issues/10871
+
+	# run failsafe termux package and repository update:
+	# mitigate general deployment setup issues
+	# mitigate skipped packages on install
+
+	frobulator.fwd "Please wait${marker_elp}"
+
+	yes | apt update > "${sink}" 2>&1
+
+	yes | apt full-upgrade > "${sink}" 2>&1
+
+}
+
+failsafe_intent
+
 # update packages list
 
 frobulator.update
