@@ -83,8 +83,8 @@ do
 			fi
 		;;
 
-		-a|--additions)
-			option="additions"
+		-a|--addons)
+			option="addons"
 		;;
 
 		-h|--help)
@@ -116,7 +116,7 @@ do
 			echo -e "                     [ termux ]"
 			echo -e "                     [ preferences ]"
 			echo
-			echo -e "-a, --additions      Setup Termux additions and companion applications."
+			echo -e "-a, --additions      Setup Termux addons and companion applications."
 			echo
 			echo -e "-h, --help           Show help and usage information."
 			echo
@@ -457,7 +457,7 @@ utility_intent () {
 		termux-failsafe
 		termux-update
 		termux-storage
-		termux-additions
+		termux-addons
 		container-expansion
 		container-image
 		container-packages
@@ -778,6 +778,11 @@ frobulator.log "architecture_intent"
 if [ "${option}" = "backup" ]
 then
 	backup_intent
+fi
+
+if [ "${option}" = "addons" ]
+then
+	addons_intent
 fi
 
 if [ "${option}" = "update" ]
