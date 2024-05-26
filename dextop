@@ -227,11 +227,13 @@ failsafe_intent () {
 
 	frobulator.fwd "Please wait${marker_elp}"
 
+	yes | apt update       > "${sink}" 2>&1
+
 	yes | apt full-upgrade > "${sink}" 2>&1
 
-	yes | pkg upgrade > "${sink}" 2>&1
+	yes | pkg upgrade      > "${sink}" 2>&1
 
-	pkg update > "${sink}" 2>&1
+	yes | pkg update       > "${sink}" 2>&1
 
 	frobulator.install root-repo
 

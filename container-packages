@@ -62,7 +62,7 @@ failsafe_intent () {
 
 	frobulator.fwd "Please wait${marker_elp}"
 
-	yes | apt update > "${sink}" 2>&1
+	yes | apt update       > "${sink}" 2>&1
 
 	yes | apt full-upgrade > "${sink}" 2>&1
 
