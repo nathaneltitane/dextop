@@ -1,4 +1,4 @@
-#!/bin/bash
+# #!/bin/bash
 
 set -x
 
@@ -60,7 +60,7 @@ list=(
 # run failsafe package install:
 # prevents container side dependencies mismatch
 
-frobulator.failsafe ${list[@]} &
+frobulator.require ${list[@]} &
 
 frobulator.stp "Please wait..."
 echo

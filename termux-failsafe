@@ -58,7 +58,7 @@ list=(
 	virglrenderer-android
 )
 
-frobulator.failsafe ${list[@]} &
+frobulator.require ${list[@]} &
 
 frobulator.stp "Please wait..."
 echo
