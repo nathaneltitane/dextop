@@ -285,7 +285,7 @@ container_intent () {
 
 	if [ $# -eq 0 ]
 	then
-		ROOT=("${PREFIX}"/cnt/*/*)
+		ROOT=("${PREFIX}"/cnt/debian/12)
 
 		export ROOT="${ROOT}"
 
