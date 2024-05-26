@@ -123,6 +123,60 @@ frobulator.script "Setting up ${script#*-}"
 
 # functions ////////////////////////////////////////////////////////////////////
 
+user_verify () {
+
+	# authentication
+
+	frobulator.fwd "Verifying..."
+	echo
+
+	# verify user existence:
+	# loop through container's /etc/passwd file and check if 'user' exists
+
+	last_entry="$(tail -n 1 /etc/passwd)"
+
+	while read -r entry
+	do
+		IFS=':'
+
+		read USER _ USER_ID GROUP_ID GECOS HOME SHELL <<< "${entry}"
+
+		IFS=','
+
+		read FULL_NAME ROOM_NUMBER WORK_PHONE HOME_PHONE USER_EMAIL <<< "${GECOS}"
+
+		# reset IFS
+
+		IFS=' '
+
+		# valid user name found
+
+		if [[ "${user_name}" == "${USER}" ]]
+		then
+
+			frobulator.scs "User name exists" "[ '${user_name}' ]"
+			echo
+
+			break
+		fi
+
+		# user naem not found
+
+		if [[ "${entry}" == "${last_entry}" ]]
+		then
+
+			frobulator.err "User name does not exist" "[ '${user_name}' ]"
+			echo
+
+			frobulator.wrn "User must exist before proceeding."
+			echo
+
+			exit 1
+		fi
+
+	done < /etc/passwd
+}
+
 user_password_generate () {
 
 	# generate random password
@@ -218,39 +272,68 @@ user_superuser () {
 
 	# generate 'user' superuser privilege
 
-	frobulator.fwd "Generating superuser privilege..."
-	echo
-
-	if [[ $(cat /etc/group | grep sudo) ]]
+	if [[ $(command -v sudo) ]]
 	then
-		sudo_id=$(cat /etc/group | grep sudo | cut -d ':' -f 3)
+		frobulator.fwd "Generating superuser privilege..."
+		echo
+
+		if [[ $(cat /etc/group | grep sudo) ]]
+		then
+			sudo_id=$(cat /etc/group | grep sudo | cut -d ':' -f 3)
+		else
+			sudo_id="27"
+		fi
+
+		# add 'user' to 'sudo' group
+
+		sed -i '/sudo.*/d' /etc/group
+
+		echo "sudo:x:${sudo_id}:${user_name}" >> /etc/group
+
 	else
-		sudo_id="27"
+
+		frobulator.err "Command must be installed to proceed" "[ 'sudo' ]"
+		echo
+
+		frobulator.inf "Install 'sudo' using the system package manager and try again."
+		echo
 	fi
-
-	# add 'user' to 'sudo' group
-
-	sed -i '/sudo.*/d' /etc/group
-
-	echo "sudo:x:${sudo_id}:${user_name}" >> /etc/group
 }
 
 user_superuser_override () {
 
 	# set 'user' superuser privilege password override
 
-	# set password override
+	if [[ $(command -v sudo) ]]
+	then
+		# verify sudoers default directory existence
 
-	frobulator.write "${user_name} ALL=(ALL) NOPASSWD: ALL" /etc/sudoers.d "${user_name}"
+		if [ -d /etc/sudoers.d ]
+		then
 
-	# fix superuser privilege runtime errors
+			# set password override
 
-	frobulator.write "Set disable_coredump false" /etc sudo.conf
+			frobulator.write "${user_name} ALL=(ALL) NOPASSWD: ALL" /etc/sudoers.d "${user_name}"
 
-	# reset password override ownership:
-	# fixes 'sudo' errors
+			# fix superuser privilege runtime errors
 
-	chmod 0440 /etc/sudoers.d/"${user_name}"
+			frobulator.write "Set disable_coredump false" /etc sudo.conf
+
+			# reset password override ownership:
+			# fixes 'sudo' errors
+
+			chmod 0440 /etc/sudoers.d/"${user_name}"
+
+		fi
+
+	else
+
+		frobulator.err "Command must be installed to proceed" "[ 'sudo' ]"
+		echo
+
+		frobulator.inf "Install 'sudo' using the system package manager and try again."
+		echo
+	fi
 }
 
 user_password () {
@@ -352,6 +435,21 @@ fi
 
 if [ "${option}" = "superuser" ]
 then
+	frobulator.install sudo
+
+	if [ -z "${user_name}" ]
+	then
+		information_list+=(user_name)
+	fi
+
+	list=(
+		${information_list[@]}
+	)
+
+	user_information
+
+	user_verify
+
 	# generate 'user' superuser privilege
 
 	user_superuser

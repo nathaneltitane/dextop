@@ -81,6 +81,9 @@ do
 
 				shift
 			fi
+
+			shift
+
 		;;
 
 		-a|--addons)
