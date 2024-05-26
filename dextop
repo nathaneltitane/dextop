@@ -252,8 +252,6 @@ environment_intent () {
 
 	PATH=""
 
-
-
 	# container
 
 	[ -d "${ROOT}"/usr/local/sbin ] && PATH+="/usr/local/sbin:"
@@ -318,6 +316,8 @@ container_intent () {
 		--bind=/proc/self/fd/1:/dev/stdout		\
 		--bind=/proc/self/fd/2:/dev/stderr		\
 		--bind="${PREFIX%/*}"/home:"${HOME}"	\
+		--bind="${PREFIX}"/bin/curl:/usr/bin/curl	\
+		--bind="${PREFIX}"/bin/proot:/usr/bin/proot	\
 			env 								\
 				--ignore-environment			\
 					PREFIX="${PREFIX}"			\
