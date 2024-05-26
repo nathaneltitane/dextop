@@ -238,7 +238,7 @@ else
 	echo
 
 	frobulator.inf "Restart this utility to install the companion application"
-	frobulator.nul "or fetch the package manually in the respective project repository."
+	frobulator.nul "or fetch the package manually from the project release page."
 	echo
 
 	exit
