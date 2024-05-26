@@ -64,7 +64,6 @@ list=(
 
 frobulator.failsafe ${list[@]} &
 
-frobulator.stp "Please wait..."
-echo
+frobulator.process "Please wait"
 
 list=()
