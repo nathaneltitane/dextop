@@ -307,30 +307,30 @@ container_intent () {
 	# mitigate pass-through issues
 	# mitigate container setup issues
 
-	proot										\
-		--kill-on-exit							\
-		--link2symlink							\
-		--rootfs="${ROOT}"						\
-		--change-id="${USER_ID}":"${GROUP_ID}"	\
-		--pwd="${ROOT_HOME}"					\
-		--bind=/data:/data						\
-		--bind=/dev:/dev						\
-		--bind=/dev/urandom:/dev/random			\
-		--bind=/proc:/proc						\
-		--bind=/proc/self/fd:/dev/fd			\
-		--bind=/proc/self/fd/0:/dev/stdin		\
-		--bind=/proc/self/fd/1:/dev/stdout		\
-		--bind=/proc/self/fd/2:/dev/stderr		\
-		--bind="${PREFIX%/*}"/home:"${HOME}"	\
+	proot											\
+		--kill-on-exit								\
+		--link2symlink								\
+		--rootfs="${ROOT}"							\
+		--change-id="${USER_ID}":"${GROUP_ID}"		\
+		--pwd="${ROOT_HOME}"						\
+		--bind=/data:/data							\
+		--bind=/dev:/dev							\
+		--bind=/dev/urandom:/dev/random				\
+		--bind=/proc:/proc							\
+		--bind=/proc/self/fd:/dev/fd				\
+		--bind=/proc/self/fd/0:/dev/stdin			\
+		--bind=/proc/self/fd/1:/dev/stdout			\
+		--bind=/proc/self/fd/2:/dev/stderr			\
+		--bind="${PREFIX%/*}"/home:"${HOME}"		\
 		--bind="${PREFIX}"/bin/curl:/usr/bin/curl	\
-			env 								\
-				--ignore-environment			\
-					PREFIX="${PREFIX}"			\
-					PATH="${PATH}"				\
-					HOME="${HOME}"				\
-					LANG="${LANG}"				\
-					TERM="${TERM}"				\
-												${@}
+			env 									\
+				--ignore-environment				\
+					PREFIX="${PREFIX}"				\
+					PATH="${PATH}"					\
+					HOME="${HOME}"					\
+					LANG="${LANG}"					\
+					TERM="${TERM}"					\
+													${@}
 }
 
 architecture_intent () {
