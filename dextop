@@ -87,9 +87,6 @@ do
 			option="additions"
 		;;
 
-			shift
-		;;
-
 		-h|--help)
 			echo
 			echo -e "Usage: ${script} -c | -e [Environment] | -t | -n | -b | -u [Update Type] [Utility Name] | [OPTION]"
