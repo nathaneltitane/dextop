@@ -318,7 +318,7 @@ container_intent () {
 
 	unset LD_PRELOAD
 
-	# generate environement paths
+	# generate environment paths
 
 	environment_intent
 
