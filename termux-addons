@@ -227,7 +227,7 @@ if [[ "${reply}" = [yY]         ]] || \
 then
 	addon="all"
 
-	frobulator.inf "Setting up all Termux additional packages."
+	frobulator.inf "Setting up all Termux addon packages."
 	echo
 	
 	frobulator.fwd "Installing..."
