@@ -261,6 +261,16 @@ environment_intent () {
 	[ -d "${ROOT}"/sbin ]           && PATH+="/sbin:"
 	[ -d "${ROOT}"/bin ]            && PATH+="/bin:"
 
+	# termux
+
+	[ -d "${HOME}"/.local/sbin ] && PATH+="${HOME}/.local/sbin:"
+	[ -d "${HOME}"/.local/bin ]  && PATH+="${HOME}/.local/bin:"
+	[ -d "${HOME}"/.sbin ]       && PATH+="${HOME}/.sbin:"
+	[ -d "${HOME}"/.bin ]        && PATH+="${HOME}/.bin:"
+
+	[ -d "${PREFIX}"/sbin ]      && PATH+="${PREFIX}/sbin:"
+	[ -d "${PREFIX}"/bin ]       && PATH+="${PREFIX}/bin:"
+
 	# android
 
 	[ -d /system/sbin ] && PATH+="/system/sbin:"
@@ -307,30 +317,28 @@ container_intent () {
 	# mitigate pass-through issues
 	# mitigate container setup issues
 
-	proot											\
-		--kill-on-exit								\
-		--link2symlink								\
-		--rootfs="${ROOT}"							\
-		--change-id="${USER_ID}":"${GROUP_ID}"		\
-		--pwd="${ROOT_HOME}"						\
-		--bind=/data:/data							\
-		--bind=/dev:/dev							\
-		--bind=/dev/urandom:/dev/random				\
-		--bind=/proc:/proc							\
-		--bind=/proc/self/fd:/dev/fd				\
-		--bind=/proc/self/fd/0:/dev/stdin			\
-		--bind=/proc/self/fd/1:/dev/stdout			\
-		--bind=/proc/self/fd/2:/dev/stderr			\
-		--bind="${PREFIX%/*}"/home:"${HOME}"		\
-		--bind="${PREFIX}"/bin/curl:/usr/bin/curl	\
-			env 									\
-				--ignore-environment				\
-					PREFIX="${PREFIX}"				\
-					PATH="${PATH}"					\
-					HOME="${HOME}"					\
-					LANG="${LANG}"					\
-					TERM="${TERM}"					\
-													${@}
+	proot										\
+		--kill-on-exit							\
+		--link2symlink							\
+		--rootfs="${ROOT}"						\
+		--change-id="${USER_ID}":"${GROUP_ID}"	\
+		--pwd="${ROOT_HOME}"					\
+		--bind=/dev:/dev						\
+		--bind=/dev/urandom:/dev/random			\
+		--bind=/proc:/proc						\
+		--bind=/proc/self/fd:/dev/fd			\
+		--bind=/proc/self/fd/0:/dev/stdin		\
+		--bind=/proc/self/fd/1:/dev/stdout		\
+		--bind=/proc/self/fd/2:/dev/stderr		\
+		--bind="${PREFIX%/*}"/home:"${HOME}"	\
+			env 								\
+				--ignore-environment			\
+					PREFIX="${PREFIX}"			\
+					PATH="${PATH}"				\
+					HOME="${HOME}"				\
+					LANG="${LANG}"				\
+					TERM="${TERM}"				\
+												${@}
 }
 
 architecture_intent () {
