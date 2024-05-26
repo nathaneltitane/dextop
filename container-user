@@ -51,6 +51,13 @@ do
 			shift
 		;;
 
+		-s|--superuser)
+			option="superuser"
+			user_name="${2}"
+
+			shift
+		;;
+
 		-u|--username)
 			option="username"
 			user_name="${2}"
@@ -343,6 +350,17 @@ then
 	user_password
 fi
 
+if [ "${option}" = "superuser" ]
+then
+	# generate 'user' superuser privilege
+
+	user_superuser
+
+	# set 'user 'superuser password override
+
+	user_superuser_override
+fi
+
 if [ "${option}" = "username" ]
 then
 	if [ -z "${user_name}" ]
@@ -379,24 +397,28 @@ then
 	# generate 'user' account: interactive
 
 	user_interactive
+
+	# set 'user' password
+
+	user_password
+
+	# generate 'user' runtime directory structure
+
+	user_runtime
+
 else
 	# generate 'user' account: noninteractive
 
 	user_noninteractive
+
+	# set 'user' password
+
+	user_password
+
+	# generate 'user' runtime directory structure
+
+	user_runtime
+
 fi
 
-# set 'user' password
 
-user_password
-
-# generate 'user' superuser privilege
-
-user_superuser
-
-# set 'user 'superuser password override
-
-user_superuser_override
-
-# generate 'user' runtime directory structure
-
-user_runtime
