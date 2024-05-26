@@ -108,6 +108,14 @@ then
 	
 	frobulator.fwd "Installing..."
 	echo
+
+else
+	frobulator.wrn "Running a session using X11 options requires Termux:X11 to be installed."
+	echo
+
+	frobulator.inf "Install the companion application by restarting this utility"
+	frobulator.nul "or by fetching the package manually."
+	echo
 fi
 
 for package in ${packages_list[@]}
