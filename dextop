@@ -1096,7 +1096,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-container-failsafe-checkpoint ]
 	then
-		"${HOME}"/.local/bin/container-failsafe
+		container_intent "${HOME}"/.local/bin/container-failsafe
 
 		frobulator.file "${HOME}"/.dextop dextop-container-failsafe-checkpoint
 	fi
