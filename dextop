@@ -382,6 +382,8 @@ fi
 
 	ROOT_HOME="/root"
 
+	HOME="${ROOT_HOME}"
+
 	LANG="C.UTF-8"
 
 	# run container setup commands through 'proot'
