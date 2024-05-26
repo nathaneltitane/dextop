@@ -252,14 +252,10 @@ environment_intent () {
 
 	PATH=""
 
-	# container
+	# android
 
-	[ -d "${ROOT}"/usr/local/sbin ] && PATH+="/usr/local/sbin:"
-	[ -d "${ROOT}"/usr/local/bin ]  && PATH+="/usr/local/bin:"
-	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/sbin:"
-	[ -d "${ROOT}"/usr/bin ]        && PATH+="/usr/bin:"
-	[ -d "${ROOT}"/sbin ]           && PATH+="/sbin:"
-	[ -d "${ROOT}"/bin ]            && PATH+="/bin:"
+	[ -d /system/sbin ] && PATH+="/system/sbin:"
+	[ -d /system/bin ]  && PATH+="/system/bin:"
 
 	# termux
 
@@ -271,10 +267,14 @@ environment_intent () {
 	[ -d "${PREFIX}"/sbin ]      && PATH+="${PREFIX}/sbin:"
 	[ -d "${PREFIX}"/bin ]       && PATH+="${PREFIX}/bin:"
 
-	# android
+	# container
 
-	[ -d /system/sbin ] && PATH+="/system/sbin:"
-	[ -d /system/bin ]  && PATH+="/system/bin:"
+	[ -d "${ROOT}"/usr/local/sbin ] && PATH+="/usr/local/sbin:"
+	[ -d "${ROOT}"/usr/local/bin ]  && PATH+="/usr/local/bin:"
+	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/sbin:"
+	[ -d "${ROOT}"/usr/bin ]        && PATH+="/usr/bin:"
+	[ -d "${ROOT}"/sbin ]           && PATH+="/sbin:"
+	[ -d "${ROOT}"/bin ]            && PATH+="/bin:"
 
 	PATH="${PATH}"
 }
