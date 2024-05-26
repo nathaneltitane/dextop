@@ -349,7 +349,7 @@ container_intent () {
 				HOME="${ROOT_HOME}"											\
 				LANG="${LANG}"												\
 				TERM="${TERM}"												\
-																			${@}
+																			"${@}"
 }
 
 architecture_intent () {
