@@ -338,10 +338,6 @@ container_intent () {
 		--bind=/proc/self/fd/0:/dev/stdin									\
 		--bind=/proc/self/fd/1:/dev/stdout									\
 		--bind=/proc/self/fd/2:/dev/stderr									\
-		--bind=/storage:/storage											\
-		--bind=/sys:/sys													\
-		--bind=/system:/system												\
-		--bind=/vendor:/vendor												\
 		--bind=/data/data/com.termux/files/home:"${ROOT_HOME}"				\
 			env -i															\
 				PREFIX="${PREFIX}"											\
@@ -349,7 +345,7 @@ container_intent () {
 				HOME="${ROOT_HOME}"											\
 				LANG="${LANG}"												\
 				TERM="${TERM}"												\
-																			"${@}"
+																			${@}
 }
 
 architecture_intent () {
