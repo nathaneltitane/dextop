@@ -223,6 +223,8 @@ failsafe_intent () {
 	# mitigate general deployment setup issues
 	# mitigate skipped packages on install
 
+	apt full-upgrade > "${sink}" 2>&1
+
 	yes | pkg upgrade > "${sink}" 2>&1
 
 	pkg update > "${sink}" 2>&1
