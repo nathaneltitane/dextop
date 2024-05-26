@@ -50,19 +50,13 @@ frobulator.script "Setting up ${script#*-}"
 
 # functions ////////////////////////////////////////////////////////////////////
 
-frobulator.stp "Please wait..."
-echo
+frobulator.update
 
-yes | apt update > "${sink}" 2>&1 &
-
-frobulator.progress "update"
-
-yes | apt upgrade > "${sink}" 2>&1 &
-
-frobulator.progress "upgrade"
+frobulator.upgrade
 
 list=(
 	curl
+	sudo
 )
 
 # run failsafe package install:
