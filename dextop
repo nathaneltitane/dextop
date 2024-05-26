@@ -256,10 +256,12 @@ environment_intent () {
 		return
 	fi
 
+	# unset path
+
+	unset PATH
+
 	# set path:
 	# in order of retreival
-
-	PATH=""
 
 	# container
 
