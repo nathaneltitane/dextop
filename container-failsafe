@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 # dependencies /////////////////////////////////////////////////////////////////
 
 if [[ -z $(command -v frobulator) ]]
@@ -49,17 +51,6 @@ frobulator.script "Setting up ${script#*-}"
 # defaults /////////////////////////////////////////////////////////////////////
 
 # functions ////////////////////////////////////////////////////////////////////
-
-frobulator.stp "Please wait..."
-echo
-
-yes | apt-get update > "${sink}" &
-
-frobulator.progress "update"
-
-yes | apt-get upgrade > "${sink}" &
-
-frobulator.progress "upgrade"
 
 list=(
 	curl

@@ -50,17 +50,6 @@ frobulator.script "Setting up ${script#*-}"
 
 # functions ////////////////////////////////////////////////////////////////////
 
-frobulator.stp "Please wait..."
-echo
-
-yes | apt-get update > "${sink}" &
-
-frobulator.progress "update"
-
-yes | apt-get upgrade > "${sink}" &
-
-frobulator.progress "upgrade"
-	
 list=(
 	proot
 	termux-x11-nightly
