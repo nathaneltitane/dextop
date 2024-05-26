@@ -452,7 +452,7 @@ addons_intent () {
 
 	# termux addons and companion applications
 
-	"${HOME}"/.local/bin/termux-update
+	"${HOME}"/.local/bin/termux-addons
 }
 
 utility_intent () {
