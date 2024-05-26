@@ -405,9 +405,9 @@ then
 	# generate 'user' runtime directory structure
 
 	user_runtime
-
 else
-	# generate 'user' account: noninteractive
+
+	# generate 'user' account: automated
 
 	user_automated
 
@@ -418,5 +418,4 @@ else
 	# generate 'user' runtime directory structure
 
 	user_runtime
-
 fi
