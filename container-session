@@ -186,11 +186,6 @@ then
 	session="$(cat ${HOME}/.dextop/dextop-session)"
 fi
 
-if [ -z "${DISPLAY_NUMBER}" ]
-then
-	DISPLAY_NUMBER="${DISPLAY/:/}"
-fi
-
 if [ -z "${LOCALHOST}" ]
 then
 	LOCALHOST="127.0.0.1"
@@ -226,12 +221,14 @@ then
 	DISPLAY=":0"
 fi
 
+if [ -z "${DISPLAY_NUMBER}" ]
+then
+	DISPLAY_NUMBER="${DISPLAY/:/}"
+fi
+
 if [ -z "${DISPLAY_DRIVER}" ]
 then
-	if [[ $(command -v virgl*) ]]
-	then
-		DISPLAY_DRIVER="virpipe"
-	fi
+	DISPLAY_DRIVER="virpipe"
 fi
 
 if [ -z "${GALLIUM_DRIVER}" ]
