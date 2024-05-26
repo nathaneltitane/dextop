@@ -313,6 +313,7 @@ container_intent () {
 		--rootfs="${ROOT}"						\
 		--change-id="${USER_ID}":"${GROUP_ID}"	\
 		--pwd="${ROOT_HOME}"					\
+		--bind=/data:/data						\
 		--bind=/dev:/dev						\
 		--bind=/dev/urandom:/dev/random			\
 		--bind=/proc:/proc						\
@@ -321,6 +322,7 @@ container_intent () {
 		--bind=/proc/self/fd/1:/dev/stdout		\
 		--bind=/proc/self/fd/2:/dev/stderr		\
 		--bind="${PREFIX%/*}"/home:"${HOME}"	\
+		--bind="${PREFIX}"/bin/curl:/usr/bin/curl	\
 			env 								\
 				--ignore-environment			\
 					PREFIX="${PREFIX}"			\
