@@ -223,16 +223,13 @@ failsafe_intent () {
 	# mitigate general deployment setup issues
 	# mitigate skipped packages on install
 
-	frobulator.log "apt-get update"
+	frobulator.update
 
-	frobulator.log "apt-get --assume-yes dist-upgrade"
+	frobulator.upgrade
 
-	frobulator.log "apt-get --assume-yes install root-repo"
+	frobulator.install root-repo
 
-	frobulator.log "apt-get --assume-yes install x11-repo"
-
-	frobulator.log "apt-get --assume-yes dist-upgrade"
-
+	frobulator.install x11-repo
 }
 
 environment_intent () {
