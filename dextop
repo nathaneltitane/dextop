@@ -223,18 +223,15 @@ failsafe_intent () {
 	# mitigate general deployment setup issues
 	# mitigate skipped packages on install
 
-	frobulator.stp "Please wait..."
-	echo
-
 	frobulator.log "apt-get update"
 
 	frobulator.log "apt-get --assume-yes install root-repo"
 
 	frobulator.log "apt-get --assume-yes install x11-repo"
 
-	frobulator.log "yes |	apt-get --assume-yes dist-upgrade" &
+	frobulator.log "apt-get --assume-yes dist-upgrade" &
 
-	frobulator.progress "upgrade"
+	frobulator.process "Please wait"
 
 }
 
