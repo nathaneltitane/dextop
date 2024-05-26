@@ -448,6 +448,13 @@ dextop_intent () {
 	frobulator.download run.dxtp.app "${HOME}"/.local/bin dextop
 }
 
+addons_intent () {
+
+	# termux addons and companion applications
+
+	"${HOME}"/.local/bin/termux-update
+}
+
 utility_intent () {
 
 	# load dextop utilities
