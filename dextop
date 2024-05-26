@@ -1021,13 +1021,13 @@ then
 
 	# termux ///////////////////////////////////////////////////////////////////
 
-	# termux additions
+	# termux addons
 
-	if [ ! -f "${HOME}"/.dextop/dextop-termux-additions-checkpoint ]
+	if [ ! -f "${HOME}"/.dextop/dextop-termux-addons-checkpoint ]
 	then
-		"${HOME}"/.local/bin/termux-additions
+		"${HOME}"/.local/bin/termux-addons
 
-		frobulator.file "${HOME}"/.dextop dextop-termux-additions-checkpoint
+		frobulator.file "${HOME}"/.dextop dextop-termux-addons-checkpoint
 	fi
 
 	# termux storage
