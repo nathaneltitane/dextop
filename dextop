@@ -313,35 +313,21 @@ container_intent () {
 
 	# run as 'root' with default system parameters
 
-	proot																											\
-		--kill-on-exit																								\
-		--link2symlink																								\
-		--rootfs="${ROOT}"																							\
-		--change-id="${USER_ID}":"${GROUP_ID}"																		\
-		--pwd="${ROOT_HOME}"																						\
-		[ -d "/apex" ]							&& --bind=/apex:/apex												\
-		[ -d "/data" ]							&& --bind=/data:/data												\
-		[ -d "/dev" ]							&& --bind=/dev:/dev													\
-		[ -e "/dev/urandom" ]					&& --bind=/dev/urandom:/dev/random									\
-		[ -e "/linkerconfig/ld.config.txt" ]  	&& --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt	\
-		[ -d "/proc" ]							&& --bind=/proc:/proc												\
-		[ -d "/proc/self/fd" ]					&& --bind=/proc/self/fd:/dev/fd										\
-		[ -e "/proc/self/fd/0" ]				&& --bind=/proc/self/fd/0:/dev/stdin								\
-		[ -e "/proc/self/fd/1" ]				&& --bind=/proc/self/fd/1:/dev/stdout								\
-		[ -e "/proc/self/fd/2" ]				&& --bind=/proc/self/fd/2:/dev/stderr								\
-		[ -d "/storage" ]						&& --bind=/storage:/storage											\
-		[ -d "/sys" ]							&& --bind=/sys:/sys													\
-		[ -d "/system" ]						&& --bind=/system:/system											\
-		[ -d "/vendor" ]						&& --bind=/vendor:/vendor											\
-		[ -d "${PREFIX%/*}"/home ]				&& --bind=${PREFIX%/*}/home:${HOME}									\
-			env 																									\
-				--ignore-environment																				\
-					PREFIX="${PREFIX}"																				\
-					PATH="${PATH}"																					\
-					HOME="${ROOT_HOME}"																				\
-					LANG="${LANG}"																					\
-					TERM="${TERM}"																					\
-																													${@}
+	proot										\
+		--kill-on-exit							\
+		--link2symlink							\
+		--rootfs="${ROOT}"						\
+		--change-id="${USER_ID}":"${GROUP_ID}"	\
+		--pwd="${ROOT_HOME}"					\
+		--bind=${PREFIX%/*}/home:${HOME}		\
+			env 								\
+				--ignore-environment			\
+					PREFIX="${PREFIX}"			\
+					PATH="${PATH}"\				\
+					HOME="${ROOT_HOME}"			\
+					LANG="${LANG}"\				\
+					TERM="${TERM}"				\
+\												${@}
 }
 
 architecture_intent () {
