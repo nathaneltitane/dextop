@@ -1158,7 +1158,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-move-checkpoint ]
 	then
-		mv "${HOME}"/dextop "${HOME}"/.local/bin/dextop
+		frobulator.move "${HOME}" "${HOME}"/.local/bin dextop
 
 		frobulator.file "${HOME}"/.dextop dextop-move-checkpoint
 	fi
