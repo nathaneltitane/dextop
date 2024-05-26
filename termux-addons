@@ -206,7 +206,7 @@ trap 'clean' EXIT
 # notice
 
 frobulator.inf "This utility sets up Termux project addons:"
-frobulator.nul "These addons are fetched directly from their respective GitHub project release pages."
+frobulator.nul "The addons are fetched directly from their respective GitHub project release pages."
 echo
 
 frobulator.wrn "Enable 'Install unknown apps' permission for Termux and all other companion applications:"
