@@ -225,13 +225,13 @@ failsafe_intent () {
 
 	frobulator.log "apt-get update"
 
+	frobulator.log "apt-get --assume-yes dist-upgrade"
+
 	frobulator.log "apt-get --assume-yes install root-repo"
 
 	frobulator.log "apt-get --assume-yes install x11-repo"
 
-	frobulator.log "apt-get --assume-yes dist-upgrade" &
-
-	frobulator.process "Please wait"
+	frobulator.log "apt-get --assume-yes dist-upgrade"
 
 }
 
