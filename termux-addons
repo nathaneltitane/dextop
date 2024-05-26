@@ -40,6 +40,69 @@ version="05-25-2024"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
+while (($#))
+do
+	case "${1}"
+	in
+		-s|--selection)
+			option="selection"
+			selection="${2}"
+
+			if [ "${selection}" = "addon" ]
+			then
+				addon="${3}"
+
+				shift
+			fi
+
+			shift
+
+		;;
+
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} -s [Selection Type] [Addon Name] | [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-s, --selection      Update application packages and utilities."
+			echo
+			echo -e "                     [ all ]"
+			echo -e "                     [ addon ]"
+			echo
+			echo -e "-h, --help           Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version // ${version} ]"
+			echo
+
+			exit
+		;;
+
+		"")
+			# handle empty argument:
+			# use default values specified in script
+
+			:
+		;;
+
+		*)
+			echo
+			echo -e "Usage: ${script} -s [Selection Type] [Addon Name] | [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+
+		;;
+
+		esac
+
+	shift
+
+done
+
 # prompt ///////////////////////////////////////////////////////////////////////
 
 frobulator.script "Setting up ${script#*-}"
@@ -50,14 +113,73 @@ frobulator.script "Setting up ${script#*-}"
 
 # functions ////////////////////////////////////////////////////////////////////
 
-clean () {
+install_intent () {
 
-	rm					\
-		--recursive		\
-		--force			 "${PREFIX}"/tmp/*.apk
+	# process addon package installtion
+
+	addon="package-termux-${addon}.apk"
+
+	frobulator.download get.trmnl.me "${PREFIX}"/tmp "${addon}"
+
+	open_intent "${PREFIX}"/tmp/"${addon}"
+
+	frobulator.countdown 10 "Installing" "[ ${addon} ]"
 }
 
-trap 'clean' EXIT
+addon_intent () {
+
+	# load termux addons
+
+	addons_list+=(
+		api
+		gui
+		styling
+		tasker
+		x11
+	)
+
+	if [[ "${option}" = "selection" ]]
+	then
+		if [[ ${addons_list[@]} =~ "${addon}" ]]
+		then
+			install_intent
+
+		elif [[ "${addon}" = "all" ]]
+		then
+			for addon in ${addons_list[@]}
+			do
+				install_intent
+			done
+
+		else
+			frobulator.err "Unknown addon name" "[ '${addon}' ]"
+			echo
+
+			frobulator.fwd "Listing known addons..."
+			echo
+
+			frobulator.timeout
+
+			IFS=$'\n'
+
+			printf "${marker_nul} %s\n" ${utilities_list[@]}
+
+			echo
+
+			IFS=''
+
+			frobulator.msg "Review utility name spelling and try again."
+			echo
+
+			frobulator.inf "Update all known utilities using 'all' argument."
+			echo
+
+			exit 1
+		fi
+	fi
+
+	addons_list=()
+}
 
 open_intent () {
 
@@ -71,6 +193,15 @@ open_intent () {
 
 	frobulator.silence "${open_command}"
 }
+
+clean () {
+
+	rm					\
+		--recursive		\
+		--force			 "${PREFIX}"/tmp/*.apk
+}
+
+trap 'clean' EXIT
 
 # notice
 
@@ -94,14 +225,7 @@ frobulator.read reply
 if [[ "${reply}" = [yY]         ]] || \
    [[ "${reply}" = [yY][eE][sS] ]]
 then
-	packages_list+=(
-		termux-api.apk
-		termux-gui.apk
-		termux-styling.apk
-		termux-tasker.apk
-		termux-x11.apk
-	#	termux-x11-shell-loader.apk
-	)
+	addon="all"
 
 	frobulator.inf "Setting up all Termux additional packages."
 	echo
@@ -116,17 +240,10 @@ else
 	frobulator.inf "Install the companion application by restarting this utility"
 	frobulator.nul "or by fetching the package manually."
 	echo
+
+	exit
 fi
 
-for package in ${packages_list[@]}
-do
-	frobulator.download get.trmnl.me "${PREFIX}"/tmp "${package}"
-
-	open_intent "${PREFIX}"/tmp/"${package}"
-
-	frobulator.countdown 10 "Installing" "[ ${package} ]"
-done
-
-packages_list=()
+addon_intent
 
 frobulator.countdown 5 "Continuing" "[ ${script} ]"
