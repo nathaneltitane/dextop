@@ -52,6 +52,10 @@ frobulator.script "Setting up ${script#*-}"
 
 # functions ////////////////////////////////////////////////////////////////////
 
+frobulator.update
+
+frobulator.upgrade
+
 list=(
 	curl
 	sudo

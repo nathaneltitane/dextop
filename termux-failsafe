@@ -50,6 +50,10 @@ frobulator.script "Setting up ${script#*-}"
 
 # functions ////////////////////////////////////////////////////////////////////
 
+frobulator.update
+
+frobulator.upgrade
+
 list=(
 	proot
 	termux-x11-nightly
