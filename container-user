@@ -513,6 +513,14 @@ else
 
 	user_password
 
+	# generate 'user' superuser privilege
+
+	user_superuser
+
+	# set 'user 'superuser password override
+
+	user_superuser_override
+
 	# generate 'user' runtime directory structure
 
 	user_runtime
