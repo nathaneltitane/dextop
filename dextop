@@ -469,7 +469,7 @@ fi
 
 	# execute 'proot'
 
-	${session_command}
+	exec ${session_command}
 }
 
 architecture_intent () {
