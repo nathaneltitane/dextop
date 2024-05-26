@@ -323,6 +323,14 @@ container_intent () {
 		--rootfs="${ROOT}"						\
 		--change-id="${USER_ID}":"${GROUP_ID}"	\
 		--pwd="${ROOT_HOME}"					\
+		--bind=/dev:/dev						\
+		--bind=/dev/urandom:/dev/random			\
+		--bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt \
+		--bind=/proc:/proc						\
+		--bind=/proc/self/fd:/dev/fd			\
+		--bind=/proc/self/fd/0:/dev/stdin		\
+		--bind=/proc/self/fd/1:/dev/stdout		\
+		--bind=/proc/self/fd/2:/dev/stderr		\
 		--bind="${PREFIX%/*}"/home:"${HOME}"	\
 			env 								\
 				--ignore-environment			\
