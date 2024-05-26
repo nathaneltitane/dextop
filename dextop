@@ -323,11 +323,11 @@ container_intent () {
 			env 								\
 				--ignore-environment			\
 					PREFIX="${PREFIX}"			\
-					PATH="${PATH}"\				\
+					PATH="${PATH}"				\
 					HOME="${ROOT_HOME}"			\
-					LANG="${LANG}"\				\
+					LANG="${LANG}"				\
 					TERM="${TERM}"				\
-\												${@}
+												${@}
 }
 
 architecture_intent () {
