@@ -245,7 +245,16 @@ environment_intent () {
 
 	# generate environment '$PATH' variable
 
-	ROOT="${ROOT}"
+	# make container setup location known
+
+	if [ $# -eq 0 ]
+	then
+		ROOT=("${PREFIX}"/cnt/debian/12)
+
+		export ROOT="${ROOT}"
+
+		return
+	fi
 
 	# set path:
 	# in order of retreival
@@ -285,7 +294,7 @@ container_intent () {
 
 	if [ $# -eq 0 ]
 	then
-		ROOT=("${PREFIX}"/cnt/*/*)
+		ROOT=("${PREFIX}"/cnt/debian/12)
 
 		export ROOT="${ROOT}"
 
@@ -319,11 +328,9 @@ container_intent () {
 		--rootfs="${ROOT}"													\
 		--change-id="${USER_ID}":"${GROUP_ID}"								\
 		--pwd="${ROOT_HOME}"												\
-		--bind=/apex:/apex													\
 		--bind=/data:/data													\
 		--bind=/dev:/dev													\
 		--bind=/dev/urandom:/dev/random										\
-		--bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt		\
 		--bind=/proc:/proc													\
 		--bind=/proc/self/fd:/dev/fd										\
 		--bind=/proc/self/fd/0:/dev/stdin									\
