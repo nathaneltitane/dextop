@@ -184,7 +184,7 @@ user_interactive () {
 		--disabled-password "${user_name}" > "${sink}"
 }
 
-user_noninteractive () {
+user_automated () {
 
 	# generate 'user account:
 	# noninteractive setup
@@ -409,7 +409,7 @@ then
 else
 	# generate 'user' account: noninteractive
 
-	user_noninteractive
+	user_automated
 
 	# set 'user' password
 
@@ -420,5 +420,3 @@ else
 	user_runtime
 
 fi
-
-
