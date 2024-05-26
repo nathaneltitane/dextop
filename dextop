@@ -212,7 +212,7 @@ fi
 
 if [ -z "${ROOT}" ]
 then
-	ROOT=("${PREFIX}"/cnt/*/*)
+	ROOT=("${PREFIX}"/cnt/debian/12)
 fi
 
 # functions ////////////////////////////////////////////////////////////////////
