@@ -234,11 +234,11 @@ then
 	echo
 
 else
-	frobulator.wrn "Running a session using X11 options requires Termux:X11 to be installed."
+	frobulator.wrn "X11 server sessions require Termux:X11 to be installed."
 	echo
 
-	frobulator.inf "Install the companion application by restarting this utility"
-	frobulator.nul "or by fetching the package manually."
+	frobulator.inf "Restart this utility to install the companion application"
+	frobulator.nul "or fetch the package manually in the respective project repository."
 	echo
 
 	exit
