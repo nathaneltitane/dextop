@@ -97,10 +97,10 @@ then
 	packages_list+=(
 		termux-api.apk
 		termux-gui.apk
-	#	termux-x11-shell-loader.apk
-		termux-x11.apk
 		termux-styling.apk
 		termux-tasker.apk
+		termux-x11.apk
+	#	termux-x11-shell-loader.apk
 	)
 
 	frobulator.inf "Setting up all Termux additional packages."
