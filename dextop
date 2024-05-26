@@ -223,7 +223,9 @@ failsafe_intent () {
 	# mitigate general deployment setup issues
 	# mitigate skipped packages on install
 
-	apt full-upgrade > "${sink}" 2>&1
+	frobulator.fwd "Please wait${marker_elp}"
+
+	yes | apt full-upgrade > "${sink}" 2>&1
 
 	yes | pkg upgrade > "${sink}" 2>&1
 
@@ -361,7 +363,7 @@ architecture_intent () {
 			frobulator.scs "Supported device architecture" "[ ${device_architecture} ]"
 			echo
 
-			frobulator.fwd "Proceeding..."
+			frobulator.fwd "Proceeding${marker_elp}"
 			echo
 
 			break
@@ -369,7 +371,7 @@ architecture_intent () {
 			frobulator.wrn "Unsupported device architecture" "[ ${device_architecture} ]"
 			echo
 
-			frobulator.fwd "Aborting..."
+			frobulator.fwd "Aborting${marker_elp}"
 			echo
 
 			frobulator.stp "Exiting."
@@ -487,7 +489,7 @@ utility_intent () {
 			frobulator.err "Unknown utility name" "[ '${utility}' ]"
 			echo
 
-			frobulator.fwd "Listing known utilities..."
+			frobulator.fwd "Listing known utilities${marker_elp}"
 			echo
 
 			frobulator.timeout
@@ -542,7 +544,7 @@ shell_intent () {
 			frobulator.err "Unknown shell item name" "[ '${shell}' ]"
 			echo
 
-			frobulator.fwd "Listing known shell items..."
+			frobulator.fwd "Listing known shell items${marker_elp}"
 			echo
 
 			frobulator.timeout
@@ -799,7 +801,7 @@ then
 		frobulator.inf "Updating" "[ ${update} ]"
 		echo
 
-		frobulator.fwd "Updating..."
+		frobulator.fwd "Updating${marker_elp}"
 		echo
 
 		preferences_intent
@@ -823,7 +825,7 @@ then
 		frobulator.inf "Updating" "[ ${update} ]"
 		echo
 
-		frobulator.fwd "Updating..."
+		frobulator.fwd "Updating${marker_elp}"
 		echo
 
 		dextop_intent
@@ -838,7 +840,7 @@ then
 		frobulator.inf "Updating" "[ ${utility} ]"
 		echo
 
-		frobulator.fwd "Updating..."
+		frobulator.fwd "Updating${marker_elp}"
 		echo
 
 		utility_intent
@@ -853,7 +855,7 @@ then
 		frobulator.inf "Updating" "[ ${utility} ]"
 		echo
 
-		frobulator.fwd "Updating..."
+		frobulator.fwd "Updating${marker_elp}"
 		echo
 
 		preferences_intent
@@ -868,7 +870,7 @@ then
 		frobulator.inf "Updating" "[ ${shell} ]"
 		echo
 
-		frobulator.fwd "Updating..."
+		frobulator.fwd "Updating${marker_elp}"
 		echo
 
 		shell_intent
@@ -882,7 +884,7 @@ then
 		frobulator.inf "Updating" "[ ${update} ]"
 		echo
 
-		frobulator.fwd "Updating..."
+		frobulator.fwd "Updating${marker_elp}"
 		echo
 
 		additions_intent
@@ -896,7 +898,7 @@ then
 		frobulator.inf "Updating" "[ ${update} ]"
 		echo
 
-		frobulator.fwd "Updating..."
+		frobulator.fwd "Updating${marker_elp}"
 		echo
 
 		"${HOME}"/.local/bin/termux-update
