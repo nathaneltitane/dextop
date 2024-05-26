@@ -323,7 +323,7 @@ container_intent () {
 		--rootfs="${ROOT}"						\
 		--change-id="${USER_ID}":"${GROUP_ID}"	\
 		--pwd="${ROOT_HOME}"					\
-		--bind=${PREFIX%/*}/home:${HOME}		\
+		--bind="${PREFIX%/*}"/home:"${HOME}"	\
 			env 								\
 				--ignore-environment			\
 					PREFIX="${PREFIX}"			\
