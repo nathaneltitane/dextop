@@ -261,16 +261,6 @@ environment_intent () {
 	[ -d "${ROOT}"/sbin ]           && PATH+="/sbin:"
 	[ -d "${ROOT}"/bin ]            && PATH+="/bin:"
 
-	# termux
-
-	[ -d "${HOME}"/.local/sbin ] && PATH+="${HOME}/.local/sbin:"
-	[ -d "${HOME}"/.local/bin ]  && PATH+="${HOME}/.local/bin:"
-	[ -d "${HOME}"/.sbin ]       && PATH+="${HOME}/.sbin:"
-	[ -d "${HOME}"/.bin ]        && PATH+="${HOME}/.bin:"
-
-	[ -d "${PREFIX}"/sbin ]      && PATH+="${PREFIX}/sbin:"
-	[ -d "${PREFIX}"/bin ]       && PATH+="${PREFIX}/bin:"
-
 	# android
 
 	[ -d /system/sbin ] && PATH+="/system/sbin:"
@@ -325,7 +315,6 @@ container_intent () {
 		--pwd="${ROOT_HOME}"					\
 		--bind=/dev:/dev						\
 		--bind=/dev/urandom:/dev/random			\
-		--bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt \
 		--bind=/proc:/proc						\
 		--bind=/proc/self/fd:/dev/fd			\
 		--bind=/proc/self/fd/0:/dev/stdin		\
