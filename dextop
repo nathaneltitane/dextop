@@ -223,9 +223,9 @@ failsafe_intent () {
 	# mitigate general deployment setup issues
 	# mitigate skipped packages on install
 
-	frobulator.update
+	yes | pkg upgrade > "${sink}" 2>&1
 
-	frobulator.upgrade
+	pkg update > "${sink}" 2>&1
 
 	frobulator.install root-repo
 
