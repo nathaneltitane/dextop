@@ -472,6 +472,7 @@ Audio playback can be disabled as follows:
 ```
 echo '' > "${HOME}"/.dextop/dextop-audio
 ```
+
 ### Termination:
 
 Automatic session and display shutdown on terminal exit can be enabled as follows:
