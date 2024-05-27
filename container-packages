@@ -57,6 +57,7 @@ failsafe_intent () {
 	# mitigate skipped packages on install
 
 	frobulator.fwd "Please wait${marker_elp}"
+	echo
 
 	yes | apt update       > "${sink}" 2>&1
 
