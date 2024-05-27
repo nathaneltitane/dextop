@@ -50,6 +50,25 @@ frobulator.script "Setting up ${script#*-}"
 
 # functions ////////////////////////////////////////////////////////////////////
 
+failsafe_intent () {
+
+	# run failsafe container package and repository update:
+	# mitigate general deployment setup issues
+	# mitigate skipped packages on install
+
+	frobulator.fwd "Please wait${marker_elp}"
+	echo
+
+	yes | apt update       > "${sink}" 2>&1
+
+	yes | apt full-upgrade > "${sink}" 2>&1
+
+}
+
+failsafe_intent
+
+# expansion
+
 if [[ $(command -v unminimize) ]]
 then
 	command_expand=$(yes | command -v unminimize)
