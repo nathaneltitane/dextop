@@ -315,6 +315,8 @@ container_intent () {
 
 	TERM="${TERM}"
 
+	TMPDIR="${TMPDIR}"
+
 	# run container setup commands through 'proot'
 
 	# assume 'termux-exec' is installed
@@ -345,7 +347,8 @@ container_intent () {
 		--bind=/sys:/sys													\
 		--bind=/system:/system												\
 		--bind=/vendor:/vendor												\
-		--bind=/data/data/com.termux/files/home:"${CONTAINER_HOME}"			\
+		--bind=${PREFIX%/*}/home:"${HOME}"									\
+		--bind=${PREFIX}/tmp:/tmp											\
 			env 															\
 				--ignore-environment										\
 					PREFIX="${PREFIX}"										\
@@ -353,6 +356,7 @@ container_intent () {
 					HOME=/data/data/com.termux/files/home					\
 					LANG="${LANG}"											\
 					TERM="${TERM}"											\
+					TMPDIR="${TMPDIR}"										\
 																			${@}
 }
 
