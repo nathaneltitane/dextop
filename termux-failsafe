@@ -83,7 +83,7 @@ list=(
 	xorg-server-xvfb
 )
 
-frobulator.failsafe ${list[@]} &
+frobulator.install ${list[@]} &
 
 frobulator.process "Please wait"
 
