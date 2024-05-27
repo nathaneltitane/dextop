@@ -303,86 +303,12 @@ container_intent () {
 		return
 	fi
 
-	if [ -z "${display}" ]
-then
-	display="x11"
-fi
-
-if [ -z "${environment}" ]
-then
-	environement="$(cat ${HOME}/.dextop/dextop-environment)"
-fi
-
-if [ -z "${session}" ]
-then
-	session="$(cat ${HOME}/.dextop/dextop-session)"
-fi
-
-if [ -z "${LOCALHOST}" ]
-then
-	LOCALHOST="127.0.0.1"
-fi
-
-if [ -z "${ADDRESS}" ]
-then
-	ADDRESS="${LOCALHOST}"
-fi
-
-if [ -z "${PORT}" ]
-then
-	PORT="590${DISPLAY_NUMBER}"
-fi
-
-if [ -z "${COLORTERM}" ]
-then
-	COLORTERM="truecolor"
-fi
-
-if [ -z "${LANG}" ]
-then
-	LANG="C.UTF-8"
-fi
-
-if [ -z "${SHELL}" ]
-then
-	SHELL="/bin/bash"
-fi
-
-if [ -z "${DISPLAY}" ]
-then
-	DISPLAY=":0"
-fi
-
-if [ -z "${DISPLAY_NUMBER}" ]
-then
-	DISPLAY_NUMBER="${DISPLAY/:/}"
-fi
-
-if [ -z "${DISPLAY_DRIVER}" ]
-then
-	DISPLAY_DRIVER="virpipe"
-fi
-
-if [ -z "${GALLIUM_DRIVER}" ]
-then
-	GALLIUM_DRIVER="${DISPLAY_DRIVER}"
-fi
-
-if [ -f /etc/os-release ]
-then
-	. /etc/os-release
-
-	name="${NAME}"
-fi
-
 	# define root system default setup parameters
 
 	USER_ID="0"
 	GROUP_ID="0"
 
 	ROOT_HOME="/root"
-
-	HOME="${ROOT_HOME}"
 
 	LANG="C.UTF-8"
 
@@ -398,78 +324,33 @@ fi
 
 	# run as 'root' with default system parameters
 
-	# setup 'proot' command arguments
-
-	unset session_command
-
-	session_command+="proot"
-	session_command+=" --kill-on-exit"
-	session_command+=" --link2symlink"
-	session_command+=" --rootfs=${ROOT}"
-	session_command+=" --change-id=${USER_ID}:${GROUP_ID}"
-	session_command+=" --pwd=${HOME}"
-	[ -d "/apex" ]                                && session_command+=" --bind=/apex:/apex"
-	[ -d "/data" ]                                && session_command+=" --bind=/data:/data"
-	[ -d "/dev" ]                                 && session_command+=" --bind=/dev:/dev"
-	[ -e "/dev/urandom" ]                         && session_command+=" --bind=/dev/urandom:/dev/random"
-	[ -e "/linkerconfig/ld.config.txt" ]          && session_command+=" --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt"
-	[ -f "/plat_property_contexts" ]              && session_command+=" --bind=/plat_property_contexts:/plat_property_contexts"
-	[ -f "/property_contexts" ]                   && session_command+=" --bind=/property_contexts:/property_contexts"
-	[ -d "/proc" ]                                && session_command+=" --bind=/proc:/proc"
-	[ -d "/proc/self/fd" ]                        && session_command+=" --bind=/proc/self/fd:/dev/fd"
-	[ -e "/proc/self/fd/0" ]                      && session_command+=" --bind=/proc/self/fd/0:/dev/stdin"
-	[ -e "/proc/self/fd/1" ]                      && session_command+=" --bind=/proc/self/fd/1:/dev/stdout"
-	[ -e "/proc/self/fd/2" ]                      && session_command+=" --bind=/proc/self/fd/2:/dev/stderr"
-	[ -d "/storage" ]                             && session_command+=" --bind=/storage:/storage"
-	[ -d "/sys" ]                                 && session_command+=" --bind=/sys:/sys"
-	[ -d "/system" ]                              && session_command+=" --bind=/system:/system"
-	[ -d "/vendor" ]                              && session_command+=" --bind=/vendor:/vendor"
-	[ -d "${PREFIX%/*}"/home ]                    && session_command+=" --bind=${PREFIX%/*}/home:${HOME}"
-	[ -d "${PREFIX}"/storage/external ]           && session_command+=" --bind=${PREFIX}/storage/external:/media/external"
-	[ -d "${PREFIX}"/storage/internal ]           && session_command+=" --bind=${PREFIX}/storage/internal:/media/internal"
-	[ -d "${PREFIX}"/storage/internal/Documents ] && session_command+=" --bind=${PREFIX}/storage/internal/Documents:/home/${USER}/Documents"
-	[ -d "${PREFIX}"/storage/internal/Downloads ] && session_command+=" --bind=${PREFIX}/storage/internal/Downloads:/home/${USER}/Documents"
-	[ -d "${PREFIX}"/storage/internal/Music ]     && session_command+=" --bind=${PREFIX}/storage/internal/Music:/home/${USER}/Music"
-	[ -d "${PREFIX}"/storage/internal/Pictures ]  && session_command+=" --bind=${PREFIX}/storage/internal/Pictures:/home/${USER}/Pictures"
-	[ -d "${PREFIX}"/storage/internal/Public ]    && session_command+=" --bind=${PREFIX}/storage/internal/Public:/home/${USER}/Public"
-	[ -d "${PREFIX}"/storage/internal/Templates ] && session_command+=" --bind=${PREFIX}/storage/internal/Templates:/home/${USER}/Templates"
-	[ -d "${PREFIX}"/storage/internal/Videos ]    && session_command+=" --bind=${PREFIX}/storage/internal/Videos:/home/${USER}/Videos"
-	[ -d "${PREFIX}"/tmp ]                        && session_command+=" --bind=${PREFIX}/tmp:/tmp"
-	session_command+=" env"
-	session_command+=" --ignore-environment"
-	session_command+=" ANDROID_ART_ROOT=${ANDROID_ART_ROOT}"
-	session_command+=" ANDROID_DATA=${ANDROID_DATA}"
-	session_command+=" ANDROID_I18N_ROOT=${ANDROID_I18N_ROOT}"
-	session_command+=" ANDROID_ROOT=${ANDROID_ROOT}"
-	session_command+=" ANDROID_RUNTIME_ROOT=${ANDROID_RUNTIME_ROOT}"
-	session_command+=" ANDROID_TZDATA_ROOT=${ANDROID_TZDATA_ROOT}"
-	session_command+=" BOOTCLASSPATH=${BOOTCLASSPATH}"
-	session_command+=" DEX2OATBOOTCLASSPATH=${DEX2OATBOOTCLASSPATH}"
-	session_command+=" PREFIX=${PREFIX}"
-	session_command+=" COLORTERM=${COLORTERM}"
-	session_command+=" DISPLAY=${DISPLAY}"
-	session_command+=" DISPLAY_DRIVER=${DISPLAY_DRIVER}"
-	session_command+=" HOME=${HOME}"
-	session_command+=" LANG=${LANG}"
-	session_command+=" LOCALHOST=${LOCALHOST}"
-	session_command+=" PATH=${PATH}"
-	session_command+=" SHELL=${SHELL}"
-	session_command+=" TERM=${TERM}"
-	session_command+=" TMPDIR=${TMPDIR}"
-	session_command+=" USER=${USER}"
-	session_command+=" XDG_RUNTIME_DIR=/run/user/${USER_ID}"
-	session_command+=" XDG_CONFIG_DIRS=/etc/xdg"
-	session_command+=" XDG_CACHE_HOME=${HOME}/.cache"
-	session_command+=" XDG_CONFIG_HOME=${HOME}/.config"
-	session_command+=" XDG_DATA_HOME=${HOME}/.local/share"
-	session_command+=" XDG_STATE_HOME=${HOME}/.local/state"
-	session_command+=" XDG_DATA_DIRS=/usr/local/share:/usr/share"
-	session_command+=" XAUTHORITY=${XDG_RUNTIME_DIR}/Xauthority"
-	session_command+=" ${@}"
-
-	# execute 'proot'
-
-	exec ${session_command}
+	proot																	\
+		--kill-on-exit														\
+		--link2symlink														\
+		--rootfs="${ROOT}"													\
+		--change-id="${USER_ID}":"${GROUP_ID}"								\
+		--pwd="${ROOT_HOME}"												\
+		--bind=/data:/data													\
+		--bind=/dev:/dev													\
+		--bind=/dev/urandom:/dev/random										\
+		--bind=/proc:/proc													\
+		--bind=/proc/self/fd:/dev/fd										\
+		--bind=/proc/self/fd/0:/dev/stdin									\
+		--bind=/proc/self/fd/1:/dev/stdout									\
+		--bind=/proc/self/fd/2:/dev/stderr									\
+		--bind=/storage:/storage											\
+		--bind=/sys:/sys													\
+		--bind=/system:/system												\
+		--bind=/vendor:/vendor												\
+		--bind=/data/data/com.termux/files/home:"${ROOT_HOME}"				\
+			env 															\
+				--ignore-environment										\
+					PREFIX="${PREFIX}"										\
+					PATH="${PATH}"											\
+					HOME="${ROOT_HOME}"										\
+					LANG="${LANG}"											\
+					TERM="${TERM}"											\
+																			${@}
 }
 
 architecture_intent () {
