@@ -309,6 +309,7 @@ container_intent () {
 	GROUP_ID="0"
 
 	ROOT_HOME="/root"
+	CONTAINER_HOME="/home"
 
 	LANG="C.UTF-8"
 
@@ -342,12 +343,12 @@ container_intent () {
 		--bind=/sys:/sys													\
 		--bind=/system:/system												\
 		--bind=/vendor:/vendor												\
-		--bind=/data/data/com.termux/files/home:"${ROOT_HOME}"				\
+		--bind=/data/data/com.termux/files/home:"${CONTAINER_HOME}"			\
 			env 															\
 				--ignore-environment										\
 					PREFIX="${PREFIX}"										\
 					PATH="${PATH}"											\
-					HOME="${HOME}"											\
+					HOME=/data/data/com.termux/files/home					\
 					LANG="${LANG}"											\
 					TERM="${TERM}"											\
 																			${@}
