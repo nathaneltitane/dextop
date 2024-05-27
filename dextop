@@ -308,10 +308,12 @@ container_intent () {
 	USER_ID="0"
 	GROUP_ID="0"
 
-	ROOT_HOME="/root"
 	CONTAINER_HOME="/home"
+	ROOT_HOME="/root"
 
 	LANG="C.UTF-8"
+
+	TERM="${TERM}"
 
 	# run container setup commands through 'proot'
 
