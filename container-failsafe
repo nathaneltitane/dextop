@@ -64,8 +64,11 @@ failsafe_intent () {
 
 	yes | apt full-upgrade > "${sink}" 2>&1
 
-}
+	yes | apt install sudo > "${sink}" 2>&1
 
+	yes | apt install curl > "${sink}" 2>&1
+
+}
 
 failsafe_intent
 
