@@ -85,8 +85,6 @@ list=(
 # run failsafe package install:
 # prevents container side dependencies mismatch
 
-frobulator.install ${list[@]} &
-
-frobulator.process "Please wait"
+frobulator.install ${list[@]}
 
 list=()

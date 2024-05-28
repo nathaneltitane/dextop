@@ -83,8 +83,6 @@ list=(
 	xorg-server-xvfb
 )
 
-frobulator.install ${list[@]} &
-
-frobulator.process "Please wait"
+frobulator.install ${list[@]}
 
 list=()
