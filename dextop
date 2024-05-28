@@ -225,8 +225,6 @@ failsafe_intent () {
 	# mitigate general deployment setup issues
 	# mitigate skipped packages on install
 
-	frobulator.process "Please wait"
-
 	yes | apt update       > "${sink}" 2>&1
 
 	yes | apt full-upgrade > "${sink}" 2>&1
@@ -870,7 +868,9 @@ then
 
 	# failsafe
 
-	failsafe_intent
+	failsafe_intent &
+
+	frobulator.process "Please wait"
 
 	# backup
 
