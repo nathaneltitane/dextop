@@ -52,25 +52,19 @@ frobulator.script "Setting up ${script#*-}"
 
 failsafe_intent () {
 
-	# ref.: https://github.com/termux/termux-packages/issues/10871
-
-	# run failsafe termux package and repository update:
+	# run failsafe container package and repository update:
 	# mitigate general deployment setup issues
 	# mitigate skipped packages on install
-
-	frobulator.process "Please wait"
 
 	yes | apt update       > "${sink}" 2>&1
 
 	yes | apt full-upgrade > "${sink}" 2>&1
 
-	yes | apt install sudo > "${sink}" 2>&1
-
-	yes | apt install curl > "${sink}" 2>&1
-
 }
 
-failsafe_intent
+failsafe_intent &
+
+frobulator.process "Please wait"
 
 # update packages list
 
