@@ -240,55 +240,6 @@ failsafe_intent () {
 	frobulator.install x11-repo
 }
 
-environment_intent () {
-
-	# generate environment '$PATH' variable
-
-	# make container setup location known
-
-	if [ $# -eq 0 ]
-	then
-		ROOT=("${PREFIX}"/cnt/debian/12)
-
-		export ROOT="${ROOT}"
-
-		return
-	fi
-
-	# unset path
-
-	unset PATH
-
-	# set path:
-	# in order of retreival
-
-	# container
-
-	[ -d "${ROOT}"/usr/local/sbin ] && PATH+="/usr/local/sbin:"
-	[ -d "${ROOT}"/usr/local/bin ]  && PATH+="/usr/local/bin:"
-	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/sbin:"
-	[ -d "${ROOT}"/usr/bin ]        && PATH+="/usr/bin:"
-	[ -d "${ROOT}"/sbin ]           && PATH+="/sbin:"
-	[ -d "${ROOT}"/bin ]            && PATH+="/bin:"
-
-	# termux
-
-	[ -d "${HOME}"/.local/sbin ] && PATH+="${HOME}/.local/sbin:"
-	[ -d "${HOME}"/.local/bin ]  && PATH+="${HOME}/.local/bin:"
-	[ -d "${HOME}"/.sbin ]       && PATH+="${HOME}/.sbin:"
-	[ -d "${HOME}"/.bin ]        && PATH+="${HOME}/.bin:"
-
-	[ -d "${PREFIX}"/sbin ]      && PATH+="${PREFIX}/sbin:"
-	[ -d "${PREFIX}"/bin ]       && PATH+="${PREFIX}/bin:"
-
-	# android
-
-	[ -d /system/sbin ] && PATH+="/system/sbin:"
-	[ -d /system/bin ]  && PATH+="/system/bin:"
-
-	PATH="${PATH}"
-}
-
 container_intent () {
 
 	# make container setup location known
@@ -304,8 +255,8 @@ container_intent () {
 
 	# define root system default setup parameters
 
-	USER_ID="0"
-	GROUP_ID="0"
+	USER_ID="1000"
+	GROUP_ID="1000"
 
 	CONTAINER_HOME="/home"
 	ROOT_HOME="/root"
@@ -322,41 +273,37 @@ container_intent () {
 
 	unset LD_PRELOAD
 
-	# generate environement paths
-
-	environment_intent
-
 	# run as 'root' with default system parameters
 
-	proot																	\
-		--kill-on-exit														\
-		--link2symlink														\
-		--rootfs="${ROOT}"													\
-		--change-id="${USER_ID}":"${GROUP_ID}"								\
-		--pwd="${ROOT_HOME}"												\
-		--bind=/data:/data													\
-		--bind=/dev:/dev													\
-		--bind=/dev/urandom:/dev/random										\
-		--bind=/proc:/proc													\
-		--bind=/proc/self/fd:/dev/fd										\
-		--bind=/proc/self/fd/0:/dev/stdin									\
-		--bind=/proc/self/fd/1:/dev/stdout									\
-		--bind=/proc/self/fd/2:/dev/stderr									\
-		--bind=/storage:/storage											\
-		--bind=/sys:/sys													\
-		--bind=/system:/system												\
-		--bind=/vendor:/vendor												\
-		--bind=${PREFIX%/*}/home:"${HOME}"									\
-		--bind=${PREFIX}/tmp:/tmp											\
-			env 															\
-				--ignore-environment										\
-					PREFIX="${PREFIX}"										\
-					PATH="${PATH}"											\
-					HOME=/data/data/com.termux/files/home					\
-					LANG="${LANG}"											\
-					TERM="${TERM}"											\
-					TMPDIR="${TMPDIR}"										\
-																			${@}
+	proot																						\
+		--kill-on-exit																			\
+		--link2symlink																			\
+		--rootfs="${ROOT}"																		\
+		--change-id="${USER_ID}":"${GROUP_ID}"													\
+		--pwd="${ROOT_HOME}"																	\
+		--bind=/data:/data																		\
+		--bind=/dev:/dev																		\
+		--bind=/dev/urandom:/dev/random															\
+		--bind=/proc:/proc																		\
+		--bind=/proc/self/fd:/dev/fd															\
+		--bind=/proc/self/fd/0:/dev/stdin														\
+		--bind=/proc/self/fd/1:/dev/stdout														\
+		--bind=/proc/self/fd/2:/dev/stderr														\
+		--bind=/storage:/storage																\
+		--bind=/sys:/sys																		\
+		--bind=/system:/system																	\
+		--bind=/vendor:/vendor																	\
+		--bind=${PREFIX%/*}/home:"${HOME}"														\
+		--bind=${PREFIX}/tmp:/tmp																\
+			env 																				\
+				--ignore-environment															\
+					PREFIX="${PREFIX}"															\
+					PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin			\
+					HOME=/data/data/com.termux/files/home										\
+					LANG="${LANG}"																\
+					TERM="${TERM}"																\
+					TMPDIR="${TMPDIR}"															\
+																								${@}
 }
 
 architecture_intent () {
