@@ -411,14 +411,14 @@ utility_intent () {
 
 	utilities_list+=(
 		termux-packages
-		termux-failsafe
+	#	termux-failsafe
 		termux-update
 		termux-storage
 		termux-addons
 		container-expansion
 		container-image
 		container-packages
-		container-failsafe
+	#	container-failsafe
 		container-session
 		container-settings
 		container-user
