@@ -257,15 +257,16 @@ container_intent () {
 
 	unset LD_PRELOAD
 
-	# run as 'root' with default system parameters:
+	# run using default system parameters:
 	# mitigate path interpretation issues during container setup
+	# UID and GID set to 1000 - bypasses Termux
 
 	proot																						\
 		--kill-on-exit																			\
 		--link2symlink																			\
 		--rootfs="${ROOT}"																		\
-		--change-id=0:0																			\
-		--pwd=/root																				\
+		--change-id=1000:1000																	\
+		--pwd=/home																				\
 		--bind=/data:/data																		\
 		--bind=/dev:/dev																		\
 		--bind=/dev/urandom:/dev/random															\
@@ -278,7 +279,7 @@ container_intent () {
 		--bind=/sys:/sys																		\
 		--bind=/system:/system																	\
 		--bind=/vendor:/vendor																	\
-		--bind=/data/data/com.termux/files/home:"${HOME}"										\
+		--bind=/data/data/com.termux/files/home:/home											\
 			env 																				\
 				--ignore-environment															\
 					PREFIX="${PREFIX}"															\
