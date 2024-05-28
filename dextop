@@ -259,13 +259,12 @@ container_intent () {
 
 	# run using default system parameters:
 	# mitigate path interpretation issues during container setup
-	# UID and GID set to 1000 - bypasses Termux 'root' installation restrictions
 
 	proot																						\
 		--kill-on-exit																			\
 		--link2symlink																			\
 		--rootfs="${ROOT}"																		\
-		--change-id=1000:1000																	\
+		--change-id=0:0																			\
 		--pwd="${HOME}"																			\
 		--bind=/data:/data																		\
 		--bind=/dev:/dev																		\
