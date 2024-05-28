@@ -266,7 +266,7 @@ container_intent () {
 		--link2symlink																			\
 		--rootfs="${ROOT}"																		\
 		--change-id=1000:1000																	\
-		--pwd=/home																				\
+		--pwd="${HOME}"																			\
 		--bind=/data:/data																		\
 		--bind=/dev:/dev																		\
 		--bind=/dev/urandom:/dev/random															\
@@ -279,7 +279,7 @@ container_intent () {
 		--bind=/sys:/sys																		\
 		--bind=/system:/system																	\
 		--bind=/vendor:/vendor																	\
-		--bind=/data/data/com.termux/files/home:/home											\
+		--bind=/data/data/com.termux/files/home:"${HOME}"										\
 			env 																				\
 				--ignore-environment															\
 					PREFIX="${PREFIX}"															\
