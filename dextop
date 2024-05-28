@@ -225,8 +225,7 @@ failsafe_intent () {
 	# mitigate general deployment setup issues
 	# mitigate skipped packages on install
 
-	frobulator.fwd "Please wait${marker_elp}"
-	echo
+	frobulator.process "Please wait"
 
 	yes | apt update       > "${sink}" 2>&1
 
