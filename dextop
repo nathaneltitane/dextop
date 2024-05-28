@@ -225,17 +225,17 @@ failsafe_intent () {
 	# mitigate general deployment setup issues
 	# mitigate skipped packages on install
 
-	yes | apt update       > "${sink}" 2>&1
+	yes | apt update            > "${sink}" 2>&1
 
-	yes | apt full-upgrade > "${sink}" 2>&1
+	yes | apt full-upgrade      > "${sink}" 2>&1
 
-	yes | pkg upgrade      > "${sink}" 2>&1
+	yes | pkg upgrade           > "${sink}" 2>&1
 
-	yes | pkg update       > "${sink}" 2>&1
+	yes | pkg update            > "${sink}" 2>&1
 
-	frobulator.install root-repo
+	yes | pkg install root-repo > "${sink}" 2>&1
 
-	frobulator.install x11-repo
+	yes | pkg install x11-repo  > "${sink}" 2>&1
 }
 
 container_intent () {
@@ -278,8 +278,7 @@ container_intent () {
 		--bind=/sys:/sys																		\
 		--bind=/system:/system																	\
 		--bind=/vendor:/vendor																	\
-		--bind=${PREFIX%/*}/home:"${HOME}"														\
-		--bind=${PREFIX}/tmp:/tmp																\
+		--bind=/data/data/com.termux/files/home:"${HOME}"										\
 			env 																				\
 				--ignore-environment															\
 					PREFIX="${PREFIX}"															\
@@ -411,14 +410,12 @@ utility_intent () {
 
 	utilities_list+=(
 		termux-packages
-	#	termux-failsafe
 		termux-update
 		termux-storage
 		termux-addons
 		container-expansion
 		container-image
 		container-packages
-	#	container-failsafe
 		container-session
 		container-settings
 		container-user

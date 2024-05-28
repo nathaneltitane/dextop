@@ -100,7 +100,7 @@ extensions_list+=(
 	termux-elf-cleaner
 	termux-exec
 	termux-gui-bash
-	termui-gui-c
+	termux-gui-c
 	termux-gui-package
 	termux-gui-pm
 	termux-keyring
