@@ -242,6 +242,8 @@ failsafe_intent () {
 
 container_intent () {
 
+	# run container setup commands through 'proot'
+
 	# make container setup location known
 
 	if [ $# -eq 0 ]
@@ -253,34 +255,19 @@ container_intent () {
 		return
 	fi
 
-	# define root system default setup parameters
-
-	USER_ID="1000"
-	GROUP_ID="1000"
-
-	CONTAINER_HOME="/home"
-	ROOT_HOME="/root"
-
-	LANG="C.UTF-8"
-
-	TERM="${TERM}"
-
-	TMPDIR="${TMPDIR}"
-
-	# run container setup commands through 'proot'
-
 	# assume 'termux-exec' is installed
 
 	unset LD_PRELOAD
 
-	# run as 'root' with default system parameters
+	# run as 'root' with default system parameters:
+	# mitigate path interpretation issues during container setup
 
 	proot																						\
 		--kill-on-exit																			\
 		--link2symlink																			\
 		--rootfs="${ROOT}"																		\
-		--change-id="${USER_ID}":"${GROUP_ID}"													\
-		--pwd="${ROOT_HOME}"																	\
+		--change-id=0:0																			\
+		--pwd=/root																				\
 		--bind=/data:/data																		\
 		--bind=/dev:/dev																		\
 		--bind=/dev/urandom:/dev/random															\
@@ -300,9 +287,6 @@ container_intent () {
 					PREFIX="${PREFIX}"															\
 					PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin			\
 					HOME=/data/data/com.termux/files/home										\
-					LANG="${LANG}"																\
-					TERM="${TERM}"																\
-					TMPDIR="${TMPDIR}"															\
 																								${@}
 }
 
