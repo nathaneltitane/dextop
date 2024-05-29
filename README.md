@@ -423,7 +423,7 @@ High latency internet connectivity or issues with accessing server content (GitH
 If for whatever reason an update fails due to an error because of deployment script corruption, paste or type:
 
 ```
-curl -s -L run.dxtp.app > "${HOME}"/.local/bin/dextop && bash dextop -u utilities
+curl -s -L run.dxtp.app > "${HOME}"/.local/bin/dextop && bash dextop -u utility all
 ```
 
 Once the latest version of Dextop is deployed, configuring it to fetch all the latest and relevant utilities is possiblewhen automatic updates on login are enabled.
