@@ -406,13 +406,11 @@ utility_intent () {
 	# load dextop utilities
 
 	utilities_list+=(
-		termux-failsafe
 		termux-packages
 		termux-update
 		termux-storage
 		termux-addons
 		container-expansion
-		container-failsafe
 		container-image
 		container-packages
 		container-session
