@@ -260,31 +260,36 @@ container_intent () {
 	# run using default system parameters:
 	# mitigate path interpretation issues during container setup
 
-	proot																													\
-		--kill-on-exit																										\
-		--link2symlink																										\
-		--rootfs="${ROOT}"																									\
-		--change-id=0:0																										\
-		--pwd="${HOME}"																										\
-		--bind=/data:/data																									\
-		--bind=/dev:/dev																									\
-		--bind=/dev/urandom:/dev/random																						\
-		--bind=/proc:/proc																									\
-		--bind=/proc/self/fd:/dev/fd																						\
-		--bind=/proc/self/fd/0:/dev/stdin																					\
-		--bind=/proc/self/fd/1:/dev/stdout																					\
-		--bind=/proc/self/fd/2:/dev/stderr																					\
-		--bind=/storage:/storage																							\
-		--bind=/sys:/sys																									\
-		--bind=/system:/system																								\
-		--bind=/vendor:/vendor																								\
-		--bind=/data/data/com.termux/files/home:"${HOME}"																	\
-			env 																											\
-				--ignore-environment																						\
-					PREFIX="${PREFIX}"																						\
-					PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data/data/com.termux/files/usr/bin	\
-					HOME=/data/data/com.termux/files/home																	\
-																															${@}
+	proot														\
+		--kill-on-exit											\
+		--link2symlink											\
+		--rootfs="${ROOT}"										\
+		--change-id=0:0											\
+		--pwd="${HOME}"											\
+		--bind=/data:/data										\
+		--bind=/dev:/dev										\
+		--bind=/dev/urandom:/dev/random							\
+		--bind=/proc:/proc										\
+		--bind=/proc/self/fd:/dev/fd							\
+		--bind=/proc/self/fd/0:/dev/stdin						\
+		--bind=/proc/self/fd/1:/dev/stdout						\
+		--bind=/proc/self/fd/2:/dev/stderr						\
+		--bind=/storage:/storage								\
+		--bind=/sys:/sys										\
+		--bind=/system:/system									\
+		--bind=/vendor:/vendor									\
+		--bind=/data/data/com.termux/files/home:"${HOME}"		\
+			env 												\
+				--ignore-environment							\
+					PREFIX="${PREFIX}"							\
+					PATH+=/usr/local/sbin:						\
+					PATH+=/usr/local/bin:						\
+					PATH+=/usr/sbin:							\
+					PATH+=/usr/bin:								\
+					PATH+=/sbin:/bin:							\
+					PATH+=/data/data/com.termux/files/usr/bin	\
+					HOME=/data/data/com.termux/files/home		\
+																${@}
 }
 
 architecture_intent () {
