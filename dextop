@@ -280,7 +280,7 @@ container_intent () {
 					PREFIX="${PREFIX}"							\
 					TERM="${TERM}"								\
 					LANG=C.UTF-8								\
-					HOME=/data/data/com.termux/files/home		\
+					HOME=/home									\
 					PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data/data/com.termux/files/usr/bin:	\
 																${@}
 }
