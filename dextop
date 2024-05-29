@@ -212,7 +212,7 @@ fi
 
 if [ -z "${ROOT}" ]
 then
-	ROOT=("${PREFIX}"/cnt/*/*)
+	ROOT=$(find "${PREFIX}"/cnt/ -mindepth 2 -maxdepth 2 -type d | head -n 1)
 fi
 
 # functions ////////////////////////////////////////////////////////////////////
@@ -242,7 +242,7 @@ container_intent () {
 
 	if [ $# -eq 0 ]
 	then
-		ROOT=("${PREFIX}"/cnt/*/*)
+		ROOT=$(find "${PREFIX}"/cnt/ -mindepth 2 -maxdepth 2 -type d | head -n 1)
 
 		export ROOT="${ROOT}"
 
