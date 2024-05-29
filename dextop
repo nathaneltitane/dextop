@@ -210,11 +210,6 @@ then
 	shell="all"
 fi
 
-if [ -z "${ROOT}" ]
-then
-	ROOT=$(find "${PREFIX}"/cnt/ -mindepth 2 -maxdepth 2 -type d | head -n 1)
-fi
-
 # functions ////////////////////////////////////////////////////////////////////
 
 failsafe_intent () {
