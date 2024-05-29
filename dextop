@@ -278,8 +278,9 @@ container_intent () {
 			env 												\
 				--ignore-environment							\
 					PREFIX="${PREFIX}"							\
+					TERM="${TERM}"								\
+					LANG=C.UTF-8								\
 					HOME=/data/data/com.termux/files/home		\
-					LANG="C.UTF-8"								\
 					PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data/data/com.termux/files/usr/bin:	\
 																${@}
 }
