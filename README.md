@@ -12,12 +12,6 @@
 - Refactored failsafe routines and cleaned up redundancies
 - Updated 'container-user' utility
 
-### KNOWN ISSUES // 05-26-2024:
-
-- Container setup does not complete as intended ( container-packages + container-user):
-  - Temporary fix: After setup completes, login using 'container-session -u root' and run 'container-packages' followed by 'container-user' to fix.
-    - Need to investigate 'proot' container_intent function in 'dextop' setup script
-
 ---
 
 ### Welcome to [Dextop](https://dextop.app)
