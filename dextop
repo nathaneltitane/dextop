@@ -282,7 +282,7 @@ container_intent () {
 			env 																				\
 				--ignore-environment															\
 					PREFIX="${PREFIX}"															\
-					PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin			\
+					PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data/data/com.termux/files/usr/bin	\
 					HOME=/data/data/com.termux/files/home										\
 																								${@}
 }
