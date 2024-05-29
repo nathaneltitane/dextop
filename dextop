@@ -279,10 +279,12 @@ container_intent () {
 		--bind=/system:/system									\
 		--bind=/vendor:/vendor									\
 		--bind=/data/data/com.termux/files/home:"${HOME}"		\
+		--bind=/data/data/com.termux/files/home/.dextop/dextop-environment:"${HOME}"/.dextop/dextop-environment		\
 			env 												\
 				--ignore-environment							\
 					PREFIX="${PREFIX}"							\
 					HOME=/data/data/com.termux/files/home		\
+					LANG="C.UTF-8"								\
 					PATH+=/usr/local/sbin:						\
 					PATH+=/usr/local/bin:						\
 					PATH+=/usr/sbin:							\
