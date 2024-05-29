@@ -229,13 +229,9 @@ failsafe_intent () {
 
 	yes | apt full-upgrade      > "${sink}" 2>&1
 
-	yes | pkg upgrade           > "${sink}" 2>&1
+	yes | apt install root-repo > "${sink}" 2>&1
 
-	yes | pkg update            > "${sink}" 2>&1
-
-	yes | pkg install root-repo > "${sink}" 2>&1
-
-	yes | pkg install x11-repo  > "${sink}" 2>&1
+	yes | apt install x11-repo  > "${sink}" 2>&1
 }
 
 container_intent () {
@@ -265,7 +261,7 @@ container_intent () {
 		--link2symlink											\
 		--rootfs="${ROOT}"										\
 		--change-id=0:0											\
-		--pwd="${HOME}"											\
+		--pwd=/home												\
 		--bind=/data:/data										\
 		--bind=/dev:/dev										\
 		--bind=/dev/urandom:/dev/random							\
@@ -278,19 +274,13 @@ container_intent () {
 		--bind=/sys:/sys										\
 		--bind=/system:/system									\
 		--bind=/vendor:/vendor									\
-		--bind=/data/data/com.termux/files/home:"${HOME}"		\
-		--bind=/data/data/com.termux/files/home/.dextop/dextop-environment:"${HOME}"/.dextop/dextop-environment		\
+		--bind=/data/data/com.termux/files/home:/home			\
 			env 												\
 				--ignore-environment							\
 					PREFIX="${PREFIX}"							\
 					HOME=/data/data/com.termux/files/home		\
 					LANG="C.UTF-8"								\
-					PATH+=/usr/local/sbin:						\
-					PATH+=/usr/local/bin:						\
-					PATH+=/usr/sbin:							\
-					PATH+=/usr/bin:								\
-					PATH+=/sbin:/bin:							\
-					PATH+=/data/data/com.termux/files/usr/bin	\
+					PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data/data/com.termux/files/usr/bin:	\
 																${@}
 }
 
@@ -1030,7 +1020,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-container-initialization-checkpoint ]
 	then
-		container_intent
+		container_intent $(echo "yes | apt install sudo") > "${sink}" 2>&1
 
 		frobulator.file "${HOME}"/.dextop dextop-container-initialization-checkpoint
 	fi
