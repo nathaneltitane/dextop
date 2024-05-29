@@ -238,7 +238,7 @@ container_intent () {
 	unset LD_PRELOAD
 
 	# run using default system parameters:
-	# mitigate path interpretation issues during container setup
+	# mitigate errors and path interpretation issues during container setup
 
 	proot														\
 		--kill-on-exit											\
