@@ -233,17 +233,6 @@ container_intent () {
 
 	# run container setup commands through 'proot'
 
-	# make container setup location known
-
-	if [ $# -eq 0 ]
-	then
-		ROOT=$(find "${PREFIX}"/cnt/ -mindepth 2 -maxdepth 2 -type d | head -n 1)
-
-		export ROOT="${ROOT}"
-
-		return
-	fi
-
 	# assume 'termux-exec' is installed
 
 	unset LD_PRELOAD
@@ -254,7 +243,7 @@ container_intent () {
 	proot														\
 		--kill-on-exit											\
 		--link2symlink											\
-		--rootfs="${ROOT}"										\
+		--rootfs="${PREFIX}"/cnt/debian/12						\
 		--change-id=0:0											\
 		--pwd=/home												\
 		--bind=/data:/data										\
@@ -981,15 +970,6 @@ then
 		frobulator.file "${HOME}"/.dextop dextop-termux-storage-checkpoint
 	fi
 
-	# termux failsafe
-
-	if [ ! -f "${HOME}"/.dextop/dextop-termux-failsafe-checkpoint ]
-	then
-		"${HOME}"/.local/bin/termux-failsafe
-
-		frobulator.file "${HOME}"/.dextop dextop-termux-failsafe-checkpoint
-	fi
-
 	# termux packages
 
 	if [ ! -f "${HOME}"/.dextop/dextop-termux-packages-checkpoint ]
@@ -1026,15 +1006,6 @@ then
 		container_intent "${HOME}"/.local/bin/container-expansion
 
 		frobulator.file "${HOME}"/.dextop dextop-container-expansion-checkpoint
-	fi
-
-	# container failsafe
-
-	if [ ! -f "${HOME}"/.dextop/dextop-container-failsafe-checkpoint ]
-	then
-		container_intent "${HOME}"/.local/bin/container-failsafe
-
-		frobulator.file "${HOME}"/.dextop dextop-container-failsafe-checkpoint
 	fi
 
 	# container packages
