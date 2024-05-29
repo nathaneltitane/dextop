@@ -1018,7 +1018,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-container-initialization-checkpoint ]
 	then
-		container_intent $(echo "yes | apt install sudo") > "${sink}" 2>&1
+		container_intent $(echo "yes | apt install curl") > "${sink}" 2>&1
 
 		frobulator.file "${HOME}"/.dextop dextop-container-initialization-checkpoint
 	fi
