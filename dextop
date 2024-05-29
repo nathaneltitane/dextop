@@ -212,7 +212,7 @@ fi
 
 if [ -z "${ROOT}" ]
 then
-	ROOT=("${PREFIX}"/cnt/debian/12)
+	ROOT=("${PREFIX}"/cnt/*/*)
 fi
 
 # functions ////////////////////////////////////////////////////////////////////
@@ -242,7 +242,7 @@ container_intent () {
 
 	if [ $# -eq 0 ]
 	then
-		ROOT=("${PREFIX}"/cnt/debian/12)
+		ROOT=("${PREFIX}"/cnt/*/*)
 
 		export ROOT="${ROOT}"
 
