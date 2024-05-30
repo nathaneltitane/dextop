@@ -8,7 +8,7 @@
 
 ### NOTICE // 05-29-2024:
 
-- Added GPU hardware acceleration to X11 display defaults (VIRGL Renderer)
+- Added GPU hardware acceleration to X11 display defaults (VirGL Renderer)
 - Refactored failsafe routines and cleaned up redundancies
 - Updated 'dextop' utility
 - Updated 'termux-storage' utility
