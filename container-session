@@ -1329,6 +1329,10 @@ then
 
 		display_interface
 
+		# start display viewing application
+
+		display_intent
+
 	else
 		frobulator.err "Unknown display server selection" "[ ${display} ]"
 		echo
