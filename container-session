@@ -945,7 +945,7 @@ display_intent () {
 
 		# start termux:x11 intent
 
-				unset intent_command
+		unset intent_command
 
 		intent_command+="am start"
 		intent_command+=" --user 0"
@@ -967,6 +967,7 @@ display_view () {
 		unset intent_command
 
 		intent_command+="am start"
+		intent_command+=" --user 0"
 		intent_command+=" -a android.intent.action.VIEW"
 		intent_command+=" -d vnc://${ADDRESS}:${PORT}"
 		intent_command+=" -S ${display_activity}"
@@ -978,7 +979,13 @@ display_view () {
 	then
 		display_activity="${termux_x11_activity}"
 
-		am start -n "${display_activity}" > "${sink}" 2>&1
+		unset intent_command
+
+		intent_command+="am start"
+		intent_command+=" --user 0"
+		intent_command+=" -n ${display_activity}"
+
+		frobulator.silence "${intent_command}"
 	fi
 }
 
