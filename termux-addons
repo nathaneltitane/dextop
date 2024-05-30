@@ -155,7 +155,7 @@ addon_intent () {
 			frobulator.err "Unknown addon name" "[ '${addon}' ]"
 			echo
 
-			frobulator.fwd "Listing known addons..."
+			frobulator.fwd "Listing known addons${marker_elp}"
 			echo
 
 			frobulator.timeout
@@ -230,7 +230,7 @@ then
 	frobulator.inf "Setting up all Termux addon packages."
 	echo
 	
-	frobulator.fwd "Installing..."
+	frobulator.fwd "Installing${marker_elp}"
 	echo
 
 else

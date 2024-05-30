@@ -209,7 +209,7 @@ then
 		frobulator.inf "Checking for package update" "[ ${package} ]"
 		echo
 
-		frobulator.fwd "Verifying..."
+		frobulator.fwd "Verifying${marker_elp}"
 		echo
 
 		# application version is deprecated
@@ -237,7 +237,7 @@ then
 
 				# update
 
-				frobulator.fwd "Updating..."
+				frobulator.fwd "Updating${marker_elp}"
 				echo
 
 				open_intent "${PREFIX}"/tmp/"${archive}"
@@ -260,7 +260,7 @@ then
 				frobulator.scs "Package version is up to date" "[ ${package} // ${archive_version} ]"
 				echo
 
-				frobulator.fwd "Continuing..."
+				frobulator.fwd "Continuing${marker_elp}"
 				echo
 			fi
 		fi

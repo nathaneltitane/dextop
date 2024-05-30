@@ -127,7 +127,7 @@ user_verify () {
 
 	# authentication
 
-	frobulator.fwd "Verifying..."
+	frobulator.fwd "Verifying${marker_elp}"
 	echo
 
 	# verify user existence:
@@ -209,7 +209,7 @@ user_interactive () {
 	# generate 'user' account:
 	# interactive setup
 
-	frobulator.fwd "Generating account..."
+	frobulator.fwd "Generating account${marker_elp}"
 	echo
 
 	room_number=""
@@ -243,7 +243,7 @@ user_automated () {
 	# generate 'user account:
 	# noninteractive setup
 
-	frobulator.fwd "Generating account..."
+	frobulator.fwd "Generating account${marker_elp}"
 	echo
 
 	if [ -z "${user_name}" ]
@@ -274,7 +274,7 @@ user_superuser () {
 
 	if [[ $(command -v sudo) ]]
 	then
-		frobulator.fwd "Generating superuser privilege..."
+		frobulator.fwd "Generating superuser privilege${marker_elp}"
 		echo
 
 		if [[ $(cat /etc/group | grep sudo) ]]
@@ -340,7 +340,7 @@ user_password () {
 
 	# set 'user' password
 
-	frobulator.fwd "Setting password..."
+	frobulator.fwd "Setting password${marker_elp}"
 	echo
 
 	# generate password credential for 'user' entry
@@ -355,7 +355,7 @@ user_runtime () {
 
 	# generate 'user' runtime directory structure
 
-	frobulator.fwd "Setting runtime..."
+	frobulator.fwd "Setting runtime${marker_elp}"
 	echo
 
 	user_uid="$(id -u ${user_name})"

@@ -93,11 +93,11 @@ else
 	frobulator.scs "Storage directory detected" "[ "${HOME}" ]"
 	echo
 
-	frobulator.fwd "Continuing..."
+	frobulator.fwd "Continuing${marker_elp}"
 	echo
 fi
 
-frobulator.fwd "Setting up storage..."
+frobulator.fwd "Setting up storage${marker_elp}"
 echo
 
 # handle storage mount locations
@@ -127,7 +127,7 @@ done
 
 # link internal storage
 
-frobulator.fwd "Linking..."
+frobulator.fwd "Linking${marker_elp}"
 echo
 
 if [ -d /storage/emulated/0 ]
@@ -183,7 +183,7 @@ then
 			frobulator.inf "Using mouts UUID for identification"
 			echo
 			
-			frobulator.fwd "Proceeding..."
+			frobulator.fwd "Proceeding${marker_elp}"
 			echo
 		fi
 
@@ -208,7 +208,7 @@ else
 	frobulator.err "No storage media detected" "[ ${storage_uuid} ]"
 	echo
 
-	frobulator.fwd "Continuing..."
+	frobulator.fwd "Continuing${marker_elp}"
 	echo
 fi
 
