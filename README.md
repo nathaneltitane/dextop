@@ -10,6 +10,7 @@
 
 - Added GPU hardware acceleration to X11 display defaults (VirGL Renderer)
 - Refactored failsafe routines and cleaned up redundancies
+- Fixed Activity Manager ('am') calls to load intended applications when requested by utilities
 - Updated 'dextop' utility
 - Updated 'termux-storage' utility
 - Updated 'container-session' utility
