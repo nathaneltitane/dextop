@@ -134,6 +134,7 @@ activity_intent () {
 	activity="${1}"
 
 	am start							\
+		--user 0						\
 		-n "${activity}"				> "${sink}" 2>&1
 	}
 
@@ -142,6 +143,7 @@ handle_intent () {
 	handle="${1}"
 
 	am start							\
+		--user 0						\
 		-a android.intent.action.VIEW	\
 		-d "${handle}"					> "${sink}" 2>&1
 }
