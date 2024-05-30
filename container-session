@@ -1274,7 +1274,7 @@ display_password () {
 		frobulator.fwd "Setting password..."
 		echo
 
-		echo "$display_password" | vncpasswd -f > "${HOME}"/.vnc/passwd
+		echo "${display_password}" | vncpasswd -f > "${HOME}"/.vnc/passwd
 
 		frobulator.scs "Password changed."
 		echo
