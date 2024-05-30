@@ -6,7 +6,7 @@
 
 ---
 
-### NOTICE // 05-26-2024:
+### NOTICE // 05-29-2024:
 
 - Added GPU hardware acceleration to X11 display defaults (VIRGL Renderer)
 - Refactored failsafe routines and cleaned up redundancies
