@@ -924,6 +924,7 @@ display_intent () {
 		# start android vnc intent and force-stop existing activity
 
 		# frobulator.silence "am start
+		#						--user 0
 		#						-a android.intent.action.VIEW
 		#						-d vnc://${ADDRESS}:${PORT}
 		#						-S ${display_activity}"
@@ -931,6 +932,7 @@ display_intent () {
 		unset intent_command
 
 		intent_command+="am start"
+		intent_command+=" --user 0"
 		intent_command+=" -a android.intent.action.VIEW"
 		intent_command+=" -d vnc://${ADDRESS}:${PORT}"
 
@@ -943,7 +945,13 @@ display_intent () {
 
 		# start termux:x11 intent
 
-		am start -n "${display_activity}" > "${sink}" 2>&1
+				unset intent_command
+
+		intent_command+="am start"
+		intent_command+=" --user 0"
+		intent_command+=" -n ${display_activity}"
+
+		frobulator.silence "${intent_command}"
 	fi
 }
 
