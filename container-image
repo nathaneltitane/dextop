@@ -342,7 +342,7 @@ image_architecture () {
 		frobulator.wrn "Unknown architecture" "[ ${image_architecture} ]"
 		echo
 
-		frobulator.fwd "Aborting..."
+		frobulator.fwd "Aborting${marker_elp}"
 		echo
 
 		frobulator.stp "Exiting."

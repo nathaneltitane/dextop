@@ -428,7 +428,7 @@ container_user () {
 
 	# authentication
 
-	frobulator.fwd "Authenticating..."
+	frobulator.fwd "Authenticating${marker_elp}"
 	echo
 
 	# verify user existence:
@@ -885,7 +885,7 @@ display_handle () {
 
 	if [[ "${selection}" = "custom" ]]
 	then
-		frobulator.fwd "Setting custom properties..."
+		frobulator.fwd "Setting custom properties${marker_elp}"
 		echo
 
 		frobulator.ipt "Set width" "[ pixels ]"
@@ -911,7 +911,7 @@ display_handle () {
 
 display_intent () {
 
-	frobulator.fwd "Generating display..."
+	frobulator.fwd "Generating display${marker_elp}"
 	echo
 
 	if [[ "${display}" = [vV][nN][cC] ]]
@@ -957,7 +957,7 @@ display_intent () {
 
 display_view () {
 
-	frobulator.fwd "Opening display..."
+	frobulator.fwd "Opening display${marker_elp}"
 	echo
 
 	if [[ "${display}" = [vV][nN][cC] ]]
@@ -993,7 +993,7 @@ display_framebuffer () {
 
 	if [[ "${display}" = [vV][nN][cC] ]]
 	then
-		frobulator.fwd "Generating framebuffer..."
+		frobulator.fwd "Generating framebuffer${marker_elp}"
 		echo
 
 		unset framebuffer_command
@@ -1023,7 +1023,7 @@ display_interface () {
 		fi
 	fi
 
-	frobulator.fwd "Loading desktop interface..."
+	frobulator.fwd "Loading desktop interface${marker_elp}"
 	echo
 }
 
@@ -1066,7 +1066,7 @@ display_load () {
 
 	# start display server
 
-	frobulator.fwd "Starting display server..."
+	frobulator.fwd "Starting display server${marker_elp}"
 	echo
 
 	server_intent
@@ -1191,7 +1191,7 @@ display_stop () {
 		frobulator.wrn "No active display server detected."
 		echo
 
-		frobulator.fwd "Exiting..."
+		frobulator.fwd "Exiting${marker_elp}"
 		echo
 	fi
 }
@@ -1222,7 +1222,7 @@ display_list () {
 
 	if [[ $(pidof "${display_server}") ]]
 	then
-		frobulator.fwd "Listing session details..."
+		frobulator.fwd "Listing session details${marker_elp}"
 		echo
 
 		display_format="${display_format}"
@@ -1271,7 +1271,7 @@ display_password () {
 
 		# hash password  using 'vncpasswd' and store it
 
-		frobulator.fwd "Setting password..."
+		frobulator.fwd "Setting password${marker_elp}"
 		echo
 
 		echo "${display_password}" | vncpasswd -f > "${HOME}"/.vnc/passwd
