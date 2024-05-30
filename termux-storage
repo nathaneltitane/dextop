@@ -136,7 +136,7 @@ then
 	do
 		if [ ! -f "${directory}"/internal ]
 		then
-			frobulator.link /storage/emulated "${directory}" 0 internal
+			frobulator.link /storage/emulated "${directory}" 0 Android
 		fi
 	done
 fi
