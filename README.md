@@ -10,6 +10,9 @@
 
 - Added GPU hardware acceleration to X11 display defaults (VIRGL Renderer)
 - Refactored failsafe routines and cleaned up redundancies
+- Updated 'dextop' utility
+- Updated 'termux-storage' utility
+- Updated 'container-session' utility
 - Updated 'container-user' utility
 
 ---
