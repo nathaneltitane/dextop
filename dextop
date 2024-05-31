@@ -260,6 +260,9 @@ container_intent () {
 		--bind=/system:/system									\
 		--bind=/vendor:/vendor									\
 		--bind=/data/data/com.termux/files/home:/home			\
+		--bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt \
+		--bind=/plat_property_contexts:/plat_property_contexts \
+		--bind=/property_contexts:/property_contexts \
 			/usr/bin/env 										\
 				--ignore-environment							\
 					ANDROID_ART_ROOT="${ANDROID_ART_ROOT}" \
