@@ -238,12 +238,7 @@ container_intent () {
 	USER_ID="0"
 	GROUP_ID="0"
 
-	if [ -d "${ROOT}"/root ]
-	then
-		HOME="/root"
-	else
-		HOME="/"
-	fi
+	ROOT_HOME="/home"
 
 	COLORTERM="truecolor"
 
@@ -264,7 +259,7 @@ container_intent () {
 	intent_command+=" --link2symlink"
 	intent_command+=" --rootfs=${ROOT}"
 	intent_command+=" --change-id=${USER_ID}:${GROUP_ID}"
-	intent_command+=" --pwd=${HOME}"
+	intent_command+=" --pwd=${ROOT_HOME}"
 
 	# android 10+ requirements
 
@@ -285,7 +280,7 @@ container_intent () {
 	[ -d "/sys" ]                                 && intent_command+=" --bind=/sys:/sys"
 	[ -d "/system" ]                              && intent_command+=" --bind=/system:/system"
 	[ -d "/vendor" ]                              && intent_command+=" --bind=/vendor:/vendor"
-	[ -d "${PREFIX%/*}"/home ]                    && intent_command+=" --bind=${PREFIX%/*}/home:${HOME}"
+	[ -d "${PREFIX%/*}"/home ]                    && intent_command+=" --bind=${PREFIX%/*}/home:${ROOT_HOME}"
 
 	# environment
 
