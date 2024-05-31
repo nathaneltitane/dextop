@@ -233,6 +233,8 @@ container_intent () {
 
 	# run container setup commands through 'proot'
 
+	ROOT=("${PREFIX}"/cnt/*/*)
+
 	# assume 'termux-exec' is installed
 
 	unset LD_PRELOAD
@@ -243,7 +245,7 @@ container_intent () {
 	proot																\
 		--kill-on-exit													\
 		--link2symlink													\
-		--rootfs="${PREFIX}"/cnt/debian/12								\
+		--rootfs="${ROOT}"												\
 		--change-id=0:0													\
 		--pwd=/home														\
 		--bind=/apex:/apex												\
