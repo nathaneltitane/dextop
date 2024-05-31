@@ -305,6 +305,7 @@ container_intent () {
 	intent_command+=" LANG=${LANG}"
 	intent_command+=" PATH=${PATH}"
 	intent_command+=" TERM=${TERM}"
+	intent_command+=" TMPDIR=${TMPDIR}"
 
 	# command
 
