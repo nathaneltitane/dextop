@@ -291,6 +291,9 @@ container_intent () {
 
 	intent_command+=" env"
 	intent_command+=" --ignore-environment"
+
+	# android
+
 	intent_command+=" ANDROID_ART_ROOT=${ANDROID_ART_ROOT}"
 	intent_command+=" ANDROID_DATA=${ANDROID_DATA}"
 	intent_command+=" ANDROID_I18N_ROOT=${ANDROID_I18N_ROOT}"
@@ -299,7 +302,13 @@ container_intent () {
 	intent_command+=" ANDROID_TZDATA_ROOT=${ANDROID_TZDATA_ROOT}"
 	intent_command+=" BOOTCLASSPATH=${BOOTCLASSPATH}"
 	intent_command+=" DEX2OATBOOTCLASSPATH=${DEX2OATBOOTCLASSPATH}"
+
+	# termux
+
 	intent_command+=" PREFIX=${PREFIX}"
+
+	# container
+
 	intent_command+=" COLORTERM=${COLORTERM}"
 	intent_command+=" HOME=${HOME}"
 	intent_command+=" LANG=${LANG}"
