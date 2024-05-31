@@ -259,9 +259,6 @@ container_intent () {
 		--bind=/system:/system									\
 		--bind=/vendor:/vendor									\
 		--bind=/data/data/com.termux/files/home:/home			\
-		[ -e "/linkerconfig/ld.config.txt" ] --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt \
-		[ -f "/plat_property_contexts" ]     --bind=/plat_property_contexts:/plat_property_contexts \
-		[ -f "/property_contexts" ]          --bind=/property_contexts:/property_contexts \
 			env 												\
 				--ignore-environment							\
 					PREFIX="${PREFIX}"							\
