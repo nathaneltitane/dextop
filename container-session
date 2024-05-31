@@ -574,7 +574,13 @@ container_session () {
 	session_command+=" ANDROID_TZDATA_ROOT=${ANDROID_TZDATA_ROOT}"
 	session_command+=" BOOTCLASSPATH=${BOOTCLASSPATH}"
 	session_command+=" DEX2OATBOOTCLASSPATH=${DEX2OATBOOTCLASSPATH}"
+
+	# termux
+
 	session_command+=" PREFIX=${PREFIX}"
+
+	# container
+
 	session_command+=" COLORTERM=${COLORTERM}"
 	session_command+=" DISPLAY=${DISPLAY}"
 	session_command+=" DISPLAY_DRIVER=${DISPLAY_DRIVER}"
