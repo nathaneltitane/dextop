@@ -259,6 +259,7 @@ container_intent () {
 		--bind=/system:/system									\
 		--bind=/vendor:/vendor									\
 		--bind=/data/data/com.termux/files/home:/home			\
+		[ -e "/linkerconfig/ld.config.txt" ] --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt \
 			env 												\
 				--ignore-environment							\
 					PREFIX="${PREFIX}"							\
