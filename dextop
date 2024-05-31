@@ -259,13 +259,13 @@ container_intent () {
 		--bind=/system:/system									\
 		--bind=/vendor:/vendor									\
 		--bind=/data/data/com.termux/files/home:/home			\
-			env 												\
+			/usr/bin/env 										\
 				--ignore-environment							\
 					PREFIX="${PREFIX}"							\
 					TERM="${TERM}"								\
 					LANG=C.UTF-8								\
 					HOME=/home									\
-					PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data/data/com.termux/files/usr/bin	\
+					PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data/data/com.termux/files/usr/bin:	\
 																${@}
 }
 
