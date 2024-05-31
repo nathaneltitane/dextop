@@ -246,6 +246,7 @@ container_intent () {
 		--rootfs="${PREFIX}"/cnt/debian/12						\
 		--change-id=0:0											\
 		--pwd=/home												\
+		--bind=/apex:/apex										\
 		--bind=/data:/data										\
 		--bind=/dev:/dev										\
 		--bind=/dev/urandom:/dev/random							\
@@ -261,7 +262,15 @@ container_intent () {
 		--bind=/data/data/com.termux/files/home:/home			\
 			/usr/bin/env 										\
 				--ignore-environment							\
-					PREFIX="${PREFIX}"							\
+					ANDROID_ART_ROOT="${ANDROID_ART_ROOT}" \
+					ANDROID_DATA="${ANDROID_DATA}" \
+					ANDROID_I18N_ROOT="${ANDROID_I18N_ROOT}" \
+					ANDROID_ROOT="${ANDROID_ROOT}" \
+					ANDROID_RUNTIME_ROOT="${ANDROID_RUNTIME_ROOT}" \
+					ANDROID_TZDATA_ROOT="${ANDROID_TZDATA_ROOT}" \
+					BOOTCLASSPATH="${BOOTCLASSPATH}" \
+					DEX2OATBOOTCLASSPATH="${DEX2OATBOOTCLASSPATH}" \
+					PREFIX="${PREFIX}" \
 					TERM="${TERM}"								\
 					LANG=C.UTF-8								\
 					HOME=/home									\
