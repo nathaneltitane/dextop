@@ -530,7 +530,14 @@ container_session () {
 	session_command+=" --rootfs=${ROOT}"
 	session_command+=" --change-id=${USER_ID}:${GROUP_ID}"
 	session_command+=" --pwd=${HOME}"
-	[ -d "/apex" ]                                && session_command+=" --bind=/apex:/apex"
+
+	# android 10+ requirements
+
+	[ -d "/apex" ]                                && intent_command+=" --bind=/apex:/apex"
+	[ -e "/linkerconfig/ld.config.txt" ]          && intent_command+=" --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt"
+
+	# android requirements
+
 	[ -d "/data" ]                                && session_command+=" --bind=/data:/data"
 	[ -d "/dev" ]                                 && session_command+=" --bind=/dev:/dev"
 	[ -e "/dev/urandom" ]                         && session_command+=" --bind=/dev/urandom:/dev/random"
@@ -554,7 +561,9 @@ container_session () {
 	[ -d "${PREFIX}"/storage/internal/Templates ] && session_command+=" --bind=${PREFIX}/storage/internal/Templates:/home/${USER}/Templates"
 	[ -d "${PREFIX}"/storage/internal/Videos ]    && session_command+=" --bind=${PREFIX}/storage/internal/Videos:/home/${USER}/Videos"
 	[ -d "${PREFIX}"/tmp ]                        && session_command+=" --bind=${PREFIX}/tmp:/tmp"
-	[ -e "/linkerconfig/ld.config.txt" ]          && session_command+=" --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt"
+
+	#environemnt
+
 	session_command+=" env"
 	session_command+=" --ignore-environment"
 	session_command+=" ANDROID_ART_ROOT=${ANDROID_ART_ROOT}"
@@ -585,6 +594,9 @@ container_session () {
 	session_command+=" XDG_STATE_HOME=${HOME}/.local/state"
 	session_command+=" XDG_DATA_DIRS=/usr/local/share:/usr/share"
 	session_command+=" XAUTHORITY=${XDG_RUNTIME_DIR}/Xauthority"
+
+	# command
+
 	session_command+=" ${SHELL}"
 	session_command+=" --login"
 
