@@ -365,6 +365,8 @@ container_intent () {
 					DEX2OATBOOTCLASSPATH="${DEX2OATBOOTCLASSPATH}"		\
 					PREFIX="${PREFIX}"									\
 					TERM="${TERM}"										\
+					TMPDIR="${TMPDIR}"									\
+					COLORTERM=truecolor									\
 					LANG=C.UTF-8										\
 					HOME=/home											\
 					PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data/data/com.termux/files/usr/bin:	\
