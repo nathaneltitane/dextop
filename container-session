@@ -255,19 +255,19 @@ container_root () {
 
 	# set container root directory
 
-	ROOT=("${PREFIX}"/cnt/*/*)
+	CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
 
 	# single container
 
-	if [[ ${#ROOT[@]} -eq 1 ]]
+	if [[ ${#CONTAINER_ROOT[@]} -eq 1 ]]
 	then
-		ROOT=("${PREFIX}"/cnt/*/*)
+		CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
 	fi
 
 	# multiple containers:
 	# parse container directories
 
-	if [[ ${#ROOT[@]} -ge 2 ]]
+	if [[ ${#CONTAINER_ROOT[@]} -ge 2 ]]
 	then
 		for distribution in "${PREFIX}"/cnt/*
 		do
@@ -366,19 +366,19 @@ container_handle () {
 	distribution_name="${name}"
 	distribution_version="${version}"
 
-	ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
+	CONTAINER_ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
 }
 
 container_input () {
 
 	if [ -d "${root_filesystem}" ]
 	then
-		ROOT="${root_filesystem}"
+		CONTAINER_ROOT="${root_filesystem}"
 
 		frobulator.scs "Container location found."
 		echo
 
-		frobulator.inf "Loading" "[ ${ROOT} ]"
+		frobulator.inf "Loading" "[ ${CONTAINER_ROOT} ]"
 		echo
 	else
 		frobulator.err "Container location not found."
@@ -398,28 +398,28 @@ container_environment () {
 	# set path:
 	# in order of retreival
 
-	PATH=""
+	CONTAINER_PATH=""
 
 	# container
 
-	[ -d "${ROOT}"/usr/local/sbin ] && PATH+="/usr/local/sbin:"
-	[ -d "${ROOT}"/usr/local/bin ]  && PATH+="/usr/local/bin:"
-	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/sbin:"
-	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/bin:"
-	[ -d "${ROOT}"/sbin ]           && PATH+="/sbin:"
-	[ -d "${ROOT}"/bin ]            && PATH+="/bin:"
+	[ -d "${CONTAINER_ROOT}"/usr/local/sbin ] && CONTAINER_PATH+="/usr/local/sbin:"
+	[ -d "${CONTAINER_ROOT}"/usr/local/bin ]  && CONTAINER_PATH+="/usr/local/bin:"
+	[ -d "${CONTAINER_ROOT}"/usr/sbin ]       && CONTAINER_PATH+="/usr/sbin:"
+	[ -d "${CONTAINER_ROOT}"/usr/sbin ]       && CONTAINER_PATH+="/usr/bin:"
+	[ -d "${CONTAINER_ROOT}"/sbin ]           && CONTAINER_PATH+="/sbin:"
+	[ -d "${CONTAINER_ROOT}"/bin ]            && CONTAINER_PATH+="/bin:"
 
 	# termux
 
-	[ -d "${HOME}"/.local/bin ]     && PATH+="${HOME}/.local/bin:"
+	[ -d "${HOME}"/.local/bin ]     && CONTAINER_PATH+="${HOME}/.local/bin:"
 
-	[ -d "${PREFIX}"/sbin ]         && PATH+="${PREFIX}/sbin:"
-	[ -d "${PREFIX}"/bin ]          && PATH+="${PREFIX}/bin:"
+	[ -d "${PREFIX}"/sbin ]         && CONTAINER_PATH+="${PREFIX}/sbin:"
+	[ -d "${PREFIX}"/bin ]          && CONTAINER_PATH+="${PREFIX}/bin:"
 
 	# android
 
-	[ -d /system/sbin ]             && PATH+="/system/sbin:"
-	[ -d /system/bin ]              && PATH+="/system/bin:"
+	[ -d /system/sbin ]             && CONTAINER_PATH+="/system/sbin:"
+	[ -d /system/bin ]              && CONTAINER_PATH+="/system/bin:"
 
 	PATH="${PATH}"
 
@@ -438,7 +438,7 @@ container_user () {
 	# source environment variables when 'user' corresponds to 'username'
 	# default to 'root' if 'username' is invalid, is not specified or does not exist
 
-	last_entry="$(tail -n 1 "${ROOT}"/etc/passwd)"
+	last_entry="$(tail -n 1 "${CONTAINER_ROOT}"/etc/passwd)"
 
 	while read -r entry
 	do
@@ -463,13 +463,14 @@ container_user () {
 			user_name="root"
 
 			USER="root"
+
 			USER_ID="0"
 			GROUP_ID="0"
 
 			UID="${USER_ID}"
 			GID="${GROUP_ID}"
 
-			if [ -d "${ROOT}"/root ]
+			if [ -d "${CONTAINER_ROOT}"/root ]
 			then
 				HOME="/root"
 			else
@@ -511,7 +512,7 @@ container_user () {
 			exit 1
 		fi
 
-	done < "${ROOT}"/etc/passwd
+	done < "${CONTAINER_ROOT}"/etc/passwd
 }
 
 container_session () {
@@ -529,7 +530,7 @@ container_session () {
 	session_command+="proot"
 	session_command+=" --kill-on-exit"
 	session_command+=" --link2symlink"
-	session_command+=" --rootfs=${ROOT}"
+	session_command+=" --rootfs=${CONTAINER_ROOT}"
 	session_command+=" --change-id=${USER_ID}:${GROUP_ID}"
 	session_command+=" --pwd=${HOME}"
 
