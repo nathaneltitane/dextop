@@ -631,47 +631,47 @@ image_environment () {
 
 	# generate environment '$PATH' variable
 
-	ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
+	CONTAINER_ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
 	
 	# set path:
 	# in order of retreival
 
-	PATH=""
+	CONTAINER_PATH=""
 
 	# container
 
-	[ -d "${ROOT}"/usr/local/sbin ] && PATH+="/usr/local/sbin:"
-	[ -d "${ROOT}"/usr/local/bin ]  && PATH+="/usr/local/bin:"
-	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/sbin:"
-	[ -d "${ROOT}"/usr/bin ]        && PATH+="/usr/bin:"
-	[ -d "${ROOT}"/sbin ]           && PATH+="/sbin:"
-	[ -d "${ROOT}"/bin ]            && PATH+="/bin:"
+	[ -d "${CONTAINER_ROOT}"/usr/local/sbin ] && CONTAINER_PATH+="/usr/local/sbin:"
+	[ -d "${CONTAINER_ROOT}"/usr/local/bin ]  && CONTAINER_PATH+="/usr/local/bin:"
+	[ -d "${CONTAINER_ROOT}"/usr/sbin ]       && CONTAINER_PATH+="/usr/sbin:"
+	[ -d "${CONTAINER_ROOT}"/usr/bin ]        && CONTAINER_PATH+="/usr/bin:"
+	[ -d "${CONTAINER_ROOT}"/sbin ]           && CONTAINER_PATH+="/sbin:"
+	[ -d "${CONTAINER_ROOT}"/bin ]            && CONTAINER_PATH+="/bin:"
 
 	# termux
 
-	[ -d "${HOME}"/.local/sbin ]    && PATH+="${HOME}/.local/sbin:"
-	[ -d "${HOME}"/.local/bin ]     && PATH+="${HOME}/.local/bin:"
-	[ -d "${HOME}"/.sbin ]          && PATH+="${HOME}/.sbin:"
-	[ -d "${HOME}"/.bin ]           && PATH+="${HOME}/.bin:"
+	[ -d "${HOME}"/.local/sbin ]    && CONTAINER_PATH+="${HOME}/.local/sbin:"
+	[ -d "${HOME}"/.local/bin ]     && CONTAINER_PATH+="${HOME}/.local/bin:"
+	[ -d "${HOME}"/.sbin ]          && CONTAINER_PATH+="${HOME}/.sbin:"
+	[ -d "${HOME}"/.bin ]           && CONTAINER_PATH+="${HOME}/.bin:"
 
-	[ -d "${PREFIX}"/sbin ]         && PATH+="${PREFIX}/sbin:"
-	[ -d "${PREFIX}"/bin ]          && PATH+="${PREFIX}/bin:"
+	[ -d "${PREFIX}"/sbin ]         && CONTAINER_PATH+="${PREFIX}/sbin:"
+	[ -d "${PREFIX}"/bin ]          && CONTAINER_PATH+="${PREFIX}/bin:"
 
 	# android
 
-	[ -d /system/sbin ]             && PATH+="/system/sbin:"
-	[ -d /system/bin ]              && PATH+="/system/bin:"
+	[ -d /system/sbin ]             && CONTAINER_PATH+="/system/sbin:"
+	[ -d /system/bin ]              && CONTAINER_PATH+="/system/bin:"
 
 	# set environment
 
 	PATH="${PATH}"
 
 	cat <<- FILE > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/environment
-	PATH=${PATH}
+	PATH=${CONTAINER_PATH}
 	PREFIX=${PREFIX}
 	FILE
 	
-	unset ROOT
+	unset CONTAINER_ROOT
 }
 
 image_groups () {

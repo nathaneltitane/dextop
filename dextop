@@ -401,6 +401,8 @@ container_environment () {
 	[ -d "${PREFIX}"/bin ]          && CONTAINER_PATH+="${PREFIX}/bin:"
 
 	CONTAINER_PATH="${CONTAINER_PATH}"
+
+	return
 }
 
 container_intent () {
@@ -410,7 +412,6 @@ container_intent () {
 	TERMUX_ROOT="${PREFIX%/*}"
 	TERMUX_HOME="${TERMUX_ROOT}"/home
 
-	CONTAINER_ROOT="${PREFIX}"/cnt/debian/12
 	CONTAINER_HOME="${CONTAINER_ROOT}"/home
 
 	USER_ID="0"
