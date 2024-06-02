@@ -105,7 +105,7 @@ echo
 
 if [ -d "${HOME}"/storage ]
 then
-    frobulator.delete "${HOME}"/storage
+    frobulator.delete "${HOME}" storage
 fi
 
 directories_list=(
