@@ -396,9 +396,9 @@ container_intent () {
 	proot																\
 		--kill-on-exit													\
 		--link2symlink													\
-		--rootfs="${ROOT}"												\
+		--rootfs="${CONTAINER_ROOT}"									\
 		--change-id="${USER_ID}":${GROUP_ID}							\
-		--pwd="${CONTAInER_HOME}"										\
+		--pwd="${CONTAINER_HOME}"										\
 		--bind=/apex:/apex												\
 		--bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt	\
 		--bind=/data:/data												\
@@ -427,8 +427,8 @@ container_intent () {
 					PREFIX="${PREFIX}"									\
 					TERM="${TERM}"										\
 					TMPDIR="${TMPDIR}"									\
-					COLORTERM=truecolor									\
-					LANG=C.UTF-8										\
+					COLORTERM="${COLORTERM}"							\
+					LANG="${LANG}"										\
 					HOME="${CONTAINER_HOME}"							\
 					PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data/data/com.termux/files/usr/bin:	\
 																															${@}
