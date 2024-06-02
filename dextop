@@ -321,7 +321,7 @@ container_intent_wip () {
 }
 
 
-container_intent () {
+container_intent_old () {
 
 	# run container setup commands through 'proot'
 
@@ -369,6 +369,65 @@ container_intent () {
 					COLORTERM=truecolor									\
 					LANG=C.UTF-8										\
 					HOME=/home											\
+					PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data/data/com.termux/files/usr/bin:	\
+																															${@}
+}
+
+container_intent () {
+
+	# run container setup commands through 'proot'
+
+	ROOT="${PREFIX}"/cnt/debian/12
+
+	USER_ID="0"
+	GROUP_ID="0"
+
+	ROOT_HOME="/home"
+
+	# assume 'termux-exec' is installed
+
+	unset LD_PRELOAD
+
+	# run using default system parameters:
+	# mitigate errors and path interpretation issues during container setup
+
+	proot																\
+		--kill-on-exit													\
+		--link2symlink													\
+		--rootfs="${ROOT}"												\
+		--change-id="${USER_ID}":${GROUP_ID}							\
+		--pwd="${ROOT_HOME}"											\
+		--bind=/apex:/apex												\
+		--bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt	\
+		--bind=/data:/data												\
+		--bind=/dev:/dev												\
+		--bind=/dev/urandom:/dev/random									\
+		--bind=/proc:/proc												\
+		--bind=/proc/self/fd:/dev/fd									\
+		--bind=/proc/self/fd/0:/dev/stdin								\
+		--bind=/proc/self/fd/1:/dev/stdout								\
+		--bind=/proc/self/fd/2:/dev/stderr								\
+		--bind=/storage:/storage										\
+		--bind=/sys:/sys												\
+		--bind=/system:/system											\
+		--bind=/vendor:/vendor											\
+		--bind=/data/data/com.termux/files/home:"${ROOT_HOME}"			\
+			/usr/bin/env 												\
+				--ignore-environment									\
+					ANDROID_ART_ROOT="${ANDROID_ART_ROOT}"				\
+					ANDROID_DATA="${ANDROID_DATA}"						\
+					ANDROID_I18N_ROOT="${ANDROID_I18N_ROOT}"			\
+					ANDROID_ROOT="${ANDROID_ROOT}"						\
+					ANDROID_RUNTIME_ROOT="${ANDROID_RUNTIME_ROOT}"		\
+					ANDROID_TZDATA_ROOT="${ANDROID_TZDATA_ROOT}"		\
+					BOOTCLASSPATH="${BOOTCLASSPATH}"					\
+					DEX2OATBOOTCLASSPATH="${DEX2OATBOOTCLASSPATH}"		\
+					PREFIX="${PREFIX}"									\
+					TERM="${TERM}"										\
+					TMPDIR="${TMPDIR}"									\
+					COLORTERM=truecolor									\
+					LANG=C.UTF-8										\
+					HOME="${ROOT_HOME}"									\
 					PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data/data/com.termux/files/usr/bin:	\
 																															${@}
 }
