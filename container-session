@@ -422,6 +422,8 @@ container_environment () {
 	[ -d /system/bin ]              && PATH+="/system/bin:"
 
 	PATH="${PATH}"
+
+	return
 }
 
 container_user () {

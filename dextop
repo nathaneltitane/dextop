@@ -373,6 +373,36 @@ container_intent_old () {
 																															${@}
 }
 
+container_environment () {
+
+	# generate container environement
+
+	CONTAINER_ROOT="${PREFIX}"/cnt/debian/12
+
+	# set path:
+	# in order of retreival
+
+	CONATINER_PATH=""
+
+	# container
+
+	[ -d "${CONTAINER_ROOT}"/usr/local/sbin ] && CONTAINER_PATH+="/usr/local/sbin:"
+	[ -d "${CONTAINER_ROOT}"/usr/local/bin ]  && CONTAINER_PATH+="/usr/local/bin:"
+	[ -d "${CONTAINER_ROOT}"/usr/sbin ]       && CONTAINER_PATH+="/usr/sbin:"
+	[ -d "${CONTAINER_ROOT}"/usr/sbin ]       && CONTAINER_PATH+="/usr/bin:"
+	[ -d "${CONTAINER_ROOT}"/sbin ]           && CONTAINER_PATH+="/sbin:"
+	[ -d "${CONTAINER_ROOT}"/bin ]            && CONTAINER_PATH+="/bin:"
+
+	# termux
+
+	[ -d "${HOME}"/.local/bin ]     && CONTAINER_PATH+="${HOME}/.local/bin:"
+
+	[ -d "${PREFIX}"/sbin ]         && CONTAINER_PATH+="${PREFIX}/sbin:"
+	[ -d "${PREFIX}"/bin ]          && CONTAINER_PATH+="${PREFIX}/bin:"
+
+	CONTAINER_PATH="${CONTAINER_PATH}"
+}
+
 container_intent () {
 
 	# run container setup commands through 'proot'
@@ -430,8 +460,8 @@ container_intent () {
 					COLORTERM="${COLORTERM}"							\
 					LANG="${LANG}"										\
 					HOME="${CONTAINER_HOME}"							\
-					PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data/data/com.termux/files/usr/bin:	\
-																															${@}
+					PATH="${CONTAINER_PATH}"							\
+																		${@}
 }
 
 architecture_intent () {
@@ -683,15 +713,15 @@ shell_intent () {
 		else
 			# link to root home
 
-			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-aliases       .bash_aliases
-			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-configuration .bashrc
-			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-configuration .bash_configuration
-			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-functions     .bash_functions
-			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-login         .bash_login
-			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-logout        .bash_logout
-			frobulator.link "${HOME}"/.local/bin "${ROOT}"/root bash-profile       .bash_profile
+			frobulator.link "${HOME}"/.local/bin "${CONTAINER_ROOT}"/root bash-aliases       .bash_aliases
+			frobulator.link "${HOME}"/.local/bin "${CONTAINER_ROOT}"/root bash-configuration .bashrc
+			frobulator.link "${HOME}"/.local/bin "${CONTAINER_ROOT}"/root bash-configuration .bash_configuration
+			frobulator.link "${HOME}"/.local/bin "${CONTAINER_ROOT}"/root bash-functions     .bash_functions
+			frobulator.link "${HOME}"/.local/bin "${CONTAINER_ROOT}"/root bash-login         .bash_login
+			frobulator.link "${HOME}"/.local/bin "${CONTAINER_ROOT}"/root bash-logout        .bash_logout
+			frobulator.link "${HOME}"/.local/bin "${CONTAINER_ROOT}"/root bash-profile       .bash_profile
 
-			frobulator.file "${ROOT}"/root .hushlogin
+			frobulator.file "${CONTAINER_ROOT}"/root .hushlogin
 		fi
 	fi
 
@@ -852,13 +882,13 @@ themes_intent () {
 
 	# keep theme selections
 
-	frobulator.keep "${ROOT}"/usr/share/themes ${files_list[@]}
+	frobulator.keep "${CONTAINER_ROOT}"/usr/share/themes ${files_list[@]}
 
 	files_list=()
 
 	# link theme directories
 
-	frobulator.link "${ROOT}"/usr/share "${HOME}" themes .themes
+	frobulator.link "${CONTAINER_ROOT}"/usr/share "${HOME}" themes .themes
 }
 
 session_intent () {
