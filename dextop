@@ -377,12 +377,14 @@ container_intent () {
 
 	# run container setup commands through 'proot'
 
-	ROOT="${PREFIX}"/cnt/debian/12
+	TERMUX_ROOT="${PREFIX%/*}"
+	TERMUX_HOME="${TERMUX_ROOT}"/home
+
+	CONTAINER_ROOT="${PREFIX}"/cnt/debian/12
+	CONTAINER_HOME="${CONTAINER_ROOT}"/home
 
 	USER_ID="0"
 	GROUP_ID="0"
-
-	ROOT_HOME="/home"
 
 	# assume 'termux-exec' is installed
 
@@ -396,7 +398,7 @@ container_intent () {
 		--link2symlink													\
 		--rootfs="${ROOT}"												\
 		--change-id="${USER_ID}":${GROUP_ID}							\
-		--pwd="${ROOT_HOME}"											\
+		--pwd="${CONTAInER_HOME}"										\
 		--bind=/apex:/apex												\
 		--bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt	\
 		--bind=/data:/data												\
@@ -411,7 +413,7 @@ container_intent () {
 		--bind=/sys:/sys												\
 		--bind=/system:/system											\
 		--bind=/vendor:/vendor											\
-		--bind=/data/data/com.termux/files/home:"${ROOT_HOME}"			\
+		--bind="${TERMUX_HOME}":"${CONTAINER_HOME}"						\
 			/usr/bin/env 												\
 				--ignore-environment									\
 					ANDROID_ART_ROOT="${ANDROID_ART_ROOT}"				\
@@ -427,7 +429,7 @@ container_intent () {
 					TMPDIR="${TMPDIR}"									\
 					COLORTERM=truecolor									\
 					LANG=C.UTF-8										\
-					HOME="${ROOT_HOME}"									\
+					HOME="${CONTAINER_HOME}"							\
 					PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data/data/com.termux/files/usr/bin:	\
 																															${@}
 }
