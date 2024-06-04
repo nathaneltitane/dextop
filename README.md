@@ -37,8 +37,8 @@ All utilities created for, loaded, and used by Dextop contain a help argument: p
   - Approve/Deny storage permission request
   - Wait for automated installtion and configuration process to finish (approximately 10 minutes)
 
-- Use Termux setup - paste or type: ```container-session -o```
-- Use Linux image container - paste or type: ```container-session -u termux``` follwed by ```container-session -o```
+- Use Termux side setup - paste or type: ```container-session -o```
+- Use Linux image container setup - paste or type: ```container-session -u termux``` follwed by ```container-session -o```
 
 ---
 
