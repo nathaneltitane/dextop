@@ -32,6 +32,7 @@ All utilities created for, loaded, and used by Dextop contain a help argument: p
 ### TL;DR
 
 - Have Termux and Termux:X11 installed on your Android device
+  - Termux:API is highly recommended but optional
 
 - Install:
   - Paste or type: ```curl -s -L run.dxtp.app > dextop && bash dextop```
