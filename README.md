@@ -41,7 +41,7 @@ All utilities created for, loaded, and used by Dextop contain a help argument: p
     ```
       - Approve/Deny Termux addons installation request
       - Approve/Deny storage permission request
-      - Wait for automated installtion and configuration process to finish (approximately 10 minutes)
+      - Wait for automated installation and configuration process to finish (approximately 10 minutes)
 
   - Use:
     - Termux system [ green 'termux' prompt ]:
