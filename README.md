@@ -40,12 +40,13 @@ All utilities created for, loaded, and used by Dextop contain a help argument: p
     - Approve/Deny storage permission request
     - Wait for automated installtion and configuration process to finish (approximately 10 minutes)
 
-- Use Termux system [ green 'termux' prompt ]:
-  - Paste or type ```container-session -o``` to start the graphical interface
+- Use:
+  - Termux system [ green 'termux' prompt ]:
+    - Paste or type ```container-session -o``` to start the graphical interface
 
-- Use Container system [ fuschia 'termux' prompt ]:
-  - Paste or type: ```container-session -u termux``` to log into the container instance
-  - Paste or type ```container-session -o``` to start the graphical interface
+  - Container system [ fuschia 'termux' prompt ]:
+    - Paste or type: ```container-session -u termux``` to log into the container instance
+    - Paste or type ```container-session -o``` to start the graphical interface
 
 Enjoy!
 
