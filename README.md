@@ -45,7 +45,7 @@ All utilities created for, loaded, and used by Dextop contain a help argument: p
 
   - Use:
     - Termux system [ green 'termux' prompt ]:
-      - Start the graphical interface - paste or type
+      - Start the graphical interface - paste or type:
       ```
       container-session -o
       ```
