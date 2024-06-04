@@ -42,11 +42,21 @@ All utilities created for, loaded, and used by Dextop contain a help argument: p
 
 - Use:
   - Termux system [ green 'termux' prompt ]:
-    - Paste or type ```container-session -o``` to start the graphical interface
+    - Start the graphical interface - paste or type
+    ```
+    container-session -o
+    ```
 
   - Container system [ fuschia 'termux' prompt ]:
-    - Paste or type: ```container-session -u termux``` to log into the container instance
-    - Paste or type ```container-session -o``` to start the graphical interface
+    - log into the container instance - paste or type:
+    ```
+    container-session -u termux
+    ```
+
+    - Start the graphical interface - paste or type
+    ```
+    container-session -o
+    ```
 
 Enjoy!
 
