@@ -18,6 +18,16 @@
 
 ---
 
+### TL;DR
+
+Have Termux and Termux:X11 installed on your Android device
+
+- Install - paste or type: ```curl -s -L run.dxtp.app > dextop && bash dextop```
+- Use Termux setup - paste or type: ```container-session -o```
+- Use Linux image container - paste or type: ```container-session -u termux``` follwed by ```container-session -o```
+
+---
+
 ### Welcome to [Dextop](https://dextop.app)
 
 Dextop turns most modern Android devices into a complete Linux distribution workstation in a matter of minutes!
