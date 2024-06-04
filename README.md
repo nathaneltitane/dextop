@@ -31,8 +31,8 @@ All utilities created for, loaded, and used by Dextop contain a help argument: p
 
 ### TL;DR
 
-- Have Termux and Termux:X11 installed on your Android device
-  - Termux:API is highly recommended but optional
+  - Prepare ↴
+    - Have Termux Termux:API Termux:X11 installed on your Android device
 
   - Install ↴
     - Launch Dextop setup - paste or type:
@@ -43,7 +43,7 @@ All utilities created for, loaded, and used by Dextop contain a help argument: p
       - Approve/Deny storage permission request
       - Wait for automated installation and configuration process to finish (approximately 10 minutes)
 
-  - Use:
+  - Use ↴
     - Termux system [ green 'termux' prompt ] ↴
       - Start the graphical interface - paste or type:
       ```
