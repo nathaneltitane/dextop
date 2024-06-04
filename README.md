@@ -23,6 +23,10 @@
 Have Termux and Termux:X11 installed on your Android device
 
 - Install - paste or type: ```curl -s -L run.dxtp.app > dextop && bash dextop```
+  - Approve/Deny Termux addons installation request
+  - Approve/Deny storage permission request
+  - Wait for automated installtion and configuration process to finish (approximately 10 minutes)
+
 - Use Termux setup - paste or type: ```container-session -o```
 - Use Linux image container - paste or type: ```container-session -u termux``` follwed by ```container-session -o```
 
