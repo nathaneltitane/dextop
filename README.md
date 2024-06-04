@@ -18,6 +18,17 @@
 
 ---
 
+### Welcome to [Dextop](https://dextop.app)
+
+Dextop turns most modern Android devices into a complete Linux distribution workstation in a matter of minutes!
+No hassle or deep technical know-how required: **Dextop is easy and user friendly.**
+
+It is highly recommended to install Dextop on a fresh Termux instance or profile to benefit from a clean slate and a snappy experience, although deploying it on an already existing setup is also possible.
+
+All utilities created for, loaded, and used by Dextop contain a help argument: please refer to the help dialogs while setting things up or before opening a bug report.
+
+---
+
 ### TL;DR
 
 Have Termux and Termux:X11 installed on your Android device
@@ -31,15 +42,6 @@ Have Termux and Termux:X11 installed on your Android device
 - Use Linux image container - paste or type: ```container-session -u termux``` follwed by ```container-session -o```
 
 ---
-
-### Welcome to [Dextop](https://dextop.app)
-
-Dextop turns most modern Android devices into a complete Linux distribution workstation in a matter of minutes!
-No hassle or deep technical know-how required: **Dextop is easy and user friendly.**
-
-It is highly recommended to install Dextop on a fresh Termux instance or profile to benefit from a clean slate and a snappy experience, although deploying it on an already existing setup is also possible.
-
-All utilities created for, loaded, and used by Dextop contain a help argument: please refer to the help dialogs while setting things up or before opening a bug report.
 
 ### Contents
 
