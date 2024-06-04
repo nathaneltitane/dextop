@@ -35,7 +35,7 @@ All utilities created for, loaded, and used by Dextop contain a help argument: p
   - Termux:API is highly recommended but optional
 
   - Install:
-    - Install dextop - paste or type:
+    - Launch Dextop setup - paste or type:
     ```
     curl -s -L run.dxtp.app > dextop && bash dextop
     ```
