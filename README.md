@@ -34,7 +34,7 @@ All utilities created for, loaded, and used by Dextop contain a help argument: p
 - Have Termux and Termux:X11 installed on your Android device
   - Termux:API is highly recommended but optional
 
-  - Install:
+  - Install ↴
     - Launch Dextop setup - paste or type:
     ```
     curl -s -L run.dxtp.app > dextop && bash dextop
@@ -44,12 +44,12 @@ All utilities created for, loaded, and used by Dextop contain a help argument: p
       - Wait for automated installation and configuration process to finish (approximately 10 minutes)
 
   - Use:
-    - Termux system [ green 'termux' prompt ]:
+    - Termux system [ green 'termux' prompt ] ↴
       - Start the graphical interface - paste or type:
       ```
       container-session -o
       ```
-    - Container system [ fuschia 'termux' prompt ]:
+    - Container system [ fuschia 'termux' prompt ] ↴
       - log into the container instance - paste or type:
       ```
       container-session -u termux
