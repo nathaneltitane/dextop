@@ -32,7 +32,7 @@ All utilities created for, loaded, and used by Dextop contain a help argument: p
 ### TL;DR
 
   - Prepare ↴
-    - Have Termux Termux:API Termux:X11 installed on your Android device
+    - Have [Termux](https://github.com/termux/termux-app/releases) + [Termux:API](https://github.com/termux/termux-api/releases) + [Termux:X11](https://github.com/termux/termux-x11/releases) installed on your Android device
 
   - Install ↴
     - Launch Dextop setup - paste or type:
