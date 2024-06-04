@@ -565,7 +565,7 @@ container_session () {
 	[ -d "${PREFIX}"/storage/internal/Videos ]    && session_command+=" --bind=${PREFIX}/storage/internal/Videos:/home/${USER}/Videos"
 	[ -d "${PREFIX}"/tmp ]                        && session_command+=" --bind=${PREFIX}/tmp:/tmp"
 
-	#environemnt
+	# environemnt
 
 	session_command+=" env"
 	session_command+=" --ignore-environment"
