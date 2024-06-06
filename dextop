@@ -974,7 +974,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-logout-checkpoint ]
 	then
-		frobulator.file "${HOME}"/.dextop dextop-logout
+		frobulator.write logout "${HOME}"/.dextop dextop-logout
 
 		frobulator.file "${HOME}"/.dextop dextop-logout-checkpoint
 	fi
