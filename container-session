@@ -1128,7 +1128,7 @@ display_start () {
 
 	if [[ "${display}" = [xX][1][1] ]]
 	then
-		:
+		display_view
 	fi
 
 	# start display session
