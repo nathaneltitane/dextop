@@ -1219,10 +1219,12 @@ display_stop () {
 		intent_command+=" --user 0"
 		intent_command+=" -a ${display_activity}"
 
-		frobulator.silence "${intent_command}"
+		frobulator.silence "${intent_command}" &
+
+		frobulator.process "Stopping display viewer"
 
 	else
-		frobulator.wrn "No active display server detected."
+		frobulator.wrn "No active display process detected."
 		echo
 
 		frobulator.fwd "Exiting${marker_elp}"
