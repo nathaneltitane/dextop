@@ -1247,7 +1247,7 @@ display_list () {
 
 	if [[ "${display}" = [xX][1][1] ]]
 	then
-		display_server="app_process / com.termux.x11.Loader"
+		display_server="com.termux.x11"
 
 		display_format="native"
 		display_geometry="native"
