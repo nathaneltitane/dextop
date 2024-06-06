@@ -411,17 +411,17 @@ container_environment () {
 
 	# termux
 
-	[ -d "${HOME}"/.local/bin ]     && CONTAINER_PATH+="${HOME}/.local/bin:"
+	[ -d "${HOME}"/.local/bin ]               && CONTAINER_PATH+="${HOME}/.local/bin:"
 
-	[ -d "${PREFIX}"/sbin ]         && CONTAINER_PATH+="${PREFIX}/sbin:"
-	[ -d "${PREFIX}"/bin ]          && CONTAINER_PATH+="${PREFIX}/bin:"
+	[ -d "${PREFIX}"/sbin ]                   && CONTAINER_PATH+="${PREFIX}/sbin:"
+	[ -d "${PREFIX}"/bin ]                    && CONTAINER_PATH+="${PREFIX}/bin:"
 
 	# android
 
-	[ -d /system/sbin ]             && CONTAINER_PATH+="/system/sbin:"
-	[ -d /system/bin ]              && CONTAINER_PATH+="/system/bin:"
+	[ -d /system/sbin ]                       && CONTAINER_PATH+="/system/sbin:"
+	[ -d /system/bin ]                        && CONTAINER_PATH+="/system/bin:"
 
-	PATH="${PATH}"
+	CONTAINER_PATH="${CONTAINER_PATH}"
 
 	return
 }
