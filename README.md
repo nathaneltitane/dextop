@@ -132,7 +132,7 @@ Dextop can be compared to other very similar projects, though:
 - It **handles all the technical intricacies related to a container installation** (chroot/proot) so that the user does not have to bother with them and get right to work.
 - It is configured as a transient container system: it talks to Android via the Termux shell to access Android and launch relevant viewers and applications as needed.
 
-![dextop-session](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop-session.png)
+[![dextop-session](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop-session.png)](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop-session.png)
 
 ### What it doesn't:
 
