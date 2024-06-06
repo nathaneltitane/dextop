@@ -238,7 +238,7 @@ container_environment () {
 	# set path:
 	# in order of retreival
 
-	CONATINER_PATH=""
+	CONTAINER_PATH=""
 
 	# container
 
@@ -257,6 +257,9 @@ container_environment () {
 	[ -d "${PREFIX}"/bin ]          && CONTAINER_PATH+="${PREFIX}/bin:"
 
 	CONTAINER_PATH="${CONTAINER_PATH}"
+
+	export CONTAINER_ROOT="${CONTAINER_ROOT}"
+	export CONTAINER_PATH="${CONTAINER_PATH}"
 
 	return
 }
@@ -731,6 +734,7 @@ icons_intent () {
 }
 
 themes_intent () {
+
 
 	# select themes
 
