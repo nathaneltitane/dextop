@@ -1344,7 +1344,7 @@ application_handle () {
 			zenity			 											\
 				--warning												\
 					--width="200"										\
-					--window-icon="${HOME}/.dextop/dextop.svg"	\
+					--window-icon="${HOME}/.dextop/dextop.svg"			\
 					--text="Application '${application}' not found." 2> "${sink}" &
 		fi
 	fi
