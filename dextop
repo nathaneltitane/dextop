@@ -642,8 +642,8 @@ directories_intent () {
 
 	for directory in ${directories_list[@]}
 	do
-        frobulator.link "${PREFIX}" "${PREFIX%/*}" "${directory}"
-    done
+		frobulator.link "${PREFIX}" "${PREFIX%/*}" "${directory}"
+	done
 
 	directories_list=()
 }
