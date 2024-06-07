@@ -735,6 +735,7 @@ icons_intent () {
 
 themes_intent () {
 
+	CONTAINER_ROOT="${PREFIX}"/cnt/debian/12
 
 	# select themes
 
