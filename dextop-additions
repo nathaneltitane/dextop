@@ -118,6 +118,7 @@ frobulator.script "Setting up ${script#*-}"
 # activities
 
 google_chrome="com.android.chrome/com.google.android.apps.chrome.Main"
+google_chrome_beta="com.chrome.beta/com.google.android.apps.chrome.Main"
 google_mail="com.google.android.gm/.GmailActivity"
 terminal="com.termux/com.termux.app.TermuxActivity"
 
