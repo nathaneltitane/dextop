@@ -1223,6 +1223,15 @@ display_stop () {
 
 		frobulator.process "Stopping display viewer"
 
+		if [[ $(pidof virgl_test_server_android) ]]
+		then
+			# x11
+
+			kill -9 $(pidof virgl_test_server_android) > "${sink}" 2>&1 &
+
+			frobulator.process "Stopping display server"
+		fi
+
 	else
 		frobulator.wrn "No active display process detected."
 		echo
