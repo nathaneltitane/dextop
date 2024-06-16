@@ -147,6 +147,7 @@ security_list+=(
 utilities_list+=(
 	apt
 	apt-file
+	blk-utils
 	fakeroot
 	git
 	hub
