@@ -165,6 +165,7 @@ utilities_list+=(
 	p7zip
 	pip
 	rsync
+	tree
 	wget
 )
 

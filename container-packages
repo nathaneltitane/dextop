@@ -132,6 +132,7 @@ utilities_list+=(
 	pip
 	sudo
 	ssh
+	tree
 )
 
 vnc_list+=(
