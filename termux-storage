@@ -309,22 +309,22 @@ then
 
 	directories_intent
 
-	directories_list+=($(ls "${PREFIX}"/media/Home))
-
 	# set IFS
 
 	IFS=$'\n'
 
+	directories_list+=($(ls "${PREFIX}"/media/Home))
+
 	for directory in "${directories_list[@]}"
 	do
-		frobulator.link "${base_directory}" "${HOME}" "${directory}" "${directory}"
+		frobulator.link "${base_directory}" "${HOME}" "${directory}"
 	done
+
+	directories_list=()
 
 	# reset IFS
 
 	IFS=''
-
-	directories_list=()
 
 else
 
