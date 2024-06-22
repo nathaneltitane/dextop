@@ -143,8 +143,8 @@ clean_intent () {
 	fi
 
 	directories_list=(
-	"${PREFIX}"/media
-	"${PREFIX}"/storage
+		"${PREFIX}"/media
+		"${PREFIX}"/storage
 	)
 
 	for directory in ${directories_list[@]}
