@@ -141,6 +141,22 @@ clean_intent () {
 	then
 		frobulator.delete "${HOME}" storage
 	fi
+
+	directories_list=(
+	"${PREFIX}"/media
+	"${PREFIX}"/storage
+	)
+
+	for directory in ${directories_list[@]}
+	do
+		if [ -d "${directory}" ]
+		then
+			for item in "${directory}"/*
+			do
+				frobulator.delete "${item}"
+			done
+		fi
+	done
 }
 
 # verify termux storage directory existence
@@ -177,8 +193,6 @@ else
 
 	frobulator.fwd "Continuing${marker_elp}"
 	echo
-
-	clean_intent
 fi
 
 frobulator.fwd "Setting up storage${marker_elp}"
@@ -186,21 +200,7 @@ echo
 
 # handle storage mount locations
 
-directories_list=(
-	"${PREFIX}"/media
-	"${PREFIX}"/storage
-)
-
-for directory in ${directories_list[@]}
-do
-	if [ -d "${directory}" ]
-	then
-		for item in "${directory}"/*
-		do
-			frobulator.delete "${item}"
-		done
-	fi
-done
+clean_intent
 
 # generate links
 
@@ -329,5 +329,3 @@ else
 
 	directories_intent
 fi
-
-clean_intent
