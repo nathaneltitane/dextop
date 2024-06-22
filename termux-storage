@@ -135,7 +135,7 @@ storage_intent () {
 
 clean_intent () {
 
-	# remove home directory termux 'storage' location
+	# remove existing termux storage references
 
 	if [ -d "${HOME}"/storage ]
 	then
