@@ -311,7 +311,7 @@ then
 
 	for directory in "${base_directory}"
 	do
-		frobulator.link "${PREFIX}"/media/Home "${HOME}" "${directory}" "${directory}"
+		frobulator.link "${base_directory}" "${HOME}" "${directory}" "${directory}"
 	done
 
 else
