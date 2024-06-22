@@ -135,11 +135,6 @@ storage_directories () {
 
 storage_list () {
 
-	directories_list=(
-		"${PREFIX}"/media
-		"${PREFIX}"/storage
-	)
-
 	return
 }
 
@@ -149,6 +144,11 @@ storage_android () {
 
 	frobulator.fwd "Linking${marker_elp}"
 	echo
+
+	directories_list=(
+		"${PREFIX}"/media
+		"${PREFIX}"/storage
+	)
 
 	if [ -d /storage/self/primary ]
 	then
@@ -173,7 +173,10 @@ storage_clean () {
 		frobulator.delete "${HOME}" storage
 	fi
 
-
+	directories_list=(
+		"${PREFIX}"/media
+		"${PREFIX}"/storage
+	)
 
 	for directory in ${directories_list[@]}
 	do
@@ -185,6 +188,8 @@ storage_clean () {
 			done
 		fi
 	done
+
+	directories_list=()
 }
 
 # verify termux storage directory existence
@@ -323,9 +328,9 @@ then
 
 	storage_directories
 
-# 	# set IFS
-#
-# 	IFS=$'\n'
+	# set IFS
+
+	IFS=$'\n'
 
 	directories_list+=($(ls "${PREFIX}"/media/Home))
 
@@ -333,9 +338,9 @@ then
 
 	directories_list=()
 
-# 	# reset IFS
-#
-# 	IFS=''
+	# reset IFS
+
+	IFS=''
 
 else
 
