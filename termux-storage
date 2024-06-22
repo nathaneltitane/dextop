@@ -309,9 +309,9 @@ then
 
 	directories_intent
 
-	# set IFS
-
-	IFS=$'\n'
+# 	# set IFS
+#
+# 	IFS=$'\n'
 
 	directories_list+=($(ls "${PREFIX}"/media/Home))
 
@@ -319,9 +319,9 @@ then
 
 	directories_list=()
 
-	# reset IFS
-
-	IFS=''
+# 	# reset IFS
+#
+# 	IFS=''
 
 else
 
