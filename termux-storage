@@ -133,58 +133,6 @@ storage_directories () {
 	directories_list=()
 }
 
-storage_android () {
-
-	# link primary/internal android storage
-
-	frobulator.fwd "Linking${marker_elp}"
-	echo
-
-	directories_list=(
-		"${PREFIX}"/media
-	)
-
-	if [ -d /storage/self/primary ]
-	then
-		for directory in ${directories_list[@]}
-		do
-			if [ ! -f "${directory}"/internal ]
-			then
-				frobulator.link /storage/self "${directory}" primary Android
-			fi
-		done
-	fi
-
-	directories_list=()
-}
-
-storage_clean () {
-
-	# remove existing termux storage references
-
-	if [ -d "${HOME}"/storage ]
-	then
-		frobulator.delete "${HOME}" storage
-	fi
-
-	directories_list=(
-		"${PREFIX}"/media
-	)
-
-	for directory in ${directories_list[@]}
-	do
-		if [ -d "${directory}" ]
-		then
-			for item in "${directory}"/*
-			do
-				frobulator.delete "${item}"
-			done
-		fi
-	done
-
-	directories_list=()
-}
-
 # verify termux storage directory existence
 
 if [ ! -d "${HOME}"/storage ]
@@ -221,16 +169,58 @@ else
 	echo
 fi
 
+# remove existing termux storage references
+
+if [ -d "${HOME}"/storage ]
+then
+	frobulator.delete "${HOME}" storage
+fi
+
+directories_list=(
+	"${PREFIX}"/media
+)
+
+for directory in ${directories_list[@]}
+do
+	if [ -d "${directory}" ]
+	then
+		for item in "${directory}"/*
+		do
+			frobulator.delete "${item}"
+		done
+	fi
+done
+
+directories_list=()
+
 frobulator.fwd "Setting up storage${marker_elp}"
 echo
 
 # handle storage mount locations
 
-storage_clean
-
 # generate links
 
-storage_android
+# link primary/internal android storage
+
+frobulator.fwd "Linking${marker_elp}"
+echo
+
+directories_list=(
+	"${PREFIX}"/media
+)
+
+if [ -d /storage/self/primary ]
+then
+	for directory in ${directories_list[@]}
+	do
+		if [ ! -f "${directory}"/internal ]
+		then
+			frobulator.link /storage/self "${directory}" primary Android
+		fi
+	done
+fi
+
+directories_list=()
 
 # link external storage
 
