@@ -311,10 +311,18 @@ then
 
 	directories_list+=($(ls "${PREFIX}"/media/Home))
 
+	# set IFS
+
+	IFS=$'\n'
+
 	for directory in "${directories_list[@]}"
 	do
-		frobulator.link "${base_directory}" "${HOME}" "${directory}"
+		frobulator.link "${base_directory}" "${HOME}" "${directory}" "${directory}"
 	done
+
+	# reset IFS
+
+	IFS=''
 
 	directories_list=()
 
