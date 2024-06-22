@@ -603,7 +603,6 @@ directories_intent () {
 		img
 		mnt
 		media
-		storage
 	)
 
 	frobulator.directory "${PREFIX}" ${directories_list[@]}
@@ -623,7 +622,6 @@ directories_intent () {
 		opt
 		tmp
 		media
-		storage
 	)
 
 	for directory in ${directories_list[@]}

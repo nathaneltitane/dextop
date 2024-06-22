@@ -116,7 +116,7 @@ directories_intent () {
 		Videos
 	)
 
-	frobulator.directory "${HOME}" ${directories_list[@]}
+	frobulator.directory "${base_directory}" ${directories_list[@]}
 
 	directories_list=()
 }
@@ -202,13 +202,13 @@ done
 frobulator.fwd "Linking${marker_elp}"
 echo
 
-if [ -d /storage/emulated/0 ]
+if [ -d /storage/self/primary ]
 then
 	for directory in ${directories_list[@]}
 	do
 		if [ ! -f "${directory}"/internal ]
 		then
-			frobulator.link /storage/emulated "${directory}" 0 Android
+			frobulator.link /storage/self "${directory}" primary Android
 		fi
 	done
 fi
@@ -287,3 +287,15 @@ fi
 # reset IFS
 
 IFS=''
+
+if [[ "${option}" = "link" ]]
+then
+	base_directory=/media
+
+	directories_intent
+
+else
+	base_directory="${HOME}"
+
+	directories_intent
+fi
