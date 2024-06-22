@@ -288,13 +288,27 @@ fi
 
 IFS=''
 
+# options
+
 if [[ "${option}" = "link" ]]
 then
-	base_directory=/media
+	# link and unify home directory structure:
+	# use  'Home' .storage label indicator
+
+	if [[ -d "${PREFIX}"/media/Home ]]
+	then
+		base_directory="${PREFIX}/media/Home"
+	fi
 
 	directories_intent
 
+	for directory in "${base_directory}"
+	do
+		frobulator.link "${PREFIX}"/media/Home "${HOME}" "${directory}" "${directory}"
+	done
+
 else
+
 	base_directory="${HOME}"
 
 	directories_intent
