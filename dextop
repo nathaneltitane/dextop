@@ -96,32 +96,32 @@ do
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-c, --console        Setup Console access to environment and utilities only."
+			echo -e "-c, --console       Setup Console access to environment and utilities only."
 			echo
-			echo -e "-e, --environment    Setup desktop environment and utilities."
+			echo -e "-e, --environment   Setup desktop environment and utilities."
 			echo
-			echo -e "                     [ i3 ]"
-			echo -e "                     [ xfce ] [ Default ]"
+			echo -e "                    [ i3 ]"
+			echo -e "                    [ xfce ] [ Default ]"
 			echo
-			echo -e "-t, --termux         Setup Termux environment and utilities only."
+			echo -e "-t, --termux        Setup Termux environment and utilities only."
 			echo
-			echo -e "-n, --container      Setup Container environment and utilities only."
+			echo -e "-n, --container     Setup Container environment and utilities only."
 			echo
-			echo -e "-b, --backup         Backup Termux user configuration files."
+			echo -e "-b, --backup        Backup Termux user configuration files."
 			echo
-			echo -e "-u, --update         Update application packages and utilities."
+			echo -e "-u, --update        Update application packages and utilities."
 			echo
-			echo -e "                     [ all ]"
-			echo -e "                     [ dextop ] [ Default ]"
-			echo -e "                     [ utility ]"
-			echo -e "                     [ additions ]"
-			echo -e "                     [ shell ]"
-			echo -e "                     [ termux ]"
-			echo -e "                     [ preferences ]"
+			echo -e "                    [ all ]"
+			echo -e "                    [ dextop ] [ Default ]"
+			echo -e "                    [ utility ]"
+			echo -e "                    [ additions ]"
+			echo -e "                    [ shell ]"
+			echo -e "                    [ termux ]"
+			echo -e "                    [ preferences ]"
 			echo
-			echo -e "-a, --additions      Setup Termux addons and companion applications."
+			echo -e "-a, --additions     Setup Termux addons and companion applications."
 			echo
-			echo -e "-h, --help           Show help and usage information."
+			echo -e "-h, --help          Show help and usage information."
 			echo
 			echo -e "'${script}' [ Version // ${version} ]"
 			echo
