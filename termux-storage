@@ -297,7 +297,7 @@ then
 
 	if [[ -d "${PREFIX}"/media/Home ]]
 	then
-		base_directory="${PREFIX}/media/Home"
+		base_directory="${PREFIX}"/media/Home
 	fi
 
 	directories_intent
