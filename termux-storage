@@ -309,10 +309,14 @@ then
 
 	directories_intent
 
-	for directory in "${base_directory}"
+	directories_list+=($(ls "${PREFIX}"/media/Home))
+
+	for directory in "${directories_list[@]}"
 	do
-		frobulator.link "${base_directory}" "${HOME}" "${directory}" "${directory}"
+		frobulator.link "${base_directory}" "${HOME}" "${directory}"
 	done
+
+	directories_list=()
 
 else
 
