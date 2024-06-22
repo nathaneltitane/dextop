@@ -193,12 +193,10 @@ done
 
 directories_list=()
 
+# generate links
+
 frobulator.fwd "Setting up storage${marker_elp}"
 echo
-
-# handle storage mount locations
-
-# generate links
 
 # link primary/internal android storage
 
@@ -213,10 +211,7 @@ if [ -d /storage/self/primary ]
 then
 	for directory in ${directories_list[@]}
 	do
-		if [ ! -f "${directory}"/internal ]
-		then
-			frobulator.link /storage/self "${directory}" primary Android
-		fi
+		frobulator.link /storage/self "${directory}" primary Android
 	done
 fi
 
@@ -274,11 +269,6 @@ then
 			frobulator.link /storage "${PREFIX}"/media "${storage_uuid}" "${storage_label}"
 		fi
 
-		if [ ! -f "${PREFIX}"/media/"${storage_label}" ]
-		then
-			frobulator.link /storage "${PREFIX}"/storage "${storage_uuid}" "${storage_label}"
-		fi
-
 	done
 
 else
@@ -290,6 +280,8 @@ else
 	frobulator.fwd "Continuing${marker_elp}"
 	echo
 fi
+
+commands_list=()
 
 # reset IFS
 
@@ -313,11 +305,20 @@ then
 
 	IFS=$'\n'
 
-	directories_list+=($(ls "${PREFIX}"/media/Home))
+	commands_list=(
+		$(ls "${PREFIX}"/media/Home)
+	)
 
-	frobulator.link "${base_directory}" "${HOME}" ${directories_list[@]}
+	for command in ${commands_list[@]}
+	do
+		read -r -a dirlist <<< ${command}
 
-	directories_list=()
+		frobulator.link "${base_directory}" "${HOME}" ${dirlist[@]}
+
+		dirlist=()
+	done
+
+	commands_list=()
 
 	# reset IFS
 
