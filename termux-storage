@@ -329,3 +329,5 @@ else
 
 	directories_intent
 fi
+
+clean_intent
