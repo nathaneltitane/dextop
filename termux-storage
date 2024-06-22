@@ -195,7 +195,7 @@ do
 	fi
 done
 
-# generate symbolic links
+# generate links
 
 # link internal storage
 
