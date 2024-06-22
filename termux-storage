@@ -50,6 +50,26 @@ frobulator.script "Setting up ${script#*-}"
 
 # functions ////////////////////////////////////////////////////////////////////
 
+directories_intent () {
+
+	# generate home directory structure
+
+	directories_list+=(
+		Desktop
+		Documents
+		Downloads
+		Music
+		Pictures
+		Public
+		Templates
+		Videos
+	)
+
+	frobulator.directory "${HOME}" ${directories_list[@]}
+
+	directories_list=()
+}
+
 storage_intent () {
 
 	unset storage_command
