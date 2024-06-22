@@ -610,23 +610,6 @@ directories_intent () {
 
 	directories_list=()
 
-	# generate home directory structure
-
-	directories_list+=(
-		Desktop
-		Documents
-		Downloads
-		Music
-		Pictures
-		Public
-		Templates
-		Videos
-	)
-
-	frobulator.directory "${HOME}" ${directories_list[@]}
-
-	directories_list=()
-
 	# generate root directory structure
 
 	directories_list+=(
