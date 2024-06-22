@@ -252,7 +252,7 @@ then
 			frobulator.wrn "No storage identifier found" "[ ${storage_uuid} ]"
 			echo
 			
-			frobulator.inf "Using mouts UUID for identification"
+			frobulator.inf "Using mounts UUID for identification"
 			echo
 			
 			frobulator.fwd "Proceeding${marker_elp}"
