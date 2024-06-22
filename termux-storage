@@ -40,6 +40,57 @@ version="05-29-2024"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
+# usage ////////////////////////////////////////////////////////////////////////
+
+while (($#))
+do
+	case "${1}"
+	in
+		-l|--link)
+			option="link"
+		;;
+
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} -c | -e [Environment] | -t | -n | -b | -u [Update Type] [Utility Name] | [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-l, --link    Link and unify storage directories."
+			echo
+			echo -e "-h, --help          Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version // ${version} ]"
+			echo
+
+			exit
+		;;
+
+		"")
+			# handle empty argument:
+			# use default values specified in script
+
+			:
+		;;
+
+		*)
+			echo
+			echo -e "Usage: ${script} -c | -e [Environment] | -t | -n | -b | -u [Update] [Name] | [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+
+		;;
+
+		esac
+
+	shift
+
+done
+
 # prompt ///////////////////////////////////////////////////////////////////////
 
 frobulator.script "Setting up ${script#*-}"
@@ -125,7 +176,7 @@ echo
 
 if [ -d "${HOME}"/storage ]
 then
-    frobulator.delete "${HOME}" storage
+	frobulator.delete "${HOME}" storage
 fi
 
 directories_list=(
