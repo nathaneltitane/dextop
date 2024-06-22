@@ -143,6 +143,27 @@ storage_list () {
 	return
 }
 
+storage_android () {
+
+	# link primary/internal android storage
+
+	frobulator.fwd "Linking${marker_elp}"
+	echo
+
+	if [ -d /storage/self/primary ]
+	then
+		for directory in ${directories_list[@]}
+		do
+			if [ ! -f "${directory}"/internal ]
+			then
+				frobulator.link /storage/self "${directory}" primary Android
+			fi
+		done
+	fi
+
+	directories_list=()
+}
+
 storage_clean () {
 
 	# remove existing termux storage references
@@ -211,23 +232,9 @@ storage_clean
 
 # generate links
 
-# link internal storage
+storage_directories
 
-frobulator.fwd "Linking${marker_elp}"
-echo
-
-if [ -d /storage/self/primary ]
-then
-	for directory in ${directories_list[@]}
-	do
-		if [ ! -f "${directory}"/internal ]
-		then
-			frobulator.link /storage/self "${directory}" primary Android
-		fi
-	done
-fi
-
-directories_list=()
+storage_android
 
 # link external storage
 
