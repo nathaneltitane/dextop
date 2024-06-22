@@ -133,6 +133,16 @@ storage_intent () {
 	frobulator.silence "${storage_command}"
 }
 
+clean_intent () {
+
+	# remove home directory termux 'storage' location
+
+	if [ -d "${HOME}"/storage ]
+	then
+		frobulator.delete "${HOME}" storage
+	fi
+}
+
 # verify termux storage directory existence
 
 if [ ! -d "${HOME}"/storage ]
@@ -167,17 +177,14 @@ else
 
 	frobulator.fwd "Continuing${marker_elp}"
 	echo
+
+	clean_intent
 fi
 
 frobulator.fwd "Setting up storage${marker_elp}"
 echo
 
 # handle storage mount locations
-
-if [ -d "${HOME}"/storage ]
-then
-	frobulator.delete "${HOME}" storage
-fi
 
 directories_list=(
 	"${PREFIX}"/media
