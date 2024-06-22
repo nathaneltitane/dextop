@@ -133,11 +133,6 @@ storage_directories () {
 	directories_list=()
 }
 
-storage_list () {
-
-	return
-}
-
 storage_android () {
 
 	# link primary/internal android storage
@@ -147,7 +142,6 @@ storage_android () {
 
 	directories_list=(
 		"${PREFIX}"/media
-		"${PREFIX}"/storage
 	)
 
 	if [ -d /storage/self/primary ]
@@ -175,7 +169,6 @@ storage_clean () {
 
 	directories_list=(
 		"${PREFIX}"/media
-		"${PREFIX}"/storage
 	)
 
 	for directory in ${directories_list[@]}
@@ -236,8 +229,6 @@ echo
 storage_clean
 
 # generate links
-
-storage_directories
 
 storage_android
 
