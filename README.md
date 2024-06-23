@@ -215,7 +215,9 @@ If not present, the utility will simply default to linking and making those moun
 
 Note:
 
-Chrome OS absed system users running Android containers (ARC) will want to add a ```.storage```` file containing 'Home' under their 'My files' directory. This will ensure that the unified storage access option for 'termux-storage' properly locates, populates and links all standard directories through the various container instances present on the device.
+Chrome OS absed system users running Android containers (ARC) will want to add a ```.storage```` file containing 'Home' under their 'My files' directory. This will ensure that the 'termux-storage' link argument properly locates, populates and links all standard directories through the various container instances present on the device.
+
+Effectively, the base ```${HOME}``` location is now shared accross all containers as a single, unified directory.
 
 ### Interface:
 
