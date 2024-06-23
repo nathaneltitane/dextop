@@ -117,7 +117,7 @@ do
 			echo
 			echo -e "-l, --link          Link and unify storage directories."
 			echo
-			echo -e "-i, --initialize    Link and unify storage directories."
+			echo -e "-i, --initialize    Initialize setup routines in case of corruption."
 			echo
 			echo -e "-b, --backup        Backup Termux user configuration files."
 			echo
