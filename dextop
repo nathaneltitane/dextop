@@ -60,6 +60,14 @@ do
 			option="container"
 		;;
 
+		-l|--link)
+			option="link"
+		;;
+
+		-i|--initialize)
+			option="initialize"
+		;;
+
 		-b|--backup)
 			option="backup"
 		;;
@@ -108,6 +116,8 @@ do
 			echo -e "-n, --container     Setup Container environment and utilities only."
 			echo
 			echo -e "-l, --link          Link and unify storage directories."
+			echo
+			echo -e "-i, --initialize    Link and unify storage directories."
 			echo
 			echo -e "-b, --backup        Backup Termux user configuration files."
 			echo
@@ -883,6 +893,21 @@ then
 	exit
 fi
 
+if [ "${option}" = "initialize" ]
+then
+	preferences_intent
+
+	addons_intent
+
+	utility_intent
+
+	shell_intent
+
+	frobulator.cpt "Complete" "[ Initialize // Dextop ]"
+	echo
+
+	exit
+fi
 # setup ////////////////////////////////////////////////////////////////////////
 
 if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
