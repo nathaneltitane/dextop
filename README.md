@@ -196,7 +196,9 @@ Music, mail, web browsing and gaming activities should preferably be taken care 
 
 ### Storage:
 
-Dextop sets up the internal (and external, when available) storage media for flexible, system-wide access. Storage detection is done through /proc/mounts by parsing the /storage directory's entries. Those entries, when present, are filtered agains a regular expression to identify additional external storage media such as SD cards, eternal drives or specific UUID mount patterns such as the ones delivered by Chrome OS based systems (i.e.: FydeOS).
+Dextop sets up the internal (and external, when available) storage media for flexible, system-wide access.
+
+Storage detection is done through /proc/mounts by parsing the /storage directory's entries. Those entries, when present, are filtered against a regular expression to identify additional external storage media such as SD cards, eternal drives or specific UUID mount patterns such as the ones delivered by Chrome OS based systems (i.e.: FydeOS).
 
 The utility in charge of mounting and linking these entries for your convenience will first look for a ```.storage``` file at the root of each of those mounted paths: ***it is highly recommended, before starting the setup, to create those files and to append whatever sensible or recognizable label intended for those mounts.***
 
@@ -204,12 +206,16 @@ The utility in charge of mounting and linking these entries for your convenience
 
 Example:
 
-/storage/emulated/0 is the default location for tha Android internal user memory (also known as the 'user data' and/or 'user home' location).
-Appending 'internal' to a .storage file for that directory via ```echo internal > /storage/emulated/0/.storage``` will then result in having accessible mounts linked under ```${PREFIX}/storage``` and ```${PREFIX}/media``` as ```internal -> /storage/emulated/0```
+/storage/self/primary is the default location for tha Android internal user memory (also known as the 'user data' and/or 'user home' location).
+Appending 'internal' to a .storage file for that directory via ```echo internal > /storage/self/primary/.storage``` will then result in having accessible mounts linked under ```${PREFIX}/media``` as ```internal -> /storage/self/primary```
 
 [![dextop-storage](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop-storage.png)](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop-storage.png)
 
-If not present, the utility will simply default to linking and making those mounts acessible under ```${PREFIX}/storage``` and ```${PREFIX}/media``` through their respective labels or default UUIDs.
+If not present, the utility will simply default to linking and making those mounts acessible under ```${PREFIX}/media``` through their respective labels or default UUIDs.
+
+Note:
+
+Chrome OS absed system  users will want to run add a ```.storage````file containing 'Home' under their 'My files' directory. This will ensure that the unified storage access option for 'termux-storage' properly locates, populates and links all standard directories through the various containers or systems present on the device.
 
 ### Interface:
 
