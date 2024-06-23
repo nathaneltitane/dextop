@@ -182,7 +182,7 @@ Setup currently defaults to XFCE (being the only complete and functional environ
 
 **By default, XFCE compositing is (and should remain) disabled with XFCE to optimize resource usage and prevent display tearing and other glitches.**
 
-In general, and for other kinds of setup, turning compositing off allows for the best possible performance and experience in accordance to current Android system and security limitations.
+In general, and for other types of setup, turning compositing off allows for the best possible performance and experience in accordance to current Android system and security limitations.
 
 Such requirement is due to the Android user space runtime policy and limited hardware access: there is no graphics hardware acceleration available - the container graphics are emulated and run using LLVM.
 
@@ -215,7 +215,7 @@ If not present, the utility will simply default to linking and making those moun
 
 Note:
 
-Chrome OS absed system  users will want to run add a ```.storage````file containing 'Home' under their 'My files' directory. This will ensure that the unified storage access option for 'termux-storage' properly locates, populates and links all standard directories through the various containers or systems present on the device.
+Chrome OS absed system users running Android containers (ARC) will want to add a ```.storage```` file containing 'Home' under their 'My files' directory. This will ensure that the unified storage access option for 'termux-storage' properly locates, populates and links all standard directories through the various container instances present on the device.
 
 ### Interface:
 
