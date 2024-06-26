@@ -326,5 +326,5 @@ else
 
 	base_directory="${HOME}"
 
-	storage_directories
+	storage_directorie
 fi
