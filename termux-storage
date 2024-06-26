@@ -167,13 +167,6 @@ else
 	echo
 fi
 
-# remove existing termux storage references
-
-if [ -d "${HOME}"/storage ]
-then
-	frobulator.delete "${HOME}" storage
-fi
-
 directories_list=(
 	"${PREFIX}"/media
 )
@@ -294,7 +287,7 @@ then
 
 	if [ -d "${PREFIX}"/media/[hH][oO][mM][eE] ]
 	then
-		base_directory=( $(find "${PREFIX}"/media -type d -iname [hH][oO][mM][eE]) )
+		base_directory=("${PREFIX}"/media/[hH][oO][mM][eE])
 	fi
 
 	storage_directories
@@ -307,9 +300,26 @@ then
 		$(ls "${base_directory}")
 	)
 
+
 	for command in ${commands_list[@]}
 	do
 		read -r -a directories_list <<< ${command}
+
+		# home:
+		# directory exists
+
+		if [[ -d "${HOME}"/"${command}" ]]
+		then
+			frobulator.delete "${HOME}" "${command}"
+		fi
+
+		# home:
+		# directory is a symlink
+
+		if [[ -L "${HOME}"/"${command}" ]]
+		then
+			break
+		fi
 
 		frobulator.link "${base_directory}" "${HOME}" ${directories_list[@]}
 
@@ -327,4 +337,11 @@ else
 	base_directory="${HOME}"
 
 	storage_directories
+fi
+
+# remove existing termux storage references
+
+if [ -d "${HOME}"/storage ]
+then
+	frobulator.delete "${HOME}" storage
 fi
