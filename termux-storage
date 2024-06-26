@@ -292,9 +292,9 @@ then
 	# link and unify home directory structure:
 	# use  'Home' .storage label indicator
 
-	if [[ -d "${PREFIX}"/media/Home ]]
+	if [ -d "${PREFIX}"/media/[hH][oO][mM][eE] ]
 	then
-		base_directory="${PREFIX}"/media/Home
+		base_directory=( $(find "${PREFIX}"/media -type d -iname [hH][oO][mM][eE]) )
 	fi
 
 	storage_directories
@@ -309,11 +309,11 @@ then
 
 	for command in ${commands_list[@]}
 	do
-		read -r -a dirlist <<< ${command}
+		read -r -a directories_list <<< ${command}
 
-		frobulator.link "${base_directory}" "${HOME}" ${dirlist[@]}
+		frobulator.link "${base_directory}" "${HOME}" ${directories_list[@]}
 
-		dirlist=()
+		directories_list=()
 	done
 
 	commands_list=()
