@@ -336,5 +336,8 @@ fi
 
 if [ -d "${HOME}"/storage ]
 then
+	frobulator.fwd "Cleaning up${marker_elp}"
+	echo
+
 	frobulator.delete "${HOME}" storage
 fi
