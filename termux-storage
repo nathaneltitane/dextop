@@ -296,30 +296,30 @@ then
 
 	IFS=$'\n'
 
-	commands_list=(
+	directories_list=(
 		$(ls "${base_directory}")
 	)
 
-	for command in ${commands_list[@]}
+	for directory in ${directories_list[@]}
 	do
-		read -r -a directories_list <<< ${command}
+		read -r -a links_list <<< ${directory}
 
-		if [[ -d "${HOME}"/"${command}" ]]
+		if [[ -d "${HOME}"/"${directory}" ]]
 		then
-			frobulator.delete "${HOME}" "${command}"
+			frobulator.delete "${HOME}" "${directory}"
 		fi
 
-		if [[ -L "${HOME}"/"${command}" ]]
+		if [[ -L "${HOME}"/"${directory}" ]]
 		then
 			break
 		fi
 
-		frobulator.link "${base_directory}" "${HOME}" ${directories_list[@]}
+		frobulator.link "${base_directory}" "${HOME}" ${links_list[@]}
 
-		directories_list=()
+		links_list=()
 	done
 
-	commands_list=()
+	directories_list=()
 
 	# reset IFS
 
