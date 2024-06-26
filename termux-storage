@@ -305,16 +305,10 @@ then
 	do
 		read -r -a directories_list <<< ${command}
 
-		# home:
-		# directory exists
-
 		if [[ -d "${HOME}"/"${command}" ]]
 		then
 			frobulator.delete "${HOME}" "${command}"
 		fi
-
-		# home:
-		# directory is a symlink
 
 		if [[ -L "${HOME}"/"${command}" ]]
 		then
