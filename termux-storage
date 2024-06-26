@@ -304,7 +304,7 @@ then
 	IFS=$'\n'
 
 	commands_list=(
-		$(ls "${PREFIX}"/media/Home)
+		$(ls "${base_directory}")
 	)
 
 	for command in ${commands_list[@]}
