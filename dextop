@@ -895,6 +895,7 @@ fi
 
 if [ "${option}" = "initialize" ]
 then
+
 	preferences_intent
 
 	addons_intent

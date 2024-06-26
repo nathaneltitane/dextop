@@ -40,6 +40,12 @@ All utilities created for, loaded, and used by Dextop contain a help argument: p
   - Prepare ↴
     - Have [Termux](https://github.com/termux/termux-app/releases) APK + [Termux:X11](https://github.com/termux/termux-x11/releases) APK installed on your Android device - [Termux:API](https://github.com/termux/termux-api/releases) APK is optional but recommended.
 
+  - Unified home directory ↴
+    - Identify directory or any other storage location for home usage - 'cd' into directory - paste or type:
+    ```
+    echo 'Home' > .storage
+    ```
+
   - Install ↴
     - Launch Dextop setup - paste or type:
     ```
