@@ -300,7 +300,6 @@ then
 		$(ls "${base_directory}")
 	)
 
-
 	for command in ${commands_list[@]}
 	do
 		read -r -a directories_list <<< ${command}
