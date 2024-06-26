@@ -216,7 +216,7 @@ xfce_addons_list+=(
 	xfce4-xkb-plugin
 )
 
-# environment #
+# environment //////////////////////////////////////////////////////////////////
 
 # console
 
