@@ -75,7 +75,7 @@ frobulator.update
 
 frobulator.upgrade
 
-# values #
+# values ///////////////////////////////////////////////////////////////////////
 
 display_list+=(
 	x11-apps

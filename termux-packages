@@ -77,7 +77,7 @@ frobulator.update
 
 frobulator.upgrade
 
-# values #
+# values ///////////////////////////////////////////////////////////////////////
 
 display_list+=(
 	virglrenderer
@@ -228,7 +228,7 @@ xfce_addons_list+=(
 	xfce4-whiskermenu-plugin
 )
 
-# environment #
+# environment //////////////////////////////////////////////////////////////////
 
 # console
 
