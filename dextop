@@ -732,7 +732,7 @@ themes_intent () {
 
 	# select themes
 
-	files_list+=(
+	themes_list+=(
 		Arc
 		Arc-Dark
 		Arc-Darker
@@ -743,7 +743,7 @@ themes_intent () {
 
 	frobulator.keep "${CONTAINER_ROOT}"/usr/share/themes ${files_list[@]}
 
-	files_list=()
+	themes_list=()
 
 	# link theme directories
 
