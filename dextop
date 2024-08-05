@@ -1035,12 +1035,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-termux-storage-checkpoint ]
 	then
-		if [[ "${option}" = "link" ]]
-		then
-			"${HOME}"/.local/bin/termux-storage -l
-		else
-			"${HOME}"/.local/bin/termux-storage
-		fi
+		"${HOME}"/.local/bin/termux-storage
 
 		frobulator.file "${HOME}"/.dextop dextop-termux-storage-checkpoint
 	fi
