@@ -8,6 +8,10 @@
 
 ### NOTICE
 
+  08-06-2024 ↴
+
+- Temporary fix for missing flags and installation pointers (frobulator issue)
+
   06-22-2024 ↴
 
 - added unified storage options for 'termux-storage' and dextop setup
