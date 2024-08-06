@@ -8,15 +8,15 @@
 
 ### NOTICE
 
-  08-06-2024 ↴
+08-06-2024 ↴
 
 - Temporary fix for missing flags and installation pointers (frobulator issue)
 
-  06-22-2024 ↴
+06-22-2024 ↴
 
 - added unified storage options for 'termux-storage' and dextop setup
 
-  05-29-2024 ↴
+05-29-2024 ↴
 
 - Added GPU hardware acceleration to X11 display defaults (VirGL Renderer)
 - Refactored failsafe routines and cleaned up redundancies
