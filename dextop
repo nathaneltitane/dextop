@@ -717,7 +717,7 @@ icons_intent () {
 
 	# keep icon theme selections
 
-	frobulator.keep "${PREFIX}"/share/icons ${icons_list[@]}
+	# frobulator.keep "${PREFIX}"/share/icons ${icons_list[@]}
 
 	icons_list=()
 
@@ -741,7 +741,7 @@ themes_intent () {
 
 	# keep theme selections
 
-	frobulator.keep "${CONTAINER_ROOT}"/usr/share/themes ${themes_list[@]}
+	# frobulator.keep "${CONTAINER_ROOT}"/usr/share/themes ${themes_list[@]}
 
 	themes_list=()
 
