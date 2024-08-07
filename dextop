@@ -728,6 +728,8 @@ icons_intent () {
 
 themes_intent () {
 
+	CONTAINER_ROOT="${PREFIX}"/cnt/debian/12
+
 	# link theme directories
 
 	frobulator.link "${CONTAINER_ROOT}"/usr/share "${HOME}" themes .themes
