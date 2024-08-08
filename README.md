@@ -8,6 +8,10 @@
 
 ### NOTICE
 
+08-07-2024 ↴
+
+- Missing templates and installation pointers fixed (frobulator.keep fix + dextop setup functions ordering change)
+
 08-06-2024 ↴
 
 - Temporary fix for missing flags and installation pointers (frobulator issue)
