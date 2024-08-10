@@ -1,0 +1,1478 @@
+#!/bin/bash
+
+# dependencies /////////////////////////////////////////////////////////////////
+
+if [[ -z $(command -v frobulator) ]]
+then
+	if [[ $(id -u -n) = "root" ]]
+	then
+		SUDO_HOME=/root
+
+		USER="${SUDO_USER}"
+
+		HOME=/home/"${USER}"
+	fi
+
+	if [[ -z $(command -v curl) ]]
+	then
+		yes | apt-get install curl
+	fi
+
+	if [ ! -d "${HOME}"/.local/bin ]
+	then
+		mkdir -p "${HOME}"/.local/bin
+	fi
+
+	curl -s -L get.frbltr.app > "${HOME}"/.local/bin/frobulator
+
+	chmod +x "${HOME}"/.local/bin/frobulator
+fi
+
+. "${HOME}"/.local/bin/frobulator
+
+# script ///////////////////////////////////////////////////////////////////////
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version //////////////////////////////////////////////////////////////////////
+
+version="05-29-2024"
+
+# usage ////////////////////////////////////////////////////////////////////////
+
+while (($#))
+do
+	case "${1}"
+	in
+		-o|--start)
+			option="start"
+			display="${2}"
+
+			shift
+		;;
+
+		-x|--stop)
+			option="stop"
+			display="${2}"
+
+			shift
+		;;
+
+		-p|--password)
+			option="password"
+		;;
+
+		-c|--clean)
+			option="clean"
+		;;
+
+		-n|--new)
+			option="new"
+		;;
+
+		-v|--view)
+			option="view"
+		;;
+
+		-a|--application)
+			option="application"
+			application="${2}"
+
+			shift
+		;;
+
+		-u|--username)
+			option="username"
+			user_name="${2}"
+
+			shift
+		;;
+
+		-r|--root)
+			option="root"
+			root_filesystem="${2}"
+
+			shift
+		;;
+
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} -o [Display Server] | -u [User Name] | -a [Application] | -n [Selection] | [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-o, --start          Start display session server."
+			echo -e "                     [ vnc ]"
+			echo -e "                     [ x11 ] [ Default ]"
+			echo
+			echo -e "-x, --stop           Stop display session server."
+			echo -e "-p, --password       Generate display session password."
+			echo
+			echo -e "-c, --clean          Clean display session geometry selection."
+			echo -e "-n, --new            Generate new display session geometry selection."
+			echo -e "-v, --view           Reload display viewer application window."
+			echo
+			echo -e "-a, --application    Specify application to start on session login."
+			echo
+			echo -e "-u, --username       Specify user name for session login."
+			echo
+			echo -e "-r, --root           Specify root filesystem directory."
+			echo
+			echo -e "-h, --help           Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version // ${version} ]"
+			echo
+
+			exit
+		;;
+
+			"")
+				# handle empty argument:
+				# use default values specified in script
+
+				:
+			;;
+
+		*)
+			echo
+			echo -e "Usage: ${script} -o [Display Server] | -u [User Name] | -a [Application] | -n [Selection] | [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+		;;
+
+	esac
+
+	shift
+done
+
+# prompt ///////////////////////////////////////////////////////////////////////
+
+frobulator.script "Setting up ${script#*-}"
+
+# variables ////////////////////////////////////////////////////////////////////
+
+# reference session viewer activity calls for known android applications:
+
+# FreebVNC:      com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity
+# RealVNC:       com.realvnc.viewer.android/.app.DesktopActivity
+# Remotix:       com.nulana.android.remotix/.Viewer
+
+# Termux:x11:    com.termux.x11/.MainActivity
+
+free_vnc_activity="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
+real_vnc_activity="com.realvnc.viewer.android/.app.DesktopActivity"
+remotix_vnc_activity="com.nulana.android.remotix/.Viewer"
+
+termux_x11_activity="com.termux.x11/.MainActivity"
+termux_x11_activity_stop="com.termux.x11.ACTION_STOP"
+
+# defaults /////////////////////////////////////////////////////////////////////
+
+if [ -z "${display}" ]
+then
+	display="x11"
+fi
+
+if [ -z "${environment}" ]
+then
+	environement="$(cat ${HOME}/.dextop/dextop-environment)"
+fi
+
+if [ -z "${session}" ]
+then
+	session="$(cat ${HOME}/.dextop/dextop-session)"
+fi
+
+if [ -z "${LOCALHOST}" ]
+then
+	LOCALHOST="127.0.0.1"
+fi
+
+if [ -z "${ADDRESS}" ]
+then
+	ADDRESS="${LOCALHOST}"
+fi
+
+if [ -z "${PORT}" ]
+then
+	PORT="590${DISPLAY_NUMBER}"
+fi
+
+if [ -z "${COLORTERM}" ]
+then
+	COLORTERM="truecolor"
+fi
+
+if [ -z "${LANG}" ]
+then
+	LANG="C.UTF-8"
+fi
+
+if [ -z "${SHELL}" ]
+then
+	SHELL="/bin/bash"
+fi
+
+if [ -z "${DISPLAY}" ]
+then
+	DISPLAY=":0"
+fi
+
+if [ -z "${DISPLAY_NUMBER}" ]
+then
+	DISPLAY_NUMBER="${DISPLAY/:/}"
+fi
+
+if [ -z "${DISPLAY_DRIVER}" ]
+then
+	DISPLAY_DRIVER="virpipe"
+fi
+
+if [ -z "${GALLIUM_DRIVER}" ]
+then
+	GALLIUM_DRIVER="${DISPLAY_DRIVER}"
+fi
+
+if [ -f /etc/os-release ]
+then
+	. /etc/os-release
+
+	name="${NAME}"
+fi
+
+# exports //////////////////////////////////////////////////////////////////////
+
+export DISPLAY="${DISPLAY}"
+
+export GALLIUM_DRIVER="${DISPLAY_DRIVER}"
+
+# functions ////////////////////////////////////////////////////////////////////
+
+container_root () {
+
+	# set container root directory
+
+	CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
+
+	# single container
+
+	if [[ ${#CONTAINER_ROOT[@]} -eq 1 ]]
+	then
+		CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
+	fi
+
+	# multiple containers:
+	# parse container directories
+
+	if [[ ${#CONTAINER_ROOT[@]} -ge 2 ]]
+	then
+		for distribution in "${PREFIX}"/cnt/*
+		do
+			for version in "${distribution}"/*
+			do
+				distribution_name=$(basename $distribution)
+
+				distribution_version=$(basename $version)
+
+				containers+=($distribution_name $distribution_version)
+			done
+		done
+
+		# set padding for uniform output
+
+		pad_length=10
+
+		# continue list using array selection of suppported values
+
+		for (( i=0 ; i<${#containers[@]} ; i+=2 ))
+		do
+			name="${containers[$i]}"
+			version="${containers[$i+1]}"
+			container="${name} ${version}"
+
+			number=$((($i/2) + 1))
+
+			if (( $i/2 >= 0 && $i/2 <= 8 ))
+			then
+				# handle number spacing for entries 1-9
+
+				printf '      [  %s ] %s ' ${number} ${name}
+			else
+				# handle number spacing for entries 10+
+
+				printf '      [ %s ] %s ' ${number} ${name}
+			fi
+
+			printf '%*s' $((pad_length - ${#name}))
+			printf '%s\n' ${version}
+		done
+
+		printf '\n'
+
+		container_handle
+	fi
+}
+
+container_handle () {
+
+	# values #
+
+	values_list=(
+		selection
+	)
+
+	# handle user input for values_list
+
+	frobulator_return=()
+
+	if [ -f "${HOME}"/.dextop/selection ]
+	then
+		selection=$(cat "${HOME}"/.dextop/selection)
+	else
+		frobulator.input ${values_list[@]}
+	fi
+
+	eval ${frobulator_return[@]}
+
+	# check selection input against selection list
+
+	while true
+	do
+		# range check:
+		# selection input must be in provided range and an integer
+
+		if [[ "${selection}" -lt 1           ]] || \
+		   [[ "${selection}" -gt "${number}" ]] || \
+		   [[ ! "${selection}" =~ ^[0-9]+$   ]]
+		then
+			echo
+			frobulator.err "Invalid selection:"
+			echo
+
+			frobulator.wrn "Select container [ 1 - ${number} ]"
+			echo
+
+			frobulator.ipt "Selection:"
+
+			frobulator.read selection
+		else
+			break
+		fi
+	done
+
+	distribution_name="${name}"
+	distribution_version="${version}"
+
+	CONTAINER_ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
+}
+
+container_input () {
+
+	if [ -d "${root_filesystem}" ]
+	then
+		CONTAINER_ROOT="${root_filesystem}"
+
+		frobulator.scs "Container location found."
+		echo
+
+		frobulator.inf "Loading" "[ ${CONTAINER_ROOT} ]"
+		echo
+	else
+		frobulator.err "Container location not found."
+		echo
+
+		frobulator.ipt "Select one of the following containers:"
+		echo
+
+		container_handle
+	fi
+}
+
+container_environment () {
+
+	# generate container environement
+
+	# set path:
+	# in order of retreival
+
+	CONTAINER_PATH=""
+
+	# container
+
+	[ -d "${CONTAINER_ROOT}"/usr/local/sbin ] && CONTAINER_PATH+="/usr/local/sbin:"
+	[ -d "${CONTAINER_ROOT}"/usr/local/bin ]  && CONTAINER_PATH+="/usr/local/bin:"
+	[ -d "${CONTAINER_ROOT}"/usr/sbin ]       && CONTAINER_PATH+="/usr/sbin:"
+	[ -d "${CONTAINER_ROOT}"/usr/sbin ]       && CONTAINER_PATH+="/usr/bin:"
+	[ -d "${CONTAINER_ROOT}"/sbin ]           && CONTAINER_PATH+="/sbin:"
+	[ -d "${CONTAINER_ROOT}"/bin ]            && CONTAINER_PATH+="/bin:"
+
+	# termux
+
+	[ -d "${HOME}"/.local/bin ]               && CONTAINER_PATH+="${HOME}/.local/bin:"
+
+	[ -d "${PREFIX}"/sbin ]                   && CONTAINER_PATH+="${PREFIX}/sbin:"
+	[ -d "${PREFIX}"/bin ]                    && CONTAINER_PATH+="${PREFIX}/bin:"
+
+	# android
+
+	[ -d /system/sbin ]                       && CONTAINER_PATH+="/system/sbin:"
+	[ -d /system/bin ]                        && CONTAINER_PATH+="/system/bin:"
+
+	CONTAINER_PATH="${CONTAINER_PATH}"
+
+	return
+}
+
+container_user () {
+
+	# authentication
+
+	frobulator.fwd "Authenticating${marker_elp}"
+	echo
+
+	# verify user existence:
+	# loop through container's /etc/passwd file and make sure 'user' exists
+	# source environment variables when 'user' corresponds to 'username'
+	# default to 'root' if 'username' is invalid, is not specified or does not exist
+
+	last_entry="$(tail -n 1 "${CONTAINER_ROOT}"/etc/passwd)"
+
+	while read -r entry
+	do
+		IFS=':'
+
+		read USER _ USER_ID GROUP_ID GECOS HOME SHELL <<< "${entry}"
+
+		IFS=','
+
+		read FULL_NAME ROOM_NUMBER WORK_PHONE HOME_PHONE USER_EMAIL <<< "${GECOS}"
+
+		# reset IFS
+
+		IFS=' '
+
+		# verify login options and parameters
+
+		# no user name specified
+
+		if [[ -z "${user_name}" ]]
+		then
+			user_name="root"
+
+			USER="root"
+
+			USER_ID="0"
+			GROUP_ID="0"
+
+			UID="${USER_ID}"
+			GID="${GROUP_ID}"
+
+			if [ -d "${CONTAINER_ROOT}"/root ]
+			then
+				HOME="/root"
+			else
+				HOME="/"
+			fi
+
+			frobulator.wrn "No user name - Defaulting" "[ '${user_name}' ]"
+			echo
+
+			break
+		fi
+
+		# valid user name found
+
+		if [[ "${user_name}" == "${USER}" ]]
+		then
+			USER="${user_name}"
+
+			if [[ "${user_name}" == "root" ]]
+			then
+				frobulator.wrn "Valid user name - Superuser" "[ '${user_name}' ]"
+				echo
+			else
+				frobulator.scs "Valid user name - Accessing" "[ '${user_name}' ]"
+				echo
+			fi
+
+			break
+		fi
+
+		# user naem not found
+
+		if [[ "${entry}" == "${last_entry}" ]]
+		then
+
+			frobulator.err "Invalid user name - Aborting" "[ '${user_name}' ]"
+			echo
+
+			exit 1
+		fi
+
+	done < "${CONTAINER_ROOT}"/etc/passwd
+}
+
+container_session () {
+
+	# load session settings
+
+	# assume 'termux-exec' is installed
+
+	unset LD_PRELOAD
+
+	# setup 'proot' command arguments
+
+	unset session_command
+
+	session_command+="proot"
+	session_command+=" --kill-on-exit"
+	session_command+=" --link2symlink"
+	session_command+=" --rootfs=${CONTAINER_ROOT}"
+	session_command+=" --change-id=${USER_ID}:${GROUP_ID}"
+	session_command+=" --pwd=${HOME}"
+
+	# android 10+ requirements
+
+	[ -d "/apex" ]                                && intent_command+=" --bind=/apex:/apex"
+	[ -e "/linkerconfig/ld.config.txt" ]          && intent_command+=" --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt"
+
+	# android requirements
+
+	[ -d "/data" ]                                && session_command+=" --bind=/data:/data"
+	[ -d "/dev" ]                                 && session_command+=" --bind=/dev:/dev"
+	[ -e "/dev/urandom" ]                         && session_command+=" --bind=/dev/urandom:/dev/random"
+	[ -d "/proc" ]                                && session_command+=" --bind=/proc:/proc"
+	[ -d "/proc/self/fd" ]                        && session_command+=" --bind=/proc/self/fd:/dev/fd"
+	[ -e "/proc/self/fd/0" ]                      && session_command+=" --bind=/proc/self/fd/0:/dev/stdin"
+	[ -e "/proc/self/fd/1" ]                      && session_command+=" --bind=/proc/self/fd/1:/dev/stdout"
+	[ -e "/proc/self/fd/2" ]                      && session_command+=" --bind=/proc/self/fd/2:/dev/stderr"
+	[ -d "/storage" ]                             && session_command+=" --bind=/storage:/storage"
+	[ -d "/sys" ]                                 && session_command+=" --bind=/sys:/sys"
+	[ -d "/system" ]                              && session_command+=" --bind=/system:/system"
+	[ -d "/vendor" ]                              && session_command+=" --bind=/vendor:/vendor"
+	[ -d "${PREFIX%/*}"/home ]                    && session_command+=" --bind=${PREFIX%/*}/home:${HOME}"
+	[ -d "${PREFIX}"/storage/external ]           && session_command+=" --bind=${PREFIX}/storage/external:/media/external"
+	[ -d "${PREFIX}"/storage/internal ]           && session_command+=" --bind=${PREFIX}/storage/internal:/media/internal"
+	[ -d "${PREFIX}"/storage/internal/Documents ] && session_command+=" --bind=${PREFIX}/storage/internal/Documents:/home/${USER}/Documents"
+	[ -d "${PREFIX}"/storage/internal/Downloads ] && session_command+=" --bind=${PREFIX}/storage/internal/Downloads:/home/${USER}/Documents"
+	[ -d "${PREFIX}"/storage/internal/Music ]     && session_command+=" --bind=${PREFIX}/storage/internal/Music:/home/${USER}/Music"
+	[ -d "${PREFIX}"/storage/internal/Pictures ]  && session_command+=" --bind=${PREFIX}/storage/internal/Pictures:/home/${USER}/Pictures"
+	[ -d "${PREFIX}"/storage/internal/Public ]    && session_command+=" --bind=${PREFIX}/storage/internal/Public:/home/${USER}/Public"
+	[ -d "${PREFIX}"/storage/internal/Templates ] && session_command+=" --bind=${PREFIX}/storage/internal/Templates:/home/${USER}/Templates"
+	[ -d "${PREFIX}"/storage/internal/Videos ]    && session_command+=" --bind=${PREFIX}/storage/internal/Videos:/home/${USER}/Videos"
+	[ -d "${PREFIX}"/tmp ]                        && session_command+=" --bind=${PREFIX}/tmp:/tmp"
+
+	# environemnt
+
+	session_command+=" env"
+	session_command+=" --ignore-environment"
+	session_command+=" ANDROID_ART_ROOT=${ANDROID_ART_ROOT}"
+	session_command+=" ANDROID_DATA=${ANDROID_DATA}"
+	session_command+=" ANDROID_I18N_ROOT=${ANDROID_I18N_ROOT}"
+	session_command+=" ANDROID_ROOT=${ANDROID_ROOT}"
+	session_command+=" ANDROID_RUNTIME_ROOT=${ANDROID_RUNTIME_ROOT}"
+	session_command+=" ANDROID_TZDATA_ROOT=${ANDROID_TZDATA_ROOT}"
+	session_command+=" BOOTCLASSPATH=${BOOTCLASSPATH}"
+	session_command+=" DEX2OATBOOTCLASSPATH=${DEX2OATBOOTCLASSPATH}"
+
+	# termux
+
+	session_command+=" PREFIX=${PREFIX}"
+
+	# container
+
+	session_command+=" COLORTERM=${COLORTERM}"
+	session_command+=" DISPLAY=${DISPLAY}"
+	session_command+=" DISPLAY_DRIVER=${DISPLAY_DRIVER}"
+	session_command+=" HOME=${HOME}"
+	session_command+=" LANG=${LANG}"
+	session_command+=" LOCALHOST=${LOCALHOST}"
+	session_command+=" PATH=${PATH}"
+	session_command+=" SHELL=${SHELL}"
+	session_command+=" TERM=${TERM}"
+	session_command+=" TMPDIR=${TMPDIR}"
+	session_command+=" USER=${USER}"
+	session_command+=" XDG_RUNTIME_DIR=/run/user/${USER_ID}"
+	session_command+=" XDG_CONFIG_DIRS=/etc/xdg"
+	session_command+=" XDG_CACHE_HOME=${HOME}/.cache"
+	session_command+=" XDG_CONFIG_HOME=${HOME}/.config"
+	session_command+=" XDG_DATA_HOME=${HOME}/.local/share"
+	session_command+=" XDG_STATE_HOME=${HOME}/.local/state"
+	session_command+=" XDG_DATA_DIRS=/usr/local/share:/usr/share"
+	session_command+=" XAUTHORITY=${XDG_RUNTIME_DIR}/Xauthority"
+
+	# command
+
+	session_command+=" ${SHELL}"
+	session_command+=" --login"
+
+	# execute 'proot'
+
+	${session_command}
+}
+
+server_intent () {
+
+	unset load_command
+
+	if [[ "${display}" = [vV][nN][cC] ]]
+	then
+		load_command+="x11vnc"
+		load_command+=" -display ${DISPLAY}"
+		load_command+=" -clip xinerama=${DISPLAY}"
+		load_command+=" -rfbport ${PORT}"
+		load_command+=" -scale 1.00"
+		load_command+=" -xkb"
+		load_command+=" -nocursor"
+		load_command+=" -nocursorshape"
+		load_command+=" -noshm"
+		load_command+=" -noxdamage"
+		load_command+=" -noxfixes"
+		load_command+=" -noxrecord"
+
+		${load_command} > "${sink}" 2>&1 &
+	fi
+
+	if [[ "${display}" = [xX][1][1] ]]
+	then
+
+		unset load_command
+
+		if [[ $(pidof virgl*) ]]
+		then
+			:
+		else
+			load_command+="virgl_test_server_android"
+
+			${load_command} > "${sink}" 2>&1 &
+		fi
+
+		unset load_command
+
+		if [[ $(pidof app_process / com.termux.x11.Loader) ]]
+		then
+			:
+		else
+			load_command+="termux-x11"
+
+			${load_command} > "${sink}" 2>&1 &
+		fi
+	fi
+}
+
+display_clean () {
+
+	if [[ "${display}" = [vV][nN][cC] ]]
+	then
+		if [ -d "${HOME}" ]
+		then
+			rm -r -f "${HOME}"/.ICE*
+			rm -r -f "${HOME}"/.X11*
+			rm -r -f "${HOME}"/.Xauth*
+		fi
+
+		if [ -d "${TMPDIR}" ]
+		then
+			rm -r -f "${TMPDIR}"/.ICE*
+			rm -r -f "${TMPDIR}"/.X11*
+			rm -r -f "${TMPDIR}"/.Xauth*
+		fi
+	fi
+
+	if [[ "${display}" = [xX][1][1] ]]
+	then
+		:
+	fi
+}
+
+display_geometry () {
+
+	frobulator.msg "Select geometry or input [c]ustom properties:"
+	echo
+
+	# list supported display resolutions
+
+	monitors=(
+		VGA		 0640    0480
+		WVGA	 0768    0480
+		SVGA	 0800    0600
+		FWVGA	 0854    0480
+		qHD		 0960    0540
+		DVGA	 0960    0640
+		WSVGA	 1024    0576
+		WSVGA	 1024    0600
+		XGA		 1024    0768
+		XGA+	 1152    0864
+		HD		 1280    0720
+		WXGA	 1366    0768
+		WXGA+	 1440    0900
+		HD+		 1600    0900
+
+		SXGA	 1280    1024
+		SXGA+	 1400    1050
+		UXGA	 1600    1200
+		WSXGA+	 1680    1050
+		FHD		 1920    1080
+		WUXGA	 1920    1200
+		DCI2K	 2048    1080
+		QWXGA	 2048    1152
+		QXGA	 2048    1536
+		UWFHD	 2560    1080
+		QHD		 2560    1440
+		WQXGA	 2560    1600
+		QSXGA	 2560    2048
+		QHD+	 3200    1800
+		WQSXGA	 3200    2048
+		QUXGA	 3200    2400
+		UWQHD	 3440    1440
+		UW4K	 3840    1600
+		4KUHD	 3840    2160
+		WQUXGA	 3840    2400
+		DCI4K	 4096    2160
+		UW5K	 5120    2160
+		5K		 5120    2880
+		8KUHD	 7680    4320
+	)
+
+	phones=(
+		GN6P	 2560    1440
+		GN6		 2560    1440
+		GN5X	 1920    1080
+		GN5		 1920    1080
+		GP5		 2340    1080
+		GP4XL	 3040    1440
+		GP4a	 2340    1080
+		GP4		 2280    1080
+		GP3aXL	 2160    1080
+		GP3a	 2220    1080
+		GP3XL	 2960    1440
+		GP3		 2160    1080
+		GP2XL	 2880    1440
+		GP2		 1920    1080
+		GPXL	 2560    1440
+		GP		 1920    1080
+
+		SGN20+	 3088    1440
+		SGN20	 3200    1440
+		SGN10+	 3040    1440
+		SGN10	 2280    1080
+		SGN9	 2960    1440
+		SGN8	 2960    1440
+		SGN7	 2560    1440
+
+		SGS10+	 3040    1440
+		SGS10	 3040    1440
+		SGS9+	 2960    1440
+		SGS9	 2960    1440
+		SGS8+	 2960    1440
+		SGS8	 2960    1440
+		SGS7E	 2560    1440
+		SGS7	 2560    1440
+		SGS6E+	 2560    1440
+		SGS6E	 2560    1440
+		SGS6	 2560    1440
+	)
+
+	tablets=(
+		GN9	     2048    1536
+		GN7-2013 1920    1200
+		GPC	     2560    1800
+
+		SGTS7+	 2800    1752
+		SGTS7	 2560    1600
+		SGTS6	 2560    1600
+		SGTS5E	 2560    1600
+		)
+
+	devices=(
+		${phones[@]}
+		${tablets[@]}
+	)
+
+	geometries=(
+		${monitors[@]}
+		${devices[@]}
+	)
+
+	# set padding for uniform output
+
+	pad_length=10
+
+	# continue list using array selection of suppported values
+
+	for (( i=0 ; i<${#geometries[@]} ; i+=3 ))
+	do
+		format="${geometries[$i]}"
+		width="${geometries[$i+1]}"
+		height="${geometries[$i+2]}"
+		geometry="${width}x${height}"
+
+		number=$(( ( $i / 3 ) + 1 ))
+
+		if (( $i / 3 >= 0 && $i / 3 <= 8 ))
+		then
+			# handle number spacing for entries 1-9
+
+			printf '      [  %s ] %s' ${number} ${format}
+		else
+			# handle number spacing for entries 10+
+
+			printf '      [ %s ] %s' ${number} ${format}
+		fi
+
+		printf '%*s' $(( pad_length - ${#format} ))
+		printf '%s\n' ${geometry}
+	done
+
+	printf '\n'
+}
+
+display_handle () {
+
+	# values #
+
+	values_list=(
+		selection
+	)
+
+	# handle user input for values_list
+
+	frobulator_return=()
+
+	if [ -f "${HOME}"/.vnc/selection ]
+	then
+		selection=$(cat "${HOME}"/.vnc/selection)
+	else
+		frobulator.input ${values_list[@]}
+	fi
+
+	eval ${frobulator_return[@]}
+
+	# check selection input against selection list
+
+	while true
+	do
+		# range check:
+		# selection input must be in provided range and an integer
+
+		if [[ "${selection}" -lt 1           ]] || \
+		   [[ "${selection}" -gt "${number}" ]] || \
+		   [[ ! "${selection}" =~ ^[0-9]+$   ]]
+		then
+			echo
+			frobulator.err "Invalid selection:"
+			echo
+
+			frobulator.wrn "Select geometry [ 1 - ${number} ] or input [c]ustom properties."
+			echo
+
+			frobulator.ipt "Selection:"
+
+			frobulator.read selection
+		else
+			break
+		fi
+
+		if [[ "${selection}" = [cC] ]]
+		then
+			selection=custom
+
+			break
+		fi
+	done
+
+	unset geometry
+
+	# integer check:
+	# handle numerical selection
+
+	if [[ "${selection}" =~ ^[0-9]+$ ]]
+	then
+		i=$(( ${selection} ))
+		i=$(( $i * 3 ))
+
+		format="${geometries[$i-3]}"
+		width="${geometries[$i-2]}"
+		height="${geometries[$i-1]}"
+		geometry="${width}x${height}"
+	fi
+
+	# handle custom selection
+
+	if [[ "${selection}" = "custom" ]]
+	then
+		frobulator.fwd "Setting custom properties${marker_elp}"
+		echo
+
+		frobulator.ipt "Set width" "[ pixels ]"
+
+		frobulator.read width
+
+		frobulator.ipt "Set height" "[ pixels ]"
+
+		frobulator.read height
+
+		frobulator.ipt "Set display number" "[ e.g. 1 ]"
+
+		frobulator.read display
+
+		format="Custom"
+		geometry="${width}x${height}"
+
+		DISPLAY=":${display}"
+		DISPLAY_NUMBER="${DISPLAY/:/}"
+		PORT="590${DISPLAY_NUMBER}"
+	fi
+}
+
+display_intent () {
+
+	frobulator.fwd "Generating display${marker_elp}"
+	echo
+
+	if [[ "${display}" = [vV][nN][cC] ]]
+	then
+		# explicit VNC viewer application to kill:
+		# used when vnc is stopped or restarted using vnc:// intent
+		# when launched via the activity manager
+		# [ 'am start -d {URI} -S {ACTIVITY}' ]
+
+		# start android vnc intent and force-stop existing activity
+
+		# frobulator.silence "am start
+		#						--user 0
+		#						-a android.intent.action.VIEW
+		#						-d vnc://${ADDRESS}:${PORT}
+		#						-S ${display_activity}"
+
+		unset intent_command
+
+		intent_command+="am start"
+		intent_command+=" --user 0"
+		intent_command+=" -a android.intent.action.VIEW"
+		intent_command+=" -d vnc://${ADDRESS}:${PORT}"
+
+		frobulator.silence "${intent_command}"
+	fi
+
+	if [[ "${display}" = [xX][1][1] ]]
+	then
+		display_activity="${termux_x11_activity}"
+
+		# start termux:x11 intent
+
+		unset intent_command
+
+		intent_command+="am start"
+		intent_command+=" --user 0"
+		intent_command+=" -n ${display_activity}"
+
+		frobulator.silence "${intent_command}"
+	fi
+}
+
+display_view () {
+
+	frobulator.fwd "Opening display${marker_elp}"
+	echo
+
+	if [[ "${display}" = [vV][nN][cC] ]]
+	then
+		display_activity="${remotix_vnc_activity}"
+
+		unset intent_command
+
+		intent_command+="am start"
+		intent_command+=" --user 0"
+		intent_command+=" -a android.intent.action.VIEW"
+		intent_command+=" -d vnc://${ADDRESS}:${PORT}"
+		intent_command+=" -S ${display_activity}"
+
+		frobulator.silence "${intent_command}"
+	fi
+
+	if [[ "${display}" = [xX][1][1] ]]
+	then
+		display_activity="${termux_x11_activity}"
+
+		unset intent_command
+
+		intent_command+="am start"
+		intent_command+=" --user 0"
+		intent_command+=" -n ${display_activity}"
+
+		frobulator.silence "${intent_command}"
+	fi
+}
+
+display_framebuffer () {
+
+	if [[ "${display}" = [vV][nN][cC] ]]
+	then
+		frobulator.fwd "Generating framebuffer${marker_elp}"
+		echo
+
+		unset framebuffer_command
+
+		framebuffer_command+="Xvfb"
+		framebuffer_command+=" -screen ${DISPLAY_NUMBER}"
+		framebuffer_command+=" ${geometry}x24"
+
+		${framebuffer_command} > "${sink}" 2>&1 &
+	fi
+
+	if [[ "${display}" = [xX][1][1] ]]
+	then
+		:
+	fi
+}
+
+display_interface () {
+
+	if [[ $(pidof "${session}") ]]
+	then
+		:
+	else
+		if [[ $(command -v "${session}") ]]
+		then
+			frobulator.silence "${session} &"
+		fi
+	fi
+
+	frobulator.fwd "Loading desktop interface${marker_elp}"
+	echo
+}
+
+display_load () {
+
+	if [[ "${display}" = [vV][nN][cC] ]]
+	then
+		# make selection available for automatic start:
+		# verify user id - do not write selection when 'root' user is logged in
+
+		if [[ $(id -u -n) = "root" ]]
+		then
+			:
+		else
+			# integer check:
+			# do not write non numerical values to file
+
+			if [[ "${selection}" =~ ^[0-9]+$ ]]
+			then
+				if [ ! -d "${HOME}"/.vnc ]
+				then
+					mkdir -p "${HOME}"/.vnc
+				fi
+
+				echo "${selection}" > "${HOME}"/.vnc/selection
+				echo "${format}"    > "${HOME}"/.vnc/format
+				echo "${geometry}"  > "${HOME}"/.vnc/geometry
+			fi
+		fi
+
+		# start vnc display framebuffer
+
+		display_framebuffer
+	fi
+
+	if [[ "${display}" = [xX][1][1] ]]
+	then
+		:
+	fi
+
+	# start display server
+
+	frobulator.fwd "Starting display server${marker_elp}"
+	echo
+
+	server_intent
+
+	# connection to x11vnc is very fast:
+	# wait for process to settle before launching vnc viewer
+
+	sleep 1
+
+	display_intent
+}
+
+display_start () {
+
+	if [[ "${display}" = [vV][nN][cC] ]]
+	then
+		if [[ $(pidof x11vnc) ]]
+		then
+			:
+		else
+			# handle selections display
+
+			if [ -f "${HOME}"/.vnc/selection ]
+			then
+				# hide if selection file is present
+
+				display_geometry > "${sink}" 2>&1
+			else
+				# show if selection file is not present
+
+				display_geometry
+			fi
+
+			# handle vnc selections
+
+			display_handle
+
+		fi
+	fi
+
+	if [[ "${display}" = [xX][1][1] ]]
+	then
+		display_view
+	fi
+
+	# start display session
+
+	display_load
+}
+
+display_new () {
+
+	if [[ "${display}" = [vV][nN][cC] ]]
+	then
+		# handle selections display
+
+		if [ -f "${HOME}"/.vnc/selection ]
+		then
+			# remove if selection file is present
+
+			rm					\
+				--recursive		\
+				--force			\
+								"${HOME}"/.vnc/selection
+		fi
+
+		# show display format selections
+
+		display_geometry
+
+		# handle vnc selections
+
+		display_handle
+	fi
+
+	if [[ "${display}" = [xX][1][1] ]]
+	then
+		:
+	fi
+
+	# start display session
+
+	display_load
+}
+
+display_stop () {
+
+	# look for corresponding server process:
+	# handle and stop display server and clean runtime files
+
+	if [[ $(pidof Xvfb) ]]
+	then
+		# framebuffer
+
+		kill -9 $(pidof Xvfb)  > "${sink}" 2>&1 &
+
+		frobulator.process "Stopping display framebuffer"
+
+	elif [[ $(pidof x11vnc) ]]
+	then
+		# vnc
+
+		x11vnc -R stop > "${sink}" 2>&1 &
+
+		frobulator.process "Stopping display server"
+
+		# clean display server runtime files
+
+		wait
+
+		display_clean
+
+	elif [[ $(pidof app_process / com.termux.x11.Loader) ]]
+	then
+		# x11
+
+		kill -9 $(pidof app_process / com.termux.x11.Loader) > "${sink}" 2>&1 &
+
+		frobulator.process "Stopping display loader"
+
+	elif [[ $(pidof com.termux.x11) ]]
+	then
+		# x11
+
+		display_activity="${termux_x11_activity_stop}"
+
+		unset intent_command
+
+		intent_command+="am broadcast"
+		intent_command+=" --user 0"
+		intent_command+=" -a ${display_activity}"
+
+		frobulator.silence "${intent_command}" &
+
+		frobulator.process "Stopping display viewer"
+
+		if [[ $(pidof virgl_test_server_android) ]]
+		then
+			# x11
+
+			kill -9 $(pidof virgl_test_server_android) > "${sink}" 2>&1 &
+
+			frobulator.process "Stopping display server"
+		fi
+
+	else
+		frobulator.wrn "No active display process detected."
+		echo
+
+		frobulator.fwd "Exiting${marker_elp}"
+		echo
+	fi
+}
+
+display_list () {
+
+	if [[ "${display}" = [vV][nN][cC] ]]
+	then
+		display_server="x11vnc"
+
+		display_format=$(cat "${HOME}"/.vnc/format)
+		display_geometry=$(cat "${HOME}"/.vnc/geometry)
+		display_display=${DISPLAY}
+		display_process=$(pidof $(echo "${display_server}"))
+		display_port="${PORT}"
+	fi
+
+	if [[ "${display}" = [xX][1][1] ]]
+	then
+		display_server="com.termux.x11"
+
+		display_format="native"
+		display_geometry="native"
+		display_display=${DISPLAY}
+		display_process=$(pidof $(echo "${display_server}"))
+		display_port="default"
+	fi
+
+	if [[ $(pidof "${display_server}") ]]
+	then
+		frobulator.fwd "Listing session details${marker_elp}"
+		echo
+
+		display_format="${display_format}"
+		display_geometry="${display_geometry}"
+		display_display="${display_display}"
+		display_process="${display_process}"
+		display_port="${display_port}"
+	else
+		frobulator.wrn "No active servers detected."
+		echo
+
+		empty="N/A"
+
+		display_format="${empty}"
+		display_geometry="${empty}"
+		display_display="${empty}"
+		display_process="${empty}"
+		display_port="${empty}"
+	fi
+
+	frobulator.inf "Format"   "[ ${display_format} ]"
+	frobulator.inf "Geometry" "[ ${display_geometry} ]"
+	frobulator.inf "Display"  "[ ${display_display} ]"
+	frobulator.inf "Process"  "[ ${display_process} ]"
+	frobulator.inf "Port"     "[ ${display_port} ]"
+	echo
+}
+
+display_password () {
+
+	if [[ "${display}" = [vV][nN][cC] ]]
+	then
+		# values #
+
+		values_list=(
+			display_password
+		)
+
+		# handle user input for values_list
+
+		frobulator_return=()
+
+		frobulator.input ${values_list[@]}
+
+		eval ${frobulator_return[@]}
+
+		# hash password  using 'vncpasswd' and store it
+
+		frobulator.fwd "Setting password${marker_elp}"
+		echo
+
+		echo "${display_password}" | vncpasswd -f > "${HOME}"/.vnc/passwd
+
+		frobulator.scs "Password changed."
+		echo
+	fi
+
+	if [[ "${display}" = [xX][1][1] ]]
+	then
+		:
+	fi
+}
+
+application_handle () {
+
+	# handle application launch
+
+	if [[ $(command -v "${application}") ]]
+	then
+		# start display session
+
+		display_start
+
+		# load application
+
+		${application} &
+	else
+		frobulator.err "Application not found" "[ "${application}" ]"
+		echo
+
+		if [[ $(command -v zenity) ]]
+		then
+			zenity			 											\
+				--warning												\
+					--width="200"										\
+					--window-icon="${HOME}/.dextop/dextop.svg"			\
+					--text="Application '${application}' not found." 2> "${sink}" &
+		fi
+	fi
+}
+
+if [ "${option}" = "start" ]
+then
+	# check server type selection
+
+	if [[ "${display}" = [vV][nN][cC] ]] || \
+	   [[ "${display}" = [xX][1][1]   ]]
+	then
+		# start display session
+
+		display_start
+
+		# start interface / desktop environment / desktop session
+
+		display_interface
+
+		# start display viewing application
+
+		display_intent
+
+	else
+		frobulator.err "Unknown display server selection" "[ ${display} ]"
+		echo
+
+		frobulator.wrn "Available display server options" "[ vnc / 'x11' ]"
+		echo
+
+		frobulator.inf "Start session using available server options."
+		echo
+
+		exit 1
+	fi
+fi
+
+if [ "${option}" = "stop" ]
+then
+	# stop display session
+
+	display_stop
+fi
+
+if [ "${option}" = "password" ]
+then
+	# generate password
+
+	display_password
+fi
+
+if [ "${option}" = "clean" ]
+then
+	# remove lock and session handler files
+
+	display_clean
+fi
+
+if [ "${option}" = "new" ]
+then
+	# start vnc session with new selection
+
+	display_new
+fi
+
+if [ "${option}" = "view" ]
+then
+	# reload display viewer application window:
+	# some activity launches can be buggy
+
+	display_view
+fi
+
+if [ "${option}" = "application" ]
+then
+	# validate and start selected application
+
+	application_handle
+fi
+
+if [ "${option}" = "username" ]
+then
+	# validate root filesystem
+
+	container_root
+
+	# set environemnt
+
+	container_environment
+
+	# validate username
+
+	container_user
+
+	# start container session
+
+	container_session
+fi
+
+if [ "${option}" = "root" ]
+then
+	# handle manual container location input
+
+	container_input
+
+	# validate root filesystem
+
+	container_root
+
+	# set environemnt
+
+	container_environment
+
+	# validate username
+
+	container_user
+
+	# start container session
+
+	container_session
+fi
