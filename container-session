@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="08-09-2024"
+version="05-29-2024"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -519,7 +519,7 @@ container_user () {
 container_session () {
 
 	# load session settings
-	
+
 	# assume 'termux-exec' is installed
 
 	unset LD_PRELOAD
@@ -542,37 +542,29 @@ container_session () {
 
 	# android requirements
 
-	[ -d "/data" ]                                   && session_command+=" --bind=/data:/data"
-	[ -d "/dev" ]                                    && session_command+=" --bind=/dev:/dev"
-	[ -e "/dev/urandom" ]                            && session_command+=" --bind=/dev/urandom:/dev/random"
-	[ -d "/proc" ]                                   && session_command+=" --bind=/proc:/proc"
-	[ -d "/proc/self/fd" ]                           && session_command+=" --bind=/proc/self/fd:/dev/fd"
-	[ -e "/proc/self/fd/0" ]                         && session_command+=" --bind=/proc/self/fd/0:/dev/stdin"
-	[ -e "/proc/self/fd/1" ]                         && session_command+=" --bind=/proc/self/fd/1:/dev/stdout"
-	[ -e "/proc/self/fd/2" ]                         && session_command+=" --bind=/proc/self/fd/2:/dev/stderr"
-	[ -d "/storage" ]                                && session_command+=" --bind=/storage:/storage"
-	[ -d "/sys" ]                                    && session_command+=" --bind=/sys:/sys"
-	[ -d "/system" ]                                 && session_command+=" --bind=/system:/system"
-	[ -d "/vendor" ]                                 && session_command+=" --bind=/vendor:/vendor"
-	[ -d "${PREFIX%/*}"/home ]                       && session_command+=" --bind=${PREFIX%/*}/home:${HOME}"
-	[ -d "${PREFIX}"/media/[aA]ndroid ]              && session_command+=" --bind=${PREFIX}/media/android:/media/android"
-	[ -d "${PREFIX}"/media/[aA]ndroid/Documents ]    && session_command+=" --bind=${PREFIX}/media/android/Documents:/home/${USER}/Documents"
-	[ -d "${PREFIX}"/media/[aA]ndroid/Downloads ]    && session_command+=" --bind=${PREFIX}/media/android/Downloads:/home/${USER}/Documents"
-	[ -d "${PREFIX}"/media/[aA]ndroid/Music ]        && session_command+=" --bind=${PREFIX}/media/android/Music:/home/${USER}/Music"
-	[ -d "${PREFIX}"/media/[aA]ndroid/Pictures ]     && session_command+=" --bind=${PREFIX}/media/android/Pictures:/home/${USER}/Pictures"
-	[ -d "${PREFIX}"/media/[aA]ndroid/Public ]       && session_command+=" --bind=${PREFIX}/media/android/Public:/home/${USER}/Public"
-	[ -d "${PREFIX}"/media/[aA]ndroid/Templates ]    && session_command+=" --bind=${PREFIX}/media/android/Templates:/home/${USER}/Templates"
-	[ -d "${PREFIX}"/media/[aA]ndroid/Videos ]       && session_command+=" --bind=${PREFIX}/media/android/Videos:/home/${USER}/Videos"
-	[ -d "${PREFIX}"/media/[eE]xternal ]             && session_command+=" --bind=${PREFIX}/media/external:/media/external"
-	[ -d "${PREFIX}"/media/[iI]nternal ]             && session_command+=" --bind=${PREFIX}/media/internal:/media/internal"
-	[ -d "${PREFIX}"/media/[iI]nternal/Documents ]   && session_command+=" --bind=${PREFIX}/media/internal/Documents:/home/${USER}/Documents"
-	[ -d "${PREFIX}"/media/[iI]nternal/Downloads ]   && session_command+=" --bind=${PREFIX}/media/internal/Downloads:/home/${USER}/Documents"
-	[ -d "${PREFIX}"/media/[iI]nternal/Music ]       && session_command+=" --bind=${PREFIX}/media/internal/Music:/home/${USER}/Music"
-	[ -d "${PREFIX}"/media/[iI]nternal/Pictures ]    && session_command+=" --bind=${PREFIX}/media/internal/Pictures:/home/${USER}/Pictures"
-	[ -d "${PREFIX}"/media/[iI]nternal/Public ]      && session_command+=" --bind=${PREFIX}/media/internal/Public:/home/${USER}/Public"
-	[ -d "${PREFIX}"/media/[iI]nternal/Templates ]   && session_command+=" --bind=${PREFIX}/media/internal/Templates:/home/${USER}/Templates"
-	[ -d "${PREFIX}"/media/[iI]nternal/Videos ]      && session_command+=" --bind=${PREFIX}/media/internal/Videos:/home/${USER}/Videos"
-	[ -d "${PREFIX}"/tmp ]                           && session_command+=" --bind=${PREFIX}/tmp:/tmp"
+	[ -d "/data" ]                                && session_command+=" --bind=/data:/data"
+	[ -d "/dev" ]                                 && session_command+=" --bind=/dev:/dev"
+	[ -e "/dev/urandom" ]                         && session_command+=" --bind=/dev/urandom:/dev/random"
+	[ -d "/proc" ]                                && session_command+=" --bind=/proc:/proc"
+	[ -d "/proc/self/fd" ]                        && session_command+=" --bind=/proc/self/fd:/dev/fd"
+	[ -e "/proc/self/fd/0" ]                      && session_command+=" --bind=/proc/self/fd/0:/dev/stdin"
+	[ -e "/proc/self/fd/1" ]                      && session_command+=" --bind=/proc/self/fd/1:/dev/stdout"
+	[ -e "/proc/self/fd/2" ]                      && session_command+=" --bind=/proc/self/fd/2:/dev/stderr"
+	[ -d "/storage" ]                             && session_command+=" --bind=/storage:/storage"
+	[ -d "/sys" ]                                 && session_command+=" --bind=/sys:/sys"
+	[ -d "/system" ]                              && session_command+=" --bind=/system:/system"
+	[ -d "/vendor" ]                              && session_command+=" --bind=/vendor:/vendor"
+	[ -d "${PREFIX%/*}"/home ]                    && session_command+=" --bind=${PREFIX%/*}/home:${HOME}"
+	[ -d "${PREFIX}"/storage/external ]           && session_command+=" --bind=${PREFIX}/storage/external:/media/external"
+	[ -d "${PREFIX}"/storage/internal ]           && session_command+=" --bind=${PREFIX}/storage/internal:/media/internal"
+	[ -d "${PREFIX}"/storage/internal/Documents ] && session_command+=" --bind=${PREFIX}/storage/internal/Documents:/home/${USER}/Documents"
+	[ -d "${PREFIX}"/storage/internal/Downloads ] && session_command+=" --bind=${PREFIX}/storage/internal/Downloads:/home/${USER}/Documents"
+	[ -d "${PREFIX}"/storage/internal/Music ]     && session_command+=" --bind=${PREFIX}/storage/internal/Music:/home/${USER}/Music"
+	[ -d "${PREFIX}"/storage/internal/Pictures ]  && session_command+=" --bind=${PREFIX}/storage/internal/Pictures:/home/${USER}/Pictures"
+	[ -d "${PREFIX}"/storage/internal/Public ]    && session_command+=" --bind=${PREFIX}/storage/internal/Public:/home/${USER}/Public"
+	[ -d "${PREFIX}"/storage/internal/Templates ] && session_command+=" --bind=${PREFIX}/storage/internal/Templates:/home/${USER}/Templates"
+	[ -d "${PREFIX}"/storage/internal/Videos ]    && session_command+=" --bind=${PREFIX}/storage/internal/Videos:/home/${USER}/Videos"
+	[ -d "${PREFIX}"/tmp ]                        && session_command+=" --bind=${PREFIX}/tmp:/tmp"
 
 	# environemnt
 
