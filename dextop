@@ -650,12 +650,14 @@ bookmarks_intent () {
 
 	directories_list=(
 		"${PREFIX}"/cnt
-		"${PREFIX}"/media/external
-		"${PREFIX}"/media/internal
+		"${PREFIX}"/media/[aA]ndroid
+		"${PREFIX}"/media/[eE]xternal
+		"${PREFIX}"/media/[iI]nternal
 	)
 
 	labels_list=(
 		Container
+		Android
 		External
 		Internal
 	)
