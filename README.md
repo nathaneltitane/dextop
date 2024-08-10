@@ -11,7 +11,7 @@
 08-10-2024 ↴
 
 - Fixed missing bookmark entries
-- Updates to storage designations in 'container-session'
+- Updated storage designations in 'container-session'
 
 08-07-2024 ↴
 
