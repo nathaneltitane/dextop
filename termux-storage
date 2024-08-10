@@ -133,38 +133,43 @@ storage_directories () {
 
 # verify termux storage directory existence
 
-if [ ! -d "${HOME}"/storage ]
+if [ ! -f "${HOME}"/.dextop/dextop-termux-storage ]
 then
-	# does not exist:
-	# enable storage permissions: requires user touch input
+	if [ ! -d "${HOME}"/storage ]
+	then
+		# does not exist:
+		# enable storage permissions: requires user touch input
 
-	frobulator.wrn "User permission required to access storage on this device:"
-	frobulator.nul "Both internal and external storage locations are made available."
-	echo
+		frobulator.wrn "User permission required to access storage on this device:"
+		frobulator.nul "Both internal and external storage locations are made available."
+		echo
 
-	frobulator.inf "Storage is also made accessible through container."
-	echo
+		frobulator.inf "Storage is also made accessible through container."
+		echo
 
-	frobulator.ins "Select 'Allow' when prompted to proceed."
-	echo
+		frobulator.ins "Select 'Allow' when prompted to proceed."
+		echo
 
-	frobulator.separate
+		frobulator.separate
 
-	# storage permissions dialog
+		# storage permissions dialog
 
-	storage_intent
+		storage_intent
 
-	frobulator.countdown 5 "Continuing" "[ ${script} ]"
+		frobulator.countdown 5 "Continuing" "[ ${script} ]"
 
-else
-	# exists:
-	# proceed with setup
+	else
+		# exists:
+		# proceed with setup
 
-	frobulator.scs "Storage directory detected" "[ "${HOME}" ]"
-	echo
+		frobulator.scs "Storage directory detected" "[ "${HOME}" ]"
+		echo
 
-	frobulator.fwd "Continuing${marker_elp}"
-	echo
+		frobulator.fwd "Continuing${marker_elp}"
+		echo
+	fi
+
+	frobulator.file "${HOME}"/.dextop/dextop-termux-storage
 fi
 
 directories_list=(
