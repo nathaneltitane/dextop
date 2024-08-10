@@ -168,7 +168,6 @@ real_vnc_activity="com.realvnc.viewer.android/.app.DesktopActivity"
 remotix_vnc_activity="com.nulana.android.remotix/.Viewer"
 
 termux_x11_activity="com.termux.x11/.MainActivity"
-termux_x11_activity_stop="com.termux.x11.ACTION_STOP"
 
 # defaults /////////////////////////////////////////////////////////////////////
 
@@ -256,19 +255,19 @@ container_root () {
 
 	# set container root directory
 
-	CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
+	ROOT=("${PREFIX}"/cnt/*/*)
 
 	# single container
 
-	if [[ ${#CONTAINER_ROOT[@]} -eq 1 ]]
+	if [[ ${#ROOT[@]} -eq 1 ]]
 	then
-		CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
+		ROOT=("${PREFIX}"/cnt/*/*)
 	fi
 
 	# multiple containers:
 	# parse container directories
 
-	if [[ ${#CONTAINER_ROOT[@]} -ge 2 ]]
+	if [[ ${#ROOT[@]} -ge 2 ]]
 	then
 		for distribution in "${PREFIX}"/cnt/*
 		do
@@ -367,19 +366,19 @@ container_handle () {
 	distribution_name="${name}"
 	distribution_version="${version}"
 
-	CONTAINER_ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
+	ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
 }
 
 container_input () {
 
 	if [ -d "${root_filesystem}" ]
 	then
-		CONTAINER_ROOT="${root_filesystem}"
+		ROOT="${root_filesystem}"
 
 		frobulator.scs "Container location found."
 		echo
 
-		frobulator.inf "Loading" "[ ${CONTAINER_ROOT} ]"
+		frobulator.inf "Loading" "[ ${ROOT} ]"
 		echo
 	else
 		frobulator.err "Container location not found."
@@ -399,32 +398,30 @@ container_environment () {
 	# set path:
 	# in order of retreival
 
-	CONTAINER_PATH=""
+	PATH=""
 
 	# container
 
-	[ -d "${CONTAINER_ROOT}"/usr/local/sbin ] && CONTAINER_PATH+="/usr/local/sbin:"
-	[ -d "${CONTAINER_ROOT}"/usr/local/bin ]  && CONTAINER_PATH+="/usr/local/bin:"
-	[ -d "${CONTAINER_ROOT}"/usr/sbin ]       && CONTAINER_PATH+="/usr/sbin:"
-	[ -d "${CONTAINER_ROOT}"/usr/sbin ]       && CONTAINER_PATH+="/usr/bin:"
-	[ -d "${CONTAINER_ROOT}"/sbin ]           && CONTAINER_PATH+="/sbin:"
-	[ -d "${CONTAINER_ROOT}"/bin ]            && CONTAINER_PATH+="/bin:"
+	[ -d "${ROOT}"/usr/local/sbin ] && PATH+="/usr/local/sbin:"
+	[ -d "${ROOT}"/usr/local/bin ]  && PATH+="/usr/local/bin:"
+	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/sbin:"
+	[ -d "${ROOT}"/usr/sbin ]       && PATH+="/usr/bin:"
+	[ -d "${ROOT}"/sbin ]           && PATH+="/sbin:"
+	[ -d "${ROOT}"/bin ]            && PATH+="/bin:"
 
 	# termux
 
-	[ -d "${HOME}"/.local/bin ]               && CONTAINER_PATH+="${HOME}/.local/bin:"
+	[ -d "${HOME}"/.local/bin ]     && PATH+="${HOME}/.local/bin:"
 
-	[ -d "${PREFIX}"/sbin ]                   && CONTAINER_PATH+="${PREFIX}/sbin:"
-	[ -d "${PREFIX}"/bin ]                    && CONTAINER_PATH+="${PREFIX}/bin:"
+	[ -d "${PREFIX}"/sbin ]         && PATH+="${PREFIX}/sbin:"
+	[ -d "${PREFIX}"/bin ]          && PATH+="${PREFIX}/bin:"
 
 	# android
 
-	[ -d /system/sbin ]                       && CONTAINER_PATH+="/system/sbin:"
-	[ -d /system/bin ]                        && CONTAINER_PATH+="/system/bin:"
+	[ -d /system/sbin ]             && PATH+="/system/sbin:"
+	[ -d /system/bin ]              && PATH+="/system/bin:"
 
-	CONTAINER_PATH="${CONTAINER_PATH}"
-
-	return
+	PATH="${PATH}"
 }
 
 container_user () {
@@ -439,7 +436,7 @@ container_user () {
 	# source environment variables when 'user' corresponds to 'username'
 	# default to 'root' if 'username' is invalid, is not specified or does not exist
 
-	last_entry="$(tail -n 1 "${CONTAINER_ROOT}"/etc/passwd)"
+	last_entry="$(tail -n 1 "${ROOT}"/etc/passwd)"
 
 	while read -r entry
 	do
@@ -464,14 +461,13 @@ container_user () {
 			user_name="root"
 
 			USER="root"
-
 			USER_ID="0"
 			GROUP_ID="0"
 
 			UID="${USER_ID}"
 			GID="${GROUP_ID}"
 
-			if [ -d "${CONTAINER_ROOT}"/root ]
+			if [ -d "${ROOT}"/root ]
 			then
 				HOME="/root"
 			else
@@ -513,7 +509,7 @@ container_user () {
 			exit 1
 		fi
 
-	done < "${CONTAINER_ROOT}"/etc/passwd
+	done < "${ROOT}"/etc/passwd
 }
 
 container_session () {
@@ -531,7 +527,7 @@ container_session () {
 	session_command+="proot"
 	session_command+=" --kill-on-exit"
 	session_command+=" --link2symlink"
-	session_command+=" --rootfs=${CONTAINER_ROOT}"
+	session_command+=" --rootfs=${ROOT}"
 	session_command+=" --change-id=${USER_ID}:${GROUP_ID}"
 	session_command+=" --pwd=${HOME}"
 
@@ -566,7 +562,7 @@ container_session () {
 	[ -d "${PREFIX}"/storage/internal/Videos ]    && session_command+=" --bind=${PREFIX}/storage/internal/Videos:/home/${USER}/Videos"
 	[ -d "${PREFIX}"/tmp ]                        && session_command+=" --bind=${PREFIX}/tmp:/tmp"
 
-	# environemnt
+	#environemnt
 
 	session_command+=" env"
 	session_command+=" --ignore-environment"
@@ -1129,7 +1125,7 @@ display_start () {
 
 	if [[ "${display}" = [xX][1][1] ]]
 	then
-		display_view
+		:
 	fi
 
 	# start display session
@@ -1207,33 +1203,8 @@ display_stop () {
 
 		frobulator.process "Stopping display loader"
 
-	elif [[ $(pidof com.termux.x11) ]]
-	then
-		# x11
-
-		display_activity="${termux_x11_activity_stop}"
-
-		unset intent_command
-
-		intent_command+="am broadcast"
-		intent_command+=" --user 0"
-		intent_command+=" -a ${display_activity}"
-
-		frobulator.silence "${intent_command}" &
-
-		frobulator.process "Stopping display viewer"
-
-		if [[ $(pidof virgl_test_server_android) ]]
-		then
-			# x11
-
-			kill -9 $(pidof virgl_test_server_android) > "${sink}" 2>&1 &
-
-			frobulator.process "Stopping display server"
-		fi
-
 	else
-		frobulator.wrn "No active display process detected."
+		frobulator.wrn "No active display server detected."
 		echo
 
 		frobulator.fwd "Exiting${marker_elp}"
@@ -1256,7 +1227,7 @@ display_list () {
 
 	if [[ "${display}" = [xX][1][1] ]]
 	then
-		display_server="com.termux.x11"
+		display_server="app_process / com.termux.x11.Loader"
 
 		display_format="native"
 		display_geometry="native"
@@ -1353,7 +1324,7 @@ application_handle () {
 			zenity			 											\
 				--warning												\
 					--width="200"										\
-					--window-icon="${HOME}/.dextop/dextop.svg"			\
+					--window-icon="${HOME}/.dextop/dextop.svg"	\
 					--text="Application '${application}' not found." 2> "${sink}" &
 		fi
 	fi
