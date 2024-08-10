@@ -11,6 +11,7 @@
 08-10-2024 ↴
 
 - Fixed missing bookmark entries
+- Fixed missing standard $HOME directories generation (frobulator.directory)
 - Updated storage designations in 'container-session'
 
 08-07-2024 ↴
