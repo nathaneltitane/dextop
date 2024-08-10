@@ -169,7 +169,7 @@ then
 		echo
 	fi
 
-	frobulator.file "${HOME}"/.dextop/dextop-termux-storage
+	frobulator.file "${HOME}"/.dextop dextop-termux-storage
 fi
 
 directories_list=(
