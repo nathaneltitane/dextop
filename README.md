@@ -8,6 +8,11 @@
 
 ### NOTICE
 
+08-10-2024 ↴
+
+- Fixed missing bookmark entries
+- Updates to storage designations in 'container-session'
+
 08-07-2024 ↴
 
 - Missing templates and installation pointers fixed (frobulator.keep fix + dextop setup functions ordering change)

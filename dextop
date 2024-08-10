@@ -615,6 +615,7 @@ directories_intent () {
 		img
 		mnt
 		media
+		storage
 	)
 
 	frobulator.directory "${PREFIX}" ${directories_list[@]}
@@ -648,31 +649,31 @@ bookmarks_intent () {
 
 	# generate file browser bookmarks
 
-	directories_list=(
+	bookmarks_directories_list=(
 		"${PREFIX}"/cnt
 		"${PREFIX}"/media/[aA]ndroid
 		"${PREFIX}"/media/[eE]xternal
 		"${PREFIX}"/media/[iI]nternal
 	)
 
-	labels_list=(
+	bookmarks_labels_list=(
 		Container
 		Android
 		External
 		Internal
 	)
 
-	for (( i=0 ; i<${#directories_list[@]} ; i++ ))
+	for (( instance=0 ; instance<${#bookmarks_directories_list[@]} ; instance++ ))
 	do
-		if [ -d "${directory}" ]
+		if [ -d ${bookmarks_directories_list[$instance]} ]
 		then
-			frobulator.write "file://${directories_list[$i]} ${labels_list[$i]}" "${HOME}"/.config/gtk-3.0 bookmarks
+			frobulator.write "file://${bookmarks_directories_list[$instance]} ${bookmarks_labels_list[$instance]}" "${HOME}"/.config/gtk-3.0 bookmarks
 		fi
 	done
 
-	directories_list=()
+	bookmarks_directories_list=()
 
-	labels_list=()
+	bookamrks_labels_list=()
 }
 
 additions_intent () {
