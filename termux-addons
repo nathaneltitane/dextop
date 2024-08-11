@@ -124,6 +124,8 @@ install_intent () {
 	open_intent "${PREFIX}"/tmp/"${addon}"
 
 	frobulator.countdown 10 "Installing" "[ ${addon} ]"
+
+	frobulator.file "${HOME}"/.dextop termux-addon-${addon}
 }
 
 addon_intent () {
