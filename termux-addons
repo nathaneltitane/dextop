@@ -153,6 +153,8 @@ addon_intent () {
 				frobulator.file "${HOME}"/.dextop termux-addon-"${addon}"
 			done
 
+			frobulator.file "${HOME}"/.dextop termux-addons
+
 		else
 			frobulator.err "Unknown addon name" "[ '${addon}' ]"
 			echo
