@@ -125,7 +125,7 @@ install_intent () {
 
 	frobulator.countdown 10 "Installing" "[ ${addon} ]"
 
-	frobulator.file "${HOME}"/.dextop termux-addon-${addon}
+	frobulator.file "${HOME}"/.dextop termux-addon-"${addon}"
 }
 
 addon_intent () {
