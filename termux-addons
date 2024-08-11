@@ -65,12 +65,12 @@ do
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-s, --selection      Update application packages and utilities."
+			echo -e "-s, --selection    Update application packages and utilities."
 			echo
-			echo -e "                     [ all ]"
-			echo -e "                     [ addon ]"
+			echo -e "                   [ all ]"
+			echo -e "                   [ addon ]"
 			echo
-			echo -e "-h, --help           Show help and usage information."
+			echo -e "-h, --help         Show help and usage information."
 			echo
 			echo -e "'${script}' [ Version // ${version} ]"
 			echo
