@@ -578,14 +578,14 @@ container_session () {
 
 	session_command+=" env"
 	session_command+=" --ignore-environment"
-	session_command+=" ANDROID_ART_ROOT=${ANDROID_ART_ROOT}"
-	session_command+=" ANDROID_DATA=${ANDROID_DATA}"
-	session_command+=" ANDROID_I18N_ROOT=${ANDROID_I18N_ROOT}"
-	session_command+=" ANDROID_ROOT=${ANDROID_ROOT}"
-	session_command+=" ANDROID_RUNTIME_ROOT=${ANDROID_RUNTIME_ROOT}"
-	session_command+=" ANDROID_TZDATA_ROOT=${ANDROID_TZDATA_ROOT}"
-	session_command+=" BOOTCLASSPATH=${BOOTCLASSPATH}"
-	session_command+=" DEX2OATBOOTCLASSPATH=${DEX2OATBOOTCLASSPATH}"
+#	session_command+=" ANDROID_ART_ROOT=${ANDROID_ART_ROOT}"
+#	session_command+=" ANDROID_DATA=${ANDROID_DATA}"
+#	session_command+=" ANDROID_I18N_ROOT=${ANDROID_I18N_ROOT}"
+#	session_command+=" ANDROID_ROOT=${ANDROID_ROOT}"
+#	session_command+=" ANDROID_RUNTIME_ROOT=${ANDROID_RUNTIME_ROOT}"
+#	session_command+=" ANDROID_TZDATA_ROOT=${ANDROID_TZDATA_ROOT}"
+#	session_command+=" BOOTCLASSPATH=${BOOTCLASSPATH}"
+#	session_command+=" DEX2OATBOOTCLASSPATH=${DEX2OATBOOTCLASSPATH}"
 
 	# termux
 
