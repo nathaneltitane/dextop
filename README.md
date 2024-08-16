@@ -8,6 +8,10 @@
 
 ### NOTICE
 
+08-11-2024 ↴
+
+  - Known issue with 'proot' not running the X11 automatic login and display sequence when running container - [possible fault with 'proot' or with $PATH management](https://github.com/termux/proot/issues/301) - Debugging help appreciated.
+
 08-10-2024 ↴
 
 - Fixed missing bookmark entries
