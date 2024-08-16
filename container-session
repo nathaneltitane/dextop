@@ -403,24 +403,24 @@ container_environment () {
 
 	# container
 
-	[ -d "${CONTAINER_ROOT}"/usr/local/sbin ] && CONTAINER_PATH+="/usr/local/sbin:"    || { frobulator.err "Direcory not found" "[ ${CONTAINER_ROOT}/usr/local/sbin ]" && return 1}
-	[ -d "${CONTAINER_ROOT}"/usr/local/bin ]  && CONTAINER_PATH+="/usr/local/bin:"     || { frobulator.err "Direcory not found" "[ ${CONTAINER_ROOT}/usr/local/bin ]"  && return 1}
-	[ -d "${CONTAINER_ROOT}"/usr/sbin ]       && CONTAINER_PATH+="/usr/sbin:"          || { frobulator.err "Direcory not found" "[ ${CONTAINER_ROOT}/usr/sbin ]"       && return 1}
-	[ -d "${CONTAINER_ROOT}"/usr/bin ]        && CONTAINER_PATH+="/usr/bin:"           || { frobulator.err "Direcory not found" "[ ${CONTAINER_ROOT}/usr/bin ]"        && return 1}
-	[ -d "${CONTAINER_ROOT}"/sbin ]           && CONTAINER_PATH+="/sbin:"              || { frobulator.err "Direcory not found" "[ ${CONTAINER_ROOT}/sbin ]"           && return 1}
-	[ -d "${CONTAINER_ROOT}"/bin ]            && CONTAINER_PATH+="/bin:"               || { frobulator.err "Direcory not found" "[ ${CONTAINER_ROOT}/bin ]"            && return 1}
+	[ -d "${CONTAINER_ROOT}"/usr/local/sbin ] && CONTAINER_PATH+="/usr/local/sbin:"
+	[ -d "${CONTAINER_ROOT}"/usr/local/bin ]  && CONTAINER_PATH+="/usr/local/bin:"
+	[ -d "${CONTAINER_ROOT}"/usr/sbin ]       && CONTAINER_PATH+="/usr/sbin:"
+	[ -d "${CONTAINER_ROOT}"/usr/bin ]        && CONTAINER_PATH+="/usr/bin:"
+	[ -d "${CONTAINER_ROOT}"/sbin ]           && CONTAINER_PATH+="/sbin:"
+	[ -d "${CONTAINER_ROOT}"/bin ]            && CONTAINER_PATH+="/bin:"
 
 	# termux
 
-	[ -d "${HOME}"/.local/bin ]               && CONTAINER_PATH+="${HOME}/.local/bin:" || { frobulator.err "Direcory not found" "[ ${HOME}/.local/bin ]"               && return 1}
+	[ -d "${HOME}"/.local/bin ]               && CONTAINER_PATH+="${HOME}/.local/bin:"
 
-	[ -d "${PREFIX}"/sbin ]                   && CONTAINER_PATH+="${PREFIX}/sbin:"     || { frobulator.err "Direcory not found" "[ ${PREFIX}/sbin ]"                   && return 1}
-	[ -d "${PREFIX}"/bin ]                    && CONTAINER_PATH+="${PREFIX}/bin:"      || { frobulator.err "Direcory not found" "[ ${PREFIX}/bin ]"                    && return 1}
+	[ -d "${PREFIX}"/sbin ]                   && CONTAINER_PATH+="${PREFIX}/sbin:"
+	[ -d "${PREFIX}"/bin ]                    && CONTAINER_PATH+="${PREFIX}/bin:"
 
 	# android
 
-	[ -d /system/sbin ]                       && CONTAINER_PATH+="/system/sbin:"       || { frobulator.err "Direcory not found" "[ /system/sbin ]"                      && return 1}
-	[ -d /system/bin ]                        && CONTAINER_PATH+="/system/bin:"        || { frobulator.err "Direcory not found" "[ /system/bin ]"                       && return 1}
+	[ -d /system/sbin ]                       && CONTAINER_PATH+="/system/sbin:"
+	[ -d /system/bin ]                        && CONTAINER_PATH+="/system/bin:"
 
 	CONTAINER_PATH="${CONTAINER_PATH}"
 
