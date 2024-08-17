@@ -46,16 +46,10 @@ do
 	in
 		-o|--start)
 			option="start"
-			display="${2}"
-
-			shift
 		;;
 
 		-x|--stop)
 			option="stop"
-			display="${2}"
-
-			shift
 		;;
 
 		-n|--new)
@@ -152,11 +146,6 @@ termux_x11_activity="com.termux.x11/.MainActivity"
 termux_x11_activity_stop="com.termux.x11.ACTION_STOP"
 
 # defaults /////////////////////////////////////////////////////////////////////
-
-if [ -z "${display}" ]
-then
-	display="x11"
-fi
 
 if [ -z "${environment}" ]
 then
@@ -653,12 +642,6 @@ display_load () {
 	display_intent
 }
 
-display_start () {
-
-	display_view
-
-}
-
 display_new () {
 
 	# start display session
@@ -760,7 +743,7 @@ application_handle () {
 	then
 		# start display session
 
-		display_start
+		display_view
 
 		# load application
 
@@ -785,7 +768,7 @@ then
 
 	# start display session
 
-	display_start
+	display_view
 
 	# start interface / desktop environment / desktop session
 
