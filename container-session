@@ -198,11 +198,6 @@ then
 	DISPLAY=":0"
 fi
 
-if [ -z "${DISPLAY_NUMBER}" ]
-then
-	DISPLAY_NUMBER="${DISPLAY/:/}"
-fi
-
 if [ -z "${DISPLAY_DRIVER}" ]
 then
 	DISPLAY_DRIVER="virpipe"
