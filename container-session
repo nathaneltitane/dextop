@@ -555,8 +555,9 @@ then
 	kill -9 $(pidof "${termux_x11_process}") > "${sink}" 2>&1 &
 
 	frobulator.process "Stopping display loader"
+fi
 
-elif [[ $(pidof com.termux.x11) ]]
+if [[ $(pidof com.termux.x11) ]]
 then
 	# x11 process
 
@@ -571,22 +572,15 @@ then
 	frobulator.silence "${intent_command}" &
 
 	frobulator.process "Stopping display viewer"
+fi
 
-	if [[ $(pidof virgl_test_server_android) ]]
-	then
-		# virtual gl server
+if [[ $(pidof virgl_test_server_android) ]]
+then
+	# virtual gl server
 
-		kill -9 $(pidof "${virgl_server}") > "${sink}" 2>&1 &
+	kill -9 $(pidof "${virgl_server}") > "${sink}" 2>&1 &
 
-		frobulator.process "Stopping display server"
-	fi
-
-else
-	frobulator.wrn "No active display process detected."
-	echo
-
-	frobulator.fwd "Exiting${marker_elp}"
-	echo
+	frobulator.process "Stopping display server"
 fi
 
 # //////////////////////////////////////////////////////////////////////////////
