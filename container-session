@@ -207,7 +207,6 @@ then
 	TERM="xterm-256color"
 fi
 
-
 if [ -z "${COLORTERM}" ]
 then
 	COLORTERM="truecolor"
