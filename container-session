@@ -58,14 +58,6 @@ do
 			shift
 		;;
 
-		-p|--password)
-			option="password"
-		;;
-
-		-c|--clean)
-			option="clean"
-		;;
-
 		-n|--new)
 			option="new"
 		;;
@@ -102,13 +94,10 @@ do
 			echo -e "Options:"
 			echo
 			echo -e "-o, --start          Start display session server."
-			echo -e "                     [ vnc ]"
 			echo -e "                     [ x11 ] [ Default ]"
 			echo
 			echo -e "-x, --stop           Stop display session server."
-			echo -e "-p, --password       Generate display session password."
 			echo
-			echo -e "-c, --clean          Clean display session geometry selection."
 			echo -e "-n, --new            Generate new display session geometry selection."
 			echo -e "-v, --view           Reload display viewer application window."
 			echo
@@ -722,7 +711,7 @@ display_new () {
 display_stop () {
 
 	# look for corresponding server process:
-	# handle and stop display server and clean runtime files
+	# handle and stop display server and purge runtime files
 
 	if [[ $(pidof app_process / com.termux.x11.Loader) ]]
 	then
@@ -875,20 +864,6 @@ then
 	# stop display session
 
 	display_stop
-fi
-
-if [ "${option}" = "password" ]
-then
-	# generate password
-
-	display_password
-fi
-
-if [ "${option}" = "clean" ]
-then
-	# remove lock and session handler files
-
-	display_clean
 fi
 
 if [ "${option}" = "new" ]
