@@ -117,6 +117,8 @@ frobulator.script "Setting up ${script#*-}"
 
 virgl_server="virgl_test_server_android"
 
+termux_x11_display="termux-x11"
+
 termux_x11_activity="com.termux.x11/.MainActivity"
 
 termux_x11_activity_start="${termux_x11_activity}"
@@ -585,26 +587,18 @@ fi
 
 # //////////////////////////////////////////////////////////////////////////////
 
-unset load_command
-
 if [[ $(pidof "${virgl_server}") ]]
 then
 	:
 else
-	load_command+="virgl_test_server_android"
-
-	${load_command} > "${sink}" 2>&1 &
+	"${virgl_server}" > "${sink}" 2>&1 &
 fi
 
-unset load_command
-
-if [[ $(pidof "") ]]
+if [[ $(pidof "${termux_x11_display}") ]]
 then
 	:
 else
-	load_command+="termux-x11"
-
-	${load_command} > "${sink}" 2>&1 &
+	"${termux_x11_display}" > "${sink}" 2>&1 &
 fi
 
 # //////////////////////////////////////////////////////////////////////////////
