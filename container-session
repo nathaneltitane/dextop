@@ -602,7 +602,7 @@ fi
 
 unset load_command
 
-if [[ $(pidof app_process / com.termux.x11.Loader) ]]
+if [[ $(pidof *com.termux.x11.Loader) ]]
 then
 	:
 else
