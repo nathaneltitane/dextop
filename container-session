@@ -590,6 +590,7 @@ container_session () {
 	# termux
 
 	session_command+=" PREFIX=${PREFIX}"
+	session_command+=" TERMUX_BINARIES=${PREFIX}/bin"
 
 	# container
 
@@ -599,7 +600,7 @@ container_session () {
 	session_command+=" HOME=${HOME}"
 	session_command+=" LANG=${LANG}"
 	session_command+=" LOCALHOST=${LOCALHOST}"
-	session_command+=" PATH=${PATH}"
+	session_command+=" PATH=${PATH}:${TERMUX_BINARIES}"
 	session_command+=" SHELL=${SHELL}"
 	session_command+=" TERM=${TERM}"
 	session_command+=" TMPDIR=${TMPDIR}"
