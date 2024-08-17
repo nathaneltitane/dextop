@@ -202,6 +202,12 @@ then
 	PORT="590${DISPLAY_NUMBER}"
 fi
 
+if [ -z "${TERM}" ]
+then
+	TERM="xterm-256color"
+fi
+
+
 if [ -z "${COLORTERM}" ]
 then
 	COLORTERM="truecolor"
