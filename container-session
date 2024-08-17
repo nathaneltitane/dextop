@@ -656,7 +656,7 @@ display_stop () {
 
 	if [[ $(pidof app_process / com.termux.x11.Loader) ]]
 	then
-		# x11
+		# x11 loader
 
 		kill -9 $(pidof app_process / com.termux.x11.Loader) > "${sink}" 2>&1 &
 
@@ -664,7 +664,7 @@ display_stop () {
 
 	elif [[ $(pidof com.termux.x11) ]]
 	then
-		# x11
+		# x11 process
 
 		display_activity="${termux_x11_activity_stop}"
 
@@ -680,7 +680,7 @@ display_stop () {
 
 		if [[ $(pidof virgl_test_server_android) ]]
 		then
-			# x11
+			# virtual gl server
 
 			kill -9 $(pidof virgl_test_server_android) > "${sink}" 2>&1 &
 
