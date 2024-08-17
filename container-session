@@ -145,6 +145,8 @@ frobulator.script "Setting up ${script#*-}"
 termux_x11_activity="com.termux.x11/.MainActivity"
 termux_x11_activity_stop="com.termux.x11.ACTION_STOP"
 
+display_activity="${termux_x11_activity}"
+
 # defaults /////////////////////////////////////////////////////////////////////
 
 if [ -z "${environment}" ]
@@ -485,25 +487,6 @@ container_session () {
 	[ -d "${PREFIX%/*}"/home ]                       && session_command+=" --bind=${PREFIX%/*}/home:${HOME}"
 	[ -d "${PREFIX}"/tmp ]                           && session_command+=" --bind=${PREFIX}/tmp:/tmp"
 
-	[ -d "${PREFIX}"/media/[aA]ndroid ]              && session_command+=" --bind=${PREFIX}/media/android:/media/android"
-	[ -d "${PREFIX}"/media/[aA]ndroid/Documents ]    && session_command+=" --bind=${PREFIX}/media/android/Documents:/home/${USER}/Documents"
-	[ -d "${PREFIX}"/media/[aA]ndroid/Downloads ]    && session_command+=" --bind=${PREFIX}/media/android/Downloads:/home/${USER}/Documents"
-	[ -d "${PREFIX}"/media/[aA]ndroid/Music ]        && session_command+=" --bind=${PREFIX}/media/android/Music:/home/${USER}/Music"
-	[ -d "${PREFIX}"/media/[aA]ndroid/Pictures ]     && session_command+=" --bind=${PREFIX}/media/android/Pictures:/home/${USER}/Pictures"
-	[ -d "${PREFIX}"/media/[aA]ndroid/Public ]       && session_command+=" --bind=${PREFIX}/media/android/Public:/home/${USER}/Public"
-	[ -d "${PREFIX}"/media/[aA]ndroid/Templates ]    && session_command+=" --bind=${PREFIX}/media/android/Templates:/home/${USER}/Templates"
-	[ -d "${PREFIX}"/media/[aA]ndroid/Videos ]       && session_command+=" --bind=${PREFIX}/media/android/Videos:/home/${USER}/Videos"
-	[ -d "${PREFIX}"/media/[eE]xternal ]             && session_command+=" --bind=${PREFIX}/media/external:/media/external"
-	[ -d "${PREFIX}"/media/[iI]nternal ]             && session_command+=" --bind=${PREFIX}/media/internal:/media/internal"
-	[ -d "${PREFIX}"/media/[iI]nternal/Documents ]   && session_command+=" --bind=${PREFIX}/media/internal/Documents:/home/${USER}/Documents"
-	[ -d "${PREFIX}"/media/[iI]nternal/Downloads ]   && session_command+=" --bind=${PREFIX}/media/internal/Downloads:/home/${USER}/Documents"
-	[ -d "${PREFIX}"/media/[iI]nternal/Music ]       && session_command+=" --bind=${PREFIX}/media/internal/Music:/home/${USER}/Music"
-	[ -d "${PREFIX}"/media/[iI]nternal/Pictures ]    && session_command+=" --bind=${PREFIX}/media/internal/Pictures:/home/${USER}/Pictures"
-	[ -d "${PREFIX}"/media/[iI]nternal/Public ]      && session_command+=" --bind=${PREFIX}/media/internal/Public:/home/${USER}/Public"
-	[ -d "${PREFIX}"/media/[iI]nternal/Templates ]   && session_command+=" --bind=${PREFIX}/media/internal/Templates:/home/${USER}/Templates"
-	[ -d "${PREFIX}"/media/[iI]nternal/Videos ]      && session_command+=" --bind=${PREFIX}/media/internal/Videos:/home/${USER}/Videos"
-
-
 	# environemnt
 
 	session_command+=" env"
@@ -582,26 +565,6 @@ display_intent () {
 
 	frobulator.fwd "Generating display${marker_elp}"
 	echo
-
-	display_activity="${termux_x11_activity}"
-
-	# start termux:x11 intent
-
-	unset intent_command
-
-	intent_command+="am start"
-	intent_command+=" --user 0"
-	intent_command+=" -n ${display_activity}"
-
-	frobulator.silence "${intent_command}"
-}
-
-display_view () {
-
-	frobulator.fwd "Opening display${marker_elp}"
-	echo
-
-	display_activity="${termux_x11_activity}"
 
 	unset intent_command
 
@@ -704,7 +667,7 @@ application_handle () {
 	then
 		# start display session
 
-		display_view
+		display_intent
 
 		# load application
 
@@ -729,7 +692,7 @@ then
 
 	# start display session
 
-	display_view
+	display_intent
 
 	# start interface / desktop environment / desktop session
 
@@ -759,7 +722,7 @@ then
 	# reload display viewer application window:
 	# some activity launches can be buggy
 
-	display_view
+	display_intent
 fi
 
 if [ "${option}" = "application" ]
