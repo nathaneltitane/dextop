@@ -168,21 +168,6 @@ then
 	session="$(cat ${HOME}/.dextop/dextop-session)"
 fi
 
-if [ -z "${LOCALHOST}" ]
-then
-	LOCALHOST="127.0.0.1"
-fi
-
-if [ -z "${ADDRESS}" ]
-then
-	ADDRESS="${LOCALHOST}"
-fi
-
-if [ -z "${PORT}" ]
-then
-	PORT="590${DISPLAY_NUMBER}"
-fi
-
 if [ -z "${TERM}" ]
 then
 	TERM="xterm-256color"
@@ -560,7 +545,6 @@ container_session () {
 	session_command+=" DISPLAY_DRIVER=${DISPLAY_DRIVER}"
 	session_command+=" HOME=${HOME}"
 	session_command+=" LANG=${LANG}"
-	session_command+=" LOCALHOST=${LOCALHOST}"
 	session_command+=" PATH=${PATH}:${TERMUX_BINARIES}"
 	session_command+=" SHELL=${SHELL}"
 	session_command+=" TERM=${TERM}"
@@ -744,7 +728,6 @@ display_list () {
 	display_geometry="native"
 	display_display=${DISPLAY}
 	display_process=$(pidof $(echo "${display_server}"))
-	display_port="default"
 
 	if [[ $(pidof "${display_server}") ]]
 	then
@@ -755,7 +738,6 @@ display_list () {
 		display_geometry="${display_geometry}"
 		display_display="${display_display}"
 		display_process="${display_process}"
-		display_port="${display_port}"
 	else
 		frobulator.wrn "No active servers detected."
 		echo
@@ -766,14 +748,12 @@ display_list () {
 		display_geometry="${empty}"
 		display_display="${empty}"
 		display_process="${empty}"
-		display_port="${empty}"
 	fi
 
 	frobulator.inf "Format"   "[ ${display_format} ]"
 	frobulator.inf "Geometry" "[ ${display_geometry} ]"
 	frobulator.inf "Display"  "[ ${display_display} ]"
 	frobulator.inf "Process"  "[ ${display_process} ]"
-	frobulator.inf "Port"     "[ ${display_port} ]"
 	echo
 }
 
