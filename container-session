@@ -541,6 +541,8 @@ container_application () {
 	fi
 }
 
+# //////////////////////////////////////////////////////////////////////////////
+
 # look for corresponding server process:
 # handle and stop display server and purge runtime files
 
@@ -585,6 +587,8 @@ else
 	echo
 fi
 
+# //////////////////////////////////////////////////////////////////////////////
+
 unset load_command
 
 if [[ $(pidof virgl*) ]]
@@ -607,6 +611,10 @@ else
 	${load_command} > "${sink}" 2>&1 &
 fi
 
+# //////////////////////////////////////////////////////////////////////////////
+
+# generate display
+
 frobulator.fwd "Generating display${marker_elp}"
 echo
 
@@ -618,6 +626,13 @@ intent_command+=" -n ${display_activity}"
 
 frobulator.silence "${intent_command}"
 
+# //////////////////////////////////////////////////////////////////////////////
+
+# load session
+
+frobulator.fwd "Loading desktop interface${marker_elp}"
+echo
+
 if [[ $(pidof "${session}") ]]
 then
 	:
@@ -628,8 +643,7 @@ else
 	fi
 fi
 
-frobulator.fwd "Loading desktop interface${marker_elp}"
-echo
+# //////////////////////////////////////////////////////////////////////////////
 
 if [ "${option}" = "application" ]
 then
