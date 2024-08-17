@@ -696,45 +696,6 @@ display_stop () {
 	fi
 }
 
-display_list () {
-
-	# define x11 server process information
-
-	display_server="com.termux.x11"
-
-	display_format="native"
-	display_geometry="native"
-	display_display=${DISPLAY}
-	display_process=$(pidof $(echo "${display_server}"))
-
-	if [[ $(pidof "${display_server}") ]]
-	then
-		frobulator.fwd "Listing session details${marker_elp}"
-		echo
-
-		display_format="${display_format}"
-		display_geometry="${display_geometry}"
-		display_display="${display_display}"
-		display_process="${display_process}"
-	else
-		frobulator.wrn "No active servers detected."
-		echo
-
-		empty="N/A"
-
-		display_format="${empty}"
-		display_geometry="${empty}"
-		display_display="${empty}"
-		display_process="${empty}"
-	fi
-
-	frobulator.inf "Format"   "[ ${display_format} ]"
-	frobulator.inf "Geometry" "[ ${display_geometry} ]"
-	frobulator.inf "Display"  "[ ${display_display} ]"
-	frobulator.inf "Process"  "[ ${display_process} ]"
-	echo
-}
-
 application_handle () {
 
 	# handle application launch
