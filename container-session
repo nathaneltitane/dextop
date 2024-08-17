@@ -44,22 +44,6 @@ while (($#))
 do
 	case "${1}"
 	in
-		-o|--start)
-			option="start"
-		;;
-
-		-x|--stop)
-			option="stop"
-		;;
-
-		-n|--new)
-			option="new"
-		;;
-
-		-v|--view)
-			option="view"
-		;;
-
 		-a|--application)
 			option="application"
 			application="${2}"
@@ -86,14 +70,6 @@ do
 			echo -e "Usage: ${script} -o [Display Server] | -u [User Name] | -a [Application] | -n [Selection] | [OPTION]"
 			echo
 			echo -e "Options:"
-			echo
-			echo -e "-o, --start          Start display session server."
-			echo -e "                     [ x11 ] [ Default ]"
-			echo
-			echo -e "-x, --stop           Stop display session server."
-			echo
-			echo -e "-n, --new            Generate new display session geometry selection."
-			echo -e "-v, --view           Reload display viewer application window."
 			echo
 			echo -e "-a, --application    Specify application to start on session login."
 			echo
@@ -536,130 +512,7 @@ container_session () {
 	${session_command}
 }
 
-server_intent () {
-
-	unset load_command
-
-	if [[ $(pidof virgl*) ]]
-	then
-		:
-	else
-		load_command+="virgl_test_server_android"
-
-		${load_command} > "${sink}" 2>&1 &
-	fi
-
-	unset load_command
-
-	if [[ $(pidof app_process / com.termux.x11.Loader) ]]
-	then
-		:
-	else
-		load_command+="termux-x11"
-
-		${load_command} > "${sink}" 2>&1 &
-	fi
-}
-
-display_intent () {
-
-	frobulator.fwd "Generating display${marker_elp}"
-	echo
-
-	unset intent_command
-
-	intent_command+="am start"
-	intent_command+=" --user 0"
-	intent_command+=" -n ${display_activity}"
-
-	frobulator.silence "${intent_command}"
-}
-
-display_interface () {
-
-	if [[ $(pidof "${session}") ]]
-	then
-		:
-	else
-		if [[ $(command -v "${session}") ]]
-		then
-			frobulator.silence "${session} &"
-		fi
-	fi
-
-	frobulator.fwd "Loading desktop interface${marker_elp}"
-	echo
-}
-
-display_load () {
-
-	# start display server
-
-	frobulator.fwd "Starting display server${marker_elp}"
-	echo
-
-	server_intent
-
-	sleep 1
-
-	display_intent
-}
-
-display_new () {
-
-	# start display session
-
-	display_load
-}
-
-display_stop () {
-
-	# look for corresponding server process:
-	# handle and stop display server and purge runtime files
-
-	if [[ $(pidof app_process / com.termux.x11.Loader) ]]
-	then
-		# x11 loader
-
-		kill -9 $(pidof app_process / com.termux.x11.Loader) > "${sink}" 2>&1 &
-
-		frobulator.process "Stopping display loader"
-
-	elif [[ $(pidof com.termux.x11) ]]
-	then
-		# x11 process
-
-		display_activity="${termux_x11_activity_stop}"
-
-		unset intent_command
-
-		intent_command+="am broadcast"
-		intent_command+=" --user 0"
-		intent_command+=" -a ${display_activity}"
-
-		frobulator.silence "${intent_command}" &
-
-		frobulator.process "Stopping display viewer"
-
-		if [[ $(pidof virgl_test_server_android) ]]
-		then
-			# virtual gl server
-
-			kill -9 $(pidof virgl_test_server_android) > "${sink}" 2>&1 &
-
-			frobulator.process "Stopping display server"
-		fi
-
-	else
-		frobulator.wrn "No active display process detected."
-		echo
-
-		frobulator.fwd "Exiting${marker_elp}"
-		echo
-	fi
-}
-
-application_handle () {
+container_application () {
 
 	# handle application launch
 
@@ -687,49 +540,101 @@ application_handle () {
 	fi
 }
 
-if [ "${option}" = "start" ]
+# look for corresponding server process:
+# handle and stop display server and purge runtime files
+
+if [[ $(pidof app_process / com.termux.x11.Loader) ]]
 then
+	# x11 loader
 
-	# start display session
+	kill -9 $(pidof app_process / com.termux.x11.Loader) > "${sink}" 2>&1 &
 
-	display_intent
+	frobulator.process "Stopping display loader"
 
-	# start interface / desktop environment / desktop session
+elif [[ $(pidof com.termux.x11) ]]
+then
+	# x11 process
 
-	display_interface
+	display_activity="${termux_x11_activity_stop}"
 
-	# start display viewing application
+	unset intent_command
 
-	display_intent
+	intent_command+="am broadcast"
+	intent_command+=" --user 0"
+	intent_command+=" -a ${display_activity}"
+
+	frobulator.silence "${intent_command}" &
+
+	frobulator.process "Stopping display viewer"
+
+	if [[ $(pidof virgl_test_server_android) ]]
+	then
+		# virtual gl server
+
+		kill -9 $(pidof virgl_test_server_android) > "${sink}" 2>&1 &
+
+		frobulator.process "Stopping display server"
+	fi
+
+else
+	frobulator.wrn "No active display process detected."
+	echo
+
+	frobulator.fwd "Exiting${marker_elp}"
+	echo
 fi
 
-if [ "${option}" = "stop" ]
-then
-	# stop display session
+unset load_command
 
-	display_stop
+if [[ $(pidof virgl*) ]]
+then
+	:
+else
+	load_command+="virgl_test_server_android"
+
+	${load_command} > "${sink}" 2>&1 &
 fi
 
-if [ "${option}" = "new" ]
-then
-	# start vnc session with new selection
+unset load_command
 
-	display_new
+if [[ $(pidof app_process / com.termux.x11.Loader) ]]
+then
+	:
+else
+	load_command+="termux-x11"
+
+	${load_command} > "${sink}" 2>&1 &
 fi
 
-if [ "${option}" = "view" ]
-then
-	# reload display viewer application window:
-	# some activity launches can be buggy
+frobulator.fwd "Generating display${marker_elp}"
+echo
 
-	display_intent
+unset intent_command
+
+intent_command+="am start"
+intent_command+=" --user 0"
+intent_command+=" -n ${display_activity}"
+
+frobulator.silence "${intent_command}"
+
+if [[ $(pidof "${session}") ]]
+then
+	:
+else
+	if [[ $(command -v "${session}") ]]
+	then
+		frobulator.silence "${session} &"
+	fi
 fi
+
+frobulator.fwd "Loading desktop interface${marker_elp}"
+echo
 
 if [ "${option}" = "application" ]
 then
 	# validate and start selected application
 
-	application_handle
+	container_application
 fi
 
 if [ "${option}" = "username" ]
