@@ -78,15 +78,6 @@ frobulator.upgrade
 # values ///////////////////////////////////////////////////////////////////////
 
 display_list+=(
-	x11-apps
-	x11-common
-	x11-session-utils
-	x11-touchscreen-calibrator
-	x11-utils
-	x11-xfs-utils
-	x11-xkb-utils
-	x11-xserver-utils
-	xvfb
 	xwayland
 )
 
@@ -133,10 +124,6 @@ utilities_list+=(
 	sudo
 	ssh
 	tree
-)
-
-vnc_list+=(
-	x11vnc
 )
 
 xfce_list+=(
