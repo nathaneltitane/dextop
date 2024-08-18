@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 # dependencies /////////////////////////////////////////////////////////////////
 
 if [[ -z $(command -v frobulator) ]]
@@ -44,6 +46,14 @@ while (($#))
 do
 	case "${1}"
 	in
+		-o|--start)
+			option="start"
+		;;
+
+		-x|--stop)
+			option="stop"
+		;;
+
 		-a|--application)
 			option="application"
 			application="${2}"
@@ -70,6 +80,10 @@ do
 			echo -e "Usage: ${script} -o [Display Server] | -u [User Name] | -a [Application] | -n [Selection] | [OPTION]"
 			echo
 			echo -e "Options:"
+			echo
+			echo -e "-o, --start          Start display session."
+			echo
+			echo -e "-x, --stop           Stop display session."
 			echo
 			echo -e "-a, --application    Specify application to start on session login."
 			echo
@@ -115,18 +129,8 @@ frobulator.script "Setting up ${script#*-}"
 
 # variables ////////////////////////////////////////////////////////////////////
 
-virgl_server="virgl_test_server_android"
-
-termux_x11_display="termux-x11"
-
 termux_x11_activity="com.termux.x11/.MainActivity"
-
-termux_x11_activity_start="${termux_x11_activity}"
 termux_x11_activity_stop="com.termux.x11.ACTION_STOP"
-
-termux_x11_process="app_process -Xnoimage-dex2oat / com.termux.x11.Loader"
-
-display_activity="${termux_x11_activity}"
 
 # defaults /////////////////////////////////////////////////////////////////////
 
@@ -140,6 +144,11 @@ then
 	session="$(cat ${HOME}/.dextop/dextop-session)"
 fi
 
+if [ -z "${COLORTERM}" ]
+then
+	COLORTERM="truecolor"
+fi
+
 if [ -z "${TERM}" ]
 then
 	TERM="xterm-256color"
@@ -147,12 +156,7 @@ fi
 
 if [ -z "${TMPDIR}" ]
 then
-	TERM="${TMPDIR}"
-fi
-
-if [ -z "${COLORTERM}" ]
-then
-	COLORTERM="truecolor"
+	TMPDIR="${TMPDIR}"
 fi
 
 if [ -z "${LANG}" ]
@@ -191,9 +195,65 @@ fi
 
 export DISPLAY="${DISPLAY}"
 
-export GALLIUM_DRIVER="${DISPLAY_DRIVER}"
+export DISPLAY_DRIVER="${DISPLAY_DRIVER}"
+
+export GALLIUM_DRIVER="${GALLIUM_DRIVER}"
 
 # functions ////////////////////////////////////////////////////////////////////
+
+container_handle () {
+
+	# values #
+
+	values_list=(
+		selection
+	)
+
+	# handle user input for values_list
+
+	frobulator_return=()
+
+	if [ -f "${HOME}"/.dextop/selection ]
+	then
+		selection=$(cat "${HOME}"/.dextop/selection)
+	else
+		frobulator.input ${values_list[@]}
+	fi
+
+	eval ${frobulator_return[@]}
+
+	# check selection input against selection list
+
+	while true
+	do
+		# range check:
+		# selection input must be in provided range and an integer
+
+		if [[ "${selection}" -lt 1           ]] || \
+		   [[ "${selection}" -gt "${number}" ]] || \
+		   [[ ! "${selection}" =~ ^[0-9]+$   ]]
+		then
+			echo
+			frobulator.err "Invalid selection:"
+			echo
+
+			frobulator.wrn "Select container [ 1 - ${number} ]"
+			echo
+
+			frobulator.ipt "Selection:"
+
+			frobulator.read selection
+		else
+			break
+		fi
+	done
+
+	distribution_name="${name}"
+	distribution_version="${version}"
+
+	CONTAINER_ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
+
+}
 
 container_root () {
 
@@ -258,59 +318,6 @@ container_root () {
 
 		container_handle
 	fi
-}
-
-container_handle () {
-
-	# values #
-
-	values_list=(
-		selection
-	)
-
-	# handle user input for values_list
-
-	frobulator_return=()
-
-	if [ -f "${HOME}"/.dextop/selection ]
-	then
-		selection=$(cat "${HOME}"/.dextop/selection)
-	else
-		frobulator.input ${values_list[@]}
-	fi
-
-	eval ${frobulator_return[@]}
-
-	# check selection input against selection list
-
-	while true
-	do
-		# range check:
-		# selection input must be in provided range and an integer
-
-		if [[ "${selection}" -lt 1           ]] || \
-		   [[ "${selection}" -gt "${number}" ]] || \
-		   [[ ! "${selection}" =~ ^[0-9]+$   ]]
-		then
-			echo
-			frobulator.err "Invalid selection:"
-			echo
-
-			frobulator.wrn "Select container [ 1 - ${number} ]"
-			echo
-
-			frobulator.ipt "Selection:"
-
-			frobulator.read selection
-		else
-			break
-		fi
-	done
-
-	distribution_name="${name}"
-	distribution_version="${version}"
-
-	CONTAINER_ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
 }
 
 container_input () {
@@ -424,7 +431,7 @@ container_user () {
 	done < "${CONTAINER_ROOT}"/etc/passwd
 }
 
-container_session () {
+container_command () {
 
 	# load session settings
 
@@ -443,57 +450,43 @@ container_session () {
 	session_command+=" --change-id=${USER_ID}:${GROUP_ID}"
 	session_command+=" --pwd=${HOME}"
 
-	# android 10+ requirements
+    [ -d "/apex" ]                                && session_command+=" --bind=/apex:/apex"
+    [ -e "/linkerconfig/ld.config.txt" ]          && session_command+=" --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt"
 
-	[ -d "/apex" ]                                && intent_command+=" --bind=/apex:/apex"
-	[ -e "/linkerconfig/ld.config.txt" ]          && intent_command+=" --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt"
+	# system directories
 
-	# android requirements
+    [ -d "/data" ]                                && session_command+=" --bind=/data:/data"
+    [ -d "/dev" ]                                 && session_command+=" --bind=/dev:/dev"
+    [ -e "/dev/urandom" ]                         && session_command+=" --bind=/dev/urandom:/dev/random"
+    [ -d "/proc" ]                                && session_command+=" --bind=/proc:/proc"
+    [ -d "/proc/self/fd" ]                        && session_command+=" --bind=/proc/self/fd:/dev/fd"
+    [ -e "/proc/self/fd/0" ]                      && session_command+=" --bind=/proc/self/fd/0:/dev/stdin"
+    [ -e "/proc/self/fd/1" ]                      && session_command+=" --bind=/proc/self/fd/1:/dev/stdout"
+    [ -e "/proc/self/fd/2" ]                      && session_command+=" --bind=/proc/self/fd/2:/dev/stderr"
+    [ -d "/storage" ]                             && session_command+=" --bind=/storage:/storage"
+    [ -d "/sys" ]                                 && session_command+=" --bind=/sys:/sys"
+    [ -d "/system" ]                              && session_command+=" --bind=/system:/system"
+    [ -d "/vendor" ]                              && session_command+=" --bind=/vendor:/vendor"
 
-	[ -d "/data" ]                                   && session_command+=" --bind=/data:/data"
-	[ -d "/dev" ]                                    && session_command+=" --bind=/dev:/dev"
-	[ -e "/dev/urandom" ]                            && session_command+=" --bind=/dev/urandom:/dev/random"
-	[ -d "/proc" ]                                   && session_command+=" --bind=/proc:/proc"
-	[ -d "/proc/self/fd" ]                           && session_command+=" --bind=/proc/self/fd:/dev/fd"
-	[ -e "/proc/self/fd/0" ]                         && session_command+=" --bind=/proc/self/fd/0:/dev/stdin"
-	[ -e "/proc/self/fd/1" ]                         && session_command+=" --bind=/proc/self/fd/1:/dev/stdout"
-	[ -e "/proc/self/fd/2" ]                         && session_command+=" --bind=/proc/self/fd/2:/dev/stderr"
-	[ -d "/storage" ]                                && session_command+=" --bind=/storage:/storage"
-	[ -d "/sys" ]                                    && session_command+=" --bind=/sys:/sys"
-	[ -d "/system" ]                                 && session_command+=" --bind=/system:/system"
-	[ -d "/vendor" ]                                 && session_command+=" --bind=/vendor:/vendor"
+	[ -d "${PREFIX%/*}"/home ]                    && session_command+=" --bind=${PREFIX%/*}/home:${HOME}"
+	[ -d "${PREFIX}"/media ]                      && session_command+=" --bind=${PREFIX}/media:/media"
+	[ -d "${PREFIX}"/tmp ]                        && session_command+=" --bind=${PREFIX}/tmp:/tmp"
 
-	# transient directories
+	# environement
 
-	[ -d "${PREFIX%/*}"/home ]                       && session_command+=" --bind=${PREFIX%/*}/home:${HOME}"
-	[ -d "${PREFIX}"/tmp ]                           && session_command+=" --bind=${PREFIX}/tmp:/tmp"
-
-	# environemnt
-
-	session_command+=" env"
-	session_command+=" --ignore-environment"
-	session_command+=" ANDROID_ART_ROOT=${ANDROID_ART_ROOT}"
-	session_command+=" ANDROID_DATA=${ANDROID_DATA}"
-	session_command+=" ANDROID_I18N_ROOT=${ANDROID_I18N_ROOT}"
-	session_command+=" ANDROID_ROOT=${ANDROID_ROOT}"
-	session_command+=" ANDROID_RUNTIME_ROOT=${ANDROID_RUNTIME_ROOT}"
-	session_command+=" ANDROID_TZDATA_ROOT=${ANDROID_TZDATA_ROOT}"
-	session_command+=" BOOTCLASSPATH=${BOOTCLASSPATH}"
-	session_command+=" DEX2OATBOOTCLASSPATH=${DEX2OATBOOTCLASSPATH}"
-
-	# termux
+    session_command+=" env"
+    session_command+=" --ignore-environment"
 
 	session_command+=" PREFIX=${PREFIX}"
 	session_command+=" TERMUX_BINARIES=${PREFIX}/bin"
 
-	# container
+	session_command+=" PATH=${PATH}:${TERMUX_BINARIES}"
 
 	session_command+=" COLORTERM=${COLORTERM}"
 	session_command+=" DISPLAY=${DISPLAY}"
 	session_command+=" DISPLAY_DRIVER=${DISPLAY_DRIVER}"
 	session_command+=" HOME=${HOME}"
 	session_command+=" LANG=${LANG}"
-	session_command+=" PATH=${PATH}:${TERMUX_BINARIES}"
 	session_command+=" SHELL=${SHELL}"
 	session_command+=" TERM=${TERM}"
 	session_command+=" TMPDIR=${TMPDIR}"
@@ -512,9 +505,22 @@ container_session () {
 	session_command+=" ${SHELL}"
 	session_command+=" --login"
 
-	# execute 'proot'
+	# execute 'proot' login
 
 	${session_command}
+}
+
+container_display () {
+
+	display_activity="${termux_x11_activity}"
+
+	unset intent_command
+
+	intent_command+="am start"
+	intent_command+=" --user 0"
+	intent_command+=" -n ${display_activity}"
+
+	frobulator.silence "${intent_command}"
 }
 
 container_application () {
@@ -539,107 +545,107 @@ container_application () {
 			zenity			 											\
 				--warning												\
 					--width="200"										\
-					--window-icon="${HOME}/.dextop/dextop.svg"			\
+					--window-icon="${HOME}/.dextop/dextop-black.svg"			\
 					--text="Application '${application}' not found." 2> "${sink}" &
 		fi
 	fi
 }
 
-# //////////////////////////////////////////////////////////////////////////////
+container_session () {
 
-# look for corresponding server process:
-# handle and stop display server and purge runtime files
+	# load session
 
-if [[ $(pidof "${termux_x11_process}") ]]
-then
-	# x11 loader
+	frobulator.fwd "Loading desktop interface${marker_elp}"
+	echo
 
-	kill -9 $(pidof "${termux_x11_process}") > "${sink}" 2>&1 &
+	if [[ $(pgrep -f proot) ]]
+	then
+		if [[ $(pgrep -f "${session}") ]]
+		then
+			kill -9 $(pgrep -f "${session}")
+		fi
+	fi
 
-	frobulator.process "Stopping display loader"
-fi
-
-if [[ $(pidof com.termux.x11) ]]
-then
-	# x11 process
-
-	display_activity="${termux_x11_activity_stop}"
-
-	unset intent_command
-
-	intent_command+="am broadcast"
-	intent_command+=" --user 0"
-	intent_command+=" -a ${display_activity}"
-
-	frobulator.silence "${intent_command}" &
-
-	frobulator.process "Stopping display viewer"
-fi
-
-if [[ $(pidof virgl_test_server_android) ]]
-then
-	# virtual gl server
-
-	kill -9 $(pidof "${virgl_server}") > "${sink}" 2>&1 &
-
-	frobulator.process "Stopping display server"
-fi
-
-# //////////////////////////////////////////////////////////////////////////////
-
-if [[ $(pidof "${virgl_server}") ]]
-then
-	:
-else
-	"${virgl_server}" > "${sink}" 2>&1 &
-fi
-
-if [[ $(pidof "${termux_x11_display}") ]]
-then
-	:
-else
-	"${termux_x11_display}" > "${sink}" 2>&1 &
-fi
-
-# //////////////////////////////////////////////////////////////////////////////
-
-# generate display
-
-frobulator.fwd "Generating display${marker_elp}"
-echo
-
-unset intent_command
-
-intent_command+="am start"
-intent_command+=" --user 0"
-intent_command+=" -n ${display_activity}"
-
-frobulator.silence "${intent_command}"
-
-# //////////////////////////////////////////////////////////////////////////////
-
-# load session
-
-frobulator.fwd "Loading desktop interface${marker_elp}"
-echo
-
-if [[ $(pidof "${session}") ]]
-then
-	:
-else
 	if [[ $(command -v "${session}") ]]
 	then
 		frobulator.silence "${session} &"
 	fi
+}
+
+display_start () {
+
+	if [[ $(pgrep -f virgl_test_server) ]]
+	then
+		:
+	else
+		virgl_test_server &
+	fi
+
+	if [[ $(pgrep -f com.termux.x11) ]]
+	then
+		:
+	else
+		termux-x11 "${DISPLAY}" &
+	fi
+
+	frobulator.fwd "Opening display${marker_elp}"
+	echo
+
+	display_activity="${termux_x11_activity}"
+
+	unset intent_command
+
+	intent_command+="am start"
+	intent_command+=" --user 0"
+	intent_command+=" -n ${display_activity}"
+
+	frobulator.silence "${intent_command}"
+}
+
+display_stop () {
+
+	# handle and stop display server
+
+	if [[ $(pgrep -f com.termux.x11) ]]
+	then
+		display_activity="${termux_x11_activity_stop}"
+
+		unset intent_command
+
+		intent_command+="am broadcast"
+		intent_command+=" --user 0"
+		intent_command+=" -a ${display_activity}"
+
+		frobulator.silence "${intent_command}" &
+
+		frobulator.process "Stopping display viewer"
+
+	else
+		frobulator.wrn "No active display process detected."
+		echo
+
+		frobulator.fwd "Exiting${marker_elp}"
+		echo
+	fi
+}
+
+if [ "${option}" = "start" ]
+then
+	# start display session
+
+	display_start
 fi
 
-# //////////////////////////////////////////////////////////////////////////////
-
-if [ "${option}" = "application" ]
+if [ "${option}" = "stop" ]
 then
-	# validate and start selected application
+	# stop display session
 
-	container_application
+	if [[ $(pgrep -f proot) ]]
+	then
+		:
+	else
+		display_stop
+	fi
 fi
 
 if [ "${option}" = "username" ]
@@ -654,7 +660,7 @@ then
 
 	# start container session
 
-	container_session
+	container_command
 fi
 
 if [ "${option}" = "root" ]
@@ -673,5 +679,5 @@ then
 
 	# start container session
 
-	container_session
+	container_command
 fi
