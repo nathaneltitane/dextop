@@ -139,16 +139,6 @@ GALLIUM_DRIVER="${TERMUX_X11_DRIVER}"
 
 # defaults /////////////////////////////////////////////////////////////////////
 
-if [ -z "${environment}" ]
-then
-	environement="$(cat ${HOME}/.dextop/dextop-environment)"
-fi
-
-if [ -z "${session}" ]
-then
-	session="$(cat ${HOME}/.dextop/dextop-session)"
-fi
-
 if [ -z "${COLORTERM}" ]
 then
 	COLORTERM="truecolor"
