@@ -518,9 +518,7 @@ container_intent () {
 
 	session_command+=" PREFIX=${PREFIX}"
 	session_command+=" TERMUX_BINARIES=${PREFIX}/bin"
-
 	session_command+=" PATH=${PATH}:${CONTAINER_PATH}"
-
 	session_command+=" COLORTERM=${COLORTERM}"
 	session_command+=" DISPLAY=${DISPLAY}"
 	session_command+=" DISPLAY_DRIVER=${DISPLAY_DRIVER}"
@@ -530,13 +528,13 @@ container_intent () {
 	session_command+=" TERM=${TERM}"
 	session_command+=" TMPDIR=${TMPDIR}"
 	session_command+=" USER=${USER}"
-	session_command+=" XDG_CONFIG_DIRS=/etc/xdg"
-	session_command+=" XDG_RUNTIME_DIR=/run/user/${USER_ID}"
 	session_command+=" XDG_CACHE_HOME=${HOME}/.cache"
+	session_command+=" XDG_CONFIG_DIRS=/etc/xdg"
 	session_command+=" XDG_CONFIG_HOME=${HOME}/.config"
-	session_command+=" XDG_DATA_HOME=${HOME}/.local/share"
-	session_command+=" XDG_STATE_HOME=${HOME}/.local/state"
 	session_command+=" XDG_DATA_DIRS=/usr/local/share:/usr/share"
+	session_command+=" XDG_DATA_HOME=${HOME}/.local/share"
+	session_command+=" XDG_RUNTIME_DIR=/run/user/${USER_ID}"
+	session_command+=" XDG_STATE_HOME=${HOME}/.local/state"
 	session_command+=" XAUTHORITY=${XDG_RUNTIME_DIR}/Xauthority"
 
 	# command
@@ -613,18 +611,18 @@ container_session () {
 
 display_start () {
 
-	if [[ $(pgrep -f virgl_test_server) ]]
+	if [[ $(pgrep -f "${TERMUX_X11_ACCELERATOR}") ]]
 	then
 		:
 	else
-		virgl_test_server &
+		"${TERMUX_X11_ACCELERATION}" &
 	fi
 
-	if [[ $(pgrep -f com.termux.x11) ]]
+	if [[ $(pgrep -f "${TERMUX_X11_APPLICATION}") ]]
 	then
 		:
 	else
-		termux-x11 "${DISPLAY}" &
+		"${TERMUX_X11_SERVER}" "${DISPLAY}" &
 	fi
 
 	frobulator.fwd "Opening display${marker_elp}"
@@ -645,7 +643,7 @@ display_stop () {
 
 	# handle and stop display server
 
-	if [[ $(pgrep -f com.termux.x11) ]]
+	if [[ $(pgrep -f "${TERMUX_X11_APPLICATION}") ]]
 	then
 		display_activity="${termux_x11_activity_stop}"
 
