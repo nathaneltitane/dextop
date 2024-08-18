@@ -419,7 +419,7 @@ container_user () {
 
 container_environment () {
 
-	# generate container environement
+	# generate container environment
 
 	CONTAINER_ROOT="${PREFIX}"/cnt/debian/12
 
@@ -464,7 +464,7 @@ container_intent () {
 
 	unset LD_PRELOAD
 
-	# generate container environement
+	# generate container environment
 
 	container_environment
 
@@ -501,7 +501,7 @@ container_intent () {
 	[ -d "${PREFIX}"/media ]                      && session_command+=" --bind=${PREFIX}/media:/media"
 	[ -d "${PREFIX}"/tmp ]                        && session_command+=" --bind=${PREFIX}/tmp:/tmp"
 
-	# environement
+	# environment
 
     session_command+=" env"
     session_command+=" --ignore-environment"
