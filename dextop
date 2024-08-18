@@ -789,8 +789,6 @@ then
 		frobulator.fwd "Updating${marker_elp}"
 		echo
 
-		preferences_intent
-
 		dextop_intent
 
 		utility_intent
