@@ -159,7 +159,7 @@ fi
 
 if [ -z "${LANG}" ]
 then
-	LANG="C.UTF-8"
+	LANG="${LANG}"
 fi
 
 if [ -z "${SHELL}" ]
