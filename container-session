@@ -568,7 +568,7 @@ container_application () {
 	then
 		# start display session
 
-		display_intent
+		container_display
 
 		# load application
 
