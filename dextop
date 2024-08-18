@@ -100,7 +100,7 @@ do
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} -c | -e [Environment] | -t | -n | -l | -i | -b | -u [Update Type] [Update Name] | [OPTION]"
+			echo -e "Usage: ${script} -c | -e [Environment] | -t | -n | -l | -i | -b | -u [Update] [Name] | [OPTION]"
 			echo
 			echo -e "Options:"
 			echo
