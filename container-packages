@@ -155,17 +155,6 @@ xfce_themes_list+=(
 	arc-theme
 	adwaita-icon-theme
 	adwaita-icon-theme-full
-#	papirus-icon-theme
-#	blackbird-gtk-theme
-#	bluebird-gtk-theme
-#	greybird-gtk-theme
-#	elementary-xfce-icon-theme
-#	gnome-themes-standard
-#	gnome-themes-extra
-#	gnome-themes-extra-data
-#	tango-icon-theme
-#	tango-icon-theme-common
-#	tango-icon-theme-extras
 )
 
 xfce_addons_list+=(
@@ -246,7 +235,6 @@ install_list+=(
 	${multimedia_list[@]}
 	${security_list[@]}
 	${utilities_list[@]}
-	${vnc_list[@]}
 	${desktop_environment_list[@]}
 )
 
