@@ -52,13 +52,6 @@ do
 			option="stop"
 		;;
 
-		-a|--application)
-			option="application"
-			application="${2}"
-
-			shift
-		;;
-
 		-u|--username)
 			option="username"
 			user_name="${2}"
@@ -545,34 +538,6 @@ container_display () {
 	frobulator.silence "${intent_command}"
 }
 
-container_application () {
-
-	# handle application launch
-
-	if [[ $(command -v "${application}") ]]
-	then
-		# start display session
-
-		container_display
-
-		# load application
-
-		container_intent "${application}"
-	else
-		frobulator.err "Application not found" "[ "${application}" ]"
-		echo
-
-		if [[ $(command -v zenity) ]]
-		then
-			zenity			 											\
-				--warning												\
-					--width="200"										\
-					--window-icon="${HOME}/.dextop/dextop-black.svg"	\
-					--text="Application '${application}' not found." 2> "${sink}" &
-		fi
-	fi
-}
-
 container_session () {
 
 	# load session
@@ -673,13 +638,6 @@ then
 	else
 		display_stop
 	fi
-fi
-
-if [ "${option}" = "application" ]
-then
-	# launch application
-
-	container_application
 fi
 
 if [ "${option}" = "username" ]
