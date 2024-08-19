@@ -525,8 +525,7 @@ container_intent () {
 
 	# command
 
-	session_command+=" ${SHELL}"
-	session_command+=" --login"
+	session_command+=" ${@}"
 
 	# execute 'proot' login
 
@@ -558,7 +557,7 @@ container_application () {
 
 		# load application
 
-		${application} &
+		container_intent "${application} &"
 	else
 		frobulator.err "Application not found" "[ "${application}" ]"
 		echo
@@ -676,6 +675,13 @@ then
 	fi
 fi
 
+if [ "${option}" = "application" ]
+then
+	# launch application
+
+	container_application
+fi
+
 if [ "${option}" = "username" ]
 then
 	# validate root filesystem
@@ -688,7 +694,7 @@ then
 
 	# start container session
 
-	container_intent
+	container_intent "${SHELL}"
 fi
 
 if [ "${option}" = "root" ]
@@ -707,5 +713,5 @@ then
 
 	# start container session
 
-	container_intent
+	container_intent "${SHELL}"
 fi
