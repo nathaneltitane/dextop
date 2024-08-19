@@ -2,15 +2,18 @@
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-2f343f.svg?style=for-the-badge)](https://www.paypal.com/donate/?hosted_button_id=2WZT7PCW3XDX6)
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 06-26-2024 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 08-19-2024 ]
 
 ---
 
 ### NOTICE
 
-08-11-2024 ↴
+08-19-2024 ↴
 
-  - Known issue with 'proot' not running the X11 automatic login and display sequence when running container - [possible fault with 'proot' or with $PATH management](https://github.com/termux/proot/issues/301) - Debugging help appreciated.
+- Known issue with 'activity manager' not launching Termux:X11 application display from within 'proot' container (mus be opened manually)
+- Updated 'container-session' utility and BASH profile hooks
+    - Removed all legacy VNC options, entries and logic - now using Termux:X11 with acceleration as default and only display option.
+
 
 08-10-2024 ↴
 
@@ -590,7 +593,7 @@ Should you suspect any issues or errors, please provide a copy of those files wh
 
 ---
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 06-26-2024 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 08-19-2024 ]
 
 ### Enjoying Dextop? Buy me a coffee to show your appreciation!
 
