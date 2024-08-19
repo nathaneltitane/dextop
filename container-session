@@ -557,7 +557,7 @@ container_application () {
 
 		# load application
 
-		container_intent "${application} &"
+		container_intent "${application}"
 	else
 		frobulator.err "Application not found" "[ "${application}" ]"
 		echo
