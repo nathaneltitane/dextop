@@ -573,14 +573,14 @@ display_start () {
 	then
 		:
 	else
-		"${TERMUX_X11_ACCELERATOR}" 2>&1 "${sink}" &
+		"${TERMUX_X11_ACCELERATOR}" > "${sink}" 2>&1 &
 	fi
 
 	if [[ $(pgrep -f "${TERMUX_X11_APPLICATION}") ]]
 	then
 		:
 	else
-		"${TERMUX_X11_SERVER}" "${DISPLAY}" 2>&1 "${sink}" &
+		"${TERMUX_X11_SERVER}" "${DISPLAY}" > "${sink}" 2>&1 &
 	fi
 
 	frobulator.fwd "Opening display${marker_elp}"
