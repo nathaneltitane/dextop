@@ -662,6 +662,10 @@ then
 	# start display session
 
 	display_start
+
+	# load session
+
+	container_session
 fi
 
 if [ "${option}" = "stop" ]
@@ -689,8 +693,6 @@ then
 	# start container session
 
 	container_intent
-
-	container_session
 fi
 
 if [ "${option}" = "root" ]
