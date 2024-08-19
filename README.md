@@ -12,14 +12,15 @@
 
 - Known issue with 'activity manager' not launching Termux:X11 application display from within 'proot' container (mus be opened manually)
 - Updated 'container-session' utility and BASH profile hooks
-    - Removed all legacy VNC options, entries and logic - now using Termux:X11 with acceleration as default and only display option.
-
+    - Removed all legacy VNC options, entries and logic - now using Termux:X11 with acceleration as default and only display option
+    - Simplified bind mounts and refactored all functions
 
 08-10-2024 ↴
 
 - Fixed missing bookmark entries
 - Fixed missing standard $HOME directories generation (frobulator.directory)
 - Updated storage designations in 'container-session'
+
 
 08-07-2024 ↴
 
