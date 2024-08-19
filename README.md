@@ -249,13 +249,9 @@ Effectively, the base ```${HOME}``` location is now shared accross all container
 
 ### Interface:
 
-Dextop offers two methods to turn an Android device into a desktop workstation and provide access to both the Termux and container side using a graphical interface.
+Dextop uses the native display server application 'termux-x11' alongside the Termux:X11 android application package and forwards the display using the device's native resolution and DPI settings using the device's hardware graphics platform (GPU).
 
-The VNC method uses the X11 virtual framebuffer 'xvfb' alongside the X11 VNC server 'x11vnc' and forwards a display port within the device as 'localhost' to minimize latency and runs it using software level emulated acceleration (LLVM).
-
-The X11 method uses a native display server application 'termux-x11' alongside the Termux:X11 android application package and forwards the display using the device's native resolution and DPI settings using the device's hardware graphics platform (GPU).
-
-In either case, the experience is extremely similar to setting up a virtual machine (VM) on a typical laptop or desktop computer and accessing it through a viewer.
+The experience is extremely similar to setting up a virtual machine (VM) on a typical laptop or desktop computer and accessing it through a viewer.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────────────┐
