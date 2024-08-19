@@ -585,18 +585,19 @@ container_session () {
 	frobulator.fwd "Loading desktop interface${marker_elp}"
 	echo
 
-	if [[ $(pgrep -f proot) ]]
+	if [ -z "${environment}" ]
 	then
-		if [[ $(pgrep -f "${session}") ]]
-		then
-			kill -9 $(pgrep -f "${session}")
-		fi
+		environment="$(cat ${HOME}/.dextop/dextop-environment)"
 	fi
 
-	if [[ $(command -v "${session}") ]]
+	if [ -z "${session}" ]
 	then
-		frobulator.silence "${session} &"
+		session="$(cat ${HOME}/.dextop/dextop-session)"
 	fi
+
+	# load desktop environment
+
+	frobulator.silence "dbus-launch --exit-with-session ${session} &"
 }
 
 display_start () {
@@ -688,6 +689,8 @@ then
 	# start container session
 
 	container_intent
+
+	container_session
 fi
 
 if [ "${option}" = "root" ]
