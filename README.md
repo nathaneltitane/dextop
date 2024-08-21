@@ -565,7 +565,16 @@ Automatic session and display shutdown on terminal exit can be disabled as follo
 
 [GNU/Bash](https://github.com/gitGNU/gnu_bash) as the shell environment on top of which the scripts function.
 
-### Projects:
+### Reports:
+
+[Submit bug report or feature request](https://github.com/nathaneltitane/dextop/issues)
+
+Note:
+
+All setup dialogs, prompts, commands and binary execution outputs have been set to redirect to the ```'${PREFIX}/var/log'``` directory to keep output messages to a minimum.
+Should you suspect any issues or errors, please provide a copy of those files when submitting a bug report.
+
+### Other Projects:
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/nathaneltitane/frobulator?style=for-the-badge&logo=gnubash&logoColor=ffffff&label=FROBULATOR)](https://github.com/nathaneltitane/frobulator)
 
@@ -576,15 +585,6 @@ Automatic session and display shutdown on terminal exit can be disabled as follo
 [![GitHub Repo stars](https://img.shields.io/github/stars/nathaneltitane/legolinux?style=for-the-badge&logo=gnubash&logoColor=ffffff&label=LEGO//LINUX)](https://github.com/nathaneltitane/legolinux)
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/nathaneltitane/nathaneltitane?style=for-the-badge&logo=gnubash&logoColor=ffffff&label=NATHANEL+TITANE)](https://github.com/nathaneltitane/nathaneltitane)
-
-### Reports:
-
-[Submit bug report or feature request](https://github.com/nathaneltitane/dextop/issues)
-
-Note:
-
-All setup dialogs, prompts, commands and binary execution outputs have been set to redirect to the ```'${PREFIX}/var/log'``` directory to keep output messages to a minimum.
-Should you suspect any issues or errors, please provide a copy of those files when submitting a bug report.
 
 ---
 
