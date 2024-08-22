@@ -862,6 +862,10 @@ image_extract
 
 image_environment
 
+# generate environment locale
+
+image_locale
+
 # generate missing groups
 
 image_groups
