@@ -241,6 +241,15 @@ failsafe_intent () {
 	yes | apt install x11-repo  > "${sink}" 2>&1
 }
 
+initialize_intent () {
+
+	container_intent $(echo "yes | apt install curl") > "${sink}" 2>&1
+
+	container_intent $(echo "yes | apt install locales") > "${sink}" 2>&1
+
+	container_intent $(echo "yes | locale-gen en_US.UTF-8") > "${sink}" 2>&1
+}
+
 container_environment () {
 
 	# generate container environement
@@ -1071,11 +1080,10 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-container-initialization-checkpoint ]
 	then
-		container_intent $(echo "yes | apt install curl") > "${sink}" 2>&1
 
-		container_intent $(echo "yes | apt install locales") > "${sink}" 2>&1
+		initialize_intent &
 
-		container_intent $(echo "yes | locale-gen en_US.UTF-8") > "${sink}" 2>&1
+		frobulator.process "Please wait"
 
 		frobulator.file "${HOME}"/.dextop dextop-container-initialization-checkpoint
 	fi
