@@ -1080,7 +1080,6 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-container-initialization-checkpoint ]
 	then
-
 		initialize_intent &
 
 		frobulator.process "Please wait"
