@@ -243,11 +243,11 @@ failsafe_intent () {
 
 initialization_intent () {
 
-	container_intent $(echo "yes | apt install curl") > "${sink}" 2>&1
+	container_intent $(echo "yes | apt install curl")
 
-	container_intent $(echo "yes | apt install locales") > "${sink}" 2>&1
+	container_intent $(echo "yes | apt install locales")
 
-	container_intent $(echo "yes | locale-gen en_US.UTF-8") > "${sink}" 2>&1
+	container_intent $(echo "yes | locale-gen en_US.UTF-8")
 }
 
 container_environment () {
