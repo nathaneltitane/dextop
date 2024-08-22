@@ -468,7 +468,7 @@ utility_intent () {
 		termux-addons
 		container-expansion
 		container-image
-		container-initialize
+		container-initialization
 		container-packages
 		container-session
 		container-settings
@@ -1072,7 +1072,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-container-initialization-checkpoint ]
 	then
-		container_intent "${HOME}"/.local/bin/container-initialize
+		container_intent "${HOME}"/.local/bin/container-initialization
 
 		frobulator.file "${HOME}"/.dextop dextop-container-initialization-checkpoint
 	fi
