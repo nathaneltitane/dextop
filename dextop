@@ -241,7 +241,7 @@ failsafe_intent () {
 	yes | apt install x11-repo  > "${sink}" 2>&1
 }
 
-initialize_intent () {
+initialization_intent () {
 
 	container_intent $(echo "yes | apt install curl") > "${sink}" 2>&1
 
@@ -1080,7 +1080,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-container-initialization-checkpoint ]
 	then
-		initialize_intent &
+		initialization_intent &
 
 		frobulator.process "Please wait"
 
