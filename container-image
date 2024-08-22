@@ -728,6 +728,15 @@ image_groups () {
 	IFS=''
 }
 
+image_locale () {
+
+	# set locale selection for container
+
+	echo "LC_ALL=en_US.UTF-8" >> /etc/environment
+	echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+	echo "LANG=en_US.UTF-8" > /etc/locale.conf
+}
+
 image_network () {
 
 	# generate network files
