@@ -52,7 +52,7 @@ frobulator.script "Setting up ${script#*-}"
 
 failsafe_intent () {
 
-	# run failsafe container package and repository update:
+	# run failsafe termux package and repository update:
 	# mitigate general deployment setup issues
 	# mitigate skipped packages on install
 
