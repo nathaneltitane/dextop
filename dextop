@@ -1073,6 +1073,10 @@ then
 	then
 		container_intent $(echo "yes | apt install curl") > "${sink}" 2>&1
 
+		container_intent $(echo "yes | apt install locales") > "${sink}" 2>&1
+
+		container_intent $(echo "yes | locale-gen en_US.UTF-8") > "${sink}" 2>&1
+
 		frobulator.file "${HOME}"/.dextop dextop-container-initialization-checkpoint
 	fi
 
