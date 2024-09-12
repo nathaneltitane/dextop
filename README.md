@@ -1,6 +1,6 @@
 ![dextop](https://raw.githubusercontent.com/nathaneltitane/dextop/main/dextop.svg)
 
-[![Donate](https://img.shields.io/badge/'Buy Me A Coffee'-2f343f.svg?style=for-the-badge&logo=buymeacoffee&label=Donate)](https://buymeacoffee.com/nathaneltitane)
+[![Donate](https://img.shields.io/badge/Donate-2f343f.svg?style=for-the-badge&logo=buymeacoffee&label=DONATE)](https://buymeacoffee.com/nathaneltitane)
 
 
 [[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 08-19-2024 ]
