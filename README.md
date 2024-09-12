@@ -1,6 +1,6 @@
 ![dextop](https://raw.githubusercontent.com/nathaneltitane/dextop/main/dextop.svg)
 
-[![Donate](https://img.shields.io/badge/Donate-2f343f.svg?style=for-the-badge&logo=buymeacoffee&label=DONATE)](https://buymeacoffee.com/nathaneltitane)
+[![Donate](https://img.shields.io/badge/Donate-2f343f.svg?style=for-the-badge&logo=buymeacoffee&label=test)](https://buymeacoffee.com/nathaneltitane)
 
 
 
