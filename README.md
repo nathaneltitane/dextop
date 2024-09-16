@@ -592,4 +592,4 @@ Should you suspect any issues or errors, please provide a copy of those files wh
 
 ### Enjoying Dextop? Buy me a coffee to show your appreciation!
 
-[![Donate](https://img.shields.io/badge/Buy_Me_A_Coffee-2f343f.svg?style=for-the-badge&logo=buymeacoffee&label=Donate)](https://www.paypal.com/donate?hosted_button_id=ZW3CDCANHJCWJ)
+[![Donate](https://img.shields.io/badge/Paypal-2f343f.svg?style=for-the-badge&logo=paypal&label=Donate)](https://www.paypal.com/donate?hosted_button_id=ZW3CDCANHJCWJ)
