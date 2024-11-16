@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="08-06-2024"
+version="11-16-2024"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -92,6 +92,10 @@ do
 
 			shift
 
+		;;
+
+		-p|--purge)
+			option="purge"
 		;;
 
 		-a|--addons)
@@ -763,6 +767,66 @@ session_intent () {
 	"${PREFIX}"/bin/login
 }
 
+purge_intent () {
+
+	# purge items loaded during dextop install
+
+	items_list=(
+
+		# files
+
+		"${HOME}"/.hushlogin
+		"${HOME}"/.config/gtk-3.0/bookmarks
+
+		"${HOME}"/.local/bin/bash-aliases
+		"${HOME}"/.local/bin/bash-configuration
+		"${HOME}"/.local/bin/bash-configuration
+		"${HOME}"/.local/bin/bash-functions
+		"${HOME}"/.local/bin/bash-login
+		"${HOME}"/.local/bin/bash-logout
+		"${HOME}"/.local/bin/bash-profile
+
+		"${HOME}"/.bash_aliases
+		"${HOME}"/.bashrc
+		"${HOME}"/.bash_configuration
+		"${HOME}"/.bash_functions
+		"${HOME}"/.bash_login
+		"${HOME}"/.bash_logout
+		"${HOME}"/.bash_profile
+
+		# directories
+
+		"${HOME}"/.dextop
+		"${HOME}"/.icons
+		"${HOME}"/.themes
+
+		"${PREFIX%/*}"bin
+		"${PREFIX%/*}"bkp
+		"${PREFIX%/*}"cnt
+		"${PREFIX%/*}"etc
+		"${PREFIX%/*}"img
+		"${PREFIX%/*}"lib
+		"${PREFIX%/*}"mnt
+		"${PREFIX%/*}"opt
+		"${PREFIX%/*}"tmp
+		"${PREFIX%/*}"media
+
+		"${PREFIX}"/bkp
+		"${PREFIX}"/cnt
+		"${PREFIX}"/img
+		"${PREFIX}"/mnt
+		"${PREFIX}"/media
+		"${PREFIX}"/storage
+
+	)
+
+	for item in ${items_list}
+	do
+		frobulator.delete "${item}"
+	done
+
+}
+
 # architecture check ///////////////////////////////////////////////////////////
 
 frobulator.log "architecture_intent"
@@ -778,6 +842,12 @@ if [ "${option}" = "addons" ]
 then
 	addons_intent
 fi
+
+if [ "${option}" = "purge" ]
+then
+	purge_intent
+fi
+
 
 if [ "${option}" = "update" ]
 then
