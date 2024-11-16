@@ -769,6 +769,10 @@ session_intent () {
 
 purge_intent () {
 
+	# uninstall desktop environment and dependencies
+
+	yes | apt purge xfce* > "${sink}" 2>&1
+
 	# purge items loaded during dextop install
 
 	items_list=(
