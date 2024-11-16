@@ -773,6 +773,8 @@ purge_intent () {
 
 	yes | apt purge xfce* > "${sink}" 2>&1
 
+	yes | apt clean > "${sink}" 2>&1
+
 	# purge items loaded during dextop install
 
 	items_list=(
@@ -875,10 +877,13 @@ then
 	if [[ "${reply}" = [yY]         ]] || \
 	[[ "${reply}" = [yY][eE][sS] ]]
 	then
-		frobulator.fwd "Purging${marker_elp}"
+		frobulator.fwd "Removal in progress${marker_elp}"
 		echo
 
-		purge_intent
+		purge_intent &
+
+		frobulator.progress "purge"
+
 	else
 		frobulator.inf "Aborting" "[ ${update} ]"
 		echo
