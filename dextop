@@ -824,7 +824,6 @@ purge_intent () {
 	do
 		frobulator.delete "${item}"
 	done
-
 }
 
 # architecture check ///////////////////////////////////////////////////////////
@@ -845,9 +844,44 @@ fi
 
 if [ "${option}" = "purge" ]
 then
-	purge_intent
-fi
+	# notice
 
+	frobulator.err "" "[ DISCLAIMER ]"
+	echo
+
+	frobulator.separate
+
+	frobulator.wrn "'Purge' option has been selected:"
+	frobulator.wrn "This action is permanent."
+	echo
+
+	frobulator.inf "All items loaded during the Dextop setup process will be PERMANENTLY REMOVED."
+	frobulator.nul "Modifications made outside the intended installation process may cause instability or data corruption upon removal."
+	echo
+
+	frobulator.wrn "The author is not responsible for any damages or issues arising from the removal of Dextop."
+	frobulator.nul "You have been warned."
+
+	frobulator.separate
+
+	frobulator.ask "Purge Dextop?"
+
+	frobulator.read reply
+
+	if [[ "${reply}" = [yY]         ]] || \
+	[[ "${reply}" = [yY][eE][sS] ]]
+	then
+		frobulator.fwd "Purging${marker_elp}"
+		echo
+
+		purge_intent
+	else
+		frobulator.inf "Aborting" "[ ${update} ]"
+		echo
+
+		exit
+	fi
+fi
 
 if [ "${option}" = "update" ]
 then
