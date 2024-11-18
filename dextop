@@ -135,7 +135,9 @@ do
 			echo -e "                    [ termux ]"
 			echo -e "                    [ preferences ]"
 			echo
-			echo -e "-a, --additions     Setup Termux addons and companion applications."
+			echo -e "-p, --purge         Purge setup components and packages."
+			echo
+			echo -e "-a, --addons        Setup Termux addons and companion applications."
 			echo
 			echo -e "-h, --help          Show help and usage information."
 			echo
