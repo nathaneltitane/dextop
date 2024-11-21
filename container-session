@@ -176,6 +176,69 @@ export TERMUX_X11_ACCELERATOR="${TERMUX_X11_ACCELERATOR}"
 
 # functions ////////////////////////////////////////////////////////////////////
 
+container_parse () {
+
+	# parse container directories
+
+	# single container
+
+	if [[ ${#CONTAINER_ROOT[@]} -eq 1 ]]
+	then
+		CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
+	fi
+
+	# multiple containers:
+	# parse container directories
+
+	if [[ ${#CONTAINER_ROOT[@]} -ge 2 ]]
+	then
+		for distribution in "${PREFIX}"/cnt/*
+		do
+			for version in "${distribution}"/*
+			do
+				distribution_name=$(basename $distribution)
+
+				distribution_version=$(basename $version)
+
+				containers+=($distribution_name $distribution_version)
+			done
+		done
+
+		# set padding for uniform output
+
+		pad_length=10
+
+		# continue list using array selection of suppported values
+
+		for (( i=0 ; i<${#containers[@]} ; i+=2 ))
+		do
+			name="${containers[$i]}"
+			version="${containers[$i+1]}"
+			container="${name} ${version}"
+
+			number=$((($i/2) + 1))
+
+			if (( $i/2 >= 0 && $i/2 <= 8 ))
+			then
+				# handle number spacing for entries 1-9
+
+				printf '      [  %s ] %s ' ${number} ${name}
+			else
+				# handle number spacing for entries 10+
+
+				printf '      [ %s ] %s ' ${number} ${name}
+			fi
+
+			printf '%*s' $((pad_length - ${#name}))
+			printf '%s\n' ${version}
+		done
+
+		printf '\n'
+
+		container_handle
+	fi
+
+}
 container_handle () {
 
 	# values #
@@ -236,63 +299,7 @@ container_location () {
 
 	CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
 
-	# single container
-
-	if [[ ${#CONTAINER_ROOT[@]} -eq 1 ]]
-	then
-		CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
-	fi
-
-	# multiple containers:
-	# parse container directories
-
-	if [[ ${#CONTAINER_ROOT[@]} -ge 2 ]]
-	then
-		for distribution in "${PREFIX}"/cnt/*
-		do
-			for version in "${distribution}"/*
-			do
-				distribution_name=$(basename $distribution)
-
-				distribution_version=$(basename $version)
-
-				containers+=($distribution_name $distribution_version)
-			done
-		done
-
-		# set padding for uniform output
-
-		pad_length=10
-
-		# continue list using array selection of suppported values
-
-		for (( i=0 ; i<${#containers[@]} ; i+=2 ))
-		do
-			name="${containers[$i]}"
-			version="${containers[$i+1]}"
-			container="${name} ${version}"
-
-			number=$((($i/2) + 1))
-
-			if (( $i/2 >= 0 && $i/2 <= 8 ))
-			then
-				# handle number spacing for entries 1-9
-
-				printf '      [  %s ] %s ' ${number} ${name}
-			else
-				# handle number spacing for entries 10+
-
-				printf '      [ %s ] %s ' ${number} ${name}
-			fi
-
-			printf '%*s' $((pad_length - ${#name}))
-			printf '%s\n' ${version}
-		done
-
-		printf '\n'
-
-		container_handle
-	fi
+	container_parse
 }
 
 container_input () {
@@ -304,17 +311,17 @@ container_input () {
 		frobulator.scs "Container location found."
 		echo
 
-		frobulator.inf "Loading" "[ ${CONTAINER_ROOT} ]"
-		echo
 	else
+		CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
+
 		frobulator.err "Container location not found."
 		echo
 
 		frobulator.ipt "Select one of the following containers:"
 		echo
-
-		container_handle
 	fi
+
+	container_parse
 }
 
 container_user () {
