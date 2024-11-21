@@ -202,7 +202,7 @@ container_handle () {
 	while true
 	do
 		# range check:
-		# selection input must be in provided range and an integer
+		# selection input must be in provided range and is an integer
 
 		if [[ "${selection}" -lt 1           ]] || \
 		   [[ "${selection}" -gt "${number}" ]] || \
