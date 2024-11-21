@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="08-18-2024"
+version="11-20-2024"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -59,8 +59,8 @@ do
 			shift
 		;;
 
-		-r|--root)
-			option="root"
+		-l|--location)
+			option="location"
 			root_filesystem="${2}"
 
 			shift
@@ -80,7 +80,7 @@ do
 			echo
 			echo -e "-u, --username       Specify user name for session login."
 			echo
-			echo -e "-r, --root           Specify root filesystem directory."
+			echo -e "-l, --location       Specify root filesystem location."
 			echo
 			echo -e "-h, --help           Show help and usage information."
 			echo
@@ -230,7 +230,7 @@ container_handle () {
 
 }
 
-container_root () {
+container_location () {
 
 	# set container root directory
 
@@ -649,9 +649,9 @@ fi
 
 if [ "${option}" = "username" ]
 then
-	# validate root filesystem
+	# validate root filesystem location
 
-	container_root
+	container_location
 
 	# validate username
 
@@ -662,15 +662,15 @@ then
 	container_intent "${SHELL}"
 fi
 
-if [ "${option}" = "root" ]
+if [ "${option}" = "location" ]
 then
 	# handle manual container location input
 
 	container_input
 
-	# validate root filesystem
+	# validate root filesystem location
 
-	container_root
+	container_location
 
 	# validate username
 
