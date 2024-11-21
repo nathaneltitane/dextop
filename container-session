@@ -252,9 +252,9 @@ container_handle () {
 
 	frobulator_return=()
 
-	if [ -f "${HOME}"/.dextop/selection ]
+	if [ -f "${HOME}"/.dextop/dextop-selection ]
 	then
-		selection=$(cat "${HOME}"/.dextop/selection)
+		selection=$(cat "${HOME}"/.dextop/dextop-selection)
 	else
 		frobulator.input ${values_list[@]}
 	fi
