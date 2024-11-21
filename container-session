@@ -300,6 +300,8 @@ container_location () {
 
 	CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
 
+	# parse container directories
+
 	container_parse
 }
 
