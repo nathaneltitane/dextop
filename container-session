@@ -307,9 +307,19 @@ container_input () {
 
 	if [ -d "${root_filesystem}" ]
 	then
-		CONTAINER_ROOT="${root_filesystem}"
+		CONTAINER_ROOT=("${root_filesystem}")
 
 		frobulator.scs "Container location found."
+		echo
+
+	elif [ -z "${root_filesystem}" ]
+	then
+		CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
+
+		frobulator.wrn "Container location not specified."
+		echo
+
+		frobulator.ipt "Select one of the following containers:"
 		echo
 
 	else
