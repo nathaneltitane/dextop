@@ -62,6 +62,7 @@ do
 		-d|--directory)
 			option="directory"
 			container_directory="${2}"
+			user_name="${4}"
 
 			shift
 		;;
