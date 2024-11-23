@@ -63,6 +63,7 @@ do
 			option="directory"
 			container_directory="${2}"
 
+			# ${3} - user name parameter flag:
 			# -u|--username
 
 			user_name="${4}"
