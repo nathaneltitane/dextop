@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="11-24-2024"
+version="11-20-2024"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -269,10 +269,12 @@ container_parse () {
 		# integer check:
 		# handle numerical selection
 
-		while [[ "${selection}" -lt 1           ]] || \
-			  [[ "${selection}" -gt "${number}" ]] || \
-			  [[ ! "${selection}" =~ ^[0-9]+$   ]]
+		while true
 		do
+			if [[ "${selection}" -lt 1           ]] || \
+			   [[ "${selection}" -gt "${number}" ]] || \
+			   [[ ! "${selection}" =~ ^[0-9]+$   ]]
+			then
 				echo
 				frobulator.err "Invalid selection:"
 				echo
@@ -283,7 +285,9 @@ container_parse () {
 				frobulator.ipt "Selection:"
 
 				frobulator.read selection
-
+			else
+				break
+			fi
 		done
 
 		echo ${containers[@]}
