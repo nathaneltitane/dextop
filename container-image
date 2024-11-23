@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="05-29-2024"
+version="11-24-2024"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -150,9 +150,10 @@ image_version () {
 		)
 
 		fedora_versions=(
-			fedora	33
-			fedora	34
-			fedora	35
+			fedora	37
+			fedora	38
+			fedora	39
+			fedora	40
 		)
 
 		ubuntu_versions=(
@@ -231,8 +232,8 @@ image_version () {
 			i=$(( ${selection} ))
 			i=$(( $i * 2 ))
 
-			version="${versions[i-1]}"
 			name="${versions[i-2]}"
+			version="${versions[i-1]}"
 
 			distribution_name="${name}"
 			distribution_version="${version}"

@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="11-20-2024"
+version="11-24-2024"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -167,6 +167,17 @@ then
 	name="${NAME}"
 fi
 
+if [ -z "${PREFIX}" ]
+then
+	if [ -d "${HOME}"/PREFIX ]
+	then
+		PREFIX="${HOME}"/PREFIX
+	else
+		exit 1
+		echo "no prefix directory found"
+	fi
+fi
+
 # exports //////////////////////////////////////////////////////////////////////
 
 export TERMUX_X11_APPLICATION="${TERMUX_X11_APPLICATION}"
@@ -212,97 +223,94 @@ container_parse () {
 
 		for (( i=0 ; i<${#containers[@]} ; i+=2 ))
 		do
+			number=$((($i/2) + 1))
+
 			name="${containers[$i]}"
 			version="${containers[$i+1]}"
-			container="${name} ${version}"
 
-			number=$((($i/2) + 1))
+			indent="${marker_tab}"
+
+			if [ ${#version} -le 2 ]
+			then
+				indent+="${marker_tab}"
+			fi
 
 			if (( $i/2 >= 0 && $i/2 <= 8 ))
 			then
 				# handle number spacing for entries 1-9
 
-				printf '      [  %s ] %s ' ${number} ${name}
+				number=" ${number}"
 			else
 				# handle number spacing for entries 10+
 
-				printf '      [ %s ] %s ' ${number} ${name}
+				number="${number}"
 			fi
 
-			printf '%*s' $((pad_length - ${#name}))
-			printf '%s\n' ${version}
+			echo "${marker_nul}" "[ ${number} ]" "${name}" "${version}"
+
 		done
 
-		printf '\n'
+		echo
 
-		container_handle
+		# values #
+
+		values_list=(
+			selection
+		)
+
+		# handle user input for values_list
+
+		eval ${frobulator_return[@]}
+
+		frobulator.ipt "Selection:"
+
+		frobulator.read selection
+
+		# integer check:
+		# handle numerical selection
+
+		while true
+		do
+			if [[ "${selection}" -lt 1           ]] || \
+			   [[ "${selection}" -gt "${number}" ]] || \
+			   [[ ! "${selection}" =~ ^[0-9]+$   ]]
+			then
+				echo
+				frobulator.err "Invalid selection:"
+				echo
+
+				frobulator.wrn "Select container [ 1 - ${number} ]"
+				echo
+
+				frobulator.ipt "Selection:"
+
+				frobulator.read selection
+			else
+				break
+			fi
+		done
+
+		echo ${containers[@]}
+		echo
+
+			i=$(( ${selection} ))
+			i=$(( $i * 2 ))
+
+			name="${containers[i-2]}"
+			version="${containers[i-1]}"
+
+			distribution_name="${name}"
+			distribution_version="${version}"
+
+		# unset array
+
+		containers=()
 	fi
 
-}
+		distribution_name="${name}"
+		distribution_version="${version}"
 
-container_handle () {
-
-	# values #
-
-	values_list=(
-		selection
-	)
-
-	# handle user input for values_list
-
-	frobulator_return=()
-
-	if [ -f "${HOME}"/.dextop/dextop-selection ]
-	then
-		selection=$(cat "${HOME}"/.dextop/dextop-selection)
-	else
-		frobulator.input ${values_list[@]}
-	fi
-
-	eval ${frobulator_return[@]}
-
-	# check selection input against selection list
-
-	while true
-	do
-		# range check:
-		# selection input must be in provided range and is an integer
-
-		if [[ "${selection}" -lt 1           ]] || \
-		   [[ "${selection}" -gt "${number}" ]] || \
-		   [[ ! "${selection}" =~ ^[0-9]+$   ]]
-		then
-			echo
-			frobulator.err "Invalid selection:"
-			echo
-
-			frobulator.wrn "Select container [ 1 - ${number} ]"
-			echo
-
-			frobulator.ipt "Selection:"
-
-			frobulator.read selection
-		else
-			break
-		fi
-	done
-
-	distribution_name="${name}"
-	distribution_version="${version}"
-
-	CONTAINER_ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
-
-}
-
-container_location () {
-
-	# set container root directory
-
-	CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
-
-	# parse container directories
-
-	container_parse
+		CONTAINER_ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
 }
 
 container_input () {
@@ -314,7 +322,9 @@ container_input () {
 		frobulator.scs "Container location found."
 		echo
 
-	elif [ -z "${root_filesystem}" ]
+	fi
+
+	if [ -z "${root_filesystem}" ]
 	then
 		CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
 
@@ -324,7 +334,11 @@ container_input () {
 		frobulator.ipt "Select one of the following containers:"
 		echo
 
-	else
+		container_parse
+	fi
+
+	if [ ! -d "${root_filesystem}" ]
+	then
 		CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
 
 		frobulator.err "Container location not found."
@@ -332,9 +346,9 @@ container_input () {
 
 		frobulator.ipt "Select one of the following containers:"
 		echo
-	fi
 
-	container_parse
+		container_parse
+	fi
 }
 
 container_user () {
@@ -430,7 +444,7 @@ container_environment () {
 
 	# generate container environment
 
-	CONTAINER_ROOT="${PREFIX}"/cnt/debian/12
+	CONTAINER_ROOT="${CONTAINER_ROOT}"
 
 	# set path:
 	# in order of retreival
@@ -669,9 +683,6 @@ fi
 
 if [ "${option}" = "username" ]
 then
-	# validate root filesystem location
-
-	container_location
 
 	# validate username
 
@@ -687,10 +698,6 @@ then
 	# handle manual container location input
 
 	container_input
-
-	# validate root filesystem location
-
-	container_location
 
 	# validate username
 
