@@ -59,16 +59,16 @@ do
 			shift
 		;;
 
-		-l|--location)
-			option="location"
-			root_filesystem="${2}"
+		-d|--directory)
+			option="directory"
+			container_directory="${2}"
 
 			shift
 		;;
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} -o [Display Server] | -x | -u [User Name] | -l [Location Path] | [OPTION]"
+			echo -e "Usage: ${script} -o [Display Server] | -x | -u [User Name] | -d [Directory] | [OPTION]"
 			echo
 			echo -e "Options:"
 			echo
@@ -80,7 +80,7 @@ do
 			echo
 			echo -e "-u, --username       Specify user name for session login."
 			echo
-			echo -e "-l, --location       Specify root filesystem location as /path/to/root/name/version"
+			echo -e "-d, --directory      Specify root filesystem directory as /path/to/root/name/version"
 			echo
 			echo -e "-h, --help           Show help and usage information."
 			echo
@@ -99,7 +99,7 @@ do
 
 		*)
 			echo
-			echo -e "Usage: ${script} -o [Display Server] | -x | -u [User Name] | -l [Location Path] | [OPTION]"
+			echo -e "Usage: ${script} -o [Display Server] | -x | -u [User Name] | -d [Directory] | [OPTION]"
 			echo
 			echo -e "${script}: Unknown option '${1}'"
 			echo -e "Type './${script} --help' for help and usage information."
@@ -269,7 +269,7 @@ container_parse () {
 		# integer check:
 		# handle numerical selection
 
-		while [ "${selection}" -lt 1 ] || [ "${selection}" -gt "${number}" ] || [ ! "${selection}" =~ ^[0-9]+$ ]
+		while [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]] || [[ ! "${selection}" =~ ^[0-9]+$ ]]
 		do
 				echo
 				frobulator.err "Invalid selection:"
@@ -283,9 +283,6 @@ container_parse () {
 				frobulator.read selection
 
 		done
-
-		echo ${containers[@]}
-		echo
 
 			i=$(( ${selection} ))
 			i=$(( $i * 2 ))
@@ -305,27 +302,29 @@ container_parse () {
 		distribution_version="${version}"
 
 		CONTAINER_ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
+
+		# specify container_directory for container input handling
+
+		container_directory="${CONTAINER_ROOT}"
 }
 
 container_input () {
 
 	# user specified container root exists
 
-	if [ -d "${root_filesystem}" ]
+	if [ -d "${container_directory}" ]
 	then
-		CONTAINER_ROOT=("${root_filesystem}")
-
-		frobulator.scs "Container location found."
+		frobulator.scs "Container directory found."
 		echo
 	fi
 
 	# no container root specified
 
-	if [ -z "${root_filesystem}" ]
+	if [ -z "${container_directory}" ]
 	then
 		CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
 
-		frobulator.wrn "Container location not specified."
+		frobulator.wrn "Container directory not specified."
 		echo
 
 		frobulator.ipt "Select one of the following containers:"
@@ -336,11 +335,11 @@ container_input () {
 
 	# user specified container root not found or invalid
 
-	if [ ! -d "${root_filesystem}" ]
+	if [ ! -d "${container_directory}" ]
 	then
 		CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
 
-		frobulator.err "Container location not found."
+		frobulator.err "Container directory not found."
 		echo
 
 		frobulator.ipt "Select one of the following containers:"
@@ -692,9 +691,9 @@ then
 	container_intent "${SHELL}"
 fi
 
-if [ "${option}" = "location" ]
+if [ "${option}" = "directory" ]
 then
-	# handle manual container location input
+	# handle manual container directory input
 
 	container_input
 
