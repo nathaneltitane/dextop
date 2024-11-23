@@ -68,7 +68,7 @@ do
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} -o [Display Server] | -x | -u [User Name] | -l [Location] | [OPTION]"
+			echo -e "Usage: ${script} -o [Display Server] | -x | -u [User Name] | -l [Location Path] | [OPTION]"
 			echo
 			echo -e "Options:"
 			echo
@@ -80,7 +80,7 @@ do
 			echo
 			echo -e "-u, --username       Specify user name for session login."
 			echo
-			echo -e "-l, --location       Specify root filesystem location."
+			echo -e "-l, --location       Specify root filesystem location as /path/to/root/name/version"
 			echo
 			echo -e "-h, --help           Show help and usage information."
 			echo
@@ -99,7 +99,7 @@ do
 
 		*)
 			echo
-			echo -e "Usage: ${script} -o [Display Server] | -x | -u [User Name] | -l [Location] | [OPTION]"
+			echo -e "Usage: ${script} -o [Display Server] | -x | -u [User Name] | -l [Location Path] | [OPTION]"
 			echo
 			echo -e "${script}: Unknown option '${1}'"
 			echo -e "Type './${script} --help' for help and usage information."
@@ -304,14 +304,17 @@ container_parse () {
 
 container_input () {
 
+	# user specified container root exists
+
 	if [ -d "${root_filesystem}" ]
 	then
 		CONTAINER_ROOT=("${root_filesystem}")
 
 		frobulator.scs "Container location found."
 		echo
-
 	fi
+
+	no container root specified
 
 	if [ -z "${root_filesystem}" ]
 	then
@@ -325,6 +328,8 @@ container_input () {
 
 		container_parse
 	fi
+
+	# user specified container root not found or invalid
 
 	if [ ! -d "${root_filesystem}" ]
 	then
