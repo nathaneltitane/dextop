@@ -167,17 +167,6 @@ then
 	name="${NAME}"
 fi
 
-if [ -z "${PREFIX}" ]
-then
-	if [ -d "${HOME}"/PREFIX ]
-	then
-		PREFIX="${HOME}"/PREFIX
-	else
-		exit 1
-		echo "no prefix directory found"
-	fi
-fi
-
 # exports //////////////////////////////////////////////////////////////////////
 
 export TERMUX_X11_APPLICATION="${TERMUX_X11_APPLICATION}"
@@ -269,18 +258,20 @@ container_parse () {
 		# integer check:
 		# handle numerical selection
 
-		while [[ "${selection}" -lt 1 ]] || [[ "${selection}" -gt "${number}" ]] || [[ ! "${selection}" =~ ^[0-9]+$ ]]
+		while [[ "${selection}" -lt 1           ]] || \
+		      [[ "${selection}" -gt "${number}" ]] || \
+		      [[ ! "${selection}" =~ ^[0-9]+$   ]]
 		do
-				echo
-				frobulator.err "Invalid selection:"
-				echo
+			echo
+			frobulator.err "Invalid selection:"
+			echo
 
-				frobulator.wrn "Select container [ 1 - ${number} ]"
-				echo
+			frobulator.wrn "Select container [ 1 - ${number} ]"
+			echo
 
-				frobulator.ipt "Selection:"
+			frobulator.ipt "Selection:"
 
-				frobulator.read selection
+			frobulator.read selection
 
 		done
 
