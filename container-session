@@ -284,14 +284,16 @@ container_parse () {
 
 		done
 
-			i=$(( ${selection} ))
-			i=$(( $i * 2 ))
+		# parse selection parameters
 
-			name="${containers[i-2]}"
-			version="${containers[i-1]}"
+		i=$(( ${selection} ))
+		i=$(( $i * 2 ))
 
-			distribution_name="${name}"
-			distribution_version="${version}"
+		name="${containers[i-2]}"
+		version="${containers[i-1]}"
+
+		distribution_name="${name}"
+		distribution_version="${version}"
 
 		# unset array
 
