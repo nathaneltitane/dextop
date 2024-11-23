@@ -62,6 +62,9 @@ do
 		-d|--directory)
 			option="directory"
 			container_directory="${2}"
+
+			# -u|--username
+
 			user_name="${4}"
 
 			shift
@@ -303,6 +306,16 @@ container_parse () {
 }
 
 container_input () {
+
+	# no user name specified
+
+	if [ -z "${user_name}" ]
+	then
+		user_name="termux"
+
+		frobulator.wrn "User name not specified - Defaulting" "[ '${user_name}' ]"
+		echo
+	fi
 
 	# user specified container root exists
 
