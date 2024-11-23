@@ -167,6 +167,17 @@ then
 	name="${NAME}"
 fi
 
+if [ -z "${PREFIX}" ]
+then
+	if [ -d "${HOME}"/PREFIX ]
+	then
+		PREFIX="${HOME}"/PREFIX
+	else
+		exit 1
+		echo "no prefix directory found"
+	fi
+fi
+
 # exports //////////////////////////////////////////////////////////////////////
 
 export TERMUX_X11_APPLICATION="${TERMUX_X11_APPLICATION}"
@@ -274,9 +285,10 @@ container_parse () {
 				frobulator.ipt "Selection:"
 
 				frobulator.read selection
-			else
-				break
 			fi
+
+			break
+
 		done
 
 		echo ${containers[@]}
@@ -314,7 +326,7 @@ container_input () {
 		echo
 	fi
 
-	no container root specified
+	# no container root specified
 
 	if [ -z "${root_filesystem}" ]
 	then
