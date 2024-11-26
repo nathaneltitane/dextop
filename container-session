@@ -185,18 +185,7 @@ container_parse () {
 
 	# parse container directories
 
-	# single container
 
-	if [[ ${#CONTAINER_ROOT[@]} -eq 1 ]]
-	then
-		CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
-	fi
-
-	# multiple containers:
-	# parse container directories
-
-	if [[ ${#CONTAINER_ROOT[@]} -ge 2 ]]
-	then
 		for distribution in "${PREFIX}"/cnt/*
 		do
 			for version in "${distribution}"/*
@@ -294,7 +283,8 @@ container_parse () {
 		# unset array
 
 		containers=()
-	fi
+
+		# specify distribution selection variables
 
 		distribution_name="${name}"
 		distribution_version="${version}"
