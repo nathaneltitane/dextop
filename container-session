@@ -318,14 +318,6 @@ container_input () {
 		echo
 	fi
 
-	# user specified container root exists
-
-	if [ -d "${container_directory}" ]
-	then
-		frobulator.scs "Container directory found."
-		echo
-	fi
-
 	# no container root specified
 
 	if [ -z "${container_directory}" ]
@@ -339,6 +331,14 @@ container_input () {
 		echo
 
 		container_parse
+	fi
+
+	# user specified container root exists
+
+	if [ -d "${container_directory}" ]
+	then
+		frobulator.scs "Container directory found."
+		echo
 	fi
 
 	# user specified container root not found or invalid
