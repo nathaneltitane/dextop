@@ -63,11 +63,6 @@ do
 			option="directory"
 			container_directory="${2}"
 
-			# ${3} - user name parameter flag:
-			# -u|--username
-
-			user_name="${4}"
-
 			shift
 		;;
 
@@ -163,6 +158,11 @@ fi
 if [ -z "${DISPLAY}" ]
 then
 	DISPLAY=":0"
+fi
+
+if [ -z "${user_name}" ]
+then
+	user_name="termux"
 fi
 
 if [ -f /etc/os-release ]
@@ -308,35 +308,12 @@ container_parse () {
 
 container_input () {
 
-	# no user name specified
-
-	if [ -z "${user_name}" ]
-	then
-		user_name="termux"
-
-		frobulator.wrn "User name not specified - Defaulting" "[ '${user_name}' ]"
-		echo
-	fi
-
-	# no container root specified
-
-	if [ -z "${container_directory}" ]
-	then
-		CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
-
-		frobulator.wrn "Container directory not specified."
-		echo
-
-		frobulator.ipt "Select one of the following containers:"
-		echo
-
-		container_parse
-	fi
-
 	# user specified container root exists
 
 	if [ -d "${container_directory}" ]
 	then
+		CONTAINER_ROOT=("${container_directory}")
+
 		frobulator.scs "Container directory found."
 		echo
 	fi
@@ -348,6 +325,23 @@ container_input () {
 		CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
 
 		frobulator.err "Container directory not found."
+		echo
+
+		frobulator.ipt "Select one of the following containers:"
+		echo
+
+		container_parse
+	fi
+
+		# no container root specified
+
+	if [ -z "${container_directory}" ]
+	then
+		CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
+
+		container_directory=("${CONTAINER_ROOT}")
+
+		frobulator.wrn "Container directory not specified."
 		echo
 
 		frobulator.ipt "Select one of the following containers:"
