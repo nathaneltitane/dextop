@@ -444,7 +444,12 @@ container_environment () {
 
 	# generate container environment
 
-	CONTAINER_ROOT="${CONTAINER_ROOT}"
+	if [ -z "${CONTAINER_ROOT}" ]
+	then
+		CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
+	else
+		CONTAINER_ROOT="${CONTAINER_ROOT}"
+	fi
 
 	# set path:
 	# in order of retreival
