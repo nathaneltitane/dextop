@@ -297,32 +297,7 @@ container_parse () {
 
 container_input () {
 
-	# user specified container root exists
-
-	if [ -d "${container_directory}" ]
-	then
-		CONTAINER_ROOT=("${container_directory}")
-
-		frobulator.scs "Container directory found."
-		echo
-	fi
-
-	# user specified container root not found or invalid
-
-	if [ ! -d "${container_directory}" ]
-	then
-		CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
-
-		frobulator.err "Container directory not found."
-		echo
-
-		frobulator.ipt "Select one of the following containers:"
-		echo
-
-		container_parse
-	fi
-
-		# no container root specified
+	# no container root specified
 
 	if [ -z "${container_directory}" ]
 	then
@@ -337,6 +312,31 @@ container_input () {
 		echo
 
 		container_parse
+	fi
+
+	# user specified invalid container root
+
+	if [ ! -e "${container_directory}" ]
+	then
+		CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
+
+		frobulator.err "Container directory not found."
+		echo
+
+		frobulator.ipt "Select one of the following containers:"
+		echo
+
+		container_parse
+	fi
+
+		# user specified container root exists
+
+	if [ -d "${container_directory}" ]
+	then
+		CONTAINER_ROOT=("${container_directory}")
+
+		frobulator.scs "Container directory found."
+		echo
 	fi
 }
 
