@@ -185,115 +185,114 @@ container_parse () {
 
 	# parse container directories
 
-
-		for distribution in "${PREFIX}"/cnt/*
+	for distribution in "${PREFIX}"/cnt/*
+	do
+		for version in "${distribution}"/*
 		do
-			for version in "${distribution}"/*
-			do
-				distribution_name=$(basename $distribution)
+			distribution_name=$(basename $distribution)
 
-				distribution_version=$(basename $version)
+			distribution_version=$(basename $version)
 
-				containers+=($distribution_name $distribution_version)
-			done
+			containers+=($distribution_name $distribution_version)
 		done
+	done
 
-		# set padding for uniform output
+	# set padding for uniform output
 
-		pad_length=10
+	pad_length=10
 
-		# continue list using array selection of suppported values
+	# continue list using array selection of suppported values
 
-		for (( i=0 ; i<${#containers[@]} ; i+=2 ))
-		do
-			number=$((($i/2) + 1))
+	for (( i=0 ; i<${#containers[@]} ; i+=2 ))
+	do
+		number=$((($i/2) + 1))
 
-			name="${containers[$i]}"
-			version="${containers[$i+1]}"
+		name="${containers[$i]}"
+		version="${containers[$i+1]}"
 
-			indent="${marker_tab}"
+		indent="${marker_tab}"
 
-			if [ ${#version} -le 2 ]
-			then
-				indent+="${marker_tab}"
-			fi
+		if [ ${#version} -le 2 ]
+		then
+			indent+="${marker_tab}"
+		fi
 
-			if (( $i/2 >= 0 && $i/2 <= 8 ))
-			then
-				# handle number spacing for entries 1-9
+		if (( $i/2 >= 0 && $i/2 <= 8 ))
+		then
+			# handle number spacing for entries 1-9
 
-				number=" ${number}"
-			else
-				# handle number spacing for entries 10+
+			number=" ${number}"
+		else
+			# handle number spacing for entries 10+
 
-				number="${number}"
-			fi
+			number="${number}"
+		fi
 
-			echo "${marker_nul}" "[ ${number} ]" "${name}" "${version}"
+		echo "${marker_nul}" "[ ${number} ]" "${name}" "${version}"
 
-		done
+	done
 
+	echo
+
+	# values #
+
+	values_list=(
+		selection
+	)
+
+	# handle user input for values_list
+
+	eval ${frobulator_return[@]}
+
+	frobulator.ipt "Selection:"
+
+	frobulator.read selection
+
+	# integer check:
+	# handle numerical selection
+
+	while [[ "${selection}" -lt 1           ]] || \
+			[[ "${selection}" -gt "${number}" ]] || \
+			[[ ! "${selection}" =~ ^[0-9]+$   ]]
+	do
+		echo
+		frobulator.err "Invalid selection:"
 		echo
 
-		# values #
-
-		values_list=(
-			selection
-		)
-
-		# handle user input for values_list
-
-		eval ${frobulator_return[@]}
+		frobulator.wrn "Select container [ 1 - ${number} ]"
+		echo
 
 		frobulator.ipt "Selection:"
 
 		frobulator.read selection
 
-		# integer check:
-		# handle numerical selection
+	done
 
-		while [[ "${selection}" -lt 1           ]] || \
-		      [[ "${selection}" -gt "${number}" ]] || \
-		      [[ ! "${selection}" =~ ^[0-9]+$   ]]
-		do
-			echo
-			frobulator.err "Invalid selection:"
-			echo
+	# parse selection parameters
 
-			frobulator.wrn "Select container [ 1 - ${number} ]"
-			echo
+	i=$(( ${selection} ))
+	i=$(( $i * 2 ))
 
-			frobulator.ipt "Selection:"
+	name="${containers[i-2]}"
+	version="${containers[i-1]}"
 
-			frobulator.read selection
+	distribution_name="${name}"
+	distribution_version="${version}"
 
-		done
+	# unset array
 
-		# parse selection parameters
+	containers=()
 
-		i=$(( ${selection} ))
-		i=$(( $i * 2 ))
+	# specify distribution selection variables
 
-		name="${containers[i-2]}"
-		version="${containers[i-1]}"
+	distribution_name="${name}"
+	distribution_version="${version}"
 
-		distribution_name="${name}"
-		distribution_version="${version}"
+	CONTAINER_ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
 
-		# unset array
+	# specify container_directory for container input handling
 
-		containers=()
-
-		# specify distribution selection variables
-
-		distribution_name="${name}"
-		distribution_version="${version}"
-
-		CONTAINER_ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
-
-		# specify container_directory for container input handling
-
-		container_directory="${CONTAINER_ROOT}"
+	container_directory="${CONTAINER_ROOT}"
 }
 
 container_input () {
