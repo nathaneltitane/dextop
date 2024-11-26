@@ -73,7 +73,7 @@ do
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} -o [Display Server] | -x | -u [User Name] | -d [Directory] | [OPTION]"
+			echo -e "Usage: ${script} -o [Display Server] | -x | -a [Application] | -u [User Name] | -d [Directory] | [OPTION]"
 			echo
 			echo -e "Options:"
 			echo
