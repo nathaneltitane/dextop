@@ -672,6 +672,10 @@ fi
 
 if [ "${option}" = "username" ]
 then
+	# handle manual container directory input
+
+	container_input
+
 	# validate username
 
 	container_user
