@@ -252,8 +252,8 @@ container_parse () {
 	# handle numerical selection
 
 	while [[ "${selection}" -lt 1           ]] || \
-			[[ "${selection}" -gt "${number}" ]] || \
-			[[ ! "${selection}" =~ ^[0-9]+$   ]]
+		  [[ "${selection}" -gt "${number}" ]] || \
+		  [[ ! "${selection}" =~ ^[0-9]+$   ]]
 	do
 		echo
 		frobulator.err "Invalid selection:"
