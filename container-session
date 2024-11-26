@@ -329,7 +329,7 @@ container_input () {
 		container_parse
 	fi
 
-		# user specified container root exists
+	# user specified container root exists
 
 	if [ -d "${container_directory}" ]
 	then
