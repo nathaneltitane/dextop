@@ -683,7 +683,6 @@ fi
 
 if [ "${option}" = "directory" ]
 then
-
 	# handle manual container directory input
 
 	container_input
