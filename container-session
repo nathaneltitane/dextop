@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="11-25-2024"
+version="11-28-2024"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -120,6 +120,8 @@ frobulator.script "Setting up ${script#*-}"
 
 termux_x11_activity="com.termux.x11/.MainActivity"
 termux_x11_activity_stop="com.termux.x11.ACTION_STOP"
+
+termux_x11_process="app_process -Xnoimage-dextooat / com.termux.x11.Loader"
 
 TERMUX_X11_APPLICATION="com.termux.x11"
 TERMUX_X11_SERVER="termux-x11"
@@ -583,19 +585,21 @@ display_start () {
 
 	# start display server and activity
 
-	if [[ $(pgrep -f proot) ]]
-	then
-		GALLIUM_DRIVER="${TERMUX_X11_DRIVER}"
+	GALLIUM_DRIVER="${TERMUX_X11_DRIVER}"
 
-		export GALLIUM_DRIVER="${GALLIUM_DRIVER}"
+	export GALLIUM_DRIVER="${GALLIUM_DRIVER}"
+
+	if [[ $(pgrep -f dbus) ]]
+	then
+		pkill -9 dbus
 	fi
 
 	if [[ $(pgrep -f "${TERMUX_X11_ACCELERATOR}") ]]
 	then
-		:
-	else
-		"${TERMUX_X11_ACCELERATOR}" > "${sink}" 2>&1 &
+		pkill -9 "${TERMUX_X11_ACCELERATOR}"
 	fi
+
+	"${TERMUX_X11_ACCELERATOR}" > "${sink}" 2>&1 &
 
 	if [[ $(pgrep -f "${TERMUX_X11_APPLICATION}") ]]
 	then
