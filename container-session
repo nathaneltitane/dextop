@@ -625,7 +625,7 @@ display_start () {
 	intent_command+=" --user 0"
 	intent_command+=" -n ${display_activity}"
 
-	frobulator.silence "${intent_command}" &
+	frobulator.silence "${intent_command}"
 }
 
 display_stop () {
