@@ -597,12 +597,12 @@ display_start () {
 
 	if [[ $(pgrep -f dbus) ]]
 	then
-		pkill -9 dbus > "${sink}" 2>&1 &
+		pkill -9 dbus > "${sink}" 2>&1
 	fi
 
-	if [[ $(pgrep -f virgl) ]]
+	if [[ $(pgrep -f "${TERMUX_X11_ACCELERATOR}") ]]
 	then
-		pkill -9 virgl > "${sink}" 2>&1 &
+		pkill -9 "${TERMUX_X11_ACCELERATOR}" > "${sink}" 2>&1
 	fi
 
 	"${TERMUX_X11_ACCELERATOR}" > "${sink}" 2>&1 &
@@ -625,7 +625,7 @@ display_start () {
 	intent_command+=" --user 0"
 	intent_command+=" -n ${display_activity}"
 
-	frobulator.silence "${intent_command}"
+	frobulator.silence "${intent_command}" &
 }
 
 display_stop () {
