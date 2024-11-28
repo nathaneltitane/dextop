@@ -201,6 +201,10 @@ container_parse () {
 
 	pad_length=10
 
+	# normalize output
+
+	echo
+
 	# continue list using array selection of suppported values
 
 	for (( i=0 ; i<${#containers[@]} ; i+=2 ))
@@ -227,6 +231,8 @@ container_parse () {
 
 			number="${number}"
 		fi
+
+		# list container entries
 
 		echo "${marker_nul}" "[ ${number} ]" "${name}" "${version}"
 
