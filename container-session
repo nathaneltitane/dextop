@@ -123,7 +123,6 @@ TERMUX_X11_SERVER="termux-x11"
 TERMUX_X11_DRIVER="virpipe"
 TERMUX_X11_ACCELERATOR="virgl_test_server_android"
 
-termux_x11_application="${TERMUX_X11_APPLICATION}"
 termux_x11_activity="com.termux.x11/.MainActivity"
 termux_x11_activity_stop="com.termux.x11.ACTION_STOP"
 
@@ -636,14 +635,12 @@ display_stop () {
 	if [[ $(pgrep -f "${TERMUX_X11_APPLICATION}") ]]
 	then
 		display_activity="${termux_x11_activity_stop}"
-		display_application="${termux_x11_application}"
 
 		unset intent_command
 
 		intent_command+="am broadcast"
 		intent_command+=" --user 0"
 		intent_command+=" -a ${display_activity}"
-		intent_command+=" -p ${display_application}"
 
 		frobulator.silence "${intent_command}" &
 
