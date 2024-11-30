@@ -649,6 +649,8 @@ display_stop () {
 
 		frobulator.process "Stopping display viewer"
 
+		pkill -f "${TERMUX_X11_APPLICATION}"
+
 	else
 		frobulator.wrn "No active display process detected."
 		echo
