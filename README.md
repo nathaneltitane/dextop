@@ -67,11 +67,14 @@ All utilities created for, loaded, and used by Dextop contain a help argument: p
       ```
       - Logout [ fuschia 'termux' prompt ] ↴
         - Use Ctrl + D or type 'exit':
-          - Closes container-side graphical session and exits back one level up to Termux System
+          - Closes container-side graphical session
+          - Exits one level up to Termux System [ green 'termux' prompt ]
 
             - Logout  [ green 'termux' prompt ] ↴
               - Use Ctrl + D or type 'exit':
-                - Terminates background processes, closes Termux session and exits application
+                - Terminates background processes
+                - Closes Termux session
+                - Exits application
 
   - Use [ general ] ↴
 
