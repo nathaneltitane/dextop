@@ -14,6 +14,8 @@
   - Rewrote display and container handling functions (see help)
   - Streamlined container display server spawning process
 
+- Update BASH session scripts to reflect session login changes
+
 ---
 
 ### Welcome to [Dextop](https://dextop.app)
@@ -47,21 +49,46 @@ All utilities created for, loaded, and used by Dextop contain a help argument: p
       - Approve/Deny storage permission request
       - Wait for automated installation and configuration process to finish (approximately 10 minutes)
 
-  - Use ↴
+  - Use (post-install) ↴
+
     - Termux system [ green 'termux' prompt ] ↴
-      - Start the graphical interface - paste or type:
+      - Start graphical interface [ Termux ]- paste or type:
       ```
       container-session -o
       ```
     - Container system [ fuschia 'termux' prompt ] ↴
-      - log into the container instance - paste or type:
+      - log into container instance - paste or type:
       ```
-      container-session -u termux
+      container-session -d
       ```
-      -  Start the graphical interface - paste or type:
+      - Start graphical interface [ Container ] - paste or type:
       ```
       container-session -o
       ```
+      - Logout [ fuschia 'termux' prompt ] ↴
+        - Use Ctrl + D or type 'exit':
+          - Closes container-side graphical session and exits back one level up to Termux System
+
+            - Logout  [ green 'termux' prompt ] ↴
+            - Use Ctrl + D or type 'exit':
+              - Terminates background processes, closes Termux session and exits application
+
+  - Use (general)↴
+
+    - Open Termux application:
+      - Automtic login enabled by default ↴
+        - BASH profile is configured to bring up the graphical session automatically into Termux System [ green 'termux' prompt ]
+
+       - log into container instance - paste or type:
+        ```
+        container-session -d
+        ```
+        - Start graphical interface [ Container ] - paste or type:
+        ```
+        container-session -o
+        ```
+
+
 
 Enjoy!
 
