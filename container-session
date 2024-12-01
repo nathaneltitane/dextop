@@ -643,6 +643,8 @@ display_stop () {
 
 	if [[ $(pgrep -f "${TERMUX_X11_APPLICATION}") ]]
 	then
+		pkill -f "${TERMUX_X11_APPLICATION}"
+
 		display_activity="${termux_x11_activity_stop}"
 
 		unset intent_command
@@ -654,9 +656,6 @@ display_stop () {
 		frobulator.silence "${intent_command}" &
 
 		frobulator.process "Stopping display viewer"
-
-		pkill -f "${TERMUX_X11_APPLICATION}"
-
 	else
 		frobulator.wrn "No active display process detected."
 		echo
@@ -681,7 +680,7 @@ if [ "${option}" = "stop" ]
 then
 	# stop display session
 
-		display_stop
+	display_stop
 fi
 
 if [ "${option}" = "username" ]
