@@ -80,12 +80,14 @@ All utilities created for, loaded, and used by Dextop contain a help argument: p
 
     - Open Termux application:
       - Automtic login enabled by default ↴
-        - BASH profile is configured to bring up the graphical session automatically into Termux System [ green 'termux' prompt ]
+        - BASH profile configured to bring up graphical session automatically:
+          - Termux System [ green 'termux' prompt ]
 
-       - log into container instance - paste or type:
-        ```
-        container-session -d
-        ```
+    - Container system [ fuschia 'termux' prompt ] ↴
+      - log into container instance - paste or type:
+      ```
+      container-session -d
+      ```
         - Start graphical interface [ Container ] - paste or type:
         ```
         container-session -o
