@@ -16,6 +16,14 @@
 
 - Update BASH session scripts to reflect session login changes
 
+- Added container manager to help user select through multiple container instances ('container-session -d')
+  - Supports user lookup and container selection:
+    - See help for details - use as follows:
+    ```
+    container-session -u <username> -d
+    ```
+
+
 ---
 
 ### Welcome to [Dextop](https://dextop.app)
