@@ -49,7 +49,7 @@ All utilities created for, loaded, and used by Dextop contain a help argument: p
       - Approve/Deny storage permission request
       - Wait for automated installation and configuration process to finish (approximately 10 minutes)
 
-  - Use (post-install) ↴
+  - Use [ post-install ] ↴
 
     - Termux system [ green 'termux' prompt ] ↴
       - Start graphical interface [ Termux ]- paste or type:
@@ -73,7 +73,7 @@ All utilities created for, loaded, and used by Dextop contain a help argument: p
             - Use Ctrl + D or type 'exit':
               - Terminates background processes, closes Termux session and exits application
 
-  - Use (general)↴
+  - Use [ general ] ↴
 
     - Open Termux application:
       - Automtic login enabled by default ↴
