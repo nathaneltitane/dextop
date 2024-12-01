@@ -2,47 +2,17 @@
 
 [![Donate](https://img.shields.io/badge/Paypal-2f343f.svg?style=for-the-badge&logo=paypal&label=Donate)](https://www.paypal.com/donate?hosted_button_id=ZW3CDCANHJCWJ)
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 08-19-2024 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 12-01-2024 ]
 
 ---
 
 ### NOTICE
 
-08-19-2024 ↴
+12-01-2024 ↴
 
-- Known issue with 'activity manager' not launching Termux:X11 application display from within 'proot' container (mus be opened manually)
-- Updated 'container-session' utility and BASH profile hooks
-    - Removed all legacy VNC options, entries and logic - now using Termux:X11 with acceleration as default and only display option
-    - Simplified bind mounts and refactored all functions
-
-08-10-2024 ↴
-
-- Fixed missing bookmark entries
-- Fixed missing standard $HOME directories generation (frobulator.directory)
-- Updated storage designations in 'container-session'
-
-
-08-07-2024 ↴
-
-- Missing templates and installation pointers fixed (frobulator.keep fix + dextop setup functions ordering change)
-
-08-06-2024 ↴
-
-- Temporary fix for missing flags and installation pointers (frobulator issue)
-
-06-22-2024 ↴
-
-- added unified storage options for 'termux-storage' and dextop setup
-
-05-29-2024 ↴
-
-- Added GPU hardware acceleration to X11 display defaults (VirGL Renderer)
-- Refactored failsafe routines and cleaned up redundancies
-- Fixed Activity Manager ('am') calls to load intended applications when requested by utilities
-- Updated 'dextop' utility
-- Updated 'termux-storage' utility
-- Updated 'container-session' utility
-- Updated 'container-user' utility
+- Fixed issues with container(s) management in 'container-session'
+  - Rewrote display and container handling functions (see help)
+  - Streamlined container display server spawning process
 
 ---
 
@@ -588,7 +558,7 @@ Should you suspect any issues or errors, please provide a copy of those files wh
 
 ---
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 08-19-2024 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 12-01-2024 ]
 
 ### Enjoying Dextop? Buy me a coffee to show your appreciation!
 
