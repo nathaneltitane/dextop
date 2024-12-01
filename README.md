@@ -70,8 +70,8 @@ All utilities created for, loaded, and used by Dextop contain a help argument: p
           - Closes container-side graphical session and exits back one level up to Termux System
 
             - Logout  [ green 'termux' prompt ] ↴
-            - Use Ctrl + D or type 'exit':
-              - Terminates background processes, closes Termux session and exits application
+              - Use Ctrl + D or type 'exit':
+                - Terminates background processes, closes Termux session and exits application
 
   - Use [ general ] ↴
 
