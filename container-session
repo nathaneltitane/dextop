@@ -681,12 +681,7 @@ if [ "${option}" = "stop" ]
 then
 	# stop display session
 
-	if [[ $(pgrep -f proot) ]]
-	then
-		:
-	else
 		display_stop
-	fi
 fi
 
 if [ "${option}" = "username" ]
