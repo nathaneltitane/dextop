@@ -94,12 +94,16 @@ do
 
 		;;
 
-		-p|--purge)
-			option="purge"
-		;;
-
 		-a|--addons)
 			option="addons"
+		;;
+
+		-d|--additions)
+			option="additions"
+		;;
+
+		-p|--purge)
+			option="purge"
 		;;
 
 		-h|--help)
@@ -135,9 +139,11 @@ do
 			echo -e "                    [ termux ]"
 			echo -e "                    [ preferences ]"
 			echo
-			echo -e "-p, --purge         Purge setup components and packages."
-			echo
 			echo -e "-a, --addons        Setup Termux addons and companion applications."
+			echo
+			echo -e "-d, --additions     Setup Dextop additions."
+			echo
+			echo -e "-p, --purge         Purge setup components and packages."
 			echo
 			echo -e "-h, --help          Show help and usage information."
 			echo
@@ -362,9 +368,9 @@ architecture_intent () {
 
 	device_architecture="$(uname -m)"
 
-	for i in ${!cpu_architectures[@]}
+	for architecture in ${!cpu_architectures[@]}
 	do
-		if [[ "${device_architecture}" != "${cpu_architectures[i]}" ]]
+		if [[ "${device_architecture}" != "${cpu_architectures[architecture]}" ]]
 		then
 
 			frobulator.scs "Supported device architecture" "[ ${device_architecture} ]"
@@ -1012,6 +1018,8 @@ fi
 
 if [ "${option}" = "initialize" ]
 then
+	frobulator.inf "Initializing" "[ Dextop ]"
+	echo
 
 	preferences_intent
 
@@ -1022,6 +1030,19 @@ then
 	shell_intent
 
 	frobulator.cpt "Complete" "[ Initialize // Dextop ]"
+	echo
+
+	exit
+fi
+
+if [ "${option}" = "additions" ]
+then
+	frobulator.inf "Loading" "[ ${option} ]"
+	echo
+
+	additions_intent
+
+	frobulator.cpt "Complete" "[ ${option} ]"
 	echo
 
 	exit
