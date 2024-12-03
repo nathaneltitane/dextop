@@ -407,7 +407,7 @@ reload_intent () {
 	settings_command+="am broadcast"
 	settings_command+=" --user 0"
 	settings_command+=" -a com.termux.app.reload_style"
-	settings_command+=" com.termux"
+	settings_command+=" -p com.termux"
 
 	frobulator.silence "${settings_command}"
 }
