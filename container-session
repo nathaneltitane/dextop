@@ -615,9 +615,15 @@ container_session () {
 		session="$(cat ${HOME}/.dextop/dextop-session)"
 	fi
 
+	# pause:
+	# required to let session loader through messaging system
+	# and load graphical interface
+
+	sleep 2
+
 	# load desktop environment
 
-	frobulator.silence "dbus-launch --exit-with-session ${session} &"
+	frobulator.silence "dbus-launch --exit-with-session ${session}" &
 }
 
 display_start () {
