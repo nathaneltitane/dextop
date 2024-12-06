@@ -197,93 +197,103 @@ container_parse () {
 		done
 	done
 
-	# set padding for uniform output
+	if [[ ${#CONTAINER_ROOT[@]} -eq 1 ]]
+	then
+		distribution_name="${distribution_name}"
+		distribution_version="${distribution_version}"
+	fi
 
-	pad_length=10
+	if [[ ${#CONTAINER_ROOT[@]} -ge 2 ]]
+	then
+		# set padding for uniform output
 
-	# normalize output
+		pad_length=10
 
-	echo
+		# normalize output
 
-	# continue list using array selection of suppported values
-
-	for (( i=0 ; i<${#containers[@]} ; i+=2 ))
-	do
-		number=$((($i/2) + 1))
-
-		name="${containers[$i]}"
-		version="${containers[$i+1]}"
-
-		indent="${marker_tab}"
-
-		if [ ${#version} -le 2 ]
-		then
-			indent+="${marker_tab}"
-		fi
-
-		if (( $i/2 >= 0 && $i/2 <= 8 ))
-		then
-			# handle number spacing for entries 1-9
-
-			number=" ${number}"
-		else
-			# handle number spacing for entries 10+
-
-			number="${number}"
-		fi
-
-		# list container entries
-
-		echo "${marker_nul}" "[ ${number} ]" "${name}" "${version}"
-
-	done
-
-	echo
-
-	# values #
-
-	values_list=(
-		selection
-	)
-
-	# handle user input for values_list
-
-	eval ${frobulator_return[@]}
-
-	frobulator.ipt "Selection:"
-
-	frobulator.read selection
-
-	# integer check:
-	# handle numerical selection
-
-	while [[ "${selection}" -lt 1           ]] || \
-		  [[ "${selection}" -gt "${number}" ]] || \
-		  [[ ! "${selection}" =~ ^[0-9]+$   ]]
-	do
-		echo
-		frobulator.err "Invalid selection:"
 		echo
 
-		frobulator.wrn "Select container [ 1 - ${number} ]"
+		# continue list using array selection of suppported values
+
+		for (( i=0 ; i<${#containers[@]} ; i+=2 ))
+		do
+			number=$((($i/2) + 1))
+
+			name="${containers[$i]}"
+			version="${containers[$i+1]}"
+
+			indent="${marker_tab}"
+
+			if [ ${#version} -le 2 ]
+			then
+				indent+="${marker_tab}"
+			fi
+
+			if (( $i/2 >= 0 && $i/2 <= 8 ))
+			then
+				# handle number spacing for entries 1-9
+
+				number=" ${number}"
+			else
+				# handle number spacing for entries 10+
+
+				number="${number}"
+			fi
+
+			# list container entries
+
+			echo "${marker_nul}" "[ ${number} ]" "${name}" "${version}"
+
+		done
+
 		echo
+
+		# values #
+
+		values_list=(
+			selection
+		)
+
+		# handle user input for values_list
+
+		eval ${frobulator_return[@]}
 
 		frobulator.ipt "Selection:"
 
 		frobulator.read selection
 
-	done
+		# integer check:
+		# handle numerical selection
 
-	# parse selection parameters
+		while [[ "${selection}" -lt 1           ]] || \
+			[[ "${selection}" -gt "${number}" ]] || \
+			[[ ! "${selection}" =~ ^[0-9]+$   ]]
+		do
+			echo
+			frobulator.err "Invalid selection:"
+			echo
 
-	i=$(( ${selection} ))
-	i=$(( $i * 2 ))
+			frobulator.wrn "Select container [ 1 - ${number} ]"
+			echo
 
-	name="${containers[i-2]}"
-	version="${containers[i-1]}"
+			frobulator.ipt "Selection:"
 
-	distribution_name="${name}"
-	distribution_version="${version}"
+			frobulator.read selection
+
+		done
+
+		# parse selection parameters
+
+		i=$(( ${selection} ))
+		i=$(( $i * 2 ))
+
+		name="${containers[i-2]}"
+		version="${containers[i-1]}"
+
+		distribution_name="${name}"
+		distribution_version="${version}"
+
+	fi
 
 	# unset array
 
