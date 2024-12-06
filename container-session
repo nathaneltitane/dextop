@@ -201,6 +201,12 @@ container_parse () {
 	then
 		distribution_name="${distribution_name}"
 		distribution_version="${distribution_version}"
+
+		frobulator.inf "Single container found" "[ ${distribution_name} // ${distribution_version} ]"
+		echo
+
+		frobulator.fwd "Proceeding${marker_elp}"
+		echo
 	fi
 
 	if [[ ${#CONTAINER_ROOT[@]} -ge 2 ]]
