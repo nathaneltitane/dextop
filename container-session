@@ -78,7 +78,7 @@ do
 			echo
 			echo -e "-u, --username       Specify user name for session login."
 			echo
-			echo -e "-d, --directory      Specify root filesystem directory as /path/to/root/name/version"
+			echo -e "-d, --directory      Specify container base directory as /path/to/base/directory containing /distribution/version"
 			echo
 			echo -e "-h, --help           Show help and usage information."
 			echo
@@ -185,15 +185,15 @@ container_parse () {
 
 	# parse container directories
 
-	for distribution in "${PREFIX}"/cnt/*
+	for distribution in "${container_base}"/*
 	do
 		for version in "${distribution}"/*
 		do
-			distribution_name=$(basename $distribution)
+			distribution_name=$(basename ${distribution})
 
-			distribution_version=$(basename $version)
+			distribution_version=$(basename ${version})
 
-			containers+=($distribution_name $distribution_version)
+			containers+=(${distribution_name} ${distribution_version})
 		done
 	done
 
@@ -307,7 +307,8 @@ container_input () {
 
 	if [ -z "${container_directory}" ]
 	then
-		CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
+		CONTAINER_BASE="${PREFIX}"/cnt
+		CONTAINER_ROOT=("${CONTAINER_BASE}"/*/*)
 
 		container_directory=("${CONTAINER_ROOT}")
 
@@ -324,7 +325,8 @@ container_input () {
 
 	if [ ! -e "${container_directory}" ]
 	then
-		CONTAINER_ROOT=("${PREFIX}"/cnt/*/*)
+		CONTAINER_BASE="${PREFIX}"/cnt
+		CONTAINER_ROOT=("${CONTAINER_BASE}"/*/*)
 
 		frobulator.err "Container directory not found."
 		echo
@@ -339,7 +341,8 @@ container_input () {
 
 	if [ -d "${container_directory}" ]
 	then
-		CONTAINER_ROOT=("${container_directory}")
+		CONTAINER_BASE="${container_directory}"
+		CONTAINER_ROOT=("${CONTAINER_BASE}"/*/*)
 
 		frobulator.scs "Container directory found."
 		echo
