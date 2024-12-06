@@ -274,7 +274,7 @@ container_parse () {
 		# integer check:
 		# handle numerical selection
 
-		while [[ "${selection}" -lt 1           ]] || \
+		while [[ "${selection}" -lt 1         ]] || \
 			[[ "${selection}" -gt "${number}" ]] || \
 			[[ ! "${selection}" =~ ^[0-9]+$   ]]
 		do
