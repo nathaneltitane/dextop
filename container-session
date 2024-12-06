@@ -211,6 +211,9 @@ container_parse () {
 
 	if [[ ${#CONTAINER_ROOT[@]} -ge 2 ]]
 	then
+		frobulator.ipt "Select one of the following containers:"
+		echo
+
 		# set padding for uniform output
 
 		pad_length=10
@@ -331,9 +334,6 @@ container_input () {
 		frobulator.wrn "Container directory not specified."
 		echo
 
-		frobulator.ipt "Select one of the following containers:"
-		echo
-
 		container_parse
 	fi
 
@@ -345,9 +345,6 @@ container_input () {
 		CONTAINER_ROOT=("${CONTAINER_BASE}"/*/*)
 
 		frobulator.err "Container directory not found."
-		echo
-
-		frobulator.ipt "Select one of the following containers:"
 		echo
 
 		container_parse
