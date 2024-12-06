@@ -185,7 +185,7 @@ container_parse () {
 
 	# parse container directories
 
-	for distribution in "${container_base}"/*
+	for distribution in "${CONTAINER_BASE}"/*
 	do
 		for version in "${distribution}"/*
 		do
@@ -304,11 +304,11 @@ container_parse () {
 	distribution_name="${name}"
 	distribution_version="${version}"
 
-	CONTAINER_ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
+	CONTAINER_ROOT="${CONTAINER_BASE}"/"${distribution_name}"/"${distribution_version}"
 
 	# specify container_directory for container input handling
 
-	container_directory="${CONTAINER_ROOT}"
+	container_directory="${CONTAINER_BASE}"
 }
 
 container_input () {
