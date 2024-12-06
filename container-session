@@ -538,6 +538,8 @@ container_intent () {
     session_command+=" env"
     session_command+=" --ignore-environment"
 
+    # android
+
 	session_command+=" ANDROID_ART_ROOT=${ANDROID_ART_ROOT}"
 	session_command+=" ANDROID_DATA=${ANDROID_DATA}"
 	session_command+=" ANDROID_I18N_ROOT=${ANDROID_I18N_ROOT}"
@@ -547,8 +549,14 @@ container_intent () {
 	session_command+=" BOOTCLASSPATH=${BOOTCLASSPATH}"
 	session_command+=" DEX2OATBOOTCLASSPATH=${DEX2OATBOOTCLASSPATH}"
 
+	# termux
+
 	session_command+=" PREFIX=${PREFIX}"
 	session_command+=" TERMUX_BINARIES=${PREFIX}/bin"
+	session_command+=" TERMUX_VERSION=${TERMUX_VERSION}"
+
+	# container
+
 	session_command+=" PATH=${PATH}:${CONTAINER_PATH}"
 	session_command+=" COLORTERM=${COLORTERM}"
 	session_command+=" DISPLAY=${DISPLAY}"
