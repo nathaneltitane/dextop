@@ -169,7 +169,8 @@ if [ -f /etc/os-release ]
 then
 	. /etc/os-release
 
-	name="${NAME}"
+	name="${ID}"
+	version="${VERSION_ID}"
 fi
 
 # exports //////////////////////////////////////////////////////////////////////
