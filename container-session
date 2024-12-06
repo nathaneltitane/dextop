@@ -644,13 +644,13 @@ display_start () {
 		pkill -f "${TERMUX_X11_ACCELERATOR}"
 	fi
 
-	"${TERMUX_X11_ACCELERATOR}" > "${sink}" 2>&1 &
+	frobulator.silence "${TERMUX_X11_ACCELERATOR}" &
 
 	if [[ $(pgrep -f "${TERMUX_X11_APPLICATION}") ]]
 	then
 		:
 	else
-		"${TERMUX_X11_SERVER}" "${DISPLAY}" > "${sink}" 2>&1 &
+		frobulator.silence "${TERMUX_X11_SERVER} ${DISPLAY}" &
 	fi
 
 	frobulator.fwd "Opening display${marker_elp}"
