@@ -581,24 +581,22 @@ frobulator.script "Setting up ${script#*-}"
 # android.telephony.euicc.action.NOTIFY_CARRIER_SETUP_INCOMPLETE
 # android.telephony.euicc.action.OTA_STATUS_CHANGED
 
-# applications
+# discreet applications
 
 google_chrome="com.android.chrome/com.google.android.apps.chrome.Main"
 google_chrome_beta="com.chrome.beta/com.google.android.apps.chrome.Main"
 google_mail="com.google.android.gm/.GmailActivity"
 terminal="com.termux/com.termux.app.TermuxActivity"
 
-# handles
+# android actions
+
+camera="android.media.action.IMAGE_CAPTURE"
+
+# mimetype handles
 
 email="mailto:"
 link="https:"
 message="sms:"
-
-# actions
-
-camera="android.media.action.IMAGE_CAPTURE"
-
-
 
 # functions ////////////////////////////////////////////////////////////////////
 
@@ -611,6 +609,15 @@ activity_intent () {
 		-n "${activity}"				> "${sink}" 2>&1
 	}
 
+action_intent () {
+
+	action="${1}"
+
+	am start							\
+		--user 0						\
+		-a "${action}"					> "${sink}" 2>&1
+}
+
 handle_intent () {
 
 	handle="${1}"
@@ -621,14 +628,7 @@ handle_intent () {
 		-d "${handle}"					> "${sink}" 2>&1
 }
 
-action_intent () {
-
-	handle="${1}"
-
-	am start							\
-		--user 0						\
-		-a "${action}"					> "${sink}" 2>&1
-}
+# options //////////////////////////////////////////////////////////////////////
 
 if [[ "${option}" = [aA][cC][tT][iI][vV][iI][tT][yY] ]]
 then
