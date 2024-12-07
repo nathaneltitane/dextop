@@ -700,6 +700,16 @@ additions_intent () {
 	frobulator.download get.dxtp.app "${HOME}"/.local/bin ${additions_list[@]}
 
 	additions_list=()
+
+	launchers_list+=(
+		dextop-browser
+		dextop-mail
+		dextop-messages
+	)
+
+	frobulator.download get.trmnl.me "${HOME}"/.local/share/applications ${launchers_list[@]}
+
+	launchers_list=()
 }
 
 backgrounds_intent () {
