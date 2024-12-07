@@ -710,4 +710,6 @@ then
 		exit 1
 	fi
 
+	handle_intent "${handle}"
+
 fi
