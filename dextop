@@ -459,7 +459,7 @@ dextop_intent () {
 
 	# load dextop deployment script
 
-	frobulator.download run.dxtp.app "${HOME}"/.local/bin dextop
+	frobulator.download get.dxtp.app "${HOME}"/.local/bin dextop
 }
 
 addons_intent () {
