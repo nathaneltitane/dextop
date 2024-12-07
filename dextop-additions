@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="05-29-2024"
+version="12-07-2024"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -51,6 +51,13 @@ do
 			shift
 		;;
 
+		-c|--action)
+			option="action"
+			action_option="${2}"
+
+			shift
+		;;
+
 		-n|--handle)
 			option="handle"
 			handle_option="${2}"
@@ -60,17 +67,23 @@ do
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} -a [Activity] | -n [Handle] | [OPTION]"
+			echo -e "Usage: ${script} -a [Activity] | -c [Action] | -n [Handle] | [OPTION]"
 			echo
 			echo -e "Options"
 			echo
-			echo -e "-a, --activity        Run native Android activities via Dextop environement defaults."
+			echo -e "-a, --activity        Run desktop environment activities through native Android application activities."
 			echo
 			echo -e "                      [ google-chrome ] | [ chrome ]"
 			echo -e "                      [ google-mail ]   | [ gmail ]"
 			echo -e "                      [ terminal ]"
 			echo
-			echo -e "-n, --handle          Run desktop environment handles through native Android applications."
+			echo -e "-c, --action          Run desktop environment activities through native Android application actions."
+			echo
+			echo -e "                      [ email ]   | [ mail ]"
+			echo -e "                      [ browser ] | [ link ] | [ web ]"
+			echo -e "                      [ message ] | [ text ] | [ sms ]"
+			echo
+			echo -e "-n, --handle          Handle desktop environment mimetypes through native Android applications."
 			echo
 			echo -e "                      [ email ]   | [ mail ]"
 			echo -e "                      [ browser ] | [ link ] | [ web ]"
@@ -93,7 +106,7 @@ do
 
 		*)
 			echo
-			echo -e "Usage: ${script} -a [Activity] | -n [Handle] | [OPTION]"
+			echo -e "Usage: ${script} -a [Activity] | -c [Action] | -n [Handle] | [OPTION]"
 			echo
 			echo -e "${script}: Unknown option '${1}'"
 			echo -e "Type './${script} --help' for help and usage information."
@@ -344,7 +357,7 @@ frobulator.script "Setting up ${script#*-}"
 # android.telephony.action.MANAGE_SUBSCRIPTION_PLANS
 # android.telephony.euicc.action.MANAGE_EMBEDDED_SUBSCRIPTIONS
 # android.telephony.euicc.action.PROVISION_EMBEDDED_SUBSCRIPTION
-com.# android.contacts.action.FILTER_CONTACTS
+# android.contacts.action.FILTER_CONTACTS
 
 # broadcast actions ////////////////////////////////////////////////////////////
 
@@ -581,6 +594,12 @@ email="mailto:"
 link="https:"
 message="sms:"
 
+# actions
+
+camera="android.media.action.IMAGE_CAPTURE"
+
+
+
 # functions ////////////////////////////////////////////////////////////////////
 
 activity_intent () {
@@ -600,6 +619,15 @@ handle_intent () {
 		--user 0						\
 		-a android.intent.action.VIEW	\
 		-d "${handle}"					> "${sink}" 2>&1
+}
+
+action_intent () {
+
+	handle="${1}"
+
+	am start							\
+		--user 0						\
+		-a "${action}"					> "${sink}" 2>&1
 }
 
 if [[ "${option}" = [aA][cC][tT][iI][vV][iI][tT][yY] ]]
@@ -646,6 +674,20 @@ then
 	then
 		handle="${message}"
 
+	else
+		frobulator.err "Unrecognized handle option" "[ ${handle_option} ]"
+		echo
+
+		exit 1
+	fi
+
+elif [[ "${option}" = [aA][cC][tT][iI][oO][nN] ]]
+then
+	if [[ "${actio_option}" = "camera"     ]] || \
+	   [[ "${handle_option}" = "photo"     ]]
+	   [[ "${handle_option}" = "selfie"    ]]
+	then
+		handle="${camera}"
 	else
 		frobulator.err "Unrecognized handle option" "[ ${handle_option} ]"
 		echo
