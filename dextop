@@ -702,9 +702,9 @@ additions_intent () {
 	additions_list=()
 
 	launchers_list+=(
-		dextop-browser
-		dextop-mail
-		dextop-messages
+		dextop-browser.desktop
+		dextop-mail.desktop
+		dextop-messages.desktop
 	)
 
 	frobulator.download get.trmnl.me "${HOME}"/.local/share/applications ${launchers_list[@]}

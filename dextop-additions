@@ -592,6 +592,7 @@ terminal="com.termux/com.termux.app.TermuxActivity"
 
 camera="android.media.action.IMAGE_CAPTURE"
 music="android.intent.action.MUSIC_PLAYER"
+recorder="android.provider.MediaStore.RECORD_SOUND"
 
 # mimetype handles
 
