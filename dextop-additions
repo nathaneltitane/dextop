@@ -673,7 +673,7 @@ then
 	then
 		action="${music}"
 	else
-		frobulator.err "Unrecognized handle option" "[ ${action_option} ]"
+		frobulator.err "Unrecognized action option" "[ ${action_option} ]"
 		echo
 
 		exit 1
