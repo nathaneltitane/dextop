@@ -79,16 +79,15 @@ do
 			echo
 			echo -e "-c, --action          Run desktop environment activities through native Android application actions."
 			echo
-			echo -e "                      [ email ]   | [ mail ]"
-			echo -e "                      [ browser ] | [ link ] | [ web ]"
-			echo -e "                      [ message ] | [ text ] | [ sms ]"
-			echo -e "                      [ file ]"
+			echo -e "                      [ camera ]   | [ photo ] | [ picture ] | [ selfie ]"
+			echo -e "                      [ music ] [ player ] | [ song ] | [ audio ]"
 			echo
 			echo -e "-n, --handle          Handle desktop environment mimetypes through native Android applications."
 			echo
 			echo -e "                      [ email ]   | [ mail ]"
 			echo -e "                      [ browser ] | [ link ] | [ web ]"
 			echo -e "                      [ message ] | [ text ] | [ sms ]"
+			echo -e "                      [ file ]"
 			echo
 			echo -e "-h, --help            Show help and usage information."
 			echo
@@ -662,11 +661,13 @@ elif [[ "${option}" = [aA][cC][tT][iI][oO][nN] ]]
 then
 	if [[ "${action_option}" = "camera"    ]] || \
 	   [[ "${action_option}" = "photo"     ]]
+	   [[ "${action_option}" = "picture"   ]]
 	   [[ "${action_option}" = "selfie"    ]]
 	then
 		action="${camera}"
 
-	elif [[ "${action_option}" = "music"    ]] || \
+	elif [[ "${action_option}" = "music"   ]] || \
+	    [[ "${action_option}" = "player"   ]]
 	    [[ "${action_option}" = "song"     ]]
 	    [[ "${action_option}" = "audio"    ]]
 	then
@@ -688,8 +689,8 @@ then
 		handle="${email}"
 
 	elif [[ "${handle_option}" = "browser" ]] || \
-		 [[ "${handle_option}" = "link"     ]] || \
-		 [[ "${handle_option}" = "web"      ]]
+		 [[ "${handle_option}" = "link"    ]] || \
+		 [[ "${handle_option}" = "web"     ]]
 	then
 		handle="${link}"
 
@@ -699,7 +700,7 @@ then
 	then
 		handle="${message}"
 
-	elif [[ "${handle_option}" = "file" ]]
+	elif [[ "${handle_option}" = "file"    ]]
 	then
 		handle="${file}"
 
