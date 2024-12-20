@@ -76,6 +76,14 @@ do
 			option="update"
 			update="${2}"
 
+			if [ "${update}" = "environement" ]
+			then
+				environement="${3}"
+
+				shift
+			fi
+
+
 			if [ "${update}" = "utility" ]
 			then
 				utility="${3}"
@@ -133,6 +141,7 @@ do
 			echo
 			echo -e "                    [ all ]"
 			echo -e "                    [ dextop ] [ Default ]"
+			echo -e "                    [ environment ]"
 			echo -e "                    [ utility ]"
 			echo -e "                    [ additions ]"
 			echo -e "                    [ shell ]"
@@ -198,10 +207,20 @@ then
 	then
 		environment="xfce"
 
-		frobulator.flag "${environment}" "${HOME}"/.dextop dextop-environment
+	elif [ "${environment}" = [iI][3] ]
+	then
+		environment="i3"
 
-		unset environment
+	elif [ "${environment}" = [xX][fF][cC][eE] ]
+	then
+		environment="xfce"
+
 	fi
+
+	frobulator.flag "${environment}" "${HOME}"/.dextop dextop-environment
+
+	unset environment
+
 fi
 
 if [ ! -f "${HOME}"/.dextop/dextop-session ]
@@ -668,7 +687,7 @@ environement_intent () {
 
 		if [ -z "${option}" ] || [ "${option}" = "termux" ]
 		then
-			# link to user home
+			# link configuration files
 
 			frobulator.link "${HOME}"/.local/bin "${HOME}"/.config/i3          i3-configuration          config
 			frobulator.link "${HOME}"/.local/bin "${HOME}"/.config/i3status    i3status-configuration    config
