@@ -671,7 +671,7 @@ environement_intent () {
 			# link to user home
 
 			frobulator.link "${HOME}"/.local/bin "${HOME}"/.config/i3          i3-configuration          config
-			frobulator.link "${HOME}"/.local/bin "${HOME}"/.config/i3status    i3status-configuration    confi
+			frobulator.link "${HOME}"/.local/bin "${HOME}"/.config/i3status    i3status-configuration    config
 		fi
 
 	fi
