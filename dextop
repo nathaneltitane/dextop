@@ -215,6 +215,9 @@ then
 	then
 		environment="xfce"
 
+	else
+		environement="console"
+
 	fi
 
 	frobulator.flag "${environment}" "${HOME}"/.dextop dextop-environment
@@ -237,10 +240,20 @@ then
 			session="xfce4-session"
 		fi
 
+		if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "console" ]]
+		then
+			session="console"
+		fi
+
 		frobulator.flag "${session}" "${HOME}"/.dextop dextop-session
 
 		unset session
 	fi
+fi
+
+if [ -z "${environement}" ]
+then
+	environement="all"
 fi
 
 if [ -z "${utility}" ]
