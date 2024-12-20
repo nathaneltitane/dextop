@@ -680,7 +680,6 @@ environement_intent () {
 
 }
 
-
 directories_intent () {
 
 	# generate dextop required directories
