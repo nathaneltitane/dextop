@@ -125,7 +125,8 @@ do
 			echo -e "-e, --environment   Setup desktop environment and utilities."
 			echo
 			echo -e "                    [ i3 ]"
-			echo -e "                    [ xfce ] [ Default ]"
+			echo -e "                    [ xfce ]    [ Default  ]"
+			echo -e "                    [ console ] [ Fallback ]"
 			echo
 			echo -e "-t, --termux        Setup Termux environment and utilities only."
 			echo
