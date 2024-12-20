@@ -618,6 +618,69 @@ shell_intent () {
 
 }
 
+environement_intent () {
+
+	# load environment files
+
+	environment_list+=(
+		i3-configuration
+		i3status-configuration
+	)
+
+	if [[ "${option}" = "update" ]]
+	then
+		if [[ ${environment_list[@]} =~ "${environement}" ]]
+		then
+			frobulator.download get.trmnl.me "${HOME}"/.local/bin "${environement}"
+
+		elif [[ "${environemnt}" = "all" ]]
+		then
+			frobulator.download get.trmnl.me "${HOME}"/.local/bin ${environment_list[@]}
+
+		else
+			frobulator.err "Unknown environement item name" "[ '${environement}' ]"
+			echo
+
+			frobulator.fwd "Listing known environement items${marker_elp}"
+			echo
+
+			frobulator.timeout
+
+			IFS=$'\n'
+
+			printf "${marker_nul} %s\n" ${environement[@]}
+
+			echo
+
+			IFS=''
+
+			frobulator.msg "Review environement item name spelling and try again."
+			echo
+
+			frobulator.inf "Update all known environement items using 'all' argument."
+			echo
+
+			exit 1
+		fi
+
+	else
+		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${environement_list[@]}
+
+		if [ -z "${option}" ] || [ "${option}" = "termux" ]
+		then
+			# link to user home
+
+			frobulator.link "${HOME}"/.local/bin "${HOME}"/.config/i3          i3-configuration          config
+			frobulator.link "${HOME}"/.local/bin "${HOME}"/.config/i3status    i3status-configuration    config
+		fi
+
+	fi
+
+	environement_list=()
+
+}
+
+
 directories_intent () {
 
 	# generate dextop required directories
