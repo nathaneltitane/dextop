@@ -76,9 +76,9 @@ do
 			option="update"
 			update="${2}"
 
-			if [ "${update}" = "environement" ]
+			if [ "${update}" = "environment" ]
 			then
-				environement="${3}"
+				environment="${3}"
 
 				shift
 			fi
@@ -216,7 +216,7 @@ then
 		environment="xfce"
 
 	else
-		environement="console"
+		environment="console"
 
 	fi
 
@@ -251,9 +251,9 @@ then
 	fi
 fi
 
-if [ -z "${environement}" ]
+if [ -z "${environment}" ]
 then
-	environement="all"
+	environment="all"
 fi
 
 if [ -z "${utility}" ]
@@ -287,7 +287,7 @@ failsafe_intent () {
 
 container_environment () {
 
-	# generate container environement
+	# generate container environment
 
 	CONTAINER_ROOT="${PREFIX}"/cnt/debian/12
 
@@ -336,7 +336,7 @@ container_intent () {
 
 	unset LD_PRELOAD
 
-	# generate container environement
+	# generate container environment
 
 	container_environment
 
@@ -650,7 +650,7 @@ shell_intent () {
 
 }
 
-environement_intent () {
+environment_intent () {
 
 	# load environment files
 
@@ -661,42 +661,42 @@ environement_intent () {
 
 	if [[ "${option}" = "update" ]]
 	then
-		if [[ ${environment_list[@]} =~ "${environement}" ]]
+		if [[ ${environment_list[@]} =~ "${environment}" ]]
 		then
-			frobulator.download get.trmnl.me "${HOME}"/.local/bin "${environement}"
+			frobulator.download get.trmnl.me "${HOME}"/.local/bin "${environment}"
 
 		elif [[ "${environemnt}" = "all" ]]
 		then
 			frobulator.download get.trmnl.me "${HOME}"/.local/bin ${environment_list[@]}
 
 		else
-			frobulator.err "Unknown environement item name" "[ '${environement}' ]"
+			frobulator.err "Unknown environment item name" "[ '${environment}' ]"
 			echo
 
-			frobulator.fwd "Listing known environement items${marker_elp}"
+			frobulator.fwd "Listing known environment items${marker_elp}"
 			echo
 
 			frobulator.timeout
 
 			IFS=$'\n'
 
-			printf "${marker_nul} %s\n" ${environement[@]}
+			printf "${marker_nul} %s\n" ${environment[@]}
 
 			echo
 
 			IFS=''
 
-			frobulator.msg "Review environement item name spelling and try again."
+			frobulator.msg "Review environment item name spelling and try again."
 			echo
 
-			frobulator.inf "Update all known environement items using 'all' argument."
+			frobulator.inf "Update all known environment items using 'all' argument."
 			echo
 
 			exit 1
 		fi
 
 	else
-		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${environement_list[@]}
+		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${environment_list[@]}
 
 		if [ -z "${option}" ] || [ "${option}" = "termux" ]
 		then
@@ -708,7 +708,7 @@ environement_intent () {
 
 	fi
 
-	environement_list=()
+	environment_list=()
 
 }
 
@@ -1040,6 +1040,21 @@ then
 		dextop_intent
 
 		frobulator.cpt "Complete" "[ Update // Dextop ]"
+		echo
+	fi
+
+	if [[ "${update}" = [eE][nN][vV][iI][rR][oO][nN][mM][eE][nN][tT] ]]
+	then
+
+		frobulator.inf "Updating" "[ ${environment} ]"
+		echo
+
+		frobulator.fwd "Updating${marker_elp}"
+		echo
+
+		utility_intent
+
+		frobulator.cpt "Complete" "[ Update // Environment ]"
 		echo
 	fi
 
