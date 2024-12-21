@@ -1056,7 +1056,7 @@ then
 		frobulator.fwd "Updating${marker_elp}"
 		echo
 
-		environment_intent
+		interface_intent
 
 		frobulator.cpt "Complete" "[ Update // Interface ]"
 		echo
