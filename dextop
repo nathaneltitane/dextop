@@ -988,7 +988,7 @@ then
 
 	frobulator.read reply
 
-	if [[ "${reply}" = [yY]         ]] || \
+	if [[ "${reply}" = [yY]      ]] || \
 	[[ "${reply}" = [yY][eE][sS] ]]
 	then
 		frobulator.fwd "Removal in progress${marker_elp}"
@@ -1056,7 +1056,7 @@ then
 		frobulator.fwd "Updating${marker_elp}"
 		echo
 
-		utility_intent
+		environment_intent
 
 		frobulator.cpt "Complete" "[ Update // Environment ]"
 		echo
