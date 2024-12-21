@@ -8,6 +8,10 @@
 
 ### NOTICE
 
+12-20-2024 ↴
+
+- Reimplemented i3 session settings and base configurations
+
 12-01-2024 ↴
 
 - Fixed issues with container(s) management in 'container-session'
