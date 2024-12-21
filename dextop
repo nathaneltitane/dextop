@@ -1019,6 +1019,8 @@ then
 
 		dextop_intent
 
+		environment_intent
+
 		utility_intent
 
 		additions_intent
