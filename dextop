@@ -667,7 +667,7 @@ environment_intent () {
 		then
 			frobulator.download get.trmnl.me "${HOME}"/.local/bin "${environment}"
 
-		elif [[ "${environemnt}" = "all" ]]
+		elif [[ "${environment}" = "all" ]]
 		then
 			frobulator.download get.trmnl.me "${HOME}"/.local/bin ${environment_list[@]}
 
