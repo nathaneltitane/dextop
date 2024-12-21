@@ -1385,6 +1385,15 @@ then
 		frobulator.file "${HOME}"/.dextop dextop-bookmarks-checkpoint
 	fi
 
+	# interface
+
+	if [ ! -f "${HOME}"/.dextop/dextop-interface-checkpoint ]
+	then
+		interface_intent
+
+		frobulator.file "${HOME}"/.dextop dextop-interface-checkpoint
+	fi
+
 	# icons
 
 	if [ ! -f "${HOME}"/.dextop/dextop-icons-checkpoint ]
