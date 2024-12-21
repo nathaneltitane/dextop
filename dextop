@@ -76,9 +76,9 @@ do
 			option="update"
 			update="${2}"
 
-			if [ "${update}" = "environment" ]
+			if [ "${update}" = "interface" ]
 			then
-				environment="${3}"
+				interface="${3}"
 
 				shift
 			fi
@@ -143,7 +143,7 @@ do
 			echo
 			echo -e "                    [ all ]"
 			echo -e "                    [ dextop ] [ Default ]"
-			echo -e "                    [ environment ]"
+			echo -e "                    [ interface ]"
 			echo -e "                    [ utility ]"
 			echo -e "                    [ additions ]"
 			echo -e "                    [ shell ]"
@@ -253,9 +253,9 @@ then
 	fi
 fi
 
-if [ -z "${environment}" ]
+if [ -z "${interface}" ]
 then
-	environment="all"
+	interface="all"
 fi
 
 if [ -z "${utility}" ]
@@ -652,53 +652,53 @@ shell_intent () {
 
 }
 
-environment_intent () {
+interface_intent () {
 
-	# load environment files
+	# load interface files
 
-	environment_list+=(
+	interface_list+=(
 		i3-configuration
 		i3status-configuration
 	)
 
 	if [[ "${option}" = "update" ]]
 	then
-		if [[ ${environment_list[@]} =~ "${environment}" ]]
+		if [[ ${interface_list[@]} =~ "${interface}" ]]
 		then
-			frobulator.download get.trmnl.me "${HOME}"/.local/bin "${environment}"
+			frobulator.download get.trmnl.me "${HOME}"/.local/bin "${interface}"
 
-		elif [[ "${environment}" = "all" ]]
+		elif [[ "${interface}" = "all" ]]
 		then
-			frobulator.download get.trmnl.me "${HOME}"/.local/bin ${environment_list[@]}
+			frobulator.download get.trmnl.me "${HOME}"/.local/bin ${interface_list[@]}
 
 		else
-			frobulator.err "Unknown environment item name" "[ '${environment}' ]"
+			frobulator.err "Unknown interface item name" "[ '${interface}' ]"
 			echo
 
-			frobulator.fwd "Listing known environment items${marker_elp}"
+			frobulator.fwd "Listing known interface items${marker_elp}"
 			echo
 
 			frobulator.timeout
 
 			IFS=$'\n'
 
-			printf "${marker_nul} %s\n" ${environment[@]}
+			printf "${marker_nul} %s\n" ${interface[@]}
 
 			echo
 
 			IFS=''
 
-			frobulator.msg "Review environment item name spelling and try again."
+			frobulator.msg "Review interface item name spelling and try again."
 			echo
 
-			frobulator.inf "Update all known environment items using 'all' argument."
+			frobulator.inf "Update all known interface items using 'all' argument."
 			echo
 
 			exit 1
 		fi
 
 	else
-		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${environment_list[@]}
+		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${interface_list[@]}
 
 		if [ -z "${option}" ] || [ "${option}" = "termux" ]
 		then
@@ -710,7 +710,7 @@ environment_intent () {
 
 	fi
 
-	environment_list=()
+	interface_list=()
 
 }
 
@@ -1019,7 +1019,7 @@ then
 
 		dextop_intent
 
-		environment_intent
+		interface_intent
 
 		utility_intent
 
@@ -1047,10 +1047,10 @@ then
 		echo
 	fi
 
-	if [[ "${update}" = [eE][nN][vV][iI][rR][oO][nN][mM][eE][nN][tT] ]]
+	if [[ "${update}" = [iI][nN][tT][eE][rR][fF][aA][cC][eE] ]]
 	then
 
-		frobulator.inf "Updating" "[ ${environment} ]"
+		frobulator.inf "Updating" "[ ${interface} ]"
 		echo
 
 		frobulator.fwd "Updating${marker_elp}"
@@ -1058,7 +1058,7 @@ then
 
 		environment_intent
 
-		frobulator.cpt "Complete" "[ Update // Environment ]"
+		frobulator.cpt "Complete" "[ Update // Interface ]"
 		echo
 	fi
 
