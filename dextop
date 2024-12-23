@@ -658,7 +658,16 @@ interface_intent () {
 
 	interface_list+=(
 		i3-configuration
+		i3-dmenu-shortcuts
 		i3status-configuration
+		dmenu-change-background
+		dmenu-confirm
+		dmenu-exit-session
+		dmenu-open-directory
+		dmenu-open-file
+		dmenu-open-file-manager
+		dmenu-open-manual
+		dmenu-template
 	)
 
 	if [[ "${option}" = "update" ]]
@@ -682,7 +691,7 @@ interface_intent () {
 
 			IFS=$'\n'
 
-			printf "${marker_nul} %s\n" ${interface[@]}
+			printf "${marker_nul} %s\n" ${interface_list[@]}
 
 			echo
 
