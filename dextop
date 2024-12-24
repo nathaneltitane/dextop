@@ -667,6 +667,7 @@ interface_intent () {
 		dmenu-open-file
 		dmenu-open-file-manager
 		dmenu-open-manual
+		dmenu-show-shortcuts
 		dmenu-template
 	)
 
