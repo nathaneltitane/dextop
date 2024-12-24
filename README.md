@@ -8,9 +8,10 @@
 
 ### NOTICE
 
-12-20-2024 ↴
+12-24-2024 ↴
 
-- Reimplemented i3 session settings and base configurations
+- Reimplemented i3 session settings and base configurations:
+  - Fixes and new implementations for dmenu, i3status and i3 session
 
 12-01-2024 ↴
 
