@@ -101,6 +101,7 @@ i3_addons_list+=(
 	dmenu
 	feh
 	rofi
+	stterm
 )
 
 icon_themes_list+=(
