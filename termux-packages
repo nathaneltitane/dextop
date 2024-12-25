@@ -121,6 +121,7 @@ i3_addons_list+=(
 	dmenu
 	feh
 	rofi
+	st
 )
 
 icon_themes_list+=(
