@@ -76,7 +76,7 @@ do
 			option="update"
 			update="${2}"
 
-			if [ "${update}" = "backgrounds" ]
+			if [ "${update}" = "background" ]
 			then
 				background="${3}"
 
@@ -852,7 +852,7 @@ backgrounds_intent () {
 		then
 			frobulator.download get.dxtp.app "${HOME}"/.local/bin "${background}"
 
-		elif [[ "${backgrounds}" = "all" ]]
+		elif [[ "${background}" = "all" ]]
 		then
 			frobulator.download get.dxtp.app "${HOME}"/.local/bin ${backgrounds_list[@]}
 
