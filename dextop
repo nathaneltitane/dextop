@@ -664,6 +664,7 @@ interface_intent () {
 		dmenu-confirm
 		dmenu-exit-session
 		dmenu-kill-process
+		dmenu-notes
 		dmenu-open-directory
 		dmenu-open-file
 		dmenu-open-file-manager
