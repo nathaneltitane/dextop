@@ -663,6 +663,7 @@ interface_intent () {
 		dmenu-change-background
 		dmenu-confirm
 		dmenu-exit-session
+		dmenu-kill-process
 		dmenu-open-directory
 		dmenu-open-file
 		dmenu-open-file-manager
