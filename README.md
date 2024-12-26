@@ -8,6 +8,12 @@
 
 ### NOTICE
 
+12-26-2024 ↴
+
+- Modularize i3 session extensions and dmenu applets
+- New shortcuts and implementations (View in i3 shortcuts)
+
+
 12-24-2024 ↴
 
 - Reimplemented i3 session settings and base configurations:
