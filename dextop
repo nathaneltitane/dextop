@@ -150,7 +150,7 @@ do
 			echo
 			echo -e "                    [ all ]"
 			echo -e "                    [ dextop ] [ Default ]"
-			echo -e "                    [ backgrounds ]"
+			echo -e "                    [ background ]"
 			echo -e "                    [ interface ]"
 			echo -e "                    [ utility ]"
 			echo -e "                    [ additions ]"
