@@ -827,10 +827,10 @@ backgrounds_intent () {
 	# load background files
 
 	backgrounds_list=(
-		dextop-black.svg
-		dextop-blue.svg
-		dextop-coral.svg
-		dextop-grey.svg
+		dextop-black.png
+		dextop-blue.png
+		dextop-coral.png
+		dextop-grey.png
 	)
 
 	frobulator.download get.dxtp.app "${HOME}"/.dextop ${backgrounds_list[@]}
