@@ -261,6 +261,11 @@ then
 	fi
 fi
 
+if [ -z "${background}" ]
+then
+	background="all"
+fi
+
 if [ -z "${interface}" ]
 then
 	interface="all"
