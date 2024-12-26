@@ -2,7 +2,7 @@
 
 [![Donate](https://img.shields.io/badge/Paypal-2f343f.svg?style=for-the-badge&logo=paypal&label=Donate)](https://www.paypal.com/donate?hosted_button_id=ZW3CDCANHJCWJ)
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 12-20-2024 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 12-26-2024 ]
 
 ---
 
@@ -608,7 +608,7 @@ Should you suspect any issues or errors, please provide a copy of those files wh
 
 ---
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 12-20-2024 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 12-26-2024 ]
 
 ### Enjoying Dextop? Buy me a coffee to show your appreciation!
 
