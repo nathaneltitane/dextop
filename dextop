@@ -675,11 +675,11 @@ interface_intent () {
 		i3status-configuration
 		dmenu-change-background
 		dmenu-confirm
-		dmenu-explore
 		dmenu-exit-session
 		dmenu-kill-process
 		dmenu-launch
 		dmenu-lookup
+		dmenu-navigate
 		dmenu-notes
 		dmenu-open-directory
 		dmenu-open-file
