@@ -675,6 +675,7 @@ interface_intent () {
 		i3status-configuration
 		dmenu-change-background
 		dmenu-confirm
+		dmenu-explore
 		dmenu-exit-session
 		dmenu-kill-process
 		dmenu-launch
