@@ -845,6 +845,10 @@ backgrounds_intent () {
 		dextop-blue.png
 		dextop-coral.png
 		dextop-grey.png
+		dextop-black.svg
+		dextop-blue.svg
+		dextop-coral.svg
+		dextop-grey.svg
 	)
 
 	if [[ "${option}" = "update" ]]
