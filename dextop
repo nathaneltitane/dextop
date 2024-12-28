@@ -1059,7 +1059,7 @@ then
 	frobulator.read reply
 
 	if [[ "${reply}" = [yY]      ]] || \
-	[[ "${reply}" = [yY][eE][sS] ]]
+	   [[ "${reply}" = [yY][eE][sS] ]]
 	then
 		frobulator.fwd "Removal in progress${marker_elp}"
 		echo
