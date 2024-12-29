@@ -429,6 +429,57 @@ architecture_intent () {
 	clear
 }
 
+update_intent () {
+
+	# handle updates
+
+	update_url="${1}"
+	update_directory="${2}"
+	update_items=(${@:3})
+
+	if [[ "${update_item}" = "all" ]]
+	then
+		update_files_list=(${update_items[@]})
+
+		frobulator.download "${update_url}" "${update_directory}" ${update_files_list[@]}
+
+	elif [[ ${update_items[@]} =~ "${update_item}" ]]
+	then
+		update_files_list=("${update_item}")
+
+		frobulator.download "${update_url}" "${update_directory}" "${update_item}"
+
+	elif  [[ ! ${update_items[@]} =~ "${update_item}" ]]
+	then
+		update_files_list=(${@:3})
+
+		frobulator.err "Unknown item name" "[ '${update_item}' ]"
+		echo
+
+		frobulator.fwd "Listing known items${marker_elp}"
+		echo
+
+		frobulator.timeout
+
+		IFS=$'\n'
+
+		printf "${marker_nul} %s\n" ${update_files_list[@]}
+
+		echo
+
+		IFS=''
+
+		frobulator.msg "Review item name spelling and try again."
+		echo
+
+		frobulator.inf "Update all known items using 'all' argument."
+		echo
+
+		exit 1
+	fi
+
+}
+#
 reload_intent () {
 
 	# termux settings reload:
@@ -499,57 +550,6 @@ addons_intent () {
 	# termux addons and companion applications
 
 	"${HOME}"/.local/bin/termux-addons
-}
-
-update_intent () {
-
-	# handle updates
-
-	update_url="${1}"
-	update_directory="${2}"
-	update_items=(${@:3})
-
-	if [[ "${update_item}" = "all" ]]
-	then
-		update_files_list=(${update_items[@]})
-
-		frobulator.download "${update_url}" "${update_directory}" ${update_files_list[@]}
-
-	elif [[ ${update_items[@]} =~ "${update_item}" ]]
-	then
-		update_files_list=("${update_item}")
-
-		frobulator.download "${update_url}" "${update_directory}" "${update_item}"
-
-	elif  [[ ! ${update_items[@]} =~ "${update_item}" ]]
-	then
-		update_files_list=(${@:3})
-
-		frobulator.err "Unknown item name" "[ '${update_item}' ]"
-		echo
-
-		frobulator.fwd "Listing known items${marker_elp}"
-		echo
-
-		frobulator.timeout
-
-		IFS=$'\n'
-
-		printf "${marker_nul} %s\n" ${update_files_list[@]}
-
-		echo
-
-		IFS=''
-
-		frobulator.msg "Review item name spelling and try again."
-		echo
-
-		frobulator.inf "Update all known items using 'all' argument."
-		echo
-
-		exit 1
-	fi
-
 }
 
 utility_intent () {
