@@ -1096,7 +1096,7 @@ then
 
 		shell_intent
 
-		frobulator.cpt "Complete" "[ Update // Backgrounds ]"
+		frobulator.cpt "Complete" "[ Update // Background ]"
 		echo
 	fi
 
