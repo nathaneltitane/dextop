@@ -536,6 +536,8 @@ utility_intent () {
 
 	if [[ "${option}" = "update" ]]
 	then
+		frobulator.keep "${HOME}"/.local/bin ${utilities_list[@]}
+
 		if [[ ${utilities_list[@]} =~ "${utility}" ]]
 		then
 			frobulator.download get.dxtp.app "${HOME}"/.local/bin "${utility}"
@@ -591,6 +593,8 @@ shell_intent () {
 
 	if [[ "${option}" = "update" ]]
 	then
+		frobulator.keep "${HOME}"/.local/bin ${shell_list[@]}
+
 		if [[ ${shell_list[@]} =~ "${shell}" ]]
 		then
 			frobulator.download get.trmnl.me "${HOME}"/.local/bin "${shell}"
@@ -671,7 +675,7 @@ interface_intent () {
 
 	interface_list+=(
 		i3-configuration
-		i3-i3-shortcuts
+		i3-shortcuts
 		i3-status
 		i3status-configuration
 		i3-change-background
@@ -692,6 +696,8 @@ interface_intent () {
 
 	if [[ "${option}" = "update" ]]
 	then
+		frobulator.keep "${HOME}"/.local/bin ${interface_list[@]}
+
 		if [[ ${interface_list[@]} =~ "${interface}" ]]
 		then
 			frobulator.download get.trmnl.me "${HOME}"/.local/bin "${interface}"
@@ -854,13 +860,15 @@ backgrounds_intent () {
 
 	if [[ "${option}" = "update" ]]
 	then
+		frobulator.keep "${HOME}"/.dextop ${backgrounds_list[@]}
+
 		if [[ ${backgrounds_list[@]} =~ "${background}" ]]
 		then
-			frobulator.download get.dxtp.app "${HOME}"/.local/bin "${background}"
+			frobulator.download get.dxtp.app "${HOME}"/.dextop "${background}"
 
 		elif [[ "${background}" = "all" ]]
 		then
-			frobulator.download get.dxtp.app "${HOME}"/.local/bin ${backgrounds_list[@]}
+			frobulator.download get.dxtp.app "${HOME}"/.dextop ${backgrounds_list[@]}
 
 		else
 			frobulator.err "Unknown backgrounds item name" "[ '${background}' ]"
