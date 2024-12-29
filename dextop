@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="12-07-2024"
+version="12-28-2024"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -78,14 +78,14 @@ do
 
 			if [ "${update}" = "background" ]
 			then
-				background="${3}"
+				update_item="${3}"
 
 				shift
 			fi
 
 			if [ "${update}" = "interface" ]
 			then
-				interface="${3}"
+				update_item="${3}"
 
 				shift
 			fi
@@ -93,14 +93,14 @@ do
 
 			if [ "${update}" = "utility" ]
 			then
-				utility="${3}"
+				update_item="${3}"
 
 				shift
 			fi
 
 			if [ "${update}" = "shell" ]
 			then
-				shell="${3}"
+				update_item="${3}"
 
 				shift
 			fi
@@ -261,24 +261,9 @@ then
 	fi
 fi
 
-if [ -z "${background}" ]
+if [ -z "${update_item}" ]
 then
-	background="all"
-fi
-
-if [ -z "${interface}" ]
-then
-	interface="all"
-fi
-
-if [ -z "${utility}" ]
-then
-	utility="all"
-fi
-
-if [ -z "${shell}" ]
-then
-	shell="all"
+	update_item="all"
 fi
 
 # functions ////////////////////////////////////////////////////////////////////
@@ -516,6 +501,57 @@ addons_intent () {
 	"${HOME}"/.local/bin/termux-addons
 }
 
+update_intent () {
+
+	# handle updates
+
+	update_url="${1}"
+	update_directory="${2}"
+	update_items=(${@:3})
+
+	if [[ "${update_item}" = "all" ]]
+	then
+		update_files_list=(${update_items[@]})
+
+		frobulator.download "${update_url}" "${update_directory}" ${update_files_list[@]}
+
+	elif [[ ${update_items[@]} =~ "${update_item}" ]]
+	then
+		update_files_list=("${update_item}")
+
+		frobulator.download "${update_url}" "${update_directory}" "${update_item}"
+
+	elif  [[ ! ${update_items[@]} =~ "${update_item}" ]]
+	then
+		update_files_list=(${@:3})
+
+		frobulator.err "Unknown item name" "[ '${update_item}' ]"
+		echo
+
+		frobulator.fwd "Listing known items${marker_elp}"
+		echo
+
+		frobulator.timeout
+
+		IFS=$'\n'
+
+		printf "${marker_nul} %s\n" ${update_files_list[@]}
+
+		echo
+
+		IFS=''
+
+		frobulator.msg "Review item name spelling and try again."
+		echo
+
+		frobulator.inf "Update all known items using 'all' argument."
+		echo
+
+		exit 1
+	fi
+
+}
+
 utility_intent () {
 
 	# load dextop utilities
@@ -536,41 +572,7 @@ utility_intent () {
 
 	if [[ "${option}" = "update" ]]
 	then
-		frobulator.keep "${HOME}"/.local/bin ${utilities_list[@]}
-
-		if [[ ${utilities_list[@]} =~ "${utility}" ]]
-		then
-			frobulator.download get.dxtp.app "${HOME}"/.local/bin "${utility}"
-
-		elif [[ "${utility}" = "all" ]]
-		then
-			frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
-
-		else
-			frobulator.err "Unknown utility name" "[ '${utility}' ]"
-			echo
-
-			frobulator.fwd "Listing known utilities${marker_elp}"
-			echo
-
-			frobulator.timeout
-
-			IFS=$'\n'
-
-			printf "${marker_nul} %s\n" ${utilities_list[@]}
-
-			echo
-
-			IFS=''
-
-			frobulator.msg "Review utility name spelling and try again."
-			echo
-
-			frobulator.inf "Update all known utilities using 'all' argument."
-			echo
-
-			exit 1
-		fi
+		update_intent get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
 	else
 		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
 	fi
@@ -593,42 +595,7 @@ shell_intent () {
 
 	if [[ "${option}" = "update" ]]
 	then
-		frobulator.keep "${HOME}"/.local/bin ${shell_list[@]}
-
-		if [[ ${shell_list[@]} =~ "${shell}" ]]
-		then
-			frobulator.download get.trmnl.me "${HOME}"/.local/bin "${shell}"
-
-		elif [[ "${shell}" = "all" ]]
-		then
-			frobulator.download get.trmnl.me "${HOME}"/.local/bin ${shell_list[@]}
-
-		else
-			frobulator.err "Unknown shell item name" "[ '${shell}' ]"
-			echo
-
-			frobulator.fwd "Listing known shell items${marker_elp}"
-			echo
-
-			frobulator.timeout
-
-			IFS=$'\n'
-
-			printf "${marker_nul} %s\n" ${shell_list[@]}
-
-			echo
-
-			IFS=''
-
-			frobulator.msg "Review shell item name spelling and try again."
-			echo
-
-			frobulator.inf "Update all known shell items using 'all' argument."
-			echo
-
-			exit 1
-		fi
-
+		update_intent get.trmnl.me "${HOME}"/.local/bin ${shell_list[@]}
 	else
 		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${shell_list[@]}
 
@@ -696,42 +663,7 @@ interface_intent () {
 
 	if [[ "${option}" = "update" ]]
 	then
-		frobulator.keep "${HOME}"/.local/bin ${interface_list[@]}
-
-		if [[ ${interface_list[@]} =~ "${interface}" ]]
-		then
-			frobulator.download get.trmnl.me "${HOME}"/.local/bin "${interface}"
-
-		elif [[ "${interface}" = "all" ]]
-		then
-			frobulator.download get.trmnl.me "${HOME}"/.local/bin ${interface_list[@]}
-
-		else
-			frobulator.err "Unknown interface item name" "[ '${interface}' ]"
-			echo
-
-			frobulator.fwd "Listing known interface items${marker_elp}"
-			echo
-
-			frobulator.timeout
-
-			IFS=$'\n'
-
-			printf "${marker_nul} %s\n" ${interface_list[@]}
-
-			echo
-
-			IFS=''
-
-			frobulator.msg "Review interface item name spelling and try again."
-			echo
-
-			frobulator.inf "Update all known interface items using 'all' argument."
-			echo
-
-			exit 1
-		fi
-
+		update_intent get.trmnl.me "${HOME}"/.local/bin ${interface_list[@]}
 	else
 		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${interface_list[@]}
 
@@ -860,41 +792,7 @@ backgrounds_intent () {
 
 	if [[ "${option}" = "update" ]]
 	then
-		frobulator.keep "${HOME}"/.dextop ${backgrounds_list[@]}
-
-		if [[ ${backgrounds_list[@]} =~ "${background}" ]]
-		then
-			frobulator.download get.dxtp.app "${HOME}"/.dextop "${background}"
-
-		elif [[ "${background}" = "all" ]]
-		then
-			frobulator.download get.dxtp.app "${HOME}"/.dextop ${backgrounds_list[@]}
-
-		else
-			frobulator.err "Unknown backgrounds item name" "[ '${background}' ]"
-			echo
-
-			frobulator.fwd "Listing known backgrounds items${marker_elp}"
-			echo
-
-			frobulator.timeout
-
-			IFS=$'\n'
-
-			printf "${marker_nul} %s\n" ${backgrounds_list[@]}
-
-			echo
-
-			IFS=''
-
-			frobulator.msg "Review background item name spelling and try again."
-			echo
-
-			frobulator.inf "Update all known background items using 'all' argument."
-			echo
-
-			exit 1
-		fi
+		update_intent get.dxtp.app "${HOME}"/.dextop ${backgrounds_list[@]}
 	else
 		frobulator.download get.dxtp.app "${HOME}"/.dextop ${backgrounds_list[@]}
 	fi
@@ -1130,7 +1028,7 @@ then
 	if [[ "${update}" = [iI][nN][tT][eE][rR][fF][aA][cC][eE] ]]
 	then
 
-		frobulator.inf "Updating" "[ ${interface} ]"
+		frobulator.inf "Updating" "[ ${update_item} ]"
 		echo
 
 		frobulator.fwd "Updating${marker_elp}"
@@ -1145,7 +1043,7 @@ then
 	if [[ "${update}" = [uU][tT][iI][lL][iI][tT][yY] ]]
 	then
 
-		frobulator.inf "Updating" "[ ${utility} ]"
+		frobulator.inf "Updating" "[ ${update_item} ]"
 		echo
 
 		frobulator.fwd "Updating${marker_elp}"
@@ -1175,7 +1073,7 @@ then
 	if [[ "${update}" = [sS][hH][eE][lL][lL] ]]
 	then
 
-		frobulator.inf "Updating" "[ ${shell} ]"
+		frobulator.inf "Updating" "[ ${update_item} ]"
 		echo
 
 		frobulator.fwd "Updating${marker_elp}"
@@ -1184,6 +1082,21 @@ then
 		shell_intent
 
 		frobulator.cpt "Complete" "[ Update // Shell ]"
+		echo
+	fi
+
+	if [[ "${update}" = [bB][aA][cK][gG][rR][oO][uU][nN][dD] ]]
+	then
+
+		frobulator.inf "Updating" "[ ${update_item} ]"
+		echo
+
+		frobulator.fwd "Updating${marker_elp}"
+		echo
+
+		shell_intent
+
+		frobulator.cpt "Complete" "[ Update // Backgrounds ]"
 		echo
 	fi
 
