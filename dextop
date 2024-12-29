@@ -484,7 +484,7 @@ preferences_intent () {
 
 	reload_intent
 
-	settings_list=()
+	preferences_list=()
 }
 
 dextop_intent () {
