@@ -467,16 +467,16 @@ backup_intent () {
 
 preferences_intent () {
 
-	# termux settings and properties
+	# termux preferences and properties
 
-	settings_list+=(
+	preferences_list+=(
 		termux-colors
 		termux-font
 		termux-properties
 		termux-reload-settings
 	)
 
-	frobulator.download get.trmnl.me "${HOME}"/.local/bin ${settings_list[@]}
+	frobulator.download get.trmnl.me "${HOME}"/.local/bin ${preferences_list[@]}
 
 	frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-colors     colors.properties
 	frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-font       font.ttf
