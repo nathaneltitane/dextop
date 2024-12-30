@@ -157,13 +157,13 @@ do
 			echo
 			echo -e "                    [ all ]"
 			echo -e "                    [ dextop ] [ Default ]"
+			echo -e "                    [ additions ]"
 			echo -e "                    [ background ]"
 			echo -e "                    [ interface ]"
-			echo -e "                    [ utility ]"
-			echo -e "                    [ additions ]"
-			echo -e "                    [ shell ]"
 			echo -e "                    [ preferences ]"
+			echo -e "                    [ shell ]"
 			echo -e "                    [ termux ]"
+			echo -e "                    [ utility ]"
 			echo
 			echo -e "-a, --addons        Setup Termux addons and companion applications."
 			echo
@@ -486,7 +486,7 @@ update_intent () {
 	fi
 
 }
-#
+
 reload_intent () {
 
 	# termux settings reload:
@@ -523,6 +523,109 @@ backup_intent () {
 	frobulator.progress "archive" "[ ${backup_directory} ]"
 }
 
+dextop_intent () {
+
+	# load dextop deployment script
+
+	frobulator.download get.dxtp.app "${HOME}"/.local/bin dextop
+}
+
+addons_intent () {
+
+	# termux addons and companion applications
+
+	"${HOME}"/.local/bin/termux-addons
+}
+
+additions_intent () {
+
+	# load additions files
+
+	additions_list+=(
+		dextop-additions
+	)
+
+	if [[ "${option}" = "update" ]]
+	then
+		update_intent get.dxtp.app "${HOME}"/.local/bin ${additions_list[@]}
+	else
+		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${additions_list[@]}
+	fi
+
+	additions_list=()
+
+}
+
+backgrounds_intent () {
+
+	# load background files
+
+	backgrounds_list=(
+		dextop-black.png
+		dextop-blue.png
+		dextop-coral.png
+		dextop-grey.png
+		dextop-black.svg
+		dextop-blue.svg
+		dextop-coral.svg
+		dextop-grey.svg
+	)
+
+	if [[ "${option}" = "update" ]]
+	then
+		update_intent get.dxtp.app "${HOME}"/.dextop ${backgrounds_list[@]}
+	else
+		frobulator.download get.dxtp.app "${HOME}"/.dextop ${backgrounds_list[@]}
+	fi
+
+	backgrounds_list=()
+}
+
+interface_intent () {
+
+	# load interface files
+
+	interface_list+=(
+		i3-configuration
+		i3-shortcuts
+		i3-status
+		i3status-configuration
+		i3-change-background
+		i3-confirm
+		i3-exit-session
+		i3-kill-process
+		i3-launch
+		i3-lookup
+		i3-navigate
+		i3-notes
+		i3-open-directory
+		i3-open-file
+		i3-open-file-manager
+		i3-open-manual
+		i3-show-shortcuts
+		i3-template
+	)
+
+	if [[ "${option}" = "update" ]]
+	then
+		update_intent get.trmnl.me "${HOME}"/.local/bin ${interface_list[@]}
+	else
+		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${interface_list[@]}
+
+		if [ -z "${option}" ] || [ "${option}" = "termux" ]
+		then
+			# link configuration files
+
+			frobulator.link "${HOME}"/.local/bin "${HOME}"/.config/i3          i3-configuration          config
+			frobulator.link "${HOME}"/.local/bin "${HOME}"/.config/i3status    i3status-configuration    config
+		fi
+
+	fi
+
+	interface_list=()
+
+}
+
 preferences_intent () {
 
 	# termux preferences and properties
@@ -548,48 +651,6 @@ preferences_intent () {
 	fi
 
 	preferences_list=()
-}
-
-dextop_intent () {
-
-	# load dextop deployment script
-
-	frobulator.download get.dxtp.app "${HOME}"/.local/bin dextop
-}
-
-addons_intent () {
-
-	# termux addons and companion applications
-
-	"${HOME}"/.local/bin/termux-addons
-}
-
-utility_intent () {
-
-	# load dextop utilities
-
-	utilities_list+=(
-		termux-packages
-		termux-update
-		termux-storage
-		termux-addons
-		container-expansion
-		container-image
-		container-initialization
-		container-packages
-		container-session
-		container-settings
-		container-user
-	)
-
-	if [[ "${option}" = "update" ]]
-	then
-		update_intent get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
-	else
-		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
-	fi
-
-	utilities_list=()
 }
 
 shell_intent () {
@@ -648,49 +709,32 @@ shell_intent () {
 
 }
 
-interface_intent () {
+utility_intent () {
 
-	# load interface files
+	# load dextop utilities
 
-	interface_list+=(
-		i3-configuration
-		i3-shortcuts
-		i3-status
-		i3status-configuration
-		i3-change-background
-		i3-confirm
-		i3-exit-session
-		i3-kill-process
-		i3-launch
-		i3-lookup
-		i3-navigate
-		i3-notes
-		i3-open-directory
-		i3-open-file
-		i3-open-file-manager
-		i3-open-manual
-		i3-show-shortcuts
-		i3-template
+	utilities_list+=(
+		termux-packages
+		termux-update
+		termux-storage
+		termux-addons
+		container-expansion
+		container-image
+		container-initialization
+		container-packages
+		container-session
+		container-settings
+		container-user
 	)
 
 	if [[ "${option}" = "update" ]]
 	then
-		update_intent get.trmnl.me "${HOME}"/.local/bin ${interface_list[@]}
+		update_intent get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
 	else
-		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${interface_list[@]}
-
-		if [ -z "${option}" ] || [ "${option}" = "termux" ]
-		then
-			# link configuration files
-
-			frobulator.link "${HOME}"/.local/bin "${HOME}"/.config/i3          i3-configuration          config
-			frobulator.link "${HOME}"/.local/bin "${HOME}"/.config/i3status    i3status-configuration    config
-		fi
-
+		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
 	fi
 
-	interface_list=()
-
+	utilities_list=()
 }
 
 directories_intent () {
@@ -762,54 +806,6 @@ bookmarks_intent () {
 	bookmarks_directories_list=()
 
 	bookamrks_labels_list=()
-}
-
-additions_intent () {
-
-	# load additions files
-
-	additions_list+=(
-		dextop-additions
-	)
-
-	frobulator.download get.dxtp.app "${HOME}"/.local/bin ${additions_list[@]}
-
-	additions_list=()
-
-	# launchers_list+=(
-	#	dextop-browser.desktop
-	# 	dextop-mail.desktop
-	# 	dextop-messages.desktop
-	# )
-
-	# frobulator.download get.trmnl.me "${HOME}"/.local/share/applications ${launchers_list[@]}
-
-	# launchers_list=()
-}
-
-backgrounds_intent () {
-
-	# load background files
-
-	backgrounds_list=(
-		dextop-black.png
-		dextop-blue.png
-		dextop-coral.png
-		dextop-grey.png
-		dextop-black.svg
-		dextop-blue.svg
-		dextop-coral.svg
-		dextop-grey.svg
-	)
-
-	if [[ "${option}" = "update" ]]
-	then
-		update_intent get.dxtp.app "${HOME}"/.dextop ${backgrounds_list[@]}
-	else
-		frobulator.download get.dxtp.app "${HOME}"/.dextop ${backgrounds_list[@]}
-	fi
-
-	backgrounds_list=()
 }
 
 icons_intent () {
