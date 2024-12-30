@@ -105,6 +105,13 @@ do
 				shift
 			fi
 
+			if [ "${update}" = "preferences" ]
+			then
+				update_item="${3}"
+
+				shift
+			fi
+
 			shift
 
 		;;
@@ -155,8 +162,8 @@ do
 			echo -e "                    [ utility ]"
 			echo -e "                    [ additions ]"
 			echo -e "                    [ shell ]"
-			echo -e "                    [ termux ]"
 			echo -e "                    [ preferences ]"
+			echo -e "                    [ termux ]"
 			echo
 			echo -e "-a, --addons        Setup Termux addons and companion applications."
 			echo
@@ -527,13 +534,18 @@ preferences_intent () {
 		termux-reload-settings
 	)
 
-	frobulator.download get.trmnl.me "${HOME}"/.local/bin ${preferences_list[@]}
+	if [[ "${option}" = "update" ]]
+	then
+		update_intent get.dxtp.app "${HOME}"/.local/bin ${preferences_list[@]}
+	else
+		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${preferences_list[@]}
 
-	frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-colors     colors.properties
-	frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-font       font.ttf
-	frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-properties termux.properties
+		frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-colors     colors.properties
+		frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-font       font.ttf
+		frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-properties termux.properties
 
-	reload_intent
+		reload_intent
+	fi
 
 	preferences_list=()
 }
