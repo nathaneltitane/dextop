@@ -76,36 +76,11 @@ do
 			option="update"
 			update="${2}"
 
-			if [ "${update}" = "background" ]
-			then
-				update_item="${3}"
-
-				shift
-			fi
-
-			if [ "${update}" = "interface" ]
-			then
-				update_item="${3}"
-
-				shift
-			fi
-
-
-			if [ "${update}" = "utility" ]
-			then
-				update_item="${3}"
-
-				shift
-			fi
-
-			if [ "${update}" = "shell" ]
-			then
-				update_item="${3}"
-
-				shift
-			fi
-
-			if [ "${update}" = "preferences" ]
+			if [ "${update}" = "background"  ] || \
+			   [ "${update}" = "interface"   ] || \
+			   [ "${update}" = "utility"     ] || \
+			   [ "${update}" = "shell"       ] || \
+			   [ "${update}" = "preferences" ]
 			then
 				update_item="${3}"
 
