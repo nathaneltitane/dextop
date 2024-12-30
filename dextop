@@ -979,6 +979,9 @@ then
 		echo
 
 		dextop_intent
+
+		frobulator.cpt "Complete" "[ Update // ${update} ]"
+		echo
 	fi
 
 	if [[ "${update}" = [aA][lL][lL] ]]
