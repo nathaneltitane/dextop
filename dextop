@@ -578,7 +578,6 @@ interface_intent () {
 		i3-status
 		i3-template
 		i3-terminate
-
 	)
 
 	if [[ "${option}" = "update" ]]
