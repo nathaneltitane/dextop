@@ -1016,7 +1016,7 @@ then
 
 		"${HOME}"/.local/bin/termux-update
 
-		frobulator.cpt "Complete" "[ Update // All ]"
+		frobulator.cpt "Complete" "[ Update // ${update} ]"
 		echo
 	fi
 
@@ -1030,7 +1030,7 @@ then
 
 		dextop_intent
 
-		frobulator.cpt "Complete" "[ Update // Dextop ]"
+		frobulator.cpt "Complete" "[ Update // ${update} ]"
 		echo
 	fi
 
@@ -1044,7 +1044,7 @@ then
 
 		additions_intent
 
-		frobulator.cpt "Complete" "[ Update // Additions ]"
+		frobulator.cpt "Complete" "[ Update // ${update} ]"
 		echo
 	fi
 
@@ -1059,7 +1059,7 @@ then
 
 		shell_intent
 
-		frobulator.cpt "Complete" "[ Update // Background ]"
+		frobulator.cpt "Complete" "[ Update // ${update} ]"
 		echo
 	fi
 
@@ -1074,7 +1074,7 @@ then
 
 		interface_intent
 
-		frobulator.cpt "Complete" "[ Update // Interface ]"
+		frobulator.cpt "Complete" "[ Update // ${update} ]"
 		echo
 	fi
 
@@ -1089,7 +1089,7 @@ then
 
 		preferences_intent
 
-		frobulator.cpt "Complete" "[ Update // Preferences ]"
+		frobulator.cpt "Complete" "[ Update // ${update} ]"
 		echo
 	fi
 
@@ -1104,7 +1104,7 @@ then
 
 		shell_intent
 
-		frobulator.cpt "Complete" "[ Update // Shell ]"
+		frobulator.cpt "Complete" "[ Update // ${update} ]"
 		echo
 	fi
 
@@ -1118,7 +1118,7 @@ then
 
 		"${HOME}"/.local/bin/termux-update
 
-		frobulator.cpt "Complete" "[ Update // Termux ]"
+		frobulator.cpt "Complete" "[ Update // ${update} ]"
 		echo
 
 	fi
@@ -1134,7 +1134,7 @@ then
 
 		utility_intent
 
-		frobulator.cpt "Complete" "[ Update // Utility ]"
+		frobulator.cpt "Complete" "[ Update // ${update} ]"
 		echo
 	fi
 
@@ -1178,7 +1178,7 @@ then
 		frobulator.progress "purge"
 
 	else
-		frobulator.inf "Aborting" "[ ${update} ]"
+		frobulator.inf "Aborting" "[ ${option} ]"
 		echo
 
 		exit
