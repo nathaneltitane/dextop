@@ -562,23 +562,23 @@ interface_intent () {
 
 	interface_list+=(
 		i3-configuration
-		i3-shortcuts
-		i3-status
 		i3status-configuration
-		i3-change-background
+		i3-backgrounds
 		i3-confirm
-		i3-exit-session
-		i3-kill-process
+		i3-directory
+		i3-exit
+		i3-file
+		i3-file-manager
 		i3-launch
 		i3-lookup
-		i3-navigate
+		i3-manuals
+		i3-navigation
 		i3-notes
-		i3-open-directory
-		i3-open-file
-		i3-open-file-manager
-		i3-open-manual
-		i3-show-shortcuts
+		i3-shortcuts
+		i3-status
 		i3-template
+		i3-terminate
+
 	)
 
 	if [[ "${option}" = "update" ]]
