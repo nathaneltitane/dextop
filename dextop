@@ -936,58 +936,28 @@ frobulator.log "architecture_intent"
 
 # options //////////////////////////////////////////////////////////////////////
 
+if [ "${option}" = "initialize" ]
+then
+	frobulator.inf "Initializing" "[ Dextop ]"
+	echo
+
+	preferences_intent
+
+	addons_intent
+
+	utility_intent
+
+	shell_intent
+
+	frobulator.cpt "Complete" "[ Initialize // Dextop ]"
+	echo
+
+	exit
+fi
+
 if [ "${option}" = "backup" ]
 then
 	backup_intent
-fi
-
-if [ "${option}" = "addons" ]
-then
-	addons_intent
-fi
-
-if [ "${option}" = "purge" ]
-then
-	# notice
-
-	frobulator.err "" "[ DISCLAIMER ]"
-	echo
-
-	frobulator.separate
-
-	frobulator.wrn "'Purge' option has been selected:"
-	frobulator.wrn "This action is permanent."
-	echo
-
-	frobulator.inf "All items loaded during the Dextop setup process will be PERMANENTLY REMOVED."
-	frobulator.nul "Modifications made outside the intended installation process may cause instability or data corruption upon removal."
-	echo
-
-	frobulator.wrn "The author is not responsible for any damages or issues arising from the removal of Dextop."
-	frobulator.nul "You have been warned."
-
-	frobulator.separate
-
-	frobulator.ask "Purge Dextop?"
-
-	frobulator.read reply
-
-	if [[ "${reply}" = [yY]      ]] || \
-	   [[ "${reply}" = [yY][eE][sS] ]]
-	then
-		frobulator.fwd "Removal in progress${marker_elp}"
-		echo
-
-		purge_intent &
-
-		frobulator.progress "purge"
-
-	else
-		frobulator.inf "Aborting" "[ ${update} ]"
-		echo
-
-		exit
-	fi
 fi
 
 if [ "${option}" = "update" ]
@@ -1033,6 +1003,35 @@ then
 		echo
 	fi
 
+	if [[ "${update}" = [aA][dD][dD][iI][tT][iI][oO][nN][sS] ]]
+	then
+		frobulator.inf "Updating" "[ ${update} ]"
+		echo
+
+		frobulator.fwd "Updating${marker_elp}"
+		echo
+
+		additions_intent
+
+		frobulator.cpt "Complete" "[ Update // Additions ]"
+		echo
+	fi
+
+	if [[ "${update}" = [bB][aA][cK][gG][rR][oO][uU][nN][dD] ]]
+	then
+
+		frobulator.inf "Updating" "[ ${update_item} ]"
+		echo
+
+		frobulator.fwd "Updating${marker_elp}"
+		echo
+
+		shell_intent
+
+		frobulator.cpt "Complete" "[ Update // Background ]"
+		echo
+	fi
+
 	if [[ "${update}" = [iI][nN][tT][eE][rR][fF][aA][cC][eE] ]]
 	then
 
@@ -1045,21 +1044,6 @@ then
 		interface_intent
 
 		frobulator.cpt "Complete" "[ Update // Interface ]"
-		echo
-	fi
-
-	if [[ "${update}" = [uU][tT][iI][lL][iI][tT][yY] ]]
-	then
-
-		frobulator.inf "Updating" "[ ${update_item} ]"
-		echo
-
-		frobulator.fwd "Updating${marker_elp}"
-		echo
-
-		utility_intent
-
-		frobulator.cpt "Complete" "[ Update // Utility ]"
 		echo
 	fi
 
@@ -1093,35 +1077,6 @@ then
 		echo
 	fi
 
-	if [[ "${update}" = [bB][aA][cK][gG][rR][oO][uU][nN][dD] ]]
-	then
-
-		frobulator.inf "Updating" "[ ${update_item} ]"
-		echo
-
-		frobulator.fwd "Updating${marker_elp}"
-		echo
-
-		shell_intent
-
-		frobulator.cpt "Complete" "[ Update // Background ]"
-		echo
-	fi
-
-	if [[ "${update}" = [aA][dD][dD][iI][tT][iI][oO][nN][sS] ]]
-	then
-		frobulator.inf "Updating" "[ ${update} ]"
-		echo
-
-		frobulator.fwd "Updating${marker_elp}"
-		echo
-
-		additions_intent
-
-		frobulator.cpt "Complete" "[ Update // Additions ]"
-		echo
-	fi
-
 	if [[ "${update}" = [tT][eE][rR][mM][uU][xX] ]]
 	then
 		frobulator.inf "Updating" "[ ${update} ]"
@@ -1137,23 +1092,37 @@ then
 
 	fi
 
+	if [[ "${update}" = [uU][tT][iI][lL][iI][tT][yY] ]]
+	then
+
+		frobulator.inf "Updating" "[ ${update_item} ]"
+		echo
+
+		frobulator.fwd "Updating${marker_elp}"
+		echo
+
+		utility_intent
+
+		frobulator.cpt "Complete" "[ Update // Utility ]"
+		echo
+	fi
+
 	exit
 fi
 
-if [ "${option}" = "initialize" ]
+if [ "${option}" = "addons" ]
 then
-	frobulator.inf "Initializing" "[ Dextop ]"
-	echo
+	addons_intent
+fi
 
-	preferences_intent
+if [ "${option}" = "addons" ]
+then
+	frobulator.inf "Loading" "[ ${option} ]"
+	echo
 
 	addons_intent
 
-	utility_intent
-
-	shell_intent
-
-	frobulator.cpt "Complete" "[ Initialize // Dextop ]"
+	frobulator.cpt "Complete" "[ ${option} ]"
 	echo
 
 	exit
@@ -1170,6 +1139,50 @@ then
 	echo
 
 	exit
+fi
+
+if [ "${option}" = "purge" ]
+then
+	# notice
+
+	frobulator.err "" "[ DISCLAIMER ]"
+	echo
+
+	frobulator.separate
+
+	frobulator.wrn "'Purge' option has been selected:"
+	frobulator.wrn "This action is permanent."
+	echo
+
+	frobulator.inf "All items loaded during the Dextop setup process will be PERMANENTLY REMOVED."
+	frobulator.nul "Modifications made outside the intended installation process may cause instability or data corruption upon removal."
+	echo
+
+	frobulator.wrn "The author is not responsible for any damages or issues arising from the removal of Dextop."
+	frobulator.nul "You have been warned."
+
+	frobulator.separate
+
+	frobulator.ask "Purge Dextop?"
+
+	frobulator.read reply
+
+	if [[ "${reply}" = [yY]      ]] || \
+	   [[ "${reply}" = [yY][eE][sS] ]]
+	then
+		frobulator.fwd "Removal in progress${marker_elp}"
+		echo
+
+		purge_intent &
+
+		frobulator.progress "purge"
+
+	else
+		frobulator.inf "Aborting" "[ ${update} ]"
+		echo
+
+		exit
+	fi
 fi
 
 # setup ////////////////////////////////////////////////////////////////////////
