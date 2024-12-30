@@ -924,7 +924,7 @@ purge_intent () {
 
 	)
 
-	for item in ${items_list}
+	for item in ${items_list[@]}
 	do
 		frobulator.delete "${item}"
 	done
