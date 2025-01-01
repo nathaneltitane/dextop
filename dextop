@@ -423,6 +423,8 @@ update_intent () {
 	then
 		update_files_list=(${update_items[@]})
 
+		frobulator.keep "${update_directory}" ${update_files_list[@]}
+
 		frobulator.download "${update_url}" "${update_directory}" ${update_files_list[@]}
 
 	elif [[ ${update_items[@]} =~ "${update_item}" ]]
