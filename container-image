@@ -452,7 +452,8 @@ image_extract () {
 
 	frobulator.directory "${PREFIX}"/cnt "${distribution_name}"/"${distribution_version}"
 
-	if [ "${distribution_name}" = debian ]
+	if [ "${distribution_name}" = debian ] || \
+	   [ "${distribution_name}" = ubuntu ]
 	then
 		core_extract "${PREFIX}"/img/"${image_file}" "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
 	fi
@@ -464,11 +465,6 @@ image_extract () {
 		mv "${PREFIX}"/img/layer.tar "${PREFIX}"/img/"${image_name}.tar"
 
 		core_extract "${PREFIX}"/img/"${image_name}.tar" "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
-	fi
-
-	if [ "${distribution_name}" = ubuntu ]
-	then
-		core_extract "${PREFIX}"/img/"${image_file}" "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
 	fi
 }
 
