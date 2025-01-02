@@ -175,14 +175,13 @@ image_version () {
 
 		# continue list using array selection of suppported values
 
-		for (( i=0 ; i<${#versions[@]} ; i+=3 ))
+		for (( i=0; i<${#versions[@]} ; i+=3 ))
 		do
+			number=$(( ( ${i} / 3 ) + 1 ))
 
-			number=$(( ( $i / 3 ) + 1 ))
-
-			name="${versions[$i]}"
-			version="${versions[$i+1]}"
-			codename="${versions[$i+2]}"
+			name="${versions[${i}]}"
+			version="${versions[${i}+1]}"
+			codename="${versions[${i}+2]}"
 
 			indent="${marker_tab}"
 
@@ -191,7 +190,7 @@ image_version () {
 				indent+="${marker_tab}"
 			fi
 
-			if (( $i/3 >= 0 && $i/3 <= 9 ))
+			if (( ${i}/3 >= 0 && ${i}/3 <= 9 ))
 			then
 				# handle number spacing for entries 1-9
 
@@ -227,18 +226,32 @@ image_version () {
 		# integer check:
 		# handle numerical selection
 
-		if [[ "${selection}" =~ ^[0-9]+$ ]]
-		then
-			i=$(( ${selection} ))
-			i=$(( $i * 2 ))
+		while [[ ! "${selection}" =~ ^[0-9]+$ ]]
+		do
+			echo
+			frobulator.err "Invalid selection:"
+			echo
 
-			name="${versions[i-2]}"
-			version="${versions[i-1]}"
+			frobulator.wrn "Select image [ 1 - ${number} ]"
+			echo
+
+			frobulator.ipt "Selection:"
+
+			frobulator.read selection
+		done
+
+			i=$(( ${selection}))
+			i=$(( ( ${i} * 3  ) - 3 ))
+
+			name="${versions[${i}]}"
+			version="${versions[${i}+1]}"
+			codename="${versions[${i}+2]}"
+
+			number="${selection}"
 
 			distribution_name="${name}"
 			distribution_version="${version}"
 			distribution_codename="${codename}"
-		fi
 
 		# handle distribution code markup
 
@@ -262,11 +275,15 @@ image_version () {
 			IFS=''
 		fi
 
+		frobulator.inf "User selection" "[ ${selection} // ${name} ${version} - '${codename}' ]"
+		echo
+
 		export distribution_name="${distribution_name}"
 		export distribution_release="${distribution_release}"
 		export distribution_version="${distribution_version}"
 		export distribution_codename="${distribution_codename}"
 	fi
+
 }
 
 image_architecture () {
@@ -335,7 +352,7 @@ image_architecture () {
 
 	# test image architecture string
 
-	if [ -z "$image_architecture"    ] || \
+	if [ -z "${i}mage_architecture"    ] || \
 	   [ -z "${device_architecture}" ]
 	then
 		image_architecture="N/A"
