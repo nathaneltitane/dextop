@@ -33,7 +33,6 @@ fi
 # script ///////////////////////////////////////////////////////////////////////
 
 script=$(basename -- "${BASH_SOURCE[0]}")
-function=$(echo "${FUNCNAME}")
 
 # version //////////////////////////////////////////////////////////////////////
 
@@ -402,7 +401,7 @@ image_download () {
 
 	frobulator.download "${image_url}" "${image_archive}" "${PREFIX}"/img "${image_file}"
 
-	frobulator.complete "${script} : ${function}"
+	frobulator.complete "${script} : ${FUNCNAME}"
 }
 
 image_extract () {
