@@ -475,11 +475,14 @@ image_extract () {
 image_handle () {
 
 	# handle manual input:
+	# validate input selections
 	# set container image name and version
 
 	case "${distribution_name}"
 	in
-		[dD][eE][bB][iI][aA][nN]|[fF][eE][dD][oO][rR][aA]|[uU][bB][uU][nN][tT][uU])
+		[dD][eE][bB][iI][aA][nN]| \
+		[fF][eE][dD][oO][rR][aA]| \
+		[uU][bB][uU][nN][tT][uU])
 			distribution_name="${distribution_name,,}"
 
 			frobulator.scs "Supported distribution name."
