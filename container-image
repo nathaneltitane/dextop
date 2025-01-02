@@ -150,10 +150,10 @@ image_version () {
 		)
 
 		fedora_versions=(
-			fedora	37
-			fedora	38
-			fedora	39
-			fedora	40
+			fedora	37 thirty-seven
+			fedora	38 thirty-eight
+			fedora	39 thirty-nine
+			fedora	40 forty
 		)
 
 		ubuntu_versions=(
