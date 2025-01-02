@@ -227,10 +227,10 @@ container_parse () {
 
 		for (( i=0 ; i<${#containers[@]} ; i+=2 ))
 		do
-			number=$((($i/2) + 1))
+			number=$(((${i}/2) + 1))
 
-			name="${containers[$i]}"
-			version="${containers[$i+1]}"
+			name="${containers[${i}]}"
+			version="${containers[${i}+1]}"
 
 			indent="${marker_tab}"
 
@@ -239,7 +239,7 @@ container_parse () {
 				indent+="${marker_tab}"
 			fi
 
-			if (( $i/2 >= 0 && $i/2 <= 8 ))
+			if (( ${i}/2 >= 0 && ${i}/2 <= 8 ))
 			then
 				# handle number spacing for entries 1-9
 
@@ -275,9 +275,9 @@ container_parse () {
 		# integer check:
 		# handle numerical selection
 
-		while [[ "${selection}" -lt 1         ]] || \
-			[[ "${selection}" -gt "${number}" ]] || \
-			[[ ! "${selection}" =~ ^[0-9]+$   ]]
+		while [[ "${selection}" -lt 1           ]] || \
+			  [[ "${selection}" -gt "${number}" ]] || \
+			  [[ ! "${selection}" =~ ^[0-9]+$   ]]
 		do
 			echo
 			frobulator.err "Invalid selection:"
@@ -295,7 +295,7 @@ container_parse () {
 		# parse selection parameters
 
 		i=$(( ${selection} ))
-		i=$(( $i * 2 ))
+		i=$(( ${i} * 2 ))
 
 		name="${containers[i-2]}"
 		version="${containers[i-1]}"
