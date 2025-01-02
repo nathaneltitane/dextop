@@ -161,7 +161,7 @@ image_version () {
 			ubuntu	18.04	bionic
 			ubuntu	20.04	focal
 			ubuntu	22.04	jammy
-			ubuntu	23.04	lunar
+			ubuntu	24.04	noble
 		)
 
 		versions=(
