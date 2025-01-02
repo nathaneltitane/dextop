@@ -131,7 +131,7 @@ fi
 
 # functions ////////////////////////////////////////////////////////////////////
 
-image_version () {
+image_select () {
 
 	frobulator.continue
 
@@ -907,7 +907,7 @@ then
 
 	# select image version
 
-	image_version
+	image_select
 fi
 
 # verify architecture
