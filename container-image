@@ -470,6 +470,10 @@ image_extract () {
 	if [ "${distribution_name}" = debian ] || \
 	   [ "${distribution_name}" = ubuntu ]
 	then
+
+	echo ${distribution_name} ${distribution_version}
+	echo
+	mkdir -p /cnt/"${distribution_name}"/"${distribution_version}"
 		core_extract "${PREFIX}"/img/"${image_file}" "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
 	fi
 
