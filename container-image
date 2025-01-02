@@ -382,6 +382,7 @@ image_download () {
 # 			image_archive="rootfs.tar.xz"
 # 			image_name="${distribution_name}-${distribution_version}"
 # 			image_file="${image_name}.tar.xz"
+
 			image_url=get.trmnl.me
 			image_archive=debian-12.tar.xz
 			image_name="${distribution_name}-${distribution_version}"
