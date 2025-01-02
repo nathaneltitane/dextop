@@ -402,6 +402,8 @@ image_download () {
 	frobulator.download "${image_url}" "${image_archive}" "${PREFIX}"/img "${image_file}"
 
 	frobulator.complete "${script} : ${function}"
+
+	exit
 }
 
 image_extract () {
