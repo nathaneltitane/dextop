@@ -132,6 +132,8 @@ fi
 
 image_version () {
 
+	frobulator.continue
+
 	# list distributions for setup
 
 	if [ -z "${distribution_name}"     ] || \
@@ -287,6 +289,8 @@ image_version () {
 
 image_architecture () {
 
+	frobulator.continue
+
 	# compare processor architecture to available images architecture
 
 	cpu_architectures=(
@@ -371,6 +375,8 @@ image_architecture () {
 
 image_download () {
 
+	frobulator.continue
+
 	# generate links and download distribution image
 
 	# handle distribution url
@@ -410,6 +416,8 @@ image_download () {
 }
 
 image_extract () {
+
+	frobulator.continue
 
 	# exclude archive directories: dev | proc | sys | system
 	# 'container-session' will bind those device directories to the container
@@ -473,9 +481,14 @@ image_extract () {
 
 		core_extract "${PREFIX}"/img/"${image_name}.tar" "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
 	fi
+
+	frobulator.complete "${script} : ${FUNCNAME}"
+
 }
 
 image_handle () {
+
+	frobulator.continue
 
 	# handle manual input:
 	# validate input selections
@@ -641,9 +654,14 @@ image_handle () {
 	;;
 
 	esac
+
+	frobulator.complete "${script} : ${FUNCNAME}"
+
 }
 
 image_environment () {
+
+	frobulator.continue
 
 	# generate environment '$PATH' variable
 
@@ -688,9 +706,14 @@ image_environment () {
 	FILE
 	
 	unset CONTAINER_ROOT
+
+	frobulator.complete "${script} : ${FUNCNAME}"
+
 }
 
 image_groups () {
+
+	frobulator.continue
 
 	# register android groups to container
 
@@ -742,18 +765,28 @@ image_groups () {
 	# reset IFS
 
 	IFS=''
+
+	frobulator.complete "${script} : ${FUNCNAME}"
+
 }
 
 image_locale () {
+
+	frobulator.continue
 
 	# set locale selection for container
 
 	echo "LC_ALL=en_US.UTF-8" >> "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/environment
 	echo "en_US.UTF-8 UTF-8" >> "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/locale.gen
 	echo "LANG=en_US.UTF-8" > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/locale.conf
+
+	frobulator.complete "${script} : ${FUNCNAME}"
+
 }
 
 image_network () {
+
+	frobulator.continue
 
 	# generate network files
 
@@ -790,9 +823,14 @@ image_network () {
 	nameserver 1.1.1.1
 	nameserver 1.0.0.1
 	FILE
+
+	frobulator.complete "${script} : ${FUNCNAME}"
+
 }
 
 image_preload () {
+
+	frobulator.continue
 
 	# generate libgcc/libc location and add to dynamic linker for preload
 
@@ -803,9 +841,14 @@ image_preload () {
 	cat <<- FILE > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/ld.so.preload
 	${preload_library}
 	FILE
+
+	frobulator.complete "${script} : ${FUNCNAME}"
+
 }
 
 image_sources () {
+
+	frobulator.continue
 
 	# generate sources file
 
@@ -842,6 +885,9 @@ image_sources () {
 		deb-src http://archive.canonical.com/${distribution_name}           ${distribution_codename}            partner
 		FILE
 	fi
+
+	frobulator.complete "${script} : ${FUNCNAME}"
+
 }
 
 if [ "${option}" = "image" ]
