@@ -150,10 +150,9 @@ image_version () {
 		)
 
 		fedora_versions=(
-			fedora	37 thirty-seven
-			fedora	38 thirty-eight
 			fedora	39 thirty-nine
 			fedora	40 forty
+			fedora	41 forty-one
 		)
 
 		ubuntu_versions=(
@@ -475,25 +474,12 @@ image_extract () {
 
 image_handle () {
 
+	# handle manual input:
 	# set container image name and version
 
 	case "${distribution_name}"
 	in
-		[dD][eE][bB][iI][aA][nN])
-			distribution_name="${distribution_name,,}"
-
-			frobulator.scs "Supported distribution name."
-			echo
-		;;
-
-		[uU][bB][uU][nN][tT][uU])
-			distribution_name="${distribution_name,,}"
-
-			frobulator.scs "Supported distribution name."
-			echo
-		;;
-
-		[fF][eE][dD][oO][rR][aA])
+		[dD][eE][bB][iI][aA][nN]|[fF][eE][dD][oO][rR][aA]|[uU][bB][uU][nN][tT][uU])
 			distribution_name="${distribution_name,,}"
 
 			frobulator.scs "Supported distribution name."
@@ -504,6 +490,9 @@ image_handle () {
 			distribution_name="debian"
 
 			frobulator.err "Empty distribution name."
+			echo
+
+			frobulator.wrn "Defaulting" "[ ${distribution_version} ]"
 			echo
 		;;
 
@@ -519,8 +508,9 @@ image_handle () {
 		;;
 	esac
 
-	if [ "${distribution_name}" = "debian" ]
-	then
+	case "${distribution_name}" in
+	debian)
+
 		case "${distribution_version}"
 		in
 			10)
@@ -556,26 +546,26 @@ image_handle () {
 				echo
 			;;
 		esac
-	fi
+	;;
 
-	if [ "${distribution_name}" = "fedora" ]
-	then
+	fedora)
+
 		case "${distribution_version}"
 		in
 			33)
-				distribution_version=33
+				distribution_version=39
 			;;
 
 			34)
-				distribution_version=34
+				distribution_version=40
 			;;
 
 			35)
-				distribution_version=35
+				distribution_version=41
 			 ;;
 
 			 "")
-				distribution_version=35
+				distribution_version=41
 
 				frobulator.err "Distribution version not specified."
 				echo
@@ -595,10 +585,10 @@ image_handle () {
 				echo
 			;;
 		esac
-	fi
+	;;
 
-	if [ "${distribution_name}" = "ubuntu" ]
-	then
+	ubuntu)
+
 		case "${distribution_version}"
 		in
 			18*04|18*04*)
@@ -642,7 +632,9 @@ image_handle () {
 				echo
 			;;
 		esac
-	fi
+	;;
+
+	esac
 }
 
 image_environment () {
