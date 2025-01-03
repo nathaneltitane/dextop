@@ -38,7 +38,6 @@
     container-session -u <username> -d
     ```
 
-
 ---
 
 ### Welcome to [Dextop](https://dextop.app)
