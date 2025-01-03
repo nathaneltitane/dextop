@@ -8,11 +8,15 @@
 
 ### NOTICE
 
+01-03-2025 ↴
+
+- Fix debian images not being found:
+  - Image archives now available through get.trmnl.me
+
 12-26-2024 ↴
 
 - Modularize i3 session extensions and dmenu applets
 - New shortcuts and implementations (View in i3 shortcuts)
-
 
 12-24-2024 ↴
 
