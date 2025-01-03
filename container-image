@@ -378,23 +378,14 @@ image_download () {
 	case "${distribution_name}"
 	in
 		debian|ubuntu)
-# 			image_url="https://github.com/debuerreotype/docker-debian-artifacts/raw/dist-${image_architecture}/${distribution_codename}"
-# 			image_archive="rootfs.tar.xz"
-# 			image_name="${distribution_name}-${distribution_version}"
-# 			image_file="${image_name}.tar.xz"
+			image_archive_extension="tar.xz"
 
-			image_url=get.trmnl.me
+			image_url="get.trmnl.me"
+			image_archive="archive-${distribution_name}-${distribution_version}.${image_archive_extension}"
+
 			image_name="${distribution_name}-${distribution_version}"
-			image_archive=archive-"${distribution_name}-${distribution_version}".tar.xz
-			image_file="${image_name}.tar.xz"
+			image_file="${image_name}.${image_archive_extension}"
 		;;
-
-#		fedora)
-#			image_url="https://download.fedoraproject.org/pub/fedora/linux/releases/${distribution_version}/Container/${image_architecture}/images"
-#			image_archive="Fedora-Container-Base-${distribution_version}-1.2.${image_architecture}.tar.xz"
-#			image_name="${distribution_name}-${distribution_version}"
-#			image_file="${image_name}.tar.gz"
-#		;;
 
 	esac
 
@@ -403,52 +394,34 @@ image_download () {
 	frobulator.complete "${script} : ${FUNCNAME}"
 }
 
-image_extract () {
+image_filesystem () {
 
 	frobulator.continue
 
 	# exclude archive directories: dev | proc | sys | system
 	# 'container-session' will bind those device directories to the container
 
-	container_extract () {
+	proot											\
+		--link2symlink								\
+			tar 									\
+				--extract							\
+				--delay-directory-restore			\
+				--preserve-permissions				\
+					--file="${1}"					\
+							--exclude='boot'		\
+							--exclude='dev'			\
+							--exclude='proc'		\
+							--exclude='sys'			\
+							--exclude='system'		\
+								--directory="${2}"	2> "${sink}"
 
-		# cloud container/docker images
+	frobulator.complete "${script} : ${FUNCNAME}"
 
-		tar 											\
-			--extract									\
-			--delay-directory-restore					\
-			--preserve-permissions						\
-				--file="${1}"							\
-						--strip-components='1'			\
-						--exclude='VERSION'				\
-						--exclude='json'				\
-						--exclude='boot'				\
-						--exclude='dev'					\
-						--exclude='proc'				\
-						--exclude='sys'					\
-						--exclude='system' 				\
-							--directory="${2}"			2> "${sink}"
-	}
+}
 
-	core_extract () {
+image_extract () {
 
-		# core/minimal base images
-
-		proot											\
-			--link2symlink								\
-				tar 									\
-					--extract							\
-					--delay-directory-restore			\
-					--preserve-permissions				\
-						--file="${1}"					\
-								--exclude='boot'		\
-								--exclude='dev'			\
-								--exclude='proc'		\
-								--exclude='sys'			\
-								--exclude='system'		\
-									--directory="${2}"	2> "${sink}"
-
-	}
+	frobulator.continue
 
 	frobulator.wrn "Extracting new deployment" "[ ${image_file} // ${image_architecture} ]"
 	echo
@@ -459,16 +432,7 @@ image_extract () {
 	   [ "${distribution_name}" = ubuntu ]
 	then
 
-		core_extract "${PREFIX}"/img/"${image_file}" "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
-	fi
-
-	if [ "${distribution_name}" = fedora ]
-	then
-		container_extract "${PREFIX}"/img/"${image_file}" "${PREFIX}"/img
-
-		mv "${PREFIX}"/img/layer.tar "${PREFIX}"/img/"${image_name}.tar"
-
-		core_extract "${PREFIX}"/img/"${image_name}.tar" "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
+		image_fil "${PREFIX}"/img/"${image_file}" "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
 	fi
 
 	frobulator.complete "${script} : ${FUNCNAME}"
