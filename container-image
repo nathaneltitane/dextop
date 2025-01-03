@@ -152,22 +152,15 @@ image_select () {
 			debian	12	bookworm
 		)
 
-		fedora_versions=(
-			fedora	39 thirty-nine
-			fedora	40 forty
-			fedora	41 forty-one
-		)
-
 		ubuntu_versions=(
 			ubuntu	18.04	bionic
 			ubuntu	20.04	focal
 			ubuntu	22.04	jammy
-			ubuntu	24.04	noble
+		#	ubuntu	24.04	noble - NOT YET AVAILABLE
 		)
 
 		versions=(
 			${debian_versions[@]}
-		#	${fedora_versions[@]}
 			${ubuntu_versions[@]}
 		)
 
