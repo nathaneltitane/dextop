@@ -61,7 +61,7 @@ do
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} -i [Distribution Name] [Distribution Version] | [OPTION]"
+			echo -e "Usage: ${script} -i [Distribution Name] [Distribution Version] | -s [Selection] | [OPTION]"
 			echo
 			echo -e "Options:"
 			echo
@@ -85,7 +85,7 @@ do
 
 		*)
 			echo
-			echo -e "Usage: ${script} -i [Distribution Name] [Distribution Version] | [OPTION]"
+			echo -e "Usage: ${script} -i [Distribution Name] [Distribution Version] | -s [Selection] | [OPTION]"
 			echo
 			echo -e "${script}: Unknown option '${1}'"
 			echo -e "Type './${script} --help' for help and usage information."
@@ -613,21 +613,28 @@ image_handle () {
 		case "${distribution_version}"
 		in
 			18*04|18*04*)
-				distribution_version="18.04.5"
+				distribution_version="18.04"
 
 				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
 				echo
 			;;
 
 			20*04|20*04*)
-				distribution_version="20.04.5"
+				distribution_version="20.04"
 
 				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
 				echo
 			;;
 
 			22*04|22*04*)
-				distribution_version="22.04.2"
+				distribution_version="22.04"
+
+				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
+				echo
+			;;
+
+			24*04|24*04*)
+				distribution_version="24.04"
 
 				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
 				echo
