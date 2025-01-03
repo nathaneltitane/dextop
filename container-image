@@ -584,12 +584,12 @@ image_handle () {
 				echo
 			;;
 
-			24*04|24*04*)
-				distribution_version="24.04"
-
-				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
-				echo
-			;;
+#			24*04|24*04*)
+#				distribution_version="24.04"
+#
+#				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
+#				echo
+#			;;
 
 			"")
 				distribution_version="${distribution_version}"
