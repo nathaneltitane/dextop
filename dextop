@@ -571,7 +571,7 @@ interface_intent () {
 		i3-file-manager
 		i3-launch
 		i3-lookup
-		i3-manuals
+		i3-manual
 		i3-navigation
 		i3-notes
 		i3-processes
