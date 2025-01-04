@@ -574,10 +574,10 @@ interface_intent () {
 		i3-manuals
 		i3-navigation
 		i3-notes
+		i3-processes
 		i3-shortcuts
 		i3-status
 		i3-template
-		i3-terminate
 	)
 
 	if [[ "${option}" = "update" ]]
