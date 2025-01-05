@@ -102,6 +102,7 @@ i3_addons_list+=(
 	feh
 	rofi
 	stterm
+	surf
 	qiv
 )
 
