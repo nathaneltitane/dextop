@@ -204,33 +204,33 @@ fi
 if [ "${option}" = "setup" ] || \
    [ "${option}" = "environment" ]
 then
+	if [ -z "${environment}" ]
+	then
+		environment="xfce"
+
+	elif [ "${environment}" = [iI][3] ]
+	then
+		environment="i3"
+
+	elif [ "${environment}" = [xX][fF][cC][eE] ]
+	then
+		environment="xfce"
+
+	elif [ "${environment}" = [cC][oO][nN][sS][oO][lL][eE] ]
+	then
+		environment="console"
+	else
+		frobulator.err "Unrecognized environment" "[ '${environment}' ]"
+		echo
+
+		frobulator.stp "Aborting${marker_elp}"
+		echo
+
+		exit 1
+	fi
+
 	if [ ! -f "${HOME}"/.dextop/dextop-environment ]
 	then
-		if [ -z "${environment}" ]
-		then
-			environment="xfce"
-
-		elif [ "${environment}" = [iI][3] ]
-		then
-			environment="i3"
-
-		elif [ "${environment}" = [xX][fF][cC][eE] ]
-		then
-			environment="xfce"
-
-		elif [ "${environment}" = [cC][oO][nN][sS][oO][lL][eE] ]
-		then
-			environment="console"
-		else
-			frobulator.err "Unrecognized environment" "[ '${environment}' ]"
-			echo
-
-			frobulator.stp "Aborting${marker_elp}"
-			echo
-
-			exit 1
-		fi
-
 		frobulator.flag "${environment}" "${HOME}"/.dextop dextop-environment
 
 		unset environment
