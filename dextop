@@ -52,6 +52,8 @@ do
 		-e|--environment)
 			option="environment"
 			environment="${2}"
+
+			shift
 		;;
 
 		-t|--termux)
@@ -1176,7 +1178,8 @@ fi
 
 # setup ////////////////////////////////////////////////////////////////////////
 
-if [ "${option}" = "setup" ]
+if [ "${option}" = "setup"       ] || \
+   [ "${option}" = "environment" ]
 then
 	if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
 	then
