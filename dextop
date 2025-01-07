@@ -219,8 +219,8 @@ then
 			environment="xfce"
 		fi
 
-		if [ "${environment}" = [iI][3]          ] || \
-		   [ "${environment}" = [xX][fF][cC][eE] ]
+		if [ ! "${environment}" = [iI][3]          ] || \
+		   [ ! "${environment}" = [xX][fF][cC][eE] ]
 		then
 			environment="console"
 		fi
