@@ -527,7 +527,6 @@ additions_intent () {
 	fi
 
 	additions_list=()
-
 }
 
 backgrounds_intent () {
@@ -596,7 +595,6 @@ interface_intent () {
 	fi
 
 	interface_list=()
-
 }
 
 preferences_intent () {
@@ -679,7 +677,6 @@ shell_intent () {
 	fi
 
 	shell_list=()
-
 }
 
 utility_intent () {
@@ -930,11 +927,6 @@ fi
 
 if [ "${option}" = "addons" ]
 then
-	addons_intent
-fi
-
-if [ "${option}" = "addons" ]
-then
 	frobulator.inf "Loading" "[ ${option} ]"
 	echo
 
@@ -961,7 +953,15 @@ fi
 
 if [ "${option}" = "backup" ]
 then
+	frobulator.inf "Loading" "[ ${option} ]"
+	echo
+
 	backup_intent
+
+	frobulator.cpt "Complete" "[ Backup // Dextop ]"
+	echo
+
+	exit
 fi
 
 if [ "${option}" = "update" ]
@@ -1175,6 +1175,7 @@ fi
 
 # setup ////////////////////////////////////////////////////////////////////////
 
+if [ -n "${environment}" ]
 if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
 then
 	# dextop ///////////////////////////////////////////////////////////////////
