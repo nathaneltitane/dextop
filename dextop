@@ -966,23 +966,8 @@ fi
 
 if [ "${option}" = "update" ]
 then
-	if [[ -z "${update_item}" ]]
-	then
-		update="dextop"
-
-		frobulator.inf "Updating" "[ ${update} ]"
-		echo
-
-		frobulator.fwd "Updating${marker_elp}"
-		echo
-
-		dextop_intent
-
-		frobulator.cpt "Complete" "[ Update // ${update} ]"
-		echo
-	fi
-
-	if [[ "${update}" = [aA][lL][lL] ]]
+	if [[ "${update}" = [aA][lL][lL] ]] || \
+	   [[ "${update_item}" = [aA][lL][lL] ]]
 	then
 		frobulator.inf "Updating" "[ ${update} ]"
 		echo
