@@ -966,7 +966,7 @@ fi
 
 if [ "${option}" = "update" ]
 then
-	if [[ "${update}" = [aA][lL][lL] ]] || \
+	if [[ "${update}" = [aA][lL][lL]      ]] || \
 	   [[ "${update_item}" = [aA][lL][lL] ]]
 	then
 		frobulator.inf "Updating" "[ ${update} ]"
