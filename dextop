@@ -284,6 +284,7 @@ failsafe_intent () {
 	yes | apt install root-repo > "${sink}" 2>&1
 
 	yes | apt install x11-repo  > "${sink}" 2>&1
+
 }
 
 container_environment () {
@@ -319,6 +320,7 @@ container_environment () {
 	export CONTAINER_PATH="${CONTAINER_PATH}"
 
 	return
+
 }
 
 container_intent () {
@@ -383,6 +385,7 @@ container_intent () {
 					HOME="${CONTAINER_HOME}"							\
 					PATH="${CONTAINER_PATH}"							\
 																		${@}
+
 }
 
 architecture_intent () {
@@ -427,7 +430,6 @@ architecture_intent () {
 		fi
 	done
 
-	clear
 }
 
 update_intent () {
@@ -494,6 +496,7 @@ reload_intent () {
 	settings_command+=" -p com.termux"
 
 	frobulator.silence "${settings_command}"
+
 }
 
 backup_intent () {
@@ -516,6 +519,7 @@ backup_intent () {
 																	"${backup_directory}" > "${sink}" 2>&1 &
 
 	frobulator.progress "archive" "[ ${backup_directory} ]"
+
 }
 
 dextop_intent () {
@@ -530,6 +534,7 @@ addons_intent () {
 	# termux addons and companion applications
 
 	"${HOME}"/.local/bin/termux-addons
+
 }
 
 additions_intent () {
@@ -548,6 +553,7 @@ additions_intent () {
 	fi
 
 	additions_list=()
+
 }
 
 backgrounds_intent () {
@@ -573,6 +579,7 @@ backgrounds_intent () {
 	fi
 
 	backgrounds_list=()
+
 }
 
 interface_intent () {
@@ -616,6 +623,7 @@ interface_intent () {
 	fi
 
 	interface_list=()
+
 }
 
 preferences_intent () {
@@ -643,6 +651,7 @@ preferences_intent () {
 	fi
 
 	preferences_list=()
+
 }
 
 shell_intent () {
@@ -698,6 +707,7 @@ shell_intent () {
 	fi
 
 	shell_list=()
+
 }
 
 utility_intent () {
@@ -726,6 +736,7 @@ utility_intent () {
 	fi
 
 	utilities_list=()
+
 }
 
 directories_intent () {
@@ -766,6 +777,7 @@ directories_intent () {
 	done
 
 	directories_list=()
+
 }
 
 bookmarks_intent () {
@@ -797,6 +809,7 @@ bookmarks_intent () {
 	bookmarks_directories_list=()
 
 	bookamrks_labels_list=()
+
 }
 
 icons_intent () {
@@ -821,6 +834,7 @@ icons_intent () {
 	frobulator.keep "${HOME}"/.icons ${icons_list[@]}
 
 	icons_list=()
+
 }
 
 themes_intent () {
@@ -845,6 +859,7 @@ themes_intent () {
 	frobulator.keep "${HOME}"/.themes ${themes_list[@]}
 
 	themes_list=()
+
 }
 
 session_intent () {
@@ -854,6 +869,7 @@ session_intent () {
 	cd "${HOME}"
 
 	"${PREFIX}"/bin/login
+
 }
 
 purge_intent () {
@@ -919,6 +935,7 @@ purge_intent () {
 	do
 		frobulator.delete "${item}"
 	done
+
 }
 
 # architecture check ///////////////////////////////////////////////////////////
