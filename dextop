@@ -237,7 +237,6 @@ then
 	fi
 fi
 
-exit
 if [ ! -f "${HOME}"/.dextop/dextop-session ]
 then
 	if [ -z "${session}" ]
