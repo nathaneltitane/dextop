@@ -204,19 +204,19 @@ fi
 if [ "${option}" = "setup" ] || \
    [ "${option}" = "environment" ]
 then
-	if [ -z "${environment}" ]
+	if [[ -z "${environment}" ]]
 	then
 		environment="xfce"
 
-	elif [ "${environment}" = [iI][3] ]
+	elif [[ "${environment}" = [iI][3] ]]
 	then
 		environment="i3"
 
-	elif [ "${environment}" = [xX][fF][cC][eE] ]
+	elif [[ "${environment}" = [xX][fF][cC][eE] ]]
 	then
 		environment="xfce"
 
-	elif [ "${environment}" = [cC][oO][nN][sS][oO][lL][eE] ]
+	elif [[ "${environment}" = [cC][oO][nN][sS][oO][lL][eE] ]]
 	then
 		environment="console"
 	else
@@ -237,6 +237,7 @@ then
 	fi
 fi
 
+exit
 if [ ! -f "${HOME}"/.dextop/dextop-session ]
 then
 	if [ -z "${session}" ]
