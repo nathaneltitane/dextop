@@ -989,7 +989,7 @@ then
 
 		"${HOME}"/.local/bin/termux-update
 
-		frobulator.cpt "Complete" "[ Update // ${update} ]"
+		frobulator.cpt "Complete" "[ Update // ${update_item} ]"
 		echo
 	fi
 
