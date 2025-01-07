@@ -256,8 +256,6 @@ then
 	fi
 fi
 
-
-
 if [ -z "${update_item}" ]
 then
 	update_item="all"
