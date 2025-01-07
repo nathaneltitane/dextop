@@ -237,6 +237,9 @@ then
 	fi
 fi
 
+xx
+
+
 if [ ! -f "${HOME}"/.dextop/dextop-session ]
 then
 	if [ -z "${session}" ]
