@@ -1154,7 +1154,7 @@ then
 		frobulator.inf "Aborting" "[ ${option} ]"
 		echo
 
-		exit
+		exit 1
 	fi
 fi
 
