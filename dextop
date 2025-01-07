@@ -969,6 +969,8 @@ then
 	if [[ "${update}" = [aA][lL][lL]      ]] || \
 	   [[ "${update_item}" = [aA][lL][lL] ]]
 	then
+		update="all"
+
 		frobulator.inf "Updating" "[ ${update} ]"
 		echo
 
@@ -989,7 +991,7 @@ then
 
 		"${HOME}"/.local/bin/termux-update
 
-		frobulator.cpt "Complete" "[ Update // ${update_item} ]"
+		frobulator.cpt "Complete" "[ Update // ${update} ]"
 		echo
 	fi
 
