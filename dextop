@@ -1176,7 +1176,7 @@ fi
 
 # setup ////////////////////////////////////////////////////////////////////////
 
-if ["${option}" = "setup" ]
+if [ "${option}" = "setup" ]
 then
 	if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
 	then
