@@ -194,33 +194,41 @@ stamp=$(date +"%m-%d-%Y-%H-%M-%S")
 
 # defaults /////////////////////////////////////////////////////////////////////
 
+if [ -z "${option}" ]
+then
+	option="setup"
+fi
+
 if [ ! -f "${HOME}"/.dextop/dextop-environment ]
 then
 
-	if [ -z "${environment}" ]
+	if [ "${option}" = "environment" ] || \
+	   [ "${option}" = "setup" ]
 	then
-		environment="xfce"
+		if [ -z "${environment}" ]
+		then
+			environment="xfce"
+		fi
+
+		if [ "${environment}" = [iI][3] ]
+		then
+			environment="i3"
+		fi
+
+		if [ "${environment}" = [xX][fF][cC][eE] ]
+		then
+			environment="xfce"
+
+		if [ "${environment}" = [iI][3]          ] || \
+		[ "${environment}" = [xX][fF][cC][eE] ]
+		then
+			environment="console"
+		fi
+
+		frobulator.flag "${environment}" "${HOME}"/.dextop dextop-environment
+
+		unset environment
 	fi
-
-	if [ "${environment}" = [iI][3] ]
-	then
-		environment="i3"
-	fi
-
-	if [ "${environment}" = [xX][fF][cC][eE] ]
-	then
-		environment="xfce"
-
-	if [ "${environment}" = [iI][3]          ] || \
-	   [ "${environment}" = [xX][fF][cC][eE] ]
-	then
-		environment="console"
-	fi
-
-	frobulator.flag "${environment}" "${HOME}"/.dextop dextop-environment
-
-	unset environment
-
 fi
 
 if [ ! -f "${HOME}"/.dextop/dextop-session ]
@@ -247,6 +255,8 @@ then
 		unset session
 	fi
 fi
+
+
 
 if [ -z "${update_item}" ]
 then
@@ -1168,267 +1178,271 @@ fi
 
 # setup ////////////////////////////////////////////////////////////////////////
 
-if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
+if ["${option}" = "setup" ]
 then
-	# dextop ///////////////////////////////////////////////////////////////////
-
-	# failsafe
-
-	failsafe_intent &
-
-	frobulator.process "Please wait"
-
-	# backup
-
-	if [ ! -f "${HOME}"/.dextop/dextop-backup-checkpoint ]
+	if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
 	then
-		backup_intent
+		# dextop ///////////////////////////////////////////////////////////////
 
-		frobulator.file "${HOME}"/.dextop dextop-backup-checkpoint
-	fi
+		# failsafe
 
-	# preferences
+		failsafe_intent &
 
-	if [ ! -f "${HOME}"/.dextop/dextop-preferences-checkpoint ]
-	then
-		preferences_intent
+		frobulator.process "Please wait"
 
-		frobulator.file "${HOME}"/.dextop dextop-preferences-checkpoint
-	fi
+		# backup
 
-	#  utilities
-
-	if [ ! -f "${HOME}"/.dextop/dextop-utilities-checkpoint ]
-	then
-		utility_intent
-
-		frobulator.file "${HOME}"/.dextop dextop-utilities-checkpoint
-	fi
-
-	# directories
-
-	if [ ! -f "${HOME}"/.dextop/dextop-directories-checkpoint ]
-	then
-		directories_intent
-
-		frobulator.file "${HOME}"/.dextop dextop-directories-checkpoint
-	fi
-
-	# additions
-
-	if [ ! -f "${HOME}"/.dextop/dextop-additions-checkpoint ]
-	then
-		additions_intent
-
-		frobulator.file "${HOME}"/.dextop dextop-additions-checkpoint
-	fi
-
-	# backgrounds
-
-	if [ ! -f "${HOME}"/.dextop/dextop-backgrounds-checkpoint ]
-	then
-		backgrounds_intent
-
-		frobulator.file "${HOME}"/.dextop dextop-backgrounds-checkpoint
-	fi
-
-	# automatic login
-
-	if [ ! -f "${HOME}"/.dextop/dextop-login-checkpoint ]
-	then
-		frobulator.write login "${HOME}"/.dextop dextop-login
-
-		frobulator.file "${HOME}"/.dextop dextop-login-checkpoint
-	fi
-
-	# automatic logout
-
-	if [ ! -f "${HOME}"/.dextop/dextop-logout-checkpoint ]
-	then
-		frobulator.write logout "${HOME}"/.dextop dextop-logout
-
-		frobulator.file "${HOME}"/.dextop dextop-logout-checkpoint
-	fi
-
-	# automatic update
-
-	if [ ! -f "${HOME}"/.dextop/dextop-update-checkpoint ]
-	then
-		frobulator.file "${HOME}"/.dextop dextop-update
-
-		frobulator.file "${HOME}"/.dextop dextop-update-checkpoint
-	fi
-
-	# audio
-
-	if [ ! -f "${HOME}"/.dextop/dextop-audio-checkpoint ]
-	then
-		frobulator.file "${HOME}"/.dextop dextop-audio
-
-		frobulator.file "${HOME}"/.dextop dextop-audio-checkpoint
-	fi
-
-	# ticker
-
-	if [ ! -f "${HOME}"/.dextop/dextop-ticker-checkpoint ]
-	then
-		frobulator.write 0 "${HOME}"/.dextop dextop-ticker
-
-		frobulator.file "${HOME}"/.dextop dextop-ticker-checkpoint
-	fi
-
-	# termux ///////////////////////////////////////////////////////////////////
-
-	# termux addons
-
-	if [ ! -f "${HOME}"/.dextop/dextop-termux-addons-checkpoint ]
-	then
-		"${HOME}"/.local/bin/termux-addons
-
-		frobulator.file "${HOME}"/.dextop dextop-termux-addons-checkpoint
-	fi
-
-	# termux storage
-
-	if [ ! -f "${HOME}"/.dextop/dextop-termux-storage-checkpoint ]
-	then
-		if [[ "${option}" = "link" ]]
+		if [ ! -f "${HOME}"/.dextop/dextop-backup-checkpoint ]
 		then
-			"${HOME}"/.local/bin/termux-storage -l
-		else
-			"${HOME}"/.local/bin/termux-storage
+			backup_intent
+
+			frobulator.file "${HOME}"/.dextop dextop-backup-checkpoint
 		fi
 
-		frobulator.file "${HOME}"/.dextop dextop-termux-storage-checkpoint
+		# preferences
+
+		if [ ! -f "${HOME}"/.dextop/dextop-preferences-checkpoint ]
+		then
+			preferences_intent
+
+			frobulator.file "${HOME}"/.dextop dextop-preferences-checkpoint
+		fi
+
+		#  utilities
+
+		if [ ! -f "${HOME}"/.dextop/dextop-utilities-checkpoint ]
+		then
+			utility_intent
+
+			frobulator.file "${HOME}"/.dextop dextop-utilities-checkpoint
+		fi
+
+		# directories
+
+		if [ ! -f "${HOME}"/.dextop/dextop-directories-checkpoint ]
+		then
+			directories_intent
+
+			frobulator.file "${HOME}"/.dextop dextop-directories-checkpoint
+		fi
+
+		# additions
+
+		if [ ! -f "${HOME}"/.dextop/dextop-additions-checkpoint ]
+		then
+			additions_intent
+
+			frobulator.file "${HOME}"/.dextop dextop-additions-checkpoint
+		fi
+
+		# backgrounds
+
+		if [ ! -f "${HOME}"/.dextop/dextop-backgrounds-checkpoint ]
+		then
+			backgrounds_intent
+
+			frobulator.file "${HOME}"/.dextop dextop-backgrounds-checkpoint
+		fi
+
+		# automatic login
+
+		if [ ! -f "${HOME}"/.dextop/dextop-login-checkpoint ]
+		then
+			frobulator.write login "${HOME}"/.dextop dextop-login
+
+			frobulator.file "${HOME}"/.dextop dextop-login-checkpoint
+		fi
+
+		# automatic logout
+
+		if [ ! -f "${HOME}"/.dextop/dextop-logout-checkpoint ]
+		then
+			frobulator.write logout "${HOME}"/.dextop dextop-logout
+
+			frobulator.file "${HOME}"/.dextop dextop-logout-checkpoint
+		fi
+
+		# automatic update
+
+		if [ ! -f "${HOME}"/.dextop/dextop-update-checkpoint ]
+		then
+			frobulator.file "${HOME}"/.dextop dextop-update
+
+			frobulator.file "${HOME}"/.dextop dextop-update-checkpoint
+		fi
+
+		# audio
+
+		if [ ! -f "${HOME}"/.dextop/dextop-audio-checkpoint ]
+		then
+			frobulator.file "${HOME}"/.dextop dextop-audio
+
+			frobulator.file "${HOME}"/.dextop dextop-audio-checkpoint
+		fi
+
+		# ticker
+
+		if [ ! -f "${HOME}"/.dextop/dextop-ticker-checkpoint ]
+		then
+			frobulator.write 0 "${HOME}"/.dextop dextop-ticker
+
+			frobulator.file "${HOME}"/.dextop dextop-ticker-checkpoint
+		fi
+
+		# termux ///////////////////////////////////////////////////////////////
+
+		# termux addons
+
+		if [ ! -f "${HOME}"/.dextop/dextop-termux-addons-checkpoint ]
+		then
+			"${HOME}"/.local/bin/termux-addons
+
+			frobulator.file "${HOME}"/.dextop dextop-termux-addons-checkpoint
+		fi
+
+		# termux storage
+
+		if [ ! -f "${HOME}"/.dextop/dextop-termux-storage-checkpoint ]
+		then
+			if [[ "${option}" = "link" ]]
+			then
+				"${HOME}"/.local/bin/termux-storage -l
+			else
+				"${HOME}"/.local/bin/termux-storage
+			fi
+
+			frobulator.file "${HOME}"/.dextop dextop-termux-storage-checkpoint
+		fi
+
+		# termux packages
+
+		if [ ! -f "${HOME}"/.dextop/dextop-termux-packages-checkpoint ]
+		then
+			"${HOME}"/.local/bin/termux-packages
+
+			frobulator.file "${HOME}"/.dextop dextop-termux-packages-checkpoint
+		fi
+
+		# container ////////////////////////////////////////////////////////////
+
+		# container image
+
+		if [ ! -f "${HOME}"/.dextop/dextop-container-image-checkpoint ]
+		then
+			"${HOME}"/.local/bin/container-image
+
+			frobulator.file "${HOME}"/.dextop dextop-container-image-checkpoint
+		fi
+
+		# container initialization
+
+		if [ ! -f "${HOME}"/.dextop/dextop-container-initialization-checkpoint ]
+		then
+			container_intent
+
+			container_intent "${HOME}"/.local/bin/container-initialization
+
+			frobulator.file "${HOME}"/.dextop dextop-container-initialization-checkpoint
+		fi
+
+		# container expansion
+
+		if [ ! -f "${HOME}"/.dextop/dextop-container-expansion-checkpoint ]
+		then
+			container_intent "${HOME}"/.local/bin/container-expansion
+
+			frobulator.file "${HOME}"/.dextop dextop-container-expansion-checkpoint
+		fi
+
+		# container packages
+
+		if [ ! -f "${HOME}"/.dextop/dextop-container-packages-checkpoint ]
+		then
+			container_intent "${HOME}"/.local/bin/container-packages
+
+			frobulator.file "${HOME}"/.dextop dextop-container-packages-checkpoint
+		fi
+
+		# container user
+
+		if [ ! -f "${HOME}"/.dextop/dextop-container-user-checkpoint ]
+		then
+			container_intent "${HOME}"/.local/bin/container-user
+
+			frobulator.file "${HOME}"/.dextop dextop-container-user-checkpoint
+		fi
+
+		# dextop ///////////////////////////////////////////////////////////////
+
+		# shell
+
+		if [ ! -f "${HOME}"/.dextop/dextop-shell-checkpoint ]
+		then
+			shell_intent
+
+			frobulator.file "${HOME}"/.dextop dextop-shell-checkpoint
+		fi
+
+		# bookmarks
+
+		if [ ! -f "${HOME}"/.dextop/dextop-bookmarks-checkpoint ]
+		then
+			bookmarks_intent
+
+			frobulator.file "${HOME}"/.dextop dextop-bookmarks-checkpoint
+		fi
+
+		# interface
+
+		if [ ! -f "${HOME}"/.dextop/dextop-interface-checkpoint ]
+		then
+			interface_intent
+
+			frobulator.file "${HOME}"/.dextop dextop-interface-checkpoint
+		fi
+
+		# icons
+
+		if [ ! -f "${HOME}"/.dextop/dextop-icons-checkpoint ]
+		then
+			icons_intent
+
+			frobulator.file "${HOME}"/.dextop dextop-icons-checkpoint
+		fi
+
+		# themes
+
+		if [ ! -f "${HOME}"/.dextop/dextop-themes-checkpoint ]
+		then
+			themes_intent
+
+			frobulator.file "${HOME}"/.dextop dextop-themes-checkpoint
+		fi
+
+		# setup move
+
+		if [ ! -f "${HOME}"/.dextop/dextop-move-checkpoint ]
+		then
+			frobulator.move "${HOME}" "${HOME}"/.local/bin dextop
+
+			frobulator.file "${HOME}"/.dextop dextop-move-checkpoint
+		fi
+
+		# setup checkpoint
+
+		frobulator.file "${HOME}"/.dextop dextop-setup-checkpoint
 	fi
 
-	# termux packages
+	# result ///////////////////////////////////////////////////////////////////
 
-	if [ ! -f "${HOME}"/.dextop/dextop-termux-packages-checkpoint ]
+	if [ -z "${option}" ]
 	then
-		"${HOME}"/.local/bin/termux-packages
+		frobulator.result "${HOME}"/.dextop dextop-setup-checkpoint "dextop setup"
+		echo
 
-		frobulator.file "${HOME}"/.dextop dextop-termux-packages-checkpoint
+		frobulator.timeout 5
 	fi
 
-	# container ////////////////////////////////////////////////////////////////
-
-	# container image
-
-	if [ ! -f "${HOME}"/.dextop/dextop-container-image-checkpoint ]
-	then
-		"${HOME}"/.local/bin/container-image
-
-		frobulator.file "${HOME}"/.dextop dextop-container-image-checkpoint
-	fi
-
-	# container initialization
-
-	if [ ! -f "${HOME}"/.dextop/dextop-container-initialization-checkpoint ]
-	then
-		container_intent
-
-		container_intent "${HOME}"/.local/bin/container-initialization
-
-		frobulator.file "${HOME}"/.dextop dextop-container-initialization-checkpoint
-	fi
-
-	# container expansion
-
-	if [ ! -f "${HOME}"/.dextop/dextop-container-expansion-checkpoint ]
-	then
-		container_intent "${HOME}"/.local/bin/container-expansion
-
-		frobulator.file "${HOME}"/.dextop dextop-container-expansion-checkpoint
-	fi
-
-	# container packages
-
-	if [ ! -f "${HOME}"/.dextop/dextop-container-packages-checkpoint ]
-	then
-		container_intent "${HOME}"/.local/bin/container-packages
-
-		frobulator.file "${HOME}"/.dextop dextop-container-packages-checkpoint
-	fi
-
-	# container user
-
-	if [ ! -f "${HOME}"/.dextop/dextop-container-user-checkpoint ]
-	then
-		container_intent "${HOME}"/.local/bin/container-user
-
-		frobulator.file "${HOME}"/.dextop dextop-container-user-checkpoint
-	fi
-
-	# dextop ///////////////////////////////////////////////////////////////////
-
-	# shell
-
-	if [ ! -f "${HOME}"/.dextop/dextop-shell-checkpoint ]
-	then
-		shell_intent
-
-		frobulator.file "${HOME}"/.dextop dextop-shell-checkpoint
-	fi
-
-	# bookmarks
-
-	if [ ! -f "${HOME}"/.dextop/dextop-bookmarks-checkpoint ]
-	then
-		bookmarks_intent
-
-		frobulator.file "${HOME}"/.dextop dextop-bookmarks-checkpoint
-	fi
-
-	# interface
-
-	if [ ! -f "${HOME}"/.dextop/dextop-interface-checkpoint ]
-	then
-		interface_intent
-
-		frobulator.file "${HOME}"/.dextop dextop-interface-checkpoint
-	fi
-
-	# icons
-
-	if [ ! -f "${HOME}"/.dextop/dextop-icons-checkpoint ]
-	then
-		icons_intent
-
-		frobulator.file "${HOME}"/.dextop dextop-icons-checkpoint
-	fi
-
-	# themes
-
-	if [ ! -f "${HOME}"/.dextop/dextop-themes-checkpoint ]
-	then
-		themes_intent
-
-		frobulator.file "${HOME}"/.dextop dextop-themes-checkpoint
-	fi
-
-	# setup move
-
-	if [ ! -f "${HOME}"/.dextop/dextop-move-checkpoint ]
-	then
-		frobulator.move "${HOME}" "${HOME}"/.local/bin dextop
-
-		frobulator.file "${HOME}"/.dextop dextop-move-checkpoint
-	fi
-
-	# setup checkpoint
-
-	frobulator.file "${HOME}"/.dextop dextop-setup-checkpoint
-fi
-
-# result ///////////////////////////////////////////////////////////////////////
-
-if [ -z "${option}" ]
-then
-	frobulator.result "${HOME}"/.dextop dextop-setup-checkpoint "dextop setup"
-	echo
-
-	frobulator.timeout 5
 fi
 
 # clear ////////////////////////////////////////////////////////////////////////
