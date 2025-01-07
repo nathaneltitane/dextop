@@ -209,22 +209,26 @@ then
 		if [ -z "${environment}" ]
 		then
 			environment="xfce"
-		fi
 
-		if [ "${environment}" = [iI][3] ]
+		elif [ "${environment}" = [iI][3] ]
 		then
 			environment="i3"
-		fi
 
-		if [ "${environment}" = [xX][fF][cC][eE] ]
+		elif [ "${environment}" = [xX][fF][cC][eE] ]
 		then
 			environment="xfce"
-		fi
 
-		if [ ! "${environment}" = [iI][3]          ] || \
-		   [ ! "${environment}" = [xX][fF][cC][eE] ]
+		elif [ "${environment}" = [cC][oO][nN][sS][oO][lL][eE] ]
 		then
 			environment="console"
+		else
+			frobulator.err "Unrecognized environment" "[ '${environment}' ]"
+			echo
+
+			frobulator.stp "Aborting${marker_elp}"
+			echo
+
+			exit 1
 		fi
 
 		frobulator.flag "${environment}" "${HOME}"/.dextop dextop-environment
