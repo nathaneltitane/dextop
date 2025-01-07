@@ -508,11 +508,12 @@ backup_intent () {
 	frobulator.inf "Generating backup" "[ ${backup_archive} ]"
 	echo
 
-	tar											\
-		--create								\
-		--gzip									\
-			--exclude="${backup_name}"*			\
-				--file="${backup_archive}"		"${backup_directory}" > "${sink}" 2>&1 &
+	tar																\
+		--create													\
+		--gzip														\
+			--exclude="${backup_name}"*								\
+				--file="${backup_directory}"/"${backup_archive}"	\
+																	"${backup_directory}" > "${sink}" 2>&1 &
 
 	frobulator.progress "archive" "[ ${backup_directory} ]"
 }
