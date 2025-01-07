@@ -45,10 +45,12 @@ do
 	case "${1}"
 	in
 		-c|--console)
+			option="environment"
 			environment="console"
 		;;
 
 		-e|--environment)
+			option="environment"
 			environment="${2}"
 		;;
 
@@ -194,21 +196,25 @@ stamp=$(date +"%m-%d-%Y-%H-%M-%S")
 
 if [ ! -f "${HOME}"/.dextop/dextop-environment ]
 then
+
 	if [ -z "${environment}" ]
 	then
 		environment="xfce"
+	fi
 
-	elif [ "${environment}" = [iI][3] ]
+	if [ "${environment}" = [iI][3] ]
 	then
 		environment="i3"
+	fi
 
-	elif [ "${environment}" = [xX][fF][cC][eE] ]
+	if [ "${environment}" = [xX][fF][cC][eE] ]
 	then
 		environment="xfce"
 
-	else
+	if [ "${environment}" = [iI][3]          ] || \
+	   [ "${environment}" = [xX][fF][cC][eE] ]
+	then
 		environment="console"
-
 	fi
 
 	frobulator.flag "${environment}" "${HOME}"/.dextop dextop-environment
