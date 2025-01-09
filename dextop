@@ -691,7 +691,6 @@ shell_intent () {
 
 		if [ "${option}" = "setup" ]
 		then
-
 			# link to root home
 
 			frobulator.link "${HOME}"/.local/bin "${CONTAINER_ROOT}"/root bash-aliases       .bash_aliases
