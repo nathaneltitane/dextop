@@ -391,7 +391,7 @@ image_download () {
 
 	esac
 
-	frobulator.download "${image_url}" "${PREFIX}"/img "${image_archive}"
+	frobulator.download "${image_url}" "${image_archive}" "${PREFIX}"/img "${image_file}"
 
 	frobulator.complete "${script} : ${FUNCNAME}"
 }
@@ -434,7 +434,7 @@ image_extract () {
 	   [ "${distribution_name}" = ubuntu ]
 	then
 
-		image_filesystem "${PREFIX}"/img/"${image_archive}" "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
+		image_filesystem "${PREFIX}"/img/"${image_file}" "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
 	fi
 
 	frobulator.complete "${script} : ${FUNCNAME}"
