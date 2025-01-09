@@ -208,6 +208,10 @@ then
 	frobulator.flag "${container}" "${HOME}"/.dextop dextop-container
 fi
 
+if [ -z "${update_item}" ]
+then
+	update_item="all"
+fi
 
 if [ "${option}" = "setup" ] || \
    [ "${option}" = "environment" ]
@@ -268,11 +272,6 @@ then
 
 		unset session
 	fi
-fi
-
-if [ -z "${update_item}" ]
-then
-	update_item="all"
 fi
 
 # functions ////////////////////////////////////////////////////////////////////
@@ -662,7 +661,6 @@ preferences_intent () {
 
 }
 
-
 shell_intent () {
 
 	# load shell files
@@ -694,9 +692,9 @@ shell_intent () {
 
 		frobulator.file "${HOME}" .hushlogin
 
-		if [ "${option}" = "setup"      ] || \
-		   [ "${option}" = "container"  ] || \
-		   [ "${option}" = "initialize" ]
+		if [[ "${option}" = "setup"      ]] || \
+		   [[ "${option}" = "container"  ]] || \
+		   [[ "${option}" = "initialize" ]]
 		then
 			CONTAINER_ROOT=$(cat "${HOME}"/.dextop/dextop-container)
 
@@ -1187,7 +1185,7 @@ then
 
 	frobulator.read reply
 
-	if [[ "${reply}" = [yY]      ]] || \
+	if [[ "${reply}" = [yY]         ]] || \
 	   [[ "${reply}" = [yY][eE][sS] ]]
 	then
 		frobulator.fwd "Removal in progress${marker_elp}"
