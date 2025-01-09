@@ -213,7 +213,7 @@ then
 	update_item="all"
 fi
 
-if [ "${option}" = "setup" ] || \
+if [ "${option}" = "setup"       ] || \
    [ "${option}" = "environment" ]
 then
 	if [[ -z "${environment}" ]]
@@ -710,6 +710,7 @@ shell_intent () {
 
 			frobulator.file "${CONTAINER_ROOT}"/root .hushlogin
 		fi
+	fi
 
 	shell_list=()
 
