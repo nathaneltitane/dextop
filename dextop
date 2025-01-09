@@ -674,6 +674,7 @@ shell_intent () {
 		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${shell_list[@]}
 
 		if [ -z "${option}"         ] || \
+		   [ "${option}" = "setup"  ] || \
 		   [ "${option}" = "termux" ]
 		then
 			# link to user home
@@ -689,7 +690,8 @@ shell_intent () {
 			frobulator.file "${HOME}" .hushlogin
 		fi
 
-		if [ "${option}" = "setup" ]
+		if [ "${option}" = "setup"     ] || \
+		   [ "${option}" = "container" ]
 		then
 			# link to root home
 
