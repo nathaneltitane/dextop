@@ -127,7 +127,7 @@ do
 			echo
 			echo -e "-l, --link          Link and unify storage directories."
 			echo
-			echo -e "-i, --initialize    Initialize setup directories."
+			echo -e "-i, --initialize    Initialize setup directories and load configurations."
 			echo
 			echo -e "-a, --addons        Setup Termux addons and companion applications."
 			echo
@@ -654,6 +654,7 @@ preferences_intent () {
 
 }
 
+
 shell_intent () {
 
 	# load shell files
@@ -673,25 +674,21 @@ shell_intent () {
 	else
 		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${shell_list[@]}
 
-		if [ -z "${option}"         ] || \
-		   [ "${option}" = "setup"  ] || \
-		   [ "${option}" = "termux" ]
-		then
-			# link to user home
+		# link to user home
 
-			frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-aliases       .bash_aliases
-			frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-configuration .bashrc
-			frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-configuration .bash_configuration
-			frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-functions     .bash_functions
-			frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-login         .bash_login
-			frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-logout        .bash_logout
-			frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-profile       .bash_profile
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-aliases       .bash_aliases
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-configuration .bashrc
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-configuration .bash_configuration
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-functions     .bash_functions
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-login         .bash_login
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-logout        .bash_logout
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-profile       .bash_profile
 
-			frobulator.file "${HOME}" .hushlogin
-		fi
+		frobulator.file "${HOME}" .hushlogin
 
-		if [ "${option}" = "setup"     ] || \
-		   [ "${option}" = "container" ]
+		if [ "${option}" = "setup"      ] || \
+		   [ "${option}" = "container"  ] || \
+		   [ "${option}" = "initialize" ]
 		then
 			# link to root home
 
