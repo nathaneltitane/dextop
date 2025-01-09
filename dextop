@@ -201,6 +201,14 @@ then
 	option="setup"
 fi
 
+if [ -z "${container}" ]
+then
+	container="${PREFIX}"/cnt/debian/12
+
+	frobulator.flag "${container}" "${HOME}"/.dextop dextop-container
+fi
+
+
 if [ "${option}" = "setup" ] || \
    [ "${option}" = "environment" ]
 then
@@ -690,6 +698,8 @@ shell_intent () {
 		   [ "${option}" = "container"  ] || \
 		   [ "${option}" = "initialize" ]
 		then
+			CONTAINER_ROOT=$(cat "${HOME}"/.dextop/dextop-container)
+
 			# link to root home
 
 			frobulator.link "${HOME}"/.local/bin "${CONTAINER_ROOT}"/root bash-aliases       .bash_aliases
@@ -702,7 +712,6 @@ shell_intent () {
 
 			frobulator.file "${CONTAINER_ROOT}"/root .hushlogin
 		fi
-	fi
 
 	shell_list=()
 
