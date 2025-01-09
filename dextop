@@ -796,11 +796,11 @@ bookmarks_intent () {
 		Internal
 	)
 
-	for (( instance=0 ; instance<${#bookmarks_directories_list[@]} ; instance++ ))
+	for (( index=0 ; index<${#bookmarks_directories_list[@]} ; index++ ))
 	do
-		if [ -d ${bookmarks_directories_list[$instance]} ]
+		if [ -d ${bookmarks_directories_list[$index]} ]
 		then
-			frobulator.write "file://${bookmarks_directories_list[$instance]} ${bookmarks_labels_list[$instance]}" "${HOME}"/.config/gtk-3.0 bookmarks
+			frobulator.write "file://${bookmarks_directories_list[$index]} ${bookmarks_labels_list[$index]}" "${HOME}"/.config/gtk-3.0 bookmarks
 		fi
 	done
 
