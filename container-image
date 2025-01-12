@@ -147,16 +147,11 @@ image_select () {
 		# list supported distribution versions
 
 		debian_versions=(
-			debian	10	buster
-			debian	11	bullseye
 			debian	12	bookworm
 		)
 
 		ubuntu_versions=(
-			ubuntu	18.04	bionic
-			ubuntu	20.04	focal
-			ubuntu	22.04	jammy
-		#	ubuntu	24.04	noble - NOT YET AVAILABLE
+			ubuntu	24.04	noble
 		)
 
 		versions=(
@@ -450,8 +445,8 @@ image_handle () {
 	case "${distribution_name}"
 	in
 		[dD][eE][bB][iI][aA][nN]| \
-		[fF][eE][dD][oO][rR][aA]| \
 		[uU][bB][uU][nN][tT][uU])
+
 			distribution_name="${distribution_name,,}"
 
 			frobulator.scs "Supported distribution name."
@@ -468,7 +463,6 @@ image_handle () {
 			echo
 		;;
 
-
 		*)
 			distribution_name="debian"
 
@@ -478,21 +472,15 @@ image_handle () {
 			frobulator.wrn "Defaulting" "[ ${distribution_name} ]"
 			echo
 		;;
+
 	esac
 
-	case "${distribution_name}" in
-	debian)
+	case "${distribution_name}"
+	in
+		debian)
 
 		case "${distribution_version}"
 		in
-			10)
-				distribution_version=10
-			;;
-
-			11)
-				distribution_version=11
-			;;
-
 			12)
 				distribution_version=12
 			 ;;
@@ -507,7 +495,6 @@ image_handle () {
 				echo
 			;;
 
-
 			 *)
 				distribution_version=12
 
@@ -517,79 +504,21 @@ image_handle () {
 				frobulator.wrn "Defaulting" "[ ${distribution_version} ]"
 				echo
 			;;
+
 		esac
-	;;
 
-	fedora)
-
-		case "${distribution_version}"
-		in
-			33)
-				distribution_version=39
-			;;
-
-			34)
-				distribution_version=40
-			;;
-
-			35)
-				distribution_version=41
-			 ;;
-
-			 "")
-				distribution_version=41
-
-				frobulator.err "Distribution version not specified."
-				echo
-
-				frobulator.wrn "Defaulting" "[ ${distribution_version} ]"
-				echo
-			;;
-
-
-			 *)
-				distribution_version=35
-
-				frobulator.err "Unsupported distribution version."
-				echo
-
-				frobulator.wrn "Defaulting" "[ ${distribution_version} ]"
-				echo
-			;;
-		esac
 	;;
 
 	ubuntu)
 
 		case "${distribution_version}"
 		in
-			18*04|18*04*)
-				distribution_version="18.04"
+			24*04|24*04*)
+				distribution_version="24.04"
 
 				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
 				echo
 			;;
-
-			20*04|20*04*)
-				distribution_version="20.04"
-
-				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
-				echo
-			;;
-
-			22*04|22*04*)
-				distribution_version="22.04"
-
-				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
-				echo
-			;;
-
-#			24*04|24*04*)
-#				distribution_version="24.04"
-#
-#				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
-#				echo
-#			;;
 
 			"")
 				distribution_version="${distribution_version}"
@@ -610,6 +539,7 @@ image_handle () {
 				frobulator.wrn "Defaulting" "[ ${distribution_version} ]"
 				echo
 			;;
+
 		esac
 	;;
 
