@@ -737,7 +737,7 @@ image_locale () {
 	# set locale selection for container
 
 	echo "LC_ALL=en_US.UTF-8" >> "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/environment
-	echo "en_US.UTF-8 UTF-8" >> "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/locale.gen
+	echo "en_US.UTF-8 UTF-8" > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/locale.gen
 	echo "LANG=en_US.UTF-8" > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/locale.conf
 
 	frobulator.complete "${script} : ${FUNCNAME}"
