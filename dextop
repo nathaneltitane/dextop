@@ -327,7 +327,6 @@ container_environment () {
 	export CONTAINER_PATH="${CONTAINER_PATH}"
 
 	return
-
 }
 
 container_intent () {
@@ -392,7 +391,6 @@ container_intent () {
 					HOME="${CONTAINER_HOME}"							\
 					PATH="${CONTAINER_PATH}"							\
 																		${@}
-
 }
 
 architecture_intent () {
