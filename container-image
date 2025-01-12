@@ -439,17 +439,10 @@ image_extract () {
 
 image_handle () {
 
-	frobulator.continue
-
-	# handle manual input:
-	# validate input selections
-	# set container image name and version
-
-	case "${distribution_name}"
+case "${distribution_name}"
 	in
 		[dD][eE][bB][iI][aA][nN]| \
 		[uU][bB][uU][nN][tT][uU])
-
 			distribution_name="${distribution_name,,}"
 
 			frobulator.scs "Supported distribution name."
@@ -478,12 +471,15 @@ image_handle () {
 
 	esac
 
-	case "${distribution_name}"
-	in
-		debian)
+	case "${distribution_name}" in
+	debian)
 
 		case "${distribution_version}"
 		in
+			11)
+				distribution_version=11
+			;;
+
 			12)
 				distribution_version=12
 			 ;;
@@ -509,13 +505,26 @@ image_handle () {
 			;;
 
 		esac
-
 	;;
 
 	ubuntu)
 
 		case "${distribution_version}"
 		in
+			20*04|20*04*)
+				distribution_version="20.04"
+
+				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
+				echo
+			;;
+
+			22*04|22*04*)
+				distribution_version="22.04"
+
+				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
+				echo
+			;;
+
 			24*04|24*04*)
 				distribution_version="24.04"
 
@@ -544,6 +553,7 @@ image_handle () {
 			;;
 
 		esac
+
 	;;
 
 	esac
