@@ -567,13 +567,17 @@ backgrounds_intent () {
 
 	backgrounds_list=(
 		dextop-black.png
-		dextop-blue.png
-		dextop-coral.png
-		dextop-grey.png
 		dextop-black.svg
+		dextop-blue.png
 		dextop-blue.svg
+		dextop-canary.png
+		dextop-canary.svg
+		dextop-coral.png
 		dextop-coral.svg
+		dextop-grey.png
 		dextop-grey.svg
+		dextop-sky.png
+		dextop-sky.svg
 	)
 
 	if [[ "${option}" = "update" ]]
@@ -637,7 +641,7 @@ preferences_intent () {
 
 	preferences_list+=(
 		termux-colors
-		termux-font
+		termux-font-hack
 		termux-properties
 		termux-reload-settings
 	)
@@ -649,7 +653,7 @@ preferences_intent () {
 		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${preferences_list[@]}
 
 		frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-colors     colors.properties
-		frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-font       font.ttf
+		frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-font-hack       font.ttf
 		frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-properties termux.properties
 
 		reload_intent
