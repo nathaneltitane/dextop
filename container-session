@@ -659,7 +659,7 @@ container_focus () {
 
 	# load desktop environment
 
-	frobulator.fwd "Loading focus interface" "[ ${application} ]"
+	frobulator.cpt "Loading focus interface" "[ ${application} ]"
 	echo
 
 	frobulator.silence "${application}" &
