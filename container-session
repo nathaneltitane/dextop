@@ -66,9 +66,16 @@ do
 			shift
 		;;
 
+		-a|--application)
+			option="application"
+			application="${2}"
+
+			shift
+		;;
+
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} -o [Display Server] | -x | -u [User Name] | -d [Directory] | [OPTION]"
+			echo -e "Usage: ${script} -o [Display Server] | -x | -u [User Name] | -d [Directory] | -a [Application] | [OPTION]"
 			echo
 			echo -e "Options:"
 			echo
@@ -742,4 +749,15 @@ then
 	# start container session
 
 	container_intent "${SHELL}"
+fi
+
+if [ "${option}" = "application" ]
+then
+	# start display session
+
+	display_start
+
+	# load application
+
+	container_application
 fi
