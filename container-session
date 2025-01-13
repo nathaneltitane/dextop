@@ -625,6 +625,15 @@ container_session () {
 		session="$(cat ${HOME}/.dextop/dextop-session)"
 	fi
 
+	if [ "${environment}" = "xfce" ]
+	then
+		window_manager="xfwm4"
+
+	elif [ "${environment}" = "i3" ]
+	then
+		window_manager="i3"
+	fi
+
 	# pause:
 	# required to let session loader through messaging system
 	# and load graphical interface
@@ -658,6 +667,8 @@ container_focus () {
 	sleep 2
 
 	# load desktop environment
+
+	frobulator.silence "${window_manager}" &
 
 	frobulator.cpt "Loading focus interface" "[ ${application} ]"
 	echo
