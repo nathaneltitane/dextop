@@ -281,7 +281,6 @@ xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/mon
 xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorscreen/workspace6/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
 xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorscreen/workspace7/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
 xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorscreen/workspace8/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
-
 xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/single-workspace-mode' -t bool -s 'true'
 xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/single-workspace-number' -t int -s '0'
 xfconf-query --create -c 'xfce4-desktop'               -p '/desktop-icons/file-icons/show-filesystem' -t bool -s 'false'
