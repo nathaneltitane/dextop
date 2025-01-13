@@ -640,7 +640,7 @@ container_focus () {
 
 	# load session
 
-	if [ -z $(commadn -v "${application}") ]
+	if [ -z $(command -v "${application}") ]
 	then
 		frobulator.err "Application not found" "[ ${application} ]"
 		echo
