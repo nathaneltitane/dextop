@@ -66,8 +66,8 @@ do
 			shift
 		;;
 
-		-a|--application)
-			option="application"
+		-f|--focus)
+			option="focus"
 			application="${2}"
 
 			shift
@@ -75,19 +75,21 @@ do
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} -o [Display Server] | -x | -u [User Name] | -d [Directory] | -a [Application] | [OPTION]"
+			echo -e "Usage: ${script} -o [Display Server] | -x | -u [User Name] | -d [Directory] | -f [Application] | [OPTION]"
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-o, --start          Start display session."
+			echo -e "-o, --start        Start display session."
 			echo
-			echo -e "-x, --stop           Stop display session."
+			echo -e "-x, --stop         Stop display session."
 			echo
-			echo -e "-u, --username       Specify user name for session login."
+			echo -e "-u, --username     Specify user name for session login."
 			echo
-			echo -e "-d, --directory      Specify container base directory as /path/to/base/directory containing /distribution/version"
+			echo -e "-d, --directory    Specify container base directory as /path/to/base/directory containing /distribution/version"
 			echo
-			echo -e "-h, --help           Show help and usage information."
+			echo -e "-f, --focus        Specify application to load."
+			echo
+			echo -e "-h, --help         Show help and usage information."
 			echo
 			echo -e "'${script}' [ Version // ${version} ]"
 			echo
@@ -634,6 +636,39 @@ container_session () {
 	frobulator.silence "dbus-launch --exit-with-session ${session}" &
 }
 
+container_focus () {
+
+	# load session
+
+	if [ -z $(commadn -v "${application}") ]
+	then
+		frobulator.err "Application not found" "[ ${application} ]"
+		echo
+
+		frobulator.stp "Aborting${marker_elp}"
+
+		exit 1
+	fi
+
+	if [ -z "${session}" ]
+	then
+		session="$(cat ${HOME}/.dextop/dextop-session)"
+	fi
+
+	# pause:
+	# required to let session loader through messaging system
+	# and load graphical interface
+
+	sleep 2
+
+	# load desktop environment
+
+	frobulator.fwd "Loading focus interface${marker_elp}"
+	echo
+
+	frobulator.silence "dbus-launch --exit-with-session ${application}" &
+}
+
 display_start () {
 
 	# start display server and activity
@@ -751,7 +786,7 @@ then
 	container_intent "${SHELL}"
 fi
 
-if [ "${option}" = "application" ]
+if [ "${option}" = "focus" ]
 then
 	# start display session
 
@@ -759,5 +794,5 @@ then
 
 	# load application
 
-	container_application
+	container_focus
 fi
