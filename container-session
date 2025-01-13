@@ -647,12 +647,8 @@ container_focus () {
 
 		frobulator.stp "Aborting${marker_elp}"
 
-		exit 1
-	fi
+		return 1
 
-	if [ -z "${session}" ]
-	then
-		session="$(cat ${HOME}/.dextop/dextop-session)"
 	fi
 
 	# pause:
@@ -663,10 +659,10 @@ container_focus () {
 
 	# load desktop environment
 
-	frobulator.fwd "Loading focus interface${marker_elp}"
+	frobulator.fwd "Loading focus interface${marker_elp}" "[ ${application} ]"
 	echo
 
-	frobulator.silence "dbus-launch --exit-with-session ${application}" &
+	frobulator.silence "${application}" &
 }
 
 display_start () {
