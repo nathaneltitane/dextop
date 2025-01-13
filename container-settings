@@ -218,6 +218,24 @@ xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/mon
 xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorBuiltinDisplay/workspace8/color-style' -t int -s '1'
 xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorBuiltinDisplay/workspace8/image-style' -t int -s '1'
 xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorBuiltinDisplay/workspace8/last-image' -t string -s '/data/data/com.termux/files/home/.dextop/dextop-blue.svg'
+xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorBuiltinDisplay/workspace0/rgba1' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorBuiltinDisplay/workspace1/rgba1' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorBuiltinDisplay/workspace2/rgba1' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorBuiltinDisplay/workspace3/rgba1' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorBuiltinDisplay/workspace4/rgba1' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorBuiltinDisplay/workspace5/rgba1' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorBuiltinDisplay/workspace6/rgba1' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorBuiltinDisplay/workspace7/rgba1' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorBuiltinDisplay/workspace8/rgba1' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorBuiltinDisplay/workspace0/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorBuiltinDisplay/workspace1/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorBuiltinDisplay/workspace2/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorBuiltinDisplay/workspace3/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorBuiltinDisplay/workspace4/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorBuiltinDisplay/workspace5/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorBuiltinDisplay/workspace6/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorBuiltinDisplay/workspace7/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorBuiltinDisplay/workspace8/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
 xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorscreen/workspace0/color-style' -t int -s '1'
 xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorscreen/workspace0/image-style' -t int -s '1'
 xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorscreen/workspace0/last-image' -t string -s '/data/data/com.termux/files/home/.dextop/dextop-blue.svg'
@@ -263,6 +281,7 @@ xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/mon
 xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorscreen/workspace6/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
 xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorscreen/workspace7/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
 xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/screen0/monitorscreen/workspace8/rgba2' -t double -s ${r} -t double -s ${g} -t double -s ${b} -t double -s ${a}
+
 xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/single-workspace-mode' -t bool -s 'true'
 xfconf-query --create -c 'xfce4-desktop'               -p '/backdrop/single-workspace-number' -t int -s '0'
 xfconf-query --create -c 'xfce4-desktop'               -p '/desktop-icons/file-icons/show-filesystem' -t bool -s 'false'
