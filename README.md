@@ -615,6 +615,8 @@ Should you suspect any issues or errors, please provide a copy of those files wh
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/nathaneltitane/nathaneltitane?style=for-the-badge&logo=gnubash&logoColor=ffffff&label=NATHANEL+TITANE)](https://github.com/nathaneltitane/nathaneltitane)
 
+[![GitHub Repo stars](https://img.shields.io/github/stars/nathaneltitane/pewpewprints?style=for-the-badge&logo=gnubash&logoColor=ffffff&label=PEWPEWPRINTS)](https://github.com/nathaneltitane/pewpewprints)
+
 ---
 
 [[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 01-03-2024 ]
