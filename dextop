@@ -1222,9 +1222,10 @@ image_colors_list=(
 
 image_color_index=$(( RANDOM % ${#image_colors_list[@]} ))
 
-image_color=${image_colors_list[$image_color_index]}
+image_color="${image_colors_list[$image_color_index]}"
 
-frobulator.image get.dxtp.app/dextop-${image_color}.png
+frobulator.image "get.dxtp.app/dextop-${image_color}.png"
+
 
 # setup ////////////////////////////////////////////////////////////////////////
 
