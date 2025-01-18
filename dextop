@@ -36,7 +36,7 @@ script=$(basename -- "${BASH_SOURCE[0]}")
 
 # version //////////////////////////////////////////////////////////////////////
 
-version="01-06-2024"
+version="01-18-2024"
 
 # usage ////////////////////////////////////////////////////////////////////////
 
@@ -578,6 +578,8 @@ backgrounds_intent () {
 		dextop-grey.svg
 		dextop-sky.png
 		dextop-sky.svg
+		dextop-violet.png
+		dextop-violet.svg
 	)
 
 	if [[ "${option}" = "update" ]]
@@ -1205,6 +1207,24 @@ then
 		exit 1
 	fi
 fi
+
+# welcome //////////////////////////////////////////////////////////////////////
+
+image_colors_list=(
+	black
+	blue
+	canary
+	coral
+	grey
+	sky
+	violet
+)
+
+image_color_index=$(( RANDOM % ${#image_colors_list[@]} ))
+
+image_color=${image_colors_list[$image_color_index]}
+
+frobulator.image get.dxtp.app/dextop-${image_color}.png
 
 # setup ////////////////////////////////////////////////////////////////////////
 
