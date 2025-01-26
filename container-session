@@ -599,13 +599,13 @@ container_display () {
 
 	display_activity="${termux_x11_activity}"
 
-	unset intent_command
+	intent_command=()
 
-	intent_command+="am start"
-	intent_command+=" --user 0"
-	intent_command+=" -n ${display_activity}"
+	intent_command+=(am start)
+	intent_command+=(--user 0)
+	intent_command+=(-n ${display_activity})
 
-	frobulator.silence "${intent_command}"
+	frobulator.silence "${intent_command[@]}"
 }
 
 container_session () {
@@ -727,13 +727,13 @@ display_stop () {
 
 		display_activity="${termux_x11_activity_stop}"
 
-		unset intent_command
+		intent_command=()
 
-		intent_command+="am broadcast"
-		intent_command+=" --user 0"
-		intent_command+=" -a ${display_activity}"
+		intent_command+=(am broadcast)
+		intent_command+=(--user 0)
+		intent_command+=(-a ${display_activity})
 
-		frobulator.silence "${intent_command}" &
+		frobulator.silence "${intent_command[@]}" &
 
 		frobulator.process "Stopping display viewer"
 	else
