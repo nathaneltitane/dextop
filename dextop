@@ -493,14 +493,14 @@ reload_intent () {
 	# termux settings reload:
 	# update command line interface with dextop settings
 
-	unset settings_command
+	settings_command=()
 
-	settings_command+="am broadcast"
-	settings_command+=" --user 0"
-	settings_command+=" -a com.termux.app.reload_style"
-	settings_command+=" -p com.termux"
+	settings_command+=(am broadcast)
+	settings_command+=(--user 0)
+	settings_command+=(-a com.termux.app.reload_style)
+	settings_command+=(-p com.termux)
 
-	frobulator.silence "${settings_command}"
+	frobulator.silence "${settings_command[@]}"
 
 }
 
