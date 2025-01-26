@@ -187,7 +187,7 @@ addon_intent () {
 
 open_intent () {
 
-	unset open_command
+	open_command=()
 
 	open_command+="am broadcast"
 	open_command+=" --user 0"
