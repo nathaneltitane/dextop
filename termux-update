@@ -118,15 +118,15 @@ trap 'clean' EXIT
 
 open_intent () {
 
-	unset open_command
+	open_command=()
 
-	open_command+="am broadcast"
-	open_command+=" --user 0"
-	open_command+=" -a android.intent.action.VIEW"
-	open_command+=" -n com.termux/com.termux.app.TermuxOpenReceiver"
-	open_command+=" -d ${@}"
+	open_command+=(am broadcast)
+	open_command+=(--user 0)
+	open_command+=(-a android.intent.action.VIEW)
+	open_command+=(-n com.termux/com.termux.app.TermuxOpenReceiver)
+	open_command+=(-d ${@})
 
-	frobulator.silence "${open_command}"
+	frobulator.silence "${open_command[@]}"
 }
 
 # notice
