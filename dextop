@@ -1377,23 +1377,14 @@ then
 			frobulator.file "${HOME}"/.dextop dextop-container-expansion-checkpoint
 		fi
 
-		# container groups
-
-		if [ ! -f "${HOME}"/.dextop/dextop-container-groups-checkpoint ]
-		then
-			container_intent "${HOME}"/.local/bin/container-groups
-
-			frobulator.file "${HOME}"/.dextop dextop-container-groups-checkpoint
-		fi
-
 		# container packages
 
-#		if [ ! -f "${HOME}"/.dextop/dextop-container-packages-checkpoint ]
-#		then
-#			container_intent "${HOME}"/.local/bin/container-packages
+		if [ ! -f "${HOME}"/.dextop/dextop-container-packages-checkpoint ]
+		then
+			container_intent "${HOME}"/.local/bin/container-packages
 
-#			frobulator.file "${HOME}"/.dextop dextop-container-packages-checkpoint
-#		fi
+			frobulator.file "${HOME}"/.dextop dextop-container-packages-checkpoint
+		fi
 
 		# container user
 
