@@ -730,6 +730,7 @@ utility_intent () {
 		termux-storage
 		termux-addons
 		container-expansion
+		container-groups
 		container-image
 		container-initialization
 		container-packages
@@ -1374,6 +1375,15 @@ then
 			container_intent "${HOME}"/.local/bin/container-expansion
 
 			frobulator.file "${HOME}"/.dextop dextop-container-expansion-checkpoint
+		fi
+
+		# container groups
+
+		if [ ! -f "${HOME}"/.dextop/dextop-container-expansion-checkpoint ]
+		then
+			container_intent "${HOME}"/.local/bin/container-groups
+
+			frobulator.file "${HOME}"/.dextop dextop-container-groups-checkpoint
 		fi
 
 		# container packages
