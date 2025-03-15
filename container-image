@@ -844,7 +844,7 @@ image_locale
 
 # generate missing groups
 
-image_groups
+# image_groups
 
 # generate network
 
