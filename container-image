@@ -433,7 +433,8 @@ image_extract () {
 	   [ "${distribution_name}" = ubuntu ]
 	then
 
-		image_filesystem "${PREFIX}"/img/"${image_file}" "${PREFIX}"/cnt/"${distribution_name}"
+		image_filesystem "${PREFIX}"/img/"${image_file}" "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
+
 	fi
 
 	frobulator.complete "${script} : ${FUNCNAME}"
