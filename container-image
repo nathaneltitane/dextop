@@ -515,6 +515,13 @@ case "${distribution_name}"
 
 		case "${distribution_version}"
 		in
+			18*04|18*04*)
+				distribution_version="18.04"
+
+				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
+				echo
+			;;
+
 			20*04|20*04*)
 				distribution_version="20.04"
 
