@@ -1379,7 +1379,7 @@ then
 
 		# container groups
 
-		if [ ! -f "${HOME}"/.dextop/dextop-container-expansion-checkpoint ]
+		if [ ! -f "${HOME}"/.dextop/dextop-container-groups-checkpoint ]
 		then
 			container_intent "${HOME}"/.local/bin/container-groups
 
