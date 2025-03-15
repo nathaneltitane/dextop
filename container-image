@@ -147,11 +147,14 @@ image_select () {
 		# list supported distribution versions
 
 		debian_versions=(
+			debian	10	buster
 			debian	11	bullseye
 			debian	12	bookworm
+			debian	13	trixie
 		)
 
 		ubuntu_versions=(
+			ubuntu	18.04	bionic
 			ubuntu	20.04	focal
 			ubuntu	22.04	jammy
 			ubuntu	24.04	noble
