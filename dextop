@@ -1388,12 +1388,12 @@ then
 
 		# container packages
 
-		if [ ! -f "${HOME}"/.dextop/dextop-container-packages-checkpoint ]
-		then
-			container_intent "${HOME}"/.local/bin/container-packages
+#		if [ ! -f "${HOME}"/.dextop/dextop-container-packages-checkpoint ]
+#		then
+#			container_intent "${HOME}"/.local/bin/container-packages
 
-			frobulator.file "${HOME}"/.dextop dextop-container-packages-checkpoint
-		fi
+#			frobulator.file "${HOME}"/.dextop dextop-container-packages-checkpoint
+#		fi
 
 		# container user
 
