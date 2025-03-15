@@ -379,7 +379,7 @@ image_download () {
 	case "${distribution_name}"
 	in
 		debian|ubuntu)
-			image_archive_extension="tar.xz"
+			image_archive_extension="tar.gz"
 
 			image_url="get.trmnl.me"
 			image_archive="archive-${distribution_name}-${distribution_version}.${image_archive_extension}"
