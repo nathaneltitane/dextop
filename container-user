@@ -507,7 +507,7 @@ else
 
 	# generate 'user' account: automated
 
-	user_automated
+#	user_automated
 
 	# set 'user' password
 
