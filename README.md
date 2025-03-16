@@ -8,6 +8,12 @@
 
 ### NOTICE
 
+03-16-2025 ↴
+
+- Fix 'container-session' application/focus mode:
+  - Show default if application not found or empty
+- Prettify Prompt messaging for connect//disconnect
+
 03-15-2025 ↴
 
 - Fix legacy groups override breaking proot container package installs
