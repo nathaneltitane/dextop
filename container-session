@@ -701,7 +701,7 @@ container_focus () {
 		echo
 
 	else
-		frobulator.scs "Application found" "[ N/A ]"
+		frobulator.scs "Application found" "[ ${application} ]"
 		echo
 
 		application="${application}"
