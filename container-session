@@ -649,6 +649,30 @@ container_focus () {
 
 	# load session
 
+	if [ -z "${environment}" ]
+	then
+		environment="$(cat ${HOME}/.dextop/dextop-environment)"
+	fi
+
+	if [ -z "${session}" ]
+	then
+		session="$(cat ${HOME}/.dextop/dextop-session)"
+	fi
+
+	if [ "${environment}" = "xfce" ]
+	then
+		window_manager="xfwm4"
+
+	elif [ "${environment}" = "i3" ]
+	then
+		window_manager="i3"
+	fi
+
+	if [ -z "$application" ]
+	then
+		application="xfce4-appfinder"
+	fi
+
 	if [ -z $(command -v "${application}") ]
 	then
 		frobulator.err "Application not found" "[ ${application} ]"
@@ -664,7 +688,7 @@ container_focus () {
 	# required to let session loader through messaging system
 	# and load graphical interface
 
-	sleep 2
+	wait
 
 	# load desktop environment
 
