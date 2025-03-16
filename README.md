@@ -198,7 +198,7 @@ Dextop links some of the modified utilities that have been patched under Termux 
 
 **Do not install Google Play Store Packages: thay have not been maintained and are deprecated since November 2020.**
 
-For the best possible experience, follow the links and recommendations below and make sure to have:
+For the best possible experience, use the offical [GitHub Termux project released packages](https://github.com/termux/termux-app/releases), follow the links and recommendations below and make sure to have:
 
 - **A modern Android device equipped with a 64 bit ARM processor** (Android 7.0 or above: Termux limitation - Avoid Android 11/12/13 when and if possible: read more regarding the [Phantom Process Killer](https://issuetracker.google.com/issues/205156966))
 - **Medium to high speed internet connectivity** (wifi or other: for setup, updates and additional package downloads)
