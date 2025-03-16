@@ -647,7 +647,7 @@ container_session () {
 
 container_focus () {
 
-	# load session
+	# load window manager
 
 	if [ -z "${environment}" ]
 	then
@@ -668,11 +668,14 @@ container_focus () {
 		window_manager="i3"
 	fi
 
+	# default
+
 	if [ -z "$application" ]
 	then
 		application="xfce4-appfinder"
 	fi
 
+	application=$(find "$")
 	if [ -z $(command -v "${application}") ]
 	then
 		frobulator.err "Application not found" "[ ${application} ]"
@@ -688,7 +691,7 @@ container_focus () {
 	# required to let session loader through messaging system
 	# and load graphical interface
 
-	wait
+	frobulator.timeout
 
 	# load desktop environment
 
