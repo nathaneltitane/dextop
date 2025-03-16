@@ -686,9 +686,15 @@ container_focus () {
 
 		application="${application_default}"
 
+		frobulator.cpt "Loading default" "[ ${application} ]"
+		echo
+
+	else
+		frobulator.cpt "Loading application" "[ ${application} ]"
+		echo
 	fi
 
-	# pause:
+	# timeout:
 	# required to let session loader through messaging system
 	# and load graphical interface
 
@@ -696,12 +702,9 @@ container_focus () {
 
 	# load desktop environment
 
-	frobulator.silence "${window_manager}" &
+	"${window_manager}" > "${sink}" 2>&1 &
 
-	frobulator.cpt "Loading focus interface" "[ ${application} ]"
-	echo
-
-	frobulator.silence "${application}" &
+	"${application}" > "${sink}" 2>&1 &
 }
 
 display_start () {
