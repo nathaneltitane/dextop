@@ -647,6 +647,8 @@ container_session () {
 
 container_focus () {
 
+	application_default="xfce4-appfinder"
+
 	# load window manager
 
 	if [ -z "${environment}" ]
@@ -670,20 +672,17 @@ container_focus () {
 
 	# default
 
-	if [ -z "$application" ]
+	if [ "$application" = "" ]
 	then
-		application="xfce4-appfinder"
+		application="${application_default}"
 	fi
 
-	application=$(find "$")
 	if [ -z $(command -v "${application}") ]
 	then
 		frobulator.err "Application not found" "[ ${application} ]"
 		echo
 
-		frobulator.stp "Aborting${marker_elp}"
-
-		return 1
+		application="${application_default}"
 
 	fi
 
