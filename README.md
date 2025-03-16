@@ -2,11 +2,17 @@
 
 [![Donate](https://img.shields.io/badge/Paypal-2f343f.svg?style=for-the-badge&logo=paypal&label=Donate)](https://www.paypal.com/donate?hosted_button_id=ZW3CDCANHJCWJ)
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 01-03-2024 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 03-15-2024 ]
 
 ---
 
 ### NOTICE
+
+03-15-2025 ↴
+
+- Fix legacy groups override breaking proot container package installs
+- Now using docker.io stock minimal images for proot deployments
+- WIP: reimplement VNC functionality
 
 01-07-2025 ↴
 
@@ -16,31 +22,6 @@
 
 - Fix debian images not being found:
   - Image archives now available through get.trmnl.me
-
-12-26-2024 ↴
-
-- Modularize i3 session extensions and dmenu applets
-- New shortcuts and implementations (View in i3 shortcuts)
-
-12-24-2024 ↴
-
-- Reimplemented i3 session settings and base configurations:
-  - Fixes and new implementations for dmenu, i3status and i3 session
-
-12-01-2024 ↴
-
-- Fixed issues with container(s) management in 'container-session'
-  - Rewrote display and container handling functions (see help)
-  - Streamlined container display server spawning process
-
-- Update BASH session scripts to reflect session login changes
-
-- Added container manager to help user select through multiple container instances ('container-session -d')
-  - Supports user lookup and container selection:
-    - See help for details - use as follows:
-    ```
-    container-session -u <username> -d
-    ```
 
 ---
 
@@ -623,7 +604,7 @@ Should you suspect any issues or errors, please provide a copy of those files wh
 
 ---
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 01-03-2024 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 03-15-2024 ]
 
 ### Enjoying Dextop? Buy me a coffee to show your appreciation!
 
