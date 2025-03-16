@@ -682,6 +682,8 @@ container_focus () {
 		frobulator.err "Application not found" "[ ${application} ]"
 		echo
 
+		frobulator.timeout 3
+
 		application="${application_default}"
 
 	fi
