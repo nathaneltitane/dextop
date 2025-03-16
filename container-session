@@ -647,9 +647,7 @@ container_session () {
 
 container_focus () {
 
-	application_default="xfce4-appfinder"
-
-	# load window manager
+	# define window manager
 
 	if [ -z "${environment}" ]
 	then
@@ -670,7 +668,16 @@ container_focus () {
 		window_manager="i3"
 	fi
 
-	# default
+	# define default application
+
+	if [ "${environment}" = "xfce" ]
+	then
+		application_default="xfce4-appfinder"
+
+	elif [ "${environment}" = "i3" ]
+	then
+		application_default="dmenu_run"
+	fi
 
 	if [ "$application" = "" ]
 	then
@@ -711,7 +718,9 @@ container_focus () {
 
 	# load desktop environment
 
-	frobulator.silence "${window_manager}" &
+	"${window_manager}" > "${sink}" 2>&1 &
+
+	# load application
 
 	frobulator.silence "${application}" &
 }
