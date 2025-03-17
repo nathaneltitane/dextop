@@ -45,7 +45,8 @@ All utilities created for, loaded, and used by Dextop contain a help argument: p
 ### TL;DR
 
   - Prepare ↴
-    - Have [Termux](https://github.com/termux/termux-app/releases) APK + [Termux:X11](https://github.com/termux/termux-x11/releases) APK installed on your Android device - [Termux:API](https://github.com/termux/termux-api/releases) APK is optional but recommended.
+    - Google Play Store Termux packages have been deprecated since November 2020: DO NOT INSTALL THEM!
+      - Have [Termux](https://github.com/termux/termux-app/releases) APK + [Termux:X11](https://github.com/termux/termux-x11/releases) APK installed on your Android device - [Termux:API](https://github.com/termux/termux-api/releases) APK is optional but recommended.
 
   - Link storage ↴
     - Identify directory or any other storage location for home usage - 'cd' into directory - paste or type:
