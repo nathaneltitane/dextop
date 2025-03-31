@@ -82,6 +82,7 @@ frobulator.upgrade
 display_list+=(
 	virglrenderer
 	virglrenderer-android
+	xorg-server-xvfb
 	xwayland
 )
 
@@ -175,6 +176,10 @@ utilities_list+=(
 	wget
 )
 
+vnc_list+=(
+	x11vnc
+)
+
 xfce_list+=(
 	xfce4
 	xfce4-appfinder
@@ -263,6 +268,7 @@ install_list+=(
 	${multimedia_list[@]}
 	${security_list[@]}
 	${utilities_list[@]}
+	${vnc_list[@]}
 	${desktop_environment_list[@]}
 )
 
