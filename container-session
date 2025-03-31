@@ -151,6 +151,12 @@ termux_x11_process="app_process -Xnoimage-dextooat / com.termux.x11.Loader"
 # RealVNC:       com.realvnc.viewer.android/.app.DesktopActivity
 # Remotix:       com.nulana.android.remotix/.Viewer
 
+free_vnc_activity="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
+real_vnc_activity="com.realvnc.viewer.android/.app.DesktopActivity"
+remotix_vnc_activity="com.nulana.android.remotix/.Viewer"
+
+vnc_activity="${remotix_vnc_activity}"
+
 # defaults /////////////////////////////////////////////////////////////////////
 
 if [ -z "${display}" ]
@@ -612,6 +618,7 @@ container_intent () {
 	session_command+=" DISPLAY_DRIVER=${DISPLAY_DRIVER}"
 	session_command+=" HOME=${HOME}"
 	session_command+=" LANG=${LANG}"
+	session_command+=" LOCALHOST=${LOCALHOST}"
 	session_command+=" SHELL=${SHELL}"
 	session_command+=" TERM=${TERM}"
 	session_command+=" TMPDIR=${TMPDIR}"
