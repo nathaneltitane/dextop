@@ -46,10 +46,16 @@ do
 	in
 		-o|--start)
 			option="start"
+			display="${2}"
+
+			shift
 		;;
 
 		-x|--stop)
 			option="stop"
+			display="${2}"
+
+			shift
 		;;
 
 		-u|--username)
@@ -79,9 +85,11 @@ do
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-o, --start        Start display session."
+			echo -e "-o, --start          Start display session server."
+			echo -e "                     [ vnc ]"
+			echo -e "                     [ x11 ] [ Default ]"
 			echo
-			echo -e "-x, --stop         Stop display session."
+			echo -e "-x, --stop           Stop display session server."
 			echo
 			echo -e "-u, --username     Specify user name for session login."
 			echo
