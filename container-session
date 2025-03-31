@@ -145,6 +145,12 @@ termux_x11_activity_stop="com.termux.x11.ACTION_STOP"
 
 termux_x11_process="app_process -Xnoimage-dextooat / com.termux.x11.Loader"
 
+# reference vnc session viewer activity calls for known android applications:
+
+# FreebVNC:      com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity
+# RealVNC:       com.realvnc.viewer.android/.app.DesktopActivity
+# Remotix:       com.nulana.android.remotix/.Viewer
+
 # defaults /////////////////////////////////////////////////////////////////////
 
 if [ -z "${COLORTERM}" ]
