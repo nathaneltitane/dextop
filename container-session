@@ -58,6 +58,10 @@ do
 			shift
 		;;
 
+		-l|--list)
+			option="list"
+		;;
+
 		-p|--password)
 			option="password"
 		;;
@@ -95,7 +99,7 @@ do
 			echo
 			echo -e "-x, --stop         Stop display session server."
 			echo
-			echo -e "-l, --list         List display session server(s) and parameters."
+			echo -e "-l, --list         List display server information and parameters."
 			echo
 			echo -e "-p, --password     Generate display session password. [ vnc ]"
 			echo
@@ -1396,6 +1400,13 @@ then
 	# stop display session
 
 	display_stop_x11
+fi
+
+if [ "${option}" = "list" ]
+then
+	# list display server information
+
+	display_list
 fi
 
 if [ "${option}" = "username" ]
