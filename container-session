@@ -777,88 +777,10 @@ container_focus () {
 	frobulator.silence "${application}" &
 }
 
-display_server_x11 () {
-
-	# start x11 display server
-
-	GALLIUM_DRIVER="${TERMUX_X11_DRIVER}"
-
-	export GALLIUM_DRIVER="${GALLIUM_DRIVER}"
-
-	if [[ $(pgrep -f dbus) ]]
-	then
-		pkill -f dbus
-	fi
-
-	if [[ $(pgrep -f "${TERMUX_X11_ACCELERATOR}") ]]
-	then
-		pkill -f "${TERMUX_X11_ACCELERATOR}"
-	fi
-
-	frobulator.silence "${TERMUX_X11_ACCELERATOR}" &
-
-	if [[ $(pgrep -f "${TERMUX_X11_APPLICATION}") ]]
-	then
-		:
-	else
-		frobulator.silence "${TERMUX_X11_SERVER} ${DISPLAY}" &
-	fi
-}
-
-display_intent_x11 () {
-
-	# start x11 display activity
-
-	frobulator.fwd "Opening display${marker_elp}"
-	echo
-
-	display_activity="${termux_x11_activity}"
-
-	unset intent_command
-
-	intent_command+="am start"
-	intent_command+=" --user 0"
-	intent_command+=" -n ${display_activity}"
-
-	frobulator.silence "${intent_command}" &
-}
-
-display_start_x11 () {
-
-	display_server_x11
-
-	display_intent_x11
-}
-
-display_stop_x11 () {
-
-	# handle and stop display server and activity
-
-	if [[ $(pgrep -f "${TERMUX_X11_APPLICATION}") ]]
-	then
-		pkill -f "${TERMUX_X11_APPLICATION}"
-
-		display_activity="${termux_x11_activity_stop}"
-
-		intent_command=()
-
-		intent_command+=(am broadcast)
-		intent_command+=(--user 0)
-		intent_command+=(-a ${display_activity})
-
-		frobulator.silence "${intent_command[@]}" &
-
-		frobulator.process "Stopping display viewer"
-	else
-		frobulator.wrn "No active display process detected."
-		echo
-
-		frobulator.fwd "Exiting${marker_elp}"
-		echo
-	fi
-}
-
 display_clean_vnc () {
+
+	# clean vnc runtime files:
+	# prevents hangups and vnc process misfires
 
 	if [ -d "${HOME}" ]
 	then
@@ -877,10 +799,10 @@ display_clean_vnc () {
 
 display_geometry_vnc () {
 
+	# list supported display resolutions
+
 	frobulator.msg "Select geometry or input [c]ustom properties:"
 	echo
-
-	# list supported display resolutions
 
 	monitors=(
 		VGA		 0640    0480
@@ -1117,6 +1039,8 @@ display_selection_vnc () {
 
 display_password_vnc () {
 
+	# handle vnc session password generation
+
 	# values #
 
 	values_list=(
@@ -1144,6 +1068,8 @@ display_password_vnc () {
 
 display_framebuffer_vnc () {
 
+	# generate vnc framebuffer
+
 	frobulator.fwd "Generating framebuffer${marker_elp}"
 	echo
 
@@ -1157,6 +1083,8 @@ display_framebuffer_vnc () {
 }
 
 display_load_vnc () {
+
+	# initilaize vnc session and parameters
 
 	# make selection available for automatic start:
 	# verify user id - do not write selection when 'root' user is logged in
@@ -1188,24 +1116,29 @@ display_load_vnc () {
 
 display_server_vnc () {
 
-	load_command+="x11vnc"
-	load_command+=" -display ${DISPLAY}"
-	load_command+=" -clip xinerama=${DISPLAY}"
-	load_command+=" -rfbport ${PORT}"
-	load_command+=" -scale 1.00"
-	load_command+=" -xkb"
-	load_command+=" -nocursor"
-	load_command+=" -nocursorshape"
-	load_command+=" -noshm"
-	load_command+=" -noxdamage"
-	load_command+=" -noxfixes"
-	load_command+=" -noxrecord"
+	# start vnc display server
 
-	${load_command} > "${sink}" 2>&1 &
+	server_command+="x11vnc"
+	server_command+=" -display ${DISPLAY}"
+	server_command+=" -clip xinerama=${DISPLAY}"
+	server_command+=" -rfbport ${PORT}"
+	server_command+=" -scale 1.00"
+	server_command+=" -xkb"
+	server_command+=" -nocursor"
+	server_command+=" -nocursorshape"
+	server_command+=" -noshm"
+	server_command+=" -noxdamage"
+	server_command+=" -noxfixes"
+	server_command+=" -noxrecord"
+
+	${server_command} > "${sink}" 2>&1 &
 
 }
 
 display_intent_vnc () {
+
+
+	# start vnc display activity
 
 	# explicit VNC viewer application to kill:
 	# used when vnc is stopped or restarted using vnc:// intent
@@ -1220,12 +1153,15 @@ display_intent_vnc () {
 	#						-d vnc://${ADDRESS}:${PORT}
 	#						-S ${display_activity}"
 
+	display_activity="${vnc_activity}"
+
 	unset intent_command
 
 	intent_command+="am start"
 	intent_command+=" --user 0"
 	intent_command+=" -a android.intent.action.VIEW"
 	intent_command+=" -d vnc://${ADDRESS}:${PORT}"
+	intent_command+=" -S ${display_activity}"
 
 	frobulator.silence "${intent_command}"
 
@@ -1295,6 +1231,87 @@ display_stop_vnc () {
 
 	else
 		frobulator.wrn "No active display server detected."
+		echo
+
+		frobulator.fwd "Exiting${marker_elp}"
+		echo
+	fi
+}
+
+display_server_x11 () {
+
+	# start x11 display server
+
+	GALLIUM_DRIVER="${TERMUX_X11_DRIVER}"
+
+	export GALLIUM_DRIVER="${GALLIUM_DRIVER}"
+
+	if [[ $(pgrep -f dbus) ]]
+	then
+		pkill -f dbus
+	fi
+
+	if [[ $(pgrep -f "${TERMUX_X11_ACCELERATOR}") ]]
+	then
+		pkill -f "${TERMUX_X11_ACCELERATOR}"
+	fi
+
+	frobulator.silence "${TERMUX_X11_ACCELERATOR}" &
+
+	if [[ $(pgrep -f "${TERMUX_X11_APPLICATION}") ]]
+	then
+		:
+	else
+		frobulator.silence "${TERMUX_X11_SERVER} ${DISPLAY}" &
+	fi
+}
+
+display_intent_x11 () {
+
+	# start x11 display activity
+
+	frobulator.fwd "Opening display${marker_elp}"
+	echo
+
+	display_activity="${termux_x11_activity}"
+
+	unset intent_command
+
+	intent_command+="am start"
+	intent_command+=" --user 0"
+	intent_command+=" -n ${display_activity}"
+
+	frobulator.silence "${intent_command}" &
+}
+
+display_start_x11 () {
+
+	display_server_x11
+
+	display_intent_x11
+}
+
+display_stop_x11 () {
+
+	# stop display server and activity
+
+	if [[ $(pgrep -f "${TERMUX_X11_APPLICATION}") ]]
+	then
+		pkill -f "${TERMUX_X11_APPLICATION}"
+
+		display_activity="${termux_x11_activity_stop}"
+
+		intent_command=()
+
+		intent_command+=(am broadcast)
+		intent_command+=(--user 0)
+		intent_command+=(-a ${display_activity})
+
+		frobulator.silence "${intent_command[@]}" &
+
+		frobulator.process "Stopping display viewer"
+	else
+		frobulator.wrn "No active display process detected."
 		echo
 
 		frobulator.fwd "Exiting${marker_elp}"
