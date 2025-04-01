@@ -91,6 +91,8 @@ do
 			echo
 			echo -e "-x, --stop           Stop display session server."
 			echo
+			echo -e "-p, --password       Generate display session password. [ vnc ]"
+			echo
 			echo -e "-u, --username     Specify user name for session login."
 			echo
 			echo -e "-d, --directory    Specify container base directory as /path/to/base/directory containing /distribution/version"
@@ -840,6 +842,23 @@ display_stop_x11 () {
 	fi
 }
 
+display_clean_vnc () {
+
+	if [ -d "${HOME}" ]
+	then
+		rm -r -f "${HOME}"/.ICE*
+		rm -r -f "${HOME}"/.X11*
+		rm -r -f "${HOME}"/.Xauth*
+	fi
+
+	if [ -d "${TMPDIR}" ]
+	then
+		rm -r -f "${TMPDIR}"/.ICE*
+		rm -r -f "${TMPDIR}"/.X11*
+		rm -r -f "${TMPDIR}"/.Xauth*
+	fi
+}
+
 display_geometry_vnc () {
 
 	frobulator.msg "Select geometry or input [c]ustom properties:"
@@ -982,6 +1001,104 @@ display_geometry_vnc () {
 	printf '\n'
 }
 
+display_handle_vnc () {
+
+	# values #
+
+	values_list=(
+		selection
+	)
+
+	# handle user input for values_list
+
+	frobulator_return=()
+
+	if [ -f "${HOME}"/.vnc/selection ]
+	then
+		selection=$(cat "${HOME}"/.vnc/selection)
+	else
+		frobulator.input ${values_list[@]}
+	fi
+
+	eval ${frobulator_return[@]}
+
+	# check selection input against selection list
+
+	while true
+	do
+		# range check:
+		# selection input must be in provided range and an integer
+
+		if [[ "${selection}" -lt 1           ]] || \
+		   [[ "${selection}" -gt "${number}" ]] || \
+		   [[ ! "${selection}" =~ ^[0-9]+$   ]]
+		then
+			echo
+			frobulator.err "Invalid selection:"
+			echo
+
+			frobulator.wrn "Select geometry [ 1 - ${number} ] or input [c]ustom properties."
+			echo
+
+			frobulator.ipt "Selection:"
+
+			frobulator.read selection
+		else
+			break
+		fi
+
+		if [[ "${selection}" = [cC] ]]
+		then
+			selection=custom
+
+			break
+		fi
+	done
+
+	unset geometry
+
+	# integer check:
+	# handle numerical selection
+
+	if [[ "${selection}" =~ ^[0-9]+$ ]]
+	then
+		i=$(( ${selection} ))
+		i=$(( $i * 3 ))
+
+		format="${geometries[$i-3]}"
+		width="${geometries[$i-2]}"
+		height="${geometries[$i-1]}"
+		geometry="${width}x${height}"
+	fi
+
+	# handle custom selection
+
+	if [[ "${selection}" = "custom" ]]
+	then
+		frobulator.fwd "Setting custom properties${marker_elp}"
+		echo
+
+		frobulator.ipt "Set width" "[ pixels ]"
+
+		frobulator.read width
+
+		frobulator.ipt "Set height" "[ pixels ]"
+
+		frobulator.read height
+
+		frobulator.ipt "Set display number" "[ e.g. 1 ]"
+
+		frobulator.read display
+
+		format="Custom"
+		geometry="${width}x${height}"
+
+		DISPLAY=":${display}"
+		DISPLAY_NUMBER="${DISPLAY/:/}"
+		PORT="590${DISPLAY_NUMBER}"
+	fi
+}
+
 display_server_vnc () {
 
 	load_command+="x11vnc"
@@ -1034,16 +1151,16 @@ display_start_vnc () {
 			then
 				# hide if selection file is present
 
-				display_geometry > "${sink}" 2>&1
+				display_geometry_vnc > "${sink}" 2>&1
 			else
 				# show if selection file is not present
 
-				display_geometry
+				display_geometry_vnc
 			fi
 
 			# handle vnc selections
 
-			display_handle
+			display_handle_vnc
 
 		fi
 }
@@ -1061,6 +1178,7 @@ display_framebuffer_vnc () {
 
 	${framebuffer_command} > "${sink}" 2>&1 &
 }
+
 
 display_load_vnc () {
 
@@ -1089,10 +1207,70 @@ display_load_vnc () {
 
 	# start vnc display framebuffer
 
-	display_framebuffer
+	display_framebuffer_vnc
 }
+
+display_password_vnc () {
+
+	# values #
+
+	values_list=(
+		display_password
+	)
+
+	# handle user input for values_list
+
+	frobulator_return=()
+
+	frobulator.input ${values_list[@]}
+
+	eval ${frobulator_return[@]}
+
+	# hash password  using 'vncpasswd' and store it
+
+	frobulator.fwd "Setting password${marker_elp}"
+	echo
+
+	echo "${display_password}" | vncpasswd -f > "${HOME}"/.vnc/passwd
+
+	frobulator.scs "Password changed."
+	echo
+}
+
 display_stop_vnc () {
 
+	# look for corresponding server process:
+	# stop display server and clean runtime files
+
+	if [[ $(pidof Xvfb) ]]
+	then
+		# framebuffer
+
+		kill -9 $(pidof Xvfb)  > "${sink}" 2>&1 &
+
+		frobulator.process "Stopping display framebuffer"
+
+	elif [[ $(pidof x11vnc) ]]
+	then
+		# vnc
+
+		x11vnc -R stop > "${sink}" 2>&1 &
+
+		frobulator.process "Stopping display server"
+
+		# clean display server runtime files
+
+		wait
+
+		display_clean_vnc
+
+	else
+		frobulator.wrn "No active display server detected."
+		echo
+
+		frobulator.fwd "Exiting${marker_elp}"
+		echo
+	fi
 }
 
 if [ "${option}" = "start" ]
