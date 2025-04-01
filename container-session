@@ -58,6 +58,10 @@ do
 			shift
 		;;
 
+		-p|--password)
+			option="password"
+		;;
+
 		-u|--username)
 			option="username"
 			user_name="${2}"
@@ -773,9 +777,9 @@ container_focus () {
 	frobulator.silence "${application}" &
 }
 
-display_start_x11 () {
+display_server_x11 () {
 
-	# start display server and activity
+	# start x11 display server
 
 	GALLIUM_DRIVER="${TERMUX_X11_DRIVER}"
 
@@ -799,10 +803,11 @@ display_start_x11 () {
 	else
 		frobulator.silence "${TERMUX_X11_SERVER} ${DISPLAY}" &
 	fi
-
-
 }
+
 display_intent_x11 () {
+
+	# start x11 display activity
 
 	frobulator.fwd "Opening display${marker_elp}"
 	echo
@@ -816,6 +821,13 @@ display_intent_x11 () {
 	intent_command+=" -n ${display_activity}"
 
 	frobulator.silence "${intent_command}" &
+}
+
+display_start_x11 () {
+
+	display_server_x11
+
+	display_intent_x11
 }
 
 display_stop_x11 () {
@@ -1103,6 +1115,77 @@ display_selection_vnc () {
 	fi
 }
 
+display_password_vnc () {
+
+	# values #
+
+	values_list=(
+		display_password
+	)
+
+	# handle user input for values_list
+
+	frobulator_return=()
+
+	frobulator.input ${values_list[@]}
+
+	eval ${frobulator_return[@]}
+
+	# hash password  using 'vncpasswd' and store it
+
+	frobulator.fwd "Setting password${marker_elp}"
+	echo
+
+	echo "${display_password}" | vncpasswd -f > "${HOME}"/.vnc/passwd
+
+	frobulator.scs "Password changed."
+	echo
+}
+
+display_framebuffer_vnc () {
+
+	frobulator.fwd "Generating framebuffer${marker_elp}"
+	echo
+
+	unset framebuffer_command
+
+	framebuffer_command+="Xvfb"
+	framebuffer_command+=" -screen ${DISPLAY_NUMBER}"
+	framebuffer_command+=" ${geometry}x24"
+
+	${framebuffer_command} > "${sink}" 2>&1 &
+}
+
+display_load_vnc () {
+
+	# make selection available for automatic start:
+	# verify user id - do not write selection when 'root' user is logged in
+
+	if [[ $(id -u -n) = "root" ]]
+	then
+		:
+	else
+		# integer check:
+		# do not write non numerical values to file
+
+		if [[ "${selection}" =~ ^[0-9]+$ ]]
+		then
+			if [ ! -d "${HOME}"/.vnc ]
+			then
+				mkdir -p "${HOME}"/.vnc
+			fi
+
+			echo "${selection}" > "${HOME}"/.vnc/selection
+			echo "${format}"    > "${HOME}"/.vnc/format
+			echo "${geometry}"  > "${HOME}"/.vnc/geometry
+		fi
+	fi
+
+	# start vnc display framebuffer
+
+	display_framebuffer_vnc
+}
+
 display_server_vnc () {
 
 	load_command+="x11vnc"
@@ -1150,7 +1233,7 @@ display_intent_vnc () {
 
 display_start_vnc () {
 
-		if [[ $(pidof x11vnc) ]]
+		if [[ $(pgrep -f  x11vnc) ]]
 		then
 			:
 		else
@@ -1172,78 +1255,13 @@ display_start_vnc () {
 			display_selection_vnc
 
 		fi
-}
-
-display_framebuffer_vnc () {
-
-	frobulator.fwd "Generating framebuffer${marker_elp}"
-	echo
-
-	unset framebuffer_command
-
-	framebuffer_command+="Xvfb"
-	framebuffer_command+=" -screen ${DISPLAY_NUMBER}"
-	framebuffer_command+=" ${geometry}x24"
-
-	${framebuffer_command} > "${sink}" 2>&1 &
-}
 
 
-display_load_vnc () {
+		display_load_vnc
 
-	# make selection available for automatic start:
-	# verify user id - do not write selection when 'root' user is logged in
+		display_server_vnc
 
-	if [[ $(id -u -n) = "root" ]]
-	then
-		:
-	else
-		# integer check:
-		# do not write non numerical values to file
-
-		if [[ "${selection}" =~ ^[0-9]+$ ]]
-		then
-			if [ ! -d "${HOME}"/.vnc ]
-			then
-				mkdir -p "${HOME}"/.vnc
-			fi
-
-			echo "${selection}" > "${HOME}"/.vnc/selection
-			echo "${format}"    > "${HOME}"/.vnc/format
-			echo "${geometry}"  > "${HOME}"/.vnc/geometry
-		fi
-	fi
-
-	# start vnc display framebuffer
-
-	display_framebuffer_vnc
-}
-
-display_password_vnc () {
-
-	# values #
-
-	values_list=(
-		display_password
-	)
-
-	# handle user input for values_list
-
-	frobulator_return=()
-
-	frobulator.input ${values_list[@]}
-
-	eval ${frobulator_return[@]}
-
-	# hash password  using 'vncpasswd' and store it
-
-	frobulator.fwd "Setting password${marker_elp}"
-	echo
-
-	echo "${display_password}" | vncpasswd -f > "${HOME}"/.vnc/passwd
-
-	frobulator.scs "Password changed."
-	echo
+		display_intent_vnc
 }
 
 display_stop_vnc () {
@@ -1251,15 +1269,15 @@ display_stop_vnc () {
 	# look for corresponding server process:
 	# stop display server and clean runtime files
 
-	if [[ $(pidof Xvfb) ]]
+	if [[ $(pgrep -f  Xvfb) ]]
 	then
 		# framebuffer
 
-		kill -9 $(pidof Xvfb)  > "${sink}" 2>&1 &
+		pkill -f Xvfb  > "${sink}" 2>&1 &
 
 		frobulator.process "Stopping display framebuffer"
 
-	elif [[ $(pidof x11vnc) ]]
+	elif [[ $(pgrep -f  x11vnc) ]]
 	then
 		# vnc
 
@@ -1289,8 +1307,6 @@ then
 	# start display session
 
 	display_start_x11
-
-	display_intent_x11
 
 	# load session
 
