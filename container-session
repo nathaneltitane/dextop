@@ -800,6 +800,10 @@ display_start_x11 () {
 		frobulator.silence "${TERMUX_X11_SERVER} ${DISPLAY}" &
 	fi
 
+
+}
+display_intent_x11 () {
+
 	frobulator.fwd "Opening display${marker_elp}"
 	echo
 
@@ -1001,7 +1005,7 @@ display_geometry_vnc () {
 	printf '\n'
 }
 
-display_handle_vnc () {
+display_selection_vnc () {
 
 	# values #
 
@@ -1116,6 +1120,10 @@ display_server_vnc () {
 
 	${load_command} > "${sink}" 2>&1 &
 
+}
+
+display_intent_vnc () {
+
 	# explicit VNC viewer application to kill:
 	# used when vnc is stopped or restarted using vnc:// intent
 	# when launched via the activity manager
@@ -1137,6 +1145,7 @@ display_server_vnc () {
 	intent_command+=" -d vnc://${ADDRESS}:${PORT}"
 
 	frobulator.silence "${intent_command}"
+
 }
 
 display_start_vnc () {
@@ -1160,7 +1169,7 @@ display_start_vnc () {
 
 			# handle vnc selections
 
-			display_handle_vnc
+			display_selection_vnc
 
 		fi
 }
@@ -1262,7 +1271,9 @@ display_stop_vnc () {
 
 		wait
 
-		display_clean_vnc
+		display_clean_vnc &
+
+		frobulator.process "Removing display runtime files"
 
 	else
 		frobulator.wrn "No active display server detected."
@@ -1277,7 +1288,9 @@ if [ "${option}" = "start" ]
 then
 	# start display session
 
-	display_start
+	display_start_x11
+
+	display_intent_x11
 
 	# load session
 
@@ -1288,7 +1301,7 @@ if [ "${option}" = "stop" ]
 then
 	# stop display session
 
-	display_stop
+	display_stop_x11
 fi
 
 if [ "${option}" = "username" ]
@@ -1325,7 +1338,7 @@ if [ "${option}" = "focus" ]
 then
 	# start display session
 
-	display_start
+	display_start_x11
 
 	# load application
 
