@@ -85,17 +85,19 @@ do
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} -o [Display Server] | -x | -u [User Name] | -d [Directory] | -f [Application] | [OPTION]"
+			echo -e "Usage: ${script} -o [Display Server] | -x | -l | -u [User Name] | -d [Directory] | -f [Application] | [OPTION]"
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-o, --start          Start display session server."
-			echo -e "                     [ vnc ]"
-			echo -e "                     [ x11 ] [ Default ]"
+			echo -e "-o, --start        Start display session server."
+			echo -e "                   [ vnc ]"
+			echo -e "                   [ x11 ] [ Default ]"
 			echo
-			echo -e "-x, --stop           Stop display session server."
+			echo -e "-x, --stop         Stop display session server."
 			echo
-			echo -e "-p, --password       Generate display session password. [ vnc ]"
+			echo -e "-l, --list         List display session server(s) and parameters."
+			echo
+			echo -e "-p, --password     Generate display session password. [ vnc ]"
 			echo
 			echo -e "-u, --username     Specify user name for session login."
 			echo
@@ -120,7 +122,7 @@ do
 
 		*)
 			echo
-			echo -e "Usage: ${script} -o [Display Server] | -x | -u [User Name] | -d [Directory] | -f [Application] | [OPTION]"
+			echo -e "Usage: ${script} -o [Display Server] | -x | -l | -u [User Name] | -d [Directory] | -f [Application] | [OPTION]"
 			echo
 			echo -e "${script}: Unknown option '${1}'"
 			echo -e "Type './${script} --help' for help and usage information."
@@ -1082,7 +1084,7 @@ display_framebuffer_vnc () {
 	${framebuffer_command} > "${sink}" 2>&1 &
 }
 
-display_load_vnc () {
+display_initialize_vnc () {
 
 	# initilaize vnc session and parameters
 
@@ -1109,7 +1111,7 @@ display_load_vnc () {
 		fi
 	fi
 
-	# start vnc display framebuffer
+	# genrate vnc display framebuffer
 
 	display_framebuffer_vnc
 }
@@ -1136,7 +1138,6 @@ display_server_vnc () {
 }
 
 display_intent_vnc () {
-
 
 	# start vnc display activity
 
@@ -1169,35 +1170,40 @@ display_intent_vnc () {
 
 display_start_vnc () {
 
-		if [[ $(pgrep -f  x11vnc) ]]
+	if [[ $(pgrep -f  x11vnc) ]]
+	then
+		:
+	else
+		# handle display geometry selection
+
+		if [ -f "${HOME}"/.vnc/selection ]
 		then
-			:
+			# hide if selection file is present
+
+			display_geometry_vnc > "${sink}" 2>&1
 		else
-			# handle selections display
+			# show if selection file is not present
 
-			if [ -f "${HOME}"/.vnc/selection ]
-			then
-				# hide if selection file is present
-
-				display_geometry_vnc > "${sink}" 2>&1
-			else
-				# show if selection file is not present
-
-				display_geometry_vnc
-			fi
-
-			# handle vnc selections
-
-			display_selection_vnc
-
+			display_geometry_vnc
 		fi
 
+		# handle vnc selections
 
-		display_load_vnc
+		display_selection_vnc
 
-		display_server_vnc
+	fi
 
-		display_intent_vnc
+	# initialize vnc parameters
+
+	display_initialize_vnc
+
+	# start vnc display server
+
+	display_server_vnc
+
+	# load vnc viewer intent
+
+	display_intent_vnc
 }
 
 display_stop_vnc () {
@@ -1221,9 +1227,9 @@ display_stop_vnc () {
 
 		frobulator.process "Stopping display server"
 
-		# clean display server runtime files
-
 		wait
+
+		# clean display server runtime files
 
 		display_clean_vnc &
 
@@ -1317,6 +1323,61 @@ display_stop_x11 () {
 		frobulator.fwd "Exiting${marker_elp}"
 		echo
 	fi
+}
+
+display_list () {
+
+	if [[ "${display}" = [vV][nN][cC] ]]
+	then
+		display_server="x11vnc"
+
+		display_format=$(cat "${HOME}"/.vnc/format)
+		display_geometry=$(cat "${HOME}"/.vnc/geometry)
+		display_display=${DISPLAY}
+		display_process=$(pidof $(echo "${display_server}"))
+		display_port="${PORT}"
+	fi
+
+	if [[ "${display}" = [xX][1][1] ]]
+	then
+		display_server="app_process / com.termux.x11.Loader"
+
+		display_format="native"
+		display_geometry="native"
+		display_display=${DISPLAY}
+		display_process=$(pidof $(echo "${display_server}"))
+		display_port="default"
+	fi
+
+	if [[ $(pidof "${display_server}") ]]
+	then
+		frobulator.fwd "Listing session details${marker_elp}"
+		echo
+
+		display_format="${display_format}"
+		display_geometry="${display_geometry}"
+		display_display="${display_display}"
+		display_process="${display_process}"
+		display_port="${display_port}"
+	else
+		frobulator.wrn "No active servers detected."
+		echo
+
+		empty="N/A"
+
+		display_format="${empty}"
+		display_geometry="${empty}"
+		display_display="${empty}"
+		display_process="${empty}"
+		display_port="${empty}"
+	fi
+
+	frobulator.inf "Format"   "[ ${display_format} ]"
+	frobulator.inf "Geometry" "[ ${display_geometry} ]"
+	frobulator.inf "Display"  "[ ${display_display} ]"
+	frobulator.inf "Process"  "[ ${display_process} ]"
+	frobulator.inf "Port"     "[ ${display_port} ]"
+	echo
 }
 
 if [ "${option}" = "start" ]
