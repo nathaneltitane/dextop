@@ -208,11 +208,6 @@ then
 	frobulator.flag "${container}" "${HOME}"/.dextop dextop-container
 fi
 
-if [ -z "${update_item}" ]
-then
-	update_item="all"
-fi
-
 if [ "${option}" = "setup"       ] || \
    [ "${option}" = "environment" ]
 then
