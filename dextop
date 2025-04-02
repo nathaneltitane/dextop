@@ -501,6 +501,8 @@ reload_intent () {
 
 backup_intent () {
 
+	# handle user home directory backup
+
 	backup_name="dextop-backup"
 	backup_extension="tar.gz"
 
