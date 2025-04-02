@@ -481,6 +481,8 @@ update_intent () {
 		exit 1
 	fi
 
+	update_files_list=()
+
 }
 
 reload_intent () {
