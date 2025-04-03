@@ -1013,35 +1013,6 @@ fi
 
 if [ "${option}" = "update" ]
 then
-	if [[ "${update}" = [aA][lL][lL]      ]] || \
-	   [[ "${update_item}" = [aA][lL][lL] ]]
-	then
-		update="all"
-
-		frobulator.inf "Updating" "[ ${update} ]"
-		echo
-
-		frobulator.fwd "Updating${marker_elp}"
-		echo
-
-		dextop_intent
-
-		backgrounds_intent
-
-		interface_intent
-
-		utility_intent
-
-		additions_intent
-
-		shell_intent
-
-		"${HOME}"/.local/bin/termux-update
-
-		frobulator.cpt "Complete" "[ Update // ${update} ]"
-		echo
-	fi
-
 	if [[ "${update}" = [dD][eE][xX][tT][oO][pP] ]]
 	then
 		frobulator.inf "Updating" "[ ${update} ]"
