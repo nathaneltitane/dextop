@@ -93,7 +93,7 @@ All utilities created for, loaded, and used by Dextop contain a help argument: p
   - Use [ general ] ↴
 
     - Open Termux application:
-      - Automtic login enabled by default ↴
+      - Automatic login enabled by default ↴
         - BASH profile configured to bring up graphical session automatically:
           - Termux System [ green 'termux' prompt ]
 
@@ -140,7 +140,7 @@ it loads and links scripts, configuration files and utilities to enhance the And
 
 **All other scripts and utilities can also be edited or modified to benefit from a more customized experience.**
 
-**The Dextop project releases itself from any responibility regarding hardware failure or loss of data when doing so!**
+**The Dextop project releases itself from any responsibility regarding hardware failure or loss of data when doing so!**
 
 **Any modification of the Dextop setup routine, scripts or utilities implies the user is fully aware of potential hardware failure or breakage and/or loss of data, including the consequences of doing so:**
 **Any bug report that stems from such action will not be acknowledged and will be closed immediately!**
@@ -153,7 +153,7 @@ Dextop is developed using a Samsung Galaxy Note 20 Ultra, a Samsung Galaxy Tab S
 
 Dextop has been primarily optimized to run within/alongside Samsung's DeX, on mobile devices.
 
-Given the devices Dextop was developped on and made for, the **ARM64 V8a** architecture is the base for all compiled objects, binaries, libraries, utilities and all other installed or required packages for the project and is the implied architecture reference when stating 'modern android device'.
+Given the devices Dextop was developed on and made for, the **ARM64 V8a** architecture is the base for all compiled objects, binaries, libraries, utilities and all other installed or required packages for the project and is the implied architecture reference when stating 'modern android device'.
 
 ---
 
@@ -173,7 +173,7 @@ Once generated, it can be found under the user's home directory with the corresp
 
 Dextop can be compared to other very similar projects, though:
 
-- It provides a selection of the Debian and Ubunut distribution base images: known to be stable, popular and has tons of user-friendly knowledge bases.
+- It provides a selection of the Debian and Ubuntu distribution base images: known to be stable, popular and has tons of user-friendly knowledge bases.
 - It expands the installed base image to run **just like a normal PC!**
 - It **generates an actual user profile and prepares a functional home directory for the user to work in**, easily and securely.
 - It installs all the necessary applications and utilities to provide the user with the right experience.
@@ -197,15 +197,15 @@ Dextop links some of the modified utilities that have been patched under Termux 
 
 ### General requirements:
 
-**Do not install Google Play Store Packages: thay have not been maintained and are deprecated since November 2020.**
+**Do not install Google Play Store Packages: they have not been maintained and are deprecated since November 2020.**
 
-For the best possible experience, use the offical [GitHub Termux project released packages](https://github.com/termux/termux-app/releases), follow the links and recommendations below and make sure to have:
+For the best possible experience, use the official [GitHub Termux project released packages](https://github.com/termux/termux-app/releases), follow the links and recommendations below and make sure to have:
 
 - **A modern Android device equipped with a 64 bit ARM processor** (Android 7.0 or above: Termux limitation - Avoid Android 11/12/13 when and if possible: read more regarding the [Phantom Process Killer](https://issuetracker.google.com/issues/205156966))
-- **Medium to high speed internet connectivity** (wifi or other: for setup, updates and additional package downloads)
-- Approximately 4GB in free storage on the device for symmetric setup (Termux and distribution container)
-- A mouse (bluetooth or other)
-- A keyboard (bluetooth or other)
+- **Medium to high speed internet connectivity** (WiFi or other: for setup, updates and additional package downloads)
+- Approximately 4GB of free storage on the device for symmetric setup (Termux and distribution container)
+- A mouse (Bluetooth or other)
+- A keyboard (Bluetooth or other)
 - A power source (other than the battery, for extended work periods and performance requirements: Samsung DeX limitation)
 - A monitor (highly recommended for phones and low display density devices)
 
@@ -217,7 +217,7 @@ Users can choose in between a complete XFCE setup to get work done, or to keep t
 
 The 'console' option is intended for users who would like to experiment with Dextop or setup their own window manager (WM)/desktop environment (DE), utilities and preferences.
 
-The 'environemnt' option lets the user specify the desktop environment (DE) to be set up and used.
+The 'environment' option lets the user specify the desktop environment (DE) to be set up and used.
 
 Setup currently defaults to XFCE (being the only complete and functional environment suite) for both the Termux and container sides, when no argument is passed to the 'dextop' deployment script.
 
@@ -233,7 +233,7 @@ Such requirement is due to the Android user space runtime policy and limited har
 
 **Dextop only loads applications as needed: this helps keep a minimal footprint and the host device running as smooth as possible!**
 
-Music, mail, web browsing and gaming activities should preferably be taken care of using native Android applications as they interface with the device's hardware and provide acceleration and other desirable features. See additons.
+Music, mail, web browsing and gaming activities should preferably be taken care of using native Android applications as they interface with the device's hardware and provide acceleration and other desirable features. See additions.
 
 [![dextop-additions](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop-additions.png)](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop-additions.png)
 
@@ -249,18 +249,18 @@ The utility in charge of mounting and linking these entries for your convenience
 
 Example:
 
-/storage/self/primary is the default location for tha Android internal user memory (also known as the 'user data' and/or 'user home' location).
+/storage/self/primary is the default location for the Android internal user memory (also known as the 'user data' and/or 'user home' location).
 Appending 'internal' to a .storage file for that directory via ```echo internal > /storage/self/primary/.storage``` will then result in having accessible mounts linked under ```${PREFIX}/media``` as ```internal -> /storage/self/primary```
 
 [![dextop-storage](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop-storage.png)](https://raw.githubusercontent.com/nathaneltitane/dextop/master/dextop-storage.png)
 
-If not present, the utility will simply default to linking and making those mounts acessible under ```${PREFIX}/media``` through their respective labels or default UUIDs.
+If not present, the utility will simply default to linking and making those mounts accessible under ```${PREFIX}/media``` through their respective labels or default UUIDs.
 
 Note:
 
-Chrome OS absed system users running Android containers (ARC) will want to add a ```.storage```` file containing 'Home' under their 'My files' directory. This will ensure that the 'termux-storage' link argument properly locates, populates and links all standard directories through the various container instances present on the device.
+Chrome OS based system users running Android containers (ARC) will want to add a ```.storage```` file containing 'Home' under their 'My files' directory. This will ensure that the 'termux-storage' link argument properly locates, populates and links all standard directories through the various container instances present on the device.
 
-Effectively, the base ```${HOME}``` location is now shared accross all containers as a single, unified directory.
+Effectively, the base ```${HOME}``` location is now shared across all containers as a single, unified directory.
 
 ### Interface:
 
@@ -341,7 +341,7 @@ To get Dextop set up, install the following packages on the host Android device:
 - [Termux](https://github.com/termux/termux-app/releases/download/v0.118.0/termux-app_v0.118.0+github-debug_arm64-v8a.apk "Termux by Fredrik Fornwall")
 - [Termux:X11](https://github.com/termux/termux-x11/releases/download/nightly/app-arm64-v8a-debug.apk "Termux:X11 by Twaik Yont")
 
-Optionally, a VNC viewer application with full screen or immersive capabillities can also be installed alongside Termux:X11, such as:
+Optionally, a VNC viewer application with full screen or immersive capabilities can also be installed alongside Termux:X11, such as:
 
 - [Remotix](https://play.google.com/store/apps/details?id=com.nulana.android.remotix "Remotix Remote Desktop by Nulana")
 - [VNC Viewer ](https://play.google.com/store/apps/details?id=com.realvnc.viewer.android "VNC Viewer by RealVNC Ltd.")
@@ -379,7 +379,7 @@ Press 'Install' when prompted during the setup to install the display server com
 
 The 'termux-additions' utility is part of the newest deployment and sets up the required Android packages to interface with the main Termux application, including Termux API, Termux GUI and Termux:X11.
 
-These additions are fetched directly from their respective Termux project GitHub releases page: any previously installed version should be removed to not inherit any conflicting packaege signatures that may contribute to unexpected issues.
+These additions are fetched directly from their respective Termux project GitHub releases page: any previously installed version should be removed to not inherit any conflicting package signatures that may contribute to unexpected issues.
 
 The display server, Termux:X11 will interface with the required 'termux-x11' package and provides Dextop with a native display solution on the host device, using the available DPI settings and running it through the hardware platform (with possibility of acceleration when it is compiled and enabled).
 
@@ -403,7 +403,7 @@ To access the container housing distribution that has been selected (recognizabl
 container-session -o <display server> -u termux
 ```
 
-To start the session using the vnc display server (x11vnc) and restart the display output, paste or type:
+To start the session using the VNC display server (x11vnc) and restart the display output, paste or type:
 
 ```
 container-session -o vnc
@@ -423,7 +423,7 @@ Other users can be added by using the 'container-user' utility.
 
 When accessing the container for the very first time, a one-time configuration runs on login to set up the keyboard layout, locales and timezone preferences.
 
-If using the vnc display server (x11vnc), the vnc session manager requires the user to select a preferred display resolution for the best display experience:
+If using the VNC display server (x11vnc), the VNC session manager requires the user to select a preferred display resolution for the best display experience:
 The selection is saved under ```"${HOME}"/.vnc/selection``` and the login routine uses it to start the VNC server and viewer automatically for your convenience!
 
 The next login will automatically launch the session using the previously chosen selection. To override the selection, paste or type:
@@ -434,13 +434,13 @@ container-session -n vnc
 
 ### Session stop:
 
-To stop the active session using the vnc display server by halting the vnc display server, paste or type:
+To stop the active session using the VNC display server by halting the VNC display server, paste or type:
 
 ```
 container-session -x
 ```
 
-To log out, press Ctrl+D or type ```'logout'``` or ```'exit'``` for the session to immediately stop the vnc server and exit:
+To log out, press Ctrl+D or type ```'logout'``` or ```'exit'``` for the session to immediately stop the VNC server and exit:
 
 Depending on the shell level in use at the time the command is executed, the container exits back to the Termux shell (recognizable by the green username prompt), or to the Android home screen.
 
@@ -448,7 +448,7 @@ Depending on the shell level in use at the time the command is executed, the con
 
 As the project evolves, certain utilities may change, either slightly or significantly and some new utilities may be introduced into the Dextop ecosystem.
 
-To ensure Dextop runs as expected, and wth the latest features in tow, proceed as follows according to the existing setup:
+To ensure Dextop runs as expected, and with the latest features in tow, proceed as follows according to the existing setup:
 
 **For new installations, run the normal setup routine and follow instructions as they appear (refer to the setup section).**
 
@@ -483,7 +483,7 @@ To update all shell session and experience scripts, paste or type:
 curl -s -L run.dxtp.app > dextop && bash dextop -u shell
 ```
 
-To simplify the overall version update process, the user can also decide to update the main deployment script and all dependant utilities. To do so, paste or type:
+To simplify the overall version update process, the user can also decide to update the main deployment script and all dependent utilities. To do so, paste or type:
 
 ```
 curl -s -L run.dxtp.app > > "${HOME}"/.local/bin/dextop && bash dextop -u all
@@ -513,7 +513,7 @@ If for whatever reason an update fails due to an error because of deployment scr
 curl -s -L run.dxtp.app > "${HOME}"/.local/bin/dextop && bash dextop -u utility all
 ```
 
-Once the latest version of Dextop is deployed, configuring it to fetch all the latest and relevant utilities is possiblewhen automatic updates on login are enabled.
+Once the latest version of Dextop is deployed, configuring it to fetch all the latest and relevant utilities is possible when automatic updates on login are enabled.
 
 Automatic utility updates on login can be enabled as follows:
 
