@@ -227,7 +227,14 @@ Setup currently defaults to XFCE (being the only complete and functional environ
 
 In general, and for other types of setup, turning compositing off allows for the best possible performance and experience in accordance to current Android system and security limitations.
 
-Such requirement is due to the Android user space runtime policy and limited hardware access: hardware acceleration has been added through 'virgl' and is only available within the proot container side of Dextop.
+Such requirement is due to the Android user space runtime policy and limited hardware access.
+
+
+### Acceleration:
+
+Hardware acceleration has been added through the Virtual GL 3D GPU stack 'virgl' and is only available within the proot container side of Dextop.
+
+This method currently leverages the 'gallium' open-source driver implementation to up the performance and make applications that require it much more responsive and usable.
 
 ### Activities:
 
