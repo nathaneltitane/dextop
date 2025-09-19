@@ -2,7 +2,7 @@
 
 [![Donate](https://img.shields.io/badge/Paypal-2f343f.svg?style=for-the-badge&logo=paypal&label=Donate)](https://www.paypal.com/donate?hosted_button_id=ZW3CDCANHJCWJ)
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 03-16-2024 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 09-19-2025 ]
 
 ---
 
@@ -227,7 +227,7 @@ Setup currently defaults to XFCE (being the only complete and functional environ
 
 In general, and for other types of setup, turning compositing off allows for the best possible performance and experience in accordance to current Android system and security limitations.
 
-Such requirement is due to the Android user space runtime policy and limited hardware access: there is no graphics hardware acceleration available - the container graphics are emulated and run using LLVM.
+Such requirement is due to the Android user space runtime policy and limited hardware access: hardware acceleration has been added through 'virgl' and is only available within the proot container side of Dextop.
 
 ### Activities:
 
@@ -611,7 +611,7 @@ Should you suspect any issues or errors, please provide a copy of those files wh
 
 ---
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 03-16-2024 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 09-19-2025 ]
 
 ### Enjoying Dextop? Buy me a coffee to show your appreciation!
 
