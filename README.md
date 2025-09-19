@@ -232,9 +232,11 @@ Such requirement is due to the Android user space runtime policy and limited har
 
 ### Acceleration:
 
-Hardware acceleration has been added through the Virtual GL 3D GPU stack 'virgl' and is only available within the proot container side of Dextop.
+Dextop supports hardware-accelerated graphics through the VirtualGL 3D GPU stack ('virgl'), providing a major performance boost for graphical applications.
 
-This method currently leverages the 'gallium' open-source driver implementation to up the performance and make applications that require it much more responsive and usable.
+This feature is only available on the PRoot container side of Dextop, where the environment is fully isolated yet flexible enough to expose virtualized GPU capabilities.
+
+This implementation is powered by the Gallium open-source driver framework, which serves as a backend for multiple graphics APIs. By using Gallium in combination with VirGL, Dextop is able to translate and offload 3D rendering tasks more efficiently, making applications that depend on OpenGL much more responsive, smoother, and closer to native performance.
 
 ### Activities:
 
