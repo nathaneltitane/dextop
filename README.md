@@ -12,7 +12,7 @@
 
 - Fix 'container-session' application/focus mode:
   - Show default if application not found or empty
-- Prettify Prompt messaging for connect//disconnect
+- Prettify prompt messaging for connect/disconnect
 
 03-15-2025 ↴
 
