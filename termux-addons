@@ -1,0 +1,253 @@
+#!/bin/bash
+
+# dependencies /////////////////////////////////////////////////////////////////
+
+if [[ -z $(command -v frobulator) ]]
+then
+	if [[ $(id -u -n) = "root" ]]
+	then
+		SUDO_HOME=/root
+
+		USER="${SUDO_USER}"
+
+		HOME=/home/"${USER}"
+	fi
+
+	if [[ -z $(command -v curl) ]]
+	then
+		yes | apt-get install curl
+	fi
+
+	if [ ! -d "${HOME}"/.local/bin ]
+	then
+		mkdir -p "${HOME}"/.local/bin
+	fi
+
+	curl -s -L get.frbltr.app > "${HOME}"/.local/bin/frobulator
+
+	chmod +x "${HOME}"/.local/bin/frobulator
+fi
+
+. "${HOME}"/.local/bin/frobulator
+
+# script ///////////////////////////////////////////////////////////////////////
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version //////////////////////////////////////////////////////////////////////
+
+version="08-11-2024"
+
+# usage ////////////////////////////////////////////////////////////////////////
+
+while (($#))
+do
+	case "${1}"
+	in
+		-s|--selection)
+			option="selection"
+			selection="${2}"
+
+			if [ "${selection}" = "addon" ]
+			then
+				addon="${3}"
+
+				shift
+			fi
+
+			shift
+
+		;;
+
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} -s [Selection Type] [Addon Name] | [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-s, --selection    Update application packages and utilities."
+			echo
+			echo -e "                   [ all ]"
+			echo -e "                   [ addon ]"
+			echo
+			echo -e "-h, --help         Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version // ${version} ]"
+			echo
+
+			exit
+		;;
+
+		"")
+			# handle empty argument:
+			# use default values specified in script
+
+			:
+		;;
+
+		*)
+			echo
+			echo -e "Usage: ${script} -s [Selection Type] [Addon Name] | [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+
+		;;
+
+		esac
+
+	shift
+
+done
+
+# prompt ///////////////////////////////////////////////////////////////////////
+
+frobulator.script "Setting up ${script#*-}"
+
+# variables ////////////////////////////////////////////////////////////////////
+
+# defaults /////////////////////////////////////////////////////////////////////
+
+# functions ////////////////////////////////////////////////////////////////////
+
+install_intent () {
+
+	# process addon package installtion
+
+	addon="package-termux-${addon}.apk"
+
+	frobulator.download get.trmnl.me "${PREFIX}"/tmp "${addon}"
+
+	open_intent "${PREFIX}"/tmp/"${addon}"
+
+	frobulator.countdown 10 "Installing" "[ ${addon} ]"
+}
+
+addon_intent () {
+
+	# load termux addons
+
+	addons_list+=(
+		api
+		gui
+		styling
+		tasker
+		x11
+	)
+
+	if [[ "${option}" = "selection" ]]
+	then
+		if [[ ${addons_list[@]} =~ "${addon}" ]]
+		then
+			install_intent
+
+		elif [[ "${addon}" = "all" ]]
+		then
+			for addon in ${addons_list[@]}
+			do
+				install_intent
+
+				frobulator.file "${HOME}"/.dextop termux-addon-"${addon}"
+			done
+
+			frobulator.file "${HOME}"/.dextop termux-addons
+
+		else
+			frobulator.err "Unknown addon name" "[ '${addon}' ]"
+			echo
+
+			frobulator.fwd "Listing known addons${marker_elp}"
+			echo
+
+			frobulator.timeout
+
+			IFS=$'\n'
+
+			printf "${marker_nul} %s\n" ${utilities_list[@]}
+
+			echo
+
+			IFS=''
+
+			frobulator.msg "Review utility name spelling and try again."
+			echo
+
+			frobulator.inf "Update all known utilities using 'all' argument."
+			echo
+
+			exit 1
+		fi
+	fi
+
+	addons_list=()
+}
+
+open_intent () {
+
+	open_command=()
+
+	open_command+=(am broadcast)
+	open_command+=(--user 0)
+	open_command+=(-a android.intent.action.VIEW)
+	open_command+=(-n com.termux/com.termux.app.TermuxOpenReceiver)
+	open_command+=(-d ${@})
+
+	frobulator.silence "${open_command[@]}"
+}
+
+clean () {
+
+	rm					\
+		--recursive		\
+		--force			 "${PREFIX}"/tmp/*.apk
+}
+
+trap 'clean' EXIT
+
+# notice
+
+frobulator.inf "This utility sets up Termux project addons:"
+frobulator.nul "The addons are fetched directly from their respective GitHub project release pages."
+echo
+
+frobulator.wrn "Enable 'Install unknown apps' permission for Termux and all other companion applications:"
+frobulator.nul "Settings > Security and Privacy > Install unknown apps > Termux[:Application]"
+echo
+
+frobulator.ins "Select 'Package Installer' when prompted to proceed."
+echo
+
+frobulator.separate
+
+frobulator.ask "Install Termux addons?"
+
+frobulator.read reply
+
+if [[ "${reply}" = [yY]         ]] || \
+   [[ "${reply}" = [yY][eE][sS] ]]
+then
+	addon="all"
+
+	frobulator.inf "Setting up all Termux addon packages."
+	echo
+	
+	frobulator.fwd "Installing${marker_elp}"
+	echo
+
+else
+	frobulator.wrn "X11 server sessions require Termux:X11 to be installed."
+	echo
+
+	frobulator.inf "Restart this utility to install the companion application"
+	frobulator.nul "or fetch the package manually from the project release page."
+	echo
+
+	exit
+fi
+
+addon_intent
+
+frobulator.countdown 5 "Continuing" "[ ${script} ]"

@@ -1,0 +1,348 @@
+#!/bin/bash
+
+# dependencies /////////////////////////////////////////////////////////////////
+
+if [[ -z $(command -v frobulator) ]]
+then
+	if [[ $(id -u -n) = "root" ]]
+	then
+		 SUDO_HOME=/root
+
+		 USER="${SUDO_USER}"
+
+		 HOME=/home/"${USER}"
+	fi
+
+	if [[ -z $(command -v curl) ]]
+	then
+		 yes | apt-get install curl
+	fi
+
+	if [ ! -d "${HOME}"/.local/bin ]
+	then
+		 mkdir -p "${HOME}"/.local/bin
+	fi
+
+	curl -s -L get.frbltr.app > "${HOME}"/.local/bin/frobulator
+
+	chmod +x "${HOME}"/.local/bin/frobulator
+fi
+
+. "${HOME}"/.local/bin/frobulator
+
+# script ///////////////////////////////////////////////////////////////////////
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version //////////////////////////////////////////////////////////////////////
+
+version="06-22-2024"
+
+# usage ////////////////////////////////////////////////////////////////////////
+
+while (($#))
+do
+	case "${1}"
+	in
+		-l|--link)
+			option="link"
+		;;
+
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} -c | -e [Environment] | -t | -n | -b | -u [Update Type] [Utility Name] | [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-l, --link    Link and unify storage directories."
+			echo
+			echo -e "-h, --help          Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version // ${version} ]"
+			echo
+
+			exit
+		;;
+
+		"")
+			# handle empty argument:
+			# use default values specified in script
+
+			:
+		;;
+
+		*)
+			echo
+			echo -e "Usage: ${script} -c | -e [Environment] | -t | -n | -b | -u [Update] [Name] | [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+
+		;;
+
+		esac
+
+	shift
+
+done
+
+# prompt ///////////////////////////////////////////////////////////////////////
+
+frobulator.script "Setting up ${script#*-}"
+
+# variables ////////////////////////////////////////////////////////////////////
+
+# defaults /////////////////////////////////////////////////////////////////////
+
+# functions ////////////////////////////////////////////////////////////////////
+
+storage_intent () {
+
+	storage_command=()
+
+	storage_command+=(am broadcast)
+	storage_command+=(--user 0)
+	storage_command+=(-e com.termux.app.reload_style storage)
+	storage_command+=(-a com.termux.app.reload_style com.termux)
+
+	frobulator.silence "${storage_command[@]}"
+}
+
+storage_directories () {
+
+	# generate home directory structure
+
+	directories_list+=(
+		Desktop
+		Documents
+		Downloads
+		Music
+		Pictures
+		Public
+		Templates
+		Videos
+	)
+
+	frobulator.directory "${base_directory}" ${directories_list[@]}
+
+	directories_list=()
+}
+
+# verify termux storage directory existence
+
+if [ ! -f "${HOME}"/.dextop/dextop-termux-storage ]
+then
+	if [ ! -d "${HOME}"/storage ]
+	then
+		# does not exist:
+		# enable storage permissions: requires user touch input
+
+		frobulator.wrn "User permission required to access storage on this device:"
+		frobulator.nul "Both internal and external storage locations are made available."
+		echo
+
+		frobulator.inf "Storage is also made accessible through container."
+		echo
+
+		frobulator.ins "Select 'Allow' when prompted to proceed."
+		echo
+
+		frobulator.separate
+
+		# storage permissions dialog
+
+		storage_intent
+
+		frobulator.countdown 5 "Continuing" "[ ${script} ]"
+
+	else
+		# exists:
+		# proceed with setup
+
+		frobulator.scs "Storage directory detected" "[ "${HOME}" ]"
+		echo
+
+		frobulator.fwd "Continuing${marker_elp}"
+		echo
+	fi
+
+	frobulator.file "${HOME}"/.dextop dextop-termux-storage
+fi
+
+directories_list=(
+	"${PREFIX}"/media
+)
+
+for directory in ${directories_list[@]}
+do
+	if [ -d "${directory}" ]
+	then
+		for item in "${directory}"/*
+		do
+			frobulator.delete "${item}"
+		done
+	fi
+done
+
+directories_list=()
+
+# generate links
+
+frobulator.fwd "Setting up storage${marker_elp}"
+echo
+
+# link primary/internal android storage
+
+frobulator.fwd "Linking${marker_elp}"
+echo
+
+directories_list=(
+	"${PREFIX}"/media
+)
+
+if [ -d /storage/self/primary ]
+then
+	for directory in ${directories_list[@]}
+	do
+		frobulator.link /storage/self "${directory}" primary Android
+	done
+fi
+
+directories_list=()
+
+# link external storage
+
+# use /proc/mounts to detect mounted media:
+# circumvent /storage access issues and DAC policy (Android 11+)
+
+commands_list=(
+	$(cat /proc/mounts | sed -r '/[A0-Z9]{4}[-][A0-Z9]{4}/!d' | grep '/storage' | cut -d ' ' -f 2)
+	$(cat /proc/mounts | sed -r '/[A0-Z9]{40}/!d' | grep '/storage' | cut -d ' ' -f 2)
+)
+
+# set IFS
+
+IFS=$'\n'
+
+for command in ${commands_list[@]}
+do
+	read -r -a storage_mounts_list <<< ${command}
+
+	for storage_mount in ${storage_mounts_list[@]}
+	do
+		 storage_paths_list+=("${storage_mount}")
+	done
+done
+
+if [ -n "${#storage_paths_list[@]}" ]
+then
+	for storage_path in ${storage_paths_list[@]}
+	do
+		storage_uuid="${storage_path/\/storage\//}"
+
+		if [ -f "${storage_path}"/.storage ]
+		then
+			storage_label=$(cat ${storage_path}/.storage)
+		else
+			frobulator.wrn "No storage identifier found" "[ ${storage_uuid} ]"
+			echo
+			
+			frobulator.inf "Using mounts UUID for identification"
+			echo
+			
+			frobulator.fwd "Proceeding${marker_elp}"
+			echo
+		fi
+
+		frobulator.scs "Storage media detected" "[ ${storage_uuid} ]"
+		echo
+
+		if [ ! -f "${PREFIX}"/media/"${storage_label}" ]
+		then
+			frobulator.link /storage "${PREFIX}"/media "${storage_uuid}" "${storage_label}"
+		fi
+
+	done
+
+else
+	storage_uuid="N/A"
+
+	frobulator.err "No storage media detected" "[ ${storage_uuid} ]"
+	echo
+
+	frobulator.fwd "Continuing${marker_elp}"
+	echo
+fi
+
+commands_list=()
+
+# reset IFS
+
+IFS=''
+
+# options
+
+if [[ "${option}" = "link" ]]
+then
+	# link and unify home directory structure:
+	# use  'Home' .storage label indicator
+
+	if [ -d "${PREFIX}"/media/[hH][oO][mM][eE] ]
+	then
+		base_directory=("${PREFIX}"/media/[hH][oO][mM][eE])
+	fi
+
+	storage_directories
+
+	# set IFS
+
+	IFS=$'\n'
+
+	directories_list=(
+		$(ls "${base_directory}")
+	)
+
+	for directory in ${directories_list[@]}
+	do
+		read -r -a links_list <<< ${directory}
+
+		if [[ -d "${HOME}"/"${directory}" ]]
+		then
+			frobulator.delete "${HOME}" "${directory}"
+		fi
+
+		if [[ -L "${HOME}"/"${directory}" ]]
+		then
+			break
+		fi
+
+		frobulator.link "${base_directory}" "${HOME}" ${links_list[@]}
+
+		links_list=()
+	done
+
+	directories_list=()
+
+	# reset IFS
+
+	IFS=''
+
+else
+
+	base_directory="${HOME}"
+
+	storage_directories
+fi
+
+# remove existing termux storage references
+
+if [ -d "${HOME}"/storage ]
+then
+	frobulator.fwd "Cleaning up${marker_elp}"
+	echo
+
+	frobulator.delete "${HOME}" storage
+fi

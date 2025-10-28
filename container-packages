@@ -1,0 +1,272 @@
+#!/bin/bash
+
+# dependencies /////////////////////////////////////////////////////////////////
+
+if [[ -z $(command -v frobulator) ]]
+then
+	if [[ $(id -u -n) = "root" ]]
+	then
+		SUDO_HOME=/root
+
+		USER="${SUDO_USER}"
+
+		HOME=/home/"${USER}"
+	fi
+
+	if [[ -z $(command -v curl) ]]
+	then
+		yes | apt-get install curl
+	fi
+
+	if [ ! -d "${HOME}"/.local/bin ]
+	then
+		mkdir -p "${HOME}"/.local/bin
+	fi
+
+	curl -s -L get.frbltr.app > "${HOME}"/.local/bin/frobulator
+
+	chmod +x "${HOME}"/.local/bin/frobulator
+fi
+
+. "${HOME}"/.local/bin/frobulator
+
+# script ///////////////////////////////////////////////////////////////////////
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version //////////////////////////////////////////////////////////////////////
+
+version="12-21-2024"
+
+# usage ////////////////////////////////////////////////////////////////////////
+
+# prompt ///////////////////////////////////////////////////////////////////////
+
+frobulator.script "Setting up ${script#*-}"
+
+# variables ////////////////////////////////////////////////////////////////////
+
+# defaults /////////////////////////////////////////////////////////////////////
+
+# functions ////////////////////////////////////////////////////////////////////
+
+failsafe_intent () {
+
+	# run failsafe termux package and repository update:
+	# mitigate general deployment setup issues
+	# mitigate skipped packages on install
+
+	frobulator.fwd "Please wait${marker_elp}"
+	echo
+
+	yes | apt update       > "${sink}" 2>&1
+
+	yes | apt full-upgrade > "${sink}" 2>&1
+
+}
+
+failsafe_intent
+
+# update packages list
+
+frobulator.update
+
+# upgrade installed packages
+
+frobulator.upgrade
+
+# values ///////////////////////////////////////////////////////////////////////
+
+display_list+=(
+	x11-apps
+	x11-common
+	x11-session-utils
+	x11-touchscreen-calibrator
+	x11-utils
+	x11-xfs-utils
+	x11-xkb-utils
+	x11-xserver-utils
+	xvfb
+	xwayland
+)
+
+documentation_list+=(
+	man
+)
+
+extensions_list+=(
+)
+
+fonts_list+=(
+	fonts-takao
+)
+
+i3_list+=(
+	i3
+	i3status
+)
+
+i3_addons_list+=(
+	dmenu
+	dunst
+	feh
+	picom
+	rofi
+	stterm
+	surf
+	qiv
+)
+
+icon_themes_list+=(
+	papirus-icon-theme
+)
+
+multimedia_list+=(
+)
+
+repositories_list+=(
+)
+
+security_list+=(
+	ca-certificates
+	openssl
+)
+
+utilities_list+=(
+	apt
+	apt-file
+	curl
+	pip
+	sudo
+	ssh
+	tree
+)
+
+vnc_list+=(
+	x11vnc
+)
+
+xfce_list+=(
+	xfce4
+	xfce4-appfinder
+	xfce4-clipman
+	xfce4-dict
+	xfce4-notifyd
+	xfce4-panel
+	xfce4-screenshooter
+	xfce4-session
+	xfce4-settings
+	xfce4-taskmanager
+	xfce4-terminal
+	galculator
+	gigolo
+	mousepad
+	parole
+	thunar
+	thunar-archive-plugin
+	ristretto
+	tumbler
+)
+
+xfce_fonts_list+=(
+)
+
+xfce_themes_list+=(
+	arc-theme
+	adwaita-icon-theme
+	adwaita-icon-theme-full
+)
+
+xfce_addons_list+=(
+	xfce4-appmenu-plugin
+	xfce4-battery-plugin
+	xfce4-clipman-plugin
+	xfce4-cpufreq-plugin
+	xfce4-cpugraph-plugin
+	xfce4-datetime-plugin
+	xfce4-diskperf-plugin
+	xfce4-equake-plugin
+	xfce4-eyes-plugin
+	xfce4-fsguard-plugin
+	xfce4-genmon-plugin
+	xfce4-indicator-plugin
+	xfce4-mailwatch-plugin
+	xfce4-mount-plugin
+	xfce4-mpc-plugin
+	xfce4-netload-plugin
+	xfce4-notes-plugin
+	xfce4-panel-profiles
+	xfce4-places-plugin
+	xfce4-sensors-plugin
+	xfce4-smartbookmark-plugin
+	xfce4-sntray-plugin
+	xfce4-sntray-plugin-common
+	xfce4-statusnotifier-plugin
+	xfce4-systemload-plugin
+	xfce4-time-out-plugin
+	xfce4-timer-plugin
+	xfce4-verve-plugin
+	xfce4-wavelan-plugin
+	xfce4-weather-plugin
+	xfce4-whiskermenu-plugin
+	xfce4-xkb-plugin
+)
+
+# environment //////////////////////////////////////////////////////////////////
+
+# console
+
+if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "console" ]]
+then
+	desktop_environment_list+=()
+fi
+
+# i3
+
+if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "i3" ]]
+then
+	desktop_environment_list+=(
+		${i3_list[@]}
+		${i3_addons_list[@]}
+	)
+fi
+
+# xfce
+
+if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "xfce" ]]
+then
+	desktop_environment_list+=(
+		${xfce_list[@]}
+		${xfce_fonts_list[@]}
+		${xfce_themes_list[@]}
+	)
+
+	#	${xfce_addons_list[@]}
+fi
+
+# install #
+
+install_list+=(
+	${repositories_list[@]}
+	${display_list[@]}
+	${documentation_list[@]}
+	${extensions_list[@]}
+	${fonts_list[@]}
+	${multimedia_list[@]}
+	${security_list[@]}
+	${utilities_list[@]}
+	${vnc_list[@]}
+	${desktop_environment_list[@]}
+)
+
+frobulator.install ${install_list[@]}
+
+# purge
+
+purge_list+=(
+	ibus
+	snap
+	xterm
+)
+
+frobulator.purge ${purge_list[@]}

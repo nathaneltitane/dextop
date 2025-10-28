@@ -1,0 +1,1471 @@
+#!/bin/bash
+
+# dependencies /////////////////////////////////////////////////////////////////
+
+if [[ -z $(command -v frobulator) ]]
+then
+	if [[ $(id -u -n) = "root" ]]
+	then
+		SUDO_HOME=/root
+
+		USER="${SUDO_USER}"
+
+		HOME=/home/"${USER}"
+	fi
+
+	if [[ -z $(command -v curl) ]]
+	then
+		yes | apt-get install curl
+	fi
+
+	if [ ! -d "${HOME}"/.local/bin ]
+	then
+		mkdir -p "${HOME}"/.local/bin
+	fi
+
+	curl -s -L get.frbltr.app > "${HOME}"/.local/bin/frobulator
+
+	chmod +x "${HOME}"/.local/bin/frobulator
+fi
+
+. "${HOME}"/.local/bin/frobulator
+
+# script ///////////////////////////////////////////////////////////////////////
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version //////////////////////////////////////////////////////////////////////
+
+version="01-18-2024"
+
+# usage ////////////////////////////////////////////////////////////////////////
+
+while (($#))
+do
+	case "${1}"
+	in
+		-c|--console)
+			option="environment"
+			environment="console"
+		;;
+
+		-e|--environment)
+			option="environment"
+			environment="${2}"
+
+			shift
+		;;
+
+		-t|--termux)
+			option="termux"
+		;;
+
+		-n|--container)
+			option="container"
+		;;
+
+		-l|--link)
+			option="link"
+		;;
+
+		-i|--initialize)
+			option="initialize"
+		;;
+
+		-b|--backup)
+			option="backup"
+		;;
+
+		-u|--update)
+			option="update"
+			update="${2}"
+
+			if [ "${update}" = "background"  ] || \
+			   [ "${update}" = "interface"   ] || \
+			   [ "${update}" = "utility"     ] || \
+			   [ "${update}" = "shell"       ] || \
+			   [ "${update}" = "preferences" ]
+			then
+				update_item="${3}"
+
+				shift
+			fi
+
+			shift
+
+		;;
+
+		-a|--addons)
+			option="addons"
+		;;
+
+		-d|--additions)
+			option="additions"
+		;;
+
+		-p|--purge)
+			option="purge"
+		;;
+
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} -c | -e [Environment] | -t | -n | -l | -i | -a | -d | -b | -u [Update] [Name] | -p | -h [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-c, --console       Setup Console access to environment and utilities only."
+			echo
+			echo -e "-e, --environment   Setup desktop environment and utilities."
+			echo
+			echo -e "                    [ i3 ]"
+			echo -e "                    [ xfce ]    [ Default  ]"
+			echo -e "                    [ console ] [ Fallback ]"
+			echo
+			echo -e "-t, --termux        Setup Termux environment and utilities only."
+			echo
+			echo -e "-n, --container     Setup Container environment and utilities only."
+			echo
+			echo -e "-l, --link          Link and unify storage directories."
+			echo
+			echo -e "-i, --initialize    Initialize setup directories and load configurations."
+			echo
+			echo -e "-a, --addons        Setup Termux addons and companion applications."
+			echo
+			echo -e "-d, --additions     Setup Dextop additions."
+			echo
+			echo -e "-b, --backup        Backup Termux user configuration files."
+			echo
+			echo -e "-u, --update        Update application packages and utilities."
+			echo
+			echo -e "                    [ all ]"
+			echo -e "                    [ dextop ] [ Default ]"
+			echo -e "                    [ additions ]"
+			echo -e "                    [ background ]"
+			echo -e "                    [ interface ]"
+			echo -e "                    [ preferences ]"
+			echo -e "                    [ shell ]"
+			echo -e "                    [ termux ]"
+			echo -e "                    [ utility ]"
+			echo
+			echo -e "-p, --purge         Purge setup components and packages."
+			echo
+			echo -e "-h, --help          Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version // ${version} ]"
+			echo
+
+			exit
+		;;
+
+		"")
+			# handle empty argument:
+			# use default values specified in script
+
+			:
+		;;
+
+		*)
+			echo
+			echo -e "Usage: ${script} -c | -e [Environment] | -t | -n | -l | -i | -a | -d | -b | -u [Update] [Name] | -p | -h [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+
+		;;
+
+		esac
+
+	shift
+
+done
+
+# clear ////////////////////////////////////////////////////////////////////////
+
+frobulator.clear
+
+# prompt ///////////////////////////////////////////////////////////////////////
+
+frobulator.script "Setting up ${script#*-}"
+
+# variables ////////////////////////////////////////////////////////////////////
+
+stamp=$(date +"%m-%d-%Y-%H-%M-%S")
+
+# defaults /////////////////////////////////////////////////////////////////////
+
+if [ -z "${option}" ]
+then
+	option="setup"
+fi
+
+if [ -z "${container}" ]
+then
+	container="${PREFIX}"/cnt/debian/12
+
+	frobulator.flag "${container}" "${HOME}"/.dextop dextop-container
+fi
+
+if [ "${option}" = "setup"       ] || \
+   [ "${option}" = "environment" ]
+then
+	if [[ -z "${environment}" ]]
+	then
+		environment="xfce"
+
+	elif [[ "${environment}" = [iI][3] ]]
+	then
+		environment="i3"
+
+	elif [[ "${environment}" = [xX][fF][cC][eE] ]]
+	then
+		environment="xfce"
+
+	elif [[ "${environment}" = [cC][oO][nN][sS][oO][lL][eE] ]]
+	then
+		environment="console"
+	else
+		frobulator.err "Unrecognized environment" "[ '${environment}' ]"
+		echo
+
+		frobulator.stp "Aborting${marker_elp}"
+		echo
+
+		exit 1
+	fi
+
+	if [ ! -f "${HOME}"/.dextop/dextop-environment ]
+	then
+		frobulator.flag "${environment}" "${HOME}"/.dextop dextop-environment
+
+		unset environment
+	fi
+fi
+
+if [ ! -f "${HOME}"/.dextop/dextop-session ]
+then
+	if [ -z "${session}" ]
+	then
+		if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "i3" ]]
+		then
+			session="i3"
+		fi
+
+		if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "xfce" ]]
+		then
+			session="xfce4-session"
+		fi
+
+		if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "console" ]]
+		then
+			session="console"
+		fi
+
+		frobulator.flag "${session}" "${HOME}"/.dextop dextop-session
+
+		unset session
+	fi
+fi
+
+# functions ////////////////////////////////////////////////////////////////////
+
+failsafe_intent () {
+
+	# ref.: https://github.com/termux/termux-packages/issues/10871
+
+	# run failsafe termux package and repository update:
+	# mitigate general deployment setup issues
+	# mitigate skipped packages on install
+
+	yes | apt update            > "${sink}" 2>&1
+
+	yes | apt full-upgrade      > "${sink}" 2>&1
+
+	yes | apt install root-repo > "${sink}" 2>&1
+
+	yes | apt install x11-repo  > "${sink}" 2>&1
+
+}
+
+container_environment () {
+
+	# generate container environment
+
+	CONTAINER_ROOT="${PREFIX}"/cnt/debian/12
+
+	# set path:
+	# in order of retreival
+
+	CONTAINER_PATH=""
+
+	# container
+
+	[ -d "${CONTAINER_ROOT}"/usr/local/sbin ] && CONTAINER_PATH+="/usr/local/sbin:"
+	[ -d "${CONTAINER_ROOT}"/usr/local/bin ]  && CONTAINER_PATH+="/usr/local/bin:"
+	[ -d "${CONTAINER_ROOT}"/usr/sbin ]       && CONTAINER_PATH+="/usr/sbin:"
+	[ -d "${CONTAINER_ROOT}"/usr/sbin ]       && CONTAINER_PATH+="/usr/bin:"
+	[ -d "${CONTAINER_ROOT}"/sbin ]           && CONTAINER_PATH+="/sbin:"
+	[ -d "${CONTAINER_ROOT}"/bin ]            && CONTAINER_PATH+="/bin:"
+
+	# termux
+
+	[ -d "${HOME}"/.local/bin ]               && CONTAINER_PATH+="${HOME}/.local/bin:"
+
+	[ -d "${PREFIX}"/sbin ]                   && CONTAINER_PATH+="${PREFIX}/sbin:"
+	[ -d "${PREFIX}"/bin ]                    && CONTAINER_PATH+="${PREFIX}/bin:"
+
+	CONTAINER_PATH="${CONTAINER_PATH}"
+
+	export CONTAINER_ROOT="${CONTAINER_ROOT}"
+	export CONTAINER_PATH="${CONTAINER_PATH}"
+
+	return
+}
+
+container_intent () {
+
+	# run container setup commands through 'proot'
+
+	TERMUX_ROOT="${PREFIX%/*}"
+	TERMUX_HOME="${TERMUX_ROOT}"/home
+
+	CONTAINER_HOME="${CONTAINER_ROOT}"/home
+
+	USER_ID="0"
+	GROUP_ID="0"
+
+	# assume 'termux-exec' is installed
+
+	unset LD_PRELOAD
+
+	# generate container environment
+
+	container_environment
+
+	# run using default system parameters:
+	# mitigate errors and path interpretation issues during container setup
+
+	proot																\
+		--kill-on-exit													\
+		--link2symlink													\
+		--rootfs="${CONTAINER_ROOT}"									\
+		--change-id="${USER_ID}":${GROUP_ID}							\
+		--pwd="${CONTAINER_HOME}"										\
+		--bind=/apex:/apex												\
+		--bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt	\
+		--bind=/data:/data												\
+		--bind=/dev:/dev												\
+		--bind=/dev/urandom:/dev/random									\
+		--bind=/proc:/proc												\
+		--bind=/proc/self/fd:/dev/fd									\
+		--bind=/proc/self/fd/0:/dev/stdin								\
+		--bind=/proc/self/fd/1:/dev/stdout								\
+		--bind=/proc/self/fd/2:/dev/stderr								\
+		--bind=/storage:/storage										\
+		--bind=/sys:/sys												\
+		--bind=/system:/system											\
+		--bind=/vendor:/vendor											\
+		--bind="${TERMUX_HOME}":"${CONTAINER_HOME}"						\
+			/usr/bin/env 												\
+				--ignore-environment									\
+					ANDROID_ART_ROOT="${ANDROID_ART_ROOT}"				\
+					ANDROID_DATA="${ANDROID_DATA}"						\
+					ANDROID_I18N_ROOT="${ANDROID_I18N_ROOT}"			\
+					ANDROID_ROOT="${ANDROID_ROOT}"						\
+					ANDROID_RUNTIME_ROOT="${ANDROID_RUNTIME_ROOT}"		\
+					ANDROID_TZDATA_ROOT="${ANDROID_TZDATA_ROOT}"		\
+					BOOTCLASSPATH="${BOOTCLASSPATH}"					\
+					DEX2OATBOOTCLASSPATH="${DEX2OATBOOTCLASSPATH}"		\
+					PREFIX="${PREFIX}"									\
+					TERM="${TERM}"										\
+					TMPDIR="${TMPDIR}"									\
+					COLORTERM="${COLORTERM}"							\
+					LANG="${LANG}"										\
+					HOME="${CONTAINER_HOME}"							\
+					PATH="${CONTAINER_PATH}"							\
+																		${@}
+}
+
+architecture_intent () {
+
+	# list supported processor architechtures
+
+	cpu_architectures=(
+		aarch64
+		arm
+		amd64
+		i*86
+		x86_64
+	)
+
+	# test processor architecture string
+
+	device_architecture="$(uname -m)"
+
+	for architecture in ${!cpu_architectures[@]}
+	do
+		if [[ "${device_architecture}" != "${cpu_architectures[architecture]}" ]]
+		then
+
+			frobulator.scs "Supported device architecture" "[ ${device_architecture} ]"
+			echo
+
+			frobulator.fwd "Proceeding${marker_elp}"
+			echo
+
+			break
+		else
+			frobulator.wrn "Unsupported device architecture" "[ ${device_architecture} ]"
+			echo
+
+			frobulator.fwd "Aborting${marker_elp}"
+			echo
+
+			frobulator.stp "Exiting."
+			echo
+
+			exit 1
+		fi
+	done
+
+}
+
+update_intent () {
+
+	# handle updates
+
+	update_url="${1}"
+	update_directory="${2}"
+	update_items=(${@:3})
+
+	if [[ "${update_item}" = "all" ]]
+	then
+		update_files_list=(${update_items[@]})
+
+		frobulator.download "${update_url}" "${update_directory}" ${update_files_list[@]}
+
+	elif [[ ${update_items[@]} =~ "${update_item}" ]]
+	then
+		update_files_list=("${update_item}")
+
+		frobulator.download "${update_url}" "${update_directory}" "${update_item}"
+
+	elif  [[ ! ${update_items[@]} =~ "${update_item}" ]]
+	then
+		update_files_list=(${@:3})
+
+		frobulator.err "Unknown item name" "[ '${update_item}' ]"
+		echo
+
+		frobulator.fwd "Listing known items${marker_elp}"
+		echo
+
+		frobulator.timeout
+
+		IFS=$'\n'
+
+		printf "${marker_nul} %s\n" ${update_files_list[@]}
+
+		echo
+
+		IFS=''
+
+		frobulator.msg "Review item name spelling and try again."
+		echo
+
+		frobulator.inf "Update all known items using 'all' argument."
+		echo
+
+		exit 1
+	fi
+
+	update_files_list=()
+
+}
+
+reload_intent () {
+
+	# termux settings reload:
+	# update command line interface with dextop settings
+
+	settings_command=()
+
+	settings_command+=(am broadcast)
+	settings_command+=(--user 0)
+	settings_command+=(-a com.termux.app.reload_style)
+	settings_command+=(-p com.termux)
+
+	frobulator.silence "${settings_command[@]}"
+
+}
+
+backup_intent () {
+
+	# handle user home directory backup
+
+	backup_name="dextop-backup"
+	backup_extension="tar.gz"
+
+	backup_directory="${HOME}"
+
+	backup_archive="${backup_name}-${stamp}.${backup_extension}"
+
+	frobulator.inf "Generating backup" "[ ${backup_archive} ]"
+	echo
+
+	tar																\
+		--create													\
+		--gzip														\
+			--exclude="${backup_name}"*								\
+				--file="${backup_directory}"/"${backup_archive}"	\
+																	"${backup_directory}" > "${sink}" 2>&1 &
+
+	frobulator.progress "archive" "[ ${backup_directory} ]"
+
+}
+
+dextop_intent () {
+
+	# load dextop deployment script
+
+	frobulator.download get.dxtp.app "${HOME}"/.local/bin dextop
+}
+
+addons_intent () {
+
+	# termux addons and companion applications
+
+	"${HOME}"/.local/bin/termux-addons
+
+}
+
+additions_intent () {
+
+	# load additions files
+
+	additions_list+=(
+		dextop-additions
+	)
+
+	if [[ "${option}" = "update" ]]
+	then
+		update_intent get.dxtp.app "${HOME}"/.local/bin ${additions_list[@]}
+	else
+		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${additions_list[@]}
+	fi
+
+	additions_list=()
+
+}
+
+backgrounds_intent () {
+
+	# load background files
+
+	backgrounds_list=(
+		dextop-black.png
+		dextop-black.svg
+		dextop-blue.png
+		dextop-blue.svg
+		dextop-canary.png
+		dextop-canary.svg
+		dextop-coral.png
+		dextop-coral.svg
+		dextop-grey.png
+		dextop-grey.svg
+		dextop-sky.png
+		dextop-sky.svg
+		dextop-violet.png
+		dextop-violet.svg
+	)
+
+	if [[ "${option}" = "update" ]]
+	then
+		update_intent get.dxtp.app "${HOME}"/.dextop ${backgrounds_list[@]}
+	else
+		frobulator.download get.dxtp.app "${HOME}"/.dextop ${backgrounds_list[@]}
+	fi
+
+	backgrounds_list=()
+
+}
+
+interface_intent () {
+
+	# load interface files
+
+	interface_list+=(
+		i3-configuration
+		i3status-configuration
+		i3-backgrounds
+		i3-confirm
+		i3-directory
+		i3-exit
+		i3-file
+		i3-file-manager
+		i3-launch
+		i3-lookup
+		i3-manual
+		i3-navigation
+		i3-notes
+		i3-processes
+		i3-shortcuts
+		i3-status
+		i3-template
+	)
+
+	if [[ "${option}" = "update" ]]
+	then
+		update_intent get.trmnl.me "${HOME}"/.local/bin ${interface_list[@]}
+	else
+		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${interface_list[@]}
+
+		if [ -z "${option}" ] || [ "${option}" = "termux" ]
+		then
+			# link configuration files
+
+			frobulator.link "${HOME}"/.local/bin "${HOME}"/.config/i3          i3-configuration          config
+			frobulator.link "${HOME}"/.local/bin "${HOME}"/.config/i3status    i3status-configuration    config
+		fi
+
+	fi
+
+	interface_list=()
+
+}
+
+preferences_intent () {
+
+	# termux preferences and properties
+
+	preferences_list+=(
+		termux-colors
+		termux-font-hack
+		termux-properties
+		termux-reload-settings
+	)
+
+	if [[ "${option}" = "update" ]]
+	then
+		update_intent get.dxtp.app "${HOME}"/.local/bin ${preferences_list[@]}
+	else
+		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${preferences_list[@]}
+
+		frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-colors     colors.properties
+		frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-font-hack       font.ttf
+		frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-properties termux.properties
+
+		reload_intent
+	fi
+
+	preferences_list=()
+
+}
+
+shell_intent () {
+
+	# load shell files
+
+	shell_list+=(
+		bash-aliases
+		bash-configuration
+		bash-functions
+		bash-login
+		bash-logout
+		bash-profile
+	)
+
+	if [[ "${option}" = "update" ]]
+	then
+		update_intent get.trmnl.me "${HOME}"/.local/bin ${shell_list[@]}
+	else
+		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${shell_list[@]}
+
+		# link to user home
+
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-aliases       .bash_aliases
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-configuration .bashrc
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-configuration .bash_configuration
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-functions     .bash_functions
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-login         .bash_login
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-logout        .bash_logout
+		frobulator.link "${HOME}"/.local/bin "${HOME}"      bash-profile       .bash_profile
+
+		frobulator.file "${HOME}" .hushlogin
+
+		if [[ "${option}" = "setup"      ]] || \
+		   [[ "${option}" = "container"  ]] || \
+		   [[ "${option}" = "initialize" ]]
+		then
+			CONTAINER_ROOT=$(cat "${HOME}"/.dextop/dextop-container)
+
+			# link to root home
+
+			frobulator.link "${HOME}"/.local/bin "${CONTAINER_ROOT}"/root bash-aliases       .bash_aliases
+			frobulator.link "${HOME}"/.local/bin "${CONTAINER_ROOT}"/root bash-configuration .bashrc
+			frobulator.link "${HOME}"/.local/bin "${CONTAINER_ROOT}"/root bash-configuration .bash_configuration
+			frobulator.link "${HOME}"/.local/bin "${CONTAINER_ROOT}"/root bash-functions     .bash_functions
+			frobulator.link "${HOME}"/.local/bin "${CONTAINER_ROOT}"/root bash-login         .bash_login
+			frobulator.link "${HOME}"/.local/bin "${CONTAINER_ROOT}"/root bash-logout        .bash_logout
+			frobulator.link "${HOME}"/.local/bin "${CONTAINER_ROOT}"/root bash-profile       .bash_profile
+
+			frobulator.file "${CONTAINER_ROOT}"/root .hushlogin
+		fi
+	fi
+
+	shell_list=()
+
+}
+
+utility_intent () {
+
+	# load dextop utilities
+
+	utilities_list+=(
+		termux-packages
+		termux-update
+		termux-storage
+		termux-addons
+		container-expansion
+		container-image
+		container-initialization
+		container-packages
+		container-session
+		container-settings
+		container-user
+	)
+
+	if [[ "${option}" = "update" ]]
+	then
+		update_intent get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
+	else
+		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
+	fi
+
+	utilities_list=()
+
+}
+
+directories_intent () {
+
+	# generate dextop required directories
+
+	directories_list+=(
+		bkp
+		cnt
+		img
+		mnt
+		media
+		storage
+	)
+
+	frobulator.directory "${PREFIX}" ${directories_list[@]}
+
+	directories_list=()
+
+	# generate root directory structure
+
+	directories_list+=(
+		bin
+		bkp
+		cnt
+		etc
+		img
+		lib
+		mnt
+		opt
+		tmp
+		media
+	)
+
+	for directory in ${directories_list[@]}
+	do
+		frobulator.link "${PREFIX}" "${PREFIX%/*}" "${directory}"
+	done
+
+	directories_list=()
+
+}
+
+bookmarks_intent () {
+
+	# generate file browser bookmarks
+
+	bookmarks_directories_list=(
+		"${PREFIX}"/cnt
+		"${PREFIX}"/media/[aA]ndroid
+		"${PREFIX}"/media/[eE]xternal
+		"${PREFIX}"/media/[iI]nternal
+	)
+
+	bookmarks_labels_list=(
+		Container
+		Android
+		External
+		Internal
+	)
+
+	for (( index=0 ; index<${#bookmarks_directories_list[@]} ; index++ ))
+	do
+		if [ -d ${bookmarks_directories_list[$index]} ]
+		then
+			frobulator.write "file://${bookmarks_directories_list[$index]} ${bookmarks_labels_list[$index]}" "${HOME}"/.config/gtk-3.0 bookmarks
+		fi
+	done
+
+	bookmarks_directories_list=()
+
+	bookamrks_labels_list=()
+
+}
+
+icons_intent () {
+
+	# link icons theme directories
+
+	frobulator.link "${PREFIX}"/share "${HOME}" icons .icons
+
+	# select icon themes
+
+	icons_list+=(
+		Adwaita
+		Papirus
+		Papirus-Dark
+		Papirus-Light
+		default
+		hicolor
+	)
+
+	# keep icon theme selections
+
+	frobulator.keep "${HOME}"/.icons ${icons_list[@]}
+
+	icons_list=()
+
+}
+
+themes_intent () {
+
+	CONTAINER_ROOT="${PREFIX}"/cnt/debian/12
+
+	# link theme directories
+
+	frobulator.link "${CONTAINER_ROOT}"/usr/share "${HOME}" themes .themes
+
+	# select themes
+
+	themes_list+=(
+		Arc
+		Arc-Dark
+		Arc-Darker
+		Arc-Lighter
+	)
+
+	# keep theme selections
+
+	frobulator.keep "${HOME}"/.themes ${themes_list[@]}
+
+	themes_list=()
+
+}
+
+session_intent () {
+
+	# start session
+
+	cd "${HOME}"
+
+	"${PREFIX}"/bin/login
+
+}
+
+purge_intent () {
+
+	# uninstall desktop environment and dependencies
+
+	yes | apt purge xfce* > "${sink}" 2>&1
+
+	yes | apt clean > "${sink}" 2>&1
+
+	# purge items loaded during dextop install
+
+	items_list=(
+
+		# files
+
+		"${HOME}"/.hushlogin
+		"${HOME}"/.config/gtk-3.0/bookmarks
+
+		"${HOME}"/.local/bin/bash-aliases
+		"${HOME}"/.local/bin/bash-configuration
+		"${HOME}"/.local/bin/bash-configuration
+		"${HOME}"/.local/bin/bash-functions
+		"${HOME}"/.local/bin/bash-login
+		"${HOME}"/.local/bin/bash-logout
+		"${HOME}"/.local/bin/bash-profile
+
+		"${HOME}"/.bash_aliases
+		"${HOME}"/.bashrc
+		"${HOME}"/.bash_configuration
+		"${HOME}"/.bash_functions
+		"${HOME}"/.bash_login
+		"${HOME}"/.bash_logout
+		"${HOME}"/.bash_profile
+
+		# directories
+
+		"${HOME}"/.dextop
+		"${HOME}"/.icons
+		"${HOME}"/.themes
+
+		"${PREFIX%/*}"bin
+		"${PREFIX%/*}"bkp
+		"${PREFIX%/*}"cnt
+		"${PREFIX%/*}"etc
+		"${PREFIX%/*}"img
+		"${PREFIX%/*}"lib
+		"${PREFIX%/*}"mnt
+		"${PREFIX%/*}"opt
+		"${PREFIX%/*}"tmp
+		"${PREFIX%/*}"media
+
+		"${PREFIX}"/bkp
+		"${PREFIX}"/cnt
+		"${PREFIX}"/img
+		"${PREFIX}"/mnt
+		"${PREFIX}"/media
+		"${PREFIX}"/storage
+
+	)
+
+	for item in ${items_list[@]}
+	do
+		frobulator.delete "${item}"
+	done
+
+}
+
+# architecture check ///////////////////////////////////////////////////////////
+
+frobulator.log "architecture_intent"
+
+# options //////////////////////////////////////////////////////////////////////
+
+if [ "${option}" = "initialize" ]
+then
+	frobulator.inf "Initializing" "[ Dextop ]"
+	echo
+
+	preferences_intent
+
+	addons_intent
+
+	utility_intent
+
+	shell_intent
+
+	frobulator.cpt "Complete" "[ Initialize // Dextop ]"
+	echo
+
+	exit
+fi
+
+if [ "${option}" = "addons" ]
+then
+	frobulator.inf "Loading" "[ ${option} ]"
+	echo
+
+	addons_intent
+
+	frobulator.cpt "Complete" "[ ${option} ]"
+	echo
+
+	exit
+fi
+
+if [ "${option}" = "additions" ]
+then
+	frobulator.inf "Loading" "[ ${option} ]"
+	echo
+
+	additions_intent
+
+	frobulator.cpt "Complete" "[ ${option} ]"
+	echo
+
+	exit
+fi
+
+if [ "${option}" = "backup" ]
+then
+	frobulator.inf "Loading" "[ ${option} ]"
+	echo
+
+	backup_intent
+
+	frobulator.cpt "Complete" "[ Backup // Dextop ]"
+	echo
+
+	exit
+fi
+
+if [ "${option}" = "update" ]
+then
+	if [[ "${update}" = [aA][lL][lL] ]]
+	then
+		update_item="all"
+
+		frobulator.inf "Updating" "[ ${update} ]"
+		echo
+
+		frobulator.fwd "Updating${marker_elp}"
+		echo
+
+		dextop_intent
+
+		backgrounds_intent
+
+		interface_intent
+
+		utility_intent
+
+		additions_intent
+
+		shell_intent
+
+		"${HOME}"/.local/bin/termux-update
+
+		frobulator.cpt "Complete" "[ Update // ${update} ]"
+		echo
+	fi
+
+	if [[ "${update}" = [dD][eE][xX][tT][oO][pP] ]]
+	then
+		frobulator.inf "Updating" "[ ${update} ]"
+		echo
+
+		frobulator.fwd "Updating${marker_elp}"
+		echo
+
+		dextop_intent
+
+		frobulator.cpt "Complete" "[ Update // ${update} ]"
+		echo
+	fi
+
+	if [[ "${update}" = [aA][dD][dD][iI][tT][iI][oO][nN][sS] ]]
+	then
+		frobulator.inf "Updating" "[ ${update} ]"
+		echo
+
+		frobulator.fwd "Updating${marker_elp}"
+		echo
+
+		additions_intent
+
+		frobulator.cpt "Complete" "[ Update // ${update} ]"
+		echo
+	fi
+
+	if [[ "${update}" = [bB][aA][cK][gG][rR][oO][uU][nN][dD] ]]
+	then
+
+		frobulator.inf "Updating" "[ ${update_item} ]"
+		echo
+
+		frobulator.fwd "Updating${marker_elp}"
+		echo
+
+		shell_intent
+
+		frobulator.cpt "Complete" "[ Update // ${update} ]"
+		echo
+	fi
+
+	if [[ "${update}" = [iI][nN][tT][eE][rR][fF][aA][cC][eE] ]]
+	then
+
+		frobulator.inf "Updating" "[ ${update_item} ]"
+		echo
+
+		frobulator.fwd "Updating${marker_elp}"
+		echo
+
+		interface_intent
+
+		frobulator.cpt "Complete" "[ Update // ${update} ]"
+		echo
+	fi
+
+	if [[ "${update}" = [pP][rR][eE][fF][eE][rR][eE][nN][cC][eE][sS] ]]
+	then
+
+		frobulator.inf "Updating" "[ ${utility} ]"
+		echo
+
+		frobulator.fwd "Updating${marker_elp}"
+		echo
+
+		preferences_intent
+
+		frobulator.cpt "Complete" "[ Update // ${update} ]"
+		echo
+	fi
+
+	if [[ "${update}" = [sS][hH][eE][lL][lL] ]]
+	then
+
+		frobulator.inf "Updating" "[ ${update_item} ]"
+		echo
+
+		frobulator.fwd "Updating${marker_elp}"
+		echo
+
+		shell_intent
+
+		frobulator.cpt "Complete" "[ Update // ${update} ]"
+		echo
+	fi
+
+	if [[ "${update}" = [tT][eE][rR][mM][uU][xX] ]]
+	then
+		frobulator.inf "Updating" "[ ${update} ]"
+		echo
+
+		frobulator.fwd "Updating${marker_elp}"
+		echo
+
+		"${HOME}"/.local/bin/termux-update
+
+		frobulator.cpt "Complete" "[ Update // ${update} ]"
+		echo
+
+	fi
+
+	if [[ "${update}" = [uU][tT][iI][lL][iI][tT][yY] ]]
+	then
+
+		frobulator.inf "Updating" "[ ${update_item} ]"
+		echo
+
+		frobulator.fwd "Updating${marker_elp}"
+		echo
+
+		utility_intent
+
+		frobulator.cpt "Complete" "[ Update // ${update} ]"
+		echo
+	fi
+
+	exit
+fi
+
+if [ "${option}" = "purge" ]
+then
+	# notice
+
+	frobulator.err "" "[ DISCLAIMER ]"
+	echo
+
+	frobulator.separate
+
+	frobulator.wrn "'Purge' option has been selected:"
+	frobulator.wrn "This action is permanent."
+	echo
+
+	frobulator.inf "All items loaded during the Dextop setup process will be PERMANENTLY REMOVED."
+	frobulator.nul "Modifications made outside the intended installation process may cause instability or data corruption upon removal."
+	echo
+
+	frobulator.wrn "The author is not responsible for any damages or issues arising from the removal of Dextop."
+	frobulator.nul "You have been warned."
+
+	frobulator.separate
+
+	frobulator.ask "Purge Dextop?"
+
+	frobulator.read reply
+
+	if [[ "${reply}" = [yY]         ]] || \
+	   [[ "${reply}" = [yY][eE][sS] ]]
+	then
+		frobulator.fwd "Removal in progress${marker_elp}"
+		echo
+
+		purge_intent &
+
+		frobulator.progress "purge"
+
+	else
+		frobulator.inf "Aborting" "[ ${option} ]"
+		echo
+
+		exit 1
+	fi
+fi
+
+# setup ////////////////////////////////////////////////////////////////////////
+
+if [ "${option}" = "setup"       ] || \
+   [ "${option}" = "environment" ]
+then
+	if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
+	then
+		# dextop ///////////////////////////////////////////////////////////////
+
+		# failsafe
+
+		failsafe_intent &
+
+		frobulator.process "Please wait"
+
+		# backup
+
+		if [ ! -f "${HOME}"/.dextop/dextop-backup-checkpoint ]
+		then
+			backup_intent
+
+			frobulator.file "${HOME}"/.dextop dextop-backup-checkpoint
+		fi
+
+		# preferences
+
+		if [ ! -f "${HOME}"/.dextop/dextop-preferences-checkpoint ]
+		then
+			preferences_intent
+
+			frobulator.file "${HOME}"/.dextop dextop-preferences-checkpoint
+		fi
+
+		#  utilities
+
+		if [ ! -f "${HOME}"/.dextop/dextop-utilities-checkpoint ]
+		then
+			utility_intent
+
+			frobulator.file "${HOME}"/.dextop dextop-utilities-checkpoint
+		fi
+
+		# directories
+
+		if [ ! -f "${HOME}"/.dextop/dextop-directories-checkpoint ]
+		then
+			directories_intent
+
+			frobulator.file "${HOME}"/.dextop dextop-directories-checkpoint
+		fi
+
+		# additions
+
+		if [ ! -f "${HOME}"/.dextop/dextop-additions-checkpoint ]
+		then
+			additions_intent
+
+			frobulator.file "${HOME}"/.dextop dextop-additions-checkpoint
+		fi
+
+		# backgrounds
+
+		if [ ! -f "${HOME}"/.dextop/dextop-backgrounds-checkpoint ]
+		then
+			backgrounds_intent
+
+			frobulator.file "${HOME}"/.dextop dextop-backgrounds-checkpoint
+		fi
+
+		# automatic login
+
+		if [ ! -f "${HOME}"/.dextop/dextop-login-checkpoint ]
+		then
+			frobulator.write login "${HOME}"/.dextop dextop-login
+
+			frobulator.file "${HOME}"/.dextop dextop-login-checkpoint
+		fi
+
+		# automatic logout
+
+		if [ ! -f "${HOME}"/.dextop/dextop-logout-checkpoint ]
+		then
+			frobulator.write logout "${HOME}"/.dextop dextop-logout
+
+			frobulator.file "${HOME}"/.dextop dextop-logout-checkpoint
+		fi
+
+		# automatic update
+
+		if [ ! -f "${HOME}"/.dextop/dextop-update-checkpoint ]
+		then
+			frobulator.file "${HOME}"/.dextop dextop-update
+
+			frobulator.file "${HOME}"/.dextop dextop-update-checkpoint
+		fi
+
+		# audio
+
+		if [ ! -f "${HOME}"/.dextop/dextop-audio-checkpoint ]
+		then
+			frobulator.file "${HOME}"/.dextop dextop-audio
+
+			frobulator.file "${HOME}"/.dextop dextop-audio-checkpoint
+		fi
+
+		# ticker
+
+		if [ ! -f "${HOME}"/.dextop/dextop-ticker-checkpoint ]
+		then
+			frobulator.write 0 "${HOME}"/.dextop dextop-ticker
+
+			frobulator.file "${HOME}"/.dextop dextop-ticker-checkpoint
+		fi
+
+		# termux ///////////////////////////////////////////////////////////////
+
+		# termux addons
+
+		if [ ! -f "${HOME}"/.dextop/dextop-termux-addons-checkpoint ]
+		then
+			"${HOME}"/.local/bin/termux-addons
+
+			frobulator.file "${HOME}"/.dextop dextop-termux-addons-checkpoint
+		fi
+
+		# termux storage
+
+		if [ ! -f "${HOME}"/.dextop/dextop-termux-storage-checkpoint ]
+		then
+			if [[ "${option}" = "link" ]]
+			then
+				"${HOME}"/.local/bin/termux-storage -l
+			else
+				"${HOME}"/.local/bin/termux-storage
+			fi
+
+			frobulator.file "${HOME}"/.dextop dextop-termux-storage-checkpoint
+		fi
+
+		# termux packages
+
+		if [ ! -f "${HOME}"/.dextop/dextop-termux-packages-checkpoint ]
+		then
+			"${HOME}"/.local/bin/termux-packages
+
+			frobulator.file "${HOME}"/.dextop dextop-termux-packages-checkpoint
+		fi
+
+		# container ////////////////////////////////////////////////////////////
+
+		# container image
+
+		if [ ! -f "${HOME}"/.dextop/dextop-container-image-checkpoint ]
+		then
+			"${HOME}"/.local/bin/container-image
+
+			frobulator.file "${HOME}"/.dextop dextop-container-image-checkpoint
+		fi
+
+		# container expansion
+
+		if [ ! -f "${HOME}"/.dextop/dextop-container-expansion-checkpoint ]
+		then
+			container_intent "${HOME}"/.local/bin/container-expansion
+
+			frobulator.file "${HOME}"/.dextop dextop-container-expansion-checkpoint
+		fi
+
+		# container packages
+
+		if [ ! -f "${HOME}"/.dextop/dextop-container-packages-checkpoint ]
+		then
+			container_intent "${HOME}"/.local/bin/container-packages
+
+			frobulator.file "${HOME}"/.dextop dextop-container-packages-checkpoint
+		fi
+
+		# container user
+
+		if [ ! -f "${HOME}"/.dextop/dextop-container-user-checkpoint ]
+		then
+			container_intent "${HOME}"/.local/bin/container-user
+
+			frobulator.file "${HOME}"/.dextop dextop-container-user-checkpoint
+		fi
+
+		# dextop ///////////////////////////////////////////////////////////////
+
+		# shell
+
+		if [ ! -f "${HOME}"/.dextop/dextop-shell-checkpoint ]
+		then
+			shell_intent
+
+			frobulator.file "${HOME}"/.dextop dextop-shell-checkpoint
+		fi
+
+		# bookmarks
+
+		if [ ! -f "${HOME}"/.dextop/dextop-bookmarks-checkpoint ]
+		then
+			bookmarks_intent
+
+			frobulator.file "${HOME}"/.dextop dextop-bookmarks-checkpoint
+		fi
+
+		# interface
+
+		if [ ! -f "${HOME}"/.dextop/dextop-interface-checkpoint ]
+		then
+			interface_intent
+
+			frobulator.file "${HOME}"/.dextop dextop-interface-checkpoint
+		fi
+
+		# icons
+
+		if [ ! -f "${HOME}"/.dextop/dextop-icons-checkpoint ]
+		then
+			icons_intent
+
+			frobulator.file "${HOME}"/.dextop dextop-icons-checkpoint
+		fi
+
+		# themes
+
+		if [ ! -f "${HOME}"/.dextop/dextop-themes-checkpoint ]
+		then
+			themes_intent
+
+			frobulator.file "${HOME}"/.dextop dextop-themes-checkpoint
+		fi
+
+		# setup move
+
+		if [ ! -f "${HOME}"/.dextop/dextop-move-checkpoint ]
+		then
+			frobulator.move "${HOME}" "${HOME}"/.local/bin dextop
+
+			frobulator.file "${HOME}"/.dextop dextop-move-checkpoint
+		fi
+
+		# setup checkpoint
+
+		frobulator.file "${HOME}"/.dextop dextop-setup-checkpoint
+	fi
+
+	# result ///////////////////////////////////////////////////////////////////
+
+	frobulator.result "${HOME}"/.dextop dextop-setup-checkpoint "dextop setup"
+	echo
+
+	frobulator.timeout 5
+
+	# clear ////////////////////////////////////////////////////////////////////
+
+	frobulator.clear
+
+	# session //////////////////////////////////////////////////////////////////
+
+	session_intent
+
+fi

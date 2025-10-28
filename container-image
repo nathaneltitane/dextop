@@ -1,0 +1,859 @@
+#!/bin/bash
+
+# dependencies /////////////////////////////////////////////////////////////////
+
+if [[ -z $(command -v frobulator) ]]
+then
+	if [[ $(id -u -n) = "root" ]]
+	then
+		SUDO_HOME=/root
+
+		USER="${SUDO_USER}"
+
+		HOME=/home/"${USER}"
+	fi
+
+	if [[ -z $(command -v curl) ]]
+	then
+		yes | apt-get install curl
+	fi
+
+	if [ ! -d "${HOME}"/.local/bin ]
+	then
+		mkdir -p "${HOME}"/.local/bin
+	fi
+
+	curl -s -L get.frbltr.app > "${HOME}"/.local/bin/frobulator
+
+	chmod +x "${HOME}"/.local/bin/frobulator
+fi
+
+. "${HOME}"/.local/bin/frobulator
+
+# script ///////////////////////////////////////////////////////////////////////
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version //////////////////////////////////////////////////////////////////////
+
+version="01-01-2025"
+
+# usage ////////////////////////////////////////////////////////////////////////
+
+while (($#))
+do
+	case "${1}"
+	in
+		-i|--image)
+			option="image"
+			distribution_name="${2}"
+
+			shift
+
+			distribution_version="${2}"
+
+			shift
+		;;
+
+		-s|--selection)
+			option="selection"
+		;;
+
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} -i [Distribution Name] [Distribution Version] | -s [Selection] | [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-i, --image        Input distribution name and version."
+			echo -e "-s, --selection    Show setup selection options."
+			echo
+			echo -e "-h, --help     Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version // ${version} ]"
+			echo
+
+			exit
+		;;
+
+			"")
+				# handle empty argument:
+				# use default values specified in script
+
+				:
+			;;
+
+		*)
+			echo
+			echo -e "Usage: ${script} -i [Distribution Name] [Distribution Version] | -s [Selection] | [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+		;;
+
+	esac
+
+	shift
+
+done
+
+# prompt ///////////////////////////////////////////////////////////////////////
+
+frobulator.script "Setting up ${script#*-}"
+
+# variables ////////////////////////////////////////////////////////////////////
+
+distribution_name="debian"
+
+distribution_version="12"
+
+distribution_codename="bookworm"
+
+# defaults /////////////////////////////////////////////////////////////////////
+
+if [ -z "${distribution_name}" ]
+then
+	distribution_name="${distribution_name}"
+fi
+
+if [ -z "${distribution_version}" ]
+then
+	distribution_version="${distribution_version}"
+fi
+
+if [ -z "${distribution_codename}" ]
+then
+	distribution_codename="${distribution_codename}"
+fi
+
+# functions ////////////////////////////////////////////////////////////////////
+
+image_select () {
+
+	frobulator.continue
+
+	# list distributions for setup
+
+	if [ -z "${distribution_name}"     ] || \
+	   [ -z "${distribution_version}"  ] || \
+	   [ -z "${distribution_codename}" ]
+	then
+		frobulator.msg "Select distribution version to setup."
+		echo
+
+		# list supported distribution versions
+
+		debian_versions=(
+			debian	10	buster
+			debian	11	bullseye
+			debian	12	bookworm
+			debian	13	trixie
+		)
+
+		ubuntu_versions=(
+			ubuntu	18.04	bionic
+			ubuntu	20.04	focal
+			ubuntu	22.04	jammy
+			ubuntu	24.04	noble
+		)
+
+		versions=(
+			${debian_versions[@]}
+			${ubuntu_versions[@]}
+		)
+
+		# set padding for uniform output
+
+		pad_length=10
+
+		# continue list using array selection of suppported values
+
+		for (( i=0; i<${#versions[@]} ; i+=3 ))
+		do
+			number=$(( ( ${i} / 3 ) + 1 ))
+
+			name="${versions[${i}]}"
+			version="${versions[${i}+1]}"
+			codename="${versions[${i}+2]}"
+
+			indent="${marker_tab}"
+
+			if [ ${#version} -le 2 ]
+			then
+				indent+="${marker_tab}"
+			fi
+
+			if (( ${i}/3 >= 0 && ${i}/3 <= 9 ))
+			then
+				# handle number spacing for entries 1-9
+
+				number=" ${number}"
+			else
+				# handle number spacing for entries 10+
+
+				number="${number}"
+			fi
+
+			echo "${marker_nul}" "[ ${number} ]" "${name}" "${version}" "${indent}" "[ ${codename} ]"
+
+		done
+
+		echo
+
+		# values #
+
+		values_list=(
+			selection
+		)
+
+		# handle user input for values_list
+
+		eval ${frobulator_return[@]}
+
+		frobulator.ipt "Selection:"
+
+		frobulator.read selection
+
+		unset distribution_version
+
+		# integer check:
+		# handle numerical selection
+
+		while [[ ! "${selection}" =~ ^[0-9]+$ ]]
+		do
+			echo
+			frobulator.err "Invalid selection:"
+			echo
+
+			frobulator.wrn "Select image [ 1 - ${number} ]"
+			echo
+
+			frobulator.ipt "Selection:"
+
+			frobulator.read selection
+		done
+
+			i=$(( ${selection}))
+			i=$(( ( ${i} * 3  ) - 3 ))
+
+			name="${versions[${i}]}"
+			version="${versions[${i}+1]}"
+			codename="${versions[${i}+2]}"
+
+			number="${selection}"
+
+			distribution_name="${name}"
+			distribution_version="${version}"
+			distribution_codename="${codename}"
+
+		# handle distribution code markup
+
+		if [ "${distribution_name}" = ubuntu ]
+		then
+			# set IFS
+
+			IFS='.'
+
+			read code_year code_month code_revision <<< "${distribution_version}"
+
+			if [ -z "${code_revision}" ]
+			then
+				distribution_release="${distribution_version}"
+			else
+				distribution_release="${distribution_version%.*}"
+			fi
+
+			# reset IFS
+
+			IFS=''
+		fi
+
+		frobulator.inf "User selection" "[ ${selection} // ${name} ${version} - '${codename}' ]"
+		echo
+
+		export distribution_name="${distribution_name}"
+		export distribution_release="${distribution_release}"
+		export distribution_version="${distribution_version}"
+		export distribution_codename="${distribution_codename}"
+	fi
+
+}
+
+image_architecture () {
+
+	frobulator.continue
+
+	# compare processor architecture to available images architecture
+
+	cpu_architectures=(
+		aarch64
+		arm
+		amd64
+		i*86
+		x86_64
+	)
+
+	# list supported image architechtures
+
+	if [ "${distribution_name}" = debian ]
+	then
+		image_architectures=(
+			arm64v8
+			arm32v7
+			amd64
+			i386
+			amd64
+		)
+	fi
+
+	if [ "${distribution_name}" = fedora ]
+	then
+		image_architectures=(
+			aarch64
+			armhfp
+			x86_64
+			x86_64
+			x86_64
+		)
+	fi
+
+	if [ "${distribution_name}" = ubuntu ]
+	then
+		image_architectures=(
+			arm64
+			armhf
+			amd64
+			i386
+			amd64
+		)
+	fi
+
+	# test processor architecture string
+
+	device_architecture="$(uname -m)"
+
+	for i in ${!cpu_architectures[@]}
+	do
+		if [[ "${device_architecture}" == "${cpu_architectures[i]}" ]]
+		then
+			image_architecture=${image_architectures[i]}
+
+			frobulator.scs "Supported architecture" "[ ${image_architecture} ]"
+			echo
+
+			break
+		fi
+	done
+
+	# test image architecture string
+
+	if [ -z "${i}mage_architecture"    ] || \
+	   [ -z "${device_architecture}" ]
+	then
+		image_architecture="N/A"
+
+		frobulator.wrn "Unknown architecture" "[ ${image_architecture} ]"
+		echo
+
+		frobulator.fwd "Aborting${marker_elp}"
+		echo
+
+		frobulator.stp "Exiting."
+		echo
+
+		exit 1
+	fi
+}
+
+image_download () {
+
+	frobulator.continue
+
+	# generate links and download distribution image
+
+	# handle distribution url
+
+	case "${distribution_name}"
+	in
+		debian|ubuntu)
+			image_archive_extension="tar.xz"
+
+			image_url="get.trmnl.me"
+			image_archive="archive-${distribution_name}-${distribution_version}.${image_archive_extension}"
+
+			image_name="${distribution_name}-${distribution_version}"
+			image_file="${image_name}.${image_archive_extension}"
+		;;
+
+	esac
+
+	frobulator.download "${image_url}" "${image_archive}" "${PREFIX}"/img "${image_file}"
+
+	frobulator.complete "${script} : ${FUNCNAME}"
+}
+
+image_filesystem () {
+
+	frobulator.continue
+
+	# exclude archive directories: dev | proc | sys | system
+	# 'container-session' will bind those device directories to the container
+
+	proot											\
+		--link2symlink								\
+			tar 									\
+				--extract							\
+				--delay-directory-restore			\
+				--preserve-permissions				\
+					--file="${1}"					\
+							--exclude='boot'		\
+							--exclude='dev'			\
+							--exclude='proc'		\
+							--exclude='sys'			\
+							--exclude='system'		\
+								--directory="${2}"	2> "${sink}"
+
+	frobulator.complete "${script} : ${FUNCNAME}"
+
+}
+
+image_extract () {
+
+	frobulator.continue
+
+	frobulator.wrn "Extracting new deployment" "[ ${image_file} // ${image_architecture} ]"
+	echo
+
+	frobulator.directory "${PREFIX}"/cnt "${distribution_name}"/"${distribution_version}"
+
+	if [ "${distribution_name}" = debian ] || \
+	   [ "${distribution_name}" = ubuntu ]
+	then
+
+		image_filesystem "${PREFIX}"/img/"${image_file}" "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
+
+	fi
+
+	frobulator.complete "${script} : ${FUNCNAME}"
+
+}
+
+image_handle () {
+
+case "${distribution_name}"
+	in
+		[dD][eE][bB][iI][aA][nN]| \
+		[uU][bB][uU][nN][tT][uU])
+			distribution_name="${distribution_name,,}"
+
+			frobulator.scs "Supported distribution name."
+			echo
+		;;
+
+		"")
+			distribution_name="debian"
+
+			frobulator.err "Empty distribution name."
+			echo
+
+			frobulator.wrn "Defaulting" "[ ${distribution_version} ]"
+			echo
+		;;
+
+		*)
+			distribution_name="debian"
+
+			frobulator.err "Unsupported distribution name."
+			echo
+
+			frobulator.wrn "Defaulting" "[ ${distribution_name} ]"
+			echo
+		;;
+
+	esac
+
+	case "${distribution_name}" in
+	debian)
+
+		case "${distribution_version}"
+		in
+			11)
+				distribution_version=11
+			;;
+
+			12)
+				distribution_version=12
+			 ;;
+
+			 "")
+				distribution_version=12
+
+				frobulator.err "Distribution version not specified."
+				echo
+
+				frobulator.wrn "Defaulting" "[ ${distribution_version} ]"
+				echo
+			;;
+
+			 *)
+				distribution_version=12
+
+				frobulator.err "Unsupported distribution version."
+				echo
+
+				frobulator.wrn "Defaulting" "[ ${distribution_version} ]"
+				echo
+			;;
+
+		esac
+	;;
+
+	ubuntu)
+
+		case "${distribution_version}"
+		in
+			18*04|18*04*)
+				distribution_version="18.04"
+
+				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
+				echo
+			;;
+
+			20*04|20*04*)
+				distribution_version="20.04"
+
+				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
+				echo
+			;;
+
+			22*04|22*04*)
+				distribution_version="22.04"
+
+				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
+				echo
+			;;
+
+			24*04|24*04*)
+				distribution_version="24.04"
+
+				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
+				echo
+			;;
+
+			"")
+				distribution_version="${distribution_version}"
+
+				frobulator.err "Distribution version not specified."
+				echo
+
+				frobulator.wrn "Defaulting" "[ ${distribution_version} ]"
+				echo
+			;;
+
+			 *)
+				distribution_version="${distribution_version}"
+
+				frobulator.err "Unsupported distribution version."
+				echo
+
+				frobulator.wrn "Defaulting" "[ ${distribution_version} ]"
+				echo
+			;;
+
+		esac
+
+	;;
+
+	esac
+
+	frobulator.complete "${script} : ${FUNCNAME}"
+
+}
+
+image_environment () {
+
+	frobulator.continue
+
+	# generate environment '$PATH' variable
+
+	CONTAINER_ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
+	
+	# set path:
+	# in order of retreival
+
+	CONTAINER_PATH=""
+
+	# container
+
+	[ -d "${CONTAINER_ROOT}"/usr/local/sbin ] && CONTAINER_PATH+="/usr/local/sbin:"
+	[ -d "${CONTAINER_ROOT}"/usr/local/bin ]  && CONTAINER_PATH+="/usr/local/bin:"
+	[ -d "${CONTAINER_ROOT}"/usr/sbin ]       && CONTAINER_PATH+="/usr/sbin:"
+	[ -d "${CONTAINER_ROOT}"/usr/bin ]        && CONTAINER_PATH+="/usr/bin:"
+	[ -d "${CONTAINER_ROOT}"/sbin ]           && CONTAINER_PATH+="/sbin:"
+	[ -d "${CONTAINER_ROOT}"/bin ]            && CONTAINER_PATH+="/bin:"
+
+	# termux
+
+	[ -d "${HOME}"/.local/sbin ]    && CONTAINER_PATH+="${HOME}/.local/sbin:"
+	[ -d "${HOME}"/.local/bin ]     && CONTAINER_PATH+="${HOME}/.local/bin:"
+	[ -d "${HOME}"/.sbin ]          && CONTAINER_PATH+="${HOME}/.sbin:"
+	[ -d "${HOME}"/.bin ]           && CONTAINER_PATH+="${HOME}/.bin:"
+
+	[ -d "${PREFIX}"/sbin ]         && CONTAINER_PATH+="${PREFIX}/sbin:"
+	[ -d "${PREFIX}"/bin ]          && CONTAINER_PATH+="${PREFIX}/bin:"
+
+	# android
+
+	[ -d /system/sbin ]             && CONTAINER_PATH+="/system/sbin:"
+	[ -d /system/bin ]              && CONTAINER_PATH+="/system/bin:"
+
+	# set environment
+
+	PATH="${PATH}"
+
+	cat <<- FILE > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/environment
+	PATH=${CONTAINER_PATH}
+	PREFIX=${PREFIX}
+	FILE
+	
+	unset CONTAINER_ROOT
+
+	frobulator.complete "${script} : ${FUNCNAME}"
+
+}
+
+image_groups () {
+
+	frobulator.continue
+
+	# register android groups to container
+
+	# set IFS
+
+	IFS=' '
+
+	# read android system IDs
+
+	read uid gid groups <<< $(id)
+
+	uid=${uid/uid=}
+	gid=${gid/gid=}
+
+	groups=${groups/groups=}
+
+	# set IFS
+
+	IFS=','
+
+	# parse existing groups
+
+	read -r -a groups_list <<< "${groups}"
+
+	for line in "${groups_list[@]}"
+	do
+		line=${line/(/ }
+		line=${line/)}
+
+		# set IFS
+
+		IFS=' '
+
+		# transfer unregistered IDs
+
+		read group_number group_name <<< ${line}
+
+		if [ -f "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/group ]
+		then
+			echo "${group_name}:x:${group_number}:" >> "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/group
+		fi
+
+		if [ -f "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/gshadow ]
+		then
+			echo "${group_name}:x:${group_number}:" >> "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/gshadow
+		fi
+	done
+
+	# reset IFS
+
+	IFS=''
+
+	frobulator.complete "${script} : ${FUNCNAME}"
+
+}
+
+image_locale () {
+
+	frobulator.continue
+
+	# set locale selection for container
+
+	echo "LC_ALL=en_US.UTF-8" >> "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/environment
+	echo "en_US.UTF-8 UTF-8" > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/locale.gen
+	echo "LANG=en_US.UTF-8" > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/locale.conf
+
+	frobulator.complete "${script} : ${FUNCNAME}"
+
+}
+
+image_network () {
+
+	frobulator.continue
+
+	# generate network files
+
+	# hostname
+
+	cat <<- 'FILE' > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/hostname
+	${HOSTNAME}
+	FILE
+
+	# hosts
+
+	cat <<- 'FILE' > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/hosts
+	# IPv4 #
+
+	127.0.0.1	localhost.localdomain
+	127.0.0.1	localhost
+
+	# IPv6 #
+
+	::1			localhost.localdomain
+	::1			localhost
+	::1			ip6-localhost
+	::1			ip6-loopbak
+	fe00::0		ip6-localnet
+	fe00::0		ip6-mcastprefix
+	ff02::1		ip6-allnodes
+	ff02::2		ip6-allrouters
+	ff02::3		ip6-allhosts
+	FILE
+
+	# nameserver
+
+	cat <<- 'FILE' > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/resolv.conf
+	nameserver 1.1.1.1
+	nameserver 1.0.0.1
+	FILE
+
+	frobulator.complete "${script} : ${FUNCNAME}"
+
+}
+
+image_preload () {
+
+	frobulator.continue
+
+	# generate libgcc/libc location and add to dynamic linker for preload
+
+	library_preload=$(find "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/usr/lib -type f -iname "libgcc_s.so.1")
+
+	# set preload
+
+	cat <<- FILE > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/ld.so.preload
+	${library_preload}
+	FILE
+
+	frobulator.complete "${script} : ${FUNCNAME}"
+
+}
+
+image_sources () {
+
+	frobulator.continue
+
+	# generate sources file
+
+	if [ "${distribution_name}" = "debian" ]
+	then
+		cat <<- FILE > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/sources.list
+		deb     http://deb.debian.org/${distribution_name}                  ${distribution_codename}            main non-free-firmware
+		deb-src http://deb.debian.org/${distribution_name}                  ${distribution_codename}            main non-free-firmware
+
+		deb     http://security.debian.org/${distribution_name}-security    ${distribution_codename}-security   main non-free-firmware
+		deb-src http://security.debian.org/${distribution_name}-security    ${distribution_codename}-security   main non-free-firmware
+
+		deb     http://deb.debian.org/${distribution_name}                  ${distribution_codename}-updates    main non-free-firmware
+		deb-src http://deb.debian.org/${distribution_name}                  ${distribution_codename}-updates    main non-free-firmware
+		FILE
+	fi
+
+	if [ "${distribution_name}" = "ubuntu" ]
+	then
+		cat <<- FILE > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/sources.list
+		deb     http://archive.ubuntu.com/${distribution_name}              ${distribution_codename}            main restricted universe multiverse
+		deb-src http://archive.ubuntu.com/${distribution_name}              ${distribution_codename}            main restricted universe multiverse
+
+		deb     http://archive.ubuntu.com/${distribution_name}              ${distribution_codename}-security   main restricted universe multiverse
+		deb-src http://archive.ubuntu.com/${distribution_name}              ${distribution_codename}-security   main restricted universe multiverse
+
+		deb     http://archive.ubuntu.com/${distribution_name}              ${distribution_codename}-updates    main restricted universe multiverse
+		deb-src http://archive.ubuntu.com/${distribution_name}              ${distribution_codename}-updates    main restricted universe multiverse
+
+		deb     http://archive.ubuntu.com/${distribution_name}              ${distribution_codename}-backports  main restricted universe multiverse
+		deb-src http://archive.ubuntu.com/${distribution_name}              ${distribution_codename}-backports  main restricted universe multiverse
+
+		deb     http://archive.canonical.com/${distribution_name}           ${distribution_codename}            partner
+		deb-src http://archive.canonical.com/${distribution_name}           ${distribution_codename}            partner
+		FILE
+	fi
+
+	frobulator.complete "${script} : ${FUNCNAME}"
+
+}
+
+if [ "${option}" = "image" ]
+then
+	# validate distribution name and version
+
+	image_handle
+fi
+
+if [ "${option}" = "selection" ]
+then
+	unset distribution_name
+	unset distribution_version
+	unset distribution_codename
+
+	# select image version
+
+	image_select
+fi
+
+# verify architecture
+
+image_architecture
+
+# download image
+
+image_download
+
+# extract image into container directory
+
+image_extract
+
+# generate environment variables
+
+image_environment
+
+# generate environment locale
+
+image_locale
+
+# generate missing groups
+
+# image_groups
+
+# generate network
+
+image_network
+
+# generate preload entries
+
+#image_preload
+
+# generate sources entries
+
+image_sources

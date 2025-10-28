@@ -1,0 +1,527 @@
+#!/bin/bash
+
+# dependencies /////////////////////////////////////////////////////////////////
+
+if [[ -z $(command -v frobulator) ]]
+then
+	if [[ $(id -u -n) = "root" ]]
+	then
+		SUDO_HOME=/root
+
+		USER="${SUDO_USER}"
+
+		HOME=/home/"${USER}"
+	fi
+
+	if [[ -z $(command -v curl) ]]
+	then
+		yes | apt-get install curl
+	fi
+
+	if [ ! -d "${HOME}"/.local/bin ]
+	then
+		mkdir -p "${HOME}"/.local/bin
+	fi
+
+	curl -s -L get.frbltr.app > "${HOME}"/.local/bin/frobulator
+
+	chmod +x "${HOME}"/.local/bin/frobulator
+fi
+
+. "${HOME}"/.local/bin/frobulator
+
+# script ///////////////////////////////////////////////////////////////////////
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version //////////////////////////////////////////////////////////////////////
+
+version="05-29-2024"
+
+# usage ////////////////////////////////////////////////////////////////////////
+
+while (($#))
+do
+	case "${1}"
+	in
+		-i|--information)
+			option="information"
+			user_name="${2}"
+
+			shift
+		;;
+
+		-s|--superuser)
+			option="superuser"
+			user_name="${2}"
+
+			shift
+		;;
+
+		-u|--username)
+			option="username"
+			user_name="${2}"
+
+			shift
+		;;
+
+		-p|--password)
+			option="password"
+			user_password="${2}"
+
+			shift
+		;;
+
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-i, --information    Gather setup information."
+			echo -e "-u, --username       Setup user account."
+			echo -e "-p, --password       Set or change user password."
+			echo
+			echo -e "-h, --help           Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version // ${version} ]"
+			echo
+
+			exit
+		;;
+
+		"")
+			# handle empty argument:
+			# use default values specified in script
+
+			:
+		;;
+
+		*)
+			echo
+			echo -e "Usage: ${script} [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+		;;
+
+	esac
+
+	shift
+done
+
+# prompt ///////////////////////////////////////////////////////////////////////
+
+frobulator.script "Setting up ${script#*-}"
+
+# variables ////////////////////////////////////////////////////////////////////
+
+# defaults /////////////////////////////////////////////////////////////////////
+
+# functions ////////////////////////////////////////////////////////////////////
+
+user_verify () {
+
+	# authentication
+
+	frobulator.fwd "Verifying${marker_elp}"
+	echo
+
+	# verify user existence:
+	# loop through container's /etc/passwd file and check if 'user' exists
+
+	last_entry="$(tail -n 1 /etc/passwd)"
+
+	while read -r entry
+	do
+		IFS=':'
+
+		read USER _ USER_ID GROUP_ID GECOS HOME SHELL <<< "${entry}"
+
+		IFS=','
+
+		read FULL_NAME ROOM_NUMBER WORK_PHONE HOME_PHONE USER_EMAIL <<< "${GECOS}"
+
+		# reset IFS
+
+		IFS=' '
+
+		# valid user name found
+
+		if [[ "${user_name}" == "${USER}" ]]
+		then
+
+			frobulator.scs "User name exists" "[ '${user_name}' ]"
+			echo
+
+			break
+		fi
+
+		# user naem not found
+
+		if [[ "${entry}" == "${last_entry}" ]]
+		then
+
+			frobulator.err "User name does not exist" "[ '${user_name}' ]"
+			echo
+
+			frobulator.wrn "User must exist before proceeding."
+			echo
+
+			exit 1
+		fi
+
+	done < /etc/passwd
+}
+
+user_password_generate () {
+
+	# generate random password
+
+	echo $(cat /dev/urandom | tr -d -c 'a-zA-Z0-9' | fold -w ${1:-32} | head -n $(echo $(( RANDOM % 10 + 1 )) ) | tail -n 1)
+}
+
+user_information () {
+
+	# get 'user' information
+
+	frobulator.inf "This information will be used to set up the user account."
+	echo
+
+	frobulator.wrn "Information is required to set up your environment:"
+	frobulator.wrn "Fields cannot be empty."
+	echo
+
+	# handle user input for information_list
+
+	frobulator_return=()
+
+	frobulator.input ${list[@]}
+
+	eval ${frobulator_return[@]}
+}
+
+user_interactive () {
+
+	# generate 'user' account:
+	# interactive setup
+
+	frobulator.fwd "Generating account${marker_elp}"
+	echo
+
+	room_number=""
+	work_number=""
+	home_number=""
+
+	gecos+="${first_name} ${last_name},"
+	gecos+="${room_number},"
+	gecos+="${work_number},"
+	gecos+="${home_number},"
+	gecos+="${user_email}"
+
+	# generate user entry
+	# silent configuration:
+	# set --gecos and --disabled-password for fully silent execution
+
+	frobulator.wrn "Creating user" "[ ${user_name} ]"
+	echo
+
+	# use "${sink}" redirection:
+	# 'adduser' prevents stdout error redirect - cannot use 'frobulator.silence'
+
+	adduser					\
+		--gecos "${gecos}"	\
+		--shell "${SHELL}"	\
+		--disabled-password "${user_name}" > "${sink}"
+}
+
+user_automated () {
+
+	# generate 'user account:
+	# noninteractive setup
+
+	frobulator.fwd "Generating account${marker_elp}"
+	echo
+
+	if [ -z "${user_name}" ]
+	then
+		user_name="termux"
+	fi
+
+	if [ -z "${user_password}" ]
+	then
+		user_password=$(user_password_generate)
+	fi
+
+	user_name="${user_name}"
+	user_id="1000"
+	group_id="1000"
+	gecos="Dextop"
+	home="/home/${user_name}"
+
+	frobulator.wrn "Creating user" "[ ${user_name} ]"
+	echo
+
+	echo  "${user_name}:x:${user_id}:${group_id}:${gecos}:${home}:${SHELL}" >> /etc/passwd
+}
+
+user_superuser () {
+
+	# generate 'user' superuser privilege
+
+	if [[ $(command -v sudo) ]]
+	then
+		frobulator.fwd "Generating superuser privilege${marker_elp}"
+		echo
+
+		if [[ $(cat /etc/group | grep sudo) ]]
+		then
+			sudo_id=$(cat /etc/group | grep sudo | cut -d ':' -f 3)
+		else
+			sudo_id="27"
+		fi
+
+		# add 'user' to 'sudo' group
+
+		sed -i '/sudo.*/d' /etc/group
+
+		echo "sudo:x:${sudo_id}:${user_name}" >> /etc/group
+
+	else
+
+		frobulator.err "Command must be installed to proceed" "[ 'sudo' ]"
+		echo
+
+		frobulator.inf "Install 'sudo' using the system package manager and try again."
+		echo
+	fi
+}
+
+user_superuser_override () {
+
+	# set 'user' superuser privilege password override
+
+	if [[ $(command -v sudo) ]]
+	then
+		# verify sudoers default directory existence
+
+		if [ -d /etc/sudoers.d ]
+		then
+
+			# set password override
+
+			frobulator.write "${user_name} ALL=(ALL) NOPASSWD: ALL" /etc/sudoers.d "${user_name}"
+
+			# fix superuser privilege runtime errors
+
+			frobulator.write "Set disable_coredump false" /etc sudo.conf
+
+			# reset password override ownership:
+			# fixes 'sudo' errors
+
+			chmod 0440 /etc/sudoers.d/"${user_name}"
+
+		fi
+
+	else
+
+		frobulator.err "Command must be installed to proceed" "[ 'sudo' ]"
+		echo
+
+		frobulator.inf "Install 'sudo' using the system package manager and try again."
+		echo
+	fi
+}
+
+user_password () {
+
+	# set 'user' password
+
+	frobulator.fwd "Setting password${marker_elp}"
+	echo
+
+	# generate password credential for 'user' entry
+
+	# silent configuration:
+	# use 'chpasswd' to append user password to account
+
+	chpasswd <<< "${user_name}:${user_password}"
+}
+
+user_runtime () {
+
+	# generate 'user' runtime directory structure
+
+	frobulator.fwd "Setting runtime${marker_elp}"
+	echo
+
+	user_uid="$(id -u ${user_name})"
+	user_gid="$(id -g ${user_name})"
+
+	# generate runtime directory
+
+	frobulator.directory /run/user "${user_uid}"
+	frobulator.directory /run/user "${user_name}"
+
+	# set runtime directory permissions
+
+	chmod 700 /run/user/"${user_uid}"
+	chmod 700 /run/user/"${user_name}"
+
+	# set runtime directory ownership
+
+	chown "${user_uid}":"${user_gid}" -R /run/user/"${user_uid}"
+	chown "${user_uid}":"${user_gid}" -R /run/user/"${user_name}"
+}
+
+if [ "${option}" = "information" ]
+then
+	if [ -z "${user_name}" ]
+	then
+		information_list+=(user_name)
+	fi
+
+	if [ -z "${first_name}" ]
+	then
+		information_list+=(first_name)
+	fi
+
+	if [ -z "${last_name}" ]
+	then
+		information_list+=(last_name)
+	fi
+
+	if [ -z "${user_email}" ]
+	then
+		information_list+=(user_email)
+	fi
+
+	if [ -z "${user_password}" ]
+	then
+		information_list+=(user_password)
+	fi
+
+	list=(
+		${information_list[@]}
+	)
+
+	user_information
+
+	export user_name="${user_name}"
+	export first_name="${first_name}"
+	export last_name="${last_name}"
+	export user_email="${user_email}"
+	export user_password="${user_password}"
+fi
+
+if [ "${option}" = "password" ]
+then
+	if [ -z "${user_password}" ]
+	then
+		information_list+=(user_password)
+	fi
+
+	list=(
+		${information_list[@]}
+	)
+
+	user_information
+
+	user_password
+fi
+
+if [ "${option}" = "superuser" ]
+then
+	frobulator.install sudo
+
+	if [ -z "${user_name}" ]
+	then
+		information_list+=(user_name)
+	fi
+
+	list=(
+		${information_list[@]}
+	)
+
+	user_information
+
+	user_verify
+
+	# generate 'user' superuser privilege
+
+	user_superuser
+
+	# set 'user 'superuser password override
+
+	user_superuser_override
+fi
+
+if [ "${option}" = "username" ]
+then
+	if [ -z "${user_name}" ]
+	then
+		information_list+=(user_name)
+	fi
+
+	if [ -z "${first_name}" ]
+	then
+		information_list+=(first_name)
+	fi
+
+	if [ -z "${last_name}" ]
+	then
+		information_list+=(last_name)
+	fi
+
+	if [ -z "${user_email}" ]
+	then
+		information_list+=(user_email)
+	fi
+
+	if [ -z "${user_password}" ]
+	then
+		information_list+=(user_password)
+	fi
+
+	list=(
+		${information_list[@]}
+	)
+
+	user_information
+
+	# generate 'user' account: interactive
+
+	user_interactive
+
+	# set 'user' password
+
+	user_password
+
+	# generate 'user' runtime directory structure
+
+	user_runtime
+else
+
+	# generate 'user' account: automated
+
+	user_automated
+
+	# set 'user' password
+
+	user_password
+
+	# generate 'user' superuser privilege
+
+	user_superuser
+
+	# set 'user 'superuser password override
+
+	user_superuser_override
+
+	# generate 'user' runtime directory structure
+
+	user_runtime
+fi

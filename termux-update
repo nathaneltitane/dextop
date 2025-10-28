@@ -1,0 +1,268 @@
+#!/bin/bash
+
+# dependencies /////////////////////////////////////////////////////////////////
+
+if [[ -z $(command -v frobulator) ]]
+then
+	if [[ $(id -u -n) = "root" ]]
+	then
+		SUDO_HOME=/root
+
+		USER="${SUDO_USER}"
+
+		HOME=/home/"${USER}"
+	fi
+
+	if [[ -z $(command -v curl) ]]
+	then
+		yes | apt-get install curl
+	fi
+
+	if [ ! -d "${HOME}"/.local/bin ]
+	then
+		mkdir -p "${HOME}"/.local/bin
+	fi
+
+	curl -s -L get.frbltr.app > "${HOME}"/.local/bin/frobulator
+
+	chmod +x "${HOME}"/.local/bin/frobulator
+fi
+
+. "${HOME}"/.local/bin/frobulator
+
+# script ///////////////////////////////////////////////////////////////////////
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version //////////////////////////////////////////////////////////////////////
+
+version="05-29-2024"
+
+# usage ////////////////////////////////////////////////////////////////////////
+
+while (($#))
+do
+	case "${1}"
+	in
+		-f|--fdroid)
+			option="fdroid"
+		;;
+
+		-g|--github)
+			option="github"
+		;;
+
+		-h|--help)
+			echo
+			echo -e "Usage: ${script} -f | -g | [OPTION]"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-f, --fdroid   Use F-Droid as package update source."
+			echo -e "-g, --github   Use GitHub as package update source."
+			echo
+			echo -e "-h, --help     Show help and usage information."
+			echo
+			echo -e "'${script}' [ Version // ${version} ]"
+			echo
+
+			exit
+		;;
+
+			"")
+				# handle empty argument:
+				# use default values specified in script
+
+				:
+			;;
+
+		*)
+			echo
+			echo -e "Usage: ${script} -f | -g | [OPTION]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+		;;
+
+	esac
+
+	shift
+done
+
+# prompt ///////////////////////////////////////////////////////////////////////
+
+frobulator.script "Setting up ${script#*-}"
+
+# variables ////////////////////////////////////////////////////////////////////
+
+# defaults /////////////////////////////////////////////////////////////////////
+
+if [ -z "${option}" ]
+then
+	option="github"
+fi
+
+# functions ////////////////////////////////////////////////////////////////////
+
+clean () {
+
+	rm					\
+		--recursive		\
+		--force			 "${PREFIX}"/tmp/*.apk
+}
+
+trap 'clean' EXIT
+
+open_intent () {
+
+	open_command=()
+
+	open_command+=(am broadcast)
+	open_command+=(--user 0)
+	open_command+=(-a android.intent.action.VIEW)
+	open_command+=(-n com.termux/com.termux.app.TermuxOpenReceiver)
+	open_command+=(-d ${@})
+
+	frobulator.silence "${open_command[@]}"
+}
+
+# notice
+
+frobulator.err "Google Play Store updates and packages deprecated since November 2020!"
+echo
+
+frobulator.wrn "Back up Termux and uninstall the Google Play Store version of Termux."
+frobulator.nul "Visit the following wiki pages on how to proceed:"
+echo
+
+frobulator.inf "Backing up Termux: https://wiki.termux.com/wiki/Backing_up_Termux"
+frobulator.nul "Installing Termux: https://wiki.termux.com/wiki/installation"
+echo
+
+frobulator.wrn "Enable 'Install unknown apps' permission for Termux:"
+frobulator.nul "Settings > Security and Privacy > Install unknown apps > Termux"
+echo
+
+frobulator.ins "Select 'Package Installer' when prompted to proceed."
+echo
+
+frobulator.separate
+
+frobulator.ask "Check for updates?"
+
+frobulator.read reply
+
+if [[ "${reply}" = [yY]         ]] || \
+   [[ "${reply}" = [yY][eE][sS] ]]
+then
+	# process update
+	
+	packages_list=(
+		com.termux
+		com.termux.api
+	)
+
+	for package in ${packages_list[@]}
+	do
+		if [[ "${option}" = "fdroid" ]]
+		then
+			packages_url="https://f-droid.org/en/packages"
+			repository_url="https://f-droid.org/repo"
+			
+			archive=$(curl -s -L "${packages_url}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
+			archive_version=$(echo "${archive}" | cut -d '_' -f 2 | sed 's/\..*//g')
+			archive_url="${repository_url}/${archive}"
+		fi
+
+		if [[ "${option}" = "github.com" ]]
+		then
+			if [ "${package}" = "com.termux" ]
+			then
+				package_reference=termux-app
+				
+				installed_version=$(echo "${TERMUX_VERSION}" | cut -d '.' -f 2)
+			fi
+
+			if [ "${package}" = "com.termux.api" ]
+			then
+				package_reference=termux-api
+				
+				installed_version=$(echo "${TERMUX_API_VERSION}" | cut -d '.' -f 2)
+			fi
+			
+			release_url="https://api.github.com/repos/termux/termux-app/releases"
+			
+			release_version=$(curl -s "${release_url}" | jq -r 'first(.[].tag_name | select(test("^v[0-9]")))')
+			
+			release_number=$(release_version/v/)
+			
+			package_url="https://github.com/termux/${package_reference}/releases/download/${release_version}/${package_reference}_${release_version}"
+
+			# https://github.com/termux/termux-app/releases/download/v0.118.0/termux-app_v0.118.0+github-debug_arm64-v8a.apk
+		fi
+		
+		frobulator.inf "Checking for package update" "[ ${package} ]"
+		echo
+
+		frobulator.fwd "Verifying${marker_elp}"
+		echo
+
+		# application version is deprecated
+
+		if [ "${installed_version}" != "${archive_version}" ]
+		then
+			frobulator.wrn "Package update available" "[ ${package} // ${release_version} ]"
+			echo
+
+			# request update permission
+
+			frobulator.ask "Update?"
+
+			frobulator.read reply
+
+			if [[ "${reply}" = [yY]         ]] || \
+               [[ "${reply}" = [yY][eE][sS] ]]
+			then
+				frobulator.inf "Dowloading update" "[ ${package} // ${release_version} ]"
+				echo
+
+				# download
+
+				frobulator.download "${repository_url}" "${PREFIX}"/tmp "${archive}"
+
+				# update
+
+				frobulator.fwd "Updating${marker_elp}"
+				echo
+
+				open_intent "${PREFIX}"/tmp/"${archive}"
+			else
+				# continue without application update
+
+				frobulator.wrn "Proceeding without update:"
+				frobulator.nul "Setup process may encounter errors."
+				echo
+
+				frobulator.num "1" "Follow wiki pages stated above to correct issues."
+				frobulator.num "2" "Restart setup on a fresh Termux installation to proceed."
+				echo
+			fi
+
+			# termux application version is up to date
+		else
+			if [ "${installed_version}" == "${archive_version}" ]
+			then
+				frobulator.scs "Package version is up to date" "[ ${package} // ${archive_version} ]"
+				echo
+
+				frobulator.fwd "Continuing${marker_elp}"
+				echo
+			fi
+		fi
+	done
+fi
+
+frobulator.countdown 3 "Continuing" "[ ${script} ]"
