@@ -2,33 +2,90 @@
 
 # dependencies /////////////////////////////////////////////////////////////////
 
-if [[ -z $(command -v frobulator) ]]
+ticker () {
+
+	echo
+
+	for ticker in '>  ' '>> ' '>>>'
+	do
+		echo -n -e "\r[  ${ticker}  ] ${1^}..."
+
+		sleep 0.5
+	done
+
+	echo
+
+	echo
+
+}
+
+if [[ $(id -u -n) = "root" ]]
 then
-	if [[ $(id -u -n) = "root" ]]
+	USER="${SUDO_USER:-root}"
+
+	if [ "${USER}" = "root" ]
 	then
-		 SUDO_HOME=/root
-
-		 USER="${SUDO_USER}"
-
-		 HOME=/home/"${USER}"
+		HOME=/root
+	else
+		HOME="/home/${USER}"
 	fi
-
-	if [[ -z $(command -v curl) ]]
-	then
-		 yes | apt-get install curl
-	fi
-
-	if [ ! -d "${HOME}"/.local/bin ]
-	then
-		 mkdir -p "${HOME}"/.local/bin
-	fi
-
-	curl -s -L get.frbltr.app > "${HOME}"/.local/bin/frobulator
-
-	chmod +x "${HOME}"/.local/bin/frobulator
 fi
 
-. "${HOME}"/.local/bin/frobulator
+ticker checking
+
+package_managers_list=(
+	"apt-get --quiet --quiet update > /dev/null 2>&1; apt-get --quiet --quiet install --yes"
+	"dnf --quiet install --assumeyes"
+	"yum --quiet install --assumeyes"
+	"apk add --quiet"
+	"pacman --sync --refresh --noconfirm --noprogressbar"
+	"zypper --quiet --non-interactive install"
+)
+
+package="curl"
+
+if [[ -z $(command -v "${package}") ]]
+then
+	for package_manager in "${package_managers_list[@]}"
+	do
+		entry="${package_manager%% *}"
+
+		if [[ -n $(command -v "${entry}") ]]
+		then
+			eval "${package_manager} ${package} > /dev/null 2>&1"
+
+			break
+		fi
+	done
+
+	if [[ -z $(command -v "${package}") ]]
+	then
+		echo "[  !  ] Unable to install or binary not found /////////////////////// [ '${package}' ]"
+		echo
+
+		exit 1
+	fi
+fi
+
+mkdir -p "${HOME}"/.local/bin
+
+frobulator="${HOME}"/.local/bin/frobulator
+
+version_online=$(curl -s -L get.frbltr.app | grep -m 1 '^# version=' | cut -d '"' -f 2)
+version_local=$(grep -m 1 '^# version=' "${frobulator}" 2>/dev/null | cut -d '"' -f 2)
+
+version_local="${version_local:-1970-01-01}"
+
+if [ ! -f "${frobulator}" ] || [[ "${version_online}" > "${version_local}" ]]
+then
+	curl -s -L get.frbltr.app > "${frobulator}"
+
+	chmod +x "${frobulator}"
+fi
+
+ticker initializing
+
+source "${frobulator}"
 
 # script ///////////////////////////////////////////////////////////////////////
 
