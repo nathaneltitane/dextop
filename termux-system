@@ -2,96 +2,99 @@
 
 # dependencies /////////////////////////////////////////////////////////////////
 
-ticker () {
-
-	echo
-
-	for ticker in '>  ' '>> ' '>>>'
-	do
-		echo -n -e "\r[  ${ticker}  ] ${1^}..."
-
-		sleep 0.5
-	done
-
-	echo
-
-	echo
-
-}
-
-if [[ $(id -u -n) = "root" ]]
+if [[ "${frobulator_loaded}" != "true" ]]
 then
-	USER="${SUDO_USER:-root}"
+	ticker () {
 
-	if [ "${USER}" = "root" ]
+		echo
+
+		for ticker in '>  ' '>> ' '>>>'
+		do
+			echo -n -e "\r[  ${ticker}  ] ${1^}..."
+
+			sleep 0.5
+		done
+
+		echo
+
+		echo
+
+	}
+
+	if [[ $(id -u -n) = "root" ]]
 	then
-		HOME=/root
-	else
-		HOME="/home/${USER}"
-	fi
-fi
+		USER="${SUDO_USER:-root}"
 
-ticker checking
-
-package_managers_list=(
-	"apt-get --quiet --quiet update > /dev/null 2>&1; apt-get --quiet --quiet install --yes"
-	"dnf --quiet install --assumeyes"
-	"yum --quiet install --assumeyes"
-	"apk add --quiet"
-	"pacman --sync --refresh --noconfirm --noprogressbar"
-	"zypper --quiet --non-interactive install"
-)
-
-package="curl"
-
-if [[ -z $(command -v "${package}") ]]
-then
-	for package_manager in "${package_managers_list[@]}"
-	do
-		entry="${package_manager%% *}"
-
-		if [[ -n $(command -v "${entry}") ]]
+		if [ "${USER}" = "root" ]
 		then
-			eval "${package_manager} ${package} > /dev/null 2>&1"
-
-			break
+			HOME=/root
+		else
+			HOME="/home/${USER}"
 		fi
-	done
+	fi
+
+	ticker checking
+
+	package_managers_list=(
+		"apt-get --quiet --quiet update > /dev/null 2>&1; apt-get --quiet --quiet install --yes"
+		"dnf --quiet install --assumeyes"
+		"yum --quiet install --assumeyes"
+		"apk add --quiet"
+		"pacman --sync --refresh --noconfirm --noprogressbar"
+		"zypper --quiet --non-interactive install"
+	)
+
+	package="curl"
 
 	if [[ -z $(command -v "${package}") ]]
 	then
-		echo "[  !  ] Unable to install or binary not found /////////////////////// [ '${package}' ]"
-		echo
+		for package_manager in "${package_managers_list[@]}"
+		do
+			entry="${package_manager%% *}"
 
-		exit 1
+			if [[ -n $(command -v "${entry}") ]]
+			then
+				eval "${package_manager} ${package} > /dev/null 2>&1"
+
+				break
+			fi
+		done
+
+		if [[ -z $(command -v "${package}") ]]
+		then
+			echo "[  !  ] Unable to install or binary not found /////////////////////// [ '${package}' ]"
+			echo
+
+			exit 1
+		fi
 	fi
+
+	mkdir -p "${HOME}"/.local/bin
+
+	frobulator="${HOME}"/.local/bin/frobulator
+
+	version_online=$(curl -s -L get.frbltr.app | grep -m 1 '^# version=' | cut -d '"' -f 2)
+	version_local=$(grep -m 1 '^# version=' "${frobulator}" 2>/dev/null | cut -d '"' -f 2)
+
+	version_local="${version_local:-1970-01-01}"
+
+	if [ ! -f "${frobulator}" ] || [[ "${version_online}" > "${version_local}" ]]
+	then
+		curl -s -L get.frbltr.app > "${frobulator}"
+
+		chmod +x "${frobulator}"
+	fi
+
+	ticker initializing
+
+	source "${frobulator}"
 fi
-
-mkdir -p "${HOME}"/.local/bin
-
-frobulator="${HOME}"/.local/bin/frobulator
-
-version_online=$(curl -s -L get.frbltr.app | grep -m 1 '^# version=' | cut -d '"' -f 2)
-version_local=$(grep -m 1 '^# version=' "${frobulator}" 2>/dev/null | cut -d '"' -f 2)
-
-version_local="${version_local:-1970-01-01}"
-
-if [ ! -f "${frobulator}" ] || [[ "${version_online}" > "${version_local}" ]]
-then
-	curl -s -L get.frbltr.app > "${frobulator}"
-
-	chmod +x "${frobulator}"
-fi
-
-ticker initializing
-
-source "${frobulator}"
 
 # superuser ////////////////////////////////////////////////////////////////////
 
 export self_arguments="${@}"
 
-# frobulator.escalate
+frobulator.escalate
 
 # script ///////////////////////////////////////////////////////////////////////
 
