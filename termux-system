@@ -4,9 +4,9 @@
 
 if [[ "${frobulator_loaded}" != "true" ]]
 then
-	ticker () {
+	echo
 
-		echo
+	ticker () {
 
 		for ticker in '>  ' '>> ' '>>>'
 		do
@@ -74,6 +74,7 @@ then
 	frobulator="${HOME}"/.local/bin/frobulator
 
 	version_online=$(curl -s -L get.frbltr.app | grep -m 1 '^# version=' | cut -d '"' -f 2)
+
 	version_local=$(grep -m 1 '^# version=' "${frobulator}" 2>/dev/null | cut -d '"' -f 2)
 
 	version_local="${version_local:-1970-01-01}"
