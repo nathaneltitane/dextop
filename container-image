@@ -649,7 +649,7 @@ image_environment () {
 	# generate environment '$PATH' variable
 
 	CONTAINER_ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
-	
+
 	# set path:
 	# in order of retreival
 
@@ -687,7 +687,7 @@ image_environment () {
 	PATH=${CONTAINER_PATH}
 	PREFIX=${PREFIX}
 	FILE
-	
+
 	unset CONTAINER_ROOT
 
 	frobulator.complete "${script} : ${FUNCNAME}"

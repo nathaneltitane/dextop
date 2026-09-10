@@ -302,7 +302,7 @@ then
 
 	frobulator.inf "Setting up all Termux addon packages."
 	echo
-	
+
 	frobulator.fwd "Installing${marker_elp}"
 	echo
 
