@@ -89,6 +89,8 @@ then
 	ticker initializing
 
 	source "${frobulator}"
+
+	export self_arguments="${@}"
 fi
 
 # superuser ////////////////////////////////////////////////////////////////////
