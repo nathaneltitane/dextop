@@ -1329,7 +1329,7 @@ then
 
 		if [ ! -f "${HOME}"/.dextop/dextop-login-checkpoint ]
 		then
-			frobulator.write login "${HOME}"/.dextop dextop-login
+			frobulator.write "write" login "${HOME}"/.dextop dextop-login
 
 			frobulator.file "${HOME}"/.dextop dextop-login-checkpoint
 		fi
@@ -1338,7 +1338,7 @@ then
 
 		if [ ! -f "${HOME}"/.dextop/dextop-logout-checkpoint ]
 		then
-			frobulator.write logout "${HOME}"/.dextop dextop-logout
+			frobulator.write "write" logout "${HOME}"/.dextop dextop-logout
 
 			frobulator.file "${HOME}"/.dextop dextop-logout-checkpoint
 		fi
@@ -1365,7 +1365,7 @@ then
 
 		if [ ! -f "${HOME}"/.dextop/dextop-ticker-checkpoint ]
 		then
-			frobulator.write 0 "${HOME}"/.dextop dextop-ticker
+			frobulator.write "write" 0 "${HOME}"/.dextop dextop-ticker
 
 			frobulator.file "${HOME}"/.dextop dextop-ticker-checkpoint
 		fi
