@@ -378,11 +378,11 @@ user_superuser_override () {
 
 			# set password override
 
-			frobulator.write "append" "${user_name} ALL=(ALL) NOPASSWD: ALL" /etc/sudoers.d "${user_name}"
+			frobulator.write append "${user_name} ALL=(ALL) NOPASSWD: ALL" /etc/sudoers.d "${user_name}"
 
 			# fix superuser privilege runtime errors
 
-			frobulator.write "append" "Set disable_coredump false" /etc sudo.conf
+			frobulator.write append "Set disable_coredump false" /etc sudo.conf
 
 			# reset password override ownership:
 			# fixes 'sudo' errors
