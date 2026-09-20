@@ -270,7 +270,7 @@ if [ -z "${container}" ]
 then
 	container="${PREFIX}"/cnt/debian/12
 
-	frobulator.write "write" "${container}" "${HOME}"/.dextop dextop-container
+	frobulator.write write "${container}" "${HOME}"/.dextop dextop-container
 fi
 
 if [ "${option}" = "setup"       ] || \
@@ -303,7 +303,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-environment ]
 	then
-		frobulator.write "write" "${environment}" "${HOME}"/.dextop dextop-environment
+		frobulator.write write "${environment}" "${HOME}"/.dextop dextop-environment
 
 		unset environment
 	fi
@@ -328,7 +328,7 @@ then
 			session="console"
 		fi
 
-		frobulator.write "write" "${session}" "${HOME}"/.dextop dextop-session
+		frobulator.write write "${session}" "${HOME}"/.dextop dextop-session
 
 		unset session
 	fi
@@ -889,7 +889,7 @@ bookmarks_intent () {
 	do
 		if [ -d ${bookmarks_directories_list[$index]} ]
 		then
-			frobulator.write "append" "file://${bookmarks_directories_list[$index]} ${bookmarks_labels_list[$index]}" "${HOME}"/.config/gtk-3.0 bookmarks
+			frobulator.write append "file://${bookmarks_directories_list[$index]} ${bookmarks_labels_list[$index]}" "${HOME}"/.config/gtk-3.0 bookmarks
 		fi
 	done
 
@@ -1329,7 +1329,7 @@ then
 
 		if [ ! -f "${HOME}"/.dextop/dextop-login-checkpoint ]
 		then
-			frobulator.write "write" login "${HOME}"/.dextop dextop-login
+			frobulator.write write login "${HOME}"/.dextop dextop-login
 
 			frobulator.file "${HOME}"/.dextop dextop-login-checkpoint
 		fi
@@ -1338,7 +1338,7 @@ then
 
 		if [ ! -f "${HOME}"/.dextop/dextop-logout-checkpoint ]
 		then
-			frobulator.write "write" logout "${HOME}"/.dextop dextop-logout
+			frobulator.write write logout "${HOME}"/.dextop dextop-logout
 
 			frobulator.file "${HOME}"/.dextop dextop-logout-checkpoint
 		fi
@@ -1365,7 +1365,7 @@ then
 
 		if [ ! -f "${HOME}"/.dextop/dextop-ticker-checkpoint ]
 		then
-			frobulator.write "write" 0 "${HOME}"/.dextop dextop-ticker
+			frobulator.write write 0 "${HOME}"/.dextop dextop-ticker
 
 			frobulator.file "${HOME}"/.dextop dextop-ticker-checkpoint
 		fi
