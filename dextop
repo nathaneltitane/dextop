@@ -270,7 +270,7 @@ if [ -z "${container}" ]
 then
 	container="${PREFIX}"/cnt/debian/12
 
-	frobulator.flag "${container}" "${HOME}"/.dextop dextop-container
+	frobulator.write "write" "${container}" "${HOME}"/.dextop dextop-container
 fi
 
 if [ "${option}" = "setup"       ] || \
@@ -303,7 +303,7 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-environment ]
 	then
-		frobulator.flag "${environment}" "${HOME}"/.dextop dextop-environment
+		frobulator.write "write" "${environment}" "${HOME}"/.dextop dextop-environment
 
 		unset environment
 	fi
@@ -328,7 +328,7 @@ then
 			session="console"
 		fi
 
-		frobulator.flag "${session}" "${HOME}"/.dextop dextop-session
+		frobulator.write "write" "${session}" "${HOME}"/.dextop dextop-session
 
 		unset session
 	fi
