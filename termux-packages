@@ -92,7 +92,10 @@ then
 
 	source "${frobulator}"
 
-	export self_arguments="${@}"
+	# script arguments for 'frobulator.escalate': kept as an array - restored
+	# exactly (spaces, quotes, empty arguments) when restarting as superuser
+
+	self_arguments=("${@}")
 fi
 
 # superuser ////////////////////////////////////////////////////////////////////
