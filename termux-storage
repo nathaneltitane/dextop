@@ -122,15 +122,15 @@ do
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} -c | -e [Environment] | -t | -n | -b | -u [Update Type] [Utility Name] | [OPTION]"
+			echo -e "Usage: ./${script} -c | -e [Environment] | -t | -n | -b | -u [Update Type] [Utility Name] | [OPTION]"
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-l, --link    Link and unify storage directories."
+			echo -e "-l, --link          Create [l]inks to unify storage directories."
 			echo
-			echo -e "-h, --help          Show help and usage information."
+			echo -e "-h, --help          Show [h]elp and usage information."
 			echo
-			echo -e "'${script}' [ Version // ${version} ]"
+			echo -e "'${script}'         [ Version // ${version} ]"
 			echo
 
 			exit
@@ -145,10 +145,10 @@ do
 
 		*)
 			echo
-			echo -e "Usage: ${script} -c | -e [Environment] | -t | -n | -b | -u [Update] [Name] | [OPTION]"
+			echo -e "Usage: ./${script} -c | -e [Environment] | -t | -n | -b | -u [Update Type] [Utility Name] | [OPTION]"
 			echo
-			echo -e "${script}: Unknown option '${1}'"
-			echo -e "Type './${script} --help' for help and usage information."
+			echo -e "Unknown option: '${script} ${1}':"
+			echo -e "Type './${script} -h' for help and usage information."
 			echo
 
 			exit 1

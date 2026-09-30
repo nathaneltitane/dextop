@@ -146,17 +146,19 @@ do
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} [OPTION]"
+			echo -e "Usage: ./${script} [OPTION]"
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-i, --information    Gather setup information."
-			echo -e "-u, --username       Setup user account."
-			echo -e "-p, --password       Set or change user password."
+			echo -e "-i, --information   Gather setup [i]nformation."
 			echo
-			echo -e "-h, --help           Show help and usage information."
+			echo -e "-u, --username      Set up [u]ser account."
 			echo
-			echo -e "'${script}' [ Version // ${version} ]"
+			echo -e "-p, --password      Set or change user [p]assword."
+			echo
+			echo -e "-h, --help          Show [h]elp and usage information."
+			echo
+			echo -e "'${script}'         [ Version // ${version} ]"
 			echo
 
 			exit
@@ -171,18 +173,20 @@ do
 
 		*)
 			echo
-			echo -e "Usage: ${script} [OPTION]"
+			echo -e "Usage: ./${script} [OPTION]"
 			echo
-			echo -e "${script}: Unknown option '${1}'"
-			echo -e "Type './${script} --help' for help and usage information."
+			echo -e "Unknown option: '${script} ${1}':"
+			echo -e "Type './${script} -h' for help and usage information."
 			echo
 
 			exit 1
+
 		;;
 
-	esac
+		esac
 
 	shift
+
 done
 
 # variables ////////////////////////////////////////////////////////////////////

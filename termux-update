@@ -126,42 +126,45 @@ do
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} -f | -g | [OPTION]"
+			echo -e "Usage: ./${script} -f | -g | [OPTION]"
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-f, --fdroid   Use F-Droid as package update source."
-			echo -e "-g, --github   Use GitHub as package update source."
+			echo -e "-f, --fdroid        Use [f]-droid as package update source."
 			echo
-			echo -e "-h, --help     Show help and usage information."
+			echo -e "-g, --github        Use [g]ithub as package update source."
 			echo
-			echo -e "'${script}' [ Version // ${version} ]"
+			echo -e "-h, --help          Show [h]elp and usage information."
+			echo
+			echo -e "'${script}'         [ Version // ${version} ]"
 			echo
 
 			exit
 		;;
 
-			"")
-				# handle empty argument:
-				# use default values specified in script
+		"")
+			# handle empty argument:
+			# use default values specified in script
 
-				:
-			;;
+			:
+		;;
 
 		*)
 			echo
-			echo -e "Usage: ${script} -f | -g | [OPTION]"
+			echo -e "Usage: ./${script} -f | -g | [OPTION]"
 			echo
-			echo -e "${script}: Unknown option '${1}'"
-			echo -e "Type './${script} --help' for help and usage information."
+			echo -e "Unknown option: '${script} ${1}':"
+			echo -e "Type './${script} -h' for help and usage information."
 			echo
 
 			exit 1
+
 		;;
 
-	esac
+		esac
 
 	shift
+
 done
 
 # variables ////////////////////////////////////////////////////////////////////
