@@ -137,13 +137,13 @@ do
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-i, --image         Specify distribution [i]mage name and version."
+			echo -e "-i, --image        Specify distribution [i]mage name and version."
 			echo
-			echo -e "-s, --selection     Show setup [s]election options."
+			echo -e "-s, --selection    Show setup [s]election options."
 			echo
-			echo -e "-h, --help          Show [h]elp and usage information."
+			echo -e "-h, --help         Show [h]elp and usage information."
 			echo
-			echo -e "'${script}'         [ Version // ${version} ]"
+			echo -e "'${script}'        [ Version // ${version} ]"
 			echo
 
 			exit

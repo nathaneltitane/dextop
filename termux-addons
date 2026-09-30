@@ -137,14 +137,14 @@ do
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-s, --selection     Update application package [s]election."
+			echo -e "-s, --selection    Update application package [s]election."
 			echo
-			echo -e "                    [ all ]"
-			echo -e "                    [ addon ]"
+			echo -e "                   [ all ]"
+			echo -e "                   [ addon ]"
 			echo
-			echo -e "-h, --help          Show [h]elp and usage information."
+			echo -e "-h, --help         Show [h]elp and usage information."
 			echo
-			echo -e "'${script}'         [ Version // ${version} ]"
+			echo -e "'${script}'        [ Version // ${version} ]"
 			echo
 
 			exit
