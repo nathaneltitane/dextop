@@ -133,18 +133,18 @@ do
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} -s [Selection Type] [Addon Name] | [OPTION]"
+			echo -e "Usage: ./${script} -s [Selection Type] [Addon Name] | [OPTION]"
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-s, --selection    Update application packages and utilities."
+			echo -e "-s, --selection     Update application package [s]election."
 			echo
-			echo -e "                   [ all ]"
-			echo -e "                   [ addon ]"
+			echo -e "                    [ all ]"
+			echo -e "                    [ addon ]"
 			echo
-			echo -e "-h, --help         Show help and usage information."
+			echo -e "-h, --help          Show [h]elp and usage information."
 			echo
-			echo -e "'${script}' [ Version // ${version} ]"
+			echo -e "'${script}'         [ Version // ${version} ]"
 			echo
 
 			exit
@@ -159,10 +159,10 @@ do
 
 		*)
 			echo
-			echo -e "Usage: ${script} -s [Selection Type] [Addon Name] | [OPTION]"
+			echo -e "Usage: ./${script} -s [Selection Type] [Addon Name] | [OPTION]"
 			echo
-			echo -e "${script}: Unknown option '${1}'"
-			echo -e "Type './${script} --help' for help and usage information."
+			echo -e "Unknown option: '${script} ${1}':"
+			echo -e "Type './${script} -h' for help and usage information."
 			echo
 
 			exit 1

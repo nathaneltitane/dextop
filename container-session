@@ -161,53 +161,57 @@ do
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} -o [Display Server] | -x | -l | -u [User Name] | -d [Directory] | -f [Application] | [OPTION]"
+			echo -e "Usage: ./${script} -o [Display Server] | -x | -l | -u [User Name] | -d [Directory] | -f [Application] | [OPTION]"
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-o, --start        Start display session server."
-			echo -e "                   [ vnc ]"
-			echo -e "                   [ x11 ] [ Default ]"
+			echo -e "-o, --start         Start display session server and [o]pen the desktop session."
 			echo
-			echo -e "-x, --stop         Stop display session server."
+			echo -e "                    [ vnc ]"
+			echo -e "                    [ x11 ] [ Default ]"
 			echo
-			echo -e "-l, --list         List display server information and parameters."
+			echo -e "-x, --stop          E[x]it the desktop session and stop the display session server."
 			echo
-			echo -e "-p, --password     Generate display session password. [ vnc ]"
+			echo -e "-l, --list          Show [l]ist of display server information and parameters."
 			echo
-			echo -e "-u, --username     Specify user name for session login."
+			echo -e "-p, --password      Generate display session [p]assword."
 			echo
-			echo -e "-d, --directory    Specify container base directory as /path/to/base/directory containing /distribution/version"
+			echo -e "                    [ vnc ]"
 			echo
-			echo -e "-f, --focus        Specify application to load."
+			echo -e "-u, --username      Specify [u]ser name for session login."
 			echo
-			echo -e "-h, --help         Show help and usage information."
+			echo -e "-d, --directory     Specify container base [d]irectory containing /distribution/version."
 			echo
-			echo -e "'${script}' [ Version // ${version} ]"
+			echo -e "-f, --focus         Set display session [f]ocus on the specified application."
+			echo
+			echo -e "-h, --help          Show [h]elp and usage information."
+			echo
+			echo -e "'${script}'         [ Version // ${version} ]"
 			echo
 
 			exit
 		;;
 
-			"")
-				# handle empty argument:
-				# use default values specified in script
+		"")
+			# handle empty argument:
+			# use default values specified in script
 
-				:
-			;;
+			:
+		;;
 
 		*)
 			echo
-			echo -e "Usage: ${script} -o [Display Server] | -x | -l | -u [User Name] | -d [Directory] | -f [Application] | [OPTION]"
+			echo -e "Usage: ./${script} -o [Display Server] | -x | -l | -u [User Name] | -d [Directory] | -f [Application] | [OPTION]"
 			echo
-			echo -e "${script}: Unknown option '${1}'"
-			echo -e "Type './${script} --help' for help and usage information."
+			echo -e "Unknown option: '${script} ${1}':"
+			echo -e "Type './${script} -h' for help and usage information."
 			echo
 
 			exit 1
+
 		;;
 
-	esac
+		esac
 
 	shift
 

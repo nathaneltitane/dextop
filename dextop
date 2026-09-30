@@ -181,36 +181,36 @@ do
 
 		-h|--help)
 			echo
-			echo -e "Usage: ${script} -c | -e [Environment] | -t | -n | -l | -i | -a | -d | -b | -u [Update] [Name] | -p | -h [OPTION]"
+			echo -e "Usage: ./${script} -c | -e [Environment] | -t | -n | -l | -i | -a | -d | -b | -u [Update] [Name] | -p | -h [OPTION]"
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-c, --console       Setup Console access to environment and utilities only."
+			echo -e "-c, --console       Set up [c]onsole access to environment and utilities only."
 			echo
-			echo -e "-e, --environment   Setup desktop environment and utilities."
+			echo -e "-e, --environment   Set up desktop [e]nvironment and utilities."
 			echo
 			echo -e "                    [ i3 ]"
 			echo -e "                    [ xfce ]    [ Default  ]"
 			echo -e "                    [ console ] [ Fallback ]"
 			echo
-			echo -e "-t, --termux        Setup [T]ermux environment and utilities only."
+			echo -e "-t, --termux        Set up [t]ermux environment and utilities only."
 			echo
-			echo -e "-n, --container     Setup Co[n]tainer environment and utilities only."
+			echo -e "-n, --container     Set up co[n]tainer environment and utilities only."
 			echo
-			echo -e "-l, --link          [L]ink and unify storage directories."
+			echo -e "-l, --link          Create [l]inks to unify storage directories."
 			echo
-			echo -e "-i, --initialize    [I]nitialize setup directories and load configurations."
+			echo -e "-i, --initialize    Run [i]nitialization of setup directories and load configurations."
 			echo
-			echo -e "-a, --addons        Setup Termux [a]ddons and companion applications."
+			echo -e "-a, --addons        Set up Termux [a]ddons and companion applications."
 			echo
-			echo -e "-d, --additions     Setup Dextop a[d]ditions."
+			echo -e "-d, --additions     Set up Dextop a[d]ditions."
 			echo
-			echo -e "-b, --backup        Backup Termux user configuration files."
+			echo -e "-b, --backup        Create [b]ackup of termux user configuration files."
 			echo
-			echo -e "-u, --update        Update application packages and utilities."
+			echo -e "-u, --update        Run [u]pdate of application packages and utilities."
 			echo
 			echo -e "                    [ all ]"
-			echo -e "                    [ dextop ] [ Default ]"
+			echo -e "                    [ dextop ]      [ Default ]"
 			echo -e "                    [ additions ]"
 			echo -e "                    [ background ]"
 			echo -e "                    [ interface ]"
@@ -219,11 +219,11 @@ do
 			echo -e "                    [ termux ]"
 			echo -e "                    [ utility ]"
 			echo
-			echo -e "-p, --purge         Purge setup components and packages."
+			echo -e "-p, --purge         Run [p]urge of setup components and packages."
 			echo
-			echo -e "-h, --help          Show help and usage information."
+			echo -e "-h, --help          Show [h]elp and usage information."
 			echo
-			echo -e "'${script}' [ Version // ${version} ]"
+			echo -e "'${script}'         [ Version // ${version} ]"
 			echo
 
 			exit
@@ -238,10 +238,10 @@ do
 
 		*)
 			echo
-			echo -e "Usage: ${script} -c | -e [Environment] | -t | -n | -l | -i | -a | -d | -b | -u [Update] [Name] | -p | -h [OPTION]"
+			echo -e "Usage: ./${script} -c | -e [Environment] | -t | -n | -l | -i | -a | -d | -b | -u [Update] [Name] | -p | -h [OPTION]"
 			echo
-			echo -e "${script}: Unknown option '${1}'"
-			echo -e "Type './${script} --help' for help and usage information."
+			echo -e "Unknown option: '${script} ${1}':"
+			echo -e "Type './${script} -h' for help and usage information."
 			echo
 
 			exit 1
