@@ -150,15 +150,15 @@ do
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-i, --information   Gather setup [i]nformation."
+			echo -e "-i, --information    Gather setup [i]nformation."
 			echo
-			echo -e "-u, --username      Set up [u]ser account."
+			echo -e "-u, --username       Set up [u]ser account."
 			echo
-			echo -e "-p, --password      Set or change user [p]assword."
+			echo -e "-p, --password       Set or change user [p]assword."
 			echo
-			echo -e "-h, --help          Show [h]elp and usage information."
+			echo -e "-h, --help           Show [h]elp and usage information."
 			echo
-			echo -e "'${script}'         [ Version // ${version} ]"
+			echo -e "'${script}'          [ Version // ${version} ]"
 			echo
 
 			exit

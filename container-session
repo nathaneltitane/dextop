@@ -165,28 +165,28 @@ do
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-o, --start         Start display session server and [o]pen the desktop session."
+			echo -e "-o, --start        Start display session server and [o]pen the desktop session."
 			echo
-			echo -e "                    [ vnc ]"
-			echo -e "                    [ x11 ] [ Default ]"
+			echo -e "                   [ vnc ]"
+			echo -e "                   [ x11 ] [ Default ]"
 			echo
-			echo -e "-x, --stop          E[x]it the desktop session and stop the display session server."
+			echo -e "-x, --stop         E[x]it the desktop session and stop the display session server."
 			echo
-			echo -e "-l, --list          Show [l]ist of display server information and parameters."
+			echo -e "-l, --list         Show [l]ist of display server information and parameters."
 			echo
-			echo -e "-p, --password      Generate display session [p]assword."
+			echo -e "-p, --password     Generate display session [p]assword."
 			echo
-			echo -e "                    [ vnc ]"
+			echo -e "                   [ vnc ]"
 			echo
-			echo -e "-u, --username      Specify [u]ser name for session login."
+			echo -e "-u, --username     Specify [u]ser name for session login."
 			echo
-			echo -e "-d, --directory     Specify container base [d]irectory containing /distribution/version."
+			echo -e "-d, --directory    Specify container base [d]irectory containing /distribution/version."
 			echo
-			echo -e "-f, --focus         Set display session [f]ocus on the specified application."
+			echo -e "-f, --focus        Set display session [f]ocus on the specified application."
 			echo
-			echo -e "-h, --help          Show [h]elp and usage information."
+			echo -e "-h, --help         Show [h]elp and usage information."
 			echo
-			echo -e "'${script}'         [ Version // ${version} ]"
+			echo -e "'${script}'        [ Version // ${version} ]"
 			echo
 
 			exit

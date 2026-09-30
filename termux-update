@@ -130,13 +130,13 @@ do
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-f, --fdroid        Use [f]-droid as package update source."
+			echo -e "-f, --fdroid    Use [f]-droid as package update source."
 			echo
-			echo -e "-g, --github        Use [g]ithub as package update source."
+			echo -e "-g, --github    Use [g]ithub as package update source."
 			echo
-			echo -e "-h, --help          Show [h]elp and usage information."
+			echo -e "-h, --help      Show [h]elp and usage information."
 			echo
-			echo -e "'${script}'         [ Version // ${version} ]"
+			echo -e "'${script}'     [ Version // ${version} ]"
 			echo
 
 			exit

@@ -143,27 +143,27 @@ do
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-a, --activity      Run desktop environment [a]ctivities through native Android application activities."
+			echo -e "-a, --activity    Run desktop environment [a]ctivities through native Android application activities."
 			echo
-			echo -e "                    [ google-chrome ] | [ chrome ]"
-			echo -e "                    [ google-mail ]   | [ gmail ]"
-			echo -e "                    [ terminal ]"
+			echo -e "                  [ google-chrome ] | [ chrome ]"
+			echo -e "                  [ google-mail ]   | [ gmail ]"
+			echo -e "                  [ terminal ]"
 			echo
-			echo -e "-c, --action        Run desktop environment activities through native Android application a[c]tions."
+			echo -e "-c, --action      Run desktop environment activities through native Android application a[c]tions."
 			echo
-			echo -e "                    [ camera ]   | [ photo ] | [ picture ] | [ selfie ]"
-			echo -e "                    [ music ] [ player ] | [ song ] | [ audio ]"
+			echo -e "                  [ camera ]   | [ photo ] | [ picture ] | [ selfie ]"
+			echo -e "                  [ music ] [ player ] | [ song ] | [ audio ]"
 			echo
-			echo -e "-n, --handle        Ha[n]dle desktop environment mimetypes through native Android applications."
+			echo -e "-n, --handle      Ha[n]dle desktop environment mimetypes through native Android applications."
 			echo
-			echo -e "                    [ email ]   | [ mail ]"
-			echo -e "                    [ browser ] | [ link ] | [ web ]"
-			echo -e "                    [ message ] | [ text ] | [ sms ]"
-			echo -e "                    [ file ]"
+			echo -e "                  [ email ]   | [ mail ]"
+			echo -e "                  [ browser ] | [ link ] | [ web ]"
+			echo -e "                  [ message ] | [ text ] | [ sms ]"
+			echo -e "                  [ file ]"
 			echo
-			echo -e "-h, --help          Show [h]elp and usage information."
+			echo -e "-h, --help        Show [h]elp and usage information."
 			echo
-			echo -e "'${script}'         [ Version // ${version} ]"
+			echo -e "'${script}'       [ Version // ${version} ]"
 			echo
 
 			exit
