@@ -224,10 +224,8 @@ addon_intent () {
 
 		else
 			frobulator.err "Unknown addon name" "[ '${addon}' ]"
-			echo
 
 			frobulator.fwd "Listing known addons${marker_elp}"
-			echo
 
 			frobulator.timeout
 
@@ -240,10 +238,8 @@ addon_intent () {
 			IFS=''
 
 			frobulator.msg "Review utility name spelling and try again."
-			echo
 
 			frobulator.inf "Update all known utilities using 'all' argument."
-			echo
 
 			exit 1
 		fi
@@ -278,14 +274,11 @@ trap 'clean' EXIT
 
 frobulator.inf "This utility sets up Termux project addons:"
 frobulator.nul "The addons are fetched directly from their respective GitHub project release pages."
-echo
 
 frobulator.wrn "Enable 'Install unknown apps' permission for Termux and all other companion applications:"
 frobulator.nul "Settings > Security and Privacy > Install unknown apps > Termux[:Application]"
-echo
 
 frobulator.ins "Select 'Package Installer' when prompted to proceed."
-echo
 
 frobulator.separate
 
@@ -299,18 +292,14 @@ then
 	addon="all"
 
 	frobulator.inf "Setting up all Termux addon packages."
-	echo
 
 	frobulator.fwd "Installing${marker_elp}"
-	echo
 
 else
 	frobulator.wrn "X11 server sessions require Termux:X11 to be installed."
-	echo
 
 	frobulator.inf "Restart this utility to install the companion application"
 	frobulator.nul "or fetch the package manually from the project release page."
-	echo
 
 	exit
 fi

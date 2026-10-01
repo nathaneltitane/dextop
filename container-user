@@ -199,7 +199,6 @@ user_verify () {
 	# authentication
 
 	frobulator.fwd "Verifying${marker_elp}"
-	echo
 
 	# verify user existence:
 	# loop through container's /etc/passwd file and check if 'user' exists
@@ -226,7 +225,6 @@ user_verify () {
 		then
 
 			frobulator.scs "User name exists" "[ '${user_name}' ]"
-			echo
 
 			break
 		fi
@@ -237,10 +235,8 @@ user_verify () {
 		then
 
 			frobulator.err "User name does not exist" "[ '${user_name}' ]"
-			echo
 
 			frobulator.wrn "User must exist before proceeding."
-			echo
 
 			exit 1
 		fi
@@ -260,11 +256,9 @@ user_information () {
 	# get 'user' information
 
 	frobulator.inf "This information will be used to set up the user account."
-	echo
 
 	frobulator.wrn "Information is required to set up your environment:"
 	frobulator.wrn "Fields cannot be empty."
-	echo
 
 	# handle user input for information_list
 
@@ -281,7 +275,6 @@ user_interactive () {
 	# interactive setup
 
 	frobulator.fwd "Generating account${marker_elp}"
-	echo
 
 	room_number=""
 	work_number=""
@@ -298,7 +291,6 @@ user_interactive () {
 	# set --gecos and --disabled-password for fully silent execution
 
 	frobulator.wrn "Creating user" "[ ${user_name} ]"
-	echo
 
 	# use "${sink}" redirection:
 	# 'adduser' prevents stdout error redirect - cannot use 'frobulator.silence'
@@ -315,7 +307,6 @@ user_automated () {
 	# noninteractive setup
 
 	frobulator.fwd "Generating account${marker_elp}"
-	echo
 
 	if [ -z "${user_name}" ]
 	then
@@ -334,7 +325,6 @@ user_automated () {
 	home="/home/${user_name}"
 
 	frobulator.wrn "Creating user" "[ ${user_name} ]"
-	echo
 
 	echo  "${user_name}:x:${user_id}:${group_id}:${gecos}:${home}:${SHELL}" >> /etc/passwd
 }
@@ -346,7 +336,6 @@ user_superuser () {
 	if [[ $(command -v sudo) ]]
 	then
 		frobulator.fwd "Generating superuser privilege${marker_elp}"
-		echo
 
 		if [[ $(cat /etc/group | grep sudo) ]]
 		then
@@ -364,10 +353,8 @@ user_superuser () {
 	else
 
 		frobulator.err "Command must be installed to proceed" "[ 'sudo' ]"
-		echo
 
 		frobulator.inf "Install 'sudo' using the system package manager and try again."
-		echo
 	fi
 }
 
@@ -400,10 +387,8 @@ user_superuser_override () {
 	else
 
 		frobulator.err "Command must be installed to proceed" "[ 'sudo' ]"
-		echo
 
 		frobulator.inf "Install 'sudo' using the system package manager and try again."
-		echo
 	fi
 }
 
@@ -412,7 +397,6 @@ user_password () {
 	# set 'user' password
 
 	frobulator.fwd "Setting password${marker_elp}"
-	echo
 
 	# generate password credential for 'user' entry
 
@@ -427,7 +411,6 @@ user_runtime () {
 	# generate 'user' runtime directory structure
 
 	frobulator.fwd "Setting runtime${marker_elp}"
-	echo
 
 	user_uid="$(id -u ${user_name})"
 	user_gid="$(id -g ${user_name})"

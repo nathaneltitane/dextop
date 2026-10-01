@@ -295,10 +295,8 @@ then
 		environment="console"
 	else
 		frobulator.err "Unrecognized environment" "[ '${environment}' ]"
-		echo
 
 		frobulator.stp "Aborting${marker_elp}"
-		echo
 
 		exit 1
 	fi
@@ -477,21 +475,16 @@ architecture_intent () {
 		then
 
 			frobulator.scs "Supported device architecture" "[ ${device_architecture} ]"
-			echo
 
 			frobulator.fwd "Proceeding${marker_elp}"
-			echo
 
 			break
 		else
 			frobulator.wrn "Unsupported device architecture" "[ ${device_architecture} ]"
-			echo
 
 			frobulator.fwd "Aborting${marker_elp}"
-			echo
 
 			frobulator.stp "Exiting."
-			echo
 
 			exit 1
 		fi
@@ -524,10 +517,8 @@ update_intent () {
 		update_files_list=(${@:3})
 
 		frobulator.err "Unknown item name" "[ '${update_item}' ]"
-		echo
 
 		frobulator.fwd "Listing known items${marker_elp}"
-		echo
 
 		frobulator.timeout
 
@@ -540,10 +531,8 @@ update_intent () {
 		IFS=''
 
 		frobulator.msg "Review item name spelling and try again."
-		echo
 
 		frobulator.inf "Update all known items using 'all' argument."
-		echo
 
 		exit 1
 	fi
@@ -580,7 +569,6 @@ backup_intent () {
 	backup_archive="${backup_name}-${stamp}.${backup_extension}"
 
 	frobulator.inf "Generating backup" "[ ${backup_archive} ]"
-	echo
 
 	tar																\
 		--create													\
@@ -1036,7 +1024,6 @@ frobulator.log "architecture_intent"
 if [ "${option}" = "initialize" ]
 then
 	frobulator.inf "Initializing" "[ Dextop ]"
-	echo
 
 	preferences_intent
 
@@ -1047,7 +1034,6 @@ then
 	shell_intent
 
 	frobulator.cpt "Complete" "[ Initialize // Dextop ]"
-	echo
 
 	exit
 fi
@@ -1055,12 +1041,10 @@ fi
 if [ "${option}" = "addons" ]
 then
 	frobulator.inf "Loading" "[ ${option} ]"
-	echo
 
 	addons_intent
 
 	frobulator.cpt "Complete" "[ ${option} ]"
-	echo
 
 	exit
 fi
@@ -1068,12 +1052,10 @@ fi
 if [ "${option}" = "additions" ]
 then
 	frobulator.inf "Loading" "[ ${option} ]"
-	echo
 
 	additions_intent
 
 	frobulator.cpt "Complete" "[ ${option} ]"
-	echo
 
 	exit
 fi
@@ -1081,12 +1063,10 @@ fi
 if [ "${option}" = "backup" ]
 then
 	frobulator.inf "Loading" "[ ${option} ]"
-	echo
 
 	backup_intent
 
 	frobulator.cpt "Complete" "[ Backup // Dextop ]"
-	echo
 
 	exit
 fi
@@ -1098,10 +1078,8 @@ then
 		update_item="all"
 
 		frobulator.inf "Updating" "[ ${update} ]"
-		echo
 
 		frobulator.fwd "Updating${marker_elp}"
-		echo
 
 		dextop_intent
 
@@ -1118,109 +1096,87 @@ then
 		"${HOME}"/.local/bin/termux-update
 
 		frobulator.cpt "Complete" "[ Update // ${update} ]"
-		echo
 	fi
 
 	if [[ "${update}" = [dD][eE][xX][tT][oO][pP] ]]
 	then
 		frobulator.inf "Updating" "[ ${update} ]"
-		echo
 
 		frobulator.fwd "Updating${marker_elp}"
-		echo
 
 		dextop_intent
 
 		frobulator.cpt "Complete" "[ Update // ${update} ]"
-		echo
 	fi
 
 	if [[ "${update}" = [aA][dD][dD][iI][tT][iI][oO][nN][sS] ]]
 	then
 		frobulator.inf "Updating" "[ ${update} ]"
-		echo
 
 		frobulator.fwd "Updating${marker_elp}"
-		echo
 
 		additions_intent
 
 		frobulator.cpt "Complete" "[ Update // ${update} ]"
-		echo
 	fi
 
 	if [[ "${update}" = [bB][aA][cK][gG][rR][oO][uU][nN][dD] ]]
 	then
 
 		frobulator.inf "Updating" "[ ${update_item} ]"
-		echo
 
 		frobulator.fwd "Updating${marker_elp}"
-		echo
 
 		shell_intent
 
 		frobulator.cpt "Complete" "[ Update // ${update} ]"
-		echo
 	fi
 
 	if [[ "${update}" = [iI][nN][tT][eE][rR][fF][aA][cC][eE] ]]
 	then
 
 		frobulator.inf "Updating" "[ ${update_item} ]"
-		echo
 
 		frobulator.fwd "Updating${marker_elp}"
-		echo
 
 		interface_intent
 
 		frobulator.cpt "Complete" "[ Update // ${update} ]"
-		echo
 	fi
 
 	if [[ "${update}" = [pP][rR][eE][fF][eE][rR][eE][nN][cC][eE][sS] ]]
 	then
 
 		frobulator.inf "Updating" "[ ${utility} ]"
-		echo
 
 		frobulator.fwd "Updating${marker_elp}"
-		echo
 
 		preferences_intent
 
 		frobulator.cpt "Complete" "[ Update // ${update} ]"
-		echo
 	fi
 
 	if [[ "${update}" = [sS][hH][eE][lL][lL] ]]
 	then
 
 		frobulator.inf "Updating" "[ ${update_item} ]"
-		echo
 
 		frobulator.fwd "Updating${marker_elp}"
-		echo
 
 		shell_intent
 
 		frobulator.cpt "Complete" "[ Update // ${update} ]"
-		echo
 	fi
 
 	if [[ "${update}" = [tT][eE][rR][mM][uU][xX] ]]
 	then
 		frobulator.inf "Updating" "[ ${update} ]"
-		echo
 
 		frobulator.fwd "Updating${marker_elp}"
-		echo
 
 		"${HOME}"/.local/bin/termux-update
 
 		frobulator.cpt "Complete" "[ Update // ${update} ]"
-		echo
 
 	fi
 
@@ -1228,15 +1184,12 @@ then
 	then
 
 		frobulator.inf "Updating" "[ ${update_item} ]"
-		echo
 
 		frobulator.fwd "Updating${marker_elp}"
-		echo
 
 		utilities_intent
 
 		frobulator.cpt "Complete" "[ Update // ${update} ]"
-		echo
 	fi
 
 	exit
@@ -1247,17 +1200,14 @@ then
 	# notice
 
 	frobulator.err "" "[ DISCLAIMER ]"
-	echo
 
 	frobulator.separate
 
 	frobulator.wrn "'Purge' option has been selected:"
 	frobulator.wrn "This action is permanent."
-	echo
 
 	frobulator.inf "All items loaded during the Dextop setup process will be PERMANENTLY REMOVED."
 	frobulator.nul "Modifications made outside the intended installation process may cause instability or data corruption upon removal."
-	echo
 
 	frobulator.wrn "The author is not responsible for any damages or issues arising from the removal of Dextop."
 	frobulator.nul "You have been warned."
@@ -1272,7 +1222,6 @@ then
 	   [[ "${reply}" = [yY][eE][sS] ]]
 	then
 		frobulator.fwd "Removal in progress${marker_elp}"
-		echo
 
 		purge_intent &
 
@@ -1280,7 +1229,6 @@ then
 
 	else
 		frobulator.inf "Aborting" "[ ${option} ]"
-		echo
 
 		exit 1
 	fi
