@@ -397,7 +397,7 @@ The display server, Termux:X11 will interface with the required 'termux-x11' pac
 To start a session and access the newly generated container, paste or type:
 
 ```
-container-session -o <display server> | -u <username> | -a <application>
+container-session -o <display server> | -u <username> | -f <application>
 ```
 
 To access the desktop environment installed directly under Termux (recognizable by the green username prompt), paste or type:
@@ -435,10 +435,11 @@ When accessing the container for the very first time, a one-time configuration r
 If using the vnc display server (x11vnc), the vnc session manager requires the user to select a preferred display resolution for the best display experience:
 The selection is saved under ```"${HOME}"/.vnc/selection``` and the login routine uses it to start the VNC server and viewer automatically for your convenience!
 
-The next login will automatically launch the session using the previously chosen selection. To override the selection, paste or type:
+The next login will automatically launch the session using the previously chosen selection. To override the selection, remove the saved selection and start the session again - paste or type:
 
 ```
-container-session -n vnc
+rm "${HOME}/.vnc/selection"
+container-session -o vnc
 ```
 
 ### Session stop:
