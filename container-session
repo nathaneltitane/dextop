@@ -341,10 +341,8 @@ container_parse () {
 		distribution_version="${distribution_version}"
 
 		frobulator.inf "Single container found" "[ ${distribution_name} // ${distribution_version} ]"
-		echo
 
 		frobulator.fwd "Proceeding${marker_elp}"
-		echo
 	fi
 
 	if [[ ${#CONTAINER_ROOT[@]} -ge 2 ]]
@@ -418,10 +416,8 @@ container_parse () {
 		do
 			echo
 			frobulator.err "Invalid selection:"
-			echo
 
 			frobulator.wrn "Select container [ 1 - ${number} ]"
-			echo
 
 			frobulator.ipt "Selection:"
 
@@ -470,7 +466,6 @@ container_input () {
 		container_directory=("${CONTAINER_ROOT}")
 
 		frobulator.wrn "Container directory not specified."
-		echo
 
 		container_parse
 	fi
@@ -483,7 +478,6 @@ container_input () {
 		CONTAINER_ROOT=("${CONTAINER_BASE}"/*/*)
 
 		frobulator.err "Container directory not found."
-		echo
 
 		container_parse
 	fi
@@ -496,7 +490,6 @@ container_input () {
 		CONTAINER_ROOT=("${CONTAINER_BASE}"/*/*)
 
 		frobulator.scs "Container directory found."
-		echo
 	fi
 }
 
@@ -505,7 +498,6 @@ container_user () {
 	# authentication
 
 	frobulator.fwd "Authenticating${marker_elp}"
-	echo
 
 	# verify user existence:
 	# loop through container's /etc/passwd file and make sure 'user' exists
@@ -552,7 +544,6 @@ container_user () {
 			fi
 
 			frobulator.wrn "No user name - Defaulting" "[ '${user_name}' ]"
-			echo
 
 			break
 		fi
@@ -566,10 +557,8 @@ container_user () {
 			if [[ "${user_name}" == "root" ]]
 			then
 				frobulator.wrn "Valid user name - Superuser" "[ '${user_name}' ]"
-				echo
 			else
 				frobulator.scs "Valid user name - Accessing" "[ '${user_name}' ]"
-				echo
 			fi
 
 			break
@@ -581,7 +570,6 @@ container_user () {
 		then
 
 			frobulator.err "Invalid user name - Aborting" "[ '${user_name}' ]"
-			echo
 
 			exit 1
 		fi
@@ -742,7 +730,6 @@ container_session () {
 	# load session
 
 	frobulator.fwd "Loading desktop interface${marker_elp}"
-	echo
 
 	if [ -z "${environment}" ]
 	then
@@ -811,32 +798,26 @@ container_focus () {
 	if [ "$application" = "" ]
 	then
 		frobulator.wrn "Application not specified" "[ N/A ]"
-		echo
 
 		application="${application_default}"
 
 		frobulator.cpt "Loading default" "[ ${application} ]"
-		echo
 	fi
 
 	if [ -z $(command -v "${application}") ]
 	then
 		frobulator.err "Application not found" "[ ${application} ]"
-		echo
 
 		application="${application_default}"
 
 		frobulator.cpt "Loading default" "[ ${application} ]"
-		echo
 
 	else
 		frobulator.scs "Application found" "[ ${application} ]"
-		echo
 
 		application="${application}"
 
 		frobulator.cpt "Loading application" "[ ${application} ]"
-		echo
 	fi
 
 	# timeout:
@@ -879,7 +860,6 @@ display_geometry_vnc () {
 	# list supported display resolutions
 
 	frobulator.msg "Select geometry or input [c]ustom properties:"
-	echo
 
 	monitors=(
 		VGA		 0640    0480
@@ -1050,10 +1030,8 @@ display_selection_vnc () {
 		then
 			echo
 			frobulator.err "Invalid selection:"
-			echo
 
 			frobulator.wrn "Select geometry [ 1 - ${number} ] or input [c]ustom properties."
-			echo
 
 			frobulator.ipt "Selection:"
 
@@ -1091,7 +1069,6 @@ display_selection_vnc () {
 	if [[ "${selection}" = "custom" ]]
 	then
 		frobulator.fwd "Setting custom properties${marker_elp}"
-		echo
 
 		frobulator.ipt "Set width" "[ pixels ]"
 
@@ -1135,12 +1112,10 @@ display_password_vnc () {
 	# hash password  using 'vncpasswd' and store it
 
 	frobulator.fwd "Setting password${marker_elp}"
-	echo
 
 	echo "${display_password}" | vncpasswd -f > "${HOME}"/.vnc/passwd
 
 	frobulator.scs "Password changed."
-	echo
 }
 
 display_framebuffer_vnc () {
@@ -1148,7 +1123,6 @@ display_framebuffer_vnc () {
 	# generate vnc framebuffer
 
 	frobulator.fwd "Generating framebuffer${marker_elp}"
-	echo
 
 	unset framebuffer_command
 
@@ -1312,10 +1286,8 @@ display_stop_vnc () {
 
 	else
 		frobulator.wrn "No active display server detected."
-		echo
 
 		frobulator.fwd "Exiting${marker_elp}"
-		echo
 	fi
 }
 
@@ -1352,7 +1324,6 @@ display_intent_x11 () {
 	# start x11 display activity
 
 	frobulator.fwd "Opening display${marker_elp}"
-	echo
 
 	display_activity="${termux_x11_activity}"
 
@@ -1393,10 +1364,8 @@ display_stop_x11 () {
 		frobulator.process "Stopping display viewer"
 	else
 		frobulator.wrn "No active display process detected."
-		echo
 
 		frobulator.fwd "Exiting${marker_elp}"
-		echo
 	fi
 }
 
@@ -1427,7 +1396,6 @@ display_list () {
 	if [[ $(pidof "${display_server}") ]]
 	then
 		frobulator.fwd "Listing session details${marker_elp}"
-		echo
 
 		display_format="${display_format}"
 		display_geometry="${display_geometry}"
@@ -1436,7 +1404,6 @@ display_list () {
 		display_port="${display_port}"
 	else
 		frobulator.wrn "No active servers detected."
-		echo
 
 		empty="N/A"
 
@@ -1452,7 +1419,6 @@ display_list () {
 	frobulator.inf "Display"  "[ ${display_display} ]"
 	frobulator.inf "Process"  "[ ${display_process} ]"
 	frobulator.inf "Port"     "[ ${display_port} ]"
-	echo
 }
 
 if [ "${option}" = "start" ]

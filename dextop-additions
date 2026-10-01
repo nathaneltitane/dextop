@@ -718,7 +718,6 @@ then
 
 	else
 		frobulator.err "Unrecognized activity option" "[ ${activity_option} ]"
-		echo
 
 		exit 1
 	fi
@@ -742,7 +741,6 @@ then
 		action="${music}"
 	else
 		frobulator.err "Unrecognized action option" "[ ${action_option} ]"
-		echo
 
 		exit 1
 	fi
@@ -774,7 +772,6 @@ then
 
 	else
 		frobulator.err "Unrecognized handle option" "[ ${handle_option} ]"
-		echo
 
 		exit 1
 	fi

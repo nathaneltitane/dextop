@@ -209,13 +209,10 @@ then
 
 		frobulator.wrn "User permission required to access storage on this device:"
 		frobulator.nul "Both internal and external storage locations are made available."
-		echo
 
 		frobulator.inf "Storage is also made accessible through container."
-		echo
 
 		frobulator.ins "Select 'Allow' when prompted to proceed."
-		echo
 
 		frobulator.separate
 
@@ -230,10 +227,8 @@ then
 		# proceed with setup
 
 		frobulator.scs "Storage directory detected" "[ "${HOME}" ]"
-		echo
 
 		frobulator.fwd "Continuing${marker_elp}"
-		echo
 	fi
 
 	frobulator.file "${HOME}"/.dextop dextop-termux-storage
@@ -259,12 +254,10 @@ directories_list=()
 # generate links
 
 frobulator.fwd "Setting up storage${marker_elp}"
-echo
 
 # link primary/internal android storage
 
 frobulator.fwd "Linking${marker_elp}"
-echo
 
 directories_list=(
 	"${PREFIX}"/media
@@ -315,17 +308,13 @@ then
 			storage_label=$(cat ${storage_path}/.storage)
 		else
 			frobulator.wrn "No storage identifier found" "[ ${storage_uuid} ]"
-			echo
 
 			frobulator.inf "Using mounts UUID for identification"
-			echo
 
 			frobulator.fwd "Proceeding${marker_elp}"
-			echo
 		fi
 
 		frobulator.scs "Storage media detected" "[ ${storage_uuid} ]"
-		echo
 
 		if [ ! -f "${PREFIX}"/media/"${storage_label}" ]
 		then
@@ -338,10 +327,8 @@ else
 	storage_uuid="N/A"
 
 	frobulator.err "No storage media detected" "[ ${storage_uuid} ]"
-	echo
 
 	frobulator.fwd "Continuing${marker_elp}"
-	echo
 fi
 
 commands_list=()
@@ -409,7 +396,6 @@ fi
 if [ -d "${HOME}"/storage ]
 then
 	frobulator.fwd "Cleaning up${marker_elp}"
-	echo
 
 	frobulator.delete "${HOME}" storage
 fi
