@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# dependencies /////////////////////////////////////////////////////////////////
+# dependencies ─────────────────────────────────────────────────────────────────
 
 script="$(basename -- ${BASH_SOURCE[0]})"
 
@@ -64,7 +64,7 @@ then
 
 		if [[ -z $(command -v "${package}") ]]
 		then
-			echo "[  !  ] Unable to install or binary not found /////////////////////// [ '${package}' ]"
+			echo "[  !  ] Unable to install or binary not found ─────────────────────── [ '${package}' ]"
 			echo
 
 			exit 1
@@ -97,19 +97,19 @@ then
 	self_arguments=("${@}")
 fi
 
-# superuser ////////////////////////////////////////////////////////////////////
+# superuser ────────────────────────────────────────────────────────────────────
 
 frobulator.escalate
 
-# script ///////////////////////////////////////////////////////////////////////
+# script ───────────────────────────────────────────────────────────────────────
 
 frobulator.script
 
-# version //////////////////////////////////////////////////////////////////////
+# version ──────────────────────────────────────────────────────────────────────
 
 version="2026-09-29"
 
-# usage ////////////////////////////////////////////////////////////////////////
+# usage ────────────────────────────────────────────────────────────────────────
 
 while (($#))
 do
@@ -253,15 +253,15 @@ do
 
 done
 
-# clear ////////////////////////////////////////////////////////////////////////
+# clear ────────────────────────────────────────────────────────────────────────
 
 frobulator.clear
 
-# variables ////////////////////////////////////////////////////////////////////
+# variables ────────────────────────────────────────────────────────────────────
 
 stamp=$(date +"%m-%d-%Y-%H-%M-%S")
 
-# defaults /////////////////////////////////////////////////////////////////////
+# defaults ─────────────────────────────────────────────────────────────────────
 
 if [ -z "${option}" ]
 then
@@ -334,25 +334,7 @@ then
 	fi
 fi
 
-# functions ////////////////////////////////////////////////////////////////////
-
-intent_failsafe () {
-
-	# ref.: https://github.com/termux/termux-packages/issues/10871
-
-	# run failsafe termux package and repository update:
-	# mitigate general deployment setup issues
-	# mitigate skipped packages on install
-
-	yes | apt update            > "${sink}" 2>&1
-
-	yes | apt full-upgrade      > "${sink}" 2>&1
-
-	yes | apt install root-repo > "${sink}" 2>&1
-
-	yes | apt install x11-repo  > "${sink}" 2>&1
-
-}
+# functions ────────────────────────────────────────────────────────────────────
 
 container_environment () {
 
@@ -451,6 +433,24 @@ container_intent () {
 					HOME="${CONTAINER_HOME}"							\
 					PATH="${CONTAINER_PATH}"							\
 																		${@}
+}
+
+intent_failsafe () {
+
+	# ref.: https://github.com/termux/termux-packages/issues/10871
+
+	# run failsafe termux package and repository update:
+	# mitigate general deployment setup issues
+	# mitigate skipped packages on install
+
+	yes | apt update            > "${sink}" 2>&1
+
+	yes | apt full-upgrade      > "${sink}" 2>&1
+
+	yes | apt install root-repo > "${sink}" 2>&1
+
+	yes | apt install x11-repo  > "${sink}" 2>&1
+
 }
 
 intent_architecture () {
@@ -1007,13 +1007,13 @@ intent_purge () {
 
 }
 
-# architecture check ///////////////////////////////////////////////////////////
+# architecture check ───────────────────────────────────────────────────────────
 
 intent_architecture
 
 frobulator.complete halt "Unsupported device architecture" "[ ${device_architecture} ]"
 
-# options //////////////////////////////////////////////////////////////////////
+# options ──────────────────────────────────────────────────────────────────────
 
 if [ "${option}" = "initialize" ]
 then
@@ -1228,14 +1228,14 @@ then
 	fi
 fi
 
-# setup ////////////////////////////////////////////////////////////////////////
+# setup ────────────────────────────────────────────────────────────────────────
 
 if [ "${option}" = "setup"       ] ||
    [ "${option}" = "environment" ]
 then
 	if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
 	then
-		# dextop ///////////////////////////////////////////////////////////////
+		# dextop ───────────────────────────────────────────────────────────────
 
 		# failsafe
 
@@ -1289,7 +1289,7 @@ then
 
 		frobulator.complete "${HOME}"/.dextop dextop-ticker-checkpoint frobulator.write write 0 "${HOME}"/.dextop dextop-ticker
 
-		# termux ///////////////////////////////////////////////////////////////
+		# termux ───────────────────────────────────────────────────────────────
 
 		# termux addons
 
@@ -1303,7 +1303,7 @@ then
 
 		frobulator.complete "${HOME}"/.dextop dextop-termux-packages-checkpoint "${HOME}"/.local/bin/termux-packages
 
-		# container ////////////////////////////////////////////////////////////
+		# container ────────────────────────────────────────────────────────────
 
 		# container image
 
@@ -1321,7 +1321,7 @@ then
 
 		frobulator.complete "${HOME}"/.dextop dextop-container-user-checkpoint container_intent "${HOME}"/.local/bin/container-user
 
-		# dextop ///////////////////////////////////////////////////////////////
+		# dextop ───────────────────────────────────────────────────────────────
 
 		# shell
 
@@ -1358,11 +1358,11 @@ then
 
 	frobulator.timeout 5
 
-	# clear ////////////////////////////////////////////////////////////////////
+	# clear ────────────────────────────────────────────────────────────────────
 
 	frobulator.clear
 
-	# session //////////////////////////////////////////////////////////////////
+	# session ──────────────────────────────────────────────────────────────────
 
 	intent_session
 

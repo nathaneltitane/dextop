@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# dependencies /////////////////////////////////////////////////////////////////
+# dependencies ─────────────────────────────────────────────────────────────────
 
 script="$(basename -- ${BASH_SOURCE[0]})"
 
@@ -64,7 +64,7 @@ then
 
 		if [[ -z $(command -v "${package}") ]]
 		then
-			echo "[  !  ] Unable to install or binary not found /////////////////////// [ '${package}' ]"
+			echo "[  !  ] Unable to install or binary not found ─────────────────────── [ '${package}' ]"
 			echo
 
 			exit 1
@@ -97,19 +97,19 @@ then
 	self_arguments=("${@}")
 fi
 
-# superuser ////////////////////////////////////////////////////////////////////
+# superuser ────────────────────────────────────────────────────────────────────
 
 frobulator.escalate
 
-# script ///////////////////////////////////////////////////////////////////////
+# script ───────────────────────────────────────────────────────────────────────
 
 frobulator.script
 
-# version //////////////////////////////////////////////////////////////////////
+# version ──────────────────────────────────────────────────────────────────────
 
 version="2026-09-29"
 
-# usage ////////////////////////////////////////////////////////////////////////
+# usage ────────────────────────────────────────────────────────────────────────
 
 while (($#))
 do
@@ -193,11 +193,11 @@ do
 
 done
 
-# variables ////////////////////////////////////////////////////////////////////
+# variables ────────────────────────────────────────────────────────────────────
 
 # activities
 
-# service actions //////////////////////////////////////////////////////////////
+# service actions ──────────────────────────────────────────────────────────────
 
 # android.app.action.DEVICE_ADMIN_SERVICE
 # android.intent.action.RESOLVE_INSTANT_APP_PACKAGE
@@ -229,7 +229,7 @@ done
 # android.telephony.action.EmbmsStreaming
 # android.view.InputMethod
 
-# activity actions /////////////////////////////////////////////////////////////
+# activity actions ─────────────────────────────────────────────────────────────
 
 # android.app.action.ADD_DEVICE_ADMIN
 # android.app.action.MANAGED_PROFILE_PROVISIONED
@@ -426,7 +426,7 @@ done
 # android.telephony.euicc.action.PROVISION_EMBEDDED_SUBSCRIPTION
 # android.contacts.action.FILTER_CONTACTS
 
-# broadcast actions ////////////////////////////////////////////////////////////
+# broadcast actions ────────────────────────────────────────────────────────────
 
 # android.accounts.LOGIN_ACCOUNTS_CHANGED
 # android.accounts.action.ACCOUNT_REMOVED
@@ -668,7 +668,7 @@ link="https:"
 message="sms:"
 file="file:"
 
-# functions ////////////////////////////////////////////////////////////////////
+# functions ────────────────────────────────────────────────────────────────────
 
 intent_activity () {
 
@@ -698,7 +698,7 @@ intent_handle () {
 		-d "${handle}"					> "${sink}" 2>&1
 }
 
-# options //////////////////////////////////////////////////////////////////////
+# options ──────────────────────────────────────────────────────────────────────
 
 if [[ "${option}" = [aA][cC][tT][iI][vV][iI][tT][yY] ]]
 then
