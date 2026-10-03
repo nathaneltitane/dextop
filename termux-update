@@ -216,7 +216,7 @@ frobulator.ins "Select 'Package Installer' when prompted to proceed."
 
 frobulator.separate
 
-frobulator.ask "Check for updates?"
+frobulator.qst "Check for updates?"
 
 frobulator.read reply
 
@@ -281,7 +281,7 @@ then
 
 			# request update permission
 
-			frobulator.ask "Update?"
+			frobulator.qst "Update?"
 
 			frobulator.read reply
 
