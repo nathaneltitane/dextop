@@ -151,10 +151,10 @@ do
 			option="update"
 			update="${2}"
 
-			if [ "${update}" = "background"  ] || \
-			   [ "${update}" = "interface"   ] || \
-			   [ "${update}" = "utility"     ] || \
-			   [ "${update}" = "shell"       ] || \
+			if [ "${update}" = "background"  ] ||
+			   [ "${update}" = "interface"   ] ||
+			   [ "${update}" = "utility"     ] ||
+			   [ "${update}" = "shell"       ] ||
 			   [ "${update}" = "preferences" ]
 			then
 				update_item="${3}"
@@ -275,7 +275,7 @@ then
 	frobulator.write write "${container}" "${HOME}"/.dextop dextop-container
 fi
 
-if [ "${option}" = "setup"       ] || \
+if [ "${option}" = "setup"       ] ||
    [ "${option}" = "environment" ]
 then
 	if [[ -z "${environment}" ]]
@@ -755,8 +755,8 @@ intent_shell () {
 
 		frobulator.file "${HOME}" .hushlogin
 
-		if [[ "${option}" = "setup"      ]] || \
-		   [[ "${option}" = "container"  ]] || \
+		if [[ "${option}" = "setup"      ]] ||
+		   [[ "${option}" = "container"  ]] ||
 		   [[ "${option}" = "initialize" ]]
 		then
 			CONTAINER_ROOT=$(cat "${HOME}"/.dextop/dextop-container)
@@ -1212,7 +1212,7 @@ then
 
 	frobulator.read reply
 
-	if [[ "${reply}" = [yY]         ]] || \
+	if [[ "${reply}" = [yY]         ]] ||
 	   [[ "${reply}" = [yY][eE][sS] ]]
 	then
 		frobulator.fwd "Removal in progress${marker_elp}"
@@ -1230,7 +1230,7 @@ fi
 
 # setup ////////////////////////////////////////////////////////////////////////
 
-if [ "${option}" = "setup"       ] || \
+if [ "${option}" = "setup"       ] ||
    [ "${option}" = "environment" ]
 then
 	if [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]

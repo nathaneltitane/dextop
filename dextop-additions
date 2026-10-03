@@ -702,12 +702,12 @@ intent_handle () {
 
 if [[ "${option}" = [aA][cC][tT][iI][vV][iI][tT][yY] ]]
 then
-	if [[ "${activity_option}" = "google-chrome" ]] || \
+	if [[ "${activity_option}" = "google-chrome" ]] ||
 	   [[ "${activity_option}" = "chrome"        ]]
 	then
 		activity="${google_chrome}"
 
-	elif [[ "${activity_option}" = "google-mail" ]] || \
+	elif [[ "${activity_option}" = "google-mail" ]] ||
 		[[ "${activity_option}" = "gmail"        ]]
 	then
 		activity="${google_mail}"
@@ -726,14 +726,14 @@ then
 
 elif [[ "${option}" = [aA][cC][tT][iI][oO][nN] ]]
 then
-	if [[ "${action_option}" = "camera"    ]] || \
+	if [[ "${action_option}" = "camera"    ]] ||
 	   [[ "${action_option}" = "photo"     ]]
 	   [[ "${action_option}" = "picture"   ]]
 	   [[ "${action_option}" = "selfie"    ]]
 	then
 		action="${camera}"
 
-	elif [[ "${action_option}" = "music"   ]] || \
+	elif [[ "${action_option}" = "music"   ]] ||
 	    [[ "${action_option}" = "player"   ]]
 	    [[ "${action_option}" = "song"     ]]
 	    [[ "${action_option}" = "audio"    ]]
@@ -749,19 +749,19 @@ then
 
 elif [[ "${option}" = [hH][aA][nN][dD][lL][eE] ]]
 then
-	if [[ "${handle_option}" = "email"     ]] || \
+	if [[ "${handle_option}" = "email"     ]] ||
 	   [[ "${handle_option}" = "mail"      ]]
 	then
 		handle="${email}"
 
-	elif [[ "${handle_option}" = "browser" ]] || \
-		 [[ "${handle_option}" = "link"    ]] || \
+	elif [[ "${handle_option}" = "browser" ]] ||
+		 [[ "${handle_option}" = "link"    ]] ||
 		 [[ "${handle_option}" = "web"     ]]
 	then
 		handle="${link}"
 
-	elif [[ "${handle_option}" = "message" ]] || \
-	     [[ "${handle_option}" = "text"    ]] || \
+	elif [[ "${handle_option}" = "message" ]] ||
+	     [[ "${handle_option}" = "text"    ]] ||
 	     [[ "${handle_option}" = "sms"     ]]
 	then
 		handle="${message}"

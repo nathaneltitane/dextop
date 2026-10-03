@@ -204,8 +204,8 @@ image_select () {
 
 	# list distributions for setup
 
-	if [ -z "${distribution_name}"     ] || \
-	   [ -z "${distribution_version}"  ] || \
+	if [ -z "${distribution_name}"     ] ||
+	   [ -z "${distribution_version}"  ] ||
 	   [ -z "${distribution_codename}" ]
 	then
 		frobulator.msg "Select distribution version to setup."
@@ -410,7 +410,7 @@ image_architecture () {
 
 	# test image architecture string
 
-	if [ -z "${i}mage_architecture"    ] || \
+	if [ -z "${i}mage_architecture"    ] ||
 	   [ -z "${device_architecture}" ]
 	then
 		image_architecture="N/A"
@@ -483,7 +483,7 @@ image_extract () {
 
 	frobulator.directory "${PREFIX}"/cnt "${distribution_name}"/"${distribution_version}"
 
-	if [ "${distribution_name}" = debian ] || \
+	if [ "${distribution_name}" = debian ] ||
 	   [ "${distribution_name}" = ubuntu ]
 	then
 

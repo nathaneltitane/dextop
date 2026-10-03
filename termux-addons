@@ -286,7 +286,7 @@ frobulator.ask "Install Termux addons?"
 
 frobulator.read reply
 
-if [[ "${reply}" = [yY]         ]] || \
+if [[ "${reply}" = [yY]         ]] ||
    [[ "${reply}" = [yY][eE][sS] ]]
 then
 	addon="all"
