@@ -410,8 +410,8 @@ container_parse () {
 		# integer check:
 		# handle numerical selection
 
-		while [[ "${selection}" -lt 1           ]] || \
-			  [[ "${selection}" -gt "${number}" ]] || \
+		while [[ "${selection}" -lt 1           ]] ||
+			  [[ "${selection}" -gt "${number}" ]] ||
 			  [[ ! "${selection}" =~ ^[0-9]+$   ]]
 		do
 			echo
@@ -1024,8 +1024,8 @@ display_vnc_selection () {
 		# range check:
 		# selection input must be in provided range and an integer
 
-		if [[ "${selection}" -lt 1           ]] || \
-		   [[ "${selection}" -gt "${number}" ]] || \
+		if [[ "${selection}" -lt 1           ]] ||
+		   [[ "${selection}" -gt "${number}" ]] ||
 		   [[ ! "${selection}" =~ ^[0-9]+$   ]]
 		then
 			echo
