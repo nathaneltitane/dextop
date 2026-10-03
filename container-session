@@ -835,7 +835,7 @@ container_focus () {
 	frobulator.silence "${application}" &
 }
 
-display_clean_vnc () {
+display_vnc_clean () {
 
 	# clean vnc runtime files:
 	# prevents hangups and vnc process misfires
@@ -855,7 +855,7 @@ display_clean_vnc () {
 	fi
 }
 
-display_geometry_vnc () {
+display_vnc_geometry () {
 
 	# list supported display resolutions
 
@@ -996,7 +996,7 @@ display_geometry_vnc () {
 	printf '\n'
 }
 
-display_selection_vnc () {
+display_vnc_selection () {
 
 	# values #
 
@@ -1091,7 +1091,7 @@ display_selection_vnc () {
 	fi
 }
 
-display_password_vnc () {
+display_vnc_password () {
 
 	# handle vnc session password generation
 
@@ -1118,7 +1118,7 @@ display_password_vnc () {
 	frobulator.scs "Password changed."
 }
 
-display_framebuffer_vnc () {
+display_vnc_framebuffer () {
 
 	# generate vnc framebuffer
 
@@ -1133,7 +1133,7 @@ display_framebuffer_vnc () {
 	${framebuffer_command} > "${sink}" 2>&1 &
 }
 
-display_initialize_vnc () {
+display_vnc_initialize () {
 
 	# initilaize vnc session and parameters
 
@@ -1162,10 +1162,10 @@ display_initialize_vnc () {
 
 	# genrate vnc display framebuffer
 
-	display_framebuffer_vnc
+	display_vnc_framebuffer
 }
 
-display_server_vnc () {
+display_vnc_server () {
 
 	# start vnc display server
 
@@ -1186,7 +1186,7 @@ display_server_vnc () {
 
 }
 
-display_intent_vnc () {
+display_vnc_intent () {
 
 	# start vnc display activity
 
@@ -1217,7 +1217,7 @@ display_intent_vnc () {
 
 }
 
-display_start_vnc () {
+display_vnc_start () {
 
 	if [[ $(pgrep -f  x11vnc) ]]
 	then
@@ -1229,33 +1229,33 @@ display_start_vnc () {
 		then
 			# hide if selection file is present
 
-			display_geometry_vnc > "${sink}" 2>&1
+			display_vnc_geometry > "${sink}" 2>&1
 		else
 			# show if selection file is not present
 
-			display_geometry_vnc
+			display_vnc_geometry
 		fi
 
 		# handle vnc selections
 
-		display_selection_vnc
+		display_vnc_selection
 
 	fi
 
 	# initialize vnc parameters
 
-	display_initialize_vnc
+	display_vnc_initialize
 
 	# start vnc display server
 
-	display_server_vnc
+	display_vnc_server
 
 	# load vnc viewer intent
 
-	display_intent_vnc
+	display_vnc_intent
 }
 
-display_stop_vnc () {
+display_vnc_stop () {
 
 	# look for corresponding server process:
 	# stop display server and clean runtime files
@@ -1280,7 +1280,7 @@ display_stop_vnc () {
 
 		# clean display server runtime files
 
-		display_clean_vnc &
+		display_vnc_clean &
 
 		frobulator.process "Removing display runtime files"
 
@@ -1291,7 +1291,7 @@ display_stop_vnc () {
 	fi
 }
 
-display_server_x11 () {
+display_x11_server () {
 
 	# start x11 display server
 
@@ -1319,7 +1319,7 @@ display_server_x11 () {
 	fi
 }
 
-display_intent_x11 () {
+display_x11_intent () {
 
 	# start x11 display activity
 
@@ -1336,14 +1336,14 @@ display_intent_x11 () {
 	frobulator.silence "${intent_command}" &
 }
 
-display_start_x11 () {
+display_x11_start () {
 
-	display_server_x11
+	display_x11_server
 
-	display_intent_x11
+	display_x11_intent
 }
 
-display_stop_x11 () {
+display_x11_stop () {
 
 	# stop display server and activity
 
@@ -1425,7 +1425,7 @@ if [ "${option}" = "start" ]
 then
 	# start display session
 
-	display_start_x11
+	display_x11_start
 
 	# load session
 
@@ -1436,7 +1436,7 @@ if [ "${option}" = "stop" ]
 then
 	# stop display session
 
-	display_stop_x11
+	display_x11_stop
 fi
 
 if [ "${option}" = "list" ]
@@ -1480,7 +1480,7 @@ if [ "${option}" = "focus" ]
 then
 	# start display session
 
-	display_start_x11
+	display_x11_start
 
 	# load application
 

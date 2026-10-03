@@ -166,7 +166,7 @@ done
 
 # functions ////////////////////////////////////////////////////////////////////
 
-storage_intent () {
+intent_storage () {
 
 	storage_command=()
 
@@ -218,7 +218,7 @@ then
 
 		# storage permissions dialog
 
-		storage_intent
+		intent_storage
 
 		frobulator.countdown 5 "Continuing" "[ ${script} ]"
 

@@ -164,7 +164,7 @@ console.script "Setting up ${script#*-}"
 
 # functions ////////////////////////////////////////////////////////////////////
 
-add_environment () {
+system_environment () {
 
 	# generate environment '$PATH'
 
@@ -203,7 +203,7 @@ add_environment () {
 	FILE
 }
 
-add_groups () {
+system_groups () {
 
 	# register android groups to container
 
@@ -256,7 +256,7 @@ add_groups () {
 	IFS=''
 }
 
-add_network () {
+system_network () {
 
 	# generate network files
 
@@ -298,7 +298,7 @@ add_network () {
 	FILE
 }
 
-add_preload () {
+system_preload () {
 
 	# generate libgcc/libc location and add to dynamic linker for preload
 
@@ -313,16 +313,16 @@ add_preload () {
 
 # generate environment variables
 
-add_environment
+system_environment
 
 # generate missing groups
 
-add_groups
+system_groups
 
 # generate network
 
-add_network
+system_network
 
 # generate preload entries
 
-add_preload
+system_preload

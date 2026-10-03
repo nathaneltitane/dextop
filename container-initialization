@@ -160,7 +160,7 @@ done
 
 # functions ////////////////////////////////////////////////////////////////////
 
-failsafe_intent () {
+intent_failsafe () {
 
 	# run failsafe container package and repository update:
 	# mitigate general deployment setup issues
@@ -178,4 +178,4 @@ failsafe_intent () {
 
 }
 
-failsafe_intent
+intent_failsafe

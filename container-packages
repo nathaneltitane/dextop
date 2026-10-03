@@ -160,7 +160,7 @@ done
 
 # functions ////////////////////////////////////////////////////////////////////
 
-failsafe_intent () {
+intent_failsafe () {
 
 	# run failsafe termux package and repository update:
 	# mitigate general deployment setup issues
@@ -174,7 +174,7 @@ failsafe_intent () {
 
 }
 
-failsafe_intent
+intent_failsafe
 
 # update packages list
 

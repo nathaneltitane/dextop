@@ -336,7 +336,7 @@ fi
 
 # functions ////////////////////////////////////////////////////////////////////
 
-failsafe_intent () {
+intent_failsafe () {
 
 	# ref.: https://github.com/termux/termux-packages/issues/10871
 
@@ -453,7 +453,7 @@ container_intent () {
 																		${@}
 }
 
-architecture_intent () {
+intent_architecture () {
 
 	# list supported processor architechtures
 
@@ -492,7 +492,7 @@ architecture_intent () {
 
 }
 
-update_intent () {
+intent_update () {
 
 	# handle updates
 
@@ -541,7 +541,7 @@ update_intent () {
 
 }
 
-reload_intent () {
+intent_reload () {
 
 	# termux settings reload:
 	# update command line interface with dextop settings
@@ -557,7 +557,7 @@ reload_intent () {
 
 }
 
-backup_intent () {
+intent_backup () {
 
 	# handle user home directory backup
 
@@ -581,14 +581,14 @@ backup_intent () {
 
 }
 
-dextop_intent () {
+intent_dextop () {
 
 	# load dextop deployment script
 
 	frobulator.download get.dxtp.app "${HOME}"/.local/bin dextop
 }
 
-addons_intent () {
+intent_addons () {
 
 	# termux addons and companion applications
 
@@ -596,7 +596,7 @@ addons_intent () {
 
 }
 
-additions_intent () {
+intent_additions () {
 
 	# load additions files
 
@@ -606,7 +606,7 @@ additions_intent () {
 
 	if [[ "${option}" = "update" ]]
 	then
-		update_intent get.dxtp.app "${HOME}"/.local/bin ${additions_list[@]}
+		intent_update get.dxtp.app "${HOME}"/.local/bin ${additions_list[@]}
 	else
 		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${additions_list[@]}
 	fi
@@ -615,7 +615,7 @@ additions_intent () {
 
 }
 
-storage_intent () {
+intent_storage () {
 
 	# select stoarge command option
 
@@ -628,7 +628,7 @@ storage_intent () {
 
 }
 
-backgrounds_intent () {
+intent_backgrounds () {
 
 	# load background files
 
@@ -651,7 +651,7 @@ backgrounds_intent () {
 
 	if [[ "${option}" = "update" ]]
 	then
-		update_intent get.dxtp.app "${HOME}"/.dextop ${backgrounds_list[@]}
+		intent_update get.dxtp.app "${HOME}"/.dextop ${backgrounds_list[@]}
 	else
 		frobulator.download get.dxtp.app "${HOME}"/.dextop ${backgrounds_list[@]}
 	fi
@@ -660,7 +660,7 @@ backgrounds_intent () {
 
 }
 
-interface_intent () {
+intent_interface () {
 
 	# load interface files
 
@@ -686,7 +686,7 @@ interface_intent () {
 
 	if [[ "${option}" = "update" ]]
 	then
-		update_intent get.trmnl.me "${HOME}"/.local/bin ${interface_list[@]}
+		intent_update get.trmnl.me "${HOME}"/.local/bin ${interface_list[@]}
 	else
 		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${interface_list[@]}
 
@@ -704,7 +704,7 @@ interface_intent () {
 
 }
 
-preferences_intent () {
+intent_preferences () {
 
 	# termux preferences and properties
 
@@ -717,7 +717,7 @@ preferences_intent () {
 
 	if [[ "${option}" = "update" ]]
 	then
-		update_intent get.dxtp.app "${HOME}"/.local/bin ${preferences_list[@]}
+		intent_update get.dxtp.app "${HOME}"/.local/bin ${preferences_list[@]}
 	else
 		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${preferences_list[@]}
 
@@ -725,14 +725,14 @@ preferences_intent () {
 		frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-font-hack       font.ttf
 		frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-properties termux.properties
 
-		reload_intent
+		intent_reload
 	fi
 
 	preferences_list=()
 
 }
 
-shell_intent () {
+intent_shell () {
 
 	# load shell files
 
@@ -747,7 +747,7 @@ shell_intent () {
 
 	if [[ "${option}" = "update" ]]
 	then
-		update_intent get.trmnl.me "${HOME}"/.local/bin ${shell_list[@]}
+		intent_update get.trmnl.me "${HOME}"/.local/bin ${shell_list[@]}
 	else
 		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${shell_list[@]}
 
@@ -787,7 +787,7 @@ shell_intent () {
 
 }
 
-utilities_intent () {
+intent_utilities () {
 
 	# load dextop utilities
 
@@ -807,7 +807,7 @@ utilities_intent () {
 
 	if [[ "${option}" = "update" ]]
 	then
-		update_intent get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
+		intent_update get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
 	else
 		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
 	fi
@@ -816,7 +816,7 @@ utilities_intent () {
 
 }
 
-directories_intent () {
+intent_directories () {
 
 	# generate dextop required directories
 
@@ -857,7 +857,7 @@ directories_intent () {
 
 }
 
-bookmarks_intent () {
+intent_bookmarks () {
 
 	# generate file browser bookmarks
 
@@ -889,7 +889,7 @@ bookmarks_intent () {
 
 }
 
-icons_intent () {
+intent_icons () {
 
 	# link icons theme directories
 
@@ -914,7 +914,7 @@ icons_intent () {
 
 }
 
-themes_intent () {
+intent_themes () {
 
 	CONTAINER_ROOT="${PREFIX}"/cnt/debian/12
 
@@ -939,7 +939,7 @@ themes_intent () {
 
 }
 
-session_intent () {
+intent_session () {
 
 	# start session
 
@@ -949,7 +949,7 @@ session_intent () {
 
 }
 
-purge_intent () {
+intent_purge () {
 
 	# uninstall desktop environment and dependencies
 
@@ -1017,7 +1017,7 @@ purge_intent () {
 
 # architecture check ///////////////////////////////////////////////////////////
 
-frobulator.log "architecture_intent"
+frobulator.log "intent_architecture"
 
 # options //////////////////////////////////////////////////////////////////////
 
@@ -1025,13 +1025,13 @@ if [ "${option}" = "initialize" ]
 then
 	frobulator.inf "Initializing" "[ Dextop ]"
 
-	preferences_intent
+	intent_preferences
 
-	addons_intent
+	intent_addons
 
-	utilities_intent
+	intent_utilities
 
-	shell_intent
+	intent_shell
 
 	frobulator.cpt "Complete" "[ Initialize // Dextop ]"
 
@@ -1042,7 +1042,7 @@ if [ "${option}" = "addons" ]
 then
 	frobulator.inf "Loading" "[ ${option} ]"
 
-	addons_intent
+	intent_addons
 
 	frobulator.cpt "Complete" "[ ${option} ]"
 
@@ -1053,7 +1053,7 @@ if [ "${option}" = "additions" ]
 then
 	frobulator.inf "Loading" "[ ${option} ]"
 
-	additions_intent
+	intent_additions
 
 	frobulator.cpt "Complete" "[ ${option} ]"
 
@@ -1064,7 +1064,7 @@ if [ "${option}" = "backup" ]
 then
 	frobulator.inf "Loading" "[ ${option} ]"
 
-	backup_intent
+	intent_backup
 
 	frobulator.cpt "Complete" "[ Backup // Dextop ]"
 
@@ -1081,17 +1081,17 @@ then
 
 		frobulator.fwd "Updating${marker_elp}"
 
-		dextop_intent
+		intent_dextop
 
-		backgrounds_intent
+		intent_backgrounds
 
-		interface_intent
+		intent_interface
 
-		utilities_intent
+		intent_utilities
 
-		additions_intent
+		intent_additions
 
-		shell_intent
+		intent_shell
 
 		"${HOME}"/.local/bin/termux-update
 
@@ -1104,7 +1104,7 @@ then
 
 		frobulator.fwd "Updating${marker_elp}"
 
-		dextop_intent
+		intent_dextop
 
 		frobulator.cpt "Complete" "[ Update // ${update} ]"
 	fi
@@ -1115,7 +1115,7 @@ then
 
 		frobulator.fwd "Updating${marker_elp}"
 
-		additions_intent
+		intent_additions
 
 		frobulator.cpt "Complete" "[ Update // ${update} ]"
 	fi
@@ -1127,7 +1127,7 @@ then
 
 		frobulator.fwd "Updating${marker_elp}"
 
-		shell_intent
+		intent_shell
 
 		frobulator.cpt "Complete" "[ Update // ${update} ]"
 	fi
@@ -1139,7 +1139,7 @@ then
 
 		frobulator.fwd "Updating${marker_elp}"
 
-		interface_intent
+		intent_interface
 
 		frobulator.cpt "Complete" "[ Update // ${update} ]"
 	fi
@@ -1151,7 +1151,7 @@ then
 
 		frobulator.fwd "Updating${marker_elp}"
 
-		preferences_intent
+		intent_preferences
 
 		frobulator.cpt "Complete" "[ Update // ${update} ]"
 	fi
@@ -1163,7 +1163,7 @@ then
 
 		frobulator.fwd "Updating${marker_elp}"
 
-		shell_intent
+		intent_shell
 
 		frobulator.cpt "Complete" "[ Update // ${update} ]"
 	fi
@@ -1187,7 +1187,7 @@ then
 
 		frobulator.fwd "Updating${marker_elp}"
 
-		utilities_intent
+		intent_utilities
 
 		frobulator.cpt "Complete" "[ Update // ${update} ]"
 	fi
@@ -1223,7 +1223,7 @@ then
 	then
 		frobulator.fwd "Removal in progress${marker_elp}"
 
-		purge_intent &
+		intent_purge &
 
 		frobulator.progress "purge"
 
@@ -1245,7 +1245,7 @@ then
 
 		# failsafe
 
-		failsafe_intent &
+		intent_failsafe &
 
 		frobulator.process "Please wait"
 
@@ -1253,27 +1253,27 @@ then
 
 		# backup
 
-		frobulator.complete "${HOME}"/.dextop dextop-backup-checkpoint backup_intent
+		frobulator.complete "${HOME}"/.dextop dextop-backup-checkpoint intent_backup
 
 		# preferences
 
-		frobulator.complete "${HOME}"/.dextop dextop-preferences-checkpoint preferences_intent
+		frobulator.complete "${HOME}"/.dextop dextop-preferences-checkpoint intent_preferences
 
 		#  utilities
 
-		frobulator.complete "${HOME}"/.dextop dextop-utilities-checkpoint utilities_intent
+		frobulator.complete "${HOME}"/.dextop dextop-utilities-checkpoint intent_utilities
 
 		# directories
 
-		frobulator.complete "${HOME}"/.dextop dextop-directories-checkpoint directories_intent
+		frobulator.complete "${HOME}"/.dextop dextop-directories-checkpoint intent_directories
 
 		# additions
 
-		frobulator.complete "${HOME}"/.dextop dextop-additions-checkpoint additions_intent
+		frobulator.complete "${HOME}"/.dextop dextop-additions-checkpoint intent_additions
 
 		# backgrounds
 
-		frobulator.complete "${HOME}"/.dextop dextop-backgrounds-checkpoint backgrounds_intent
+		frobulator.complete "${HOME}"/.dextop dextop-backgrounds-checkpoint intent_backgrounds
 
 		# automatic login
 
@@ -1303,7 +1303,7 @@ then
 
 		# termux storage
 
-		frobulator.complete "${HOME}/.dextop" dextop-termux-storage-checkpoint storage_intent
+		frobulator.complete "${HOME}/.dextop" dextop-termux-storage-checkpoint intent_storage
 
 		# termux packages
 
@@ -1331,23 +1331,23 @@ then
 
 		# shell
 
-		frobulator.complete "${HOME}"/.dextop dextop-shell-checkpoint shell_intent
+		frobulator.complete "${HOME}"/.dextop dextop-shell-checkpoint intent_shell
 
 		# bookmarks
 
-		frobulator.complete "${HOME}"/.dextop dextop-bookmarks-checkpoint bookmarks_intent
+		frobulator.complete "${HOME}"/.dextop dextop-bookmarks-checkpoint intent_bookmarks
 
 		# interface
 
-		frobulator.complete "${HOME}"/.dextop dextop-interface-checkpoint interface_intent
+		frobulator.complete "${HOME}"/.dextop dextop-interface-checkpoint intent_interface
 
 		# icons
 
-		frobulator.complete "${HOME}"/.dextop dextop-icons-checkpoint icons_intent
+		frobulator.complete "${HOME}"/.dextop dextop-icons-checkpoint intent_icons
 
 		# themes
 
-		frobulator.complete "${HOME}"/.dextop dextop-themes-checkpoint themes_intent
+		frobulator.complete "${HOME}"/.dextop dextop-themes-checkpoint intent_themes
 
 		# setup move
 
@@ -1374,6 +1374,6 @@ then
 
 	# session //////////////////////////////////////////////////////////////////
 
-	session_intent
+	intent_session
 
 fi

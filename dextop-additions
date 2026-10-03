@@ -670,7 +670,7 @@ file="file:"
 
 # functions ////////////////////////////////////////////////////////////////////
 
-activity_intent () {
+intent_activity () {
 
 	activity="${1}"
 
@@ -679,7 +679,7 @@ activity_intent () {
 		-n "${activity}"				> "${sink}" 2>&1
 	}
 
-action_intent () {
+intent_action () {
 
 	action="${1}"
 
@@ -688,7 +688,7 @@ action_intent () {
 		-a "${action}"					> "${sink}" 2>&1
 }
 
-handle_intent () {
+intent_handle () {
 
 	handle="${1}"
 
@@ -722,7 +722,7 @@ then
 		exit 1
 	fi
 
-	activity_intent "${activity}"
+	intent_activity "${activity}"
 
 elif [[ "${option}" = [aA][cC][tT][iI][oO][nN] ]]
 then
@@ -745,7 +745,7 @@ then
 		exit 1
 	fi
 
-	action_intent "${action}"
+	intent_action "${action}"
 
 elif [[ "${option}" = [hH][aA][nN][dD][lL][eE] ]]
 then
@@ -776,6 +776,6 @@ then
 		exit 1
 	fi
 
-	handle_intent "${handle}"
+	intent_handle "${handle}"
 
 fi

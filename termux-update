@@ -177,16 +177,16 @@ fi
 
 # functions ////////////////////////////////////////////////////////////////////
 
-clean () {
+intent_clean () {
 
 	rm					\
 		--recursive		\
 		--force			 "${PREFIX}"/tmp/*.apk
 }
 
-trap 'clean' EXIT
+trap 'intent_clean' EXIT
 
-open_intent () {
+intent_open () {
 
 	open_command=()
 
@@ -298,7 +298,7 @@ then
 
 				frobulator.fwd "Updating${marker_elp}"
 
-				open_intent "${PREFIX}"/tmp/"${archive}"
+				intent_open "${PREFIX}"/tmp/"${archive}"
 			else
 				# continue without application update
 
