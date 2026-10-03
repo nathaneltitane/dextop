@@ -282,7 +282,7 @@ frobulator.ins "Select 'Package Installer' when prompted to proceed."
 
 frobulator.separate
 
-frobulator.ask "Install Termux addons?"
+frobulator.qst "Install Termux addons?"
 
 frobulator.read reply
 
