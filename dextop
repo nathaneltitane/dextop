@@ -1193,7 +1193,7 @@ if [ "${option}" = "purge" ]
 then
 	# notice
 
-	frobulator.ntf wrn "[ DISCLAIMER ] 'Purge' option has been selected" "This action is permanent.${NLN}${NLN}All items loaded during the Dextop setup process will be PERMANENTLY REMOVED.${NLN}Modifications made outside the intended installation process may cause instability or data corruption upon removal.${NLN}${NLN}The author is not responsible for any damages or issues arising from the removal of Dextop.${NLN}You have been warned."
+	frobulator.ntf err "[ DISCLAIMER ] 'Purge' option has been selected" "This action is permanent.${NLN}${NLN}All items loaded during the Dextop setup process will be PERMANENTLY REMOVED.${NLN}Modifications made outside the intended installation process may cause instability or data corruption upon removal.${NLN}${NLN}The author is not responsible for any damages or issues arising from the removal of Dextop.${NLN}${NLN}You have been warned."
 
 	frobulator.ask "Purge Dextop?"
 
