@@ -1349,16 +1349,9 @@ then
 
 	fi
 
-	# result ///////////////////////////////////////////////////////////////////
+	# result and setup checkpoint: written only when every step succeeded
 
-	frobulator.result "dextop setup"
-
-	# setup checkpoint: only when every step succeeded
-
-	if [ "${?}" -eq 0 ] && [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
-	then
-		frobulator.file "${HOME}"/.dextop dextop-setup-checkpoint
-	fi
+	frobulator.complete "${HOME}"/.dextop dextop-setup-checkpoint frobulator.result "dextop setup"
 
 	frobulator.timeout 5
 
