@@ -174,7 +174,7 @@ window_theme="Arc-Dark"
 
 # functions ////////////////////////////////////////////////////////////////////
 
-translate_color () {
+color_translate () {
 
 	# convert hexadecimal to rgba integer range
 
@@ -207,7 +207,7 @@ translate_color () {
 
 # translate color
 
-translate_color "${color}"
+color_translate "${color}"
 
 # reset 'xfce4-panel' settings
 

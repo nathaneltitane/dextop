@@ -180,7 +180,7 @@ done
 
 # functions ////////////////////////////////////////////////////////////////////
 
-install_intent () {
+intent_install () {
 
 	# process addon package installtion
 
@@ -188,12 +188,12 @@ install_intent () {
 
 	frobulator.download get.trmnl.me "${PREFIX}"/tmp "${addon}"
 
-	open_intent "${PREFIX}"/tmp/"${addon}"
+	intent_open "${PREFIX}"/tmp/"${addon}"
 
 	frobulator.countdown 10 "Installing" "[ ${addon} ]"
 }
 
-addon_intent () {
+intent_addon () {
 
 	# load termux addons
 
@@ -209,13 +209,13 @@ addon_intent () {
 	then
 		if [[ ${addons_list[@]} =~ "${addon}" ]]
 		then
-			install_intent
+			intent_install
 
 		elif [[ "${addon}" = "all" ]]
 		then
 			for addon in ${addons_list[@]}
 			do
-				install_intent
+				intent_install
 
 				frobulator.file "${HOME}"/.dextop termux-addon-"${addon}"
 			done
@@ -248,7 +248,7 @@ addon_intent () {
 	addons_list=()
 }
 
-open_intent () {
+intent_open () {
 
 	open_command=()
 
@@ -261,14 +261,14 @@ open_intent () {
 	frobulator.silence "${open_command[@]}"
 }
 
-clean () {
+intent_clean () {
 
 	rm					\
 		--recursive		\
 		--force			 "${PREFIX}"/tmp/*.apk
 }
 
-trap 'clean' EXIT
+trap 'intent_clean' EXIT
 
 # notice
 
@@ -304,6 +304,6 @@ else
 	exit
 fi
 
-addon_intent
+intent_addon
 
 frobulator.countdown 5 "Continuing" "[ ${script} ]"
