@@ -1249,7 +1249,7 @@ then
 
 		frobulator.process "Please wait"
 
-		frobulator.complete "${HOME}"/.dextop dextop-failsafe-checkpoint
+		frobulator.complete halt "Failsafe failed"
 
 		# backup
 
@@ -1277,48 +1277,23 @@ then
 
 		# automatic login
 
-		if [ ! -f "${HOME}"/.dextop/dextop-login-checkpoint ]
-		then
-			frobulator.write write login "${HOME}"/.dextop dextop-login
-
-			frobulator.file "${HOME}"/.dextop dextop-login-checkpoint
-		fi
+		frobulator.complete "${HOME}"/.dextop dextop-login-checkpoint frobulator.write write login "${HOME}"/.dextop dextop-login
 
 		# automatic logout
 
-		if [ ! -f "${HOME}"/.dextop/dextop-logout-checkpoint ]
-		then
-			frobulator.write write logout "${HOME}"/.dextop dextop-logout
-
-			frobulator.file "${HOME}"/.dextop dextop-logout-checkpoint
-		fi
+		frobulator.complete "${HOME}"/.dextop dextop-logout-checkpoint frobulator.write write logout "${HOME}"/.dextop dextop-logout
 
 		# automatic update
 
-		if [ ! -f "${HOME}"/.dextop/dextop-update-checkpoint ]
-		then
-			frobulator.file "${HOME}"/.dextop dextop-update
-
-			frobulator.file "${HOME}"/.dextop dextop-update-checkpoint
-		fi
+		frobulator.complete "${HOME}"/.dextop dextop-update-checkpoint frobulator.file "${HOME}"/.dextop dextop-update
 
 		# audio
 
-		if [ ! -f "${HOME}"/.dextop/dextop-audio-checkpoint ]
-		then
-			frobulator.file "${HOME}"/.dextop dextop-audio
-
-			frobulator.file "${HOME}"/.dextop dextop-audio-checkpoint
-		fi
+		frobulator.complete "${HOME}"/.dextop dextop-audio-checkpoint frobulator.file "${HOME}"/.dextop dextop-audio
 
 		# ticker
 
-		if [ ! -f "${HOME}"/.dextop/dextop-ticker-checkpoint ]
-		then
-			frobulator.write write 0 "${HOME}"/.dextop dextop-ticker
-
-			frobulator.file "${HOME}"/.dextop dextop-ticker-checkpoint
-		fi
+		frobulator.complete "${HOME}"/.dextop dextop-ticker-checkpoint frobulator.write write 0 "${HOME}"/.dextop dextop-ticker
 
 		# termux ///////////////////////////////////////////////////////////////
 
@@ -1338,7 +1313,7 @@ then
 
 		# container image
 
-		frobulator.complete "${HOME}"/.dextop dextop-container-image-checkpoint "${HOME}"/.local/bin/container-image
+		frobulator.complete halt "${HOME}"/.dextop dextop-container-image-checkpoint "${HOME}"/.local/bin/container-image
 
 		# container expansion
 
@@ -1378,15 +1353,18 @@ then
 
 		frobulator.complete "${HOME}"/.dextop dextop-move-checkpoint frobulator.move "${HOME}" "${HOME}"/.local/bin dextop
 
-		# setup checkpoint
-
-		frobulator.file "${HOME}"/.dextop dextop-setup-checkpoint
 	fi
 
 	# result ///////////////////////////////////////////////////////////////////
 
-	frobulator.result "${HOME}"/.dextop dextop-setup-checkpoint "dextop setup"
-	echo
+	frobulator.result "dextop setup"
+
+	# setup checkpoint: only when every step succeeded
+
+	if [ "${?}" -eq 0 ] && [ ! -f "${HOME}"/.dextop/dextop-setup-checkpoint ]
+	then
+		frobulator.file "${HOME}"/.dextop dextop-setup-checkpoint
+	fi
 
 	frobulator.timeout 5
 

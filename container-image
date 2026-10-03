@@ -202,8 +202,6 @@ fi
 
 image_select () {
 
-	frobulator.continue
-
 	# list distributions for setup
 
 	if [ -z "${distribution_name}"     ] || \
@@ -349,8 +347,6 @@ image_select () {
 
 image_architecture () {
 
-	frobulator.continue
-
 	# compare processor architecture to available images architecture
 
 	cpu_architectures=(
@@ -431,8 +427,6 @@ image_architecture () {
 
 image_download () {
 
-	frobulator.continue
-
 	# generate links and download distribution image
 
 	# handle distribution url
@@ -453,12 +447,10 @@ image_download () {
 
 	frobulator.download "${image_url}" "${image_archive}" "${PREFIX}"/img "${image_file}"
 
-	frobulator.complete
+	frobulator.complete halt "Image download failed" "[ ${image_file} ]"
 }
 
 image_filesystem () {
-
-	frobulator.continue
 
 	# exclude archive directories: dev | proc | sys | system
 	# 'container-session' will bind those device directories to the container
@@ -477,13 +469,15 @@ image_filesystem () {
 							--exclude='system'		\
 								--directory="${2}"	2> "${sink}"
 
-	frobulator.complete
+	# validate extracted system: tar warnings under proot are not failures
+
+	[ -e "${2}"/etc/os-release ]
+
+	frobulator.complete halt "Image extraction failed" "[ ${1##*/} ]"
 
 }
 
 image_extract () {
-
-	frobulator.continue
 
 	frobulator.wrn "Extracting new deployment" "[ ${image_file} // ${image_architecture} ]"
 
@@ -618,8 +612,6 @@ case "${distribution_name}"
 
 image_environment () {
 
-	frobulator.continue
-
 	# generate environment '$PATH' variable
 
 	CONTAINER_ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
@@ -669,8 +661,6 @@ image_environment () {
 }
 
 image_groups () {
-
-	frobulator.continue
 
 	# register android groups to container
 
@@ -729,8 +719,6 @@ image_groups () {
 
 image_locale () {
 
-	frobulator.continue
-
 	# set locale selection for container
 
 	echo "LC_ALL=en_US.UTF-8" >> "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/environment
@@ -742,8 +730,6 @@ image_locale () {
 }
 
 image_network () {
-
-	frobulator.continue
 
 	# generate network files
 
@@ -787,8 +773,6 @@ image_network () {
 
 image_preload () {
 
-	frobulator.continue
-
 	# generate libgcc/libc location and add to dynamic linker for preload
 
 	library_preload=$(find "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/usr/lib -type f -iname "libgcc_s.so.1")
@@ -804,8 +788,6 @@ image_preload () {
 }
 
 image_sources () {
-
-	frobulator.continue
 
 	# generate sources file
 
