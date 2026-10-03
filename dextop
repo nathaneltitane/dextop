@@ -455,13 +455,15 @@ container_intent () {
 
 intent_architecture () {
 
-	# list supported processor architechtures
+	local architecture
+
+	# list supported processor architectures
 
 	cpu_architectures=(
 		aarch64
-		arm
+		"arm*"
 		amd64
-		i*86
+		"i*86"
 		x86_64
 	)
 
@@ -469,27 +471,17 @@ intent_architecture () {
 
 	device_architecture="$(uname -m)"
 
-	for architecture in ${!cpu_architectures[@]}
+	for architecture in "${cpu_architectures[@]}"
 	do
-		if [[ "${device_architecture}" != "${cpu_architectures[architecture]}" ]]
+		if [[ "${device_architecture}" == ${architecture} ]]
 		then
-
 			frobulator.scs "Supported device architecture" "[ ${device_architecture} ]"
 
-			frobulator.fwd "Proceeding${marker_elp}"
-
-			break
-		else
-			frobulator.wrn "Unsupported device architecture" "[ ${device_architecture} ]"
-
-			frobulator.fwd "Aborting${marker_elp}"
-
-			frobulator.stp "Exiting."
-
-			exit 1
+			return 0
 		fi
 	done
 
+	return 1
 }
 
 intent_update () {
@@ -1017,7 +1009,9 @@ intent_purge () {
 
 # architecture check ///////////////////////////////////////////////////////////
 
-frobulator.log "intent_architecture"
+intent_architecture
+
+frobulator.complete halt "Unsupported device architecture" "[ ${device_architecture} ]"
 
 # options //////////////////////////////////////////////////////////////////////
 
