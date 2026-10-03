@@ -453,7 +453,7 @@ image_download () {
 
 	frobulator.download "${image_url}" "${image_archive}" "${PREFIX}"/img "${image_file}"
 
-	frobulator.complete "${script} : ${FUNCNAME}"
+	frobulator.complete
 }
 
 image_filesystem () {
@@ -477,7 +477,7 @@ image_filesystem () {
 							--exclude='system'		\
 								--directory="${2}"	2> "${sink}"
 
-	frobulator.complete "${script} : ${FUNCNAME}"
+	frobulator.complete
 
 }
 
@@ -497,7 +497,7 @@ image_extract () {
 
 	fi
 
-	frobulator.complete "${script} : ${FUNCNAME}"
+	frobulator.complete
 
 }
 
@@ -612,7 +612,7 @@ case "${distribution_name}"
 
 	esac
 
-	frobulator.complete "${script} : ${FUNCNAME}"
+	frobulator.complete
 
 }
 
@@ -664,7 +664,7 @@ image_environment () {
 
 	unset CONTAINER_ROOT
 
-	frobulator.complete "${script} : ${FUNCNAME}"
+	frobulator.complete
 
 }
 
@@ -723,7 +723,7 @@ image_groups () {
 
 	IFS=''
 
-	frobulator.complete "${script} : ${FUNCNAME}"
+	frobulator.complete
 
 }
 
@@ -737,7 +737,7 @@ image_locale () {
 	echo "en_US.UTF-8 UTF-8" > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/locale.gen
 	echo "LANG=en_US.UTF-8" > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/locale.conf
 
-	frobulator.complete "${script} : ${FUNCNAME}"
+	frobulator.complete
 
 }
 
@@ -781,7 +781,7 @@ image_network () {
 	nameserver 1.0.0.1
 	FILE
 
-	frobulator.complete "${script} : ${FUNCNAME}"
+	frobulator.complete
 
 }
 
@@ -799,7 +799,7 @@ image_preload () {
 	${library_preload}
 	FILE
 
-	frobulator.complete "${script} : ${FUNCNAME}"
+	frobulator.complete
 
 }
 
@@ -843,7 +843,7 @@ image_sources () {
 		FILE
 	fi
 
-	frobulator.complete "${script} : ${FUNCNAME}"
+	frobulator.complete
 
 }
 
