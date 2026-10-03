@@ -1351,6 +1351,9 @@ then
 
 	# result and setup checkpoint: written only when every step succeeded
 
+	# 'frobulator.result' is the checkpoint command:
+	# returns success only when every step passed
+
 	frobulator.complete "${HOME}"/.dextop dextop-setup-checkpoint frobulator.result "dextop setup"
 
 	frobulator.timeout 5
