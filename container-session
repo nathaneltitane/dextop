@@ -763,6 +763,8 @@ container_session () {
 
 container_focus () {
 
+	local command_path
+
 	# define window manager
 
 	if [ -z "${environment}" ]
@@ -804,7 +806,11 @@ container_focus () {
 		frobulator.cpt "Loading default" "[ ${application} ]"
 	fi
 
-	if [ -z $(command -v "${application}") ]
+	# path of the command named in ${application}, empty when not installed
+
+	command_path="$(command -v "${application}")"
+
+	if [ -z "${command_path}" ]
 	then
 		frobulator.err "Application not found" "[ ${application} ]"
 
@@ -1140,7 +1146,13 @@ display_vnc_initialize () {
 	# make selection available for automatic start:
 	# verify user id - do not write selection when 'root' user is logged in
 
-	if [[ $(id -u -n) = "root" ]]
+	local user_current
+
+	# name of the logged in user
+
+	user_current="$(id -u -n)"
+
+	if [ "${user_current}" = "root" ]
 	then
 		:
 	else
@@ -1219,7 +1231,13 @@ display_vnc_intent () {
 
 display_vnc_start () {
 
-	if [[ $(pgrep -f  x11vnc) ]]
+	local process_vnc
+
+	# process ids of a running vnc server, empty when stopped
+
+	process_vnc="$(pgrep -f x11vnc)"
+
+	if [ -n "${process_vnc}" ]
 	then
 		:
 	else
@@ -1260,7 +1278,15 @@ display_vnc_stop () {
 	# look for corresponding server process:
 	# stop display server and clean runtime files
 
-	if [[ $(pgrep -f  Xvfb) ]]
+	local process_framebuffer
+	local process_vnc
+
+	# process ids of a running framebuffer and vnc server, empty when stopped
+
+	process_framebuffer="$(pgrep -f Xvfb)"
+	process_vnc="$(pgrep -f x11vnc)"
+
+	if [ -n "${process_framebuffer}" ]
 	then
 		# framebuffer
 
@@ -1268,7 +1294,7 @@ display_vnc_stop () {
 
 		frobulator.process "Stopping display framebuffer"
 
-	elif [[ $(pgrep -f  x11vnc) ]]
+	elif [ -n "${process_vnc}" ]
 	then
 		# vnc
 
@@ -1293,25 +1319,38 @@ display_vnc_stop () {
 
 display_x11_server () {
 
+	local process_dbus
+	local process_accelerator
+	local process_x11_application
+
 	# start x11 display server
 
 	GALLIUM_DRIVER="${TERMUX_X11_DRIVER}"
 
 	export GALLIUM_DRIVER="${GALLIUM_DRIVER}"
 
-	if [[ $(pgrep -f dbus) ]]
+	# process ids of running dbus and graphics accelerator, empty when stopped
+
+	process_dbus="$(pgrep -f dbus)"
+	process_accelerator="$(pgrep -f "${TERMUX_X11_ACCELERATOR}")"
+
+	if [ -n "${process_dbus}" ]
 	then
 		pkill -f dbus
 	fi
 
-	if [[ $(pgrep -f "${TERMUX_X11_ACCELERATOR}") ]]
+	if [ -n "${process_accelerator}" ]
 	then
 		pkill -f "${TERMUX_X11_ACCELERATOR}"
 	fi
 
 	frobulator.silence "${TERMUX_X11_ACCELERATOR}" &
 
-	if [[ $(pgrep -f "${TERMUX_X11_APPLICATION}") ]]
+	# process ids of the running termux x11 application, empty when stopped
+
+	process_x11_application="$(pgrep -f "${TERMUX_X11_APPLICATION}")"
+
+	if [ -n "${process_x11_application}" ]
 	then
 		:
 	else
@@ -1347,7 +1386,13 @@ display_x11_stop () {
 
 	# stop display server and activity
 
-	if [[ $(pgrep -f "${TERMUX_X11_APPLICATION}") ]]
+	local process_x11_application
+
+	# process ids of the running termux x11 application, empty when stopped
+
+	process_x11_application="$(pgrep -f "${TERMUX_X11_APPLICATION}")"
+
+	if [ -n "${process_x11_application}" ]
 	then
 		pkill -f "${TERMUX_X11_APPLICATION}"
 
@@ -1397,7 +1442,7 @@ display_list () {
 		display_port="default"
 	fi
 
-	if [[ $(pidof "${display_server}") ]]
+	if [ -n "${display_process}" ]
 	then
 		frobulator.fwd "Listing session details${marker_elp}"
 

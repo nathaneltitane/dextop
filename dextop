@@ -313,17 +313,21 @@ if [ ! -f "${HOME}"/.dextop/dextop-session ]
 then
 	if [ -z "${session}" ]
 	then
-		if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "i3" ]]
+		# desktop environment chosen at setup: console, i3 or xfce
+
+		desktop_environment="$(cat "${HOME}"/.dextop/dextop-environment)"
+
+		if [ "${desktop_environment}" = "i3" ]
 		then
 			session="i3"
 		fi
 
-		if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "xfce" ]]
+		if [ "${desktop_environment}" = "xfce" ]
 		then
 			session="xfce4-session"
 		fi
 
-		if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "console" ]]
+		if [ "${desktop_environment}" = "console" ]
 		then
 			session="console"
 		fi

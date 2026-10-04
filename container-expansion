@@ -162,7 +162,11 @@ done
 
 # expansion
 
-if [[ $(command -v unminimize) ]]
+# path of 'unminimize', empty when not installed
+
+command_unminimize="$(command -v unminimize)"
+
+if [ -n "${command_unminimize}" ]
 then
 	command_expand=$(yes | command -v unminimize)
 

@@ -335,16 +335,20 @@ xfce_addons_list+=(
 
 # environment ──────────────────────────────────────────────────────────────────
 
+# desktop environment chosen at setup: console, i3 or xfce
+
+desktop_environment="$(cat "${HOME}"/.dextop/dextop-environment)"
+
 # console
 
-if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "console" ]]
+if [ "${desktop_environment}" = "console" ]
 then
 	desktop_environment_list+=()
 fi
 
 # i3
 
-if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "i3" ]]
+if [ "${desktop_environment}" = "i3" ]
 then
 	desktop_environment_list+=(
 		${i3_list[@]}
@@ -354,7 +358,7 @@ fi
 
 # xfce
 
-if [[ $(cat "${HOME}"/.dextop/dextop-environment) = "xfce" ]]
+if [ "${desktop_environment}" = "xfce" ]
 then
 	desktop_environment_list+=(
 		${xfce_list[@]}
