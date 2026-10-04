@@ -248,7 +248,13 @@ user_password_generate () {
 
 	# generate random password
 
-	echo $(cat /dev/urandom | tr -d -c 'a-zA-Z0-9' | fold -w ${1:-32} | head -n $(echo $(( RANDOM % 10 + 1 )) ) | tail -n 1)
+	local password_length="${1:-32}"
+	local password_line=$(( RANDOM % 10 + 1 ))
+	local password
+
+	password="$(cat /dev/urandom | tr -d -c 'a-zA-Z0-9' | fold -w "${password_length}" | head -n "${password_line}" | tail -n 1)"
+
+	echo "${password}"
 }
 
 user_information () {

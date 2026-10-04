@@ -1378,7 +1378,9 @@ display_list () {
 		display_format=$(cat "${HOME}"/.vnc/format)
 		display_geometry=$(cat "${HOME}"/.vnc/geometry)
 		display_display=${DISPLAY}
-		display_process=$(pidof $(echo "${display_server}"))
+		read -r -a display_server_names <<< "${display_server}"
+
+		display_process=$(pidof "${display_server_names[@]}")
 		display_port="${PORT}"
 	fi
 
@@ -1389,7 +1391,9 @@ display_list () {
 		display_format="native"
 		display_geometry="native"
 		display_display=${DISPLAY}
-		display_process=$(pidof $(echo "${display_server}"))
+		read -r -a display_server_names <<< "${display_server}"
+
+		display_process=$(pidof "${display_server_names[@]}")
 		display_port="default"
 	fi
 
