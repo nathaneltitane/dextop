@@ -246,11 +246,12 @@ user_verify () {
 
 user_password_generate () {
 
-	# generate random password
-
 	local password_length="${1:-32}"
 	local password_line=$(( RANDOM % 10 + 1 ))
+
 	local password
+
+	# generate random password
 
 	password="$(cat /dev/urandom | tr -d -c 'a-zA-Z0-9' | fold -w "${password_length}" | head -n "${password_line}" | tail -n 1)"
 
@@ -312,6 +313,7 @@ user_automated () {
 	# generate 'user account:
 	# noninteractive setup
 
+
 	frobulator.fwd "Generating account${marker_elp}"
 
 	if [ -z "${user_name}" ]
@@ -337,13 +339,25 @@ user_automated () {
 
 user_superuser () {
 
+	local group_sudo
+
 	# generate 'user' superuser privilege
 
-	if [[ $(command -v sudo) ]]
+	local command_sudo
+
+	# path of 'sudo', empty when not installed
+
+	command_sudo="$(command -v sudo)"
+
+	if [ -n "${command_sudo}" ]
 	then
 		frobulator.fwd "Generating superuser privilege${marker_elp}"
 
-		if [[ $(cat /etc/group | grep sudo) ]]
+		# sudo group entry from the group file, empty when the group does not exist
+
+		group_sudo="$(cat /etc/group | grep sudo)"
+
+		if [ -n "${group_sudo}" ]
 		then
 			sudo_id=$(cat /etc/group | grep sudo | cut -d ':' -f 3)
 		else
@@ -366,9 +380,15 @@ user_superuser () {
 
 user_superuser_override () {
 
+	local command_sudo
+
 	# set 'user' superuser privilege password override
 
-	if [[ $(command -v sudo) ]]
+	# path of 'sudo', empty when not installed
+
+	command_sudo="$(command -v sudo)"
+
+	if [ -n "${command_sudo}" ]
 	then
 		# verify sudoers default directory existence
 
@@ -415,6 +435,7 @@ user_password () {
 user_runtime () {
 
 	# generate 'user' runtime directory structure
+
 
 	frobulator.fwd "Setting runtime${marker_elp}"
 
