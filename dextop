@@ -313,7 +313,7 @@ if [ ! -f "${HOME}"/.dextop/dextop-session ]
 then
 	if [ -z "${session}" ]
 	then
-		# desktop environment chosen at setup: console, i3 or xfce
+		# desktop environment chosen at setup: console / i3 / xfce
 
 		desktop_environment="$(cat "${HOME}"/.dextop/dextop-environment)"
 

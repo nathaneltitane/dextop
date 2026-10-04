@@ -162,7 +162,7 @@ done
 
 # expansion
 
-# path of 'unminimize', empty when not installed
+# 'unminimize' path - empty if not installed
 
 command_unminimize="$(command -v unminimize)"
 

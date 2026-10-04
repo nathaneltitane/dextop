@@ -345,7 +345,7 @@ user_superuser () {
 
 	local command_sudo
 
-	# path of 'sudo', empty when not installed
+	# 'sudo' path - empty if not installed
 
 	command_sudo="$(command -v sudo)"
 
@@ -353,7 +353,7 @@ user_superuser () {
 	then
 		frobulator.fwd "Generating superuser privilege${marker_elp}"
 
-		# sudo group entry from the group file, empty when the group does not exist
+		# sudo group file entry - empty if the group does not exist
 
 		group_sudo="$(cat /etc/group | grep sudo)"
 
@@ -384,7 +384,7 @@ user_superuser_override () {
 
 	# set 'user' superuser privilege password override
 
-	# path of 'sudo', empty when not installed
+	# 'sudo' path - empty if not installed
 
 	command_sudo="$(command -v sudo)"
 
