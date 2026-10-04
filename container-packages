@@ -2,99 +2,57 @@
 
 # dependencies ─────────────────────────────────────────────────────────────────
 
-script="$(basename -- ${BASH_SOURCE[0]})"
+script="$(basename -- "${BASH_SOURCE[0]}")"
 
-if [[ "${frobulator_loaded}" != "true" ]]
+# script arguments for escalation
+
+self_arguments=("${@}")
+
+if [ "${frobulator_loaded}" != "true" ]
 then
 	echo
+	echo "[  >  ] Checking..."
+	echo
 
-	ticker () {
+	# root through sudo keeps using the user's frobulator
 
-		for ticker in '>  ' '>> ' '>>>'
-		do
-			echo -n -e "\r[  ${ticker}  ] ${1^}..."
-
-			sleep 0.5
-		done
-
-		echo
-
-		echo
-
-	}
-
-	if [[ $(id -u -n) = "root" ]]
+	if [ -n "${SUDO_USER}" ]
 	then
-		USER="${SUDO_USER:-root}"
-
-		if [ "${USER}" = "root" ]
-		then
-			HOME=/root
-		else
-			HOME="/home/${USER}"
-		fi
+		USER="${SUDO_USER}"
+		HOME="$(getent passwd "${SUDO_USER}" | cut -d ':' -f 6)"
 	fi
 
-	ticker checking
+	frobulator="${HOME}/.local/bin/frobulator"
+	frobulator_download="$(mktemp)"
 
-	package_managers_list=(
-		"apt-get --quiet --quiet update > /dev/null 2>&1; apt-get --quiet --quiet install --yes"
-		"dnf --quiet install --assumeyes"
-		"yum --quiet install --assumeyes"
-		"apk add --quiet"
-		"pacman --sync --refresh --noconfirm --noprogressbar"
-		"zypper --quiet --non-interactive install"
-	)
+	mkdir -p "${HOME}/.local/bin"
 
-	package="curl"
+	# latest release - curl or wget - local copy replaced only by a newer one
 
-	if [[ -z $(command -v "${package}") ]]
+	curl -s -L -o "${frobulator_download}" get.frbltr.app 2> /dev/null ||
+	wget -q -O "${frobulator_download}" get.frbltr.app 2> /dev/null
+
+	version_online="$(grep -m 1 '^update=' "${frobulator_download}")"
+	version_local="$(grep -m 1 '^update=' "${frobulator}" 2> /dev/null)"
+
+	if [[ "${version_online}" > "${version_local}" ]]
 	then
-		for package_manager in "${package_managers_list[@]}"
-		do
-			entry="${package_manager%% *}"
-
-			if [[ -n $(command -v "${entry}") ]]
-			then
-				eval "${package_manager} ${package} > /dev/null 2>&1"
-
-				break
-			fi
-		done
-
-		if [[ -z $(command -v "${package}") ]]
-		then
-			echo "[  !  ] Unable to install or binary not found ─────────────────────── [ '${package}' ]"
-			echo
-
-			exit 1
-		fi
-	fi
-
-	mkdir -p "${HOME}"/.local/bin
-
-	frobulator="${HOME}"/.local/bin/frobulator
-
-	version_online=$(curl -s -L get.frbltr.app | grep -m 1 '^update=' | cut -d '"' -f 2)
-
-	version_local=$(grep -m 1 '^update=' "${frobulator}" 2>/dev/null | cut -d '"' -f 2)
-
-	version_local="${version_local:-1970-01-01}"
-
-	if [ ! -f "${frobulator}" ] || [[ "${version_online}" > "${version_local}" ]]
-	then
-		curl -s -L get.frbltr.app > "${frobulator}"
+		mv -f "${frobulator_download}" "${frobulator}"
 
 		chmod +x "${frobulator}"
 	fi
 
-	ticker initializing
+	rm -f "${frobulator_download}"
+
+	if [ ! -f "${frobulator}" ]
+	then
+		echo "[  !  ] Unable to fetch frobulator ── [ get.frbltr.app ]"
+		echo
+
+		exit 1
+	fi
 
 	source "${frobulator}"
-
-	# script arguments for escalation
-
-	self_arguments=("${@}")
 fi
 
 # superuser ────────────────────────────────────────────────────────────────────
@@ -107,7 +65,7 @@ frobulator.script
 
 # version ──────────────────────────────────────────────────────────────────────
 
-version="2026-09-29"
+version="2026-10-04"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
