@@ -323,7 +323,7 @@ xfce_addons_list+=(
 
 # environment ──────────────────────────────────────────────────────────────────
 
-# desktop environment chosen at setup: console, i3 or xfce
+# desktop environment chosen at setup: console / i3 / xfce
 
 desktop_environment="$(cat "${HOME}"/.dextop/dextop-environment)"
 

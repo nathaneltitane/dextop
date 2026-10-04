@@ -806,7 +806,7 @@ container_focus () {
 		frobulator.cpt "Loading default" "[ ${application} ]"
 	fi
 
-	# path of the command named in ${application}, empty when not installed
+	# ${application} command path - empty if not installed
 
 	command_path="$(command -v "${application}")"
 
@@ -1148,7 +1148,7 @@ display_vnc_initialize () {
 
 	local user_current
 
-	# name of the logged in user
+	# logged in user name
 
 	user_current="$(id -u -n)"
 
@@ -1233,7 +1233,7 @@ display_vnc_start () {
 
 	local process_vnc
 
-	# process ids of a running vnc server, empty when stopped
+	# running vnc server process ids - empty if stopped
 
 	process_vnc="$(pgrep -f x11vnc)"
 
@@ -1281,7 +1281,7 @@ display_vnc_stop () {
 	local process_framebuffer
 	local process_vnc
 
-	# process ids of a running framebuffer and vnc server, empty when stopped
+	# running framebuffer and vnc server process ids - empty if stopped
 
 	process_framebuffer="$(pgrep -f Xvfb)"
 	process_vnc="$(pgrep -f x11vnc)"
@@ -1329,7 +1329,7 @@ display_x11_server () {
 
 	export GALLIUM_DRIVER="${GALLIUM_DRIVER}"
 
-	# process ids of running dbus and graphics accelerator, empty when stopped
+	# running dbus and graphics accelerator process ids - empty if stopped
 
 	process_dbus="$(pgrep -f dbus)"
 	process_accelerator="$(pgrep -f "${TERMUX_X11_ACCELERATOR}")"
@@ -1346,7 +1346,7 @@ display_x11_server () {
 
 	frobulator.silence "${TERMUX_X11_ACCELERATOR}" &
 
-	# process ids of the running termux x11 application, empty when stopped
+	# running termux x11 application process ids - empty if stopped
 
 	process_x11_application="$(pgrep -f "${TERMUX_X11_APPLICATION}")"
 
@@ -1388,7 +1388,7 @@ display_x11_stop () {
 
 	local process_x11_application
 
-	# process ids of the running termux x11 application, empty when stopped
+	# running termux x11 application process ids - empty if stopped
 
 	process_x11_application="$(pgrep -f "${TERMUX_X11_APPLICATION}")"
 
