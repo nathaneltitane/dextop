@@ -264,8 +264,8 @@ if [ -f /etc/os-release ]
 then
 	. /etc/os-release
 
-	name="${ID}"
-	version="${VERSION_ID}"
+	name_entry="${ID}"
+	version_entry="${VERSION_ID}"
 fi
 
 # exports ──────────────────────────────────────────────────────────────────────
@@ -283,11 +283,11 @@ container_parse () {
 
 	for distribution in "${CONTAINER_BASE}"/*
 	do
-		for version in "${distribution}"/*
+		for version_entry in "${distribution}"/*
 		do
 			name_distribution=$(basename ${distribution})
 
-			version_distribution=$(basename ${version})
+			version_distribution=$(basename ${version_entry})
 
 			containers+=(${name_distribution} ${version_distribution})
 		done
@@ -322,12 +322,12 @@ container_parse () {
 		do
 			number=$(((${i}/2) + 1))
 
-			name="${containers[${i}]}"
-			version="${containers[${i}+1]}"
+			name_entry="${containers[${i}]}"
+			version_entry="${containers[${i}+1]}"
 
 			indent="${marker_tab}"
 
-			if [ ${#version} -le 2 ]
+			if [ ${#version_entry} -le 2 ]
 			then
 				indent+="${marker_tab}"
 			fi
@@ -345,7 +345,7 @@ container_parse () {
 
 			# list container entries
 
-			echo "${marker_nul}" "[ ${number} ]" "${name}" "${version}"
+			echo "${marker_nul}" "[ ${number} ]" "${name_entry}" "${version_entry}"
 
 		done
 
@@ -388,11 +388,11 @@ container_parse () {
 		i=$(( ${selection} ))
 		i=$(( ${i} * 2 ))
 
-		name="${containers[i-2]}"
-		version="${containers[i-1]}"
+		name_entry="${containers[i-2]}"
+		version_entry="${containers[i-1]}"
 
-		name_distribution="${name}"
-		version_distribution="${version}"
+		name_distribution="${name_entry}"
+		version_distribution="${version_entry}"
 
 	fi
 
@@ -402,8 +402,8 @@ container_parse () {
 
 	# specify distribution selection variables
 
-	name_distribution="${name}"
-	version_distribution="${version}"
+	name_distribution="${name_entry}"
+	version_distribution="${version_entry}"
 
 	CONTAINER_ROOT="${CONTAINER_BASE}"/"${name_distribution}"/"${version_distribution}"
 
