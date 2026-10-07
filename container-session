@@ -69,20 +69,20 @@ version="2026-10-04"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
-while (($#))
+while (( $# ))
 do
 	case "${1}"
 	in
 		-o|--start)
 			option="start"
-			display="${2}"
+			mode_display="${2}"
 
 			shift
 		;;
 
 		-x|--stop)
 			option="stop"
-			display="${2}"
+			mode_display="${2}"
 
 			shift
 		;;
@@ -200,9 +200,9 @@ activity_vnc="${activity_vnc_remotix}"
 
 # defaults ─────────────────────────────────────────────────────────────────────
 
-if [ -z "${display}" ]
+if [ -z "${mode_display}" ]
 then
-	display="x11"
+	mode_display="x11"
 fi
 
 if [ -z "${COLORTERM}" ]
@@ -281,15 +281,15 @@ container_parse () {
 
 	# parse container directories
 
-	for distribution in "${CONTAINER_BASE}"/*
+	for directory_distribution in "${CONTAINER_BASE}"/*
 	do
-		for version_entry in "${distribution}"/*
+		for version_entry in "${directory_distribution}"/*
 		do
-			name_distribution=$(basename ${distribution})
+			name_distribution=$(basename ${directory_distribution})
 
 			version_distribution=$(basename ${version_entry})
 
-			containers+=(${name_distribution} ${version_distribution})
+			list_containers+=(${name_distribution} ${version_distribution})
 		done
 	done
 
@@ -318,12 +318,12 @@ container_parse () {
 
 		# continue list using array selection of suppported values
 
-		for (( i=0 ; i<${#containers[@]} ; i+=2 ))
+		for (( index_entry = 0 ; index_entry < ${#list_containers[@]} ; index_entry += 2 ))
 		do
-			number=$(((${i}/2) + 1))
+			number_entry=$(( ( ${index_entry} / 2 ) + 1 ))
 
-			name_entry="${containers[${i}]}"
-			version_entry="${containers[${i}+1]}"
+			name_entry="${list_containers[${index_entry}]}"
+			version_entry="${list_containers[${index_entry}+1]}"
 
 			indent="${marker_tab}"
 
@@ -332,20 +332,20 @@ container_parse () {
 				indent+="${marker_tab}"
 			fi
 
-			if (( ${i}/2 >= 0 && ${i}/2 <= 8 ))
+			if (( ${index_entry} / 2 >= 0 && ${index_entry} / 2 <= 8 ))
 			then
 				# handle number spacing for entries 1-9
 
-				number=" ${number}"
+				number_entry=" ${number_entry}"
 			else
 				# handle number spacing for entries 10+
 
-				number="${number}"
+				number_entry="${number_entry}"
 			fi
 
 			# list container entries
 
-			echo "${marker_nul}" "[ ${number} ]" "${name_entry}" "${version_entry}"
+			echo "${marker_nul}" "[ ${number_entry} ]" "${name_entry}" "${version_entry}"
 
 		done
 
@@ -369,13 +369,13 @@ container_parse () {
 		# handle numerical selection
 
 		while [[ "${selection}" -lt 1           ]] ||
-			  [[ "${selection}" -gt "${number}" ]] ||
+			  [[ "${selection}" -gt "${number_entry}" ]] ||
 			  [[ ! "${selection}" =~ ^[0-9]+$   ]]
 		do
 			echo
 			frobulator.err "Invalid selection:"
 
-			frobulator.wrn "Select container [ 1 - ${number} ]"
+			frobulator.wrn "Select container [ 1 - ${number_entry} ]"
 
 			frobulator.ipt "Selection:"
 
@@ -385,11 +385,11 @@ container_parse () {
 
 		# parse selection parameters
 
-		i=$(( ${selection} ))
-		i=$(( ${i} * 2 ))
+		index_entry=$(( ${selection} ))
+		index_entry=$(( ${index_entry} * 2 ))
 
-		name_entry="${containers[i-2]}"
-		version_entry="${containers[i-1]}"
+		name_entry="${list_containers[index_entry-2]}"
+		version_entry="${list_containers[index_entry-1]}"
 
 		name_distribution="${name_entry}"
 		version_distribution="${version_entry}"
@@ -398,7 +398,7 @@ container_parse () {
 
 	# unset array
 
-	containers=()
+	list_containers=()
 
 	# specify distribution selection variables
 
@@ -464,11 +464,11 @@ container_user () {
 
 	line_passwd_last="$(tail -n 1 "${CONTAINER_ROOT}"/etc/passwd)"
 
-	while read -r entry
+	while read -r line_passwd
 	do
 		IFS=':'
 
-		read USER _ USER_ID GROUP_ID GECOS HOME SHELL <<< "${entry}"
+		read USER _ USER_ID GROUP_ID GECOS HOME SHELL <<< "${line_passwd}"
 
 		IFS=','
 
@@ -524,7 +524,7 @@ container_user () {
 
 		# user naem not found
 
-		if [[ "${entry}" == "${line_passwd_last}" ]]
+		if [[ "${line_passwd}" == "${line_passwd_last}" ]]
 		then
 
 			frobulator.err "Invalid user name - Aborting" "[ '${name_user}' ]"
@@ -689,21 +689,21 @@ container_session () {
 
 	frobulator.fwd "Loading desktop interface${marker_elp}"
 
-	if [ -z "${environment}" ]
+	if [ -z "${name_environment}" ]
 	then
-		environment="$(cat ${HOME}/.dextop/dextop-environment)"
+		name_environment="$(cat ${HOME}/.dextop/dextop-environment)"
 	fi
 
-	if [ -z "${session}" ]
+	if [ -z "${name_session}" ]
 	then
-		session="$(cat ${HOME}/.dextop/dextop-session)"
+		name_session="$(cat ${HOME}/.dextop/dextop-session)"
 	fi
 
-	if [ "${environment}" = "xfce" ]
+	if [ "${name_environment}" = "xfce" ]
 	then
 		manager_window="xfwm4"
 
-	elif [ "${environment}" = "i3" ]
+	elif [ "${name_environment}" = "i3" ]
 	then
 		manager_window="i3"
 	fi
@@ -716,7 +716,7 @@ container_session () {
 
 	# load desktop environment
 
-	frobulator.silence "dbus-launch --exit-with-session ${session}" &
+	frobulator.silence "dbus-launch --exit-with-session ${name_session}" &
 }
 
 container_focus () {
@@ -725,32 +725,32 @@ container_focus () {
 
 	# define window manager
 
-	if [ -z "${environment}" ]
+	if [ -z "${name_environment}" ]
 	then
-		environment="$(cat ${HOME}/.dextop/dextop-environment)"
+		name_environment="$(cat ${HOME}/.dextop/dextop-environment)"
 	fi
 
-	if [ -z "${session}" ]
+	if [ -z "${name_session}" ]
 	then
-		session="$(cat ${HOME}/.dextop/dextop-session)"
+		name_session="$(cat ${HOME}/.dextop/dextop-session)"
 	fi
 
-	if [ "${environment}" = "xfce" ]
+	if [ "${name_environment}" = "xfce" ]
 	then
 		manager_window="xfwm4"
 
-	elif [ "${environment}" = "i3" ]
+	elif [ "${name_environment}" = "i3" ]
 	then
 		manager_window="i3"
 	fi
 
 	# define default application
 
-	if [ "${environment}" = "xfce" ]
+	if [ "${name_environment}" = "xfce" ]
 	then
 		application_default="xfce4-appfinder"
 
-	elif [ "${environment}" = "i3" ]
+	elif [ "${name_environment}" = "i3" ]
 	then
 		application_default="dmenu_run"
 	fi
@@ -825,7 +825,7 @@ display_vnc_geometry () {
 
 	frobulator.msg "Select geometry or input [c]ustom properties:"
 
-	monitors=(
+	list_monitors=(
 		VGA		 0640    0480
 		WVGA	 0768    0480
 		SVGA	 0800    0600
@@ -867,7 +867,7 @@ display_vnc_geometry () {
 		8KUHD	 7680    4320
 	)
 
-	phones=(
+	list_phones=(
 		GN6P	 2560    1440
 		GN6		 2560    1440
 		GN5X	 1920    1080
@@ -906,7 +906,7 @@ display_vnc_geometry () {
 		SGS6	 2560    1440
 	)
 
-	tablets=(
+	list_tablets=(
 		GN9	     2048    1536
 		GN7-2013 1920    1200
 		GPC	     2560    1800
@@ -917,14 +917,14 @@ display_vnc_geometry () {
 		SGTS5E	 2560    1600
 		)
 
-	devices=(
-		${phones[@]}
-		${tablets[@]}
+	list_devices=(
+		${list_phones[@]}
+		${list_tablets[@]}
 	)
 
-	geometries=(
-		${monitors[@]}
-		${devices[@]}
+	list_geometries=(
+		${list_monitors[@]}
+		${list_devices[@]}
 	)
 
 	# set padding for uniform output
@@ -933,27 +933,27 @@ display_vnc_geometry () {
 
 	# continue list using array selection of suppported values
 
-	for (( i=0 ; i<${#geometries[@]} ; i+=3 ))
+	for (( index_entry = 0 ; index_entry < ${#list_geometries[@]} ; index_entry += 3 ))
 	do
-		format="${geometries[$i]}"
-		width="${geometries[$i+1]}"
-		height="${geometries[$i+2]}"
-		geometry="${width}x${height}"
+		label_geometry="${list_geometries[$index_entry]}"
+		width_display="${list_geometries[$index_entry+1]}"
+		height_display="${list_geometries[$index_entry+2]}"
+		geometry="${width_display}x${height_display}"
 
-		number=$(( ( $i / 3 ) + 1 ))
+		number_entry=$(( ( $index_entry / 3 ) + 1 ))
 
-		if (( $i / 3 >= 0 && $i / 3 <= 8 ))
+		if (( $index_entry / 3 >= 0 && $index_entry / 3 <= 8 ))
 		then
 			# handle number spacing for entries 1-9
 
-			printf '      [  %s ] %s' ${number} ${format}
+			printf '      [  %s ] %s' ${number_entry} ${label_geometry}
 		else
 			# handle number spacing for entries 10+
 
-			printf '      [ %s ] %s' ${number} ${format}
+			printf '      [ %s ] %s' ${number_entry} ${label_geometry}
 		fi
 
-		printf '%*s' $(( length_pad - ${#format} ))
+		printf '%*s' $(( length_pad - ${#label_geometry} ))
 		printf '%s\n' ${geometry}
 	done
 
@@ -989,13 +989,13 @@ display_vnc_selection () {
 		# selection input must be in provided range and an integer
 
 		if [[ "${selection}" -lt 1           ]] ||
-		   [[ "${selection}" -gt "${number}" ]] ||
+		   [[ "${selection}" -gt "${number_entry}" ]] ||
 		   [[ ! "${selection}" =~ ^[0-9]+$   ]]
 		then
 			echo
 			frobulator.err "Invalid selection:"
 
-			frobulator.wrn "Select geometry [ 1 - ${number} ] or input [c]ustom properties."
+			frobulator.wrn "Select geometry [ 1 - ${number_entry} ] or input [c]ustom properties."
 
 			frobulator.ipt "Selection:"
 
@@ -1019,13 +1019,13 @@ display_vnc_selection () {
 
 	if [[ "${selection}" =~ ^[0-9]+$ ]]
 	then
-		i=$(( ${selection} ))
-		i=$(( $i * 3 ))
+		index_entry=$(( ${selection} ))
+		index_entry=$(( $index_entry * 3 ))
 
-		format="${geometries[$i-3]}"
-		width="${geometries[$i-2]}"
-		height="${geometries[$i-1]}"
-		geometry="${width}x${height}"
+		label_geometry="${list_geometries[$index_entry-3]}"
+		width_display="${list_geometries[$index_entry-2]}"
+		height_display="${list_geometries[$index_entry-1]}"
+		geometry="${width_display}x${height_display}"
 	fi
 
 	# handle custom selection
@@ -1036,20 +1036,20 @@ display_vnc_selection () {
 
 		frobulator.ipt "Set width" "[ pixels ]"
 
-		frobulator.read width
+		frobulator.read width_display
 
 		frobulator.ipt "Set height" "[ pixels ]"
 
-		frobulator.read height
+		frobulator.read height_display
 
 		frobulator.ipt "Set display number" "[ e.g. 1 ]"
 
-		frobulator.read display
+		frobulator.read mode_display
 
-		format="Custom"
-		geometry="${width}x${height}"
+		label_geometry="Custom"
+		geometry="${width_display}x${height_display}"
 
-		DISPLAY=":${display}"
+		DISPLAY=":${mode_display}"
 		DISPLAY_NUMBER="${DISPLAY/:/}"
 		PORT="590${DISPLAY_NUMBER}"
 	fi
@@ -1125,7 +1125,7 @@ display_vnc_initialize () {
 			fi
 
 			echo "${selection}" > "${HOME}"/.vnc/selection
-			echo "${format}"    > "${HOME}"/.vnc/format
+			echo "${label_geometry}"    > "${HOME}"/.vnc/format
 			echo "${geometry}"  > "${HOME}"/.vnc/geometry
 		fi
 	fi
@@ -1374,7 +1374,7 @@ display_x11_stop () {
 
 list_display () {
 
-	if [[ "${display}" = [vV][nN][cC] ]]
+	if [[ "${mode_display}" = [vV][nN][cC] ]]
 	then
 		server_display="x11vnc"
 
@@ -1387,7 +1387,7 @@ list_display () {
 		port_display="${PORT}"
 	fi
 
-	if [[ "${display}" = [xX][1][1] ]]
+	if [[ "${mode_display}" = [xX][1][1] ]]
 	then
 		server_display="app_process / com.termux.x11.Loader"
 
@@ -1412,13 +1412,13 @@ list_display () {
 	else
 		frobulator.wrn "No active servers detected."
 
-		empty="N/A"
+		value_empty="N/A"
 
-		format_display="${empty}"
-		geometry_display="${empty}"
-		name_display="${empty}"
-		id_process_display="${empty}"
-		port_display="${empty}"
+		format_display="${value_empty}"
+		geometry_display="${value_empty}"
+		name_display="${value_empty}"
+		id_process_display="${value_empty}"
+		port_display="${value_empty}"
 	fi
 
 	frobulator.inf "Format"   "[ ${format_display} ]"

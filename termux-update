@@ -69,7 +69,7 @@ version="2026-10-04"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
-while (($#))
+while (( $# ))
 do
 	case "${1}"
 	in
@@ -195,9 +195,9 @@ then
 			url_packages="https://f-droid.org/en/packages"
 			url_repository="https://f-droid.org/repo"
 
-			archive=$(curl -s -L "${url_packages}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
-			version_archive=$(echo "${archive}" | cut -d '_' -f 2 | sed 's/\..*//g')
-			url_archive="${url_repository}/${archive}"
+			file_archive=$(curl -s -L "${url_packages}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
+			version_archive=$(echo "${file_archive}" | cut -d '_' -f 2 | sed 's/\..*//g')
+			url_archive="${url_repository}/${file_archive}"
 		fi
 
 		if [[ "${option}" = "github.com" ]]
@@ -250,13 +250,13 @@ then
 
 				# download
 
-				frobulator.download "${url_repository}" "${PREFIX}"/tmp "${archive}"
+				frobulator.download "${url_repository}" "${PREFIX}"/tmp "${file_archive}"
 
 				# update
 
 				frobulator.fwd "Updating${marker_elp}"
 
-				intent_open "${PREFIX}"/tmp/"${archive}"
+				intent_open "${PREFIX}"/tmp/"${file_archive}"
 			else
 				# continue without application update
 
