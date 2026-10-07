@@ -144,7 +144,7 @@ frobulator.upgrade
 
 # values ───────────────────────────────────────────────────────────────────────
 
-display_list+=(
+list_display+=(
 	x11-apps
 	x11-common
 	x11-session-utils
@@ -157,23 +157,23 @@ display_list+=(
 	xwayland
 )
 
-documentation_list+=(
+list_documentation+=(
 	man
 )
 
-extensions_list+=(
+list_extensions+=(
 )
 
-fonts_list+=(
+list_fonts+=(
 	fonts-takao
 )
 
-i3_list+=(
+list_i3+=(
 	i3
 	i3status
 )
 
-i3_addons_list+=(
+list_addons_i3+=(
 	dmenu
 	dunst
 	feh
@@ -184,22 +184,22 @@ i3_addons_list+=(
 	qiv
 )
 
-icon_themes_list+=(
+list_themes_icon+=(
 	papirus-icon-theme
 )
 
-multimedia_list+=(
+list_multimedia+=(
 )
 
-repositories_list+=(
+list_repositories+=(
 )
 
-security_list+=(
+list_security+=(
 	ca-certificates
 	openssl
 )
 
-utilities_list+=(
+list_utilities+=(
 	apt
 	apt-file
 	curl
@@ -209,11 +209,11 @@ utilities_list+=(
 	tree
 )
 
-vnc_list+=(
+list_vnc+=(
 	x11vnc
 )
 
-xfce_list+=(
+list_xfce+=(
 	xfce4
 	xfce4-appfinder
 	xfce4-clipman
@@ -235,16 +235,16 @@ xfce_list+=(
 	tumbler
 )
 
-xfce_fonts_list+=(
+list_fonts_xfce+=(
 )
 
-xfce_themes_list+=(
+list_themes_xfce+=(
 	arc-theme
 	adwaita-icon-theme
 	adwaita-icon-theme-full
 )
 
-xfce_addons_list+=(
+list_addons_xfce+=(
 	xfce4-appmenu-plugin
 	xfce4-battery-plugin
 	xfce4-clipman-plugin
@@ -283,61 +283,61 @@ xfce_addons_list+=(
 
 # desktop environment chosen at setup: console / i3 / xfce
 
-desktop_environment="$(cat "${HOME}"/.dextop/dextop-environment)"
+name_environment="$(cat "${HOME}"/.dextop/dextop-environment)"
 
 # console
 
-if [ "${desktop_environment}" = "console" ]
+if [ "${name_environment}" = "console" ]
 then
-	desktop_environment_list+=()
+	list_environment_desktop+=()
 fi
 
 # i3
 
-if [ "${desktop_environment}" = "i3" ]
+if [ "${name_environment}" = "i3" ]
 then
-	desktop_environment_list+=(
-		${i3_list[@]}
-		${i3_addons_list[@]}
+	list_environment_desktop+=(
+		${list_i3[@]}
+		${list_addons_i3[@]}
 	)
 fi
 
 # xfce
 
-if [ "${desktop_environment}" = "xfce" ]
+if [ "${name_environment}" = "xfce" ]
 then
-	desktop_environment_list+=(
-		${xfce_list[@]}
-		${xfce_fonts_list[@]}
-		${xfce_themes_list[@]}
+	list_environment_desktop+=(
+		${list_xfce[@]}
+		${list_fonts_xfce[@]}
+		${list_themes_xfce[@]}
 	)
 
-	#	${xfce_addons_list[@]}
+	#	${list_addons_xfce[@]}
 fi
 
 # install #
 
-install_list+=(
-	${repositories_list[@]}
-	${display_list[@]}
-	${documentation_list[@]}
-	${extensions_list[@]}
-	${fonts_list[@]}
-	${multimedia_list[@]}
-	${security_list[@]}
-	${utilities_list[@]}
-	${vnc_list[@]}
-	${desktop_environment_list[@]}
+list_install+=(
+	${list_repositories[@]}
+	${list_display[@]}
+	${list_documentation[@]}
+	${list_extensions[@]}
+	${list_fonts[@]}
+	${list_multimedia[@]}
+	${list_security[@]}
+	${list_utilities[@]}
+	${list_vnc[@]}
+	${list_environment_desktop[@]}
 )
 
-frobulator.install ${install_list[@]}
+frobulator.install ${list_install[@]}
 
 # purge
 
-purge_list+=(
+list_purge+=(
 	ibus
 	snap
 	xterm
 )
 
-frobulator.purge ${purge_list[@]}
+frobulator.purge ${list_purge[@]}

@@ -97,14 +97,14 @@ do
 
 		-u|--username)
 			option="username"
-			user_name="${2}"
+			name_user="${2}"
 
 			shift
 		;;
 
 		-d|--directory)
 			option="directory"
-			container_directory="${2}"
+			directory_container="${2}"
 
 			shift
 		;;
@@ -181,10 +181,10 @@ TERMUX_X11_SERVER="termux-x11"
 TERMUX_X11_DRIVER="virpipe"
 TERMUX_X11_ACCELERATOR="virgl_test_server_android"
 
-termux_x11_activity="com.termux.x11/.MainActivity"
-termux_x11_activity_stop="com.termux.x11.ACTION_STOP"
+activity_termux_x11="com.termux.x11/.MainActivity"
+activity_termux_x11_stop="com.termux.x11.ACTION_STOP"
 
-termux_x11_process="app_process -Xnoimage-dextooat / com.termux.x11.Loader"
+command_termux_x11="app_process -Xnoimage-dextooat / com.termux.x11.Loader"
 
 # reference vnc session viewer activity calls for known android applications:
 
@@ -192,11 +192,11 @@ termux_x11_process="app_process -Xnoimage-dextooat / com.termux.x11.Loader"
 # RealVNC:       com.realvnc.viewer.android/.app.DesktopActivity
 # Remotix:       com.nulana.android.remotix/.Viewer
 
-free_vnc_activity="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
-real_vnc_activity="com.realvnc.viewer.android/.app.DesktopActivity"
-remotix_vnc_activity="com.nulana.android.remotix/.Viewer"
+activity_vnc_free="com.iiordanov.freebVNC/com.iiordanov.bVNC.RemoteCanvasActivity"
+activity_vnc_real="com.realvnc.viewer.android/.app.DesktopActivity"
+activity_vnc_remotix="com.nulana.android.remotix/.Viewer"
 
-vnc_activity="${remotix_vnc_activity}"
+activity_vnc="${activity_vnc_remotix}"
 
 # defaults ─────────────────────────────────────────────────────────────────────
 
@@ -255,9 +255,9 @@ then
 	DISPLAY_NUMBER="${DISPLAY/:/}"
 fi
 
-if [ -z "${user_name}" ]
+if [ -z "${name_user}" ]
 then
-	user_name="termux"
+	name_user="termux"
 fi
 
 if [ -f /etc/os-release ]
@@ -285,20 +285,20 @@ container_parse () {
 	do
 		for version in "${distribution}"/*
 		do
-			distribution_name=$(basename ${distribution})
+			name_distribution=$(basename ${distribution})
 
-			distribution_version=$(basename ${version})
+			version_distribution=$(basename ${version})
 
-			containers+=(${distribution_name} ${distribution_version})
+			containers+=(${name_distribution} ${version_distribution})
 		done
 	done
 
 	if [[ ${#CONTAINER_ROOT[@]} -eq 1 ]]
 	then
-		distribution_name="${distribution_name}"
-		distribution_version="${distribution_version}"
+		name_distribution="${name_distribution}"
+		version_distribution="${version_distribution}"
 
-		frobulator.inf "Single container found" "[ ${distribution_name} // ${distribution_version} ]"
+		frobulator.inf "Single container found" "[ ${name_distribution} // ${version_distribution} ]"
 
 		frobulator.fwd "Proceeding${marker_elp}"
 	fi
@@ -310,7 +310,7 @@ container_parse () {
 
 		# set padding for uniform output
 
-		pad_length=10
+		length_pad=10
 
 		# normalize output
 
@@ -353,11 +353,11 @@ container_parse () {
 
 		# values #
 
-		values_list=(
+		list_values=(
 			selection
 		)
 
-		# handle user input for values_list
+		# handle user input for list_values
 
 		eval ${frobulator_return[@]}
 
@@ -391,8 +391,8 @@ container_parse () {
 		name="${containers[i-2]}"
 		version="${containers[i-1]}"
 
-		distribution_name="${name}"
-		distribution_version="${version}"
+		name_distribution="${name}"
+		version_distribution="${version}"
 
 	fi
 
@@ -402,26 +402,26 @@ container_parse () {
 
 	# specify distribution selection variables
 
-	distribution_name="${name}"
-	distribution_version="${version}"
+	name_distribution="${name}"
+	version_distribution="${version}"
 
-	CONTAINER_ROOT="${CONTAINER_BASE}"/"${distribution_name}"/"${distribution_version}"
+	CONTAINER_ROOT="${CONTAINER_BASE}"/"${name_distribution}"/"${version_distribution}"
 
-	# specify container_directory for container input handling
+	# specify directory_container for container input handling
 
-	container_directory="${CONTAINER_BASE}"
+	directory_container="${CONTAINER_BASE}"
 }
 
 container_input () {
 
 	# no container root specified
 
-	if [ -z "${container_directory}" ]
+	if [ -z "${directory_container}" ]
 	then
 		CONTAINER_BASE="${PREFIX}"/cnt
 		CONTAINER_ROOT=("${CONTAINER_BASE}"/*/*)
 
-		container_directory=("${CONTAINER_ROOT}")
+		directory_container=("${CONTAINER_ROOT}")
 
 		frobulator.wrn "Container directory not specified."
 
@@ -430,7 +430,7 @@ container_input () {
 
 	# user specified invalid container root
 
-	if [ ! -e "${container_directory}" ]
+	if [ ! -e "${directory_container}" ]
 	then
 		CONTAINER_BASE="${PREFIX}"/cnt
 		CONTAINER_ROOT=("${CONTAINER_BASE}"/*/*)
@@ -442,9 +442,9 @@ container_input () {
 
 	# user specified container root exists
 
-	if [ -d "${container_directory}" ]
+	if [ -d "${directory_container}" ]
 	then
-		CONTAINER_BASE="${container_directory}"
+		CONTAINER_BASE="${directory_container}"
 		CONTAINER_ROOT=("${CONTAINER_BASE}"/*/*)
 
 		frobulator.scs "Container directory found."
@@ -462,7 +462,7 @@ container_user () {
 	# source environment variables when 'user' corresponds to 'username'
 	# default to 'root' if 'username' is invalid, is not specified or does not exist
 
-	last_entry="$(tail -n 1 "${CONTAINER_ROOT}"/etc/passwd)"
+	line_passwd_last="$(tail -n 1 "${CONTAINER_ROOT}"/etc/passwd)"
 
 	while read -r entry
 	do
@@ -482,9 +482,9 @@ container_user () {
 
 		# no user name specified
 
-		if [[ -z "${user_name}" ]]
+		if [[ -z "${name_user}" ]]
 		then
-			user_name="root"
+			name_user="root"
 
 			USER="root"
 
@@ -501,22 +501,22 @@ container_user () {
 				HOME="/"
 			fi
 
-			frobulator.wrn "No user name - Defaulting" "[ '${user_name}' ]"
+			frobulator.wrn "No user name - Defaulting" "[ '${name_user}' ]"
 
 			break
 		fi
 
 		# valid user name found
 
-		if [[ "${user_name}" == "${USER}" ]]
+		if [[ "${name_user}" == "${USER}" ]]
 		then
-			USER="${user_name}"
+			USER="${name_user}"
 
-			if [[ "${user_name}" == "root" ]]
+			if [[ "${name_user}" == "root" ]]
 			then
-				frobulator.wrn "Valid user name - Superuser" "[ '${user_name}' ]"
+				frobulator.wrn "Valid user name - Superuser" "[ '${name_user}' ]"
 			else
-				frobulator.scs "Valid user name - Accessing" "[ '${user_name}' ]"
+				frobulator.scs "Valid user name - Accessing" "[ '${name_user}' ]"
 			fi
 
 			break
@@ -524,10 +524,10 @@ container_user () {
 
 		# user naem not found
 
-		if [[ "${entry}" == "${last_entry}" ]]
+		if [[ "${entry}" == "${line_passwd_last}" ]]
 		then
 
-			frobulator.err "Invalid user name - Aborting" "[ '${user_name}' ]"
+			frobulator.err "Invalid user name - Aborting" "[ '${name_user}' ]"
 
 			exit 1
 		fi
@@ -586,101 +586,101 @@ container_intent () {
 
 	# setup 'proot' command arguments
 
-	unset session_command
+	unset command_session
 
-	session_command+="proot"
-	session_command+=" --kill-on-exit"
-	session_command+=" --link2symlink"
-	session_command+=" --rootfs=${CONTAINER_ROOT}"
-	session_command+=" --change-id=${USER_ID}:${GROUP_ID}"
-	session_command+=" --pwd=${HOME}"
+	command_session+="proot"
+	command_session+=" --kill-on-exit"
+	command_session+=" --link2symlink"
+	command_session+=" --rootfs=${CONTAINER_ROOT}"
+	command_session+=" --change-id=${USER_ID}:${GROUP_ID}"
+	command_session+=" --pwd=${HOME}"
 
-    [ -d "/apex" ]                                && session_command+=" --bind=/apex:/apex"
-    [ -e "/linkerconfig/ld.config.txt" ]          && session_command+=" --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt"
+    [ -d "/apex" ]                                && command_session+=" --bind=/apex:/apex"
+    [ -e "/linkerconfig/ld.config.txt" ]          && command_session+=" --bind=/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt"
 
 	# system directories
 
-    [ -d "/data" ]                                && session_command+=" --bind=/data:/data"
-    [ -d "/dev" ]                                 && session_command+=" --bind=/dev:/dev"
-    [ -e "/dev/urandom" ]                         && session_command+=" --bind=/dev/urandom:/dev/random"
-    [ -d "/proc" ]                                && session_command+=" --bind=/proc:/proc"
-    [ -d "/proc/self/fd" ]                        && session_command+=" --bind=/proc/self/fd:/dev/fd"
-    [ -e "/proc/self/fd/0" ]                      && session_command+=" --bind=/proc/self/fd/0:/dev/stdin"
-    [ -e "/proc/self/fd/1" ]                      && session_command+=" --bind=/proc/self/fd/1:/dev/stdout"
-    [ -e "/proc/self/fd/2" ]                      && session_command+=" --bind=/proc/self/fd/2:/dev/stderr"
-    [ -d "/storage" ]                             && session_command+=" --bind=/storage:/storage"
-    [ -d "/sys" ]                                 && session_command+=" --bind=/sys:/sys"
-    [ -d "/system" ]                              && session_command+=" --bind=/system:/system"
-    [ -d "/vendor" ]                              && session_command+=" --bind=/vendor:/vendor"
+    [ -d "/data" ]                                && command_session+=" --bind=/data:/data"
+    [ -d "/dev" ]                                 && command_session+=" --bind=/dev:/dev"
+    [ -e "/dev/urandom" ]                         && command_session+=" --bind=/dev/urandom:/dev/random"
+    [ -d "/proc" ]                                && command_session+=" --bind=/proc:/proc"
+    [ -d "/proc/self/fd" ]                        && command_session+=" --bind=/proc/self/fd:/dev/fd"
+    [ -e "/proc/self/fd/0" ]                      && command_session+=" --bind=/proc/self/fd/0:/dev/stdin"
+    [ -e "/proc/self/fd/1" ]                      && command_session+=" --bind=/proc/self/fd/1:/dev/stdout"
+    [ -e "/proc/self/fd/2" ]                      && command_session+=" --bind=/proc/self/fd/2:/dev/stderr"
+    [ -d "/storage" ]                             && command_session+=" --bind=/storage:/storage"
+    [ -d "/sys" ]                                 && command_session+=" --bind=/sys:/sys"
+    [ -d "/system" ]                              && command_session+=" --bind=/system:/system"
+    [ -d "/vendor" ]                              && command_session+=" --bind=/vendor:/vendor"
 
-	[ -d "${PREFIX%/*}"/home ]                    && session_command+=" --bind=${PREFIX%/*}/home:${HOME}"
-	[ -d "${PREFIX}"/media ]                      && session_command+=" --bind=${PREFIX}/media:/media"
-	[ -d "${PREFIX}"/tmp ]                        && session_command+=" --bind=${PREFIX}/tmp:/tmp"
+	[ -d "${PREFIX%/*}"/home ]                    && command_session+=" --bind=${PREFIX%/*}/home:${HOME}"
+	[ -d "${PREFIX}"/media ]                      && command_session+=" --bind=${PREFIX}/media:/media"
+	[ -d "${PREFIX}"/tmp ]                        && command_session+=" --bind=${PREFIX}/tmp:/tmp"
 
 	# environment
 
-    session_command+=" env"
-    session_command+=" --ignore-environment"
+    command_session+=" env"
+    command_session+=" --ignore-environment"
 
     # android
 
-	session_command+=" ANDROID_ART_ROOT=${ANDROID_ART_ROOT}"
-	session_command+=" ANDROID_DATA=${ANDROID_DATA}"
-	session_command+=" ANDROID_I18N_ROOT=${ANDROID_I18N_ROOT}"
-	session_command+=" ANDROID_ROOT=${ANDROID_ROOT}"
-	session_command+=" ANDROID_RUNTIME_ROOT=${ANDROID_RUNTIME_ROOT}"
-	session_command+=" ANDROID_TZDATA_ROOT=${ANDROID_TZDATA_ROOT}"
-	session_command+=" BOOTCLASSPATH=${BOOTCLASSPATH}"
-	session_command+=" DEX2OATBOOTCLASSPATH=${DEX2OATBOOTCLASSPATH}"
+	command_session+=" ANDROID_ART_ROOT=${ANDROID_ART_ROOT}"
+	command_session+=" ANDROID_DATA=${ANDROID_DATA}"
+	command_session+=" ANDROID_I18N_ROOT=${ANDROID_I18N_ROOT}"
+	command_session+=" ANDROID_ROOT=${ANDROID_ROOT}"
+	command_session+=" ANDROID_RUNTIME_ROOT=${ANDROID_RUNTIME_ROOT}"
+	command_session+=" ANDROID_TZDATA_ROOT=${ANDROID_TZDATA_ROOT}"
+	command_session+=" BOOTCLASSPATH=${BOOTCLASSPATH}"
+	command_session+=" DEX2OATBOOTCLASSPATH=${DEX2OATBOOTCLASSPATH}"
 
 	# termux
 
-	session_command+=" PREFIX=${PREFIX}"
-	session_command+=" TERMUX_BINARIES=${PREFIX}/bin"
-	session_command+=" TERMUX_VERSION=${TERMUX_VERSION}"
+	command_session+=" PREFIX=${PREFIX}"
+	command_session+=" TERMUX_BINARIES=${PREFIX}/bin"
+	command_session+=" TERMUX_VERSION=${TERMUX_VERSION}"
 
 	# container
 
-	session_command+=" PATH=${PATH}:${CONTAINER_PATH}"
-	session_command+=" COLORTERM=${COLORTERM}"
-	session_command+=" DISPLAY=${DISPLAY}"
-	session_command+=" DISPLAY_DRIVER=${DISPLAY_DRIVER}"
-	session_command+=" HOME=${HOME}"
-	session_command+=" LANG=${LANG}"
-	session_command+=" LOCALHOST=${LOCALHOST}"
-	session_command+=" SHELL=${SHELL}"
-	session_command+=" TERM=${TERM}"
-	session_command+=" TMPDIR=${TMPDIR}"
-	session_command+=" USER=${USER}"
-	session_command+=" XDG_CACHE_HOME=${HOME}/.cache"
-	session_command+=" XDG_CONFIG_DIRS=/etc/xdg"
-	session_command+=" XDG_CONFIG_HOME=${HOME}/.config"
-	session_command+=" XDG_DATA_DIRS=/usr/local/share:/usr/share"
-	session_command+=" XDG_DATA_HOME=${HOME}/.local/share"
-	session_command+=" XDG_RUNTIME_DIR=/run/user/${USER_ID}"
-	session_command+=" XDG_STATE_HOME=${HOME}/.local/state"
-	session_command+=" XAUTHORITY=${XDG_RUNTIME_DIR}/Xauthority"
+	command_session+=" PATH=${PATH}:${CONTAINER_PATH}"
+	command_session+=" COLORTERM=${COLORTERM}"
+	command_session+=" DISPLAY=${DISPLAY}"
+	command_session+=" DISPLAY_DRIVER=${DISPLAY_DRIVER}"
+	command_session+=" HOME=${HOME}"
+	command_session+=" LANG=${LANG}"
+	command_session+=" LOCALHOST=${LOCALHOST}"
+	command_session+=" SHELL=${SHELL}"
+	command_session+=" TERM=${TERM}"
+	command_session+=" TMPDIR=${TMPDIR}"
+	command_session+=" USER=${USER}"
+	command_session+=" XDG_CACHE_HOME=${HOME}/.cache"
+	command_session+=" XDG_CONFIG_DIRS=/etc/xdg"
+	command_session+=" XDG_CONFIG_HOME=${HOME}/.config"
+	command_session+=" XDG_DATA_DIRS=/usr/local/share:/usr/share"
+	command_session+=" XDG_DATA_HOME=${HOME}/.local/share"
+	command_session+=" XDG_RUNTIME_DIR=/run/user/${USER_ID}"
+	command_session+=" XDG_STATE_HOME=${HOME}/.local/state"
+	command_session+=" XAUTHORITY=${XDG_RUNTIME_DIR}/Xauthority"
 
 	# command
 
-	session_command+=" ${@}"
+	command_session+=" ${@}"
 
 	# execute 'proot' login
 
-	${session_command}
+	${command_session}
 }
 
 container_display () {
 
-	display_activity="${termux_x11_activity}"
+	activity_display="${activity_termux_x11}"
 
-	intent_command=()
+	command_intent=()
 
-	intent_command+=(am start)
-	intent_command+=(--user 0)
-	intent_command+=(-n ${display_activity})
+	command_intent+=(am start)
+	command_intent+=(--user 0)
+	command_intent+=(-n ${activity_display})
 
-	frobulator.silence "${intent_command[@]}"
+	frobulator.silence "${command_intent[@]}"
 }
 
 container_session () {
@@ -701,11 +701,11 @@ container_session () {
 
 	if [ "${environment}" = "xfce" ]
 	then
-		window_manager="xfwm4"
+		manager_window="xfwm4"
 
 	elif [ "${environment}" = "i3" ]
 	then
-		window_manager="i3"
+		manager_window="i3"
 	fi
 
 	# pause:
@@ -721,7 +721,7 @@ container_session () {
 
 container_focus () {
 
-	local command_path
+	local path_command
 
 	# define window manager
 
@@ -737,11 +737,11 @@ container_focus () {
 
 	if [ "${environment}" = "xfce" ]
 	then
-		window_manager="xfwm4"
+		manager_window="xfwm4"
 
 	elif [ "${environment}" = "i3" ]
 	then
-		window_manager="i3"
+		manager_window="i3"
 	fi
 
 	# define default application
@@ -766,9 +766,9 @@ container_focus () {
 
 	# ${application} command path - empty if not installed
 
-	command_path="$(command -v "${application}")"
+	path_command="$(command -v "${application}")"
 
-	if [ -z "${command_path}" ]
+	if [ -z "${path_command}" ]
 	then
 		frobulator.err "Application not found" "[ ${application} ]"
 
@@ -792,7 +792,7 @@ container_focus () {
 
 	# load desktop environment
 
-	"${window_manager}" > "${sink}" 2>&1 &
+	"${manager_window}" > "${sink}" 2>&1 &
 
 	# load application
 
@@ -929,7 +929,7 @@ display_vnc_geometry () {
 
 	# set padding for uniform output
 
-	pad_length=10
+	length_pad=10
 
 	# continue list using array selection of suppported values
 
@@ -953,7 +953,7 @@ display_vnc_geometry () {
 			printf '      [ %s ] %s' ${number} ${format}
 		fi
 
-		printf '%*s' $(( pad_length - ${#format} ))
+		printf '%*s' $(( length_pad - ${#format} ))
 		printf '%s\n' ${geometry}
 	done
 
@@ -964,11 +964,11 @@ display_vnc_selection () {
 
 	# values #
 
-	values_list=(
+	list_values=(
 		selection
 	)
 
-	# handle user input for values_list
+	# handle user input for list_values
 
 	frobulator_return=()
 
@@ -976,7 +976,7 @@ display_vnc_selection () {
 	then
 		selection=$(cat "${HOME}"/.vnc/selection)
 	else
-		frobulator.input ${values_list[@]}
+		frobulator.input ${list_values[@]}
 	fi
 
 	eval ${frobulator_return[@]}
@@ -1061,15 +1061,15 @@ display_vnc_password () {
 
 	# values #
 
-	values_list=(
-		display_password
+	list_values=(
+		password_display
 	)
 
-	# handle user input for values_list
+	# handle user input for list_values
 
 	frobulator_return=()
 
-	frobulator.input ${values_list[@]}
+	frobulator.input ${list_values[@]}
 
 	eval ${frobulator_return[@]}
 
@@ -1077,7 +1077,7 @@ display_vnc_password () {
 
 	frobulator.fwd "Setting password${marker_elp}"
 
-	echo "${display_password}" | vncpasswd -f > "${HOME}"/.vnc/passwd
+	echo "${password_display}" | vncpasswd -f > "${HOME}"/.vnc/passwd
 
 	frobulator.scs "Password changed."
 }
@@ -1088,13 +1088,13 @@ display_vnc_framebuffer () {
 
 	frobulator.fwd "Generating framebuffer${marker_elp}"
 
-	unset framebuffer_command
+	unset command_framebuffer
 
-	framebuffer_command+="Xvfb"
-	framebuffer_command+=" -screen ${DISPLAY_NUMBER}"
-	framebuffer_command+=" ${geometry}x24"
+	command_framebuffer+="Xvfb"
+	command_framebuffer+=" -screen ${DISPLAY_NUMBER}"
+	command_framebuffer+=" ${geometry}x24"
 
-	${framebuffer_command} > "${sink}" 2>&1 &
+	${command_framebuffer} > "${sink}" 2>&1 &
 }
 
 display_vnc_initialize () {
@@ -1139,20 +1139,20 @@ display_vnc_server () {
 
 	# start vnc display server
 
-	server_command+="x11vnc"
-	server_command+=" -display ${DISPLAY}"
-	server_command+=" -clip xinerama=${DISPLAY}"
-	server_command+=" -rfbport ${PORT}"
-	server_command+=" -scale 1.00"
-	server_command+=" -xkb"
-	server_command+=" -nocursor"
-	server_command+=" -nocursorshape"
-	server_command+=" -noshm"
-	server_command+=" -noxdamage"
-	server_command+=" -noxfixes"
-	server_command+=" -noxrecord"
+	command_server+="x11vnc"
+	command_server+=" -display ${DISPLAY}"
+	command_server+=" -clip xinerama=${DISPLAY}"
+	command_server+=" -rfbport ${PORT}"
+	command_server+=" -scale 1.00"
+	command_server+=" -xkb"
+	command_server+=" -nocursor"
+	command_server+=" -nocursorshape"
+	command_server+=" -noshm"
+	command_server+=" -noxdamage"
+	command_server+=" -noxfixes"
+	command_server+=" -noxrecord"
 
-	${server_command} > "${sink}" 2>&1 &
+	${command_server} > "${sink}" 2>&1 &
 
 }
 
@@ -1171,31 +1171,31 @@ display_vnc_intent () {
 	#						--user 0
 	#						-a android.intent.action.VIEW
 	#						-d vnc://${ADDRESS}:${PORT}
-	#						-S ${display_activity}"
+	#						-S ${activity_display}"
 
-	display_activity="${vnc_activity}"
+	activity_display="${activity_vnc}"
 
-	unset intent_command
+	unset command_intent
 
-	intent_command+="am start"
-	intent_command+=" --user 0"
-	intent_command+=" -a android.intent.action.VIEW"
-	intent_command+=" -d vnc://${ADDRESS}:${PORT}"
-	intent_command+=" -S ${display_activity}"
+	command_intent+="am start"
+	command_intent+=" --user 0"
+	command_intent+=" -a android.intent.action.VIEW"
+	command_intent+=" -d vnc://${ADDRESS}:${PORT}"
+	command_intent+=" -S ${activity_display}"
 
-	frobulator.silence "${intent_command}"
+	frobulator.silence "${command_intent}"
 
 }
 
 display_vnc_start () {
 
-	local process_vnc
+	local id_process_vnc
 
 	# running vnc server process ids - empty if stopped
 
-	process_vnc="$(pgrep -f x11vnc)"
+	id_process_vnc="$(pgrep -f x11vnc)"
 
-	if [ -n "${process_vnc}" ]
+	if [ -n "${id_process_vnc}" ]
 	then
 		:
 	else
@@ -1236,15 +1236,15 @@ display_vnc_stop () {
 	# look for corresponding server process:
 	# stop display server and clean runtime files
 
-	local process_framebuffer
-	local process_vnc
+	local id_process_framebuffer
+	local id_process_vnc
 
 	# running framebuffer and vnc server process ids - empty if stopped
 
-	process_framebuffer="$(pgrep -f Xvfb)"
-	process_vnc="$(pgrep -f x11vnc)"
+	id_process_framebuffer="$(pgrep -f Xvfb)"
+	id_process_vnc="$(pgrep -f x11vnc)"
 
-	if [ -n "${process_framebuffer}" ]
+	if [ -n "${id_process_framebuffer}" ]
 	then
 		# framebuffer
 
@@ -1252,7 +1252,7 @@ display_vnc_stop () {
 
 		frobulator.process "Stopping display framebuffer"
 
-	elif [ -n "${process_vnc}" ]
+	elif [ -n "${id_process_vnc}" ]
 	then
 		# vnc
 
@@ -1277,9 +1277,9 @@ display_vnc_stop () {
 
 display_x11_server () {
 
-	local process_dbus
-	local process_accelerator
-	local process_x11_application
+	local id_process_dbus
+	local id_process_accelerator
+	local id_process_x11_application
 
 	# start x11 display server
 
@@ -1289,15 +1289,15 @@ display_x11_server () {
 
 	# running dbus and graphics accelerator process ids - empty if stopped
 
-	process_dbus="$(pgrep -f dbus)"
-	process_accelerator="$(pgrep -f "${TERMUX_X11_ACCELERATOR}")"
+	id_process_dbus="$(pgrep -f dbus)"
+	id_process_accelerator="$(pgrep -f "${TERMUX_X11_ACCELERATOR}")"
 
-	if [ -n "${process_dbus}" ]
+	if [ -n "${id_process_dbus}" ]
 	then
 		pkill -f dbus
 	fi
 
-	if [ -n "${process_accelerator}" ]
+	if [ -n "${id_process_accelerator}" ]
 	then
 		pkill -f "${TERMUX_X11_ACCELERATOR}"
 	fi
@@ -1306,9 +1306,9 @@ display_x11_server () {
 
 	# running termux x11 application process ids - empty if stopped
 
-	process_x11_application="$(pgrep -f "${TERMUX_X11_APPLICATION}")"
+	id_process_x11_application="$(pgrep -f "${TERMUX_X11_APPLICATION}")"
 
-	if [ -n "${process_x11_application}" ]
+	if [ -n "${id_process_x11_application}" ]
 	then
 		:
 	else
@@ -1322,15 +1322,15 @@ display_x11_intent () {
 
 	frobulator.fwd "Opening display${marker_elp}"
 
-	display_activity="${termux_x11_activity}"
+	activity_display="${activity_termux_x11}"
 
-	unset intent_command
+	unset command_intent
 
-	intent_command+="am start"
-	intent_command+=" --user 0"
-	intent_command+=" -n ${display_activity}"
+	command_intent+="am start"
+	command_intent+=" --user 0"
+	command_intent+=" -n ${activity_display}"
 
-	frobulator.silence "${intent_command}" &
+	frobulator.silence "${command_intent}" &
 }
 
 display_x11_start () {
@@ -1344,25 +1344,25 @@ display_x11_stop () {
 
 	# stop display server and activity
 
-	local process_x11_application
+	local id_process_x11_application
 
 	# running termux x11 application process ids - empty if stopped
 
-	process_x11_application="$(pgrep -f "${TERMUX_X11_APPLICATION}")"
+	id_process_x11_application="$(pgrep -f "${TERMUX_X11_APPLICATION}")"
 
-	if [ -n "${process_x11_application}" ]
+	if [ -n "${id_process_x11_application}" ]
 	then
 		pkill -f "${TERMUX_X11_APPLICATION}"
 
-		display_activity="${termux_x11_activity_stop}"
+		activity_display="${activity_termux_x11_stop}"
 
-		intent_command=()
+		command_intent=()
 
-		intent_command+=(am broadcast)
-		intent_command+=(--user 0)
-		intent_command+=(-a ${display_activity})
+		command_intent+=(am broadcast)
+		command_intent+=(--user 0)
+		command_intent+=(-a ${activity_display})
 
-		frobulator.silence "${intent_command[@]}" &
+		frobulator.silence "${command_intent[@]}" &
 
 		frobulator.process "Stopping display viewer"
 	else
@@ -1372,60 +1372,60 @@ display_x11_stop () {
 	fi
 }
 
-display_list () {
+list_display () {
 
 	if [[ "${display}" = [vV][nN][cC] ]]
 	then
-		display_server="x11vnc"
+		server_display="x11vnc"
 
-		display_format=$(cat "${HOME}"/.vnc/format)
-		display_geometry=$(cat "${HOME}"/.vnc/geometry)
-		display_display=${DISPLAY}
-		read -r -a display_server_names <<< "${display_server}"
+		format_display=$(cat "${HOME}"/.vnc/format)
+		geometry_display=$(cat "${HOME}"/.vnc/geometry)
+		name_display=${DISPLAY}
+		read -r -a list_names_server_display <<< "${server_display}"
 
-		display_process=$(pidof "${display_server_names[@]}")
-		display_port="${PORT}"
+		id_process_display=$(pidof "${list_names_server_display[@]}")
+		port_display="${PORT}"
 	fi
 
 	if [[ "${display}" = [xX][1][1] ]]
 	then
-		display_server="app_process / com.termux.x11.Loader"
+		server_display="app_process / com.termux.x11.Loader"
 
-		display_format="native"
-		display_geometry="native"
-		display_display=${DISPLAY}
-		read -r -a display_server_names <<< "${display_server}"
+		format_display="native"
+		geometry_display="native"
+		name_display=${DISPLAY}
+		read -r -a list_names_server_display <<< "${server_display}"
 
-		display_process=$(pidof "${display_server_names[@]}")
-		display_port="default"
+		id_process_display=$(pidof "${list_names_server_display[@]}")
+		port_display="default"
 	fi
 
-	if [ -n "${display_process}" ]
+	if [ -n "${id_process_display}" ]
 	then
 		frobulator.fwd "Listing session details${marker_elp}"
 
-		display_format="${display_format}"
-		display_geometry="${display_geometry}"
-		display_display="${display_display}"
-		display_process="${display_process}"
-		display_port="${display_port}"
+		format_display="${format_display}"
+		geometry_display="${geometry_display}"
+		name_display="${name_display}"
+		id_process_display="${id_process_display}"
+		port_display="${port_display}"
 	else
 		frobulator.wrn "No active servers detected."
 
 		empty="N/A"
 
-		display_format="${empty}"
-		display_geometry="${empty}"
-		display_display="${empty}"
-		display_process="${empty}"
-		display_port="${empty}"
+		format_display="${empty}"
+		geometry_display="${empty}"
+		name_display="${empty}"
+		id_process_display="${empty}"
+		port_display="${empty}"
 	fi
 
-	frobulator.inf "Format"   "[ ${display_format} ]"
-	frobulator.inf "Geometry" "[ ${display_geometry} ]"
-	frobulator.inf "Display"  "[ ${display_display} ]"
-	frobulator.inf "Process"  "[ ${display_process} ]"
-	frobulator.inf "Port"     "[ ${display_port} ]"
+	frobulator.inf "Format"   "[ ${format_display} ]"
+	frobulator.inf "Geometry" "[ ${geometry_display} ]"
+	frobulator.inf "Display"  "[ ${name_display} ]"
+	frobulator.inf "Process"  "[ ${id_process_display} ]"
+	frobulator.inf "Port"     "[ ${port_display} ]"
 }
 
 if [ "${option}" = "start" ]
@@ -1450,7 +1450,7 @@ if [ "${option}" = "list" ]
 then
 	# list display server information
 
-	display_list
+	list_display
 fi
 
 if [ "${option}" = "username" ]

@@ -75,11 +75,11 @@ do
 	in
 		-i|--image)
 			option="image"
-			distribution_name="${2}"
+			name_distribution="${2}"
 
 			shift
 
-			distribution_version="${2}"
+			version_distribution="${2}"
 
 			shift
 		;;
@@ -133,27 +133,27 @@ done
 
 # variables ────────────────────────────────────────────────────────────────────
 
-distribution_name="debian"
+name_distribution="debian"
 
-distribution_version="12"
+version_distribution="12"
 
-distribution_codename="bookworm"
+codename_distribution="bookworm"
 
 # defaults ─────────────────────────────────────────────────────────────────────
 
-if [ -z "${distribution_name}" ]
+if [ -z "${name_distribution}" ]
 then
-	distribution_name="${distribution_name}"
+	name_distribution="${name_distribution}"
 fi
 
-if [ -z "${distribution_version}" ]
+if [ -z "${version_distribution}" ]
 then
-	distribution_version="${distribution_version}"
+	version_distribution="${version_distribution}"
 fi
 
-if [ -z "${distribution_codename}" ]
+if [ -z "${codename_distribution}" ]
 then
-	distribution_codename="${distribution_codename}"
+	codename_distribution="${codename_distribution}"
 fi
 
 # functions ────────────────────────────────────────────────────────────────────
@@ -162,22 +162,22 @@ image_select () {
 
 	# list distributions for setup
 
-	if [ -z "${distribution_name}"     ] ||
-	   [ -z "${distribution_version}"  ] ||
-	   [ -z "${distribution_codename}" ]
+	if [ -z "${name_distribution}"     ] ||
+	   [ -z "${version_distribution}"  ] ||
+	   [ -z "${codename_distribution}" ]
 	then
 		frobulator.msg "Select distribution version to setup."
 
 		# list supported distribution versions
 
-		debian_versions=(
+		list_versions_debian=(
 			debian	10	buster
 			debian	11	bullseye
 			debian	12	bookworm
 			debian	13	trixie
 		)
 
-		ubuntu_versions=(
+		list_versions_ubuntu=(
 			ubuntu	18.04	bionic
 			ubuntu	20.04	focal
 			ubuntu	22.04	jammy
@@ -185,13 +185,13 @@ image_select () {
 		)
 
 		versions=(
-			${debian_versions[@]}
-			${ubuntu_versions[@]}
+			${list_versions_debian[@]}
+			${list_versions_ubuntu[@]}
 		)
 
 		# set padding for uniform output
 
-		pad_length=10
+		length_pad=10
 
 		# continue list using array selection of suppported values
 
@@ -229,11 +229,11 @@ image_select () {
 
 		# values #
 
-		values_list=(
+		list_values=(
 			selection
 		)
 
-		# handle user input for values_list
+		# handle user input for list_values
 
 		eval ${frobulator_return[@]}
 
@@ -241,7 +241,7 @@ image_select () {
 
 		frobulator.read selection
 
-		unset distribution_version
+		unset version_distribution
 
 		# integer check:
 		# handle numerical selection
@@ -267,25 +267,25 @@ image_select () {
 
 			number="${selection}"
 
-			distribution_name="${name}"
-			distribution_version="${version}"
-			distribution_codename="${codename}"
+			name_distribution="${name}"
+			version_distribution="${version}"
+			codename_distribution="${codename}"
 
 		# handle distribution code markup
 
-		if [ "${distribution_name}" = ubuntu ]
+		if [ "${name_distribution}" = ubuntu ]
 		then
 			# set IFS
 
 			IFS='.'
 
-			read code_year code_month code_revision <<< "${distribution_version}"
+			read year_release month_release revision_release <<< "${version_distribution}"
 
-			if [ -z "${code_revision}" ]
+			if [ -z "${revision_release}" ]
 			then
-				distribution_release="${distribution_version}"
+				release_distribution="${version_distribution}"
 			else
-				distribution_release="${distribution_version%.*}"
+				release_distribution="${version_distribution%.*}"
 			fi
 
 			# reset IFS
@@ -295,19 +295,19 @@ image_select () {
 
 		frobulator.inf "User selection" "[ ${selection} // ${name} ${version} - '${codename}' ]"
 
-		export distribution_name="${distribution_name}"
-		export distribution_release="${distribution_release}"
-		export distribution_version="${distribution_version}"
-		export distribution_codename="${distribution_codename}"
+		export name_distribution="${name_distribution}"
+		export release_distribution="${release_distribution}"
+		export version_distribution="${version_distribution}"
+		export codename_distribution="${codename_distribution}"
 	fi
 
 }
 
-image_architecture () {
+architecture_image () {
 
 	# compare processor architecture to available images architecture
 
-	cpu_architectures=(
+	list_architectures_cpu=(
 		aarch64
 		arm
 		amd64
@@ -317,9 +317,9 @@ image_architecture () {
 
 	# list supported image architechtures
 
-	if [ "${distribution_name}" = debian ]
+	if [ "${name_distribution}" = debian ]
 	then
-		image_architectures=(
+		list_architectures_image=(
 			arm64v8
 			arm32v7
 			amd64
@@ -328,9 +328,9 @@ image_architecture () {
 		)
 	fi
 
-	if [ "${distribution_name}" = fedora ]
+	if [ "${name_distribution}" = fedora ]
 	then
-		image_architectures=(
+		list_architectures_image=(
 			aarch64
 			armhfp
 			x86_64
@@ -339,9 +339,9 @@ image_architecture () {
 		)
 	fi
 
-	if [ "${distribution_name}" = ubuntu ]
+	if [ "${name_distribution}" = ubuntu ]
 	then
-		image_architectures=(
+		list_architectures_image=(
 			arm64
 			armhf
 			amd64
@@ -352,15 +352,15 @@ image_architecture () {
 
 	# test processor architecture string
 
-	device_architecture="$(uname -m)"
+	architecture_device="$(uname -m)"
 
-	for i in ${!cpu_architectures[@]}
+	for i in ${!list_architectures_cpu[@]}
 	do
-		if [[ "${device_architecture}" == "${cpu_architectures[i]}" ]]
+		if [[ "${architecture_device}" == "${list_architectures_cpu[i]}" ]]
 		then
-			image_architecture=${image_architectures[i]}
+			architecture_image=${list_architectures_image[i]}
 
-			frobulator.scs "Supported architecture" "[ ${image_architecture} ]"
+			frobulator.scs "Supported architecture" "[ ${architecture_image} ]"
 
 			break
 		fi
@@ -369,11 +369,11 @@ image_architecture () {
 	# test image architecture string
 
 	if [ -z "${i}mage_architecture"    ] ||
-	   [ -z "${device_architecture}" ]
+	   [ -z "${architecture_device}" ]
 	then
-		image_architecture="N/A"
+		architecture_image="N/A"
 
-		frobulator.wrn "Unknown architecture" "[ ${image_architecture} ]"
+		frobulator.wrn "Unknown architecture" "[ ${architecture_image} ]"
 
 		frobulator.fwd "Aborting${marker_elp}"
 
@@ -389,23 +389,23 @@ image_download () {
 
 	# handle distribution url
 
-	case "${distribution_name}"
+	case "${name_distribution}"
 	in
 		debian|ubuntu)
-			image_archive_extension="tar.xz"
+			extension_archive_image="tar.xz"
 
-			image_url="get.trmnl.me"
-			image_archive="archive-${distribution_name}-${distribution_version}.${image_archive_extension}"
+			url_image="get.trmnl.me"
+			file_archive_image="archive-${name_distribution}-${version_distribution}.${extension_archive_image}"
 
-			image_name="${distribution_name}-${distribution_version}"
-			image_file="${image_name}.${image_archive_extension}"
+			name_image="${name_distribution}-${version_distribution}"
+			file_image="${name_image}.${extension_archive_image}"
 		;;
 
 	esac
 
-	frobulator.download "${image_url}" "${image_archive}" "${PREFIX}"/img "${image_file}"
+	frobulator.download "${url_image}" "${file_archive_image}" "${PREFIX}"/img "${file_image}"
 
-	frobulator.complete halt "Image download failed" "[ ${image_file} ]"
+	frobulator.complete halt "Image download failed" "[ ${file_image} ]"
 }
 
 image_filesystem () {
@@ -437,15 +437,15 @@ image_filesystem () {
 
 image_extract () {
 
-	frobulator.wrn "Extracting new deployment" "[ ${image_file} // ${image_architecture} ]"
+	frobulator.wrn "Extracting new deployment" "[ ${file_image} // ${architecture_image} ]"
 
-	frobulator.directory "${PREFIX}"/cnt "${distribution_name}"/"${distribution_version}"
+	frobulator.directory "${PREFIX}"/cnt "${name_distribution}"/"${version_distribution}"
 
-	if [ "${distribution_name}" = debian ] ||
-	   [ "${distribution_name}" = ubuntu ]
+	if [ "${name_distribution}" = debian ] ||
+	   [ "${name_distribution}" = ubuntu ]
 	then
 
-		image_filesystem "${PREFIX}"/img/"${image_file}" "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
+		image_filesystem "${PREFIX}"/img/"${file_image}" "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"
 
 	fi
 
@@ -455,60 +455,60 @@ image_extract () {
 
 image_handle () {
 
-case "${distribution_name}"
+case "${name_distribution}"
 	in
 		[dD][eE][bB][iI][aA][nN]| \
 		[uU][bB][uU][nN][tT][uU])
-			distribution_name="${distribution_name,,}"
+			name_distribution="${name_distribution,,}"
 
 			frobulator.scs "Supported distribution name."
 		;;
 
 		"")
-			distribution_name="debian"
+			name_distribution="debian"
 
 			frobulator.err "Empty distribution name."
 
-			frobulator.wrn "Defaulting" "[ ${distribution_version} ]"
+			frobulator.wrn "Defaulting" "[ ${version_distribution} ]"
 		;;
 
 		*)
-			distribution_name="debian"
+			name_distribution="debian"
 
 			frobulator.err "Unsupported distribution name."
 
-			frobulator.wrn "Defaulting" "[ ${distribution_name} ]"
+			frobulator.wrn "Defaulting" "[ ${name_distribution} ]"
 		;;
 
 	esac
 
-	case "${distribution_name}" in
+	case "${name_distribution}" in
 	debian)
 
-		case "${distribution_version}"
+		case "${version_distribution}"
 		in
 			11)
-				distribution_version=11
+				version_distribution=11
 			;;
 
 			12)
-				distribution_version=12
+				version_distribution=12
 			 ;;
 
 			 "")
-				distribution_version=12
+				version_distribution=12
 
 				frobulator.err "Distribution version not specified."
 
-				frobulator.wrn "Defaulting" "[ ${distribution_version} ]"
+				frobulator.wrn "Defaulting" "[ ${version_distribution} ]"
 			;;
 
 			 *)
-				distribution_version=12
+				version_distribution=12
 
 				frobulator.err "Unsupported distribution version."
 
-				frobulator.wrn "Defaulting" "[ ${distribution_version} ]"
+				frobulator.wrn "Defaulting" "[ ${version_distribution} ]"
 			;;
 
 		esac
@@ -516,46 +516,46 @@ case "${distribution_name}"
 
 	ubuntu)
 
-		case "${distribution_version}"
+		case "${version_distribution}"
 		in
 			18*04|18*04*)
-				distribution_version="18.04"
+				version_distribution="18.04"
 
-				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
+				frobulator.scs "Supported distribution version" "[ ${version_distribution} ]"
 			;;
 
 			20*04|20*04*)
-				distribution_version="20.04"
+				version_distribution="20.04"
 
-				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
+				frobulator.scs "Supported distribution version" "[ ${version_distribution} ]"
 			;;
 
 			22*04|22*04*)
-				distribution_version="22.04"
+				version_distribution="22.04"
 
-				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
+				frobulator.scs "Supported distribution version" "[ ${version_distribution} ]"
 			;;
 
 			24*04|24*04*)
-				distribution_version="24.04"
+				version_distribution="24.04"
 
-				frobulator.scs "Supported distribution version" "[ ${distribution_version} ]"
+				frobulator.scs "Supported distribution version" "[ ${version_distribution} ]"
 			;;
 
 			"")
-				distribution_version="${distribution_version}"
+				version_distribution="${version_distribution}"
 
 				frobulator.err "Distribution version not specified."
 
-				frobulator.wrn "Defaulting" "[ ${distribution_version} ]"
+				frobulator.wrn "Defaulting" "[ ${version_distribution} ]"
 			;;
 
 			 *)
-				distribution_version="${distribution_version}"
+				version_distribution="${version_distribution}"
 
 				frobulator.err "Unsupported distribution version."
 
-				frobulator.wrn "Defaulting" "[ ${distribution_version} ]"
+				frobulator.wrn "Defaulting" "[ ${version_distribution} ]"
 			;;
 
 		esac
@@ -572,7 +572,7 @@ image_environment () {
 
 	# generate environment '$PATH' variable
 
-	CONTAINER_ROOT="${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"
+	CONTAINER_ROOT="${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"
 
 	# set path:
 	# in order of retreival
@@ -607,7 +607,7 @@ image_environment () {
 
 	PATH="${PATH}"
 
-	cat <<- FILE > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/environment
+	cat <<- FILE > "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/etc/environment
 	PATH=${CONTAINER_PATH}
 	PREFIX=${PREFIX}
 	FILE
@@ -641,9 +641,9 @@ image_groups () {
 
 	# parse existing groups
 
-	read -r -a groups_list <<< "${groups}"
+	read -r -a list_groups <<< "${groups}"
 
-	for line in "${groups_list[@]}"
+	for line in "${list_groups[@]}"
 	do
 		line=${line/(/ }
 		line=${line/)}
@@ -654,16 +654,16 @@ image_groups () {
 
 		# transfer unregistered IDs
 
-		read group_number group_name <<< ${line}
+		read number_group name_group <<< ${line}
 
-		if [ -f "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/group ]
+		if [ -f "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/etc/group ]
 		then
-			echo "${group_name}:x:${group_number}:" >> "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/group
+			echo "${name_group}:x:${number_group}:" >> "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/etc/group
 		fi
 
-		if [ -f "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/gshadow ]
+		if [ -f "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/etc/gshadow ]
 		then
-			echo "${group_name}:x:${group_number}:" >> "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/gshadow
+			echo "${name_group}:x:${number_group}:" >> "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/etc/gshadow
 		fi
 	done
 
@@ -679,9 +679,9 @@ image_locale () {
 
 	# set locale selection for container
 
-	echo "LC_ALL=en_US.UTF-8" >> "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/environment
-	echo "en_US.UTF-8 UTF-8" > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/locale.gen
-	echo "LANG=en_US.UTF-8" > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/locale.conf
+	echo "LC_ALL=en_US.UTF-8" >> "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/etc/environment
+	echo "en_US.UTF-8 UTF-8" > "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/etc/locale.gen
+	echo "LANG=en_US.UTF-8" > "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/etc/locale.conf
 
 	frobulator.complete
 
@@ -693,13 +693,13 @@ image_network () {
 
 	# hostname
 
-	cat <<- 'FILE' > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/hostname
+	cat <<- 'FILE' > "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/etc/hostname
 	${HOSTNAME}
 	FILE
 
 	# hosts
 
-	cat <<- 'FILE' > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/hosts
+	cat <<- 'FILE' > "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/etc/hosts
 	# IPv4 #
 
 	127.0.0.1	localhost.localdomain
@@ -720,7 +720,7 @@ image_network () {
 
 	# nameserver
 
-	cat <<- 'FILE' > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/resolv.conf
+	cat <<- 'FILE' > "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/etc/resolv.conf
 	nameserver 1.1.1.1
 	nameserver 1.0.0.1
 	FILE
@@ -733,11 +733,11 @@ image_preload () {
 
 	# generate libgcc/libc location and add to dynamic linker for preload
 
-	library_preload=$(find "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/usr/lib -type f -iname "libgcc_s.so.1")
+	library_preload=$(find "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/usr/lib -type f -iname "libgcc_s.so.1")
 
 	# set preload
 
-	cat <<- FILE > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/ld.so.preload
+	cat <<- FILE > "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/etc/ld.so.preload
 	${library_preload}
 	FILE
 
@@ -749,37 +749,37 @@ image_sources () {
 
 	# generate sources file
 
-	if [ "${distribution_name}" = "debian" ]
+	if [ "${name_distribution}" = "debian" ]
 	then
-		cat <<- FILE > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/sources.list
-		deb     http://deb.debian.org/${distribution_name}                  ${distribution_codename}            main non-free-firmware
-		deb-src http://deb.debian.org/${distribution_name}                  ${distribution_codename}            main non-free-firmware
+		cat <<- FILE > "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/etc/sources.list
+		deb     http://deb.debian.org/${name_distribution}                  ${codename_distribution}            main non-free-firmware
+		deb-src http://deb.debian.org/${name_distribution}                  ${codename_distribution}            main non-free-firmware
 
-		deb     http://security.debian.org/${distribution_name}-security    ${distribution_codename}-security   main non-free-firmware
-		deb-src http://security.debian.org/${distribution_name}-security    ${distribution_codename}-security   main non-free-firmware
+		deb     http://security.debian.org/${name_distribution}-security    ${codename_distribution}-security   main non-free-firmware
+		deb-src http://security.debian.org/${name_distribution}-security    ${codename_distribution}-security   main non-free-firmware
 
-		deb     http://deb.debian.org/${distribution_name}                  ${distribution_codename}-updates    main non-free-firmware
-		deb-src http://deb.debian.org/${distribution_name}                  ${distribution_codename}-updates    main non-free-firmware
+		deb     http://deb.debian.org/${name_distribution}                  ${codename_distribution}-updates    main non-free-firmware
+		deb-src http://deb.debian.org/${name_distribution}                  ${codename_distribution}-updates    main non-free-firmware
 		FILE
 	fi
 
-	if [ "${distribution_name}" = "ubuntu" ]
+	if [ "${name_distribution}" = "ubuntu" ]
 	then
-		cat <<- FILE > "${PREFIX}"/cnt/"${distribution_name}"/"${distribution_version}"/etc/sources.list
-		deb     http://archive.ubuntu.com/${distribution_name}              ${distribution_codename}            main restricted universe multiverse
-		deb-src http://archive.ubuntu.com/${distribution_name}              ${distribution_codename}            main restricted universe multiverse
+		cat <<- FILE > "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/etc/sources.list
+		deb     http://archive.ubuntu.com/${name_distribution}              ${codename_distribution}            main restricted universe multiverse
+		deb-src http://archive.ubuntu.com/${name_distribution}              ${codename_distribution}            main restricted universe multiverse
 
-		deb     http://archive.ubuntu.com/${distribution_name}              ${distribution_codename}-security   main restricted universe multiverse
-		deb-src http://archive.ubuntu.com/${distribution_name}              ${distribution_codename}-security   main restricted universe multiverse
+		deb     http://archive.ubuntu.com/${name_distribution}              ${codename_distribution}-security   main restricted universe multiverse
+		deb-src http://archive.ubuntu.com/${name_distribution}              ${codename_distribution}-security   main restricted universe multiverse
 
-		deb     http://archive.ubuntu.com/${distribution_name}              ${distribution_codename}-updates    main restricted universe multiverse
-		deb-src http://archive.ubuntu.com/${distribution_name}              ${distribution_codename}-updates    main restricted universe multiverse
+		deb     http://archive.ubuntu.com/${name_distribution}              ${codename_distribution}-updates    main restricted universe multiverse
+		deb-src http://archive.ubuntu.com/${name_distribution}              ${codename_distribution}-updates    main restricted universe multiverse
 
-		deb     http://archive.ubuntu.com/${distribution_name}              ${distribution_codename}-backports  main restricted universe multiverse
-		deb-src http://archive.ubuntu.com/${distribution_name}              ${distribution_codename}-backports  main restricted universe multiverse
+		deb     http://archive.ubuntu.com/${name_distribution}              ${codename_distribution}-backports  main restricted universe multiverse
+		deb-src http://archive.ubuntu.com/${name_distribution}              ${codename_distribution}-backports  main restricted universe multiverse
 
-		deb     http://archive.canonical.com/${distribution_name}           ${distribution_codename}            partner
-		deb-src http://archive.canonical.com/${distribution_name}           ${distribution_codename}            partner
+		deb     http://archive.canonical.com/${name_distribution}           ${codename_distribution}            partner
+		deb-src http://archive.canonical.com/${name_distribution}           ${codename_distribution}            partner
 		FILE
 	fi
 
@@ -796,9 +796,9 @@ fi
 
 if [ "${option}" = "selection" ]
 then
-	unset distribution_name
-	unset distribution_version
-	unset distribution_codename
+	unset name_distribution
+	unset version_distribution
+	unset codename_distribution
 
 	# select image version
 
@@ -807,7 +807,7 @@ fi
 
 # verify architecture
 
-image_architecture
+architecture_image
 
 # download image
 

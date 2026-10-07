@@ -146,15 +146,15 @@ trap 'intent_clean' EXIT
 
 intent_open () {
 
-	open_command=()
+	command_open=()
 
-	open_command+=(am broadcast)
-	open_command+=(--user 0)
-	open_command+=(-a android.intent.action.VIEW)
-	open_command+=(-n com.termux/com.termux.app.TermuxOpenReceiver)
-	open_command+=(-d ${@})
+	command_open+=(am broadcast)
+	command_open+=(--user 0)
+	command_open+=(-a android.intent.action.VIEW)
+	command_open+=(-n com.termux/com.termux.app.TermuxOpenReceiver)
+	command_open+=(-d ${@})
 
-	frobulator.silence "${open_command[@]}"
+	frobulator.silence "${command_open[@]}"
 }
 
 # notice
@@ -183,46 +183,46 @@ if [[ "${reply}" = [yY]         ]] ||
 then
 	# process update
 
-	packages_list=(
+	list_packages=(
 		com.termux
 		com.termux.api
 	)
 
-	for package in ${packages_list[@]}
+	for package in ${list_packages[@]}
 	do
 		if [[ "${option}" = "fdroid" ]]
 		then
-			packages_url="https://f-droid.org/en/packages"
-			repository_url="https://f-droid.org/repo"
+			url_packages="https://f-droid.org/en/packages"
+			url_repository="https://f-droid.org/repo"
 
-			archive=$(curl -s -L "${packages_url}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
-			archive_version=$(echo "${archive}" | cut -d '_' -f 2 | sed 's/\..*//g')
-			archive_url="${repository_url}/${archive}"
+			archive=$(curl -s -L "${url_packages}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
+			version_archive=$(echo "${archive}" | cut -d '_' -f 2 | sed 's/\..*//g')
+			url_archive="${url_repository}/${archive}"
 		fi
 
 		if [[ "${option}" = "github.com" ]]
 		then
 			if [ "${package}" = "com.termux" ]
 			then
-				package_reference=termux-app
+				name_repository=termux-app
 
-				installed_version=$(echo "${TERMUX_VERSION}" | cut -d '.' -f 2)
+				version_installed=$(echo "${TERMUX_VERSION}" | cut -d '.' -f 2)
 			fi
 
 			if [ "${package}" = "com.termux.api" ]
 			then
-				package_reference=termux-api
+				name_repository=termux-api
 
-				installed_version=$(echo "${TERMUX_API_VERSION}" | cut -d '.' -f 2)
+				version_installed=$(echo "${TERMUX_API_VERSION}" | cut -d '.' -f 2)
 			fi
 
-			release_url="https://api.github.com/repos/termux/termux-app/releases"
+			url_release="https://api.github.com/repos/termux/termux-app/releases"
 
-			release_version=$(curl -s "${release_url}" | jq -r 'first(.[].tag_name | select(test("^v[0-9]")))')
+			version_release=$(curl -s "${url_release}" | jq -r 'first(.[].tag_name | select(test("^v[0-9]")))')
 
-			release_number=$(release_version/v/)
+			number_release=$(version_release/v/)
 
-			package_url="https://github.com/termux/${package_reference}/releases/download/${release_version}/${package_reference}_${release_version}"
+			url_package="https://github.com/termux/${name_repository}/releases/download/${version_release}/${name_repository}_${version_release}"
 
 			# https://github.com/termux/termux-app/releases/download/v0.118.0/termux-app_v0.118.0+github-debug_arm64-v8a.apk
 		fi
@@ -233,9 +233,9 @@ then
 
 		# application version is deprecated
 
-		if [ "${installed_version}" != "${archive_version}" ]
+		if [ "${version_installed}" != "${version_archive}" ]
 		then
-			frobulator.wrn "Package update available" "[ ${package} // ${release_version} ]"
+			frobulator.wrn "Package update available" "[ ${package} // ${version_release} ]"
 
 			# request update permission
 
@@ -246,11 +246,11 @@ then
 			if [[ "${reply}" = [yY]         ]] ||
                [[ "${reply}" = [yY][eE][sS] ]]
 			then
-				frobulator.inf "Dowloading update" "[ ${package} // ${release_version} ]"
+				frobulator.inf "Dowloading update" "[ ${package} // ${version_release} ]"
 
 				# download
 
-				frobulator.download "${repository_url}" "${PREFIX}"/tmp "${archive}"
+				frobulator.download "${url_repository}" "${PREFIX}"/tmp "${archive}"
 
 				# update
 
@@ -269,9 +269,9 @@ then
 
 			# termux application version is up to date
 		else
-			if [ "${installed_version}" == "${archive_version}" ]
+			if [ "${version_installed}" == "${version_archive}" ]
 			then
-				frobulator.scs "Package version is up to date" "[ ${package} // ${archive_version} ]"
+				frobulator.scs "Package version is up to date" "[ ${package} // ${version_archive} ]"
 
 				frobulator.fwd "Continuing${marker_elp}"
 			fi
