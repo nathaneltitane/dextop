@@ -69,7 +69,7 @@ version="2026-10-04"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
-while (($#))
+while (( $# ))
 do
 	case "${1}"
 	in
@@ -184,7 +184,7 @@ image_select () {
 			ubuntu	24.04	noble
 		)
 
-		versions=(
+		list_versions=(
 			${list_versions_debian[@]}
 			${list_versions_ubuntu[@]}
 		)
@@ -195,13 +195,13 @@ image_select () {
 
 		# continue list using array selection of suppported values
 
-		for (( i=0; i<${#versions[@]} ; i+=3 ))
+		for (( index_version = 0 ; index_version < ${#list_versions[@]} ; index_version += 3 ))
 		do
-			number=$(( ( ${i} / 3 ) + 1 ))
+			number_entry=$(( ( ${index_version} / 3 ) + 1 ))
 
-			name_entry="${versions[${i}]}"
-			version_entry="${versions[${i}+1]}"
-			codename="${versions[${i}+2]}"
+			name_entry="${list_versions[${index_version}]}"
+			version_entry="${list_versions[${index_version}+1]}"
+			codename_entry="${list_versions[${index_version}+2]}"
 
 			indent="${marker_tab}"
 
@@ -210,18 +210,18 @@ image_select () {
 				indent+="${marker_tab}"
 			fi
 
-			if (( ${i}/3 >= 0 && ${i}/3 <= 9 ))
+			if (( ${index_version} / 3 >= 0 && ${index_version} / 3 <= 9 ))
 			then
 				# handle number spacing for entries 1-9
 
-				number=" ${number}"
+				number_entry=" ${number_entry}"
 			else
 				# handle number spacing for entries 10+
 
-				number="${number}"
+				number_entry="${number_entry}"
 			fi
 
-			echo "${marker_nul}" "[ ${number} ]" "${name_entry}" "${version_entry}" "${indent}" "[ ${codename} ]"
+			echo "${marker_nul}" "[ ${number_entry} ]" "${name_entry}" "${version_entry}" "${indent}" "[ ${codename_entry} ]"
 
 		done
 
@@ -251,25 +251,25 @@ image_select () {
 			echo
 			frobulator.err "Invalid selection:"
 
-			frobulator.wrn "Select image [ 1 - ${number} ]"
+			frobulator.wrn "Select image [ 1 - ${number_entry} ]"
 
 			frobulator.ipt "Selection:"
 
 			frobulator.read selection
 		done
 
-			i=$(( ${selection}))
-			i=$(( ( ${i} * 3  ) - 3 ))
+			index_version=$(( ${selection} ))
+			index_version=$(( ( ${index_version} * 3 ) - 3 ))
 
-			name_entry="${versions[${i}]}"
-			version_entry="${versions[${i}+1]}"
-			codename="${versions[${i}+2]}"
+			name_entry="${list_versions[${index_version}]}"
+			version_entry="${list_versions[${index_version}+1]}"
+			codename_entry="${list_versions[${index_version}+2]}"
 
-			number="${selection}"
+			number_entry="${selection}"
 
 			name_distribution="${name_entry}"
 			version_distribution="${version_entry}"
-			codename_distribution="${codename}"
+			codename_distribution="${codename_entry}"
 
 		# handle distribution code markup
 
@@ -293,7 +293,7 @@ image_select () {
 			IFS=''
 		fi
 
-		frobulator.inf "User selection" "[ ${selection} // ${name_entry} ${version_entry} - '${codename}' ]"
+		frobulator.inf "User selection" "[ ${selection} // ${name_entry} ${version_entry} - '${codename_entry}' ]"
 
 		export name_distribution="${name_distribution}"
 		export release_distribution="${release_distribution}"
@@ -354,11 +354,11 @@ architecture_image () {
 
 	architecture_device="$(uname -m)"
 
-	for i in ${!list_architectures_cpu[@]}
+	for index_version in ${!list_architectures_cpu[@]}
 	do
-		if [[ "${architecture_device}" == "${list_architectures_cpu[i]}" ]]
+		if [[ "${architecture_device}" == "${list_architectures_cpu[index_version]}" ]]
 		then
-			architecture_image=${list_architectures_image[i]}
+			architecture_image=${list_architectures_image[index_version]}
 
 			frobulator.scs "Supported architecture" "[ ${architecture_image} ]"
 
@@ -628,12 +628,12 @@ image_groups () {
 
 	# read android system IDs
 
-	read uid gid groups <<< $(id)
+	read id_user id_group text_groups <<< $(id)
 
-	uid=${uid/uid=}
-	gid=${gid/gid=}
+	id_user=${id_user/uid=}
+	id_group=${id_group/gid=}
 
-	groups=${groups/groups=}
+	text_groups=${text_groups/groups=}
 
 	# set IFS
 
@@ -641,12 +641,12 @@ image_groups () {
 
 	# parse existing groups
 
-	read -r -a list_groups <<< "${groups}"
+	read -r -a list_groups <<< "${text_groups}"
 
-	for line in "${list_groups[@]}"
+	for line_group in "${list_groups[@]}"
 	do
-		line=${line/(/ }
-		line=${line/)}
+		line_group=${line_group/(/ }
+		line_group=${line_group/)}
 
 		# set IFS
 
@@ -654,7 +654,7 @@ image_groups () {
 
 		# transfer unregistered IDs
 
-		read number_group name_group <<< ${line}
+		read number_group name_group <<< ${line_group}
 
 		if [ -f "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/etc/group ]
 		then

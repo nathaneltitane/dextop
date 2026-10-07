@@ -69,7 +69,7 @@ version="2026-10-04"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
-while (($#))
+while (( $# ))
 do
 	case "${1}"
 	in
@@ -611,20 +611,20 @@ done
 activity_chrome="com.android.chrome/com.google.android.apps.chrome.Main"
 activity_chrome_beta="com.chrome.beta/com.google.android.apps.chrome.Main"
 activity_gmail="com.google.android.gm/.GmailActivity"
-terminal="com.termux/com.termux.app.TermuxActivity"
+activity_terminal="com.termux/com.termux.app.TermuxActivity"
 
 # android actions
 
-camera="android.media.action.IMAGE_CAPTURE"
-music="android.intent.action.MUSIC_PLAYER"
-recorder="android.provider.MediaStore.RECORD_SOUND"
+action_camera="android.media.action.IMAGE_CAPTURE"
+action_music="android.intent.action.MUSIC_PLAYER"
+action_recorder="android.provider.MediaStore.RECORD_SOUND"
 
 # mimetype handles
 
-email="mailto:"
-link="https:"
-message="sms:"
-file="file:"
+handle_email="mailto:"
+handle_link="https:"
+handle_message="sms:"
+handle_file="file:"
 
 # functions ────────────────────────────────────────────────────────────────────
 
@@ -672,7 +672,7 @@ then
 
 	elif [[ "${option_activity}" = "terminal"    ]]
 	then
-		activity="${terminal}"
+		activity="${activity_terminal}"
 
 	else
 		frobulator.err "Unrecognized activity option" "[ ${option_activity} ]"
@@ -689,14 +689,14 @@ then
 	   [[ "${option_action}" = "picture"   ]]
 	   [[ "${option_action}" = "selfie"    ]]
 	then
-		action="${camera}"
+		action="${action_camera}"
 
 	elif [[ "${option_action}" = "music"   ]] ||
 	    [[ "${option_action}" = "player"   ]]
 	    [[ "${option_action}" = "song"     ]]
 	    [[ "${option_action}" = "audio"    ]]
 	then
-		action="${music}"
+		action="${action_music}"
 	else
 		frobulator.err "Unrecognized action option" "[ ${option_action} ]"
 
@@ -710,23 +710,23 @@ then
 	if [[ "${option_handle}" = "email"     ]] ||
 	   [[ "${option_handle}" = "mail"      ]]
 	then
-		handle="${email}"
+		handle="${handle_email}"
 
 	elif [[ "${option_handle}" = "browser" ]] ||
 		 [[ "${option_handle}" = "link"    ]] ||
 		 [[ "${option_handle}" = "web"     ]]
 	then
-		handle="${link}"
+		handle="${handle_link}"
 
 	elif [[ "${option_handle}" = "message" ]] ||
 	     [[ "${option_handle}" = "text"    ]] ||
 	     [[ "${option_handle}" = "sms"     ]]
 	then
-		handle="${message}"
+		handle="${handle_message}"
 
 	elif [[ "${option_handle}" = "file"    ]]
 	then
-		handle="${file}"
+		handle="${handle_file}"
 
 	else
 		frobulator.err "Unrecognized handle option" "[ ${option_handle} ]"

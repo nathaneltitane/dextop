@@ -69,7 +69,7 @@ version="2026-10-04"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
-while (($#))
+while (( $# ))
 do
 	case "${1}"
 	in
@@ -163,11 +163,11 @@ user_verify () {
 
 	line_passwd_last="$(tail -n 1 /etc/passwd)"
 
-	while read -r entry
+	while read -r line_passwd
 	do
 		IFS=':'
 
-		read USER _ USER_ID GROUP_ID GECOS HOME SHELL <<< "${entry}"
+		read USER _ USER_ID GROUP_ID GECOS HOME SHELL <<< "${line_passwd}"
 
 		IFS=','
 
@@ -189,7 +189,7 @@ user_verify () {
 
 		# user naem not found
 
-		if [[ "${entry}" == "${line_passwd_last}" ]]
+		if [[ "${line_passwd}" == "${line_passwd_last}" ]]
 		then
 
 			frobulator.err "User name does not exist" "[ '${name_user}' ]"
@@ -207,13 +207,13 @@ user_password_generate () {
 	local length_password="${1:-32}"
 	local number_line_password=$(( RANDOM % 10 + 1 ))
 
-	local password
+	local password_generated
 
 	# generate random password
 
-	password="$(cat /dev/urandom | tr -d -c 'a-zA-Z0-9' | fold -w "${length_password}" | head -n "${number_line_password}" | tail -n 1)"
+	password_generated="$(cat /dev/urandom | tr -d -c 'a-zA-Z0-9' | fold -w "${length_password}" | head -n "${number_line_password}" | tail -n 1)"
 
-	echo "${password}"
+	echo "${password_generated}"
 }
 
 user_information () {
@@ -288,11 +288,11 @@ user_automated () {
 	id_user_default="1000"
 	id_group_default="1000"
 	gecos="Dextop"
-	home="/home/${name_user}"
+	directory_home="/home/${name_user}"
 
 	frobulator.wrn "Creating user" "[ ${name_user} ]"
 
-	echo  "${name_user}:x:${id_user_default}:${id_group_default}:${gecos}:${home}:${SHELL}" >> /etc/passwd
+	echo  "${name_user}:x:${id_user_default}:${id_group_default}:${gecos}:${directory_home}:${SHELL}" >> /etc/passwd
 }
 
 user_superuser () {

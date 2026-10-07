@@ -69,18 +69,18 @@ version="2026-10-04"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
-while (($#))
+while (( $# ))
 do
 	case "${1}"
 	in
 		-c|--console)
 			option="environment"
-			environment="console"
+			option_environment="console"
 		;;
 
 		-e|--environment)
 			option="environment"
-			environment="${2}"
+			option_environment="${2}"
 
 			shift
 		;;
@@ -107,13 +107,13 @@ do
 
 		-u|--update)
 			option="update"
-			update="${2}"
+			option_update="${2}"
 
-			if [ "${update}" = "background"  ] ||
-			   [ "${update}" = "interface"   ] ||
-			   [ "${update}" = "utility"     ] ||
-			   [ "${update}" = "shell"       ] ||
-			   [ "${update}" = "preferences" ]
+			if [ "${option_update}" = "background"  ] ||
+			   [ "${option_update}" = "interface"   ] ||
+			   [ "${option_update}" = "utility"     ] ||
+			   [ "${option_update}" = "shell"       ] ||
+			   [ "${option_update}" = "preferences" ]
 			then
 				item_update="${3}"
 
@@ -217,7 +217,7 @@ frobulator.clear
 
 # variables ────────────────────────────────────────────────────────────────────
 
-stamp=$(date +"%m-%d-%Y-%H-%M-%S")
+date_backup=$(date +"%m-%d-%Y-%H-%M-%S")
 
 # defaults ─────────────────────────────────────────────────────────────────────
 
@@ -226,33 +226,33 @@ then
 	option="setup"
 fi
 
-if [ -z "${container}" ]
+if [ -z "${directory_container}" ]
 then
-	container="${PREFIX}"/cnt/debian/12
+	directory_container="${PREFIX}"/cnt/debian/12
 
-	frobulator.write write "${container}" "${HOME}"/.dextop dextop-container
+	frobulator.write write "${directory_container}" "${HOME}"/.dextop dextop-container
 fi
 
 if [ "${option}" = "setup"       ] ||
    [ "${option}" = "environment" ]
 then
-	if [[ -z "${environment}" ]]
+	if [[ -z "${option_environment}" ]]
 	then
-		environment="xfce"
+		option_environment="xfce"
 
-	elif [[ "${environment}" = [iI][3] ]]
+	elif [[ "${option_environment}" = [iI][3] ]]
 	then
-		environment="i3"
+		option_environment="i3"
 
-	elif [[ "${environment}" = [xX][fF][cC][eE] ]]
+	elif [[ "${option_environment}" = [xX][fF][cC][eE] ]]
 	then
-		environment="xfce"
+		option_environment="xfce"
 
-	elif [[ "${environment}" = [cC][oO][nN][sS][oO][lL][eE] ]]
+	elif [[ "${option_environment}" = [cC][oO][nN][sS][oO][lL][eE] ]]
 	then
-		environment="console"
+		option_environment="console"
 	else
-		frobulator.err "Unrecognized environment" "[ '${environment}' ]"
+		frobulator.err "Unrecognized environment" "[ '${option_environment}' ]"
 
 		frobulator.stp "Aborting${marker_elp}"
 
@@ -261,15 +261,15 @@ then
 
 	if [ ! -f "${HOME}"/.dextop/dextop-environment ]
 	then
-		frobulator.write write "${environment}" "${HOME}"/.dextop dextop-environment
+		frobulator.write write "${option_environment}" "${HOME}"/.dextop dextop-environment
 
-		unset environment
+		unset option_environment
 	fi
 fi
 
 if [ ! -f "${HOME}"/.dextop/dextop-session ]
 then
-	if [ -z "${session}" ]
+	if [ -z "${name_session}" ]
 	then
 		# desktop environment chosen at setup: console / i3 / xfce
 
@@ -277,22 +277,22 @@ then
 
 		if [ "${name_environment}" = "i3" ]
 		then
-			session="i3"
+			name_session="i3"
 		fi
 
 		if [ "${name_environment}" = "xfce" ]
 		then
-			session="xfce4-session"
+			name_session="xfce4-session"
 		fi
 
 		if [ "${name_environment}" = "console" ]
 		then
-			session="console"
+			name_session="console"
 		fi
 
-		frobulator.write write "${session}" "${HOME}"/.dextop dextop-session
+		frobulator.write write "${name_session}" "${HOME}"/.dextop dextop-session
 
-		unset session
+		unset name_session
 	fi
 fi
 
@@ -520,7 +520,7 @@ intent_backup () {
 
 	directory_backup="${HOME}"
 
-	file_backup="${name_backup}-${stamp}.${extension_backup}"
+	file_backup="${name_backup}-${date_backup}.${extension_backup}"
 
 	frobulator.inf "Generating backup" "[ ${file_backup} ]"
 
@@ -829,7 +829,7 @@ intent_bookmarks () {
 		Internal
 	)
 
-	for (( index=0 ; index<${#list_directories_bookmarks[@]} ; index++ ))
+	for (( index = 0 ; index < ${#list_directories_bookmarks[@]} ; index ++ ))
 	do
 		if [ -d ${list_directories_bookmarks[$index]} ]
 		then
@@ -1029,11 +1029,11 @@ fi
 
 if [ "${option}" = "update" ]
 then
-	if [[ "${update}" = [aA][lL][lL] ]]
+	if [[ "${option_update}" = [aA][lL][lL] ]]
 	then
 		item_update="all"
 
-		frobulator.inf "Updating" "[ ${update} ]"
+		frobulator.inf "Updating" "[ ${option_update} ]"
 
 		frobulator.fwd "Updating${marker_elp}"
 
@@ -1051,32 +1051,32 @@ then
 
 		"${HOME}"/.local/bin/termux-update
 
-		frobulator.cpt "Complete" "[ Update // ${update} ]"
+		frobulator.cpt "Complete" "[ Update // ${option_update} ]"
 	fi
 
-	if [[ "${update}" = [dD][eE][xX][tT][oO][pP] ]]
+	if [[ "${option_update}" = [dD][eE][xX][tT][oO][pP] ]]
 	then
-		frobulator.inf "Updating" "[ ${update} ]"
+		frobulator.inf "Updating" "[ ${option_update} ]"
 
 		frobulator.fwd "Updating${marker_elp}"
 
 		intent_dextop
 
-		frobulator.cpt "Complete" "[ Update // ${update} ]"
+		frobulator.cpt "Complete" "[ Update // ${option_update} ]"
 	fi
 
-	if [[ "${update}" = [aA][dD][dD][iI][tT][iI][oO][nN][sS] ]]
+	if [[ "${option_update}" = [aA][dD][dD][iI][tT][iI][oO][nN][sS] ]]
 	then
-		frobulator.inf "Updating" "[ ${update} ]"
+		frobulator.inf "Updating" "[ ${option_update} ]"
 
 		frobulator.fwd "Updating${marker_elp}"
 
 		intent_additions
 
-		frobulator.cpt "Complete" "[ Update // ${update} ]"
+		frobulator.cpt "Complete" "[ Update // ${option_update} ]"
 	fi
 
-	if [[ "${update}" = [bB][aA][cK][gG][rR][oO][uU][nN][dD] ]]
+	if [[ "${option_update}" = [bB][aA][cK][gG][rR][oO][uU][nN][dD] ]]
 	then
 
 		frobulator.inf "Updating" "[ ${item_update} ]"
@@ -1085,10 +1085,10 @@ then
 
 		intent_shell
 
-		frobulator.cpt "Complete" "[ Update // ${update} ]"
+		frobulator.cpt "Complete" "[ Update // ${option_update} ]"
 	fi
 
-	if [[ "${update}" = [iI][nN][tT][eE][rR][fF][aA][cC][eE] ]]
+	if [[ "${option_update}" = [iI][nN][tT][eE][rR][fF][aA][cC][eE] ]]
 	then
 
 		frobulator.inf "Updating" "[ ${item_update} ]"
@@ -1097,10 +1097,10 @@ then
 
 		intent_interface
 
-		frobulator.cpt "Complete" "[ Update // ${update} ]"
+		frobulator.cpt "Complete" "[ Update // ${option_update} ]"
 	fi
 
-	if [[ "${update}" = [pP][rR][eE][fF][eE][rR][eE][nN][cC][eE][sS] ]]
+	if [[ "${option_update}" = [pP][rR][eE][fF][eE][rR][eE][nN][cC][eE][sS] ]]
 	then
 
 		frobulator.inf "Updating" "[ ${utility} ]"
@@ -1109,10 +1109,10 @@ then
 
 		intent_preferences
 
-		frobulator.cpt "Complete" "[ Update // ${update} ]"
+		frobulator.cpt "Complete" "[ Update // ${option_update} ]"
 	fi
 
-	if [[ "${update}" = [sS][hH][eE][lL][lL] ]]
+	if [[ "${option_update}" = [sS][hH][eE][lL][lL] ]]
 	then
 
 		frobulator.inf "Updating" "[ ${item_update} ]"
@@ -1121,22 +1121,22 @@ then
 
 		intent_shell
 
-		frobulator.cpt "Complete" "[ Update // ${update} ]"
+		frobulator.cpt "Complete" "[ Update // ${option_update} ]"
 	fi
 
-	if [[ "${update}" = [tT][eE][rR][mM][uU][xX] ]]
+	if [[ "${option_update}" = [tT][eE][rR][mM][uU][xX] ]]
 	then
-		frobulator.inf "Updating" "[ ${update} ]"
+		frobulator.inf "Updating" "[ ${option_update} ]"
 
 		frobulator.fwd "Updating${marker_elp}"
 
 		"${HOME}"/.local/bin/termux-update
 
-		frobulator.cpt "Complete" "[ Update // ${update} ]"
+		frobulator.cpt "Complete" "[ Update // ${option_update} ]"
 
 	fi
 
-	if [[ "${update}" = [uU][tT][iI][lL][iI][tT][yY] ]]
+	if [[ "${option_update}" = [uU][tT][iI][lL][iI][tT][yY] ]]
 	then
 
 		frobulator.inf "Updating" "[ ${item_update} ]"
@@ -1145,7 +1145,7 @@ then
 
 		intent_utilities
 
-		frobulator.cpt "Complete" "[ Update // ${update} ]"
+		frobulator.cpt "Complete" "[ Update // ${option_update} ]"
 	fi
 
 	exit
