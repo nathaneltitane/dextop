@@ -199,13 +199,13 @@ image_select () {
 		do
 			number=$(( ( ${i} / 3 ) + 1 ))
 
-			name="${versions[${i}]}"
-			version="${versions[${i}+1]}"
+			name_entry="${versions[${i}]}"
+			version_entry="${versions[${i}+1]}"
 			codename="${versions[${i}+2]}"
 
 			indent="${marker_tab}"
 
-			if [ ${#version} -le 2 ]
+			if [ ${#version_entry} -le 2 ]
 			then
 				indent+="${marker_tab}"
 			fi
@@ -221,7 +221,7 @@ image_select () {
 				number="${number}"
 			fi
 
-			echo "${marker_nul}" "[ ${number} ]" "${name}" "${version}" "${indent}" "[ ${codename} ]"
+			echo "${marker_nul}" "[ ${number} ]" "${name_entry}" "${version_entry}" "${indent}" "[ ${codename} ]"
 
 		done
 
@@ -261,14 +261,14 @@ image_select () {
 			i=$(( ${selection}))
 			i=$(( ( ${i} * 3  ) - 3 ))
 
-			name="${versions[${i}]}"
-			version="${versions[${i}+1]}"
+			name_entry="${versions[${i}]}"
+			version_entry="${versions[${i}+1]}"
 			codename="${versions[${i}+2]}"
 
 			number="${selection}"
 
-			name_distribution="${name}"
-			version_distribution="${version}"
+			name_distribution="${name_entry}"
+			version_distribution="${version_entry}"
 			codename_distribution="${codename}"
 
 		# handle distribution code markup
@@ -293,7 +293,7 @@ image_select () {
 			IFS=''
 		fi
 
-		frobulator.inf "User selection" "[ ${selection} // ${name} ${version} - '${codename}' ]"
+		frobulator.inf "User selection" "[ ${selection} // ${name_entry} ${version_entry} - '${codename}' ]"
 
 		export name_distribution="${name_distribution}"
 		export release_distribution="${release_distribution}"
@@ -368,7 +368,7 @@ architecture_image () {
 
 	# test image architecture string
 
-	if [ -z "${i}mage_architecture"    ] ||
+	if [ -z "${architecture_image}"  ] ||
 	   [ -z "${architecture_device}" ]
 	then
 		architecture_image="N/A"

@@ -220,7 +220,7 @@ then
 
 			version_release=$(curl -s "${url_release}" | jq -r 'first(.[].tag_name | select(test("^v[0-9]")))')
 
-			number_release=$(version_release/v/)
+			number_release="${version_release/v/}"
 
 			url_package="https://github.com/termux/${name_repository}/releases/download/${version_release}/${name_repository}_${version_release}"
 

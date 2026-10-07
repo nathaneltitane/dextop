@@ -839,7 +839,7 @@ intent_bookmarks () {
 
 	list_directories_bookmarks=()
 
-	bookamrks_labels_list=()
+	list_labels_bookmarks=()
 
 }
 
