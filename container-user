@@ -75,28 +75,28 @@ do
 	in
 		-i|--information)
 			option="information"
-			user_name="${2}"
+			name_user="${2}"
 
 			shift
 		;;
 
 		-s|--superuser)
 			option="superuser"
-			user_name="${2}"
+			name_user="${2}"
 
 			shift
 		;;
 
 		-u|--username)
 			option="username"
-			user_name="${2}"
+			name_user="${2}"
 
 			shift
 		;;
 
 		-p|--password)
 			option="password"
-			user_password="${2}"
+			password_user="${2}"
 
 			shift
 		;;
@@ -161,7 +161,7 @@ user_verify () {
 	# verify user existence:
 	# loop through container's /etc/passwd file and check if 'user' exists
 
-	last_entry="$(tail -n 1 /etc/passwd)"
+	line_passwd_last="$(tail -n 1 /etc/passwd)"
 
 	while read -r entry
 	do
@@ -179,20 +179,20 @@ user_verify () {
 
 		# valid user name found
 
-		if [[ "${user_name}" == "${USER}" ]]
+		if [[ "${name_user}" == "${USER}" ]]
 		then
 
-			frobulator.scs "User name exists" "[ '${user_name}' ]"
+			frobulator.scs "User name exists" "[ '${name_user}' ]"
 
 			break
 		fi
 
 		# user naem not found
 
-		if [[ "${entry}" == "${last_entry}" ]]
+		if [[ "${entry}" == "${line_passwd_last}" ]]
 		then
 
-			frobulator.err "User name does not exist" "[ '${user_name}' ]"
+			frobulator.err "User name does not exist" "[ '${name_user}' ]"
 
 			frobulator.wrn "User must exist before proceeding."
 
@@ -204,14 +204,14 @@ user_verify () {
 
 user_password_generate () {
 
-	local password_length="${1:-32}"
-	local password_line=$(( RANDOM % 10 + 1 ))
+	local length_password="${1:-32}"
+	local number_line_password=$(( RANDOM % 10 + 1 ))
 
 	local password
 
 	# generate random password
 
-	password="$(cat /dev/urandom | tr -d -c 'a-zA-Z0-9' | fold -w "${password_length}" | head -n "${password_line}" | tail -n 1)"
+	password="$(cat /dev/urandom | tr -d -c 'a-zA-Z0-9' | fold -w "${length_password}" | head -n "${number_line_password}" | tail -n 1)"
 
 	echo "${password}"
 }
@@ -225,7 +225,7 @@ user_information () {
 	frobulator.wrn "Information is required to set up your environment:"
 	frobulator.wrn "Fields cannot be empty."
 
-	# handle user input for information_list
+	# handle user input for list_information
 
 	frobulator_return=()
 
@@ -241,21 +241,21 @@ user_interactive () {
 
 	frobulator.fwd "Generating account${marker_elp}"
 
-	room_number=""
-	work_number=""
-	home_number=""
+	number_room=""
+	number_work=""
+	number_home=""
 
-	gecos+="${first_name} ${last_name},"
-	gecos+="${room_number},"
-	gecos+="${work_number},"
-	gecos+="${home_number},"
-	gecos+="${user_email}"
+	gecos+="${name_first} ${name_last},"
+	gecos+="${number_room},"
+	gecos+="${number_work},"
+	gecos+="${number_home},"
+	gecos+="${email_user}"
 
 	# generate user entry
 	# silent configuration:
 	# set --gecos and --disabled-password for fully silent execution
 
-	frobulator.wrn "Creating user" "[ ${user_name} ]"
+	frobulator.wrn "Creating user" "[ ${name_user} ]"
 
 	# use "${sink}" redirection:
 	# 'adduser' prevents stdout error redirect - cannot use 'frobulator.silence'
@@ -263,7 +263,7 @@ user_interactive () {
 	adduser					\
 		--gecos "${gecos}"	\
 		--shell "${SHELL}"	\
-		--disabled-password "${user_name}" > "${sink}"
+		--disabled-password "${name_user}" > "${sink}"
 }
 
 user_automated () {
@@ -274,30 +274,30 @@ user_automated () {
 
 	frobulator.fwd "Generating account${marker_elp}"
 
-	if [ -z "${user_name}" ]
+	if [ -z "${name_user}" ]
 	then
-		user_name="termux"
+		name_user="termux"
 	fi
 
-	if [ -z "${user_password}" ]
+	if [ -z "${password_user}" ]
 	then
-		user_password=$(user_password_generate)
+		password_user=$(user_password_generate)
 	fi
 
-	user_name="${user_name}"
-	user_id="1000"
-	group_id="1000"
+	name_user="${name_user}"
+	id_user_default="1000"
+	id_group_default="1000"
 	gecos="Dextop"
-	home="/home/${user_name}"
+	home="/home/${name_user}"
 
-	frobulator.wrn "Creating user" "[ ${user_name} ]"
+	frobulator.wrn "Creating user" "[ ${name_user} ]"
 
-	echo  "${user_name}:x:${user_id}:${group_id}:${gecos}:${home}:${SHELL}" >> /etc/passwd
+	echo  "${name_user}:x:${id_user_default}:${id_group_default}:${gecos}:${home}:${SHELL}" >> /etc/passwd
 }
 
 user_superuser () {
 
-	local group_sudo
+	local name_group_sudo
 
 	# generate 'user' superuser privilege
 
@@ -313,20 +313,20 @@ user_superuser () {
 
 		# sudo group file entry - empty if the group does not exist
 
-		group_sudo="$(cat /etc/group | grep sudo)"
+		name_group_sudo="$(cat /etc/group | grep sudo)"
 
-		if [ -n "${group_sudo}" ]
+		if [ -n "${name_group_sudo}" ]
 		then
-			sudo_id=$(cat /etc/group | grep sudo | cut -d ':' -f 3)
+			id_group_sudo=$(cat /etc/group | grep sudo | cut -d ':' -f 3)
 		else
-			sudo_id="27"
+			id_group_sudo="27"
 		fi
 
 		# add 'user' to 'sudo' group
 
 		sed -i '/sudo.*/d' /etc/group
 
-		echo "sudo:x:${sudo_id}:${user_name}" >> /etc/group
+		echo "sudo:x:${id_group_sudo}:${name_user}" >> /etc/group
 
 	else
 
@@ -355,7 +355,7 @@ user_superuser_override () {
 
 			# set password override
 
-			frobulator.write append "${user_name} ALL=(ALL) NOPASSWD: ALL" /etc/sudoers.d "${user_name}"
+			frobulator.write append "${name_user} ALL=(ALL) NOPASSWD: ALL" /etc/sudoers.d "${name_user}"
 
 			# fix superuser privilege runtime errors
 
@@ -364,7 +364,7 @@ user_superuser_override () {
 			# reset password override ownership:
 			# fixes 'sudo' errors
 
-			chmod 0440 /etc/sudoers.d/"${user_name}"
+			chmod 0440 /etc/sudoers.d/"${name_user}"
 
 		fi
 
@@ -376,7 +376,7 @@ user_superuser_override () {
 	fi
 }
 
-user_password () {
+password_user () {
 
 	# set 'user' password
 
@@ -387,7 +387,7 @@ user_password () {
 	# silent configuration:
 	# use 'chpasswd' to append user password to account
 
-	chpasswd <<< "${user_name}:${user_password}"
+	chpasswd <<< "${name_user}:${password_user}"
 }
 
 user_runtime () {
@@ -397,92 +397,92 @@ user_runtime () {
 
 	frobulator.fwd "Setting runtime${marker_elp}"
 
-	user_uid="$(id -u ${user_name})"
-	user_gid="$(id -g ${user_name})"
+	id_user="$(id -u ${name_user})"
+	id_group_user="$(id -g ${name_user})"
 
 	# generate runtime directory
 
-	frobulator.directory /run/user "${user_uid}"
-	frobulator.directory /run/user "${user_name}"
+	frobulator.directory /run/user "${id_user}"
+	frobulator.directory /run/user "${name_user}"
 
 	# set runtime directory permissions
 
-	chmod 700 /run/user/"${user_uid}"
-	chmod 700 /run/user/"${user_name}"
+	chmod 700 /run/user/"${id_user}"
+	chmod 700 /run/user/"${name_user}"
 
 	# set runtime directory ownership
 
-	chown "${user_uid}":"${user_gid}" -R /run/user/"${user_uid}"
-	chown "${user_uid}":"${user_gid}" -R /run/user/"${user_name}"
+	chown "${id_user}":"${id_group_user}" -R /run/user/"${id_user}"
+	chown "${id_user}":"${id_group_user}" -R /run/user/"${name_user}"
 }
 
 if [ "${option}" = "information" ]
 then
-	if [ -z "${user_name}" ]
+	if [ -z "${name_user}" ]
 	then
-		information_list+=(user_name)
+		list_information+=(name_user)
 	fi
 
-	if [ -z "${first_name}" ]
+	if [ -z "${name_first}" ]
 	then
-		information_list+=(first_name)
+		list_information+=(name_first)
 	fi
 
-	if [ -z "${last_name}" ]
+	if [ -z "${name_last}" ]
 	then
-		information_list+=(last_name)
+		list_information+=(name_last)
 	fi
 
-	if [ -z "${user_email}" ]
+	if [ -z "${email_user}" ]
 	then
-		information_list+=(user_email)
+		list_information+=(email_user)
 	fi
 
-	if [ -z "${user_password}" ]
+	if [ -z "${password_user}" ]
 	then
-		information_list+=(user_password)
+		list_information+=(password_user)
 	fi
 
 	list=(
-		${information_list[@]}
+		${list_information[@]}
 	)
 
 	user_information
 
-	export user_name="${user_name}"
-	export first_name="${first_name}"
-	export last_name="${last_name}"
-	export user_email="${user_email}"
-	export user_password="${user_password}"
+	export name_user="${name_user}"
+	export name_first="${name_first}"
+	export name_last="${name_last}"
+	export email_user="${email_user}"
+	export password_user="${password_user}"
 fi
 
 if [ "${option}" = "password" ]
 then
-	if [ -z "${user_password}" ]
+	if [ -z "${password_user}" ]
 	then
-		information_list+=(user_password)
+		list_information+=(password_user)
 	fi
 
 	list=(
-		${information_list[@]}
+		${list_information[@]}
 	)
 
 	user_information
 
-	user_password
+	password_user
 fi
 
 if [ "${option}" = "superuser" ]
 then
 	frobulator.install sudo
 
-	if [ -z "${user_name}" ]
+	if [ -z "${name_user}" ]
 	then
-		information_list+=(user_name)
+		list_information+=(name_user)
 	fi
 
 	list=(
-		${information_list[@]}
+		${list_information[@]}
 	)
 
 	user_information
@@ -500,33 +500,33 @@ fi
 
 if [ "${option}" = "username" ]
 then
-	if [ -z "${user_name}" ]
+	if [ -z "${name_user}" ]
 	then
-		information_list+=(user_name)
+		list_information+=(name_user)
 	fi
 
-	if [ -z "${first_name}" ]
+	if [ -z "${name_first}" ]
 	then
-		information_list+=(first_name)
+		list_information+=(name_first)
 	fi
 
-	if [ -z "${last_name}" ]
+	if [ -z "${name_last}" ]
 	then
-		information_list+=(last_name)
+		list_information+=(name_last)
 	fi
 
-	if [ -z "${user_email}" ]
+	if [ -z "${email_user}" ]
 	then
-		information_list+=(user_email)
+		list_information+=(email_user)
 	fi
 
-	if [ -z "${user_password}" ]
+	if [ -z "${password_user}" ]
 	then
-		information_list+=(user_password)
+		list_information+=(password_user)
 	fi
 
 	list=(
-		${information_list[@]}
+		${list_information[@]}
 	)
 
 	user_information
@@ -537,7 +537,7 @@ then
 
 	# set 'user' password
 
-	user_password
+	password_user
 
 	# generate 'user' runtime directory structure
 
@@ -550,7 +550,7 @@ else
 
 	# set 'user' password
 
-	user_password
+	password_user
 
 	# generate 'user' superuser privilege
 

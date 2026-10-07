@@ -126,21 +126,21 @@ done
 
 intent_storage () {
 
-	storage_command=()
+	command_storage=()
 
-	storage_command+=(am broadcast)
-	storage_command+=(--user 0)
-	storage_command+=(-e com.termux.app.reload_style storage)
-	storage_command+=(-a com.termux.app.reload_style com.termux)
+	command_storage+=(am broadcast)
+	command_storage+=(--user 0)
+	command_storage+=(-e com.termux.app.reload_style storage)
+	command_storage+=(-a com.termux.app.reload_style com.termux)
 
-	frobulator.silence "${storage_command[@]}"
+	frobulator.silence "${command_storage[@]}"
 }
 
 storage_directories () {
 
 	# generate home directory structure
 
-	directories_list+=(
+	list_directories+=(
 		Desktop
 		Documents
 		Downloads
@@ -151,9 +151,9 @@ storage_directories () {
 		Videos
 	)
 
-	frobulator.directory "${base_directory}" ${directories_list[@]}
+	frobulator.directory "${directory_base}" ${list_directories[@]}
 
-	directories_list=()
+	list_directories=()
 }
 
 # verify termux storage directory existence
@@ -192,11 +192,11 @@ then
 	frobulator.file "${HOME}"/.dextop dextop-termux-storage
 fi
 
-directories_list=(
+list_directories=(
 	"${PREFIX}"/media
 )
 
-for directory in ${directories_list[@]}
+for directory in ${list_directories[@]}
 do
 	if [ -d "${directory}" ]
 	then
@@ -207,7 +207,7 @@ do
 	fi
 done
 
-directories_list=()
+list_directories=()
 
 # generate links
 
@@ -217,26 +217,26 @@ frobulator.fwd "Setting up storage${marker_elp}"
 
 frobulator.fwd "Linking${marker_elp}"
 
-directories_list=(
+list_directories=(
 	"${PREFIX}"/media
 )
 
 if [ -d /storage/self/primary ]
 then
-	for directory in ${directories_list[@]}
+	for directory in ${list_directories[@]}
 	do
 		frobulator.link /storage/self "${directory}" primary Android
 	done
 fi
 
-directories_list=()
+list_directories=()
 
 # link external storage
 
 # use /proc/mounts to detect mounted media:
 # circumvent /storage access issues and DAC policy (Android 11+)
 
-commands_list=(
+list_commands=(
 	$(cat /proc/mounts | sed -r '/[A0-Z9]{4}[-][A0-Z9]{4}/!d' | grep '/storage' | cut -d ' ' -f 2)
 	$(cat /proc/mounts | sed -r '/[A0-Z9]{40}/!d' | grep '/storage' | cut -d ' ' -f 2)
 )
@@ -245,51 +245,51 @@ commands_list=(
 
 IFS=$'\n'
 
-for command in ${commands_list[@]}
+for command in ${list_commands[@]}
 do
-	read -r -a storage_mounts_list <<< ${command}
+	read -r -a list_mounts_storage <<< ${command}
 
-	for storage_mount in ${storage_mounts_list[@]}
+	for mount_storage in ${list_mounts_storage[@]}
 	do
-		 storage_paths_list+=("${storage_mount}")
+		 list_paths_storage+=("${mount_storage}")
 	done
 done
 
-if [ -n "${#storage_paths_list[@]}" ]
+if [ -n "${#list_paths_storage[@]}" ]
 then
-	for storage_path in ${storage_paths_list[@]}
+	for path_storage in ${list_paths_storage[@]}
 	do
-		storage_uuid="${storage_path/\/storage\//}"
+		uuid_storage="${path_storage/\/storage\//}"
 
-		if [ -f "${storage_path}"/.storage ]
+		if [ -f "${path_storage}"/.storage ]
 		then
-			storage_label=$(cat ${storage_path}/.storage)
+			label_storage=$(cat ${path_storage}/.storage)
 		else
-			frobulator.wrn "No storage identifier found" "[ ${storage_uuid} ]"
+			frobulator.wrn "No storage identifier found" "[ ${uuid_storage} ]"
 
 			frobulator.inf "Using mounts UUID for identification"
 
 			frobulator.fwd "Proceeding${marker_elp}"
 		fi
 
-		frobulator.scs "Storage media detected" "[ ${storage_uuid} ]"
+		frobulator.scs "Storage media detected" "[ ${uuid_storage} ]"
 
-		if [ ! -f "${PREFIX}"/media/"${storage_label}" ]
+		if [ ! -f "${PREFIX}"/media/"${label_storage}" ]
 		then
-			frobulator.link /storage "${PREFIX}"/media "${storage_uuid}" "${storage_label}"
+			frobulator.link /storage "${PREFIX}"/media "${uuid_storage}" "${label_storage}"
 		fi
 
 	done
 
 else
-	storage_uuid="N/A"
+	uuid_storage="N/A"
 
-	frobulator.err "No storage media detected" "[ ${storage_uuid} ]"
+	frobulator.err "No storage media detected" "[ ${uuid_storage} ]"
 
 	frobulator.fwd "Continuing${marker_elp}"
 fi
 
-commands_list=()
+list_commands=()
 
 # reset IFS
 
@@ -304,7 +304,7 @@ then
 
 	if [ -d "${PREFIX}"/media/[hH][oO][mM][eE] ]
 	then
-		base_directory=("${PREFIX}"/media/[hH][oO][mM][eE])
+		directory_base=("${PREFIX}"/media/[hH][oO][mM][eE])
 	fi
 
 	storage_directories
@@ -313,13 +313,13 @@ then
 
 	IFS=$'\n'
 
-	directories_list=(
-		$(ls "${base_directory}")
+	list_directories=(
+		$(ls "${directory_base}")
 	)
 
-	for directory in ${directories_list[@]}
+	for directory in ${list_directories[@]}
 	do
-		read -r -a links_list <<< ${directory}
+		read -r -a list_links <<< ${directory}
 
 		if [[ -d "${HOME}"/"${directory}" ]]
 		then
@@ -331,12 +331,12 @@ then
 			break
 		fi
 
-		frobulator.link "${base_directory}" "${HOME}" ${links_list[@]}
+		frobulator.link "${directory_base}" "${HOME}" ${list_links[@]}
 
-		links_list=()
+		list_links=()
 	done
 
-	directories_list=()
+	list_directories=()
 
 	# reset IFS
 
@@ -344,7 +344,7 @@ then
 
 else
 
-	base_directory="${HOME}"
+	directory_base="${HOME}"
 
 	storage_directories
 fi

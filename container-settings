@@ -120,15 +120,15 @@ done
 
 color="#2f343f"
 
-edge_value="50"
+value_edge="50"
 
-font_size="10"
-regular_font="Sans"
-monospace_font="Monospace"
+size_font="10"
+font_regular="Sans"
+font_monospace="Monospace"
 
-cursor_theme="Adwaita"
-icon_theme="Papirus-Dark"
-window_theme="Arc-Dark"
+theme_cursor="Adwaita"
+theme_icons="Papirus-Dark"
+theme_window="Arc-Dark"
 
 # functions ────────────────────────────────────────────────────────────────────
 
@@ -148,19 +148,19 @@ color_translate () {
 
 	# calculate float-point integer value
 
-	r_integer=$(( 1000000 * $r / 256 ))
-	g_integer=$(( 1000000 * $g / 256 ))
-	b_integer=$(( 1000000 * $b / 256 ))
+	integer_red=$(( 1000000 * $r / 256 ))
+	integer_green=$(( 1000000 * $g / 256 ))
+	integer_blue=$(( 1000000 * $b / 256 ))
 
-	a_integer=$(( 256 / 256 ))
+	integer_alpha=$(( 256 / 256 ))
 
 	# assign rgba gamut
 
-	r=0.${r_integer}
-	g=0.${g_integer}
-	b=0.${b_integer}
+	r=0.${integer_red}
+	g=0.${integer_green}
+	b=0.${integer_blue}
 
-	a=${a_integer}.000000
+	a=${integer_alpha}.000000
 }
 
 # translate color
@@ -169,12 +169,12 @@ color_translate "${color}"
 
 # reset 'xfce4-panel' settings
 
-properties_list=(
+list_properties=(
 	'/panels'
 	'/plugins'
 )
 
-for property in ${properties_list[@]}
+for property in ${list_properties[@]}
 do
 	xfconf-query -r -R -v -c 'xfce4-panel' -p "${property}"
 done
@@ -212,16 +212,16 @@ xfconf-query --create -c 'xsettings'                   -p '/Gdk/WindowScalingFac
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/ButtonImages' -t bool -s 'false'
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/CanChangeAccels' -t bool -s 'false'
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/ColorPalette' -t string -s 'rgb(38,50,56);rgb(255,152,0);rgb(139,195,74);rgb(255,193,7);rgb(3,169,244);rgb(233,30,99);rgb(0,150,136);rgb(207,216,220);rgb(55,71,79);rgb(255,167,77);rgb(156,204,101);rgb(255,160,0);rgb(129,212,250);rgb(173,20,87);rgb(38,166,154);rgb(236,239,241)'
-xfconf-query --create -c 'xsettings'                   -p '/Gtk/CursorThemeName' -t string -s "${cursor_theme}"
+xfconf-query --create -c 'xsettings'                   -p '/Gtk/CursorThemeName' -t string -s "${theme_cursor}"
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/CursorThemeSize' -t int -s '0'
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/DecorationLayout' -t string -s 'menu'
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/DialogsUseHeader' -t bool -s 'true'
-xfconf-query --create -c 'xsettings'                   -p '/Gtk/FontName' -t string -s "${regular_font} ${font_size}"
+xfconf-query --create -c 'xsettings'                   -p '/Gtk/FontName' -t string -s "${font_regular} ${size_font}"
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/IconSizes' -t string -s ''
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/KeyThemeName' -t string -s ''
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/MenuBarAccel' -t string -s 'F10'
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/MenuImages' -t bool -s 'true'
-xfconf-query --create -c 'xsettings'                   -p '/Gtk/MonospaceFontName' -t string -s "${monospace_font} ${font_size}"
+xfconf-query --create -c 'xsettings'                   -p '/Gtk/MonospaceFontName' -t string -s "${font_monospace} ${size_font}"
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/TitlebarMiddleClick' -t string -s 'lower'
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/ToolbarIconSize' -t int -s '3'
 xfconf-query --create -c 'xsettings'                   -p '/Gtk/ToolbarStyle' -t string -s 'icons'
@@ -232,9 +232,9 @@ xfconf-query --create -c 'xsettings'                   -p '/Net/DoubleClickDista
 xfconf-query --create -c 'xsettings'                   -p '/Net/DoubleClickTime' -t int -s '400'
 xfconf-query --create -c 'xsettings'                   -p '/Net/EnableEventSounds' -t bool -s 'false'
 xfconf-query --create -c 'xsettings'                   -p '/Net/EnableInputFeedbackSounds' -t bool -s 'false'
-xfconf-query --create -c 'xsettings'                   -p '/Net/IconThemeName' -t string -s "${icon_theme}"
+xfconf-query --create -c 'xsettings'                   -p '/Net/IconThemeName' -t string -s "${theme_icons}"
 xfconf-query --create -c 'xsettings'                   -p '/Net/SoundThemeName' -t string -s 'default'
-xfconf-query --create -c 'xsettings'                   -p '/Net/ThemeName' -t string -s "${window_theme}"
+xfconf-query --create -c 'xsettings'                   -p '/Net/ThemeName' -t string -s "${theme_window}"
 xfconf-query --create -c 'xsettings'                   -p '/Xft/Antialias' -t string -s '-1'
 xfconf-query --create -c 'xsettings'                   -p '/Xft/HintStyle' -t string -s 'hintnone'
 xfconf-query --create -c 'xsettings'                   -p '/Xft/Hinting' -t string -s '-1'
@@ -532,11 +532,11 @@ xfconf-query --create -c 'xfwm4'                       -p '/general/show_popup_s
 xfconf-query --create -c 'xfwm4'                       -p '/general/snap_resist' -t bool -s 'false'
 xfconf-query --create -c 'xfwm4'                       -p '/general/snap_to_border' -t bool -s 'true'
 xfconf-query --create -c 'xfwm4'                       -p '/general/snap_to_windows' -t bool -s 'true'
-xfconf-query --create -c 'xfwm4'                       -p '/general/snap_width' -t int -s "${edge_value}"
-xfconf-query --create -c 'xfwm4'                       -p '/general/theme' -t string -s "${window_theme}"
+xfconf-query --create -c 'xfwm4'                       -p '/general/snap_width' -t int -s "${value_edge}"
+xfconf-query --create -c 'xfwm4'                       -p '/general/theme' -t string -s "${theme_window}"
 xfconf-query --create -c 'xfwm4'                       -p '/general/tile_on_move' -t bool -s 'true'
 xfconf-query --create -c 'xfwm4'                       -p '/general/title_alignment' -t string -s 'center'
-xfconf-query --create -c 'xfwm4'                       -p '/general/title_font' -t string -s "${regular_font} ${font_size}"
+xfconf-query --create -c 'xfwm4'                       -p '/general/title_font' -t string -s "${font_regular} ${size_font}"
 xfconf-query --create -c 'xfwm4'                       -p '/general/title_horizontal_offset' -t int -s '0'
 xfconf-query --create -c 'xfwm4'                       -p '/general/title_shadow_active' -t bool -s 'false'
 xfconf-query --create -c 'xfwm4'                       -p '/general/title_shadow_inactive' -t bool -s 'false'
@@ -552,7 +552,7 @@ xfconf-query --create -c 'xfwm4'                       -p '/general/workspace_co
 xfconf-query --create -c 'xfwm4'                       -p '/general/workspace_names' -t string -s 'Workspace 01' -t string -s 'Workspace 02' -t string -s 'Workspace 03' -t string -s 'Workspace 04' -t string -s 'Workspace 05' -t string -s 'Workspace 06' -t string -s 'Workspace 07' -t string -s 'Workspace 08' -t string -s 'Workspace 09'
 xfconf-query --create -c 'xfwm4'                       -p '/general/wrap_cycle' -t bool -s 'false'
 xfconf-query --create -c 'xfwm4'                       -p '/general/wrap_layout' -t bool -s 'false'
-xfconf-query --create -c 'xfwm4'                       -p '/general/wrap_resistance' -t int -s "${edge_value}"
+xfconf-query --create -c 'xfwm4'                       -p '/general/wrap_resistance' -t int -s "${value_edge}"
 xfconf-query --create -c 'xfwm4'                       -p '/general/wrap_windows' -t bool -s 'false'
 xfconf-query --create -c 'xfwm4'                       -p '/general/wrap_workspaces' -t bool -s 'false'
 xfconf-query --create -c 'xfwm4'                       -p '/general/zoom_desktop' -t bool -s 'false'
@@ -609,12 +609,12 @@ FILE
 
 # restart applications and modules
 
-applications_list=(
+list_applications=(
 	xfce4-panel
 	xfce4-terminal
 )
 
-for application in ${applications_list[@]}
+for application in ${list_applications[@]}
 do
 	pkill -9 "${application}"
 done

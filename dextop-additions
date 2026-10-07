@@ -75,21 +75,21 @@ do
 	in
 		-a|--activity)
 			option="activity"
-			activity_option="${2}"
+			option_activity="${2}"
 
 			shift
 		;;
 
 		-c|--action)
 			option="action"
-			action_option="${2}"
+			option_action="${2}"
 
 			shift
 		;;
 
 		-n|--handle)
 			option="handle"
-			handle_option="${2}"
+			option_handle="${2}"
 
 			shift
 		;;
@@ -608,9 +608,9 @@ done
 
 # discreet applications
 
-google_chrome="com.android.chrome/com.google.android.apps.chrome.Main"
-google_chrome_beta="com.chrome.beta/com.google.android.apps.chrome.Main"
-google_mail="com.google.android.gm/.GmailActivity"
+activity_chrome="com.android.chrome/com.google.android.apps.chrome.Main"
+activity_chrome_beta="com.chrome.beta/com.google.android.apps.chrome.Main"
+activity_gmail="com.google.android.gm/.GmailActivity"
 terminal="com.termux/com.termux.app.TermuxActivity"
 
 # android actions
@@ -660,22 +660,22 @@ intent_handle () {
 
 if [[ "${option}" = [aA][cC][tT][iI][vV][iI][tT][yY] ]]
 then
-	if [[ "${activity_option}" = "google-chrome" ]] ||
-	   [[ "${activity_option}" = "chrome"        ]]
+	if [[ "${option_activity}" = "google-chrome" ]] ||
+	   [[ "${option_activity}" = "chrome"        ]]
 	then
-		activity="${google_chrome}"
+		activity="${activity_chrome}"
 
-	elif [[ "${activity_option}" = "google-mail" ]] ||
-		[[ "${activity_option}" = "gmail"        ]]
+	elif [[ "${option_activity}" = "google-mail" ]] ||
+		[[ "${option_activity}" = "gmail"        ]]
 	then
-		activity="${google_mail}"
+		activity="${activity_gmail}"
 
-	elif [[ "${activity_option}" = "terminal"    ]]
+	elif [[ "${option_activity}" = "terminal"    ]]
 	then
 		activity="${terminal}"
 
 	else
-		frobulator.err "Unrecognized activity option" "[ ${activity_option} ]"
+		frobulator.err "Unrecognized activity option" "[ ${option_activity} ]"
 
 		exit 1
 	fi
@@ -684,21 +684,21 @@ then
 
 elif [[ "${option}" = [aA][cC][tT][iI][oO][nN] ]]
 then
-	if [[ "${action_option}" = "camera"    ]] ||
-	   [[ "${action_option}" = "photo"     ]]
-	   [[ "${action_option}" = "picture"   ]]
-	   [[ "${action_option}" = "selfie"    ]]
+	if [[ "${option_action}" = "camera"    ]] ||
+	   [[ "${option_action}" = "photo"     ]]
+	   [[ "${option_action}" = "picture"   ]]
+	   [[ "${option_action}" = "selfie"    ]]
 	then
 		action="${camera}"
 
-	elif [[ "${action_option}" = "music"   ]] ||
-	    [[ "${action_option}" = "player"   ]]
-	    [[ "${action_option}" = "song"     ]]
-	    [[ "${action_option}" = "audio"    ]]
+	elif [[ "${option_action}" = "music"   ]] ||
+	    [[ "${option_action}" = "player"   ]]
+	    [[ "${option_action}" = "song"     ]]
+	    [[ "${option_action}" = "audio"    ]]
 	then
 		action="${music}"
 	else
-		frobulator.err "Unrecognized action option" "[ ${action_option} ]"
+		frobulator.err "Unrecognized action option" "[ ${option_action} ]"
 
 		exit 1
 	fi
@@ -707,29 +707,29 @@ then
 
 elif [[ "${option}" = [hH][aA][nN][dD][lL][eE] ]]
 then
-	if [[ "${handle_option}" = "email"     ]] ||
-	   [[ "${handle_option}" = "mail"      ]]
+	if [[ "${option_handle}" = "email"     ]] ||
+	   [[ "${option_handle}" = "mail"      ]]
 	then
 		handle="${email}"
 
-	elif [[ "${handle_option}" = "browser" ]] ||
-		 [[ "${handle_option}" = "link"    ]] ||
-		 [[ "${handle_option}" = "web"     ]]
+	elif [[ "${option_handle}" = "browser" ]] ||
+		 [[ "${option_handle}" = "link"    ]] ||
+		 [[ "${option_handle}" = "web"     ]]
 	then
 		handle="${link}"
 
-	elif [[ "${handle_option}" = "message" ]] ||
-	     [[ "${handle_option}" = "text"    ]] ||
-	     [[ "${handle_option}" = "sms"     ]]
+	elif [[ "${option_handle}" = "message" ]] ||
+	     [[ "${option_handle}" = "text"    ]] ||
+	     [[ "${option_handle}" = "sms"     ]]
 	then
 		handle="${message}"
 
-	elif [[ "${handle_option}" = "file"    ]]
+	elif [[ "${option_handle}" = "file"    ]]
 	then
 		handle="${file}"
 
 	else
-		frobulator.err "Unrecognized handle option" "[ ${handle_option} ]"
+		frobulator.err "Unrecognized handle option" "[ ${option_handle} ]"
 
 		exit 1
 	fi

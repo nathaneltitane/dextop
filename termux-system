@@ -183,9 +183,9 @@ system_groups () {
 
 	# parse existing groups
 
-	read -r -a groups_list <<< "${groups}"
+	read -r -a list_groups <<< "${groups}"
 
-	for line in "${groups_list[@]}"
+	for line in "${list_groups[@]}"
 	do
 		line=${line/(/ }
 		line=${line/)}
@@ -196,16 +196,16 @@ system_groups () {
 
 		# transfer unregistered IDs
 
-		read group_number group_name <<< ${line}
+		read number_group name_group <<< ${line}
 
 		if [ -f "${PREFIX}"/cnt/etc/group ]
 		then
-			echo "${group_name}:x:${group_number}:" >> "${PREFIX}"/cnt/etc/group
+			echo "${name_group}:x:${number_group}:" >> "${PREFIX}"/cnt/etc/group
 		fi
 
 		if [ -f "${PREFIX}"/cnt/etc/gshadow ]
 		then
-			echo "${group_name}:x:${group_number}:" >> "${PREFIX}"/cnt/etc/gshadow
+			echo "${name_group}:x:${number_group}:" >> "${PREFIX}"/cnt/etc/gshadow
 		fi
 	done
 
@@ -260,12 +260,12 @@ system_preload () {
 
 	# generate libgcc/libc location and add to dynamic linker for preload
 
-	preload_library=$(find "${PREFIX}"/cnt/usr/lib -type f -iname "libgcc_s.so.1")
+	library_preload=$(find "${PREFIX}"/cnt/usr/lib -type f -iname "libgcc_s.so.1")
 
 	# set preload
 
 	cat <<- FILE > "${PREFIX}"/cnt/etc/ld.so.preload
-	${preload_library}
+	${library_preload}
 	FILE
 }
 

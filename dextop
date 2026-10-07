@@ -115,7 +115,7 @@ do
 			   [ "${update}" = "shell"       ] ||
 			   [ "${update}" = "preferences" ]
 			then
-				update_item="${3}"
+				item_update="${3}"
 
 				shift
 			fi
@@ -273,19 +273,19 @@ then
 	then
 		# desktop environment chosen at setup: console / i3 / xfce
 
-		desktop_environment="$(cat "${HOME}"/.dextop/dextop-environment)"
+		name_environment="$(cat "${HOME}"/.dextop/dextop-environment)"
 
-		if [ "${desktop_environment}" = "i3" ]
+		if [ "${name_environment}" = "i3" ]
 		then
 			session="i3"
 		fi
 
-		if [ "${desktop_environment}" = "xfce" ]
+		if [ "${name_environment}" = "xfce" ]
 		then
 			session="xfce4-session"
 		fi
 
-		if [ "${desktop_environment}" = "console" ]
+		if [ "${name_environment}" = "console" ]
 		then
 			session="console"
 		fi
@@ -421,7 +421,7 @@ intent_architecture () {
 
 	# list supported processor architectures
 
-	cpu_architectures=(
+	list_architectures_cpu=(
 		aarch64
 		"arm*"
 		amd64
@@ -431,13 +431,13 @@ intent_architecture () {
 
 	# test processor architecture string
 
-	device_architecture="$(uname -m)"
+	architecture_device="$(uname -m)"
 
-	for architecture in "${cpu_architectures[@]}"
+	for architecture in "${list_architectures_cpu[@]}"
 	do
-		if [[ "${device_architecture}" == ${architecture} ]]
+		if [[ "${architecture_device}" == ${architecture} ]]
 		then
-			frobulator.scs "Supported device architecture" "[ ${device_architecture} ]"
+			frobulator.scs "Supported device architecture" "[ ${architecture_device} ]"
 
 			return 0
 		fi
@@ -450,27 +450,27 @@ intent_update () {
 
 	# handle updates
 
-	update_url="${1}"
-	update_directory="${2}"
-	update_items=(${@:3})
+	url_update="${1}"
+	directory_update="${2}"
+	list_items_update=(${@:3})
 
-	if [[ "${update_item}" = "all" ]]
+	if [[ "${item_update}" = "all" ]]
 	then
-		update_files_list=(${update_items[@]})
+		list_files_update=(${list_items_update[@]})
 
-		frobulator.download "${update_url}" "${update_directory}" ${update_files_list[@]}
+		frobulator.download "${url_update}" "${directory_update}" ${list_files_update[@]}
 
-	elif [[ ${update_items[@]} =~ "${update_item}" ]]
+	elif [[ ${list_items_update[@]} =~ "${item_update}" ]]
 	then
-		update_files_list=("${update_item}")
+		list_files_update=("${item_update}")
 
-		frobulator.download "${update_url}" "${update_directory}" "${update_item}"
+		frobulator.download "${url_update}" "${directory_update}" "${item_update}"
 
-	elif  [[ ! ${update_items[@]} =~ "${update_item}" ]]
+	elif  [[ ! ${list_items_update[@]} =~ "${item_update}" ]]
 	then
-		update_files_list=(${@:3})
+		list_files_update=(${@:3})
 
-		frobulator.err "Unknown item name" "[ '${update_item}' ]"
+		frobulator.err "Unknown item name" "[ '${item_update}' ]"
 
 		frobulator.fwd "Listing known items${marker_elp}"
 
@@ -478,7 +478,7 @@ intent_update () {
 
 		IFS=$'\n'
 
-		printf "${marker_nul} %s\n" ${update_files_list[@]}
+		printf "${marker_nul} %s\n" ${list_files_update[@]}
 
 		echo
 
@@ -491,7 +491,7 @@ intent_update () {
 		exit 1
 	fi
 
-	update_files_list=()
+	list_files_update=()
 
 }
 
@@ -500,14 +500,14 @@ intent_reload () {
 	# termux settings reload:
 	# update command line interface with dextop settings
 
-	settings_command=()
+	command_settings=()
 
-	settings_command+=(am broadcast)
-	settings_command+=(--user 0)
-	settings_command+=(-a com.termux.app.reload_style)
-	settings_command+=(-p com.termux)
+	command_settings+=(am broadcast)
+	command_settings+=(--user 0)
+	command_settings+=(-a com.termux.app.reload_style)
+	command_settings+=(-p com.termux)
 
-	frobulator.silence "${settings_command[@]}"
+	frobulator.silence "${command_settings[@]}"
 
 }
 
@@ -515,23 +515,23 @@ intent_backup () {
 
 	# handle user home directory backup
 
-	backup_name="dextop-backup"
-	backup_extension="tar.gz"
+	name_backup="dextop-backup"
+	extension_backup="tar.gz"
 
-	backup_directory="${HOME}"
+	directory_backup="${HOME}"
 
-	backup_archive="${backup_name}-${stamp}.${backup_extension}"
+	file_backup="${name_backup}-${stamp}.${extension_backup}"
 
-	frobulator.inf "Generating backup" "[ ${backup_archive} ]"
+	frobulator.inf "Generating backup" "[ ${file_backup} ]"
 
 	tar																\
 		--create													\
 		--gzip														\
-			--exclude="${backup_name}"*								\
-				--file="${backup_directory}"/"${backup_archive}"	\
-																	"${backup_directory}" > "${sink}" 2>&1 &
+			--exclude="${name_backup}"*								\
+				--file="${directory_backup}"/"${file_backup}"	\
+																	"${directory_backup}" > "${sink}" 2>&1 &
 
-	frobulator.progress "archive" "[ ${backup_directory} ]"
+	frobulator.progress "archive" "[ ${directory_backup} ]"
 
 }
 
@@ -554,18 +554,18 @@ intent_additions () {
 
 	# load additions files
 
-	additions_list+=(
+	list_additions+=(
 		dextop-additions
 	)
 
 	if [[ "${option}" = "update" ]]
 	then
-		intent_update get.dxtp.app "${HOME}"/.local/bin ${additions_list[@]}
+		intent_update get.dxtp.app "${HOME}"/.local/bin ${list_additions[@]}
 	else
-		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${additions_list[@]}
+		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${list_additions[@]}
 	fi
 
-	additions_list=()
+	list_additions=()
 
 }
 
@@ -586,7 +586,7 @@ intent_backgrounds () {
 
 	# load background files
 
-	backgrounds_list=(
+	list_backgrounds=(
 		dextop-black.png
 		dextop-black.svg
 		dextop-blue.png
@@ -605,12 +605,12 @@ intent_backgrounds () {
 
 	if [[ "${option}" = "update" ]]
 	then
-		intent_update get.dxtp.app "${HOME}"/.dextop ${backgrounds_list[@]}
+		intent_update get.dxtp.app "${HOME}"/.dextop ${list_backgrounds[@]}
 	else
-		frobulator.download get.dxtp.app "${HOME}"/.dextop ${backgrounds_list[@]}
+		frobulator.download get.dxtp.app "${HOME}"/.dextop ${list_backgrounds[@]}
 	fi
 
-	backgrounds_list=()
+	list_backgrounds=()
 
 }
 
@@ -618,7 +618,7 @@ intent_interface () {
 
 	# load interface files
 
-	interface_list+=(
+	list_interface+=(
 		i3-configuration
 		i3status-configuration
 		i3-backgrounds
@@ -640,9 +640,9 @@ intent_interface () {
 
 	if [[ "${option}" = "update" ]]
 	then
-		intent_update get.trmnl.me "${HOME}"/.local/bin ${interface_list[@]}
+		intent_update get.trmnl.me "${HOME}"/.local/bin ${list_interface[@]}
 	else
-		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${interface_list[@]}
+		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${list_interface[@]}
 
 		if [ -z "${option}" ] || [ "${option}" = "termux" ]
 		then
@@ -654,7 +654,7 @@ intent_interface () {
 
 	fi
 
-	interface_list=()
+	list_interface=()
 
 }
 
@@ -662,7 +662,7 @@ intent_preferences () {
 
 	# termux preferences and properties
 
-	preferences_list+=(
+	list_preferences+=(
 		termux-colors
 		termux-font-hack
 		termux-properties
@@ -671,9 +671,9 @@ intent_preferences () {
 
 	if [[ "${option}" = "update" ]]
 	then
-		intent_update get.dxtp.app "${HOME}"/.local/bin ${preferences_list[@]}
+		intent_update get.dxtp.app "${HOME}"/.local/bin ${list_preferences[@]}
 	else
-		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${preferences_list[@]}
+		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${list_preferences[@]}
 
 		frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-colors     colors.properties
 		frobulator.link "${HOME}"/.local/bin "${HOME}"/.termux termux-font-hack       font.ttf
@@ -682,7 +682,7 @@ intent_preferences () {
 		intent_reload
 	fi
 
-	preferences_list=()
+	list_preferences=()
 
 }
 
@@ -690,7 +690,7 @@ intent_shell () {
 
 	# load shell files
 
-	shell_list+=(
+	list_shell+=(
 		bash-aliases
 		bash-configuration
 		bash-functions
@@ -701,9 +701,9 @@ intent_shell () {
 
 	if [[ "${option}" = "update" ]]
 	then
-		intent_update get.trmnl.me "${HOME}"/.local/bin ${shell_list[@]}
+		intent_update get.trmnl.me "${HOME}"/.local/bin ${list_shell[@]}
 	else
-		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${shell_list[@]}
+		frobulator.download get.trmnl.me "${HOME}"/.local/bin ${list_shell[@]}
 
 		# link to user home
 
@@ -737,7 +737,7 @@ intent_shell () {
 		fi
 	fi
 
-	shell_list=()
+	list_shell=()
 
 }
 
@@ -745,7 +745,7 @@ intent_utilities () {
 
 	# load dextop utilities
 
-	utilities_list+=(
+	list_utilities+=(
 		termux-packages
 		termux-update
 		termux-storage
@@ -761,12 +761,12 @@ intent_utilities () {
 
 	if [[ "${option}" = "update" ]]
 	then
-		intent_update get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
+		intent_update get.dxtp.app "${HOME}"/.local/bin ${list_utilities[@]}
 	else
-		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${utilities_list[@]}
+		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${list_utilities[@]}
 	fi
 
-	utilities_list=()
+	list_utilities=()
 
 }
 
@@ -774,7 +774,7 @@ intent_directories () {
 
 	# generate dextop required directories
 
-	directories_list+=(
+	list_directories+=(
 		bkp
 		cnt
 		img
@@ -783,13 +783,13 @@ intent_directories () {
 		storage
 	)
 
-	frobulator.directory "${PREFIX}" ${directories_list[@]}
+	frobulator.directory "${PREFIX}" ${list_directories[@]}
 
-	directories_list=()
+	list_directories=()
 
 	# generate root directory structure
 
-	directories_list+=(
+	list_directories+=(
 		bin
 		bkp
 		cnt
@@ -802,12 +802,12 @@ intent_directories () {
 		media
 	)
 
-	for directory in ${directories_list[@]}
+	for directory in ${list_directories[@]}
 	do
 		frobulator.link "${PREFIX}" "${PREFIX%/*}" "${directory}"
 	done
 
-	directories_list=()
+	list_directories=()
 
 }
 
@@ -815,29 +815,29 @@ intent_bookmarks () {
 
 	# generate file browser bookmarks
 
-	bookmarks_directories_list=(
+	list_directories_bookmarks=(
 		"${PREFIX}"/cnt
 		"${PREFIX}"/media/[aA]ndroid
 		"${PREFIX}"/media/[eE]xternal
 		"${PREFIX}"/media/[iI]nternal
 	)
 
-	bookmarks_labels_list=(
+	list_labels_bookmarks=(
 		Container
 		Android
 		External
 		Internal
 	)
 
-	for (( index=0 ; index<${#bookmarks_directories_list[@]} ; index++ ))
+	for (( index=0 ; index<${#list_directories_bookmarks[@]} ; index++ ))
 	do
-		if [ -d ${bookmarks_directories_list[$index]} ]
+		if [ -d ${list_directories_bookmarks[$index]} ]
 		then
-			frobulator.write append "file://${bookmarks_directories_list[$index]} ${bookmarks_labels_list[$index]}" "${HOME}"/.config/gtk-3.0 bookmarks
+			frobulator.write append "file://${list_directories_bookmarks[$index]} ${list_labels_bookmarks[$index]}" "${HOME}"/.config/gtk-3.0 bookmarks
 		fi
 	done
 
-	bookmarks_directories_list=()
+	list_directories_bookmarks=()
 
 	bookamrks_labels_list=()
 
@@ -851,7 +851,7 @@ intent_icons () {
 
 	# select icon themes
 
-	icons_list+=(
+	list_icons+=(
 		Adwaita
 		Papirus
 		Papirus-Dark
@@ -862,9 +862,9 @@ intent_icons () {
 
 	# keep icon theme selections
 
-	frobulator.keep "${HOME}"/.icons ${icons_list[@]}
+	frobulator.keep "${HOME}"/.icons ${list_icons[@]}
 
-	icons_list=()
+	list_icons=()
 
 }
 
@@ -878,7 +878,7 @@ intent_themes () {
 
 	# select themes
 
-	themes_list+=(
+	list_themes+=(
 		Arc
 		Arc-Dark
 		Arc-Darker
@@ -887,9 +887,9 @@ intent_themes () {
 
 	# keep theme selections
 
-	frobulator.keep "${HOME}"/.themes ${themes_list[@]}
+	frobulator.keep "${HOME}"/.themes ${list_themes[@]}
 
-	themes_list=()
+	list_themes=()
 
 }
 
@@ -913,7 +913,7 @@ intent_purge () {
 
 	# purge items loaded during dextop install
 
-	items_list=(
+	list_items=(
 
 		# files
 
@@ -962,7 +962,7 @@ intent_purge () {
 
 	)
 
-	for item in ${items_list[@]}
+	for item in ${list_items[@]}
 	do
 		frobulator.delete "${item}"
 	done
@@ -973,7 +973,7 @@ intent_purge () {
 
 intent_architecture
 
-frobulator.complete halt "Unsupported device architecture" "[ ${device_architecture} ]"
+frobulator.complete halt "Unsupported device architecture" "[ ${architecture_device} ]"
 
 # options ──────────────────────────────────────────────────────────────────────
 
@@ -1031,7 +1031,7 @@ if [ "${option}" = "update" ]
 then
 	if [[ "${update}" = [aA][lL][lL] ]]
 	then
-		update_item="all"
+		item_update="all"
 
 		frobulator.inf "Updating" "[ ${update} ]"
 
@@ -1079,7 +1079,7 @@ then
 	if [[ "${update}" = [bB][aA][cK][gG][rR][oO][uU][nN][dD] ]]
 	then
 
-		frobulator.inf "Updating" "[ ${update_item} ]"
+		frobulator.inf "Updating" "[ ${item_update} ]"
 
 		frobulator.fwd "Updating${marker_elp}"
 
@@ -1091,7 +1091,7 @@ then
 	if [[ "${update}" = [iI][nN][tT][eE][rR][fF][aA][cC][eE] ]]
 	then
 
-		frobulator.inf "Updating" "[ ${update_item} ]"
+		frobulator.inf "Updating" "[ ${item_update} ]"
 
 		frobulator.fwd "Updating${marker_elp}"
 
@@ -1115,7 +1115,7 @@ then
 	if [[ "${update}" = [sS][hH][eE][lL][lL] ]]
 	then
 
-		frobulator.inf "Updating" "[ ${update_item} ]"
+		frobulator.inf "Updating" "[ ${item_update} ]"
 
 		frobulator.fwd "Updating${marker_elp}"
 
@@ -1139,7 +1139,7 @@ then
 	if [[ "${update}" = [uU][tT][iI][lL][iI][tT][yY] ]]
 	then
 
-		frobulator.inf "Updating" "[ ${update_item} ]"
+		frobulator.inf "Updating" "[ ${item_update} ]"
 
 		frobulator.fwd "Updating${marker_elp}"
 

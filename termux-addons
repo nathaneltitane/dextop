@@ -155,7 +155,7 @@ intent_addon () {
 
 	# load termux addons
 
-	addons_list+=(
+	list_addons+=(
 		api
 		gui
 		styling
@@ -165,13 +165,13 @@ intent_addon () {
 
 	if [[ "${option}" = "selection" ]]
 	then
-		if [[ ${addons_list[@]} =~ "${addon}" ]]
+		if [[ ${list_addons[@]} =~ "${addon}" ]]
 		then
 			intent_install
 
 		elif [[ "${addon}" = "all" ]]
 		then
-			for addon in ${addons_list[@]}
+			for addon in ${list_addons[@]}
 			do
 				intent_install
 
@@ -189,7 +189,7 @@ intent_addon () {
 
 			IFS=$'\n'
 
-			printf "${marker_nul} %s\n" ${utilities_list[@]}
+			printf "${marker_nul} %s\n" ${list_utilities[@]}
 
 			echo
 
@@ -203,20 +203,20 @@ intent_addon () {
 		fi
 	fi
 
-	addons_list=()
+	list_addons=()
 }
 
 intent_open () {
 
-	open_command=()
+	command_open=()
 
-	open_command+=(am broadcast)
-	open_command+=(--user 0)
-	open_command+=(-a android.intent.action.VIEW)
-	open_command+=(-n com.termux/com.termux.app.TermuxOpenReceiver)
-	open_command+=(-d ${@})
+	command_open+=(am broadcast)
+	command_open+=(--user 0)
+	command_open+=(-a android.intent.action.VIEW)
+	command_open+=(-n com.termux/com.termux.app.TermuxOpenReceiver)
+	command_open+=(-d ${@})
 
-	frobulator.silence "${open_command[@]}"
+	frobulator.silence "${command_open[@]}"
 }
 
 intent_clean () {
