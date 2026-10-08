@@ -169,6 +169,7 @@ list_fonts+=(
 )
 
 list_i3+=(
+	bc
 	i3
 	i3status
 )
