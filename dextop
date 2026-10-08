@@ -528,7 +528,7 @@ intent_backup () {
 		--create													\
 		--gzip														\
 			--exclude="${name_backup}"*								\
-				--file="${directory_backup}"/"${file_backup}"	\
+				--file="${directory_backup}"/"${file_backup}"		\
 																	"${directory_backup}" > "${sink}" 2>&1 &
 
 	frobulator.progress "archive" "[ ${directory_backup} ]"
