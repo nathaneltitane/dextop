@@ -263,8 +263,8 @@ then
 				frobulator.wrn "Proceeding without update:"
 				frobulator.nul "Setup process may encounter errors."
 
-				frobulator.num "1" "Follow wiki pages stated above to correct issues."
-				frobulator.num "2" "Restart setup on a fresh Termux installation to proceed."
+				frobulator.num 1 "Follow wiki pages stated above to correct issues."
+				frobulator.num 2 "Restart setup on a fresh Termux installation to proceed."
 			fi
 
 			# termux application version is up to date
