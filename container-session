@@ -1248,25 +1248,19 @@ display_vnc_stop () {
 	then
 		# framebuffer
 
-		pkill -f Xvfb  > "${sink}" 2>&1 &
-
-		frobulator.process "Stopping display framebuffer"
+		frobulator.background quiet process "Stopping display framebuffer" -- pkill -f Xvfb
 
 	elif [ -n "${id_process_vnc}" ]
 	then
 		# vnc
 
-		x11vnc -R stop > "${sink}" 2>&1 &
-
-		frobulator.process "Stopping display server"
+		frobulator.background quiet process "Stopping display server" -- x11vnc -R stop
 
 		wait
 
 		# clean display server runtime files
 
-		display_vnc_clean &
-
-		frobulator.process "Removing display runtime files"
+		frobulator.background process "Removing display runtime files" -- display_vnc_clean
 
 	else
 		frobulator.wrn "No active display server detected."
@@ -1362,9 +1356,7 @@ display_x11_stop () {
 		command_intent+=(--user 0)
 		command_intent+=(-a ${activity_display})
 
-		frobulator.silence "${command_intent[@]}" &
-
-		frobulator.process "Stopping display viewer"
+		frobulator.background process "Stopping display viewer" -- frobulator.silence "${command_intent[@]}"
 	else
 		frobulator.wrn "No active display process detected."
 

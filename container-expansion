@@ -130,7 +130,5 @@ then
 
 	# expand system image
 
-	frobulator.silence "${command_expand}" &
-
-	frobulator.progress "expand"
+	frobulator.background "expand" -- frobulator.silence "${command_expand}"
 fi
