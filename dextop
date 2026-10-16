@@ -524,14 +524,12 @@ intent_backup () {
 
 	frobulator.inf "Generating backup" "[ ${file_backup} ]"
 
-	tar																\
+	frobulator.background quiet "archive" "[ ${directory_backup} ]" -- tar																\
 		--create													\
 		--gzip														\
 			--exclude="${name_backup}"*								\
 				--file="${directory_backup}"/"${file_backup}"		\
-																	"${directory_backup}" > "${sink}" 2>&1 &
-
-	frobulator.progress "archive" "[ ${directory_backup} ]"
+																	"${directory_backup}"
 
 }
 
@@ -1166,9 +1164,7 @@ then
 	then
 		frobulator.fwd "Removal in progress${marker_elp}"
 
-		intent_purge &
-
-		frobulator.progress "purge"
+		frobulator.background "purge" -- intent_purge
 
 	else
 		frobulator.inf "Aborting" "[ ${option} ]"
@@ -1188,9 +1184,7 @@ then
 
 		# failsafe
 
-		intent_failsafe &
-
-		frobulator.process "Please wait"
+		frobulator.background process "Please wait" -- intent_failsafe
 
 		frobulator.complete halt "Failsafe failed"
 
