@@ -345,15 +345,15 @@ The experience is extremely similar to setting up a virtual machine (VM) on a ty
 ┌─────────────────────────────────────────────────────────────────────────────────────────────┐
 │ Data Paths                                                                                  │
 ├─────────────────────────────────────────────────────────────────────────────────────────────┤
-│ Display   Container ► X Server  ► Termux:X11            ► Display                           │
-│           Container ► x11vnc    ► VNC Viewer            ► Display                           │
-│                                                                                             │
-│ 3D        Container ► VirGL     ► Graphics              ► GPU                               │
-│                                                                                             │
-│ Storage   Storage   ► /storage  ► ${PREFIX}/media links ► Home                              │
-│           Storage   ► /storage  ► bound into the Container                                  │
-│                                                                                             │
-│ Launch    Dextop    ► termux-am ► Activities            ► Termux:X11 / VNC Viewer           │
+│ Display         Container ► X Server ► Termux:X11 ► Display                                 │
+│                 Container ► x11vnc ► VNC Viewer ► Display                                   │
+├─────────────────────────────────────────────────────────────────────────────────────────────┤
+│ Acceleration    Container ► VirGL ► Graphics ► GPU                                          │
+├─────────────────────────────────────────────────────────────────────────────────────────────┤
+│ Storage         Storage   ► /storage  ► proot bind ► Container                              │
+│                 Storage   ► /storage  ► ${PREFIX}/media/link ► Home                         │
+├─────────────────────────────────────────────────────────────────────────────────────────────┤
+│ Launch          Dextop    ► termux-am ► Android Activities ► Termux:X11 / VNC Viewer        │
 └─────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
