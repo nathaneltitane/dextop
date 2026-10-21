@@ -65,7 +65,7 @@ frobulator.script
 
 # version ──────────────────────────────────────────────────────────────────────
 
-version="2026-10-04"
+version="2026-10-21"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
@@ -105,6 +105,20 @@ do
 			option="backup"
 		;;
 
+		-r|--restore)
+			option="restore"
+			item_restore="${2}"
+
+			# backup name optional - next option left in place
+
+			if [ -n "${item_restore}" ] && [ "${item_restore:0:1}" != "-" ]
+			then
+				shift
+			else
+				unset item_restore
+			fi
+		;;
+
 		-u|--update)
 			option="update"
 			option_update="${2}"
@@ -132,13 +146,13 @@ do
 			option="additions"
 		;;
 
-		-p|--purge|--uninstall)
+		-p|--purge)
 			option="purge"
 		;;
 
 		-h|--help)
 			echo
-			echo -e "Usage: ./${script} -c | -e [Environment] | -t | -n | -l | -i | -a | -d | -b | -u [Update] [Name] | -p | -h [OPTION]"
+			echo -e "Usage: ./${script} -c | -e [Environment] | -t | -n | -l | -i | -a | -d | -b | -r [Backup] | -u [Update] [Name] | -p | -h [OPTION]"
 			echo
 			echo -e "Options:"
 			echo
@@ -162,7 +176,13 @@ do
 			echo
 			echo -e "-d, --additions      Set up Dextop a[d]ditions."
 			echo
-			echo -e "-b, --backup         Create [b]ackup of termux user configuration files."
+			echo -e "-b, --backup         Create [b]ackup of the user home directory."
+			echo
+			echo -e "-r, --restore        Run [r]estore of the user home directory from a backup."
+			echo
+			echo -e "                     [ latest ]   [ Default ]"
+			echo -e "                     [ earliest ] [ Before setup ]"
+			echo -e "                     [ name ]"
 			echo
 			echo -e "-u, --update         Run [u]pdate of application packages and utilities."
 			echo
@@ -176,7 +196,7 @@ do
 			echo -e "                     [ termux ]"
 			echo -e "                     [ utility ]"
 			echo
-			echo -e "-p, --purge          Run [p]urge of setup components and packages - same as --uninstall."
+			echo -e "-p, --purge          Run [p]urge of setup components and packages - home restore offered."
 			echo
 			echo -e "-h, --help           Show [h]elp and usage information."
 			echo
@@ -195,7 +215,7 @@ do
 
 		*)
 			echo
-			echo -e "Usage: ./${script} -c | -e [Environment] | -t | -n | -l | -i | -a | -d | -b | -u [Update] [Name] | -p | -h [OPTION]"
+			echo -e "Usage: ./${script} -c | -e [Environment] | -t | -n | -l | -i | -a | -d | -b | -r [Backup] | -u [Update] [Name] | -p | -h [OPTION]"
 			echo
 			echo -e "Unknown option: '${script} ${1}':"
 			echo -e "Type './${script} -h' for help and usage information."
@@ -217,7 +237,67 @@ frobulator.clear
 
 # variables ────────────────────────────────────────────────────────────────────
 
-date_backup=$(date +"%m-%d-%Y-%H-%M-%S")
+# sortable stamp - backups listed oldest to newest
+
+date_backup=$(date +"%Y-%m-%d-%H-%M-%S")
+
+# components ───────────────────────────────────────────────────────────────────
+
+# files loaded by setup and update steps - removed again by purge
+
+list_additions=(
+	dextop-additions
+)
+
+list_interface=(
+	i3-configuration
+	i3status-configuration
+	i3-backgrounds
+	i3-confirm
+	i3-directory
+	i3-exit
+	i3-file
+	i3-file-manager
+	i3-launch
+	i3-lookup
+	i3-manual
+	i3-navigation
+	i3-notes
+	i3-processes
+	i3-shortcuts
+	i3-status
+	i3-template
+)
+
+list_preferences=(
+	termux-colors
+	termux-font-hack
+	termux-properties
+	termux-reload-settings
+)
+
+list_shell=(
+	bash-aliases
+	bash-configuration
+	bash-functions
+	bash-login
+	bash-logout
+	bash-profile
+)
+
+list_utilities=(
+	termux-packages
+	termux-update
+	termux-storage
+	termux-addons
+	container-expansion
+	container-image
+	container-initialization
+	container-packages
+	container-session
+	container-settings
+	container-user
+)
 
 # defaults ─────────────────────────────────────────────────────────────────────
 
@@ -513,23 +593,59 @@ intent_reload () {
 
 intent_backup () {
 
-	# handle user home directory backup
+	# archive the user home directory - stored outside home so no backup holds another
 
-	name_backup="dextop-backup"
-	extension_backup="tar.gz"
+	frobulator.directory "${PREFIX}" bkp
 
-	directory_backup="${HOME}"
+	(
+		cd "${PREFIX}"/bkp || exit 1
 
-	file_backup="${name_backup}-${date_backup}.${extension_backup}"
+		frobulator.archive "dextop-backup-${date_backup}" tar.gz "${HOME}"
+	)
 
-	frobulator.inf "Generating backup" "[ ${file_backup} ]"
+}
 
-	frobulator.background quiet "archive" "[ ${directory_backup} ]" -- tar																\
-		--create													\
-		--gzip														\
-			--exclude="${name_backup}"*								\
-				--file="${directory_backup}"/"${file_backup}"		\
-																	"${directory_backup}"
+intent_restore () {
+
+	# extract a backup over the user home directory - archive holds home as its top directory
+
+	local file_restore
+
+	list_backups=("${PREFIX}"/bkp/dextop-backup-*.tar.gz)
+
+	if [ "${item_restore:-latest}" = "latest" ]
+	then
+		file_restore="${list_backups[-1]}"
+
+	elif [ "${item_restore}" = "earliest" ]
+	then
+		file_restore="${list_backups[0]}"
+	else
+		file_restore="${PREFIX}/bkp/${item_restore##*/}"
+	fi
+
+	list_backups=()
+
+	if [ ! -f "${file_restore}" ]
+	then
+		frobulator.err "No backup found" "[ ${file_restore} ]"
+
+		return 1
+	fi
+
+	frobulator.qst "Restore ${file_restore##*/} over the home directory?"
+
+	frobulator.read reply
+
+	if [[ "${reply}" = [yY]         ]] ||
+	   [[ "${reply}" = [yY][eE][sS] ]]
+	then
+		frobulator.extract "${file_restore}" "${HOME%/*}"
+	else
+		frobulator.inf "Skipping" "[ restore ]"
+
+		return 1
+	fi
 
 }
 
@@ -552,18 +668,12 @@ intent_additions () {
 
 	# load additions files
 
-	list_additions+=(
-		dextop-additions
-	)
-
 	if [[ "${option}" = "update" ]]
 	then
 		intent_update get.dxtp.app "${HOME}"/.local/bin ${list_additions[@]}
 	else
 		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${list_additions[@]}
 	fi
-
-	list_additions=()
 
 }
 
@@ -616,26 +726,6 @@ intent_interface () {
 
 	# load interface files
 
-	list_interface+=(
-		i3-configuration
-		i3status-configuration
-		i3-backgrounds
-		i3-confirm
-		i3-directory
-		i3-exit
-		i3-file
-		i3-file-manager
-		i3-launch
-		i3-lookup
-		i3-manual
-		i3-navigation
-		i3-notes
-		i3-processes
-		i3-shortcuts
-		i3-status
-		i3-template
-	)
-
 	if [[ "${option}" = "update" ]]
 	then
 		intent_update get.trmnl.me "${HOME}"/.local/bin ${list_interface[@]}
@@ -652,20 +742,11 @@ intent_interface () {
 
 	fi
 
-	list_interface=()
-
 }
 
 intent_preferences () {
 
 	# termux preferences and properties
-
-	list_preferences+=(
-		termux-colors
-		termux-font-hack
-		termux-properties
-		termux-reload-settings
-	)
 
 	if [[ "${option}" = "update" ]]
 	then
@@ -680,22 +761,11 @@ intent_preferences () {
 		intent_reload
 	fi
 
-	list_preferences=()
-
 }
 
 intent_shell () {
 
 	# load shell files
-
-	list_shell+=(
-		bash-aliases
-		bash-configuration
-		bash-functions
-		bash-login
-		bash-logout
-		bash-profile
-	)
 
 	if [[ "${option}" = "update" ]]
 	then
@@ -735,27 +805,11 @@ intent_shell () {
 		fi
 	fi
 
-	list_shell=()
-
 }
 
 intent_utilities () {
 
 	# load dextop utilities
-
-	list_utilities+=(
-		termux-packages
-		termux-update
-		termux-storage
-		termux-addons
-		container-expansion
-		container-image
-		container-initialization
-		container-packages
-		container-session
-		container-settings
-		container-user
-	)
 
 	if [[ "${option}" = "update" ]]
 	then
@@ -763,8 +817,6 @@ intent_utilities () {
 	else
 		frobulator.download get.dxtp.app "${HOME}"/.local/bin ${list_utilities[@]}
 	fi
-
-	list_utilities=()
 
 }
 
@@ -905,11 +957,11 @@ intent_purge () {
 
 	# uninstall desktop environment and dependencies
 
-	yes | apt purge xfce* > "${sink}" 2>&1
+	yes | apt purge 'xfce*' > "${sink}" 2>&1
 
 	yes | apt clean > "${sink}" 2>&1
 
-	# purge items loaded during dextop install
+	# purge items loaded during dextop setup - backups kept for restore
 
 	list_items=(
 
@@ -917,14 +969,11 @@ intent_purge () {
 
 		"${HOME}"/.hushlogin
 		"${HOME}"/.config/gtk-3.0/bookmarks
-
-		"${HOME}"/.local/bin/bash-aliases
-		"${HOME}"/.local/bin/bash-configuration
-		"${HOME}"/.local/bin/bash-configuration
-		"${HOME}"/.local/bin/bash-functions
-		"${HOME}"/.local/bin/bash-login
-		"${HOME}"/.local/bin/bash-logout
-		"${HOME}"/.local/bin/bash-profile
+		"${HOME}"/.config/i3/config
+		"${HOME}"/.config/i3status/config
+		"${HOME}"/.termux/colors.properties
+		"${HOME}"/.termux/font.ttf
+		"${HOME}"/.termux/termux.properties
 
 		"${HOME}"/.bash_aliases
 		"${HOME}"/.bashrc
@@ -934,24 +983,14 @@ intent_purge () {
 		"${HOME}"/.bash_logout
 		"${HOME}"/.bash_profile
 
+		"${HOME}"/.local/bin/dextop
+
 		# directories
 
 		"${HOME}"/.dextop
 		"${HOME}"/.icons
 		"${HOME}"/.themes
 
-		"${PREFIX%/*}"bin
-		"${PREFIX%/*}"bkp
-		"${PREFIX%/*}"cnt
-		"${PREFIX%/*}"etc
-		"${PREFIX%/*}"img
-		"${PREFIX%/*}"lib
-		"${PREFIX%/*}"mnt
-		"${PREFIX%/*}"opt
-		"${PREFIX%/*}"tmp
-		"${PREFIX%/*}"media
-
-		"${PREFIX}"/bkp
 		"${PREFIX}"/cnt
 		"${PREFIX}"/img
 		"${PREFIX}"/mnt
@@ -960,10 +999,26 @@ intent_purge () {
 
 	)
 
-	for item in ${list_items[@]}
+	# root directory links - named apart so the paths never read as system paths
+
+	for item in bin cnt etc img lib mnt opt tmp media
 	do
-		frobulator.delete "${item}"
+		list_items+=("${PREFIX%/*}/${item}")
 	done
+
+	# component files
+
+	for item in "${list_additions[@]}" "${list_interface[@]}" "${list_preferences[@]}" "${list_shell[@]}" "${list_utilities[@]}"
+	do
+		list_items+=("${HOME}"/.local/bin/"${item}")
+	done
+
+	for item in "${list_items[@]}"
+	do
+		frobulator.delete "${item%/*}" "${item##*/}"
+	done
+
+	list_items=()
 
 }
 
@@ -1021,6 +1076,17 @@ then
 	intent_backup
 
 	frobulator.cpt "Complete" "[ Backup // Dextop ]"
+
+	exit
+fi
+
+if [ "${option}" = "restore" ]
+then
+	frobulator.inf "Loading" "[ ${option} ]"
+
+	intent_restore || exit 1
+
+	frobulator.cpt "Complete" "[ Restore // Dextop ]"
 
 	exit
 fi
@@ -1151,6 +1217,15 @@ fi
 
 if [ "${option}" = "purge" ]
 then
+	# termux only - purge paths are built from the termux prefix
+
+	if [ -z "${PREFIX}" ]
+	then
+		frobulator.err "Termux environment not found" "[ PREFIX ]"
+
+		exit 1
+	fi
+
 	# notice
 
 	frobulator.ntf err "[ DISCLAIMER ] 'Purge' option has been selected" "This action is permanent.${NLN}${NLN}All items loaded during the Dextop setup process will be PERMANENTLY REMOVED.${NLN}Modifications made outside the intended installation process may cause instability or data corruption upon removal.${NLN}${NLN}The author is not responsible for any damages or issues arising from the removal of Dextop.${NLN}${NLN}You have been warned."
@@ -1166,11 +1241,22 @@ then
 
 		frobulator.background "purge" -- intent_purge
 
+		# home as it was before setup - earliest backup
+
+		item_restore="earliest"
+
+		intent_restore
+
+		frobulator.cpt "Complete" "[ Purge // Dextop ]"
+
+		frobulator.inf "Kept" "[ ${PREFIX}/bkp ]"
 	else
 		frobulator.inf "Aborting" "[ ${option} ]"
 
 		exit 1
 	fi
+
+	exit
 fi
 
 # setup ────────────────────────────────────────────────────────────────────────

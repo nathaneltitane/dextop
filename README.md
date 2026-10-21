@@ -4,11 +4,17 @@
 
 ⭐ Useful? Star the repository - it helps others find it.
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 2025-09-19 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 2026-10-21 ]
 
 ---
 
 ### NOTICE
+
+10-21-2026 ↴
+
+- New restore option: '-r' brings back the home directory from a backup
+- Backups now stored in '${PREFIX}/bkp' - sortable names, no backup holds another
+- Purge removes every setup component and offers to restore the home directory from before setup
 
 03-16-2025 ↴
 
@@ -167,7 +173,7 @@ Given the devices Dextop was developped on and made for, the **ARM64 V8a** archi
 
 A backup routine has also been built that archives the user's home directory before proceeding, regardless, to ensure some kind of safety.
 
-Once generated, it can be found under the user's home directory with the corresponding stamp as 'dextop-backup-MM-DD-YYYY-HH-MM-SS.tar.gz'
+Once generated, it can be found under '${PREFIX}/bkp' with the corresponding stamp as 'dextop-backup-YYYY-MM-DD-HH-MM-SS.tar.gz' - kept outside the home directory so no backup ever holds another.
 
 ---
 
@@ -525,15 +531,29 @@ To simplify the overall version update process, the user can also decide to upda
 curl -s -L run.dxtp.app > > "${HOME}"/.local/bin/dextop && bash dextop -u all
 ```
 
-### Uninstall:
+### Backup, Restore and Purge:
 
-To remove Dextop and everything its setup installed - desktop environment, container, configuration and links - paste or type:
+Back up the user home directory at any time - archives are stored in '${PREFIX}/bkp':
 
 ```
-bash dextop --uninstall
+bash dextop -b
 ```
 
-`--uninstall` is the same as `-p` / `--purge`. Dextop asks for confirmation first - the removal is permanent.
+Restore the home directory from a backup - the latest by default, 'earliest' for the one taken before setup, or a backup file name:
+
+```
+bash dextop -r
+bash dextop -r earliest
+bash dextop -r dextop-backup-YYYY-MM-DD-HH-MM-SS.tar.gz
+```
+
+Remove Dextop and everything its setup installed - desktop environment, container, configuration, utilities and links:
+
+```
+bash dextop -p
+```
+
+Dextop asks for confirmation first - the removal is permanent. Once done, it offers to restore the home directory from the earliest backup, putting back the files as they were before setup. Backups in '${PREFIX}/bkp' are kept.
 
 ### Issues:
 
@@ -657,7 +677,7 @@ Should you suspect any issues or errors, please provide a copy of those files wh
 
 ---
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 2025-09-19 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 2026-10-21 ]
 
 ### Enjoying Dextop? Buy me a coffee to show your appreciation!
 
