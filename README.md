@@ -525,6 +525,16 @@ To simplify the overall version update process, the user can also decide to upda
 curl -s -L run.dxtp.app > > "${HOME}"/.local/bin/dextop && bash dextop -u all
 ```
 
+### Uninstall:
+
+To remove Dextop and everything its setup installed - desktop environment, container, configuration and links - paste or type:
+
+```
+bash dextop --uninstall
+```
+
+`--uninstall` is the same as `-p` / `--purge`. Dextop asks for confirmation first - the removal is permanent.
+
 ### Issues:
 
 If the initial setup succeeds but the user is unable to launch a session, or any random package appears to be missing when typing a command, spotty Termux package management issues are the cause: repository info seems spotty and pkg/apt fails to fetch or pull the requested package at the time of install.

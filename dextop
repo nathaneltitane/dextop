@@ -132,7 +132,7 @@ do
 			option="additions"
 		;;
 
-		-p|--purge)
+		-p|--purge|--uninstall)
 			option="purge"
 		;;
 
@@ -176,7 +176,7 @@ do
 			echo -e "                     [ termux ]"
 			echo -e "                     [ utility ]"
 			echo
-			echo -e "-p, --purge          Run [p]urge of setup components and packages."
+			echo -e "-p, --purge          Run [p]urge of setup components and packages - same as --uninstall."
 			echo
 			echo -e "-h, --help           Show [h]elp and usage information."
 			echo
