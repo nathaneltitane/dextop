@@ -285,6 +285,27 @@ list_shell=(
 	bash-profile
 )
 
+# home items made by setup - cleared by purge and before restoring the earliest backup
+
+list_home=(
+	.hushlogin
+	.config/gtk-3.0/bookmarks
+	.config/i3/config
+	.config/i3status/config
+	.termux/colors.properties
+	.termux/font.ttf
+	.termux/termux.properties
+	.bash_aliases
+	.bashrc
+	.bash_configuration
+	.bash_functions
+	.bash_login
+	.bash_logout
+	.bash_profile
+	.icons
+	.themes
+)
+
 list_utilities=(
 	termux-packages
 	termux-update
@@ -610,6 +631,7 @@ intent_restore () {
 	# extract a backup over the user home directory - archive holds home as its top directory
 
 	local file_restore
+	local file_earliest
 
 	list_backups=("${PREFIX}"/bkp/dextop-backup-*.tar.gz)
 
@@ -623,6 +645,8 @@ intent_restore () {
 	else
 		file_restore="${PREFIX}/bkp/${item_restore##*/}"
 	fi
+
+	file_earliest="${list_backups[0]}"
 
 	list_backups=()
 
@@ -640,6 +664,19 @@ intent_restore () {
 	if [[ "${reply}" = [yY]         ]] ||
 	   [[ "${reply}" = [yY][eE][sS] ]]
 	then
+		# home as before setup - setup items cleared first so none outlive the restore
+
+		if [ "${file_restore}" = "${file_earliest}" ]
+		then
+			for item in "${list_home[@]}"
+			do
+				if [ -e "${HOME}/${item}" ] || [ -L "${HOME}/${item}" ]
+				then
+					frobulator.delete "${HOME}" "${item}"
+				fi
+			done
+		fi
+
 		frobulator.extract "${file_restore}" "${HOME%/*}"
 	else
 		frobulator.inf "Skipping" "[ restore ]"
@@ -967,29 +1004,11 @@ intent_purge () {
 
 		# files
 
-		"${HOME}"/.hushlogin
-		"${HOME}"/.config/gtk-3.0/bookmarks
-		"${HOME}"/.config/i3/config
-		"${HOME}"/.config/i3status/config
-		"${HOME}"/.termux/colors.properties
-		"${HOME}"/.termux/font.ttf
-		"${HOME}"/.termux/termux.properties
-
-		"${HOME}"/.bash_aliases
-		"${HOME}"/.bashrc
-		"${HOME}"/.bash_configuration
-		"${HOME}"/.bash_functions
-		"${HOME}"/.bash_login
-		"${HOME}"/.bash_logout
-		"${HOME}"/.bash_profile
-
 		"${HOME}"/.local/bin/dextop
 
 		# directories
 
 		"${HOME}"/.dextop
-		"${HOME}"/.icons
-		"${HOME}"/.themes
 
 		"${PREFIX}"/cnt
 		"${PREFIX}"/img
@@ -1004,6 +1023,13 @@ intent_purge () {
 	for item in bin cnt etc img lib mnt opt tmp media
 	do
 		list_items+=("${PREFIX%/*}/${item}")
+	done
+
+	# home items
+
+	for item in "${list_home[@]}"
+	do
+		list_items+=("${HOME}/${item}")
 	done
 
 	# component files
