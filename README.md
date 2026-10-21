@@ -15,6 +15,7 @@
 - New restore option: '-r' brings back the home directory from a backup
 - Backups now stored in '${PREFIX}/bkp' - sortable names, no backup holds another
 - Purge removes every setup component and offers to restore the home directory from before setup
+- Restoring the earliest backup clears the setup's home links first
 
 03-16-2025 ↴
 
@@ -546,6 +547,8 @@ bash dextop -r
 bash dextop -r earliest
 bash dextop -r dextop-backup-YYYY-MM-DD-HH-MM-SS.tar.gz
 ```
+
+Restoring the earliest backup first clears the links and files the setup made in the home directory - shell files, Termux settings, i3 configuration, icons and themes - so none of them outlive the restore. The files they point to are never touched.
 
 Remove Dextop and everything its setup installed - desktop environment, container, configuration, utilities and links:
 
