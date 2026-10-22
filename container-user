@@ -297,11 +297,14 @@ user_automated () {
 
 user_superuser () {
 
-	local name_group_sudo
+	local command_sudo
+	local index_group
+	local line_group
+	local list_group
+	local member_group
+	local status_group
 
 	# generate 'user' superuser privilege
-
-	local command_sudo
 
 	# 'sudo' path - empty if not installed
 
@@ -311,22 +314,42 @@ user_superuser () {
 	then
 		frobulator.fwd "Generating superuser privilege${marker_elp}"
 
-		# sudo group file entry - empty if the group does not exist
-
-		name_group_sudo="$(cat /etc/group | grep sudo)"
-
-		if [ -n "${name_group_sudo}" ]
-		then
-			id_group_sudo=$(cat /etc/group | grep sudo | cut -d ':' -f 3)
-		else
-			id_group_sudo="27"
-		fi
-
 		# add 'user' to 'sudo' group
 
-		sed -i '/sudo.*/d' /etc/group
+		mapfile -t list_group < /etc/group
 
-		echo "sudo:x:${id_group_sudo}:${name_user}" >> /etc/group
+		for index_group in "${!list_group[@]}"
+		do
+			line_group="${list_group[${index_group}]}"
+
+			if [ "${line_group%%:*}" = "sudo" ]
+			then
+				status_group="found"
+
+				member_group="${line_group##*:}"
+
+				# keep existing members
+
+				if [[ ",${member_group}," != *",${name_user},"* ]]
+				then
+					if [ -n "${member_group}" ]
+					then
+						list_group[${index_group}]="${line_group},${name_user}"
+					else
+						list_group[${index_group}]="${line_group}${name_user}"
+					fi
+				fi
+			fi
+		done
+
+		# create missing 'sudo' group
+
+		if [ -z "${status_group}" ]
+		then
+			list_group+=("sudo:x:27:${name_user}")
+		fi
+
+		printf '%s\n' "${list_group[@]}" > /etc/group
 
 	else
 
