@@ -65,7 +65,7 @@ frobulator.script
 
 # version ──────────────────────────────────────────────────────────────────────
 
-version="2026-10-04"
+version="2026-10-22"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
@@ -227,6 +227,7 @@ list_utilities+=(
 	git
 	hub
 	htop
+	jq
 	ncurses
 	ncurses-utils
 	openssh
