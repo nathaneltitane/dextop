@@ -2,7 +2,7 @@
 
 # dependencies ─────────────────────────────────────────────────────────────────
 
-script="$(basename -- "${BASH_SOURCE[0]}")"
+script="${BASH_SOURCE[0]##*/}"
 
 # script arguments for escalation
 
@@ -19,7 +19,14 @@ then
 	if [ -n "${SUDO_USER}" ]
 	then
 		USER="${SUDO_USER}"
-		HOME="$(getent passwd "${SUDO_USER}" | cut -d ':' -f 6)"
+
+		while IFS=':' read -r name_passwd _ _ _ _ home_passwd _
+		do
+			if [ "${name_passwd}" = "${SUDO_USER}" ]
+			then
+				HOME="${home_passwd}"
+			fi
+		done < /etc/passwd
 	fi
 
 	frobulator="${HOME}/.local/bin/frobulator"
@@ -65,7 +72,7 @@ frobulator.script
 
 # version ──────────────────────────────────────────────────────────────────────
 
-version="2026-10-04"
+version="2026-10-22"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
@@ -195,8 +202,21 @@ then
 			url_packages="https://f-droid.org/en/packages"
 			url_repository="https://f-droid.org/repo"
 
-			file_archive=$(curl -s -L "${url_packages}"/"${package}" | grep -o "${package}"[aA0-zZ9-_]*.apk | head -n 1)
-			version_archive=$(echo "${file_archive}" | cut -d '_' -f 2 | sed 's/\..*//g')
+			page_package="$(curl -s -L "${url_packages}"/"${package}")"
+			pattern_archive="${package//./\\.}[A-Za-z0-9_-]*\\.apk"
+
+			unset file_archive
+
+			# first archive name on page
+
+			if [[ "${page_package}" =~ ${pattern_archive} ]]
+			then
+				file_archive="${BASH_REMATCH[0]}"
+			fi
+
+			version_archive="${file_archive#*_}"
+			version_archive="${version_archive%%_*}"
+			version_archive="${version_archive%%.*}"
 			url_archive="${url_repository}/${file_archive}"
 		fi
 
@@ -206,14 +226,16 @@ then
 			then
 				name_repository=termux-app
 
-				version_installed=$(echo "${TERMUX_VERSION}" | cut -d '.' -f 2)
+				version_installed="${TERMUX_VERSION#*.}"
+				version_installed="${version_installed%%.*}"
 			fi
 
 			if [ "${package}" = "com.termux.api" ]
 			then
 				name_repository=termux-api
 
-				version_installed=$(echo "${TERMUX_API_VERSION}" | cut -d '.' -f 2)
+				version_installed="${TERMUX_API_VERSION#*.}"
+				version_installed="${version_installed%%.*}"
 			fi
 
 			url_release="https://api.github.com/repos/termux/termux-app/releases"

@@ -4,7 +4,7 @@
 
 ⭐ Useful? Star the repository - it helps others find it.
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 2026-10-21 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 2026-10-22 ]
 
 ---
 
@@ -680,7 +680,7 @@ Should you suspect any issues or errors, please provide a copy of those files wh
 
 ---
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 2026-10-21 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 2026-10-22 ]
 
 ### Enjoying Dextop? Buy me a coffee to show your appreciation!
 
