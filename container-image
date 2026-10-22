@@ -2,7 +2,7 @@
 
 # dependencies ─────────────────────────────────────────────────────────────────
 
-script="$(basename -- "${BASH_SOURCE[0]}")"
+script="${BASH_SOURCE[0]##*/}"
 
 # script arguments for escalation
 
@@ -19,7 +19,14 @@ then
 	if [ -n "${SUDO_USER}" ]
 	then
 		USER="${SUDO_USER}"
-		HOME="$(getent passwd "${SUDO_USER}" | cut -d ':' -f 6)"
+
+		while IFS=':' read -r name_passwd _ _ _ _ home_passwd _
+		do
+			if [ "${name_passwd}" = "${SUDO_USER}" ]
+			then
+				HOME="${home_passwd}"
+			fi
+		done < /etc/passwd
 	fi
 
 	frobulator="${HOME}/.local/bin/frobulator"
@@ -65,7 +72,7 @@ frobulator.script
 
 # version ──────────────────────────────────────────────────────────────────────
 
-version="2026-10-04"
+version="2026-10-22"
 
 # usage ────────────────────────────────────────────────────────────────────────
 

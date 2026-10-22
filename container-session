@@ -2,7 +2,7 @@
 
 # dependencies ─────────────────────────────────────────────────────────────────
 
-script="$(basename -- "${BASH_SOURCE[0]}")"
+script="${BASH_SOURCE[0]##*/}"
 
 # script arguments for escalation
 
@@ -19,7 +19,14 @@ then
 	if [ -n "${SUDO_USER}" ]
 	then
 		USER="${SUDO_USER}"
-		HOME="$(getent passwd "${SUDO_USER}" | cut -d ':' -f 6)"
+
+		while IFS=':' read -r name_passwd _ _ _ _ home_passwd _
+		do
+			if [ "${name_passwd}" = "${SUDO_USER}" ]
+			then
+				HOME="${home_passwd}"
+			fi
+		done < /etc/passwd
 	fi
 
 	frobulator="${HOME}/.local/bin/frobulator"
@@ -65,7 +72,7 @@ frobulator.script
 
 # version ──────────────────────────────────────────────────────────────────────
 
-version="2026-10-04"
+version="2026-10-22"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
@@ -285,9 +292,9 @@ container_parse () {
 	do
 		for version_entry in "${directory_distribution}"/*
 		do
-			name_distribution=$(basename ${directory_distribution})
+			name_distribution="${directory_distribution##*/}"
 
-			version_distribution=$(basename ${version_entry})
+			version_distribution="${version_entry##*/}"
 
 			list_containers+=(${name_distribution} ${version_distribution})
 		done
@@ -462,7 +469,7 @@ container_user () {
 	# source environment variables when 'user' corresponds to 'username'
 	# default to 'root' if 'username' is invalid, is not specified or does not exist
 
-	line_passwd_last="$(tail -n 1 "${CONTAINER_ROOT}"/etc/passwd)"
+	unset status_user
 
 	while read -r line_passwd
 	do
@@ -503,6 +510,8 @@ container_user () {
 
 			frobulator.wrn "No user name - Defaulting" "[ '${name_user}' ]"
 
+			status_user="found"
+
 			break
 		fi
 
@@ -519,20 +528,21 @@ container_user () {
 				frobulator.scs "Valid user name - Accessing" "[ '${name_user}' ]"
 			fi
 
+			status_user="found"
+
 			break
 		fi
 
-		# user naem not found
-
-		if [[ "${line_passwd}" == "${line_passwd_last}" ]]
-		then
-
-			frobulator.err "Invalid user name - Aborting" "[ '${name_user}' ]"
-
-			exit 1
-		fi
-
 	done < "${CONTAINER_ROOT}"/etc/passwd
+
+	# user name not found
+
+	if [ -z "${status_user}" ]
+	then
+		frobulator.err "Invalid user name - Aborting" "[ '${name_user}' ]"
+
+		exit 1
+	fi
 }
 
 container_environment () {

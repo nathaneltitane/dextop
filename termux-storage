@@ -2,7 +2,7 @@
 
 # dependencies ─────────────────────────────────────────────────────────────────
 
-script="$(basename -- "${BASH_SOURCE[0]}")"
+script="${BASH_SOURCE[0]##*/}"
 
 # script arguments for escalation
 
@@ -19,7 +19,14 @@ then
 	if [ -n "${SUDO_USER}" ]
 	then
 		USER="${SUDO_USER}"
-		HOME="$(getent passwd "${SUDO_USER}" | cut -d ':' -f 6)"
+
+		while IFS=':' read -r name_passwd _ _ _ _ home_passwd _
+		do
+			if [ "${name_passwd}" = "${SUDO_USER}" ]
+			then
+				HOME="${home_passwd}"
+			fi
+		done < /etc/passwd
 	fi
 
 	frobulator="${HOME}/.local/bin/frobulator"
@@ -65,7 +72,7 @@ frobulator.script
 
 # version ──────────────────────────────────────────────────────────────────────
 
-version="2026-10-04"
+version="2026-10-22"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
@@ -236,26 +243,22 @@ list_directories=()
 # use /proc/mounts to detect mounted media:
 # circumvent /storage access issues and DAC policy (Android 11+)
 
-list_commands=(
-	$(cat /proc/mounts | sed -r '/[A0-Z9]{4}[-][A0-Z9]{4}/!d' | grep '/storage' | cut -d ' ' -f 2)
-	$(cat /proc/mounts | sed -r '/[A0-Z9]{40}/!d' | grep '/storage' | cut -d ' ' -f 2)
-)
+pattern_storage='[0-9A-Z]{4}-[0-9A-Z]{4}|[0-9A-Z]{40}'
+
+while read -r _ mount_storage _
+do
+	if [[ "${mount_storage}" == /storage/* ]] &&
+	   [[ "${mount_storage}" =~ ${pattern_storage} ]]
+	then
+		list_paths_storage+=("${mount_storage}")
+	fi
+done < /proc/mounts
 
 # set IFS
 
 IFS=$'\n'
 
-for command in ${list_commands[@]}
-do
-	read -r -a list_mounts_storage <<< ${command}
-
-	for mount_storage in ${list_mounts_storage[@]}
-	do
-		 list_paths_storage+=("${mount_storage}")
-	done
-done
-
-if [ -n "${#list_paths_storage[@]}" ]
+if [ "${#list_paths_storage[@]}" -gt 0 ]
 then
 	for path_storage in ${list_paths_storage[@]}
 	do

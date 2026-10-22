@@ -2,7 +2,7 @@
 
 # dependencies ─────────────────────────────────────────────────────────────────
 
-script="$(basename -- "${BASH_SOURCE[0]}")"
+script="${BASH_SOURCE[0]##*/}"
 
 # script arguments for escalation
 
@@ -19,7 +19,14 @@ then
 	if [ -n "${SUDO_USER}" ]
 	then
 		USER="${SUDO_USER}"
-		HOME="$(getent passwd "${SUDO_USER}" | cut -d ':' -f 6)"
+
+		while IFS=':' read -r name_passwd _ _ _ _ home_passwd _
+		do
+			if [ "${name_passwd}" = "${SUDO_USER}" ]
+			then
+				HOME="${home_passwd}"
+			fi
+		done < /etc/passwd
 	fi
 
 	frobulator="${HOME}/.local/bin/frobulator"
@@ -161,7 +168,7 @@ user_verify () {
 	# verify user existence:
 	# loop through container's /etc/passwd file and check if 'user' exists
 
-	line_passwd_last="$(tail -n 1 /etc/passwd)"
+	unset status_user
 
 	while read -r line_passwd
 	do
@@ -184,36 +191,45 @@ user_verify () {
 
 			frobulator.scs "User name exists" "[ '${name_user}' ]"
 
+			status_user="found"
+
 			break
 		fi
 
-		# user naem not found
-
-		if [[ "${line_passwd}" == "${line_passwd_last}" ]]
-		then
-
-			frobulator.err "User name does not exist" "[ '${name_user}' ]"
-
-			frobulator.wrn "User must exist before proceeding."
-
-			exit 1
-		fi
-
 	done < /etc/passwd
+
+	# user name not found
+
+	if [ -z "${status_user}" ]
+	then
+		frobulator.err "User name does not exist" "[ '${name_user}' ]"
+
+		frobulator.wrn "User must exist before proceeding."
+
+		exit 1
+	fi
 }
 
 user_password_generate () {
 
 	local length_password="${1:-32}"
-	local number_line_password=$(( RANDOM % 10 + 1 ))
+	local LC_ALL=C
 
+	local chunk_random
 	local password_generated
 
 	# generate random password
 
-	password_generated="$(cat /dev/urandom | tr -d -c 'a-zA-Z0-9' | fold -w "${length_password}" | head -n "${number_line_password}" | tail -n 1)"
+	while [ "${#password_generated}" -lt "${length_password}" ]
+	do
+		IFS= read -r -n 64 -d '' chunk_random < /dev/urandom
 
-	echo "${password_generated}"
+		# keep letters and digits
+
+		password_generated+="${chunk_random//[^a-zA-Z0-9]/}"
+	done
+
+	echo "${password_generated:0:${length_password}}"
 }
 
 user_information () {
@@ -251,28 +267,12 @@ user_interactive () {
 	gecos+="${number_home},"
 	gecos+="${email_user}"
 
-	# generate user entry
-	# silent configuration:
-	# set --gecos and --disabled-password for fully silent execution
+	directory_home="/home/${name_user}"
 
-	frobulator.wrn "Creating user" "[ ${name_user} ]"
-
-	# use "${sink}" redirection:
-	# 'adduser' prevents stdout error redirect - cannot use 'frobulator.silence'
-
-	adduser					\
-		--gecos "${gecos}"	\
-		--shell "${SHELL}"	\
-		--disabled-password "${name_user}" > "${sink}"
+	user_create
 }
 
 user_automated () {
-
-	local date_current
-	local id_entry
-	local name_entry
-	local status_user
-	local text_id_used
 
 	# generate 'user account:
 	# noninteractive setup
@@ -290,11 +290,24 @@ user_automated () {
 		password_user=$(user_password_generate)
 	fi
 
-	unset id_user
-	unset id_group_user
-
 	gecos="Dextop"
 	directory_home="/home/${name_user}"
+
+	user_create
+}
+
+user_create () {
+
+	local date_current
+	local id_entry
+	local name_entry
+	local status_user
+	local text_id_used
+
+	# generate 'user' entries
+
+	unset id_user
+	unset id_group_user
 
 	# existing user and used ids
 
