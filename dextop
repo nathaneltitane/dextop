@@ -109,7 +109,7 @@ do
 			option="restore"
 			item_restore="${2}"
 
-			# backup name optional - next option left in place
+			# optional backup name
 
 			if [ -n "${item_restore}" ] && [ "${item_restore:0:1}" != "-" ]
 			then
@@ -237,13 +237,13 @@ frobulator.clear
 
 # variables ────────────────────────────────────────────────────────────────────
 
-# sortable stamp - backups listed oldest to newest
+# sortable backup stamp
 
 date_backup=$(date +"%Y-%m-%d-%H-%M-%S")
 
 # components ───────────────────────────────────────────────────────────────────
 
-# files loaded by setup and update steps - removed again by purge
+# setup components
 
 list_additions=(
 	dextop-additions
@@ -285,7 +285,7 @@ list_shell=(
 	bash-profile
 )
 
-# home items made by setup - cleared by purge and before restoring the earliest backup
+# home items made by setup
 
 list_home=(
 	.hushlogin
@@ -614,7 +614,7 @@ intent_reload () {
 
 intent_backup () {
 
-	# archive the user home directory - stored outside home so no backup holds another
+	# archive user home
 
 	frobulator.directory "${PREFIX}" bkp
 
@@ -628,7 +628,7 @@ intent_backup () {
 
 intent_restore () {
 
-	# extract a backup over the user home directory - archive holds home as its top directory
+	# extract backup over user home
 
 	local file_restore
 	local file_earliest
@@ -664,7 +664,7 @@ intent_restore () {
 	if [[ "${reply}" = [yY]         ]] ||
 	   [[ "${reply}" = [yY][eE][sS] ]]
 	then
-		# home as before setup - setup items cleared first so none outlive the restore
+		# clear setup items before earliest restore
 
 		if [ "${file_restore}" = "${file_earliest}" ]
 		then
@@ -998,7 +998,7 @@ intent_purge () {
 
 	yes | apt clean > "${sink}" 2>&1
 
-	# purge items loaded during dextop setup - backups kept for restore
+	# purge items loaded during dextop setup
 
 	list_items=(
 
@@ -1018,7 +1018,7 @@ intent_purge () {
 
 	)
 
-	# root directory links - named apart so the paths never read as system paths
+	# root directory links
 
 	for item in bin cnt etc img lib mnt opt tmp media
 	do
@@ -1243,7 +1243,7 @@ fi
 
 if [ "${option}" = "purge" ]
 then
-	# termux only - purge paths are built from the termux prefix
+	# termux only
 
 	if [ -z "${PREFIX}" ]
 	then
@@ -1267,7 +1267,7 @@ then
 
 		frobulator.background "purge" -- intent_purge
 
-		# home as it was before setup - earliest backup
+		# restore home from before setup
 
 		item_restore="earliest"
 
