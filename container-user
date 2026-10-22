@@ -65,7 +65,7 @@ frobulator.script
 
 # version ──────────────────────────────────────────────────────────────────────
 
-version="2026-10-04"
+version="2026-10-22"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
@@ -339,6 +339,9 @@ user_superuser () {
 user_superuser_override () {
 
 	local command_sudo
+	local count_line
+	local file_sudoers_temporary
+	local status_sudoers
 
 	# set 'user' superuser privilege password override
 
@@ -355,17 +358,36 @@ user_superuser_override () {
 
 			# set password override
 
-			frobulator.write append "${name_user} ALL=(ALL) NOPASSWD: ALL" /etc/sudoers.d "${name_user}"
+			file_sudoers_temporary="$(mktemp)"
+
+			echo "${name_user} ALL=(ALL) NOPASSWD: ALL" > "${file_sudoers_temporary}"
+
+			visudo -c -q -f "${file_sudoers_temporary}"
+
+			status_sudoers="${?}"
+
+			if [ "${status_sudoers}" -eq 0 ]
+			then
+				cp "${file_sudoers_temporary}" /etc/sudoers.d/"${name_user}"
+
+				# reset password override ownership:
+				# fixes 'sudo' errors
+
+				chmod 0440 /etc/sudoers.d/"${name_user}"
+			else
+				frobulator.err "Sudoers check failed - left unchanged" "[ /etc/sudoers.d/${name_user} ]"
+			fi
+
+			rm -f "${file_sudoers_temporary}"
 
 			# fix superuser privilege runtime errors
 
-			frobulator.write append "Set disable_coredump false" /etc sudo.conf
+			count_line="$(grep -c -x -F "Set disable_coredump false" /etc/sudo.conf 2> /dev/null)"
 
-			# reset password override ownership:
-			# fixes 'sudo' errors
-
-			chmod 0440 /etc/sudoers.d/"${name_user}"
-
+			if [ "${count_line:-0}" -eq 0 ]
+			then
+				frobulator.write append "Set disable_coredump false" /etc sudo.conf
+			fi
 		fi
 
 	else
@@ -542,7 +564,10 @@ then
 	# generate 'user' runtime directory structure
 
 	user_runtime
-else
+fi
+
+if [ -z "${option}" ] || [ "${option}" = "information" ]
+then
 
 	# generate 'user' account: automated
 
