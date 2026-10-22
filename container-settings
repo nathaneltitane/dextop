@@ -65,7 +65,7 @@ frobulator.script
 
 # version ──────────────────────────────────────────────────────────────────────
 
-version="2026-10-04"
+version="2026-10-22"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
@@ -616,5 +616,20 @@ list_applications=(
 
 for application in ${list_applications[@]}
 do
-	pkill -9 "${application}"
+	# match process names from proc
+
+	for file_process in /proc/[0-9]*/comm
+	do
+		unset name_process
+
+		read -r name_process 2> /dev/null < "${file_process}"
+
+		if [ "${name_process}" = "${application:0:15}" ]
+		then
+			id_process="${file_process%/comm}"
+			id_process="${id_process#/proc/}"
+
+			kill -9 "${id_process}" 2> /dev/null
+		fi
+	done
 done

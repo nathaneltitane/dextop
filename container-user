@@ -268,6 +268,12 @@ user_interactive () {
 
 user_automated () {
 
+	local date_current
+	local id_entry
+	local name_entry
+	local status_user
+	local text_id_used
+
 	# generate 'user account:
 	# noninteractive setup
 
@@ -284,15 +290,87 @@ user_automated () {
 		password_user=$(user_password_generate)
 	fi
 
-	name_user="${name_user}"
-	id_user_default="1000"
-	id_group_default="1000"
+	unset id_user
+	unset id_group_user
+
 	gecos="Dextop"
 	directory_home="/home/${name_user}"
 
+	# existing user and used ids
+
+	while IFS=':' read -r name_entry _ id_entry _
+	do
+		if [ "${name_entry}" = "${name_user}" ]
+		then
+			status_user="found"
+		fi
+
+		text_id_used+=" ${id_entry} "
+	done < /etc/passwd
+
+	while IFS=':' read -r name_entry _ id_entry _
+	do
+		if [ "${name_entry}" = "${name_user}" ]
+		then
+			id_group_user="${id_entry}"
+		fi
+
+		text_id_used+=" ${id_entry} "
+	done < /etc/group
+
+	if [ -n "${status_user}" ]
+	then
+		frobulator.wrn "User exists" "[ ${name_user} ]"
+
+		return
+	fi
+
 	frobulator.wrn "Creating user" "[ ${name_user} ]"
 
-	echo  "${name_user}:x:${id_user_default}:${id_group_default}:${gecos}:${directory_home}:${SHELL}" >> /etc/passwd
+	# first free id from 1000
+
+	id_user="1000"
+
+	while [[ "${text_id_used}" == *" ${id_user} "* ]]
+	do
+		(( id_user++ ))
+	done
+
+	# user group
+
+	if [ -z "${id_group_user}" ]
+	then
+		id_group_user="${id_user}"
+
+		echo "${name_user}:x:${id_group_user}:" >> /etc/group
+
+		if [ -f /etc/gshadow ]
+		then
+			echo "${name_user}:!::" >> /etc/gshadow
+		fi
+	fi
+
+	# user entry
+
+	echo "${name_user}:x:${id_user}:${id_group_user}:${gecos}:${directory_home}:${SHELL}" >> /etc/passwd
+
+	if [ -f /etc/shadow ]
+	then
+		printf -v date_current '%(%s)T' -1
+
+		echo "${name_user}:!:$(( date_current / 86400 )):0:99999:7:::" >> /etc/shadow
+	fi
+
+	# user home
+
+	frobulator.directory /home "${name_user}"
+
+	if [ -d /etc/skel ]
+	then
+		cp -a /etc/skel/. "${directory_home}"
+	fi
+
+	chown -R "${id_user}":"${id_group_user}" "${directory_home}"
 }
 
 user_superuser () {
