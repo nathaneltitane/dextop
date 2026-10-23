@@ -4,11 +4,20 @@
 
 ⭐ Useful? Star the repository - it helps others find it.
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 2026-10-22 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 2026-10-23 ]
 
 ---
 
 ### NOTICE
+
+10-23-2026 ↴
+
+- Fedora images: 41, 42, 43 and 44 (dnf5) alongside Debian and Ubuntu
+- Image selection, codename-free Fedora entries and fixed '-i' image option
+- Container apt sources match each release (archive, ports, non-free-firmware)
+- Container hostname written from the device hostname
+- Setup runs in C.UTF-8 and initializes the container locale: prompt markers no longer garble
+- Sessions fall back to C.UTF-8 when the chosen locale is missing from the container
 
 10-21-2026 ↴
 
@@ -182,7 +191,7 @@ Once generated, it can be found under '${PREFIX}/bkp' with the corresponding sta
 
 Dextop can be compared to other very similar projects, though:
 
-- It provides a selection of the Debian and Ubunut distribution base images: known to be stable, popular and has tons of user-friendly knowledge bases.
+- It provides a selection of the Debian, Ubuntu and Fedora distribution base images: known to be stable, popular and has tons of user-friendly knowledge bases.
 - It expands the installed base image to run **just like a normal PC!**
 - It **generates an actual user profile and prepares a functional home directory for the user to work in**, easily and securely.
 - It installs all the necessary applications and utilities to provide the user with the right experience.
@@ -680,7 +689,7 @@ Should you suspect any issues or errors, please provide a copy of those files wh
 
 ---
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 2026-10-22 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 2026-10-23 ]
 
 ### Enjoying Dextop? Buy me a coffee to show your appreciation!
 
