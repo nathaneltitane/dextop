@@ -17,6 +17,7 @@
 - Container apt sources match each release (archive, ports, non-free-firmware)
 - Container hostname: 'dextop' by default, no longer taken from Android - set with 'container-user -n'
 - Fedora package lists: container packages installed under their Fedora names through dnf
+- Papirus-Dark icon theme now installed with xfce - set by the desktop settings but never installed before
 - Setup runs in C.UTF-8 and initializes the container locale: prompt markers no longer garble
 - Sessions fall back to C.UTF-8 when the chosen locale is missing from the container
 
