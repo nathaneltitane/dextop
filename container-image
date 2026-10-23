@@ -598,12 +598,16 @@ image_locale () {
 
 image_network () {
 
+	# default hostname - set by the user during user setup
+
+	local name_host="dextop"
+
 	# generate network files
 
 	# hostname
 
 	cat <<- FILE > "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/etc/hostname
-	${HOSTNAME:-localhost}
+	${name_host}
 	FILE
 
 	# hosts

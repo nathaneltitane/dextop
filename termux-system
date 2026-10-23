@@ -72,7 +72,7 @@ frobulator.script
 
 # version ──────────────────────────────────────────────────────────────────────
 
-version="2026-10-22"
+version="2026-10-23"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
@@ -223,12 +223,16 @@ system_groups () {
 
 system_network () {
 
+	# default hostname - set by the user during user setup
+
+	local name_host="dextop"
+
 	# generate network files
 
 	# hostname
 
-	cat <<- 'FILE' > "${PREFIX}"/cnt/etc/hostname
-	${HOSTNAME}
+	cat <<- FILE > "${PREFIX}"/cnt/etc/hostname
+	${name_host}
 
 	FILE
 

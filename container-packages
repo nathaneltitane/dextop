@@ -72,7 +72,7 @@ frobulator.script
 
 # version ──────────────────────────────────────────────────────────────────────
 
-version="2026-10-22"
+version="2026-10-23"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
@@ -127,15 +127,25 @@ done
 
 intent_failsafe () {
 
+	local command_apt="/usr/bin/apt"
+	local command_dnf="/usr/bin/dnf"
+
 	# run failsafe termux package and repository update:
 	# mitigate general deployment setup issues
 	# mitigate skipped packages on install
 
 	frobulator.fwd "Please wait${marker_elp}"
 
-	yes | apt update       > "${sink}" 2>&1
+	if [ -x "${command_apt}" ]
+	then
+		yes | "${command_apt}" update       > "${sink}" 2>&1
 
-	yes | apt full-upgrade > "${sink}" 2>&1
+		yes | "${command_apt}" full-upgrade > "${sink}" 2>&1
+
+	elif [ -x "${command_dnf}" ]
+	then
+		"${command_dnf}" --assumeyes upgrade > "${sink}" 2>&1
+	fi
 
 }
 
@@ -151,141 +161,285 @@ frobulator.upgrade
 
 # values ───────────────────────────────────────────────────────────────────────
 
-list_display+=(
-	x11-apps
-	x11-common
-	x11-session-utils
-	x11-touchscreen-calibrator
-	x11-utils
-	x11-xfs-utils
-	x11-xkb-utils
-	x11-xserver-utils
-	xvfb
-	xwayland
-)
+# package names per distribution family - fedora under dnf - debian otherwise
 
-list_documentation+=(
-	man
-)
+if [ "${manager_package}" = "dnf" ] || [ "${manager_package}" = "yum" ]
+then
+	list_display+=(
+		setxkbmap
+		xclock
+		xdpyinfo
+		xev
+		xeyes
+		xhost
+		xkbcomp
+		xmodmap
+		xorg-x11-server-Xvfb
+		xorg-x11-server-Xwayland
+		xorg-x11-xinit
+		xprop
+		xrandr
+		xrdb
+		xset
+		xsetroot
+		xwininfo
+	)
 
-list_extensions+=(
-)
+	list_documentation+=(
+		man-db
+		man-pages
+	)
 
-list_fonts+=(
-	fonts-takao
-)
+	list_extensions+=(
+	)
 
-list_i3+=(
-	bc
-	i3
-	i3status
-)
+	list_fonts+=(
+		ipa-gothic-fonts
+	)
 
-list_addons_i3+=(
-	dmenu
-	dunst
-	feh
-	picom
-	rofi
-	stterm
-	surf
-	qiv
-)
+	list_i3+=(
+		bc
+		i3
+		i3status
+	)
 
-list_themes_icon+=(
-	papirus-icon-theme
-)
+	list_addons_i3+=(
+		dmenu
+		dunst
+		feh
+		picom
+		rofi
+		st
+		surf
+		qiv
+	)
 
-list_multimedia+=(
-)
+	list_themes_icon+=(
+		papirus-icon-theme
+	)
 
-list_repositories+=(
-)
+	list_multimedia+=(
+	)
 
-list_security+=(
-	ca-certificates
-	openssl
-)
+	list_repositories+=(
+	)
 
-list_utilities+=(
-	apt
-	apt-file
-	curl
-	pip
-	sudo
-	ssh
-	tree
-)
+	list_security+=(
+		ca-certificates
+		openssl
+	)
 
-list_vnc+=(
-	x11vnc
-)
+	list_utilities+=(
+		dnf-plugins-core
+		curl
+		python3-pip
+		sudo
+		openssh-clients
+		openssh-server
+		tree
+	)
 
-list_xfce+=(
-	xfce4
-	xfce4-appfinder
-	xfce4-clipman
-	xfce4-dict
-	xfce4-notifyd
-	xfce4-panel
-	xfce4-screenshooter
-	xfce4-session
-	xfce4-settings
-	xfce4-taskmanager
-	xfce4-terminal
-	galculator
-	gigolo
-	mousepad
-	parole
-	thunar
-	thunar-archive-plugin
-	ristretto
-	tumbler
-)
+	list_vnc+=(
+		x11vnc
+	)
 
-list_fonts_xfce+=(
-)
+	list_xfce+=(
+		xfce4-session
+		xfwm4
+		xfdesktop
+		xfce4-appfinder
+		xfce4-clipman-plugin
+		xfce4-dict
+		xfce4-notifyd
+		xfce4-panel
+		xfce4-screenshooter
+		xfce4-settings
+		xfce4-taskmanager
+		xfce4-terminal
+		galculator
+		gigolo
+		mousepad
+		parole
+		Thunar
+		thunar-archive-plugin
+		ristretto
+		tumbler
+	)
 
-list_themes_xfce+=(
-	arc-theme
-	adwaita-icon-theme
-	adwaita-icon-theme-full
-)
+	list_fonts_xfce+=(
+	)
 
-list_addons_xfce+=(
-	xfce4-appmenu-plugin
-	xfce4-battery-plugin
-	xfce4-clipman-plugin
-	xfce4-cpufreq-plugin
-	xfce4-cpugraph-plugin
-	xfce4-datetime-plugin
-	xfce4-diskperf-plugin
-	xfce4-equake-plugin
-	xfce4-eyes-plugin
-	xfce4-fsguard-plugin
-	xfce4-genmon-plugin
-	xfce4-indicator-plugin
-	xfce4-mailwatch-plugin
-	xfce4-mount-plugin
-	xfce4-mpc-plugin
-	xfce4-netload-plugin
-	xfce4-notes-plugin
-	xfce4-panel-profiles
-	xfce4-places-plugin
-	xfce4-sensors-plugin
-	xfce4-smartbookmark-plugin
-	xfce4-sntray-plugin
-	xfce4-sntray-plugin-common
-	xfce4-statusnotifier-plugin
-	xfce4-systemload-plugin
-	xfce4-time-out-plugin
-	xfce4-timer-plugin
-	xfce4-verve-plugin
-	xfce4-wavelan-plugin
-	xfce4-weather-plugin
-	xfce4-whiskermenu-plugin
-	xfce4-xkb-plugin
-)
+	list_themes_xfce+=(
+		arc-theme
+		adwaita-icon-theme
+		adwaita-icon-theme-legacy
+	)
+
+	list_addons_xfce+=(
+		xfce4-battery-plugin
+		xfce4-cpufreq-plugin
+		xfce4-cpugraph-plugin
+		xfce4-datetime-plugin
+		xfce4-diskperf-plugin
+		xfce4-eyes-plugin
+		xfce4-fsguard-plugin
+		xfce4-genmon-plugin
+		xfce4-mailwatch-plugin
+		xfce4-mount-plugin
+		xfce4-mpc-plugin
+		xfce4-netload-plugin
+		xfce4-notes-plugin
+		xfce4-panel-profiles
+		xfce4-places-plugin
+		xfce4-sensors-plugin
+		xfce4-smartbookmark-plugin
+		xfce4-statusnotifier-plugin
+		xfce4-systemload-plugin
+		xfce4-time-out-plugin
+		xfce4-timer-plugin
+		xfce4-verve-plugin
+		xfce4-wavelan-plugin
+		xfce4-weather-plugin
+		xfce4-whiskermenu-plugin
+		xfce4-xkb-plugin
+	)
+else
+	list_display+=(
+		x11-apps
+		x11-common
+		x11-session-utils
+		x11-touchscreen-calibrator
+		x11-utils
+		x11-xfs-utils
+		x11-xkb-utils
+		x11-xserver-utils
+		xvfb
+		xwayland
+	)
+
+	list_documentation+=(
+		man
+	)
+
+	list_extensions+=(
+	)
+
+	list_fonts+=(
+		fonts-takao
+	)
+
+	list_i3+=(
+		bc
+		i3
+		i3status
+	)
+
+	list_addons_i3+=(
+		dmenu
+		dunst
+		feh
+		picom
+		rofi
+		stterm
+		surf
+		qiv
+	)
+
+	list_themes_icon+=(
+		papirus-icon-theme
+	)
+
+	list_multimedia+=(
+	)
+
+	list_repositories+=(
+	)
+
+	list_security+=(
+		ca-certificates
+		openssl
+	)
+
+	list_utilities+=(
+		apt
+		apt-file
+		curl
+		pip
+		sudo
+		ssh
+		tree
+	)
+
+	list_vnc+=(
+		x11vnc
+	)
+
+	list_xfce+=(
+		xfce4
+		xfce4-appfinder
+		xfce4-clipman
+		xfce4-dict
+		xfce4-notifyd
+		xfce4-panel
+		xfce4-screenshooter
+		xfce4-session
+		xfce4-settings
+		xfce4-taskmanager
+		xfce4-terminal
+		galculator
+		gigolo
+		mousepad
+		parole
+		thunar
+		thunar-archive-plugin
+		ristretto
+		tumbler
+	)
+
+	list_fonts_xfce+=(
+	)
+
+	list_themes_xfce+=(
+		arc-theme
+		adwaita-icon-theme
+		adwaita-icon-theme-full
+	)
+
+	list_addons_xfce+=(
+		xfce4-appmenu-plugin
+		xfce4-battery-plugin
+		xfce4-clipman-plugin
+		xfce4-cpufreq-plugin
+		xfce4-cpugraph-plugin
+		xfce4-datetime-plugin
+		xfce4-diskperf-plugin
+		xfce4-equake-plugin
+		xfce4-eyes-plugin
+		xfce4-fsguard-plugin
+		xfce4-genmon-plugin
+		xfce4-indicator-plugin
+		xfce4-mailwatch-plugin
+		xfce4-mount-plugin
+		xfce4-mpc-plugin
+		xfce4-netload-plugin
+		xfce4-notes-plugin
+		xfce4-panel-profiles
+		xfce4-places-plugin
+		xfce4-sensors-plugin
+		xfce4-smartbookmark-plugin
+		xfce4-sntray-plugin
+		xfce4-sntray-plugin-common
+		xfce4-statusnotifier-plugin
+		xfce4-systemload-plugin
+		xfce4-time-out-plugin
+		xfce4-timer-plugin
+		xfce4-verve-plugin
+		xfce4-wavelan-plugin
+		xfce4-weather-plugin
+		xfce4-whiskermenu-plugin
+		xfce4-xkb-plugin
+	)
+fi
 
 # environment ──────────────────────────────────────────────────────────────────
 
@@ -342,10 +496,19 @@ frobulator.install ${list_install[@]}
 
 # purge
 
-list_purge+=(
-	ibus
-	snap
-	xterm
-)
+if [ "${manager_package}" = "dnf" ] || [ "${manager_package}" = "yum" ]
+then
+	list_purge+=(
+		ibus
+		snapd
+		xterm
+	)
+else
+	list_purge+=(
+		ibus
+		snap
+		xterm
+	)
+fi
 
 frobulator.purge ${list_purge[@]}
