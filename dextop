@@ -538,11 +538,11 @@ intent_architecture () {
 	# list supported processor architectures
 
 	list_architectures_cpu=(
-		aarch64
+		"aarch64"
 		"arm*"
-		amd64
+		"amd64"
 		"i*86"
-		x86_64
+		"x86_64"
 	)
 
 	# test processor architecture string
