@@ -215,7 +215,7 @@ then
 	)
 
 	list_themes_icon+=(
-		papirus-icon-theme
+		papirus-icon-theme-dark
 	)
 
 	list_multimedia+=(
@@ -472,6 +472,7 @@ then
 		${list_xfce[@]}
 		${list_fonts_xfce[@]}
 		${list_themes_xfce[@]}
+		${list_themes_icon[@]}
 	)
 
 	#	${list_addons_xfce[@]}
