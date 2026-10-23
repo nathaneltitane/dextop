@@ -249,6 +249,13 @@ user_information () {
 
 	# get 'user' information
 
+	# nothing left to ask
+
+	if [ "${#list[@]}" -eq 0 ]
+	then
+		return
+	fi
+
 	frobulator.inf "This information will be used to set up the user account."
 
 	frobulator.wrn "Information is required to set up your environment:"
