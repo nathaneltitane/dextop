@@ -131,27 +131,37 @@ intent_failsafe () {
 	# mitigate general deployment setup issues
 	# mitigate skipped packages on install
 
+	# container package managers - absolute paths skip the termux apt on the path
+
+	local command_apt="/usr/bin/apt"
+	local command_dnf="/usr/bin/dnf"
+
+	# container locale and its packages
+
+	local name_locale="en_US.UTF-8"
+
+	local package_locale_apt="locales"
+	local package_locale_dnf="glibc-langpack-en"
+
 	frobulator.fwd "Please wait${marker_elp}"
 
-	# container package manager - absolute paths skip the termux apt on the path
-
-	if [ -x /usr/bin/apt ]
+	if [ -x "${command_apt}" ]
 	then
-		yes | /usr/bin/apt update          > "${sink}" 2>&1
+		yes | "${command_apt}" update                                > "${sink}" 2>&1
 
-		yes | /usr/bin/apt full-upgrade    > "${sink}" 2>&1
+		yes | "${command_apt}" full-upgrade                          > "${sink}" 2>&1
 
-		yes | /usr/bin/apt install locales > "${sink}" 2>&1
+		yes | "${command_apt}" install "${package_locale_apt}"       > "${sink}" 2>&1
 
 		# debian reads /etc/locale.gen - ubuntu takes the name
 
-		locale-gen en_US.UTF-8             > "${sink}" 2>&1
+		locale-gen "${name_locale}"                                  > "${sink}" 2>&1
 
-	elif [ -x /usr/bin/dnf ]
+	elif [ -x "${command_dnf}" ]
 	then
-		/usr/bin/dnf --assumeyes upgrade                   > "${sink}" 2>&1
+		"${command_dnf}" --assumeyes upgrade                         > "${sink}" 2>&1
 
-		/usr/bin/dnf --assumeyes install glibc-langpack-en > "${sink}" 2>&1
+		"${command_dnf}" --assumeyes install "${package_locale_dnf}" > "${sink}" 2>&1
 	fi
 
 }
