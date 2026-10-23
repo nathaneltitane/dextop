@@ -587,8 +587,8 @@ image_network () {
 
 	# hostname
 
-	cat <<- 'FILE' > "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/etc/hostname
-	${HOSTNAME}
+	cat <<- FILE > "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/etc/hostname
+	${HOSTNAME:-localhost}
 	FILE
 
 	# hosts
@@ -641,39 +641,67 @@ image_preload () {
 
 image_sources () {
 
-	# generate sources file
+	# generate apt sources - fedora keeps its own repositories
+
+	local file_sources="${PREFIX}/cnt/${name_distribution}/${version_distribution}/etc/apt/sources.list"
+	local url_debian="http://deb.debian.org/debian"
+	local url_security="http://security.debian.org/debian-security"
+	local url_ubuntu="http://archive.ubuntu.com/ubuntu"
+	local components_debian="main contrib non-free non-free-firmware"
 
 	if [ "${name_distribution}" = "debian" ]
 	then
-		cat <<- FILE > "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/etc/sources.list
-		deb     http://deb.debian.org/${name_distribution}                  ${codename_distribution}            main non-free-firmware
-		deb-src http://deb.debian.org/${name_distribution}                  ${codename_distribution}            main non-free-firmware
+		mkdir -p "${file_sources%/*}"
 
-		deb     http://security.debian.org/${name_distribution}-security    ${codename_distribution}-security   main non-free-firmware
-		deb-src http://security.debian.org/${name_distribution}-security    ${codename_distribution}-security   main non-free-firmware
+		# firmware component from bookworm on
 
-		deb     http://deb.debian.org/${name_distribution}                  ${codename_distribution}-updates    main non-free-firmware
-		deb-src http://deb.debian.org/${name_distribution}                  ${codename_distribution}-updates    main non-free-firmware
-		FILE
+		if [ "${version_distribution}" -lt 12 ]
+		then
+			components_debian="main contrib non-free"
+		fi
+
+		# buster moved to the archive - security under codename/updates
+
+		if [ "${version_distribution}" -lt 11 ]
+		then
+			cat <<- FILE > "${file_sources}"
+			deb     http://archive.debian.org/debian            ${codename_distribution}            ${components_debian}
+			deb-src http://archive.debian.org/debian            ${codename_distribution}            ${components_debian}
+			deb     http://archive.debian.org/debian-security   ${codename_distribution}/updates    ${components_debian}
+			deb-src http://archive.debian.org/debian-security   ${codename_distribution}/updates    ${components_debian}
+			FILE
+		else
+			cat <<- FILE > "${file_sources}"
+			deb     ${url_debian}       ${codename_distribution}            ${components_debian}
+			deb-src ${url_debian}       ${codename_distribution}            ${components_debian}
+			deb     ${url_security}     ${codename_distribution}-security   ${components_debian}
+			deb-src ${url_security}     ${codename_distribution}-security   ${components_debian}
+			deb     ${url_debian}       ${codename_distribution}-updates    ${components_debian}
+			deb-src ${url_debian}       ${codename_distribution}-updates    ${components_debian}
+			FILE
+		fi
 	fi
 
 	if [ "${name_distribution}" = "ubuntu" ]
 	then
-		cat <<- FILE > "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/etc/sources.list
-		deb     http://archive.ubuntu.com/${name_distribution}              ${codename_distribution}            main restricted universe multiverse
-		deb-src http://archive.ubuntu.com/${name_distribution}              ${codename_distribution}            main restricted universe multiverse
+		mkdir -p "${file_sources%/*}"
 
-		deb     http://archive.ubuntu.com/${name_distribution}              ${codename_distribution}-security   main restricted universe multiverse
-		deb-src http://archive.ubuntu.com/${name_distribution}              ${codename_distribution}-security   main restricted universe multiverse
+		# arm packages on the ports mirror
 
-		deb     http://archive.ubuntu.com/${name_distribution}              ${codename_distribution}-updates    main restricted universe multiverse
-		deb-src http://archive.ubuntu.com/${name_distribution}              ${codename_distribution}-updates    main restricted universe multiverse
+		if [ "${architecture_image}" = "arm64" ] || [ "${architecture_image}" = "armhf" ]
+		then
+			url_ubuntu="http://ports.ubuntu.com/ubuntu-ports"
+		fi
 
-		deb     http://archive.ubuntu.com/${name_distribution}              ${codename_distribution}-backports  main restricted universe multiverse
-		deb-src http://archive.ubuntu.com/${name_distribution}              ${codename_distribution}-backports  main restricted universe multiverse
-
-		deb     http://archive.canonical.com/${name_distribution}           ${codename_distribution}            partner
-		deb-src http://archive.canonical.com/${name_distribution}           ${codename_distribution}            partner
+		cat <<- FILE > "${file_sources}"
+		deb     ${url_ubuntu}   ${codename_distribution}            main restricted universe multiverse
+		deb-src ${url_ubuntu}   ${codename_distribution}            main restricted universe multiverse
+		deb     ${url_ubuntu}   ${codename_distribution}-security   main restricted universe multiverse
+		deb-src ${url_ubuntu}   ${codename_distribution}-security   main restricted universe multiverse
+		deb     ${url_ubuntu}   ${codename_distribution}-updates    main restricted universe multiverse
+		deb-src ${url_ubuntu}   ${codename_distribution}-updates    main restricted universe multiverse
+		deb     ${url_ubuntu}   ${codename_distribution}-backports  main restricted universe multiverse
+		deb-src ${url_ubuntu}   ${codename_distribution}-backports  main restricted universe multiverse
 		FILE
 	fi
 
