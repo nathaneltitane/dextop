@@ -340,7 +340,7 @@ fi
 
 if [ -z "${directory_container}" ]
 then
-	directory_container="${PREFIX}"/cnt/debian/12
+	directory_container="${PREFIX}"/cnt/debian/13
 
 	frobulator.write write "${directory_container}" "${HOME}"/.dextop dextop-container
 fi
@@ -414,7 +414,7 @@ container_environment () {
 
 	# generate container environment
 
-	CONTAINER_ROOT="${PREFIX}"/cnt/debian/12
+	CONTAINER_ROOT="${directory_container}"
 
 	# set path:
 	# in order of retreival
@@ -972,7 +972,7 @@ intent_icons () {
 
 intent_themes () {
 
-	CONTAINER_ROOT="${PREFIX}"/cnt/debian/12
+	CONTAINER_ROOT="${directory_container}"
 
 	# link theme directories
 

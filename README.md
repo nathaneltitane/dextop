@@ -12,10 +12,13 @@
 
 10-23-2026 ↴
 
+- Default container is now Debian 13 (trixie) - was Debian 12 (bookworm)
 - Fedora images: 41, 42, 43 and 44 (dnf5) alongside Debian and Ubuntu
+- Debian and Ubuntu images rebuilt with the current filesystem utility
 - Image selection, codename-free Fedora entries and fixed '-i' image option
 - Container apt sources match each release (archive, ports, non-free-firmware)
 - Container hostname: 'dextop' by default, no longer taken from Android - set with 'container-user -n'
+- 'container-user' only shows the information prompt when there is something to ask
 - Fedora package lists: container packages installed under their Fedora names through dnf
 - Papirus-Dark icon theme now installed with xfce - set by the desktop settings but never installed before
 - Setup runs in C.UTF-8 and initializes the container locale: prompt markers no longer garble

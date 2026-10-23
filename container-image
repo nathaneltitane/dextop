@@ -174,8 +174,8 @@ list_versions=(
 if [ "${option}" != "image" ] && [ "${option}" != "selection" ]
 then
 	name_distribution="debian"
-	version_distribution="12"
-	codename_distribution="bookworm"
+	version_distribution="13"
+	codename_distribution="trixie"
 fi
 
 # functions ────────────────────────────────────────────────────────────────────
