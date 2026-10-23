@@ -72,7 +72,7 @@ frobulator.script
 
 # version ──────────────────────────────────────────────────────────────────────
 
-version="2026-10-22"
+version="2026-10-23"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
@@ -133,13 +133,26 @@ intent_failsafe () {
 
 	frobulator.fwd "Please wait${marker_elp}"
 
-	yes | apt update          > "${sink}" 2>&1
+	# container package manager - absolute paths skip the termux apt on the path
 
-	yes | apt full-upgrade    > "${sink}" 2>&1
+	if [ -x /usr/bin/apt ]
+	then
+		yes | /usr/bin/apt update          > "${sink}" 2>&1
 
-	yes | apt install locales > "${sink}" 2>&1
+		yes | /usr/bin/apt full-upgrade    > "${sink}" 2>&1
 
-	locale-gen en_US.utf-8    > "${sink}" 2>&1
+		yes | /usr/bin/apt install locales > "${sink}" 2>&1
+
+		# debian reads /etc/locale.gen - ubuntu takes the name
+
+		locale-gen en_US.UTF-8             > "${sink}" 2>&1
+
+	elif [ -x /usr/bin/dnf ]
+	then
+		/usr/bin/dnf --assumeyes upgrade                   > "${sink}" 2>&1
+
+		/usr/bin/dnf --assumeyes install glibc-langpack-en > "${sink}" 2>&1
+	fi
 
 }
 

@@ -72,7 +72,7 @@ frobulator.script
 
 # version ──────────────────────────────────────────────────────────────────────
 
-version="2026-10-22"
+version="2026-10-23"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
@@ -247,6 +247,10 @@ frobulator.clear
 # sortable backup stamp
 
 date_backup=$(date +"%Y-%m-%d-%H-%M-%S")
+
+# container setup locale - shipped by every image
+
+locale_setup="C.UTF-8"
 
 # components ───────────────────────────────────────────────────────────────────
 
@@ -452,6 +456,10 @@ container_intent () {
 
 	USER_ID="0"
 	GROUP_ID="0"
+
+	# setup locale for this call only
+
+	local LANG="${locale_setup}"
 
 	# assume 'termux-exec' is installed
 
@@ -1370,6 +1378,10 @@ then
 		# container image
 
 		frobulator.complete halt "${HOME}"/.dextop dextop-container-image-checkpoint "${HOME}"/.local/bin/container-image
+
+		# container initialization
+
+		frobulator.complete "${HOME}"/.dextop dextop-container-initialization-checkpoint container_intent "${HOME}"/.local/bin/container-initialization
 
 		# container expansion
 

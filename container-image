@@ -572,10 +572,25 @@ image_groups () {
 image_locale () {
 
 	# set locale selection for container
+	# fedora ships only C.UTF-8 until glibc-langpack-en is installed
 
-	echo "LC_ALL=en_US.UTF-8" >> "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/etc/environment
-	echo "en_US.UTF-8 UTF-8" > "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/etc/locale.gen
-	echo "LANG=en_US.UTF-8" > "${PREFIX}"/cnt/"${name_distribution}"/"${version_distribution}"/etc/locale.conf
+	local directory_container="${PREFIX}/cnt/${name_distribution}/${version_distribution}"
+	local name_locale="en_US.UTF-8"
+
+	if [ "${name_distribution}" = "fedora" ] && [ ! -d "${directory_container}"/usr/lib/locale/en_US.utf8 ] && [ ! -f "${directory_container}"/usr/lib/locale/locale-archive ]
+	then
+		name_locale="C.UTF-8"
+	fi
+
+	echo "LC_ALL=${name_locale}" >> "${directory_container}"/etc/environment
+	echo "LANG=${name_locale}" > "${directory_container}"/etc/locale.conf
+
+	# generated locales on debian and ubuntu
+
+	if [ "${name_distribution}" != "fedora" ]
+	then
+		echo "en_US.UTF-8 UTF-8" > "${directory_container}"/etc/locale.gen
+	fi
 
 	frobulator.complete
 
