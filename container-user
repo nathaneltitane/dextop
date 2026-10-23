@@ -72,7 +72,7 @@ frobulator.script
 
 # version ──────────────────────────────────────────────────────────────────────
 
-version="2026-10-22"
+version="2026-10-23"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
@@ -108,6 +108,13 @@ do
 			shift
 		;;
 
+		-n|--hostname)
+			option="hostname"
+			name_host="${2}"
+
+			shift
+		;;
+
 		-h|--help)
 			echo
 			echo -e "Usage: ./${script} [OPTION]"
@@ -119,6 +126,8 @@ do
 			echo -e "-u, --username       Set up [u]ser account."
 			echo
 			echo -e "-p, --password       Set or change user [p]assword."
+			echo
+			echo -e "-n, --hostname       Set container host[n]ame."
 			echo
 			echo -e "-h, --help           Show [h]elp and usage information."
 			echo
@@ -156,6 +165,10 @@ done
 # variables ────────────────────────────────────────────────────────────────────
 
 # defaults ─────────────────────────────────────────────────────────────────────
+
+# container hostname - android hostname is not meaningful
+
+name_host_default="dextop"
 
 # functions ────────────────────────────────────────────────────────────────────
 
@@ -526,6 +539,50 @@ password_user () {
 	chpasswd <<< "${name_user}:${password_user}"
 }
 
+hostname_container () {
+
+	local file_hosts="/etc/hosts"
+	local file_hostname="/etc/hostname"
+	local address_host="127.0.1.1"
+
+	local line_hosts
+	local list_hosts=()
+
+	# set container hostname
+
+	frobulator.fwd "Setting hostname${marker_elp}"
+
+	name_host="${name_host:-${name_host_default}}"
+
+	# letters, digits and hyphens - default otherwise
+
+	if [[ ! "${name_host}" =~ ^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$ ]]
+	then
+		frobulator.wrn "Invalid hostname - using default" "[ ${name_host} // ${name_host_default} ]"
+
+		name_host="${name_host_default}"
+	fi
+
+	echo "${name_host}" > "${file_hostname}"
+
+	# replace any previous hostname entry
+
+	if [ -f "${file_hosts}" ]
+	then
+		while IFS= read -r line_hosts || [ -n "${line_hosts}" ]
+		do
+			if [[ "${line_hosts}" != "${address_host}"[[:space:]]* ]]
+			then
+				list_hosts+=("${line_hosts}")
+			fi
+		done < "${file_hosts}"
+	fi
+
+	list_hosts+=("${address_host}	${name_host}")
+
+	printf '%s\n' "${list_hosts[@]}" > "${file_hosts}"
+}
+
 user_runtime () {
 
 	# generate 'user' runtime directory structure
@@ -579,6 +636,11 @@ then
 		list_information+=(password_user)
 	fi
 
+	if [ -z "${name_host}" ]
+	then
+		list_information+=(name_host)
+	fi
+
 	list=(
 		${list_information[@]}
 	)
@@ -590,6 +652,23 @@ then
 	export name_last="${name_last}"
 	export email_user="${email_user}"
 	export password_user="${password_user}"
+	export name_host="${name_host}"
+fi
+
+if [ "${option}" = "hostname" ]
+then
+	if [ -z "${name_host}" ]
+	then
+		list_information+=(name_host)
+	fi
+
+	list=(
+		${list_information[@]}
+	)
+
+	user_information
+
+	hostname_container
 fi
 
 if [ "${option}" = "password" ]
@@ -661,6 +740,11 @@ then
 		list_information+=(password_user)
 	fi
 
+	if [ -z "${name_host}" ]
+	then
+		list_information+=(name_host)
+	fi
+
 	list=(
 		${list_information[@]}
 	)
@@ -674,6 +758,10 @@ then
 	# set 'user' password
 
 	password_user
+
+	# set container hostname
+
+	hostname_container
 
 	# generate 'user' runtime directory structure
 
@@ -698,6 +786,10 @@ then
 	# set 'user 'superuser password override
 
 	user_superuser_override
+
+	# set container hostname
+
+	hostname_container
 
 	# generate 'user' runtime directory structure
 

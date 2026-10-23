@@ -15,7 +15,8 @@
 - Fedora images: 41, 42, 43 and 44 (dnf5) alongside Debian and Ubuntu
 - Image selection, codename-free Fedora entries and fixed '-i' image option
 - Container apt sources match each release (archive, ports, non-free-firmware)
-- Container hostname written from the device hostname
+- Container hostname: 'dextop' by default, no longer taken from Android - set with 'container-user -n'
+- Fedora package lists: container packages installed under their Fedora names through dnf
 - Setup runs in C.UTF-8 and initializes the container locale: prompt markers no longer garble
 - Sessions fall back to C.UTF-8 when the chosen locale is missing from the container
 
@@ -471,6 +472,12 @@ container-session -o x11
 **User 'termux' is the default username that is utilized during the automatic container setup.**
 It is used to identify a default user under the distribution image that has been selected and can be edited after setup.
 Other users can be added by using the 'container-user' utility.
+
+**Hostname 'dextop' is the default container hostname** - Android's hostname is not used. Another one (letters, digits and hyphens) can be set by using the 'container-user' utility:
+
+```
+container-user -n <hostname>
+```
 
 When accessing the container for the very first time, a one-time configuration runs on login to set up the keyboard layout, locales and timezone preferences.
 
