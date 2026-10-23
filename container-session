@@ -72,7 +72,7 @@ frobulator.script
 
 # version ──────────────────────────────────────────────────────────────────────
 
-version="2026-10-22"
+version="2026-10-23"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
@@ -582,6 +582,26 @@ container_environment () {
 	return
 }
 
+container_locale () {
+
+	# session locale - termux choice when the container has it - C.UTF-8 otherwise
+
+	local name_locale="${LANG:-en_US.UTF-8}"
+	local name_compiled="${name_locale%%.*}.utf8"
+	local file_archive="${CONTAINER_ROOT}/usr/lib/locale/locale-archive"
+
+	locale_session="C.UTF-8"
+
+	if [[ "${name_locale}" == C.* ]] || [ -d "${CONTAINER_ROOT}/usr/lib/locale/${name_compiled}" ]
+	then
+		locale_session="${name_locale}"
+
+	elif [ -f "${file_archive}" ] && [ -n "$(grep --text --only-matching --max-count=1 --fixed-strings "${name_compiled}" "${file_archive}")" ]
+	then
+		locale_session="${name_locale}"
+	fi
+}
+
 container_intent () {
 
 	# load session settings
@@ -593,6 +613,12 @@ container_intent () {
 	# generate container environment
 
 	container_environment
+
+	container_locale
+
+	# session locale for this call only
+
+	local LANG="${locale_session}"
 
 	# setup 'proot' command arguments
 
