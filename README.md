@@ -706,7 +706,7 @@ Should you suspect any issues or errors, please provide a copy of those files wh
 
 ---
 
-[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop) [ Version // 2026-10-23 ]
+[[ Dextop // Project Page ]](https://github.com/nathaneltitane/dextop)-----------------------------------------------------------------------------------------------------------------------------[ Version // 2026-10-23 ]
 
 ---
 
@@ -717,4 +717,3 @@ Show your appreciation with a PayPal donation!
 
 [![Star](https://img.shields.io/github/stars/nathaneltitane/dextop.svg?style=for-the-badge&logo=github&label=Star&color=2f343f)](https://github.com/nathaneltitane/dextop)<br>
 Useful? Star the repository - it helps others find it.
-
