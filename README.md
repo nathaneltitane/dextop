@@ -16,7 +16,7 @@ Useful? Star the repository - it helps others find it.
 
 ### NOTICE
 
-10-23-2026 ↴
+2026-10-23 ↴
 
 - Default container is now Debian 13 (trixie) - was Debian 12 (bookworm)
 - Fedora images: 41, 42, 43 and 44 (dnf5) alongside Debian and Ubuntu
@@ -30,30 +30,30 @@ Useful? Star the repository - it helps others find it.
 - Setup runs in C.UTF-8 and initializes the container locale: prompt markers no longer garble
 - Sessions fall back to C.UTF-8 when the chosen locale is missing from the container
 
-10-21-2026 ↴
+2026-10-21 ↴
 
 - New restore option: '-r' brings back the home directory from a backup
 - Backups now stored in '${PREFIX}/bkp' - sortable names, no backup holds another
 - Purge removes every setup component and offers to restore the home directory from before setup
 - Restoring the earliest backup clears the setup's home links first
 
-03-16-2025 ↴
+2025-03-16 ↴
 
 - Fix 'container-session' application/focus mode:
   - Show default if application not found or empty
 - Prettify prompt messaging for connect/disconnect
 
-03-15-2025 ↴
+2025-03-15 ↴
 
 - Fix legacy groups override breaking proot container package installs
 - Now using docker.io stock minimal images for proot deployments
 - WIP: reimplement VNC functionality
 
-01-07-2025 ↴
+2025-01-07 ↴
 
 - Fix environment options being passed and wrap setup to handle option delegations
 
-01-03-2025 ↴
+2025-01-03 ↴
 
 - Fix debian images not being found:
   - Image archives now available through get.trmnl.me
