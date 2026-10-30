@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/nathaneltitane/dextop/main/dextop.svg" alt="dextop"><br><b>Linux workstation for Android</b><br>Your desktop, in your pocket</p>
+<p align="center"><img src="https://raw.githubusercontent.com/nathaneltitane/dextop/main/dextop.svg" alt="dextop"><br><b>Linux workstation for Android</b><br>YOUR DESKTOP, IN YOUR POCKET.</p>
 
 ---
 
