@@ -813,16 +813,16 @@ details ul {
 		<figcaption>A Dextop session on Termux:X11</figcaption>
 	</figure>
 	<ul class="points">
-		<li><b>Three distributions.</b> Debian, Ubuntu and Fedora base images, stable and popular with large knowledge bases. Debian 13 (trixie) is the default.</li>
+		<li><b>Three <a href="#distributions">distributions</a>.</b> Debian, Ubuntu and Fedora base images, stable and popular with large knowledge bases. Debian 13 (trixie) is the default.</li>
 		<li><b>Just like a PC.</b> The base image is expanded to a full system with a real user profile, a working home directory and sudo rights.</li>
-		<li><b>Desktop or console.</b> A complete XFCE desktop, the i3 window manager, or a console only setup for command line and programming work.</li>
+		<li><b>Desktop or console.</b> A complete XFCE desktop, the i3 window manager, or a console only <a href="#setup">setup</a> for command line and programming work.</li>
 		<li><b>Native display.</b> The Termux:X11 display server at the device's native resolution and DPI, with VNC as an alternative display path.</li>
 		<li><b>Hardware acceleration.</b> 3D rendering offloaded to the device GPU through VirGL and the Gallium driver framework, on the PRoot container side.</li>
-		<li><b>Unified storage.</b> Internal and external media detected, labelled and linked, with one home directory shared by Termux and every container.</li>
+		<li><b>Unified <a href="#storage">storage</a>.</b> Internal and external media detected, labelled and linked, with one home directory shared by Termux and every container.</li>
 		<li><b>Android integration.</b> Links, mail, messages, camera and music are handed to native Android applications through the Activity Manager.</li>
 		<li><b>No root.</b> Everything runs in the Android user space through Termux and PRoot: the device is never rooted.</li>
 		<li><b>Safe by default.</b> The home directory is archived before setup, and the whole setup can be restored or purged again.</li>
-		<li><b>Help everywhere.</b> Every utility answers <code>-h</code> with its usage and options, all listed in the Commands section below.</li>
+		<li><b>Help everywhere.</b> Every utility answers <code>-h</code> with its usage and options, all listed in the <a href="#commands">Commands</a> section below.</li>
 	</ul>
 	<h3>What it doesn't do</h3>
 	<ul class="points">
@@ -837,12 +837,12 @@ details ul {
 		<svg class="icon big" style="color:#00aade" aria-hidden="true"><use href="#i-dextop"/></svg>
 		<h2>INSTALL // ONE COMMAND, TEN MINUTES</h2>
 	</header>
-	<p class="lead">Install Termux and Termux:X11, label your storage, and run one command. Back up your existing Termux setup first, following the Termux backup recommendations.</p>
+	<p class="lead">Install Termux and Termux:X11, label your <a href="#storage">storage</a>, and run one command. Back up your existing Termux <a href="#setup">setup</a> first, following the Termux backup recommendations.</p>
 	<ul class="points">
 		<li><b>Device.</b> A modern Android device with a 64 bit ARM processor (ARM64 V8a), Android 7.0 or later. Android 11 to 13 can stop background processes: see the Phantom Process Killer.</li>
-		<li><b>Connection.</b> Medium to high speed internet for setup, updates and additional packages.</li>
+		<li><b>Connection.</b> Medium to high speed internet for setup, updates and additional <a href="#packages">packages</a>.</li>
 		<li><b>Space.</b> About 4 GB of free storage for Termux and the distribution container.</li>
-		<li><b>Peripherals.</b> A mouse, a keyboard, a power source for long sessions and, on phones, a monitor. Dextop is optimized for Samsung DeX.</li>
+		<li><b>Peripherals.</b> A mouse, a keyboard, a power source for long <a href="#sessions">sessions</a> and, on phones, a monitor. Dextop is optimized for Samsung DeX.</li>
 	</ul>
 	<h3>Prepare</h3>
 	<ol class="steps">
@@ -880,13 +880,13 @@ details ul {
 	</header>
 	<p class="lead"><code>dextop</code> runs the whole setup in order, with Frobulator reporting every step. User information and distribution preferences are asked along the way, so stay attentive.</p>
 	<ol class="steps">
-		<li><b>Failsafe.</b> Refreshes the Termux repositories and packages so nothing is skipped on install.</li>
+		<li><b>Failsafe.</b> Refreshes the Termux repositories and <a href="#packages">packages</a> so nothing is skipped on <a href="#install">install</a>.</li>
 		<li><b>Backup.</b> Archives the home directory to <code>${PREFIX}/bkp</code> before anything changes.</li>
 		<li><b>Preferences.</b> Links the Termux colors, font and properties.</li>
 		<li><b>Utilities.</b> Downloads the Dextop utilities into <code>~/.local/bin</code>.</li>
-		<li><b>Directories, additions and backgrounds.</b> Creates the setup directories, installs the Android handlers and the desktop backgrounds.</li>
-		<li><b>Login options.</b> Turns on automatic session start and shutdown, and prepares the update and audio switches.</li>
-		<li><b>Termux.</b> Installs the companion applications, links the storage and installs the Termux packages.</li>
+		<li><b>Directories, <a href="#additions">additions</a> and backgrounds.</b> Creates the setup directories, installs the Android handlers and the desktop backgrounds.</li>
+		<li><b>Login options.</b> Turns on automatic session start and shutdown, and prepares the update and audio <a href="#switches">switches</a>.</li>
+		<li><b>Termux.</b> Installs the companion applications, links the <a href="#storage">storage</a> and installs the Termux packages.</li>
 		<li><b>Container.</b> Downloads the image, initializes it, expands it to a full system, installs its packages and creates your user.</li>
 		<li><b>Desktop.</b> Links the shell files, file manager bookmarks, the i3 interface, icon themes and themes.</li>
 		<li><b>Session.</b> Moves the deployment script into <code>~/.local/bin</code> and starts the first session.</li>
@@ -919,7 +919,7 @@ details ul {
 		<svg class="icon big" style="color:#cc575d" aria-hidden="true"><use href="#i-dextop"/></svg>
 		<h2>DISTRIBUTIONS // 12 CONTAINER IMAGES</h2>
 	</header>
-	<p class="lead">The container runs through PRoot with the Android system, storage and devices bound in, so it behaves like a normal Linux installation.</p>
+	<p class="lead">The container runs through PRoot with the Android system, <a href="#storage">storage</a> and devices bound in, so it behaves like a normal Linux installation.</p>
 	<div class="table">
 		<table>
 			<thead>
@@ -942,10 +942,10 @@ details ul {
 		</table>
 	</div>
 	<ul class="points">
-		<li><b>Selection.</b> Without an image option the setup lists every supported image to pick by number. <code>container-image -s</code> shows the list.</li>
+		<li><b>Selection.</b> Without an image option the <a href="#setup">setup</a> lists every supported image to pick by number. <code>container-image -s</code> shows the list.</li>
 		<li><b>Architecture.</b> The processor is checked against the image architectures before anything is downloaded.</li>
 		<li><b>Matching sources.</b> Container apt sources follow each release: archive, ports and non-free-firmware.</li>
-		<li><b>Locale.</b> Setup runs in C.UTF-8 and initializes the container locale. Sessions fall back to C.UTF-8 when the chosen locale is missing.</li>
+		<li><b>Locale.</b> Setup runs in C.UTF-8 and initializes the container locale. <a href="#sessions">Sessions</a> fall back to C.UTF-8 when the chosen locale is missing.</li>
 		<li><b>Hostname.</b> The container is called <code>dextop</code> by default, not after Android. Set another with <code>container-user -n</code>.</li>
 		<li><b>Several containers.</b> Containers live under <code>${PREFIX}/cnt/distribution/version</code>. <code>container-session -d</code> picks one, or lists them all to choose from.</li>
 	</ul>
@@ -992,7 +992,7 @@ details ul {
 				<tr><td>Display</td><td>Container ► X Server ► Termux:X11 ► Display</td></tr>
 				<tr><td>Display</td><td>Container ► x11vnc ► VNC Viewer ► Display</td></tr>
 				<tr><td>Acceleration</td><td>Container ► VirGL ► Graphics ► GPU</td></tr>
-				<tr><td>Storage</td><td>Storage ► /storage ► proot bind ► Container</td></tr>
+				<tr><td><a href="#storage">Storage</a></td><td>Storage ► /storage ► proot bind ► Container</td></tr>
 				<tr><td>Storage</td><td>Storage ► /storage ► ${PREFIX}/media/link ► Home</td></tr>
 				<tr><td>Launch</td><td>Dextop ► termux-am ► Android Activities ► Termux:X11 / VNC Viewer</td></tr>
 			</tbody>
@@ -1006,7 +1006,7 @@ details ul {
 		<svg class="icon big" style="color:#ff8080" aria-hidden="true"><use href="#i-dextop"/></svg>
 		<h2>STORAGE // ONE HOME FOR EVERY SYSTEM</h2>
 	</header>
-	<p class="lead"><code>termux-storage</code> asks for the storage permission, then links internal and external media for system wide access. Create the .storage labels before setup for recognizable names.</p>
+	<p class="lead"><code>termux-storage</code> asks for the storage permission, then links internal and external media for system wide access. Create the .storage labels before <a href="#setup">setup</a> for recognizable names.</p>
 	<div class="gallery two">
 		<figure>
 			<button class="shot" data-full="dextop-label.png" aria-label="Enlarge A .storage label at the root of a mount">
@@ -1067,7 +1067,7 @@ details ul {
 		<svg class="icon big" style="color:#6acfec" aria-hidden="true"><use href="#i-dextop"/></svg>
 		<h2>SWITCHES // LOGIN, LOGOUT, UPDATES AND AUDIO</h2>
 	</header>
-	<p class="lead">Dextop keeps its choices as small files in <code>~/.dextop</code>. Write the keyword in a file to turn a switch on, empty it to turn it off. Automatic login and logout are on after setup.</p>
+	<p class="lead">Dextop keeps its choices as small files in <code>~/.dextop</code>. Write the keyword in a file to turn a switch on, empty it to turn it off. Automatic login and logout are on after <a href="#setup">setup</a>.</p>
 	<div class="table">
 		<table>
 			<thead>
@@ -1095,7 +1095,7 @@ details ul {
 		<svg class="icon big" style="color:#d4ade2" aria-hidden="true"><use href="#i-dextop"/></svg>
 		<h2>PACKAGES // 277 PACKAGES BY GROUP</h2>
 	</header>
-	<p class="lead"><code>termux-packages</code> and <code>container-packages</code> install these groups, read straight from the scripts. The container installs them under their Debian and Ubuntu or Fedora names.</p>
+	<p class="lead"><code>termux-packages</code> and <code>container-packages</code> <a href="#install">install</a> these groups, read straight from the scripts. The container installs them under their Debian and Ubuntu or Fedora names.</p>
 	<div class="table wrap">
 		<table>
 			<thead>
@@ -1165,7 +1165,7 @@ bash dextop -u shell</code></pre>
 			<tbody>
 				<tr><td><code>bash dextop -b</code></td><td>Archives the home directory to <code>${PREFIX}/bkp/dextop-backup-YYYY-MM-DD-HH-MM-SS.tar.gz</code></td></tr>
 				<tr><td><code>bash dextop -r</code></td><td>Restores the latest backup</td></tr>
-				<tr><td><code>bash dextop -r earliest</code></td><td>Restores the backup taken before setup, clearing the links and files setup made</td></tr>
+				<tr><td><code>bash dextop -r earliest</code></td><td>Restores the backup taken before <a href="#setup">setup</a>, clearing the links and files setup made</td></tr>
 				<tr><td><code>bash dextop -r [name]</code></td><td>Restores a backup by its file name</td></tr>
 				<tr><td><code>bash dextop -p</code></td><td>Removes Dextop and everything its setup installed, after confirmation, then offers the earliest backup</td></tr>
 			</tbody>
@@ -1174,7 +1174,7 @@ bash dextop -u shell</code></pre>
 	<p>Backups are kept outside the home directory, so no backup ever holds another, and purge keeps them.</p>
 	<h3>Issues</h3>
 	<ul class="points">
-		<li><b>Missing packages.</b> Spotty Termux repositories can skip packages. Run <code>bash dextop</code> again: it resumes from its checkpoints.</li>
+		<li><b>Missing <a href="#packages">packages</a>.</b> Spotty Termux repositories can skip packages. Run <code>bash dextop</code> again: it resumes from its checkpoints.</li>
 		<li><b>Start over.</b> Remove <code>~/.dextop</code> to reset the setup checkpoints without wiping Termux.</li>
 		<li><b>Broken script.</b> A slow or failed download can corrupt the deployment script: fetch it again and run <code>bash dextop -u utility all</code>.</li>
 		<li><b>Logs.</b> Attach the files from <code>${PREFIX}/var/log</code> to bug reports.</li>
@@ -1195,7 +1195,7 @@ bash dextop -u shell</code></pre>
 	<div id="command-list" class="command-list">
 		<article class="command" id="command-dextop" data-group="Setup">
 			<div class="command-body">
-				<div class="command-head"><h3>dextop</h3><span class="command-meta">Setup // 2026-10-23</span></div>
+				<div class="command-head"><h3>dextop</h3><span class="command-meta"><a href="#setup">Setup</a> // 2026-10-23</span></div>
 				<p>The deployment script: sets up Termux, the container and the desktop, and updates, backs up, restores and purges the whole setup.</p>
 				<pre><code>dextop -c | -e [Environment] | -t | -n | -l | -i | -a | -d | -b | -r [Backup] | -u [Update] [Name] | -p | -h [OPTION]</code></pre>
 			</div>
@@ -1218,7 +1218,7 @@ bash dextop -u shell</code></pre>
 			</div>
 			<div class="option">
 				<code>-l, --link</code>
-				<p>Create <span class="marker">l</span>inks to unify storage directories.</p>
+				<p>Create <span class="marker">l</span>inks to unify <a href="#storage">storage</a> directories.</p>
 			</div>
 			<div class="option">
 				<code>-i, --initialize</code>
@@ -1243,8 +1243,8 @@ bash dextop -u shell</code></pre>
 			</div>
 			<div class="option">
 				<code>-u, --update <span class="argument">[Update] [Name]</span></code>
-				<p>Run <span class="marker">u</span>pdate of application packages and utilities.</p>
-				<div class="values"><span class="value">all</span><span class="value">dextop <i>// Default</i></span><span class="value">additions</span><span class="value">background</span><span class="value">interface</span><span class="value">preferences</span><span class="value">shell</span><span class="value">termux</span><span class="value">utility</span></div>
+				<p>Run <span class="marker">u</span>pdate of application <a href="#packages">packages</a> and utilities.</p>
+				<div class="values"><span class="value">all</span><span class="value">dextop <i>// Default</i></span><span class="value"><a href="#additions">additions</a></span><span class="value">background</span><span class="value">interface</span><span class="value">preferences</span><span class="value">shell</span><span class="value">termux</span><span class="value">utility</span></div>
 			</div>
 			<div class="option">
 				<code>-p, --purge</code>
@@ -1269,7 +1269,7 @@ bash dextop -u shell</code></pre>
 		<article class="command" id="command-termux-update" data-group="Termux">
 			<div class="command-body">
 				<div class="command-head"><h3>termux-update</h3><span class="command-meta">Termux // 2026-10-22</span></div>
-				<p>Compares the installed Termux application with its latest release and offers to download and install the update.</p>
+				<p>Compares the installed Termux application with its latest release and offers to download and <a href="#install">install</a> the update.</p>
 				<pre><code>termux-update -f | -g | [OPTION]</code></pre>
 			</div>
 			<div class="option">
@@ -1420,7 +1420,7 @@ bash dextop -u shell</code></pre>
 		<article class="command" id="command-container-session" data-group="Session">
 			<div class="command-body">
 				<div class="command-head"><h3>container-session</h3><span class="command-meta">Session // 2026-10-23</span></div>
-				<p>Starts and stops desktop sessions on Termux:X11 or VNC, for any container directory and user.</p>
+				<p>Starts and stops desktop <a href="#sessions">sessions</a> on Termux:X11 or VNC, for any container directory and user.</p>
 				<pre><code>container-session -o [Display Server] | -x | -l | -u [User Name] | -d [Directory] | -f [Application] | [OPTION]</code></pre>
 			</div>
 			<div class="option">
@@ -1504,10 +1504,10 @@ bash dextop -u shell</code></pre>
 			<li>Container apt sources match each release (archive, ports, non-free-firmware)</li>
 			<li>Container hostname: <code>dextop</code> by default, no longer taken from Android - set with <code>container-user -n</code></li>
 			<li><code>container-user</code> only shows the information prompt when there is something to ask</li>
-			<li>Fedora package lists: container packages installed under their Fedora names through dnf</li>
+			<li>Fedora package lists: container <a href="#packages">packages</a> installed under their Fedora names through dnf</li>
 			<li>Papirus-Dark icon theme now installed with xfce - set by the desktop settings but never installed before</li>
-			<li>Setup runs in C.UTF-8 and initializes the container locale: prompt markers no longer garble</li>
-			<li>Sessions fall back to C.UTF-8 when the chosen locale is missing from the container</li>
+			<li><a href="#setup">Setup</a> runs in C.UTF-8 and initializes the container locale: prompt markers no longer garble</li>
+			<li><a href="#sessions">Sessions</a> fall back to C.UTF-8 when the chosen locale is missing from the container</li>
 		</ul>
 	</details>
 	<details>
