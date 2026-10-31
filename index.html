@@ -11,12 +11,16 @@
 <meta property="og:url" content="https://dextop.app/">
 <meta property="og:title" content="Dextop - Linux workstation for Android">
 <meta property="og:description" content="Dextop turns a modern Android device into a complete Linux workstation in minutes: Termux, a Debian, Ubuntu or Fedora container, an XFCE or i3 desktop on Termux:X11 with VirGL acceleration.">
-<meta property="og:image" content="https://dextop.app/dextop-session.png">
-<meta property="og:image:alt" content="A Dextop desktop session">
+<meta property="og:image" content="https://dextop.app/resources/web/social-preview.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="Dextop logo over a desktop session">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" type="image/svg+xml" href="dextop-blue.svg">
-<link rel="icon" type="image/png" href="dextop-blue.png">
-<link rel="apple-touch-icon" href="dextop-blue.png">
+<link rel="icon" type="image/svg+xml" href="resources/web/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="resources/web/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="resources/web/favicon-16x16.png">
+<link rel="apple-touch-icon" href="resources/web/apple-touch-icon.png">
+<link rel="manifest" href="resources/web/site.webmanifest">
 <style>
 * {
 	font-family: monospace;
@@ -214,6 +218,7 @@ code {
 	padding: 0;
 	margin: 25px 0;
 	display: grid;
+	align-items: start;
 	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 	gap: 10px 30px;
 }
@@ -356,9 +361,9 @@ th:last-child { border-radius: 0 20px 0 0; }
 	display: inline-block;
 	background: #383c4a;
 	color: #f5f6f7;
-	border-radius: 10px;
-	padding: 0 8px;
-	margin: 2px 0;
+	border-radius: 20px;
+	padding: 5px 10px;
+	margin: 3px 0;
 	font-size: 12px;
 	white-space: nowrap;
 }
@@ -425,7 +430,7 @@ html::-webkit-scrollbar-thumb:hover, .table::-webkit-scrollbar-thumb:hover, pre:
 	width: 100%;
 	padding: 10px 20px;
 	background: #383c4a;
-	border: 2px solid #4b5162;
+	border: 0;
 	border-radius: 20px;
 	color: #f5f6f7;
 	font-size: 14px;
@@ -433,7 +438,7 @@ html::-webkit-scrollbar-thumb:hover, .table::-webkit-scrollbar-thumb:hover, pre:
 }
 
 #command-search:focus {
-	border-color: #5294e2;
+	background: #404552;
 }
 
 .chips {
@@ -536,16 +541,17 @@ html::-webkit-scrollbar-thumb:hover, .table::-webkit-scrollbar-thumb:hover, pre:
 
 .values {
 	display: grid;
+	align-items: start;
 	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-	gap: 5px;
-	margin: 5px 0 0 0;
+	gap: 10px;
+	margin: 10px 0 0 0;
 }
 
 .value {
 	text-align: center;
 	background: #2f343f;
-	border-radius: 10px;
-	padding: 0 8px;
+	border-radius: 20px;
+	padding: 5px 10px;
 	font-size: 12px;
 	color: #f5f6f7;
 }
@@ -802,7 +808,7 @@ details ul {
 	<p class="lead">Dextop handles all the technical intricacies of a PRoot container so you can get right to work. It runs as a transient container system that talks to Android through the Termux shell to open viewers and applications as needed.</p>
 	<figure class="wide">
 		<button class="shot" data-full="dextop-session.png" aria-label="Enlarge A Dextop session on Termux:X11">
-			<img src="dextop-session.png" alt="A Dextop session on Termux:X11" loading="lazy">
+			<img src="dextop-session.png" alt="A Dextop session on Termux:X11" width="3840" height="2160" loading="lazy">
 		</button>
 		<figcaption>A Dextop session on Termux:X11</figcaption>
 	</figure>
@@ -1004,13 +1010,13 @@ details ul {
 	<div class="gallery two">
 		<figure>
 			<button class="shot" data-full="dextop-label.png" aria-label="Enlarge A .storage label at the root of a mount">
-				<img src="dextop-label.png" alt="A .storage label at the root of a mount" loading="lazy">
+				<img src="dextop-label.png" alt="A .storage label at the root of a mount" width="3840" height="2160" loading="lazy">
 			</button>
 			<figcaption>A .storage label at the root of a mount</figcaption>
 		</figure>
 		<figure>
 			<button class="shot" data-full="dextop-storage.png" aria-label="Enlarge Labelled mounts linked under ${PREFIX}/media">
-				<img src="dextop-storage.png" alt="Labelled mounts linked under ${PREFIX}/media" loading="lazy">
+				<img src="dextop-storage.png" alt="Labelled mounts linked under ${PREFIX}/media" width="970" height="578" loading="lazy">
 			</button>
 			<figcaption>Labelled mounts linked under ${PREFIX}/media</figcaption>
 		</figure>
@@ -1033,7 +1039,7 @@ details ul {
 	<p class="lead"><code>dextop-additions</code> hands desktop requests to the Android Activity Manager, which opens the matching Android application for you. Dextop only loads applications as needed, keeping the device smooth.</p>
 	<figure class="wide">
 		<button class="shot" data-full="dextop-additions.png" aria-label="Enlarge Dextop additions open native Android applications">
-			<img src="dextop-additions.png" alt="Dextop additions open native Android applications" loading="lazy">
+			<img src="dextop-additions.png" alt="Dextop additions open native Android applications" width="3840" height="2160" loading="lazy">
 		</button>
 		<figcaption>Dextop additions open native Android applications</figcaption>
 	</figure>
