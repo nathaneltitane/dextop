@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dextop - Linux workstation for Android</title>
+<meta name="description" content="Dextop turns a modern Android device into a complete Linux workstation in minutes: Termux, a Debian, Ubuntu or Fedora container, an XFCE or i3 desktop on Termux:X11 with VirGL acceleration.">
+<meta name="theme-color" content="#2f343f">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Dextop">
+<meta property="og:url" content="https://dextop.app/">
+<meta property="og:title" content="Dextop - Linux workstation for Android">
+<meta property="og:description" content="Dextop turns a modern Android device into a complete Linux workstation in minutes: Termux, a Debian, Ubuntu or Fedora container, an XFCE or i3 desktop on Termux:X11 with VirGL acceleration.">
+<meta property="og:image" content="https://dextop.app/dextop-session.png">
+<meta property="og:image:alt" content="A Dextop desktop session">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="dextop-blue.svg">
+<link rel="icon" type="image/png" href="dextop-blue.png">
+<link rel="apple-touch-icon" href="dextop-blue.png">
+<style>
+* {
+	font-family: monospace;
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+	scroll-padding-top: 20px;
+}
+
+body {
+	background: #2f343f;
+	color: #a7b0b7;
+	margin: 0;
+	padding: 0 0 100px 0;
+	font-size: 14px;
+	line-height: 1.6;
+	overflow-x: hidden;
+}
+
+h1, h2, h3, b, strong {
+	color: #f5f6f7;
+}
+
+h1, h2, h3 {
+	margin: 0;
+	line-height: 1.2;
+}
+
+a {
+	color: #5294e2;
+}
+
+a:hover {
+	font-weight: bold;
+}
+
+code {
+	color: #f5f6f7;
+}
+
+/* landing */
+
+.landing {
+	position: relative;
+	min-height: 100vh;
+	min-height: 100dvh;
+	overflow: hidden;
+}
+
+.backdrop {
+	position: absolute;
+	inset: 0;
+	background: url("dextop-session.png") center / cover no-repeat;
+	opacity: 0;
+	filter: blur(2px);
+	animation: backdrop-reveal 2s ease forwards;
+}
+
+@keyframes backdrop-reveal {
+	from { opacity: 0; transform: scale(1.75); }
+	to { opacity: 0.2; transform: scale(1); }
+}
+
+.landing-head {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 10px;
+	opacity: 0;
+	animation: fade-reveal 0.75s ease forwards;
+}
+
+.landing-head h1 {
+	font-size: clamp(22px, 4vw, 40px);
+}
+
+.landing-head p {
+	margin: 5px 0 0 0;
+}
+
+.landing-logo {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: min(36vw, 44vh, 380px);
+	height: min(36vw, 44vh, 380px);
+	color: #5294e2;
+	transform: translate(-50%, -55%);
+	opacity: 0;
+	animation: logo-reveal 1.25s ease 0.25s forwards;
+}
+
+.logo {
+	width: 100%;
+	height: 100%;
+}
+
+@keyframes logo-reveal {
+	from { opacity: 0; transform: translate(-50%, -45%) scale(0.85); }
+	to { opacity: 1; transform: translate(-50%, -55%) scale(1); }
+}
+
+.landing-foot {
+	position: absolute;
+	right: 0;
+	bottom: 80px;
+	max-width: 520px;
+	padding: 10px;
+	text-align: right;
+	opacity: 0;
+	animation: fade-reveal 0.75s ease 0.5s forwards;
+}
+
+.landing-foot p {
+	margin: 0 0 15px 0;
+}
+
+.landing-foot h2 {
+	font-size: clamp(20px, 3vw, 30px);
+}
+
+.tagline {
+	letter-spacing: 0.3em;
+}
+
+.buttons {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	gap: 10px;
+	margin: 0 0 20px 0;
+}
+
+.button {
+	background: #5294e2;
+	color: #f5f6f7;
+	border-radius: 20px;
+	padding: 10px 20px;
+	text-decoration: none;
+}
+
+.button:hover {
+	background: #4b84c9;
+}
+
+@keyframes fade-reveal {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+/* version */
+
+.version {
+	margin: 0;
+	padding: 25px 20px 0 20px;
+	text-align: center;
+}
+
+/* sections */
+
+.section {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 60px 20px 20px 20px;
+}
+
+.section-head {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	border-bottom: 2px solid #404552;
+	padding: 0 0 10px 0;
+	margin: 0 0 20px 0;
+}
+
+.section-head h2 {
+	font-size: clamp(18px, 2.6vw, 26px);
+}
+
+.section h3 {
+	margin: 30px 0 10px 0;
+	font-size: 16px;
+}
+
+.lead {
+	font-size: 15px;
+	max-width: 900px;
+}
+
+.points {
+	list-style: none;
+	padding: 0;
+	margin: 25px 0;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	gap: 10px 30px;
+}
+
+.points li {
+	border-left: 4px solid #5294e2;
+	padding: 2.5px 0 2.5px 10px;
+}
+
+.points code {
+	white-space: nowrap;
+}
+
+.steps {
+	margin: 25px 0;
+	padding: 0 0 0 30px;
+}
+
+.steps li {
+	margin: 0 0 10px 0;
+	padding: 0 0 0 5px;
+}
+
+.steps li::marker {
+	color: #5294e2;
+	font-weight: bold;
+}
+
+.more a {
+	font-weight: bold;
+}
+
+.reveal {
+	opacity: 0;
+	transform: translateY(40px);
+	transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+.reveal.shown {
+	opacity: 1;
+	transform: none;
+}
+
+/* icons */
+
+.icon {
+	width: 40px;
+	height: 40px;
+	display: block;
+	margin: 0 auto;
+}
+
+.icon.big {
+	width: 56px;
+	height: 56px;
+	margin: 0;
+	flex: none;
+}
+
+/* figures */
+
+figure {
+	margin: 0;
+}
+
+figure.wide {
+	margin: 25px 0;
+}
+
+.shot {
+	display: block;
+	width: 100%;
+	padding: 0;
+	border: 0;
+	border-radius: 20px;
+	background: #383c4a;
+	overflow: hidden;
+	cursor: zoom-in;
+}
+
+.shot img {
+	display: block;
+	width: 100%;
+	height: auto;
+	transition: transform 0.4s ease;
+}
+
+.shot:hover img {
+	transform: scale(1.02);
+}
+
+figcaption {
+	padding: 5px 5px 0 5px;
+	font-size: 12px;
+	text-align: center;
+}
+
+.gallery {
+	display: grid;
+	gap: 20px;
+	margin: 25px 0;
+}
+
+.gallery.two { grid-template-columns: repeat(2, 1fr); }
+
+/* tables and code */
+
+.table {
+	overflow-x: auto;
+	margin: 20px 0;
+}
+
+table {
+	border-collapse: collapse;
+	min-width: 100%;
+}
+
+th, td {
+	text-align: left;
+	vertical-align: top;
+	padding: 10px 15px;
+	border-bottom: 1px solid #404552;
+	white-space: nowrap;
+}
+
+th {
+	color: #f5f6f7;
+	background: #404552;
+}
+
+th:first-child { border-radius: 20px 0 0 0; }
+th:last-child { border-radius: 0 20px 0 0; }
+
+.table.wrap td {
+	white-space: normal;
+	min-width: 160px;
+}
+
+.package {
+	display: inline-block;
+	background: #383c4a;
+	color: #f5f6f7;
+	border-radius: 10px;
+	padding: 0 8px;
+	margin: 2px 0;
+	font-size: 12px;
+	white-space: nowrap;
+}
+
+pre {
+	background: #383c4a;
+	color: #f5f6f7;
+	border-radius: 20px;
+	padding: 15px 20px;
+	overflow-x: auto;
+}
+
+pre.diagram {
+	font-size: 12px;
+	line-height: 1.25;
+}
+
+/* scrollbars kept clear of the corner radii */
+
+.table::-webkit-scrollbar, pre::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+
+.table::-webkit-scrollbar-track, pre::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.table::-webkit-scrollbar-track:horizontal, pre::-webkit-scrollbar-track:horizontal {
+	margin: 0 20px;
+}
+
+.table::-webkit-scrollbar-track:vertical, pre::-webkit-scrollbar-track:vertical {
+	margin: 20px 0;
+}
+
+.table::-webkit-scrollbar-thumb, pre::-webkit-scrollbar-thumb {
+	background: #4b5162;
+	border-radius: 3px;
+}
+
+.table::-webkit-scrollbar-thumb:hover, pre::-webkit-scrollbar-thumb:hover {
+	background: #7c818c;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+	.table, pre {
+		scrollbar-width: thin;
+		scrollbar-color: #4b5162 transparent;
+	}
+}
+
+/* commands */
+
+.command-tools {
+	position: sticky;
+	top: 0;
+	z-index: 5;
+	background: #2f343f;
+	padding: 10px 0;
+}
+
+#command-search {
+	width: 100%;
+	padding: 10px 20px;
+	background: #383c4a;
+	border: 2px solid #4b5162;
+	border-radius: 20px;
+	color: #f5f6f7;
+	font-size: 14px;
+	outline: none;
+}
+
+#command-search:focus {
+	border-color: #5294e2;
+}
+
+.chips {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+	gap: 10px;
+	margin: 10px 0 0 0;
+}
+
+.chip {
+	text-align: center;
+	background: #383c4a;
+	color: #a7b0b7;
+	border: 0;
+	border-radius: 20px;
+	padding: 5px 10px;
+	font-size: 12px;
+	cursor: pointer;
+}
+
+.chip:hover {
+	font-weight: bold;
+}
+
+.chip.active {
+	background: #5294e2;
+	color: #f5f6f7;
+	font-weight: bold;
+}
+
+.command-list {
+	columns: 2 480px;
+	column-gap: 25px;
+}
+
+.command {
+	break-inside: avoid;
+	background: #383c4a;
+	border-radius: 14px;
+	padding: 15px;
+	margin: 0 0 20px 0;
+}
+
+.command-head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 0 10px;
+}
+
+.command-head h3 {
+	margin: 0;
+	font-size: 16px;
+}
+
+.command-meta {
+	font-size: 12px;
+	color: #7c818c;
+}
+
+.command p {
+	margin: 5px 0 0 0;
+}
+
+.command pre {
+	margin: 10px 0;
+	padding: 10px 15px;
+	border-radius: 10px;
+	background: #2f343f;
+	font-size: 12px;
+	white-space: pre-wrap;
+}
+
+.option {
+	border-top: 1px solid #404552;
+	padding: 8px 0 0 0;
+	margin: 8px 0 0 0;
+}
+
+.option code {
+	color: #f5f6f7;
+	font-weight: bold;
+}
+
+.option .argument {
+	color: #7c818c;
+	font-weight: normal;
+}
+
+.option p {
+	margin: 2px 0 0 0;
+}
+
+.marker {
+	color: #5294e2;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.values {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	gap: 5px;
+	margin: 5px 0 0 0;
+}
+
+.value {
+	text-align: center;
+	background: #2f343f;
+	border-radius: 10px;
+	padding: 0 8px;
+	font-size: 12px;
+	color: #f5f6f7;
+}
+
+.value i {
+	color: #7c818c;
+	font-style: normal;
+}
+
+.command-empty {
+	padding: 20px 0;
+}
+
+.command.hidden, .option.hidden {
+	display: none;
+}
+
+/* notices */
+
+details {
+	background: #383c4a;
+	border-radius: 14px;
+	padding: 10px 15px;
+	margin: 0 0 10px 0;
+}
+
+summary {
+	color: #f5f6f7;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+details ul {
+	margin: 10px 0 5px 0;
+	padding: 0 0 0 20px;
+}
+
+/* footer */
+
+#footer {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 80px;
+	background: #383c4a;
+	border-radius: 20px 20px 0 0;
+	overflow: hidden;
+	z-index: 20;
+	transform: translateY(80px);
+	animation: footer-reveal 0.75s ease 0.75s forwards;
+}
+
+@keyframes footer-reveal {
+	to { transform: none; }
+}
+
+.footer {
+	display: flex;
+	height: 80px;
+	padding: 0 10px;
+	overflow-x: auto;
+	overflow-y: hidden;
+	scrollbar-width: none;
+}
+
+.footer::-webkit-scrollbar {
+	display: none;
+}
+
+/* footer ends point to the buttons out of view */
+
+.footer-start,
+.footer-end {
+	flex: none;
+	align-self: center;
+	width: 40px;
+	border: 10px solid transparent;
+	opacity: 0;
+	transition: opacity 0.25s ease;
+}
+
+.footer-start {
+	border-left-color: #f5f6f7;
+	transform: translateX(50%);
+}
+
+.footer-end {
+	border-right-color: #f5f6f7;
+	transform: translateX(-50%);
+}
+
+.footer-scroll .footer-start,
+.footer-scroll .footer-end {
+	opacity: 1;
+}
+
+/* footer edges fade the buttons scrolling under them */
+
+.footer-border {
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	border: 10px solid #383c4a;
+	border-top: 0;
+	border-bottom: 0;
+	border-radius: 20px 20px 0 0;
+	box-shadow: inset 5px 0 10px #383c4a, inset -5px 0 10px #383c4a;
+	pointer-events: none;
+}
+
+.footer-inner {
+	display: flex;
+	margin: 0 auto;
+}
+
+.nav-button {
+	flex: none;
+	width: 80px;
+	padding: 10px 0 0 0;
+	color: #a7b0b7;
+	text-align: center;
+	text-decoration: none;
+	font-size: 12px;
+}
+
+.nav-button .icon {
+	transition: transform 0.2s ease;
+}
+
+.nav-button:hover .icon,
+.nav-button.current .icon {
+	transform: translateY(-3px);
+}
+
+.nav-button:hover,
+.nav-button.current {
+	color: #f5f6f7;
+	font-weight: bold;
+}
+
+.label {
+	display: block;
+}
+
+/* copyright */
+
+.copyright {
+	max-width: 1200px;
+	margin: 40px auto 0 auto;
+	padding: 20px;
+	border-top: 2px solid #404552;
+	font-size: 12px;
+}
+
+.copyright p {
+	margin: 0 0 10px 0;
+}
+
+/* viewer */
+
+#viewer {
+	position: fixed;
+	inset: 0;
+	z-index: 30;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	background: rgba(47, 52, 63, 0.95);
+	padding: 20px;
+	cursor: zoom-out;
+}
+
+#viewer.open {
+	display: flex;
+	animation: fade-reveal 0.25s ease;
+}
+
+#viewer img {
+	max-width: 100%;
+	max-height: 100%;
+	border-radius: 10px;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 800px) {
+	.landing-foot { left: 0; }
+	.section .gallery:has(> figure + figure) { display: flex; flex-wrap: nowrap; align-items: flex-start; gap: 15px; margin: 25px -20px; padding: 0 20px 10px 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 20px; scrollbar-width: none; }
+	.section .gallery:has(> figure + figure)::-webkit-scrollbar { display: none; }
+	.section .gallery:has(> figure + figure) > figure { flex: none; width: 82%; scroll-snap-align: center; }
+}
+
+@media (max-width: 520px), (max-height: 560px) {
+	.landing { display: flex; flex-direction: column; gap: 25px; padding: 0 0 80px 0; }
+	.landing-head, .landing-logo, .landing-foot { position: static; }
+	.landing-logo { width: min(56vw, 40vh, 260px); height: min(56vw, 40vh, 260px); margin: auto; transform: none; animation-name: fade-reveal; }
+	.landing-foot { max-width: none; }
+}
+
+@media (max-width: 520px) {
+	.gallery.two { grid-template-columns: 1fr; }
+	.points { grid-template-columns: 1fr; }
+	.command-list { columns: 1; }
+	.section { padding: 50px 15px 15px 15px; }
+	.section .gallery:has(> figure + figure) { margin: 25px -15px; padding: 0 15px 10px 15px; scroll-padding: 0 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*, *::before, *::after { animation-duration: 0.01s !important; transition: none !important; }
+	html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+	<symbol id="i-dextop" viewBox="0 0 270.93333 270.93335">
+		<g fill="none" stroke="currentColor" stroke-width="12.7" stroke-linecap="round">
+			<path d="M 31.83143,195.3005 V 75.63284 l 103.63524,-59.833829 103.63524,59.833835 -1e-5,119.667664 -103.63523,59.83383 -51.38528,-29.66731"/>
+			<path d="m 160.86666,171.60198 -8.46667,4.88823 1e-5,42.33334 8.46667,-4.88824"/>
+			<path d="m 211.66666,142.27258 8.46667,-4.88823 v 42.33334 l -8.46667,4.88823"/>
+			<path d="M 194.73333,152.4 177.8,203.2"/>
+		</g>
+	</symbol>
+</svg>
+
+<div class="landing" id="top">
+	<div class="backdrop"></div>
+	<div class="landing-head">
+		<h1>Dextop</h1>
+		<p>LINUX WORKSTATION FOR ANDROID</p>
+	</div>
+	<div class="landing-logo">
+		<svg class="logo" style="color:#5294e2" aria-hidden="true"><use href="#i-dextop"/></svg>
+	</div>
+	<div class="landing-foot">
+		<p>Dextop turns most modern Android devices into a complete Linux distribution workstation in a matter of minutes. No hassle or deep technical know-how required.</p>
+		<p>One command sets up Termux, a Debian, Ubuntu or Fedora container with your own user, and an XFCE or i3 desktop on the native Termux:X11 display with VirGL acceleration.</p>
+		<div class="buttons">
+			<a class="button" href="#install">Install</a>
+			<a class="button" href="#overview">Features</a>
+			<a class="button" href="#commands">Commands</a>
+		</div>
+		<h2 class="tagline">YOUR DESKTOP, IN YOUR POCKET.</h2>
+	</div>
+</div>
+
+<p class="version">Version // 2026-10-23</p>
+
+<section id="overview" class="section reveal">
+	<header class="section-head">
+		<svg class="icon big" style="color:#5294e2" aria-hidden="true"><use href="#i-dextop"/></svg>
+		<h2>OVERVIEW // A LINUX WORKSTATION ON ANDROID</h2>
+	</header>
+	<p class="lead">Dextop handles all the technical intricacies of a PRoot container so you can get right to work. It runs as a transient container system that talks to Android through the Termux shell to open viewers and applications as needed.</p>
+	<figure class="wide">
+		<button class="shot" data-full="dextop-session.png" aria-label="Enlarge A Dextop session on Termux:X11">
+			<img src="dextop-session.png" alt="A Dextop session on Termux:X11" loading="lazy">
+		</button>
+		<figcaption>A Dextop session on Termux:X11</figcaption>
+	</figure>
+	<ul class="points">
+		<li><b>Three distributions.</b> Debian, Ubuntu and Fedora base images, stable and popular with large knowledge bases. Debian 13 (trixie) is the default.</li>
+		<li><b>Just like a PC.</b> The base image is expanded to a full system with a real user profile, a working home directory and sudo rights.</li>
+		<li><b>Desktop or console.</b> A complete XFCE desktop, the i3 window manager, or a console only setup for command line and programming work.</li>
+		<li><b>Native display.</b> The Termux:X11 display server at the device's native resolution and DPI, with VNC as an alternative display path.</li>
+		<li><b>Hardware acceleration.</b> 3D rendering offloaded to the device GPU through VirGL and the Gallium driver framework, on the PRoot container side.</li>
+		<li><b>Unified storage.</b> Internal and external media detected, labelled and linked, with one home directory shared by Termux and every container.</li>
+		<li><b>Android integration.</b> Links, mail, messages, camera and music are handed to native Android applications through the Activity Manager.</li>
+		<li><b>No root.</b> Everything runs in the Android user space through Termux and PRoot: the device is never rooted.</li>
+		<li><b>Safe by default.</b> The home directory is archived before setup, and the whole setup can be restored or purged again.</li>
+		<li><b>Help everywhere.</b> Every utility answers <code>-h</code> with its usage and options, all listed in the Commands section below.</li>
+	</ul>
+	<h3>What it doesn't do</h3>
+	<ul class="points">
+		<li><b>No services.</b> Dextop does not load services or backends, so applications that need them, such as Snap and snapd, do not run.</li>
+		<li><b>No hardware probes.</b> Features that need restricted system directories or hardware access only work on a rooted device.</li>
+		<li><b>Patched tools.</b> htop, kill, pgrep, pkill, ps and top are linked from their Termux builds for the limited access Android allows.</li>
+	</ul>
+</section>
+
+<section id="install" class="section reveal">
+	<header class="section-head">
+		<svg class="icon big" style="color:#00aade" aria-hidden="true"><use href="#i-dextop"/></svg>
+		<h2>INSTALL // ONE COMMAND, TEN MINUTES</h2>
+	</header>
+	<p class="lead">Install Termux and Termux:X11, label your storage, and run one command. Back up your existing Termux setup first, following the Termux backup recommendations.</p>
+	<ul class="points">
+		<li><b>Device.</b> A modern Android device with a 64 bit ARM processor (ARM64 V8a), Android 7.0 or later. Android 11 to 13 can stop background processes: see the Phantom Process Killer.</li>
+		<li><b>Connection.</b> Medium to high speed internet for setup, updates and additional packages.</li>
+		<li><b>Space.</b> About 4 GB of free storage for Termux and the distribution container.</li>
+		<li><b>Peripherals.</b> A mouse, a keyboard, a power source for long sessions and, on phones, a monitor. Dextop is optimized for Samsung DeX.</li>
+	</ul>
+	<h3>Prepare</h3>
+	<ol class="steps">
+		<li><b>Get Termux from GitHub.</b> The Google Play Store packages are deprecated since November 2020: do not install them. Install the Termux and Termux:X11 APKs from their GitHub releases, and optionally Termux:API.</li>
+		<li><b>Allow unknown apps.</b> Settings &gt; Security and Privacy &gt; Install unknown apps &gt; Termux: the setup installs the companion applications for you.</li>
+		<li><b>Label your storage.</b> In the storage you want as home, create a .storage file with a label, as shown below.</li>
+	</ol>
+	<pre><code>echo 'Home' &gt; .storage</code></pre>
+	<h3>Install</h3>
+	<p>Open Termux and run the deployment script. Answer the user and distribution questions, press Allow for storage and Install for the add-ons, and the rest runs on its own in about 10 minutes.</p>
+	<pre><code>curl -s -L run.dxtp.app &gt; dextop &amp;&amp; bash dextop</code></pre>
+	<p>Choose another setup with an option: <code>bash dextop -e i3</code> for the i3 window manager, <code>bash dextop -c</code> for console access only, <code>t</code> or <code>n</code> for the Termux or container side alone.</p>
+	<h3>Use</h3>
+	<div class="table">
+		<table>
+			<thead>
+				<tr><th>Prompt</th><th>Where</th><th>Command</th></tr>
+			</thead>
+			<tbody>
+				<tr><td>green termux</td><td>Termux system</td><td><code>container-session -o</code> starts the Termux desktop</td></tr>
+				<tr><td>green termux</td><td>Termux system</td><td><code>container-session -d</code> logs into the container</td></tr>
+				<tr><td>fuschia termux</td><td>Container system</td><td><code>container-session -o</code> starts the container desktop</td></tr>
+				<tr><td>any</td><td>Logout</td><td>Ctrl+D or <code>exit</code> closes the session and goes up one level</td></tr>
+			</tbody>
+		</table>
+	</div>
+	<p>Opening Termux logs in and brings the graphical session up automatically. A recommended clean slate is a fresh Termux instance or profile, but Dextop also deploys over an existing setup.</p>
+	<p class="more"><a href="https://github.com/termux/termux-app/releases">Download Termux from GitHub ›</a></p>
+</section>
+
+<section id="setup" class="section reveal">
+	<header class="section-head">
+		<svg class="icon big" style="color:#a072b8" aria-hidden="true"><use href="#i-dextop"/></svg>
+		<h2>SETUP // WHAT THE DEPLOYMENT SCRIPT DOES</h2>
+	</header>
+	<p class="lead"><code>dextop</code> runs the whole setup in order, with Frobulator reporting every step. User information and distribution preferences are asked along the way, so stay attentive.</p>
+	<ol class="steps">
+		<li><b>Failsafe.</b> Refreshes the Termux repositories and packages so nothing is skipped on install.</li>
+		<li><b>Backup.</b> Archives the home directory to <code>${PREFIX}/bkp</code> before anything changes.</li>
+		<li><b>Preferences.</b> Links the Termux colors, font and properties.</li>
+		<li><b>Utilities.</b> Downloads the Dextop utilities into <code>~/.local/bin</code>.</li>
+		<li><b>Directories, additions and backgrounds.</b> Creates the setup directories, installs the Android handlers and the desktop backgrounds.</li>
+		<li><b>Login options.</b> Turns on automatic session start and shutdown, and prepares the update and audio switches.</li>
+		<li><b>Termux.</b> Installs the companion applications, links the storage and installs the Termux packages.</li>
+		<li><b>Container.</b> Downloads the image, initializes it, expands it to a full system, installs its packages and creates your user.</li>
+		<li><b>Desktop.</b> Links the shell files, file manager bookmarks, the i3 interface, icon themes and themes.</li>
+		<li><b>Session.</b> Moves the deployment script into <code>~/.local/bin</code> and starts the first session.</li>
+	</ol>
+	<p>Every step writes a checkpoint in <code>~/.dextop</code>, so running <code>bash dextop</code> again resumes where it stopped. The setup checkpoint is only written when every step succeeded. All prompts and outputs are logged to <code>${PREFIX}/var/log</code>.</p>
+	<h3>Files Dextop links</h3>
+	<div class="table">
+		<table>
+			<thead>
+				<tr><th>File</th><th>Link</th></tr>
+			</thead>
+			<tbody>
+				<tr><td><code>~/.termux/colors.properties</code></td><td><code>~/.local/bin/termux-colors</code></td></tr>
+				<tr><td><code>~/.termux/font.ttf</code></td><td><code>~/.local/bin/termux-font</code></td></tr>
+				<tr><td><code>~/.termux/termux.properties</code></td><td><code>~/.local/bin/termux-properties</code></td></tr>
+				<tr><td><code>~/.bashrc</code></td><td><code>~/.local/bin/bash-configuration</code></td></tr>
+				<tr><td><code>~/.bash_aliases</code></td><td><code>~/.local/bin/bash-aliases</code></td></tr>
+				<tr><td><code>~/.bash_functions</code></td><td><code>~/.local/bin/bash-functions</code></td></tr>
+				<tr><td><code>~/.bash_login</code></td><td><code>~/.local/bin/bash-login</code></td></tr>
+				<tr><td><code>~/.bash_logout</code></td><td><code>~/.local/bin/bash-logout</code></td></tr>
+				<tr><td><code>~/.bash_profile</code></td><td><code>~/.local/bin/bash-profile</code></td></tr>
+			</tbody>
+		</table>
+	</div>
+	<p>Dextop is Bash centric. All of these files can be customized and make a good base, but changes are at your own risk: bug reports stemming from modified scripts are closed.</p>
+</section>
+
+<section id="distributions" class="section reveal">
+	<header class="section-head">
+		<svg class="icon big" style="color:#cc575d" aria-hidden="true"><use href="#i-dextop"/></svg>
+		<h2>DISTRIBUTIONS // 12 CONTAINER IMAGES</h2>
+	</header>
+	<p class="lead">The container runs through PRoot with the Android system, storage and devices bound in, so it behaves like a normal Linux installation.</p>
+	<div class="table">
+		<table>
+			<thead>
+				<tr><th>Distribution</th><th>Version</th><th>Codename</th><th>Package manager</th><th>Command</th></tr>
+			</thead>
+			<tbody>
+				<tr><td>Debian</td><td>10</td><td>buster</td><td>apt</td><td><code>container-image -i debian 10</code></td></tr>
+				<tr><td>Debian</td><td>11</td><td>bullseye</td><td>apt</td><td><code>container-image -i debian 11</code></td></tr>
+				<tr><td>Debian</td><td>12</td><td>bookworm</td><td>apt</td><td><code>container-image -i debian 12</code></td></tr>
+				<tr><td>Debian</td><td>13 <b>// Default</b></td><td>trixie</td><td>apt</td><td><code>container-image -i debian 13</code></td></tr>
+				<tr><td>Ubuntu</td><td>18.04</td><td>bionic</td><td>apt</td><td><code>container-image -i ubuntu 18.04</code></td></tr>
+				<tr><td>Ubuntu</td><td>20.04</td><td>focal</td><td>apt</td><td><code>container-image -i ubuntu 20.04</code></td></tr>
+				<tr><td>Ubuntu</td><td>22.04</td><td>jammy</td><td>apt</td><td><code>container-image -i ubuntu 22.04</code></td></tr>
+				<tr><td>Ubuntu</td><td>24.04</td><td>noble</td><td>apt</td><td><code>container-image -i ubuntu 24.04</code></td></tr>
+				<tr><td>Fedora</td><td>41</td><td></td><td>dnf</td><td><code>container-image -i fedora 41</code></td></tr>
+				<tr><td>Fedora</td><td>42</td><td></td><td>dnf</td><td><code>container-image -i fedora 42</code></td></tr>
+				<tr><td>Fedora</td><td>43</td><td></td><td>dnf</td><td><code>container-image -i fedora 43</code></td></tr>
+				<tr><td>Fedora</td><td>44</td><td></td><td>dnf</td><td><code>container-image -i fedora 44</code></td></tr>
+			</tbody>
+		</table>
+	</div>
+	<ul class="points">
+		<li><b>Selection.</b> Without an image option the setup lists every supported image to pick by number. <code>container-image -s</code> shows the list.</li>
+		<li><b>Architecture.</b> The processor is checked against the image architectures before anything is downloaded.</li>
+		<li><b>Matching sources.</b> Container apt sources follow each release: archive, ports and non-free-firmware.</li>
+		<li><b>Locale.</b> Setup runs in C.UTF-8 and initializes the container locale. Sessions fall back to C.UTF-8 when the chosen locale is missing.</li>
+		<li><b>Hostname.</b> The container is called <code>dextop</code> by default, not after Android. Set another with <code>container-user -n</code>.</li>
+		<li><b>Several containers.</b> Containers live under <code>${PREFIX}/cnt/distribution/version</code>. <code>container-session -d</code> picks one, or lists them all to choose from.</li>
+	</ul>
+</section>
+
+<section id="sessions" class="section reveal">
+	<header class="section-head">
+		<svg class="icon big" style="color:#f6d32d" aria-hidden="true"><use href="#i-dextop"/></svg>
+		<h2>SESSIONS // DESKTOPS ON TERMUX:X11 OR VNC</h2>
+	</header>
+	<p class="lead"><code>container-session</code> starts and stops the graphical session, on Termux or inside the container. It is just like running a virtual machine on a computer and looking at it through a viewer.</p>
+	<div class="table">
+		<table>
+			<thead>
+				<tr><th>Command</th><th>Does</th></tr>
+			</thead>
+			<tbody>
+				<tr><td><code>container-session -o</code></td><td>Starts the session on Termux:X11, the default display</td></tr>
+				<tr><td><code>container-session -o vnc</code></td><td>Starts the session on x11vnc and opens the VNC viewer</td></tr>
+				<tr><td><code>container-session -x</code></td><td>Exits the session and stops the display server</td></tr>
+				<tr><td><code>container-session -u [User Name]</code></td><td>Logs in as another container user</td></tr>
+				<tr><td><code>container-session -d [Directory]</code></td><td>Logs into the container in that directory</td></tr>
+				<tr><td><code>container-session -f [Application]</code></td><td>Starts the session focused on one application</td></tr>
+				<tr><td><code>container-session -l</code></td><td>Lists the display server information and parameters</td></tr>
+				<tr><td><code>container-session -p vnc</code></td><td>Generates the VNC session password</td></tr>
+			</tbody>
+		</table>
+	</div>
+	<ul class="points">
+		<li><b>Termux or container.</b> The green prompt is the Termux system, the fuschia prompt the container. Each has its own desktop session.</li>
+		<li><b>User termux.</b> The default container user is <code>termux</code>. Add more with <code>container-user -u</code> and change passwords with <code>container-user -p</code>.</li>
+		<li><b>First login.</b> The first container login sets up the keyboard layout, locales and timezone once.</li>
+		<li><b>VNC resolution.</b> The VNC session asks for a resolution once and keeps it in <code>~/.vnc/selection</code>. Remove that file to choose again.</li>
+		<li><b>VNC viewers.</b> Remotix, RealVNC VNC Viewer or bVNC, with full screen or immersive modes.</li>
+		<li><b>Logout.</b> Ctrl+D, <code>logout</code> or <code>exit</code> stops the session and goes back to the Termux shell, or to the Android home screen.</li>
+	</ul>
+	<h3>Display and data paths</h3>
+	<div class="table">
+		<table>
+			<thead>
+				<tr><th>Path</th><th>Route</th></tr>
+			</thead>
+			<tbody>
+				<tr><td>Display</td><td>Container ► X Server ► Termux:X11 ► Display</td></tr>
+				<tr><td>Display</td><td>Container ► x11vnc ► VNC Viewer ► Display</td></tr>
+				<tr><td>Acceleration</td><td>Container ► VirGL ► Graphics ► GPU</td></tr>
+				<tr><td>Storage</td><td>Storage ► /storage ► proot bind ► Container</td></tr>
+				<tr><td>Storage</td><td>Storage ► /storage ► ${PREFIX}/media/link ► Home</td></tr>
+				<tr><td>Launch</td><td>Dextop ► termux-am ► Android Activities ► Termux:X11 / VNC Viewer</td></tr>
+			</tbody>
+		</table>
+	</div>
+	<p>XFCE compositing stays off: within Android's user space policy it costs performance and causes tearing.</p>
+</section>
+
+<section id="storage" class="section reveal">
+	<header class="section-head">
+		<svg class="icon big" style="color:#ff8080" aria-hidden="true"><use href="#i-dextop"/></svg>
+		<h2>STORAGE // ONE HOME FOR EVERY SYSTEM</h2>
+	</header>
+	<p class="lead"><code>termux-storage</code> asks for the storage permission, then links internal and external media for system wide access. Create the .storage labels before setup for recognizable names.</p>
+	<div class="gallery two">
+		<figure>
+			<button class="shot" data-full="dextop-label.png" aria-label="Enlarge A .storage label at the root of a mount">
+				<img src="dextop-label.png" alt="A .storage label at the root of a mount" loading="lazy">
+			</button>
+			<figcaption>A .storage label at the root of a mount</figcaption>
+		</figure>
+		<figure>
+			<button class="shot" data-full="dextop-storage.png" aria-label="Enlarge Labelled mounts linked under ${PREFIX}/media">
+				<img src="dextop-storage.png" alt="Labelled mounts linked under ${PREFIX}/media" loading="lazy">
+			</button>
+			<figcaption>Labelled mounts linked under ${PREFIX}/media</figcaption>
+		</figure>
+	</div>
+	<ul class="points">
+		<li><b>Detection.</b> Mounts under /storage are read from /proc/mounts, which avoids the /storage access limits of Android 11 and later, and filtered for SD cards, external drives and Chrome OS UUID mounts.</li>
+		<li><b>Labels.</b> Each mount is linked under <code>${PREFIX}/media</code> by the label in its .storage file: <code>echo internal &gt; /storage/self/primary/.storage</code> gives <code>internal -&gt; /storage/self/primary</code>.</li>
+		<li><b>No label.</b> Unlabelled mounts are linked by their own names or UUIDs.</li>
+		<li><b>Home.</b> A storage labelled <code>Home</code> holds the standard directories, linked into the home directory shared by Termux and every container.</li>
+		<li><b>Chrome OS.</b> Add a .storage file containing <code>Home</code> under My files so the links find your directories in every container.</li>
+		<li><b>Bookmarks.</b> Every mount is added to the file manager bookmarks with its label.</li>
+	</ul>
+</section>
+
+<section id="additions" class="section reveal">
+	<header class="section-head">
+		<svg class="icon big" style="color:#ffe680" aria-hidden="true"><use href="#i-dextop"/></svg>
+		<h2>ADDITIONS // ANDROID APPLICATIONS FROM THE DESKTOP</h2>
+	</header>
+	<p class="lead"><code>dextop-additions</code> hands desktop requests to the Android Activity Manager, which opens the matching Android application for you. Dextop only loads applications as needed, keeping the device smooth.</p>
+	<figure class="wide">
+		<button class="shot" data-full="dextop-additions.png" aria-label="Enlarge Dextop additions open native Android applications">
+			<img src="dextop-additions.png" alt="Dextop additions open native Android applications" loading="lazy">
+		</button>
+		<figcaption>Dextop additions open native Android applications</figcaption>
+	</figure>
+	<div class="table wrap">
+		<table>
+			<thead>
+				<tr><th>Command</th><th>Does</th><th>Takes</th></tr>
+			</thead>
+			<tbody>
+				<tr><td><code>dextop-additions -a</code></td><td>Run desktop environment activities through native Android application activities.</td><td><div class="values"><span class="value">google-chrome <i>&#124;</i> chrome</span><span class="value">google-mail <i>&#124;</i> gmail</span><span class="value">terminal</span></div></td></tr>
+				<tr><td><code>dextop-additions -c</code></td><td>Run desktop environment activities through native Android application actions.</td><td><div class="values"><span class="value">camera <i>&#124;</i> photo <i>&#124;</i> picture <i>&#124;</i> selfie</span><span class="value">music</span><span class="value">player <i>&#124;</i> song <i>&#124;</i> audio</span></div></td></tr>
+				<tr><td><code>dextop-additions -n</code></td><td>Handle desktop environment mimetypes through native Android applications.</td><td><div class="values"><span class="value">email <i>&#124;</i> mail</span><span class="value">browser <i>&#124;</i> link <i>&#124;</i> web</span><span class="value">message <i>&#124;</i> text <i>&#124;</i> sms</span><span class="value">file</span></div></td></tr>
+			</tbody>
+		</table>
+	</div>
+	<ul class="points">
+		<li><b>Slim system.</b> Music, mail, browsing and games run best in native Android applications, with hardware acceleration and the device features.</li>
+		<li><b>Default applications.</b> The desktop opens links, mail and files in Android applications through the mimetype handles.</li>
+		<li><b>Audio.</b> PulseAudio playback works but is heavy on the battery and processor. It is off by default.</li>
+	</ul>
+</section>
+
+<section id="switches" class="section reveal">
+	<header class="section-head">
+		<svg class="icon big" style="color:#6acfec" aria-hidden="true"><use href="#i-dextop"/></svg>
+		<h2>SWITCHES // LOGIN, LOGOUT, UPDATES AND AUDIO</h2>
+	</header>
+	<p class="lead">Dextop keeps its choices as small files in <code>~/.dextop</code>. Write the keyword in a file to turn a switch on, empty it to turn it off. Automatic login and logout are on after setup.</p>
+	<div class="table">
+		<table>
+			<thead>
+				<tr><th>Switch</th><th>File in ~/.dextop</th><th>On</th><th>Off</th></tr>
+			</thead>
+			<tbody>
+				<tr><td>Automatic session start on login</td><td><code>dextop-login</code></td><td><code>echo login > ~/.dextop/dextop-login</code></td><td><code>echo '' > ~/.dextop/dextop-login</code></td></tr>
+				<tr><td>Session and display shutdown on exit</td><td><code>dextop-logout</code></td><td><code>echo logout > ~/.dextop/dextop-logout</code></td><td><code>echo '' > ~/.dextop/dextop-logout</code></td></tr>
+				<tr><td>Utility updates on login</td><td><code>dextop-update</code></td><td><code>echo update > ~/.dextop/dextop-update</code></td><td><code>echo '' > ~/.dextop/dextop-update</code></td></tr>
+				<tr><td>Audio playback on login</td><td><code>dextop-audio</code></td><td><code>echo audio > ~/.dextop/dextop-audio</code></td><td><code>echo '' > ~/.dextop/dextop-audio</code></td></tr>
+			</tbody>
+		</table>
+	</div>
+	<ul class="points">
+		<li><b>Environment.</b> <code>dextop-environment</code> keeps the desktop chosen at setup: xfce, i3 or console.</li>
+		<li><b>Session.</b> <code>dextop-session</code> keeps the session command: xfce4-session, i3 or console.</li>
+		<li><b>Container.</b> <code>dextop-container</code> keeps the container directory, <code>${PREFIX}/cnt/debian/13</code> by default.</li>
+		<li><b>Login count.</b> <code>dextop-ticker</code> counts the logins shown on the welcome message.</li>
+		<li><b>Checkpoints.</b> One <code>dextop-...-checkpoint</code> file per setup step. Remove <code>~/.dextop</code> to run the whole setup again.</li>
+	</ul>
+</section>
+
+<section id="packages" class="section reveal">
+	<header class="section-head">
+		<svg class="icon big" style="color:#d4ade2" aria-hidden="true"><use href="#i-dextop"/></svg>
+		<h2>PACKAGES // 277 PACKAGES BY GROUP</h2>
+	</header>
+	<p class="lead"><code>termux-packages</code> and <code>container-packages</code> install these groups, read straight from the scripts. The container installs them under their Debian and Ubuntu or Fedora names.</p>
+	<div class="table wrap">
+		<table>
+			<thead>
+				<tr><th>Group</th><th>Termux</th><th>Debian, Ubuntu</th><th>Fedora</th></tr>
+			</thead>
+			<tbody>
+				<tr><td>Display</td><td><span class="package">virglrenderer</span> <span class="package">virglrenderer-android</span> <span class="package">xorg-server-xvfb</span> <span class="package">xwayland</span></td><td><span class="package">x11-apps</span> <span class="package">x11-common</span> <span class="package">x11-session-utils</span> <span class="package">x11-touchscreen-calibrator</span> <span class="package">x11-utils</span> <span class="package">x11-xfs-utils</span> <span class="package">x11-xkb-utils</span> <span class="package">x11-xserver-utils</span> <span class="package">xvfb</span> <span class="package">xwayland</span></td><td><span class="package">setxkbmap</span> <span class="package">xclock</span> <span class="package">xdpyinfo</span> <span class="package">xev</span> <span class="package">xeyes</span> <span class="package">xhost</span> <span class="package">xkbcomp</span> <span class="package">xmodmap</span> <span class="package">xorg-x11-server-Xvfb</span> <span class="package">xorg-x11-server-Xwayland</span> <span class="package">xorg-x11-xinit</span> <span class="package">xprop</span> <span class="package">xrandr</span> <span class="package">xrdb</span> <span class="package">xset</span> <span class="package">xsetroot</span> <span class="package">xwininfo</span></td></tr>
+				<tr><td>Documentation</td><td><span class="package">man</span></td><td><span class="package">man</span></td><td><span class="package">man-db</span> <span class="package">man-pages</span></td></tr>
+				<tr><td>Extensions</td><td><span class="package">termux-am</span> <span class="package">termux-am-socket</span> <span class="package">termux-api</span> <span class="package">termux-apt-repo</span> <span class="package">termux-auth</span> <span class="package">termux-create-package</span> <span class="package">termux-elf-cleaner</span> <span class="package">termux-exec</span> <span class="package">termux-gui-bash</span> <span class="package">termux-gui-c</span> <span class="package">termux-gui-package</span> <span class="package">termux-gui-pm</span> <span class="package">termux-keyring</span> <span class="package">termux-licenses</span> <span class="package">termux-services</span> <span class="package">termux-tools</span> <span class="package">termux-x11-nightly</span></td><td></td><td></td></tr>
+				<tr><td>i3</td><td><span class="package">bc</span> <span class="package">i3</span> <span class="package">i3status</span></td><td><span class="package">bc</span> <span class="package">i3</span> <span class="package">i3status</span></td><td><span class="package">bc</span> <span class="package">i3</span> <span class="package">i3status</span></td></tr>
+				<tr><td>i3 add-ons</td><td><span class="package">dmenu</span> <span class="package">dunst</span> <span class="package">feh</span> <span class="package">picom</span> <span class="package">rofi</span> <span class="package">st</span> <span class="package">surf</span> <span class="package">qiv</span></td><td><span class="package">dmenu</span> <span class="package">dunst</span> <span class="package">feh</span> <span class="package">picom</span> <span class="package">rofi</span> <span class="package">stterm</span> <span class="package">surf</span> <span class="package">qiv</span></td><td><span class="package">dmenu</span> <span class="package">dunst</span> <span class="package">feh</span> <span class="package">picom</span> <span class="package">rofi</span> <span class="package">st</span> <span class="package">surf</span> <span class="package">qiv</span></td></tr>
+				<tr><td>Icon themes</td><td><span class="package">papirus-icon-theme</span></td><td><span class="package">papirus-icon-theme</span></td><td><span class="package">papirus-icon-theme-dark</span></td></tr>
+				<tr><td>Multimedia</td><td><span class="package">ffmpeg</span> <span class="package">flac</span> <span class="package">gstreamer</span> <span class="package">gst-plugins-good</span> <span class="package">gst-plugins-bad</span> <span class="package">gst-plugins-ugly</span> <span class="package">gst-plugins-base</span></td><td></td><td></td></tr>
+				<tr><td>Repositories</td><td><span class="package">root-repo</span> <span class="package">x11-repo</span></td><td></td><td></td></tr>
+				<tr><td>Utilities</td><td><span class="package">apt</span> <span class="package">apt-file</span> <span class="package">blk-utils</span> <span class="package">fakeroot</span> <span class="package">git</span> <span class="package">hub</span> <span class="package">htop</span> <span class="package">jq</span> <span class="package">ncurses</span> <span class="package">ncurses-utils</span> <span class="package">openssh</span> <span class="package">proot</span> <span class="package">ranger</span> <span class="package">zip</span> <span class="package">unzip</span> <span class="package">bzip2</span> <span class="package">gzip</span> <span class="package">lzip</span> <span class="package">p7zip</span> <span class="package">pip</span> <span class="package">rsync</span> <span class="package">tree</span> <span class="package">wget</span></td><td><span class="package">apt</span> <span class="package">apt-file</span> <span class="package">curl</span> <span class="package">pip</span> <span class="package">sudo</span> <span class="package">ssh</span> <span class="package">tree</span></td><td><span class="package">dnf-plugins-core</span> <span class="package">curl</span> <span class="package">python3-pip</span> <span class="package">sudo</span> <span class="package">openssh-clients</span> <span class="package">openssh-server</span> <span class="package">tree</span></td></tr>
+				<tr><td>VNC</td><td><span class="package">x11vnc</span></td><td><span class="package">x11vnc</span></td><td><span class="package">x11vnc</span></td></tr>
+				<tr><td>XFCE</td><td><span class="package">xfce4</span> <span class="package">xfce4-appfinder</span> <span class="package">xfce4-dict</span> <span class="package">xfce4-notifyd</span> <span class="package">xfce4-panel</span> <span class="package">xfce4-screenshooter</span> <span class="package">xfce4-session</span> <span class="package">xfce4-settings</span> <span class="package">xfce4-taskmanager</span> <span class="package">xfce4-terminal</span> <span class="package">galculator</span> <span class="package">gigolo</span> <span class="package">mousepad</span> <span class="package">parole</span> <span class="package">thunar</span> <span class="package">thunar-archive-plugin</span> <span class="package">ristretto</span> <span class="package">tumbler</span></td><td><span class="package">xfce4</span> <span class="package">xfce4-appfinder</span> <span class="package">xfce4-clipman</span> <span class="package">xfce4-dict</span> <span class="package">xfce4-notifyd</span> <span class="package">xfce4-panel</span> <span class="package">xfce4-screenshooter</span> <span class="package">xfce4-session</span> <span class="package">xfce4-settings</span> <span class="package">xfce4-taskmanager</span> <span class="package">xfce4-terminal</span> <span class="package">galculator</span> <span class="package">gigolo</span> <span class="package">mousepad</span> <span class="package">parole</span> <span class="package">thunar</span> <span class="package">thunar-archive-plugin</span> <span class="package">ristretto</span> <span class="package">tumbler</span></td><td><span class="package">xfce4-session</span> <span class="package">xfwm4</span> <span class="package">xfdesktop</span> <span class="package">xfce4-appfinder</span> <span class="package">xfce4-clipman-plugin</span> <span class="package">xfce4-dict</span> <span class="package">xfce4-notifyd</span> <span class="package">xfce4-panel</span> <span class="package">xfce4-screenshooter</span> <span class="package">xfce4-settings</span> <span class="package">xfce4-taskmanager</span> <span class="package">xfce4-terminal</span> <span class="package">galculator</span> <span class="package">gigolo</span> <span class="package">mousepad</span> <span class="package">parole</span> <span class="package">Thunar</span> <span class="package">thunar-archive-plugin</span> <span class="package">ristretto</span> <span class="package">tumbler</span></td></tr>
+				<tr><td>XFCE themes</td><td><span class="package">adwaita-icon-theme</span> <span class="package">adwaita-icon-theme-full</span></td><td><span class="package">arc-theme</span> <span class="package">adwaita-icon-theme</span> <span class="package">adwaita-icon-theme-full</span></td><td><span class="package">arc-theme</span> <span class="package">adwaita-icon-theme</span> <span class="package">adwaita-icon-theme-legacy</span></td></tr>
+				<tr><td>XFCE plugins, not installed</td><td><span class="package">xfce4-calculator-plugin</span> <span class="package">xfce4-clipman-plugin</span> <span class="package">xfce4-datetime-plugin</span> <span class="package">xfce4-eyes-plugin</span> <span class="package">xfce4-mailwatch-plugin</span> <span class="package">xfce4-netload-plugin</span> <span class="package">xfce4-notes-plugin</span> <span class="package">xfce4-places-plugin</span> <span class="package">xfce4-timer-plugin</span> <span class="package">xfce4-wavelan-plugin</span> <span class="package">xfce4-whiskermenu-plugin</span></td><td><span class="package">xfce4-appmenu-plugin</span> <span class="package">xfce4-battery-plugin</span> <span class="package">xfce4-clipman-plugin</span> <span class="package">xfce4-cpufreq-plugin</span> <span class="package">xfce4-cpugraph-plugin</span> <span class="package">xfce4-datetime-plugin</span> <span class="package">xfce4-diskperf-plugin</span> <span class="package">xfce4-equake-plugin</span> <span class="package">xfce4-eyes-plugin</span> <span class="package">xfce4-fsguard-plugin</span> <span class="package">xfce4-genmon-plugin</span> <span class="package">xfce4-indicator-plugin</span> <span class="package">xfce4-mailwatch-plugin</span> <span class="package">xfce4-mount-plugin</span> <span class="package">xfce4-mpc-plugin</span> <span class="package">xfce4-netload-plugin</span> <span class="package">xfce4-notes-plugin</span> <span class="package">xfce4-panel-profiles</span> <span class="package">xfce4-places-plugin</span> <span class="package">xfce4-sensors-plugin</span> <span class="package">xfce4-smartbookmark-plugin</span> <span class="package">xfce4-sntray-plugin</span> <span class="package">xfce4-sntray-plugin-common</span> <span class="package">xfce4-statusnotifier-plugin</span> <span class="package">xfce4-systemload-plugin</span> <span class="package">xfce4-time-out-plugin</span> <span class="package">xfce4-timer-plugin</span> <span class="package">xfce4-verve-plugin</span> <span class="package">xfce4-wavelan-plugin</span> <span class="package">xfce4-weather-plugin</span> <span class="package">xfce4-whiskermenu-plugin</span> <span class="package">xfce4-xkb-plugin</span></td><td><span class="package">xfce4-battery-plugin</span> <span class="package">xfce4-cpufreq-plugin</span> <span class="package">xfce4-cpugraph-plugin</span> <span class="package">xfce4-datetime-plugin</span> <span class="package">xfce4-diskperf-plugin</span> <span class="package">xfce4-eyes-plugin</span> <span class="package">xfce4-fsguard-plugin</span> <span class="package">xfce4-genmon-plugin</span> <span class="package">xfce4-mailwatch-plugin</span> <span class="package">xfce4-mount-plugin</span> <span class="package">xfce4-mpc-plugin</span> <span class="package">xfce4-netload-plugin</span> <span class="package">xfce4-notes-plugin</span> <span class="package">xfce4-panel-profiles</span> <span class="package">xfce4-places-plugin</span> <span class="package">xfce4-sensors-plugin</span> <span class="package">xfce4-smartbookmark-plugin</span> <span class="package">xfce4-statusnotifier-plugin</span> <span class="package">xfce4-systemload-plugin</span> <span class="package">xfce4-time-out-plugin</span> <span class="package">xfce4-timer-plugin</span> <span class="package">xfce4-verve-plugin</span> <span class="package">xfce4-wavelan-plugin</span> <span class="package">xfce4-weather-plugin</span> <span class="package">xfce4-whiskermenu-plugin</span> <span class="package">xfce4-xkb-plugin</span></td></tr>
+				<tr><td>Fonts</td><td></td><td><span class="package">fonts-takao</span></td><td><span class="package">ipa-gothic-fonts</span></td></tr>
+				<tr><td>Security</td><td></td><td><span class="package">ca-certificates</span> <span class="package">openssl</span></td><td><span class="package">ca-certificates</span> <span class="package">openssl</span></td></tr>
+			</tbody>
+		</table>
+	</div>
+	<h3>Termux add-ons</h3>
+	<p><code>termux-addons</code> installs the Termux companion applications. Remove any earlier version first so no conflicting package signatures are inherited.</p>
+	<div class="table">
+		<table>
+			<thead>
+				<tr><th>Add-on</th><th>Package</th></tr>
+			</thead>
+			<tbody>
+				<tr><td>Termux:API</td><td><code>package-termux-api.apk</code></td></tr>
+				<tr><td>Termux:GUI</td><td><code>package-termux-gui.apk</code></td></tr>
+				<tr><td>Termux:Styling</td><td><code>package-termux-styling.apk</code></td></tr>
+				<tr><td>Termux:Tasker</td><td><code>package-termux-tasker.apk</code></td></tr>
+				<tr><td>Termux:X11</td><td><code>package-termux-x11.apk</code></td></tr>
+			</tbody>
+		</table>
+	</div>
+	<ul class="points">
+		<li><b>By desktop.</b> Console installs the base groups only. i3 adds the i3 and i3 add-on groups, XFCE the XFCE, font and theme groups and Papirus-Dark icons.</li>
+		<li><b>Removed.</b> ibus, snap and xterm are purged from the container.</li>
+	</ul>
+</section>
+
+<section id="maintenance" class="section reveal">
+	<header class="section-head">
+		<svg class="icon big" style="color:#a7b0b7" aria-hidden="true"><use href="#i-dextop"/></svg>
+		<h2>MAINTENANCE // UPDATE, BACK UP, RESTORE AND PURGE</h2>
+	</header>
+	<p class="lead">Dextop updates itself and its utilities from the latest release, and keeps your home directory safe with dated backups.</p>
+	<h3>Update</h3>
+	<p>Get the latest deployment script first, then update what you need. A wrong utility name lists every available one.</p>
+	<pre><code>curl -s -L run.dxtp.app &gt; "${HOME}"/.local/bin/dextop
+bash dextop -u all
+bash dextop -u utility all
+bash dextop -u utility [Utility Name]
+bash dextop -u shell</code></pre>
+	<p><code>termux-update</code> checks the Termux application itself against GitHub or F-Droid with <code>-g</code> or <code>-f</code> and offers the update.</p>
+	<h3>Back up, restore and purge</h3>
+	<div class="table">
+		<table>
+			<thead>
+				<tr><th>Command</th><th>Does</th></tr>
+			</thead>
+			<tbody>
+				<tr><td><code>bash dextop -b</code></td><td>Archives the home directory to <code>${PREFIX}/bkp/dextop-backup-YYYY-MM-DD-HH-MM-SS.tar.gz</code></td></tr>
+				<tr><td><code>bash dextop -r</code></td><td>Restores the latest backup</td></tr>
+				<tr><td><code>bash dextop -r earliest</code></td><td>Restores the backup taken before setup, clearing the links and files setup made</td></tr>
+				<tr><td><code>bash dextop -r [name]</code></td><td>Restores a backup by its file name</td></tr>
+				<tr><td><code>bash dextop -p</code></td><td>Removes Dextop and everything its setup installed, after confirmation, then offers the earliest backup</td></tr>
+			</tbody>
+		</table>
+	</div>
+	<p>Backups are kept outside the home directory, so no backup ever holds another, and purge keeps them.</p>
+	<h3>Issues</h3>
+	<ul class="points">
+		<li><b>Missing packages.</b> Spotty Termux repositories can skip packages. Run <code>bash dextop</code> again: it resumes from its checkpoints.</li>
+		<li><b>Start over.</b> Remove <code>~/.dextop</code> to reset the setup checkpoints without wiping Termux.</li>
+		<li><b>Broken script.</b> A slow or failed download can corrupt the deployment script: fetch it again and run <code>bash dextop -u utility all</code>.</li>
+		<li><b>Logs.</b> Attach the files from <code>${PREFIX}/var/log</code> to bug reports.</li>
+	</ul>
+	<p class="more"><a href="https://github.com/nathaneltitane/dextop/issues">Submit a bug report or feature request ›</a></p>
+</section>
+
+<section id="commands" class="section reveal">
+	<header class="section-head">
+		<svg class="icon big" style="color:#f5f6f7" aria-hidden="true"><use href="#i-dextop"/></svg>
+		<h2>COMMANDS // EVERY UTILITY AND OPTION</h2>
+	</header>
+	<p class="lead">The help of all 14 Dextop utilities, read from the scripts themselves: 46 options with their values and defaults. The marked letter is the short option. Search them, or pick a group.</p>
+	<div class="command-tools">
+		<input id="command-search" type="search" placeholder="Search commands and options" aria-label="Search commands and options">
+		<div id="command-groups" class="chips"></div>
+	</div>
+	<div id="command-list" class="command-list">
+		<article class="command" id="command-dextop" data-group="Setup">
+			<div class="command-body">
+				<div class="command-head"><h3>dextop</h3><span class="command-meta">Setup // 2026-10-23</span></div>
+				<p>The deployment script: sets up Termux, the container and the desktop, and updates, backs up, restores and purges the whole setup.</p>
+				<pre><code>dextop -c | -e [Environment] | -t | -n | -l | -i | -a | -d | -b | -r [Backup] | -u [Update] [Name] | -p | -h [OPTION]</code></pre>
+			</div>
+			<div class="option">
+				<code>-c, --console</code>
+				<p>Set up <span class="marker">c</span>onsole access to environment and utilities only.</p>
+			</div>
+			<div class="option">
+				<code>-e, --environment <span class="argument">[Environment]</span></code>
+				<p>Set up desktop <span class="marker">e</span>nvironment and utilities.</p>
+				<div class="values"><span class="value">i3</span><span class="value">xfce <i>// Default</i></span><span class="value">console <i>// Fallback</i></span></div>
+			</div>
+			<div class="option">
+				<code>-t, --termux</code>
+				<p>Set up <span class="marker">t</span>ermux environment and utilities only.</p>
+			</div>
+			<div class="option">
+				<code>-n, --container</code>
+				<p>Set up co<span class="marker">n</span>tainer environment and utilities only.</p>
+			</div>
+			<div class="option">
+				<code>-l, --link</code>
+				<p>Create <span class="marker">l</span>inks to unify storage directories.</p>
+			</div>
+			<div class="option">
+				<code>-i, --initialize</code>
+				<p>Run <span class="marker">i</span>nitialization of setup directories and load configurations.</p>
+			</div>
+			<div class="option">
+				<code>-a, --addons</code>
+				<p>Set up Termux <span class="marker">a</span>ddons and companion applications.</p>
+			</div>
+			<div class="option">
+				<code>-d, --additions</code>
+				<p>Set up Dextop a<span class="marker">d</span>ditions.</p>
+			</div>
+			<div class="option">
+				<code>-b, --backup</code>
+				<p>Create <span class="marker">b</span>ackup of the user home directory.</p>
+			</div>
+			<div class="option">
+				<code>-r, --restore <span class="argument">[Backup]</span></code>
+				<p>Run <span class="marker">r</span>estore of the user home directory from a backup.</p>
+				<div class="values"><span class="value">latest <i>// Default</i></span><span class="value">earliest <i>// Before setup</i></span><span class="value">name</span></div>
+			</div>
+			<div class="option">
+				<code>-u, --update <span class="argument">[Update] [Name]</span></code>
+				<p>Run <span class="marker">u</span>pdate of application packages and utilities.</p>
+				<div class="values"><span class="value">all</span><span class="value">dextop <i>// Default</i></span><span class="value">additions</span><span class="value">background</span><span class="value">interface</span><span class="value">preferences</span><span class="value">shell</span><span class="value">termux</span><span class="value">utility</span></div>
+			</div>
+			<div class="option">
+				<code>-p, --purge</code>
+				<p>Run <span class="marker">p</span>urge of setup components and packages - home restore offered.</p>
+			</div>
+			<div class="option">
+				<code>-h, --help</code>
+				<p>Show <span class="marker">h</span>elp and usage information.</p>
+			</div>
+		</article>
+		<article class="command" id="command-termux-packages" data-group="Termux">
+			<div class="command-body">
+				<div class="command-head"><h3>termux-packages</h3><span class="command-meta">Termux // 2026-10-22</span></div>
+				<p>Refreshes the Termux repositories and installs the Termux packages for the chosen desktop.</p>
+				<pre><code>termux-packages -h</code></pre>
+			</div>
+			<div class="option">
+				<code>-h, --help</code>
+				<p>Show <span class="marker">h</span>elp and usage information.</p>
+			</div>
+		</article>
+		<article class="command" id="command-termux-update" data-group="Termux">
+			<div class="command-body">
+				<div class="command-head"><h3>termux-update</h3><span class="command-meta">Termux // 2026-10-22</span></div>
+				<p>Compares the installed Termux application with its latest release and offers to download and install the update.</p>
+				<pre><code>termux-update -f | -g | [OPTION]</code></pre>
+			</div>
+			<div class="option">
+				<code>-f, --fdroid</code>
+				<p>Use <span class="marker">f</span>-droid as package update source.</p>
+			</div>
+			<div class="option">
+				<code>-g, --github</code>
+				<p>Use <span class="marker">g</span>ithub as package update source.</p>
+			</div>
+			<div class="option">
+				<code>-h, --help</code>
+				<p>Show <span class="marker">h</span>elp and usage information.</p>
+			</div>
+		</article>
+		<article class="command" id="command-termux-storage" data-group="Termux">
+			<div class="command-body">
+				<div class="command-head"><h3>termux-storage</h3><span class="command-meta">Termux // 2026-10-22</span></div>
+				<p>Asks for the storage permission, links the labelled internal and external media under ${PREFIX}/media and unifies the home directories.</p>
+				<pre><code>termux-storage -c | -e [Environment] | -t | -n | -b | -u [Update Type] [Utility Name] | [OPTION]</code></pre>
+			</div>
+			<div class="option">
+				<code>-l, --link</code>
+				<p>Create <span class="marker">l</span>inks to unify storage directories.</p>
+			</div>
+			<div class="option">
+				<code>-h, --help</code>
+				<p>Show <span class="marker">h</span>elp and usage information.</p>
+			</div>
+		</article>
+		<article class="command" id="command-termux-addons" data-group="Termux">
+			<div class="command-body">
+				<div class="command-head"><h3>termux-addons</h3><span class="command-meta">Termux // 2026-10-22</span></div>
+				<p>Downloads and installs the Termux companion applications, all of them or one by name.</p>
+				<pre><code>termux-addons -s [Selection Type] [Addon Name] | [OPTION]</code></pre>
+			</div>
+			<div class="option">
+				<code>-s, --selection <span class="argument">[Selection Type] [Addon Name]</span></code>
+				<p>Update application package <span class="marker">s</span>election.</p>
+				<div class="values"><span class="value">all</span><span class="value">addon</span></div>
+			</div>
+			<div class="option">
+				<code>-h, --help</code>
+				<p>Show <span class="marker">h</span>elp and usage information.</p>
+			</div>
+		</article>
+		<article class="command" id="command-termux-system" data-group="Termux">
+			<div class="command-body">
+				<div class="command-head"><h3>termux-system</h3><span class="command-meta">Termux // 2026-10-23</span></div>
+				<p>Prepares the container environment from Termux: the PATH, Android groups, hostname, hosts, nameserver and libc preload.</p>
+				<pre><code>termux-system -h</code></pre>
+			</div>
+			<div class="option">
+				<code>-h, --help</code>
+				<p>Show <span class="marker">h</span>elp and usage information.</p>
+			</div>
+		</article>
+		<article class="command" id="command-container-image" data-group="Container">
+			<div class="command-body">
+				<div class="command-head"><h3>container-image</h3><span class="command-meta">Container // 2026-10-23</span></div>
+				<p>Lists the supported images, checks the processor architecture, downloads and extracts the image and validates the system.</p>
+				<pre><code>container-image -i [Distribution Name] [Distribution Version] | -s [Selection] | [OPTION]</code></pre>
+			</div>
+			<div class="option">
+				<code>-i, --image <span class="argument">[Distribution Name] [Distribution Version]</span></code>
+				<p>Specify distribution <span class="marker">i</span>mage name and version.</p>
+			</div>
+			<div class="option">
+				<code>-s, --selection <span class="argument">[Selection]</span></code>
+				<p>Show setup <span class="marker">s</span>election options.</p>
+			</div>
+			<div class="option">
+				<code>-h, --help</code>
+				<p>Show <span class="marker">h</span>elp and usage information.</p>
+			</div>
+		</article>
+		<article class="command" id="command-container-initialization" data-group="Container">
+			<div class="command-body">
+				<div class="command-head"><h3>container-initialization</h3><span class="command-meta">Container // 2026-10-23</span></div>
+				<p>Runs the first package and repository update inside the container and sets up its locale.</p>
+				<pre><code>container-initialization -h</code></pre>
+			</div>
+			<div class="option">
+				<code>-h, --help</code>
+				<p>Show <span class="marker">h</span>elp and usage information.</p>
+			</div>
+		</article>
+		<article class="command" id="command-container-expansion" data-group="Container">
+			<div class="command-body">
+				<div class="command-head"><h3>container-expansion</h3><span class="command-meta">Container // 2026-10-22</span></div>
+				<p>Expands a minimized base image to a full system with unminimize when the image has it.</p>
+				<pre><code>container-expansion -h</code></pre>
+			</div>
+			<div class="option">
+				<code>-h, --help</code>
+				<p>Show <span class="marker">h</span>elp and usage information.</p>
+			</div>
+		</article>
+		<article class="command" id="command-container-packages" data-group="Container">
+			<div class="command-body">
+				<div class="command-head"><h3>container-packages</h3><span class="command-meta">Container // 2026-10-23</span></div>
+				<p>Installs the container packages for the chosen desktop under their distribution names and removes ibus, snap and xterm.</p>
+				<pre><code>container-packages -h</code></pre>
+			</div>
+			<div class="option">
+				<code>-h, --help</code>
+				<p>Show <span class="marker">h</span>elp and usage information.</p>
+			</div>
+		</article>
+		<article class="command" id="command-container-user" data-group="Container">
+			<div class="command-body">
+				<div class="command-head"><h3>container-user</h3><span class="command-meta">Container // 2026-10-23</span></div>
+				<p>Creates the container user with a home directory and sudo rights, sets passwords and the container hostname.</p>
+				<pre><code>container-user [OPTION]</code></pre>
+			</div>
+			<div class="option">
+				<code>-i, --information</code>
+				<p>Gather setup <span class="marker">i</span>nformation.</p>
+			</div>
+			<div class="option">
+				<code>-u, --username</code>
+				<p>Set up <span class="marker">u</span>ser account.</p>
+			</div>
+			<div class="option">
+				<code>-p, --password</code>
+				<p>Set or change user <span class="marker">p</span>assword.</p>
+			</div>
+			<div class="option">
+				<code>-n, --hostname</code>
+				<p>Set container host<span class="marker">n</span>ame.</p>
+			</div>
+			<div class="option">
+				<code>-h, --help</code>
+				<p>Show <span class="marker">h</span>elp and usage information.</p>
+			</div>
+		</article>
+		<article class="command" id="command-container-settings" data-group="Container">
+			<div class="command-body">
+				<div class="command-head"><h3>container-settings</h3><span class="command-meta">Container // 2026-10-22</span></div>
+				<p>Applies the Dextop look to the XFCE panel, session and terminal and restarts the affected modules.</p>
+				<pre><code>container-settings -h</code></pre>
+			</div>
+			<div class="option">
+				<code>-h, --help</code>
+				<p>Show <span class="marker">h</span>elp and usage information.</p>
+			</div>
+		</article>
+		<article class="command" id="command-container-session" data-group="Session">
+			<div class="command-body">
+				<div class="command-head"><h3>container-session</h3><span class="command-meta">Session // 2026-10-23</span></div>
+				<p>Starts and stops desktop sessions on Termux:X11 or VNC, for any container directory and user.</p>
+				<pre><code>container-session -o [Display Server] | -x | -l | -u [User Name] | -d [Directory] | -f [Application] | [OPTION]</code></pre>
+			</div>
+			<div class="option">
+				<code>-o, --start <span class="argument">[Display Server]</span></code>
+				<p>Start display session server and <span class="marker">o</span>pen the desktop session.</p>
+				<div class="values"><span class="value">vnc</span><span class="value">x11 <i>// Default</i></span></div>
+			</div>
+			<div class="option">
+				<code>-x, --stop</code>
+				<p>E<span class="marker">x</span>it the desktop session and stop the display session server.</p>
+			</div>
+			<div class="option">
+				<code>-l, --list</code>
+				<p>Show <span class="marker">l</span>ist of display server information and parameters.</p>
+			</div>
+			<div class="option">
+				<code>-p, --password</code>
+				<p>Generate display session <span class="marker">p</span>assword.</p>
+				<div class="values"><span class="value">vnc</span></div>
+			</div>
+			<div class="option">
+				<code>-u, --username <span class="argument">[User Name]</span></code>
+				<p>Specify <span class="marker">u</span>ser name for session login.</p>
+			</div>
+			<div class="option">
+				<code>-d, --directory <span class="argument">[Directory]</span></code>
+				<p>Specify container base <span class="marker">d</span>irectory containing /distribution/version.</p>
+			</div>
+			<div class="option">
+				<code>-f, --focus <span class="argument">[Application]</span></code>
+				<p>Set display session <span class="marker">f</span>ocus on the specified application.</p>
+			</div>
+			<div class="option">
+				<code>-h, --help</code>
+				<p>Show <span class="marker">h</span>elp and usage information.</p>
+			</div>
+		</article>
+		<article class="command" id="command-dextop-additions" data-group="Additions">
+			<div class="command-body">
+				<div class="command-head"><h3>dextop-additions</h3><span class="command-meta">Additions // 2026-10-04</span></div>
+				<p>Opens native Android applications for desktop activities, actions and mimetypes through the Activity Manager.</p>
+				<pre><code>dextop-additions -a [Activity] | -c [Action] | -n [Handle] | [OPTION]</code></pre>
+			</div>
+			<div class="option">
+				<code>-a, --activity <span class="argument">[Activity]</span></code>
+				<p>Run desktop environment <span class="marker">a</span>ctivities through native Android application activities.</p>
+				<div class="values"><span class="value">google-chrome <i>&#124;</i> chrome</span><span class="value">google-mail <i>&#124;</i> gmail</span><span class="value">terminal</span></div>
+			</div>
+			<div class="option">
+				<code>-c, --action <span class="argument">[Action]</span></code>
+				<p>Run desktop environment activities through native Android application a<span class="marker">c</span>tions.</p>
+				<div class="values"><span class="value">camera <i>&#124;</i> photo <i>&#124;</i> picture <i>&#124;</i> selfie</span><span class="value">music</span><span class="value">player <i>&#124;</i> song <i>&#124;</i> audio</span></div>
+			</div>
+			<div class="option">
+				<code>-n, --handle <span class="argument">[Handle]</span></code>
+				<p>Ha<span class="marker">n</span>dle desktop environment mimetypes through native Android applications.</p>
+				<div class="values"><span class="value">email <i>&#124;</i> mail</span><span class="value">browser <i>&#124;</i> link <i>&#124;</i> web</span><span class="value">message <i>&#124;</i> text <i>&#124;</i> sms</span><span class="value">file</span></div>
+			</div>
+			<div class="option">
+				<code>-h, --help</code>
+				<p>Show <span class="marker">h</span>elp and usage information.</p>
+			</div>
+		</article>
+	</div>
+	<p id="command-empty" class="command-empty" hidden>No command matches your search.</p>
+</section>
+
+<section id="news" class="section reveal">
+	<header class="section-head">
+		<svg class="icon big" style="color:#a072b8" aria-hidden="true"><use href="#i-dextop"/></svg>
+		<h2>NEWS // LATEST CHANGES</h2>
+	</header>
+	<p class="lead">The latest release notices from the Dextop repository.</p>
+	<details open>
+		<summary>2026-10-23</summary>
+		<ul>
+			<li>Default container is now Debian 13 (trixie) - was Debian 12 (bookworm)</li>
+			<li>Fedora images: 41, 42, 43 and 44 (dnf5) alongside Debian and Ubuntu</li>
+			<li>Debian and Ubuntu images rebuilt with the current filesystem utility</li>
+			<li>Image selection, codename-free Fedora entries and fixed <code>-i</code> image option</li>
+			<li>Container apt sources match each release (archive, ports, non-free-firmware)</li>
+			<li>Container hostname: <code>dextop</code> by default, no longer taken from Android - set with <code>container-user -n</code></li>
+			<li><code>container-user</code> only shows the information prompt when there is something to ask</li>
+			<li>Fedora package lists: container packages installed under their Fedora names through dnf</li>
+			<li>Papirus-Dark icon theme now installed with xfce - set by the desktop settings but never installed before</li>
+			<li>Setup runs in C.UTF-8 and initializes the container locale: prompt markers no longer garble</li>
+			<li>Sessions fall back to C.UTF-8 when the chosen locale is missing from the container</li>
+		</ul>
+	</details>
+	<details>
+		<summary>2026-10-21</summary>
+		<ul>
+			<li>New restore option: <code>-r</code> brings back the home directory from a backup</li>
+			<li>Backups now stored in <code>${PREFIX}/bkp</code> - sortable names, no backup holds another</li>
+			<li>Purge removes every setup component and offers to restore the home directory from before setup</li>
+			<li>Restoring the earliest backup clears the setup's home links first</li>
+		</ul>
+	</details>
+	<details>
+		<summary>2025-03-16</summary>
+		<ul>
+			<li>Fix <code>container-session</code> application/focus mode:</li>
+			<li>Show default if application not found or empty</li>
+			<li>Prettify prompt messaging for connect/disconnect</li>
+		</ul>
+	</details>
+	<details>
+		<summary>2025-03-15</summary>
+		<ul>
+			<li>Fix legacy groups override breaking proot container package installs</li>
+			<li>Now using docker.io stock minimal images for proot deployments</li>
+			<li>WIP: reimplement VNC functionality</li>
+		</ul>
+	</details>
+	<details>
+		<summary>2025-01-07</summary>
+		<ul>
+			<li>Fix environment options being passed and wrap setup to handle option delegations</li>
+		</ul>
+	</details>
+	<details>
+		<summary>2025-01-03</summary>
+		<ul>
+			<li>Fix debian images not being found:</li>
+			<li>Image archives now available through get.trmnl.me</li>
+		</ul>
+	</details>
+	<p class="more"><a href="https://github.com/nathaneltitane/dextop#notice">Read every notice ›</a></p>
+</section>
+
+<div class="copyright reveal">
+	<p>Dextop runs on <a href="https://github.com/termux/termux-app">Termux</a> and <a href="https://github.com/termux/termux-x11">Termux:X11</a>, with its scripts built on <a href="https://github.com/nathaneltitane/frobulator">Frobulator</a> and <a href="https://www.gnu.org/software/bash/">GNU Bash</a>.</p>
+	<p>Dextop is free software released under the GNU General Public License version 3.</p>
+	<p><a href="https://github.com/nathaneltitane/dextop/issues">Submit a bug report or feature request</a> // <a href="https://github.com/nathaneltitane">NATHANEL + TITANE</a></p>
+	<p>Android is a trademark of Google LLC, which does not sponsor, authorize or endorse this project.</p>
+</div>
+
+<nav id="footer" aria-label="Sections">
+	<div class="footer-border"></div>
+	<div class="footer">
+		<div class="footer-inner">
+			<span class="footer-start" aria-hidden="true"></span>
+			<a class="nav-button" href="#top"><svg class="icon" style="color:#5294e2" aria-hidden="true"><use href="#i-dextop"/></svg><span class="label">Home</span></a>
+			<a class="nav-button" href="#overview"><svg class="icon" style="color:#5294e2" aria-hidden="true"><use href="#i-dextop"/></svg><span class="label">Overview</span></a>
+			<a class="nav-button" href="#install"><svg class="icon" style="color:#00aade" aria-hidden="true"><use href="#i-dextop"/></svg><span class="label">Install</span></a>
+			<a class="nav-button" href="#setup"><svg class="icon" style="color:#a072b8" aria-hidden="true"><use href="#i-dextop"/></svg><span class="label">Setup</span></a>
+			<a class="nav-button" href="#distributions"><svg class="icon" style="color:#cc575d" aria-hidden="true"><use href="#i-dextop"/></svg><span class="label">Images</span></a>
+			<a class="nav-button" href="#sessions"><svg class="icon" style="color:#f6d32d" aria-hidden="true"><use href="#i-dextop"/></svg><span class="label">Sessions</span></a>
+			<a class="nav-button" href="#storage"><svg class="icon" style="color:#ff8080" aria-hidden="true"><use href="#i-dextop"/></svg><span class="label">Storage</span></a>
+			<a class="nav-button" href="#additions"><svg class="icon" style="color:#ffe680" aria-hidden="true"><use href="#i-dextop"/></svg><span class="label">Additions</span></a>
+			<a class="nav-button" href="#switches"><svg class="icon" style="color:#6acfec" aria-hidden="true"><use href="#i-dextop"/></svg><span class="label">Switches</span></a>
+			<a class="nav-button" href="#packages"><svg class="icon" style="color:#d4ade2" aria-hidden="true"><use href="#i-dextop"/></svg><span class="label">Packages</span></a>
+			<a class="nav-button" href="#maintenance"><svg class="icon" style="color:#a7b0b7" aria-hidden="true"><use href="#i-dextop"/></svg><span class="label">Maintenance</span></a>
+			<a class="nav-button" href="#commands"><svg class="icon" style="color:#f5f6f7" aria-hidden="true"><use href="#i-dextop"/></svg><span class="label">Commands</span></a>
+			<a class="nav-button" href="#news"><svg class="icon" style="color:#a072b8" aria-hidden="true"><use href="#i-dextop"/></svg><span class="label">News</span></a>
+			<a class="nav-button" href="https://github.com/nathaneltitane/dextop"><svg class="icon" style="color:#a7b0b7" aria-hidden="true"><use href="#i-dextop"/></svg><span class="label">GitHub</span></a>
+			<a class="nav-button" href="https://github.com/nathaneltitane/frobulator"><svg class="icon" style="color:#00aade" aria-hidden="true"><use href="#i-dextop"/></svg><span class="label">Frobulator</span></a>
+			<a class="nav-button" href="https://www.paypal.com/donate?hosted_button_id=ZW3CDCANHJCWJ"><svg class="icon" style="color:#cc575d" aria-hidden="true"><use href="#i-dextop"/></svg><span class="label">Donate</span></a>
+			<span class="footer-end" aria-hidden="true"></span>
+		</div>
+	</div>
+</nav>
+
+<div id="viewer" role="dialog" aria-label="Image viewer"><img alt=""></div>
+
+<script>
+// reveal sections as they scroll in
+
+const revealObserver = new IntersectionObserver((items) => {
+	items.forEach((item) => {
+		if (item.isIntersecting) {
+			item.target.classList.add('shown');
+			revealObserver.unobserve(item.target);
+		}
+	});
+}, { threshold: 0 });
+
+document.querySelectorAll('.reveal').forEach((node) => revealObserver.observe(node));
+
+// mark the footer button of the section in view
+
+const navFooter = document.querySelector('.footer');
+
+function navReveal(button) {
+	const left = button.offsetLeft - navFooter.offsetLeft;
+	const right = left + button.offsetWidth;
+
+	if (left >= navFooter.scrollLeft && right <= navFooter.scrollLeft + navFooter.clientWidth) return;
+
+	navFooter.scrollTo({ left: left - (navFooter.clientWidth - button.offsetWidth) / 2, behavior: 'smooth' });
+}
+
+// show the footer ends when the buttons do not all fit
+
+function navEnds() {
+	navFooter.classList.toggle('footer-scroll', navFooter.scrollWidth > navFooter.clientWidth + 1);
+}
+
+window.addEventListener('resize', navEnds);
+
+navEnds();
+
+// scroll the footer sideways with the mouse wheel
+
+navFooter.addEventListener('wheel', (event) => {
+	if (event.deltaY === 0 || navFooter.scrollWidth <= navFooter.clientWidth) return;
+
+	event.preventDefault();
+
+	navFooter.scrollLeft += event.deltaY;
+}, { passive: false });
+
+const navButtons = [...document.querySelectorAll('.nav-button[href^="#"]')];
+
+const navObserver = new IntersectionObserver((items) => {
+	items.forEach((item) => {
+		if (!item.isIntersecting) return;
+
+		navButtons.forEach((button) => {
+			const current = button.getAttribute('href') === '#' + item.target.id;
+
+			button.classList.toggle('current', current);
+
+			if (current) navReveal(button);
+		});
+	});
+}, { rootMargin: '-45% 0px -50% 0px' });
+
+document.querySelectorAll('.landing, .section').forEach((node) => navObserver.observe(node));
+
+// image viewer
+
+const viewer = document.getElementById('viewer');
+const viewerImage = viewer.querySelector('img');
+
+document.querySelectorAll('.shot').forEach((shot) => {
+	shot.addEventListener('click', () => {
+		viewerImage.src = shot.dataset.full;
+		viewerImage.alt = shot.querySelector('img').alt;
+		viewer.classList.add('open');
+	});
+});
+
+const viewerClose = () => viewer.classList.remove('open');
+
+viewer.addEventListener('click', viewerClose);
+
+document.addEventListener('keydown', (event) => {
+	if (event.key === 'Escape') viewerClose();
+});
+
+// command reference with search and group chips
+
+const commandSearch = document.getElementById('command-search');
+const commandChips = document.getElementById('command-groups');
+const commandEmpty = document.getElementById('command-empty');
+const commandCards = [...document.querySelectorAll('.command')];
+const commandGroups = [...new Set(commandCards.map((card) => card.dataset.group))];
+
+let commandGroup = '';
+
+function commandChip(name, label) {
+	const chip = document.createElement('button');
+
+	chip.className = 'chip' + (name === commandGroup ? ' active' : '');
+	chip.textContent = label;
+
+	chip.addEventListener('click', () => {
+		commandGroup = name;
+		commandChips.querySelectorAll('.chip').forEach((other) => other.classList.toggle('active', other === chip));
+		commandRender();
+	});
+
+	commandChips.appendChild(chip);
+}
+
+function commandRender() {
+	const words = commandSearch.value.toLowerCase().split(/\s+/).filter(Boolean);
+
+	let count = 0;
+
+	commandCards.forEach((card) => {
+		const head = card.querySelector('.command-body').textContent.toLowerCase();
+		const options = [...card.querySelectorAll('.option')];
+
+		let shown = !commandGroup || card.dataset.group === commandGroup;
+
+		if (shown && words.length) {
+			const headMatch = words.every((word) => head.includes(word));
+
+			let optionCount = 0;
+
+			options.forEach((option) => {
+				const match = headMatch || words.every((word) => (head + ' ' + option.textContent.toLowerCase()).includes(word));
+
+				option.classList.toggle('hidden', !match);
+
+				if (match) optionCount++;
+			});
+
+			shown = headMatch || optionCount > 0;
+		} else {
+			options.forEach((option) => option.classList.remove('hidden'));
+		}
+
+		card.classList.toggle('hidden', !shown);
+
+		if (shown) count++;
+	});
+
+	commandEmpty.hidden = count > 0;
+}
+
+commandChip('', 'All');
+
+commandGroups.forEach((group) => commandChip(group, group));
+
+commandSearch.addEventListener('input', commandRender);
+
+commandRender();
+</script>
+</body>
+</html>
