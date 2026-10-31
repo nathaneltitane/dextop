@@ -125,7 +125,6 @@ code {
 	position: absolute;
 	right: 0;
 	bottom: 80px;
-	max-width: 520px;
 	padding: 10px;
 	text-align: right;
 	opacity: 0;
@@ -133,11 +132,13 @@ code {
 }
 
 .landing-foot p {
-	margin: 0 0 15px 0;
+	max-width: 520px;
+	margin: 0 0 15px auto;
 }
 
 .landing-foot h2 {
-	font-size: clamp(20px, 3vw, 30px);
+	font-size: clamp(12px, 3.3vw, 30px);
+	white-space: nowrap;
 }
 
 .tagline {
@@ -377,12 +378,12 @@ pre.diagram {
 
 /* scrollbars kept clear of the corner radii */
 
-.table::-webkit-scrollbar, pre::-webkit-scrollbar {
+html::-webkit-scrollbar, .table::-webkit-scrollbar, pre::-webkit-scrollbar {
 	width: 6px;
 	height: 6px;
 }
 
-.table::-webkit-scrollbar-track, pre::-webkit-scrollbar-track {
+html::-webkit-scrollbar-track, .table::-webkit-scrollbar-track, pre::-webkit-scrollbar-track {
 	background: transparent;
 }
 
@@ -394,17 +395,17 @@ pre.diagram {
 	margin: 20px 0;
 }
 
-.table::-webkit-scrollbar-thumb, pre::-webkit-scrollbar-thumb {
+html::-webkit-scrollbar-thumb, .table::-webkit-scrollbar-thumb, pre::-webkit-scrollbar-thumb {
 	background: #4b5162;
 	border-radius: 3px;
 }
 
-.table::-webkit-scrollbar-thumb:hover, pre::-webkit-scrollbar-thumb:hover {
+html::-webkit-scrollbar-thumb:hover, .table::-webkit-scrollbar-thumb:hover, pre::-webkit-scrollbar-thumb:hover {
 	background: #7c818c;
 }
 
 @supports not selector(::-webkit-scrollbar) {
-	.table, pre {
+	html, .table, pre {
 		scrollbar-width: thin;
 		scrollbar-color: #4b5162 transparent;
 	}
@@ -1580,6 +1581,12 @@ bash dextop -u shell</code></pre>
 <div id="viewer" role="dialog" aria-label="Image viewer"><img alt=""></div>
 
 <script>
+// colour the landing logo with a random logo variant on every load
+
+const logoColours = ['#5294e2', '#ffe680', '#cc575d', '#f5f6f7', '#6acfec', '#d4ade2'];
+
+document.querySelector('.landing-logo .logo').style.color = logoColours[Math.floor(Math.random() * logoColours.length)];
+
 // reveal sections as they scroll in
 
 const revealObserver = new IntersectionObserver((items) => {
