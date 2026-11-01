@@ -1,0 +1,17 @@
+termux
+linux
+linuxondex
+android
+vnc
+xorg
+i3
+xfce4
+dextop
+ubuntu
+proot
+chroot
+vm
+termux-x11
+x11vnc
+xwayland
+xvfb
