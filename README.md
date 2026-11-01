@@ -75,8 +75,6 @@ Should you suspect any issues or errors, please provide a copy of those files wh
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/nathaneltitane/studworx?style=for-the-badge&logo=gnubash&logoColor=ffffff&label=STUDWORX)](https://github.com/nathaneltitane/studworx)
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/nathaneltitane/pixtrm?style=for-the-badge&logo=gnubash&logoColor=ffffff&label=PIXTRM)](https://github.com/nathaneltitane/pixtrm)
-
 [![GitHub Repo stars](https://img.shields.io/github/stars/nathaneltitane/nathaneltitane?style=for-the-badge&logo=gnubash&logoColor=ffffff&label=NATHANEL%20%2b%20TITANE)](https://github.com/nathaneltitane/nathaneltitane)
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/nathaneltitane/pewpewprints?style=for-the-badge&logo=gnubash&logoColor=ffffff&label=PEW%21%20PEW%21%20PRINTS)](https://github.com/nathaneltitane/pewpewprints)
