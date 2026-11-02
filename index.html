@@ -860,7 +860,7 @@
 
 			.copyright {
 				max-width: 1200px;
-				margin: 40px auto 0 auto;
+				margin: 20px auto 0 auto;
 				padding: 20px;
 				border-top: 2px solid #404552;
 				font-size: 12px;
@@ -868,6 +868,17 @@
 
 			.copyright p {
 				margin: 0 0 10px 0;
+			}
+
+			.copyright p:last-child {
+				margin: 0;
+			}
+
+			/* the last section ends flush so every site keeps the same gap above the credits */
+
+			.section > :last-child,
+			.section > :last-child > :last-child {
+				margin-bottom: 0;
 			}
 
 			/* viewer */
@@ -1860,11 +1871,11 @@ bash dextop -u shell</code></pre>
 		</section>
 
 		<div class="copyright reveal">
-			<p>Dextop runs on <a href="https://github.com/termux/termux-app">Termux</a> and <a href="https://github.com/termux/termux-x11">Termux:X11</a>, with its scripts built on <a href="https://frobulator.app">Frobulator</a> and <a href="https://www.gnu.org/software/bash/">GNU Bash</a>.</p>
+			<p>Dextop runs on <a href="https://github.com/termux/termux-app">Termux</a> and <a href="https://github.com/termux/termux-x11">Termux:X11</a>, with its scripts written for <a href="https://www.gnu.org/software/bash/">GNU Bash</a>.</p>
 			<p>Dextop is free software released under the GNU General Public License version 3.</p>
 			<p>Related projects: <a href="https://frobulator.app">Frobulator</a>, the shell scripting function library behind every Dextop script, and <a href="https://terminal.me">Terminal</a>, shell scripts, templates, dotfiles and utilities for Linux, which hosts the container images Dextop downloads.</p>
 			<p><a href="https://github.com/nathaneltitane/dextop/issues">Submit a bug report or feature request</a> // <a href="https://github.com/nathaneltitane">NATHANEL + TITANE</a></p>
-			<p>Android is a trademark of Google LLC, which does not sponsor, authorize or endorse this project.</p>
+			<p>Disclaimer: Linux is a registered trademark of Linus Torvalds. Android is a trademark of Google LLC. Neither sponsors, authorizes or endorses this project.</p>
 		</div>
 
 		<nav id="footer" aria-label="Sections">
