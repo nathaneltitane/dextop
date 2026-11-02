@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/nathaneltitane/dextop/main/dextop.svg" alt="dextop"><br><b>Linux workstation for Android</b><br>YOUR DESKTOP, IN YOUR POCKET.</p>
+<p align="center"><img src="https://raw.githubusercontent.com/nathaneltitane/dextop/main/dextop.svg" alt="dextop"><br><b>Linux based workstation for Android</b><br>YOUR DESKTOP, IN YOUR POCKET.</p>
 
 ---
 
@@ -14,7 +14,7 @@ Useful? Star the repository - it helps others find it.
 
 ### Welcome to [Dextop](https://dextop.app)
 
-Dextop turns most modern Android devices into a complete Linux distribution workstation in a matter of minutes!
+Dextop turns most modern Android devices into a complete Linux based workstation in a matter of minutes!
 No hassle or deep technical know-how required: **Dextop is easy and user friendly.**
 
 Every command, option, distribution and package is documented on [dextop.app](https://dextop.app) - release notes are listed in [NOTICE.md](NOTICE.md).
