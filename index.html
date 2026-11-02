@@ -161,7 +161,7 @@
 			.backdrop {
 				position: absolute;
 				inset: 0;
-				background: url("dextop-session.png") center / cover no-repeat;
+				background: url("resources/images/dextop-session.png") center / cover no-repeat;
 				opacity: 0;
 				filter: blur(2px);
 				animation: reveal-backdrop 2s ease forwards;
@@ -483,6 +483,7 @@
 			.table {
 				overflow-x: auto;
 				margin: 20px 0;
+				border-radius: 20px 20px 0 0;
 			}
 
 			table {
@@ -502,9 +503,6 @@
 				color: #f5f6f7;
 				background: #404552;
 			}
-
-			th:first-child { border-radius: 20px 0 0 0; }
-			th:last-child { border-radius: 0 20px 0 0; }
 
 			.table.wrap td {
 				white-space: normal;
@@ -546,11 +544,11 @@
 				background: transparent;
 			}
 
-			.table::-webkit-scrollbar-track:horizontal, pre::-webkit-scrollbar-track:horizontal {
+			pre::-webkit-scrollbar-track:horizontal {
 				margin: 0 20px;
 			}
 
-			.table::-webkit-scrollbar-track:vertical, pre::-webkit-scrollbar-track:vertical {
+			pre::-webkit-scrollbar-track:vertical {
 				margin: 20px 0;
 			}
 
@@ -1001,8 +999,8 @@
 			<p class="lead">Dextop handles all the technical intricacies of a PRoot container so you can get right to work. It runs as a transient container system that talks to Android through the Termux shell to open viewers and applications as needed.</p>
 
 			<figure class="wide">
-				<button class="shot" data-full="dextop-session.png" aria-label="Enlarge A Dextop session on Termux:X11">
-					<img src="dextop-session.png" alt="A Dextop session on Termux:X11" width="3840" height="2160" loading="lazy">
+				<button class="shot" data-full="resources/images/dextop-session.png" aria-label="Enlarge A Dextop session on Termux:X11">
+					<img src="resources/images/dextop-session.png" alt="A Dextop session on Termux:X11" width="3840" height="2160" loading="lazy">
 				</button>
 
 				<figcaption>A Dextop session on Termux:X11</figcaption>
@@ -1235,16 +1233,16 @@
 
 			<div class="gallery two">
 				<figure>
-					<button class="shot" data-full="dextop-label.png" aria-label="Enlarge A .storage label at the root of a mount">
-						<img src="dextop-label.png" alt="A .storage label at the root of a mount" width="3840" height="2160" loading="lazy">
+					<button class="shot" data-full="resources/images/dextop-label.png" aria-label="Enlarge A .storage label at the root of a mount">
+						<img src="resources/images/dextop-label.png" alt="A .storage label at the root of a mount" width="3840" height="2160" loading="lazy">
 					</button>
 
 					<figcaption>A .storage label at the root of a mount</figcaption>
 				</figure>
 
 				<figure>
-					<button class="shot" data-full="dextop-storage.png" aria-label="Enlarge Labelled mounts linked under ${PREFIX}/media">
-						<img src="dextop-storage.png" alt="Labelled mounts linked under ${PREFIX}/media" width="970" height="578" loading="lazy">
+					<button class="shot" data-full="resources/images/dextop-storage.png" aria-label="Enlarge Labelled mounts linked under ${PREFIX}/media">
+						<img src="resources/images/dextop-storage.png" alt="Labelled mounts linked under ${PREFIX}/media" width="970" height="578" loading="lazy">
 					</button>
 
 					<figcaption>Labelled mounts linked under ${PREFIX}/media</figcaption>
@@ -1270,8 +1268,8 @@
 			<p class="lead"><code>dextop-additions</code> hands desktop requests to the Android Activity Manager, which opens the matching Android application for you. Dextop only loads applications as needed, keeping the device smooth.</p>
 
 			<figure class="wide">
-				<button class="shot" data-full="dextop-additions.png" aria-label="Enlarge Dextop additions open native Android applications">
-					<img src="dextop-additions.png" alt="Dextop additions open native Android applications" width="3840" height="2160" loading="lazy">
+				<button class="shot" data-full="resources/images/dextop-additions.png" aria-label="Enlarge Dextop additions open native Android applications">
+					<img src="resources/images/dextop-additions.png" alt="Dextop additions open native Android applications" width="3840" height="2160" loading="lazy">
 				</button>
 
 				<figcaption>Dextop additions open native Android applications</figcaption>

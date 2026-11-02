@@ -252,6 +252,10 @@ date_backup=$(date +"%Y-%m-%d-%H-%M-%S")
 
 locale_setup="C.UTF-8"
 
+# background files location
+
+url_backgrounds="get.dxtp.app/resources/logo"
+
 # components ───────────────────────────────────────────────────────────────────
 
 # setup components
@@ -747,27 +751,27 @@ intent_backgrounds () {
 	# load background files
 
 	list_backgrounds=(
-		dextop-black.png
-		dextop-black.svg
-		dextop-blue.png
-		dextop-blue.svg
-		dextop-canary.png
-		dextop-canary.svg
-		dextop-coral.png
-		dextop-coral.svg
-		dextop-grey.png
-		dextop-grey.svg
-		dextop-sky.png
-		dextop-sky.svg
-		dextop-violet.png
-		dextop-violet.svg
+		logo-dextop-black.png
+		logo-dextop-black.svg
+		logo-dextop-blue.png
+		logo-dextop-blue.svg
+		logo-dextop-canary.png
+		logo-dextop-canary.svg
+		logo-dextop-coral.png
+		logo-dextop-coral.svg
+		logo-dextop-grey.png
+		logo-dextop-grey.svg
+		logo-dextop-sky.png
+		logo-dextop-sky.svg
+		logo-dextop-violet.png
+		logo-dextop-violet.svg
 	)
 
 	if [[ "${option}" = "update" ]]
 	then
-		intent_update get.dxtp.app "${HOME}"/.dextop ${list_backgrounds[@]}
+		intent_update "${url_backgrounds}" "${HOME}"/.dextop ${list_backgrounds[@]}
 	else
-		frobulator.download get.dxtp.app "${HOME}"/.dextop ${list_backgrounds[@]}
+		frobulator.download "${url_backgrounds}" "${HOME}"/.dextop ${list_backgrounds[@]}
 	fi
 
 	list_backgrounds=()
