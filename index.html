@@ -1935,7 +1935,7 @@ bash dextop -u shell</code></pre>
 
 						button.classList.toggle ( 'current', current ) ;
 
-						if ( current ) {
+						if ( current && ! page_end ( ) ) {
 
 							button_reveal ( button ) ;
 
@@ -1948,6 +1948,51 @@ bash dextop -u shell</code></pre>
 			}, { rootMargin: margin_navigation } ) ;
 
 			document.querySelectorAll ( '.landing, .section' ).forEach ( ( node ) => observer_navigation.observe ( node ) ) ;
+
+			// at the end of the page the last section is current and the footer scrolls to its own end
+
+			function page_end ( ) {
+
+				return window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2 ;
+
+			}
+
+			let end_shown = false ;
+
+			function end_reveal ( ) {
+
+				const end = page_end ( ) ;
+
+				if ( end === end_shown ) {
+
+					return ;
+
+				}
+
+				end_shown = end ;
+
+				if ( ! end ) {
+
+					return ;
+
+				}
+
+				const button_last = buttons_navigation [ buttons_navigation.length - 1 ] ;
+
+				buttons_navigation.forEach ( ( button ) => button.classList.toggle ( 'current', button === button_last ) ) ;
+
+				footer_navigation.scrollTo ( {
+					left: footer_navigation.scrollWidth,
+					behavior: 'smooth'
+				} ) ;
+
+			}
+
+			window.addEventListener ( 'scroll', end_reveal, { passive: true } ) ;
+
+			window.addEventListener ( 'resize', end_reveal ) ;
+
+			end_reveal ( ) ;
 
 			// image viewer
 
