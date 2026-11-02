@@ -355,6 +355,9 @@
 				height: 40px;
 				display: block;
 				margin: 0 auto;
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: contain;
 			}
 
 			.icon.big {
@@ -362,6 +365,76 @@
 				height: 56px;
 				margin: 0;
 				flex: none;
+			}
+
+			/* buttons */
+
+			.logo-button-red {
+				background-image: url(logo/logo-button-red.svg);
+			}
+
+			.logo-button-orange {
+				background-image: url(logo/logo-button-orange.svg);
+			}
+
+			.logo-button-amber {
+				background-image: url(logo/logo-button-amber.svg);
+			}
+
+			.logo-button-yellow {
+				background-image: url(logo/logo-button-yellow.svg);
+			}
+
+			.logo-button-lime {
+				background-image: url(logo/logo-button-lime.svg);
+			}
+
+			.logo-button-green {
+				background-image: url(logo/logo-button-green.svg);
+			}
+
+			.logo-button-emerald {
+				background-image: url(logo/logo-button-emerald.svg);
+			}
+
+			.logo-button-teal {
+				background-image: url(logo/logo-button-teal.svg);
+			}
+
+			.logo-button-cyan {
+				background-image: url(logo/logo-button-cyan.svg);
+			}
+
+			.logo-button-sky {
+				background-image: url(logo/logo-button-sky.svg);
+			}
+
+			.logo-button-blue {
+				background-image: url(logo/logo-button-blue.svg);
+			}
+
+			.logo-button-indigo {
+				background-image: url(logo/logo-button-indigo.svg);
+			}
+
+			.logo-button-violet {
+				background-image: url(logo/logo-button-violet.svg);
+			}
+
+			.logo-button-purple {
+				background-image: url(logo/logo-button-purple.svg);
+			}
+
+			.logo-button-fuchsia {
+				background-image: url(logo/logo-button-fuchsia.svg);
+			}
+
+			.logo-button-pink {
+				background-image: url(logo/logo-button-pink.svg);
+			}
+
+			.logo-button-rose {
+				background-image: url(logo/logo-button-rose.svg);
 			}
 
 			/* figures */
@@ -897,7 +970,7 @@
 
 		<section id="overview" class="section reveal">
 			<header class="head-section">
-				<svg class="icon big" style="color:#8fd18f" aria-hidden="true"><use href="#icon-dextop"/></svg>
+				<span class="icon big logo-button-orange" aria-hidden="true"></span>
 				<h2>OVERVIEW // A LINUX WORKSTATION ON ANDROID</h2>
 			</header>
 
@@ -935,7 +1008,7 @@
 
 		<section id="install" class="section reveal">
 			<header class="head-section">
-				<svg class="icon big" style="color:#f2d479" aria-hidden="true"><use href="#icon-dextop"/></svg>
+				<span class="icon big logo-button-amber" aria-hidden="true"></span>
 				<h2>INSTALL // ONE COMMAND, TEN MINUTES</h2>
 			</header>
 
@@ -984,7 +1057,7 @@
 
 		<section id="setup" class="section reveal">
 			<header class="head-section">
-				<svg class="icon big" style="color:#7fb2f0" aria-hidden="true"><use href="#icon-dextop"/></svg>
+				<span class="icon big logo-button-yellow" aria-hidden="true"></span>
 				<h2>SETUP // WHAT THE DEPLOYMENT SCRIPT DOES</h2>
 			</header>
 
@@ -1031,7 +1104,7 @@
 
 		<section id="distributions" class="section reveal">
 			<header class="head-section">
-				<svg class="icon big" style="color:#d29be0" aria-hidden="true"><use href="#icon-dextop"/></svg>
+				<span class="icon big logo-button-lime" aria-hidden="true"></span>
 				<h2>DISTRIBUTIONS // 12 CONTAINER IMAGES</h2>
 			</header>
 
@@ -1072,7 +1145,7 @@
 
 		<section id="sessions" class="section reveal">
 			<header class="head-section">
-				<svg class="icon big" style="color:#6fd0e0" aria-hidden="true"><use href="#icon-dextop"/></svg>
+				<span class="icon big logo-button-green" aria-hidden="true"></span>
 				<h2>SESSIONS // DESKTOPS ON TERMUX:X11 OR VNC</h2>
 			</header>
 
@@ -1130,7 +1203,7 @@
 
 		<section id="storage" class="section reveal">
 			<header class="head-section">
-				<svg class="icon big" style="color:#e6e9ef" aria-hidden="true"><use href="#icon-dextop"/></svg>
+				<span class="icon big logo-button-emerald" aria-hidden="true"></span>
 				<h2>STORAGE // ONE HOME FOR EVERY SYSTEM</h2>
 			</header>
 
@@ -1166,7 +1239,7 @@
 
 		<section id="additions" class="section reveal">
 			<header class="head-section">
-				<svg class="icon big" style="color:#9aa3ad" aria-hidden="true"><use href="#icon-dextop"/></svg>
+				<span class="icon big logo-button-teal" aria-hidden="true"></span>
 				<h2>ADDITIONS // ANDROID APPLICATIONS FROM THE DESKTOP</h2>
 			</header>
 
@@ -1203,7 +1276,7 @@
 
 		<section id="switches" class="section reveal">
 			<header class="head-section">
-				<svg class="icon big" style="color:#ffa8a8" aria-hidden="true"><use href="#icon-dextop"/></svg>
+				<span class="icon big logo-button-cyan" aria-hidden="true"></span>
 				<h2>SWITCHES // LOGIN, LOGOUT, UPDATES AND AUDIO</h2>
 			</header>
 
@@ -1235,7 +1308,7 @@
 
 		<section id="packages" class="section reveal">
 			<header class="head-section">
-				<svg class="icon big" style="color:#b8f0a0" aria-hidden="true"><use href="#icon-dextop"/></svg>
+				<span class="icon big logo-button-sky" aria-hidden="true"></span>
 				<h2>PACKAGES // 277 PACKAGES BY GROUP</h2>
 			</header>
 
@@ -1294,7 +1367,7 @@
 
 		<section id="maintenance" class="section reveal">
 			<header class="head-section">
-				<svg class="icon big" style="color:#fff2a0" aria-hidden="true"><use href="#icon-dextop"/></svg>
+				<span class="icon big logo-button-blue" aria-hidden="true"></span>
 				<h2>MAINTENANCE // UPDATE, BACK UP, RESTORE AND PURGE</h2>
 			</header>
 
@@ -1342,7 +1415,7 @@ bash dextop -u shell</code></pre>
 
 		<section id="commands" class="section reveal">
 			<header class="head-section">
-				<svg class="icon big" style="color:#a8c8ff" aria-hidden="true"><use href="#icon-dextop"/></svg>
+				<span class="icon big logo-button-indigo" aria-hidden="true"></span>
 				<h2>COMMANDS // EVERY UTILITY AND OPTION</h2>
 			</header>
 
@@ -1711,7 +1784,7 @@ bash dextop -u shell</code></pre>
 
 		<section id="news" class="section reveal">
 			<header class="head-section">
-				<svg class="icon big" style="color:#f0b0ff" aria-hidden="true"><use href="#icon-dextop"/></svg>
+				<span class="icon big logo-button-violet" aria-hidden="true"></span>
 				<h2>NEWS // LATEST CHANGES</h2>
 			</header>
 
@@ -1800,23 +1873,23 @@ bash dextop -u shell</code></pre>
 			<div class="footer">
 				<div class="inner-footer">
 					<span class="start-footer" aria-hidden="true"></span>
-					<a class="button-navigation" href="#top"><svg class="icon" style="color:#f28b82" aria-hidden="true"><use href="#icon-dextop"/></svg><span class="label">Home</span></a>
-					<a class="button-navigation" href="#overview"><svg class="icon" style="color:#8fd18f" aria-hidden="true"><use href="#icon-dextop"/></svg><span class="label">Overview</span></a>
-					<a class="button-navigation" href="#install"><svg class="icon" style="color:#f2d479" aria-hidden="true"><use href="#icon-dextop"/></svg><span class="label">Install</span></a>
-					<a class="button-navigation" href="#setup"><svg class="icon" style="color:#7fb2f0" aria-hidden="true"><use href="#icon-dextop"/></svg><span class="label">Setup</span></a>
-					<a class="button-navigation" href="#distributions"><svg class="icon" style="color:#d29be0" aria-hidden="true"><use href="#icon-dextop"/></svg><span class="label">Images</span></a>
-					<a class="button-navigation" href="#sessions"><svg class="icon" style="color:#6fd0e0" aria-hidden="true"><use href="#icon-dextop"/></svg><span class="label">Sessions</span></a>
-					<a class="button-navigation" href="#storage"><svg class="icon" style="color:#e6e9ef" aria-hidden="true"><use href="#icon-dextop"/></svg><span class="label">Storage</span></a>
-					<a class="button-navigation" href="#additions"><svg class="icon" style="color:#9aa3ad" aria-hidden="true"><use href="#icon-dextop"/></svg><span class="label">Additions</span></a>
-					<a class="button-navigation" href="#switches"><svg class="icon" style="color:#ffa8a8" aria-hidden="true"><use href="#icon-dextop"/></svg><span class="label">Switches</span></a>
-					<a class="button-navigation" href="#packages"><svg class="icon" style="color:#b8f0a0" aria-hidden="true"><use href="#icon-dextop"/></svg><span class="label">Packages</span></a>
-					<a class="button-navigation" href="#maintenance"><svg class="icon" style="color:#fff2a0" aria-hidden="true"><use href="#icon-dextop"/></svg><span class="label">Maintenance</span></a>
-					<a class="button-navigation" href="#commands"><svg class="icon" style="color:#a8c8ff" aria-hidden="true"><use href="#icon-dextop"/></svg><span class="label">Commands</span></a>
-					<a class="button-navigation" href="#news"><svg class="icon" style="color:#f0b0ff" aria-hidden="true"><use href="#icon-dextop"/></svg><span class="label">News</span></a>
-					<a class="button-navigation" href="https://github.com/nathaneltitane/dextop"><svg class="icon" style="color:#a0f0f0" aria-hidden="true"><use href="#icon-dextop"/></svg><span class="label">GitHub</span></a>
-					<a class="button-navigation" href="https://frobulator.app"><svg class="icon" style="color:#ffffff" aria-hidden="true"><use href="#icon-dextop"/></svg><span class="label">Frobulator</span></a>
-					<a class="button-navigation" href="https://terminal.me"><svg class="icon" style="color:#f0b0ff" aria-hidden="true"><use href="#icon-dextop"/></svg><span class="label">Terminal</span></a>
-					<a class="button-navigation" href="https://www.paypal.com/donate?hosted_button_id=ZW3CDCANHJCWJ"><svg class="icon" style="color:#f28b82" aria-hidden="true"><use href="#icon-dextop"/></svg><span class="label">Donate</span></a>
+					<a class="button-navigation" href="#top"><span class="icon logo-button-red" aria-hidden="true"></span><span class="label">Home</span></a>
+					<a class="button-navigation" href="#overview"><span class="icon logo-button-orange" aria-hidden="true"></span><span class="label">Overview</span></a>
+					<a class="button-navigation" href="#install"><span class="icon logo-button-amber" aria-hidden="true"></span><span class="label">Install</span></a>
+					<a class="button-navigation" href="#setup"><span class="icon logo-button-yellow" aria-hidden="true"></span><span class="label">Setup</span></a>
+					<a class="button-navigation" href="#distributions"><span class="icon logo-button-lime" aria-hidden="true"></span><span class="label">Images</span></a>
+					<a class="button-navigation" href="#sessions"><span class="icon logo-button-green" aria-hidden="true"></span><span class="label">Sessions</span></a>
+					<a class="button-navigation" href="#storage"><span class="icon logo-button-emerald" aria-hidden="true"></span><span class="label">Storage</span></a>
+					<a class="button-navigation" href="#additions"><span class="icon logo-button-teal" aria-hidden="true"></span><span class="label">Additions</span></a>
+					<a class="button-navigation" href="#switches"><span class="icon logo-button-cyan" aria-hidden="true"></span><span class="label">Switches</span></a>
+					<a class="button-navigation" href="#packages"><span class="icon logo-button-sky" aria-hidden="true"></span><span class="label">Packages</span></a>
+					<a class="button-navigation" href="#maintenance"><span class="icon logo-button-blue" aria-hidden="true"></span><span class="label">Maintenance</span></a>
+					<a class="button-navigation" href="#commands"><span class="icon logo-button-indigo" aria-hidden="true"></span><span class="label">Commands</span></a>
+					<a class="button-navigation" href="#news"><span class="icon logo-button-violet" aria-hidden="true"></span><span class="label">News</span></a>
+					<a class="button-navigation" href="https://github.com/nathaneltitane/dextop"><span class="icon logo-button-purple" aria-hidden="true"></span><span class="label">GitHub</span></a>
+					<a class="button-navigation" href="https://frobulator.app"><span class="icon logo-button-fuchsia" aria-hidden="true"></span><span class="label">Frobulator</span></a>
+					<a class="button-navigation" href="https://terminal.me"><span class="icon logo-button-pink" aria-hidden="true"></span><span class="label">Terminal</span></a>
+					<a class="button-navigation" href="https://www.paypal.com/donate?hosted_button_id=ZW3CDCANHJCWJ"><span class="icon logo-button-rose" aria-hidden="true"></span><span class="label">Donate</span></a>
 					<span class="end-footer" aria-hidden="true"></span>
 				</div>
 			</div>
