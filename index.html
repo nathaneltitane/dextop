@@ -850,12 +850,13 @@
 				display: block;
 			}
 
-			/* copyright */
+			/* copyright: inset like the sections so its separators span the same width as the section heading lines */
 
 			.copyright {
-				max-width: 1200px;
+				max-width: 1160px;
+				width: calc(100% - 40px);
 				margin: 20px auto 0 auto;
-				padding: 20px;
+				padding: 20px 0;
 				border-top: 2px solid #404552;
 				font-size: 12px;
 			}
@@ -939,6 +940,7 @@
 				.points { grid-template-columns: 1fr; }
 				.list-command { columns: 1; }
 				.section { padding: 50px 15px 15px 15px; }
+				.copyright { width: calc(100% - 30px); }
 				.section .gallery:has(> figure + figure) { margin: 25px -15px; padding: 0 15px 10px 15px; scroll-padding: 0 15px; }
 			}
 
