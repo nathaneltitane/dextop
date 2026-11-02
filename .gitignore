@@ -1,4 +1,5 @@
-/tools/dextop-site-update
-/tools/dextop-social-update
-/site/
+/tools/dextop-site
+/tools/dextop-social
+/resources/site/
+/index-social.html
 AGENTS.md
