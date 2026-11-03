@@ -116,6 +116,13 @@
 			html {
 				scroll-behavior: smooth;
 				scroll-padding-top: 20px;
+				scrollbar-width: none;
+			}
+
+			/* page scrollbar hidden so the fixed footer spans the full width */
+
+			html::-webkit-scrollbar {
+				display: none;
 			}
 
 			body {
@@ -165,6 +172,18 @@
 				opacity: 0;
 				filter: blur(2px);
 				animation: reveal-backdrop 2s ease forwards;
+			}
+
+			.backdrop pre {
+				margin: 0;
+				padding: 0;
+				background: none;
+				border-radius: 0;
+				overflow: visible;
+				color: #4b5162;
+				font-size: clamp(5px, 0.9vw, 11px);
+				line-height: 1.1;
+				zoom: 2;
 			}
 
 			@keyframes reveal-backdrop {
@@ -304,12 +323,12 @@
 			}
 
 			.points li {
-				border-left: 4px solid #5294e2;
+				border-left: 5px solid #5294e2;
 				padding: 2.5px 0 2.5px 10px;
 			}
 
 			.points code {
-				white-space: nowrap;
+				overflow-wrap: anywhere;
 			}
 
 			.steps {
@@ -355,8 +374,8 @@
 			}
 
 			.icon.big {
-				width: 56px;
-				height: 56px;
+				width: 55px;
+				height: 55px;
 				margin: 0;
 				flex: none;
 			}
@@ -446,14 +465,19 @@
 				width: 100%;
 				padding: 0;
 				border: 0;
-				border-radius: 3px;
+				border-radius: 5px;
 				background: #383c4a;
 				overflow: visible;
 				cursor: pointer;
 			}
 
+			figure.plain .shot {
+				background: transparent;
+				border-radius: 5px;
+			}
+
 			.shot img {
-				border-radius: 3px;
+				border-radius: 5px;
 				display: block;
 				width: 100%;
 				height: auto;
@@ -462,6 +486,22 @@
 
 			.shot:hover img {
 				transform: scale(1.02);
+			}
+
+			figure.video {
+				margin: 25px 0;
+			}
+
+			.gallery figure.video {
+				margin: 0;
+			}
+
+			figure.video video {
+				display: block;
+				width: 100%;
+				height: auto;
+				border-radius: 5px;
+				background: #1e2129;
 			}
 
 			figcaption {
@@ -477,6 +517,56 @@
 			}
 
 			.gallery.two { grid-template-columns: repeat(2, 1fr); }
+
+			.gallery.square .shot {
+				background: transparent;
+			}
+
+			.gallery.tall .shot img {
+				aspect-ratio: 960 / 1100;
+				object-fit: cover;
+				object-position: top;
+			}
+
+			.gallery.natural {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: flex-start;
+				gap: 20px;
+			}
+
+			.gallery.natural figure {
+				flex: 0 1 auto;
+				max-width: 100%;
+			}
+
+			.gallery.natural .shot {
+				background: transparent;
+				border-radius: 5px;
+			}
+
+			.gallery.natural .shot img {
+				width: auto;
+				max-width: 100%;
+				max-height: 520px;
+			}
+
+			.gallery.cube {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+				align-items: flex-start;
+				gap: 40px;
+			}
+
+			.gallery.cube .shot {
+				width: auto;
+				background: transparent;
+			}
+
+			.gallery.cube .shot img {
+				width: auto;
+			}
 
 			/* tables and code */
 
@@ -516,7 +606,7 @@
 				color: #f5f6f7;
 				border-radius: 20px;
 				padding: 5px 10px;
-				margin: 3px 0;
+				margin: 5px 0;
 				font-size: 12px;
 				white-space: nowrap;
 			}
@@ -537,15 +627,15 @@
 			/* scrollbars kept clear of the corner radii */
 
 			::-webkit-scrollbar {
-				width: 6px;
-				height: 6px;
+				width: 5px;
+				height: 5px;
 			}
 
 			::-webkit-scrollbar-track {
 				background: transparent;
 			}
 
-			pre::-webkit-scrollbar-track:horizontal {
+			::-webkit-scrollbar-track:horizontal {
 				margin: 0 20px;
 			}
 
@@ -555,7 +645,7 @@
 
 			::-webkit-scrollbar-thumb {
 				background: #4b5162;
-				border-radius: 3px;
+				border-radius: 5px;
 			}
 
 			::-webkit-scrollbar-thumb:hover {
@@ -569,9 +659,17 @@
 				}
 			}
 
+			/* options */
+
+			.options {
+				columns: 2 420px;
+				column-gap: 25px;
+				margin: 25px 0;
+			}
+
 			/* commands */
 
-			.tools-command {
+			.tools-search {
 				position: sticky;
 				top: 0;
 				z-index: 5;
@@ -579,7 +677,7 @@
 				padding: 10px 0;
 			}
 
-			#search-command {
+			#search {
 				width: 100%;
 				padding: 10px 20px;
 				background: #383c4a;
@@ -590,22 +688,27 @@
 				outline: none;
 			}
 
-			#search-command:focus {
+			#search:focus {
 				background: #404552;
 			}
 
 			.chips {
 				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-				grid-auto-rows: 28px;
+				grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+				grid-auto-rows: 30px;
 				gap: 10px;
-				max-height: calc(4 * 28px + 3 * 10px);
+				max-height: calc(4 * 30px + 3 * 10px);
 				overflow-y: auto;
-				margin: 10px 0 0 0;
+				scrollbar-gutter: stable;
+				padding-right: 10px;
+				margin: 10px -15px 0 0;
 			}
 
 			.chip {
 				text-align: center;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
 				background: #383c4a;
 				color: #a7b0b7;
 				border: 0;
@@ -632,7 +735,7 @@
 			.command {
 				break-inside: avoid;
 				background: #383c4a;
-				border-radius: 14px;
+				border-radius: 15px;
 				padding: 15px;
 				margin: 0 0 20px 0;
 			}
@@ -670,8 +773,8 @@
 
 			.option {
 				border-top: 1px solid #404552;
-				padding: 8px 0 0 0;
-				margin: 8px 0 0 0;
+				padding: 10px 0 0 0;
+				margin: 10px 0 0 0;
 			}
 
 			.option code {
@@ -685,7 +788,7 @@
 			}
 
 			.option p {
-				margin: 2px 0 0 0;
+				margin: 5px 0 0 0;
 			}
 
 			.marker {
@@ -700,6 +803,30 @@
 				grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 				gap: 10px;
 				margin: 10px 0 0 0;
+			}
+
+			.values li {
+				background: #2f343f;
+				border-radius: 10px;
+				padding: 5px 10px;
+				margin: 0 0 5px 0;
+				font-size: 12px;
+			}
+
+			.tag {
+				display: inline-block;
+				background: #404552;
+				color: #f5f6f7;
+				border-radius: 20px;
+				padding: 5px 10px;
+				margin: 5px 0;
+				font-size: 12px;
+				white-space: nowrap;
+			}
+
+			.tag.default {
+				background: #4b5162;
+				color: #2f343f;
 			}
 
 			.value {
@@ -724,11 +851,43 @@
 				display: none;
 			}
 
+			.list-help {
+				columns: 3 320px;
+				column-gap: 25px;
+			}
+
+			.group-help {
+				column-span: all;
+				break-inside: avoid;
+				margin: 20px 0 5px 0;
+				font-size: 15px;
+			}
+
+			.item-help {
+				break-inside: avoid;
+				background: #383c4a;
+				border-radius: 15px;
+				padding: 10px 15px;
+				margin: 0 0 10px 0;
+			}
+
+			.item-help b {
+				display: block;
+			}
+
+			.item-help p {
+				margin: 5px 0 0 0;
+			}
+
+			.empty-help {
+				padding: 20px 0;
+			}
+
 			/* notices */
 
 			details {
 				background: #383c4a;
-				border-radius: 14px;
+				border-radius: 15px;
 				padding: 10px 15px;
 				margin: 0 0 10px 0;
 			}
@@ -742,6 +901,16 @@
 			details ul {
 				margin: 10px 0 5px 0;
 				padding: 0 0 0 20px;
+			}
+
+			details li {
+				margin: 0 0 5px 0;
+			}
+
+			details code {
+				color: #f5f6f7;
+				font-weight: bold;
+				overflow-wrap: anywhere;
 			}
 
 			/* footer */
@@ -771,6 +940,12 @@
 				overflow-x: auto;
 				overflow-y: hidden;
 				scrollbar-width: none;
+			}
+
+			/* page scrollbar hidden so the fixed footer spans the full width */
+
+			html::-webkit-scrollbar {
+				display: none;
 			}
 
 			.footer::-webkit-scrollbar {
@@ -839,7 +1014,7 @@
 
 			.button-navigation:hover .icon,
 			.button-navigation.current .icon {
-				transform: translateY(-3px);
+				transform: translateY(-5px);
 			}
 
 			.button-navigation:hover,
@@ -886,8 +1061,8 @@
 
 			.copyright .avatar img {
 				display: block;
-				width: 64px;
-				height: 64px;
+				width: 65px;
+				height: 65px;
 			}
 
 			/* the last section ends flush so every site keeps the same gap above the credits */
@@ -919,15 +1094,91 @@
 			#viewer img {
 				max-width: 100%;
 				max-height: 100%;
-				border-radius: 3px;
+				border-radius: 5px;
 				box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 			}
 
+			/* terminal */
+
+			.terminal {
+				background: #1e2129;
+				color: #f5f6f7;
+				border-radius: 20px;
+				padding: 15px 20px;
+				font-size: 12px;
+				line-height: 1.4;
+				overflow-x: auto;
+				white-space: pre;
+			}
+
+			.bar-terminal {
+				display: flex;
+				gap: 5px;
+				margin: 0 0 10px 0;
+			}
+
+			.bar-terminal i {
+				width: 10px;
+				height: 10px;
+				border-radius: 50%;
+				background: #4b5162;
+			}
+
+			/* palette */
+
+			.swatches {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+				gap: 10px;
+				margin: 25px 0;
+			}
+
+			.swatch {
+				background: #383c4a;
+				border-radius: 15px;
+				padding: 10px;
+				font-size: 12px;
+			}
+
+			.swatch span {
+				display: block;
+				height: 35px;
+				border-radius: 10px;
+				margin: 0 0 10px 0;
+			}
+
+			.swatch b {
+				display: block;
+			}
+
+			.glyph {
+				font-weight: bold;
+				white-space: pre;
+			}
+
+			.command ul {
+				margin: 5px 0 0 0;
+				padding: 0 0 0 20px;
+			}
+
+			.command .table {
+				margin: 10px 0;
+			}
+
+			.command th, .command td {
+				padding: 5px 10px;
+				font-size: 12px;
+			}
+
 			@media (max-width: 800px) {
+				.gallery.three, .gallery.four { grid-template-columns: repeat(2, 1fr); }
 				.foot-landing { left: 0; }
 				.section .gallery:has(> figure + figure) { display: flex; flex-wrap: nowrap; align-items: flex-start; gap: 15px; margin: 25px -20px; padding: 0 20px 10px 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 20px; scrollbar-width: none; }
 				.section .gallery:has(> figure + figure)::-webkit-scrollbar { display: none; }
 				.section .gallery:has(> figure + figure) > figure { flex: none; width: 82%; scroll-snap-align: center; }
+				.section .gallery.natural:has(> figure + figure) > figure { width: auto; max-width: 82%; }
+				.section .gallery.cube:has(> figure + figure) { justify-content: center; overflow-x: visible; }
+				.section .gallery.cube:has(> figure + figure) > figure { width: auto; }
 			}
 
 			@media (max-width: 520px), (max-height: 560px) {
@@ -939,11 +1190,13 @@
 
 			@media (max-width: 520px) {
 				.gallery.two { grid-template-columns: 1fr; }
+				.gallery.two, .gallery.three, .gallery.four { grid-template-columns: 1fr; }
 				.points { grid-template-columns: 1fr; }
 				.list-command { columns: 1; }
 				.section { padding: 50px 15px 15px 15px; }
 				.copyright { width: calc(100% - 30px); }
 				.section .gallery:has(> figure + figure) { margin: 25px -15px; padding: 0 15px 10px 15px; scroll-padding: 0 15px; }
+				.gallery.natural .shot img { max-height: 440px; }
 			}
 
 			@media (prefers-reduced-motion: reduce) {
@@ -1447,8 +1700,8 @@ bash dextop -u shell</code></pre>
 
 			<p class="lead">The help of all 14 Dextop utilities, read from the scripts themselves: 46 options with their values and defaults. The marked letter is the short option. Search them, or pick a group.</p>
 
-			<div class="tools-command">
-				<input id="search-command" type="search" placeholder="Search commands and options" aria-label="Search commands and options">
+			<div class="tools-search">
+				<input id="search" type="search" placeholder="Search commands and options" aria-label="Search commands and options">
 				<div id="groups-command" class="chips"></div>
 			</div>
 
@@ -2131,7 +2384,7 @@ bash dextop -u shell</code></pre>
 
 			// command reference with search and group chips
 
-			const search_command = document.getElementById ( 'search-command' ) ;
+			const search_command = document.getElementById ( 'search' ) ;
 			const chips_command = document.getElementById ( 'groups-command' ) ;
 			const empty_command = document.getElementById ( 'empty-command' ) ;
 			const cards_command = [ ...document.querySelectorAll ( '.command' ) ] ;
