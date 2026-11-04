@@ -317,9 +317,8 @@
 				padding: 0;
 				margin: 25px 0;
 				display: grid;
-				align-items: start;
 				grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-				gap: 10px 30px;
+				gap: 10px 20px;
 			}
 
 			.points li {
@@ -560,7 +559,9 @@
 			}
 
 			.gallery.cube .shot {
+				display: block;
 				width: auto;
+				margin: 0 auto;
 				background: transparent;
 			}
 
@@ -1265,23 +1266,23 @@
 
 			<ul class="points">
 				<li><b>Three <a href="#distributions">distributions</a>.</b> Debian, Ubuntu and Fedora base images, stable and popular with large knowledge bases. Debian 13 (trixie) is the default.</li>
-				<li><b>Just like a PC.</b> The base image is expanded to a full system with a real user profile, a working home directory and sudo rights.</li>
-				<li><b>Desktop or console.</b> A complete XFCE desktop, the i3 window manager, or a console only <a href="#setup">setup</a> for command line and programming work.</li>
-				<li><b>Native display.</b> The Termux:X11 display server at the device's native resolution and DPI, with VNC as an alternative display path.</li>
-				<li><b>Hardware acceleration.</b> 3D rendering offloaded to the device GPU through VirGL and the Gallium driver framework, on the PRoot container side.</li>
 				<li><b>Unified <a href="#storage">storage</a>.</b> Internal and external media detected, labelled and linked, with one home directory shared by Termux and every container.</li>
+				<li><b>Hardware acceleration.</b> 3D rendering offloaded to the device GPU through VirGL and the Gallium driver framework, on the PRoot container side.</li>
+				<li><b>Native display.</b> The Termux:X11 display server at the device's native resolution and DPI, with VNC as an alternative display path.</li>
+				<li><b>Just like a PC.</b> The base image is expanded to a full system with a real user profile, a working home directory and sudo rights.</li>
 				<li><b>Android integration.</b> Links, mail, messages, camera and music are handed to native Android applications through the Activity Manager.</li>
-				<li><b>No root.</b> Everything runs in the Android user space through Termux and PRoot: the device is never rooted.</li>
+				<li><b>Desktop or console.</b> A complete XFCE desktop, the i3 window manager, or a console only <a href="#setup">setup</a> for command line and programming work.</li>
 				<li><b>Safe by default.</b> The home directory is archived before setup, and the whole setup can be restored or purged again.</li>
 				<li><b>Help everywhere.</b> Every utility answers <code>-h</code> with its usage and options, all listed in the <a href="#commands">Commands</a> section below.</li>
+				<li><b>No root.</b> Everything runs in the Android user space through Termux and PRoot: the device is never rooted.</li>
 			</ul>
 
 			<h3>What it doesn't do</h3>
 
 			<ul class="points">
+				<li><b>Patched tools.</b> htop, kill, pgrep, pkill, ps and top are linked from their Termux builds for the limited access Android allows.</li>
 				<li><b>No services.</b> Dextop does not load services or backends, so applications that need them, such as Snap and snapd, do not run.</li>
 				<li><b>No hardware probes.</b> Features that need restricted system directories or hardware access only work on a rooted device.</li>
-				<li><b>Patched tools.</b> htop, kill, pgrep, pkill, ps and top are linked from their Termux builds for the limited access Android allows.</li>
 			</ul>
 		</section>
 
@@ -1295,9 +1296,9 @@
 
 			<ul class="points">
 				<li><b>Device.</b> A modern Android device with a 64 bit ARM processor (ARM64 V8a), Android 7.0 or later. Android 11 to 13 can stop background processes: see the Phantom Process Killer.</li>
+				<li><b>Peripherals.</b> A mouse, a keyboard, a power source for long <a href="#sessions">sessions</a> and, on phones, a monitor. Dextop is optimized for Samsung DeX.</li>
 				<li><b>Connection.</b> Medium to high speed internet for setup, updates and additional <a href="#packages">packages</a>.</li>
 				<li><b>Space.</b> About 4 GB of free storage for Termux and the distribution container.</li>
-				<li><b>Peripherals.</b> A mouse, a keyboard, a power source for long <a href="#sessions">sessions</a> and, on phones, a monitor. Dextop is optimized for Samsung DeX.</li>
 			</ul>
 
 			<h3>Prepare</h3>
@@ -1413,12 +1414,12 @@
 			</div>
 
 			<ul class="points">
-				<li><b>Selection.</b> Without an image option the <a href="#setup">setup</a> lists every supported image to pick by number. <code>container-image -s</code> shows the list.</li>
+				<li><b>Several containers.</b> Containers live under <code>${PREFIX}/cnt/distribution/version</code>. <code>container-session -d</code> picks one, or lists them all to choose from.</li>
+				<li><b>Locale.</b> <a href="#setup">Setup</a> runs in C.UTF-8 and initializes the container locale. <a href="#sessions">Sessions</a> fall back to C.UTF-8 when the chosen locale is missing.</li>
+				<li><b>Selection.</b> Without an image option the setup lists every supported image to pick by number. <code>container-image -s</code> shows the list.</li>
+				<li><b>Hostname.</b> The container is called <code>dextop</code> by default, not after Android. Set another with <code>container-user -n</code>.</li>
 				<li><b>Architecture.</b> The processor is checked against the image architectures before anything is downloaded.</li>
 				<li><b>Matching sources.</b> Container apt sources follow each release: archive, ports and non-free-firmware.</li>
-				<li><b>Locale.</b> Setup runs in C.UTF-8 and initializes the container locale. <a href="#sessions">Sessions</a> fall back to C.UTF-8 when the chosen locale is missing.</li>
-				<li><b>Hostname.</b> The container is called <code>dextop</code> by default, not after Android. Set another with <code>container-user -n</code>.</li>
-				<li><b>Several containers.</b> Containers live under <code>${PREFIX}/cnt/distribution/version</code>. <code>container-session -d</code> picks one, or lists them all to choose from.</li>
 			</ul>
 		</section>
 
@@ -1450,12 +1451,12 @@
 			</div>
 
 			<ul class="points">
-				<li><b>Termux or container.</b> The green prompt is the Termux system, the fuschia prompt the container. Each has its own desktop session.</li>
 				<li><b>User termux.</b> The default container user is <code>termux</code>. Add more with <code>container-user -u</code> and change passwords with <code>container-user -p</code>.</li>
-				<li><b>First login.</b> The first container login sets up the keyboard layout, locales and timezone once.</li>
 				<li><b>VNC resolution.</b> The VNC session asks for a resolution once and keeps it in <code>~/.vnc/selection</code>. Remove that file to choose again.</li>
-				<li><b>VNC viewers.</b> Remotix, RealVNC VNC Viewer or bVNC, with full screen or immersive modes.</li>
 				<li><b>Logout.</b> Ctrl+D, <code>logout</code> or <code>exit</code> stops the session and goes back to the Termux shell, or to the Android home screen.</li>
+				<li><b>Termux or container.</b> The green prompt is the Termux system, the fuschia prompt the container. Each has its own desktop session.</li>
+				<li><b>First login.</b> The first container login sets up the keyboard layout, locales and timezone once.</li>
+				<li><b>VNC viewers.</b> Remotix, RealVNC VNC Viewer or bVNC, with full screen or immersive modes.</li>
 			</ul>
 
 			<h3>Display and data paths</h3>
@@ -1509,10 +1510,10 @@
 			<ul class="points">
 				<li><b>Detection.</b> Mounts under /storage are read from /proc/mounts, which avoids the /storage access limits of Android 11 and later, and filtered for SD cards, external drives and Chrome OS UUID mounts.</li>
 				<li><b>Labels.</b> Each mount is linked under <code>${PREFIX}/media</code> by the label in its .storage file: <code>echo internal &gt; /storage/self/primary/.storage</code> gives <code>internal -&gt; /storage/self/primary</code>.</li>
-				<li><b>No label.</b> Unlabelled mounts are linked by their own names or UUIDs.</li>
 				<li><b>Home.</b> A storage labelled <code>Home</code> holds the standard directories, linked into the home directory shared by Termux and every container.</li>
 				<li><b>Chrome OS.</b> Add a .storage file containing <code>Home</code> under My files so the links find your directories in every container.</li>
 				<li><b>Bookmarks.</b> Every mount is added to the file manager bookmarks with its label.</li>
+				<li><b>No label.</b> Unlabelled mounts are linked by their own names or UUIDs.</li>
 			</ul>
 		</section>
 
@@ -1577,11 +1578,11 @@
 			</div>
 
 			<ul class="points">
+				<li><b>Checkpoints.</b> One <code>dextop-...-checkpoint</code> file per setup step. Remove <code>~/.dextop</code> to run the whole setup again.</li>
+				<li><b>Container.</b> <code>dextop-container</code> keeps the container directory, <code>${PREFIX}/cnt/debian/13</code> by default.</li>
 				<li><b>Environment.</b> <code>dextop-environment</code> keeps the desktop chosen at setup: xfce, i3 or console.</li>
 				<li><b>Session.</b> <code>dextop-session</code> keeps the session command: xfce4-session, i3 or console.</li>
-				<li><b>Container.</b> <code>dextop-container</code> keeps the container directory, <code>${PREFIX}/cnt/debian/13</code> by default.</li>
 				<li><b>Login count.</b> <code>dextop-ticker</code> counts the logins shown on the welcome message.</li>
-				<li><b>Checkpoints.</b> One <code>dextop-...-checkpoint</code> file per setup step. Remove <code>~/.dextop</code> to run the whole setup again.</li>
 			</ul>
 		</section>
 
@@ -1683,9 +1684,9 @@ bash dextop -u shell</code></pre>
 			<h3>Issues</h3>
 
 			<ul class="points">
+				<li><b>Broken script.</b> A slow or failed download can corrupt the deployment script: fetch it again and run <code>bash dextop -u utility all</code>.</li>
 				<li><b>Missing <a href="#packages">packages</a>.</b> Spotty Termux repositories can skip packages. Run <code>bash dextop</code> again: it resumes from its checkpoints.</li>
 				<li><b>Start over.</b> Remove <code>~/.dextop</code> to reset the setup checkpoints without wiping Termux.</li>
-				<li><b>Broken script.</b> A slow or failed download can corrupt the deployment script: fetch it again and run <code>bash dextop -u utility all</code>.</li>
 				<li><b>Logs.</b> Attach the files from <code>${PREFIX}/var/log</code> to bug reports.</li>
 			</ul>
 
