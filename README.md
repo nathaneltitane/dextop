@@ -59,6 +59,22 @@ container-session -o
 
 ---
 
+### Credits:
+
+Dextop runs on [Termux](https://github.com/termux/termux-app) and [Termux:X11](https://github.com/termux/termux-x11), with its scripts written for [GNU Bash](https://www.gnu.org/software/bash/).
+
+Dextop is related to [Frobulator](https://github.com/nathaneltitane/frobulator), the shell scripting function library behind every Dextop script, and [Terminal](https://github.com/nathaneltitane/terminal), which hosts the container images Dextop downloads.
+
+---
+
+### License:
+
+Dextop is free software released under the GNU General Public License version 3 - see 'LICENSE.md'.
+
+Linux is a registered trademark of Linus Torvalds. Android is a trademark of Google LLC. Neither sponsors, authorizes or endorses this project.
+
+---
+
 ### Reports:
 
 [Submit bug report or feature request](https://github.com/nathaneltitane/dextop/issues)
