@@ -29,7 +29,7 @@ Install the [Termux](https://github.com/termux/termux-app/releases) and [Termux:
 
 **Link storage ↴**
 
-'cd' into the directory to use as home storage - paste or type:
+'cd' into the directory to use as home storage:
 
 ```
 echo 'Home' > .storage
@@ -37,7 +37,7 @@ echo 'Home' > .storage
 
 **Install ↴**
 
-Launch Dextop setup - paste or type:
+Launch Dextop setup:
 
 ```
 curl -s -L run.dxtp.app > dextop && bash dextop
@@ -45,13 +45,13 @@ curl -s -L run.dxtp.app > dextop && bash dextop
 
 **Use ↴**
 
-Log into the container - paste or type:
+Log into the container:
 
 ```
 container-session -d
 ```
 
-Start the graphical interface - paste or type:
+Start the graphical interface:
 
 ```
 container-session -o
