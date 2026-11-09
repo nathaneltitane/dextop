@@ -28,22 +28,27 @@ Every command, option, distribution and package is documented on [dextop.app](ht
 
   - Link storage ↴
     - 'cd' into the directory to use as home storage - paste or type:
+
     ```
     echo 'Home' > .storage
     ```
 
   - Install ↴
     - Launch Dextop setup - paste or type:
+
     ```
     curl -s -L run.dxtp.app > dextop && bash dextop
     ```
 
   - Use ↴
     - Log into the container - paste or type:
+
     ```
     container-session -d
     ```
+
     - Start the graphical interface - paste or type:
+
     ```
     container-session -o
     ```
