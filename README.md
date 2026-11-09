@@ -23,35 +23,39 @@ Every command, option, distribution and package is documented on [dextop.app](ht
 
 ### TL;DR
 
-  - Prepare ↴
-    - Install the [Termux](https://github.com/termux/termux-app/releases) and [Termux:X11](https://github.com/termux/termux-x11/releases) APKs - [Termux:API](https://github.com/termux/termux-api/releases) is optional but recommended - never the deprecated Google Play Store packages.
+**Prepare ↴**
 
-  - Link storage ↴
-    - 'cd' into the directory to use as home storage - paste or type:
+Install the [Termux](https://github.com/termux/termux-app/releases) and [Termux:X11](https://github.com/termux/termux-x11/releases) APKs - [Termux:API](https://github.com/termux/termux-api/releases) is optional but recommended - never the deprecated Google Play Store packages.
 
-      ```
-      echo 'Home' > .storage
-      ```
+**Link storage ↴**
 
-  - Install ↴
-    - Launch Dextop setup - paste or type:
+'cd' into the directory to use as home storage - paste or type:
 
-      ```
-      curl -s -L run.dxtp.app > dextop && bash dextop
-      ```
+```
+echo 'Home' > .storage
+```
 
-  - Use ↴
-    - Log into the container - paste or type:
+**Install ↴**
 
-      ```
-      container-session -d
-      ```
+Launch Dextop setup - paste or type:
 
-    - Start the graphical interface - paste or type:
+```
+curl -s -L run.dxtp.app > dextop && bash dextop
+```
 
-      ```
-      container-session -o
-      ```
+**Use ↴**
+
+Log into the container - paste or type:
+
+```
+container-session -d
+```
+
+Start the graphical interface - paste or type:
+
+```
+container-session -o
+```
 
 ---
 
