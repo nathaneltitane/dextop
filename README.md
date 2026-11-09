@@ -65,8 +65,10 @@ container-session -o
 
 Note:
 
-All setup dialogs, prompts, commands and binary execution outputs have been set to redirect to the ```'${PREFIX}/var/log'``` directory to keep output messages to a minimum.
+All setup dialogs, prompts, commands and binary execution outputs have been set to redirect to the `${PREFIX}/var/log` directory to keep output messages to a minimum.
 Should you suspect any issues or errors, please provide a copy of those files when submitting a bug report.
+
+---
 
 ### Projects:
 
