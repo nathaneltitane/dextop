@@ -1,0 +1,20 @@
+/* component stylesheets */
+
+@import url("body.css");
+@import url("landing.css");
+@import url("section.css");
+@import url("icon.css");
+@import url("logo.css");
+@import url("image.css");
+@import url("table.css");
+@import url("scrollbar.css");
+@import url("search.css");
+@import url("command.css");
+@import url("help.css");
+@import url("notice.css");
+@import url("footer.css");
+@import url("copyright.css");
+@import url("viewer.css");
+@import url("terminal.css");
+@import url("palette.css");
+@import url("media.css");

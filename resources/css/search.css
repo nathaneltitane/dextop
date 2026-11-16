@@ -1,0 +1,79 @@
+/* options */
+
+.options {
+	columns: 2 420px;
+	column-gap: 25px;
+	margin: 25px 0px 25px 0px;
+}
+
+/* commands */
+
+.search-tools {
+	position: sticky;
+	top: 0px;
+	z-index: 5;
+	background: #2f343f;
+	padding: 10px 0px 10px 0px;
+}
+
+/* search field */
+
+#search {
+	width: 100%;
+	padding: 10px 20px 10px 20px;
+	background: #383c4a;
+	border: 0px;
+	border-radius: 20px 20px 20px 20px;
+	color: #f5f6f7;
+	font-size: 15px;
+	outline: none;
+}
+
+/* search field focused */
+
+#search:focus {
+	background: #404552;
+}
+
+/* group chips grid */
+
+.chips {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+	grid-auto-rows: 30px;
+	gap: 10px;
+	max-height: calc(4 * 30px + 3 * 10px);
+	overflow-y: auto;
+	scrollbar-gutter: stable;
+	padding-right: 10px;
+	margin: 10px 0px 0px 0px;
+}
+
+/* group chip */
+
+.chip {
+	text-align: center;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	background: #383c4a;
+	color: #a7b0b7;
+	border: 0px;
+	border-radius: 20px 20px 20px 20px;
+	padding: 5px 10px 5px 10px;
+	cursor: pointer;
+}
+
+/* group chip hover */
+
+.chip:hover {
+	font-weight: bold;
+}
+
+/* selected group chip */
+
+.chip.active {
+	background: #5294e2;
+	color: #f5f6f7;
+	font-weight: bold;
+}

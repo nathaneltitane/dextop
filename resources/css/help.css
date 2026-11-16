@@ -1,0 +1,43 @@
+/* help entries in columns */
+
+.help-list {
+	columns: 3 320px;
+	column-gap: 25px;
+}
+
+/* help group title */
+
+.help-group {
+	column-span: all;
+	break-inside: avoid;
+	margin: 20px 0px 5px 0px;
+	font-size: 15px;
+}
+
+/* help entry card */
+
+.help-item {
+	break-inside: avoid;
+	background: #383c4a;
+	border-radius: 15px 15px 15px 15px;
+	padding: 10px 15px 10px 15px;
+	margin: 0px 0px 10px 0px;
+}
+
+/* help entry title */
+
+.help-item b {
+	display: block;
+}
+
+/* help entry text */
+
+.help-item p {
+	margin: 5px 0px 0px 0px;
+}
+
+/* no matching help */
+
+.help-empty {
+	padding: 20px 0px 20px 0px;
+}

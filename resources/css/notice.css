@@ -1,0 +1,37 @@
+/* notices */
+
+details {
+	background: #383c4a;
+	border-radius: 15px 15px 15px 15px;
+	padding: 10px 15px 10px 15px;
+	margin: 0px 0px 10px 0px;
+}
+
+/* folding list title */
+
+summary {
+	color: #f5f6f7;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+/* folding list items */
+
+details ul {
+	margin: 10px 0px 5px 0px;
+	padding: 0px 0px 0px 20px;
+}
+
+/* one folding item */
+
+details li {
+	margin: 0px 0px 5px 0px;
+}
+
+/* folding item code */
+
+details code {
+	color: #f5f6f7;
+	font-weight: bold;
+	overflow-wrap: anywhere;
+}

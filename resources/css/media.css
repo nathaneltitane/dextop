@@ -1,0 +1,122 @@
+/* tablet layout */
+
+@media (max-width: 800px) {
+	.landing-foot {
+		left: 0px;
+	}
+
+	.section .gallery:not(.one, .scroll):has(> figure ~ figure) {
+		display: flex;
+		flex-wrap: nowrap;
+		align-items: flex-start;
+		gap: 15px;
+		margin: 25px -20px 25px -20px;
+		padding: 0px 20px 10px 20px;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scroll-padding: 0px 20px 0px 20px;
+		scrollbar-width: none;
+	}
+
+	.section .gallery:not(.one, .scroll):has(> figure ~ figure)::-webkit-scrollbar {
+		display: none;
+	}
+
+	.section .gallery:not(.one, .scroll):has(> figure ~ figure) > figure {
+		flex: none;
+		width: 82%;
+		scroll-snap-align: center;
+	}
+
+	.section .gallery.natural .break {
+		display: none;
+	}
+
+	.section .gallery.scroll .shot img {
+		height: min(260px, calc(var(--height-image, 260) * 1px));
+	}
+
+	.section .gallery.natural:has(> figure ~ figure) > figure {
+		width: calc(var(--width-image, 300) * 1px);
+		max-width: 82%;
+	}
+
+	.section .gallery.cube:has(> figure ~ figure) {
+		justify-content: center;
+		overflow-x: visible;
+	}
+
+	.section .gallery.cube:has(> figure ~ figure) > figure {
+		width: auto;
+	}
+}
+
+/* small screen landing */
+
+@media (max-width: 520px), (max-height: 560px) {
+	.landing {
+		display: flex;
+		flex-direction: column;
+		gap: 25px;
+		padding: 0px 0px 80px 0px;
+	}
+
+	.landing-head,
+	.landing-logo,
+	.landing-foot {
+		position: static;
+	}
+
+	.landing-logo {
+		width: min(56vw, 40vh, 260px);
+		height: min(56vw, 40vh, 260px);
+		margin: auto auto auto auto;
+		transform: none;
+		animation-name: reveal-fade;
+	}
+
+	.landing-foot {
+		max-width: none;
+	}
+}
+
+/* phone layout */
+
+@media (max-width: 520px) {
+	.points {
+		grid-template-columns: 1fr;
+	}
+
+	.command-list {
+		columns: 1;
+	}
+
+	.section {
+		padding: 50px 15px 15px 15px;
+	}
+
+	.copyright {
+		width: calc(100% - 30px);
+	}
+
+	.section .gallery:not(.one, .scroll):has(> figure ~ figure) {
+		margin: 25px -15px 25px -15px;
+		padding: 0px 15px 10px 15px;
+		scroll-padding: 0px 15px 0px 15px;
+	}
+}
+
+/* less motion when asked */
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01s !important;
+		transition: none !important;
+	}
+
+	html {
+		scroll-behavior: auto;
+	}
+}

@@ -1,0 +1,139 @@
+/* footer */
+
+#footer {
+	position: fixed;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	height: 80px;
+	background: #383c4a;
+	border-radius: 20px 20px 0px 0px;
+	overflow: hidden;
+	z-index: 20;
+	transform: translateY(80px);
+	animation: reveal-footer 0.75s ease 0.75s forwards;
+}
+
+/* footer slide in */
+
+@keyframes reveal-footer {
+	to {
+		transform: none;
+	}
+}
+
+/* bottom navigation bar */
+
+.footer {
+	display: flex;
+	height: 80px;
+	padding: 0px 10px 0px 10px;
+	overflow-x: auto;
+	overflow-y: hidden;
+	scrollbar-width: none;
+}
+
+/* page scrollbar hidden */
+
+html::-webkit-scrollbar {
+	display: none;
+}
+
+/* hidden footer scrollbar */
+
+.footer::-webkit-scrollbar {
+	display: none;
+}
+
+/* footer scroll ends */
+
+.footer-start,
+.footer-end {
+	flex: none;
+	align-self: center;
+	width: 40px;
+	border: 10px solid transparent;
+	opacity: 0;
+	transition: opacity 0.25s ease;
+}
+
+/* left scroll arrow */
+
+.footer-start {
+	border-left-color: #f5f6f7;
+	transform: translateX(50%);
+}
+
+/* footer scroll arrows */
+
+.footer-end {
+	border-right-color: #f5f6f7;
+	transform: translateX(-50%);
+}
+
+/* arrows shown when scrolling */
+
+.footer-scroll .footer-start,
+.footer-scroll .footer-end {
+	opacity: 1;
+}
+
+/* footer edges fade */
+
+.footer-border {
+	position: absolute;
+	inset: 0px 0px 0px 0px;
+	z-index: 1;
+	border: 10px solid #383c4a;
+	border-top: 0px;
+	border-bottom: 0px;
+	border-radius: 20px 20px 0px 0px;
+	box-shadow: inset 5px 0px 10px #383c4a, inset -5px 0px 10px #383c4a;
+	pointer-events: none;
+}
+
+/* centered footer buttons */
+
+.footer-inner {
+	display: flex;
+	margin: 0px auto 0px auto;
+}
+
+/* footer button */
+
+.navigation-button {
+	flex: none;
+	min-width: 80px;
+	padding: 10px 10px 0px 10px;
+	color: #a7b0b7;
+	text-align: center;
+	text-decoration: none;
+	font-size: 15px;
+}
+
+/* footer button icon */
+
+.navigation-button .icon {
+	transition: transform 0.2s ease;
+}
+
+/* hovered or current icon raised */
+
+.navigation-button:hover .icon,
+.navigation-button.current .icon {
+	transform: translateY(-5px);
+}
+
+/* hovered or current button */
+
+.navigation-button:hover,
+.navigation-button.current {
+	color: #f5f6f7;
+	font-weight: bold;
+}
+
+/* footer button label */
+
+.label {
+	display: block;
+}

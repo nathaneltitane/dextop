@@ -1,0 +1,39 @@
+/* palette */
+
+.swatches {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+	gap: 10px;
+	margin: 25px 0px 25px 0px;
+}
+
+/* color swatch card */
+
+.swatch {
+	background: #383c4a;
+	border-radius: 15px 15px 15px 15px;
+	padding: 10px 10px 10px 10px;
+	font-size: 10px;
+}
+
+/* swatch color */
+
+.swatch span {
+	display: block;
+	height: 35px;
+	border-radius: 10px 10px 10px 10px;
+	margin: 0px 0px 10px 0px;
+}
+
+/* swatch name */
+
+.swatch b {
+	display: block;
+}
+
+/* glyph preview */
+
+.glyph {
+	font-weight: bold;
+	white-space: pre;
+}

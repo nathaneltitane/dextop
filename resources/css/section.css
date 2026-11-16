@@ -1,0 +1,103 @@
+/* sections */
+
+.section {
+	max-width: 1200px;
+	margin: 0px auto 0px auto;
+	padding: 60px 20px 20px 20px;
+}
+
+/* section heading row */
+
+.section-head {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	border-bottom: 2px solid #404552;
+	padding: 0px 0px 10px 0px;
+	margin: 0px 0px 20px 0px;
+}
+
+/* section title */
+
+.section-head h2 {
+	font-size: clamp(20px, 2.5vw, 25px);
+}
+
+/* section subtitle */
+
+.section h3 {
+	margin: 30px 0px 10px 0px;
+	font-size: 15px;
+}
+
+/* section introduction */
+
+.lead {
+	font-size: 15px;
+}
+
+/* feature points grid */
+
+.points {
+	list-style: none;
+	padding: 0px 0px 0px 0px;
+	margin: 25px 0px 25px 0px;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	gap: 10px 20px;
+}
+
+/* one feature point */
+
+.points li {
+	border-left: 5px solid #5294e2;
+	padding: 5px 0px 5px 10px;
+}
+
+/* long code wraps */
+
+.points code {
+	overflow-wrap: anywhere;
+}
+
+/* numbered steps */
+
+.steps {
+	margin: 25px 0px 25px 0px;
+	padding: 0px 0px 0px 30px;
+}
+
+/* one step */
+
+.steps li {
+	margin: 0px 0px 10px 0px;
+	padding: 0px 0px 0px 5px;
+}
+
+/* step number */
+
+.steps li::marker {
+	color: #5294e2;
+	font-weight: bold;
+}
+
+/* read more link */
+
+.more a {
+	font-weight: bold;
+}
+
+/* hidden until scrolled to */
+
+.reveal {
+	opacity: 0;
+	transform: translateY(40px);
+	transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+/* shown once scrolled to */
+
+.reveal.shown {
+	opacity: 1;
+	transform: none;
+}

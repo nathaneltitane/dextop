@@ -1,0 +1,29 @@
+/* terminal */
+
+.terminal {
+	background: #1e2129;
+	color: #f5f6f7;
+	border-radius: 20px 20px 20px 20px;
+	padding: 15px 20px 15px 20px;
+	font-size: 10px;
+	line-height: 1.4;
+	overflow-x: auto;
+	white-space: pre;
+}
+
+/* terminal window dots */
+
+.terminal-bar {
+	display: flex;
+	gap: 5px;
+	margin: 0px 0px 10px 0px;
+}
+
+/* one terminal dot */
+
+.terminal-bar i {
+	width: 10px;
+	height: 10px;
+	border-radius: 50% 50% 50% 50%;
+	background: #4b5162;
+}

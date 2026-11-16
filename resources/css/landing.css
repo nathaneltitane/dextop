@@ -1,0 +1,175 @@
+/* landing */
+
+.landing {
+	position: relative;
+	min-height: 100vh;
+	min-height: 100dvh;
+	overflow: hidden;
+}
+
+/* landing background picture */
+
+.backdrop {
+	position: absolute;
+	inset: 0px 0px 0px 0px;
+	background: url("../images/dextop-session.png") center / cover no-repeat;
+	opacity: 0;
+	filter: blur(2px);
+	animation: reveal-backdrop 2s ease forwards;
+}
+
+/* backdrop text block */
+
+.backdrop pre {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	background: none;
+	border-radius: 0px 0px 0px 0px;
+	overflow: visible;
+	color: #4b5162;
+	font-size: clamp(5px, 0.9vw, 10px);
+	line-height: 1.1;
+	zoom: 2;
+}
+
+/* backdrop zoom in */
+
+@keyframes reveal-backdrop {
+	from {
+		opacity: 0;
+		transform: scale(1.75);
+	}
+
+	to {
+		opacity: 0.2;
+		transform: scale(1);
+	}
+}
+
+/* landing title corner */
+
+.landing-head {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	padding: 10px 10px 10px 10px;
+	opacity: 0;
+	animation: reveal-fade 0.75s ease forwards;
+}
+
+/* landing title */
+
+.landing-head h1 {
+	font-size: clamp(20px, 4vw, 40px);
+}
+
+/* landing subtitle */
+
+.landing-head p {
+	margin: 5px 0px 0px 0px;
+}
+
+/* centered landing logo */
+
+.landing-logo {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: min(36vw, 44vh, 380px);
+	height: min(36vw, 44vh, 380px);
+	color: #5294e2;
+	transform: translate(-50%, -55%);
+	opacity: 0;
+	animation: reveal-logo 1.25s ease 0.25s forwards;
+}
+
+/* logo fills its box */
+
+.logo {
+	width: 100%;
+	height: 100%;
+}
+
+/* logo rise in */
+
+@keyframes reveal-logo {
+	from {
+		opacity: 0;
+		transform: translate(-50%, -45%) scale(0.85);
+	}
+
+	to {
+		opacity: 1;
+		transform: translate(-50%, -55%) scale(1);
+	}
+}
+
+/* landing text corner */
+
+.landing-foot {
+	position: absolute;
+	right: 0px;
+	bottom: 80px;
+	padding: 10px 10px 10px 10px;
+	text-align: right;
+	opacity: 0;
+	animation: reveal-fade 0.75s ease 0.5s forwards;
+}
+
+/* landing introduction */
+
+.landing-foot p {
+	max-width: 520px;
+	margin: 0px 0px 15px auto;
+}
+
+/* landing tagline size */
+
+.landing-foot h2 {
+	font-size: clamp(20px, 3.3vw, 30px);
+	white-space: nowrap;
+}
+
+/* spaced tagline letters */
+
+.tagline {
+	letter-spacing: 0.3em;
+}
+
+/* landing button row */
+
+.buttons {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	gap: 10px;
+	margin: 0px 0px 20px 0px;
+}
+
+/* landing button */
+
+.button {
+	background: #5294e2;
+	color: #f5f6f7;
+	border-radius: 20px 20px 20px 20px;
+	padding: 10px 20px 10px 20px;
+	text-decoration: none;
+}
+
+/* landing button hover */
+
+.button:hover {
+	background: #4b84c9;
+}
+
+/* fade in */
+
+@keyframes reveal-fade {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}

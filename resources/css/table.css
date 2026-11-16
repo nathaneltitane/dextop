@@ -1,0 +1,70 @@
+/* tables and code */
+
+.table {
+	overflow-x: auto;
+	margin: 20px 0px 20px 0px;
+	border-radius: 20px 20px 0px 0px;
+}
+
+/* table */
+
+table {
+	border-collapse: collapse;
+	min-width: 100%;
+	background: #383c4a;
+}
+
+/* table cells */
+
+th,
+td {
+	text-align: left;
+	vertical-align: top;
+	padding: 10px 15px 10px 15px;
+	border-bottom: 1px solid #404552;
+	white-space: nowrap;
+}
+
+/* table header */
+
+th {
+	color: #f5f6f7;
+	background: #404552;
+}
+
+/* wrapping table cells */
+
+.table.wrap td {
+	white-space: normal;
+	min-width: 160px;
+}
+
+/* package name pill */
+
+.package {
+	display: inline-block;
+	background: #383c4a;
+	color: #f5f6f7;
+	border-radius: 20px 20px 20px 20px;
+	padding: 5px 10px 5px 10px;
+	margin: 5px 0px 5px 0px;
+	font-size: 10px;
+	white-space: nowrap;
+}
+
+/* code block */
+
+pre {
+	background: #383c4a;
+	color: #f5f6f7;
+	border-radius: 20px 20px 20px 20px;
+	padding: 15px 20px 15px 20px;
+	overflow-x: auto;
+}
+
+/* text diagram */
+
+pre.diagram {
+	font-size: 10px;
+	line-height: 1.25;
+}

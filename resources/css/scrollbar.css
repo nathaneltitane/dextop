@@ -1,0 +1,43 @@
+/* scrollbars clear of corners */
+
+::-webkit-scrollbar {
+	width: 5px;
+	height: 5px;
+}
+
+/* scrollbar track */
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+/* code block scrollbar inset */
+
+pre::-webkit-scrollbar-track:vertical {
+	margin: 20px 0px 20px 0px;
+}
+
+/* scrollbar handle */
+
+::-webkit-scrollbar-thumb {
+	background: #4b5162;
+	border-radius: 5px 5px 5px 5px;
+}
+
+/* scrollbar handle hover */
+
+::-webkit-scrollbar-thumb:hover {
+	background: #7c818c;
+}
+
+/* browsers without scrollbar styling */
+
+@supports not selector(::-webkit-scrollbar) {
+
+	/* thin scrollbars elsewhere */
+
+	* {
+		scrollbar-width: thin;
+		scrollbar-color: #4b5162 transparent;
+	}
+}

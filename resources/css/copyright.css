@@ -1,0 +1,50 @@
+/* copyright inset like sections */
+
+.copyright {
+	max-width: 1160px;
+	width: calc(100% - 40px);
+	margin: 20px auto 0px auto;
+	padding: 20px 0px 20px 0px;
+	border-top: 2px solid #404552;
+	font-size: 10px;
+}
+
+/* copyright lines */
+
+.copyright p {
+	margin: 0px 0px 10px 0px;
+}
+
+/* last copyright line */
+
+.copyright p:last-child {
+	margin: 0px 0px 0px 0px;
+}
+
+/* authorship closes the credits */
+
+.copyright .authorship {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+	margin: 20px 0px 0px 0px;
+	padding: 20px 0px 0px 0px;
+	border-top: inherit;
+	text-align: center;
+}
+
+/* copyright avatar */
+
+.copyright .avatar img {
+	display: block;
+	width: 65px;
+	height: 65px;
+}
+
+/* last section ends flush */
+
+.section > :last-child,
+.section > :last-child > :last-child {
+	margin-bottom: 0px;
+}
