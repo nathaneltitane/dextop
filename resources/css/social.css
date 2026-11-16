@@ -1,0 +1,102 @@
+/* base font and sizing */
+
+* {
+	font-family: monospace;
+	box-sizing: border-box;
+	margin: 0px 0px 0px 0px;
+}
+
+/* card size and colours */
+
+body {
+	width: var(--width-card);
+	height: var(--height-card);
+	background: var(--color-background);
+	color: var(--color-text);
+	position: relative;
+	overflow: hidden;
+}
+
+/* faded picture behind the card */
+
+.backdrop {
+	position: absolute;
+	inset: 0px 0px 0px 0px;
+	background: center / cover no-repeat;
+	opacity: var(--opacity-backdrop);
+}
+
+/* centred ascii art */
+
+.backdrop.ascii {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* ascii art text */
+
+.backdrop pre {
+	font-size: 15px;
+	line-height: 1.2;
+	color: var(--color-text);
+}
+
+/* title in the top corner */
+
+.head {
+	position: absolute;
+	top: 30px;
+	left: 30px;
+}
+
+/* card title */
+
+h1 {
+	color: var(--color-heading);
+	font-size: 55px;
+	line-height: 1.1;
+}
+
+/* card subtitle */
+
+.head p {
+	font-size: 20px;
+	margin-top: 5px;
+}
+
+/* logo in the middle */
+
+.logo {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 300px;
+	height: 300px;
+	transform: translate(-50%, -50%);
+}
+
+/* tagline in the bottom corner */
+
+.foot {
+	position: absolute;
+	right: 30px;
+	bottom: 30px;
+	text-align: right;
+}
+
+/* card tagline */
+
+.foot h2 {
+	color: var(--color-heading);
+	font-size: 35px;
+	letter-spacing: .3em;
+	margin-right: -.3em;
+}
+
+/* card domain */
+
+.foot p {
+	font-size: 20px;
+	margin-top: 10px;
+}
