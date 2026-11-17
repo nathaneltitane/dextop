@@ -21,7 +21,7 @@ Every command, option, distribution and package is documented on [dextop.app](ht
 
 ---
 
-### TL;DR
+### TL:DR
 
 **Prepare ↴**
 

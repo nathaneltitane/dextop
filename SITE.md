@@ -1,10 +1,10 @@
 # Site
 
-Every section of [dextop.app](https://dextop.app). `tools/dextop-site` builds the page from this file. Each `##` section starts with a comment that sets its page id, icon and heading, and its first paragraph is the lead. `- **Title.** text` lines become points and `1. **Title.** text` lines steps, a `<!-- table class -->` comment sets the class of the table below it, and a `<!-- gallery class -->` comment turns the images and video links below it into one gallery, the title of a single image setting its figure class. A `<!-- video -->` comment turns the link below it into a looping video. A `<!-- include name -->` comment places content read from the scripts, a paragraph made of links ending in › becomes a more link, and `@NAME@` placeholders are filled with counts read from the scripts.
+Every section of [dextop.app](https://dextop.app). `tools/dextop-site` builds the page from this file. Each `##` section starts with a comment that sets its page id, icon and heading, and its first paragraph is the lead. `- **Title.** text` lines become points and `1. **Title.** text` lines steps, a `[//]: # (table class)` comment sets the class of the table below it, and a `[//]: # (gallery class)` comment turns the images and video links below it into one gallery, the title of a single image setting its figure class. A `[//]: # (video)` comment turns the link below it into a looping video. A `[//]: # (include name)` comment places content read from the scripts, a paragraph made of links ending in › becomes a more link, and `@NAME@` placeholders are filled with counts read from the scripts.
 
 ## Overview
 
-<!-- overview | orange | OVERVIEW // A LINUX WORKSTATION ON ANDROID -->
+[//]: # (overview | orange | OVERVIEW // A LINUX WORKSTATION ON ANDROID)
 
 Dextop handles all the technical intricacies of a PRoot container so you can get right to work. It runs as a transient container system that talks to Android through the Termux shell to open viewers and applications as needed.
 
@@ -29,7 +29,7 @@ Dextop handles all the technical intricacies of a PRoot container so you can get
 
 ## Install
 
-<!-- install | amber | INSTALL // ONE COMMAND, TEN MINUTES -->
+[//]: # (install | amber | INSTALL // ONE COMMAND, TEN MINUTES)
 
 Install Termux and Termux:X11, label your storage, and run one command. Back up your existing Termux setup first, following the Termux backup recommendations.
 
@@ -73,7 +73,7 @@ Opening Termux logs in and brings the graphical session up automatically. A reco
 
 ## Setup
 
-<!-- setup | yellow | SETUP // WHAT THE DEPLOYMENT SCRIPT DOES -->
+[//]: # (setup | yellow | SETUP // WHAT THE DEPLOYMENT SCRIPT DOES)
 
 `dextop` runs the whole setup in order, with Frobulator reporting every step. User information and distribution preferences are asked along the way, so stay attentive.
 
@@ -108,11 +108,11 @@ Dextop is Bash centric. All of these files can be customized and make a good bas
 
 ## Images
 
-<!-- distributions | lime | DISTRIBUTIONS // @DISTRIBUTIONS@ CONTAINER IMAGES -->
+[//]: # (distributions | lime | DISTRIBUTIONS // @DISTRIBUTIONS@ CONTAINER IMAGES)
 
 The container runs through PRoot with the Android system, storage and devices bound in, so it behaves like a normal Linux based system.
 
-<!-- include images -->
+[//]: # (include images)
 
 - **Selection.** Without an image option the setup lists every supported image to pick by number. `container-image -s` shows the list.
 - **Architecture.** The processor is checked against the image architectures before anything is downloaded.
@@ -123,7 +123,7 @@ The container runs through PRoot with the Android system, storage and devices bo
 
 ## Sessions
 
-<!-- sessions | green | SESSIONS // DESKTOPS ON TERMUX:X11 OR VNC -->
+[//]: # (sessions | green | SESSIONS // DESKTOPS ON TERMUX:X11 OR VNC)
 
 `container-session` starts and stops the graphical session, on Termux or inside the container. It is just like running a virtual machine on a computer and looking at it through a viewer.
 
@@ -160,11 +160,11 @@ XFCE compositing stays off: within Android's user space policy it costs performa
 
 ## Storage
 
-<!-- storage | emerald | STORAGE // ONE HOME FOR EVERY SYSTEM -->
+[//]: # (storage | emerald | STORAGE // ONE HOME FOR EVERY SYSTEM)
 
 `termux-storage` asks for the storage permission, then links internal and external media for system wide access. Create the .storage labels before setup for recognizable names.
 
-<!-- gallery two -->
+[//]: # (gallery two)
 
 ![A .storage label at the root of a mount](resources/images/dextop-label.png)
 ![Labelled mounts linked under ${PREFIX}/media](resources/images/dextop-storage.png)
@@ -178,13 +178,13 @@ XFCE compositing stays off: within Android's user space policy it costs performa
 
 ## Additions
 
-<!-- additions | teal | ADDITIONS // ANDROID APPLICATIONS FROM THE DESKTOP -->
+[//]: # (additions | teal | ADDITIONS // ANDROID APPLICATIONS FROM THE DESKTOP)
 
 `dextop-additions` hands desktop requests to the Android Activity Manager, which opens the matching Android application for you. Dextop only loads applications as needed, keeping the device smooth.
 
 ![Dextop additions open native Android applications](resources/images/dextop-additions.png "wide")
 
-<!-- include additions -->
+[//]: # (include additions)
 
 - **Slim system.** Music, mail, browsing and games run best in native Android applications, with hardware acceleration and the device features.
 - **Default applications.** The desktop opens links, mail and files in Android applications through the mimetype handles.
@@ -192,7 +192,7 @@ XFCE compositing stays off: within Android's user space policy it costs performa
 
 ## Switches
 
-<!-- switches | cyan | SWITCHES // LOGIN, LOGOUT, UPDATES AND AUDIO -->
+[//]: # (switches | cyan | SWITCHES // LOGIN, LOGOUT, UPDATES AND AUDIO)
 
 Dextop keeps its choices as small files in `~/.dextop`. Write the keyword in a file to turn a switch on, empty it to turn it off. Automatic login and logout are on after setup.
 
@@ -211,24 +211,24 @@ Dextop keeps its choices as small files in `~/.dextop`. Write the keyword in a f
 
 ## Packages
 
-<!-- packages | sky | PACKAGES // @PACKAGES@ PACKAGES BY GROUP -->
+[//]: # (packages | sky | PACKAGES // @PACKAGES@ PACKAGES BY GROUP)
 
 `termux-packages` and `container-packages` install these groups, read straight from the scripts. The container installs them under their Debian and Ubuntu or Fedora names.
 
-<!-- include groups -->
+[//]: # (include groups)
 
 ### Termux add-ons
 
 `termux-addons` installs the Termux companion applications. Remove any earlier version first so no conflicting package signatures are inherited.
 
-<!-- include addons -->
+[//]: # (include addons)
 
 - **By desktop.** Console installs the base groups only. i3 adds the i3 and i3 add-on groups, XFCE the XFCE, font and theme groups and Papirus-Dark icons.
 - **Removed.** ibus, snap and xterm are purged from the container.
 
 ## Maintenance
 
-<!-- maintenance | blue | MAINTENANCE // UPDATE, BACK UP, RESTORE AND PURGE -->
+[//]: # (maintenance | blue | MAINTENANCE // UPDATE, BACK UP, RESTORE AND PURGE)
 
 Dextop updates itself and its utilities from the latest release, and keeps your home directory safe with dated backups.
 
@@ -269,19 +269,19 @@ Backups are kept outside the home directory, so no backup ever holds another, an
 
 ## Commands
 
-<!-- commands | indigo | COMMANDS // EVERY UTILITY AND OPTION -->
+[//]: # (commands | indigo | COMMANDS // EVERY UTILITY AND OPTION)
 
 The help of all @UTILITIES@ Dextop utilities, read from the scripts themselves: @OPTIONS@ options with their values and defaults. The marked letter is the short option. Search them, or pick a group.
 
-<!-- include commands -->
+[//]: # (include commands)
 
 ## News
 
-<!-- news | violet | NEWS // LATEST CHANGES -->
+[//]: # (news | violet | NEWS // LATEST CHANGES)
 
 The latest release notices from the Dextop repository.
 
-<!-- include notice -->
+[//]: # (include notice)
 
 [Read every notice ›](https://github.com/nathaneltitane/dextop/blob/main/NOTICE.md)
 
