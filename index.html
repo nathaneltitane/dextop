@@ -1508,7 +1508,22 @@ bash dextop -u shell</code></pre>
 				} ;
 
 				field.addEventListener ( 'input', clear_update ) ;
-				chips?.addEventListener ( 'click', clear_update ) ;
+
+				// a picked group overrides the typed search
+
+				chips?.addEventListener ( 'click', ( ) => {
+
+					if ( field.value ) {
+
+						field.value = '' ;
+
+						field.dispatchEvent ( new Event ( 'input' ) ) ;
+
+					}
+
+					clear_update ( ) ;
+
+				} ) ;
 
 				// empties the field and picks all again
 
