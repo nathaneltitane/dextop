@@ -1482,6 +1482,52 @@ bash dextop -u shell</code></pre>
 
 			command_render ( ) ;
 
+			// clear marker for each search field
+
+			document.querySelectorAll ( '.search-tools input[type=search]' ).forEach ( ( field ) => {
+
+				const box = document.createElement ( 'div' ) ;
+				const clear = document.createElement ( 'span' ) ;
+				const chips = field.parentNode.querySelector ( '.chips' ) ;
+
+				box.className = 'search-box' ;
+				clear.className = 'search-clear' ;
+				clear.textContent = '✕' ;
+				clear.setAttribute ( 'role', 'button' ) ;
+				clear.setAttribute ( 'aria-label', 'Clear search' ) ;
+
+				field.replaceWith ( box ) ;
+				box.append ( field, clear ) ;
+
+				// shown with text or a group picked
+
+				const clear_update = ( ) => {
+
+					clear.hidden = ! field.value && ! chips?.querySelector ( '.chip.active:not(:first-child)' ) ;
+
+				} ;
+
+				field.addEventListener ( 'input', clear_update ) ;
+				chips?.addEventListener ( 'click', clear_update ) ;
+
+				// empties the field and picks all again
+
+				clear.addEventListener ( 'click', ( ) => {
+
+					field.value = '' ;
+
+					chips?.firstElementChild.click ( ) ;
+
+					field.dispatchEvent ( new Event ( 'input' ) ) ;
+
+					field.focus ( ) ;
+
+				} ) ;
+
+				clear_update ( ) ;
+
+			} ) ;
+
 		</script>
 
 	</body>

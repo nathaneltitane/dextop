@@ -20,7 +20,7 @@
 
 #search {
 	width: 100%;
-	padding: 10px 20px 10px 20px;
+	padding: 10px 45px 10px 20px;
 	background: #383c4a;
 	border: 0px;
 	border-radius: 20px 20px 20px 20px;
@@ -33,6 +33,62 @@
 
 #search:focus {
 	background: #404552;
+}
+
+/* field holder for the clear marker */
+
+.search-box {
+	position: relative;
+}
+
+/* native clear marker replaced by a text one */
+
+.search-tools input[type=search]::-webkit-search-cancel-button {
+	display: none;
+
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+/* text clear marker inside the field - circle kept 5px inside the pill */
+
+.search-clear {
+	color: #5294e2;
+	border-radius: 50% 50% 50% 50%;
+
+	font-size: 15px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	bottom: 5px;
+
+	aspect-ratio: 1;
+
+	cursor: pointer;
+
+	user-select: none;
+
+	transition: background-color 0.4s ease, color 0.4s ease, font-size 0.4s ease;
+}
+
+/* clear marker hidden with no text and no group picked */
+
+.search-clear[hidden] {
+	display: none;
+}
+
+/* clear marker hovered - accent circle, light cross, glyph zoom */
+
+.search-clear:hover {
+	background-color: #5294e2;
+	color: #f5f6f7;
+
+	font-size: 20px;
 }
 
 /* group chips grid */
