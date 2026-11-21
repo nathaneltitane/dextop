@@ -110,6 +110,7 @@
 	padding: 5px 10px 5px 10px;
 	margin: 0px 0px 5px 0px;
 	font-size: 10px;
+	line-height: 15px;
 }
 
 /* value tag */
@@ -122,6 +123,7 @@
 	padding: 5px 10px 5px 10px;
 	margin: 5px 0px 5px 0px;
 	font-size: 10px;
+	line-height: 15px;
 	white-space: nowrap;
 }
 
@@ -140,6 +142,7 @@
 	border-radius: 20px 20px 20px 20px;
 	padding: 5px 10px 5px 10px;
 	font-size: 10px;
+	line-height: 15px;
 	color: #f5f6f7;
 }
 
