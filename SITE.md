@@ -141,6 +141,7 @@ The container runs through PRoot with the Android system, storage and devices bo
 - **Termux or container.** The green prompt is the Termux system, the fuschia prompt the container. Each has its own desktop session.
 - **User termux.** The default container user is `termux`. Add more with `container-user -u` and change passwords with `container-user -p`.
 - **First login.** The first container login sets up the keyboard layout, locales and timezone once.
+- **Quiet display server.** Termux:X11 messages, like the harmless xkbcomp keyboard warnings, go to a log in `~/.local/var/log` instead of the screen.
 - **VNC resolution.** The VNC session asks for a resolution once and keeps it in `~/.vnc/selection`. Remove that file to choose again.
 - **VNC viewers.** Remotix, RealVNC VNC Viewer or bVNC, with full screen or immersive modes.
 - **Logout.** Ctrl+D, `logout` or `exit` stops the session and goes back to the Termux shell, or to the Android home screen.

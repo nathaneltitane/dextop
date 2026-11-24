@@ -1342,7 +1342,7 @@ display_x11_server () {
 	then
 		:
 	else
-		frobulator.silence "${TERMUX_X11_SERVER} ${DISPLAY}" &
+		frobulator.silence log "${TERMUX_X11_SERVER} ${DISPLAY}" &
 	fi
 }
 
