@@ -95,6 +95,7 @@ html::-webkit-scrollbar {
 /* centered footer buttons */
 
 .footer-inner {
+	flex: none;
 	display: flex;
 	margin: 0px auto 0px auto;
 }
