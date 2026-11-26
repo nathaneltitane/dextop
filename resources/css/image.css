@@ -293,14 +293,19 @@ figcaption {
 	transition: opacity 0.25s ease;
 }
 
-/* arrow inside circle */
+/* chevron inside circle */
 
 .gallery-start::before,
 .gallery-end::before {
 	content: "";
 	position: absolute;
-	top: 10px;
-	border: 10px solid transparent;
+	top: 50%;
+	left: 50%;
+	width: 10px;
+	height: 10px;
+	border-style: solid;
+	border-color: #f5f6f7;
+	border-width: 0px 5px 5px 0px;
 }
 
 /* left gallery arrow */
@@ -310,8 +315,7 @@ figcaption {
 }
 
 .gallery-start::before {
-	left: 17px;
-	border-left-color: #f5f6f7;
+	transform: translate(-70%, -50%) rotate(-45deg);
 }
 
 /* right gallery arrow */
@@ -321,8 +325,7 @@ figcaption {
 }
 
 .gallery-end::before {
-	left: 3px;
-	border-right-color: #f5f6f7;
+	transform: translate(-30%, -50%) rotate(135deg);
 }
 
 /* arrows shown at each strip end */
