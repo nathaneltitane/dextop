@@ -310,8 +310,8 @@ figcaption {
 }
 
 .gallery-start::before {
-	left: 5px;
-	border-right-color: #f5f6f7;
+	left: 15px;
+	border-left-color: #f5f6f7;
 }
 
 /* right gallery arrow */
@@ -321,8 +321,8 @@ figcaption {
 }
 
 .gallery-end::before {
-	left: 15px;
-	border-left-color: #f5f6f7;
+	left: 5px;
+	border-right-color: #f5f6f7;
 }
 
 /* arrows shown while more lies that way */
