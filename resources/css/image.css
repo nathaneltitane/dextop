@@ -310,7 +310,7 @@ figcaption {
 }
 
 .gallery-start::before {
-	left: 15px;
+	left: 17px;
 	border-left-color: #f5f6f7;
 }
 
@@ -321,7 +321,7 @@ figcaption {
 }
 
 .gallery-end::before {
-	left: 5px;
+	left: 3px;
 	border-right-color: #f5f6f7;
 }
 
