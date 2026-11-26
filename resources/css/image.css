@@ -283,28 +283,46 @@ figcaption {
 .gallery-end {
 	position: absolute;
 	top: 50%;
-	width: 0px;
-	border: 10px solid transparent;
-	filter: drop-shadow(0px 0px 3px #2f343f);
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background: #383c4a;
 	opacity: 0;
 	pointer-events: none;
+	transform: translateY(-50%);
 	transition: opacity 0.25s ease;
+}
+
+/* arrow inside circle */
+
+.gallery-start::before,
+.gallery-end::before {
+	content: "";
+	position: absolute;
+	top: 10px;
+	border: 10px solid transparent;
 }
 
 /* left gallery arrow */
 
 .gallery-start {
-	left: 0px;
+	left: 10px;
+}
+
+.gallery-start::before {
+	left: 5px;
 	border-right-color: #f5f6f7;
-	transform: translateY(-50%);
 }
 
 /* right gallery arrow */
 
 .gallery-end {
-	right: 0px;
+	right: 10px;
+}
+
+.gallery-end::before {
+	left: 15px;
 	border-left-color: #f5f6f7;
-	transform: translateY(-50%);
 }
 
 /* arrows shown while more lies that way */
