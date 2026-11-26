@@ -1236,8 +1236,8 @@ bash dextop -u shell</code></pre>
 					const overflow = getComputedStyle ( gallery ).overflowX ;
 					const scrolls = ( overflow === 'auto' || overflow === 'scroll' ) && gallery.scrollWidth > gallery.clientWidth + 1 ;
 
-					frame.classList.toggle ( 'gallery-more-start', scrolls && gallery.scrollLeft > 1 ) ;
-					frame.classList.toggle ( 'gallery-more-end', scrolls && gallery.scrollLeft + gallery.clientWidth < gallery.scrollWidth - 1 ) ;
+					frame.classList.toggle ( 'gallery-at-start', scrolls && gallery.scrollLeft <= 1 ) ;
+					frame.classList.toggle ( 'gallery-at-end', scrolls && gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 1 ) ;
 
 				}
 

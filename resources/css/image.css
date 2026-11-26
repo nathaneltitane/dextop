@@ -325,9 +325,9 @@ figcaption {
 	border-right-color: #f5f6f7;
 }
 
-/* arrows shown while more lies that way */
+/* arrows shown at each strip end */
 
-.gallery-more-start .gallery-start,
-.gallery-more-end .gallery-end {
+.gallery-at-start .gallery-start,
+.gallery-at-end .gallery-end {
 	opacity: 1;
 }
