@@ -48,7 +48,7 @@ figure.plain .shot {
 /* picture zoom on hover */
 
 .shot:hover img {
-	transform: scale(1.02);
+	transform: scale(1.01);
 }
 
 /* video figure */
@@ -78,7 +78,7 @@ figure.video video {
 /* video zoom on hover */
 
 figure.video video:hover {
-	transform: scale(1.02);
+	transform: scale(1.01);
 }
 
 /* viewer hides the other media */
