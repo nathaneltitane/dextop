@@ -270,3 +270,46 @@ figcaption {
 .gallery.cube .shot img {
 	width: auto;
 }
+
+/* gallery with its arrows */
+
+.gallery-frame {
+	position: relative;
+}
+
+/* gallery scroll arrows */
+
+.gallery-start,
+.gallery-end {
+	position: absolute;
+	top: 50%;
+	width: 0px;
+	border: 10px solid transparent;
+	filter: drop-shadow(0px 0px 3px #2f343f);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.25s ease;
+}
+
+/* left gallery arrow */
+
+.gallery-start {
+	left: 0px;
+	border-right-color: #f5f6f7;
+	transform: translateY(-50%);
+}
+
+/* right gallery arrow */
+
+.gallery-end {
+	right: 0px;
+	border-left-color: #f5f6f7;
+	transform: translateY(-50%);
+}
+
+/* arrows shown while more lies that way */
+
+.gallery-more-start .gallery-start,
+.gallery-more-end .gallery-end {
+	opacity: 1;
+}

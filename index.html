@@ -1215,6 +1215,42 @@ bash dextop -u shell</code></pre>
 
 			}, { passive: false } ) ;
 
+			// arrows mark side scrolling galleries
+
+			document.querySelectorAll ( '.gallery' ).forEach ( ( gallery ) => {
+
+				const frame = document.createElement ( 'div' ) ;
+
+				frame.className = 'gallery-frame' ;
+
+				gallery.before ( frame ) ;
+
+				frame.append ( gallery ) ;
+
+				frame.insertAdjacentHTML ( 'beforeend', '<span class="gallery-start" aria-hidden="true"></span><span class="gallery-end" aria-hidden="true"></span>' ) ;
+
+				// each arrow while more lies that way
+
+				function arrows_toggle ( ) {
+
+					const overflow = getComputedStyle ( gallery ).overflowX ;
+					const scrolls = ( overflow === 'auto' || overflow === 'scroll' ) && gallery.scrollWidth > gallery.clientWidth + 1 ;
+
+					frame.classList.toggle ( 'gallery-more-start', scrolls && gallery.scrollLeft > 1 ) ;
+					frame.classList.toggle ( 'gallery-more-end', scrolls && gallery.scrollLeft + gallery.clientWidth < gallery.scrollWidth - 1 ) ;
+
+				}
+
+				// pictures loading widen the strip
+
+				gallery.addEventListener ( 'load', arrows_toggle, true ) ;
+				gallery.addEventListener ( 'scroll', arrows_toggle, { passive: true } ) ;
+				window.addEventListener ( 'resize', arrows_toggle ) ;
+
+				arrows_toggle ( ) ;
+
+			} ) ;
+
 			const buttons_navigation = [ ...document.querySelectorAll ( '.navigation-button[href^="#"]' ) ] ;
 
 			// the section in view crosses a band just above the middle of the window
