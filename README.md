@@ -104,6 +104,8 @@ Should you suspect any issues or errors, please provide a copy of those files wh
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/nathaneltitane/pewpewprints?style=for-the-badge&logo=gnubash&logoColor=ffffff&label=PEW%21%20PEW%21%20PRINTS)](https://github.com/nathaneltitane/pewpewprints)
 
+[![GitHub Repo stars](https://img.shields.io/github/stars/nathaneltitane/ada?style=for-the-badge&logo=gnubash&logoColor=ffffff&label=ADA)](https://github.com/nathaneltitane/ada)
+
 ---
 
 [![Donate](https://img.shields.io/badge/Paypal-2f343f.svg?style=for-the-badge&logo=paypal&label=Donate)](https://www.paypal.com/donate?hosted_button_id=ZW3CDCANHJCWJ)<br>
